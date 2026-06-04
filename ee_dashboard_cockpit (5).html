@@ -1,0 +1,404 @@
+
+<h2 class="sr-only">Dashboard da aba E.E — Cockpit Monetização Sales: metas vs realizado por mês, por squad e por produto</h2>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+.tab-row { display: flex; gap: 6px; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.tab-btn { background: var(--color-background-secondary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 6px 14px; font-size: 12px; cursor: pointer; color: var(--color-text-secondary); font-family: var(--font-sans); }
+.tab-btn.active { background: var(--color-background-primary); border-color: var(--color-border-primary); color: var(--color-text-primary); font-weight: 500; }
+.pane { display: none; }
+.pane.active { display: block; }
+.section-title { font-size: 12px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 1rem; padding-bottom: 6px; border-bottom: 0.5px solid var(--color-border-tertiary); }
+.metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 1.5rem; }
+.metric { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 14px 16px; }
+.metric-label { font-size: 12px; color: var(--color-text-secondary); margin-bottom: 4px; }
+.metric-value { font-size: 20px; font-weight: 500; color: var(--color-text-primary); }
+.metric-sub { font-size: 11px; color: var(--color-text-tertiary); margin-top: 2px; }
+.metric-ok { border-left: 3px solid #1D9E75; }
+.metric-warn { border-left: 3px solid #EF9F27; }
+.metric-bad { border-left: 3px solid #E24B4A; }
+.chart-box { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 16px; margin-bottom: 16px; }
+.chart-title { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 10px; }
+.chart-sub { font-size: 11px; color: var(--color-text-secondary); margin-bottom: 12px; }
+.chart-wrap { position: relative; }
+.legend { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 10px; font-size: 11px; color: var(--color-text-secondary); }
+.legend span { display: flex; align-items: center; gap: 4px; }
+.legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.data-table { width: 100%; font-size: 12px; border-collapse: collapse; }
+.data-table th { text-align: left; font-size: 11px; font-weight: 500; color: var(--color-text-secondary); padding: 7px 10px; border-bottom: 0.5px solid var(--color-border-tertiary); }
+.data-table td { padding: 7px 10px; border-bottom: 0.5px solid var(--color-border-tertiary); color: var(--color-text-primary); }
+.data-table tr:last-child td { border-bottom: none; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: var(--border-radius-md); font-size: 11px; font-weight: 500; }
+.ok { background: #E1F5EE; color: #0F6E56; }
+.warn { background: #FAEEDA; color: #854F0B; }
+.bad { background: #FCEBEB; color: #A32D2D; }
+.insight { background: var(--color-background-secondary); border-radius: var(--border-radius-lg); padding: 13px 15px; margin-bottom: 10px; font-size: 13px; color: var(--color-text-primary); line-height: 1.6; }
+.insight strong { font-weight: 500; }
+.progress-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 0.5px solid var(--color-border-tertiary); }
+.progress-row:last-child { border-bottom: none; }
+.progress-label { font-size: 12px; color: var(--color-text-primary); width: 100px; flex-shrink: 0; }
+.progress-bg { flex: 1; height: 8px; background: var(--color-background-secondary); border-radius: 4px; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 4px; }
+.progress-val { font-size: 12px; color: var(--color-text-secondary); width: 48px; text-align: right; flex-shrink: 0; }
+</style>
+
+<div style="padding: 1rem 0;">
+<div class="tab-row">
+  <button class="tab-btn active" data-tab="resumo">Resumo Geral</button>
+  <button class="tab-btn" data-tab="expansao">Expansão Carteira</button>
+  <button class="tab-btn" data-tab="ee">E.E (Estruturação)</button>
+  <button class="tab-btn" data-tab="squads">Por Squad</button>
+  <button class="tab-btn" data-tab="conversao">Conversão & Vendas</button>
+</div>
+
+<div id="resumo" class="pane active">
+  <div class="section-title">Realizado total acumulado Jan–Jun/2026 vs metas</div>
+  <div class="metric-grid">
+    <div class="metric metric-bad">
+      <div class="metric-label">Junho (atual)</div>
+      <div class="metric-value">R$ 0</div>
+      <div class="metric-sub">Meta: R$900k · 0% atingido</div>
+    </div>
+    <div class="metric metric-warn">
+      <div class="metric-label">Maio</div>
+      <div class="metric-value">R$ 848k</div>
+      <div class="metric-sub">Meta: R$1,2M · 70,7% atingido</div>
+    </div>
+    <div class="metric metric-warn">
+      <div class="metric-label">Abril</div>
+      <div class="metric-value">R$ 624k</div>
+      <div class="metric-sub">Meta: R$1M · 62,4% atingido</div>
+    </div>
+    <div class="metric metric-ok">
+      <div class="metric-label">Março</div>
+      <div class="metric-value">R$ 740k</div>
+      <div class="metric-sub">Meta: R$507k · 145,9% ✓</div>
+    </div>
+    <div class="metric metric-warn">
+      <div class="metric-label">Fevereiro</div>
+      <div class="metric-value">R$ 549k</div>
+      <div class="metric-sub">Meta: R$1,085M · 50,6% atingido</div>
+    </div>
+    <div class="metric metric-ok">
+      <div class="metric-label">Janeiro</div>
+      <div class="metric-value">R$ 667k</div>
+      <div class="metric-sub">Meta: R$301k · 221,7% ✓</div>
+    </div>
+  </div>
+
+  <div class="chart-box">
+    <div class="chart-title">Realizado vs Meta — Total mensal (Expansão + EE + Executar)</div>
+    <div class="legend">
+      <span><span class="legend-dot" style="background:#1D9E75"></span>Realizado</span>
+      <span><span class="legend-dot" style="background:#378ADD; opacity:.5"></span>Meta</span>
+    </div>
+    <div class="chart-wrap" style="height:240px">
+      <canvas id="totalChart" role="img" aria-label="Barras de realizado vs meta por mês de jan a jun 2026">Jan: R$667k real / R$301k meta. Fev: R$549k / R$1,085M. Mar: R$740k / R$507k. Abr: R$624k / R$1M. Mai: R$848k / R$1,2M. Jun: R$0 / R$900k.</canvas>
+    </div>
+  </div>
+
+  <div class="section-title">Diagnóstico rápido</div>
+  <div class="insight"><strong>Jan e Mar bateram a meta</strong> (221% e 146% respectivamente), mas esses dois meses compensaram quedas severas em Fev, Abr e Mai — onde o time ficou entre 50–70% do objetivo. Junho está em 0% com meta de R$900k, o que é crítico.</div>
+  <div class="insight"><strong>Tendência preocupante:</strong> as metas estão crescendo muito (de R$301k em Jan para R$900k em Jun) enquanto o realizado não acompanhou. Há uma lacuna estrutural crescente entre o que se planeja e o que se entrega.</div>
+  <div class="insight"><strong>Maio foi o melhor mês absoluto</strong> (R$848k), puxado principalmente pelo Executar (R$783k), mas ainda 30% abaixo da meta de R$1,2M.</div>
+</div>
+
+<div id="expansao" class="pane">
+  <div class="section-title">Expansão de carteira — Meta x Realizado por categoria</div>
+  <div class="chart-box">
+    <div class="chart-title">Expansão Carteira — Executar (faturamento mensal)</div>
+    <div class="legend">
+      <span><span class="legend-dot" style="background:#1D9E75"></span>Realizado</span>
+      <span><span class="legend-dot" style="background:#378ADD; opacity:.5"></span>Meta</span>
+    </div>
+    <div class="chart-wrap" style="height:220px">
+      <canvas id="execChart" role="img" aria-label="Expansão Executar por mês: jan 225k/40k, fev 423k/850k, mar 31k/173k, abr 128k/50k, mai 41k/150k, jun 0/80k">Executar: Jan R$226k·meta R$40k; Fev R$423k·meta R$850k; Mar R$31k·meta R$173k; Abr R$128k·meta R$50k; Mai R$41k·meta R$150k; Jun R$0·meta R$80k.</canvas>
+    </div>
+  </div>
+
+  <div class="chart-box">
+    <div class="chart-title">Expansão Carteira — Ter/Saber (faturamento mensal)</div>
+    <div class="chart-wrap" style="height:200px">
+      <canvas id="tersaberChart" role="img" aria-label="Ter/Saber por mês: jan 80k, fev 28k, mar 0, abr 30k, mai 24k, jun 0">Ter/Saber: Jan R$80k; Fev R$28k; Mar R$0; Abr R$30k; Mai R$24k; Jun R$0.</canvas>
+    </div>
+  </div>
+
+  <div class="section-title">Destaques por squad — Expansão Carteira (acumulado)</div>
+  <table class="data-table">
+    <thead><tr><th>Squad</th><th>Oportunidades</th><th>Reuniões</th><th>Vendas LG</th><th>Vendas Executar</th><th>Tx. Conversão</th></tr></thead>
+    <tbody>
+      <tr><td>Billions</td><td>10</td><td>4</td><td>5</td><td>—</td><td><span class="badge warn">50%</span></td></tr>
+      <tr><td>Exclusive</td><td>0</td><td>0</td><td>0</td><td>—</td><td><span class="badge bad">—</span></td></tr>
+      <tr><td>Invictus</td><td>16</td><td>7</td><td>7</td><td>—</td><td><span class="badge ok">43,75%</span></td></tr>
+    </tbody>
+  </table>
+  <div class="insight" style="margin-top:14px"><strong>Exclusive zerou em expansão de carteira</strong> no período mais recente — 0 oportunidades, 0 reuniões, 0 vendas. Requer atenção imediata da liderança para entender o que travou o squad.</div>
+</div>
+
+<div id="ee" class="pane">
+  <div class="section-title">E.E (Estruturação Estratégica) — performance mensal</div>
+  <div class="metric-grid">
+    <div class="metric metric-bad">
+      <div class="metric-label">Junho — Pitches marcados</div>
+      <div class="metric-value">5</div>
+      <div class="metric-sub">EE: 1 Billions · 2 Excl. · 2 Invictus</div>
+    </div>
+    <div class="metric metric-ok">
+      <div class="metric-label">Maio — Pitches marcados</div>
+      <div class="metric-value">28</div>
+      <div class="metric-sub">11 Billions · 9 Excl. · 8 Invictus</div>
+    </div>
+    <div class="metric metric-ok">
+      <div class="metric-label">Abril — Pitches marcados</div>
+      <div class="metric-value">22</div>
+      <div class="metric-sub">9 Billions · 7 Excl. · 6 Invictus</div>
+    </div>
+    <div class="metric metric-ok">
+      <div class="metric-label">Março — Pitches marcados</div>
+      <div class="metric-value">19</div>
+      <div class="metric-sub">7 Billions · 7 Excl. · 5 Invictus</div>
+    </div>
+    <div class="metric metric-warn">
+      <div class="metric-label">Fevereiro — Pitches marcados</div>
+      <div class="metric-value">9</div>
+      <div class="metric-sub">5 Billions · 1 Excl. · 3 Invictus</div>
+    </div>
+  </div>
+
+  <div class="chart-box">
+    <div class="chart-title">E.E — Pitches marcados por mês e squad</div>
+    <div class="legend">
+      <span><span class="legend-dot" style="background:#1D9E75"></span>Billions</span>
+      <span><span class="legend-dot" style="background:#378ADD"></span>Exclusive</span>
+      <span><span class="legend-dot" style="background:#7F77DD"></span>Invictus</span>
+    </div>
+    <div class="chart-wrap" style="height:220px">
+      <canvas id="eeChart" role="img" aria-label="Pitches E.E por mês: fev 5/1/3, mar 7/7/5, abr 9/7/6, mai 11/9/8, jun 1/2/2">Pitches EE: Fev 5+1+3=9; Mar 7+7+5=19; Abr 9+7+6=22; Mai 11+9+8=28; Jun 1+2+2=5.</canvas>
+    </div>
+  </div>
+
+  <div class="chart-box">
+    <div class="chart-title">E.E — Vendas LG por mês (total)</div>
+    <div class="chart-wrap" style="height:180px">
+      <canvas id="eeVendasChart" role="img" aria-label="Vendas EE: fev 0, mar 9, abr 9, mai 11, jun 0">Vendas EE: Fev 0; Mar 9; Abr 9; Mai 11; Jun 0.</canvas>
+    </div>
+  </div>
+
+  <div class="section-title">Tx. Conversão (Reunião → Venda) — E.E</div>
+  <div style="background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 16px;">
+    <div class="progress-row">
+      <span class="progress-label">Fevereiro</span>
+      <div class="progress-bg"><div class="progress-fill" style="width:47%; background:#EF9F27"></div></div>
+      <span class="progress-val">47%</span>
+    </div>
+    <div class="progress-row">
+      <span class="progress-label">Março</span>
+      <div class="progress-bg"><div class="progress-fill" style="width:35.7%; background:#EF9F27"></div></div>
+      <span class="progress-val">35,7%</span>
+    </div>
+    <div class="progress-row">
+      <span class="progress-label">Abril</span>
+      <div class="progress-bg"><div class="progress-fill" style="width:65%; background:#1D9E75"></div></div>
+      <span class="progress-val">65%+</span>
+    </div>
+    <div class="progress-row">
+      <span class="progress-label">Maio</span>
+      <div class="progress-bg"><div class="progress-fill" style="width:0%; background:#E24B4A"></div></div>
+      <span class="progress-val">0%</span>
+    </div>
+    <div class="progress-row">
+      <span class="progress-label">Junho</span>
+      <div class="progress-bg"><div class="progress-fill" style="width:0%; background:#E24B4A"></div></div>
+      <span class="progress-val">0%</span>
+    </div>
+  </div>
+  <div class="insight" style="margin-top:14px"><strong>Queda brusca em Mai e Jun:</strong> Maio teve 28 pitches marcados mas 0% de conversão em venda. Isso indica que o volume de atividade existe, mas o fechamento travou completamente. Pode ser problema de proposta, preço ou follow-up pós-pitch.</div>
+</div>
+
+<div id="squads" class="pane">
+  <div class="section-title">Performance por squad — visão acumulada</div>
+
+  <div class="two-col" style="margin-bottom:16px">
+    <div class="chart-box">
+      <div class="chart-title">Billions — Expansão carteira</div>
+      <div class="chart-sub">Meta: 25 oport. · Realizado: 10 · Tx conv.: 50%</div>
+      <div class="chart-wrap" style="height:160px">
+        <canvas id="billCart" role="img" aria-label="Billions expansão: oportunidades 10/25, reuniões 4/20, vendas 5/9">Billions: Oport 10vs25, RR 4vs20, Vendas 5vs9.</canvas>
+      </div>
+    </div>
+    <div class="chart-box">
+      <div class="chart-title">Invictus — Expansão carteira</div>
+      <div class="chart-sub">Meta: — · Realizado: 16 oport. · Tx conv.: 43,75%</div>
+      <div class="chart-wrap" style="height:160px">
+        <canvas id="invCart" role="img" aria-label="Invictus expansão: oportunidades 16, reuniões 7, vendas 7">Invictus: Oport 16, RR 7, Vendas 7.</canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="chart-box">
+    <div class="chart-title">E.E — Pitches marcados por squad (acumulado Fev–Jun)</div>
+    <div class="legend">
+      <span><span class="legend-dot" style="background:#1D9E75"></span>Billions</span>
+      <span><span class="legend-dot" style="background:#378ADD"></span>Exclusive</span>
+      <span><span class="legend-dot" style="background:#7F77DD"></span>Invictus</span>
+    </div>
+    <div class="chart-wrap" style="height:200px">
+      <canvas id="squadEEChart" role="img" aria-label="Pitches EE acumulado: Billions 33, Exclusive 26, Invictus 24">Pitches acumulados: Billions 33, Exclusive 26, Invictus 24.</canvas>
+    </div>
+  </div>
+
+  <div class="section-title">Coordenadores — E.E (pitches e vendas)</div>
+  <table class="data-table">
+    <thead><tr><th>Coordenador</th><th>Squad</th><th>Pitch Marcado</th><th>Venda</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Eder Vasconcelos</td><td>Billions</td><td>1</td><td>0</td><td><span class="badge bad">0 vendas</span></td></tr>
+      <tr><td>Jhonatan Mayer</td><td>Billions</td><td>—</td><td>0</td><td><span class="badge bad">0 vendas</span></td></tr>
+      <tr><td>Rafaela Tolomeu</td><td>Exclusive</td><td>—</td><td>0</td><td><span class="badge bad">0 vendas</span></td></tr>
+      <tr><td>Ruan Silva</td><td>Invictus</td><td>—</td><td>0</td><td><span class="badge bad">0 vendas</span></td></tr>
+      <tr><td>Vitor Neres</td><td>Exclusive</td><td>1</td><td>1</td><td><span class="badge ok">1 venda</span></td></tr>
+      <tr><td>Ueliton Pereira</td><td>Invictus</td><td>6</td><td>0</td><td><span class="badge bad">0 vendas</span></td></tr>
+      <tr><td>Thiago Almeida</td><td>Invictus</td><td>3</td><td>0</td><td><span class="badge bad">0 vendas</span></td></tr>
+    </tbody>
+  </table>
+  <div class="insight" style="margin-top:14px"><strong>Apenas Vitor Neres (Exclusive) registrou 1 venda em E.E.</strong> Todos os demais coordenadores estão em 0 vendas, apesar de pitches marcados. Isso mostra que o problema não é volume de atividade, mas efetividade no fechamento.</div>
+</div>
+
+<div id="conversao" class="pane">
+  <div class="section-title">Taxas de conversão — Expansão Carteira (Reunião → Venda)</div>
+  <div class="chart-box">
+    <div class="chart-title">Tx. Conversão RR→Venda por mês — Expansão Carteira</div>
+    <div class="legend">
+      <span><span class="legend-dot" style="background:#1D9E75"></span>Realizado</span>
+      <span><span class="legend-dot" style="background:#5F5E5A; opacity:.5"></span>Meta (65%)</span>
+    </div>
+    <div class="chart-wrap" style="height:220px">
+      <canvas id="txConvChart" role="img" aria-label="Taxa de conversão por mês: jan 47%, fev 71%, mar 35,7%, abr 0%, mai 0%, jun 0%">Tx conv.: Jan 47%; Fev 71,4%; Mar 35,7%; Abr 0%; Mai 0%; Jun 0%.</canvas>
+    </div>
+  </div>
+
+  <div class="section-title">Vendas por produto — acumulado 2026</div>
+  <div class="two-col">
+    <div>
+      <div class="chart-box">
+        <div class="chart-title">Vendas — LG (logo)</div>
+        <div class="chart-wrap" style="height:180px">
+          <canvas id="vendaLGChart" role="img" aria-label="Vendas LG por mês: jan 8, fev 5, mar 5, abr 0, mai 0, jun 0">Vendas LG: Jan 8, Fev 5, Mar 5, Abr 0, Mai 0, Jun 0.</canvas>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="chart-box">
+        <div class="chart-title">Vendas — Executar</div>
+        <div class="chart-wrap" style="height:180px">
+          <canvas id="vendaExecChart" role="img" aria-label="Vendas Executar por mês: jan 4, fev 8, mar 7, abr 10, mai 10, jun 0">Vendas Executar: Jan 4, Fev 8, Mar 7, Abr 10, Mai 10, Jun 0.</canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">Análise da queda de vendas em logo</div>
+  <div class="insight"><strong>Vendas em logo (LG) caíram a zero a partir de Abril:</strong> Jan teve 8 vendas LG, Fev 5, Mar 5 — e depois zerou. Isso explica diretamente o problema de menor volume de logos que foi levantado. O pipeline existe mas a conversão em cliente novo parou.</div>
+  <div class="insight"><strong>Vendas Executar ainda sustentam o número</strong> (10 em Abr e Mai), mas sem novos logos a expansão de carteira também fica limitada ao que já existe. A estrutura está dependendo da carteira ativa para gerar receita.</div>
+  <div class="insight"><strong>Ticket médio (T.M) instável:</strong> Em Março, o T.M geral foi R$31,5k (puxado por Billions com R$66,7k). Em Fevereiro caiu para R$6,2k. A inconsistência de ticket indica falta de padronização no ICP qualificado para fechamento.</div>
+
+  <div class="section-title">Projeção vs necessidade — Junho</div>
+  <table class="data-table">
+    <thead><tr><th>Produto</th><th>Meta Junho</th><th>Realizado</th><th>Gap</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Expansão — Executar</td><td>R$ 80.000</td><td>R$ 0</td><td>R$ 80.000</td><td><span class="badge bad">Crítico</span></td></tr>
+      <tr><td>Expansão — Ter/Saber</td><td>R$ 20.000</td><td>R$ 0</td><td>R$ 20.000</td><td><span class="badge bad">Crítico</span></td></tr>
+      <tr><td>Executar (Saber→Executar)</td><td>R$ 800.000</td><td>R$ 0</td><td>R$ 800.000</td><td><span class="badge bad">Crítico</span></td></tr>
+      <tr><td><strong>TOTAL</strong></td><td><strong>R$ 900.000</strong></td><td><strong>R$ 0</strong></td><td><strong>R$ 900.000</strong></td><td><span class="badge bad">0% atingido</span></td></tr>
+    </tbody>
+  </table>
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.pane').forEach(p => p.classList.remove('active'));
+    this.classList.add('active');
+    document.getElementById(this.dataset.tab).classList.add('active');
+  });
+});
+
+const isDark = matchMedia('(prefers-color-scheme: dark)').matches;
+const grid = isDark ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.06)';
+const txt = isDark ? '#b4b2a9' : '#5f5e5a';
+const meses = ['Jan','Fev','Mar','Abr','Mai','Jun'];
+
+function bar(id, labels, datasets, yFmt) {
+  new Chart(document.getElementById(id), {
+    type: 'bar',
+    data: { labels, datasets },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { grid: { display: false }, ticks: { color: txt, font: { size: 11 } } },
+        y: { grid: { color: grid }, ticks: { color: txt, font: { size: 11 }, callback: yFmt || (v => v) }, beginAtZero: true }
+      }
+    }
+  });
+}
+
+const brl = v => 'R$' + (Math.abs(v)/1000).toFixed(0) + 'k';
+
+bar('totalChart', meses,
+  [{ label: 'Realizado', data: [667152, 548565, 739869, 623649, 848121, 0], backgroundColor: '#1D9E75', borderRadius: 4, borderWidth: 0 },
+   { label: 'Meta', data: [301000, 1085000, 507000, 1000000, 1200000, 900000], backgroundColor: 'rgba(55,138,221,0.25)', borderRadius: 4, borderWidth: 0 }], brl);
+
+bar('execChart', meses,
+  [{ label: 'Realizado', data: [225732, 422700, 31166, 128056, 40898, 0], backgroundColor: '#1D9E75', borderRadius: 4, borderWidth: 0 },
+   { label: 'Meta', data: [40000, 850000, 173000, 50000, 150000, 80000], backgroundColor: 'rgba(55,138,221,0.25)', borderRadius: 4, borderWidth: 0 }], brl);
+
+bar('tersaberChart', ['Jan','Fev','Mar','Abr','Mai','Jun'],
+  [{ label: 'Ter/Saber', data: [80350, 27865, 0, 29706, 23693, 0], backgroundColor: '#7F77DD', borderRadius: 4, borderWidth: 0 }], brl);
+
+bar('eeChart', ['Fev','Mar','Abr','Mai','Jun'],
+  [{ label: 'Billions', data: [5,7,9,11,1], backgroundColor: '#1D9E75', borderRadius: 4, borderWidth: 0, stack:'s' },
+   { label: 'Exclusive', data: [1,7,7,9,2], backgroundColor: '#378ADD', borderRadius: 4, borderWidth: 0, stack:'s' },
+   { label: 'Invictus', data: [3,5,6,8,2], backgroundColor: '#7F77DD', borderRadius: 4, borderWidth: 0, stack:'s' }]);
+
+bar('eeVendasChart', ['Fev','Mar','Abr','Mai','Jun'],
+  [{ label: 'Vendas LG', data: [0,9,9,11,0], backgroundColor: '#1D9E75', borderRadius: 4, borderWidth: 0 }]);
+
+new Chart(document.getElementById('billCart'), {
+  type: 'bar',
+  data: { labels: ['Oportunidades','Reuniões','Vendas LG'],
+    datasets: [
+      { label: 'Realizado', data: [10,4,5], backgroundColor: '#1D9E75', borderRadius: 4, borderWidth: 0 },
+      { label: 'Meta', data: [25,20,9], backgroundColor: 'rgba(55,138,221,0.25)', borderRadius: 4, borderWidth: 0 }
+    ]},
+  options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid:{ display:false }, ticks:{ color:txt,font:{size:10} } }, y: { grid:{ color:grid }, ticks:{ color:txt,font:{size:10} }, beginAtZero:true } } }
+});
+
+new Chart(document.getElementById('invCart'), {
+  type: 'bar',
+  data: { labels: ['Oportunidades','Reuniões','Vendas LG'],
+    datasets: [{ label: 'Realizado', data: [16,7,7], backgroundColor: '#7F77DD', borderRadius: 4, borderWidth: 0 }]},
+  options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid:{ display:false }, ticks:{ color:txt,font:{size:10} } }, y: { grid:{ color:grid }, ticks:{ color:txt,font:{size:10} }, beginAtZero:true } } }
+});
+
+bar('squadEEChart', ['Billions','Exclusive','Invictus'],
+  [{ data: [33,26,24], backgroundColor: ['#1D9E75','#378ADD','#7F77DD'], borderRadius: 4, borderWidth: 0 }]);
+
+new Chart(document.getElementById('txConvChart'), {
+  type: 'line',
+  data: { labels: meses,
+    datasets: [
+      { label: 'Tx Conversão', data: [47,71.4,35.7,0,0,0], borderColor: '#1D9E75', backgroundColor: 'rgba(29,158,117,0.1)', fill: true, tension: 0.3, pointRadius: 4 },
+      { label: 'Meta 65%', data: [65,65,65,65,65,65], borderColor: 'rgba(95,94,90,0.4)', borderDash: [4,4], pointRadius: 0 }
+    ]},
+  options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid:{ display:false }, ticks:{ color:txt,font:{size:11} } }, y: { grid:{ color:grid }, ticks:{ color:txt,font:{size:11}, callback: v => v+'%' }, beginAtZero:true, max:100 } } }
+});
+
+bar('vendaLGChart', meses,
+  [{ data: [8,5,5,0,0,0], backgroundColor: '#1D9E75', borderRadius: 4, borderWidth: 0 }]);
+
+bar('vendaExecChart', meses,
+  [{ data: [4,8,7,10,10,0], backgroundColor: '#378ADD', borderRadius: 4, borderWidth: 0 }]);
+</script>
