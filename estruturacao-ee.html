@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rota da Linguiça — Estruturação Estratégica (V4)</title>
+  <meta name="description" content="Diagnóstico completo e plano de estruturação digital de 5 semanas para expansão de franquias da Rota da Linguiça." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --smoke: #14100e;
+      --ink: #1f1814;
+      --muted: #6e6258;
+      --line: #d9d0c6;
+      --paper: #f2efe9;
+      --surface: #fffcf8;
+      --wine: #7a1f24;
+      --wine-soft: #f3e4e2;
+      --brass: #b8923f;
+      --brass-soft: #efe2c4;
+      --pine: #2f4a3c;
+      --pine-soft: #d7e4dc;
+      --amber: #9a6b1f;
+      --amber-soft: #f4e8d0;
+      --shadow: 0 14px 40px rgba(20, 16, 14, 0.08);
+      --font-display: "Cormorant Garamond", Georgia, serif;
+      --font-body: "Sora", sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      color: var(--ink);
+      background:
+        radial-gradient(ellipse 70% 40% at 0% 0%, #e8ddd0 0%, transparent 50%),
+        radial-gradient(ellipse 50% 35% at 100% 10%, #ddd8cf 0%, transparent 45%),
+        var(--paper);
+      line-height: 1.55;
+      min-height: 100vh;
+    }
+    a { color: inherit; }
+    button { font: inherit; cursor: pointer; }
+
+    .shell { width: min(1100px, 100%); margin: 0 auto; padding: 24px 20px 80px; }
+
+    .topbar {
+      display: flex; flex-wrap: wrap; gap: 12px;
+      justify-content: space-between; align-items: center;
+      margin-bottom: 22px;
+    }
+    .brand {
+      font-family: var(--font-display);
+      font-size: 1.35rem; font-weight: 600;
+    }
+    .top-links { display: flex; flex-wrap: wrap; gap: 8px; }
+    .top-links a {
+      text-decoration: none; font-size: 12px; font-weight: 600;
+      background: var(--surface); border: 1px solid var(--line);
+      padding: 8px 12px; border-radius: 4px;
+      transition: border-color .2s ease, transform .2s ease;
+    }
+    .top-links a:hover { border-color: var(--wine); transform: translateY(-1px); }
+
+    .hero {
+      background:
+        linear-gradient(135deg, rgba(20,16,14,0.96) 0%, rgba(79,18,22,0.92) 55%, rgba(47,74,60,0.9) 100%);
+      color: #f7f1e8;
+      border-radius: 18px;
+      padding: clamp(28px, 5vw, 42px);
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+      animation: rise .7s ease both;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: "";
+      position: absolute; right: -30px; bottom: -40px;
+      width: 180px; height: 180px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(184,146,63,0.22), transparent 70%);
+      pointer-events: none;
+    }
+    .hero-kicker {
+      font-size: 12px; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; opacity: 0.75; margin-bottom: 12px;
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      font-weight: 600; line-height: 1.1;
+      max-width: 16ch; margin-bottom: 12px;
+    }
+    .hero p { max-width: 58ch; opacity: 0.9; margin-bottom: 20px; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      font-size: 12px; font-weight: 600;
+      padding: 8px 12px;
+      border: 1px solid rgba(247,241,232,0.28);
+      background: rgba(255,255,255,0.06);
+      border-radius: 999px;
+    }
+
+    .tabs {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin: 18px 0 16px;
+      position: sticky; top: 8px; z-index: 10;
+      background: rgba(242,239,233,0.92);
+      backdrop-filter: blur(8px);
+      padding: 8px 0;
+    }
+    .tab-btn {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 9px 14px;
+      font-size: 12px; font-weight: 600;
+      transition: all .2s ease;
+    }
+    .tab-btn.active {
+      background: var(--smoke);
+      border-color: var(--smoke);
+      color: #f7f1e8;
+    }
+
+    .pane { display: none; animation: rise .45s ease both; }
+    .pane.active { display: block; }
+
+    .section-title {
+      font-size: 12px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted);
+      margin: 8px 0 14px; padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 18px 18px 16px;
+      box-shadow: var(--shadow);
+    }
+    .card h3 {
+      font-family: var(--font-display);
+      font-size: 1.35rem; font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .card p, .card li { font-size: 0.92rem; color: var(--muted); }
+    .card ul { margin-left: 1.1rem; display: grid; gap: 6px; }
+    .card.bad { border-left: 4px solid var(--wine); }
+    .card.ok { border-left: 4px solid var(--pine); }
+    .card.warn { border-left: 4px solid var(--amber); }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .metric {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px;
+    }
+    .metric-label { font-size: 11px; color: var(--muted); margin-bottom: 4px; }
+    .metric-value {
+      font-family: var(--font-display);
+      font-size: 1.55rem; font-weight: 600; line-height: 1.1;
+    }
+    .metric-sub { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+    .timeline {
+      display: grid; gap: 10px;
+    }
+    .week {
+      display: grid;
+      grid-template-columns: 88px 1fr;
+      gap: 12px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px 16px;
+      align-items: start;
+    }
+    .week-num {
+      font-family: var(--font-display);
+      font-size: 1.3rem; font-weight: 600;
+      color: var(--wine);
+    }
+    .week h4 { font-size: 0.95rem; margin-bottom: 4px; }
+    .week p { font-size: 0.88rem; color: var(--muted); }
+
+    .persona {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 14px;
+    }
+    .quote {
+      font-family: var(--font-display);
+      font-size: 1.35rem; font-style: italic;
+      line-height: 1.35;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .tag {
+      font-size: 11px; font-weight: 600;
+      padding: 6px 10px; border-radius: 999px;
+      background: var(--brass-soft); color: #6a4f16;
+    }
+    .tag.pine { background: var(--pine-soft); color: var(--pine); }
+    .tag.wine { background: var(--wine-soft); color: var(--wine); }
+    .tag.amber { background: var(--amber-soft); color: var(--amber); }
+
+    .checklist { display: grid; gap: 8px; }
+    .check-item {
+      display: flex; gap: 10px; align-items: flex-start;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 0.9rem;
+    }
+    .check-item input { margin-top: 3px; accent-color: var(--pine); }
+    .check-item.done { opacity: 0.65; text-decoration: line-through; }
+
+    .insight {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      font-size: 0.92rem;
+      color: var(--ink);
+    }
+    .insight strong { font-weight: 600; }
+
+    .footer-note {
+      margin-top: 28px;
+      font-size: 12px; color: var(--muted);
+      text-align: center;
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 860px) {
+      .grid-2, .grid-3, .persona, .metric-grid { grid-template-columns: 1fr; }
+      .metric-grid { grid-template-columns: 1fr 1fr; }
+      .week { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 520px) {
+      .metric-grid { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="topbar">
+      <div class="brand">Rota da Linguiça · EE V4</div>
+      <div class="top-links">
+        <a href="briefing-cfo.html">Briefing CFO</a>
+        <a href="index.html">Landing Franquias</a>
+        <a href="cockpit-monetizacao.html">Cockpit Monetização</a>
+      </div>
+    </div>
+
+    <header class="hero">
+      <p class="hero-kicker">Estruturação Estratégica · 5 semanas</p>
+      <h1>Diagnóstico e plano digital de franquias</h1>
+      <p>
+        Profissionalizar a marca B2B, destravar o funil de franqueados e preparar a base digital
+        antes de escalar mídia paga — alinhado à mentalidade cautelosa do cliente.
+      </p>
+      <div class="hero-meta">
+        <span class="chip">Cliente: Ricardo &amp; Juliana</span>
+        <span class="chip">Unidade: Pomerode/SC</span>
+        <span class="chip">Consultoria franquia: Inova</span>
+        <span class="chip">Foco: Sul &amp; Sudeste</span>
+      </div>
+    </header>
+
+    <div class="tabs" role="tablist" aria-label="Seções do diagnóstico">
+      <button class="tab-btn active" data-tab="resumo" role="tab" aria-selected="true">Resumo</button>
+      <button class="tab-btn" data-tab="malentendido" role="tab" aria-selected="false">Franquia vs. próprias</button>
+      <button class="tab-btn" data-tab="barreiras" role="tab" aria-selected="false">Barreiras</button>
+      <button class="tab-btn" data-tab="solucoes" role="tab" aria-selected="false">Soluções</button>
+      <button class="tab-btn" data-tab="cliente" role="tab" aria-selected="false">Mentalidade</button>
+      <button class="tab-btn" data-tab="cronograma" role="tab" aria-selected="false">5 semanas</button>
+      <button class="tab-btn" data-tab="entregas" role="tab" aria-selected="false">Checklist</button>
+    </div>
+
+    <!-- RESUMO -->
+    <section id="resumo" class="pane active" role="tabpanel">
+      <div class="section-title">Snapshot do negócio</div>
+      <div class="metric-grid">
+        <div class="metric">
+          <div class="metric-label">Faturamento matriz (pico)</div>
+          <div class="metric-value">R$ 200k+</div>
+          <div class="metric-sub">Mensal histórico</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Faturamento atual</div>
+          <div class="metric-value">R$ 100–130k</div>
+          <div class="metric-sub">Queda por menor fluxo turístico</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Leads de franquia</div>
+          <div class="metric-value">8 ativos</div>
+          <div class="metric-sub">Negociações “congeladas”</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Ponto de equilíbrio</div>
+          <div class="metric-value">R$ 48k</div>
+          <div class="metric-sub">Operação enxuta (casal)</div>
+        </div>
+      </div>
+
+      <div class="insight">
+        <strong>Objetivo central:</strong> profissionalizar a marca e criar um funil de aquisição de franqueados previsível e escalável — sem queimar caixa em tráfego pago antes da base digital estar pronta.
+      </div>
+      <div class="insight">
+        <strong>Aposta do cliente:</strong> o modelo de franquia é “a menina dos olhos”. A decisão de não expandir por lojas próprias veio da escassez de mão de obra em Pomerode — não de rejeição ao modelo de franquia.
+      </div>
+      <div class="insight">
+        <strong>Pivotagem geográfica:</strong> priorizar Sul, Sudeste e capitais (ex.: Balneário Camboriú, Itapema, Curitiba), onde o produto regional já tem validação, em vez de branding nacional do zero.
+      </div>
+    </section>
+
+    <!-- MAL-ENTENDIDO -->
+    <section id="malentendido" class="pane" role="tabpanel">
+      <div class="section-title">Esclarecimento estratégico</div>
+      <div class="grid-2">
+        <article class="card ok">
+          <h3>Franquias = caminho escolhido</h3>
+          <p>Ricardo chama a franquia de “a menina dos olhos”. O projeto de formatação está pronto com a Inova. A expansão nacional passa por investidores, não por novas unidades próprias da matriz.</p>
+        </article>
+        <article class="card warn">
+          <h3>O que foi descartado</h3>
+          <p>Abrir novas lojas próprias. Motivo: extrema dificuldade de contratar e reter mão de obra em Pomerode e região — fábricas com até 4.000 funcionários absorvem o mercado local e o comércio de fim de semana perde atratividade.</p>
+        </article>
+      </div>
+      <div class="card" style="margin-top:14px">
+        <h3>Como a franquia resolve o gargalo</h3>
+        <ul>
+          <li>Contratação e gestão de pessoas passam para o franqueado (operação viável com um casal).</li>
+          <li>Matriz centraliza logística: compra de 60–70 fornecedores artesanais e abastece semanalmente via curva ABC.</li>
+          <li>Franqueado não carrega fretes fragmentados nem complexidade de sourcing.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- BARREIRAS -->
+    <section id="barreiras" class="pane" role="tabpanel">
+      <div class="section-title">Barreiras e gargalos</div>
+      <div class="grid-2">
+        <article class="card bad">
+          <h3>1. Queda de faturamento</h3>
+          <p>Matriz caiu de R$ 200k+ para R$ 100–130k/mês. Dependência quase total do turismo em Pomerode.</p>
+        </article>
+        <article class="card bad">
+          <h3>2. Escassez de mão de obra</h3>
+          <p>Expansão por lojas próprias inviável. Indústria local compete fortemente por funcionários.</p>
+        </article>
+        <article class="card bad">
+          <h3>3. Funil de franquias congelado</h3>
+          <p>8 leads ativos, mas decisões adiadas para o “segundo semestre” (economia, eleições, Copa).</p>
+        </article>
+        <article class="card bad">
+          <h3>4. Digital fraco e desalinhado</h3>
+          <p>Marketing só B2C (varejo local). Instagram não comunica força institucional para investidor B2B.</p>
+        </article>
+        <article class="card bad">
+          <h3>5. Dependência operacional</h3>
+          <p>Ricardo e Juliana centralizam loja, empório, pousada, transportadora e restaurante. Sem CRM e sem métricas claras.</p>
+        </article>
+        <article class="card bad">
+          <h3>6. Medo de queimar caixa</h3>
+          <p>Receio de investir pesado em tráfego pago sem marca digital forte. Complexidade de 60–70 fornecedores já foi internalizada na matriz.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- SOLUÇÕES -->
+    <section id="solucoes" class="pane" role="tabpanel">
+      <div class="section-title">Soluções e estratégia definida</div>
+      <div class="grid-2">
+        <article class="card ok">
+          <h3>Franquia com estrutura enxuta</h3>
+          <p>Transfere RH para o investidor. Operação para duas pessoas. Break-even ~R$ 48k/mês.</p>
+        </article>
+        <article class="card ok">
+          <h3>Logística verticalizada</h3>
+          <p>Matriz gerencia fornecedores e abastece por curva ABC semanal — diferencial competitivo no artesanal.</p>
+        </article>
+        <article class="card ok">
+          <h3>EE de 5 semanas (V4)</h3>
+          <p>“Saber antes de executar”: estruturar marca, ativos e métricas antes de escalar mídia paga.</p>
+        </article>
+        <article class="card ok">
+          <h3>Reposicionamento B2B</h3>
+          <p>Separar comunicação de varejinho local da narrativa de franqueadora. LP + manual + criativos.</p>
+        </article>
+        <article class="card ok">
+          <h3>Auditorias + cliente oculto</h3>
+          <p>Auditar tráfego (~R$ 1k/mês via Inova), redes e atendimento comercial dos leads.</p>
+        </article>
+        <article class="card ok">
+          <h3>Pivotagem geográfica</h3>
+          <p>Sul, Sudeste e capitais com perfil misto (turismo + consumo local) para reduzir sazonalidade.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- CLIENTE -->
+    <section id="cliente" class="pane" role="tabpanel">
+      <div class="section-title">Mentalidade do cliente</div>
+      <div class="persona">
+        <article class="card">
+          <p class="quote">“Não faço leilão com agência. Quero análise concreta antes de decidir.”</p>
+          <p>Ricardo — ex-gerente do ramo automobilístico (21 anos). Vendedor experiente, pragmático e analítico. Difícil de convencer com promessa vazia.</p>
+          <div class="tag-row">
+            <span class="tag">Pragmático</span>
+            <span class="tag amber">Avesso a desperdício</span>
+            <span class="tag wine">Sobrecarga operacional</span>
+            <span class="tag pine">Franquia = prioridade</span>
+          </div>
+        </article>
+        <article class="card">
+          <h3>Como a V4 “comprou” a mentalidade</h3>
+          <ul>
+            <li>Validou o medo de anunciar sem base digital e sem CAC/conversão.</li>
+            <li>Freou queima de caixa com execução prematura.</li>
+            <li>Vendeu estruturação estratégica antes da escala.</li>
+            <li>Alinhou público-alvo geográfico no kickoff (Ruan).</li>
+          </ul>
+        </article>
+      </div>
+      <div class="card" style="margin-top:14px">
+        <h3>Ecossistema do cliente</h3>
+        <p>Além da loja matriz: empório, pousada, transportadora e restaurante anexo. Tempo é o maior gargalo para crescimento — qualquer plano precisa ser enxuto em demanda de gestão do casal.</p>
+      </div>
+    </section>
+
+    <!-- CRONOGRAMA -->
+    <section id="cronograma" class="pane" role="tabpanel">
+      <div class="section-title">Cronograma de 5 semanas</div>
+      <div class="timeline">
+        <div class="week">
+          <div class="week-num">Sem 1</div>
+          <div>
+            <h4>Diagnóstico de marketing &amp; imersão</h4>
+            <p>Mapear presença digital, canais B2C vs B2B, gaps de narrativa institucional e baseline de métricas (ou ausência delas).</p>
+          </div>
+        </div>
+        <div class="week">
+          <div class="week-num">Sem 2</div>
+          <div>
+            <h4>Auditoria comercial &amp; cliente oculto</h4>
+            <p>Testar atendimento da Inova nos 8 leads, identificar falhas de abordagem e pontos de congelamento no funil.</p>
+          </div>
+        </div>
+        <div class="week">
+          <div class="week-num">Sem 3</div>
+          <div>
+            <h4>Auditoria de tráfego &amp; concorrência</h4>
+            <p>Revisar conta de mídia (~R$ 1.000/mês), criativos atuais e benchmark de franquias gastronômicas no Sul/Sudeste.</p>
+          </div>
+        </div>
+        <div class="week">
+          <div class="week-num">Sem 4</div>
+          <div>
+            <h4>Ativos B2B &amp; identidade</h4>
+            <p>Landing page de franquias, manual de comunicação (copy + visual) e novos criativos institucionais para investidor.</p>
+          </div>
+        </div>
+        <div class="week">
+          <div class="week-num">Sem 5</div>
+          <div>
+            <h4>Plano de mídia &amp; handoff</h4>
+            <p>Estruturar funil previsível, definir CAC-alvo, roteiro de escala e critérios para ligar tráfego pago com segurança.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHECKLIST -->
+    <section id="entregas" class="pane" role="tabpanel">
+      <div class="section-title">Checklist de entregas (persistido neste navegador)</div>
+      <div class="checklist" id="checklist">
+        <label class="check-item"><input type="checkbox" data-key="diag-mkt" /> Diagnóstico profundo de marketing</label>
+        <label class="check-item"><input type="checkbox" data-key="audit-trafego" /> Auditoria de tráfego pago (conta Inova)</label>
+        <label class="check-item"><input type="checkbox" data-key="audit-social" /> Auditoria de redes sociais</label>
+        <label class="check-item"><input type="checkbox" data-key="concorrencia" /> Análise de concorrência (franquias gastronômicas)</label>
+        <label class="check-item"><input type="checkbox" data-key="cliente-oculto" /> Cliente oculto no comercial da Inova</label>
+        <label class="check-item"><input type="checkbox" data-key="sep-b2b" /> Separação narrativa B2C vs B2B</label>
+        <label class="check-item"><input type="checkbox" data-key="lp" /> Landing page de captura de franqueados</label>
+        <label class="check-item"><input type="checkbox" data-key="manual" /> Manual de comunicação (copy + identidade)</label>
+        <label class="check-item"><input type="checkbox" data-key="criativos" /> Novos criativos institucionais B2B</label>
+        <label class="check-item"><input type="checkbox" data-key="geo" /> Alinhamento de expansão Sul/Sudeste/capitais</label>
+        <label class="check-item"><input type="checkbox" data-key="metricas" /> Definição de CAC, conversão e painel de métricas</label>
+        <label class="check-item"><input type="checkbox" data-key="plano-midia" /> Plano de mídia paga pós-estruturação</label>
+      </div>
+      <div class="insight" style="margin-top:14px">
+        <strong>Critério de sucesso da EE:</strong> base digital B2B pronta + funil comercial diagnosticado + clareza geográfica, para só então acelerar aquisição de franqueados com previsibilidade.
+      </div>
+    </section>
+
+    <p class="footer-note">
+      Documento interno V4 · Fonte: kickoff, transcrições e planejamento estratégico Rota da Linguiça ·
+      <a href="index.html">Abrir landing de franquias</a>
+    </p>
+  </div>
+
+  <script>
+    const tabs = document.querySelectorAll(".tab-btn");
+    const panes = document.querySelectorAll(".pane");
+
+    tabs.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const id = btn.dataset.tab;
+        tabs.forEach((b) => {
+          b.classList.toggle("active", b === btn);
+          b.setAttribute("aria-selected", b === btn ? "true" : "false");
+        });
+        panes.forEach((p) => p.classList.toggle("active", p.id === id));
+      });
+    });
+
+    const storageKey = "rdl_ee_checklist_v1";
+    const saved = JSON.parse(localStorage.getItem(storageKey) || "{}");
+    document.querySelectorAll("#checklist input[type=checkbox]").forEach((input) => {
+      const key = input.dataset.key;
+      input.checked = Boolean(saved[key]);
+      input.closest(".check-item").classList.toggle("done", input.checked);
+      input.addEventListener("change", () => {
+        saved[key] = input.checked;
+        localStorage.setItem(storageKey, JSON.stringify(saved));
+        input.closest(".check-item").classList.toggle("done", input.checked);
+      });
+    });
+  </script>
+</body>
+</html>

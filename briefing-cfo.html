@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Briefing CFO — Rota da Linguiça | Reunião com o cliente</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #1a1512;
+      --muted: #5c534c;
+      --line: #ddd5cb;
+      --paper: #f7f4ef;
+      --surface: #fffdf9;
+      --wine: #7a1f24;
+      --pine: #2f4a3c;
+      --brass: #9a7a32;
+      --soft: #efe8dc;
+      --font-display: "Cormorant Garamond", Georgia, serif;
+      --font-body: "Sora", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-body);
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.55;
+      font-size: 15px;
+    }
+    .page {
+      width: min(820px, 100%);
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+    }
+    .doc-head {
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 18px;
+      margin-bottom: 28px;
+    }
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--wine);
+      margin-bottom: 8px;
+    }
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(1.9rem, 4vw, 2.5rem);
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+    .sub {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 58ch;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .meta span {
+      font-size: 12px;
+      font-weight: 600;
+      background: var(--soft);
+      padding: 6px 10px;
+      border-radius: 999px;
+    }
+    h2 {
+      font-family: var(--font-display);
+      font-size: 1.55rem;
+      margin: 32px 0 12px;
+      padding-top: 8px;
+      border-top: 1px solid var(--line);
+    }
+    h2:first-of-type { border-top: none; padding-top: 0; }
+    h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin: 18px 0 6px;
+    }
+    p { margin-bottom: 10px; color: var(--ink); }
+    .muted { color: var(--muted); }
+    ul, ol { margin: 8px 0 14px 1.2rem; }
+    li { margin-bottom: 6px; }
+    .box {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin: 14px 0;
+    }
+    .box.wine { border-left: 4px solid var(--wine); }
+    .box.pine { border-left: 4px solid var(--pine); }
+    .box.brass { border-left: 4px solid var(--brass); }
+    .box strong.label {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .two {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .stat {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 14px;
+    }
+    .stat b {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+    .stat span { font-size: 12px; color: var(--muted); }
+    .callout {
+      background: #1a1512;
+      color: #f7f1e8;
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin: 18px 0;
+    }
+    .callout p { color: #f7f1e8; margin: 0; }
+    .callout .label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #c4a35a;
+      margin-bottom: 8px;
+    }
+    .steps { counter-reset: step; list-style: none; margin-left: 0; }
+    .steps li {
+      counter-increment: step;
+      position: relative;
+      padding-left: 42px;
+      margin-bottom: 14px;
+    }
+    .steps li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0; top: 0;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--wine);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      display: grid;
+      place-items: center;
+    }
+    .footer {
+      margin-top: 36px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: space-between;
+    }
+    .footer a { color: var(--wine); font-weight: 600; text-decoration: none; }
+    .print-btn {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      background: var(--ink);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(0,0,0,.18);
+    }
+    @media (max-width: 700px) {
+      .two { grid-template-columns: 1fr; }
+    }
+    @media print {
+      body { background: #fff; }
+      .page { padding: 0; width: 100%; }
+      .print-btn { display: none; }
+      .box, .stat, .callout { break-inside: avoid; }
+      a { color: inherit; text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+  <main class="page">
+    <header class="doc-head">
+      <p class="eyebrow">Briefing interno · Uso do CFO · V4 Company</p>
+      <h1>Rota da Linguiça</h1>
+      <p class="sub">Documento mastigado para entrar na reunião com o cliente e apresentar a nova solução com segurança.</p>
+      <div class="meta">
+        <span>Conta: Rota da Linguiça</span>
+        <span>Decisor: Ricardo</span>
+        <span>Sócia: Juliana</span>
+        <span>Produto: Estruturação Estratégica (5 semanas)</span>
+      </div>
+    </header>
+
+    <!-- QUEM É -->
+    <h2>1. Quem é o cliente</h2>
+    <div class="box wine">
+      <strong class="label">Em uma frase</strong>
+      <p><strong>Rota da Linguiça</strong> é um negócio gastronômico artesanal de Pomerode (SC), nascido no Vale Europeu, que hoje quer crescer no Brasil via <strong>franquias</strong> — não abrindo lojas próprias.</p>
+    </div>
+
+    <h3>O que a empresa faz</h3>
+    <ul>
+      <li>Vende produtos artesanais regionais (linguiças e itens do Vale Europeu).</li>
+      <li>A loja matriz depende quase 100% de turistas em Pomerode.</li>
+      <li>Além da loja, o casal ainda toca empório, pousada, transportadora e restaurante anexo.</li>
+      <li>A matriz compra de <strong>60 a 70 fornecedores artesanais</strong> e quer usar isso como diferencial da franquia: o franqueado recebe a mercadoria pronta, sem ter que gerenciar essa complexidade.</li>
+    </ul>
+
+    <div class="two">
+      <div class="stat">
+        <b>R$ 200k+</b>
+        <span>Faturamento mensal que a matriz já chegou a fazer</span>
+      </div>
+      <div class="stat">
+        <b>R$ 100–130k</b>
+        <span>Faixa atual — caiu com a redução do turismo</span>
+      </div>
+      <div class="stat">
+        <b>8 leads</b>
+        <span>Investidores de franquia ativos, mas “congelados”</span>
+      </div>
+      <div class="stat">
+        <b>R$ 48k</b>
+        <span>Ponto de equilíbrio da unidade franqueada (modelo enxuto)</span>
+      </div>
+    </div>
+
+    <!-- PERFIL -->
+    <h2>2. Perfil de quem você vai falar</h2>
+    <div class="box brass">
+      <strong class="label">Ricardo (decisor)</strong>
+      <p>Ex-gerente do ramo automobilístico por <strong>21 anos</strong>. É vendedor experiente, pragmático e analítico. <strong>Não compra promessa</strong>. Não gosta de “leilão” entre agências. Quer número, lógica e caminho claro antes de gastar.</p>
+    </div>
+
+    <h3>Como ele pensa (importante para a reunião)</h3>
+    <ul>
+      <li><strong>Medo principal:</strong> colocar dinheiro em anúncio (tráfego pago) sem ter marca forte no digital e sem saber CAC / conversão — ele sente que isso é jogar dinheiro fora.</li>
+      <li><strong>Realidade dele:</strong> está sobrecarregado. Ele e a Juliana centralizam quase tudo. Tempo é escasso.</li>
+      <li><strong>O que ele ama no negócio:</strong> a franquia. Ele mesmo chama de <strong>“a menina dos olhos”</strong>.</li>
+      <li><strong>O que ele já descartou:</strong> abrir mais lojas próprias — não por falta de ambição, e sim porque em Pomerode é muito difícil contratar e reter gente (a indústria local “engole” a mão de obra).</li>
+    </ul>
+
+    <div class="callout">
+      <div class="label">Como falar com ele</div>
+      <p>Fale como quem respeita o medo dele. Mostre que a V4 não quer queimar caixa. A solução é estruturar primeiro, executar depois. Evite discurso genérico de agência. Seja concreto, curto e orientado a risco/retorno.</p>
+    </div>
+
+    <!-- O QUE ACONTECEU -->
+    <h2>3. O que aconteceu (história em ordem)</h2>
+    <ol class="steps">
+      <li>
+        <strong>O negócio cresceu no turismo e depois sofreu.</strong><br />
+        <span class="muted">A matriz era forte com turista. Com a queda do fluxo, o faturamento despencou para a faixa de R$ 100–130k.</span>
+      </li>
+      <li>
+        <strong>Eles decidiram crescer por franquia.</strong><br />
+        <span class="muted">Loja própria ficou inviável por falta de mão de obra. A franquia transfere a gestão de pessoas para o investidor. A matriz fica com a logística e o abastecimento.</span>
+      </li>
+      <li>
+        <strong>A formatação da franquia já existe.</strong><br />
+        <span class="muted">Consultoria Inova cuida do comercial. Há 8 leads na mesa — mas ninguém fecha. Os investidores estão adiando para o “segundo semestre” (economia, eleições, Copa).</span>
+      </li>
+      <li>
+        <strong>O digital não ajuda a vender franquia.</strong><br />
+        <span class="muted">Hoje o marketing parece “varejinho local” (B2C). Não passa força de franqueadora nacional para atrair investidor (B2B).</span>
+      </li>
+      <li>
+        <strong>Ricardo chegou com medo de gastar em anúncio.</strong><br />
+        <span class="muted">A V4 validou esse medo: anunciar sem base, sem métrica e sem narrativa B2B seria dirigir sem mapa.</span>
+      </li>
+      <li>
+        <strong>Foi vendida a Estruturação Estratégica (5 semanas).</strong><br />
+        <span class="muted">Em vez de ligar mídia agora, a V4 prepara a fundação: marca, ativos, diagnóstico comercial e rota geográfica correta — para só então escalar com previsibilidade.</span>
+      </li>
+    </ol>
+
+    <!-- A SOLUÇÃO -->
+    <h2>4. A nova solução (o que apresentar)</h2>
+    <div class="box pine">
+      <strong class="label">Promessa da reunião</strong>
+      <p>Não estamos pedindo para o cliente “investir em anúncio e torcer”. Estamos profissionalizando a franqueadora no digital e montando um funil de franqueados previsível — <strong>antes</strong> de acelerar mídia paga.</p>
+    </div>
+
+    <h3>O que a V4 entrega nessas 5 semanas</h3>
+    <ul>
+      <li><strong>Separar B2C de B2B:</strong> comunicação de investidor diferente da comunicação de loja local.</li>
+      <li><strong>Landing page de franquias:</strong> página feita para capturar e qualificar franqueado.</li>
+      <li><strong>Manual de comunicação + criativos:</strong> copy e visual alinhados à franqueadora.</li>
+      <li><strong>Diagnósticos:</strong> marketing, tráfego, concorrência e “cliente oculto” no comercial da Inova (para entender por que os 8 leads não fecham).</li>
+      <li><strong>Rota geográfica inteligente:</strong> focar Sul, Sudeste e capitais (ex.: Balneário Camboriú, Itapema, Curitiba), onde o produto já faz sentido — em vez de gastar fortuna tentando educar o Brasil inteiro do zero.</li>
+    </ul>
+
+    <h3>Números úteis da franquia (se o cliente citar)</h3>
+    <div class="two">
+      <div class="stat">
+        <b>R$ 281 mil</b>
+        <span>Investimento inicial estimado</span>
+      </div>
+      <div class="stat">
+        <b>R$ 50 mil</b>
+        <span>Taxa de franquia</span>
+      </div>
+      <div class="stat">
+        <b>R$ 131 mil</b>
+        <span>Faturamento médio mensal da unidade</span>
+      </div>
+      <div class="stat">
+        <b>17 meses</b>
+        <span>Payback esperado · sem cobrança de FNP</span>
+      </div>
+    </div>
+
+    <!-- ROTEIRO -->
+    <h2>5. Roteiro rápido para a reunião</h2>
+    <div class="box">
+      <ol>
+        <li><strong>Reconhecer o momento:</strong> “Vocês têm um modelo de franquia forte, mas o digital e o funil ainda não estão convertendo a altura do produto.”</li>
+        <li><strong>Espelhar o medo dele:</strong> “Faz total sentido não despejar verba em anúncio sem base. Por isso começamos pela estruturação.”</li>
+        <li><strong>Mostrar o caminho:</strong> 5 semanas para diagnosticar, organizar a marca B2B, criar a LP e limpar o comercial.</li>
+        <li><strong>Fechar o porquê agora:</strong> há 8 leads parados; sem narrativa e sem processo, esse pipeline esfria. Com base pronta, a escala de mídia deixa de ser aposta e vira sistema.</li>
+        <li><strong>Não prometer milagre de venda imediata:</strong> o objetivo desta fase é previsibilidade. Venda de franquia em escala vem depois da fundação.</li>
+      </ol>
+    </div>
+
+    <div class="callout">
+      <div class="label">Frase de ouro (pode usar)</div>
+      <p>“A gente não vai acelerar o carro sem painel. Nessas 5 semanas a gente coloca o painel, o mapa e o funil — para o investimento em mídia trabalhar a favor do caixa, não contra.”</p>
+    </div>
+
+    <h2>6. O que NÃO confundir na conversa</h2>
+    <ul>
+      <li><strong>Não diga</strong> que o cliente “não quer franquia”. Ele quer — e muito.</li>
+      <li><strong>Não diga</strong> que o problema é só anúncio. O problema é fundação + comercial + posicionamento.</li>
+      <li><strong>Não empurre</strong> expansão Brasil inteiro agora. O alinhamento interno é Sul/Sudeste primeiro.</li>
+      <li><strong>Não trate</strong> Juliana como detalhe: ela opera junto e a sobrecarga é do casal.</li>
+    </ul>
+
+    <footer class="footer">
+      <div>V4 Company · Briefing CFO · Rota da Linguiça</div>
+      <div>
+        <a href="estruturacao-ee.html">Diagnóstico completo</a> ·
+        <a href="index.html">Landing de franquias</a>
+      </div>
+    </footer>
+  </main>
+</body>
+</html>
