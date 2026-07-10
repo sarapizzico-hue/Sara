@@ -1,404 +1,630 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rota da Linguiça — Seja um Franqueado</title>
+  <meta name="description" content="Invista na franquia Rota da Linguiça: logística verticalizada, operação enxuta e sabores artesanais do Vale Europeu. Expansão Sul e Sudeste." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --smoke: #14100e;
+      --smoke-soft: #2a221c;
+      --ink: #1f1814;
+      --muted: #6e6258;
+      --line: #d9d0c6;
+      --paper: #f2efe9;
+      --surface: #fffcf8;
+      --wine: #7a1f24;
+      --wine-deep: #4f1216;
+      --brass: #b8923f;
+      --brass-soft: #efe2c4;
+      --pine: #2f4a3c;
+      --pine-soft: #d7e4dc;
+      --shadow: 0 18px 50px rgba(20, 16, 14, 0.14);
+      --font-display: "Cormorant Garamond", Georgia, serif;
+      --font-body: "Sora", sans-serif;
+    }
 
-<h2 class="sr-only">Dashboard da aba E.E — Cockpit Monetização Sales: metas vs realizado por mês, por squad e por produto</h2>
-<style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-.tab-row { display: flex; gap: 6px; margin-bottom: 1.5rem; flex-wrap: wrap; }
-.tab-btn { background: var(--color-background-secondary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 6px 14px; font-size: 12px; cursor: pointer; color: var(--color-text-secondary); font-family: var(--font-sans); }
-.tab-btn.active { background: var(--color-background-primary); border-color: var(--color-border-primary); color: var(--color-text-primary); font-weight: 500; }
-.pane { display: none; }
-.pane.active { display: block; }
-.section-title { font-size: 12px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 1rem; padding-bottom: 6px; border-bottom: 0.5px solid var(--color-border-tertiary); }
-.metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 1.5rem; }
-.metric { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 14px 16px; }
-.metric-label { font-size: 12px; color: var(--color-text-secondary); margin-bottom: 4px; }
-.metric-value { font-size: 20px; font-weight: 500; color: var(--color-text-primary); }
-.metric-sub { font-size: 11px; color: var(--color-text-tertiary); margin-top: 2px; }
-.metric-ok { border-left: 3px solid #1D9E75; }
-.metric-warn { border-left: 3px solid #EF9F27; }
-.metric-bad { border-left: 3px solid #E24B4A; }
-.chart-box { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 16px; margin-bottom: 16px; }
-.chart-title { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 10px; }
-.chart-sub { font-size: 11px; color: var(--color-text-secondary); margin-bottom: 12px; }
-.chart-wrap { position: relative; }
-.legend { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 10px; font-size: 11px; color: var(--color-text-secondary); }
-.legend span { display: flex; align-items: center; gap: 4px; }
-.legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
-.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.data-table { width: 100%; font-size: 12px; border-collapse: collapse; }
-.data-table th { text-align: left; font-size: 11px; font-weight: 500; color: var(--color-text-secondary); padding: 7px 10px; border-bottom: 0.5px solid var(--color-border-tertiary); }
-.data-table td { padding: 7px 10px; border-bottom: 0.5px solid var(--color-border-tertiary); color: var(--color-text-primary); }
-.data-table tr:last-child td { border-bottom: none; }
-.badge { display: inline-block; padding: 2px 8px; border-radius: var(--border-radius-md); font-size: 11px; font-weight: 500; }
-.ok { background: #E1F5EE; color: #0F6E56; }
-.warn { background: #FAEEDA; color: #854F0B; }
-.bad { background: #FCEBEB; color: #A32D2D; }
-.insight { background: var(--color-background-secondary); border-radius: var(--border-radius-lg); padding: 13px 15px; margin-bottom: 10px; font-size: 13px; color: var(--color-text-primary); line-height: 1.6; }
-.insight strong { font-weight: 500; }
-.progress-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 0.5px solid var(--color-border-tertiary); }
-.progress-row:last-child { border-bottom: none; }
-.progress-label { font-size: 12px; color: var(--color-text-primary); width: 100px; flex-shrink: 0; }
-.progress-bg { flex: 1; height: 8px; background: var(--color-background-secondary); border-radius: 4px; overflow: hidden; }
-.progress-fill { height: 100%; border-radius: 4px; }
-.progress-val { font-size: 12px; color: var(--color-text-secondary); width: 48px; text-align: right; flex-shrink: 0; }
-</style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.55;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+    button, input, select, textarea { font: inherit; }
 
-<div style="padding: 1rem 0;">
-<div class="tab-row">
-  <button class="tab-btn active" data-tab="resumo">Resumo Geral</button>
-  <button class="tab-btn" data-tab="expansao">Expansão Carteira</button>
-  <button class="tab-btn" data-tab="ee">E.E (Estruturação)</button>
-  <button class="tab-btn" data-tab="squads">Por Squad</button>
-  <button class="tab-btn" data-tab="conversao">Conversão & Vendas</button>
-</div>
+    .nav {
+      position: absolute; top: 0; left: 0; right: 0; z-index: 20;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px clamp(20px, 4vw, 48px);
+      color: #f7f1e8;
+    }
+    .nav-brand {
+      font-family: var(--font-display);
+      font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+    }
+    .nav-cta {
+      text-decoration: none;
+      background: var(--brass);
+      color: var(--smoke);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 12px 18px;
+      border-radius: 4px;
+      transition: transform .25s ease, background .25s ease;
+    }
+    .nav-cta:hover { transform: translateY(-2px); background: #c9a456; }
 
-<div id="resumo" class="pane active">
-  <div class="section-title">Realizado total acumulado Jan–Jun/2026 vs metas</div>
-  <div class="metric-grid">
-    <div class="metric metric-bad">
-      <div class="metric-label">Junho (atual)</div>
-      <div class="metric-value">R$ 0</div>
-      <div class="metric-sub">Meta: R$900k · 0% atingido</div>
-    </div>
-    <div class="metric metric-warn">
-      <div class="metric-label">Maio</div>
-      <div class="metric-value">R$ 848k</div>
-      <div class="metric-sub">Meta: R$1,2M · 70,7% atingido</div>
-    </div>
-    <div class="metric metric-warn">
-      <div class="metric-label">Abril</div>
-      <div class="metric-value">R$ 624k</div>
-      <div class="metric-sub">Meta: R$1M · 62,4% atingido</div>
-    </div>
-    <div class="metric metric-ok">
-      <div class="metric-label">Março</div>
-      <div class="metric-value">R$ 740k</div>
-      <div class="metric-sub">Meta: R$507k · 145,9% ✓</div>
-    </div>
-    <div class="metric metric-warn">
-      <div class="metric-label">Fevereiro</div>
-      <div class="metric-value">R$ 549k</div>
-      <div class="metric-sub">Meta: R$1,085M · 50,6% atingido</div>
-    </div>
-    <div class="metric metric-ok">
-      <div class="metric-label">Janeiro</div>
-      <div class="metric-value">R$ 667k</div>
-      <div class="metric-sub">Meta: R$301k · 221,7% ✓</div>
-    </div>
-  </div>
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: grid;
+      align-items: end;
+      color: #f7f1e8;
+      isolation: isolate;
+      overflow: hidden;
+    }
+    .hero-media {
+      position: absolute; inset: 0; z-index: -2;
+      background:
+        linear-gradient(180deg, rgba(20,16,14,0.35) 0%, rgba(20,16,14,0.25) 40%, rgba(20,16,14,0.88) 100%),
+        url("https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=2000&q=80") center/cover no-repeat;
+      transform: scale(1.04);
+      animation: heroZoom 12s ease-out both;
+    }
+    .hero-grain {
+      position: absolute; inset: 0; z-index: -1; pointer-events: none;
+      background:
+        radial-gradient(ellipse 70% 50% at 70% 20%, rgba(184,146,63,0.18), transparent 55%),
+        radial-gradient(ellipse 50% 40% at 15% 80%, rgba(122,31,36,0.28), transparent 60%);
+      mix-blend-mode: soft-light;
+    }
+    .hero-content {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+      padding: 0 clamp(20px, 4vw, 48px) clamp(48px, 8vh, 88px);
+      animation: rise .9s ease both;
+    }
+    .hero-brand {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 8vw, 5.6rem);
+      font-weight: 600;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      margin-bottom: 18px;
+      max-width: 12ch;
+      animation: rise .9s .08s ease both;
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(1.55rem, 3.4vw, 2.35rem);
+      font-weight: 500;
+      font-style: italic;
+      line-height: 1.2;
+      max-width: 22ch;
+      margin-bottom: 14px;
+      color: #f3e7d4;
+      animation: rise .9s .16s ease both;
+    }
+    .hero p {
+      max-width: 42ch;
+      font-size: clamp(0.95rem, 1.5vw, 1.08rem);
+      opacity: 0.9;
+      margin-bottom: 28px;
+      animation: rise .9s .24s ease both;
+    }
+    .hero-actions {
+      display: flex; flex-wrap: wrap; gap: 12px;
+      animation: rise .9s .32s ease both;
+    }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      text-decoration: none; border: none; cursor: pointer;
+      font-size: 14px; font-weight: 600;
+      padding: 14px 22px; border-radius: 4px;
+      transition: transform .25s ease, background .25s ease, color .25s ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--brass); color: var(--smoke); }
+    .btn-primary:hover { background: #c9a456; }
+    .btn-ghost {
+      background: transparent; color: #f7f1e8;
+      border: 1px solid rgba(247,241,232,0.45);
+    }
+    .btn-ghost:hover { background: rgba(247,241,232,0.08); }
 
-  <div class="chart-box">
-    <div class="chart-title">Realizado vs Meta — Total mensal (Expansão + EE + Executar)</div>
-    <div class="legend">
-      <span><span class="legend-dot" style="background:#1D9E75"></span>Realizado</span>
-      <span><span class="legend-dot" style="background:#378ADD; opacity:.5"></span>Meta</span>
-    </div>
-    <div class="chart-wrap" style="height:240px">
-      <canvas id="totalChart" role="img" aria-label="Barras de realizado vs meta por mês de jan a jun 2026">Jan: R$667k real / R$301k meta. Fev: R$549k / R$1,085M. Mar: R$740k / R$507k. Abr: R$624k / R$1M. Mai: R$848k / R$1,2M. Jun: R$0 / R$900k.</canvas>
-    </div>
-  </div>
+    .section {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+      padding: clamp(64px, 10vw, 104px) clamp(20px, 4vw, 48px);
+    }
+    .section-kicker {
+      font-size: 12px; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--wine); margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 600; line-height: 1.1;
+      max-width: 16ch; margin-bottom: 14px;
+    }
+    .section-lead {
+      max-width: 48ch; color: var(--muted); font-size: 1.02rem; margin-bottom: 40px;
+    }
 
-  <div class="section-title">Diagnóstico rápido</div>
-  <div class="insight"><strong>Jan e Mar bateram a meta</strong> (221% e 146% respectivamente), mas esses dois meses compensaram quedas severas em Fev, Abr e Mai — onde o time ficou entre 50–70% do objetivo. Junho está em 0% com meta de R$900k, o que é crítico.</div>
-  <div class="insight"><strong>Tendência preocupante:</strong> as metas estão crescendo muito (de R$301k em Jan para R$900k em Jun) enquanto o realizado não acompanhou. Há uma lacuna estrutural crescente entre o que se planeja e o que se entrega.</div>
-  <div class="insight"><strong>Maio foi o melhor mês absoluto</strong> (R$848k), puxado principalmente pelo Executar (R$783k), mas ainda 30% abaixo da meta de R$1,2M.</div>
-</div>
+    .model {
+      background:
+        linear-gradient(180deg, #ebe6de 0%, var(--paper) 100%);
+    }
+    .model-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: clamp(28px, 5vw, 56px);
+      align-items: center;
+    }
+    .model-visual {
+      position: relative;
+      min-height: 420px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      animation: rise .8s ease both;
+    }
+    .model-visual img {
+      width: 100%; height: 100%; object-fit: cover;
+      position: absolute; inset: 0;
+    }
+    .model-list { display: grid; gap: 22px; }
+    .model-item h3 {
+      font-family: var(--font-display);
+      font-size: 1.55rem; font-weight: 600; margin-bottom: 6px;
+    }
+    .model-item p { color: var(--muted); font-size: 0.95rem; max-width: 38ch; }
 
-<div id="expansao" class="pane">
-  <div class="section-title">Expansão de carteira — Meta x Realizado por categoria</div>
-  <div class="chart-box">
-    <div class="chart-title">Expansão Carteira — Executar (faturamento mensal)</div>
-    <div class="legend">
-      <span><span class="legend-dot" style="background:#1D9E75"></span>Realizado</span>
-      <span><span class="legend-dot" style="background:#378ADD; opacity:.5"></span>Meta</span>
-    </div>
-    <div class="chart-wrap" style="height:220px">
-      <canvas id="execChart" role="img" aria-label="Expansão Executar por mês: jan 225k/40k, fev 423k/850k, mar 31k/173k, abr 128k/50k, mai 41k/150k, jun 0/80k">Executar: Jan R$226k·meta R$40k; Fev R$423k·meta R$850k; Mar R$31k·meta R$173k; Abr R$128k·meta R$50k; Mai R$41k·meta R$150k; Jun R$0·meta R$80k.</canvas>
-    </div>
-  </div>
+    .numbers {
+      background: var(--smoke);
+      color: #f4ebe0;
+    }
+    .numbers .section { padding-top: clamp(56px, 8vw, 88px); padding-bottom: clamp(56px, 8vw, 88px); }
+    .numbers .section-kicker { color: var(--brass); }
+    .numbers .section-title { color: #f7f1e8; max-width: 18ch; }
+    .numbers .section-lead { color: rgba(244,235,224,0.72); }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+    .metric {
+      border-top: 1px solid rgba(184,146,63,0.45);
+      padding-top: 18px;
+      animation: rise .7s ease both;
+    }
+    .metric:nth-child(2) { animation-delay: .08s; }
+    .metric:nth-child(3) { animation-delay: .16s; }
+    .metric:nth-child(4) { animation-delay: .24s; }
+    .metric-value {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      font-weight: 600; line-height: 1; margin-bottom: 8px;
+      color: var(--brass-soft);
+    }
+    .metric-label { font-size: 0.88rem; color: rgba(244,235,224,0.7); }
 
-  <div class="chart-box">
-    <div class="chart-title">Expansão Carteira — Ter/Saber (faturamento mensal)</div>
-    <div class="chart-wrap" style="height:200px">
-      <canvas id="tersaberChart" role="img" aria-label="Ter/Saber por mês: jan 80k, fev 28k, mar 0, abr 30k, mai 24k, jun 0">Ter/Saber: Jan R$80k; Fev R$28k; Mar R$0; Abr R$30k; Mai R$24k; Jun R$0.</canvas>
-    </div>
-  </div>
+    .diff {
+      background: var(--surface);
+    }
+    .diff-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px 32px;
+    }
+    .diff-item {
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      animation: rise .7s ease both;
+    }
+    .diff-item:nth-child(2) { animation-delay: .08s; }
+    .diff-item:nth-child(3) { animation-delay: .16s; }
+    .diff-item h3 {
+      font-family: var(--font-display);
+      font-size: 1.45rem; font-weight: 600; margin-bottom: 8px;
+    }
+    .diff-item p { color: var(--muted); font-size: 0.94rem; }
 
-  <div class="section-title">Destaques por squad — Expansão Carteira (acumulado)</div>
-  <table class="data-table">
-    <thead><tr><th>Squad</th><th>Oportunidades</th><th>Reuniões</th><th>Vendas LG</th><th>Vendas Executar</th><th>Tx. Conversão</th></tr></thead>
-    <tbody>
-      <tr><td>Billions</td><td>10</td><td>4</td><td>5</td><td>—</td><td><span class="badge warn">50%</span></td></tr>
-      <tr><td>Exclusive</td><td>0</td><td>0</td><td>0</td><td>—</td><td><span class="badge bad">—</span></td></tr>
-      <tr><td>Invictus</td><td>16</td><td>7</td><td>7</td><td>—</td><td><span class="badge ok">43,75%</span></td></tr>
-    </tbody>
-  </table>
-  <div class="insight" style="margin-top:14px"><strong>Exclusive zerou em expansão de carteira</strong> no período mais recente — 0 oportunidades, 0 reuniões, 0 vendas. Requer atenção imediata da liderança para entender o que travou o squad.</div>
-</div>
+    .geo {
+      background:
+        linear-gradient(120deg, rgba(47,74,60,0.94), rgba(20,16,14,0.92)),
+        url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1800&q=80") center/cover;
+      color: #f4ebe0;
+    }
+    .geo .section-kicker { color: #d7c08a; }
+    .geo .section-title { max-width: 18ch; color: #f7f1e8; }
+    .geo .section-lead { color: rgba(244,235,224,0.78); }
+    .geo-tags {
+      display: flex; flex-wrap: wrap; gap: 10px;
+    }
+    .geo-tags span {
+      font-size: 13px; font-weight: 500;
+      padding: 10px 14px;
+      border: 1px solid rgba(247,241,232,0.28);
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(4px);
+    }
 
-<div id="ee" class="pane">
-  <div class="section-title">E.E (Estruturação Estratégica) — performance mensal</div>
-  <div class="metric-grid">
-    <div class="metric metric-bad">
-      <div class="metric-label">Junho — Pitches marcados</div>
-      <div class="metric-value">5</div>
-      <div class="metric-sub">EE: 1 Billions · 2 Excl. · 2 Invictus</div>
-    </div>
-    <div class="metric metric-ok">
-      <div class="metric-label">Maio — Pitches marcados</div>
-      <div class="metric-value">28</div>
-      <div class="metric-sub">11 Billions · 9 Excl. · 8 Invictus</div>
-    </div>
-    <div class="metric metric-ok">
-      <div class="metric-label">Abril — Pitches marcados</div>
-      <div class="metric-value">22</div>
-      <div class="metric-sub">9 Billions · 7 Excl. · 6 Invictus</div>
-    </div>
-    <div class="metric metric-ok">
-      <div class="metric-label">Março — Pitches marcados</div>
-      <div class="metric-value">19</div>
-      <div class="metric-sub">7 Billions · 7 Excl. · 5 Invictus</div>
-    </div>
-    <div class="metric metric-warn">
-      <div class="metric-label">Fevereiro — Pitches marcados</div>
-      <div class="metric-value">9</div>
-      <div class="metric-sub">5 Billions · 1 Excl. · 3 Invictus</div>
-    </div>
-  </div>
+    .faq details {
+      border-bottom: 1px solid var(--line);
+      padding: 18px 0;
+    }
+    .faq summary {
+      cursor: pointer; list-style: none;
+      display: flex; justify-content: space-between; gap: 16px;
+      font-weight: 600; font-size: 1rem;
+    }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after {
+      content: "+";
+      color: var(--wine);
+      font-family: var(--font-display);
+      font-size: 1.4rem; line-height: 1;
+    }
+    .faq details[open] summary::after { content: "–"; }
+    .faq details p {
+      margin-top: 10px; color: var(--muted); max-width: 62ch;
+    }
 
-  <div class="chart-box">
-    <div class="chart-title">E.E — Pitches marcados por mês e squad</div>
-    <div class="legend">
-      <span><span class="legend-dot" style="background:#1D9E75"></span>Billions</span>
-      <span><span class="legend-dot" style="background:#378ADD"></span>Exclusive</span>
-      <span><span class="legend-dot" style="background:#7F77DD"></span>Invictus</span>
-    </div>
-    <div class="chart-wrap" style="height:220px">
-      <canvas id="eeChart" role="img" aria-label="Pitches E.E por mês: fev 5/1/3, mar 7/7/5, abr 9/7/6, mai 11/9/8, jun 1/2/2">Pitches EE: Fev 5+1+3=9; Mar 7+7+5=19; Abr 9+7+6=22; Mai 11+9+8=28; Jun 1+2+2=5.</canvas>
-    </div>
-  </div>
+    .capture {
+      background:
+        radial-gradient(ellipse 60% 50% at 100% 0%, rgba(184,146,63,0.16), transparent 55%),
+        linear-gradient(180deg, #ebe4da 0%, var(--paper) 100%);
+    }
+    .capture-grid {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: clamp(28px, 5vw, 56px);
+      align-items: start;
+    }
+    .form {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      padding: clamp(22px, 3vw, 32px);
+      box-shadow: var(--shadow);
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .field { display: grid; gap: 6px; }
+    .field.full { grid-column: 1 / -1; }
+    .field label { font-size: 12px; font-weight: 600; color: var(--muted); }
+    .field input, .field select, .field textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      padding: 12px 14px;
+      border-radius: 4px;
+      outline: none;
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus {
+      border-color: var(--wine);
+      box-shadow: 0 0 0 3px rgba(122,31,36,0.12);
+    }
+    .form .btn { width: 100%; margin-top: 8px; }
+    .form-note {
+      margin-top: 12px; font-size: 12px; color: var(--muted);
+    }
+    .form-success {
+      display: none;
+      padding: 18px;
+      background: var(--pine-soft);
+      color: var(--pine);
+      border-radius: 4px;
+      font-size: 0.95rem;
+      margin-bottom: 14px;
+    }
+    .form-success.show { display: block; animation: rise .45s ease both; }
 
-  <div class="chart-box">
-    <div class="chart-title">E.E — Vendas LG por mês (total)</div>
-    <div class="chart-wrap" style="height:180px">
-      <canvas id="eeVendasChart" role="img" aria-label="Vendas EE: fev 0, mar 9, abr 9, mai 11, jun 0">Vendas EE: Fev 0; Mar 9; Abr 9; Mai 11; Jun 0.</canvas>
-    </div>
-  </div>
+    .footer {
+      background: var(--smoke);
+      color: rgba(244,235,224,0.72);
+      padding: 28px clamp(20px, 4vw, 48px);
+    }
+    .footer-inner {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+      display: flex; flex-wrap: wrap; gap: 12px 24px;
+      justify-content: space-between; align-items: center;
+      font-size: 13px;
+    }
+    .footer a { color: #f7f1e8; text-decoration: none; font-weight: 500; }
+    .footer a:hover { color: var(--brass); }
 
-  <div class="section-title">Tx. Conversão (Reunião → Venda) — E.E</div>
-  <div style="background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 16px;">
-    <div class="progress-row">
-      <span class="progress-label">Fevereiro</span>
-      <div class="progress-bg"><div class="progress-fill" style="width:47%; background:#EF9F27"></div></div>
-      <span class="progress-val">47%</span>
-    </div>
-    <div class="progress-row">
-      <span class="progress-label">Março</span>
-      <div class="progress-bg"><div class="progress-fill" style="width:35.7%; background:#EF9F27"></div></div>
-      <span class="progress-val">35,7%</span>
-    </div>
-    <div class="progress-row">
-      <span class="progress-label">Abril</span>
-      <div class="progress-bg"><div class="progress-fill" style="width:65%; background:#1D9E75"></div></div>
-      <span class="progress-val">65%+</span>
-    </div>
-    <div class="progress-row">
-      <span class="progress-label">Maio</span>
-      <div class="progress-bg"><div class="progress-fill" style="width:0%; background:#E24B4A"></div></div>
-      <span class="progress-val">0%</span>
-    </div>
-    <div class="progress-row">
-      <span class="progress-label">Junho</span>
-      <div class="progress-bg"><div class="progress-fill" style="width:0%; background:#E24B4A"></div></div>
-      <span class="progress-val">0%</span>
-    </div>
-  </div>
-  <div class="insight" style="margin-top:14px"><strong>Queda brusca em Mai e Jun:</strong> Maio teve 28 pitches marcados mas 0% de conversão em venda. Isso indica que o volume de atividade existe, mas o fechamento travou completamente. Pode ser problema de proposta, preço ou follow-up pós-pitch.</div>
-</div>
+    .internal-link {
+      position: fixed; right: 16px; bottom: 16px; z-index: 30;
+      font-size: 11px; font-weight: 600;
+      background: var(--smoke); color: #f7f1e8;
+      text-decoration: none; padding: 10px 12px; border-radius: 4px;
+      opacity: 0.85; transition: opacity .2s ease;
+    }
+    .internal-link:hover { opacity: 1; }
 
-<div id="squads" class="pane">
-  <div class="section-title">Performance por squad — visão acumulada</div>
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes heroZoom {
+      from { transform: scale(1.08); }
+      to { transform: scale(1.02); }
+    }
 
-  <div class="two-col" style="margin-bottom:16px">
-    <div class="chart-box">
-      <div class="chart-title">Billions — Expansão carteira</div>
-      <div class="chart-sub">Meta: 25 oport. · Realizado: 10 · Tx conv.: 50%</div>
-      <div class="chart-wrap" style="height:160px">
-        <canvas id="billCart" role="img" aria-label="Billions expansão: oportunidades 10/25, reuniões 4/20, vendas 5/9">Billions: Oport 10vs25, RR 4vs20, Vendas 5vs9.</canvas>
-      </div>
-    </div>
-    <div class="chart-box">
-      <div class="chart-title">Invictus — Expansão carteira</div>
-      <div class="chart-sub">Meta: — · Realizado: 16 oport. · Tx conv.: 43,75%</div>
-      <div class="chart-wrap" style="height:160px">
-        <canvas id="invCart" role="img" aria-label="Invictus expansão: oportunidades 16, reuniões 7, vendas 7">Invictus: Oport 16, RR 7, Vendas 7.</canvas>
-      </div>
-    </div>
-  </div>
+    @media (max-width: 900px) {
+      .model-grid, .capture-grid, .diff-grid, .metrics {
+        grid-template-columns: 1fr;
+      }
+      .model-visual { min-height: 280px; }
+      .metrics { grid-template-columns: 1fr 1fr; }
+      .hero { align-items: end; }
+      .hero-brand { max-width: 10ch; }
+    }
+    @media (max-width: 560px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .metrics { grid-template-columns: 1fr; }
+      .nav-cta { display: none; }
+    }
 
-  <div class="chart-box">
-    <div class="chart-title">E.E — Pitches marcados por squad (acumulado Fev–Jun)</div>
-    <div class="legend">
-      <span><span class="legend-dot" style="background:#1D9E75"></span>Billions</span>
-      <span><span class="legend-dot" style="background:#378ADD"></span>Exclusive</span>
-      <span><span class="legend-dot" style="background:#7F77DD"></span>Invictus</span>
-    </div>
-    <div class="chart-wrap" style="height:200px">
-      <canvas id="squadEEChart" role="img" aria-label="Pitches EE acumulado: Billions 33, Exclusive 26, Invictus 24">Pitches acumulados: Billions 33, Exclusive 26, Invictus 24.</canvas>
-    </div>
-  </div>
-
-  <div class="section-title">Coordenadores — E.E (pitches e vendas)</div>
-  <table class="data-table">
-    <thead><tr><th>Coordenador</th><th>Squad</th><th>Pitch Marcado</th><th>Venda</th><th>Status</th></tr></thead>
-    <tbody>
-      <tr><td>Eder Vasconcelos</td><td>Billions</td><td>1</td><td>0</td><td><span class="badge bad">0 vendas</span></td></tr>
-      <tr><td>Jhonatan Mayer</td><td>Billions</td><td>—</td><td>0</td><td><span class="badge bad">0 vendas</span></td></tr>
-      <tr><td>Rafaela Tolomeu</td><td>Exclusive</td><td>—</td><td>0</td><td><span class="badge bad">0 vendas</span></td></tr>
-      <tr><td>Ruan Silva</td><td>Invictus</td><td>—</td><td>0</td><td><span class="badge bad">0 vendas</span></td></tr>
-      <tr><td>Vitor Neres</td><td>Exclusive</td><td>1</td><td>1</td><td><span class="badge ok">1 venda</span></td></tr>
-      <tr><td>Ueliton Pereira</td><td>Invictus</td><td>6</td><td>0</td><td><span class="badge bad">0 vendas</span></td></tr>
-      <tr><td>Thiago Almeida</td><td>Invictus</td><td>3</td><td>0</td><td><span class="badge bad">0 vendas</span></td></tr>
-    </tbody>
-  </table>
-  <div class="insight" style="margin-top:14px"><strong>Apenas Vitor Neres (Exclusive) registrou 1 venda em E.E.</strong> Todos os demais coordenadores estão em 0 vendas, apesar de pitches marcados. Isso mostra que o problema não é volume de atividade, mas efetividade no fechamento.</div>
-</div>
-
-<div id="conversao" class="pane">
-  <div class="section-title">Taxas de conversão — Expansão Carteira (Reunião → Venda)</div>
-  <div class="chart-box">
-    <div class="chart-title">Tx. Conversão RR→Venda por mês — Expansão Carteira</div>
-    <div class="legend">
-      <span><span class="legend-dot" style="background:#1D9E75"></span>Realizado</span>
-      <span><span class="legend-dot" style="background:#5F5E5A; opacity:.5"></span>Meta (65%)</span>
-    </div>
-    <div class="chart-wrap" style="height:220px">
-      <canvas id="txConvChart" role="img" aria-label="Taxa de conversão por mês: jan 47%, fev 71%, mar 35,7%, abr 0%, mai 0%, jun 0%">Tx conv.: Jan 47%; Fev 71,4%; Mar 35,7%; Abr 0%; Mai 0%; Jun 0%.</canvas>
-    </div>
-  </div>
-
-  <div class="section-title">Vendas por produto — acumulado 2026</div>
-  <div class="two-col">
-    <div>
-      <div class="chart-box">
-        <div class="chart-title">Vendas — LG (logo)</div>
-        <div class="chart-wrap" style="height:180px">
-          <canvas id="vendaLGChart" role="img" aria-label="Vendas LG por mês: jan 8, fev 5, mar 5, abr 0, mai 0, jun 0">Vendas LG: Jan 8, Fev 5, Mar 5, Abr 0, Mai 0, Jun 0.</canvas>
-        </div>
-      </div>
-    </div>
-    <div>
-      <div class="chart-box">
-        <div class="chart-title">Vendas — Executar</div>
-        <div class="chart-wrap" style="height:180px">
-          <canvas id="vendaExecChart" role="img" aria-label="Vendas Executar por mês: jan 4, fev 8, mar 7, abr 10, mai 10, jun 0">Vendas Executar: Jan 4, Fev 8, Mar 7, Abr 10, Mai 10, Jun 0.</canvas>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section-title">Análise da queda de vendas em logo</div>
-  <div class="insight"><strong>Vendas em logo (LG) caíram a zero a partir de Abril:</strong> Jan teve 8 vendas LG, Fev 5, Mar 5 — e depois zerou. Isso explica diretamente o problema de menor volume de logos que foi levantado. O pipeline existe mas a conversão em cliente novo parou.</div>
-  <div class="insight"><strong>Vendas Executar ainda sustentam o número</strong> (10 em Abr e Mai), mas sem novos logos a expansão de carteira também fica limitada ao que já existe. A estrutura está dependendo da carteira ativa para gerar receita.</div>
-  <div class="insight"><strong>Ticket médio (T.M) instável:</strong> Em Março, o T.M geral foi R$31,5k (puxado por Billions com R$66,7k). Em Fevereiro caiu para R$6,2k. A inconsistência de ticket indica falta de padronização no ICP qualificado para fechamento.</div>
-
-  <div class="section-title">Projeção vs necessidade — Junho</div>
-  <table class="data-table">
-    <thead><tr><th>Produto</th><th>Meta Junho</th><th>Realizado</th><th>Gap</th><th>Status</th></tr></thead>
-    <tbody>
-      <tr><td>Expansão — Executar</td><td>R$ 80.000</td><td>R$ 0</td><td>R$ 80.000</td><td><span class="badge bad">Crítico</span></td></tr>
-      <tr><td>Expansão — Ter/Saber</td><td>R$ 20.000</td><td>R$ 0</td><td>R$ 20.000</td><td><span class="badge bad">Crítico</span></td></tr>
-      <tr><td>Executar (Saber→Executar)</td><td>R$ 800.000</td><td>R$ 0</td><td>R$ 800.000</td><td><span class="badge bad">Crítico</span></td></tr>
-      <tr><td><strong>TOTAL</strong></td><td><strong>R$ 900.000</strong></td><td><strong>R$ 0</strong></td><td><strong>R$ 900.000</strong></td><td><span class="badge bad">0% atingido</span></td></tr>
-    </tbody>
-  </table>
-</div>
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
-<script>
-document.querySelectorAll('.tab-btn').forEach(btn => {
-  btn.addEventListener('click', function() {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.pane').forEach(p => p.classList.remove('active'));
-    this.classList.add('active');
-    document.getElementById(this.dataset.tab).classList.add('active');
-  });
-});
-
-const isDark = matchMedia('(prefers-color-scheme: dark)').matches;
-const grid = isDark ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.06)';
-const txt = isDark ? '#b4b2a9' : '#5f5e5a';
-const meses = ['Jan','Fev','Mar','Abr','Mai','Jun'];
-
-function bar(id, labels, datasets, yFmt) {
-  new Chart(document.getElementById(id), {
-    type: 'bar',
-    data: { labels, datasets },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { display: false } },
-      scales: {
-        x: { grid: { display: false }, ticks: { color: txt, font: { size: 11 } } },
-        y: { grid: { color: grid }, ticks: { color: txt, font: { size: 11 }, callback: yFmt || (v => v) }, beginAtZero: true }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
       }
     }
-  });
-}
+  </style>
+</head>
+<body>
+  <nav class="nav" aria-label="Principal">
+    <a class="nav-brand" href="#topo">Rota da Linguiça</a>
+    <a class="nav-cta" href="#captura">Quero ser franqueado</a>
+  </nav>
 
-const brl = v => 'R$' + (Math.abs(v)/1000).toFixed(0) + 'k';
+  <header class="hero" id="topo">
+    <div class="hero-media" aria-hidden="true"></div>
+    <div class="hero-grain" aria-hidden="true"></div>
+    <div class="hero-content">
+      <p class="hero-brand">Rota da Linguiça</p>
+      <h1>Leve o Vale Europeu para a sua cidade.</h1>
+      <p>Franquia gastronômica artesanal com logística centralizada, operação enxuta e marca validada pelo turismo de Santa Catarina.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#captura">Receber o material da franquia</a>
+        <a class="btn btn-ghost" href="#modelo">Conhecer o modelo</a>
+      </div>
+    </div>
+  </header>
 
-bar('totalChart', meses,
-  [{ label: 'Realizado', data: [667152, 548565, 739869, 623649, 848121, 0], backgroundColor: '#1D9E75', borderRadius: 4, borderWidth: 0 },
-   { label: 'Meta', data: [301000, 1085000, 507000, 1000000, 1200000, 900000], backgroundColor: 'rgba(55,138,221,0.25)', borderRadius: 4, borderWidth: 0 }], brl);
+  <section class="model" id="modelo">
+    <div class="section">
+      <div class="model-grid">
+        <div class="model-visual">
+          <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1400&q=80" alt="Produtos artesanais e mesa gastronômica" />
+        </div>
+        <div>
+          <p class="section-kicker">O modelo</p>
+          <h2 class="section-title">Franquia enxuta, operação descomplicada.</h2>
+          <p class="section-lead">A matriz assume a complexidade. O franqueado foca em vender sabor e experiência.</p>
+          <div class="model-list">
+            <div class="model-item">
+              <h3>Logística 100% verticalizada</h3>
+              <p>A matriz compra de 60 a 70 fornecedores artesanais e abastece a unidade semanalmente com base na curva ABC do ERP.</p>
+            </div>
+            <div class="model-item">
+              <h3>Operação para duas pessoas</h3>
+              <p>Desenhada para um casal de investidores. Ponto de equilíbrio estimado em R$ 48 mil mensais.</p>
+            </div>
+            <div class="model-item">
+              <h3>Sem taxa de FNP</h3>
+              <p>Investimentos de marketing da marca ficam na franqueadora — sem fundo nacional de propaganda cobrado do franqueado.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-bar('execChart', meses,
-  [{ label: 'Realizado', data: [225732, 422700, 31166, 128056, 40898, 0], backgroundColor: '#1D9E75', borderRadius: 4, borderWidth: 0 },
-   { label: 'Meta', data: [40000, 850000, 173000, 50000, 150000, 80000], backgroundColor: 'rgba(55,138,221,0.25)', borderRadius: 4, borderWidth: 0 }], brl);
+  <section class="numbers" id="numeros" aria-label="Números da franquia">
+    <div class="section">
+      <p class="section-kicker">Números</p>
+      <h2 class="section-title">Investimento com previsibilidade.</h2>
+      <p class="section-lead">Indicadores oficiais da franquia para o investidor avaliar o negócio com clareza.</p>
+      <div class="metrics">
+        <div class="metric">
+          <div class="metric-value">R$ 281 mil</div>
+          <div class="metric-label">Investimento inicial estimado</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">R$ 50 mil</div>
+          <div class="metric-label">Taxa de franquia</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">R$ 131 mil</div>
+          <div class="metric-label">Faturamento médio mensal</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">17 meses</div>
+          <div class="metric-label">Payback esperado</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-bar('tersaberChart', ['Jan','Fev','Mar','Abr','Mai','Jun'],
-  [{ label: 'Ter/Saber', data: [80350, 27865, 0, 29706, 23693, 0], backgroundColor: '#7F77DD', borderRadius: 4, borderWidth: 0 }], brl);
+  <section class="diff" id="diferenciais">
+    <div class="section">
+      <p class="section-kicker">Diferenciais</p>
+      <h2 class="section-title">Por que investidores escolhem a Rota.</h2>
+      <p class="section-lead">Uma marca nascida no Vale Europeu, com produto artesanal e estrutura pronta para escalar via franquias.</p>
+      <div class="diff-grid">
+        <article class="diff-item">
+          <h3>Produtos artesanais selecionados</h3>
+          <p>Rede de produtores exclusivos do Vale Europeu, com qualidade consistente e identidade gastronômica forte.</p>
+        </article>
+        <article class="diff-item">
+          <h3>Suporte de gestão e software</h3>
+          <p>ERP, CRM omnichannel e rotinas de abastecimento que tiram a complexidade operacional do dia a dia do franqueado.</p>
+        </article>
+        <article class="diff-item">
+          <h3>Marca com prova de mercado</h3>
+          <p>Origem em Pomerode, validada por turistas e agora formatada para expansão em cidades com turismo e consumo local.</p>
+        </article>
+      </div>
+    </div>
+  </section>
 
-bar('eeChart', ['Fev','Mar','Abr','Mai','Jun'],
-  [{ label: 'Billions', data: [5,7,9,11,1], backgroundColor: '#1D9E75', borderRadius: 4, borderWidth: 0, stack:'s' },
-   { label: 'Exclusive', data: [1,7,7,9,2], backgroundColor: '#378ADD', borderRadius: 4, borderWidth: 0, stack:'s' },
-   { label: 'Invictus', data: [3,5,6,8,2], backgroundColor: '#7F77DD', borderRadius: 4, borderWidth: 0, stack:'s' }]);
+  <section class="geo" id="expansao">
+    <div class="section">
+      <p class="section-kicker">Expansão inteligente</p>
+      <h2 class="section-title">Prioridade: Sul, Sudeste e capitais.</h2>
+      <p class="section-lead">Foco em cidades com turismo forte e vida própria — para reduzir sazonalidade e acelerar o reconhecimento da marca.</p>
+      <div class="geo-tags" aria-label="Cidades e regiões prioritárias">
+        <span>Balneário Camboriú</span>
+        <span>Itapema</span>
+        <span>Curitiba</span>
+        <span>Santa Catarina</span>
+        <span>Paraná</span>
+        <span>Rio Grande do Sul</span>
+        <span>Sudeste</span>
+        <span>Capitais</span>
+      </div>
+    </div>
+  </section>
 
-bar('eeVendasChart', ['Fev','Mar','Abr','Mai','Jun'],
-  [{ label: 'Vendas LG', data: [0,9,9,11,0], backgroundColor: '#1D9E75', borderRadius: 4, borderWidth: 0 }]);
+  <section class="faq" id="faq">
+    <div class="section">
+      <p class="section-kicker">FAQ</p>
+      <h2 class="section-title">Perguntas frequentes.</h2>
+      <p class="section-lead">Respostas diretas para quem está avaliando a franquia com seriedade.</p>
 
-new Chart(document.getElementById('billCart'), {
-  type: 'bar',
-  data: { labels: ['Oportunidades','Reuniões','Vendas LG'],
-    datasets: [
-      { label: 'Realizado', data: [10,4,5], backgroundColor: '#1D9E75', borderRadius: 4, borderWidth: 0 },
-      { label: 'Meta', data: [25,20,9], backgroundColor: 'rgba(55,138,221,0.25)', borderRadius: 4, borderWidth: 0 }
-    ]},
-  options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid:{ display:false }, ticks:{ color:txt,font:{size:10} } }, y: { grid:{ color:grid }, ticks:{ color:txt,font:{size:10} }, beginAtZero:true } } }
-});
+      <details>
+        <summary>Qual é o investimento inicial?</summary>
+        <p>O investimento inicial estimado é de R$ 281.041,00, incluindo taxa de franquia e estrutura necessária para operação.</p>
+      </details>
+      <details>
+        <summary>Quanto custa a taxa de franquia?</summary>
+        <p>A taxa de franquia é de R$ 50.000,00 e garante uso da marca, modelo de negócio e suporte da franqueadora.</p>
+      </details>
+      <details>
+        <summary>Qual o faturamento médio e o payback?</summary>
+        <p>O faturamento médio estimado por unidade é de R$ 131.234,00 mensais, com payback esperado em 17 meses, variando conforme praça e gestão.</p>
+      </details>
+      <details>
+        <summary>O franqueado precisa gerenciar fornecedores?</summary>
+        <p>Não. A matriz centraliza compras com dezenas de produtores artesanais e abastece a unidade semanalmente, simplificando a operação.</p>
+      </details>
+      <details>
+        <summary>Existe cobrança de FNP?</summary>
+        <p>Não. A Rota da Linguiça não cobra taxa de Fundo Nacional de Propaganda.</p>
+      </details>
+    </div>
+  </section>
 
-new Chart(document.getElementById('invCart'), {
-  type: 'bar',
-  data: { labels: ['Oportunidades','Reuniões','Vendas LG'],
-    datasets: [{ label: 'Realizado', data: [16,7,7], backgroundColor: '#7F77DD', borderRadius: 4, borderWidth: 0 }]},
-  options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid:{ display:false }, ticks:{ color:txt,font:{size:10} } }, y: { grid:{ color:grid }, ticks:{ color:txt,font:{size:10} }, beginAtZero:true } } }
-});
+  <section class="capture" id="captura">
+    <div class="section">
+      <div class="capture-grid">
+        <div>
+          <p class="section-kicker">Próximo passo</p>
+          <h2 class="section-title">Fale com a franqueadora.</h2>
+          <p class="section-lead">Preencha o formulário e receba o material completo da franquia. Atendimento comercial conduzido com a consultoria Inova.</p>
+          <p style="color: var(--muted); font-size: 0.95rem; max-width: 38ch;">
+            Ideal para investidores das regiões Sul e Sudeste que buscam um negócio gastronômico com operação enxuta e abastecimento centralizado.
+          </p>
+        </div>
+        <form class="form" id="leadForm" novalidate>
+          <div class="form-success" id="formSuccess" role="status">
+            Recebemos seu interesse. Em breve a equipe comercial entra em contato com o material da franquia.
+          </div>
+          <div class="form-grid">
+            <div class="field full">
+              <label for="nome">Nome completo</label>
+              <input id="nome" name="nome" type="text" autocomplete="name" required placeholder="Seu nome" />
+            </div>
+            <div class="field">
+              <label for="email">E-mail</label>
+              <input id="email" name="email" type="email" autocomplete="email" required placeholder="voce@email.com" />
+            </div>
+            <div class="field">
+              <label for="telefone">WhatsApp</label>
+              <input id="telefone" name="telefone" type="tel" autocomplete="tel" required placeholder="(00) 00000-0000" />
+            </div>
+            <div class="field">
+              <label for="cidade">Cidade de interesse</label>
+              <input id="cidade" name="cidade" type="text" required placeholder="Ex.: Curitiba" />
+            </div>
+            <div class="field">
+              <label for="capital">Capital disponível</label>
+              <select id="capital" name="capital" required>
+                <option value="">Selecione</option>
+                <option value="ate-250">Até R$ 250 mil</option>
+                <option value="250-350">R$ 250 mil – R$ 350 mil</option>
+                <option value="350-500">R$ 350 mil – R$ 500 mil</option>
+                <option value="acima-500">Acima de R$ 500 mil</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label for="mensagem">Conte um pouco do seu perfil (opcional)</label>
+              <textarea id="mensagem" name="mensagem" rows="3" placeholder="Experiência, prazo para investir, praça desejada..."></textarea>
+            </div>
+          </div>
+          <button class="btn btn-primary" type="submit">Quero receber o material</button>
+          <p class="form-note">Ao enviar, você concorda em ser contatado sobre a franquia Rota da Linguiça. Seus dados não serão compartilhados com terceiros fora do funil comercial.</p>
+        </form>
+      </div>
+    </div>
+  </section>
 
-bar('squadEEChart', ['Billions','Exclusive','Invictus'],
-  [{ data: [33,26,24], backgroundColor: ['#1D9E75','#378ADD','#7F77DD'], borderRadius: 4, borderWidth: 0 }]);
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>© <span id="year"></span> Rota da Linguiça · Pomerode/SC</div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;">
+        <a href="https://www.rotadalinguica.tur.br/" target="_blank" rel="noopener">Site oficial</a>
+        <a href="briefing-cfo.html">Briefing CFO</a>
+        <a href="estruturacao-ee.html">Diagnóstico EE (V4)</a>
+        <a href="cockpit-monetizacao.html">Cockpit Monetização</a>
+      </div>
+    </div>
+  </footer>
 
-new Chart(document.getElementById('txConvChart'), {
-  type: 'line',
-  data: { labels: meses,
-    datasets: [
-      { label: 'Tx Conversão', data: [47,71.4,35.7,0,0,0], borderColor: '#1D9E75', backgroundColor: 'rgba(29,158,117,0.1)', fill: true, tension: 0.3, pointRadius: 4 },
-      { label: 'Meta 65%', data: [65,65,65,65,65,65], borderColor: 'rgba(95,94,90,0.4)', borderDash: [4,4], pointRadius: 0 }
-    ]},
-  options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid:{ display:false }, ticks:{ color:txt,font:{size:11} } }, y: { grid:{ color:grid }, ticks:{ color:txt,font:{size:11}, callback: v => v+'%' }, beginAtZero:true, max:100 } } }
-});
+  <a class="internal-link" href="estruturacao-ee.html">Ver estruturação EE</a>
 
-bar('vendaLGChart', meses,
-  [{ data: [8,5,5,0,0,0], backgroundColor: '#1D9E75', borderRadius: 4, borderWidth: 0 }]);
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-bar('vendaExecChart', meses,
-  [{ data: [4,8,7,10,10,0], backgroundColor: '#378ADD', borderRadius: 4, borderWidth: 0 }]);
-</script>
+    const form = document.getElementById("leadForm");
+    const success = document.getElementById("formSuccess");
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      const data = Object.fromEntries(new FormData(form).entries());
+      const leads = JSON.parse(localStorage.getItem("rdl_franchise_leads") || "[]");
+      leads.push({ ...data, createdAt: new Date().toISOString() });
+      localStorage.setItem("rdl_franchise_leads", JSON.stringify(leads));
+      success.classList.add("show");
+      form.reset();
+    });
+  </script>
+</body>
+</html>
