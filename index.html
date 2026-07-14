@@ -1,404 +1,464 @@
-
-<h2 class="sr-only">Dashboard da aba E.E — Cockpit Monetização Sales: metas vs realizado por mês, por squad e por produto</h2>
-<style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-.tab-row { display: flex; gap: 6px; margin-bottom: 1.5rem; flex-wrap: wrap; }
-.tab-btn { background: var(--color-background-secondary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 6px 14px; font-size: 12px; cursor: pointer; color: var(--color-text-secondary); font-family: var(--font-sans); }
-.tab-btn.active { background: var(--color-background-primary); border-color: var(--color-border-primary); color: var(--color-text-primary); font-weight: 500; }
-.pane { display: none; }
-.pane.active { display: block; }
-.section-title { font-size: 12px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 1rem; padding-bottom: 6px; border-bottom: 0.5px solid var(--color-border-tertiary); }
-.metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 1.5rem; }
-.metric { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 14px 16px; }
-.metric-label { font-size: 12px; color: var(--color-text-secondary); margin-bottom: 4px; }
-.metric-value { font-size: 20px; font-weight: 500; color: var(--color-text-primary); }
-.metric-sub { font-size: 11px; color: var(--color-text-tertiary); margin-top: 2px; }
-.metric-ok { border-left: 3px solid #1D9E75; }
-.metric-warn { border-left: 3px solid #EF9F27; }
-.metric-bad { border-left: 3px solid #E24B4A; }
-.chart-box { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 16px; margin-bottom: 16px; }
-.chart-title { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 10px; }
-.chart-sub { font-size: 11px; color: var(--color-text-secondary); margin-bottom: 12px; }
-.chart-wrap { position: relative; }
-.legend { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 10px; font-size: 11px; color: var(--color-text-secondary); }
-.legend span { display: flex; align-items: center; gap: 4px; }
-.legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
-.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.data-table { width: 100%; font-size: 12px; border-collapse: collapse; }
-.data-table th { text-align: left; font-size: 11px; font-weight: 500; color: var(--color-text-secondary); padding: 7px 10px; border-bottom: 0.5px solid var(--color-border-tertiary); }
-.data-table td { padding: 7px 10px; border-bottom: 0.5px solid var(--color-border-tertiary); color: var(--color-text-primary); }
-.data-table tr:last-child td { border-bottom: none; }
-.badge { display: inline-block; padding: 2px 8px; border-radius: var(--border-radius-md); font-size: 11px; font-weight: 500; }
-.ok { background: #E1F5EE; color: #0F6E56; }
-.warn { background: #FAEEDA; color: #854F0B; }
-.bad { background: #FCEBEB; color: #A32D2D; }
-.insight { background: var(--color-background-secondary); border-radius: var(--border-radius-lg); padding: 13px 15px; margin-bottom: 10px; font-size: 13px; color: var(--color-text-primary); line-height: 1.6; }
-.insight strong { font-weight: 500; }
-.progress-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 0.5px solid var(--color-border-tertiary); }
-.progress-row:last-child { border-bottom: none; }
-.progress-label { font-size: 12px; color: var(--color-text-primary); width: 100px; flex-shrink: 0; }
-.progress-bg { flex: 1; height: 8px; background: var(--color-background-secondary); border-radius: 4px; overflow: hidden; }
-.progress-fill { height: 100%; border-radius: 4px; }
-.progress-val { font-size: 12px; color: var(--color-text-secondary); width: 48px; text-align: right; flex-shrink: 0; }
-</style>
-
-<div style="padding: 1rem 0;">
-<div class="tab-row">
-  <button class="tab-btn active" data-tab="resumo">Resumo Geral</button>
-  <button class="tab-btn" data-tab="expansao">Expansão Carteira</button>
-  <button class="tab-btn" data-tab="ee">E.E (Estruturação)</button>
-  <button class="tab-btn" data-tab="squads">Por Squad</button>
-  <button class="tab-btn" data-tab="conversao">Conversão & Vendas</button>
-</div>
-
-<div id="resumo" class="pane active">
-  <div class="section-title">Realizado total acumulado Jan–Jun/2026 vs metas</div>
-  <div class="metric-grid">
-    <div class="metric metric-bad">
-      <div class="metric-label">Junho (atual)</div>
-      <div class="metric-value">R$ 0</div>
-      <div class="metric-sub">Meta: R$900k · 0% atingido</div>
-    </div>
-    <div class="metric metric-warn">
-      <div class="metric-label">Maio</div>
-      <div class="metric-value">R$ 848k</div>
-      <div class="metric-sub">Meta: R$1,2M · 70,7% atingido</div>
-    </div>
-    <div class="metric metric-warn">
-      <div class="metric-label">Abril</div>
-      <div class="metric-value">R$ 624k</div>
-      <div class="metric-sub">Meta: R$1M · 62,4% atingido</div>
-    </div>
-    <div class="metric metric-ok">
-      <div class="metric-label">Março</div>
-      <div class="metric-value">R$ 740k</div>
-      <div class="metric-sub">Meta: R$507k · 145,9% ✓</div>
-    </div>
-    <div class="metric metric-warn">
-      <div class="metric-label">Fevereiro</div>
-      <div class="metric-value">R$ 549k</div>
-      <div class="metric-sub">Meta: R$1,085M · 50,6% atingido</div>
-    </div>
-    <div class="metric metric-ok">
-      <div class="metric-label">Janeiro</div>
-      <div class="metric-value">R$ 667k</div>
-      <div class="metric-sub">Meta: R$301k · 221,7% ✓</div>
-    </div>
-  </div>
-
-  <div class="chart-box">
-    <div class="chart-title">Realizado vs Meta — Total mensal (Expansão + EE + Executar)</div>
-    <div class="legend">
-      <span><span class="legend-dot" style="background:#1D9E75"></span>Realizado</span>
-      <span><span class="legend-dot" style="background:#378ADD; opacity:.5"></span>Meta</span>
-    </div>
-    <div class="chart-wrap" style="height:240px">
-      <canvas id="totalChart" role="img" aria-label="Barras de realizado vs meta por mês de jan a jun 2026">Jan: R$667k real / R$301k meta. Fev: R$549k / R$1,085M. Mar: R$740k / R$507k. Abr: R$624k / R$1M. Mai: R$848k / R$1,2M. Jun: R$0 / R$900k.</canvas>
-    </div>
-  </div>
-
-  <div class="section-title">Diagnóstico rápido</div>
-  <div class="insight"><strong>Jan e Mar bateram a meta</strong> (221% e 146% respectivamente), mas esses dois meses compensaram quedas severas em Fev, Abr e Mai — onde o time ficou entre 50–70% do objetivo. Junho está em 0% com meta de R$900k, o que é crítico.</div>
-  <div class="insight"><strong>Tendência preocupante:</strong> as metas estão crescendo muito (de R$301k em Jan para R$900k em Jun) enquanto o realizado não acompanhou. Há uma lacuna estrutural crescente entre o que se planeja e o que se entrega.</div>
-  <div class="insight"><strong>Maio foi o melhor mês absoluto</strong> (R$848k), puxado principalmente pelo Executar (R$783k), mas ainda 30% abaixo da meta de R$1,2M.</div>
-</div>
-
-<div id="expansao" class="pane">
-  <div class="section-title">Expansão de carteira — Meta x Realizado por categoria</div>
-  <div class="chart-box">
-    <div class="chart-title">Expansão Carteira — Executar (faturamento mensal)</div>
-    <div class="legend">
-      <span><span class="legend-dot" style="background:#1D9E75"></span>Realizado</span>
-      <span><span class="legend-dot" style="background:#378ADD; opacity:.5"></span>Meta</span>
-    </div>
-    <div class="chart-wrap" style="height:220px">
-      <canvas id="execChart" role="img" aria-label="Expansão Executar por mês: jan 225k/40k, fev 423k/850k, mar 31k/173k, abr 128k/50k, mai 41k/150k, jun 0/80k">Executar: Jan R$226k·meta R$40k; Fev R$423k·meta R$850k; Mar R$31k·meta R$173k; Abr R$128k·meta R$50k; Mai R$41k·meta R$150k; Jun R$0·meta R$80k.</canvas>
-    </div>
-  </div>
-
-  <div class="chart-box">
-    <div class="chart-title">Expansão Carteira — Ter/Saber (faturamento mensal)</div>
-    <div class="chart-wrap" style="height:200px">
-      <canvas id="tersaberChart" role="img" aria-label="Ter/Saber por mês: jan 80k, fev 28k, mar 0, abr 30k, mai 24k, jun 0">Ter/Saber: Jan R$80k; Fev R$28k; Mar R$0; Abr R$30k; Mai R$24k; Jun R$0.</canvas>
-    </div>
-  </div>
-
-  <div class="section-title">Destaques por squad — Expansão Carteira (acumulado)</div>
-  <table class="data-table">
-    <thead><tr><th>Squad</th><th>Oportunidades</th><th>Reuniões</th><th>Vendas LG</th><th>Vendas Executar</th><th>Tx. Conversão</th></tr></thead>
-    <tbody>
-      <tr><td>Billions</td><td>10</td><td>4</td><td>5</td><td>—</td><td><span class="badge warn">50%</span></td></tr>
-      <tr><td>Exclusive</td><td>0</td><td>0</td><td>0</td><td>—</td><td><span class="badge bad">—</span></td></tr>
-      <tr><td>Invictus</td><td>16</td><td>7</td><td>7</td><td>—</td><td><span class="badge ok">43,75%</span></td></tr>
-    </tbody>
-  </table>
-  <div class="insight" style="margin-top:14px"><strong>Exclusive zerou em expansão de carteira</strong> no período mais recente — 0 oportunidades, 0 reuniões, 0 vendas. Requer atenção imediata da liderança para entender o que travou o squad.</div>
-</div>
-
-<div id="ee" class="pane">
-  <div class="section-title">E.E (Estruturação Estratégica) — performance mensal</div>
-  <div class="metric-grid">
-    <div class="metric metric-bad">
-      <div class="metric-label">Junho — Pitches marcados</div>
-      <div class="metric-value">5</div>
-      <div class="metric-sub">EE: 1 Billions · 2 Excl. · 2 Invictus</div>
-    </div>
-    <div class="metric metric-ok">
-      <div class="metric-label">Maio — Pitches marcados</div>
-      <div class="metric-value">28</div>
-      <div class="metric-sub">11 Billions · 9 Excl. · 8 Invictus</div>
-    </div>
-    <div class="metric metric-ok">
-      <div class="metric-label">Abril — Pitches marcados</div>
-      <div class="metric-value">22</div>
-      <div class="metric-sub">9 Billions · 7 Excl. · 6 Invictus</div>
-    </div>
-    <div class="metric metric-ok">
-      <div class="metric-label">Março — Pitches marcados</div>
-      <div class="metric-value">19</div>
-      <div class="metric-sub">7 Billions · 7 Excl. · 5 Invictus</div>
-    </div>
-    <div class="metric metric-warn">
-      <div class="metric-label">Fevereiro — Pitches marcados</div>
-      <div class="metric-value">9</div>
-      <div class="metric-sub">5 Billions · 1 Excl. · 3 Invictus</div>
-    </div>
-  </div>
-
-  <div class="chart-box">
-    <div class="chart-title">E.E — Pitches marcados por mês e squad</div>
-    <div class="legend">
-      <span><span class="legend-dot" style="background:#1D9E75"></span>Billions</span>
-      <span><span class="legend-dot" style="background:#378ADD"></span>Exclusive</span>
-      <span><span class="legend-dot" style="background:#7F77DD"></span>Invictus</span>
-    </div>
-    <div class="chart-wrap" style="height:220px">
-      <canvas id="eeChart" role="img" aria-label="Pitches E.E por mês: fev 5/1/3, mar 7/7/5, abr 9/7/6, mai 11/9/8, jun 1/2/2">Pitches EE: Fev 5+1+3=9; Mar 7+7+5=19; Abr 9+7+6=22; Mai 11+9+8=28; Jun 1+2+2=5.</canvas>
-    </div>
-  </div>
-
-  <div class="chart-box">
-    <div class="chart-title">E.E — Vendas LG por mês (total)</div>
-    <div class="chart-wrap" style="height:180px">
-      <canvas id="eeVendasChart" role="img" aria-label="Vendas EE: fev 0, mar 9, abr 9, mai 11, jun 0">Vendas EE: Fev 0; Mar 9; Abr 9; Mai 11; Jun 0.</canvas>
-    </div>
-  </div>
-
-  <div class="section-title">Tx. Conversão (Reunião → Venda) — E.E</div>
-  <div style="background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 16px;">
-    <div class="progress-row">
-      <span class="progress-label">Fevereiro</span>
-      <div class="progress-bg"><div class="progress-fill" style="width:47%; background:#EF9F27"></div></div>
-      <span class="progress-val">47%</span>
-    </div>
-    <div class="progress-row">
-      <span class="progress-label">Março</span>
-      <div class="progress-bg"><div class="progress-fill" style="width:35.7%; background:#EF9F27"></div></div>
-      <span class="progress-val">35,7%</span>
-    </div>
-    <div class="progress-row">
-      <span class="progress-label">Abril</span>
-      <div class="progress-bg"><div class="progress-fill" style="width:65%; background:#1D9E75"></div></div>
-      <span class="progress-val">65%+</span>
-    </div>
-    <div class="progress-row">
-      <span class="progress-label">Maio</span>
-      <div class="progress-bg"><div class="progress-fill" style="width:0%; background:#E24B4A"></div></div>
-      <span class="progress-val">0%</span>
-    </div>
-    <div class="progress-row">
-      <span class="progress-label">Junho</span>
-      <div class="progress-bg"><div class="progress-fill" style="width:0%; background:#E24B4A"></div></div>
-      <span class="progress-val">0%</span>
-    </div>
-  </div>
-  <div class="insight" style="margin-top:14px"><strong>Queda brusca em Mai e Jun:</strong> Maio teve 28 pitches marcados mas 0% de conversão em venda. Isso indica que o volume de atividade existe, mas o fechamento travou completamente. Pode ser problema de proposta, preço ou follow-up pós-pitch.</div>
-</div>
-
-<div id="squads" class="pane">
-  <div class="section-title">Performance por squad — visão acumulada</div>
-
-  <div class="two-col" style="margin-bottom:16px">
-    <div class="chart-box">
-      <div class="chart-title">Billions — Expansão carteira</div>
-      <div class="chart-sub">Meta: 25 oport. · Realizado: 10 · Tx conv.: 50%</div>
-      <div class="chart-wrap" style="height:160px">
-        <canvas id="billCart" role="img" aria-label="Billions expansão: oportunidades 10/25, reuniões 4/20, vendas 5/9">Billions: Oport 10vs25, RR 4vs20, Vendas 5vs9.</canvas>
-      </div>
-    </div>
-    <div class="chart-box">
-      <div class="chart-title">Invictus — Expansão carteira</div>
-      <div class="chart-sub">Meta: — · Realizado: 16 oport. · Tx conv.: 43,75%</div>
-      <div class="chart-wrap" style="height:160px">
-        <canvas id="invCart" role="img" aria-label="Invictus expansão: oportunidades 16, reuniões 7, vendas 7">Invictus: Oport 16, RR 7, Vendas 7.</canvas>
-      </div>
-    </div>
-  </div>
-
-  <div class="chart-box">
-    <div class="chart-title">E.E — Pitches marcados por squad (acumulado Fev–Jun)</div>
-    <div class="legend">
-      <span><span class="legend-dot" style="background:#1D9E75"></span>Billions</span>
-      <span><span class="legend-dot" style="background:#378ADD"></span>Exclusive</span>
-      <span><span class="legend-dot" style="background:#7F77DD"></span>Invictus</span>
-    </div>
-    <div class="chart-wrap" style="height:200px">
-      <canvas id="squadEEChart" role="img" aria-label="Pitches EE acumulado: Billions 33, Exclusive 26, Invictus 24">Pitches acumulados: Billions 33, Exclusive 26, Invictus 24.</canvas>
-    </div>
-  </div>
-
-  <div class="section-title">Coordenadores — E.E (pitches e vendas)</div>
-  <table class="data-table">
-    <thead><tr><th>Coordenador</th><th>Squad</th><th>Pitch Marcado</th><th>Venda</th><th>Status</th></tr></thead>
-    <tbody>
-      <tr><td>Eder Vasconcelos</td><td>Billions</td><td>1</td><td>0</td><td><span class="badge bad">0 vendas</span></td></tr>
-      <tr><td>Jhonatan Mayer</td><td>Billions</td><td>—</td><td>0</td><td><span class="badge bad">0 vendas</span></td></tr>
-      <tr><td>Rafaela Tolomeu</td><td>Exclusive</td><td>—</td><td>0</td><td><span class="badge bad">0 vendas</span></td></tr>
-      <tr><td>Ruan Silva</td><td>Invictus</td><td>—</td><td>0</td><td><span class="badge bad">0 vendas</span></td></tr>
-      <tr><td>Vitor Neres</td><td>Exclusive</td><td>1</td><td>1</td><td><span class="badge ok">1 venda</span></td></tr>
-      <tr><td>Ueliton Pereira</td><td>Invictus</td><td>6</td><td>0</td><td><span class="badge bad">0 vendas</span></td></tr>
-      <tr><td>Thiago Almeida</td><td>Invictus</td><td>3</td><td>0</td><td><span class="badge bad">0 vendas</span></td></tr>
-    </tbody>
-  </table>
-  <div class="insight" style="margin-top:14px"><strong>Apenas Vitor Neres (Exclusive) registrou 1 venda em E.E.</strong> Todos os demais coordenadores estão em 0 vendas, apesar de pitches marcados. Isso mostra que o problema não é volume de atividade, mas efetividade no fechamento.</div>
-</div>
-
-<div id="conversao" class="pane">
-  <div class="section-title">Taxas de conversão — Expansão Carteira (Reunião → Venda)</div>
-  <div class="chart-box">
-    <div class="chart-title">Tx. Conversão RR→Venda por mês — Expansão Carteira</div>
-    <div class="legend">
-      <span><span class="legend-dot" style="background:#1D9E75"></span>Realizado</span>
-      <span><span class="legend-dot" style="background:#5F5E5A; opacity:.5"></span>Meta (65%)</span>
-    </div>
-    <div class="chart-wrap" style="height:220px">
-      <canvas id="txConvChart" role="img" aria-label="Taxa de conversão por mês: jan 47%, fev 71%, mar 35,7%, abr 0%, mai 0%, jun 0%">Tx conv.: Jan 47%; Fev 71,4%; Mar 35,7%; Abr 0%; Mai 0%; Jun 0%.</canvas>
-    </div>
-  </div>
-
-  <div class="section-title">Vendas por produto — acumulado 2026</div>
-  <div class="two-col">
-    <div>
-      <div class="chart-box">
-        <div class="chart-title">Vendas — LG (logo)</div>
-        <div class="chart-wrap" style="height:180px">
-          <canvas id="vendaLGChart" role="img" aria-label="Vendas LG por mês: jan 8, fev 5, mar 5, abr 0, mai 0, jun 0">Vendas LG: Jan 8, Fev 5, Mar 5, Abr 0, Mai 0, Jun 0.</canvas>
-        </div>
-      </div>
-    </div>
-    <div>
-      <div class="chart-box">
-        <div class="chart-title">Vendas — Executar</div>
-        <div class="chart-wrap" style="height:180px">
-          <canvas id="vendaExecChart" role="img" aria-label="Vendas Executar por mês: jan 4, fev 8, mar 7, abr 10, mai 10, jun 0">Vendas Executar: Jan 4, Fev 8, Mar 7, Abr 10, Mai 10, Jun 0.</canvas>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section-title">Análise da queda de vendas em logo</div>
-  <div class="insight"><strong>Vendas em logo (LG) caíram a zero a partir de Abril:</strong> Jan teve 8 vendas LG, Fev 5, Mar 5 — e depois zerou. Isso explica diretamente o problema de menor volume de logos que foi levantado. O pipeline existe mas a conversão em cliente novo parou.</div>
-  <div class="insight"><strong>Vendas Executar ainda sustentam o número</strong> (10 em Abr e Mai), mas sem novos logos a expansão de carteira também fica limitada ao que já existe. A estrutura está dependendo da carteira ativa para gerar receita.</div>
-  <div class="insight"><strong>Ticket médio (T.M) instável:</strong> Em Março, o T.M geral foi R$31,5k (puxado por Billions com R$66,7k). Em Fevereiro caiu para R$6,2k. A inconsistência de ticket indica falta de padronização no ICP qualificado para fechamento.</div>
-
-  <div class="section-title">Projeção vs necessidade — Junho</div>
-  <table class="data-table">
-    <thead><tr><th>Produto</th><th>Meta Junho</th><th>Realizado</th><th>Gap</th><th>Status</th></tr></thead>
-    <tbody>
-      <tr><td>Expansão — Executar</td><td>R$ 80.000</td><td>R$ 0</td><td>R$ 80.000</td><td><span class="badge bad">Crítico</span></td></tr>
-      <tr><td>Expansão — Ter/Saber</td><td>R$ 20.000</td><td>R$ 0</td><td>R$ 20.000</td><td><span class="badge bad">Crítico</span></td></tr>
-      <tr><td>Executar (Saber→Executar)</td><td>R$ 800.000</td><td>R$ 0</td><td>R$ 800.000</td><td><span class="badge bad">Crítico</span></td></tr>
-      <tr><td><strong>TOTAL</strong></td><td><strong>R$ 900.000</strong></td><td><strong>R$ 0</strong></td><td><strong>R$ 900.000</strong></td><td><span class="badge bad">0% atingido</span></td></tr>
-    </tbody>
-  </table>
-</div>
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
-<script>
-document.querySelectorAll('.tab-btn').forEach(btn => {
-  btn.addEventListener('click', function() {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.pane').forEach(p => p.classList.remove('active'));
-    this.classList.add('active');
-    document.getElementById(this.dataset.tab).classList.add('active');
-  });
-});
-
-const isDark = matchMedia('(prefers-color-scheme: dark)').matches;
-const grid = isDark ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.06)';
-const txt = isDark ? '#b4b2a9' : '#5f5e5a';
-const meses = ['Jan','Fev','Mar','Abr','Mai','Jun'];
-
-function bar(id, labels, datasets, yFmt) {
-  new Chart(document.getElementById(id), {
-    type: 'bar',
-    data: { labels, datasets },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { display: false } },
-      scales: {
-        x: { grid: { display: false }, ticks: { color: txt, font: { size: 11 } } },
-        y: { grid: { color: grid }, ticks: { color: txt, font: { size: 11 }, callback: yFmt || (v => v) }, beginAtZero: true }
-      }
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pipe E.E · Sara · Jul/2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --brand: #e50915; --brand-light: #ff1a27; --brand-dim: rgba(229,9,21,.12);
+      --brand-glow: rgba(229,9,21,.35); --bg: #050505; --surf: rgba(20,20,20,.85);
+      --surf2: #161616; --glass: rgba(255,255,255,.04); --bd: rgba(255,255,255,.08);
+      --bd-strong: rgba(255,255,255,.14); --txt: #fafafa; --mut: #a3a3a3;
+      --ok: #22c55e; --warn: #facc15; --info: #60a5fa;
+      --inv: #818cf8; --bil: #fbbf24; --exc: #f472b6; --radius: 16px;
+      --shadow: 0 24px 80px rgba(0,0,0,.55);
     }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--bg); color: var(--txt);
+      font: 14px/1.6 Inter, system-ui, sans-serif; padding-bottom: 64px;
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(229,9,21,.18), transparent),
+        radial-gradient(circle at 100% 0%, rgba(229,9,21,.06), transparent 40%);
+    }
+    .topbar {
+      position: sticky; top: 0; z-index: 100; backdrop-filter: blur(16px);
+      background: rgba(5,5,5,.82); border-bottom: 1px solid var(--bd);
+      padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+    }
+    .v4-logo { font-weight: 900; font-size: 18px; letter-spacing: -.02em; }
+    .v4-logo span { color: var(--brand-light); }
+    .sync-pill {
+      display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 600;
+      color: var(--mut); background: var(--glass); border: 1px solid var(--bd);
+      padding: 6px 12px; border-radius: 999px;
+    }
+    .sync-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 10px var(--ok); }
+    .wrap { max-width: 1240px; margin: 0 auto; padding: 28px 24px 0; }
+    .hero {
+      position: relative; border-radius: var(--radius); padding: 36px 32px 32px; margin-bottom: 24px;
+      background: linear-gradient(135deg, rgba(229,9,21,.14) 0%, rgba(20,20,20,.9) 45%, var(--surf2) 100%);
+      border: 1px solid var(--bd-strong); box-shadow: var(--shadow); overflow: hidden;
+    }
+    .hero::after {
+      content: ''; position: absolute; top: -40%; right: -10%; width: 320px; height: 320px;
+      border-radius: 50%; background: radial-gradient(circle, var(--brand-glow), transparent 70%); pointer-events: none;
+    }
+    .hero-inner { position: relative; z-index: 1; }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px; font-size: 10px; font-weight: 800;
+      letter-spacing: .14em; text-transform: uppercase; color: #fca5a5; margin-bottom: 10px;
+    }
+    .hero-eyebrow::before { content: ''; width: 24px; height: 3px; background: var(--brand); border-radius: 2px; }
+    .hero h1 { margin: 0 0 10px; font-size: clamp(26px, 4vw, 36px); font-weight: 900; letter-spacing: -.03em; }
+    .hero .meta { color: var(--mut); font-size: 13px; max-width: 720px; }
+  .hero .meta strong { color: var(--txt); }
+    .source-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .chip {
+      font-size: 10px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+      padding: 5px 10px; border-radius: 999px; border: 1px solid var(--bd); background: var(--glass); color: var(--mut);
+    }
+    .chip.live { border-color: rgba(34,197,94,.35); color: #86efac; }
+    .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 14px; margin-bottom: 24px; }
+    .kpi {
+      background: var(--surf); border: 1px solid var(--bd); border-radius: var(--radius);
+      padding: 18px 20px; transition: border-color .2s, transform .2s;
+    }
+    .kpi:hover { border-color: var(--bd-strong); transform: translateY(-2px); }
+    .kpi .v { font-size: 28px; font-weight: 900; line-height: 1; }
+    .kpi .v.red { color: var(--brand-light); }
+    .kpi .l { font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: var(--mut); margin-top: 8px; font-weight: 600; }
+    .squad-view-bar {
+      position: sticky; top: 56px; z-index: 90; margin: 0 0 24px; padding: 8px;
+      background: rgba(8,8,8,.92); backdrop-filter: blur(14px);
+      border: 1px solid var(--bd-strong); border-radius: 16px;
+    }
+    .bar-label { font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--mut); padding: 4px 10px 10px; }
+    .squad-view-tabs { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
+    @media (max-width: 900px) { .squad-view-tabs { grid-template-columns: repeat(2, 1fr); } }
+    .squad-view-tab {
+      appearance: none; border: 1px solid var(--bd); background: var(--surf2); color: var(--mut);
+      border-radius: 12px; padding: 12px 14px; cursor: pointer; text-align: left; font-family: inherit; transition: all .2s;
+    }
+    .squad-view-tab:hover { border-color: var(--bd-strong); color: #fff; }
+    .squad-view-tab.active {
+      color: #fff; border-color: var(--brand);
+      background: linear-gradient(135deg, rgba(229,9,21,.18), rgba(20,20,20,.95));
+      box-shadow: 0 0 24px var(--brand-dim);
+    }
+    .squad-view-tab .tab-name { display: block; font-size: 13px; font-weight: 800; margin-bottom: 4px; }
+    .squad-view-tab .tab-stats { font-size: 10px; font-weight: 700; color: #d4d4d4; }
+    .view-panel { display: none; animation: viewFade .25s ease; }
+    .view-panel.is-active { display: block; }
+    @keyframes viewFade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+    .section {
+      background: var(--surf); border: 1px solid var(--bd); border-radius: var(--radius);
+      padding: 22px 24px; margin-bottom: 18px;
+    }
+    .section h2 { margin: 0 0 16px; font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: var(--mut); font-weight: 800; }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 768px) { .grid2 { grid-template-columns: 1fr; } }
+    .chart-box { position: relative; height: 260px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td { padding: 11px 12px; text-align: left; border-bottom: 1px solid var(--bd); vertical-align: top; }
+    th { font-size: 10px; text-transform: uppercase; letter-spacing: .07em; color: var(--mut); font-weight: 800; background: rgba(255,255,255,.02); }
+    tbody tr:hover { background: rgba(255,255,255,.02); }
+    .cli { font-weight: 700; }
+    .sub { color: var(--mut); font-size: 11px; margin-top: 2px; }
+    .tag { display: inline-block; padding: 3px 8px; border-radius: 5px; font-size: 11px; font-weight: 700; }
+    .tag-quente { background: rgba(239,68,68,.15); color: #fca5a5; }
+    .tag-morno { background: rgba(250,204,21,.12); color: #fde047; }
+    .tag-frio { background: rgba(96,165,250,.12); color: #93c5fd; }
+    .tag-ok { background: rgba(34,197,94,.12); color: #86efac; }
+    .tag-drop { background: rgba(239,68,68,.12); color: #fca5a5; }
+    .tag-neu { background: rgba(255,255,255,.06); color: var(--mut); }
+    .funnel { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+    .funnel-step {
+      flex: 1; min-width: 90px; background: var(--surf2); border: 1px solid var(--bd);
+      border-radius: 12px; padding: 14px 12px; text-align: center;
+    }
+    .funnel-step.active-heavy { border-color: var(--brand); box-shadow: 0 0 24px var(--brand-dim); }
+    .funnel-step .n { font-size: 26px; font-weight: 900; }
+    .funnel-step .lbl { font-size: 9px; text-transform: uppercase; letter-spacing: .06em; color: var(--mut); margin-top: 4px; font-weight: 700; }
+    .pace-card { padding: 16px 18px; border-radius: 12px; border: 1px solid var(--bd); background: var(--surf2); margin-bottom: 12px; }
+    .pace-label { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--mut); }
+    .pace-values { font-size: 20px; font-weight: 700; margin: 8px 0; }
+    .bar-bg { height: 6px; background: var(--bd); border-radius: 3px; overflow: hidden; }
+    .bar-fill { height: 100%; background: linear-gradient(90deg, var(--brand), var(--brand-light)); border-radius: 3px; }
+    .action-item { border-left: 3px solid var(--brand); padding: 12px 16px; margin-bottom: 10px; background: var(--brand-dim); border-radius: 0 10px 10px 0; }
+    .action-item.p0 { border-color: #ef4444; background: rgba(239,68,68,.08); }
+    .action-item.p1 { border-color: var(--warn); background: rgba(250,204,21,.06); }
+    .action-item.p2 { border-color: var(--info); background: rgba(96,165,250,.06); }
+    .table-wrap { overflow-x: auto; border-radius: 10px; }
+    .obs-cell { max-width: 280px; font-size: 12px; color: #d4d4d4; }
+    footer { text-align: center; color: var(--mut); font-size: 11px; margin-top: 48px; padding: 24px 0; border-top: 1px solid var(--bd); }
+  </style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="v4-logo">V4 <span>COMPANY</span></div>
+  <div class="sync-pill"><span class="sync-dot"></span> Sara Pizzico · E.E · Jul/2026</div>
+</header>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Farmer ABM · Estruturação Estratégica</div>
+      <h1>Pipe Diário — E.E Sara</h1>
+      <p class="meta">
+        <strong>Sara Pizzico</strong> · Competência Jul/2026 · Aba <strong>E.E ✅</strong> do Cockpit Monetização.
+        Dados: empresa, need scope, tipo, status, temperatura, pitch, TCV, observação e motivo de drop.
+      </p>
+      <div class="source-chips">
+        <span class="chip live">Planilha E.E</span>
+        <span class="chip">Cockpit Monetização</span>
+        <span class="chip">Atualizado 14/07/2026</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="kpis">
+    <div class="kpi"><div class="v red">10</div><div class="l">Follow + Aceito</div></div>
+    <div class="kpi"><div class="v">R$ 730k</div><div class="l">TCV em negociação</div></div>
+    <div class="kpi"><div class="v">19</div><div class="l">Semanas abertas</div></div>
+    <div class="kpi"><div class="v">3</div><div class="l">Quentes (Follow)</div></div>
+    <div class="kpi"><div class="v">1</div><div class="l">Aceito</div></div>
+    <div class="kpi"><div class="v">3</div><div class="l">Drop (julho)</div></div>
+    <div class="kpi"><div class="v">1</div><div class="l">Monetizado jul</div></div>
+  </div>
+
+  <nav class="squad-view-bar">
+    <div class="bar-label">Selecionar visão</div>
+    <div class="squad-view-tabs">
+      <button class="squad-view-tab active" data-view="geral"><span class="tab-name">Visão geral</span><span class="tab-stats">Meta · Funil · Gráficos</span></button>
+      <button class="squad-view-tab" data-view="follow"><span class="tab-name">Follow & Aceito</span><span class="tab-stats">10 contas · R$ 730k</span></button>
+      <button class="squad-view-tab" data-view="semanas"><span class="tab-name">Semanas</span><span class="tab-stats">19 em aberto</span></button>
+      <button class="squad-view-tab" data-view="drop"><span class="tab-name">Drop</span><span class="tab-stats">3 no mês</span></button>
+      <button class="squad-view-tab" data-view="plano"><span class="tab-name">Plano de ação</span><span class="tab-stats">P0 → P3</span></button>
+    </div>
+  </nav>
+
+  <!-- GERAL -->
+  <div class="view-panel is-active" data-view="geral">
+    <div class="section">
+      <h2>🎯 Meta E.E · Jul/26</h2>
+      <div class="grid2">
+        <div class="pace-card">
+          <div class="pace-label">E.E Saber → Executar</div>
+          <div class="pace-values">R$ 0,00 / R$ 70.000,00</div>
+          <div class="bar-bg"><div class="bar-fill" style="width:0%"></div></div>
+          <div class="sub" style="margin-top:8px">0% realizado</div>
+        </div>
+        <div class="pace-card">
+          <div class="pace-label">E.E Ter → Saber</div>
+          <div class="pace-values">R$ 8.109,38 / R$ 30.000,00</div>
+          <div class="bar-bg"><div class="bar-fill" style="width:27%"></div></div>
+          <div class="sub" style="margin-top:8px">27% realizado</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Funil E.E · Sara · Jul/26</h2>
+      <div class="funnel">
+        <div class="funnel-step"><div class="n">19</div><div class="lbl">Semanas</div></div>
+        <div class="funnel-step active-heavy"><div class="n">9</div><div class="lbl">Follow</div></div>
+        <div class="funnel-step"><div class="n">1</div><div class="lbl">Aceito</div></div>
+        <div class="funnel-step"><div class="n">1</div><div class="lbl">Monetizado</div></div>
+        <div class="funnel-step"><div class="n">3</div><div class="lbl">Drop jul</div></div>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div class="section">
+        <h2>🌡️ Termômetro · Follow</h2>
+        <div class="chart-box"><canvas id="chartTemp"></canvas></div>
+      </div>
+      <div class="section">
+        <h2>📊 TCV por Squad · Follow</h2>
+        <div class="chart-box"><canvas id="chartSquad"></canvas></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>📅 Pitches em Julho/2026</h2>
+      <div class="chart-box" style="height:220px"><canvas id="chartPitch"></canvas></div>
+    </div>
+
+    <div class="section">
+      <h2>✅ Monetizado em Jul/26</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Empresa</th><th>Need</th><th>Tipo</th><th>Temp</th><th>Pitch</th><th>TCV</th><th>Observação</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="cli">Nova York & Você (BM)</td>
+              <td><span class="tag tag-neu">MEDIUM</span></td>
+              <td>Estruturação</td>
+              <td><span class="tag tag-quente">Quente</span></td>
+              <td>25/06/2026</td>
+              <td>R$ 29.312,94</td>
+              <td class="obs-cell">—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOLLOW + ACEITO -->
+  <div class="view-panel" data-view="follow">
+    <div class="section">
+      <h2>🔥 Follow · 9 contas</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Empresa</th><th>Need</th><th>Tipo</th><th>Status</th><th>Temp</th><th>Pitch</th><th>TCV</th><th>Observação</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="cli">Stylus Manaus (BS)</td><td>SMALL</td><td>Estruturação</td><td>Follow</td><td><span class="tag tag-morno">Morno</span></td><td>02/07/2026</td><td>R$ 92.270,76</td><td class="obs-cell">Devolutiva para o dia 17/07. Cliente engajada</td></tr>
+            <tr><td class="cli">BR Distribuidora de Piercing (BS)</td><td>SMALL</td><td>Estruturação</td><td>Follow</td><td><span class="tag tag-frio">Frio</span></td><td>03/07/2026</td><td>R$ 79.224,12</td><td class="obs-cell">Devolutiva para o dia 10/07</td></tr>
+            <tr><td class="cli">KFG Torres</td><td>SMALL</td><td>Estruturação</td><td>Follow</td><td><span class="tag tag-morno">Morno</span></td><td>07/07/2026</td><td>R$ 79.224,12</td><td class="obs-cell">Devolutiva para o dia 13/07</td></tr>
+            <tr><td class="cli">Modular Estruturas (BM)</td><td>MEDIUM</td><td>Estruturação</td><td>Follow</td><td><span class="tag tag-quente">Quente</span></td><td>10/07/2026</td><td>R$ 88.396,35</td><td class="obs-cell">executar + ec</td></tr>
+            <tr><td class="cli">Fui Aluguel de Motos (BS)</td><td>SMALL</td><td>Estruturação</td><td>Follow</td><td><span class="tag tag-morno">Morno</span></td><td>10/07/2026</td><td>R$ 91.224,12</td><td class="obs-cell">FB: entrar no grupo para enviar mensagem</td></tr>
+            <tr><td class="cli">AGM DISTRIBUIDORA (BS)</td><td>SMALL</td><td>Estruturação</td><td>Follow</td><td><span class="tag tag-morno">Morno</span></td><td>13/07/2026</td><td>R$ 74.198,16</td><td class="obs-cell">FB: entrar no grupo para enviar mensagem</td></tr>
+            <tr><td class="cli">Terra prometida (BS)</td><td>SMALL</td><td>Estruturação</td><td>Follow</td><td><span class="tag tag-quente">Quente</span></td><td>24/06/2026</td><td>R$ 57.356,00</td><td class="obs-cell">Devolutiva para o dia 10/07</td></tr>
+            <tr><td class="cli">Rota da Linguiça (BS)</td><td>SMALL</td><td>Estruturação</td><td>Follow</td><td><span class="tag tag-quente">Quente</span></td><td>25/06/2026</td><td>R$ 28.400,00</td><td class="obs-cell">PITCH NO DIA 10/07 PARA O PRODUTO EQV</td></tr>
+            <tr><td class="cli">Creative Eng (BT)</td><td>TINY</td><td>Estruturação</td><td>Follow</td><td><span class="tag tag-frio">Frio</span></td><td>30/06/2026</td><td>R$ 66.000,00</td><td class="obs-cell">Limite 45d: 12/07/2026</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="section">
+      <h2>✅ Aceito · 1 conta</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Empresa</th><th>Need</th><th>Tipo</th><th>Status</th><th>Temp</th><th>Pitch</th><th>TCV</th><th>Observação</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="cli">Unik Benefícios (BS)</td><td>SMALL</td><td>Estruturação</td><td>Aceito</td>
+              <td><span class="tag tag-quente">Quente</span></td><td>06/07/2026</td><td>R$ 74.074,44</td>
+              <td class="obs-cell">Devolutiva para o dia 07/07</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEMANAS -->
+  <div class="view-panel" data-view="semanas">
+    <div class="section"><h2>Semana 0 · 4 contas</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Empresa</th><th>Need</th><th>Tipo</th><th>Status</th><th>Temp</th><th>Pitch</th><th>TCV</th><th>Observação</th></tr></thead>
+        <tbody>
+          <tr><td class="cli">RM Burguer Itabira (BS)</td><td>SMALL</td><td>TER</td><td>Semana 0</td><td>—</td><td>—</td><td>R$ 0</td><td class="obs-cell">Travado por falta de pagamento. Iniciar em julho</td></tr>
+          <tr><td class="cli">General car (BS)</td><td>SMALL</td><td>TER</td><td>Semana 0</td><td>—</td><td>—</td><td>R$ 0</td><td class="obs-cell">Travado por falta de pagamento. Iniciar em julho</td></tr>
+          <tr><td class="cli">Brod transportes ltda (LL)</td><td>LARGE</td><td>E.E + Assessoria</td><td>Semana 0</td><td>—</td><td>—</td><td>R$ 0</td><td class="obs-cell">—</td></tr>
+          <tr><td class="cli">G6 INTERNET</td><td>LARGE</td><td>Estruturação</td><td>Semana 0</td><td>—</td><td>—</td><td>R$ 0</td><td class="obs-cell">Kick-off feito</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <div class="section"><h2>Semana 02 · 4 contas</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Empresa</th><th>Need</th><th>Tipo</th><th>Status</th><th>Temp</th><th>Pitch</th><th>TCV</th><th>Observação</th></tr></thead>
+        <tbody>
+          <tr><td class="cli">Almeida e Neves (RecM)</td><td>MEDIUM</td><td>Estruturação</td><td>Semana 02</td><td>—</td><td>—</td><td>R$ 0</td><td class="obs-cell">Avaliando semanas para AP e proposta</td></tr>
+          <tr><td class="cli">Protesol tendas (BS)</td><td>SMALL</td><td>Estruturação</td><td>Semana 02</td><td>—</td><td>—</td><td>R$ 0</td><td class="obs-cell">Avaliando semanas para AP e proposta</td></tr>
+          <tr><td class="cli">Wang (BS)</td><td>SMALL</td><td>Estruturação</td><td>Semana 02</td><td>—</td><td>—</td><td>R$ 0</td><td class="obs-cell">AP + proposta. FB: ROI errado / sem site</td></tr>
+          <tr><td class="cli">Fernando Móveis e Eletro (BM)</td><td>MEDIUM</td><td>E.E + Assessoria</td><td>Semana 02</td><td>—</td><td>—</td><td>R$ 0</td><td class="obs-cell">Assessoria — não levar proposta E.E. AP base ativa</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <div class="section"><h2>Semana 03 · 7 contas</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Empresa</th><th>Need</th><th>Tipo</th><th>Status</th><th>Temp</th><th>Pitch</th><th>TCV</th><th>Observação</th></tr></thead>
+        <tbody>
+          <tr><td class="cli">Academia Imigrantes (BS)</td><td>SMALL</td><td>Estruturação</td><td>Semana 03</td><td>—</td><td>15/07/2026</td><td>R$ 79.224,12</td><td class="obs-cell">Growth — finalizar proposta. Cliente ciente</td></tr>
+          <tr><td class="cli">Moteis Fortaleza (BM)</td><td>MEDIUM</td><td>Estruturação</td><td>Semana 03</td><td>—</td><td>—</td><td>R$ 194.716,68</td><td class="obs-cell">Finalizar proposta Growth 4 unidades. Definir pitch</td></tr>
+          <tr><td class="cli">Adriano Martins Cardoso (BS)</td><td>SMALL</td><td>Estruturação</td><td>Semana 03</td><td>—</td><td>—</td><td>R$ 0</td><td class="obs-cell">Montar proposta · contato 08/07</td></tr>
+          <tr><td class="cli">Ecofitness Aldeia (BS)</td><td>SMALL</td><td>Estruturação</td><td>Semana 03</td><td>—</td><td>—</td><td>R$ 0</td><td class="obs-cell">Growth Basic (~R$2k mkt) · contato 08/07</td></tr>
+          <tr><td class="cli">Estação Delta (BM)</td><td>MEDIUM</td><td>Estruturação</td><td>Semana 03</td><td>—</td><td>—</td><td>R$ 0</td><td class="obs-cell">AP + proposta · contato 08/07</td></tr>
+          <tr><td class="cli">Hanaro (BL)</td><td>LARGE</td><td>Estruturação</td><td>Semana 03</td><td>—</td><td>—</td><td>R$ 0</td><td class="obs-cell">AP + proposta · contato 09/07</td></tr>
+          <tr><td class="cli">Medicar (BL)</td><td>LARGE</td><td>E.E + Assessoria</td><td>Semana 03</td><td>—</td><td>—</td><td>R$ 0</td><td class="obs-cell">Assessoria — não levar proposta. AP base ativa</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <div class="section"><h2>Semana 04–05 · 3 contas</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Empresa</th><th>Need</th><th>Tipo</th><th>Status</th><th>Temp</th><th>Pitch</th><th>TCV</th><th>Observação</th></tr></thead>
+        <tbody>
+          <tr><td class="cli">Pedrini e Azevedo (BS)</td><td>SMALL</td><td>Estruturação</td><td>Semana 04</td><td>—</td><td>10/07/2026</td><td>R$ 0</td><td class="obs-cell">Aguardando Denis (EC) para enviar mensagem</td></tr>
+          <tr><td class="cli">Triboltech (BS)</td><td>SMALL</td><td>Estruturação</td><td>Semana 05</td><td>—</td><td>03/07/2026</td><td>R$ 0</td><td class="obs-cell">Travado — cliente desmarca entregáveis + pitch</td></tr>
+          <tr><td class="cli">Sora consultoria (BS)</td><td>SMALL</td><td>Estruturação</td><td>Semana 05</td><td>—</td><td>—</td><td>R$ 0</td><td class="obs-cell">PROJETO TRAVADO</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <!-- DROP -->
+  <div class="view-panel" data-view="drop">
+    <div class="section">
+      <h2>❌ Drop · vínculo Jul/2026 · 3 contas</h2>
+      <div class="chart-box" style="height:200px;margin-bottom:16px"><canvas id="chartDrop"></canvas></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Empresa</th><th>Need</th><th>Tipo</th><th>Status</th><th>Temp</th><th>Pitch</th><th>TCV</th><th>Observação</th><th>Motivo DROP</th></tr></thead>
+          <tbody>
+            <tr><td class="cli">M & J Green Foods (BS)</td><td>TINY</td><td>Estruturação</td><td>Drop</td><td>—</td><td>—</td><td>R$ 0</td><td class="obs-cell">PROJETO CAIU</td><td><span class="tag tag-drop">Tratativa Ops</span></td></tr>
+            <tr><td class="cli">Curavida (BM)</td><td>MEDIUM</td><td>Estruturação</td><td>Drop</td><td><span class="tag tag-frio">Frio</span></td><td>26/06/2026</td><td>R$ 26.461,20</td><td class="obs-cell">DEVOLUTIVA 30/06 até o final do dia</td><td><span class="tag tag-neu">—</span></td></tr>
+            <tr><td class="cli">Positive Safety (BS)</td><td>SMALL</td><td>TER</td><td>Drop</td><td><span class="tag tag-frio">Frio</span></td><td>26/06/2026</td><td>R$ 66.000,00</td><td class="obs-cell">—</td><td><span class="tag tag-drop">Timing</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLANO -->
+  <div class="view-panel" data-view="plano">
+    <div class="section">
+      <h2>🎯 Plano de ação · Julho/2026</h2>
+      <div class="action-item p0"><strong>P0 — Hoje / esta semana</strong><br>
+        1. <strong>Unik Benefícios</strong> (Aceito · Quente) — fechar assinatura pós-devolutiva 07/07.<br>
+        2. <strong>Terra prometida + BR Piercing</strong> — devolutivas 10/07: cobrar retorno no dia.<br>
+        3. <strong>Rota da Linguiça</strong> — pitch EQV 10/07 + follow no mesmo dia.<br>
+        4. <strong>Modular Estruturas</strong> (Quente) — empacotar executar+EC · limite 13/07.<br>
+        5. <strong>KFG Torres</strong> — devolutiva 13/07.<br>
+        6. <strong>Academia Imigrantes</strong> — finalizar proposta · pitch 15/07.
+      </div>
+      <div class="action-item p1"><strong>P1 — Nutrir Follow</strong><br>
+        7. <strong>Fui Motos + AGM</strong> — entrar no grupo e enviar mensagem hoje.<br>
+        8. <strong>Stylus Manaus</strong> — preparar devolutiva 17/07.<br>
+        9. <strong>Creative Eng</strong> (Frio) — 1 tentativa de reaquecimento até 12/07.
+      </div>
+      <div class="action-item p2"><strong>P2 — Semanas → pitch</strong><br>
+        10. <strong>Moteis Fortaleza</strong> (R$ 194k) — prioridade: proposta 4 unidades + data pitch.<br>
+        11. Adriano / Ecofitness / Estação Delta / Hanaro — propostas + contatos 08–09/07.<br>
+        12. Pedrini — destravar com Denis (EC).<br>
+        13. RM Burguer + General car — reiniciar entregáveis em julho.
+      </div>
+      <div class="action-item p2"><strong>P3 — Limpeza</strong><br>
+        14. Sora + Triboltech — drop formal ou FUP com data.<br>
+        15. Preencher <strong>temperatura</strong> em todas as Semanas (hoje 100% sem temp).<br>
+        16. Curavida — registrar motivo de drop na planilha.
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    V4 Company · Pipe E.E Sara · Jul/2026<br>
+  Fonte: <a href="https://docs.google.com/spreadsheets/d/1dSukhon9dIUABcbQIKGKUa-ku-_oLOn1Q5YWeWGfI6U/edit" style="color:#86efac">Cockpit Monetização — aba E.E ✅</a>
+    · Layout inspirado em <a href="https://marcelofigueiredo23.github.io/pipediario/jul2026/" style="color:#86efac">Pipe Diário jul/2026</a>
+  </footer>
+</div>
+
+<script>
+(function() {
+  const tabs = document.querySelectorAll('.squad-view-tab');
+  const panels = document.querySelectorAll('.view-panel');
+  const valid = ['geral','follow','semanas','drop','plano'];
+  function setView(view) {
+    if (!valid.includes(view)) view = 'geral';
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.view === view));
+    panels.forEach(p => p.classList.toggle('is-active', p.dataset.view === view));
+    history.replaceState(null, '', '#' + view);
+  }
+  tabs.forEach(t => t.addEventListener('click', () => setView(t.dataset.view)));
+  const initial = (location.hash || '#geral').replace('#','');
+  setView(initial);
+  window.addEventListener('hashchange', () => setView(location.hash.replace('#','')));
+
+  const chartOpts = {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { labels: { color: '#a3a3a3', font: { family: 'Inter' } } } },
+    scales: {
+      x: { ticks: { color: '#a3a3a3' }, grid: { color: 'rgba(255,255,255,.06)' } },
+      y: { ticks: { color: '#a3a3a3' }, grid: { color: 'rgba(255,255,255,.06)' } }
+    }
+  };
+
+  new Chart(document.getElementById('chartTemp'), {
+    type: 'doughnut',
+    data: {
+      labels: ['Quente', 'Morno', 'Frio'],
+      datasets: [{ data: [3,4,2], backgroundColor: ['#e50915','#facc15','#60a5fa'], borderWidth: 0 }]
+    },
+    options: { ...chartOpts, plugins: { legend: { position: 'bottom', labels: { color: '#a3a3a3' } } } }
   });
-}
 
-const brl = v => 'R$' + (Math.abs(v)/1000).toFixed(0) + 'k';
+  new Chart(document.getElementById('chartSquad'), {
+    type: 'bar',
+    data: {
+      labels: ['Exclusive', 'Invictus', 'Billions'],
+      datasets: [{ label: 'TCV Follow (R$ mil)', data: [394,108,154], backgroundColor: ['#f472b6','#818cf8','#fbbf24'] }]
+    },
+    options: chartOpts
+  });
 
-bar('totalChart', meses,
-  [{ label: 'Realizado', data: [667152, 548565, 739869, 623649, 848121, 0], backgroundColor: '#1D9E75', borderRadius: 4, borderWidth: 0 },
-   { label: 'Meta', data: [301000, 1085000, 507000, 1000000, 1200000, 900000], backgroundColor: 'rgba(55,138,221,0.25)', borderRadius: 4, borderWidth: 0 }], brl);
+  new Chart(document.getElementById('chartPitch'), {
+    type: 'bar',
+    data: {
+      labels: ['02/07','03/07','06/07','07/07','10/07','13/07','15/07'],
+      datasets: [{ label: 'Pitches', data: [1,2,1,1,3,1,1], backgroundColor: '#e50915' }]
+    },
+    options: { ...chartOpts, scales: { ...chartOpts.scales, y: { ...chartOpts.scales.y, ticks: { stepSize: 1, color: '#a3a3a3' } } } }
+  });
 
-bar('execChart', meses,
-  [{ label: 'Realizado', data: [225732, 422700, 31166, 128056, 40898, 0], backgroundColor: '#1D9E75', borderRadius: 4, borderWidth: 0 },
-   { label: 'Meta', data: [40000, 850000, 173000, 50000, 150000, 80000], backgroundColor: 'rgba(55,138,221,0.25)', borderRadius: 4, borderWidth: 0 }], brl);
-
-bar('tersaberChart', ['Jan','Fev','Mar','Abr','Mai','Jun'],
-  [{ label: 'Ter/Saber', data: [80350, 27865, 0, 29706, 23693, 0], backgroundColor: '#7F77DD', borderRadius: 4, borderWidth: 0 }], brl);
-
-bar('eeChart', ['Fev','Mar','Abr','Mai','Jun'],
-  [{ label: 'Billions', data: [5,7,9,11,1], backgroundColor: '#1D9E75', borderRadius: 4, borderWidth: 0, stack:'s' },
-   { label: 'Exclusive', data: [1,7,7,9,2], backgroundColor: '#378ADD', borderRadius: 4, borderWidth: 0, stack:'s' },
-   { label: 'Invictus', data: [3,5,6,8,2], backgroundColor: '#7F77DD', borderRadius: 4, borderWidth: 0, stack:'s' }]);
-
-bar('eeVendasChart', ['Fev','Mar','Abr','Mai','Jun'],
-  [{ label: 'Vendas LG', data: [0,9,9,11,0], backgroundColor: '#1D9E75', borderRadius: 4, borderWidth: 0 }]);
-
-new Chart(document.getElementById('billCart'), {
-  type: 'bar',
-  data: { labels: ['Oportunidades','Reuniões','Vendas LG'],
-    datasets: [
-      { label: 'Realizado', data: [10,4,5], backgroundColor: '#1D9E75', borderRadius: 4, borderWidth: 0 },
-      { label: 'Meta', data: [25,20,9], backgroundColor: 'rgba(55,138,221,0.25)', borderRadius: 4, borderWidth: 0 }
-    ]},
-  options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid:{ display:false }, ticks:{ color:txt,font:{size:10} } }, y: { grid:{ color:grid }, ticks:{ color:txt,font:{size:10} }, beginAtZero:true } } }
-});
-
-new Chart(document.getElementById('invCart'), {
-  type: 'bar',
-  data: { labels: ['Oportunidades','Reuniões','Vendas LG'],
-    datasets: [{ label: 'Realizado', data: [16,7,7], backgroundColor: '#7F77DD', borderRadius: 4, borderWidth: 0 }]},
-  options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid:{ display:false }, ticks:{ color:txt,font:{size:10} } }, y: { grid:{ color:grid }, ticks:{ color:txt,font:{size:10} }, beginAtZero:true } } }
-});
-
-bar('squadEEChart', ['Billions','Exclusive','Invictus'],
-  [{ data: [33,26,24], backgroundColor: ['#1D9E75','#378ADD','#7F77DD'], borderRadius: 4, borderWidth: 0 }]);
-
-new Chart(document.getElementById('txConvChart'), {
-  type: 'line',
-  data: { labels: meses,
-    datasets: [
-      { label: 'Tx Conversão', data: [47,71.4,35.7,0,0,0], borderColor: '#1D9E75', backgroundColor: 'rgba(29,158,117,0.1)', fill: true, tension: 0.3, pointRadius: 4 },
-      { label: 'Meta 65%', data: [65,65,65,65,65,65], borderColor: 'rgba(95,94,90,0.4)', borderDash: [4,4], pointRadius: 0 }
-    ]},
-  options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid:{ display:false }, ticks:{ color:txt,font:{size:11} } }, y: { grid:{ color:grid }, ticks:{ color:txt,font:{size:11}, callback: v => v+'%' }, beginAtZero:true, max:100 } } }
-});
-
-bar('vendaLGChart', meses,
-  [{ data: [8,5,5,0,0,0], backgroundColor: '#1D9E75', borderRadius: 4, borderWidth: 0 }]);
-
-bar('vendaExecChart', meses,
-  [{ data: [4,8,7,10,10,0], backgroundColor: '#378ADD', borderRadius: 4, borderWidth: 0 }]);
+  new Chart(document.getElementById('chartDrop'), {
+    type: 'pie',
+    data: {
+      labels: ['Tratativa Ops', 'Timing', 'Sem motivo'],
+      datasets: [{ data: [1,1,1], backgroundColor: ['#ef4444','#facc15','#737373'], borderWidth: 0 }]
+    },
+    options: { plugins: { legend: { position: 'bottom', labels: { color: '#a3a3a3' } } } }
+  });
+})();
 </script>
+</body>
+</html>
