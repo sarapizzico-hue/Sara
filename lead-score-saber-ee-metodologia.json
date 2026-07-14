@@ -1,0 +1,214 @@
+{
+  "version": "0.1.0",
+  "status": "esqueleto",
+  "updated_at": "2026-07-14",
+  "name": "Lead Score Saber — Estruturação Estratégica",
+  "owner": "Sara Pizzico · Farmer Base Saber (E.E)",
+  "sibling": {
+    "name": "Lead Score Expansão Base Ativa",
+    "url": "https://marcelofigueiredo23.github.io/pipediario/jul2026/lead-score-metodologia.html",
+    "relation": "irmão — mesma família Clarindo; fórmula e pergunta diferentes"
+  },
+  "question": "Quão pronto este cliente em Estruturação Estratégica está para aceitar (e avançar) o próximo passo comercial — e com que risco de travar?",
+  "unit": "conta/projeto em E.E (Saber)",
+  "scale": {
+    "raw_points": 100,
+    "normalized": "0-100",
+    "bands": [
+      { "id": "A", "min": 80, "label": "Pronto / acelerar", "action_playbook": null },
+      { "id": "B", "min": 60, "max": 79, "label": "Intermediário / alinhar", "action_playbook": null },
+      { "id": "C", "min": 40, "max": 59, "label": "Construir clareza", "action_playbook": null },
+      { "id": "D", "min": 0, "max": 39, "label": "Frear / recuperar", "action_playbook": null }
+    ],
+    "note": "Saída V0.1 = score + banda + flags. Playbook de ação fica para calibração após 2–3 semanas de uso."
+  },
+  "pillars": [
+    {
+      "id": "satisfacao",
+      "label": "Satisfação (+ NPS)",
+      "weight": 45,
+      "role": "motor",
+      "description": "Termômetro principal. É dali que se colhe clareza sobre time, marketing e próximo passo.",
+      "inputs": [
+        { "field": "satisfacao_semanal", "type": "int_1_5", "required": true },
+        { "field": "nps_recente", "type": "int_0_10", "required": false, "max_age_days": 45 }
+      ],
+      "rubric_satisfacao_semanal": {
+        "1": "Sumiu / cancela / atrito",
+        "2": "Responde pouco, entrega arrastando",
+        "3": "Cumpre ritual, sem energia",
+        "4": "Engajado, pede avanço, traz time",
+        "5": "Puxa agenda, traz decisor, fala de próximo passo"
+      },
+      "points_draft": {
+        "satisfacao_1": 5,
+        "satisfacao_2": 12,
+        "satisfacao_3": 22,
+        "satisfacao_4": 34,
+        "satisfacao_5": 40,
+        "nps_9_10": 5,
+        "nps_7_8": 2,
+        "nps_lte_6": -8,
+        "nps_ausente": 0
+      }
+    },
+    {
+      "id": "decisores",
+      "label": "Mapa de decisores",
+      "weight": 20,
+      "role": "modulador_politico",
+      "description": "1–3 mapeados acelera. >3 várias cabeças = teto intermediário. Desconhecido = incompleto.",
+      "inputs": [
+        { "field": "n_decisores", "type": "int", "required": true },
+        { "field": "sponsor_identificado", "type": "bool", "required": true },
+        { "field": "decisor_na_mesa", "type": "bool", "required": false }
+      ],
+      "curve": [
+        { "when": "n == 0 || desconhecido", "effect": "baixa / incompleto", "cap_band": "C" },
+        { "when": "n == 1 && sponsor", "effect": "sobe", "points_hint": "alto" },
+        { "when": "n in 2..3 && sponsor", "effect": "ideal", "points_hint": "alto" },
+        { "when": "n > 3", "effect": "teto intermediário", "cap_band": "B", "flag": "DECISORES_3PLUS" }
+      ],
+      "points_draft": {
+        "desconhecido_ou_0": 2,
+        "um_sem_sponsor": 8,
+        "um_com_sponsor": 16,
+        "dois_tres_com_sponsor": 20,
+        "mais_de_3": 10,
+        "bonus_decisor_na_mesa": 0
+      },
+      "cap_when_gt_3": {
+        "max_band": "B",
+        "max_score": 79,
+        "reason": "Várias cabeças com ideias diferentes — alinhar antes de forçar próximo passo comercial"
+      }
+    },
+    {
+      "id": "marketing",
+      "label": "Marketing interno",
+      "weight": 15,
+      "role": "oportunidade_mais_atencao",
+      "description": "Ter setor sem mapeamento é crítico: bom para a V4, mas risco de não querer tirar o time ou querer time+V4. Clareza colhida na satisfação.",
+      "inputs": [
+        {
+          "field": "mkt_postura",
+          "type": "enum",
+          "required": true,
+          "values": ["sem_mkt", "sem_mapa", "parceiro", "complementar", "bloqueador"]
+        }
+      ],
+      "points_draft": {
+        "sem_mkt": 10,
+        "sem_mapa": 6,
+        "parceiro": 15,
+        "complementar": 12,
+        "bloqueador": 3
+      },
+      "flags": {
+        "sem_mapa": "MKT_ATENCAO"
+      }
+    },
+    {
+      "id": "tier",
+      "label": "Tier / porte",
+      "weight": 10,
+      "role": "contexto_valor",
+      "description": "Tamanho da aposta e abordagem — não probabilidade sozinha. LARGE sem mapa político = score ilusório.",
+      "inputs": [
+        { "field": "tier", "type": "enum", "values": ["TINY", "SMALL", "MEDIUM", "LARGE", "ENTERPRISE", "NO_ICP"] }
+      ],
+      "points_draft": {
+        "TINY": 4,
+        "SMALL": 8,
+        "MEDIUM": 9,
+        "LARGE": 10,
+        "ENTERPRISE": 10,
+        "NO_ICP": 0
+      }
+    },
+    {
+      "id": "momentum_ee",
+      "label": "Momentum do E.E",
+      "weight": 10,
+      "role": "contexto_projeto",
+      "description": "Semana/status, temperatura, quem puxa, dor verbalizada. Esqueleto — calibração na v0.2.",
+      "inputs": [
+        { "field": "status_ee", "type": "string" },
+        { "field": "temperatura", "type": "enum", "values": ["Quente", "Morno", "Frio", null] },
+        { "field": "dor_verbalizada", "type": "bool" },
+        { "field": "cliente_puxa_proximo_passo", "type": "bool" }
+      ],
+      "points_draft": {
+        "placeholder": true,
+        "note": "Distribuir 10 pts na v0.2 com base no ritual semanal"
+      }
+    }
+  ],
+  "gates": [
+    {
+      "id": "sat_baixa",
+      "when": "satisfacao_semanal <= 2",
+      "effect": "flag SAT_BAIXA; sugerir cap banda C",
+      "flag": "SAT_BAIXA"
+    },
+    {
+      "id": "nps_detrator",
+      "when": "nps_recente <= 6 && nps_age_days <= 45",
+      "effect": "penalidade em satisfação; não forçar pitch",
+      "flag": "NPS_DETRATOR"
+    },
+    {
+      "id": "health_danger",
+      "when": "algorithm_flag in [Danger, Critical]",
+      "effect": "freio — alinhar coord; não é score de expansão cego",
+      "flag": "HEALTH_FREIO",
+      "optional_v01": true
+    },
+    {
+      "id": "decisores_3plus",
+      "when": "n_decisores > 3",
+      "effect": "cap score <= 79 (banda B no máximo)",
+      "flag": "DECISORES_3PLUS"
+    },
+    {
+      "id": "mkt_sem_mapa",
+      "when": "mkt_postura == sem_mapa",
+      "effect": "flag MKT_ATENCAO — mapear papel (substitui / complementa / governa) antes de pitch agressivo",
+      "flag": "MKT_ATENCAO"
+    }
+  ],
+  "output_v01": {
+    "fields": ["score", "band", "flags", "pillar_breakdown"],
+    "action_playbook": null,
+    "rationale": "Observar 2–3 semanas o que a farmer faz quando a nota é X; só então travar playbook por banda."
+  },
+  "weekly_ritual": [
+    "Satisfação desta semana (1–5)?",
+    "NPS recente (≤45d), se houver?",
+    "Tier?",
+    "Decisores: quantos / tem sponsor / já sentou na mesa?",
+    "Marketing interno: sem_mkt / sem_mapa / parceiro / complementar / bloqueador?",
+    "Cliente já verbalizou dor de próximo passo? (S/N)"
+  ],
+  "clarindo_depara": [
+    { "clarindo": "CSAT", "saber_ee": "Pilar Satisfação (+NPS) — motor" },
+    { "clarindo": "Saúde do projeto", "saber_ee": "Gate HEALTH_FREIO (opcional v0.1)" },
+    { "clarindo": "Entrega", "saber_ee": "Dentro da rubrica de satisfação semanal" },
+    { "clarindo": "Rentabilidade", "saber_ee": "Tier (peso baixo)" },
+    { "clarindo": "Oportunidades mapeadas", "saber_ee": "Dor verbalizada + momentum E.E" },
+    { "clarindo": "White space", "saber_ee": "Secundário — produto em curso é o Saber/E.E" },
+    { "clarindo": "(novo Saber)", "saber_ee": "Decisores + Marketing interno" }
+  ],
+  "vs_base_ativa": {
+    "base_ativa_question": "Qual conta da carteira atacar para expandir?",
+    "saber_ee_question": "Esta conta em Estruturação está pronta para o próximo passo?",
+    "do_not_mix": "Não reutilizar compute_lead_score() da base ativa sem adaptar pesos e inputs."
+  },
+  "open_items": [
+    "Calibrar pontos exatos da rubrica após 2–3 semanas",
+    "Definir playbook de saída por banda (A/B/C/D)",
+    "Integrar Health Score Cockpit quando contas E.E estiverem no Flow",
+    "Fechar pontuação do pilar Momentum E.E (10 pts)",
+    "Decidir se escala final fica 0–100 ou normaliza 0–1 como o irmão Base Ativa"
+  ]
+}

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lead Score Saber (E.E) — Metodologia esqueleto | V4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#c41020; --ink:#14151f; --muted:#687083; --line:#e5e7eb; --bg:#f6f7f9;
+  --green:#15803d; --yellow:#b7791f; --blue:#1d4ed8;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.55}
+.cover{background:linear-gradient(135deg,#650006,#c41020 55%,#7b0008);color:#fff;padding:40px 44px 36px}
+.brand{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:16px}
+h1{font-size:clamp(22px,3.2vw,30px);line-height:1.12;margin:0 0 10px;font-weight:800;letter-spacing:-.8px;max-width:920px}
+.lead{font-size:15px;max-width:840px;color:rgba(255,255,255,.9);margin:0}
+.meta{margin-top:16px;font-size:12px;color:rgba(255,255,255,.65);display:flex;flex-wrap:wrap;gap:8px 16px}
+.meta a{color:#fff}
+.pill-h{display:inline-block;font-size:10px;font-weight:800;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.15);margin-bottom:10px}
+.nav{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line);padding:0 16px;display:flex;gap:0;overflow-x:auto}
+.nav a{padding:12px 10px;color:#7b8190;text-decoration:none;font-size:11px;font-weight:700;border-bottom:2px solid transparent;white-space:nowrap}
+.nav a:hover{color:var(--red);border-bottom-color:var(--red)}
+.wrap{max-width:1120px;margin:0 auto;padding:28px 22px 64px}
+section{margin-bottom:44px;scroll-margin-top:50px}
+h2{font-size:20px;font-weight:800;margin:0 0 6px;display:flex;align-items:center;gap:10px}
+h2:before{content:"";width:4px;height:22px;border-radius:4px;background:var(--red);flex-shrink:0}
+h3{font-size:15px;font-weight:800;margin:18px 0 10px}
+.sub{color:var(--muted);font-size:13px;margin:0 0 16px 14px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-bottom:18px}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:10px;padding:13px 15px;border-left:4px solid var(--red)}
+.kpi.a{border-left-color:#4ade80}.kpi.b{border-left-color:#C9A84C}.kpi.c{border-left-color:#60a5fa}.kpi.d{border-left-color:#ef4444}.kpi.neu{border-left-color:var(--blue)}
+.kpi .lbl{font-size:10px;font-weight:800;text-transform:uppercase;color:#8c94a3;margin-bottom:4px}
+.kpi .val{font-size:22px;font-weight:800;line-height:1.1}
+.kpi .hint{font-size:11px;color:var(--muted);margin-top:4px}
+.quote{background:#fff;border:1px solid var(--line);border-left:4px solid var(--red);border-radius:10px;padding:18px 20px;margin-bottom:16px;font-size:14px;line-height:1.65}
+.quote.green{border-left-color:var(--green);background:#f8fdf9}
+.quote.warn{border-left-color:var(--yellow);background:#fffef8}
+.quote.blue{border-left-color:var(--blue);background:#f8faff}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.arch{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:8px;align-items:center;margin:16px 0}
+.arch-box{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px;text-align:center;font-size:12px}
+.arch-box strong{display:block;font-size:13px;margin-bottom:4px}
+.arch-arrow{color:var(--red);font-weight:800;font-size:20px;text-align:center}
+.score-draft{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin-bottom:14px}
+.score-row{display:grid;grid-template-columns:1.2fr 56px 1fr;gap:10px;padding:9px 0;border-bottom:1px solid #f1f3f5;font-size:13px;align-items:center}
+.score-row:last-child{border-bottom:0}
+.score-row .pts{font-weight:800;text-align:center;color:var(--red)}
+.score-row.neg .pts{color:#b91c1c}
+.score-row .muted{color:var(--muted);font-weight:400;font-size:11px}
+.tbl{overflow:auto;border:1px solid var(--line);border-radius:10px;background:#fff;margin-bottom:14px}
+table{width:100%;border-collapse:collapse}
+th{background:#f9fafb;font-size:10px;text-transform:uppercase;color:#8c94a3;text-align:left;padding:9px 11px;border-bottom:1px solid var(--line)}
+td{padding:9px 11px;border-bottom:1px solid #f1f3f5;font-size:12px;vertical-align:top}
+td.name{font-weight:700}td.r{text-align:right}
+.badge-r{font-size:10px;font-weight:800;padding:2px 7px;border-radius:4px;background:#eef2ff;color:#3730a3}
+.band-tag{font-size:10px;font-weight:800;padding:2px 8px;border-radius:4px}
+.band-tag.a{background:#dcfce7;color:#166534}
+.band-tag.b{background:#fef9c3;color:#854d0e}
+.band-tag.c{background:#dbeafe;color:#1e40af}
+.band-tag.d{background:#fee2e2;color:#991b1b}
+.flag{font-size:10px;font-weight:800;padding:2px 7px;border-radius:4px;background:#fef3c7;color:#92400e;margin-right:4px}
+.check{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:grid;grid-template-columns:auto 1fr;gap:10px;margin-bottom:8px}
+.check .ok{width:26px;height:26px;border-radius:50%;background:#dcfce7;color:var(--green);font-weight:800;display:flex;align-items:center;justify-content:center;font-size:13px}
+.check .wip{width:26px;height:26px;border-radius:50%;background:#fef9c3;color:#854d0e;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:11px}
+.check .todo{width:26px;height:26px;border-radius:50%;background:#f3f4f6;color:#6b7280;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:11px}
+.check h4{margin:0 0 3px;font-size:13px;font-weight:800}.check p{margin:0;font-size:12px;color:#4b5563}
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.card h4{margin:0 0 8px;font-size:13px;font-weight:800}
+.card p,.card li{font-size:12px;color:#4b5563}
+.card ol{margin:0;padding-left:18px}
+.card li{margin-bottom:4px}
+.foot{font-size:11px;color:#8b92a0;text-align:center;padding-top:20px;border-top:1px solid var(--line);line-height:1.6}
+.foot a{color:var(--red)}
+code{font-size:12px;background:#f3f4f6;padding:1px 5px;border-radius:4px}
+@media(max-width:900px){.grid2,.arch{grid-template-columns:1fr}.arch-arrow{transform:rotate(90deg)}.cover{padding:28px 20px}}
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <div class="brand">V4 Company · Lead Score · Base Saber (E.E)</div>
+  <span class="pill-h">Esqueleto v0.1.0 · 14/07/2026 · sem playbook de ação ainda</span>
+  <h1>Lead Score Saber — Estruturação Estratégica</h1>
+  <p class="lead">
+    Nota de <strong>prontidão para o próximo passo</strong> nas contas em Estruturação Estratégica (base Saber).
+    Irmão do Lead Score da Base Ativa — mesma família Clarindo, <strong>pergunta e pesos diferentes</strong>.
+    Motor: <strong>satisfação semanal (+NPS)</strong>. Moduladores: <strong>decisores</strong> e <strong>marketing interno</strong>.
+  </p>
+  <div class="meta">
+    <span>Escala 0–100 · Bandas A–D</span>
+    <span>Saída V0.1: score + banda + flags</span>
+    <span><a href="lead-score-saber-ee-metodologia.json">JSON metodologia →</a></span>
+    <span><a href="https://marcelofigueiredo23.github.io/pipediario/jul2026/lead-score-metodologia.html">Irmão Base Ativa →</a></span>
+  </div>
+</header>
+
+<nav class="nav">
+  <a href="#status">Status</a>
+  <a href="#pergunta">Pergunta</a>
+  <a href="#vs">vs Base Ativa</a>
+  <a href="#arquitetura">Arquitetura</a>
+  <a href="#pesos">Pesos</a>
+  <a href="#rubricas">Rubricas</a>
+  <a href="#gates">Gates</a>
+  <a href="#bandas">Bandas</a>
+  <a href="#clarindo">Clarindo</a>
+  <a href="#ritual">Ritual</a>
+  <a href="#abertos">Abertos</a>
+</nav>
+
+<div class="wrap">
+
+  <!-- STATUS -->
+  <section id="status">
+    <h2>Status do esqueleto</h2>
+    <p class="sub">O que já está decidido vs o que fica para calibração</p>
+    <div class="check"><div class="ok">✓</div><div>
+      <h4>Pergunta e unidade definidas</h4>
+      <p>Score da <strong>conta/projeto em E.E</strong> — prontidão de próximo passo, não ranking de carteira.</p>
+    </div></div>
+    <div class="check"><div class="ok">✓</div><div>
+      <h4>Motor = Satisfação (+ NPS)</h4>
+      <p>NPS entra como reforço da satisfação. Clareza sobre time/mkt/decisão é colhida no feeling semanal.</p>
+    </div></div>
+    <div class="check"><div class="ok">✓</div><div>
+      <h4>Decisores com curva (teto se &gt;3)</h4>
+      <p>1–3 com sponsor sobe; &gt;3 = várias cabeças → nota intermediária (cap banda B).</p>
+    </div></div>
+    <div class="check"><div class="ok">✓</div><div>
+      <h4>Marketing = oportunidade + atenção</h4>
+      <p>Sem mapeamento = flag <code>MKT_ATENCAO</code> (pode não querer tirar o time ou querer time + V4).</p>
+    </div></div>
+    <div class="check"><div class="wip">…</div><div>
+      <h4>Saída = score + banda + flags</h4>
+      <p>Playbook de ação por banda <strong>ainda em aberto</strong> — observar 2–3 semanas antes de travar.</p>
+    </div></div>
+    <div class="check"><div class="todo">○</div><div>
+      <h4>Ainda não: código, carteira aplicada, validação empírica</h4>
+      <p>v0.1 é metodologia. Implementação e ranking vivo vêm depois da calibração dos pontos.</p>
+    </div></div>
+  </section>
+
+  <!-- PERGUNTA -->
+  <section id="pergunta">
+    <h2>A pergunta que a nota responde</h2>
+    <div class="quote">
+      <strong>Quão pronto este cliente em Estruturação Estratégica está para aceitar (e avançar) o próximo passo comercial — e com que risco de travar?</strong>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <h4>É</h4>
+        <p>Prontidão de avanço dentro do Saber/E.E (transição → proposta Exec/Ter ou 2º Saber).</p>
+      </div>
+      <div class="card">
+        <h4>Não é</h4>
+        <p>Health Score operacional · ranking de carteira Base Ativa · escolha automática de produto.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VS -->
+  <section id="vs">
+    <h2>vs Lead Score Base Ativa (Marcelo)</h2>
+    <p class="sub">Mesma família Clarindo — fórmulas e usos diferentes. Não misturar.</p>
+    <div class="tbl">
+      <table>
+        <thead>
+          <tr><th></th><th>Base Ativa</th><th>Saber / E.E (este)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="name">Pergunta</td><td>Qual conta atacar na carteira?</td><td>Esta conta em E.E avança o próximo passo?</td></tr>
+          <tr><td class="name">Unidade</td><td>Conta / carteira</td><td>Projeto E.E em andamento</td></tr>
+          <tr><td class="name">Motor</td><td>Fee+Tier, Flow, GPI REACH</td><td><strong>Satisfação semanal (+NPS)</strong></td></tr>
+          <tr><td class="name">Política</td><td>Quase ausente</td><td><strong>Decisores</strong> (teto se &gt;3)</td></tr>
+          <tr><td class="name">Time cliente</td><td>Não modela</td><td><strong>Marketing interno</strong> + flag atenção</td></tr>
+          <tr><td class="name">Escala</td><td>0–1 · Atacar/Nutrir/Recuperar</td><td>0–100 · A/B/C/D + flags</td></tr>
+          <tr><td class="name">Fonte</td><td><a href="https://marcelofigueiredo23.github.io/pipediario/jul2026/lead-score-metodologia.html">metodologia Base Ativa</a></td><td>Este documento + JSON</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="quote blue">
+      Fluxo desejado: Base Ativa escolhe <em>conta</em> → conta entra/está em Saber E.E → <strong>este score</strong> decide se <em>avança</em> o próximo passo na semana.
+    </div>
+  </section>
+
+  <!-- ARQUITETURA -->
+  <section id="arquitetura">
+    <h2>Arquitetura V0.1</h2>
+    <p class="sub">Sem GPI completo no V1 — satisfação carrega o papel vivo do CSAT/Entrega</p>
+    <div class="arch">
+      <div class="arch-box"><strong>Ritual semanal E.E</strong>Satisfação · NPS · Decisores · MKT · Tier · Dor</div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-box" style="border-color:#fecaca"><strong>compute_saber_ee_score()</strong>0–100 · 5 pilares + gates</div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-box" style="border-color:#bbf7d0"><strong>Saída V0.1</strong>Score · Banda · Flags<br><span style="color:#687083">(+ breakdown)</span></div>
+    </div>
+    <div class="kpis">
+      <div class="kpi"><div class="lbl">Satisfação</div><div class="val">45</div><div class="hint">Motor</div></div>
+      <div class="kpi"><div class="lbl">Decisores</div><div class="val">20</div><div class="hint">Curva + teto &gt;3</div></div>
+      <div class="kpi"><div class="lbl">Marketing</div><div class="val">15</div><div class="hint">+ flag atenção</div></div>
+      <div class="kpi neu"><div class="lbl">Tier</div><div class="val">10</div><div class="hint">Contexto porte</div></div>
+      <div class="kpi neu"><div class="lbl">Momentum E.E</div><div class="val">10</div><div class="hint">Calibrar v0.2</div></div>
+    </div>
+  </section>
+
+  <!-- PESOS -->
+  <section id="pesos">
+    <h2>Pesos (rascunho fechado para teste)</h2>
+    <p class="sub">Soma = 100 pts → score 0–100. Pontos internos por rubrica ainda calibráveis.</p>
+    <div class="score-draft">
+      <div class="score-row">
+        <div><strong>Satisfação (+ NPS)</strong> <span class="muted">· Motor · CSAT Clarindo</span></div>
+        <div class="pts">45</div>
+        <div>Rubrica 1–5 semanal + NPS ≤45d (opcional)</div>
+      </div>
+      <div class="score-row">
+        <div><strong>Decisores</strong> <span class="muted">· Mapa político</span></div>
+        <div class="pts">20</div>
+        <div>1–3 + sponsor sobe · &gt;3 teto banda B</div>
+      </div>
+      <div class="score-row">
+        <div><strong>Marketing interno</strong> <span class="muted">· Oportunidade + atenção</span></div>
+        <div class="pts">15</div>
+        <div>Postura: sem_mkt / sem_mapa / parceiro / complementar / bloqueador</div>
+      </div>
+      <div class="score-row">
+        <div><strong>Tier</strong> <span class="muted">· Porte / valor</span></div>
+        <div class="pts">10</div>
+        <div>TINY→LARGE · NO ICP = 0</div>
+      </div>
+      <div class="score-row">
+        <div><strong>Momentum E.E</strong> <span class="muted">· Projeto em curso</span></div>
+        <div class="pts">10</div>
+        <div>Placeholder v0.1 — temp, dor verbalizada, quem puxa</div>
+      </div>
+      <div class="score-row neg">
+        <div><strong>Gates</strong></div>
+        <div class="pts">CAP</div>
+        <div>SAT_BAIXA · DECISORES_3PLUS · MKT_ATENCAO · (opcional) HEALTH_FREIO</div>
+      </div>
+    </div>
+    <div class="quote warn">
+      Regra de ouro: satisfação alta + decisores &gt;3 <em>ou</em> MKT sem mapa → <strong>intermediário</strong> (alinhar política/time, não vender ainda).
+      Satisfação baixa → não força próximo passo comercial.
+    </div>
+  </section>
+
+  <!-- RUBRICAS -->
+  <section id="rubricas">
+    <h2>Rubricas</h2>
+    <p class="sub">Como pontuar cada input no ritual</p>
+
+    <h3>1) Satisfação semanal (1–5) — até ~40 dos 45 pts</h3>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Nota</th><th>Leitura</th><th class="r">Pts (draft)</th></tr></thead>
+        <tbody>
+          <tr><td class="name">1</td><td>Sumiu / cancela / atrito</td><td class="r">5</td></tr>
+          <tr><td class="name">2</td><td>Responde pouco, entrega arrastando</td><td class="r">12</td></tr>
+          <tr><td class="name">3</td><td>Cumpre ritual, sem energia</td><td class="r">22</td></tr>
+          <tr><td class="name">4</td><td>Engajado, pede avanço, traz time</td><td class="r">34</td></tr>
+          <tr><td class="name">5</td><td>Puxa agenda, traz decisor, fala de próximo passo</td><td class="r">40</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>NPS recente (≤45 dias) — até ±5–8 pts dentro do pilar</h3>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>NPS</th><th>Efeito</th><th class="r">Pts (draft)</th></tr></thead>
+        <tbody>
+          <tr><td class="name">9–10</td><td>Porta aberta / confiança</td><td class="r">+5</td></tr>
+          <tr><td class="name">7–8</td><td>Neutro</td><td class="r">+2</td></tr>
+          <tr><td class="name">≤6</td><td>Freio — não forçar pitch</td><td class="r">−8</td></tr>
+          <tr><td class="name">Ausente / velho</td><td>Não trava a nota</td><td class="r">0</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="sub" style="margin-top:-6px">Cap do pilar Satisfação = 45 (mesmo com NPS alto).</p>
+
+    <h3>2) Decisores — 20 pts + possível cap de banda</h3>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Cenário</th><th>Leitura</th><th class="r">Pts (draft)</th></tr></thead>
+        <tbody>
+          <tr><td class="name">0 / desconhecido</td><td>Cego — incompleto</td><td class="r">2</td></tr>
+          <tr><td class="name">1 sem sponsor</td><td>Frágil</td><td class="r">8</td></tr>
+          <tr><td class="name">1 com sponsor</td><td>Rápido</td><td class="r">16</td></tr>
+          <tr><td class="name">2–3 com sponsor</td><td>Ideal político</td><td class="r">20</td></tr>
+          <tr><td class="name"><strong>&gt;3</strong></td><td>Várias cabeças / ideias diferentes → <strong>teto intermediário</strong></td><td class="r">10 + cap B</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>3) Marketing interno — 15 pts + flag</h3>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Postura</th><th>Leitura estratégica</th><th class="r">Pts</th><th>Flag</th></tr></thead>
+        <tbody>
+          <tr><td class="name">sem_mkt</td><td>Mais dependência V4; abertura alta, absorção = risco</td><td class="r">10</td><td>—</td></tr>
+          <tr><td class="name">sem_mapa</td><td><strong>Crítico</strong> — bom pra nós, atenção: não tirar time vs time+V4</td><td class="r">6</td><td><span class="flag">MKT_ATENCAO</span></td></tr>
+          <tr><td class="name">parceiro</td><td>Mapeado, colabora</td><td class="r">15</td><td>—</td></tr>
+          <tr><td class="name">complementar</td><td>Time interno + V4 para performance</td><td class="r">12</td><td>—</td></tr>
+          <tr><td class="name">bloqueador</td><td>Defensivo / trava agência interna</td><td class="r">3</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="quote">
+      A coleta da postura de marketing vem da <strong>satisfação/conversa semanal</strong> (“ele tinha clareza ou não?”), não de um checkbox frio no dia 1.
+    </div>
+
+    <h3>4) Tier — 10 pts</h3>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Tier</th><th>Leitura no E.E</th><th class="r">Pts</th></tr></thead>
+        <tbody>
+          <tr><td class="name">TINY</td><td>Fecha rápido, ticket menor</td><td class="r">4</td></tr>
+          <tr><td class="name">SMALL</td><td>Sweet spot histórico</td><td class="r">8</td></tr>
+          <tr><td class="name">MEDIUM</td><td>Coração da carteira</td><td class="r">9</td></tr>
+          <tr><td class="name">LARGE / ENTERPRISE</td><td>Consultivo — só confiar se mapa político ok</td><td class="r">10</td></tr>
+          <tr><td class="name">NO ICP</td><td>Fora do jogo</td><td class="r">0</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>5) Momentum E.E — 10 pts (placeholder)</h3>
+    <div class="quote warn">
+      v0.1 reserva 10 pontos para: status/semana, temperatura, dor verbalizada, cliente puxa próximo passo.
+      Fechar a tabela na <strong>v0.2</strong> depois de 2–3 rituais reais.
+    </div>
+  </section>
+
+  <!-- GATES -->
+  <section id="gates">
+    <h2>Gates e flags</h2>
+    <p class="sub">Penalizam ou capam — não substituem o score</p>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Gate</th><th>Quando</th><th>Efeito</th><th>Flag</th></tr></thead>
+        <tbody>
+          <tr><td class="name">Satisfação baixa</td><td>Sat ≤ 2</td><td>Sugerir cap banda C</td><td><span class="flag">SAT_BAIXA</span></td></tr>
+          <tr><td class="name">NPS detrator</td><td>NPS ≤6 (≤45d)</td><td>Penalidade no pilar; sem pitch agressivo</td><td><span class="flag">NPS_DETRATOR</span></td></tr>
+          <tr><td class="name">Decisores &gt;3</td><td>n &gt; 3</td><td><strong>Cap score ≤ 79</strong> (máx. banda B)</td><td><span class="flag">DECISORES_3PLUS</span></td></tr>
+          <tr><td class="name">MKT sem mapa</td><td>postura = sem_mapa</td><td>Mapear papel antes de pitch agressivo</td><td><span class="flag">MKT_ATENCAO</span></td></tr>
+          <tr><td class="name">Health freio</td><td>Flag Danger/Critical</td><td>Opcional v0.1 — alinhar coord</td><td><span class="flag">HEALTH_FREIO</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- BANDAS -->
+  <section id="bandas">
+    <h2>Bandas (saída V0.1)</h2>
+    <p class="sub">Sem playbook de ação travado — só leitura + flags</p>
+    <div class="kpis">
+      <div class="kpi a"><div class="lbl">A · ≥80</div><div class="val">Pronto</div><div class="hint">Acelerar próximo passo</div></div>
+      <div class="kpi b"><div class="lbl">B · 60–79</div><div class="val">Intermediário</div><div class="hint">Alinhar política / time</div></div>
+      <div class="kpi c"><div class="lbl">C · 40–59</div><div class="val">Construir</div><div class="hint">Gerar clareza</div></div>
+      <div class="kpi d"><div class="lbl">D · &lt;40</div><div class="val">Frear</div><div class="hint">Recuperar satisfação</div></div>
+    </div>
+    <div class="quote green">
+      <strong>Saída mínima por conta:</strong>
+      <code>{ score, band, flags[], pillars{} }</code>
+      — observar o que a farmer faz na prática quando a nota é X; só então fechar playbook (A = transição, B = trazer decisor, etc.).
+    </div>
+  </section>
+
+  <!-- CLARINDO -->
+  <section id="clarindo">
+    <h2>De-para Clarindo × Saber E.E</h2>
+    <p class="sub">Reaproveitar categorias sem copiar a fórmula da Base Ativa</p>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Categoria Clarindo</th><th>No Saber / E.E</th></tr></thead>
+        <tbody>
+          <tr><td class="name">CSAT</td><td><span class="badge-r">Motor</span> Pilar Satisfação (+NPS)</td></tr>
+          <tr><td class="name">Saúde do projeto</td><td>Gate <code>HEALTH_FREIO</code> (opcional v0.1)</td></tr>
+          <tr><td class="name">Entrega</td><td>Dentro da rubrica de satisfação semanal</td></tr>
+          <tr><td class="name">Rentabilidade</td><td>Tier (peso baixo)</td></tr>
+          <tr><td class="name">Oportunidades mapeadas</td><td>Dor verbalizada + momentum E.E</td></tr>
+          <tr><td class="name">White space</td><td>Secundário — produto em curso é o Saber</td></tr>
+          <tr><td class="name">(novo Saber)</td><td><strong>Decisores</strong> + <strong>Marketing interno</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- RITUAL -->
+  <section id="ritual">
+    <h2>Ritual semanal (6 perguntas)</h2>
+    <p class="sub">Entrada mínima para gerar a nota</p>
+    <div class="card">
+      <ol>
+        <li>Satisfação desta semana <strong>(1–5)</strong>?</li>
+        <li>NPS recente (≤45d), se houver?</li>
+        <li>Tier?</li>
+        <li>Decisores: quantos / tem sponsor / já sentou na mesa?</li>
+        <li>Marketing interno: <code>sem_mkt</code> / <code>sem_mapa</code> / <code>parceiro</code> / <code>complementar</code> / <code>bloqueador</code>?</li>
+        <li>Cliente já verbalizou dor de próximo passo? <strong>(S/N)</strong></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ABERTOS -->
+  <section id="abertos">
+    <h2>Itens abertos (próximas versões)</h2>
+    <div class="grid2">
+      <div class="card">
+        <h4>v0.2 — calibração</h4>
+        <ul style="margin:0;padding-left:18px">
+          <li>Ajustar pts da rubrica com 2–3 semanas reais</li>
+          <li>Fechar os 10 pts de Momentum E.E</li>
+          <li>Decidir 0–100 vs normalizar 0–1 (paridade visual com Base Ativa)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>v0.3 — operação</h4>
+        <ul style="margin:0;padding-left:18px">
+          <li>Playbook de saída por banda</li>
+          <li><code>compute_saber_ee_score()</code> + JSON de carteira</li>
+          <li>Plugar Health Score quando E.E estiver no Flow</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    V4 Company · Lead Score Saber (Estruturação Estratégica) · esqueleto v0.1.0 · 14/07/2026<br>
+    Fonte máquina: <a href="lead-score-saber-ee-metodologia.json">lead-score-saber-ee-metodologia.json</a>
+    · Irmão: <a href="https://marcelofigueiredo23.github.io/pipediario/jul2026/lead-score-metodologia.html">Lead Score Base Ativa</a>
+    · Pipe E.E Sara: <a href="index.html">index.html</a>
+  </footer>
+</div>
+
+</body>
+</html>
