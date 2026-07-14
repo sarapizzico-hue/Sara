@@ -57,7 +57,7 @@
       "label": "Mapa de decisores",
       "weight": 20,
       "role": "modulador_politico",
-      "description": "1–3 mapeados acelera. >3 várias cabeças = teto intermediário. Desconhecido = incompleto.",
+      "description": "1–3 mapeados acelera. Quanto mais acima de 3, menor a nota (mais pessoas pensando diferente). Desconhecido = incompleto.",
       "inputs": [
         { "field": "n_decisores", "type": "int", "required": true },
         { "field": "sponsor_identificado", "type": "bool", "required": true },
@@ -66,21 +66,22 @@
       "curve": [
         { "when": "n == 0 || desconhecido", "effect": "baixa / incompleto", "cap_band": "C" },
         { "when": "n == 1 && sponsor", "effect": "sobe", "points_hint": "alto" },
-        { "when": "n in 2..3 && sponsor", "effect": "ideal", "points_hint": "alto" },
-        { "when": "n > 3", "effect": "teto intermediário", "cap_band": "B", "flag": "DECISORES_3PLUS" }
+        { "when": "n in 2..3 && sponsor", "effect": "ideal / pico", "points_hint": "máximo do pilar" },
+        { "when": "n > 3", "effect": "desce progressivamente quanto maior n", "flag": "DECISORES_3PLUS" }
       ],
       "points_draft": {
         "desconhecido_ou_0": 2,
         "um_sem_sponsor": 8,
         "um_com_sponsor": 16,
         "dois_tres_com_sponsor": 20,
-        "mais_de_3": 10,
+        "n_4": 8,
+        "n_5": 5,
+        "n_6_ou_mais": 2,
         "bonus_decisor_na_mesa": 0
       },
-      "cap_when_gt_3": {
-        "max_band": "B",
-        "max_score": 79,
-        "reason": "Várias cabeças com ideias diferentes — alinhar antes de forçar próximo passo comercial"
+      "rule_when_gt_3": {
+        "effect": "nota do pilar cai conforme sobe o número de decisores",
+        "reason": "Mais pessoas pensando diferente = mais atrito político e menor prontidão de avanço"
       }
     },
     {
@@ -167,7 +168,7 @@
     {
       "id": "decisores_3plus",
       "when": "n_decisores > 3",
-      "effect": "cap score <= 79 (banda B no máximo)",
+      "effect": "pontos do pilar Decisores caem (4→8, 5→5, 6+→2); flag de atenção política",
       "flag": "DECISORES_3PLUS"
     },
     {

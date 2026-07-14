@@ -126,8 +126,8 @@ code{font-size:12px;background:#f3f4f6;padding:1px 5px;border-radius:4px}
       <p>NPS entra como reforço da satisfação. Clareza sobre time/mkt/decisão é colhida no feeling semanal.</p>
     </div></div>
     <div class="check"><div class="ok">✓</div><div>
-      <h4>Decisores com curva (teto se &gt;3)</h4>
-      <p>1–3 com sponsor sobe; &gt;3 = várias cabeças → nota intermediária (cap banda B).</p>
+      <h4>Decisores com curva (acima de 3 a nota cai)</h4>
+      <p>1–3 com sponsor sobe; quanto mais acima de 3, <strong>menor</strong> a nota — mais pessoas pensando diferente.</p>
     </div></div>
     <div class="check"><div class="ok">✓</div><div>
       <h4>Marketing = oportunidade + atenção</h4>
@@ -174,7 +174,7 @@ code{font-size:12px;background:#f3f4f6;padding:1px 5px;border-radius:4px}
           <tr><td class="name">Pergunta</td><td>Qual conta atacar na carteira?</td><td>Esta conta em E.E avança o próximo passo?</td></tr>
           <tr><td class="name">Unidade</td><td>Conta / carteira</td><td>Projeto E.E em andamento</td></tr>
           <tr><td class="name">Motor</td><td>Fee+Tier, Flow, GPI REACH</td><td><strong>Satisfação semanal (+NPS)</strong></td></tr>
-          <tr><td class="name">Política</td><td>Quase ausente</td><td><strong>Decisores</strong> (teto se &gt;3)</td></tr>
+          <tr><td class="name">Política</td><td>Quase ausente</td><td><strong>Decisores</strong> (acima de 3 a nota cai)</td></tr>
           <tr><td class="name">Time cliente</td><td>Não modela</td><td><strong>Marketing interno</strong> + flag atenção</td></tr>
           <tr><td class="name">Escala</td><td>0–1 · Atacar/Nutrir/Recuperar</td><td>0–100 · A/B/C/D + flags</td></tr>
           <tr><td class="name">Fonte</td><td><a href="https://marcelofigueiredo23.github.io/pipediario/jul2026/lead-score-metodologia.html">metodologia Base Ativa</a></td><td>Este documento + JSON</td></tr>
@@ -199,7 +199,7 @@ code{font-size:12px;background:#f3f4f6;padding:1px 5px;border-radius:4px}
     </div>
     <div class="kpis">
       <div class="kpi"><div class="lbl">Satisfação</div><div class="val">45</div><div class="hint">Motor</div></div>
-      <div class="kpi"><div class="lbl">Decisores</div><div class="val">20</div><div class="hint">Curva + teto &gt;3</div></div>
+      <div class="kpi"><div class="lbl">Decisores</div><div class="val">20</div><div class="hint">Pico em 2–3; cai se &gt;3</div></div>
       <div class="kpi"><div class="lbl">Marketing</div><div class="val">15</div><div class="hint">+ flag atenção</div></div>
       <div class="kpi neu"><div class="lbl">Tier</div><div class="val">10</div><div class="hint">Contexto porte</div></div>
       <div class="kpi neu"><div class="lbl">Momentum E.E</div><div class="val">10</div><div class="hint">Calibrar v0.2</div></div>
@@ -219,7 +219,7 @@ code{font-size:12px;background:#f3f4f6;padding:1px 5px;border-radius:4px}
       <div class="score-row">
         <div><strong>Decisores</strong> <span class="muted">· Mapa político</span></div>
         <div class="pts">20</div>
-        <div>1–3 + sponsor sobe · &gt;3 teto banda B</div>
+        <div>1–3 + sponsor sobe · quanto mais &gt;3, menor a nota</div>
       </div>
       <div class="score-row">
         <div><strong>Marketing interno</strong> <span class="muted">· Oportunidade + atenção</span></div>
@@ -243,7 +243,8 @@ code{font-size:12px;background:#f3f4f6;padding:1px 5px;border-radius:4px}
       </div>
     </div>
     <div class="quote warn">
-      Regra de ouro: satisfação alta + decisores &gt;3 <em>ou</em> MKT sem mapa → <strong>intermediário</strong> (alinhar política/time, não vender ainda).
+      Regra de ouro: quanto mais decisores acima de 3, <strong>menor</strong> a nota (mais atrito político).
+      Satisfação alta + MKT sem mapa → atenção (alinhar time, não vender ainda).
       Satisfação baixa → não força próximo passo comercial.
     </div>
   </section>
@@ -281,7 +282,7 @@ code{font-size:12px;background:#f3f4f6;padding:1px 5px;border-radius:4px}
     </div>
     <p class="sub" style="margin-top:-6px">Cap do pilar Satisfação = 45 (mesmo com NPS alto).</p>
 
-    <h3>2) Decisores — 20 pts + possível cap de banda</h3>
+    <h3>2) Decisores — 20 pts (acima de 3 a nota cai)</h3>
     <div class="tbl">
       <table>
         <thead><tr><th>Cenário</th><th>Leitura</th><th class="r">Pts (draft)</th></tr></thead>
@@ -289,8 +290,10 @@ code{font-size:12px;background:#f3f4f6;padding:1px 5px;border-radius:4px}
           <tr><td class="name">0 / desconhecido</td><td>Cego — incompleto</td><td class="r">2</td></tr>
           <tr><td class="name">1 sem sponsor</td><td>Frágil</td><td class="r">8</td></tr>
           <tr><td class="name">1 com sponsor</td><td>Rápido</td><td class="r">16</td></tr>
-          <tr><td class="name">2–3 com sponsor</td><td>Ideal político</td><td class="r">20</td></tr>
-          <tr><td class="name"><strong>&gt;3</strong></td><td>Várias cabeças / ideias diferentes → <strong>teto intermediário</strong></td><td class="r">10 + cap B</td></tr>
+          <tr><td class="name">2–3 com sponsor</td><td>Ideal político (pico)</td><td class="r">20</td></tr>
+          <tr><td class="name">4</td><td>Mais atrito — ideias diferentes</td><td class="r">8</td></tr>
+          <tr><td class="name">5</td><td>Atrito alto</td><td class="r">5</td></tr>
+          <tr><td class="name">6+</td><td>Muito atrito político — nota bem menor</td><td class="r">2</td></tr>
         </tbody>
       </table>
     </div>
@@ -343,7 +346,7 @@ code{font-size:12px;background:#f3f4f6;padding:1px 5px;border-radius:4px}
         <tbody>
           <tr><td class="name">Satisfação baixa</td><td>Sat ≤ 2</td><td>Sugerir cap banda C</td><td><span class="flag">SAT_BAIXA</span></td></tr>
           <tr><td class="name">NPS detrator</td><td>NPS ≤6 (≤45d)</td><td>Penalidade no pilar; sem pitch agressivo</td><td><span class="flag">NPS_DETRATOR</span></td></tr>
-          <tr><td class="name">Decisores &gt;3</td><td>n &gt; 3</td><td><strong>Cap score ≤ 79</strong> (máx. banda B)</td><td><span class="flag">DECISORES_3PLUS</span></td></tr>
+          <tr><td class="name">Decisores &gt;3</td><td>n &gt; 3</td><td>Pontos do pilar <strong>caem</strong> (4→8, 5→5, 6+→2)</td><td><span class="flag">DECISORES_3PLUS</span></td></tr>
           <tr><td class="name">MKT sem mapa</td><td>postura = sem_mapa</td><td>Mapear papel antes de pitch agressivo</td><td><span class="flag">MKT_ATENCAO</span></td></tr>
           <tr><td class="name">Health freio</td><td>Flag Danger/Critical</td><td>Opcional v0.1 — alinhar coord</td><td><span class="flag">HEALTH_FREIO</span></td></tr>
         </tbody>
