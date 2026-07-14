@@ -26,7 +26,6 @@ h2:before{content:"";width:4px;height:22px;border-radius:4px;background:var(--re
 h3{font-size:15px;font-weight:800;margin:18px 0 6px}
 .sub{color:var(--muted);font-size:13px;margin:0 0 14px 14px}
 .warn{background:#fffef8;border:1px solid #fde68a;border-left:4px solid var(--yellow);border-radius:10px;padding:14px 16px;margin-bottom:16px;font-size:13px}
-.info{background:#f8faff;border:1px solid #bfdbfe;border-left:4px solid var(--blue);border-radius:10px;padding:14px 16px;margin-bottom:16px;font-size:13px}
 .kpis{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-bottom:16px}
 .kpi{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px;border-left:4px solid var(--red)}
 .kpi.a{border-left-color:#4ade80}.kpi.b{border-left-color:#C9A84C}.kpi.c{border-left-color:#60a5fa}.kpi.d{border-left-color:#ef4444}
@@ -45,6 +44,7 @@ h3{font-size:15px;font-weight:800;margin:18px 0 6px}
 .tags{display:flex;flex-wrap:wrap;gap:4px}
 .tag{font-size:9px;font-weight:800;text-transform:uppercase;padding:2px 6px;border-radius:4px;background:#f3f4f6;color:#6b7280}
 .tag.band{background:#fff5f5;color:var(--red)}.tag.squad{background:#eef2ff;color:#3730a3}
+.tag.exec{background:#dcfce7;color:#166534}
 .client-score .sc{font-size:26px;font-weight:800;color:var(--red);text-align:right;line-height:1}
 .client-score .sc-sub{font-size:10px;color:var(--muted);text-align:right}
 .client-meta{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:11px;color:var(--muted);margin-bottom:8px}
@@ -55,8 +55,10 @@ h3{font-size:15px;font-weight:800;margin:18px 0 6px}
 .bar-fill{height:100%;background:var(--red);border-radius:3px}
 .bar-val{font-size:9px;text-align:right;color:var(--muted)}
 .flag{display:inline-block;font-size:9px;font-weight:800;padding:2px 6px;border-radius:4px;background:#fef3c7;color:#92400e;margin:0 3px 3px 0}
+.flag.exec{background:#dcfce7;color:#166534}
+.muted-inline{font-size:11px;color:var(--muted)}
 .mix{font-size:11px;color:var(--muted);margin:6px 0}
-.next{font-size:11px;color:var(--green);font-weight:600;margin:8px 0 0}
+.calc-line{font-size:10px;color:#9ca3af;margin:4px 0 0}
 .tbl{overflow:auto;border:1px solid var(--line);border-radius:10px;background:#fff;margin-bottom:14px}
 table{width:100%;border-collapse:collapse}
 th{background:#f9fafb;font-size:10px;text-transform:uppercase;color:#8c94a3;text-align:left;padding:9px 10px;border-bottom:1px solid var(--line)}
@@ -68,9 +70,9 @@ td.name{font-weight:700}td.r{text-align:right;white-space:nowrap}
 .drop-block{margin-bottom:22px}
 .drop-block.ops{padding:14px;border:1px solid #fecaca;border-radius:12px;background:#fff5f5}
 .drop-block.ops h3{color:#991b1b}
-.glossary{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px}
-.g-item{background:#fff;border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:12px}
-.g-item strong{display:block;margin-bottom:2px}
+.missing{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-top:16px}
+.missing h3{margin-top:0}
+.missing li{margin-bottom:6px;font-size:13px;color:#374151}
 .foot{font-size:11px;color:#8b92a0;text-align:center;padding-top:18px;border-top:1px solid var(--line);line-height:1.6}
 .foot a{color:var(--red)}
 @media(max-width:700px){.cover{padding:24px 18px}.grid{grid-template-columns:1fr}}
@@ -79,337 +81,286 @@ td.name{font-weight:700}td.r{text-align:right;white-space:nowrap}
 <body>
 <header class="cover">
   <div class="brand">V4 Company · Sara Pizzico · Base Saber (E.E)</div>
-  <span class="pill">Mapa Lead Score v0.1.1 · 14/07/2026</span>
+  <span class="pill">Mapa Lead Score v0.2 · 14/07/2026</span>
   <h1>Mapeamento da carteira E.E — Lead Score Saber</h1>
-  <p class="lead">Nota de <strong>prontidão para o próximo passo</strong> nas contas de Estruturação Estratégica.
-  Fonte principal: <strong>planilha Cockpit Monetização · aba E.E</strong> (não o Flow). Flow hoje tem só 1 card da Sara.</p>
+  <p class="lead">Nota de prontidão para o <strong>próximo passo</strong> após / durante a Estruturação Estratégica.
+  Inclui leitura de quem <strong>entrou com Executar</strong> (Tipo = E.E + Assessoria).</p>
   <div class="meta">
-    <span>28 ativos · 29 monetizados · 47 drops (18 tratativa Ops)</span>
-    <span>Média ativos: 42.4</span>
+    <span>28 ativos · 3 EE+Executar · 29 monetizados · 47 drops</span>
+    <span>Média: 41.4</span>
     <span>TCV ativos: R$ 979.109</span>
     <span><a href="lead-score-saber-ee-metodologia.html">Metodologia →</a></span>
   </div>
 </header>
 <nav class="nav">
-  <a href="#fontes">Fontes</a>
-  <a href="#modelo">Modelo</a>
+  <a href="#atencao">Atenção</a>
+  <a href="#calculo">Cálculo</a>
   <a href="#kpis">KPIs</a>
   <a href="#ativos">Ativos</a>
   <a href="#monetizados">Monetizados</a>
   <a href="#drops">Drops</a>
-  <a href="#glossario">Glossário</a>
 </nav>
 <div class="wrap">
 
-<section id="fontes">
-  <h2>De onde vêm os dados?</h2>
-  <div class="info">
-    <strong>Não</strong> estou puxando o score do Flow / Cockpit Saber como motor.<br><br>
-    <strong>Fonte usada agora:</strong> planilha <em>Cockpit Monetização → aba E.E</em> (Farmer = Sara).<br>
-    Dela saem: empresa, status, temperatura, need/tier, tipo, squad, Saber/Ter/Exec/TCV, pitch, limite 45d, motivo de drop.<br><br>
-    <strong>Flow expansão:</strong> conferido — só <strong>1 card</strong> da Sara (não dá para scorear a carteira E.E por lá).<br>
-    <strong>Cockpit Health Score:</strong> não entra no cálculo v0.1 (só como freio opcional depois).<br><br>
-    <strong>Ainda proxy / incompleto no ritual:</strong> satisfação real, nº de decisores, postura de marketing.
+<section id="atencao">
+  <h2>Ponto de atenção (acesso)</h2>
+  <div class="warn">
+    <strong>Ainda não acessamos de forma estável no cálculo:</strong>
+    satisfação semanal real do cliente · NPS recente · nº de decisores/sponsor ·
+    postura do marketing interno · investimento em mkt declarado pelo cliente ·
+    Health Score do Cockpit (freio opcional).<br><br>
+    <strong>O que já entra:</strong> planilha E.E (status, temperatura, need/tier, tipo EE+Executar, Saber/Ter/Exec/TCV, motivo de drop).
   </div>
 </section>
 
-<section id="modelo">
-  <h2>Os 5 pedaços da nota (com o porquê)</h2>
-  <p class="sub">Motor + moduladores + contexto</p>
+<section id="calculo">
+  <h2>Como a nota é calculada</h2>
+  <p class="sub">Objetivo: decidir se avança o próximo passo — e se o cliente já veio com Executar</p>
   <div class="tbl"><table>
-    <thead><tr><th>Peso</th><th>Pedaço</th><th>O que é</th><th>Por quê existe</th><th>Fonte hoje</th></tr></thead>
+    <thead><tr><th>Peso</th><th>Sinal</th><th>Como pontua (objetivo)</th><th>Leitura estratégica</th></tr></thead>
     <tbody>
-      <tr><td class="r"><strong>45</strong></td><td class="name">Satisfação (+ NPS)</td><td>Como o cliente está esta semana (1–5). NPS = “de 0 a 10, indicaria?”</td><td>É o termômetro vivo. Sem satisfação boa, forçar próximo passo vira atrito.</td><td>Proxy: temperatura + texto da planilha (até preencher ritual)</td></tr>
-      <tr><td class="r"><strong>20</strong></td><td class="name">Decisores</td><td>Quantas pessoas precisam concordar para comprar (+ sponsor)</td><td>Política trava o pós-E.E. 2–3 é o pico; <strong>acima de 3 a nota cai</strong> (mais ideias diferentes).</td><td>Ainda não mapeado → 2 pts + flag DEC.?</td></tr>
-      <tr><td class="r"><strong>15</strong></td><td class="name">Marketing interno</td><td>Postura do time de mkt do cliente (sem / sem mapa / parceiro / complementar / bloqueador)</td><td>Ter mkt sem mapa é crítico: bom pra V4, mas pode não querer tirar o time ou querer time+V4.</td><td>Quase sempre “sem mapa” até o ritual</td></tr>
-      <tr><td class="r"><strong>10</strong></td><td class="name">Tier / Need scope</td><td>Porte da conta (TINY→LARGE)</td><td>Tamanho da aposta — não é “vai fechar esta semana”.</td><td>Planilha E.E · Need scope</td></tr>
-      <tr><td class="r"><strong>10</strong></td><td class="name">Momentum E.E.</td><td>Se o projeto está andando (status, temp, sinais de avanço)</td><td>Satisfação boa com projeto parado ainda é risco.</td><td>Planilha: status + temperatura (+ texto só para sinais)</td></tr>
+      <tr>
+        <td class="r"><strong>45</strong></td>
+        <td class="name">Satisfação (+NPS)</td>
+        <td>1→5 / 2→12 / 3→22 / 4→34 / 5→40 · NPS 9–10 +5 · ≤6 −8</td>
+        <td>Motor. Hoje: proxy temperatura/obs até o ritual semanal com o cliente.</td>
+      </tr>
+      <tr>
+        <td class="r"><strong>20</strong></td>
+        <td class="name">Decisores</td>
+        <td>1–3 com sponsor = alto · &gt;3 = cai (4→8, 5→5, 6+→2) · ? = 2</td>
+        <td>Mais cabeças = mais atrito. Sem mapa = incompleto.</td>
+      </tr>
+      <tr>
+        <td class="r"><strong>15</strong></td>
+        <td class="name">Marketing / inv. mkt</td>
+        <td>parceiro 15 · complementar 12 · sem_mkt 10 · sem_mapa 6 · bloqueador 3</td>
+        <td>Como conduzir o próximo passo (substituir / somar / não mexer no time).</td>
+      </tr>
+      <tr>
+        <td class="r"><strong>10</strong></td>
+        <td class="name">Tier</td>
+        <td>TINY 4 · SMALL 8 · MEDIUM 9 · LARGE 10 · NO ICP 0</td>
+        <td>Tamanho da aposta (Need scope da planilha).</td>
+      </tr>
+      <tr>
+        <td class="r"><strong>10</strong></td>
+        <td class="name">Momentum + EE+Executar</td>
+        <td>Status/temp/sinais · <strong>+3 se Tipo = E.E + Assessoria</strong> (entrou com Executar)</td>
+        <td>Já tem caminho de Executar → próximo passo é condução/expansão, não “descobrir se entra em fee”.</td>
+      </tr>
     </tbody>
   </table></div>
-
-  <h3>Flags (avisos)</h3>
   <div class="tbl"><table>
-    <thead><tr><th>Flag</th><th>Significado</th><th>Por quê</th></tr></thead>
+    <thead><tr><th>Regra EE+Executar</th><th>Campo</th><th>Efeito na nota</th></tr></thead>
     <tbody>
-      <tr><td class="name">SAT_BAIXA</td><td>Satisfação ≤ 2</td><td>Não forçar venda com cliente frio/irritado</td></tr>
-      <tr><td class="name">NPS_DETRATOR</td><td>NPS ≤ 6 recente</td><td>Confiança quebrada</td></tr>
-      <tr><td class="name">DECISORES_3PLUS</td><td>Mais de 3 decisores</td><td>Atrito político — nota do pilar cai</td></tr>
-      <tr><td class="name">MKT_ATENCAO</td><td>Marketing sem mapa</td><td>Alinhar papel do time antes de pitch agressivo</td></tr>
-      <tr><td class="name">PROXY_SAT / DEC.? / INCOMPLETO</td><td>Dado ainda não ritualizado</td><td>Score parcial até preencher</td></tr>
-      <tr><td class="name">HEALTH_FREIO</td><td>Danger/Critical no Cockpit</td><td>Opcional — alinhar Ops/coord (ainda não aplicado)</td></tr>
+      <tr>
+        <td class="name">Cliente entrou com Executar após/ junto da E.E.</td>
+        <td>Planilha · coluna <strong>Tipo</strong> = <code>E.E + Assesosria/Assessoria</code></td>
+        <td>Flag <strong>EE+EXECUTAR</strong> + <strong>+3</strong> no Momentum (até 10). Tag verde no card.</td>
+      </tr>
+      <tr>
+        <td class="name">Ativos nessa condição agora</td>
+        <td colspan="2"><strong>3</strong> · Medicar (BL), Brod transportes ltda (LL), Fernando Móveis e Eletro (BM)</td>
+      </tr>
     </tbody>
   </table></div>
-
-  <h3>Bandas</h3>
-  <div class="tbl"><table>
-    <thead><tr><th>Banda</th><th>Faixa</th><th>Leitura</th><th>Por quê</th></tr></thead>
-    <tbody>
-      <tr><td><span class="band-tag a">A</span></td><td>≥ 80</td><td>Pronto / acelerar</td><td>Satisfação + política ok</td></tr>
-      <tr><td><span class="band-tag b">B</span></td><td>60–79</td><td>Intermediário / alinhar</td><td>Tem abertura, falta alinhar gente/time</td></tr>
-      <tr><td><span class="band-tag c">C</span></td><td>40–59</td><td>Construir clareza</td><td>Ainda falta mapa / momentum</td></tr>
-      <tr><td><span class="band-tag d">D</span></td><td>&lt; 40</td><td>Frear / recuperar</td><td>Recuperar satisfação antes de vender</td></tr>
-    </tbody>
-  </table></div>
-
-  <h3>Ritual semanal (6 perguntas)</h3>
-  <div class="tbl"><table>
-    <thead><tr><th>#</th><th>Pergunta</th><th>Por quê</th></tr></thead>
-    <tbody>
-      <tr><td>1</td><td>Satisfação desta semana (1–5)?</td><td>Motor da nota</td></tr>
-      <tr><td>2</td><td>NPS recente (≤45d), se houver?</td><td>Reforço de confiança</td></tr>
-      <tr><td>3</td><td>Tier?</td><td>Tamanho da aposta</td></tr>
-      <tr><td>4</td><td>Decisores: quantos / tem sponsor / já sentou na mesa?</td><td>Risco político (&gt;3 reduz a nota)</td></tr>
-      <tr><td>5</td><td>Marketing: sem_mkt / sem_mapa / parceiro / complementar / bloqueador?</td><td>Fit e atenção</td></tr>
-      <tr><td>6</td><td>Cliente já verbalizou dor de próximo passo? (S/N)</td><td>Sem dor falada, proposta é cedo</td></tr>
-    </tbody>
-  </table></div>
+  <p class="sub" style="margin-top:-6px">Bandas: A ≥80 · B 60–79 · C 40–59 · D &lt;40 · Sat ≤2 cap em C</p>
 </section>
 
 <section id="kpis">
-  <h2>KPIs — pipe ativo E.E</h2>
-  <p class="sub">Follow / Aceito / Semanas · score ainda parcial (ritual incompleto)</p>
-  <div class="warn"><strong>Por que quase ninguém está em A:</strong> decisores não mapeados (2 pts) + mkt sem mapa. Preencher o ritual sobe a nota de verdade.</div>
+  <h2>KPIs — ativos</h2>
   <div class="kpis">
     <div class="kpi"><div class="lbl">Ativos</div><div class="val">28</div></div>
-    <div class="kpi"><div class="lbl">Score médio</div><div class="val">42.4</div></div>
-    <div class="kpi a"><div class="lbl">Banda A</div><div class="val">0</div><div class="hint">Pronto</div></div>
-    <div class="kpi b"><div class="lbl">Banda B</div><div class="val">1</div><div class="hint">Intermediário</div></div>
-    <div class="kpi c"><div class="lbl">Banda C</div><div class="val">21</div><div class="hint">Construir</div></div>
-    <div class="kpi d"><div class="lbl">Banda D</div><div class="val">6</div><div class="hint">Frear</div></div>
-    <div class="kpi"><div class="lbl">TCV ativos</div><div class="val" style="font-size:16px">R$ 979.109</div></div>
+    <div class="kpi"><div class="lbl">EE+Executar</div><div class="val">3</div><div class="hint">Tipo E.E+Assessoria</div></div>
+    <div class="kpi"><div class="lbl">Score médio</div><div class="val">41.4</div></div>
+    <div class="kpi a"><div class="lbl">A</div><div class="val">0</div></div>
+    <div class="kpi b"><div class="lbl">B</div><div class="val">1</div></div>
+    <div class="kpi c"><div class="lbl">C</div><div class="val">18</div></div>
+    <div class="kpi d"><div class="lbl">D</div><div class="val">9</div></div>
+    <div class="kpi"><div class="lbl">TCV</div><div class="val" style="font-size:16px">R$ 979.109</div></div>
   </div>
 </section>
 
 <section id="ativos">
-  <h2>Ativos — 28 contas</h2>
-  <p class="sub">Sem coluna de observação · ordenados por Lead Score</p>
+  <h2>Ativos — o que já dá para calcular</h2>
+  <p class="sub">Com os dados disponíveis na planilha E.E · Sat* = proxy até o ritual</p>
   <div class="filters">
     <input id="q" type="search" placeholder="Buscar empresa…">
     <select id="band">
       <option value="">Todas as bandas</option>
-      <option value="A">A · Pronto</option>
-      <option value="B">B · Intermediário</option>
-      <option value="C">C · Construir</option>
-      <option value="D">D · Frear</option>
+      <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option>
     </select>
     <select id="squad">
-      <option value="">Todos os squads</option>
-      <option value="Billions">Billions</option><option value="Exclusive">Exclusive</option><option value="Invictus">Invictus</option>
+      <option value="">Todos os squads</option><option value="Billions">Billions</option><option value="Exclusive">Exclusive</option><option value="Invictus">Invictus</option>
+    </select>
+    <select id="execf">
+      <option value="">Entrada: todos</option>
+      <option value="1">Só EE+Executar</option>
+      <option value="0">Sem EE+Executar</option>
     </select>
   </div>
   <div class="grid" id="grid">
-    <article class="client band-b" data-band="B" data-squad="Exclusive" data-name="stylus manaus (bs)">
+    <article class="client band-b" data-band="B" data-squad="Exclusive" data-exec="0" data-name="stylus manaus (bs)">
       <div class="client-top">
         <div>
           <h4>Stylus Manaus (BS)</h4>
           <div class="tags">
-            <span class="tag band">B · Intermediário / alinhar</span>
+            <span class="tag band">B · Intermediário</span>
             <span class="tag">Follow</span>
             <span class="tag">Quente</span>
             <span class="tag">SMALL</span>
+            <span class="tag ">Estruturação</span>
             <span class="tag squad">Exclusive</span>
           </div>
         </div>
         <div class="client-score">
-          <div class="sc">64</div>
+          <div class="sc">61</div>
           <div class="sc-sub">Lead Score</div>
         </div>
       </div>
       <div class="client-meta">
-        <span>Sat proxy: <strong>5/5</strong></span>
-        <span>Decisores: <strong>?</strong></span>
-        <span>MKT: <strong>Tem mkt · sem mapa (atenção)</strong></span>
+        <span>Sat*: <strong>5/5</strong></span>
+        <span>Tier: <strong>SMALL</strong></span>
+        <span>Entrada: <strong>E.E puro / outro</strong></span>
         <span>TCV: <strong>R$ 92.271</strong></span>
       </div>
-      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:88%"></div></div><span class="bar-val">40/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="bar-val">8/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="bar-val">8/10</span></div></div>
-      <div class="flags"><span class="flag">INCOMPLETO</span> <span class="flag">DEC. ?</span> <span class="flag">MKT ATENÇÃO</span> <span class="flag">MKT ?</span> <span class="flag">PROXY SAT</span></div>
+      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:88%"></div></div><span class="bar-val">40/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="bar-val">8/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:50%"></div></div><span class="bar-val">5/10</span></div></div>
+      <div class="flags"><span class="flag ">MKT ATENÇÃO</span></div>
       <div class="mix">Saber R$ 0 · Ter R$ 0 · Exec R$ 7.689</div>
-      <p class="next">Preencher ritual: satisfação real · nº decisores/sponsor · postura de marketing</p>
+      <p class="calc-line">Entrada: Estruturação / outro · Mom 5/10 · Sat 40/45 · Dec 2/20 · Mkt 6/15 · Tier 8/10</p>
     </article>
 
-    <article class="client band-c" data-band="C" data-squad="Exclusive" data-name="unik benefícios (bs)">
+    <article class="client band-c" data-band="C" data-squad="Exclusive" data-exec="0" data-name="unik benefícios (bs)">
       <div class="client-top">
         <div>
           <h4>Unik Benefícios (BS)</h4>
           <div class="tags">
-            <span class="tag band">C · Construir clareza</span>
+            <span class="tag band">C · Construir</span>
             <span class="tag">Aceito</span>
             <span class="tag">Quente</span>
             <span class="tag">SMALL</span>
+            <span class="tag ">Estruturação</span>
             <span class="tag squad">Exclusive</span>
           </div>
         </div>
         <div class="client-score">
-          <div class="sc">59</div>
+          <div class="sc">56</div>
           <div class="sc-sub">Lead Score</div>
         </div>
       </div>
       <div class="client-meta">
-        <span>Sat proxy: <strong>4/5</strong></span>
-        <span>Decisores: <strong>?</strong></span>
-        <span>MKT: <strong>Tem mkt · sem mapa (atenção)</strong></span>
+        <span>Sat*: <strong>4/5</strong></span>
+        <span>Tier: <strong>SMALL</strong></span>
+        <span>Entrada: <strong>E.E puro / outro</strong></span>
         <span>TCV: <strong>R$ 74.074</strong></span>
       </div>
-      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:75%"></div></div><span class="bar-val">34/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="bar-val">8/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:90%"></div></div><span class="bar-val">9/10</span></div></div>
-      <div class="flags"><span class="flag">INCOMPLETO</span> <span class="flag">DEC. ?</span> <span class="flag">MKT ATENÇÃO</span> <span class="flag">MKT ?</span> <span class="flag">PROXY SAT</span></div>
+      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:75%"></div></div><span class="bar-val">34/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="bar-val">8/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:60%"></div></div><span class="bar-val">6/10</span></div></div>
+      <div class="flags"><span class="flag ">MKT ATENÇÃO</span></div>
       <div class="mix">Saber R$ 0 · Ter R$ 0 · Exec R$ 6.173</div>
-      <p class="next">Preencher ritual: satisfação real · nº decisores/sponsor · postura de marketing</p>
+      <p class="calc-line">Entrada: Estruturação / outro · Mom 6/10 · Sat 34/45 · Dec 2/20 · Mkt 6/15 · Tier 8/10</p>
     </article>
 
-    <article class="client band-c" data-band="C" data-squad="Exclusive" data-name="terra prometida (bs)">
-      <div class="client-top">
-        <div>
-          <h4>Terra prometida (BS)</h4>
-          <div class="tags">
-            <span class="tag band">C · Construir clareza</span>
-            <span class="tag">Follow</span>
-            <span class="tag">Quente</span>
-            <span class="tag">SMALL</span>
-            <span class="tag squad">Exclusive</span>
-          </div>
-        </div>
-        <div class="client-score">
-          <div class="sc">58</div>
-          <div class="sc-sub">Lead Score</div>
-        </div>
-      </div>
-      <div class="client-meta">
-        <span>Sat proxy: <strong>4/5</strong></span>
-        <span>Decisores: <strong>?</strong></span>
-        <span>MKT: <strong>Tem mkt · sem mapa (atenção)</strong></span>
-        <span>TCV: <strong>R$ 57.356</strong></span>
-      </div>
-      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:75%"></div></div><span class="bar-val">34/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="bar-val">8/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="bar-val">8/10</span></div></div>
-      <div class="flags"><span class="flag">INCOMPLETO</span> <span class="flag">DEC. ?</span> <span class="flag">MKT ATENÇÃO</span> <span class="flag">MKT ?</span> <span class="flag">PROXY SAT</span></div>
-      <div class="mix">Saber R$ 0 · Ter R$ 3.500 · Exec R$ 4.488</div>
-      <p class="next">Preencher ritual: satisfação real · nº decisores/sponsor · postura de marketing</p>
-    </article>
-
-    <article class="client band-c" data-band="C" data-squad="Invictus" data-name="rota da linguiça (bs)">
-      <div class="client-top">
-        <div>
-          <h4>Rota da Linguiça (BS)</h4>
-          <div class="tags">
-            <span class="tag band">C · Construir clareza</span>
-            <span class="tag">Follow</span>
-            <span class="tag">Quente</span>
-            <span class="tag">SMALL</span>
-            <span class="tag squad">Invictus</span>
-          </div>
-        </div>
-        <div class="client-score">
-          <div class="sc">58</div>
-          <div class="sc-sub">Lead Score</div>
-        </div>
-      </div>
-      <div class="client-meta">
-        <span>Sat proxy: <strong>4/5</strong></span>
-        <span>Decisores: <strong>?</strong></span>
-        <span>MKT: <strong>Tem mkt · sem mapa (atenção)</strong></span>
-        <span>TCV: <strong>R$ 28.400</strong></span>
-      </div>
-      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:75%"></div></div><span class="bar-val">34/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="bar-val">8/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="bar-val">8/10</span></div></div>
-      <div class="flags"><span class="flag">INCOMPLETO</span> <span class="flag">DEC. ?</span> <span class="flag">MKT ATENÇÃO</span> <span class="flag">MKT ?</span> <span class="flag">PROXY SAT</span></div>
-      <div class="mix">Saber R$ 0 · Ter R$ 11.000 · Exec R$ 2.900</div>
-      <p class="next">Preencher ritual: satisfação real · nº decisores/sponsor · postura de marketing</p>
-    </article>
-
-    <article class="client band-c" data-band="C" data-squad="Billions" data-name="modular estruturas (bm)">
+    <article class="client band-c" data-band="C" data-squad="Billions" data-exec="0" data-name="modular estruturas (bm)">
       <div class="client-top">
         <div>
           <h4>Modular Estruturas (BM)</h4>
           <div class="tags">
-            <span class="tag band">C · Construir clareza</span>
+            <span class="tag band">C · Construir</span>
             <span class="tag">Follow</span>
             <span class="tag">Quente</span>
             <span class="tag">MEDIUM</span>
+            <span class="tag ">Estruturação</span>
             <span class="tag squad">Billions</span>
           </div>
         </div>
         <div class="client-score">
-          <div class="sc">57</div>
+          <div class="sc">55</div>
           <div class="sc-sub">Lead Score</div>
         </div>
       </div>
       <div class="client-meta">
-        <span>Sat proxy: <strong>4/5</strong></span>
-        <span>Decisores: <strong>?</strong></span>
-        <span>MKT: <strong>Tem mkt · sem mapa (atenção)</strong></span>
+        <span>Sat*: <strong>4/5</strong></span>
+        <span>Tier: <strong>MEDIUM</strong></span>
+        <span>Entrada: <strong>E.E puro / outro</strong></span>
         <span>TCV: <strong>R$ 88.396</strong></span>
       </div>
-      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:75%"></div></div><span class="bar-val">34/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:90%"></div></div><span class="bar-val">9/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:60%"></div></div><span class="bar-val">6/10</span></div></div>
-      <div class="flags"><span class="flag">INCOMPLETO</span> <span class="flag">DEC. ?</span> <span class="flag">MKT ATENÇÃO</span> <span class="flag">MKT ?</span> <span class="flag">PROXY SAT</span></div>
+      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:75%"></div></div><span class="bar-val">34/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:90%"></div></div><span class="bar-val">9/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">4/10</span></div></div>
+      <div class="flags"><span class="flag ">MKT ATENÇÃO</span></div>
       <div class="mix">Saber R$ 14.198 · Ter R$ 0 · Exec R$ 6.183</div>
-      <p class="next">Preencher ritual: satisfação real · nº decisores/sponsor · postura de marketing</p>
+      <p class="calc-line">Entrada: Estruturação / outro · Mom 4/10 · Sat 34/45 · Dec 2/20 · Mkt 6/15 · Tier 9/10</p>
     </article>
 
-    <article class="client band-c" data-band="C" data-squad="Exclusive" data-name="agm distribuidora (bs)">
+    <article class="client band-c" data-band="C" data-squad="Exclusive" data-exec="0" data-name="terra prometida (bs)">
+      <div class="client-top">
+        <div>
+          <h4>Terra prometida (BS)</h4>
+          <div class="tags">
+            <span class="tag band">C · Construir</span>
+            <span class="tag">Follow</span>
+            <span class="tag">Quente</span>
+            <span class="tag">SMALL</span>
+            <span class="tag ">Estruturação</span>
+            <span class="tag squad">Exclusive</span>
+          </div>
+        </div>
+        <div class="client-score">
+          <div class="sc">55</div>
+          <div class="sc-sub">Lead Score</div>
+        </div>
+      </div>
+      <div class="client-meta">
+        <span>Sat*: <strong>4/5</strong></span>
+        <span>Tier: <strong>SMALL</strong></span>
+        <span>Entrada: <strong>E.E puro / outro</strong></span>
+        <span>TCV: <strong>R$ 57.356</strong></span>
+      </div>
+      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:75%"></div></div><span class="bar-val">34/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="bar-val">8/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:50%"></div></div><span class="bar-val">5/10</span></div></div>
+      <div class="flags"><span class="flag ">MKT ATENÇÃO</span></div>
+      <div class="mix">Saber R$ 0 · Ter R$ 3.500 · Exec R$ 4.488</div>
+      <p class="calc-line">Entrada: Estruturação / outro · Mom 5/10 · Sat 34/45 · Dec 2/20 · Mkt 6/15 · Tier 8/10</p>
+    </article>
+
+    <article class="client band-c" data-band="C" data-squad="Invictus" data-exec="0" data-name="rota da linguiça (bs)">
+      <div class="client-top">
+        <div>
+          <h4>Rota da Linguiça (BS)</h4>
+          <div class="tags">
+            <span class="tag band">C · Construir</span>
+            <span class="tag">Follow</span>
+            <span class="tag">Quente</span>
+            <span class="tag">SMALL</span>
+            <span class="tag ">Estruturação</span>
+            <span class="tag squad">Invictus</span>
+          </div>
+        </div>
+        <div class="client-score">
+          <div class="sc">55</div>
+          <div class="sc-sub">Lead Score</div>
+        </div>
+      </div>
+      <div class="client-meta">
+        <span>Sat*: <strong>4/5</strong></span>
+        <span>Tier: <strong>SMALL</strong></span>
+        <span>Entrada: <strong>E.E puro / outro</strong></span>
+        <span>TCV: <strong>R$ 28.400</strong></span>
+      </div>
+      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:75%"></div></div><span class="bar-val">34/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="bar-val">8/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:50%"></div></div><span class="bar-val">5/10</span></div></div>
+      <div class="flags"><span class="flag ">MKT ATENÇÃO</span></div>
+      <div class="mix">Saber R$ 0 · Ter R$ 11.000 · Exec R$ 2.900</div>
+      <p class="calc-line">Entrada: Estruturação / outro · Mom 5/10 · Sat 34/45 · Dec 2/20 · Mkt 6/15 · Tier 8/10</p>
+    </article>
+
+    <article class="client band-c" data-band="C" data-squad="Exclusive" data-exec="0" data-name="agm distribuidora (bs)">
       <div class="client-top">
         <div>
           <h4>AGM DISTRIBUIDORA (BS)</h4>
           <div class="tags">
-            <span class="tag band">C · Construir clareza</span>
+            <span class="tag band">C · Construir</span>
             <span class="tag">Follow</span>
             <span class="tag">Morno</span>
             <span class="tag">SMALL</span>
-            <span class="tag squad">Exclusive</span>
-          </div>
-        </div>
-        <div class="client-score">
-          <div class="sc">55</div>
-          <div class="sc-sub">Lead Score</div>
-        </div>
-      </div>
-      <div class="client-meta">
-        <span>Sat proxy: <strong>4/5</strong></span>
-        <span>Decisores: <strong>?</strong></span>
-        <span>MKT: <strong>Tem mkt · sem mapa (atenção)</strong></span>
-        <span>TCV: <strong>R$ 74.198</strong></span>
-      </div>
-      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:75%"></div></div><span class="bar-val">34/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="bar-val">8/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:50%"></div></div><span class="bar-val">5/10</span></div></div>
-      <div class="flags"><span class="flag">INCOMPLETO</span> <span class="flag">DEC. ?</span> <span class="flag">MKT ATENÇÃO</span> <span class="flag">MKT ?</span> <span class="flag">PROXY SAT</span></div>
-      <div class="mix">Saber R$ 0 · Ter R$ 0 · Exec R$ 6.183</div>
-      <p class="next">Preencher ritual: satisfação real · nº decisores/sponsor · postura de marketing</p>
-    </article>
-
-    <article class="client band-c" data-band="C" data-squad="Exclusive" data-name="fui aluguel de motos (bs)">
-      <div class="client-top">
-        <div>
-          <h4>Fui Aluguel de Motos (BS)</h4>
-          <div class="tags">
-            <span class="tag band">C · Construir clareza</span>
-            <span class="tag">Follow</span>
-            <span class="tag">Morno</span>
-            <span class="tag">SMALL</span>
-            <span class="tag squad">Exclusive</span>
-          </div>
-        </div>
-        <div class="client-score">
-          <div class="sc">55</div>
-          <div class="sc-sub">Lead Score</div>
-        </div>
-      </div>
-      <div class="client-meta">
-        <span>Sat proxy: <strong>4/5</strong></span>
-        <span>Decisores: <strong>?</strong></span>
-        <span>MKT: <strong>Tem mkt · sem mapa (atenção)</strong></span>
-        <span>TCV: <strong>R$ 66.024</strong></span>
-      </div>
-      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:75%"></div></div><span class="bar-val">34/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="bar-val">8/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:50%"></div></div><span class="bar-val">5/10</span></div></div>
-      <div class="flags"><span class="flag">INCOMPLETO</span> <span class="flag">DEC. ?</span> <span class="flag">MKT ATENÇÃO</span> <span class="flag">MKT ?</span> <span class="flag">PROXY SAT</span></div>
-      <div class="mix">Saber R$ 0 · Ter R$ 0 · Exec R$ 5.502</div>
-      <p class="next">Preencher ritual: satisfação real · nº decisores/sponsor · postura de marketing</p>
-    </article>
-
-    <article class="client band-c" data-band="C" data-squad="Exclusive" data-name="academia imigrantes ltda (bs)">
-      <div class="client-top">
-        <div>
-          <h4>Academia imigrantes Ltda (BS)</h4>
-          <div class="tags">
-            <span class="tag band">C · Construir clareza</span>
-            <span class="tag">Semana 03</span>
-            <span class="tag">—</span>
-            <span class="tag">SMALL</span>
+            <span class="tag ">Estruturação</span>
             <span class="tag squad">Exclusive</span>
           </div>
         </div>
@@ -419,27 +370,88 @@ td.name{font-weight:700}td.r{text-align:right;white-space:nowrap}
         </div>
       </div>
       <div class="client-meta">
-        <span>Sat proxy: <strong>4/5</strong></span>
-        <span>Decisores: <strong>?</strong></span>
-        <span>MKT: <strong>Tem mkt · sem mapa (atenção)</strong></span>
-        <span>TCV: <strong>R$ 79.224</strong></span>
+        <span>Sat*: <strong>4/5</strong></span>
+        <span>Tier: <strong>SMALL</strong></span>
+        <span>Entrada: <strong>E.E puro / outro</strong></span>
+        <span>TCV: <strong>R$ 74.198</strong></span>
       </div>
       <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:75%"></div></div><span class="bar-val">34/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="bar-val">8/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:30%"></div></div><span class="bar-val">3/10</span></div></div>
-      <div class="flags"><span class="flag">INCOMPLETO</span> <span class="flag">DEC. ?</span> <span class="flag">MKT ATENÇÃO</span> <span class="flag">MKT ?</span> <span class="flag">PROXY SAT</span></div>
-      <div class="mix">Saber R$ 0 · Ter R$ 0 · Exec R$ 6.602</div>
-      <p class="next">Preencher ritual: satisfação real · nº decisores/sponsor · postura de marketing</p>
+      <div class="flags"><span class="flag ">MKT ATENÇÃO</span></div>
+      <div class="mix">Saber R$ 0 · Ter R$ 0 · Exec R$ 6.183</div>
+      <p class="calc-line">Entrada: Estruturação / outro · Mom 3/10 · Sat 34/45 · Dec 2/20 · Mkt 6/15 · Tier 8/10</p>
     </article>
 
-    <article class="client band-c" data-band="C" data-squad="Invictus" data-name="kfg torres">
+    <article class="client band-c" data-band="C" data-squad="Exclusive" data-exec="0" data-name="fui aluguel de motos (bs)">
       <div class="client-top">
         <div>
-          <h4>KFG Torres</h4>
+          <h4>Fui Aluguel de Motos (BS)</h4>
           <div class="tags">
-            <span class="tag band">C · Construir clareza</span>
+            <span class="tag band">C · Construir</span>
             <span class="tag">Follow</span>
             <span class="tag">Morno</span>
             <span class="tag">SMALL</span>
-            <span class="tag squad">Invictus</span>
+            <span class="tag ">Estruturação</span>
+            <span class="tag squad">Exclusive</span>
+          </div>
+        </div>
+        <div class="client-score">
+          <div class="sc">53</div>
+          <div class="sc-sub">Lead Score</div>
+        </div>
+      </div>
+      <div class="client-meta">
+        <span>Sat*: <strong>4/5</strong></span>
+        <span>Tier: <strong>SMALL</strong></span>
+        <span>Entrada: <strong>E.E puro / outro</strong></span>
+        <span>TCV: <strong>R$ 66.024</strong></span>
+      </div>
+      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:75%"></div></div><span class="bar-val">34/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="bar-val">8/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:30%"></div></div><span class="bar-val">3/10</span></div></div>
+      <div class="flags"><span class="flag ">MKT ATENÇÃO</span></div>
+      <div class="mix">Saber R$ 0 · Ter R$ 0 · Exec R$ 5.502</div>
+      <p class="calc-line">Entrada: Estruturação / outro · Mom 3/10 · Sat 34/45 · Dec 2/20 · Mkt 6/15 · Tier 8/10</p>
+    </article>
+
+    <article class="client band-c" data-band="C" data-squad="Exclusive" data-exec="0" data-name="academia imigrantes ltda (bs)">
+      <div class="client-top">
+        <div>
+          <h4>Academia imigrantes Ltda (BS)</h4>
+          <div class="tags">
+            <span class="tag band">C · Construir</span>
+            <span class="tag">Semana 03</span>
+            <span class="tag">—</span>
+            <span class="tag">SMALL</span>
+            <span class="tag ">Estruturação</span>
+            <span class="tag squad">Exclusive</span>
+          </div>
+        </div>
+        <div class="client-score">
+          <div class="sc">52</div>
+          <div class="sc-sub">Lead Score</div>
+        </div>
+      </div>
+      <div class="client-meta">
+        <span>Sat*: <strong>4/5</strong></span>
+        <span>Tier: <strong>SMALL</strong></span>
+        <span>Entrada: <strong>E.E puro / outro</strong></span>
+        <span>TCV: <strong>R$ 79.224</strong></span>
+      </div>
+      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:75%"></div></div><span class="bar-val">34/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="bar-val">8/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:20%"></div></div><span class="bar-val">2/10</span></div></div>
+      <div class="flags"><span class="flag ">MKT ATENÇÃO</span></div>
+      <div class="mix">Saber R$ 0 · Ter R$ 0 · Exec R$ 6.602</div>
+      <p class="calc-line">Entrada: Estruturação / outro · Mom 2/10 · Sat 34/45 · Dec 2/20 · Mkt 6/15 · Tier 8/10</p>
+    </article>
+
+    <article class="client band-c" data-band="C" data-squad="Exclusive" data-exec="1" data-name="medicar (bl)">
+      <div class="client-top">
+        <div>
+          <h4>Medicar (BL)</h4>
+          <div class="tags">
+            <span class="tag band">C · Construir</span>
+            <span class="tag">Semana 03</span>
+            <span class="tag">—</span>
+            <span class="tag">LARGE</span>
+            <span class="tag exec">E.E + Assesosria</span>
+            <span class="tag squad">Exclusive</span>
           </div>
         </div>
         <div class="client-score">
@@ -448,27 +460,28 @@ td.name{font-weight:700}td.r{text-align:right;white-space:nowrap}
         </div>
       </div>
       <div class="client-meta">
-        <span>Sat proxy: <strong>3/5</strong></span>
-        <span>Decisores: <strong>?</strong></span>
-        <span>MKT: <strong>Tem mkt · sem mapa (atenção)</strong></span>
-        <span>TCV: <strong>R$ 79.224</strong></span>
+        <span>Sat*: <strong>3/5</strong></span>
+        <span>Tier: <strong>LARGE</strong></span>
+        <span>Entrada: <strong>EE+Executar</strong></span>
+        <span>TCV: <strong>R$ 0</strong></span>
       </div>
-      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:48%"></div></div><span class="bar-val">22/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="bar-val">8/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:70%"></div></div><span class="bar-val">7/10</span></div></div>
-      <div class="flags"><span class="flag">INCOMPLETO</span> <span class="flag">DEC. ?</span> <span class="flag">MKT ATENÇÃO</span> <span class="flag">MKT ?</span> <span class="flag">PROXY SAT</span></div>
-      <div class="mix">Saber R$ 0 · Ter R$ 0 · Exec R$ 6.602</div>
-      <p class="next">Preencher ritual: satisfação real · nº decisores/sponsor · postura de marketing</p>
+      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:48%"></div></div><span class="bar-val">22/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-val">10/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:50%"></div></div><span class="bar-val">5/10</span></div></div>
+      <div class="flags"><span class="flag exec">EE+EXECUTAR</span> <span class="flag ">MKT ATENÇÃO</span></div>
+      <div class="mix">Saber R$ 0 · Ter R$ 0 · Exec R$ 0</div>
+      <p class="calc-line">Entrou com Executar (E.E+Assessoria) · Mom 5/10 · Sat 22/45 · Dec 2/20 · Mkt 6/15 · Tier 10/10</p>
     </article>
 
-    <article class="client band-c" data-band="C" data-squad="Billions" data-name="moteis fortaleza (bm)">
+    <article class="client band-c" data-band="C" data-squad="Exclusive" data-exec="1" data-name="brod transportes ltda (ll)">
       <div class="client-top">
         <div>
-          <h4>Moteis Fortaleza (BM)</h4>
+          <h4>Brod transportes ltda (LL)</h4>
           <div class="tags">
-            <span class="tag band">C · Construir clareza</span>
-            <span class="tag">Semana 03</span>
+            <span class="tag band">C · Construir</span>
+            <span class="tag">Semana 0</span>
             <span class="tag">—</span>
-            <span class="tag">MEDIUM</span>
-            <span class="tag squad">Billions</span>
+            <span class="tag">LARGE</span>
+            <span class="tag exec">E.E + Assesosria</span>
+            <span class="tag squad">Exclusive</span>
           </div>
         </div>
         <div class="client-score">
@@ -477,258 +490,147 @@ td.name{font-weight:700}td.r{text-align:right;white-space:nowrap}
         </div>
       </div>
       <div class="client-meta">
-        <span>Sat proxy: <strong>3/5</strong></span>
-        <span>Decisores: <strong>?</strong></span>
-        <span>MKT: <strong>Tem mkt · sem mapa (atenção)</strong></span>
-        <span>TCV: <strong>R$ 194.717</strong></span>
-      </div>
-      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:48%"></div></div><span class="bar-val">22/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:90%"></div></div><span class="bar-val">9/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:50%"></div></div><span class="bar-val">5/10</span></div></div>
-      <div class="flags"><span class="flag">INCOMPLETO</span> <span class="flag">DEC. ?</span> <span class="flag">MKT ATENÇÃO</span> <span class="flag">MKT ?</span> <span class="flag">PROXY SAT</span> <span class="flag">SEM TEMP</span></div>
-      <div class="mix">Saber R$ 0 · Ter R$ 0 · Exec R$ 16.226</div>
-      <p class="next">Preencher ritual: satisfação real · nº decisores/sponsor · postura de marketing</p>
-    </article>
-
-    <article class="client band-c" data-band="C" data-squad="Invictus" data-name="hanaro (bl)">
-      <div class="client-top">
-        <div>
-          <h4>Hanaro (BL)</h4>
-          <div class="tags">
-            <span class="tag band">C · Construir clareza</span>
-            <span class="tag">Semana 03</span>
-            <span class="tag">—</span>
-            <span class="tag">LARGE</span>
-            <span class="tag squad">Invictus</span>
-          </div>
-        </div>
-        <div class="client-score">
-          <div class="sc">43</div>
-          <div class="sc-sub">Lead Score</div>
-        </div>
-      </div>
-      <div class="client-meta">
-        <span>Sat proxy: <strong>3/5</strong></span>
-        <span>Decisores: <strong>?</strong></span>
-        <span>MKT: <strong>Tem mkt · sem mapa (atenção)</strong></span>
+        <span>Sat*: <strong>3/5</strong></span>
+        <span>Tier: <strong>LARGE</strong></span>
+        <span>Entrada: <strong>EE+Executar</strong></span>
         <span>TCV: <strong>R$ 0</strong></span>
       </div>
-      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:48%"></div></div><span class="bar-val">22/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-val">10/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:30%"></div></div><span class="bar-val">3/10</span></div></div>
-      <div class="flags"><span class="flag">INCOMPLETO</span> <span class="flag">DEC. ?</span> <span class="flag">MKT ATENÇÃO</span> <span class="flag">MKT ?</span> <span class="flag">PROXY SAT</span> <span class="flag">SEM TEMP</span></div>
+      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:48%"></div></div><span class="bar-val">22/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-val">10/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">4/10</span></div></div>
+      <div class="flags"><span class="flag exec">EE+EXECUTAR</span> <span class="flag ">MKT ATENÇÃO</span></div>
       <div class="mix">Saber R$ 0 · Ter R$ 0 · Exec R$ 0</div>
-      <p class="next">Preencher ritual: satisfação real · nº decisores/sponsor · postura de marketing</p>
+      <p class="calc-line">Entrou com Executar (E.E+Assessoria) · Mom 4/10 · Sat 22/45 · Dec 2/20 · Mkt 6/15 · Tier 10/10</p>
     </article>
 
-    <article class="client band-c" data-band="C" data-squad="Exclusive" data-name="medicar (bl)">
-      <div class="client-top">
-        <div>
-          <h4>Medicar (BL)</h4>
-          <div class="tags">
-            <span class="tag band">C · Construir clareza</span>
-            <span class="tag">Semana 03</span>
-            <span class="tag">—</span>
-            <span class="tag">LARGE</span>
-            <span class="tag squad">Exclusive</span>
-          </div>
-        </div>
-        <div class="client-score">
-          <div class="sc">43</div>
-          <div class="sc-sub">Lead Score</div>
-        </div>
-      </div>
-      <div class="client-meta">
-        <span>Sat proxy: <strong>3/5</strong></span>
-        <span>Decisores: <strong>?</strong></span>
-        <span>MKT: <strong>Tem mkt · sem mapa (atenção)</strong></span>
-        <span>TCV: <strong>R$ 0</strong></span>
-      </div>
-      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:48%"></div></div><span class="bar-val">22/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-val">10/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:30%"></div></div><span class="bar-val">3/10</span></div></div>
-      <div class="flags"><span class="flag">INCOMPLETO</span> <span class="flag">DEC. ?</span> <span class="flag">MKT ATENÇÃO</span> <span class="flag">MKT ?</span> <span class="flag">PROXY SAT</span> <span class="flag">SEM TEMP</span></div>
-      <div class="mix">Saber R$ 0 · Ter R$ 0 · Exec R$ 0</div>
-      <p class="next">Preencher ritual: satisfação real · nº decisores/sponsor · postura de marketing</p>
-    </article>
-
-    <article class="client band-c" data-band="C" data-squad="Exclusive" data-name="brod transportes ltda (ll)">
-      <div class="client-top">
-        <div>
-          <h4>Brod transportes ltda (LL)</h4>
-          <div class="tags">
-            <span class="tag band">C · Construir clareza</span>
-            <span class="tag">Semana 0</span>
-            <span class="tag">—</span>
-            <span class="tag">LARGE</span>
-            <span class="tag squad">Exclusive</span>
-          </div>
-        </div>
-        <div class="client-score">
-          <div class="sc">42</div>
-          <div class="sc-sub">Lead Score</div>
-        </div>
-      </div>
-      <div class="client-meta">
-        <span>Sat proxy: <strong>3/5</strong></span>
-        <span>Decisores: <strong>?</strong></span>
-        <span>MKT: <strong>Tem mkt · sem mapa (atenção)</strong></span>
-        <span>TCV: <strong>R$ 0</strong></span>
-      </div>
-      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:48%"></div></div><span class="bar-val">22/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-val">10/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:20%"></div></div><span class="bar-val">2/10</span></div></div>
-      <div class="flags"><span class="flag">INCOMPLETO</span> <span class="flag">DEC. ?</span> <span class="flag">MKT ATENÇÃO</span> <span class="flag">MKT ?</span> <span class="flag">PROXY SAT</span> <span class="flag">SEM TEMP</span></div>
-      <div class="mix">Saber R$ 0 · Ter R$ 0 · Exec R$ 0</div>
-      <p class="next">Preencher ritual: satisfação real · nº decisores/sponsor · postura de marketing</p>
-    </article>
-
-    <article class="client band-c" data-band="C" data-squad="Exclusive" data-name="estação delta emergência &amp; facilities (bm)">
-      <div class="client-top">
-        <div>
-          <h4>Estação Delta Emergência &amp; Facilities (BM)</h4>
-          <div class="tags">
-            <span class="tag band">C · Construir clareza</span>
-            <span class="tag">Semana 03</span>
-            <span class="tag">—</span>
-            <span class="tag">MEDIUM</span>
-            <span class="tag squad">Exclusive</span>
-          </div>
-        </div>
-        <div class="client-score">
-          <div class="sc">42</div>
-          <div class="sc-sub">Lead Score</div>
-        </div>
-      </div>
-      <div class="client-meta">
-        <span>Sat proxy: <strong>3/5</strong></span>
-        <span>Decisores: <strong>?</strong></span>
-        <span>MKT: <strong>Tem mkt · sem mapa (atenção)</strong></span>
-        <span>TCV: <strong>R$ 0</strong></span>
-      </div>
-      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:48%"></div></div><span class="bar-val">22/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:90%"></div></div><span class="bar-val">9/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:30%"></div></div><span class="bar-val">3/10</span></div></div>
-      <div class="flags"><span class="flag">INCOMPLETO</span> <span class="flag">DEC. ?</span> <span class="flag">MKT ATENÇÃO</span> <span class="flag">MKT ?</span> <span class="flag">PROXY SAT</span> <span class="flag">SEM TEMP</span></div>
-      <div class="mix">Saber R$ 0 · Ter R$ 0 · Exec R$ 0</div>
-      <p class="next">Preencher ritual: satisfação real · nº decisores/sponsor · postura de marketing</p>
-    </article>
-
-    <article class="client band-c" data-band="C" data-squad="Exclusive" data-name="g6 internet">
-      <div class="client-top">
-        <div>
-          <h4>G6 INTERNET</h4>
-          <div class="tags">
-            <span class="tag band">C · Construir clareza</span>
-            <span class="tag">Semana 0</span>
-            <span class="tag">—</span>
-            <span class="tag">LARGE</span>
-            <span class="tag squad">Exclusive</span>
-          </div>
-        </div>
-        <div class="client-score">
-          <div class="sc">42</div>
-          <div class="sc-sub">Lead Score</div>
-        </div>
-      </div>
-      <div class="client-meta">
-        <span>Sat proxy: <strong>3/5</strong></span>
-        <span>Decisores: <strong>?</strong></span>
-        <span>MKT: <strong>Tem mkt · sem mapa (atenção)</strong></span>
-        <span>TCV: <strong>R$ 0</strong></span>
-      </div>
-      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:48%"></div></div><span class="bar-val">22/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-val">10/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:20%"></div></div><span class="bar-val">2/10</span></div></div>
-      <div class="flags"><span class="flag">INCOMPLETO</span> <span class="flag">DEC. ?</span> <span class="flag">MKT ATENÇÃO</span> <span class="flag">MKT ?</span> <span class="flag">PROXY SAT</span> <span class="flag">SEM TEMP</span></div>
-      <div class="mix">Saber R$ 0 · Ter R$ 0 · Exec R$ 0</div>
-      <p class="next">Preencher ritual: satisfação real · nº decisores/sponsor · postura de marketing</p>
-    </article>
-
-    <article class="client band-c" data-band="C" data-squad="Exclusive" data-name="adriano martins cardoso (bs)">
-      <div class="client-top">
-        <div>
-          <h4>Adriano Martins Cardoso (BS)</h4>
-          <div class="tags">
-            <span class="tag band">C · Construir clareza</span>
-            <span class="tag">Semana 03</span>
-            <span class="tag">—</span>
-            <span class="tag">SMALL</span>
-            <span class="tag squad">Exclusive</span>
-          </div>
-        </div>
-        <div class="client-score">
-          <div class="sc">41</div>
-          <div class="sc-sub">Lead Score</div>
-        </div>
-      </div>
-      <div class="client-meta">
-        <span>Sat proxy: <strong>3/5</strong></span>
-        <span>Decisores: <strong>?</strong></span>
-        <span>MKT: <strong>Tem mkt · sem mapa (atenção)</strong></span>
-        <span>TCV: <strong>R$ 0</strong></span>
-      </div>
-      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:48%"></div></div><span class="bar-val">22/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="bar-val">8/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:30%"></div></div><span class="bar-val">3/10</span></div></div>
-      <div class="flags"><span class="flag">INCOMPLETO</span> <span class="flag">DEC. ?</span> <span class="flag">MKT ATENÇÃO</span> <span class="flag">MKT ?</span> <span class="flag">PROXY SAT</span> <span class="flag">SEM TEMP</span></div>
-      <div class="mix">Saber R$ 0 · Ter R$ 0 · Exec R$ 0</div>
-      <p class="next">Preencher ritual: satisfação real · nº decisores/sponsor · postura de marketing</p>
-    </article>
-
-    <article class="client band-c" data-band="C" data-squad="Invictus" data-name="almeida e neves (recm)">
-      <div class="client-top">
-        <div>
-          <h4>Almeida e Neves (RecM)</h4>
-          <div class="tags">
-            <span class="tag band">C · Construir clareza</span>
-            <span class="tag">Semana 02</span>
-            <span class="tag">—</span>
-            <span class="tag">MEDIUM</span>
-            <span class="tag squad">Invictus</span>
-          </div>
-        </div>
-        <div class="client-score">
-          <div class="sc">41</div>
-          <div class="sc-sub">Lead Score</div>
-        </div>
-      </div>
-      <div class="client-meta">
-        <span>Sat proxy: <strong>3/5</strong></span>
-        <span>Decisores: <strong>?</strong></span>
-        <span>MKT: <strong>Tem mkt · sem mapa (atenção)</strong></span>
-        <span>TCV: <strong>R$ 0</strong></span>
-      </div>
-      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:48%"></div></div><span class="bar-val">22/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:90%"></div></div><span class="bar-val">9/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:20%"></div></div><span class="bar-val">2/10</span></div></div>
-      <div class="flags"><span class="flag">INCOMPLETO</span> <span class="flag">DEC. ?</span> <span class="flag">MKT ATENÇÃO</span> <span class="flag">MKT ?</span> <span class="flag">PROXY SAT</span> <span class="flag">SEM TEMP</span></div>
-      <div class="mix">Saber R$ 0 · Ter R$ 0 · Exec R$ 0</div>
-      <p class="next">Preencher ritual: satisfação real · nº decisores/sponsor · postura de marketing</p>
-    </article>
-
-    <article class="client band-c" data-band="C" data-squad="Exclusive" data-name="ecofitness aldeia (bs)">
-      <div class="client-top">
-        <div>
-          <h4>Ecofitness Aldeia (BS)</h4>
-          <div class="tags">
-            <span class="tag band">C · Construir clareza</span>
-            <span class="tag">Semana 03</span>
-            <span class="tag">—</span>
-            <span class="tag">SMALL</span>
-            <span class="tag squad">Exclusive</span>
-          </div>
-        </div>
-        <div class="client-score">
-          <div class="sc">41</div>
-          <div class="sc-sub">Lead Score</div>
-        </div>
-      </div>
-      <div class="client-meta">
-        <span>Sat proxy: <strong>3/5</strong></span>
-        <span>Decisores: <strong>?</strong></span>
-        <span>MKT: <strong>Tem mkt · sem mapa (atenção)</strong></span>
-        <span>TCV: <strong>R$ 0</strong></span>
-      </div>
-      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:48%"></div></div><span class="bar-val">22/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="bar-val">8/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:30%"></div></div><span class="bar-val">3/10</span></div></div>
-      <div class="flags"><span class="flag">INCOMPLETO</span> <span class="flag">DEC. ?</span> <span class="flag">MKT ATENÇÃO</span> <span class="flag">MKT ?</span> <span class="flag">PROXY SAT</span> <span class="flag">SEM TEMP</span></div>
-      <div class="mix">Saber R$ 0 · Ter R$ 0 · Exec R$ 0</div>
-      <p class="next">Preencher ritual: satisfação real · nº decisores/sponsor · postura de marketing</p>
-    </article>
-
-    <article class="client band-c" data-band="C" data-squad="Exclusive" data-name="fernando móveis e eletro (bm)">
+    <article class="client band-c" data-band="C" data-squad="Exclusive" data-exec="1" data-name="fernando móveis e eletro (bm)">
       <div class="client-top">
         <div>
           <h4>Fernando Móveis e Eletro (BM)</h4>
           <div class="tags">
-            <span class="tag band">C · Construir clareza</span>
+            <span class="tag band">C · Construir</span>
             <span class="tag">Semana 02</span>
             <span class="tag">—</span>
             <span class="tag">MEDIUM</span>
+            <span class="tag exec">E.E + Assesosria</span>
+            <span class="tag squad">Exclusive</span>
+          </div>
+        </div>
+        <div class="client-score">
+          <div class="sc">43</div>
+          <div class="sc-sub">Lead Score</div>
+        </div>
+      </div>
+      <div class="client-meta">
+        <span>Sat*: <strong>3/5</strong></span>
+        <span>Tier: <strong>MEDIUM</strong></span>
+        <span>Entrada: <strong>EE+Executar</strong></span>
+        <span>TCV: <strong>R$ 0</strong></span>
+      </div>
+      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:48%"></div></div><span class="bar-val">22/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:90%"></div></div><span class="bar-val">9/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">4/10</span></div></div>
+      <div class="flags"><span class="flag exec">EE+EXECUTAR</span> <span class="flag ">MKT ATENÇÃO</span></div>
+      <div class="mix">Saber R$ 0 · Ter R$ 0 · Exec R$ 0</div>
+      <p class="calc-line">Entrou com Executar (E.E+Assessoria) · Mom 4/10 · Sat 22/45 · Dec 2/20 · Mkt 6/15 · Tier 9/10</p>
+    </article>
+
+    <article class="client band-c" data-band="C" data-squad="Billions" data-exec="0" data-name="moteis fortaleza (bm)">
+      <div class="client-top">
+        <div>
+          <h4>Moteis Fortaleza (BM)</h4>
+          <div class="tags">
+            <span class="tag band">C · Construir</span>
+            <span class="tag">Semana 03</span>
+            <span class="tag">—</span>
+            <span class="tag">MEDIUM</span>
+            <span class="tag ">Estruturação</span>
+            <span class="tag squad">Billions</span>
+          </div>
+        </div>
+        <div class="client-score">
+          <div class="sc">42</div>
+          <div class="sc-sub">Lead Score</div>
+        </div>
+      </div>
+      <div class="client-meta">
+        <span>Sat*: <strong>3/5</strong></span>
+        <span>Tier: <strong>MEDIUM</strong></span>
+        <span>Entrada: <strong>E.E puro / outro</strong></span>
+        <span>TCV: <strong>R$ 194.717</strong></span>
+      </div>
+      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:48%"></div></div><span class="bar-val">22/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:90%"></div></div><span class="bar-val">9/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:30%"></div></div><span class="bar-val">3/10</span></div></div>
+      <div class="flags"><span class="flag ">MKT ATENÇÃO</span></div>
+      <div class="mix">Saber R$ 0 · Ter R$ 0 · Exec R$ 16.226</div>
+      <p class="calc-line">Entrada: Estruturação / outro · Mom 3/10 · Sat 22/45 · Dec 2/20 · Mkt 6/15 · Tier 9/10</p>
+    </article>
+
+    <article class="client band-c" data-band="C" data-squad="Invictus" data-exec="0" data-name="kfg torres">
+      <div class="client-top">
+        <div>
+          <h4>KFG Torres</h4>
+          <div class="tags">
+            <span class="tag band">C · Construir</span>
+            <span class="tag">Follow</span>
+            <span class="tag">Morno</span>
+            <span class="tag">SMALL</span>
+            <span class="tag ">Estruturação</span>
+            <span class="tag squad">Invictus</span>
+          </div>
+        </div>
+        <div class="client-score">
+          <div class="sc">42</div>
+          <div class="sc-sub">Lead Score</div>
+        </div>
+      </div>
+      <div class="client-meta">
+        <span>Sat*: <strong>3/5</strong></span>
+        <span>Tier: <strong>SMALL</strong></span>
+        <span>Entrada: <strong>E.E puro / outro</strong></span>
+        <span>TCV: <strong>R$ 79.224</strong></span>
+      </div>
+      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:48%"></div></div><span class="bar-val">22/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="bar-val">8/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">4/10</span></div></div>
+      <div class="flags"><span class="flag ">MKT ATENÇÃO</span></div>
+      <div class="mix">Saber R$ 0 · Ter R$ 0 · Exec R$ 6.602</div>
+      <p class="calc-line">Entrada: Estruturação / outro · Mom 4/10 · Sat 22/45 · Dec 2/20 · Mkt 6/15 · Tier 8/10</p>
+    </article>
+
+    <article class="client band-c" data-band="C" data-squad="Invictus" data-exec="0" data-name="hanaro (bl)">
+      <div class="client-top">
+        <div>
+          <h4>Hanaro (BL)</h4>
+          <div class="tags">
+            <span class="tag band">C · Construir</span>
+            <span class="tag">Semana 03</span>
+            <span class="tag">—</span>
+            <span class="tag">LARGE</span>
+            <span class="tag ">Estruturação</span>
+            <span class="tag squad">Invictus</span>
+          </div>
+        </div>
+        <div class="client-score">
+          <div class="sc">42</div>
+          <div class="sc-sub">Lead Score</div>
+        </div>
+      </div>
+      <div class="client-meta">
+        <span>Sat*: <strong>3/5</strong></span>
+        <span>Tier: <strong>LARGE</strong></span>
+        <span>Entrada: <strong>E.E puro / outro</strong></span>
+        <span>TCV: <strong>R$ 0</strong></span>
+      </div>
+      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:48%"></div></div><span class="bar-val">22/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-val">10/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:20%"></div></div><span class="bar-val">2/10</span></div></div>
+      <div class="flags"><span class="flag ">MKT ATENÇÃO</span></div>
+      <div class="mix">Saber R$ 0 · Ter R$ 0 · Exec R$ 0</div>
+      <p class="calc-line">Entrada: Estruturação / outro · Mom 2/10 · Sat 22/45 · Dec 2/20 · Mkt 6/15 · Tier 10/10</p>
+    </article>
+
+    <article class="client band-c" data-band="C" data-squad="Exclusive" data-exec="0" data-name="estação delta emergência &amp; facilities (bm)">
+      <div class="client-top">
+        <div>
+          <h4>Estação Delta Emergência &amp; Facilities (BM)</h4>
+          <div class="tags">
+            <span class="tag band">C · Construir</span>
+            <span class="tag">Semana 03</span>
+            <span class="tag">—</span>
+            <span class="tag">MEDIUM</span>
+            <span class="tag ">Estruturação</span>
             <span class="tag squad">Exclusive</span>
           </div>
         </div>
@@ -738,171 +640,297 @@ td.name{font-weight:700}td.r{text-align:right;white-space:nowrap}
         </div>
       </div>
       <div class="client-meta">
-        <span>Sat proxy: <strong>3/5</strong></span>
-        <span>Decisores: <strong>?</strong></span>
-        <span>MKT: <strong>Tem mkt · sem mapa (atenção)</strong></span>
+        <span>Sat*: <strong>3/5</strong></span>
+        <span>Tier: <strong>MEDIUM</strong></span>
+        <span>Entrada: <strong>E.E puro / outro</strong></span>
         <span>TCV: <strong>R$ 0</strong></span>
       </div>
       <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:48%"></div></div><span class="bar-val">22/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:90%"></div></div><span class="bar-val">9/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:20%"></div></div><span class="bar-val">2/10</span></div></div>
-      <div class="flags"><span class="flag">INCOMPLETO</span> <span class="flag">DEC. ?</span> <span class="flag">MKT ATENÇÃO</span> <span class="flag">MKT ?</span> <span class="flag">PROXY SAT</span> <span class="flag">SEM TEMP</span></div>
+      <div class="flags"><span class="flag ">MKT ATENÇÃO</span></div>
       <div class="mix">Saber R$ 0 · Ter R$ 0 · Exec R$ 0</div>
-      <p class="next">Preencher ritual: satisfação real · nº decisores/sponsor · postura de marketing</p>
+      <p class="calc-line">Entrada: Estruturação / outro · Mom 2/10 · Sat 22/45 · Dec 2/20 · Mkt 6/15 · Tier 9/10</p>
     </article>
 
-    <article class="client band-c" data-band="C" data-squad="Invictus" data-name="pedrini e azevedo advocacia (bs)">
+    <article class="client band-c" data-band="C" data-squad="Exclusive" data-exec="0" data-name="g6 internet">
+      <div class="client-top">
+        <div>
+          <h4>G6 INTERNET</h4>
+          <div class="tags">
+            <span class="tag band">C · Construir</span>
+            <span class="tag">Semana 0</span>
+            <span class="tag">—</span>
+            <span class="tag">LARGE</span>
+            <span class="tag ">Estruturação</span>
+            <span class="tag squad">Exclusive</span>
+          </div>
+        </div>
+        <div class="client-score">
+          <div class="sc">41</div>
+          <div class="sc-sub">Lead Score</div>
+        </div>
+      </div>
+      <div class="client-meta">
+        <span>Sat*: <strong>3/5</strong></span>
+        <span>Tier: <strong>LARGE</strong></span>
+        <span>Entrada: <strong>E.E puro / outro</strong></span>
+        <span>TCV: <strong>R$ 0</strong></span>
+      </div>
+      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:48%"></div></div><span class="bar-val">22/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-val">10/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">1/10</span></div></div>
+      <div class="flags"><span class="flag ">MKT ATENÇÃO</span></div>
+      <div class="mix">Saber R$ 0 · Ter R$ 0 · Exec R$ 0</div>
+      <p class="calc-line">Entrada: Estruturação / outro · Mom 1/10 · Sat 22/45 · Dec 2/20 · Mkt 6/15 · Tier 10/10</p>
+    </article>
+
+    <article class="client band-c" data-band="C" data-squad="Exclusive" data-exec="0" data-name="adriano martins cardoso (bs)">
+      <div class="client-top">
+        <div>
+          <h4>Adriano Martins Cardoso (BS)</h4>
+          <div class="tags">
+            <span class="tag band">C · Construir</span>
+            <span class="tag">Semana 03</span>
+            <span class="tag">—</span>
+            <span class="tag">SMALL</span>
+            <span class="tag ">Estruturação</span>
+            <span class="tag squad">Exclusive</span>
+          </div>
+        </div>
+        <div class="client-score">
+          <div class="sc">40</div>
+          <div class="sc-sub">Lead Score</div>
+        </div>
+      </div>
+      <div class="client-meta">
+        <span>Sat*: <strong>3/5</strong></span>
+        <span>Tier: <strong>SMALL</strong></span>
+        <span>Entrada: <strong>E.E puro / outro</strong></span>
+        <span>TCV: <strong>R$ 0</strong></span>
+      </div>
+      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:48%"></div></div><span class="bar-val">22/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="bar-val">8/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:20%"></div></div><span class="bar-val">2/10</span></div></div>
+      <div class="flags"><span class="flag ">MKT ATENÇÃO</span></div>
+      <div class="mix">Saber R$ 0 · Ter R$ 0 · Exec R$ 0</div>
+      <p class="calc-line">Entrada: Estruturação / outro · Mom 2/10 · Sat 22/45 · Dec 2/20 · Mkt 6/15 · Tier 8/10</p>
+    </article>
+
+    <article class="client band-c" data-band="C" data-squad="Invictus" data-exec="0" data-name="almeida e neves (recm)">
+      <div class="client-top">
+        <div>
+          <h4>Almeida e Neves (RecM)</h4>
+          <div class="tags">
+            <span class="tag band">C · Construir</span>
+            <span class="tag">Semana 02</span>
+            <span class="tag">—</span>
+            <span class="tag">MEDIUM</span>
+            <span class="tag ">Estruturação</span>
+            <span class="tag squad">Invictus</span>
+          </div>
+        </div>
+        <div class="client-score">
+          <div class="sc">40</div>
+          <div class="sc-sub">Lead Score</div>
+        </div>
+      </div>
+      <div class="client-meta">
+        <span>Sat*: <strong>3/5</strong></span>
+        <span>Tier: <strong>MEDIUM</strong></span>
+        <span>Entrada: <strong>E.E puro / outro</strong></span>
+        <span>TCV: <strong>R$ 0</strong></span>
+      </div>
+      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:48%"></div></div><span class="bar-val">22/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:90%"></div></div><span class="bar-val">9/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">1/10</span></div></div>
+      <div class="flags"><span class="flag ">MKT ATENÇÃO</span></div>
+      <div class="mix">Saber R$ 0 · Ter R$ 0 · Exec R$ 0</div>
+      <p class="calc-line">Entrada: Estruturação / outro · Mom 1/10 · Sat 22/45 · Dec 2/20 · Mkt 6/15 · Tier 9/10</p>
+    </article>
+
+    <article class="client band-c" data-band="C" data-squad="Exclusive" data-exec="0" data-name="ecofitness aldeia (bs)">
+      <div class="client-top">
+        <div>
+          <h4>Ecofitness Aldeia (BS)</h4>
+          <div class="tags">
+            <span class="tag band">C · Construir</span>
+            <span class="tag">Semana 03</span>
+            <span class="tag">—</span>
+            <span class="tag">SMALL</span>
+            <span class="tag ">Estruturação</span>
+            <span class="tag squad">Exclusive</span>
+          </div>
+        </div>
+        <div class="client-score">
+          <div class="sc">40</div>
+          <div class="sc-sub">Lead Score</div>
+        </div>
+      </div>
+      <div class="client-meta">
+        <span>Sat*: <strong>3/5</strong></span>
+        <span>Tier: <strong>SMALL</strong></span>
+        <span>Entrada: <strong>E.E puro / outro</strong></span>
+        <span>TCV: <strong>R$ 0</strong></span>
+      </div>
+      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:48%"></div></div><span class="bar-val">22/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="bar-val">8/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:20%"></div></div><span class="bar-val">2/10</span></div></div>
+      <div class="flags"><span class="flag ">MKT ATENÇÃO</span></div>
+      <div class="mix">Saber R$ 0 · Ter R$ 0 · Exec R$ 0</div>
+      <p class="calc-line">Entrada: Estruturação / outro · Mom 2/10 · Sat 22/45 · Dec 2/20 · Mkt 6/15 · Tier 8/10</p>
+    </article>
+
+    <article class="client band-d" data-band="D" data-squad="Invictus" data-exec="0" data-name="pedrini e azevedo advocacia (bs)">
       <div class="client-top">
         <div>
           <h4>PEDRINI E AZEVEDO ADVOCACIA (BS)</h4>
           <div class="tags">
-            <span class="tag band">C · Construir clareza</span>
+            <span class="tag band">D · Frear</span>
             <span class="tag">Semana 04</span>
             <span class="tag">—</span>
             <span class="tag">SMALL</span>
+            <span class="tag ">Estruturação</span>
             <span class="tag squad">Invictus</span>
           </div>
         </div>
         <div class="client-score">
-          <div class="sc">40</div>
+          <div class="sc">39</div>
           <div class="sc-sub">Lead Score</div>
         </div>
       </div>
       <div class="client-meta">
-        <span>Sat proxy: <strong>3/5</strong></span>
-        <span>Decisores: <strong>?</strong></span>
-        <span>MKT: <strong>Tem mkt · sem mapa (atenção)</strong></span>
+        <span>Sat*: <strong>3/5</strong></span>
+        <span>Tier: <strong>SMALL</strong></span>
+        <span>Entrada: <strong>E.E puro / outro</strong></span>
         <span>TCV: <strong>R$ 0</strong></span>
       </div>
-      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:48%"></div></div><span class="bar-val">22/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="bar-val">8/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:20%"></div></div><span class="bar-val">2/10</span></div></div>
-      <div class="flags"><span class="flag">INCOMPLETO</span> <span class="flag">DEC. ?</span> <span class="flag">MKT ATENÇÃO</span> <span class="flag">MKT ?</span> <span class="flag">PROXY SAT</span> <span class="flag">SEM TEMP</span></div>
+      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:48%"></div></div><span class="bar-val">22/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="bar-val">8/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">1/10</span></div></div>
+      <div class="flags"><span class="flag ">MKT ATENÇÃO</span></div>
       <div class="mix">Saber R$ 0 · Ter R$ 0 · Exec R$ 0</div>
-      <p class="next">Preencher ritual: satisfação real · nº decisores/sponsor · postura de marketing</p>
+      <p class="calc-line">Entrada: Estruturação / outro · Mom 1/10 · Sat 22/45 · Dec 2/20 · Mkt 6/15 · Tier 8/10</p>
     </article>
 
-    <article class="client band-c" data-band="C" data-squad="Invictus" data-name="protesol tendas (bs)">
+    <article class="client band-d" data-band="D" data-squad="Invictus" data-exec="0" data-name="protesol tendas (bs)">
       <div class="client-top">
         <div>
           <h4>Protesol tendas (BS)</h4>
           <div class="tags">
-            <span class="tag band">C · Construir clareza</span>
+            <span class="tag band">D · Frear</span>
             <span class="tag">Semana 02</span>
             <span class="tag">—</span>
             <span class="tag">SMALL</span>
+            <span class="tag ">Estruturação</span>
             <span class="tag squad">Invictus</span>
           </div>
         </div>
         <div class="client-score">
-          <div class="sc">40</div>
+          <div class="sc">39</div>
           <div class="sc-sub">Lead Score</div>
         </div>
       </div>
       <div class="client-meta">
-        <span>Sat proxy: <strong>3/5</strong></span>
-        <span>Decisores: <strong>?</strong></span>
-        <span>MKT: <strong>Tem mkt · sem mapa (atenção)</strong></span>
+        <span>Sat*: <strong>3/5</strong></span>
+        <span>Tier: <strong>SMALL</strong></span>
+        <span>Entrada: <strong>E.E puro / outro</strong></span>
         <span>TCV: <strong>R$ 0</strong></span>
       </div>
-      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:48%"></div></div><span class="bar-val">22/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="bar-val">8/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:20%"></div></div><span class="bar-val">2/10</span></div></div>
-      <div class="flags"><span class="flag">INCOMPLETO</span> <span class="flag">DEC. ?</span> <span class="flag">MKT ATENÇÃO</span> <span class="flag">MKT ?</span> <span class="flag">PROXY SAT</span> <span class="flag">SEM TEMP</span></div>
+      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:48%"></div></div><span class="bar-val">22/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="bar-val">8/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">1/10</span></div></div>
+      <div class="flags"><span class="flag ">MKT ATENÇÃO</span></div>
       <div class="mix">Saber R$ 0 · Ter R$ 0 · Exec R$ 0</div>
-      <p class="next">Preencher ritual: satisfação real · nº decisores/sponsor · postura de marketing</p>
+      <p class="calc-line">Entrada: Estruturação / outro · Mom 1/10 · Sat 22/45 · Dec 2/20 · Mkt 6/15 · Tier 8/10</p>
     </article>
 
-    <article class="client band-c" data-band="C" data-squad="Exclusive" data-name="wang (bs)">
+    <article class="client band-d" data-band="D" data-squad="Exclusive" data-exec="0" data-name="wang (bs)">
       <div class="client-top">
         <div>
           <h4>Wang (BS)</h4>
           <div class="tags">
-            <span class="tag band">C · Construir clareza</span>
+            <span class="tag band">D · Frear</span>
             <span class="tag">Semana 02</span>
             <span class="tag">—</span>
             <span class="tag">SMALL</span>
+            <span class="tag ">Estruturação</span>
             <span class="tag squad">Exclusive</span>
           </div>
         </div>
         <div class="client-score">
-          <div class="sc">40</div>
+          <div class="sc">39</div>
           <div class="sc-sub">Lead Score</div>
         </div>
       </div>
       <div class="client-meta">
-        <span>Sat proxy: <strong>3/5</strong></span>
-        <span>Decisores: <strong>?</strong></span>
-        <span>MKT: <strong>Tem mkt · sem mapa (atenção)</strong></span>
+        <span>Sat*: <strong>3/5</strong></span>
+        <span>Tier: <strong>SMALL</strong></span>
+        <span>Entrada: <strong>E.E puro / outro</strong></span>
         <span>TCV: <strong>R$ 0</strong></span>
       </div>
-      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:48%"></div></div><span class="bar-val">22/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="bar-val">8/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:20%"></div></div><span class="bar-val">2/10</span></div></div>
-      <div class="flags"><span class="flag">INCOMPLETO</span> <span class="flag">DEC. ?</span> <span class="flag">MKT ATENÇÃO</span> <span class="flag">MKT INF.</span> <span class="flag">PROXY SAT</span> <span class="flag">SEM TEMP</span></div>
+      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:48%"></div></div><span class="bar-val">22/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="bar-val">8/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">1/10</span></div></div>
+      <div class="flags"><span class="flag ">MKT ATENÇÃO</span></div>
       <div class="mix">Saber R$ 0 · Ter R$ 0 · Exec R$ 0</div>
-      <p class="next">Preencher ritual: satisfação real · nº decisores/sponsor · postura de marketing</p>
+      <p class="calc-line">Entrada: Estruturação / outro · Mom 1/10 · Sat 22/45 · Dec 2/20 · Mkt 6/15 · Tier 8/10</p>
     </article>
 
-    <article class="client band-d" data-band="D" data-squad="Exclusive" data-name="br distribuidora de piercing (bs)">
+    <article class="client band-d" data-band="D" data-squad="Exclusive" data-exec="0" data-name="br distribuidora de piercing (bs)">
       <div class="client-top">
         <div>
           <h4>BR Distribuidora de Piercing (BS)</h4>
           <div class="tags">
-            <span class="tag band">D · Frear / recuperar</span>
+            <span class="tag band">D · Frear</span>
             <span class="tag">Follow</span>
             <span class="tag">Frio</span>
             <span class="tag">SMALL</span>
+            <span class="tag ">Estruturação</span>
             <span class="tag squad">Exclusive</span>
           </div>
         </div>
         <div class="client-score">
-          <div class="sc">33</div>
+          <div class="sc">31</div>
           <div class="sc-sub">Lead Score</div>
         </div>
       </div>
       <div class="client-meta">
-        <span>Sat proxy: <strong>2/5</strong></span>
-        <span>Decisores: <strong>?</strong></span>
-        <span>MKT: <strong>Tem mkt · sem mapa (atenção)</strong></span>
+        <span>Sat*: <strong>2/5</strong></span>
+        <span>Tier: <strong>SMALL</strong></span>
+        <span>Entrada: <strong>E.E puro / outro</strong></span>
         <span>TCV: <strong>R$ 79.224</strong></span>
       </div>
-      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:26%"></div></div><span class="bar-val">12/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="bar-val">8/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:50%"></div></div><span class="bar-val">5/10</span></div></div>
-      <div class="flags"><span class="flag">INCOMPLETO</span> <span class="flag">DEC. ?</span> <span class="flag">MKT ATENÇÃO</span> <span class="flag">MKT ?</span> <span class="flag">PROXY SAT</span> <span class="flag">SAT BAIXA</span></div>
+      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:26%"></div></div><span class="bar-val">12/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="bar-val">8/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:30%"></div></div><span class="bar-val">3/10</span></div></div>
+      <div class="flags"><span class="flag ">MKT ATENÇÃO</span> <span class="flag ">SAT BAIXA</span></div>
       <div class="mix">Saber R$ 0 · Ter R$ 0 · Exec R$ 6.602</div>
-      <p class="next">Preencher ritual: satisfação real · nº decisores/sponsor · postura de marketing</p>
+      <p class="calc-line">Entrada: Estruturação / outro · Mom 3/10 · Sat 12/45 · Dec 2/20 · Mkt 6/15 · Tier 8/10</p>
     </article>
 
-    <article class="client band-d" data-band="D" data-squad="Billions" data-name="creative eng (bt)">
+    <article class="client band-d" data-band="D" data-squad="Billions" data-exec="0" data-name="creative eng (bt)">
       <div class="client-top">
         <div>
           <h4>Creative Eng (BT)</h4>
           <div class="tags">
-            <span class="tag band">D · Frear / recuperar</span>
+            <span class="tag band">D · Frear</span>
             <span class="tag">Follow</span>
             <span class="tag">Frio</span>
             <span class="tag">TINY</span>
+            <span class="tag ">Estruturação</span>
             <span class="tag squad">Billions</span>
           </div>
         </div>
         <div class="client-score">
-          <div class="sc">27</div>
+          <div class="sc">26</div>
           <div class="sc-sub">Lead Score</div>
         </div>
       </div>
       <div class="client-meta">
-        <span>Sat proxy: <strong>2/5</strong></span>
-        <span>Decisores: <strong>?</strong></span>
-        <span>MKT: <strong>Tem mkt · sem mapa (atenção)</strong></span>
+        <span>Sat*: <strong>2/5</strong></span>
+        <span>Tier: <strong>TINY</strong></span>
+        <span>Entrada: <strong>E.E puro / outro</strong></span>
         <span>TCV: <strong>R$ 66.000</strong></span>
       </div>
-      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:26%"></div></div><span class="bar-val">12/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">4/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:30%"></div></div><span class="bar-val">3/10</span></div></div>
-      <div class="flags"><span class="flag">INCOMPLETO</span> <span class="flag">DEC. ?</span> <span class="flag">MKT ATENÇÃO</span> <span class="flag">MKT ?</span> <span class="flag">PROXY SAT</span> <span class="flag">SAT BAIXA</span></div>
+      <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:26%"></div></div><span class="bar-val">12/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">4/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:20%"></div></div><span class="bar-val">2/10</span></div></div>
+      <div class="flags"><span class="flag ">MKT ATENÇÃO</span> <span class="flag ">SAT BAIXA</span></div>
       <div class="mix">Saber R$ 0 · Ter R$ 0 · Exec R$ 5.500</div>
-      <p class="next">Preencher ritual: satisfação real · nº decisores/sponsor · postura de marketing</p>
+      <p class="calc-line">Entrada: Estruturação / outro · Mom 2/10 · Sat 12/45 · Dec 2/20 · Mkt 6/15 · Tier 4/10</p>
     </article>
 
-    <article class="client band-d" data-band="D" data-squad="Billions" data-name="general car (bs)">
+    <article class="client band-d" data-band="D" data-squad="Billions" data-exec="0" data-name="general car (bs)">
       <div class="client-top">
         <div>
           <h4>General car (BS)</h4>
           <div class="tags">
-            <span class="tag band">D · Frear / recuperar</span>
+            <span class="tag band">D · Frear</span>
             <span class="tag">Semana 0</span>
             <span class="tag">—</span>
             <span class="tag">SMALL</span>
+            <span class="tag ">TER</span>
             <span class="tag squad">Billions</span>
           </div>
         </div>
@@ -912,26 +940,27 @@ td.name{font-weight:700}td.r{text-align:right;white-space:nowrap}
         </div>
       </div>
       <div class="client-meta">
-        <span>Sat proxy: <strong>1/5</strong></span>
-        <span>Decisores: <strong>?</strong></span>
-        <span>MKT: <strong>Tem mkt · sem mapa (atenção)</strong></span>
+        <span>Sat*: <strong>1/5</strong></span>
+        <span>Tier: <strong>SMALL</strong></span>
+        <span>Entrada: <strong>E.E puro / outro</strong></span>
         <span>TCV: <strong>R$ 0</strong></span>
       </div>
       <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:11%"></div></div><span class="bar-val">5/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="bar-val">8/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:0%"></div></div><span class="bar-val">0/10</span></div></div>
-      <div class="flags"><span class="flag">INCOMPLETO</span> <span class="flag">DEC. ?</span> <span class="flag">MKT ATENÇÃO</span> <span class="flag">MKT ?</span> <span class="flag">PROXY SAT</span> <span class="flag">SAT BAIXA</span></div>
+      <div class="flags"><span class="flag ">MKT ATENÇÃO</span> <span class="flag ">SAT BAIXA</span></div>
       <div class="mix">Saber R$ 0 · Ter R$ 0 · Exec R$ 0</div>
-      <p class="next">Preencher ritual: satisfação real · nº decisores/sponsor · postura de marketing</p>
+      <p class="calc-line">Entrada: Estruturação / outro · Mom 0/10 · Sat 5/45 · Dec 2/20 · Mkt 6/15 · Tier 8/10</p>
     </article>
 
-    <article class="client band-d" data-band="D" data-squad="Billions" data-name="rm burguer itabira  (bs)">
+    <article class="client band-d" data-band="D" data-squad="Billions" data-exec="0" data-name="rm burguer itabira  (bs)">
       <div class="client-top">
         <div>
           <h4>RM Burguer Itabira  (BS)</h4>
           <div class="tags">
-            <span class="tag band">D · Frear / recuperar</span>
+            <span class="tag band">D · Frear</span>
             <span class="tag">Semana 0</span>
             <span class="tag">—</span>
             <span class="tag">SMALL</span>
+            <span class="tag ">TER</span>
             <span class="tag squad">Billions</span>
           </div>
         </div>
@@ -941,26 +970,27 @@ td.name{font-weight:700}td.r{text-align:right;white-space:nowrap}
         </div>
       </div>
       <div class="client-meta">
-        <span>Sat proxy: <strong>1/5</strong></span>
-        <span>Decisores: <strong>?</strong></span>
-        <span>MKT: <strong>Tem mkt · sem mapa (atenção)</strong></span>
+        <span>Sat*: <strong>1/5</strong></span>
+        <span>Tier: <strong>SMALL</strong></span>
+        <span>Entrada: <strong>E.E puro / outro</strong></span>
         <span>TCV: <strong>R$ 0</strong></span>
       </div>
       <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:11%"></div></div><span class="bar-val">5/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="bar-val">8/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:0%"></div></div><span class="bar-val">0/10</span></div></div>
-      <div class="flags"><span class="flag">INCOMPLETO</span> <span class="flag">DEC. ?</span> <span class="flag">MKT ATENÇÃO</span> <span class="flag">MKT ?</span> <span class="flag">PROXY SAT</span> <span class="flag">SAT BAIXA</span></div>
+      <div class="flags"><span class="flag ">MKT ATENÇÃO</span> <span class="flag ">SAT BAIXA</span></div>
       <div class="mix">Saber R$ 0 · Ter R$ 0 · Exec R$ 0</div>
-      <p class="next">Preencher ritual: satisfação real · nº decisores/sponsor · postura de marketing</p>
+      <p class="calc-line">Entrada: Estruturação / outro · Mom 0/10 · Sat 5/45 · Dec 2/20 · Mkt 6/15 · Tier 8/10</p>
     </article>
 
-    <article class="client band-d" data-band="D" data-squad="Billions" data-name="sora consultoria (bs)">
+    <article class="client band-d" data-band="D" data-squad="Billions" data-exec="0" data-name="sora consultoria (bs)">
       <div class="client-top">
         <div>
           <h4>Sora consultoria (BS)</h4>
           <div class="tags">
-            <span class="tag band">D · Frear / recuperar</span>
+            <span class="tag band">D · Frear</span>
             <span class="tag">Semana 05</span>
             <span class="tag">—</span>
             <span class="tag">SMALL</span>
+            <span class="tag ">Estruturação</span>
             <span class="tag squad">Billions</span>
           </div>
         </div>
@@ -970,26 +1000,27 @@ td.name{font-weight:700}td.r{text-align:right;white-space:nowrap}
         </div>
       </div>
       <div class="client-meta">
-        <span>Sat proxy: <strong>1/5</strong></span>
-        <span>Decisores: <strong>?</strong></span>
-        <span>MKT: <strong>Tem mkt · sem mapa (atenção)</strong></span>
+        <span>Sat*: <strong>1/5</strong></span>
+        <span>Tier: <strong>SMALL</strong></span>
+        <span>Entrada: <strong>E.E puro / outro</strong></span>
         <span>TCV: <strong>R$ 0</strong></span>
       </div>
       <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:11%"></div></div><span class="bar-val">5/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="bar-val">8/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:0%"></div></div><span class="bar-val">0/10</span></div></div>
-      <div class="flags"><span class="flag">INCOMPLETO</span> <span class="flag">DEC. ?</span> <span class="flag">MKT ATENÇÃO</span> <span class="flag">MKT ?</span> <span class="flag">PROXY SAT</span> <span class="flag">SAT BAIXA</span></div>
+      <div class="flags"><span class="flag ">MKT ATENÇÃO</span> <span class="flag ">SAT BAIXA</span></div>
       <div class="mix">Saber R$ 0 · Ter R$ 0 · Exec R$ 0</div>
-      <p class="next">Preencher ritual: satisfação real · nº decisores/sponsor · postura de marketing</p>
+      <p class="calc-line">Entrada: Estruturação / outro · Mom 0/10 · Sat 5/45 · Dec 2/20 · Mkt 6/15 · Tier 8/10</p>
     </article>
 
-    <article class="client band-d" data-band="D" data-squad="Invictus" data-name="triboltech (bs)">
+    <article class="client band-d" data-band="D" data-squad="Invictus" data-exec="0" data-name="triboltech (bs)">
       <div class="client-top">
         <div>
           <h4>Triboltech (BS)</h4>
           <div class="tags">
-            <span class="tag band">D · Frear / recuperar</span>
+            <span class="tag band">D · Frear</span>
             <span class="tag">Semana 05</span>
             <span class="tag">—</span>
             <span class="tag">SMALL</span>
+            <span class="tag ">Estruturação</span>
             <span class="tag squad">Invictus</span>
           </div>
         </div>
@@ -999,877 +1030,717 @@ td.name{font-weight:700}td.r{text-align:right;white-space:nowrap}
         </div>
       </div>
       <div class="client-meta">
-        <span>Sat proxy: <strong>1/5</strong></span>
-        <span>Decisores: <strong>?</strong></span>
-        <span>MKT: <strong>Tem mkt · sem mapa (atenção)</strong></span>
+        <span>Sat*: <strong>1/5</strong></span>
+        <span>Tier: <strong>SMALL</strong></span>
+        <span>Entrada: <strong>E.E puro / outro</strong></span>
         <span>TCV: <strong>R$ 0</strong></span>
       </div>
       <div class="bars"><div class="bar-row"><span class="bar-lbl">Sat</span><div class="bar-track"><div class="bar-fill" style="width:11%"></div></div><span class="bar-val">5/45</span></div><div class="bar-row"><span class="bar-lbl">Dec</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-val">2/20</span></div><div class="bar-row"><span class="bar-lbl">Mkt</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="bar-val">6/15</span></div><div class="bar-row"><span class="bar-lbl">Tier</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="bar-val">8/10</span></div><div class="bar-row"><span class="bar-lbl">Mom</span><div class="bar-track"><div class="bar-fill" style="width:0%"></div></div><span class="bar-val">0/10</span></div></div>
-      <div class="flags"><span class="flag">INCOMPLETO</span> <span class="flag">DEC. ?</span> <span class="flag">MKT ATENÇÃO</span> <span class="flag">MKT ?</span> <span class="flag">PROXY SAT</span> <span class="flag">SAT BAIXA</span></div>
+      <div class="flags"><span class="flag ">MKT ATENÇÃO</span> <span class="flag ">SAT BAIXA</span></div>
       <div class="mix">Saber R$ 0 · Ter R$ 0 · Exec R$ 0</div>
-      <p class="next">Preencher ritual: satisfação real · nº decisores/sponsor · postura de marketing</p>
+      <p class="calc-line">Entrada: Estruturação / outro · Mom 0/10 · Sat 5/45 · Dec 2/20 · Mkt 6/15 · Tier 8/10</p>
     </article></div>
+
+  <div class="missing" id="faltantes">
+    <h3>O que falta puxar (vale para a carteira inteira)</h3>
+    <p class="sub" style="margin-left:0">Por isso Dec e Mkt ainda puxam a nota para baixo de forma geral — não é “cliente ruim”.</p>
+    <ul>
+      <li><strong>Satisfação semanal real</strong> — suas perguntas semanais (entendimento, satisfação, investimento em mkt).</li>
+      <li><strong>NPS recente</strong> — quando existir (≤45 dias).</li>
+      <li><strong>Mapa de decisores</strong> — quantos / sponsor / se já sentou na mesa.</li>
+      <li><strong>Postura + investimento de marketing</strong> — se tem time, se quer somar com a V4, se tem budget de mkt.</li>
+      <li><strong>Health Score Cockpit</strong> — freio opcional (Danger/Critical), ainda sem acesso estável no cálculo.</li>
+    </ul>
+  </div>
 </section>
 
 <section id="monetizados">
   <h2>Monetizados — 29</h2>
-  <p class="sub">Histórico · sem observação</p>
+  <p class="sub">Histórico · com coluna de entrada EE+Executar</p>
   <div class="tbl"><table>
-    <thead><tr><th>Empresa</th><th>Score*</th><th>Status</th><th>Need</th><th>Temp</th><th>TCV</th><th>Saber</th></tr></thead>
-    <tbody>
-<tr>
+    <thead><tr><th>Empresa</th><th>Score*</th><th>Status</th><th>Need</th><th>Tipo</th><th>EE+Exec</th><th>TCV</th><th>Saber</th></tr></thead>
+    <tbody><tr>
           <td class="name">CDGFITNESS (BM)</td>
-          <td><span class="band-tag c">C 54</span></td>
+          <td><span class="band-tag c">C 53</span></td>
           <td>Monetizado</td>
           <td>MEDIUM</td>
-          <td>Quente</td>
+          <td>Estruturação</td>
+          <td>—</td>
           <td class="r">R$ 138.170</td>
           <td class="r">R$ 0</td>
-          
         </tr>
 <tr>
           <td class="name">Biesky Bebidas Loja (BM)</td>
-          <td><span class="band-tag c">C 54</span></td>
+          <td><span class="band-tag c">C 53</span></td>
           <td>Monetizado</td>
           <td>MEDIUM</td>
-          <td>Quente</td>
+          <td>Estruturação</td>
+          <td>—</td>
           <td class="r">R$ 126.640</td>
           <td class="r">R$ 0</td>
-          
         </tr>
 <tr>
           <td class="name">WK Carpetes - Pisotron (LM)</td>
-          <td><span class="band-tag c">C 54</span></td>
+          <td><span class="band-tag c">C 53</span></td>
           <td>Monetizado</td>
           <td>MEDIUM</td>
-          <td>Quente</td>
+          <td>Estruturação</td>
+          <td>—</td>
           <td class="r">R$ 108.133</td>
           <td class="r">R$ 14.455</td>
-          
         </tr>
 <tr>
           <td class="name">Rpplass comercial (BS)</td>
-          <td><span class="band-tag c">C 53</span></td>
+          <td><span class="band-tag c">C 52</span></td>
           <td>Monetizado</td>
           <td>SMALL</td>
-          <td>Quente</td>
+          <td>Estruturação</td>
+          <td>—</td>
           <td class="r">R$ 100.790</td>
           <td class="r">R$ 0</td>
-          
         </tr>
 <tr>
           <td class="name">Natuclen (BM)</td>
-          <td><span class="band-tag c">C 56</span></td>
+          <td><span class="band-tag c">C 54</span></td>
           <td>Monetizado</td>
           <td>MEDIUM</td>
-          <td>Quente</td>
+          <td>Estruturação</td>
+          <td>—</td>
           <td class="r">R$ 100.372</td>
           <td class="r">R$ 0</td>
-          
         </tr>
 <tr>
           <td class="name">Escritório Fares (BM)</td>
-          <td><span class="band-tag c">C 54</span></td>
+          <td><span class="band-tag c">C 53</span></td>
           <td>Monetizado</td>
           <td>MEDIUM</td>
-          <td>Quente</td>
+          <td>Estruturação</td>
+          <td>—</td>
           <td class="r">R$ 96.762</td>
           <td class="r">R$ 0</td>
-          
         </tr>
 <tr>
           <td class="name">Gigaclima</td>
-          <td><span class="band-tag c">C 54</span></td>
+          <td><span class="band-tag c">C 53</span></td>
           <td>Monetizado</td>
           <td>MEDIUM</td>
-          <td>Quente</td>
+          <td>Estruturação</td>
+          <td>—</td>
           <td class="r">R$ 82.272</td>
           <td class="r">R$ 0</td>
-          
         </tr>
 <tr>
           <td class="name">FIBRANETBR (BM)</td>
-          <td><span class="band-tag c">C 56</span></td>
+          <td><span class="band-tag c">C 54</span></td>
           <td>Monetizado</td>
           <td>MEDIUM</td>
-          <td>Quente</td>
+          <td>Estruturação</td>
+          <td>—</td>
           <td class="r">R$ 80.845</td>
           <td class="r">R$ 0</td>
-          
         </tr>
 <tr>
           <td class="name">Soluções Locação (BM)</td>
-          <td><span class="band-tag c">C 54</span></td>
+          <td><span class="band-tag c">C 53</span></td>
           <td>Monetizado</td>
           <td>MEDIUM</td>
-          <td>Quente</td>
+          <td>Estruturação</td>
+          <td>—</td>
           <td class="r">R$ 71.734</td>
           <td class="r">R$ 9.939</td>
-          
         </tr>
 <tr>
           <td class="name">Creazione</td>
-          <td><span class="band-tag c">C 53</span></td>
+          <td><span class="band-tag c">C 52</span></td>
           <td>Monetizado</td>
           <td>SMALL</td>
-          <td>Quente</td>
+          <td>DRX</td>
+          <td>—</td>
           <td class="r">R$ 54.240</td>
           <td class="r">R$ 0</td>
-          
         </tr>
 <tr>
           <td class="name">Reveservice (BM)</td>
-          <td><span class="band-tag c">C 54</span></td>
+          <td><span class="band-tag c">C 53</span></td>
           <td>Monetizado</td>
           <td>MEDIUM</td>
-          <td>Quente</td>
+          <td>Estruturação</td>
+          <td>—</td>
           <td class="r">R$ 52.899</td>
           <td class="r">R$ 0</td>
-          
         </tr>
 <tr>
           <td class="name">OFOS (BM)</td>
-          <td><span class="band-tag c">C 54</span></td>
+          <td><span class="band-tag c">C 56</span></td>
           <td>Monetizado</td>
           <td>MEDIUM</td>
-          <td>Quente</td>
+          <td>E.E + Assesosria</td>
+          <td>EE+Exec</td>
           <td class="r">R$ 45.627</td>
           <td class="r">R$ 23.819</td>
-          
         </tr>
 <tr>
           <td class="name">Espao Zabeu</td>
-          <td><span class="band-tag c">C 54</span></td>
+          <td><span class="band-tag c">C 53</span></td>
           <td>Monetizado</td>
           <td>MEDIUM</td>
-          <td>Quente</td>
+          <td>Estruturação</td>
+          <td>—</td>
           <td class="r">R$ 44.141</td>
           <td class="r">R$ 0</td>
-          
         </tr>
 <tr>
           <td class="name">Studio Henrique Hoffman (B)</td>
-          <td><span class="band-tag c">C 55</span></td>
+          <td><span class="band-tag c">C 53</span></td>
           <td>Monetizado</td>
           <td>SMALL</td>
-          <td>Quente</td>
+          <td>Estruturação</td>
+          <td>—</td>
           <td class="r">R$ 42.818</td>
           <td class="r">R$ 0</td>
-          
         </tr>
 <tr>
           <td class="name">ID Negócios Empresariais (LS)</td>
-          <td><span class="band-tag c">C 53</span></td>
+          <td><span class="band-tag c">C 52</span></td>
           <td>Monetizado</td>
           <td>SMALL</td>
-          <td>Quente</td>
+          <td>Estruturação</td>
+          <td>—</td>
           <td class="r">R$ 29.371</td>
           <td class="r">R$ 22.000</td>
-          
         </tr>
 <tr>
           <td class="name">Nova York &amp; Você (BM)</td>
-          <td><span class="band-tag c">C 54</span></td>
+          <td><span class="band-tag c">C 53</span></td>
           <td>Monetizado</td>
           <td>MEDIUM</td>
-          <td>Quente</td>
+          <td>Estruturação</td>
+          <td>—</td>
           <td class="r">R$ 29.313</td>
           <td class="r">R$ 0</td>
-          
         </tr>
 <tr>
           <td class="name">Sensoria (BM)</td>
-          <td><span class="band-tag d">D 29</span></td>
+          <td><span class="band-tag d">D 32</span></td>
           <td>Já monetizado</td>
           <td>MEDIUM</td>
-          <td>Frio</td>
+          <td>E.E + Assesosria</td>
+          <td>EE+Exec</td>
           <td class="r">R$ 23.951</td>
           <td class="r">R$ 0</td>
-          
         </tr>
 <tr>
           <td class="name">Telefer Telecomunicações (BS)</td>
-          <td><span class="band-tag c">C 55</span></td>
+          <td><span class="band-tag c">C 53</span></td>
           <td>Monetizado</td>
           <td>SMALL</td>
-          <td>Quente</td>
+          <td>Estruturação</td>
+          <td>—</td>
           <td class="r">R$ 19.927</td>
           <td class="r">R$ 0</td>
-          
         </tr>
 <tr>
           <td class="name">PACHANE (BM)</td>
-          <td><span class="band-tag c">C 54</span></td>
+          <td><span class="band-tag c">C 53</span></td>
           <td>Monetizado</td>
           <td>MEDIUM</td>
-          <td>Quente</td>
+          <td>Estruturação</td>
+          <td>—</td>
           <td class="r">R$ 17.537</td>
           <td class="r">R$ 0</td>
-          
         </tr>
 <tr>
           <td class="name">Exclusiva Home e Decor (BS)</td>
-          <td><span class="band-tag c">C 53</span></td>
-          <td>Monetizado</td>
-          <td>SMALL</td>
-          <td>Quente</td>
-          <td class="r">R$ 14.319</td>
-          <td class="r">R$ 0</td>
-          
-        </tr>
-<tr>
-          <td class="name">DECANTER</td>
-          <td><span class="band-tag c">C 53</span></td>
-          <td>Monetizado</td>
-          <td>SMALL</td>
-          <td>Quente</td>
-          <td class="r">R$ 13.760</td>
-          <td class="r">R$ 0</td>
-          
-        </tr>
-<tr>
-          <td class="name">Rede Construir Nova Lima (BS)</td>
-          <td><span class="band-tag c">C 53</span></td>
-          <td>Monetizado</td>
-          <td>SMALL</td>
-          <td>Quente</td>
-          <td class="r">R$ 13.590</td>
-          <td class="r">R$ 13.590</td>
-          
-        </tr>
-<tr>
-          <td class="name">Luup Perfumes</td>
-          <td><span class="band-tag c">C 49</span></td>
-          <td>Monetizado</td>
-          <td>TINY</td>
-          <td>Quente</td>
-          <td class="r">R$ 12.298</td>
-          <td class="r">R$ 0</td>
-          
-        </tr>
-<tr>
-          <td class="name">Inovar treinamento e serviços ltda (BS)</td>
           <td><span class="band-tag c">C 55</span></td>
           <td>Monetizado</td>
           <td>SMALL</td>
-          <td>Quente</td>
+          <td>E.E + Assesosria</td>
+          <td>EE+Exec</td>
+          <td class="r">R$ 14.319</td>
+          <td class="r">R$ 0</td>
+        </tr>
+<tr>
+          <td class="name">DECANTER</td>
+          <td><span class="band-tag c">C 52</span></td>
+          <td>Monetizado</td>
+          <td>SMALL</td>
+          <td>E.C</td>
+          <td>—</td>
+          <td class="r">R$ 13.760</td>
+          <td class="r">R$ 0</td>
+        </tr>
+<tr>
+          <td class="name">Rede Construir Nova Lima (BS)</td>
+          <td><span class="band-tag c">C 52</span></td>
+          <td>Monetizado</td>
+          <td>SMALL</td>
+          <td>Estruturação</td>
+          <td>—</td>
+          <td class="r">R$ 13.590</td>
+          <td class="r">R$ 13.590</td>
+        </tr>
+<tr>
+          <td class="name">Luup Perfumes</td>
+          <td><span class="band-tag c">C 48</span></td>
+          <td>Monetizado</td>
+          <td>TINY</td>
+          <td>Estruturação</td>
+          <td>—</td>
+          <td class="r">R$ 12.298</td>
+          <td class="r">R$ 0</td>
+        </tr>
+<tr>
+          <td class="name">Inovar treinamento e serviços ltda (BS)</td>
+          <td><span class="band-tag c">C 53</span></td>
+          <td>Monetizado</td>
+          <td>SMALL</td>
+          <td>Estruturação</td>
+          <td>—</td>
           <td class="r">R$ 10.142</td>
           <td class="r">R$ 10.142</td>
-          
         </tr>
 <tr>
           <td class="name">DECORTI</td>
-          <td><span class="band-tag c">C 51</span></td>
+          <td><span class="band-tag c">C 49</span></td>
           <td>Monetizado</td>
           <td>TINY</td>
-          <td>Quente</td>
+          <td>Estruturação</td>
+          <td>—</td>
           <td class="r">R$ 8.112</td>
           <td class="r">R$ 8.112</td>
-          
         </tr>
 <tr>
           <td class="name">Belô Café (BM)</td>
-          <td><span class="band-tag c">C 42</span></td>
+          <td><span class="band-tag c">C 43</span></td>
           <td>Já monetizado</td>
           <td>MEDIUM</td>
-          <td>—</td>
+          <td>E.E + Assesosria</td>
+          <td>EE+Exec</td>
           <td class="r">R$ 0</td>
           <td class="r">R$ 0</td>
-          
         </tr>
 <tr>
           <td class="name">Ez turismo (BM)</td>
-          <td><span class="band-tag c">C 40</span></td>
+          <td><span class="band-tag c">C 42</span></td>
           <td>Já monetizado</td>
           <td>MEDIUM</td>
-          <td>—</td>
+          <td>E.E + Assesosria</td>
+          <td>EE+Exec</td>
           <td class="r">R$ 0</td>
           <td class="r">R$ 0</td>
-          
         </tr>
 <tr>
           <td class="name">METAL COMERCIO (BM)</td>
-          <td><span class="band-tag c">C 40</span></td>
+          <td><span class="band-tag c">C 42</span></td>
           <td>Já monetizado</td>
           <td>MEDIUM</td>
-          <td>—</td>
+          <td>E.E + Assesosria</td>
+          <td>EE+Exec</td>
           <td class="r">R$ 0</td>
           <td class="r">R$ 0</td>
-          
         </tr>
 <tr>
           <td class="name">Rdo Pro (BL)</td>
-          <td><span class="band-tag c">C 41</span></td>
+          <td><span class="band-tag c">C 43</span></td>
           <td>Já monetizado</td>
           <td>LARGE</td>
-          <td>—</td>
+          <td>E.E + Assesosria</td>
+          <td>EE+Exec</td>
           <td class="r">R$ 0</td>
           <td class="r">R$ 0</td>
-          
-        </tr>
-    </tbody>
+        </tr></tbody>
   </table></div>
 </section>
 
 <section id="drops">
-  <h2>Drops — 47 (separados por motivo)</h2>
-  <p class="sub">Tratativa de operação vem primeiro e isolada · sem observação</p>
+  <h2>Drops — 47</h2>
+  <p class="sub">Sem TCV / Saber · Interno com observação do porquê</p>
   
     <div class="drop-block ops">
       <h3>Drop · Tratativa de operação (18)</h3>
-      <p class="sub">Separado porque é tratativa de Ops — não é o mesmo tipo de perda comercial.</p>
+      <p class="sub">Separado da perda comercial · sem TCV / Saber</p>
       <div class="tbl"><table>
-        <thead><tr><th>Empresa</th><th>Score*</th><th>Status</th><th>Need</th><th>Temp</th><th>TCV</th><th>Saber</th><th>Motivo DROP</th></tr></thead>
-        <tbody>
+        <thead><tr><th>Empresa</th><th>Need</th><th>Tipo</th><th>Temp</th><th>Squad</th></tr></thead>
+        <tbody><tr>
+              <td class="name">Amorelli mercenaria (BT)</td>
+              <td>TINY</td>
+              <td>Estruturação</td>
+              <td>—</td>
+              <td>Billions</td>
+            </tr>
 <tr>
-          <td class="name">Amorelli mercenaria (BT)</td>
-          <td><span class="band-tag d">D 17</span></td>
-          <td>Drop</td>
-          <td>TINY</td>
-          <td>—</td>
-          <td class="r">R$ 0</td>
-          <td class="r">R$ 0</td>
-          <td>Tratativa Ops</td>
-        </tr>
+              <td class="name">Casa Bella (BS)</td>
+              <td>SMALL</td>
+              <td>Estruturação</td>
+              <td>Frio</td>
+              <td>Billions</td>
+            </tr>
 <tr>
-          <td class="name">Casa Bella (BS)</td>
-          <td><span class="band-tag d">D 21</span></td>
-          <td>Drop</td>
-          <td>SMALL</td>
-          <td>Frio</td>
-          <td class="r">R$ 0</td>
-          <td class="r">R$ 0</td>
-          <td>Tratativa Ops</td>
-        </tr>
+              <td class="name">Equilibra</td>
+              <td>TINY</td>
+              <td>Estruturação</td>
+              <td>Frio</td>
+              <td>Invictus</td>
+            </tr>
 <tr>
-          <td class="name">Equilibra</td>
-          <td><span class="band-tag d">D 24</span></td>
-          <td>Drop</td>
-          <td>TINY</td>
-          <td>Frio</td>
-          <td class="r">R$ 0</td>
-          <td class="r">R$ 0</td>
-          <td>Tratativa Ops</td>
-        </tr>
+              <td class="name">Fc Cursio (BT)</td>
+              <td>TINY</td>
+              <td>Estruturação</td>
+              <td>—</td>
+              <td>Invictus</td>
+            </tr>
 <tr>
-          <td class="name">Fc Cursio (BT)</td>
-          <td><span class="band-tag d">D 17</span></td>
-          <td>Drop</td>
-          <td>TINY</td>
-          <td>—</td>
-          <td class="r">R$ 0</td>
-          <td class="r">R$ 0</td>
-          <td>Tratativa Ops</td>
-        </tr>
+              <td class="name">Financial Sistemas</td>
+              <td>SMALL</td>
+              <td>Estruturação</td>
+              <td>Morno</td>
+              <td>Exclusive</td>
+            </tr>
 <tr>
-          <td class="name">Financial Sistemas</td>
-          <td><span class="band-tag d">D 21</span></td>
-          <td>Drop</td>
-          <td>SMALL</td>
-          <td>Morno</td>
-          <td class="r">R$ 0</td>
-          <td class="r">R$ 0</td>
-          <td>Tratativa Ops</td>
-        </tr>
+              <td class="name">Fuzinatto - Ceramica Roverotto (IndL)</td>
+              <td>LARGE</td>
+              <td>Estruturação</td>
+              <td>Frio</td>
+              <td>Invictus</td>
+            </tr>
 <tr>
-          <td class="name">Fuzinatto - Ceramica Roverotto (IndL)</td>
-          <td><span class="band-tag d">D 23</span></td>
-          <td>Drop</td>
-          <td>LARGE</td>
-          <td>Frio</td>
-          <td class="r">R$ 118.600</td>
-          <td class="r">R$ 0</td>
-          <td>Tratativa Ops</td>
-        </tr>
+              <td class="name">Globo Eventos (BT)</td>
+              <td>SMALL</td>
+              <td>Estruturação</td>
+              <td>Frio</td>
+              <td>Invictus</td>
+            </tr>
 <tr>
-          <td class="name">Globo Eventos (BT)</td>
-          <td><span class="band-tag d">D 28</span></td>
-          <td>Drop</td>
-          <td>SMALL</td>
-          <td>Frio</td>
-          <td class="r">R$ 37.565</td>
-          <td class="r">R$ 0</td>
-          <td>Tratativa Ops</td>
-        </tr>
+              <td class="name">Joyful Feast Food Park (BT)</td>
+              <td>SMALL</td>
+              <td>Estruturação</td>
+              <td>Frio</td>
+              <td>Billions</td>
+            </tr>
 <tr>
-          <td class="name">Joyful Feast Food Park (BT)</td>
-          <td><span class="band-tag d">D 21</span></td>
-          <td>Drop</td>
-          <td>SMALL</td>
-          <td>Frio</td>
-          <td class="r">R$ 3.600</td>
-          <td class="r">R$ 0</td>
-          <td>Tratativa Ops</td>
-        </tr>
+              <td class="name">L5 máquinas para nutrição animal (BS)</td>
+              <td>SMALL</td>
+              <td>Estruturação</td>
+              <td>—</td>
+              <td>Invictus</td>
+            </tr>
 <tr>
-          <td class="name">L5 máquinas para nutrição animal (BS)</td>
-          <td><span class="band-tag d">D 21</span></td>
-          <td>Drop</td>
-          <td>SMALL</td>
-          <td>—</td>
-          <td class="r">R$ 0</td>
-          <td class="r">R$ 0</td>
-          <td>Tratativa Ops</td>
-        </tr>
+              <td class="name">LaundryApp (Agrovita)</td>
+              <td>NO ICP</td>
+              <td>Estruturação</td>
+              <td>Frio</td>
+              <td>Billions</td>
+            </tr>
 <tr>
-          <td class="name">LaundryApp (Agrovita)</td>
-          <td><span class="band-tag d">D 13</span></td>
-          <td>Drop</td>
-          <td>NO ICP</td>
-          <td>Frio</td>
-          <td class="r">R$ 0</td>
-          <td class="r">R$ 0</td>
-          <td>Tratativa Ops</td>
-        </tr>
+              <td class="name">Lone Star BC LTDA (BS)</td>
+              <td>TINY</td>
+              <td>Estruturação</td>
+              <td>—</td>
+              <td>Invictus</td>
+            </tr>
 <tr>
-          <td class="name">Lone Star BC LTDA (BS)</td>
-          <td><span class="band-tag d">D 17</span></td>
-          <td>Drop</td>
-          <td>TINY</td>
-          <td>—</td>
-          <td class="r">R$ 0</td>
-          <td class="r">R$ 0</td>
-          <td>Tratativa Ops</td>
-        </tr>
+              <td class="name">M &amp; J GREEN FOODS LTDA (BS)</td>
+              <td>TINY</td>
+              <td>Estruturação</td>
+              <td>—</td>
+              <td>Billions</td>
+            </tr>
 <tr>
-          <td class="name">M &amp; J GREEN FOODS LTDA (BS)</td>
-          <td><span class="band-tag d">D 18</span></td>
-          <td>Drop</td>
-          <td>TINY</td>
-          <td>—</td>
-          <td class="r">R$ 0</td>
-          <td class="r">R$ 0</td>
-          <td>Tratativa Ops</td>
-        </tr>
+              <td class="name">MasterPlan (BS)</td>
+              <td>MEDIUM</td>
+              <td>Estruturação</td>
+              <td>—</td>
+              <td>Exclusive</td>
+            </tr>
 <tr>
-          <td class="name">MasterPlan (BS)</td>
-          <td><span class="band-tag d">D 22</span></td>
-          <td>Drop</td>
-          <td>MEDIUM</td>
-          <td>—</td>
-          <td class="r">R$ 15.461</td>
-          <td class="r">R$ 0</td>
-          <td>Tratativa Ops</td>
-        </tr>
+              <td class="name">NextPack Equipamentos Ltda (BS)</td>
+              <td>SMALL</td>
+              <td>Estruturação</td>
+              <td>—</td>
+              <td>Exclusive</td>
+            </tr>
 <tr>
-          <td class="name">NextPack Equipamentos Ltda (BS)</td>
-          <td><span class="band-tag d">D 39</span></td>
-          <td>Drop</td>
-          <td>SMALL</td>
-          <td>—</td>
-          <td class="r">R$ 0</td>
-          <td class="r">R$ 0</td>
-          <td>Tratativa Ops</td>
-        </tr>
+              <td class="name">Ntec instalações hidráulicas ltda (LT)</td>
+              <td>TINY</td>
+              <td>Estruturação</td>
+              <td>—</td>
+              <td>Invictus</td>
+            </tr>
 <tr>
-          <td class="name">Ntec instalações hidráulicas ltda (LT)</td>
-          <td><span class="band-tag d">D 17</span></td>
-          <td>Drop</td>
-          <td>TINY</td>
-          <td>—</td>
-          <td class="r">R$ 0</td>
-          <td class="r">R$ 0</td>
-          <td>Tratativa Ops</td>
-        </tr>
+              <td class="name">Prata Nobre (BM)</td>
+              <td>MEDIUM</td>
+              <td>E.E + Assesosria</td>
+              <td>Frio</td>
+              <td>Billions</td>
+            </tr>
 <tr>
-          <td class="name">Prata Nobre (BM)</td>
-          <td><span class="band-tag d">D 29</span></td>
-          <td>Drop</td>
-          <td>MEDIUM</td>
-          <td>Frio</td>
-          <td class="r">R$ 50.660</td>
-          <td class="r">R$ 0</td>
-          <td>Tratativa Ops</td>
-        </tr>
+              <td class="name">Premium Gourmet E Chopeiras (BS)</td>
+              <td>SMALL</td>
+              <td>E.E + Assesosria</td>
+              <td>Frio</td>
+              <td>Invictus</td>
+            </tr>
 <tr>
-          <td class="name">Premium Gourmet E Chopeiras (BS)</td>
-          <td><span class="band-tag d">D 28</span></td>
-          <td>Drop</td>
-          <td>SMALL</td>
-          <td>Frio</td>
-          <td class="r">R$ 0</td>
-          <td class="r">R$ 0</td>
-          <td>Tratativa Ops</td>
-        </tr>
-<tr>
-          <td class="name">Vita Mater Home Care (BS)</td>
-          <td><span class="band-tag d">D 28</span></td>
-          <td>Drop</td>
-          <td>SMALL</td>
-          <td>Frio</td>
-          <td class="r">R$ 0</td>
-          <td class="r">R$ 0</td>
-          <td>Tratativa Ops</td>
-        </tr>
-        </tbody>
+              <td class="name">Vita Mater Home Care (BS)</td>
+              <td>SMALL</td>
+              <td>Estruturação</td>
+              <td>Frio</td>
+              <td>Billions</td>
+            </tr></tbody>
       </table></div>
     </div>
-
     <div class="drop-block ">
       <h3>Drop · Timing (16)</h3>
-      <p class="sub">Motivo registrado na planilha E.E.</p>
+      <p class="sub">Sem TCV / Saber</p>
       <div class="tbl"><table>
-        <thead><tr><th>Empresa</th><th>Score*</th><th>Status</th><th>Need</th><th>Temp</th><th>TCV</th><th>Saber</th><th>Motivo DROP</th></tr></thead>
-        <tbody>
+        <thead><tr><th>Empresa</th><th>Need</th><th>Tipo</th><th>Temp</th><th>Squad</th></tr></thead>
+        <tbody><tr>
+              <td class="name">Becton Company (BT)</td>
+              <td>TINY</td>
+              <td>Estruturação</td>
+              <td>Frio</td>
+              <td>Billions</td>
+            </tr>
 <tr>
-          <td class="name">Becton Company (BT)</td>
-          <td><span class="band-tag d">D 24</span></td>
-          <td>Drop</td>
-          <td>TINY</td>
-          <td>Frio</td>
-          <td class="r">R$ 191.061</td>
-          <td class="r">R$ 0</td>
-          <td>Timing</td>
-        </tr>
+              <td class="name">Bioativos (BS)</td>
+              <td>SMALL</td>
+              <td>Estruturação</td>
+              <td>Frio</td>
+              <td>Billions</td>
+            </tr>
 <tr>
-          <td class="name">Bioativos (BS)</td>
-          <td><span class="band-tag d">D 28</span></td>
-          <td>Drop</td>
-          <td>SMALL</td>
-          <td>Frio</td>
-          <td class="r">R$ 94.224</td>
-          <td class="r">R$ 15.000</td>
-          <td>Timing</td>
-        </tr>
+              <td class="name">Danah Arquitetura (BS)</td>
+              <td>SMALL</td>
+              <td>Estruturação</td>
+              <td>Frio</td>
+              <td>Exclusive</td>
+            </tr>
 <tr>
-          <td class="name">Danah Arquitetura (BS)</td>
-          <td><span class="band-tag d">D 28</span></td>
-          <td>Drop</td>
-          <td>SMALL</td>
-          <td>Frio</td>
-          <td class="r">R$ 4.461</td>
-          <td class="r">R$ 0</td>
-          <td>Timing</td>
-        </tr>
+              <td class="name">Devstate (DR-X)</td>
+              <td>MEDIUM</td>
+              <td>Estruturação</td>
+              <td>Quente</td>
+              <td>Invictus</td>
+            </tr>
 <tr>
-          <td class="name">Devstate (DR-X)</td>
-          <td><span class="band-tag c">C 54</span></td>
-          <td>Drop</td>
-          <td>MEDIUM</td>
-          <td>Quente</td>
-          <td class="r">R$ 123.923</td>
-          <td class="r">R$ 0</td>
-          <td>Timing</td>
-        </tr>
+              <td class="name">Eskimó Sorvetes (Francinei Grassi Pereira)</td>
+              <td>MEDIUM</td>
+              <td>Estruturação</td>
+              <td>Frio</td>
+              <td>Invictus</td>
+            </tr>
 <tr>
-          <td class="name">Eskimó Sorvetes (Francinei Grassi Pereira)</td>
-          <td><span class="band-tag d">D 29</span></td>
-          <td>Drop</td>
-          <td>MEDIUM</td>
-          <td>Frio</td>
-          <td class="r">R$ 50.529</td>
-          <td class="r">R$ 0</td>
-          <td>Timing</td>
-        </tr>
+              <td class="name">ID Finanças (LS)</td>
+              <td>SMALL</td>
+              <td>Estruturação</td>
+              <td>Frio</td>
+              <td>Exclusive</td>
+            </tr>
 <tr>
-          <td class="name">ID Finanças (LS)</td>
-          <td><span class="band-tag d">D 30</span></td>
-          <td>Drop</td>
-          <td>SMALL</td>
-          <td>Frio</td>
-          <td class="r">R$ 0</td>
-          <td class="r">R$ 0</td>
-          <td>Timing</td>
-        </tr>
+              <td class="name">Madeiras teresense (BM)</td>
+              <td>MEDIUM</td>
+              <td>Estruturação</td>
+              <td>Frio</td>
+              <td>Invictus</td>
+            </tr>
 <tr>
-          <td class="name">Madeiras teresense (BM)</td>
-          <td><span class="band-tag d">D 29</span></td>
-          <td>Drop</td>
-          <td>MEDIUM</td>
-          <td>Frio</td>
-          <td class="r">R$ 125.151</td>
-          <td class="r">R$ 0</td>
-          <td>Timing</td>
-        </tr>
+              <td class="name">Madeireira Ervatti (BT)</td>
+              <td>TINY</td>
+              <td>Estruturação</td>
+              <td>Morno</td>
+              <td>Exclusive</td>
+            </tr>
 <tr>
-          <td class="name">Madeireira Ervatti (BT)</td>
-          <td><span class="band-tag d">D 36</span></td>
-          <td>Drop</td>
-          <td>TINY</td>
-          <td>Morno</td>
-          <td class="r">R$ 17.753</td>
-          <td class="r">R$ 17.753</td>
-          <td>Timing</td>
-        </tr>
+              <td class="name">Mais Gondolas (BS)</td>
+              <td>SMALL</td>
+              <td>Estruturação</td>
+              <td>Frio</td>
+              <td>Invictus</td>
+            </tr>
 <tr>
-          <td class="name">Mais Gondolas (BS)</td>
-          <td><span class="band-tag d">D 28</span></td>
-          <td>Drop</td>
-          <td>SMALL</td>
-          <td>Frio</td>
-          <td class="r">R$ 98.951</td>
-          <td class="r">R$ 16.227</td>
-          <td>Timing</td>
-        </tr>
+              <td class="name">Mayko Junior</td>
+              <td>SMALL</td>
+              <td>Estruturação</td>
+              <td>Frio</td>
+              <td>Billions</td>
+            </tr>
 <tr>
-          <td class="name">Mayko Junior</td>
-          <td><span class="band-tag d">D 28</span></td>
-          <td>Drop</td>
-          <td>SMALL</td>
-          <td>Frio</td>
-          <td class="r">R$ 25.500</td>
-          <td class="r">R$ 0</td>
-          <td>Timing</td>
-        </tr>
+              <td class="name">Movement (BS)</td>
+              <td>SMALL</td>
+              <td>Estruturação</td>
+              <td>Frio</td>
+              <td>Billions</td>
+            </tr>
 <tr>
-          <td class="name">Movement (BS)</td>
-          <td><span class="band-tag d">D 30</span></td>
-          <td>Drop</td>
-          <td>SMALL</td>
-          <td>Frio</td>
-          <td class="r">R$ 10.953</td>
-          <td class="r">R$ 0</td>
-          <td>Timing</td>
-        </tr>
+              <td class="name">Positive Safety Sistemas (BS)</td>
+              <td>SMALL</td>
+              <td>TER</td>
+              <td>Frio</td>
+              <td>Exclusive</td>
+            </tr>
 <tr>
-          <td class="name">Positive Safety Sistemas (BS)</td>
-          <td><span class="band-tag d">D 28</span></td>
-          <td>Drop</td>
-          <td>SMALL</td>
-          <td>Frio</td>
-          <td class="r">R$ 66.000</td>
-          <td class="r">R$ 0</td>
-          <td>Timing</td>
-        </tr>
+              <td class="name">Positive Solutions</td>
+              <td>SMALL</td>
+              <td>Estruturação</td>
+              <td>Frio</td>
+              <td>Invictus</td>
+            </tr>
 <tr>
-          <td class="name">Positive Solutions</td>
-          <td><span class="band-tag d">D 28</span></td>
-          <td>Drop</td>
-          <td>SMALL</td>
-          <td>Frio</td>
-          <td class="r">R$ 0</td>
-          <td class="r">R$ 0</td>
-          <td>Timing</td>
-        </tr>
+              <td class="name">Testfy</td>
+              <td>MEDIUM</td>
+              <td>Estruturação</td>
+              <td>—</td>
+              <td>Billions</td>
+            </tr>
 <tr>
-          <td class="name">Testfy</td>
-          <td><span class="band-tag c">C 40</span></td>
-          <td>Drop</td>
-          <td>MEDIUM</td>
-          <td>—</td>
-          <td class="r">R$ 0</td>
-          <td class="r">R$ 0</td>
-          <td>Timing</td>
-        </tr>
+              <td class="name">WZR Reciclados Ltda (B)</td>
+              <td>TINY</td>
+              <td>Estruturação</td>
+              <td>Frio</td>
+              <td>Billions</td>
+            </tr>
 <tr>
-          <td class="name">WZR Reciclados Ltda (B)</td>
-          <td><span class="band-tag d">D 24</span></td>
-          <td>Drop</td>
-          <td>TINY</td>
-          <td>Frio</td>
-          <td class="r">R$ 17.753</td>
-          <td class="r">R$ 17.753</td>
-          <td>Timing</td>
-        </tr>
-<tr>
-          <td class="name">Ícaro Braga Advogados</td>
-          <td><span class="band-tag d">D 29</span></td>
-          <td>Drop</td>
-          <td>MEDIUM</td>
-          <td>Frio</td>
-          <td class="r">R$ 63.000</td>
-          <td class="r">R$ 0</td>
-          <td>Timing</td>
-        </tr>
-        </tbody>
+              <td class="name">Ícaro Braga Advogados</td>
+              <td>MEDIUM</td>
+              <td>Estruturação</td>
+              <td>Frio</td>
+              <td>Billions</td>
+            </tr></tbody>
       </table></div>
     </div>
-
     <div class="drop-block ">
       <h3>Drop · Budget (10)</h3>
-      <p class="sub">Motivo registrado na planilha E.E.</p>
+      <p class="sub">Sem TCV / Saber</p>
       <div class="tbl"><table>
-        <thead><tr><th>Empresa</th><th>Score*</th><th>Status</th><th>Need</th><th>Temp</th><th>TCV</th><th>Saber</th><th>Motivo DROP</th></tr></thead>
-        <tbody>
+        <thead><tr><th>Empresa</th><th>Need</th><th>Tipo</th><th>Temp</th><th>Squad</th></tr></thead>
+        <tbody><tr>
+              <td class="name">Acarlos serviços e manutencao (BS)</td>
+              <td>SMALL</td>
+              <td>Estruturação</td>
+              <td>Frio</td>
+              <td>Invictus</td>
+            </tr>
 <tr>
-          <td class="name">Acarlos serviços e manutencao (BS)</td>
-          <td><span class="band-tag d">D 28</span></td>
-          <td>Drop</td>
-          <td>SMALL</td>
-          <td>Frio</td>
-          <td class="r">R$ 2.635</td>
-          <td class="r">R$ 0</td>
-          <td>Budget</td>
-        </tr>
+              <td class="name">Cria Nutrição Animal</td>
+              <td>MEDIUM</td>
+              <td>Estruturação</td>
+              <td>Frio</td>
+              <td>Billions</td>
+            </tr>
 <tr>
-          <td class="name">Cria Nutrição Animal</td>
-          <td><span class="band-tag d">D 22</span></td>
-          <td>Drop</td>
-          <td>MEDIUM</td>
-          <td>Frio</td>
-          <td class="r">R$ 82.955</td>
-          <td class="r">R$ 0</td>
-          <td>Budget</td>
-        </tr>
+              <td class="name">Drogaria Ultra Vida</td>
+              <td>NO ICP</td>
+              <td>Estruturação</td>
+              <td>Frio</td>
+              <td>Billions</td>
+            </tr>
 <tr>
-          <td class="name">Drogaria Ultra Vida</td>
-          <td><span class="band-tag d">D 20</span></td>
-          <td>Drop</td>
-          <td>NO ICP</td>
-          <td>Frio</td>
-          <td class="r">R$ 8.000</td>
-          <td class="r">R$ 0</td>
-          <td>Budget</td>
-        </tr>
+              <td class="name">Gaucho parafusos (BS)</td>
+              <td>SMALL</td>
+              <td>Estruturação</td>
+              <td>Frio</td>
+              <td>Billions</td>
+            </tr>
 <tr>
-          <td class="name">Gaucho parafusos (BS)</td>
-          <td><span class="band-tag d">D 30</span></td>
-          <td>Drop</td>
-          <td>SMALL</td>
-          <td>Frio</td>
-          <td class="r">R$ 10.460</td>
-          <td class="r">R$ 0</td>
-          <td>Budget</td>
-        </tr>
+              <td class="name">Kidys Park (BS)</td>
+              <td>MEDIUM</td>
+              <td>Estruturação</td>
+              <td>Quente</td>
+              <td>Invictus</td>
+            </tr>
 <tr>
-          <td class="name">Kidys Park (BS)</td>
-          <td><span class="band-tag c">C 54</span></td>
-          <td>Drop</td>
-          <td>MEDIUM</td>
-          <td>Quente</td>
-          <td class="r">R$ 42.795</td>
-          <td class="r">R$ 0</td>
-          <td>Budget</td>
-        </tr>
+              <td class="name">Madezatto repaginação de ambientes (BS)</td>
+              <td>SMALL</td>
+              <td>E.C</td>
+              <td>Morno</td>
+              <td>Invictus</td>
+            </tr>
 <tr>
-          <td class="name">Madezatto repaginação de ambientes (BS)</td>
-          <td><span class="band-tag c">C 42</span></td>
-          <td>Drop</td>
-          <td>SMALL</td>
-          <td>Morno</td>
-          <td class="r">R$ 66.000</td>
-          <td class="r">R$ 0</td>
-          <td>Budget</td>
-        </tr>
+              <td class="name">Punctual Shuttle Transporte Executivo (BT-)</td>
+              <td>NO ICP</td>
+              <td>Estruturação</td>
+              <td>Frio</td>
+              <td>Billions</td>
+            </tr>
 <tr>
-          <td class="name">Punctual Shuttle Transporte Executivo (BT-)</td>
-          <td><span class="band-tag c">C 44</span></td>
-          <td>Drop</td>
-          <td>NO ICP</td>
-          <td>Frio</td>
-          <td class="r">R$ 3.792</td>
-          <td class="r">R$ 0</td>
-          <td>Budget</td>
-        </tr>
+              <td class="name">Ruiz Climatização</td>
+              <td>TINY</td>
+              <td>Estruturação</td>
+              <td>—</td>
+              <td>Invictus</td>
+            </tr>
 <tr>
-          <td class="name">Ruiz Climatização</td>
-          <td><span class="band-tag d">D 37</span></td>
-          <td>Drop</td>
-          <td>TINY</td>
-          <td>—</td>
-          <td class="r">R$ 0</td>
-          <td class="r">R$ 0</td>
-          <td>Budget</td>
-        </tr>
+              <td class="name">U R TRANSPORTES LTDA (BS)</td>
+              <td>SMALL</td>
+              <td>Estruturação</td>
+              <td>Frio</td>
+              <td>Billions</td>
+            </tr>
 <tr>
-          <td class="name">U R TRANSPORTES LTDA (BS)</td>
-          <td><span class="band-tag d">D 28</span></td>
-          <td>Drop</td>
-          <td>SMALL</td>
-          <td>Frio</td>
-          <td class="r">R$ 8.000</td>
-          <td class="r">R$ 0</td>
-          <td>Budget</td>
-        </tr>
-<tr>
-          <td class="name">Óticas Líder (BT)</td>
-          <td><span class="band-tag d">D 20</span></td>
-          <td>Drop</td>
-          <td>NO ICP</td>
-          <td>Frio</td>
-          <td class="r">R$ 8.496</td>
-          <td class="r">R$ 8.496</td>
-          <td>Budget</td>
-        </tr>
-        </tbody>
+              <td class="name">Óticas Líder (BT)</td>
+              <td>NO ICP</td>
+              <td>Estruturação</td>
+              <td>Frio</td>
+              <td>Billions</td>
+            </tr></tbody>
       </table></div>
     </div>
-
     <div class="drop-block ">
       <h3>Drop · Interno (2)</h3>
-      <p class="sub">Motivo registrado na planilha E.E.</p>
+      <p class="sub">Com observação do porquê interno · sem TCV / Saber</p>
       <div class="tbl"><table>
-        <thead><tr><th>Empresa</th><th>Score*</th><th>Status</th><th>Need</th><th>Temp</th><th>TCV</th><th>Saber</th><th>Motivo DROP</th></tr></thead>
-        <tbody>
+        <thead><tr><th>Empresa</th><th>Need</th><th>Tipo</th><th>Temp</th><th>Observação (por quê)</th></tr></thead>
+        <tbody><tr>
+              <td class="name">Diveq</td>
+              <td>MEDIUM</td>
+              <td>Estruturação</td>
+              <td>Frio</td>
+              <td>(FUP FUTURO) A proposta havia sido aceita, porém o projeto entrou em standby estratégico devido a uma mudança na composição societária (desligamento do sócio principal). No momento, a prioridade da empresa foi deslocada para a reestruturação do quadro funcional e governança interna. Manterei o monitoramento para retomar o onboarding assim que a operação estabilizar.</td>
+            </tr>
 <tr>
-          <td class="name">Diveq</td>
-          <td><span class="band-tag d">D 29</span></td>
-          <td>Drop</td>
-          <td>MEDIUM</td>
-          <td>Frio</td>
-          <td class="r">R$ 92.098</td>
-          <td class="r">R$ 0</td>
-          <td>Interno</td>
-        </tr>
-<tr>
-          <td class="name">ZLS hub (BT)</td>
-          <td><span class="band-tag d">D 28</span></td>
-          <td>Drop</td>
-          <td>SMALL</td>
-          <td>Frio</td>
-          <td class="r">R$ 0</td>
-          <td class="r">R$ 0</td>
-          <td>Interno</td>
-        </tr>
-        </tbody>
+              <td class="name">ZLS hub (BT)</td>
+              <td>SMALL</td>
+              <td>Estruturação</td>
+              <td>Frio</td>
+              <td>—</td>
+            </tr></tbody>
       </table></div>
     </div>
-
     <div class="drop-block ">
       <h3>Drop · (sem motivo) (1)</h3>
-      <p class="sub">Motivo registrado na planilha E.E.</p>
+      <p class="sub">Sem TCV / Saber</p>
       <div class="tbl"><table>
-        <thead><tr><th>Empresa</th><th>Score*</th><th>Status</th><th>Need</th><th>Temp</th><th>TCV</th><th>Saber</th><th>Motivo DROP</th></tr></thead>
-        <tbody>
-<tr>
-          <td class="name">Curavida (BM)</td>
-          <td><span class="band-tag d">D 31</span></td>
-          <td>Drop</td>
-          <td>MEDIUM</td>
-          <td>Frio</td>
-          <td class="r">R$ 26.461</td>
-          <td class="r">R$ 22.000</td>
-          <td>(sem motivo)</td>
-        </tr>
-        </tbody>
+        <thead><tr><th>Empresa</th><th>Need</th><th>Tipo</th><th>Temp</th><th>Squad</th></tr></thead>
+        <tbody><tr>
+              <td class="name">Curavida (BM)</td>
+              <td>MEDIUM</td>
+              <td>Estruturação</td>
+              <td>Frio</td>
+              <td>Exclusive</td>
+            </tr></tbody>
       </table></div>
     </div>
-</section>
-
-<section id="glossario">
-  <h2>Glossário rápido</h2>
-  <div class="glossary">
-    <div class="g-item"><strong>E.E.</strong>Estruturação Estratégica (Saber que você conduz).</div>
-    <div class="g-item"><strong>Lead Score</strong>Nota 0–100 de prontidão para o próximo passo.</div>
-    <div class="g-item"><strong>NPS</strong>Nota 0–10 de indicação.</div>
-    <div class="g-item"><strong>Tier / Need</strong>Porte da conta.</div>
-    <div class="g-item"><strong>Decisores</strong>Quem precisa concordar. &gt;3 reduz a nota.</div>
-    <div class="g-item"><strong>MKT</strong>Marketing interno e postura.</div>
-    <div class="g-item"><strong>Tratativa Ops</strong>Drop por tratativa de operação (separado dos drops comerciais).</div>
-    <div class="g-item"><strong>Flow / Cockpit</strong>Sistemas internos — ainda não são o motor deste mapa.</div>
-  </div>
 </section>
 
 <footer class="foot">
-  V4 · Sara · Lead Score Saber E.E · mapa v0.1.1 · 14/07/2026<br>
-  Fonte: planilha E.E (não Flow) · <a href="lead-score-saber-ee-metodologia.html">metodologia</a>
+  V4 · Sara · Lead Score Saber E.E · v0.2 · fonte planilha E.E · <a href="lead-score-saber-ee-metodologia.html">metodologia</a>
 </footer>
 </div>
 <script>
-const q=document.getElementById('q'), band=document.getElementById('band'), squad=document.getElementById('squad');
+const q=document.getElementById('q'), band=document.getElementById('band'), squad=document.getElementById('squad'), execf=document.getElementById('execf');
 function filter(){
   const qq=(q.value||'').toLowerCase().trim();
-  const b=band.value, s=squad.value;
+  const b=band.value, s=squad.value, e=execf.value;
   document.querySelectorAll('#grid .client').forEach(el=>{
     const okQ=!qq || (el.dataset.name||'').includes(qq);
     const okB=!b || el.dataset.band===b;
     const okS=!s || el.dataset.squad===s;
-    el.classList.toggle('hidden', !(okQ && okB && okS));
+    const okE=!e || el.dataset.exec===e;
+    el.classList.toggle('hidden', !(okQ && okB && okS && okE));
   });
 }
-[q,band,squad].forEach(el=>el.addEventListener('input', filter));
-band.addEventListener('change', filter);
-squad.addEventListener('change', filter);
+[q,band,squad,execf].forEach(el=>el.addEventListener('input', filter));
+[band,squad,execf].forEach(el=>el.addEventListener('change', filter));
 </script>
 </body>
 </html>
