@@ -56,8 +56,8 @@
     }
     .hero-eyebrow::before { content: ''; width: 24px; height: 3px; background: var(--brand); border-radius: 2px; }
     .hero h1 { margin: 0 0 10px; font-size: clamp(26px, 4vw, 36px); font-weight: 900; letter-spacing: -.03em; }
-    .hero .meta { color: var(--mut); font-size: 13px; max-width: 720px; }
-  .hero .meta strong { color: var(--txt); }
+    .hero .meta { color: var(--mut); font-size: 13px; max-width: 760px; }
+    .hero .meta strong { color: var(--txt); }
     .source-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
     .chip {
       font-size: 10px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
@@ -117,6 +117,7 @@
     .tag-ok { background: rgba(34,197,94,.12); color: #86efac; }
     .tag-drop { background: rgba(239,68,68,.12); color: #fca5a5; }
     .tag-neu { background: rgba(255,255,255,.06); color: var(--mut); }
+    .tag-reativa { background: rgba(250,204,21,.12); color: #fde047; }
     .funnel { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
     .funnel-step {
       flex: 1; min-width: 90px; background: var(--surf2); border: 1px solid var(--bd);
@@ -135,7 +136,13 @@
     .action-item.p1 { border-color: var(--warn); background: rgba(250,204,21,.06); }
     .action-item.p2 { border-color: var(--info); background: rgba(96,165,250,.06); }
     .table-wrap { overflow-x: auto; border-radius: 10px; }
-    .obs-cell { max-width: 280px; font-size: 12px; color: #d4d4d4; }
+    .obs-cell { max-width: 320px; font-size: 12px; color: #d4d4d4; }
+    .callout {
+      margin-bottom: 18px; padding: 14px 18px; border-radius: 12px;
+      border: 1px solid rgba(250,204,21,.28); background: rgba(250,204,21,.06);
+      color: #fde68a; font-size: 13px;
+    }
+    .callout strong { color: #fef08a; }
     footer { text-align: center; color: var(--mut); font-size: 11px; margin-top: 48px; padding: 24px 0; border-top: 1px solid var(--bd); }
   </style>
 </head>
@@ -143,108 +150,125 @@
 
 <header class="topbar">
   <div class="v4-logo">V4 <span>COMPANY</span></div>
-  <div class="sync-pill"><span class="sync-dot"></span> Sara Pizzico · E.E · Jul/2026</div>
+  <div class="sync-pill"><span class="sync-dot"></span> Sara Pizzico · E.E · Jul/2026 · 15/07</div>
 </header>
 
 <div class="wrap">
   <section class="hero">
     <div class="hero-inner">
       <div class="hero-eyebrow">Farmer ABM · Estruturação Estratégica</div>
-      <h1>Pipe Diário — E.E Sara</h1>
+      <h1>Pipe Diário — E.E Sara · Julho</h1>
       <p class="meta">
-        <strong>Sara Pizzico</strong> · Competência Jul/2026 · Aba <strong>E.E ✅</strong> do Cockpit Monetização.
-        Dados: empresa, need scope, tipo, status, temperatura, pitch, TCV, observação e motivo de drop.
+        <strong>Sara Pizzico</strong> · Competência <strong>Jul/2026</strong> · Aba <strong>E.E ✅</strong> + <strong>Meta x Realizado 2026</strong>.
+        Snapshot de 15/07: 10 contas em Follow/Aceito (R$ 705k TCV), 18 semanas abertas, 0 fechamento E.E em julho até agora.
       </p>
       <div class="source-chips">
         <span class="chip live">Planilha E.E</span>
-        <span class="chip">Cockpit Monetização</span>
-        <span class="chip">Atualizado 14/07/2026</span>
+        <span class="chip live">Meta x Realizado</span>
+        <span class="chip">Atualizado 15/07/2026</span>
       </div>
     </div>
   </section>
 
+  <div class="callout">
+    <strong>Leitura do dia (15/07):</strong> Unik aguarda assinatura · Modular aceitou com reajuste · Pedrini EQV hoje · Academia pitch 16/07 · Stylus + Rota devolutiva 17/07 · Meta total julho em 9,24% (R$ 14,8k / R$ 160k).
+  </div>
+
   <div class="kpis">
     <div class="kpi"><div class="v red">10</div><div class="l">Follow + Aceito</div></div>
-    <div class="kpi"><div class="v">R$ 730k</div><div class="l">TCV em negociação</div></div>
-    <div class="kpi"><div class="v">19</div><div class="l">Semanas abertas</div></div>
+    <div class="kpi"><div class="v">R$ 705k</div><div class="l">TCV em negociação</div></div>
+    <div class="kpi"><div class="v">18</div><div class="l">Semanas abertas</div></div>
     <div class="kpi"><div class="v">3</div><div class="l">Quentes (Follow)</div></div>
     <div class="kpi"><div class="v">1</div><div class="l">Aceito</div></div>
-    <div class="kpi"><div class="v">3</div><div class="l">Drop (julho)</div></div>
-    <div class="kpi"><div class="v">1</div><div class="l">Monetizado jul</div></div>
+    <div class="kpi"><div class="v">0</div><div class="l">Monetizado jul</div></div>
+    <div class="kpi"><div class="v">9%</div><div class="l">Meta total jul</div></div>
   </div>
 
   <nav class="squad-view-bar">
     <div class="bar-label">Selecionar visão</div>
     <div class="squad-view-tabs">
       <button class="squad-view-tab active" data-view="geral"><span class="tab-name">Visão geral</span><span class="tab-stats">Meta · Funil · Gráficos</span></button>
-      <button class="squad-view-tab" data-view="follow"><span class="tab-name">Follow & Aceito</span><span class="tab-stats">10 contas · R$ 730k</span></button>
-      <button class="squad-view-tab" data-view="semanas"><span class="tab-name">Semanas</span><span class="tab-stats">19 em aberto</span></button>
-      <button class="squad-view-tab" data-view="drop"><span class="tab-name">Drop</span><span class="tab-stats">3 no mês</span></button>
-      <button class="squad-view-tab" data-view="plano"><span class="tab-name">Plano de ação</span><span class="tab-stats">P0 → P3</span></button>
+      <button class="squad-view-tab" data-view="follow"><span class="tab-name">Follow & Aceito</span><span class="tab-stats">10 contas · R$ 705k</span></button>
+      <button class="squad-view-tab" data-view="semanas"><span class="tab-name">Semanas</span><span class="tab-stats">18 em aberto</span></button>
+      <button class="squad-view-tab" data-view="drop"><span class="tab-name">Drop / EQV</span><span class="tab-stats">4 vínculo jul</span></button>
+      <button class="squad-view-tab" data-view="plano"><span class="tab-name">Plano de ação</span><span class="tab-stats">P0 → P3 · 15/07</span></button>
     </div>
   </nav>
 
   <!-- GERAL -->
   <div class="view-panel is-active" data-view="geral">
     <div class="section">
-      <h2>🎯 Meta E.E · Jul/26</h2>
+      <h2>Meta · Jul/26 · Cockpit</h2>
       <div class="grid2">
         <div class="pace-card">
           <div class="pace-label">E.E Saber → Executar</div>
           <div class="pace-values">R$ 0,00 / R$ 70.000,00</div>
           <div class="bar-bg"><div class="bar-fill" style="width:0%"></div></div>
-          <div class="sub" style="margin-top:8px">0% realizado</div>
+          <div class="sub" style="margin-top:8px">0% · delta R$ 70.000</div>
         </div>
         <div class="pace-card">
           <div class="pace-label">E.E Ter → Saber</div>
           <div class="pace-values">R$ 8.109,38 / R$ 30.000,00</div>
           <div class="bar-bg"><div class="bar-fill" style="width:27%"></div></div>
-          <div class="sub" style="margin-top:8px">27% realizado</div>
+          <div class="sub" style="margin-top:8px">27,03% · Aceito+Realizado R$ 6.669,32</div>
         </div>
+        <div class="pace-card">
+          <div class="pace-label">Expansão Carteira · Executar</div>
+          <div class="pace-values">R$ 1.669,32 / R$ 30.000,00</div>
+          <div class="bar-bg"><div class="bar-fill" style="width:6%"></div></div>
+          <div class="sub" style="margin-top:8px">5,56% realizado</div>
+        </div>
+        <div class="pace-card">
+          <div class="pace-label">Expansão Carteira · Ter / Saber</div>
+          <div class="pace-values">R$ 5.000,00 / R$ 30.000,00</div>
+          <div class="bar-bg"><div class="bar-fill" style="width:17%"></div></div>
+          <div class="sub" style="margin-top:8px">16,67% realizado</div>
+        </div>
+      </div>
+      <div class="pace-card" style="margin-bottom:0">
+        <div class="pace-label">Total Julho</div>
+        <div class="pace-values">R$ 14.778,70 / R$ 160.000,00</div>
+        <div class="bar-bg"><div class="bar-fill" style="width:9%"></div></div>
+        <div class="sub" style="margin-top:8px">9,24% · faltam R$ 145.221,30</div>
       </div>
     </div>
 
     <div class="section">
       <h2>Funil E.E · Sara · Jul/26</h2>
       <div class="funnel">
-        <div class="funnel-step"><div class="n">19</div><div class="lbl">Semanas</div></div>
+        <div class="funnel-step"><div class="n">18</div><div class="lbl">Semanas</div></div>
         <div class="funnel-step active-heavy"><div class="n">9</div><div class="lbl">Follow</div></div>
         <div class="funnel-step"><div class="n">1</div><div class="lbl">Aceito</div></div>
-        <div class="funnel-step"><div class="n">1</div><div class="lbl">Monetizado</div></div>
-        <div class="funnel-step"><div class="n">3</div><div class="lbl">Drop jul</div></div>
+        <div class="funnel-step"><div class="n">0</div><div class="lbl">Monetizado jul</div></div>
+        <div class="funnel-step"><div class="n">4</div><div class="lbl">Drop / EQV</div></div>
       </div>
     </div>
 
     <div class="grid2">
       <div class="section">
-        <h2>🌡️ Termômetro · Follow</h2>
+        <h2>Termômetro · Follow</h2>
         <div class="chart-box"><canvas id="chartTemp"></canvas></div>
       </div>
       <div class="section">
-        <h2>📊 TCV por Squad · Follow</h2>
+        <h2>TCV por Squad · Follow</h2>
         <div class="chart-box"><canvas id="chartSquad"></canvas></div>
       </div>
     </div>
 
     <div class="section">
-      <h2>📅 Pitches em Julho/2026</h2>
+      <h2>Pitches em Julho/2026</h2>
       <div class="chart-box" style="height:220px"><canvas id="chartPitch"></canvas></div>
     </div>
 
     <div class="section">
-      <h2>✅ Monetizado em Jul/26</h2>
+      <h2>Monetizado em Jul/26</h2>
+      <p class="sub" style="margin:0 0 12px">Nenhum fechamento com data em julho até 15/07. Último E.E: <strong style="color:#fff">Nova York & Você</strong> em 29/06 (R$ 29.312,94 · competência junho).</p>
       <div class="table-wrap">
         <table>
-          <thead><tr><th>Empresa</th><th>Need</th><th>Tipo</th><th>Temp</th><th>Pitch</th><th>TCV</th><th>Observação</th></tr></thead>
+          <thead><tr><th>Empresa</th><th>Need</th><th>Tipo</th><th>Temp</th><th>Pitch</th><th>Fechamento</th><th>TCV</th><th>Observação</th></tr></thead>
           <tbody>
             <tr>
-              <td class="cli">Nova York & Você (BM)</td>
-              <td><span class="tag tag-neu">MEDIUM</span></td>
-              <td>Estruturação</td>
-              <td><span class="tag tag-quente">Quente</span></td>
-              <td>25/06/2026</td>
-              <td>R$ 29.312,94</td>
-              <td class="obs-cell">—</td>
+              <td class="cli" colspan="8" style="color:var(--mut)">— sem monetização registrada em julho —</td>
             </tr>
           </tbody>
         </table>
@@ -255,28 +279,28 @@
   <!-- FOLLOW + ACEITO -->
   <div class="view-panel" data-view="follow">
     <div class="section">
-      <h2>🔥 Follow · 9 contas</h2>
+      <h2>Follow · 9 contas · R$ 631k</h2>
       <div class="table-wrap">
         <table>
           <thead>
             <tr><th>Empresa</th><th>Need</th><th>Tipo</th><th>Status</th><th>Temp</th><th>Pitch</th><th>TCV</th><th>Observação</th></tr>
           </thead>
           <tbody>
-            <tr><td class="cli">Stylus Manaus (BS)</td><td>SMALL</td><td>Estruturação</td><td>Follow</td><td><span class="tag tag-morno">Morno</span></td><td>02/07/2026</td><td>R$ 92.270,76</td><td class="obs-cell">Devolutiva para o dia 17/07. Cliente engajada</td></tr>
-            <tr><td class="cli">BR Distribuidora de Piercing (BS)</td><td>SMALL</td><td>Estruturação</td><td>Follow</td><td><span class="tag tag-frio">Frio</span></td><td>03/07/2026</td><td>R$ 79.224,12</td><td class="obs-cell">Devolutiva para o dia 10/07</td></tr>
-            <tr><td class="cli">KFG Torres</td><td>SMALL</td><td>Estruturação</td><td>Follow</td><td><span class="tag tag-morno">Morno</span></td><td>07/07/2026</td><td>R$ 79.224,12</td><td class="obs-cell">Devolutiva para o dia 13/07</td></tr>
-            <tr><td class="cli">Modular Estruturas (BM)</td><td>MEDIUM</td><td>Estruturação</td><td>Follow</td><td><span class="tag tag-quente">Quente</span></td><td>10/07/2026</td><td>R$ 88.396,35</td><td class="obs-cell">executar + ec</td></tr>
-            <tr><td class="cli">Fui Aluguel de Motos (BS)</td><td>SMALL</td><td>Estruturação</td><td>Follow</td><td><span class="tag tag-morno">Morno</span></td><td>10/07/2026</td><td>R$ 91.224,12</td><td class="obs-cell">FB: entrar no grupo para enviar mensagem</td></tr>
-            <tr><td class="cli">AGM DISTRIBUIDORA (BS)</td><td>SMALL</td><td>Estruturação</td><td>Follow</td><td><span class="tag tag-morno">Morno</span></td><td>13/07/2026</td><td>R$ 74.198,16</td><td class="obs-cell">FB: entrar no grupo para enviar mensagem</td></tr>
-            <tr><td class="cli">Terra prometida (BS)</td><td>SMALL</td><td>Estruturação</td><td>Follow</td><td><span class="tag tag-quente">Quente</span></td><td>24/06/2026</td><td>R$ 57.356,00</td><td class="obs-cell">Devolutiva para o dia 10/07</td></tr>
-            <tr><td class="cli">Rota da Linguiça (BS)</td><td>SMALL</td><td>Estruturação</td><td>Follow</td><td><span class="tag tag-quente">Quente</span></td><td>25/06/2026</td><td>R$ 28.400,00</td><td class="obs-cell">PITCH NO DIA 10/07 PARA O PRODUTO EQV</td></tr>
-            <tr><td class="cli">Creative Eng (BT)</td><td>TINY</td><td>Estruturação</td><td>Follow</td><td><span class="tag tag-frio">Frio</span></td><td>30/06/2026</td><td>R$ 66.000,00</td><td class="obs-cell">Limite 45d: 12/07/2026</td></tr>
+            <tr><td class="cli">Modular Estruturas (BM)</td><td>MEDIUM</td><td>Estruturação</td><td>Follow</td><td><span class="tag tag-quente">Quente</span></td><td>10/07/2026</td><td>R$ 88.396,35</td><td class="obs-cell">Cliente aceitou a proposta com condição de reajuste nos valores (momento financeiro)</td></tr>
+            <tr><td class="cli">Stylus Manaus (BS)</td><td>SMALL</td><td>Estruturação</td><td>Follow</td><td><span class="tag tag-quente">Quente</span></td><td>02/07/2026</td><td>R$ 92.270,76</td><td class="obs-cell">Devolutiva para o dia 17/07. Cliente engajada</td></tr>
+            <tr><td class="cli">Rota da Linguiça (BS)</td><td>SMALL</td><td>Estruturação</td><td>Follow</td><td><span class="tag tag-quente">Quente</span></td><td>25/06/2026</td><td>R$ 28.400,00</td><td class="obs-cell">Devolutiva do EQV 17/07</td></tr>
+            <tr><td class="cli">KFG Torres</td><td>SMALL</td><td>Estruturação</td><td>Follow</td><td><span class="tag tag-morno">Morno</span></td><td>07/07/2026</td><td>R$ 79.224,12</td><td class="obs-cell">Cliente engajado remarcando a devolutiva com os sócios</td></tr>
+            <tr><td class="cli">Fui Aluguel de Motos (BS)</td><td>SMALL</td><td>Estruturação</td><td>Follow</td><td><span class="tag tag-morno">Morno</span></td><td>10/07/2026</td><td>R$ 66.024,12</td><td class="obs-cell">Pediu 1 semana para avaliar com financeiro. Follow engajado</td></tr>
+            <tr><td class="cli">AGM DISTRIBUIDORA (BS)</td><td>SMALL</td><td>Estruturação</td><td>Follow</td><td><span class="tag tag-morno">Morno</span></td><td>13/07/2026</td><td>R$ 74.198,16</td><td class="obs-cell">Pediu 1 semana para avaliar com financeiro. Follow engajado</td></tr>
+            <tr><td class="cli">Terra prometida (BS)</td><td>SMALL</td><td>Estruturação</td><td>Follow</td><td><span class="tag tag-frio">Frio</span></td><td>24/06/2026</td><td>R$ 57.356,00</td><td class="obs-cell">Devolutiva 15/07 feita. Cliente queria remover a cláusula do resultado</td></tr>
+            <tr><td class="cli">BR Distribuidora de Piercing (BS)</td><td>SMALL</td><td>Estruturação</td><td>Follow</td><td><span class="tag tag-frio">Frio</span></td><td>03/07/2026</td><td>R$ 79.224,12</td><td class="obs-cell">Auditoria de tráfego 20/07 — retomar proposta depois</td></tr>
+            <tr><td class="cli">Creative Eng (BT)</td><td>TINY</td><td>Estruturação</td><td>Follow</td><td><span class="tag tag-frio">Frio</span></td><td>30/06/2026</td><td>R$ 66.000,00</td><td class="obs-cell">Follow frio. Cliente não está engajado · limite 12/07</td></tr>
           </tbody>
         </table>
       </div>
     </div>
     <div class="section">
-      <h2>✅ Aceito · 1 conta</h2>
+      <h2>Aceito · 1 conta · R$ 74k</h2>
       <div class="table-wrap">
         <table>
           <thead><tr><th>Empresa</th><th>Need</th><th>Tipo</th><th>Status</th><th>Temp</th><th>Pitch</th><th>TCV</th><th>Observação</th></tr></thead>
@@ -284,7 +308,7 @@
             <tr>
               <td class="cli">Unik Benefícios (BS)</td><td>SMALL</td><td>Estruturação</td><td>Aceito</td>
               <td><span class="tag tag-quente">Quente</span></td><td>06/07/2026</td><td>R$ 74.074,44</td>
-              <td class="obs-cell">Devolutiva para o dia 07/07</td>
+              <td class="obs-cell">Aguardando assinatura</td>
             </tr>
           </tbody>
         </table>
@@ -296,47 +320,47 @@
   <div class="view-panel" data-view="semanas">
     <div class="section"><h2>Semana 0 · 4 contas</h2>
       <div class="table-wrap"><table>
-        <thead><tr><th>Empresa</th><th>Need</th><th>Tipo</th><th>Status</th><th>Temp</th><th>Pitch</th><th>TCV</th><th>Observação</th></tr></thead>
+        <thead><tr><th>Empresa</th><th>Need</th><th>Tipo</th><th>Status</th><th>Pitch</th><th>TCV</th><th>Observação</th></tr></thead>
         <tbody>
-          <tr><td class="cli">RM Burguer Itabira (BS)</td><td>SMALL</td><td>TER</td><td>Semana 0</td><td>—</td><td>—</td><td>R$ 0</td><td class="obs-cell">Travado por falta de pagamento. Iniciar em julho</td></tr>
-          <tr><td class="cli">General car (BS)</td><td>SMALL</td><td>TER</td><td>Semana 0</td><td>—</td><td>—</td><td>R$ 0</td><td class="obs-cell">Travado por falta de pagamento. Iniciar em julho</td></tr>
-          <tr><td class="cli">Brod transportes ltda (LL)</td><td>LARGE</td><td>E.E + Assessoria</td><td>Semana 0</td><td>—</td><td>—</td><td>R$ 0</td><td class="obs-cell">—</td></tr>
-          <tr><td class="cli">G6 INTERNET</td><td>LARGE</td><td>Estruturação</td><td>Semana 0</td><td>—</td><td>—</td><td>R$ 0</td><td class="obs-cell">Kick-off feito</td></tr>
+          <tr><td class="cli">RM Burguer Itabira (BS)</td><td>SMALL</td><td>TER</td><td>Semana 0</td><td>—</td><td>R$ 0</td><td class="obs-cell">Travado por falta de pagamento. Iniciar em julho</td></tr>
+          <tr><td class="cli">General car (BS)</td><td>SMALL</td><td>TER</td><td>Semana 0</td><td>—</td><td>R$ 0</td><td class="obs-cell">Travado por falta de pagamento. Iniciar em julho</td></tr>
+          <tr><td class="cli">Brod transportes ltda (LL)</td><td>LARGE</td><td>E.E + Assessoria</td><td>Semana 0</td><td>—</td><td>R$ 0</td><td class="obs-cell">—</td></tr>
+          <tr><td class="cli">G6 INTERNET</td><td>LARGE</td><td>Estruturação</td><td>Semana 0</td><td>—</td><td>R$ 0</td><td class="obs-cell">—</td></tr>
         </tbody>
       </table></div>
     </div>
     <div class="section"><h2>Semana 02 · 4 contas</h2>
       <div class="table-wrap"><table>
-        <thead><tr><th>Empresa</th><th>Need</th><th>Tipo</th><th>Status</th><th>Temp</th><th>Pitch</th><th>TCV</th><th>Observação</th></tr></thead>
+        <thead><tr><th>Empresa</th><th>Need</th><th>Tipo</th><th>Status</th><th>Pitch</th><th>TCV</th><th>Observação</th></tr></thead>
         <tbody>
-          <tr><td class="cli">Almeida e Neves (RecM)</td><td>MEDIUM</td><td>Estruturação</td><td>Semana 02</td><td>—</td><td>—</td><td>R$ 0</td><td class="obs-cell">Avaliando semanas para AP e proposta</td></tr>
-          <tr><td class="cli">Protesol tendas (BS)</td><td>SMALL</td><td>Estruturação</td><td>Semana 02</td><td>—</td><td>—</td><td>R$ 0</td><td class="obs-cell">Avaliando semanas para AP e proposta</td></tr>
-          <tr><td class="cli">Wang (BS)</td><td>SMALL</td><td>Estruturação</td><td>Semana 02</td><td>—</td><td>—</td><td>R$ 0</td><td class="obs-cell">AP + proposta. FB: ROI errado / sem site</td></tr>
-          <tr><td class="cli">Fernando Móveis e Eletro (BM)</td><td>MEDIUM</td><td>E.E + Assessoria</td><td>Semana 02</td><td>—</td><td>—</td><td>R$ 0</td><td class="obs-cell">Assessoria — não levar proposta E.E. AP base ativa</td></tr>
+          <tr><td class="cli">Almeida e Neves (RecM)</td><td>MEDIUM</td><td>Estruturação</td><td>Semana 02</td><td>—</td><td>R$ 0</td><td class="obs-cell">Avaliando semanas para AP e proposta</td></tr>
+          <tr><td class="cli">Protesol tendas (BS)</td><td>SMALL</td><td>Estruturação</td><td>Semana 02</td><td>—</td><td>R$ 0</td><td class="obs-cell">Avaliando semanas para AP e proposta</td></tr>
+          <tr><td class="cli">Wang (BS)</td><td>SMALL</td><td>Estruturação</td><td>Semana 02</td><td>—</td><td>R$ 0</td><td class="obs-cell">Avaliando semanas para AP e proposta</td></tr>
+          <tr><td class="cli">Fernando Móveis e Eletro (BM)</td><td>MEDIUM</td><td>E.E + Assessoria</td><td>Semana 02</td><td>—</td><td>R$ 0</td><td class="obs-cell">Assessoria — não levar proposta E.E. AP base ativa</td></tr>
         </tbody>
       </table></div>
     </div>
     <div class="section"><h2>Semana 03 · 7 contas</h2>
       <div class="table-wrap"><table>
-        <thead><tr><th>Empresa</th><th>Need</th><th>Tipo</th><th>Status</th><th>Temp</th><th>Pitch</th><th>TCV</th><th>Observação</th></tr></thead>
+        <thead><tr><th>Empresa</th><th>Need</th><th>Tipo</th><th>Status</th><th>Pitch</th><th>TCV</th><th>Observação</th></tr></thead>
         <tbody>
-          <tr><td class="cli">Academia Imigrantes (BS)</td><td>SMALL</td><td>Estruturação</td><td>Semana 03</td><td>—</td><td>15/07/2026</td><td>R$ 79.224,12</td><td class="obs-cell">Growth — finalizar proposta. Cliente ciente</td></tr>
-          <tr><td class="cli">Moteis Fortaleza (BM)</td><td>MEDIUM</td><td>Estruturação</td><td>Semana 03</td><td>—</td><td>—</td><td>R$ 194.716,68</td><td class="obs-cell">Finalizar proposta Growth 4 unidades. Definir pitch</td></tr>
-          <tr><td class="cli">Adriano Martins Cardoso (BS)</td><td>SMALL</td><td>Estruturação</td><td>Semana 03</td><td>—</td><td>—</td><td>R$ 0</td><td class="obs-cell">Montar proposta · contato 08/07</td></tr>
-          <tr><td class="cli">Ecofitness Aldeia (BS)</td><td>SMALL</td><td>Estruturação</td><td>Semana 03</td><td>—</td><td>—</td><td>R$ 0</td><td class="obs-cell">Growth Basic (~R$2k mkt) · contato 08/07</td></tr>
-          <tr><td class="cli">Estação Delta (BM)</td><td>MEDIUM</td><td>Estruturação</td><td>Semana 03</td><td>—</td><td>—</td><td>R$ 0</td><td class="obs-cell">AP + proposta · contato 08/07</td></tr>
-          <tr><td class="cli">Hanaro (BL)</td><td>LARGE</td><td>Estruturação</td><td>Semana 03</td><td>—</td><td>—</td><td>R$ 0</td><td class="obs-cell">AP + proposta · contato 09/07</td></tr>
-          <tr><td class="cli">Medicar (BL)</td><td>LARGE</td><td>E.E + Assessoria</td><td>Semana 03</td><td>—</td><td>—</td><td>R$ 0</td><td class="obs-cell">Assessoria — não levar proposta. AP base ativa</td></tr>
+          <tr><td class="cli">Academia Imigrantes (BS)</td><td>SMALL</td><td>Estruturação</td><td>Semana 03</td><td>16/07/2026</td><td>R$ 79.224,12</td><td class="obs-cell">Growth — finalizar proposta. Cliente ciente e aguardando</td></tr>
+          <tr><td class="cli">Moteis Fortaleza (BM)</td><td>MEDIUM</td><td>Estruturação</td><td>Semana 03</td><td>—</td><td>R$ 194.716,68</td><td class="obs-cell">Finalizar proposta Growth 4 unidades. Definir pitch com consultor</td></tr>
+          <tr><td class="cli">Adriano Martins Cardoso (BS)</td><td>SMALL</td><td>Estruturação</td><td>Semana 03</td><td>—</td><td>R$ 0</td><td class="obs-cell">Montar proposta</td></tr>
+          <tr><td class="cli">Ecofitness Aldeia (BS)</td><td>SMALL</td><td>Estruturação</td><td>Semana 03</td><td>—</td><td>R$ 0</td><td class="obs-cell">Montar proposta Growth Basic (~R$2k mkt)</td></tr>
+          <tr><td class="cli">Estação Delta (BM)</td><td>MEDIUM</td><td>Estruturação</td><td>Semana 03</td><td>—</td><td>R$ 0</td><td class="obs-cell">AP + proposta</td></tr>
+          <tr><td class="cli">Hanaro (BL)</td><td>LARGE</td><td>Estruturação</td><td>Semana 03</td><td>—</td><td>R$ 0</td><td class="obs-cell">AP + proposta · limite 17/07</td></tr>
+          <tr><td class="cli">Medicar (BL)</td><td>LARGE</td><td>E.E + Assessoria</td><td>Semana 03</td><td>—</td><td>R$ 0</td><td class="obs-cell">Assessoria — não levar proposta. AP base ativa</td></tr>
         </tbody>
       </table></div>
     </div>
     <div class="section"><h2>Semana 04–05 · 3 contas</h2>
       <div class="table-wrap"><table>
-        <thead><tr><th>Empresa</th><th>Need</th><th>Tipo</th><th>Status</th><th>Temp</th><th>Pitch</th><th>TCV</th><th>Observação</th></tr></thead>
+        <thead><tr><th>Empresa</th><th>Need</th><th>Tipo</th><th>Status</th><th>Pitch</th><th>TCV</th><th>Observação</th></tr></thead>
         <tbody>
-          <tr><td class="cli">Pedrini e Azevedo (BS)</td><td>SMALL</td><td>Estruturação</td><td>Semana 04</td><td>—</td><td>10/07/2026</td><td>R$ 0</td><td class="obs-cell">Aguardando Denis (EC) para enviar mensagem</td></tr>
-          <tr><td class="cli">Triboltech (BS)</td><td>SMALL</td><td>Estruturação</td><td>Semana 05</td><td>—</td><td>03/07/2026</td><td>R$ 0</td><td class="obs-cell">Travado — cliente desmarca entregáveis + pitch</td></tr>
-          <tr><td class="cli">Sora consultoria (BS)</td><td>SMALL</td><td>Estruturação</td><td>Semana 05</td><td>—</td><td>—</td><td>R$ 0</td><td class="obs-cell">PROJETO TRAVADO</td></tr>
+          <tr><td class="cli">Pedrini e Azevedo (BS)</td><td>SMALL</td><td>Estruturação</td><td>Semana 04</td><td>15/07/2026</td><td>R$ 17.400,00</td><td class="obs-cell">Apresentar EQV · pitch hoje 15/07</td></tr>
+          <tr><td class="cli">Triboltech (BS)</td><td>SMALL</td><td>Estruturação</td><td>Semana 05</td><td>03/07/2026</td><td>R$ 0</td><td class="obs-cell">Travado — cliente desmarca entregáveis + pitch</td></tr>
+          <tr><td class="cli">Sora consultoria (BS)</td><td>SMALL</td><td>Estruturação</td><td>Semana 05</td><td>—</td><td>R$ 0</td><td class="obs-cell">PROJETO TRAVADO</td></tr>
         </tbody>
       </table></div>
     </div>
@@ -345,15 +369,16 @@
   <!-- DROP -->
   <div class="view-panel" data-view="drop">
     <div class="section">
-      <h2>❌ Drop · vínculo Jul/2026 · 3 contas</h2>
+      <h2>Drop / reativação EQV · vínculo Jul/2026 · 4 contas</h2>
       <div class="chart-box" style="height:200px;margin-bottom:16px"><canvas id="chartDrop"></canvas></div>
       <div class="table-wrap">
         <table>
           <thead><tr><th>Empresa</th><th>Need</th><th>Tipo</th><th>Status</th><th>Temp</th><th>Pitch</th><th>TCV</th><th>Observação</th><th>Motivo DROP</th></tr></thead>
           <tbody>
+            <tr><td class="cli">Curavida (BM)</td><td>MEDIUM</td><td>Estruturação</td><td>Drop</td><td><span class="tag tag-frio">Frio</span></td><td>26/06/2026</td><td>R$ 26.461,20</td><td class="obs-cell">REATIVANDO PARA O EQV</td><td><span class="tag tag-reativa">EQV</span></td></tr>
+            <tr><td class="cli">Positive Safety (BS)</td><td>SMALL</td><td>TER</td><td>Drop</td><td><span class="tag tag-frio">Frio</span></td><td>26/06/2026</td><td>R$ 66.000,00</td><td class="obs-cell">REATIVANDO PARA O EQV</td><td><span class="tag tag-drop">Timing</span></td></tr>
+            <tr><td class="cli">Madezatto (BS)</td><td>SMALL</td><td>E.C</td><td>Drop</td><td><span class="tag tag-morno">Morno</span></td><td>29/06/2026</td><td>R$ 66.000,00</td><td class="obs-cell">REATIVANDO PARA O EQV</td><td><span class="tag tag-drop">Budget</span></td></tr>
             <tr><td class="cli">M & J Green Foods (BS)</td><td>TINY</td><td>Estruturação</td><td>Drop</td><td>—</td><td>—</td><td>R$ 0</td><td class="obs-cell">PROJETO CAIU</td><td><span class="tag tag-drop">Tratativa Ops</span></td></tr>
-            <tr><td class="cli">Curavida (BM)</td><td>MEDIUM</td><td>Estruturação</td><td>Drop</td><td><span class="tag tag-frio">Frio</span></td><td>26/06/2026</td><td>R$ 26.461,20</td><td class="obs-cell">DEVOLUTIVA 30/06 até o final do dia</td><td><span class="tag tag-neu">—</span></td></tr>
-            <tr><td class="cli">Positive Safety (BS)</td><td>SMALL</td><td>TER</td><td>Drop</td><td><span class="tag tag-frio">Frio</span></td><td>26/06/2026</td><td>R$ 66.000,00</td><td class="obs-cell">—</td><td><span class="tag tag-drop">Timing</span></td></tr>
           </tbody>
         </table>
       </div>
@@ -363,37 +388,40 @@
   <!-- PLANO -->
   <div class="view-panel" data-view="plano">
     <div class="section">
-      <h2>🎯 Plano de ação · Julho/2026</h2>
-      <div class="action-item p0"><strong>P0 — Hoje / esta semana</strong><br>
-        1. <strong>Unik Benefícios</strong> (Aceito · Quente) — fechar assinatura pós-devolutiva 07/07.<br>
-        2. <strong>Terra prometida + BR Piercing</strong> — devolutivas 10/07: cobrar retorno no dia.<br>
-        3. <strong>Rota da Linguiça</strong> — pitch EQV 10/07 + follow no mesmo dia.<br>
-        4. <strong>Modular Estruturas</strong> (Quente) — empacotar executar+EC · limite 13/07.<br>
-        5. <strong>KFG Torres</strong> — devolutiva 13/07.<br>
-        6. <strong>Academia Imigrantes</strong> — finalizar proposta · pitch 15/07.
+      <h2>Plano de ação · 15/07/2026</h2>
+      <div class="action-item p0"><strong>P0 — Hoje / próximos 2 dias</strong><br>
+        1. <strong>Unik Benefícios</strong> (Aceito · Quente · R$ 74k) — cobrar assinatura hoje.<br>
+        2. <strong>Modular Estruturas</strong> (Quente · aceitou c/ reajuste) — fechar novos valores e contrato.<br>
+        3. <strong>Pedrini e Azevedo</strong> — pitch EQV hoje 15/07 (R$ 17,4k).<br>
+        4. <strong>Academia Imigrantes</strong> — finalizar proposta Growth · pitch 16/07.<br>
+        5. <strong>Stylus Manaus + Rota da Linguiça</strong> — devolutivas 17/07 (ambos quentes).
       </div>
       <div class="action-item p1"><strong>P1 — Nutrir Follow</strong><br>
-        7. <strong>Fui Motos + AGM</strong> — entrar no grupo e enviar mensagem hoje.<br>
-        8. <strong>Stylus Manaus</strong> — preparar devolutiva 17/07.<br>
-        9. <strong>Creative Eng</strong> (Frio) — 1 tentativa de reaquecimento até 12/07.
+        6. <strong>Terra prometida</strong> — pós-devolutiva 15/07: tratar cláusula de resultado e manter FUP.<br>
+        7. <strong>KFG Torres</strong> — remarcar devolutiva com sócios (engajado).<br>
+        8. <strong>Fui Motos + AGM</strong> — follow na semana pedida; manter ritmo de mensagem.<br>
+        9. <strong>BR Piercing</strong> — aguardar auditoria 20/07; agendar retomada já.<br>
+        10. <strong>Creative Eng</strong> (Frio · limite vencido) — 1 última tentativa ou drop formal.
       </div>
       <div class="action-item p2"><strong>P2 — Semanas → pitch</strong><br>
-        10. <strong>Moteis Fortaleza</strong> (R$ 194k) — prioridade: proposta 4 unidades + data pitch.<br>
-        11. Adriano / Ecofitness / Estação Delta / Hanaro — propostas + contatos 08–09/07.<br>
-        12. Pedrini — destravar com Denis (EC).<br>
-        13. RM Burguer + General car — reiniciar entregáveis em julho.
+        11. <strong>Moteis Fortaleza</strong> (R$ 194k) — prioridade: proposta 4 unidades + data pitch.<br>
+        12. Adriano / Ecofitness / Estação Delta / Hanaro — propostas + AP.<br>
+        13. RM Burguer + General car — reiniciar entregáveis em julho.<br>
+        14. EQV: Curavida · Positive Safety · Madezatto — reativar com oferta.
       </div>
-      <div class="action-item p2"><strong>P3 — Limpeza</strong><br>
-        14. Sora + Triboltech — drop formal ou FUP com data.<br>
-        15. Preencher <strong>temperatura</strong> em todas as Semanas (hoje 100% sem temp).<br>
-        16. Curavida — registrar motivo de drop na planilha.
+      <div class="action-item p2"><strong>P3 — Limpeza / meta</strong><br>
+        15. Sora + Triboltech — drop formal ou FUP com data firme.<br>
+        16. Preencher temperatura nas Semanas (ainda 100% sem temp).<br>
+        17. Curavida — registrar motivo de drop se não reativar.<br>
+        18. Meta jul: E.E Saber→Executar ainda R$ 0 — priorizar Unik + Modular para sair do zero.
       </div>
     </div>
   </div>
 
   <footer>
-    V4 Company · Pipe E.E Sara · Jul/2026<br>
-  Fonte: <a href="https://docs.google.com/spreadsheets/d/1dSukhon9dIUABcbQIKGKUa-ku-_oLOn1Q5YWeWGfI6U/edit" style="color:#86efac">Cockpit Monetização — aba E.E ✅</a>
+    V4 Company · Pipe E.E Sara · Jul/2026 · sync 15/07/2026<br>
+    Fonte: <a href="https://docs.google.com/spreadsheets/d/1dSukhon9dIUABcbQIKGKUa-ku-_oLOn1Q5YWeWGfI6U/edit?gid=759150030#gid=759150030" style="color:#86efac">Cockpit Monetização — E.E ✅</a>
+    + <a href="https://docs.google.com/spreadsheets/d/1dSukhon9dIUABcbQIKGKUa-ku-_oLOn1Q5YWeWGfI6U/edit?gid=73958285#gid=73958285" style="color:#86efac">Meta x Realizado 2026</a>
     · Layout inspirado em <a href="https://marcelofigueiredo23.github.io/pipediario/jul2026/" style="color:#86efac">Pipe Diário jul/2026</a>
   </footer>
 </div>
@@ -427,7 +455,7 @@
     type: 'doughnut',
     data: {
       labels: ['Quente', 'Morno', 'Frio'],
-      datasets: [{ data: [3,4,2], backgroundColor: ['#e50915','#facc15','#60a5fa'], borderWidth: 0 }]
+      datasets: [{ data: [3,3,3], backgroundColor: ['#e50915','#facc15','#60a5fa'], borderWidth: 0 }]
     },
     options: { ...chartOpts, plugins: { legend: { position: 'bottom', labels: { color: '#a3a3a3' } } } }
   });
@@ -435,8 +463,8 @@
   new Chart(document.getElementById('chartSquad'), {
     type: 'bar',
     data: {
-      labels: ['Exclusive', 'Invictus', 'Billions'],
-      datasets: [{ label: 'TCV Follow (R$ mil)', data: [394,108,154], backgroundColor: ['#f472b6','#818cf8','#fbbf24'] }]
+      labels: ['Exclusive', 'Billions', 'Invictus'],
+      datasets: [{ label: 'TCV Follow (R$ mil)', data: [369,154,108], backgroundColor: ['#f472b6','#fbbf24','#818cf8'] }]
     },
     options: chartOpts
   });
@@ -444,8 +472,8 @@
   new Chart(document.getElementById('chartPitch'), {
     type: 'bar',
     data: {
-      labels: ['02/07','03/07','06/07','07/07','10/07','13/07','15/07'],
-      datasets: [{ label: 'Pitches', data: [1,2,1,1,3,1,1], backgroundColor: '#e50915' }]
+      labels: ['02/07','03/07','06/07','07/07','10/07','13/07','15/07','16/07'],
+      datasets: [{ label: 'Pitches', data: [1,2,1,1,2,1,1,1], backgroundColor: '#e50915' }]
     },
     options: { ...chartOpts, scales: { ...chartOpts.scales, y: { ...chartOpts.scales.y, ticks: { stepSize: 1, color: '#a3a3a3' } } } }
   });
@@ -453,8 +481,8 @@
   new Chart(document.getElementById('chartDrop'), {
     type: 'pie',
     data: {
-      labels: ['Tratativa Ops', 'Timing', 'Sem motivo'],
-      datasets: [{ data: [1,1,1], backgroundColor: ['#ef4444','#facc15','#737373'], borderWidth: 0 }]
+      labels: ['EQV / reativação', 'Timing', 'Budget', 'Tratativa Ops'],
+      datasets: [{ data: [1,1,1,1], backgroundColor: ['#facc15','#ef4444','#f97316','#737373'], borderWidth: 0 }]
     },
     options: { plugins: { legend: { position: 'bottom', labels: { color: '#a3a3a3' } } } }
   });
