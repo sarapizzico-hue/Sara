@@ -93,8 +93,9 @@
     }
     .squad-view-tab .tab-name { display: block; font-size: 13px; font-weight: 800; margin-bottom: 4px; }
     .squad-view-tab .tab-stats { font-size: 10px; font-weight: 700; color: #d4d4d4; }
-    .view-panel { display: none; animation: viewFade .25s ease; }
-    .view-panel.is-active { display: block; }
+    .view-panel { display: block; animation: viewFade .25s ease; margin-bottom: 8px; }
+    body.js-ready .view-panel { display: none; }
+    body.js-ready .view-panel.is-active { display: block; }
     @keyframes viewFade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
     .section {
       background: var(--surf); border: 1px solid var(--bd); border-radius: var(--radius);
@@ -165,7 +166,7 @@
       <div class="source-chips">
         <span class="chip live">Planilha E.E</span>
         <span class="chip live">Meta x Realizado</span>
-        <span class="chip">Atualizado 15/07/2026</span>
+        <span class="chip">Atualizado 15/07/2026 · Pages</span>
       </div>
     </div>
   </section>
@@ -428,6 +429,7 @@
 
 <script>
 (function() {
+  document.body.classList.add('js-ready');
   const tabs = document.querySelectorAll('.squad-view-tab');
   const panels = document.querySelectorAll('.view-panel');
   const valid = ['geral','follow','semanas','drop','plano'];
@@ -441,6 +443,7 @@
   const initial = (location.hash || '#geral').replace('#','');
   setView(initial);
   window.addEventListener('hashchange', () => setView(location.hash.replace('#','')));
+  if (typeof Chart === 'undefined') { console.warn('Chart.js indisponível'); return; }
 
   const chartOpts = {
     responsive: true, maintainAspectRatio: false,
@@ -451,6 +454,7 @@
     }
   };
 
+  try {
   new Chart(document.getElementById('chartTemp'), {
     type: 'doughnut',
     data: {
@@ -486,6 +490,7 @@
     },
     options: { plugins: { legend: { position: 'bottom', labels: { color: '#a3a3a3' } } } }
   });
+  } catch (e) { console.warn('Falha ao renderizar gráficos', e); }
 })();
 </script>
 </body>
