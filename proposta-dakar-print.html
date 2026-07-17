@@ -1,0 +1,312 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"/>
+<title>Dakar × V4 — Proposta comercial</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+@page { size: A4 landscape; margin: 12mm; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  background: #a10f14;
+  color: #fff;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+.page {
+  page-break-after: always;
+  break-after: page;
+  min-height: 180mm;
+  padding: 18mm 16mm;
+  position: relative;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(255,74,74,.45) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 55% at 85% 90%, rgba(255,42,26,.35) 0%, transparent 50%),
+    radial-gradient(ellipse 100% 100% at 50% 50%, #c4181e 0%, #a10f14 70%, #6b080c 100%);
+  display: flex; flex-direction: column; justify-content: center;
+}
+.page:last-child { page-break-after: auto; }
+.inner {
+  max-width: 980px; margin: 0 auto; width: 100%;
+  background: rgba(255,255,255,.14);
+  border: 1px solid rgba(255,255,255,.28);
+  border-radius: 18px;
+  padding: 22px 26px;
+}
+.page.capa .inner { background: transparent; border: 0; text-align: center; padding: 0; }
+.eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: #ffe0e0; margin-bottom: 8px; }
+h1 { font-family: Outfit, sans-serif; font-size: 42px; line-height: 1.1; margin: 12px 0; }
+h2 { font-family: Outfit, sans-serif; font-size: 28px; line-height: 1.15; margin-bottom: 8px; }
+h3 { font-family: Outfit, sans-serif; font-size: 15px; margin-bottom: 4px; }
+.gold-line { width: 56px; height: 3px; background: linear-gradient(90deg,#fff,#ffd0d0); margin: 8px 0 12px; border-radius: 2px; }
+.lead { font-size: 14px; color: rgba(255,255,255,.88); max-width: 720px; line-height: 1.45; }
+.capa-partnership { display:flex; justify-content:center; gap:10px; margin-bottom:8px; color: rgba(255,255,255,.88); }
+.capa-badge { display:inline-block; margin-top:14px; padding:6px 12px; border-radius:999px; border:1px solid rgba(255,255,255,.45); font-size:11px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; background:rgba(255,255,255,.12); }
+.grid-3 { display:grid; grid-template-columns: repeat(3,1fr); gap:10px; margin-top:12px; }
+.grid-2 { display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-top:12px; }
+.card { background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.22); border-radius:12px; padding:12px 14px; }
+.card-num { font-family:Outfit; font-size:11px; font-weight:800; color:#ffe0e0; margin-bottom:4px; }
+.card p, .card li { font-size:12px; color:rgba(255,255,255,.88); line-height:1.4; }
+.card ul { list-style:none; margin-top:6px; }
+.card ul li { padding-left:10px; position:relative; margin-bottom:3px; }
+.card ul li::before { content:"·"; position:absolute; left:0; font-weight:700; }
+.quote { margin:12px 0 0; padding-left:12px; border-left:3px solid rgba(255,255,255,.55); font-size:15px; font-weight:700; }
+.quote span { display:block; margin-top:4px; font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.65); font-weight:700; }
+.flow-row { display:flex; gap:8px; margin-top:12px; flex-wrap:wrap; }
+.flow-step { flex:1; min-width:120px; text-align:center; padding:10px 8px; background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.22); border-radius:10px; }
+.flow-step .icon { font-family:Outfit; font-size:16px; font-weight:800; }
+.flow-step strong { display:block; font-size:12px; margin:4px 0 2px; }
+.flow-step span { font-size:11px; color:rgba(255,255,255,.85); }
+.flow-arrow { align-self:center; opacity:.45; }
+.map-row { display:grid; grid-template-columns:1fr auto 1fr; gap:8px; align-items:center; padding:8px 0; border-bottom:1px solid rgba(255,255,255,.12); font-size:12px; }
+.map-row:last-child { border-bottom:0; }
+.map-chair { text-align:right; color:rgba(255,255,255,.88); }
+.tag-16h { display:inline-block; font-size:10px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:2px 6px; border-radius:5px; background:rgba(255,255,255,.2); margin-bottom:6px; }
+.plans { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:12px; }
+.plan { border-radius:14px; padding:14px 16px; border:1px solid rgba(255,255,255,.2); background:rgba(0,0,0,.34); }
+.plan.featured { border-color:#fff; background:rgba(0,0,0,.48); }
+.plan-label { font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#ffe8e8; margin-bottom:6px; }
+.plan-sub { font-size:12px; color:rgba(255,255,255,.85); margin-bottom:8px; }
+.price-old { font-size:12px; color:rgba(255,255,255,.5); text-decoration:line-through; }
+.plan-price { font-family:Outfit; font-size:28px; font-weight:800; line-height:1; margin:4px 0; }
+.plan-price small { font-size:13px; font-weight:600; color:rgba(255,255,255,.85); }
+.plan-discount { font-size:12px; color:#ffe0e0; font-weight:600; }
+.plan-total { font-size:12px; color:rgba(255,255,255,.85); margin-top:4px; }
+.plan ul { list-style:none; margin-top:8px; }
+.plan ul li { font-size:12px; color:rgba(255,255,255,.85); padding-left:10px; position:relative; }
+.plan ul li::before { content:"·"; position:absolute; left:0; }
+.cta-box { margin-top:12px; padding:12px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.35); background:rgba(255,255,255,.14); }
+.cta-box h3 { font-size:14px; margin-bottom:4px; }
+.cta-box p { font-size:12px; color:rgba(255,255,255,.88); }
+.note { font-size:11px; color:rgba(255,255,255,.65); margin-top:10px; font-style:italic; }
+.footer { position:absolute; bottom:8mm; left:16mm; right:16mm; font-size:10px; color:rgba(255,255,255,.7); display:flex; justify-content:space-between; }
+.slide-hint { display:none; }
+.slide-logo { display:none; }
+</style></head><body><div class="page capa"><div class="inner">
+      <div class="inner">
+        <div class="capa-partnership">
+          <span>Dakar Automotive Center</span>
+          <span class="x">×</span>
+          <span>V4 Company</span>
+        </div>
+        <h1>Saber + Executar<br /><em>pós Estruturação Estratégica</em></h1>
+        <p class="lead" style="margin:0.75rem auto 0;text-align:center;max-width:640px;">
+          A EE organizou a máquina. Agora é hora de operar com disciplina —
+          comercial blindado, CRM vivo e Assessoria de Growth lado a lado com a Dakar.
+        </p>
+        <span class="capa-badge" style="margin-top:1.25rem;">Proposta comercial · Colli&amp;Co · 2026</span>
+        
+      </div>
+    </div><div class="footer"><span>Dakar × V4 · Saber + Executar</span><span>1 / 7</span></div></div><div class="page"><div class="inner">
+      <div class="inner glass">
+        <p class="eyebrow">Contexto · pós EE</p>
+        <h2>Vocês saíram do “o que fazer”.<br />Falta o “como operar todo dia”.</h2>
+        <div class="gold-line"></div>
+        <p class="lead">A Estruturação Estratégica entregou o mapa: comercial, posicionamento, ICPs, Google/LPs e o fim do ralo de orçamentos. Sem execução assistida, o risco é processo no papel e operação voltando ao reativo.</p>
+        <p class="quote">“Não adianta encher a oficina sem organização.”<span>Premissa da Dakar — norte desta proposta</span></p>
+        <div class="grid-3">
+          <article class="card">
+            <div class="card-num">01</div>
+            <h3>EE → execução</h3>
+            <p>Diagnóstico virou playbook. Agora vira rotina, KPI e receita previsível.</p>
+          </article>
+          <article class="card">
+            <div class="card-num">02</div>
+            <h3>Gap de capacidade</h3>
+            <p>~R$ 100k/mês entre capacidade (até R$ 300k) e faturamento atual (R$ 150–200k).</p>
+          </article>
+          <article class="card">
+            <div class="card-num">03</div>
+            <h3>Comercial + atração</h3>
+            <p>Tráfego sem processo é desperdício. Saber fecha a conta; Executar preenche a oficina.</p>
+          </article>
+        </div>
+      </div>
+    </div><div class="footer"><span>Dakar × V4 · Saber + Executar</span><span>2 / 7</span></div></div><div class="page"><div class="inner">
+      <div class="inner glass">
+        <p class="eyebrow">A jornada</p>
+        <h2>Do diagnóstico<br />à execução</h2>
+        <div class="gold-line"></div>
+        <p class="lead">Uma sequência simples, respeitando o momento de caixa e a aversão a risco da Dakar.</p>
+        <div class="flow-row">
+          <div class="flow-step">
+            <div class="icon">01</div>
+            <strong>EE</strong>
+            <span>Já realizada — mapa de funil, ICPs, scripts e posicionamento</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">
+            <div class="icon">02</div>
+            <strong>Saber</strong>
+            <span>Estruturação Comercial 360º — CRM, SLA, playbooks e treinamento</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">
+            <div class="icon">03</div>
+            <strong>Executar</strong>
+            <span>Assessoria de Growth 12 meses — mídia + design em operação</span>
+          </div>
+        </div>
+        <div class="grid-2" style="margin-top:1rem;">
+          <div class="card">
+            <h3>Saber · pontual</h3>
+            <p>Ativar o método comercial: funil, papéis, rituais e CRM — para a equipe vender com disciplina, não no improviso.</p>
+          </div>
+          <div class="card">
+            <h3>Executar · 12 meses</h3>
+            <p>Time V4 em operação contínua: mídia de performance + design, otimizando CAC e preenchendo capacidade ociosa.</p>
+          </div>
+        </div>
+      </div>
+    </div><div class="footer"><span>Dakar × V4 · Saber + Executar</span><span>3 / 7</span></div></div><div class="page"><div class="inner">
+      <div class="inner glass">
+        <p class="eyebrow">Estratégia → execução</p>
+        <h2>Cada frente entra<br />em um ponto do plano</h2>
+        <div class="gold-line"></div>
+        <div class="map-row">
+          <div class="map-strat">Funil, KPIs, SLAs, playbooks e papéis (SDR/Vendas)</div>
+          <div class="map-arrow">→</div>
+          <div class="map-chair"><strong>Estruturação Comercial 360º</strong> · Saber · pontual</div>
+        </div>
+        <div class="map-row">
+          <div class="map-strat">CRM vivo: pipes, fases, canais de captura e bot</div>
+          <div class="map-arrow">→</div>
+          <div class="map-chair"><strong>Implementação de CRM</strong> · incluso no Saber</div>
+        </div>
+        <div class="map-row">
+          <div class="map-strat">Campanhas Google &amp; Meta com foco em orçamento e CAC</div>
+          <div class="map-arrow">→</div>
+          <div class="map-chair"><strong>Gestão de Mídia Paga</strong> · Executar · 12 meses</div>
+        </div>
+        <div class="map-row">
+          <div class="map-strat">Criativos de performance alinhados aos ICPs da Dakar</div>
+          <div class="map-arrow">→</div>
+          <div class="map-chair"><strong>Design Gráfico</strong> · Executar · 12 meses</div>
+        </div>
+        <div class="map-row">
+          <div class="map-strat">Leitura de funil: clique → orçamento → receita</div>
+          <div class="map-arrow">→</div>
+          <div class="map-chair"><strong>Assessoria de Growth</strong> · cadência + QBR</div>
+        </div>
+        <p class="lead" style="margin-top:0.85rem;font-size:0.95rem;">
+          Dois motores sincronizados: <strong>processo comercial</strong> + <strong>atração</strong>. Trabalhamos de forma modular.
+        </p>
+      </div>
+    </div><div class="footer"><span>Dakar × V4 · Saber + Executar</span><span>4 / 7</span></div></div><div class="page"><div class="inner">
+      <div class="inner">
+        <p class="eyebrow">Escopo tangibilizado</p>
+        <h2>O que entra<br />nesta proposta</h2>
+        <div class="gold-line"></div>
+        <div class="grid-2">
+          <article class="card">
+            <span class="tag-16h">Saber · pontual</span>
+            <h3>Diagnóstico e Performance Comercial 360º</h3>
+            <ul>
+              <li>Mapeamento de funil, KPIs e SLAs</li>
+              <li>Playbooks, scripts e definição de papéis</li>
+              <li>Processos (BPMN) e rituais de gestão</li>
+              <li>ICP e política de comissionamento</li>
+              <li>Treinamento da equipe na nova rotina</li>
+              <li>Implementação de CRM: pipes, fases, canais e bot</li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="tag-16h">Executar · 12 meses</span>
+            <h3>Assessoria de Growth</h3>
+            <ul>
+              <li>Gestão de Mídia Paga (Google &amp; Meta)</li>
+              <li>Design Gráfico (criativos de performance)</li>
+              <li>Monitoramento diário de campanhas</li>
+              <li>Check-in quinzenal de performance</li>
+              <li>QBR trimestral com liderança</li>
+              <li>Leitura de funil até a receita</li>
+            </ul>
+          </article>
+        </div>
+        <div class="grid-3" style="margin-top:0.65rem;">
+          <article class="card">
+            <h3>Mídia Paga</h3>
+            <p>Campanhas com foco em orçamento e CAC. Testes contínuos — não “ligar anúncio e rezar”.</p>
+          </article>
+          <article class="card">
+            <h3>Design</h3>
+            <p>Criativos alinhados aos ICPs: agro, frota e família SUV — vender confiabilidade, não preço.</p>
+          </article>
+          <article class="card">
+            <h3>Comercial</h3>
+            <p>Processo, CRM, scripts e treinamento para conduzir o orçamento até o fechamento.</p>
+          </article>
+        </div>
+      </div>
+    </div><div class="footer"><span>Dakar × V4 · Saber + Executar</span><span>5 / 7</span></div></div><div class="page"><div class="inner">
+      <div class="inner glass">
+        <p class="eyebrow">Como opera</p>
+        <h2>Kickoff, cadência<br />e accountability</h2>
+        <div class="gold-line"></div>
+        <div class="flow-row">
+          <div class="flow-step">
+            <div class="icon">01</div>
+            <strong>Kickoff</strong>
+            <span>Acessos, responsáveis e escopo da Estruturação Comercial</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">
+            <div class="icon">02</div>
+            <strong>Saber</strong>
+            <span>CRM + playbooks + treinamento do time Dakar</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">
+            <div class="icon">03</div>
+            <strong>Growth</strong>
+            <span>Mídia + design em operação contínua</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">
+            <div class="icon">04</div>
+            <strong>QBR</strong>
+            <span>Revisão trimestral com liderança</span>
+          </div>
+        </div>
+        <div class="grid-2" style="margin-top:1rem;">
+          <div class="card">
+            <h3>Vigência</h3>
+            <p><strong>Assessoria de Growth · 12 meses</strong>, com abatimento da EE aplicado na condição de Executar. Cadência quinzenal + QBR.</p>
+          </div>
+          <div class="card">
+            <h3>Papel da Dakar</h3>
+            <p>Alinhar Fernando, Heiner e Renan; liberar acessos de CRM/mídia; aprovar ritmos sem sobrecarregar a oficina.</p>
+          </div>
+        </div>
+        <p class="note">Não é um PDF e sumimos. É gente operando com vocês — com cadência, dado e accountability.</p>
+      </div>
+    </div><div class="footer"><span>Dakar × V4 · Saber + Executar</span><span>6 / 7</span></div></div><div class="page"><div class="inner">
+      <div class="inner glass">
+        <p class="eyebrow">Investimento</p>
+        <h2>Condições comerciais<br />pós Estruturação Estratégica</h2>
+        <div class="gold-line"></div>
+        <div class="plans">
+          <article class="plan featured">
+            <div class="plan-label">Executar · 12 meses</div>
+            <h3>Assessoria de Growth</h3>
+            <p class="plan-sub">Mídia + Design · operação contínua</p>
+            <p class="price-old">De R$ 11.223,40/mês</p>
+            <div class="plan-price">R$ 6.172,87 <small>/mês</small></div>
+            <p class="plan-discount">Cashback EE ≈ R$ 13.488 · + descontos de cliente</p>
+            <ul>
+              <li>Assessoria de Growth · 12 meses</li>
+            </ul>
+          </article>
+          <article class="plan">
+            <h3>Performance Comercial 360º</h3>
+            <p class="plan-sub">Diagnóstico + CRM + treinamento</p>
+            <p class="price-old">De R$ 20.283,13</p>
+            <div class="plan-price" style="font-size:1.85rem;">R$ 9.127,41</div>
+            <p class="plan-discount">Descontos de cliente aplicados</p>
+            <p class="plan-total">ou <strong style="color:#fff">12× R$ 760,62</strong></p>
+          </article>
+        </div>
+        <div class="cta-box">
+          <h3>Investimento inicial</h3>
+          <p>Próximo passo: validar escopo → formalizar → kickoff em até 5 dias úteis · Colli&amp;Co</p>
+        </div>
+      </div>
+    </div><div class="footer"><span>Dakar × V4 · Saber + Executar</span><span>7 / 7</span></div></div></body></html>
