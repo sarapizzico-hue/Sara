@@ -1,160 +1,173 @@
-# Script de pitch — Dakar × V4 (Saber + Executar)
+# Script consultivo — Dakar × V4 (Saber + Executar)
 
-Uso: falar com o deck aberto. Cada bloco = 1 slide. Tom direto, sem enrolação.
+Tom: vendedor consultivo. Escuta, conecta, traduz dor em caminho.  
+Não ler o slide. Usar o slide como apoio visual enquanto conduz a conversa.
 
 ---
 
 ## Slide 1 — Capa
 
-**Objetivo:** abrir com clareza do que é a proposta e por que ela existe agora.
+**O que você quer que eles sintam:** “eles entenderam o nosso momento.”
 
-**Falar:**
+**Abrir:**
 
-> “Essa proposta é da Colli&Co / V4 para a Dakar Automotive Center.
+> “Antes de falar de produto ou valor, quero alinhar o ponto de partida.
 >
-> Vocês já fizeram a Estruturação Estratégica. O mapa está pronto. O que estamos trazendo aqui não é mais diagnóstico — é **Saber + Executar**: estruturar o comercial de ponta a ponta e colocar um time de Growth operando com vocês.
+> Vocês fizeram a Estruturação Estratégica com a gente. Não foi teoria — foi organizar a Dakar: quem é o cliente, como vende, onde o orçamento vaza, como o Google e as LPs entram.
 >
-> Em uma frase: a EE organizou a máquina; agora é hora de operar com disciplina — comercial blindado, CRM vivo e Assessoria de Growth lado a lado com a Dakar.”
+> O que trouxe hoje é o próximo passo natural: **como transformar esse mapa em operação do dia a dia** — comercial com método e Growth rodando com vocês.
+>
+> Não é ‘mais uma proposta’. É a continuação do que a EE já começou.”
 
-**Não alongar.** Passar em ~30–40s.
+**Pausa.** Deixar respirar. Só então avançar.
 
 ---
 
 ## Slide 2 — Contexto
 
-**Objetivo:** ancorar no que a EE já entregou e no risco de não executar; usar a frase da própria Dakar.
+**O que você quer:** validar a dor deles com as palavras deles.
 
-**Falar:**
+**Conduzir:**
 
-> “Vocês saíram do ‘o que fazer’. Falta o ‘como operar todo dia’.
+> “Me digam se isso faz sentido: a EE tirou vocês da dúvida do *o que fazer*. O risco agora não é falta de ideia — é a operação voltar ao improviso depois que o diagnóstico esfria.
 >
-> A EE entregou o mapa: comercial, posicionamento, ICPs, Google/LPs e o fim do ralo de orçamentos. Se isso ficar só no papel, o risco clássico acontece — a operação volta ao reativo.
+> Vocês mesmos disseram algo que ficou marcado pra gente: *‘Não adianta encher a oficina sem organização.’*
 >
-> E isso conecta direto com a premissa de vocês: *‘Não adianta encher a oficina sem organização.’* Essa frase é o norte desta proposta.
+> É exatamente isso. Dá pra gerar demanda. A pergunta é: quando o lead chega, a máquina comercial segura ou vaza?
 >
-> Três pontos rápidos:
-> 1. **EE → execução** — o diagnóstico virou playbook; agora precisa virar rotina, KPI e receita previsível.
-> 2. **Gap de capacidade** — vocês têm capacidade de ir até cerca de R$ 300k; hoje estão em R$ 150–200k. São ~R$ 100k/mês de gap. Não é falta de oficina — é falta de máquina comercial + demanda qualificada sincronizadas.
-> 3. **Comercial + atração** — tráfego sem processo é desperdício. O Saber fecha a conta da conversão; o Executar preenche a oficina com demanda certa.”
+> E tem um segundo ponto — de capacidade. Vocês têm estrutura pra ir mais longe do que o faturamento atual. Tem um gap relevante entre o que a oficina aguenta e o que entra todo mês. Isso não se resolve só com anúncio. Resolve com **processo + demanda sincronizados**.
+>
+> Por isso esta proposta tem dois movimentos: organizar a venda (Saber) e operar atração com disciplina (Executar).”
 
-**Fechar:** “Por isso esta proposta não é mais consultoria. É o time V4 entrando para executar com vocês.”
+**Pergunta de confirmação:**  
+> “Isso descreve o momento de vocês — ou tem alguma prioridade que eu esteja subestimando?”
 
 ---
 
 ## Slide 3 — Jornada
 
-**Objetivo:** mostrar sequência simples e respeitar aversão a risco / caixa.
+**O que você quer:** reduzir medo de “projeto grande demais”.
 
-**Falar:**
+**Conduzir:**
 
-> “A jornada é em três etapas — propositalmente simples.
+> “A gente desenhou uma sequência que respeita o caixa e o risco de vocês — sem tentar fazer tudo ao mesmo tempo.
 >
-> **01 · EE** — já realizada. Mapa de funil, ICPs, scripts e posicionamento. Isso não vamos refazer.
+> A EE já aconteceu. Isso é ativo. Não vamos recomeçar do zero.
 >
-> **02 · Saber** — Estruturação Comercial 360º. Aqui a gente ativa CRM, SLA, playbooks e treinamento para a equipe vender com método, não no improviso.
+> O próximo passo é o **Saber**: colocar o comercial pra funcionar de verdade — CRM, papéis, scripts, rituais, treinamento. É o que faz a organização que vocês pediram existir no chão da operação.
 >
-> **03 · Executar** — Assessoria de Growth por 12 meses: mídia + design em operação contínua, otimizando CAC e preenchendo capacidade ociosa.
+> Em paralelo na jornada — e sustentando no tempo — vem o **Executar**: um time de Growth operando mídia e design pra trazer demanda alinhada aos ICPs que a EE já mapeou.
 >
-> O Saber é pontual: liga o método comercial. O Executar é recorrente: mantém a máquina rodando. Modular — cada um tem um papel claro, sem misturar escopo.”
+> Em resumo: primeiro a gente garante que a Dakar sabe receber e fechar bem. Depois (e junto) a gente escala a atração com responsabilidade.”
+
+**Ponte:**  
+> “Se fizer sentido, no próximo slide eu mostro como cada necessidade de vocês vira uma frente concreta.”
 
 ---
 
-## Slide 4 — Mapa (estratégia → execução)
+## Slide 4 — Mapa
 
-**Objetivo:** conectar cada necessidade do negócio a uma frente da proposta.
+**O que você quer:** eles enxergarem “cada dor tem um dono”.
 
-**Falar:**
+**Conduzir:**
 
-> “Aqui está o mapa: o que a Dakar precisa versus o que entra na proposta.
+> “Aqui não é organograma da V4. É o mapa do problema de vocês.
 >
-> - Funil, KPIs, SLAs, playbooks e papéis de SDR/Vendas → **Estruturação Comercial 360º** (Saber).
-> - CRM vivo — pipes, fases, canais de captura e bot → **implementação de CRM**, inclusa no Saber.
-> - Campanhas Google e Meta com foco em orçamento e CAC → **Gestão de Mídia Paga** (Executar).
-> - Criativos alinhados aos ICPs da Dakar → **Design** (Executar).
-> - Leitura de funil do clique ao orçamento até a receita → **Assessoria de Growth**, com cadência e QBR.
+> Se o funil está solto, se não tem SLA, se cada um vende de um jeito — isso é Estruturação Comercial.
 >
-> São dois motores sincronizados: **processo comercial** e **atração**. Um sem o outro não fecha a conta.”
+> Se o orçamento entra no WhatsApp e some, se não tem pipe, se não tem histórico — isso é CRM vivo, dentro do mesmo Saber.
+>
+> Se a oficina tem capacidade ociosa e precisa de demanda qualificada — isso é mídia com foco em orçamento e CAC, não em vanity metric.
+>
+> Se o anúncio fala preço e a Dakar vende confiança, especialidade, segurança pro agro, frota e família SUV — isso é design e mensagem certos.
+>
+> E o que amarra tudo: olhar o funil do clique até a receita. Não celebrar impressão. Celebrar orçamento e fechamento.
+>
+> Por isso falamos em dois motores: **processo comercial** e **atração**. Um sem o outro ou queima dinheiro, ou deixa a oficina vazia.”
 
-**Opcional (se perguntarem):** reforçar que mídia sem CRM/processo queima dinheiro; processo sem demanda deixa capacidade ociosa.
+**Pergunta leve:**  
+> “Qual desses pontos dói mais hoje — o comercial interno ou a geração de demanda?”
+
+*(Use a resposta pra calibrar ênfase nos próximos slides.)*
 
 ---
 
 ## Slide 5 — Entregáveis
 
-**Objetivo:** tangibilizar escopo — o que exatamente entra.
+**O que você quer:** tangibilizar sem virar lista de supermercado.
 
-**Falar:**
+**Conduzir:**
 
-> “Vou tangibilizar o que entra.
+> “Vou ser bem transparente no que entra — porque proposta boa é proposta clara.
 >
-> **No Saber — Diagnóstico e Performance Comercial 360º:**
-> mapeamento de funil, KPIs e SLAs; playbooks, scripts e definição de papéis; processos e rituais de gestão; ICP e política de comissionamento; treinamento da equipe; e implementação de CRM — pipes, fases, canais e bot.
+> No **Saber**, o trabalho é deixar a Dakar comercialmente operacional: funil e indicadores, playbooks e papéis, rituais de gestão, ICP e comissionamento alinhados, treinamento do time e CRM implementado — pipes, fases, canais, bot de boas-vindas. Ou seja: quando o lead chegar, tem caminho.
 >
-> **No Executar — Assessoria de Growth, 12 meses:**
-> Gestão de Mídia Paga (Google e Meta); Design de criativos de performance; monitoramento diário; check-in quinzenal; QBR trimestral com a liderança; e leitura de funil até a receita.
+> No **Executar**, por 12 meses, a V4 entra pra operar: mídia Google e Meta, criativos de performance, monitoramento, rituais de acompanhamento e revisão com a liderança olhando receita — não só mídia.
 >
-> Na prática, três frentes andando juntas:
-> - **Mídia** — campanhas com foco em orçamento e CAC, com teste contínuo, não ‘ligar anúncio e rezar’.
-> - **Design** — criativos para os ICPs de vocês: agro, frota e família SUV — vender **confiabilidade**, não preço.
-> - **Comercial** — processo, CRM e treinamento para conduzir o orçamento até o fechamento.”
+> O que isso muda na prática pra vocês:
+> - anúncio deixa de ser ‘esperança’ e vira teste com meta;
+> - a comunicação passa a vender o que a Dakar realmente é — confiança, não briga de preço;
+> - o comercial deixa de ser reativo e passa a conduzir o orçamento até o fim.”
 
-**Não ler lista como checklist longo** — apontar os blocos e aprofundar só se pedirem.
+**Se pedirem detalhe:** aprofundar só o bloco que interessar. Não despejar os 12 bullets.
 
 ---
 
 ## Slide 6 — Operação
 
-**Objetivo:** reduzir medo de “mais um PDF”; mostrar como roda no dia a dia.
+**O que você quer:** matar o medo de “consultoria que some”.
 
-**Falar:**
+**Conduzir:**
 
-> “Como isso opera no dia a dia.
+> “Uma preocupação justa de quem já contratou marketing: chega um PDF bonito e depois some o mundo.
 >
-> **01 Kickoff** — alinhamos acessos, responsáveis e o escopo da Estruturação Comercial.
-> **02 Saber** — implementamos CRM, playbooks e treinamos o time da Dakar.
-> **03 Growth** — mídia e design entram em operação contínua.
-> **04 QBR** — revisão trimestral com a liderança, olhando funil e receita — não só clique.
+> Aqui a lógica é outra. A gente abre com kickoff — acessos, responsáveis, escopo. Em seguida o Saber coloca CRM e método no time de vocês. O Growth entra em operação. E a cada trimestre a gente senta com a liderança pra olhar o que importou: funil e receita.
 >
-> A Assessoria de Growth é de **12 meses**, com o abatimento da EE já aplicado na condição de Executar. Cadência quinzenal + QBR.
+> Vocês não ficam sozinhos. E a gente também não opera no escuro: precisamos de Fernando, Heiner e Renan alinhados, acessos liberados e um ritmo de aprovação que não trave a oficina.
 >
-> Papel da Dakar: alinhar Fernando, Heiner e Renan; liberar acessos de CRM e mídia; aprovar ritmos **sem sobrecarregar a oficina**.
->
-> Não é PDF e sumimos. É gente operando com vocês — com cadência, dado e accountability.”
+> O contrato de Growth é de 12 meses justamente pra dar tempo de construir curva — não pra ‘ligar campanha e ver em 15 dias’. E a EE que vocês já investiram entra como crédito nessa condição. Ou seja: o que já foi feito continua trabalhando a favor de vocês.”
+
+**Ponte pro preço:**  
+> “Se a lógica de operação faz sentido, o próximo passo é olhar as condições — já calibradas pro momento pós-EE.”
 
 ---
 
 ## Slide 7 — Investimento
 
-**Objetivo:** fechar valor com clareza; cashback + desconto sem detalhar tabela linha a linha.
+**O que você quer:** preço como consequência do valor, não como “surpresa”.
 
-**Falar:**
+**Conduzir:**
 
-> “Condições comerciais pós Estruturação Estratégica — já com a condição de cliente Colli&Co.
+> “Vou direto, sem enrolar.
 >
-> **Executar — Assessoria de Growth, 12 meses**  
-> Valor de tabela: R$ 11.223,40 por mês.  
-> Condição desta proposta: **R$ 6.172,87 por mês**.  
-> Nessa condição entram o **cashback da EE de aproximadamente R$ 13.488** e os descontos de cliente.  
-> Escopo: mídia + design em operação contínua, por 12 meses.
+> Tem duas frentes de investimento — e as duas já vêm com condição de cliente, porque vocês não estão começando do zero com a V4.
 >
-> **Saber — Performance Comercial 360º**  
-> Valor de tabela: R$ 20.283,13.  
-> Condição desta proposta: **R$ 9.127,41** — ou **12 vezes de R$ 760,62**.  
-> Inclui diagnóstico, CRM e treinamento, com descontos de cliente já aplicados.
+> **A operação contínua — Assessoria de Growth, 12 meses:**  
+> O valor de referência é R$ 11.223,40 por mês.  
+> Nesta proposta, com **cashback da EE de cerca de R$ 13.488** e os descontos de cliente, o valor fica em **R$ 6.172,87 por mês**.  
+> É mídia + design rodando com vocês, mês a mês.
 >
-> **Próximo passo:** validar escopo → formalizar → kickoff em até 5 dias úteis, com a Colli&Co.”
+> **A estruturação pontual — Performance Comercial 360º:**  
+> De R$ 20.283,13 na tabela para **R$ 9.127,41** nesta condição — ou **12 vezes de R$ 760,62**.  
+> É o que liga o comercial: diagnóstico, CRM e treinamento.
+>
+> O jeito de ler isso: vocês não estão comprando ‘horas de agência’. Estão comprando a capacidade de **organizar a venda e alimentar a oficina com demanda qualificada** — usando o que a EE já construiu.”
 
-**Se pedirem o “porquê do desconto” (só se perguntarem):**  
-> “A EE que vocês já investiram volta como crédito no Executar. No Saber e no Growth entram as condições de cliente V4 — sem precisar abrir linha a linha agora.”
+**Fechamento consultivo (não agressivo):**
 
-**Fechamento sugerido:**  
-> “Se fizer sentido, alinhamos responsáveis e acessos e ligamos a operação. Alguma dúvida no escopo ou no valor antes de formalizar?”
+> “Meu próximo passo sugerido é simples: validar se o escopo está redondo pra vocês, formalizar e em até cinco dias úteis a gente faz o kickoff com a Colli&Co.
+>
+> Antes disso — o que ainda gera dúvida: o escopo do Saber, a operação dos 12 meses, ou a condição comercial?”
+
+**Se hesitarem no preço:**  
+> “Faz sentido. O que eu não gostaria é de vocês investirem em mídia sem o comercial pronto — ou estruturarem o comercial e ficarem sem demanda. Por isso a proposta vem em conjunto. Se quiserem, a gente prioriza a ordem de entrada sem perder a lógica dos dois motores.”
 
 ---
 
-## Ordem de fechamento (checklist mental)
+## Postura geral (lembrete rápido)
 
-1. Confirmar que a premissa da Dakar (“oficina sem organização”) foi validada.  
-2. Confirmar sequência: Saber liga processo → Executar traz demanda.  
-3. Confirmar valores: **R$ 9.127,41** (Saber) + **R$ 6.172,87/mês** (Growth).  
-4. Pedir próximo passo concreto: formalização + kickoff.
+- Pergunte mais do que afirme nos slides 2 e 4.  
+- Use a frase da Dakar como âncora emocional — ela vende sozinha.  
+- Preço só depois de valor e operação estarem claros.  
+- Nunca defenda desconto linha a linha; fale em **condição pós-EE + parceria**.  
+- Feche pedindo a **próxima ação**, não um “pensem e me falem”.
