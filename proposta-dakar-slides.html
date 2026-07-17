@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dakar × V4 — Saber + Executar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --v4-red-deep: #a10f14;
+      --v4-red-mid: #c4181e;
+      --cream: #ffffff;
+      --muted: rgba(255,255,255,0.88);
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; overflow: hidden; }
+    body {
+      font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+      font-size: 1.05rem;
+      background: var(--v4-red-deep);
+      color: var(--cream);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    .slide-logo { position: absolute; top: 1.25rem; left: 1.5rem; z-index: 10; }
+    .slide-logo svg { height: clamp(22px, 3.5vh, 30px); width: auto; display: block; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.35)); }
+    .blend-progress {
+      position: fixed; top: 0; left: 0; right: 0; height: 5px; z-index: 200;
+      background: linear-gradient(90deg, #fff, #ffd0d0);
+      transform-origin: left; transform: scaleX(var(--slide-progress, 0.125));
+      transition: transform 0.4s var(--ease);
+    }
+    .nav-dots {
+      position: fixed; right: 1rem; top: 50%; transform: translateY(-50%);
+      z-index: 100; display: flex; flex-direction: column; gap: 0.45rem;
+    }
+    .nav-dots a {
+      width: 9px; height: 9px; border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.45); background: transparent;
+      transition: all 0.3s var(--ease);
+    }
+    .nav-dots a:hover, .nav-dots a.active { background: #fff; border-color: #fff; transform: scale(1.2); }
+    .nav-arrow {
+      position: fixed; top: 50%; transform: translateY(-50%); z-index: 100;
+      width: 46px; height: 46px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.35); background: rgba(161,15,20,0.55);
+      color: white; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; line-height: 1;
+    }
+    .nav-arrow:hover:not(:disabled) { background: rgba(255,255,255,0.2); border-color: #fff; }
+    .nav-arrow:disabled { opacity: 0.25; cursor: default; }
+    .nav-arrow--prev { left: 1rem; }
+    .nav-arrow--next { right: 3rem; }
+    .deck { position: relative; width: 100vw; height: 100vh; overflow: hidden; }
+    section {
+      position: absolute; inset: 0; width: 100%; height: 100vh;
+      padding: clamp(2.5rem, 5vh, 3.5rem) clamp(1.25rem, 4vw, 3rem) 4.5rem;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      overflow-y: auto; opacity: 0; visibility: hidden; transform: translateX(60px);
+      transition: opacity 0.4s var(--ease), transform 0.4s var(--ease), visibility 0.4s; z-index: 0;
+    }
+    section.slide-active { opacity: 1; visibility: visible; transform: translateX(0); z-index: 2; }
+    section.slide-exit-left { transform: translateX(-60px); opacity: 0; }
+    section.slide-exit-right { transform: translateX(60px); opacity: 0; }
+    section::before {
+      content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(255, 74, 74, 0.45) 0%, transparent 55%),
+        radial-gradient(ellipse 70% 55% at 85% 90%, rgba(255, 42, 26, 0.35) 0%, transparent 50%),
+        radial-gradient(ellipse 100% 100% at 50% 50%, var(--v4-red-mid) 0%, var(--v4-red-deep) 70%, #6b080c 100%);
+    }
+    .inner { position: relative; z-index: 2; width: 100%; max-width: 980px; max-height: calc(100vh - 5rem); }
+    .eyebrow {
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: #ffe0e0; margin-bottom: 0.5rem;
+    }
+    h1, h2, h3 { font-family: Outfit, sans-serif; font-weight: 700; line-height: 1.12; letter-spacing: -0.02em; color: #fff; }
+    h2 { font-size: clamp(1.65rem, 4vh, 2.45rem); margin-bottom: 0.5rem; }
+    .gold-line { width: 64px; height: 4px; background: linear-gradient(90deg, #fff, #ffd0d0); border-radius: 2px; margin: 0.5rem 0 0.9rem; }
+    .lead { font-size: clamp(0.98rem, 1.75vh, 1.12rem); color: var(--muted); max-width: 720px; line-height: 1.5; }
+    .glass {
+      background: rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.28); border-radius: 22px;
+      padding: clamp(1.1rem, 2.5vh, 1.75rem) clamp(1.2rem, 3vw, 1.85rem);
+      box-shadow: 0 12px 40px rgba(80, 0, 0, 0.25);
+    }
+    #capa .inner { text-align: center; }
+    .capa-partnership {
+      display: flex; align-items: center; justify-content: center; gap: 0.75rem;
+      margin: 1rem 0 0.65rem; font-size: 1rem; color: var(--muted);
+    }
+    .capa-partnership .x { opacity: 0.5; }
+    #capa h1 { font-size: clamp(2.2rem, 6.5vh, 3.5rem); margin-bottom: 0.75rem; }
+    #capa h1 em { font-style: normal; color: #ffe8e8; }
+    .capa-badge {
+      display: inline-block; padding: 0.45rem 1rem; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.45); font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase; background: rgba(255,255,255,0.12);
+    }
+    .slide-hint { margin-top: 1.75rem; font-size: 0.85rem; color: rgba(255,255,255,0.5); }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.65rem; margin-top: 0.85rem; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; margin-top: 0.85rem; }
+    .card {
+      background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 14px; padding: 0.85rem 1rem;
+    }
+    .card-num { font-family: Outfit; font-size: 0.8rem; font-weight: 800; color: #ffe0e0; margin-bottom: 0.3rem; }
+    .card h3 { font-size: 0.98rem; margin-bottom: 0.3rem; }
+    .card p, .card li { font-size: 0.88rem; color: var(--muted); line-height: 1.45; }
+    .card ul { list-style: none; margin-top: 0.35rem; }
+    .card ul li { padding-left: 0.9rem; position: relative; margin-bottom: 0.2rem; }
+    .card ul li::before { content: "·"; position: absolute; left: 0; color: #fff; font-weight: 700; }
+    .tag-16h {
+      display: inline-block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; padding: 0.2rem 0.5rem; border-radius: 6px;
+      background: rgba(255,255,255,0.2); color: #fff; margin-bottom: 0.35rem;
+    }
+    .map-row {
+      display: grid; grid-template-columns: 1fr auto 1fr; gap: 0.5rem; align-items: center;
+      margin-top: 0.5rem; padding: 0.55rem 0; border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+    .map-row:last-child { border-bottom: none; }
+    .map-strat { font-size: 0.88rem; font-weight: 600; color: #fff; }
+    .map-arrow { color: rgba(255,255,255,0.45); font-size: 1rem; }
+    .map-chair { font-size: 0.85rem; color: var(--muted); text-align: right; }
+    .flow-row { display: flex; align-items: stretch; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap; }
+    .flow-step {
+      flex: 1; min-width: 120px; text-align: center; padding: 0.75rem 0.5rem;
+      background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.22); border-radius: 12px;
+    }
+    .flow-step .icon { font-family: Outfit; font-size: 1.2rem; font-weight: 800; margin-bottom: 0.3rem; }
+    .flow-step strong { display: block; font-size: 0.88rem; margin-bottom: 0.2rem; }
+    .flow-step span { font-size: 0.78rem; color: var(--muted); }
+    .flow-arrow { align-self: center; color: rgba(255,255,255,0.45); }
+    .plans { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; margin-top: 0.85rem; }
+    .plan {
+      border-radius: 16px; padding: 1rem 1.1rem;
+      border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.34);
+    }
+    .plan.featured { border-color: #fff; background: rgba(0,0,0,0.48); box-shadow: 0 8px 32px rgba(0,0,0,0.35); }
+    .plan-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #ffe8e8; margin-bottom: 0.35rem; }
+    .plan h3 { font-size: 1.05rem; margin-bottom: 0.15rem; }
+    .plan-sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.5rem; }
+    .price-old { font-size: 0.9rem; color: rgba(255,255,255,0.5); text-decoration: line-through; }
+    .plan-price { font-family: Outfit; font-size: 2.1rem; font-weight: 800; line-height: 1; color: #fff; }
+    .plan-price small { font-size: 0.95rem; font-weight: 600; color: var(--muted); }
+    .plan-discount { font-size: 0.82rem; color: #ffe0e0; margin-top: 0.25rem; font-weight: 600; }
+    .plan-total { font-size: 0.85rem; color: var(--muted); margin-top: 0.35rem; }
+    .plan ul { list-style: none; margin-top: 0.55rem; }
+    .plan ul li { font-size: 0.85rem; color: var(--muted); padding: 0.15rem 0 0.15rem 0.9rem; position: relative; }
+    .plan ul li::before { content: "·"; position: absolute; left: 0; color: #fff; font-weight: 700; }
+    .price-lines { margin: 0.4rem 0 0.55rem; }
+    .price-line {
+      display: flex; justify-content: space-between; gap: 0.75rem;
+      font-size: 0.82rem; color: var(--muted); padding: 0.22rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .price-line:last-child { border-bottom: none; }
+    .price-line strong { color: #fff; font-weight: 700; }
+    .price-line .ok { color: #b7f7d0; }
+    .cta-box {
+      margin-top: 0.85rem; padding: 1rem 1.15rem; border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.35); background: rgba(255,255,255,0.14);
+    }
+    .cta-box h3 { font-size: 1rem; margin-bottom: 0.35rem; }
+    .cta-box p { font-size: 0.88rem; color: var(--muted); }
+    .note { font-size: 0.82rem; color: rgba(255,255,255,0.65); margin-top: 0.65rem; font-style: italic; }
+    .quote {
+      margin: 0.85rem 0 0;
+      padding-left: 0.9rem;
+      border-left: 3px solid rgba(255,255,255,0.55);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.35;
+    }
+    .quote span {
+      display: block;
+      margin-top: 0.35rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+    }
+    .deck-footer {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 150;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.65rem 1.25rem; background: rgba(107, 8, 12, 0.85);
+      border-top: 1px solid rgba(255,255,255,0.15); font-size: 0.82rem; color: rgba(255,255,255,0.75);
+    }
+    .progress-wrap { flex: 1; max-width: 220px; height: 4px; background: rgba(255,255,255,0.2); border-radius: 2px; margin: 0 1rem; }
+    .progress-fill { height: 100%; background: #fff; border-radius: 2px; width: 14.28%; transition: width 0.4s var(--ease); }
+    @media (max-width: 760px) {
+      .grid-3, .grid-2, .plans { grid-template-columns: 1fr; }
+      .nav-arrow--next { right: 1rem; }
+      .flow-arrow, .map-arrow { display: none; }
+      .map-row { grid-template-columns: 1fr; }
+      .map-chair { text-align: left; }
+      .slide-logo { left: 1rem; top: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="blend-progress" aria-hidden="true"></div>
+
+  <nav class="nav-dots" aria-label="Slides">
+    <a href="#" data-slide="1" class="active" title="Capa"></a>
+    <a href="#" data-slide="2" title="Contexto"></a>
+    <a href="#" data-slide="3" title="Jornada"></a>
+    <a href="#" data-slide="4" title="Mapa"></a>
+    <a href="#" data-slide="5" title="Entregáveis"></a>
+    <a href="#" data-slide="6" title="Operação"></a>
+    <a href="#" data-slide="7" title="Investimento"></a>
+  </nav>
+
+  <button type="button" class="nav-arrow nav-arrow--prev" id="prevBtn" disabled aria-label="Anterior">‹</button>
+  <button type="button" class="nav-arrow nav-arrow--next" id="nextBtn" aria-label="Próximo">›</button>
+
+  <template id="v4-logo-tpl">
+    <div class="slide-logo" aria-label="V4 Company">
+      <svg fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 77 20"><path fill="#fff" d="M33.023 3.575c-2.001.003-3.093 1.21-3.09 3.32l.008 6.858c.003 2.11 1.098 3.315 3.1 3.312 2-.003 3.092-1.21 3.09-3.32l-.009-6.858c-.003-2.11-1.097-3.315-3.099-3.312zm.015 11.606c-.649.001-1.057-.356-1.058-1.298l-.009-7.122c-.001-.942.406-1.3 1.055-1.302.648 0 1.057.357 1.058 1.299l.009 7.122c.001.942-.407 1.3-1.055 1.301zm-6.1-3.176l.002 1.884c.001.942-.406 1.282-1.055 1.283-.648 0-1.056-.338-1.058-1.28l-.009-7.122c-.001-.942.406-1.3 1.055-1.302.648 0 1.057.357 1.058 1.299l.002 1.413 1.927-.002-.002-1.281c-.002-2.11-1.041-3.315-3.043-3.313-2 .003-3.037 1.21-3.034 3.32l.008 6.859c.003 2.11 1.042 3.314 3.043 3.312 2.002-.003 3.038-1.21 3.035-3.32l-.002-1.752-1.927.002zM13.055 6.352L8.68 10.813c-.06.062-.017.166.067.166l4.382-.006a.096.096 0 00.096-.097l-.006-4.456c0-.087-.103-.13-.163-.068zm5.862 7.88l-2.687.004a.035.035 0 00-.035.035l.004 2.879c0 .02-.015.035-.035.035l-3.01.004a.035.035 0 01-.034-.035l-.004-2.879a.035.035 0 00-.034-.035l-8.796.012a.141.141 0 01-.14-.142l-.003-2.624v-.004a.795.795 0 01.223-.588l8.758-8.928a.035.035 0 01.025-.01l2.846-.004c.005 0 .009.001.014.003a.367.367 0 01.216.348l.01 8.677c0 .019.017.035.036.035l2.641-.004a.035.035 0 00.035-.035l-.011-8.5c-.002-1.364-1.1-2.478-2.442-2.476L4.18.016a.035.035 0 00-.034.036l.008 6.856c0 .031.037.047.06.025l4.994-5.064a.034.034 0 01.024-.01l2.603-.003c.03 0 .046.037.025.06l-8.118 8.41a.034.034 0 01-.049 0l-1.529-1.55a.036.036 0 01-.01-.026L2.143.074A.035.035 0 002.104.04C.976.185.086 1.131 0 2.294v5.972l.011 8.9a2.48 2.48 0 001.937 2.424h14.974c1.15-.199 2.034-1.224 2.032-2.448l-.003-2.873a.035.035 0 00-.035-.036zM66.47 3.682l.01 7.895-2.104-7.892-2.557.003.017 13.19 1.834-.003-.012-9.553 2.55 9.55 2.094-.004-.016-13.188-1.816.002zm-23.33.031l-1.378 9.366-1.513-9.362-2.835.003.017 13.19 1.779-.003-.012-9.327 1.532 9.325 1.927-.003 1.396-9.46.012 9.458 1.928-.002-.017-13.19-2.835.005h-.001zm33.133-.043l-1.946.002-1.549 6.013-1.564-6.009-2.131.003 2.587 8.814.005 4.371 2.039-.003-.006-4.37 2.565-8.821zm-20.44.026l-2.058 13.192 1.871-.003.35-2.393 2.501-.003.355 2.392 2.057-.003-2.092-13.186-2.983.004zm.42 9.005l.974-6.67.99 6.668-1.964.002zm-5.793-8.998l-3.002.004.017 13.189 2.038-.003-.006-4.955.964-.002c2.038-.002 3.037-1.153 3.035-3.263l-.003-1.715c-.002-2.11-1.005-3.258-3.043-3.255zm.008 6.35h-.964L49.5 5.589l.964-.001c.648-.001 1.001.3 1.002 1.242l.003 1.978c.001.942-.35 1.245-1 1.245z"></path></svg>
+    </div>
+  </template>
+
+  <div class="deck" id="deck">
+
+    <!-- 1 · CAPA -->
+    <section id="capa" class="slide-active" data-slide="1">
+      <div class="inner">
+        <div class="capa-partnership">
+          <span>Dakar Automotive Center</span>
+          <span class="x">×</span>
+          <span>V4 Company</span>
+        </div>
+        <h1>Saber + Executar<br /><em>pós Estruturação Estratégica</em></h1>
+        <p class="lead" style="margin:0.75rem auto 0;text-align:center;max-width:640px;">
+          A EE organizou a máquina. Agora é hora de operar com disciplina —
+          comercial blindado, CRM vivo e Assessoria de Growth lado a lado com a Dakar.
+        </p>
+        <span class="capa-badge" style="margin-top:1.25rem;">Proposta comercial · Colli&amp;Co · 2026</span>
+        <p class="slide-hint">Setas, scroll ou swipe para avançar →</p>
+      </div>
+    </section>
+
+    <!-- 2 · CONTEXTO -->
+    <section id="contexto" data-slide="2">
+      <div class="inner glass">
+        <p class="eyebrow">Contexto · pós EE</p>
+        <h2>Vocês saíram do “o que fazer”.<br />Falta o “como operar todo dia”.</h2>
+        <div class="gold-line"></div>
+        <p class="lead">A Estruturação Estratégica entregou o mapa: comercial, posicionamento, ICPs, Google/LPs e o fim do ralo de orçamentos. Sem execução assistida, o risco é processo no papel e operação voltando ao reativo.</p>
+        <p class="quote">“Não adianta encher a oficina sem organização.”<span>Premissa da Dakar — norte desta proposta</span></p>
+        <div class="grid-3">
+          <article class="card">
+            <div class="card-num">01</div>
+            <h3>EE → execução</h3>
+            <p>Diagnóstico virou playbook. Agora vira rotina, KPI e receita previsível.</p>
+          </article>
+          <article class="card">
+            <div class="card-num">02</div>
+            <h3>Gap de capacidade</h3>
+            <p>~R$ 100k/mês entre capacidade (até R$ 300k) e faturamento atual (R$ 150–200k).</p>
+          </article>
+          <article class="card">
+            <div class="card-num">03</div>
+            <h3>Comercial + atração</h3>
+            <p>Tráfego sem processo é desperdício. Saber fecha a conta; Executar preenche a oficina.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 · JORNADA -->
+    <section id="jornada" data-slide="3">
+      <div class="inner glass">
+        <p class="eyebrow">A jornada</p>
+        <h2>Do diagnóstico<br />à execução</h2>
+        <div class="gold-line"></div>
+        <p class="lead">Uma sequência simples, respeitando o momento de caixa e a aversão a risco da Dakar.</p>
+        <div class="flow-row">
+          <div class="flow-step">
+            <div class="icon">01</div>
+            <strong>EE</strong>
+            <span>Já realizada — mapa de funil, ICPs, scripts e posicionamento</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">
+            <div class="icon">02</div>
+            <strong>Saber</strong>
+            <span>Estruturação Comercial 360º — CRM, SLA, playbooks e treinamento</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">
+            <div class="icon">03</div>
+            <strong>Executar</strong>
+            <span>Assessoria de Growth 12 meses — mídia + design em operação</span>
+          </div>
+        </div>
+        <div class="grid-2" style="margin-top:1rem;">
+          <div class="card">
+            <h3>Saber · pontual</h3>
+            <p>Ativar o método comercial: funil, papéis, rituais e CRM — para a equipe vender com disciplina, não no improviso.</p>
+          </div>
+          <div class="card">
+            <h3>Executar · 12 meses</h3>
+            <p>Time V4 em operação contínua: mídia de performance + design, otimizando CAC e preenchendo capacidade ociosa.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 · MAPA -->
+    <section id="mapa" data-slide="4">
+      <div class="inner glass">
+        <p class="eyebrow">Estratégia → execução</p>
+        <h2>Cada frente entra<br />em um ponto do plano</h2>
+        <div class="gold-line"></div>
+        <div class="map-row">
+          <div class="map-strat">Funil, KPIs, SLAs, playbooks e papéis (SDR/Vendas)</div>
+          <div class="map-arrow">→</div>
+          <div class="map-chair"><strong>Estruturação Comercial 360º</strong> · Saber · pontual</div>
+        </div>
+        <div class="map-row">
+          <div class="map-strat">CRM vivo: pipes, fases, canais de captura e bot</div>
+          <div class="map-arrow">→</div>
+          <div class="map-chair"><strong>Implementação de CRM</strong> · incluso no Saber</div>
+        </div>
+        <div class="map-row">
+          <div class="map-strat">Campanhas Google &amp; Meta com foco em orçamento e CAC</div>
+          <div class="map-arrow">→</div>
+          <div class="map-chair"><strong>Gestão de Mídia Paga</strong> · Executar · 12 meses</div>
+        </div>
+        <div class="map-row">
+          <div class="map-strat">Criativos de performance alinhados aos ICPs da Dakar</div>
+          <div class="map-arrow">→</div>
+          <div class="map-chair"><strong>Design Gráfico</strong> · Executar · 12 meses</div>
+        </div>
+        <div class="map-row">
+          <div class="map-strat">Leitura de funil: clique → orçamento → receita</div>
+          <div class="map-arrow">→</div>
+          <div class="map-chair"><strong>Assessoria de Growth</strong> · cadência + QBR</div>
+        </div>
+        <p class="lead" style="margin-top:0.85rem;font-size:0.95rem;">
+          Dois motores sincronizados: <strong>processo comercial</strong> + <strong>atração</strong>. Trabalhamos de forma modular.
+        </p>
+      </div>
+    </section>
+
+    <!-- 5 · ENTREGÁVEIS -->
+    <section id="entregaveis" data-slide="5">
+      <div class="inner">
+        <p class="eyebrow">Escopo tangibilizado</p>
+        <h2>O que entra<br />nesta proposta</h2>
+        <div class="gold-line"></div>
+        <div class="grid-2">
+          <article class="card">
+            <span class="tag-16h">Saber · pontual</span>
+            <h3>Diagnóstico e Performance Comercial 360º</h3>
+            <ul>
+              <li>Mapeamento de funil, KPIs e SLAs</li>
+              <li>Playbooks, scripts e definição de papéis</li>
+              <li>Processos (BPMN) e rituais de gestão</li>
+              <li>ICP e política de comissionamento</li>
+              <li>Treinamento da equipe na nova rotina</li>
+              <li>Implementação de CRM: pipes, fases, canais e bot</li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="tag-16h">Executar · 12 meses</span>
+            <h3>Assessoria de Growth</h3>
+            <ul>
+              <li>Gestão de Mídia Paga (Google &amp; Meta)</li>
+              <li>Design Gráfico (criativos de performance)</li>
+              <li>Monitoramento diário de campanhas</li>
+              <li>Check-in quinzenal de performance</li>
+              <li>QBR trimestral com liderança</li>
+              <li>Leitura de funil até a receita</li>
+            </ul>
+          </article>
+        </div>
+        <div class="grid-3" style="margin-top:0.65rem;">
+          <article class="card">
+            <h3>Mídia Paga</h3>
+            <p>Campanhas com foco em orçamento e CAC. Testes contínuos — não “ligar anúncio e rezar”.</p>
+          </article>
+          <article class="card">
+            <h3>Design</h3>
+            <p>Criativos alinhados aos ICPs: agro, frota e família SUV — vender confiabilidade, não preço.</p>
+          </article>
+          <article class="card">
+            <h3>Comercial</h3>
+            <p>Processo, CRM, scripts e treinamento para conduzir o orçamento até o fechamento.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 · OPERAÇÃO -->
+    <section id="operacao" data-slide="6">
+      <div class="inner glass">
+        <p class="eyebrow">Como opera</p>
+        <h2>Kickoff, cadência<br />e accountability</h2>
+        <div class="gold-line"></div>
+        <div class="flow-row">
+          <div class="flow-step">
+            <div class="icon">01</div>
+            <strong>Kickoff</strong>
+            <span>Acessos, responsáveis e escopo da Estruturação Comercial</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">
+            <div class="icon">02</div>
+            <strong>Saber</strong>
+            <span>CRM + playbooks + treinamento do time Dakar</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">
+            <div class="icon">03</div>
+            <strong>Growth</strong>
+            <span>Mídia + design em operação contínua</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">
+            <div class="icon">04</div>
+            <strong>QBR</strong>
+            <span>Revisão trimestral com liderança</span>
+          </div>
+        </div>
+        <div class="grid-2" style="margin-top:1rem;">
+          <div class="card">
+            <h3>Vigência</h3>
+            <p><strong>Assessoria de Growth · 12 meses</strong>, com abatimento da EE aplicado na condição de Executar. Cadência quinzenal + QBR.</p>
+          </div>
+          <div class="card">
+            <h3>Papel da Dakar</h3>
+            <p>Alinhar Fernando, Heiner e Renan; liberar acessos de CRM/mídia; aprovar ritmos sem sobrecarregar a oficina.</p>
+          </div>
+        </div>
+        <p class="note">Não é um PDF e sumimos. É gente operando com vocês — com cadência, dado e accountability.</p>
+      </div>
+    </section>
+
+    <!-- 7 · INVESTIMENTO -->
+    <section id="investimento" data-slide="7">
+      <div class="inner glass">
+        <p class="eyebrow">Investimento</p>
+        <h2>Condições comerciais<br />pós Estruturação Estratégica</h2>
+        <div class="gold-line"></div>
+        <div class="plans">
+          <article class="plan featured">
+            <div class="plan-label">Executar · 12 meses</div>
+            <h3>Assessoria de Growth</h3>
+            <p class="plan-sub">Mídia + Design · operação contínua</p>
+            <p class="price-old">De R$ 11.223,40/mês</p>
+            <div class="plan-price">R$ 6.172,87 <small>/mês</small></div>
+            <p class="plan-discount">Cashback EE ≈ R$ 13.488 · + descontos de cliente</p>
+            <ul>
+              <li>Assessoria de Growth · 12 meses</li>
+            </ul>
+          </article>
+          <article class="plan">
+            <h3>Performance Comercial 360º</h3>
+            <p class="plan-sub">Diagnóstico + CRM + treinamento</p>
+            <p class="price-old">De R$ 20.283,13</p>
+            <div class="plan-price" style="font-size:1.85rem;">R$ 9.127,41</div>
+            <p class="plan-discount">Descontos de cliente aplicados</p>
+            <p class="plan-total">ou <strong style="color:#fff">12× R$ 760,62</strong></p>
+          </article>
+        </div>
+        <div class="cta-box">
+          <h3>Investimento inicial</h3>
+          <p>Próximo passo: validar escopo → formalizar → kickoff em até 5 dias úteis · Colli&amp;Co</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer class="deck-footer">
+    <span>Dakar × V4 · Saber + Executar</span>
+    <div class="progress-wrap"><div class="progress-fill" id="progressFill"></div></div>
+    <span id="slideCounter">1 / 7</span>
+  </footer>
+
+  <script>
+  (function () {
+    const tpl = document.getElementById("v4-logo-tpl");
+    document.querySelectorAll("#deck section").forEach((slide) => {
+      slide.insertBefore(tpl.content.cloneNode(true), slide.firstChild);
+    });
+
+    const TOTAL = 7;
+    let current = 1;
+    const slides = Array.from(document.querySelectorAll("#deck section[id]"));
+    const navLinks = document.querySelectorAll(".nav-dots a");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const progressFill = document.getElementById("progressFill");
+    const slideCounter = document.getElementById("slideCounter");
+    const blendBar = document.querySelector(".blend-progress");
+
+    function updateUI() {
+      const p = current / TOTAL;
+      if (progressFill) progressFill.style.width = (p * 100) + "%";
+      if (slideCounter) slideCounter.textContent = current + " / " + TOTAL;
+      if (blendBar) blendBar.style.transform = "scaleX(" + Math.max(0.05, p) + ")";
+      document.documentElement.style.setProperty("--slide-progress", p);
+      if (prevBtn) prevBtn.disabled = current === 1;
+      if (nextBtn) nextBtn.disabled = current === TOTAL;
+      navLinks.forEach((a) => a.classList.toggle("active", Number(a.dataset.slide) === current));
+    }
+
+    function goTo(n, dir) {
+      if (n < 1 || n > TOTAL || n === current) return;
+      const prev = slides[current - 1];
+      const next = slides[n - 1];
+      const fwd = dir === "forward" || (dir !== "back" && n > current);
+      prev.classList.remove("slide-active");
+      prev.classList.add(fwd ? "slide-exit-left" : "slide-exit-right");
+      setTimeout(() => prev.classList.remove("slide-exit-left", "slide-exit-right"), 420);
+      next.classList.add("slide-active");
+      current = n;
+      updateUI();
+    }
+
+    if (prevBtn) prevBtn.addEventListener("click", () => goTo(current - 1, "back"));
+    if (nextBtn) nextBtn.addEventListener("click", () => goTo(current + 1, "forward"));
+    navLinks.forEach((a) => a.addEventListener("click", (e) => { e.preventDefault(); goTo(Number(a.dataset.slide)); }));
+
+    document.addEventListener("wheel", (e) => {
+      if (Math.abs(e.deltaY) < 20) return;
+      e.preventDefault();
+      goTo(current + (e.deltaY > 0 ? 1 : -1), e.deltaY > 0 ? "forward" : "back");
+    }, { passive: false });
+
+    document.addEventListener("keydown", (e) => {
+      if (["ArrowRight", " ", "PageDown"].includes(e.key)) { e.preventDefault(); goTo(current + 1, "forward"); }
+      if (["ArrowLeft", "PageUp"].includes(e.key)) { e.preventDefault(); goTo(current - 1, "back"); }
+    });
+
+    let tx = 0;
+    document.addEventListener("touchstart", (e) => { tx = e.changedTouches[0].screenX; }, { passive: true });
+    document.addEventListener("touchend", (e) => {
+      const dx = e.changedTouches[0].screenX - tx;
+      if (Math.abs(dx) > 50) goTo(current + (dx < 0 ? 1 : -1), dx < 0 ? "forward" : "back");
+    }, { passive: true });
+
+    updateUI();
+  })();
+  </script>
+</body>
+</html>
