@@ -186,6 +186,27 @@
     }
     .compare-table td:last-child, .compare-table th:last-child { text-align: right; white-space: nowrap; }
     .compare-table tr.total td { color: #fff; font-weight: 700; border-bottom: none; padding-top: 0.65rem; }
+    .sheet-wrap { margin-top: 0.65rem; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .sheet {
+      width: 100%; border-collapse: collapse; font-size: 0.72rem; min-width: 640px;
+    }
+    .sheet th, .sheet td {
+      padding: 0.38rem 0.45rem; text-align: right; white-space: nowrap;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .sheet th:first-child, .sheet td:first-child { text-align: left; font-weight: 600; }
+    .sheet thead th {
+      background: #8b0c10; color: #fff; font-size: 0.68rem;
+      letter-spacing: 0.04em; text-transform: uppercase; font-weight: 800;
+    }
+    .sheet tr.section td {
+      background: rgba(0,0,0,0.45); color: #ffe0e0; font-weight: 800;
+      font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 0.48rem 0.45rem; border-bottom: none;
+    }
+    .sheet td.metric { color: rgba(255,255,255,0.88); font-weight: 500; }
+    .sheet td.num { color: #fff; font-variant-numeric: tabular-nums; }
+    .sheet tr.hl td { background: rgba(255,255,255,0.12); font-weight: 700; }
     .big-num {
       font-family: Outfit; font-size: clamp(1.8rem, 4vh, 2.6rem); font-weight: 800; line-height: 1; color: #fff;
     }
@@ -230,7 +251,7 @@
     <a href="#" data-slide="10" title="Réguas bonificadas"></a>
     <a href="#" data-slide="11" title="Preço de mercado"></a>
     <a href="#" data-slide="12" title="Projeção 12 meses"></a>
-    <a href="#" data-slide="13" title="Breakeven"></a>
+    <a href="#" data-slide="13" title="Leitura da projeção"></a>
     <a href="#" data-slide="14" title="Investimento"></a>
   </nav>
 
@@ -255,9 +276,8 @@
         </div>
         <h1>Por que investir em<br /><em>Growth agora</em></h1>
         <p class="lead" style="margin:0.75rem auto 0;text-align:center;max-width:700px;">
-          A EE desenhou a máquina 360º. Esta proposta coloca marketing, comercial,
-          processos e retenção em operação contínua — para sair do esforço manual
-          e chegar a R$&nbsp;200&nbsp;mil/mês com previsibilidade.
+          A EE desenhou a máquina. Esta proposta coloca Account, Copy, Design e GT
+          para operar a projeção SKYJIN — mídia fixa, funil subindo e receita acompanhando.
         </p>
         <span class="capa-badge" style="margin-top:1.25rem;">Jundiaí · Imigrantes · Pós Estruturação Estratégica</span>
         <p class="slide-hint">Setas, scroll ou swipe para avançar →</p>
@@ -409,7 +429,7 @@
           <div class="flow-step">
             <div class="icon">03</div>
             <strong>Comercial</strong>
-            <span>Diagnóstico no WhatsApp · SLA 5 min · CRM que já existe</span>
+            <span>Diagnóstico no WhatsApp · SLA 5 min · funil com dono</span>
           </div>
           <span class="flow-arrow">→</span>
           <div class="flow-step">
@@ -459,7 +479,7 @@
         </div>
         <div class="cta-box">
           <p style="font-size:0.95rem;font-weight:700;color:#fff;">
-            Verba sugerida: começa em R$ 2.500/mês e sobe com o funil (até R$ 5.500). Critério de sucesso: matrícula rastreada — não só conversa no WhatsApp.
+            Verba de mídia da projeção: <strong style="color:#fff">R$ 2.500/mês fixos</strong>. Critério de sucesso: matrícula rastreada — não só conversa no WhatsApp.
           </p>
         </div>
       </div>
@@ -484,13 +504,13 @@
           </article>
           <article class="card">
             <div class="card-num">03</div>
-            <h3>CRM que vocês já têm</h3>
-            <p>Funil visual no CRM atual: contato → visita → compareceu → matriculou → onboarding.</p>
+            <h3>Funil com dono</h3>
+            <p>Contato → visita → compareceu → matriculou → onboarding. Sem lead perdido no improviso.</p>
           </article>
         </div>
         <div class="cta-box">
           <p style="font-size:0.95rem;font-weight:700;color:#fff;">
-            Sem implementar CRM novo — usamos a ferramenta que já roda na unidade e plugamos processo + réguas em cima.
+            Sem implementação de CRM nesta proposta — o foco é processo comercial + mídia + réguas de relacionamento.
           </p>
         </div>
       </div>
@@ -543,9 +563,9 @@
             <ul>
               <li>Account orquestrando prioridades com Gabriel e a unidade</li>
               <li>Gestão de Google Ads e Meta Ads com mix 40/35/15/10</li>
-              <li>Verba de mídia progressiva (R$ 2,5k → R$ 5,5k)</li>
+              <li>Verba de mídia fixa na projeção (R$ 2.500/mês)</li>
               <li>Tracking de matrícula até a origem da mídia</li>
-              <li>Check-ins com leitura de CPL, visita e matrícula</li>
+              <li>Check-ins com leitura de CPL, CAC e ROAS</li>
             </ul>
           </article>
           <article class="card">
@@ -563,7 +583,7 @@
         <div class="grid-2" style="margin-top:0.65rem;">
           <article class="card">
             <h3>Processo comercial</h3>
-            <p>Scripts de diagnóstico, SLA de 5 minutos e rituais com a recepção no CRM que já existe.</p>
+            <p>Scripts de diagnóstico, SLA de 5 minutos e rituais com a recepção.</p>
           </article>
           <article class="card">
             <h3>Retenção assistida</h3>
@@ -580,7 +600,7 @@
         <h2>3 implementações de<br />régua de relacionamento</h2>
         <div class="gold-line"></div>
         <p class="lead">
-          Vocês já têm CRM. O que falta é o relacionamento automático no percurso do aluno —
+          O que falta é o relacionamento automático no percurso do aluno —
           para o Gabriel não precisar lembrar de cada follow no braço.
         </p>
         <div class="grid-3">
@@ -602,7 +622,7 @@
         </div>
         <div class="bonus-box">
           <strong>Bonificado na Assessoria de Growth</strong>
-          <p>As 3 réguas são implementadas no CRM atual da unidade — sem ferramenta nova e sem custo à parte nesta proposta.</p>
+          <p>3 implementações de régua de relacionamento — sem custo à parte nesta proposta. Sem implementação de CRM.</p>
         </div>
       </div>
     </section>
@@ -638,106 +658,133 @@
       </div>
     </section>
 
-    <!-- 11 PROJEÇÃO -->
+    <!-- 11 PROJEÇÃO PLANILHA -->
     <section id="projecao" data-slide="12">
       <div class="inner glass">
-        <p class="eyebrow">Projeção de breakeven · 12 meses</p>
-        <h2>O que a máquina gera<br />quando Growth roda</h2>
+        <p class="eyebrow">Projeção SKYJIN · 12 meses</p>
+        <h2>Mídia fixa. Funil sobe.<br />Receita acompanha.</h2>
         <div class="gold-line"></div>
         <p class="lead">
-          Modelo de projeção com ticket médio de R$&nbsp;130, fee V4 fixo e verba de mídia
-          progressiva — do aprendizado ao volume.
+          Mesma lógica da planilha de breakeven: R$&nbsp;2.500/mês de mídia o ano inteiro,
+          ticket R$&nbsp;130 e conversão lead → venda melhorando mês a mês.
         </p>
-        <div class="stat-row">
-          <div class="stat">
-            <div class="n">R$ 2,5k → 5,5k</div>
-            <div class="l">Verba de mídia/mês · sobe nos meses 5, 8 e 11</div>
-          </div>
-          <div class="stat">
-            <div class="n">6 → 407</div>
-            <div class="l">Vendas/mês projetadas · M1 ao M12</div>
-          </div>
-          <div class="stat">
-            <div class="n">R$ 201k</div>
-            <div class="l">Receita bruta acumulada no ano 1</div>
-          </div>
+        <div class="sheet-wrap">
+          <table class="sheet">
+            <thead>
+              <tr>
+                <th>Métrica</th>
+                <th>Mês 1</th>
+                <th>Mês 3</th>
+                <th>Mês 6</th>
+                <th>Mês 9</th>
+                <th>Mês 12</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="section"><td colspan="6">Estrutura de geração de tráfego com mídia</td></tr>
+              <tr>
+                <td class="metric">Investimento em mídia</td>
+                <td class="num">R$ 2.500</td><td class="num">R$ 2.500</td><td class="num">R$ 2.500</td><td class="num">R$ 2.500</td><td class="num">R$ 2.500</td>
+              </tr>
+              <tr>
+                <td class="metric">CPM</td>
+                <td class="num">R$ 18</td><td class="num">R$ 16</td><td class="num">R$ 15</td><td class="num">R$ 14</td><td class="num">R$ 12</td>
+              </tr>
+              <tr>
+                <td class="metric">CTR</td>
+                <td class="num">1,00%</td><td class="num">1,30%</td><td class="num">2,00%</td><td class="num">2,40%</td><td class="num">2,50%</td>
+              </tr>
+              <tr class="hl">
+                <td class="metric">Leads (WhatsApp)</td>
+                <td class="num">82</td><td class="num">~210</td><td class="num">~430</td><td class="num">~680</td><td class="num">904</td>
+              </tr>
+              <tr>
+                <td class="metric">Custo por lead</td>
+                <td class="num">R$ 30,49</td><td class="num">~R$ 12</td><td class="num">~R$ 6</td><td class="num">~R$ 4</td><td class="num">R$ 2,77</td>
+              </tr>
+              <tr class="section"><td colspan="6">Estrutura de conversão em venda</td></tr>
+              <tr>
+                <td class="metric">Conv. lead → venda</td>
+                <td class="num">39%</td><td class="num">42%</td><td class="num">49%</td><td class="num">54%</td><td class="num">60%</td>
+              </tr>
+              <tr class="hl">
+                <td class="metric">Vendas</td>
+                <td class="num">32</td><td class="num">~90</td><td class="num">~210</td><td class="num">~370</td><td class="num">543</td>
+              </tr>
+              <tr>
+                <td class="metric">CAC / custo por venda</td>
+                <td class="num">R$ 78,13</td><td class="num">~R$ 28</td><td class="num">~R$ 12</td><td class="num">~R$ 7</td><td class="num">R$ 4,60</td>
+              </tr>
+              <tr class="section"><td colspan="6">Projeção de receita</td></tr>
+              <tr>
+                <td class="metric">Ticket médio</td>
+                <td class="num">R$ 130</td><td class="num">R$ 130</td><td class="num">R$ 130</td><td class="num">R$ 130</td><td class="num">R$ 130</td>
+              </tr>
+              <tr class="hl">
+                <td class="metric">Receita projetada</td>
+                <td class="num">R$ 4.160</td><td class="num">~R$ 11,7k</td><td class="num">~R$ 27k</td><td class="num">~R$ 48k</td><td class="num">R$ 70.590</td>
+              </tr>
+              <tr class="hl">
+                <td class="metric">ROAS</td>
+                <td class="num">1,66x</td><td class="num">~4,7x</td><td class="num">~11x</td><td class="num">~19x</td><td class="num">28,24x</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div class="grid-4" style="margin-top:0.85rem;">
-          <article class="card">
-            <div class="card-num">Mês 1</div>
-            <h3>R$ 780</h3>
-            <p>6 vendas · ROAS 0,31 · aprendizado</p>
-          </article>
-          <article class="card">
-            <div class="card-num">Mês 4</div>
-            <h3>ROAS &gt; 1</h3>
-            <p>21 vendas · mídia começa a se pagar</p>
-          </article>
-          <article class="card">
-            <div class="card-num">Mês 8</div>
-            <h3>139 vendas</h3>
-            <p>Receita no mês R$ 18,1k · ROAS 4,0</p>
-          </article>
-          <article class="card">
-            <div class="card-num">Mês 12</div>
-            <h3>407 vendas</h3>
-            <p>Receita no mês R$ 52,9k · ROAS 9,6</p>
-          </article>
-        </div>
-        <p class="note" style="font-size:0.78rem;color:rgba(255,255,255,0.6);margin-top:0.75rem;font-style:italic;">
-          Projeção interna de cenário · sujeita a execução, sazonalidade e disciplina de funil.
+        <p style="font-size:0.72rem;color:rgba(255,255,255,0.55);margin-top:0.55rem;font-style:italic;">
+          Mês 1 e Mês 12 = planilha. Intermediários ilustrativos da curva · execução e sazonalidade alteram o ritmo.
         </p>
       </div>
     </section>
 
-    <!-- 12 BREAKEVEN -->
+    <!-- 12 RESULTADO DA CURVA -->
     <section id="breakeven" data-slide="13">
       <div class="inner glass">
-        <p class="eyebrow">Margem de contribuição</p>
-        <h2>Breakeven no mês 10.<br />Depois a curva vira.</h2>
+        <p class="eyebrow">Leitura da projeção</p>
+        <h2>Com R$ 2.500 de mídia,<br />a curva já nasce no azul.</h2>
         <div class="gold-line"></div>
-        <div class="grid-2">
-          <article class="card">
-            <h3>Até o mês 9</h3>
-            <ul>
-              <li>Investimento em aprendizado + estrutura</li>
-              <li>MC acumulada ainda negativa (curva de aquecimento)</li>
-              <li>Mídia sobe com o funil ganhando eficiência</li>
-              <li>Custo por venda cai de R$ 417 (M1) para R$ 25 (M9)</li>
-            </ul>
-          </article>
-          <article class="card">
-            <h3>A partir do mês 10</h3>
-            <ul>
-              <li>MC do mês positiva: +R$ 1.471</li>
-              <li>Mês 11: +R$ 7.649 · Mês 12: +R$ 12.126</li>
-              <li>ROI V4 do mês vira positivo (0,14 → 1,04)</li>
-              <li>Receita líquida acumulada no ano: ~R$ 183k</li>
-            </ul>
-          </article>
-        </div>
         <div class="stat-row">
           <div class="stat">
-            <div class="n">R$ 6.172</div>
-            <div class="l">Fee V4 / mês · Account + Copy + Design + GT</div>
+            <div class="n">1,66x</div>
+            <div class="l">ROAS no mês 1 · mídia já se paga</div>
           </div>
           <div class="stat">
-            <div class="n">R$ 45k</div>
-            <div class="l">Mídia acumulada no ano 1 (verba do cliente)</div>
+            <div class="n">28,24x</div>
+            <div class="l">ROAS no mês 12 · eficiência máxima</div>
           </div>
           <div class="stat">
-            <div class="n">Mês 10</div>
-            <div class="l">Primeiro mês com margem de contribuição positiva</div>
+            <div class="n">R$ 70,6k</div>
+            <div class="l">Receita projetada só no mês 12</div>
           </div>
         </div>
+        <div class="grid-2" style="margin-top:0.85rem;">
+          <article class="card">
+            <h3>O que melhora na operação</h3>
+            <ul>
+              <li>Leads: 82 → 904 / mês (mesmo investimento)</li>
+              <li>CPL: R$ 30,49 → R$ 2,77</li>
+              <li>Conv. lead → venda: 39% → 60%</li>
+              <li>CAC: R$ 78,13 → R$ 4,60</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>O que isso significa</h3>
+            <ul>
+              <li>Vendas: 32 → 543 matrículas / mês</li>
+              <li>Receita M1 R$ 4.160 → M12 R$ 70.590</li>
+              <li>Mídia fixa R$ 2.500 · 12 × = R$ 30.000 no ano</li>
+              <li>Fee V4 = o time que faz essa curva acontecer</li>
+            </ul>
+          </article>
+        </div>
         <p class="quote">
-          O fee não é custo solto — é o motor que faz a mídia e o funil pagarem a conta.
-          <span>Breakeven projetado · mês 10</span>
+          Não é “gastar mais em anúncio”. É fazer o mesmo R$ 2.500 render 28x.
+          <span>Projeção SKYJIN · SkyFit Imigrantes</span>
         </p>
       </div>
     </section>
 
-    <!-- 13 INVESTIMENTO -->
+    <!-- 14 INVESTIMENTO -->
     <section id="investimento" data-slide="14">
       <div class="inner glass">
         <p class="eyebrow">Investimento · condição final</p>
@@ -754,16 +801,16 @@
             <ul>
               <li>Onboarding 90 dias · Frequência/Red Flag · Recuperação de base</li>
               <li>Aquisição com mix Google / Meta / remarketing / testes</li>
-              <li>Comercial consultivo + SLA 5 min no CRM atual</li>
-              <li>Verba de mídia à parte · começa em R$ 2.500/mês</li>
+              <li>Comercial consultivo + SLA 5 min</li>
+              <li>Verba de mídia à parte · R$ 2.500/mês (projeção)</li>
             </ul>
           </article>
         </div>
         <div class="cta-box">
           <h3>O que vocês levam com a V4</h3>
           <p>
-            Time de Growth operando a projeção no CRM que já existe — com 3 réguas
-            bonificadas para fechar o balde do churn e breakeven projetado no mês 10.
+            Time de Growth para operar a projeção SKYJIN — mídia eficiente, comercial com padrão
+            e 3 réguas bonificadas. Sem implementação de CRM nesta proposta.
           </p>
         </div>
       </div>
