@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SkyFit Imigrantes × V4 — Proposta Consultiva Growth</title>
+  <title>SkyFit Imigrantes × V4 — Growth pós EE</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -30,15 +30,15 @@
     .blend-progress {
       position: fixed; top: 0; left: 0; right: 0; height: 5px; z-index: 200;
       background: linear-gradient(90deg, #fff, #ffd0d0);
-      transform-origin: left; transform: scaleX(var(--slide-progress, 0.08));
+      transform-origin: left; transform: scaleX(var(--slide-progress, 0.125));
       transition: transform 0.4s var(--ease);
     }
     .nav-dots {
       position: fixed; right: 1rem; top: 50%; transform: translateY(-50%);
-      z-index: 100; display: flex; flex-direction: column; gap: 0.38rem;
+      z-index: 100; display: flex; flex-direction: column; gap: 0.45rem;
     }
     .nav-dots a {
-      width: 8px; height: 8px; border-radius: 50%;
+      width: 9px; height: 9px; border-radius: 50%;
       border: 2px solid rgba(255,255,255,0.45); background: transparent;
       transition: all 0.3s var(--ease);
     }
@@ -78,9 +78,9 @@
       text-transform: uppercase; color: #ffe0e0; margin-bottom: 0.5rem;
     }
     h1, h2, h3 { font-family: Outfit, sans-serif; font-weight: 700; line-height: 1.12; letter-spacing: -0.02em; color: #fff; }
-    h2 { font-size: clamp(1.55rem, 3.8vh, 2.35rem); margin-bottom: 0.5rem; }
+    h2 { font-size: clamp(1.65rem, 4vh, 2.45rem); margin-bottom: 0.5rem; }
     .gold-line { width: 64px; height: 4px; background: linear-gradient(90deg, #fff, #ffd0d0); border-radius: 2px; margin: 0.5rem 0 0.9rem; }
-    .lead { font-size: clamp(0.95rem, 1.7vh, 1.1rem); color: var(--muted); max-width: 760px; line-height: 1.5; }
+    .lead { font-size: clamp(0.98rem, 1.75vh, 1.12rem); color: var(--muted); max-width: 720px; line-height: 1.5; }
     .glass {
       background: rgba(255, 255, 255, 0.14);
       backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
@@ -94,7 +94,7 @@
       margin: 1rem 0 0.65rem; font-size: 1rem; color: var(--muted);
     }
     .capa-partnership .x { opacity: 0.5; }
-    #capa h1 { font-size: clamp(2rem, 6vh, 3.3rem); margin-bottom: 0.75rem; }
+    #capa h1 { font-size: clamp(2.2rem, 6.5vh, 3.5rem); margin-bottom: 0.75rem; }
     #capa h1 em { font-style: normal; color: #ffe8e8; }
     .capa-badge {
       display: inline-block; padding: 0.45rem 1rem; border-radius: 999px;
@@ -104,14 +104,13 @@
     .slide-hint { margin-top: 1.75rem; font-size: 0.85rem; color: rgba(255,255,255,0.5); }
     .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.65rem; margin-top: 0.85rem; }
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; margin-top: 0.85rem; }
-    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.55rem; margin-top: 0.85rem; }
     .card {
       background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.22);
       border-radius: 14px; padding: 0.85rem 1rem;
     }
     .card-num { font-family: Outfit; font-size: 0.8rem; font-weight: 800; color: #ffe0e0; margin-bottom: 0.3rem; }
     .card h3 { font-size: 0.98rem; margin-bottom: 0.3rem; }
-    .card p, .card li { font-size: 0.86rem; color: var(--muted); line-height: 1.45; }
+    .card p, .card li { font-size: 0.88rem; color: var(--muted); line-height: 1.45; }
     .card ul { list-style: none; margin-top: 0.35rem; }
     .card ul li { padding-left: 0.9rem; position: relative; margin-bottom: 0.2rem; }
     .card ul li::before { content: "·"; position: absolute; left: 0; color: #fff; font-weight: 700; }
@@ -120,32 +119,24 @@
       text-transform: uppercase; padding: 0.2rem 0.5rem; border-radius: 6px;
       background: rgba(255,255,255,0.2); color: #fff; margin-bottom: 0.35rem;
     }
+    .map-row {
+      display: grid; grid-template-columns: 1fr auto 1fr; gap: 0.5rem; align-items: center;
+      margin-top: 0.5rem; padding: 0.55rem 0; border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+    .map-row:last-child { border-bottom: none; }
+    .map-strat { font-size: 0.88rem; font-weight: 600; color: #fff; }
+    .map-arrow { color: rgba(255,255,255,0.45); font-size: 1rem; }
+    .map-chair { font-size: 0.85rem; color: var(--muted); text-align: right; }
     .flow-row { display: flex; align-items: stretch; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap; }
     .flow-step {
-      flex: 1; min-width: 110px; text-align: center; padding: 0.7rem 0.45rem;
+      flex: 1; min-width: 120px; text-align: center; padding: 0.75rem 0.5rem;
       background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.22); border-radius: 12px;
     }
-    .flow-step .icon { font-family: Outfit; font-size: 1.15rem; font-weight: 800; margin-bottom: 0.25rem; }
-    .flow-step strong { display: block; font-size: 0.86rem; margin-bottom: 0.2rem; }
-    .flow-step span { font-size: 0.76rem; color: var(--muted); }
+    .flow-step .icon { font-family: Outfit; font-size: 1.2rem; font-weight: 800; margin-bottom: 0.3rem; }
+    .flow-step strong { display: block; font-size: 0.88rem; margin-bottom: 0.2rem; }
+    .flow-step span { font-size: 0.78rem; color: var(--muted); }
     .flow-arrow { align-self: center; color: rgba(255,255,255,0.45); }
     .plans { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; margin-top: 0.85rem; }
-    .plans--single { grid-template-columns: 1fr; max-width: 560px; }
-    .price-break {
-      border-radius: 16px; padding: 1rem 1.1rem;
-      border: 1px solid rgba(255,255,255,0.28); background: rgba(255,255,255,0.12);
-      display: flex; flex-direction: column; justify-content: center; gap: 0.65rem;
-    }
-    .price-break .row {
-      display: flex; justify-content: space-between; align-items: baseline; gap: 0.75rem;
-      padding-bottom: 0.55rem; border-bottom: 1px solid rgba(255,255,255,0.15);
-    }
-    .price-break .row:last-child { border-bottom: none; padding-bottom: 0; }
-    .price-break .lbl { font-size: 0.78rem; color: var(--muted); line-height: 1.35; max-width: 58%; }
-    .price-break .val { font-family: Outfit; font-weight: 800; font-size: 1.05rem; color: #fff; white-space: nowrap; }
-    .price-break .row.abat .val { color: #b7f7d0; }
-    .price-break .row.final .val { font-size: 1.45rem; }
-    .price-break .row.final .lbl { color: #fff; font-weight: 700; font-size: 0.86rem; }
     .plan {
       border-radius: 16px; padding: 1rem 1.1rem;
       border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.34);
@@ -154,99 +145,62 @@
     .plan-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #ffe8e8; margin-bottom: 0.35rem; }
     .plan h3 { font-size: 1.05rem; margin-bottom: 0.15rem; }
     .plan-sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.5rem; }
-    .plan-price { font-family: Outfit; font-size: 2rem; font-weight: 800; line-height: 1; color: #fff; }
-    .plan-price small { font-size: 0.9rem; font-weight: 600; color: var(--muted); }
+    .price-old { font-size: 0.9rem; color: rgba(255,255,255,0.5); text-decoration: line-through; }
+    .plan-price { font-family: Outfit; font-size: 2.1rem; font-weight: 800; line-height: 1; color: #fff; }
+    .plan-price small { font-size: 0.95rem; font-weight: 600; color: var(--muted); }
     .plan-discount { font-size: 0.82rem; color: #ffe0e0; margin-top: 0.25rem; font-weight: 600; }
     .plan-total { font-size: 0.85rem; color: var(--muted); margin-top: 0.35rem; }
     .plan ul { list-style: none; margin-top: 0.55rem; }
-    .plan ul li { font-size: 0.84rem; color: var(--muted); padding: 0.15rem 0 0.15rem 0.9rem; position: relative; }
+    .plan ul li { font-size: 0.85rem; color: var(--muted); padding: 0.15rem 0 0.15rem 0.9rem; position: relative; }
     .plan ul li::before { content: "·"; position: absolute; left: 0; color: #fff; font-weight: 700; }
+    .price-lines { margin: 0.4rem 0 0.55rem; }
+    .price-line {
+      display: flex; justify-content: space-between; gap: 0.75rem;
+      font-size: 0.82rem; color: var(--muted); padding: 0.22rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .price-line:last-child { border-bottom: none; }
+    .price-line strong { color: #fff; font-weight: 700; }
+    .price-line .ok { color: #b7f7d0; }
     .cta-box {
-      margin-top: 0.75rem; padding: 0.9rem 1.1rem; border-radius: 14px;
+      margin-top: 0.85rem; padding: 1rem 1.15rem; border-radius: 14px;
       border: 1px solid rgba(255,255,255,0.35); background: rgba(255,255,255,0.14);
     }
     .cta-box h3 { font-size: 1rem; margin-bottom: 0.35rem; }
-    .cta-box p { font-size: 0.86rem; color: var(--muted); }
+    .cta-box p { font-size: 0.88rem; color: var(--muted); }
+    .note { font-size: 0.82rem; color: rgba(255,255,255,0.65); margin-top: 0.65rem; font-style: italic; }
     .quote {
-      margin: 0.75rem 0 0;
+      margin: 0.85rem 0 0;
       padding-left: 0.9rem;
       border-left: 3px solid rgba(255,255,255,0.55);
-      font-size: 1.02rem;
+      font-size: 1.05rem;
       font-weight: 700;
       color: #fff;
       line-height: 1.35;
     }
     .quote span {
-      display: block; margin-top: 0.35rem; font-size: 0.72rem; font-weight: 700;
-      letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.65);
+      display: block;
+      margin-top: 0.35rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
     }
-    .bonus-box {
-      margin-top: 0.7rem; padding: 0.8rem 1rem; border-radius: 12px;
-      border: 1px solid rgba(183,247,208,0.35); background: rgba(52,211,153,0.14);
-    }
-    .bonus-box strong {
-      display: block; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
-      color: #b7f7d0; margin-bottom: 0.3rem;
-    }
-    .bonus-box p { font-size: 0.86rem; color: #e8fff2; }
-    .compare-table {
-      width: 100%; border-collapse: collapse; margin-top: 0.75rem; font-size: 0.84rem;
-    }
-    .compare-table th, .compare-table td {
-      padding: 0.45rem 0.55rem; border-bottom: 1px solid rgba(255,255,255,0.12);
-      text-align: left; color: var(--muted);
-    }
-    .compare-table th {
-      font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
-      color: #ffe0e0; font-weight: 700;
-    }
-    .compare-table td:last-child, .compare-table th:last-child { text-align: right; white-space: nowrap; }
-    .compare-table tr.total td { color: #fff; font-weight: 700; border-bottom: none; padding-top: 0.65rem; }
-    .sheet-wrap { margin-top: 0.65rem; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-    .sheet {
-      width: 100%; border-collapse: collapse; font-size: 0.72rem; min-width: 640px;
-    }
-    .sheet th, .sheet td {
-      padding: 0.38rem 0.45rem; text-align: right; white-space: nowrap;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-    .sheet th:first-child, .sheet td:first-child { text-align: left; font-weight: 600; }
-    .sheet thead th {
-      background: #8b0c10; color: #fff; font-size: 0.68rem;
-      letter-spacing: 0.04em; text-transform: uppercase; font-weight: 800;
-    }
-    .sheet tr.section td {
-      background: rgba(0,0,0,0.45); color: #ffe0e0; font-weight: 800;
-      font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase;
-      padding: 0.48rem 0.45rem; border-bottom: none;
-    }
-    .sheet td.metric { color: rgba(255,255,255,0.88); font-weight: 500; }
-    .sheet td.num { color: #fff; font-variant-numeric: tabular-nums; }
-    .sheet tr.hl td { background: rgba(255,255,255,0.12); font-weight: 700; }
-    .big-num {
-      font-family: Outfit; font-size: clamp(1.8rem, 4vh, 2.6rem); font-weight: 800; line-height: 1; color: #fff;
-    }
-    .stat-row {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.55rem; margin-top: 0.85rem;
-    }
-    .stat {
-      text-align: center; padding: 0.85rem 0.5rem;
-      background: rgba(0,0,0,0.28); border: 1px solid rgba(255,255,255,0.2); border-radius: 14px;
-    }
-    .stat .n { font-family: Outfit; font-size: clamp(1.35rem, 3vh, 1.85rem); font-weight: 800; color: #fff; line-height: 1.1; }
-    .stat .l { font-size: 0.72rem; color: var(--muted); margin-top: 0.35rem; line-height: 1.35; }
     .deck-footer {
       position: fixed; bottom: 0; left: 0; right: 0; z-index: 150;
       display: flex; align-items: center; justify-content: space-between;
       padding: 0.65rem 1.25rem; background: rgba(107, 8, 12, 0.85);
-      border-top: 1px solid rgba(255,255,255,0.15); font-size: 0.8rem; color: rgba(255,255,255,0.75);
+      border-top: 1px solid rgba(255,255,255,0.15); font-size: 0.82rem; color: rgba(255,255,255,0.75);
     }
     .progress-wrap { flex: 1; max-width: 220px; height: 4px; background: rgba(255,255,255,0.2); border-radius: 2px; margin: 0 1rem; }
-    .progress-fill { height: 100%; background: #fff; border-radius: 2px; width: 8%; transition: width 0.4s var(--ease); }
+    .progress-fill { height: 100%; background: #fff; border-radius: 2px; width: 14.28%; transition: width 0.4s var(--ease); }
     @media (max-width: 760px) {
-      .grid-3, .grid-2, .grid-4, .stat-row, .plans { grid-template-columns: 1fr; }
+      .grid-3, .grid-2, .plans { grid-template-columns: 1fr; }
       .nav-arrow--next { right: 1rem; }
-      .flow-arrow { display: none; }
+      .flow-arrow, .map-arrow { display: none; }
+      .map-row { grid-template-columns: 1fr; }
+      .map-chair { text-align: left; }
       .slide-logo { left: 1rem; top: 1rem; }
     }
   </style>
@@ -256,17 +210,12 @@
 
     <nav class="nav-dots" aria-label="Slides">
     <a href="#" data-slide="1" class="active" title="Capa"></a>
-    <a href="#" data-slide="2" title="Por que isso importa"></a>
-    <a href="#" data-slide="3" title="Realidade atual"></a>
-    <a href="#" data-slide="4" title="Posicionamento"></a>
-    <a href="#" data-slide="5" title="Jornada"></a>
-    <a href="#" data-slide="6" title="Aquisição"></a>
-    <a href="#" data-slide="7" title="Retenção"></a>
-    <a href="#" data-slide="8" title="O que a V4 opera"></a>
-    <a href="#" data-slide="9" title="Réguas bonificadas"></a>
-    <a href="#" data-slide="10" title="Preço de mercado"></a>
-    <a href="#" data-slide="11" title="Leitura da projeção"></a>
-    <a href="#" data-slide="12" title="Investimento"></a>
+    <a href="#" data-slide="2" title="Contexto"></a>
+    <a href="#" data-slide="3" title="Jornada"></a>
+    <a href="#" data-slide="4" title="Mapa"></a>
+    <a href="#" data-slide="5" title="Entregáveis"></a>
+    <a href="#" data-slide="6" title="Operação"></a>
+    <a href="#" data-slide="7" title="Investimento"></a>
   </nav>
 
   <button type="button" class="nav-arrow nav-arrow--prev" id="prevBtn" disabled aria-label="Anterior">‹</button>
@@ -278,6 +227,7 @@
     </div>
   </template>
 
+  
   <div class="deck" id="deck">
 
     <!-- 1 CAPA -->
@@ -288,453 +238,247 @@
           <span class="x">×</span>
           <span>V4 Company</span>
         </div>
-        <h1>Por que investir em<br /><em>Growth agora</em></h1>
-        <p class="lead" style="margin:0.75rem auto 0;text-align:center;max-width:700px;">
-          A EE desenhou a máquina. Esta proposta coloca Account, Copy, Design e GT
-          para operar a projeção SKYJIN — mídia fixa, funil subindo e receita acompanhando.
+        <h1>Growth<br /><em>pós Estruturação Estratégica</em></h1>
+        <p class="lead" style="margin:0.75rem auto 0;text-align:center;max-width:680px;">
+          A EE desenhou a máquina 360º. Agora é hora de operar — aquisição rastreada,
+          comercial com método e retenção que fecha o balde furado.
         </p>
-        <span class="capa-badge" style="margin-top:1.25rem;">Jundiaí · Imigrantes · Pós Estruturação Estratégica</span>
+        <span class="capa-badge" style="margin-top:1.25rem;">Jundiaí · Imigrantes · Proposta comercial · 2026</span>
         <p class="slide-hint">Setas, scroll ou swipe para avançar →</p>
       </div>
     </section>
 
-    <!-- 2 POR QUE IMPORTA -->
-    <section id="importancia" data-slide="2">
+    <!-- 2 CONTEXTO -->
+    <section id="contexto" data-slide="2">
       <div class="inner glass">
-        <p class="eyebrow">O ponto de partida</p>
-        <h2>Não é “vender mais”.<br />É parar o balde furado.</h2>
+        <p class="eyebrow">Contexto · pós EE</p>
+        <h2>Vocês já vendem.<br />O problema é o balde furado.</h2>
         <div class="gold-line"></div>
         <p class="lead">
-          A unidade já vende. O gestor já entrega resultado no braço. O problema não é falta
-          de esforço — é cancelamento engolindo quase tudo o que entra, enquanto aquisição
-          e retenção ainda dependem de pessoas, não de processo.
+          A EE mostrou: faturamento ~R$&nbsp;175k, 140–150 vendas/mês no braço do Gabriel —
+          e 110–120 cancelamentos comendo o líquido. Sem execução assistida, a operação
+          volta ao improviso.
+        </p>
+        <p class="quote">
+          “Volte a treinar com acompanhamento real, aulas inclusas e uma rotina possível.”
+          <span>PUV da EE — norte desta proposta</span>
         </p>
         <div class="grid-3">
           <article class="card">
             <div class="card-num">01</div>
-            <h3>Aquisição no braço</h3>
-            <p>Gabriel reativa ex-alunos e insiste no WhatsApp. Funciona, mas não escala e não deixa o gestor livre.</p>
+            <h3>EE → execução</h3>
+            <p>Diagnóstico, ICP 35+, mix de mídia e retenção 90 dias. Agora vira rotina e KPI.</p>
           </article>
           <article class="card">
             <div class="card-num">02</div>
             <h3>Churn como freio</h3>
-            <p>110 a 120 cancelamentos/mês. O crescimento líquido fica em 20–30 alunos — longe da meta.</p>
+            <p>Líquido de só 20–30 alunos/mês. Meta R$&nbsp;200k exige fechar o furo, não só encher lead.</p>
           </article>
           <article class="card">
             <div class="card-num">03</div>
             <h3>Mídia sem rastreio</h3>
-            <p>Tráfego barato no WhatsApp, sem matrícula no Meta. O algoritmo aprende a trazer curioso, não comprador.</p>
-          </article>
-        </div>
-        <p class="quote">
-          Vender sem reter é encher um balde furado.
-          <span>Growth fecha o furo e liga a torneira certa</span>
-        </p>
-      </div>
-    </section>
-
-    <!-- 3 REALIDADE -->
-    <section id="realidade" data-slide="3">
-      <div class="inner glass">
-        <p class="eyebrow">Diagnóstico da EE</p>
-        <h2>O que os números mostram hoje</h2>
-        <div class="gold-line"></div>
-        <div class="stat-row">
-          <div class="stat">
-            <div class="n">R$ 175k</div>
-            <div class="l">Faturamento mensal atual · ticket médio ~R$ 119,90</div>
-          </div>
-          <div class="stat">
-            <div class="n">140–150</div>
-            <div class="l">Vendas/mês após a chegada do Gabriel na operação</div>
-          </div>
-          <div class="stat">
-            <div class="n">110–120</div>
-            <div class="l">Cancelamentos/mês · líquido de só 20–30 alunos</div>
-          </div>
-        </div>
-        <div class="grid-2" style="margin-top:0.85rem;">
-          <article class="card">
-            <h3>O que já funciona</h3>
-            <ul>
-              <li>Gestor engajado e capaz de puxar venda no dia a dia</li>
-              <li>Volume de conversas no WhatsApp com CPL baixo (R$ 3,64 a R$ 5,15)</li>
-              <li>Infraestrutura e modalidades reais (Muay Thai, Pilates, Spinning, Kids)</li>
-              <li>Diferenciais físicos: Espaço Kids e Manobrista Noturno</li>
-            </ul>
-          </article>
-          <article class="card">
-            <h3>O que está vazando</h3>
-            <ul>
-              <li>Churn alto: aquisição alta, base quase estagnada</li>
-              <li>Tráfego amador (Giovana · ~R$ 40/dia) sem métricas de matrícula</li>
-              <li>WhatsApp como tabela de preço, não como diagnóstico</li>
-              <li>Retenção no improviso — Gabriel monitora faltas sozinho</li>
-            </ul>
-          </article>
-        </div>
-        <p class="quote" style="margin-top:0.9rem;">
-          Meta da operação: R$ 200 mil/mês · cerca de 209 alunos ativos líquidos novos.
-        </p>
-      </div>
-    </section>
-
-    <!-- 4 POSICIONAMENTO -->
-    <section id="posicionamento" data-slide="4">
-      <div class="inner glass">
-        <p class="eyebrow">ICP · PUV · Concorrência</p>
-        <h2>Para quem a SkyFit Imigrantes<br />precisa parecer óbvia</h2>
-        <div class="gold-line"></div>
-        <div class="grid-2">
-          <article class="card">
-            <div class="card-num">ICP</div>
-            <h3>Adulto 35+ · classes C/D</h3>
-            <ul>
-              <li>Busca saúde, alívio de dores e qualidade de vida — não só estética</li>
-              <li>Preza atendimento e tem vergonha de academia lotada</li>
-              <li>Não quer se sentir invisível nem sem instrução</li>
-            </ul>
-          </article>
-          <article class="card">
-            <div class="card-num">PUV</div>
-            <h3>Acompanhamento real</h3>
-            <p class="quote" style="margin-top:0.4rem;font-size:0.95rem;">
-              “Volte a treinar com acompanhamento real, aulas inclusas e uma rotina possível.”
-            </p>
-          </article>
-        </div>
-        <div class="grid-3">
-          <article class="card">
-            <h3>vs Smart Fit</h3>
-            <p>Eles ganham em preço e escala. Vocês rebatem com presença humana, orientação e acolhimento.</p>
-          </article>
-          <article class="card">
-            <h3>vs ALLP Fit</h3>
-            <p>Premium e mais cara. SkyFit: acessível, com sensação de experiência e comunidade.</p>
-          </article>
-          <article class="card">
-            <h3>vs bairro</h3>
-            <p>Mais infraestrutura, modalidades e Espaço Kids — sem parecer “academia genérica”.</p>
+            <p>Conversa barata no WhatsApp sem matrícula no Meta. Algoritmo treina curioso, não comprador.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- 5 JORNADA -->
-    <section id="jornada" data-slide="5">
+    <!-- 3 JORNADA -->
+    <section id="jornada" data-slide="3">
       <div class="inner glass">
-        <p class="eyebrow">Sequência correta</p>
-        <h2>Do clique ao 3º mês de treino</h2>
+        <p class="eyebrow">A jornada</p>
+        <h2>Do diagnóstico<br />à execução</h2>
         <div class="gold-line"></div>
-        <p class="lead">A EE desenhou o mapa 360º. Growth executa as quatro frentes na ordem certa — sem pular retenção.</p>
+        <p class="lead">Uma sequência simples: do clique ao 3º mês de treino — sem pular retenção.</p>
         <div class="flow-row">
           <div class="flow-step">
             <div class="icon">01</div>
             <strong>EE</strong>
-            <span>Já feita: diagnóstico, PUV, mídia, comercial e retenção</span>
+            <span>Já feita — mapa 360º, PUV, mídia, comercial e retenção</span>
           </div>
           <span class="flow-arrow">→</span>
           <div class="flow-step">
             <div class="icon">02</div>
-            <strong>Aquisição</strong>
-            <span>Google + Meta + remarketing com rastreio de matrícula</span>
+            <strong>Growth</strong>
+            <span>Account + Copy + Design + GT em operação contínua</span>
           </div>
           <span class="flow-arrow">→</span>
           <div class="flow-step">
             <div class="icon">03</div>
-            <strong>Comercial</strong>
-            <span>Diagnóstico no WhatsApp · SLA 5 min · funil com dono</span>
-          </div>
-          <span class="flow-arrow">→</span>
-          <div class="flow-step">
-            <div class="icon">04</div>
-            <strong>Retenção</strong>
-            <span>Onboarding 90 dias · CVBA · Red Flag de frequência</span>
-          </div>
-        </div>
-        <p class="quote">
-          Growth não é “mais anúncio”. É operar o percurso completo do aluno.
-          <span>Da intenção no Google ao hábito no 3º mês</span>
-        </p>
-      </div>
-    </section>
-
-    <!-- 6 AQUISIÇÃO -->
-    <section id="aquisicao" data-slide="6">
-      <div class="inner glass">
-        <p class="eyebrow">Máquina de marketing</p>
-        <h2>Parar de treinar o algoritmo<br />para curioso</h2>
-        <div class="gold-line"></div>
-        <p class="lead">
-          Hoje o Meta otimiza conversa barata. Sem matrícula rastreada, a mídia escala o lead errado.
-          A nova distribuição de verba equilibra intenção, conversão, remarketing e teste.
-        </p>
-        <div class="grid-4">
-          <article class="card">
-            <div class="card-num">40%</div>
-            <h3>Google Search</h3>
-            <p>Intenção ativa: “academia perto de mim em Jundiaí”, “musculação em Jundiaí”.</p>
-          </article>
-          <article class="card">
-            <div class="card-num">35%</div>
-            <h3>Meta Conversão</h3>
-            <p>Dores da persona (vergonha, falta de tempo) + vídeos de professores e alunos reais.</p>
-          </article>
-          <article class="card">
-            <div class="card-num">15%</div>
-            <h3>Remarketing</h3>
-            <p>Recuperar quem visitou ou chamou e não matriculou.</p>
-          </article>
-          <article class="card">
-            <div class="card-num">10%</div>
-            <h3>Testes</h3>
-            <p>Criativos, segmentações e copys novos — aprendizado contínuo.</p>
-          </article>
-        </div>
-        <div class="cta-box">
-          <p style="font-size:0.95rem;font-weight:700;color:#fff;">
-            Verba de mídia da projeção: <strong style="color:#fff">R$ 2.500/mês fixos</strong>. Critério de sucesso: matrícula rastreada — não só conversa no WhatsApp.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 7 COMERCIAL -->
-    
-
-    <!-- 8 RETENÇÃO -->
-    <section id="retencao" data-slide="7">
-      <div class="inner glass">
-        <p class="eyebrow">Alavanca mais crítica</p>
-        <h2>A venda só termina<br />no dia 90</h2>
-        <div class="gold-line"></div>
-        <div class="grid-2">
-          <article class="card">
-            <span class="tag-16h">Matriz CVBA</span>
-            <h3>Diferencial vira argumento</h3>
-            <ul>
-              <li>Espaço Kids → “treine tranquilo: seu filho está seguro”</li>
-              <li>Avaliação física → progresso visível, não treino solto</li>
-              <li>Manobrista Noturno → acesso fácil apesar da rampa</li>
-              <li>Aulas inclusas → rotina possível, não só musculação</li>
-            </ul>
-          </article>
-          <article class="card">
-            <span class="tag-16h">Onboarding 90 dias</span>
-            <h3>Pontos de contato</h3>
-            <ul>
-              <li>Dia 0: 1º treino agendado na assinatura</li>
-              <li>Dia 2–7: boas-vindas e checagem se iniciou</li>
-              <li>Dia 15–30: revisão de frequência e meta com o professor</li>
-              <li>Red Flag: 14 dias sem catraca → ligação acolhedora</li>
-            </ul>
-          </article>
-        </div>
-        <p class="quote">
-          “Oi, notamos sua ausência. Está tudo bem ou precisou pausar pela rotina?”
-          <span>Frequência monitorada sem culpa — acolhimento, não punição</span>
-        </p>
-      </div>
-    </section>
-
-    <!-- 9 O QUE A V4 OPERA -->
-    <section id="operacao" data-slide="8">
-      <div class="inner">
-        <h2>Time V4 · operação contínua</h2>
-        <div class="gold-line"></div>
-        <div class="grid-2">
-          <article class="card">
-            <span class="tag-16h">Account Manager + GT</span>
-            <h3>Demanda e mensuração</h3>
-            <ul>
-              <li>Account orquestrando prioridades com Gabriel e a unidade</li>
-              <li>Gestão de Google Ads e Meta Ads com mix 40/35/15/10</li>
-              <li>Verba de mídia fixa na projeção (R$ 2.500/mês)</li>
-              <li>Tracking de matrícula até a origem da mídia</li>
-              <li>Check-ins com leitura de CPL, CAC e ROAS</li>
-            </ul>
-          </article>
-          <article class="card">
-            <span class="tag-16h">Copy + Design</span>
-            <h3>Mensagem e desejo</h3>
-            <ul>
-              <li>Copy de anúncio e WhatsApp alinhados ao ICP 35+</li>
-              <li>Criativos com professores, alunos reais e estrutura</li>
-              <li>Peças de remarketing para recuperar lead que não fechou</li>
-              <li>Ativação visual de Espaço Kids, modalidades e Manobrista</li>
-              <li>Narrativa de acolhimento — não só promoção de preço</li>
-            </ul>
-          </article>
-        </div>
-        <div class="grid-2" style="margin-top:0.65rem;">
-          <article class="card">
-            <h3>Processo comercial</h3>
-            <p>Scripts de diagnóstico, SLA de 5 minutos e rituais com a recepção.</p>
-          </article>
-          <article class="card">
-            <h3>Retenção assistida</h3>
-            <p>Onboarding, Red Flag de frequência e CVBA no discurso de fechamento — com réguas automatizadas.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- 10 RÉGUAS BONIFICADAS -->
-    <section id="reguas" data-slide="9">
-      <div class="inner glass">
-        <p class="eyebrow">Bonificação da parceria</p>
-        <h2>3 implementações de<br />régua de relacionamento</h2>
-        <div class="gold-line"></div>
-        <p class="lead">
-          O que falta é o relacionamento automático no percurso do aluno —
-          para o Gabriel não precisar lembrar de cada follow no braço.
-        </p>
-        <div class="grid-3">
-          <article class="card">
-            <div class="card-num">01</div>
-            <h3>Onboarding 90 dias</h3>
-            <p>Régua do novo aluno: Dia 0 (1º treino) → boas-vindas → checagem de início → revisão de frequência e meta.</p>
-          </article>
-          <article class="card">
-            <div class="card-num">02</div>
-            <h3>Frequência / Red Flag</h3>
-            <p>Ausência detectada → mensagem acolhedora → escalada para ligação se ficar 14 dias sem catraca.</p>
-          </article>
-          <article class="card">
-            <div class="card-num">03</div>
-            <h3>Recuperação de base</h3>
-            <p>Lead que não matriculou + ex-aluno: cadência de reativação com PUV de acompanhamento real.</p>
-          </article>
-        </div>
-        <div class="bonus-box">
-          <strong>Bonificado na Assessoria de Growth</strong>
-          <p>3 implementações de régua de relacionamento — sem custo à parte nesta proposta. Sem implementação de CRM.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 11 MERCADO -->
-    <section id="mercado" data-slide="10">
-      <div class="inner glass">
-        <p class="eyebrow">Âncora de mercado · montar sozinho</p>
-        <h2>Quanto custaria montar<br />esse núcleo por conta própria</h2>
-        <div class="gold-line"></div>
-        <p class="lead">Referência de mercado para cobrir Account, Copy, Design, GT, comercial e retenção — sem contar tempo de contratação nem risco de erro.</p>
-        <table class="compare-table">
-          <thead>
-            <tr>
-              <th>Frente</th>
-              <th>Referência / mês</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>Account Manager / Head de Growth</td><td>R$ 6.000 a R$ 9.000</td></tr>
-            <tr><td>Gestão de Tráfego (Google + Meta)</td><td>R$ 4.000 a R$ 6.000</td></tr>
-            <tr><td>Copy + Designer de performance</td><td>R$ 5.000 a R$ 8.000</td></tr>
-            <tr><td>Processo comercial + retenção / réguas</td><td>R$ 4.000 a R$ 6.000</td></tr>
-            <tr><td>Ferramentas e stack</td><td>R$ 500 a R$ 1.200</td></tr>
-            <tr class="total"><td>Total estimado de mercado</td><td>R$ 19.500 a R$ 30.200</td></tr>
-          </tbody>
-        </table>
-        <div class="cta-box">
-          <p style="font-size:1.02rem;font-weight:700;color:#fff;line-height:1.4;">
-            Fee tabela deste escopo na V4: <strong>R$ 8.632,12/mês</strong> — bem abaixo de montar o time por conta própria.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 11 PROJEÇÃO PLANILHA -->
-    
-
-    <!-- 12 RESULTADO DA CURVA -->
-    <section id="breakeven" data-slide="11">
-      <div class="inner glass">
-        <p class="eyebrow">Leitura da projeção</p>
-        <h2>Com R$ 2.500 de mídia,<br />a curva já nasce no azul.</h2>
-        <div class="gold-line"></div>
-        <div class="stat-row">
-          <div class="stat">
-            <div class="n">1,66x</div>
-            <div class="l">ROAS no mês 1 · mídia já se paga</div>
-          </div>
-          <div class="stat">
-            <div class="n">28,24x</div>
-            <div class="l">ROAS no mês 12 · eficiência máxima</div>
-          </div>
-          <div class="stat">
-            <div class="n">R$ 70,6k</div>
-            <div class="l">Receita projetada só no mês 12</div>
+            <strong>Réguas</strong>
+            <span>Onboarding, frequência e recuperação de base</span>
           </div>
         </div>
         <div class="grid-2" style="margin-top:0.85rem;">
           <article class="card">
-            <h3>O que melhora na operação</h3>
-            <ul>
-              <li>Leads: 82 → 904 / mês (mesmo investimento)</li>
-              <li>CPL: R$ 30,49 → R$ 2,77</li>
-              <li>Conv. lead → venda: 39% → 60%</li>
-              <li>CAC: R$ 78,13 → R$ 4,60</li>
-            </ul>
+            <span class="tag-16h">Executar · 12 meses</span>
+            <h3>Assessoria de Growth</h3>
+            <p>Mídia Google/Meta (mix 40/35/15/10), copy e design de performance, comercial consultivo com SLA 5 min e retenção assistida.</p>
           </article>
           <article class="card">
-            <h3>O que isso significa</h3>
-            <ul>
-              <li>Vendas: 32 → 543 matrículas / mês</li>
-              <li>Receita M1 R$ 4.160 → M12 R$ 70.590</li>
-              <li>Mídia fixa R$ 2.500 · 12 × = R$ 30.000 no ano</li>
-              <li>Fee V4 = o time que faz essa curva acontecer</li>
-            </ul>
+            <span class="tag-16h">Bonificado</span>
+            <h3>3 réguas de relacionamento</h3>
+            <p>Onboarding 90 dias · Frequência/Red Flag · Recuperação de base — sem implementação de CRM e sem Social Media.</p>
           </article>
         </div>
+      </div>
+    </section>
+
+    <!-- 4 MAPA -->
+    <section id="mapa" data-slide="4">
+      <div class="inner glass">
+        <p class="eyebrow">Estratégia → execução</p>
+        <h2>Cada frente entra<br />em um ponto do plano</h2>
+        <div class="gold-line"></div>
+        <div class="map-row">
+          <div class="map-strat">Google Search + Meta Conversão + remarketing + testes</div>
+          <div class="map-arrow">→</div>
+          <div class="map-chair">Gestão de Mídia · Growth · 12 meses</div>
+        </div>
+        <div class="map-row">
+          <div class="map-strat">Copy e criativos pro ICP 35+ (acolhimento, não queima de preço)</div>
+          <div class="map-arrow">→</div>
+          <div class="map-chair">Copy + Design · Growth · 12 meses</div>
+        </div>
+        <div class="map-row">
+          <div class="map-strat">WhatsApp consultivo, SLA 5 min, funil com dono</div>
+          <div class="map-arrow">→</div>
+          <div class="map-chair">Processo comercial · no Growth</div>
+        </div>
+        <div class="map-row">
+          <div class="map-strat">Onboarding 90 dias, CVBA, Red Flag de frequência</div>
+          <div class="map-arrow">→</div>
+          <div class="map-chair">Retenção + 3 réguas · bonificadas</div>
+        </div>
+        <div class="map-row">
+          <div class="map-strat">Leitura de funil: clique → visita → matrícula → receita</div>
+          <div class="map-arrow">→</div>
+          <div class="map-chair">Account · cadência + KPIs</div>
+        </div>
         <p class="quote">
-          Não é “gastar mais em anúncio”. É fazer o mesmo R$ 2.500 render 28x.
-          <span>Projeção SKYJIN · SkyFit Imigrantes</span>
+          Dois motores sincronizados: atração rastreada + retenção.
+          <span>Sem Social Media · sem implementação de CRM nesta proposta</span>
         </p>
       </div>
     </section>
 
-    <!-- 14 INVESTIMENTO -->
-    <section id="investimento" data-slide="12">
+    <!-- 5 ENTREGÁVEIS -->
+    <section id="entregaveis" data-slide="5">
       <div class="inner glass">
-        <p class="eyebrow">Investimento · condição final</p>
-        <h2>Todo o escopo.<br />Condição de continuidade.</h2>
+        <p class="eyebrow">Escopo tangibilizado</p>
+        <h2>O que entra<br />nesta proposta</h2>
         <div class="gold-line"></div>
-        <div class="grid-3" style="margin-top:0.35rem;">
+        <div class="grid-2">
           <article class="card">
-            <div class="card-num">Fee tabela</div>
-            <p class="big-num" style="font-size:1.45rem;margin-top:0.35rem;">R$ 8.632,12</p>
-            <p style="margin-top:0.35rem;font-size:0.84rem;color:var(--muted);">Mensalidade do escopo completo · Account + Copy + Design + GT</p>
+            <span class="tag-16h">Growth · 12 meses</span>
+            <h3>Assessoria de Growth</h3>
+            <ul>
+              <li>Account Manager orquestrando com a unidade</li>
+              <li>Gestão de Tráfego (Google Ads + Meta Ads)</li>
+              <li>Verba de mídia da projeção: R$ 2.500/mês</li>
+              <li>Copy de anúncio e WhatsApp (ICP 35+)</li>
+              <li>Design de criativos de performance</li>
+              <li>Tracking de matrícula até a origem</li>
+              <li>Check-ins com CPL, CAC e ROAS</li>
+            </ul>
           </article>
           <article class="card">
-            <div class="card-num">EE já investida</div>
-            <p class="big-num" style="font-size:1.45rem;margin-top:0.35rem;">R$ 20.794</p>
-            <p style="margin-top:0.35rem;font-size:0.84rem;color:var(--muted);">Abatemos o que vocês já colocaram na Estruturação Estratégica</p>
-          </article>
-          <article class="card">
-            <div class="card-num">+ momento</div>
-            <p class="big-num" style="font-size:1.45rem;margin-top:0.35rem;">Descontos</p>
-            <p style="margin-top:0.35rem;font-size:0.84rem;color:var(--muted);">Condição adicional entendendo o momento da unidade</p>
+            <span class="tag-16h">Bonificado na parceria</span>
+            <h3>3 réguas de relacionamento</h3>
+            <ul>
+              <li>Onboarding 90 dias (D0 → hábito)</li>
+              <li>Frequência / Red Flag (14 dias sem catraca)</li>
+              <li>Recuperação de base (lead + ex-aluno)</li>
+              <li>Scripts de venda consultiva + SLA 5 min</li>
+              <li>CVBA no discurso de fechamento</li>
+            </ul>
           </article>
         </div>
-        <div class="plans plans--single" style="margin-top:0.85rem;">
-          <article class="plan featured">
-            <div class="plan-label">Condição final · Growth · 12 meses</div>
-            <h3>Assessoria de Growth</h3>
-            <p class="plan-sub">Account Manager + Copy + Design + GT · SkyFit Imigrantes</p>
-            <div class="plan-price">R$ 4.800,00 <small>/mês</small></div>
-            <p class="plan-total">3 réguas de relacionamento · <strong style="color:#b7f7d0">bonificadas</strong></p>
+        <div class="grid-3" style="margin-top:0.65rem;">
+          <article class="card"><h3>Mídia</h3><p>Mix 40% Google · 35% Meta · 15% remarketing · 10% testes.</p></article>
+          <article class="card"><h3>Comercial</h3><p>Diagnóstico antes do preço. Funil com dono — sem projeto de CRM.</p></article>
+          <article class="card"><h3>Retenção</h3><p>A venda só termina no dia 90. Réguas tiram o follow do braço do Gabriel.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 OPERAÇÃO -->
+    <section id="operacao" data-slide="6">
+      <div class="inner glass">
+        <p class="eyebrow">Como opera</p>
+        <h2>Kickoff, cadência<br />e accountability</h2>
+        <div class="gold-line"></div>
+        <div class="flow-row">
+          <div class="flow-step"><div class="icon">01</div><strong>Kickoff</strong><span>Acessos Ads, processo e briefing das réguas</span></div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step"><div class="icon">02</div><strong>Setup</strong><span>Campanhas + scripts + 3 réguas ligadas</span></div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step"><div class="icon">03</div><strong>Growth</strong><span>Mídia + copy + design em operação</span></div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step"><div class="icon">04</div><strong>Rituais</strong><span>Check-ins de CPL, CAC, ROAS e matrícula</span></div>
+        </div>
+        <div class="grid-2" style="margin-top:0.85rem;">
+          <article class="card">
+            <h3>Vigência</h3>
+            <p>Assessoria de Growth · <strong style="color:#fff">12 meses</strong>, com abatimento da EE na condição final. Cadência contínua com a unidade.</p>
           </article>
+          <article class="card">
+            <h3>Papel da SkyFit</h3>
+            <p>Alinhar Gabriel e a recepção; liberar acessos de mídia; validar criativos e ritmos sem travar a operação da academia.</p>
+          </article>
+        </div>
+        <p class="quote">
+          Não é um PDF e sumimos. É gente operando com vocês — com cadência, dado e accountability.
+        </p>
+      </div>
+    </section>
+
+    <!-- 7 INVESTIMENTO -->
+    <section id="investimento" data-slide="7">
+      <div class="inner glass">
+        <p class="eyebrow">Investimento</p>
+        <h2>Condições comerciais<br />pós Estruturação Estratégica</h2>
+        <div class="gold-line"></div>
+        <div class="plans">
+          <article class="plan featured">
+            <div class="plan-label">Executar · 12 meses</div>
+            <h3>Assessoria de Growth</h3>
+            <p class="plan-sub">Account + Copy + Design + GT · SkyFit Imigrantes</p>
+            <p class="price-old">De R$ 8.632,12/mês</p>
+            <div class="plan-price">R$ 4.800,00 <small>/mês</small></div>
+            <p class="plan-discount">EE R$ 20.794 abatida · + descontos de momento</p>
+            <p class="plan-total">Referência anual · <strong style="color:#fff">R$ 57.600,00</strong></p>
+            <ul>
+              <li>Escopo completo do fee tabela</li>
+              <li>3 réguas de relacionamento · bonificadas</li>
+            </ul>
+          </article>
+          <article class="plan">
+            <div class="plan-label">Como chegamos no valor</div>
+            <h3>Reconhecimento da EE</h3>
+            <div class="price-lines">
+              <div class="price-line"><span>Fee tabela do escopo</span><strong>R$ 8.632,12</strong></div>
+              <div class="price-line"><span>Investido na EE · abatido</span><strong class="ok">R$ 20.794,00</strong></div>
+              <div class="price-line"><span>Descontos de momento</span><strong class="ok">aplicados</strong></div>
+              <div class="price-line"><span>Condição final / mês</span><strong>R$ 4.800,00</strong></div>
+            </div>
+            <p class="plan-total">Verba de mídia à parte · R$ 2.500/mês (projeção)</p>
+          </article>
+        </div>
+        <div class="cta-box">
+          <h3>Próximo passo</h3>
+          <p>Validar escopo → formalizar → kickoff em até 5 dias úteis · SkyFit Imigrantes × V4</p>
         </div>
       </div>
     </section>
 
   </div>
 
+
   <footer class="deck-footer">
-    <span>SkyFit Imigrantes × V4 · Proposta consultiva</span>
+    <span>SkyFit Imigrantes × V4 · Growth</span>
     <div class="progress-wrap"><div class="progress-fill" id="progressFill"></div></div>
-    <span id="slideCounter">1 / 12</span>
+    <span id="slideCounter">1 / 7</span>
   </footer>
 
   <script>
@@ -744,7 +488,7 @@
       slide.insertBefore(tpl.content.cloneNode(true), slide.firstChild);
     });
 
-    const TOTAL = 12;
+    const TOTAL = 7;
     let current = 1;
     const slides = Array.from(document.querySelectorAll("#deck section[id]"));
     const navLinks = document.querySelectorAll(".nav-dots a");
