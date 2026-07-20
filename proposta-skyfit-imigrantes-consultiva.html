@@ -129,7 +129,23 @@
     .flow-step strong { display: block; font-size: 0.86rem; margin-bottom: 0.2rem; }
     .flow-step span { font-size: 0.76rem; color: var(--muted); }
     .flow-arrow { align-self: center; color: rgba(255,255,255,0.45); }
-    .plans { display: grid; grid-template-columns: 1fr; gap: 0.85rem; margin-top: 0.85rem; max-width: 560px; }
+    .plans { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; margin-top: 0.85rem; }
+    .plans--single { grid-template-columns: 1fr; max-width: 560px; }
+    .price-break {
+      border-radius: 16px; padding: 1rem 1.1rem;
+      border: 1px solid rgba(255,255,255,0.28); background: rgba(255,255,255,0.12);
+      display: flex; flex-direction: column; justify-content: center; gap: 0.65rem;
+    }
+    .price-break .row {
+      display: flex; justify-content: space-between; align-items: baseline; gap: 0.75rem;
+      padding-bottom: 0.55rem; border-bottom: 1px solid rgba(255,255,255,0.15);
+    }
+    .price-break .row:last-child { border-bottom: none; padding-bottom: 0; }
+    .price-break .lbl { font-size: 0.78rem; color: var(--muted); line-height: 1.35; max-width: 58%; }
+    .price-break .val { font-family: Outfit; font-weight: 800; font-size: 1.05rem; color: #fff; white-space: nowrap; }
+    .price-break .row.abat .val { color: #b7f7d0; }
+    .price-break .row.final .val { font-size: 1.45rem; }
+    .price-break .row.final .lbl { color: #fff; font-weight: 700; font-size: 0.86rem; }
     .plan {
       border-radius: 16px; padding: 1rem 1.1rem;
       border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.34);
@@ -228,7 +244,7 @@
     .progress-wrap { flex: 1; max-width: 220px; height: 4px; background: rgba(255,255,255,0.2); border-radius: 2px; margin: 0 1rem; }
     .progress-fill { height: 100%; background: #fff; border-radius: 2px; width: 8%; transition: width 0.4s var(--ease); }
     @media (max-width: 760px) {
-      .grid-3, .grid-2, .grid-4, .stat-row { grid-template-columns: 1fr; }
+      .grid-3, .grid-2, .grid-4, .stat-row, .plans { grid-template-columns: 1fr; }
       .nav-arrow--next { right: 1rem; }
       .flow-arrow { display: none; }
       .slide-logo { left: 1rem; top: 1rem; }
@@ -788,45 +804,36 @@
     <section id="investimento" data-slide="14">
       <div class="inner glass">
         <p class="eyebrow">Investimento · condição final</p>
-        <h2>Todo o escopo.<br />Condição de continuidade.</h2>
+        <h2>Assessoria de Growth<br />em operação contínua</h2>
         <div class="gold-line"></div>
-        <div class="grid-3" style="margin-top:0.35rem;">
-          <article class="card">
-            <div class="card-num">Fee tabela</div>
-            <p class="big-num" style="font-size:1.45rem;margin-top:0.35rem;">R$ 8.632,12</p>
-            <p style="margin-top:0.35rem;font-size:0.84rem;color:var(--muted);">Mensalidade do escopo completo hoje · Account + Copy + Design + GT + réguas</p>
-          </article>
-          <article class="card">
-            <div class="card-num">EE já investida</div>
-            <p class="big-num" style="font-size:1.45rem;margin-top:0.35rem;">R$ 20.794</p>
-            <p style="margin-top:0.35rem;font-size:0.84rem;color:var(--muted);">Abatemos o que vocês já colocaram na Estruturação Estratégica</p>
-          </article>
-          <article class="card">
-            <div class="card-num">+ momento</div>
-            <p class="big-num" style="font-size:1.45rem;margin-top:0.35rem;">Descontos</p>
-            <p style="margin-top:0.35rem;font-size:0.84rem;color:var(--muted);">Condição adicional entendendo o momento da unidade</p>
-          </article>
-        </div>
-        <div class="plans" style="margin-top:0.85rem;">
+        <div class="plans">
           <article class="plan featured">
-            <div class="plan-label">Condição final · Growth · 12 meses</div>
+            <div class="plan-label">Growth · 12 meses · Executar</div>
             <h3>Assessoria de Growth</h3>
             <p class="plan-sub">Account Manager + Copy + Design + GT · SkyFit Imigrantes</p>
-            <div class="plan-price">R$ 5.000,00 <small>/mês</small></div>
-            <p class="plan-discount">De R$ 8.632,12 → R$ 5.000,00 · referência anual R$ 60.000,00</p>
+            <div class="plan-price">R$ 4.800,00 <small>/mês</small></div>
+            <p class="plan-discount">Referência anual · R$ 57.600,00</p>
             <p class="plan-total">3 réguas de relacionamento · <strong style="color:#b7f7d0">bonificadas</strong></p>
-            <ul>
-              <li>Escopo completo: aquisição, comercial, retenção e réguas</li>
-              <li>Sem Social Media · sem implementação de CRM</li>
-              <li>Verba de mídia à parte · R$ 2.500/mês (projeção)</li>
-            </ul>
           </article>
+          <aside class="price-break" aria-label="Como chegamos no valor">
+            <div class="row">
+              <span class="lbl">Fee tabela do escopo completo</span>
+              <span class="val">R$ 8.632,12</span>
+            </div>
+            <div class="row abat">
+              <span class="lbl">EE já investida · abatida<br />R$ 20.794,00 + descontos de momento</span>
+              <span class="val">− abatimento</span>
+            </div>
+            <div class="row final">
+              <span class="lbl">Condição final / mês</span>
+              <span class="val">R$ 4.800,00</span>
+            </div>
+          </aside>
         </div>
         <div class="cta-box">
           <h3>O que vocês levam com a V4</h3>
           <p>
-            O mesmo escopo do fee tabela, com o investimento da EE reconhecido e uma condição
-            feita para o momento da SkyFit Imigrantes — para operar a projeção SKYJIN lado a lado.
+            Time de Growth para operar a projeção SKYJIN — mídia eficiente e 3 réguas bonificadas.
           </p>
         </div>
       </div>
