@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AVD Q2 · Franquias · Cultura GROWTH</title>
-  <meta name="description" content="Guia e autoavaliação da Avaliação de Desempenho Q2 — Franquias, baseado na cultura GROWTH da V4 Company." />
+  <title>Avaliação de Desempenho V4 — Ciclo 2 2026 · Franquias</title>
+  <meta name="description" content="AVD Ciclo 2 2026 — Franquias. Autoavaliação de comportamentos observáveis da cultura GROWTH da V4 Company." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
@@ -160,6 +160,82 @@
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,0.25);
       background: rgba(255,255,255,0.08);
+    }
+
+    .intro {
+      background: rgba(255, 252, 249, 0.92);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: clamp(20px, 3vw, 28px);
+      margin-bottom: 22px;
+      box-shadow: var(--shadow);
+      animation: rise 0.7s var(--ease) 0.08s both;
+    }
+    .intro h2 {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+    }
+    .intro p {
+      color: var(--ink-soft);
+      margin-bottom: 12px;
+      max-width: 78ch;
+    }
+    .intro p:last-child { margin-bottom: 0; }
+    .intro .emphasis {
+      color: var(--ink);
+      font-weight: 600;
+    }
+    .scale-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 18px 0 6px;
+    }
+    @media (max-width: 900px) {
+      .scale-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 520px) {
+      .scale-grid { grid-template-columns: 1fr; }
+    }
+    .scale-card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      background: #fff;
+      min-height: 100%;
+    }
+    .scale-card .n {
+      font-family: var(--font-display);
+      font-size: 1.55rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--brand);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .scale-card .t {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.35;
+    }
+    .investor-box {
+      margin-top: 18px;
+      padding: 16px 18px;
+      border-radius: 14px;
+      border: 1px solid rgba(225, 6, 0, 0.18);
+      background: linear-gradient(180deg, var(--brand-soft), transparent 80%);
+    }
+    .investor-box h3 {
+      font-family: var(--font-display);
+      font-size: 1.02rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    .investor-box p {
+      margin-bottom: 10px;
     }
 
     .progress-strip {
@@ -456,10 +532,16 @@
     }
     .score-option .lbl {
       font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.01em;
       color: var(--mute);
+      line-height: 1.25;
+    }
+    .score-option.missing-note {
+      box-shadow: inset 0 0 0 1px rgba(154, 91, 0, 0.35);
+    }
+    textarea.required-empty {
+      border-color: rgba(154, 91, 0, 0.45);
     }
     .evidence-label {
       display: block;
@@ -585,17 +667,69 @@
 
     <section class="hero">
       <div class="hero-inner">
-        <div class="hero-eyebrow">Avaliação de Desempenho · Q2</div>
-        <h1>AVD Franquias<br />Cultura GROWTH</h1>
+        <div class="hero-eyebrow">Franquias · Cultura GROWTH</div>
+        <h1>Avaliação de Desempenho V4<br />Ciclo 2 2026</h1>
         <p>
-          O gargalo da V4 não é capacidade de execução — é cadência de aprendizado.
-          Use este guia para avaliar (ou se autoavaliar) nos seis comportamentos que definem como a rede vence.
+          Esta avaliação mede o quanto a cultura da V4 está presente no dia a dia de cada investidor.
+          Não é sobre intenção, é sobre comportamento observável.
         </p>
         <div class="hero-meta">
-          <span class="pill">6 comportamentos</span>
+          <span class="pill">30–40 min</span>
           <span class="pill">Escala 1–4</span>
-          <span class="pill">Red Book · GTM</span>
+          <span class="pill">Justificativa obrigatória</span>
         </div>
+      </div>
+    </section>
+
+    <section class="intro" aria-labelledby="intro-title">
+      <h2 id="intro-title">Como funciona esta avaliação</h2>
+      <p>
+        O que conta é o que as pessoas ao redor conseguem ver, não o que cada um acredita que faz.
+        <span class="emphasis">Seja honesto. Avaliações infladas não ajudam ninguém a crescer.</span>
+      </p>
+      <p>
+        O preenchimento leva entre 30 e 40 minutos. Reserve um momento sem interrupções para fazer isso com atenção.
+      </p>
+      <p>
+        A escala vai de 1 a 4. Não existe meio-termo por design. Você precisa tomar uma decisão:
+        o comportamento está sendo demonstrado ou não.
+      </p>
+
+      <div class="scale-grid" aria-label="Escala de avaliação">
+        <div class="scale-card">
+          <div class="n">1</div>
+          <div class="t">Não demonstra</div>
+        </div>
+        <div class="scale-card">
+          <div class="n">2</div>
+          <div class="t">Precisa ser lembrado para demonstrar</div>
+        </div>
+        <div class="scale-card">
+          <div class="n">3</div>
+          <div class="t">Demonstra de forma consistente</div>
+        </div>
+        <div class="scale-card">
+          <div class="n">4</div>
+          <div class="t">Demonstra e puxa o time para o mesmo nível</div>
+        </div>
+      </div>
+
+      <p style="margin-top:16px">
+        Todas as perguntas exigem comentário. A nota sozinha não é suficiente.
+        Use o campo de justificativa para trazer exemplos concretos que sustentem a opção escolhida.
+      </p>
+
+      <div class="investor-box">
+        <h3>Se você é investidor — autoavaliação</h3>
+        <p>
+          Responda com base em evidências concretas do ciclo. Para cada comportamento, a pergunta é:
+          <span class="emphasis">tenho exemplos reais que comprovam isso?</span>
+          Se a resposta for vaga, a nota provavelmente é 2, não 3.
+        </p>
+        <p>
+          Evite dois extremos: a modéstia que subestima entregas reais e o viés que ignora os pontos cegos.
+          Use os campos de justificativa. Eles existem para você chegar preparado para a conversa de feedback com seu gestor.
+        </p>
       </div>
     </section>
 
@@ -627,8 +761,8 @@
     </section>
 
     <p class="footer-note">
-      Conteúdo oficial de G (GTM to Learn Faster) conforme AVD Q2 Franquias.
-      Demais comportamentos alinhados à cultura GROWTH publicada pela V4.
+      Introdução e escala oficiais da Avaliação de Desempenho V4 — Ciclo 2 2026.
+      Conteúdo de G (GTM to Learn Faster) conforme AVD Franquias. Demais comportamentos alinhados à cultura GROWTH.
       Notas salvas apenas neste navegador.
     </p>
   </div>
@@ -772,10 +906,17 @@
     ];
 
     const SCORE_LABELS = {
-      1: "Abaixo",
-      2: "Parcial",
-      3: "Sólido",
-      4: "Referência"
+      1: "Não demonstra",
+      2: "Precisa ser lembrado",
+      3: "Demonstra de forma consistente",
+      4: "Demonstra e puxa o time"
+    };
+
+    const SCORE_FULL = {
+      1: "Não demonstra",
+      2: "Precisa ser lembrado para demonstrar",
+      3: "Demonstra de forma consistente",
+      4: "Demonstra e puxa o time para o mesmo nível"
     };
 
     const state = loadState();
@@ -803,6 +944,10 @@
       );
     }
 
+    function completeCount() {
+      return BEHAVIORS.filter((b) => state.scores[b.id] && (state.notes[b.id] || "").trim()).length;
+    }
+
     function scoredCount() {
       return BEHAVIORS.filter((b) => state.scores[b.id]).length;
     }
@@ -818,14 +963,16 @@
       const root = document.getElementById("behaviorList");
       root.innerHTML = BEHAVIORS.map((b) => {
         const score = state.scores[b.id];
+        const hasNote = !!(state.notes[b.id] || "").trim();
+        const complete = score && hasNote;
         return `
           <button class="behavior-btn ${activeId === b.id ? "active" : ""}" type="button" data-id="${b.id}">
             <span class="letter">${b.letter}</span>
             <span>
               <span class="behavior-name">${b.en}</span>
-              <span class="behavior-sub">${b.title}</span>
+              <span class="behavior-sub">${complete ? "Nota + justificativa" : score ? "Falta justificativa" : "Pendente"}</span>
             </span>
-            <span class="score-chip ${score ? "filled" : ""}">${score || "–"}</span>
+            <span class="score-chip ${complete ? "filled" : ""}">${score || "–"}</span>
           </button>
         `;
       }).join("");
@@ -882,7 +1029,7 @@
             ${[1, 2, 3, 4]
               .map(
                 (n) => `
-              <button class="score-option ${score === n ? "selected" : ""}" type="button" data-score="${n}">
+              <button class="score-option ${score === n ? "selected" : ""}" type="button" data-score="${n}" title="${SCORE_FULL[n]}">
                 <span class="n">${n}</span>
                 <span class="lbl">${SCORE_LABELS[n]}</span>
               </button>
@@ -890,9 +1037,9 @@
               )
               .join("")}
           </div>
-          <label class="evidence-label" for="evidence">Evidências do ciclo (fatos, testes, resultados)</label>
-          <textarea id="evidence" placeholder="Ex.: hipótese → teste → KPI → o que mudou no resultado → lição compartilhada">${note}</textarea>
-          <p class="hint">A pergunta central: o que mudou no resultado depois do teste?</p>
+          <label class="evidence-label" for="evidence">Justificativa (obrigatória) — exemplos concretos do ciclo</label>
+          <textarea id="evidence" class="${score && !(note || "").trim() ? "required-empty" : ""}" placeholder="Tenho exemplos reais que comprovam isso? Se a resposta for vaga, a nota provavelmente é 2, não 3.">${note}</textarea>
+          <p class="hint">A nota sozinha não é suficiente. Traga fatos observáveis que sustentem a opção escolhida.</p>
         </div>
       `;
 
@@ -916,17 +1063,20 @@
     }
 
     function renderProgress() {
-      const count = scoredCount();
+      const complete = completeCount();
+      const scored = scoredCount();
       const avg = averageScore();
-      document.getElementById("progressFill").style.width = `${(count / 6) * 100}%`;
-      document.getElementById("progressCopy").textContent = `${count} de 6 comportamentos pontuados`;
+      document.getElementById("progressFill").style.width = `${(complete / 6) * 100}%`;
+      document.getElementById("progressCopy").textContent =
+        `${complete} de 6 completos (nota + justificativa)` +
+        (scored > complete ? ` · ${scored - complete} sem comentário` : "");
       document.getElementById("avgScore").innerHTML = avg == null ? `— <span>/ 4</span>` : `${avg} <span>/ 4</span>`;
       document.getElementById("avgCopy").textContent =
         avg == null
           ? "Pontue os comportamentos para ver a média."
-          : count < 6
-            ? "Média parcial com base nos comportamentos já pontuados."
-            : "Avaliação completa. Revise as evidências antes de enviar.";
+          : complete < 6
+            ? "Média parcial. Toda nota precisa de justificativa."
+            : "Avaliação completa. Revise antes da conversa com seu gestor.";
     }
 
     function renderSummary() {
@@ -937,8 +1087,8 @@
         return `
           <div class="summary-item">
             <div class="k">${b.letter} · ${b.en}</div>
-            <div class="v">${score ? `${score} · ${SCORE_LABELS[score]}` : "Sem nota"}</div>
-            <div class="e">${note || "Sem evidência registrada."}</div>
+            <div class="v">${score ? `${score} · ${SCORE_FULL[score]}` : "Sem nota"}</div>
+            <div class="e">${note || "Sem justificativa — obrigatória para concluir."}</div>
           </div>
         `;
       }).join("");
@@ -947,15 +1097,15 @@
     function buildSummaryText() {
       const avg = averageScore();
       const lines = [
-        "AVD Q2 — Franquias | Cultura GROWTH",
+        "Avaliação de Desempenho V4 — Ciclo 2 2026 | Franquias",
         `Média: ${avg == null ? "—" : avg + " / 4"}`,
         ""
       ];
       BEHAVIORS.forEach((b) => {
         const score = state.scores[b.id];
         const note = (state.notes[b.id] || "").trim();
-        lines.push(`${b.letter} · ${b.en}: ${score ? score + " (" + SCORE_LABELS[score] + ")" : "sem nota"}`);
-        if (note) lines.push(`Evidências: ${note}`);
+        lines.push(`${b.letter} · ${b.en}: ${score ? score + " — " + SCORE_FULL[score] : "sem nota"}`);
+        lines.push(`Justificativa: ${note || "(pendente)"}`);
         lines.push("");
       });
       return lines.join("\n").trim();
