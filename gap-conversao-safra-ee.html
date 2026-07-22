@@ -1,594 +1,366 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Gap de Conversão · Safra E.E · Sara</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --brand:#e50915; --brand-light:#ff1a27; --brand-dim:rgba(229,9,21,.12);
-      --bg:#050505; --surf:rgba(20,20,20,.9); --surf2:#141414; --glass:rgba(255,255,255,.04);
-      --bd:rgba(255,255,255,.08); --bd-strong:rgba(255,255,255,.14);
-      --txt:#fafafa; --mut:#a3a3a3; --ok:#22c55e; --warn:#facc15; --info:#60a5fa; --radius:16px;
-    }
-    * { box-sizing:border-box; }
-    body {
-      margin:0; color:var(--txt); font:14px/1.55 Inter,system-ui,sans-serif; background:var(--bg);
-      background-image: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(229,9,21,.18), transparent),
-        radial-gradient(circle at 100% 0%, rgba(229,9,21,.05), transparent 40%);
-      padding-bottom:72px;
-    }
-    .topbar {
-      position:sticky; top:0; z-index:20; display:flex; justify-content:space-between; align-items:center;
-      gap:12px; flex-wrap:wrap; padding:12px 24px; backdrop-filter:blur(14px);
-      background:rgba(5,5,5,.84); border-bottom:1px solid var(--bd);
-    }
-    .logo { font-weight:900; letter-spacing:-.02em; } .logo span { color:var(--brand-light); }
-    .pill { font-size:11px; font-weight:600; color:var(--mut); border:1px solid var(--bd); background:var(--glass); padding:6px 12px; border-radius:999px; }
-    .wrap { max-width:1180px; margin:0 auto; padding:28px 24px 0; }
-    .hero {
-      border:1px solid var(--bd-strong); border-radius:var(--radius); padding:32px 28px; margin-bottom:20px;
-      background:linear-gradient(135deg, rgba(229,9,21,.14), rgba(20,20,20,.92) 42%, var(--surf2));
-    }
-    .eyebrow { font-size:10px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:#fca5a5; margin-bottom:8px; }
-    h1 { margin:0 0 10px; font-size:clamp(26px,4vw,34px); font-weight:900; letter-spacing:-.03em; }
-    .meta { color:var(--mut); max-width:820px; } .meta strong { color:var(--txt); }
-    .chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
-    .chip { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; padding:5px 10px; border-radius:999px; border:1px solid var(--bd); color:var(--mut); }
-    .chip.live { color:#86efac; border-color:rgba(34,197,94,.35); }
-    .verdict {
-      margin:0 0 20px; padding:14px 16px; border-radius:12px; border:1px solid rgba(250,204,21,.3);
-      background:rgba(250,204,21,.07); color:#fde68a; font-size:13px;
-    }
-    .verdict strong { color:#fef08a; }
-    .kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:12px; margin-bottom:20px; }
-    .kpi { background:var(--surf); border:1px solid var(--bd); border-radius:var(--radius); padding:16px 18px; }
-    .kpi .v { font-size:26px; font-weight:900; line-height:1; } .kpi .v.red { color:var(--brand-light); }
-    .kpi .l { margin-top:8px; font-size:10px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--mut); }
-    .section { background:var(--surf); border:1px solid var(--bd); border-radius:var(--radius); padding:20px 22px; margin-bottom:16px; }
-    .section h2 { margin:0 0 14px; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--mut); font-weight:800; }
-    .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
-    @media (max-width:800px) { .grid2 { grid-template-columns:1fr; } }
-    .box { background:var(--surf2); border:1px solid var(--bd); border-radius:12px; padding:14px 16px; }
-    .box h3 { margin:0 0 8px; font-size:13px; }
-    .box p, .box li { color:#d4d4d4; font-size:13px; }
-    .box ul { margin:8px 0 0; padding-left:18px; }
-    .mut { color:var(--mut); }
-    table { width:100%; border-collapse:collapse; font-size:13px; }
-    th,td { padding:10px 11px; border-bottom:1px solid var(--bd); text-align:left; vertical-align:top; }
-    th { font-size:10px; text-transform:uppercase; letter-spacing:.07em; color:var(--mut); font-weight:800; background:rgba(255,255,255,.02); }
-    .cli { font-weight:700; } .sub { color:var(--mut); font-size:11px; margin-top:2px; }
-    .tag { display:inline-block; padding:3px 8px; border-radius:5px; font-size:11px; font-weight:700; }
-    .tag-quente { background:rgba(239,68,68,.15); color:#fca5a5; }
-    .tag-morno { background:rgba(250,204,21,.12); color:#fde047; }
-    .tag-frio { background:rgba(96,165,250,.12); color:#93c5fd; }
-    .tag-ok { background:rgba(34,197,94,.12); color:#86efac; }
-    .tag-neu { background:rgba(255,255,255,.06); color:var(--mut); }
-    .tag-tier { background:rgba(129,140,248,.12); color:#c7d2fe; }
-    .obs-cell { max-width:280px; font-size:12px; color:#d4d4d4; }
-    .table-wrap { overflow-x:auto; border-radius:10px; }
-    .scen { border:1px solid var(--bd); border-radius:12px; padding:16px; margin-bottom:12px; background:var(--surf2); }
-    .scen-head { display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:8px; }
-    .scen-id { display:inline-block; font-size:10px; font-weight:800; letter-spacing:.1em; color:#fca5a5; margin-bottom:4px; }
-    .scen h3 { margin:0; font-size:15px; }
-    .scen-meta { display:flex; gap:10px; align-items:center; color:var(--mut); font-size:12px; font-weight:600; }
-    .prio { color:#fff; background:rgba(229,9,21,.25); border:1px solid rgba(229,9,21,.4); padding:3px 8px; border-radius:999px; font-size:10px; font-weight:800; }
-    .diag, .acao { margin:6px 0; font-size:13px; color:#d4d4d4; }
-    .scen ul { margin:10px 0 0; padding-left:18px; }
-    .scen li { margin-bottom:4px; }
-    .matrix { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
-    @media (max-width:900px) { .matrix { grid-template-columns:repeat(2,1fr); } }
-    .mcell { background:var(--surf2); border:1px solid var(--bd); border-radius:10px; padding:12px; min-height:88px; }
-    .mcell .t { font-size:10px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--mut); }
-    .mcell .n { font-size:22px; font-weight:900; margin:6px 0 2px; }
-    .mcell .s { font-size:11px; color:var(--mut); }
-    .play { border-left:3px solid var(--brand); background:var(--brand-dim); border-radius:0 10px 10px 0; padding:12px 14px; margin-bottom:10px; }
-    .play.p0 { border-color:#ef4444; background:rgba(239,68,68,.08); }
-    .play.p1 { border-color:var(--warn); background:rgba(250,204,21,.06); }
-    .play.p2 { border-color:var(--info); background:rgba(96,165,250,.06); }
-    .play strong { display:block; margin-bottom:4px; }
-    footer { text-align:center; color:var(--mut); font-size:11px; margin-top:40px; padding:20px 0; border-top:1px solid var(--bd); }
-    a { color:#fca5a5; }
-  </style>
-</head>
-<body>
-<header class="topbar">
-  <div class="logo">V4 <span>COMPANY</span></div>
-  <div class="pill">Sara Pizzico · Gap Conversão Safra E.E · 22/07/2026</div>
-</header>
-
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>De-para Cockpit × Coordenação · Gap Conversão</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+:root{--brand:#e50915;--brand-light:#ff1a27;--bg:#050505;--surf:rgba(20,20,20,.92);--surf2:#141414;--bd:rgba(255,255,255,.08);--bd-strong:rgba(255,255,255,.14);--txt:#fafafa;--mut:#a3a3a3;--radius:16px}
+*{box-sizing:border-box}body{margin:0;color:var(--txt);font:14px/1.55 Inter,system-ui,sans-serif;background:var(--bg);background-image:radial-gradient(ellipse 80% 50% at 50% -20%,rgba(229,9,21,.18),transparent);padding-bottom:72px}
+.topbar{position:sticky;top:0;z-index:20;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 24px;backdrop-filter:blur(14px);background:rgba(5,5,5,.84);border-bottom:1px solid var(--bd)}
+.logo{font-weight:900}.logo span{color:var(--brand-light)}.pill{font-size:11px;font-weight:600;color:var(--mut);border:1px solid var(--bd);padding:6px 12px;border-radius:999px}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 24px 0}
+.hero{border:1px solid var(--bd-strong);border-radius:var(--radius);padding:28px;margin-bottom:18px;background:linear-gradient(135deg,rgba(229,9,21,.14),rgba(20,20,20,.92) 45%,var(--surf2))}
+.eyebrow{font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#fca5a5;margin-bottom:8px}
+h1{margin:0 0 10px;font-size:clamp(24px,4vw,34px);font-weight:900;letter-spacing:-.03em}
+.meta{color:var(--mut);max-width:920px}.meta strong{color:var(--txt)}
+.verdict{margin:0 0 18px;padding:14px 16px;border-radius:12px;border:1px solid rgba(250,204,21,.3);background:rgba(250,204,21,.07);color:#fde68a;font-size:13px}.verdict strong{color:#fef08a}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:18px}
+.kpi{background:var(--surf);border:1px solid var(--bd);border-radius:var(--radius);padding:16px}.kpi .v{font-size:26px;font-weight:900}.kpi .v.red{color:var(--brand-light)}.kpi .l{margin-top:8px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+.section{background:var(--surf);border:1px solid var(--bd);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}.section h2{margin:0 0 12px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);font-weight:800}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:800px){.grid2{grid-template-columns:1fr}}
+.box{background:var(--surf2);border:1px solid var(--bd);border-radius:12px;padding:14px 16px}.box h3{margin:0 0 8px;font-size:13px}.box p,.box li{color:#d4d4d4;font-size:13px}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:10px 11px;border-bottom:1px solid var(--bd);text-align:left;vertical-align:top}
+th{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--mut);font-weight:800;background:rgba(255,255,255,.02)}
+.cli{font-weight:700}.sub{color:var(--mut);font-size:11px;margin-top:2px}.obs-cell{max-width:300px;font-size:12px;color:#d4d4d4}.table-wrap{overflow-x:auto;border-radius:10px}
+.scen{border:1px solid var(--bd);border-radius:12px;padding:14px;margin-bottom:10px;background:var(--surf2)}
+.scen-head{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:6px}.scen-id{display:block;font-size:10px;font-weight:800;letter-spacing:.1em;color:#fca5a5}.scen h3{margin:0;font-size:15px}.scen-meta{color:var(--mut);font-size:12px;font-weight:600}
+.play{border-left:3px solid var(--brand);background:rgba(229,9,21,.1);border-radius:0 10px 10px 0;padding:12px 14px;margin-bottom:10px}
+.play.p0{border-color:#ef4444;background:rgba(239,68,68,.08)}.play.p1{border-color:#facc15;background:rgba(250,204,21,.06)}.play.p2{border-color:#60a5fa;background:rgba(96,165,250,.06)}
+a{color:#fca5a5}footer{text-align:center;color:var(--mut);font-size:11px;margin-top:36px;padding:20px 0;border-top:1px solid var(--bd)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.chip{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:5px 10px;border-radius:999px;border:1px solid var(--bd);color:var(--mut)}.chip.live{color:#86efac;border-color:rgba(34,197,94,.35)}.chip.warn{color:#fde047;border-color:rgba(250,204,21,.35)}
+</style></head><body>
+<header class="topbar"><div class="logo">V4 <span>COMPANY</span></div><div class="pill">Sara · Cockpit × Coordenação Rafaela · 22/07/2026</div></header>
 <div class="wrap">
-  <section class="hero">
-    <div class="eyebrow">Farmer ABM · Plano de ação por cenário</div>
-    <h1>Por que a safra não converte — e o que fazer</h1>
-    <p class="meta">
-      Cruzamento do <strong>cockpit E.E Sara</strong> (planilha Monetização) com o <strong>Comitê SABER / coordenação Rafaela</strong>
-      (Flow + propostas + CSAT + indicações). Snapshot planilha Sara: <strong>114 contas</strong> ·
-      <strong>33 ativos</strong> · Follow+Aceito <strong>15 · R$ 978.472,03</strong>.
-    </p>
-    <div class="chips">
-      <span class="chip live">Cockpit E.E Sara</span>
-      <span class="chip live">Comitê SABER 15/07</span>
-      <span class="chip live">Lead Score média 44.9</span>
-      <span class="chip">Squad Exclusive tx conversão 0%</span>
-    </div>
-  </section>
-
-  <div class="verdict">
-    <strong>Veredito:</strong> o gap não é falta de entendimento da EE.
-    CSAT/NPS dos pitches estão altos (média CSAT semanal 4.5, NPS matriz 80.0),
-    mas a safra Exclusive fechou <strong>0 de 14 pitches em jul</strong>.
-    O bloqueio dominante é <strong>comercial pós-pitch</strong>: preço, decisor/sócios e timing — não qualidade da entrega.
+<section class="hero">
+  <div class="eyebrow">De-para de carteira · Gap de conversão</div>
+  <h1>Quem são os seus clientes na planilha da coordenadora</h1>
+  <p class="meta">Cockpit: <a href="https://docs.google.com/spreadsheets/d/1dSukhon9dIUABcbQIKGKUa-ku-_oLOn1Q5YWeWGfI6U/edit?usp=sharing" target="_blank">Monetização Sara</a>
+  · Coordenação: <a href="https://docs.google.com/spreadsheets/d/1MPMzBvnZZPHyo8aUyMOJhHfBb36eFAyFiyloOsnoFCQ/edit?usp=sharing" target="_blank">Rafaela / Comitê SABER</a>
+  (sync público do Comitê 15/07 — CSV direto da coord exige login Google).</p>
+  <div class="chips">
+    <span class="chip live">27 ativos cruzados</span>
+    <span class="chip warn">6 só no cockpit</span>
+    <span class="chip">114 linhas Farmer Sara</span>
+    <span class="chip">15 Follow+Aceito · R$ 978.472,03</span>
   </div>
-
-  <div class="kpis">
-    <div class="kpi"><div class="v red">3</div><div class="l">Aceito</div></div>
-    <div class="kpi"><div class="v">12</div><div class="l">Follow</div></div>
-    <div class="kpi"><div class="v">18</div><div class="l">Em semanas</div></div>
-    <div class="kpi"><div class="v">978.472,03</div><div class="l">TCV Follow+Aceito</div></div>
-    <div class="kpi"><div class="v red">0%</div><div class="l">Tx conversão squad jul</div></div>
-    <div class="kpi"><div class="v">4.938,29</div><div class="l">E.E Saber→Exec / 70.000</div></div>
-  </div>
-
-  <section class="section">
-    <h2>1. Diagnóstico em 4 camadas</h2>
-    <div class="grid2">
-      <div class="box">
-        <h3>Entendimento / satisfação</h3>
-        <p>Não é o gargalo principal. Quem pitchou elogia a EE (“consultor ao meu lado”, NPS 8–10). Lead Score médio <strong>44.9</strong> (bandas B4 / C17 / D9) — score baixo por momentum comercial, não por CSAT.</p>
-      </div>
-      <div class="box">
-        <h3>Tier / Need scope</h3>
-        <p>Volume da safra é <strong>SMALL</strong> (20 ativos). Small/Tiny historicamente travam mais em preço. LARGE ainda está em Semanas (Brod, Hanaro, Medicar, G6) — conversão de julho depende pouco deles.</p>
-      </div>
-      <div class="box">
-        <h3>Estágio comercial</h3>
-        <p><strong>3 Aceito</strong> ainda sem monetizar · <strong>12 Follow</strong> com ~R$ 810.120,97 em negociação · 18 em Semanas sem temperatura preenchida (risco de pitch cego).</p>
-      </div>
-      <div class="box">
-        <h3>Motivo histórico de Drop (Sara)</h3>
-        <ul>
-          <li><strong>Tratativa Ops</strong>: 16</li><li><strong>Timing</strong>: 16</li><li><strong>Budget</strong>: 10</li><li><strong>Sem motivo</strong>: 3</li><li><strong>Interno</strong>: 2</li>
-        </ul>
-        <p class="mut" style="margin-top:8px">Timing + Budget + Tratativa Ops = 90%+ dos drops. Mesmo padrão dos Follow atuais.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <h2>2. Matriz Tier × Estágio (ativos)</h2>
-    <div class="matrix">
-<div class="mcell"><div class="t">TINY · Aceito</div><div class="n">0</div><div class="s">—<br></div></div><div class="mcell"><div class="t">TINY · Follow</div><div class="n">0</div><div class="s">—<br></div></div><div class="mcell"><div class="t">TINY · Semanas</div><div class="n">1</div><div class="s">—<br>RE/MAX PRO WORK (B</div></div><div class="mcell"><div class="t">SMALL · Aceito</div><div class="n">2</div><div class="s">R$ 140.068,08<br>Unik Benefícios (B, Adriano Martins Ca</div></div><div class="mcell"><div class="t">SMALL · Follow</div><div class="n">10</div><div class="s">R$ 599.943,13<br>Rota da Linguiça (, Stylus Manaus (BS), BR Distribuidora d +7</div></div><div class="mcell"><div class="t">SMALL · Semanas</div><div class="n">8</div><div class="s">R$ 79.224,12<br>Triboltech (BS), Protesol tendas (B, Henri Soluções (LS +5</div></div><div class="mcell"><div class="t">MEDIUM · Aceito</div><div class="n">1</div><div class="s">R$ 28.282,98<br>Modular Estruturas</div></div><div class="mcell"><div class="t">MEDIUM · Follow</div><div class="n">2</div><div class="s">R$ 210.177,84<br>Moteis Fortaleza (, MasterPlan (BS)</div></div><div class="mcell"><div class="t">MEDIUM · Semanas</div><div class="n">4</div><div class="s">R$ 49.050,90<br>Estação Delta Emer, Global Cotton (BM), Fernando Móveis e  +1</div></div><div class="mcell"><div class="t">LARGE · Aceito</div><div class="n">0</div><div class="s">—<br></div></div><div class="mcell"><div class="t">LARGE · Follow</div><div class="n">0</div><div class="s">—<br></div></div><div class="mcell"><div class="t">LARGE · Semanas</div><div class="n">5</div><div class="s">—<br>Ecco Salva (BL), Brod transportes l, G6 INTERNET +2</div></div>
-    </div>
-  </section>
-
-  <section class="section">
-    <h2>3. Plano de ação por cenário</h2>
-    <div class="scen" id="S1">
-      <div class="scen-head">
-        <div><span class="scen-id">S1</span><h3>Fechar agora (Aceito)</h3></div>
-        <div class="scen-meta"><span class="prio">P0 · 48h</span><span>3 contas · R$ 168.351,06</span></div>
-      </div>
-      <p class="diag"><strong>Diagnóstico:</strong> Contas que já aceitaram. Gap = assinatura/formalização, não entendimento.</p>
-      <p class="acao"><strong>Ação:</strong> Follow diário na assinatura; remover atrito de contrato/pagamento; confirmar kickoff Executar no mesmo dia da assinatura.</p>
-      <ul><li><strong>Unik Benefícios (BS)</strong> · SMALL · R$ 74.074,44 · Alto</li><li><strong>Adriano Martins Cardoso (BS)</strong> · SMALL · R$ 65.993,64 · Alto*</li><li><strong>Modular Estruturas (BM)</strong> · MEDIUM · R$ 28.282,98 · Médio</li></ul>
-    </div>
-    <div class="scen" id="S2">
-      <div class="scen-head">
-        <div><span class="scen-id">S2</span><h3>Acelerar Aceito (Follow Quente)</h3></div>
-        <div class="scen-meta"><span class="prio">P0 · 72h</span><span>1 contas · R$ 22.400</span></div>
-      </div>
-      <p class="diag"><strong>Diagnóstico:</strong> Temperatura alta + entendimento aparente. Falta empurrar para Aceito com próximo passo datado.</p>
-      <p class="acao"><strong>Ação:</strong> Call de fechamento com decisor; proposta one-page; data limite; se travar em preço, oferta bridge 30d.</p>
-      <ul><li><strong>PEDRINI E AZEVEDO ADVOCACIA (BS)</strong> · SMALL · R$ 22.400 · Alto*</li></ul>
-    </div>
-    <div class="scen" id="S3a">
-      <div class="scen-head">
-        <div><span class="scen-id">S3a</span><h3>Unlock preço (Follow Morno)</h3></div>
-        <div class="scen-meta"><span class="prio">P1</span><span>3 contas · R$ 237.519</span></div>
-      </div>
-      <p class="diag"><strong>Diagnóstico:</strong> Entende o valor, trava no ticket. Padrão dominante da safra (KFG, Fui, Stylus).</p>
-      <p class="acao"><strong>Ação:</strong> Reempacotar escopo (MRR menor + setup); 2 opções A/B; cashback EE; mostrar ROI 90d; nunca “desconto solto”.</p>
-      <ul><li><strong>Stylus Manaus (BS)</strong> · SMALL · R$ 92.270,76 · Médio</li><li><strong>KFG Torres</strong> · SMALL · R$ 79.224,12 · Alto</li><li><strong>Fui Aluguel de Motos (BS)</strong> · SMALL · R$ 66.024,12 · Médio*</li></ul>
-    </div>
-    <div class="scen" id="S3b">
-      <div class="scen-head">
-        <div><span class="scen-id">S3b</span><h3>Unlock decisão (Follow Morno)</h3></div>
-        <div class="scen-meta"><span class="prio">P1</span><span>1 contas · R$ 74.198,16</span></div>
-      </div>
-      <p class="diag"><strong>Diagnóstico:</strong> Gostou da EE, mas pede tempo / sócios / “estudar material” / cláusula.</p>
-      <p class="acao"><strong>Ação:</strong> Workshop 45min com sócios; tirar objeção jurídica; checklist de decisão; FUP D+2/D+5 com pergunta binária.</p>
-      <ul><li><strong>AGM DISTRIBUIDORA (BS)</strong> · SMALL · R$ 74.198,16 · Médio*</li></ul>
-    </div>
-    <div class="scen" id="S3">
-      <div class="scen-head">
-        <div><span class="scen-id">S3</span><h3>Nutrir Follow (sem blocker claro)</h3></div>
-        <div class="scen-meta"><span class="prio">P1</span><span>6 contas · R$ 396.779,69</span></div>
-      </div>
-      <p class="diag"><strong>Diagnóstico:</strong> Morno sem diagnóstico fino — risco de vazar dias.</p>
-      <p class="acao"><strong>Ação:</strong> Diagnosticar blocker em 1 call: preço × decisor × timing × escopo. Reclassificar para S3a/S3b/S4.</p>
-      <ul><li><strong>Moteis Fortaleza (BM)</strong> · MEDIUM · R$ 194.716,68 · Médio*</li><li><strong>Dakarautomotivecenter (BS)</strong> · SMALL · R$ 83.201,85 · Médio*</li><li><strong>Academia imigrantes Ltda (BS)</strong> · SMALL · R$ 57.600 · Alto</li><li><strong>Rota da Linguiça (BS)</strong> · SMALL · R$ 28.400 · Médio*</li><li><strong>Ecofitness Aldeia (BS)</strong> · SMALL · R$ 17.400 · Médio</li><li><strong>MasterPlan (BS)</strong> · MEDIUM · R$ 15.461,16 · Sem dado</li></ul>
-    </div>
-    <div class="scen" id="S4">
-      <div class="scen-head">
-        <div><span class="scen-id">S4</span><h3>Recuperar / EQV (Follow Frio)</h3></div>
-        <div class="scen-meta"><span class="prio">P2</span><span>1 contas · R$ 79.224,12</span></div>
-      </div>
-      <p class="diag"><strong>Diagnóstico:</strong> Baixa energia. Forçar pitch queima relacionamento.</p>
-      <p class="acao"><strong>Ação:</strong> Micro-win (auditoria/insight); remarcar; se 2 FUP sem resposta → EQV com data.</p>
-      <ul><li><strong>BR Distribuidora de Piercing (BS)</strong> · SMALL · R$ 79.224,12 · Alto</li></ul>
-    </div>
-    <div class="scen" id="S5">
-      <div class="scen-head">
-        <div><span class="scen-id">S5</span><h3>Semana 0 · kickoff limpo</h3></div>
-        <div class="scen-meta"><span class="prio">P2</span><span>7 contas · R$ 0</span></div>
-      </div>
-      <p class="diag"><strong>Diagnóstico:</strong> Entendimento ainda não existe — não vender Executar cedo.</p>
-      <p class="acao"><strong>Ação:</strong> Kickoff forte; mapa de decisores; baseline CSAT; ancorar expectativa do pitch desde D1.</p>
-      <ul><li><strong>Henri Soluções (LS)</strong> · SMALL · R$ 0 · Sem dado</li><li><strong>Ecco Salva (BL)</strong> · LARGE · R$ 0 · Sem dado</li><li><strong>Brod transportes ltda (LL)</strong> · LARGE · R$ 0 · Sem dado</li><li><strong>General car (BS)</strong> · SMALL · R$ 0 · Sem dado</li><li><strong>RM Burguer Itabira  (BS)</strong> · SMALL · R$ 0 · Sem dado</li><li><strong>Freebong (BS)</strong> · SMALL · R$ 0 · Sem dado</li><li><strong>RE/MAX PRO WORK (BT)</strong> · TINY · R$ 0 · Sem dado</li></ul>
-    </div>
-    <div class="scen" id="S6">
-      <div class="scen-head">
-        <div><span class="scen-id">S6</span><h3>Semanas · construir entendimento</h3></div>
-        <div class="scen-meta"><span class="prio">P1–P2</span><span>8 contas · R$ 0</span></div>
-      </div>
-      <p class="diag"><strong>Diagnóstico:</strong> Onde CSAT/condição de pitch nascem. Gap futuro se condução fraca.</p>
-      <p class="acao"><strong>Ação:</strong> CSAT semanal obrigatório; condução ≥4; trazer sponsor para W3; teaser de próximo passo sem pitch precoce.</p>
-      <ul><li><strong>Protesol tendas (BS)</strong> · SMALL · R$ 0 · Sem dado</li><li><strong>Estação Delta Emergência &amp; Facilities (BM)</strong> · MEDIUM · R$ 0 · Sem dado</li><li><strong>Fernando Móveis e Eletro (BM)</strong> · MEDIUM · R$ 0 · Médio</li><li><strong>Wang (BS)</strong> · SMALL · R$ 0 · Sem dado</li><li><strong>G6 INTERNET</strong> · LARGE · R$ 0 · Sem dado</li><li><strong>Almeida e Neves (RecM)</strong> · MEDIUM · R$ 0 · Sem dado</li><li><strong>Hanaro (BL)</strong> · LARGE · R$ 0 · Sem dado</li><li><strong>Medicar (BL)</strong> · LARGE · R$ 0 · Sem dado</li></ul>
-    </div>
-    <div class="scen" id="S7">
-      <div class="scen-head">
-        <div><span class="scen-id">S7</span><h3>Semana 05 · decidir</h3></div>
-        <div class="scen-meta"><span class="prio">P2–P3</span><span>3 contas · R$ 128.275,02</span></div>
-      </div>
-      <p class="diag"><strong>Diagnóstico:</strong> Pipeline envelhecido. Ou pitch com data ou drop limpo.</p>
-      <p class="acao"><strong>Ação:</strong> Ultimato comercial: pitch em 7 dias ou Drop Timing com FUP 30/60d.</p>
-      <ul><li><strong>Triboltech (BS)</strong> · SMALL · R$ 79.224,12 · Sem dado</li><li><strong>Global Cotton (BM)</strong> · MEDIUM · R$ 49.050,90 · Sem dado</li><li><strong>Sora consultoria (BS)</strong> · SMALL · R$ 0 · Sem dado</li></ul>
-    </div></section>
-
-  <section class="section">
-    <h2>4. Sequência operacional (desta semana)</h2>
-    <div class="play p0"><strong>P0 — Hoje / 48h (vira caixa)</strong>
-      1) Unik + Modular + Adriano — follow diário até assinatura (Aceito Quente).<br>
-      2) Pedrini — call de fechamento → Aceito.<br>
-      3) Stylus + AGM + KFG + Fui — 1 call cada só para classificar blocker (preço vs sócios vs timing) e remarcar devolutiva com decisor.
-    </div>
-    <div class="play p1"><strong>P1 — 3–7 dias (destravar Follow Morno)</strong>
-      4) Motéis Fortaleza + Dakar + Academia — proposta/AP + data de pitch/devolutiva firme.<br>
-      5) Play de preço: pacote bridge (MRR menor + escopo cortado) para KFG/Fui; cashback EE onde couber.<br>
-      6) Play de decisão: workshop sócios AGM + Rota; remover objeção jurídica se aparecer cláusula de resultado.
-    </div>
-    <div class="play p1"><strong>P1 — Semanas com CSAT (proteger pitch)</strong>
-      7) Ecofitness / Fernando / Academia / Modular(CSAT condução 3!) — elevar condução e trazer sponsor antes do pitch.<br>
-      8) EE+Executar (Brod, Fernando, Medicar): mapear ticket Executar desde W2, sem forçar close precoce.
-    </div>
-    <div class="play p2"><strong>P2 — Limpeza / meta</strong>
-      9) Semana 05 (Triboltech, Sora, Global Cotton): pitch em 7 dias ou Drop Timing com FUP.<br>
-      10) BR Piercing (Frio): micro-win ou EQV.<br>
-      11) Preencher temperatura em 100% das Semanas.<br>
-      12) Pedir indicação onde CSAT/NPS ≥8 e ainda não solicitou (Unik, KFG, BR, Terra/EQV).
-    </div>
-  </section>
-
-  <section class="section">
-    <h2>5. Hipóteses do gap (priorizadas)</h2>
-    <div class="grid2">
-      <div class="box">
-        <h3>H1 · Preço vs percepção Tiny/Small</h3>
-        <p>Cliente ama a EE e ancora em R$ 5–6k. Ticket Full quebra. <em>Teste:</em> 2 ofertas A/B em 5 Follows Mornos esta semana.</p>
-      </div>
-      <div class="box">
-        <h3>H2 · Pitch sem decisor completo</h3>
-        <p>Devolutiva com 1 sponsor; sócios entram depois e esfriam. <em>Teste:</em> regra “sem mapa de 2+ decisores = não pitcha”.</p>
-      </div>
-      <div class="box">
-        <h3>H3 · “Estudar o material” = ghost educado</h3>
-        <p>AGM-pattern. Satisfação alta, zero next-step binário. <em>Teste:</em> FUP com pergunta fecha/abre em 48h.</p>
-      </div>
-      <div class="box">
-        <h3>H4 · Meta desalinhada com ciclo</h3>
-        <p>LARGE ainda em W0–W3; julho depende de SMALL em Follow. <em>Teste:</em> meta semanal = #Aceitos + TCV assinado, não só pitches feitos.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <h2>6. Carteira cruzada (cockpit × coordenação)</h2>
-    <p class="mut" style="margin:0 0 12px">Tier cockpit = Need scope da planilha E.E. Tier coordenação / fase Flow quando houve match no Comitê. Entendimento = CSAT/NPS real ou proxy por temperatura (*).</p>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Cliente / cenário</th><th>Status</th><th>Temp</th><th>Tier</th><th>Entendimento</th><th>TCV</th><th>Blocker / contexto</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-      <td><div class="cli">Unik Benefícios (BS)</div><div class="sub">S1 · Fechar agora</div></td>
-      <td><span class="tag tag-ok">Aceito</span></td>
-      <td><span class="tag tag-quente">Quente</span></td>
-      <td><span class="tag tag-tier">SMALL</span><div class="sub">Medium</div></td>
-      <td>Alto<div class="sub">CSAT — · NPS 9</div></td>
-      <td>R$ 74.074,44</td>
-      <td><div class="obs-cell">Contrato na rua<br>Proposta aceita, contrato na rua. Valor: R$ 5.500.</div></td>
-    </tr><tr>
-      <td><div class="cli">Adriano Martins Cardoso (BS)</div><div class="sub">S1 · Fechar agora</div></td>
-      <td><span class="tag tag-ok">Aceito</span></td>
-      <td><span class="tag tag-quente">Quente</span></td>
-      <td><span class="tag tag-tier">SMALL</span><div class="sub"></div></td>
-      <td>Alto*<div class="sub">CSAT — · NPS —</div></td>
-      <td>R$ 65.993,64</td>
-      <td><div class="obs-cell">—<br>Aguardando assinatura</div></td>
-    </tr><tr>
-      <td><div class="cli">Modular Estruturas (BM)</div><div class="sub">S1 · Fechar agora</div></td>
-      <td><span class="tag tag-ok">Aceito</span></td>
-      <td><span class="tag tag-quente">Quente</span></td>
-      <td><span class="tag tag-tier">MEDIUM</span><div class="sub">Medium</div></td>
-      <td>Médio<div class="sub">CSAT 4.0 · NPS —</div></td>
-      <td>R$ 28.282,98</td>
-      <td><div class="obs-cell">Em negociação<br>Aceitou na condição da primeira proposta do contato na venda inicial — a partir de R$ 4.500 abordado lá atrás. Ficou com isso na cabeça e deu essa condição de f</div></td>
-    </tr><tr>
-      <td><div class="cli">PEDRINI E AZEVEDO ADVOCACIA (BS)</div><div class="sub">S2 · Acelerar Aceito</div></td>
-      <td><span class="tag tag-quente">Follow</span></td>
-      <td><span class="tag tag-quente">Quente</span></td>
-      <td><span class="tag tag-tier">SMALL</span><div class="sub"></div></td>
-      <td>Alto*<div class="sub">CSAT — · NPS —</div></td>
-      <td>R$ 22.400</td>
-      <td><div class="obs-cell">—<br>Apresentar EQV - Devolutiva no dia 17/07. Cliente gostou da proposta e vai bater com os decisores</div></td>
-    </tr><tr>
-      <td><div class="cli">Moteis Fortaleza (BM)</div><div class="sub">S3 · Nutrir Follow</div></td>
-      <td><span class="tag tag-quente">Follow</span></td>
-      <td><span class="tag tag-morno">Morno</span></td>
-      <td><span class="tag tag-tier">MEDIUM</span><div class="sub"></div></td>
-      <td>Médio*<div class="sub">CSAT — · NPS —</div></td>
-      <td>R$ 194.716,68</td>
-      <td><div class="obs-cell">—<br>Finalizar proposta. Assessoria de Growth para as 4 unidades. Definir data do pitch com o consultor</div></td>
-    </tr><tr>
-      <td><div class="cli">Dakarautomotivecenter (BS)</div><div class="sub">S3 · Nutrir Follow</div></td>
-      <td><span class="tag tag-quente">Follow</span></td>
-      <td><span class="tag tag-morno">Morno</span></td>
-      <td><span class="tag tag-tier">SMALL</span><div class="sub"></div></td>
-      <td>Médio*<div class="sub">CSAT — · NPS —</div></td>
-      <td>R$ 83.201,85</td>
-      <td><div class="obs-cell">Reativação/EQV<br>Devolutiva 22/07</div></td>
-    </tr><tr>
-      <td><div class="cli">Academia imigrantes Ltda (BS)</div><div class="sub">S3 · Nutrir Follow</div></td>
-      <td><span class="tag tag-quente">Follow</span></td>
-      <td><span class="tag tag-morno">Morno</span></td>
-      <td><span class="tag tag-tier">SMALL</span><div class="sub">Medium</div></td>
-      <td>Alto<div class="sub">CSAT 5.0 · NPS —</div></td>
-      <td>R$ 57.600</td>
-      <td><div class="obs-cell">Em desenvolvimento<br>Assessoria de Growth (finalizar proposta) Cliente ciente da proposta e aguardando</div></td>
-    </tr><tr>
-      <td><div class="cli">Rota da Linguiça (BS)</div><div class="sub">S3 · Nutrir Follow</div></td>
-      <td><span class="tag tag-quente">Follow</span></td>
-      <td><span class="tag tag-morno">Morno</span></td>
-      <td><span class="tag tag-tier">SMALL</span><div class="sub">Tiny</div></td>
-      <td>Médio*<div class="sub">CSAT — · NPS —</div></td>
-      <td>R$ 28.400</td>
-      <td><div class="obs-cell">Reativação/EQV<br>Devolutiva do EQV 17/07 (No Show) Cliente está com problemas de saúde e por isso estamos aguardando a disponibilidade para reagendar a devolutiva.</div></td>
-    </tr><tr>
-      <td><div class="cli">Ecofitness Aldeia (BS)</div><div class="sub">S3 · Nutrir Follow</div></td>
-      <td><span class="tag tag-quente">Follow</span></td>
-      <td><span class="tag tag-morno">Morno</span></td>
-      <td><span class="tag tag-tier">SMALL</span><div class="sub">Medium</div></td>
-      <td>Médio<div class="sub">CSAT 4.0 · NPS —</div></td>
-      <td>R$ 17.400</td>
-      <td><div class="obs-cell">Em desenvolvimento<br>MONTAR PROPOSTA - EQV - Devolutiva 22/07</div></td>
-    </tr><tr>
-      <td><div class="cli">MasterPlan (BS)</div><div class="sub">S3 · Nutrir Follow</div></td>
-      <td><span class="tag tag-quente">Follow</span></td>
-      <td><span class="tag tag-neu">—</span></td>
-      <td><span class="tag tag-tier">MEDIUM</span><div class="sub"></div></td>
-      <td>Sem dado<div class="sub">CSAT — · NPS —</div></td>
-      <td>R$ 15.461,16</td>
-      <td><div class="obs-cell">—<br>projeto travado por falta de pagamento Churn M0</div></td>
-    </tr><tr>
-      <td><div class="cli">Stylus Manaus (BS)</div><div class="sub">S3a · Unlock preço</div></td>
-      <td><span class="tag tag-quente">Follow</span></td>
-      <td><span class="tag tag-morno">Morno</span></td>
-      <td><span class="tag tag-tier">SMALL</span><div class="sub">Small</div></td>
-      <td>Médio<div class="sub">CSAT — · NPS 8</div></td>
-      <td>R$ 92.270,76</td>
-      <td><div class="obs-cell">Em negociação<br>Cliente elogiou e indicou clientes, mas para continuarem precisa ajustar a precificação — levamos R$ 7.689,23. Até então não passamos nenhuma outra proposta; a </div></td>
-    </tr><tr>
-      <td><div class="cli">KFG Torres</div><div class="sub">S3a · Unlock preço</div></td>
-      <td><span class="tag tag-quente">Follow</span></td>
-      <td><span class="tag tag-morno">Morno</span></td>
-      <td><span class="tag tag-tier">SMALL</span><div class="sub">Tiny</div></td>
-      <td>Alto<div class="sub">CSAT — · NPS 9</div></td>
-      <td>R$ 79.224,12</td>
-      <td><div class="obs-cell">Em negociação<br>Cliente ficou satisfeito e verbalizou que precisa da continuidade, mas imaginava precificação de R$ 5.500. Ficou devolutiva para esta semana; ainda não consegui</div></td>
-    </tr><tr>
-      <td><div class="cli">Fui Aluguel de Motos (BS)</div><div class="sub">S3a · Unlock preço</div></td>
-      <td><span class="tag tag-quente">Follow</span></td>
-      <td><span class="tag tag-morno">Morno</span></td>
-      <td><span class="tag tag-tier">SMALL</span><div class="sub">Medium</div></td>
-      <td>Médio*<div class="sub">CSAT — · NPS —</div></td>
-      <td>R$ 66.024,12</td>
-      <td><div class="obs-cell">Em negociação<br>Cliente ficou super satisfeito, pontuou sobre a qualidade das entregas e reforçou que entende que precisa ter a V4 — gostaria de ter tido essa visão antes de al</div></td>
-    </tr><tr>
-      <td><div class="cli">AGM DISTRIBUIDORA (BS)</div><div class="sub">S3b · Unlock decisão</div></td>
-      <td><span class="tag tag-quente">Follow</span></td>
-      <td><span class="tag tag-morno">Morno</span></td>
-      <td><span class="tag tag-tier">SMALL</span><div class="sub">Medium</div></td>
-      <td>Médio*<div class="sub">CSAT — · NPS —</div></td>
-      <td>R$ 74.198,16</td>
-      <td><div class="obs-cell">Em negociação<br>Na cabeça deles, precisam primeiro estudar todo material da EE para depois terem certeza do próximo passo. Trouxeram a frase: «Parecia que o consultor estava ao</div></td>
-    </tr><tr>
-      <td><div class="cli">BR Distribuidora de Piercing (BS)</div><div class="sub">S4 · Recuperar / EQV</div></td>
-      <td><span class="tag tag-quente">Follow</span></td>
-      <td><span class="tag tag-frio">Frio</span></td>
-      <td><span class="tag tag-tier">SMALL</span><div class="sub">Small</div></td>
-      <td>Alto<div class="sub">CSAT — · NPS 9</div></td>
-      <td>R$ 79.224,12</td>
-      <td><div class="obs-cell">Em negociação<br>Na cabeça deles, precisam primeiro estudar todo material da EE para depois terem certeza do próximo passo. Trouxeram a frase: «Parecia que o consultor estava ao</div></td>
-    </tr><tr>
-      <td><div class="cli">Brod transportes ltda (LL)</div><div class="sub">S5 · Semana 0 · kickoff · EE+Exec</div></td>
-      <td><span class="tag tag-neu">Semana 0</span></td>
-      <td><span class="tag tag-neu">—</span></td>
-      <td><span class="tag tag-tier">LARGE</span><div class="sub">Medium</div></td>
-      <td>Sem dado<div class="sub">CSAT — · NPS —</div></td>
-      <td>R$ 0</td>
-      <td><div class="obs-cell">Reativação/EQV<br>—</div></td>
-    </tr><tr>
-      <td><div class="cli">Ecco Salva (BL)</div><div class="sub">S5 · Semana 0 · kickoff</div></td>
-      <td><span class="tag tag-neu">Semana 0</span></td>
-      <td><span class="tag tag-neu">—</span></td>
-      <td><span class="tag tag-tier">LARGE</span><div class="sub"></div></td>
-      <td>Sem dado<div class="sub">CSAT — · NPS —</div></td>
-      <td>R$ 0</td>
-      <td><div class="obs-cell">—<br>—</div></td>
-    </tr><tr>
-      <td><div class="cli">Freebong (BS)</div><div class="sub">S5 · Semana 0 · kickoff</div></td>
-      <td><span class="tag tag-neu">Semana 0</span></td>
-      <td><span class="tag tag-neu">—</span></td>
-      <td><span class="tag tag-tier">SMALL</span><div class="sub">Medium</div></td>
-      <td>Sem dado<div class="sub">CSAT — · NPS —</div></td>
-      <td>R$ 0</td>
-      <td><div class="obs-cell">—<br>investiram na EE: R$14.050,00</div></td>
-    </tr><tr>
-      <td><div class="cli">General car (BS)</div><div class="sub">S5 · Semana 0 · kickoff</div></td>
-      <td><span class="tag tag-neu">Semana 0</span></td>
-      <td><span class="tag tag-neu">—</span></td>
-      <td><span class="tag tag-tier">SMALL</span><div class="sub"></div></td>
-      <td>Sem dado<div class="sub">CSAT — · NPS —</div></td>
-      <td>R$ 0</td>
-      <td><div class="obs-cell">—<br>projeto estava travado por falta de pagamento. Será iniciado agora nesse mês de Julho</div></td>
-    </tr><tr>
-      <td><div class="cli">Henri Soluções (LS)</div><div class="sub">S5 · Semana 0 · kickoff</div></td>
-      <td><span class="tag tag-neu">Semana 0</span></td>
-      <td><span class="tag tag-neu">—</span></td>
-      <td><span class="tag tag-tier">SMALL</span><div class="sub">Small</div></td>
-      <td>Sem dado<div class="sub">CSAT — · NPS —</div></td>
-      <td>R$ 0</td>
-      <td><div class="obs-cell">—<br>—</div></td>
-    </tr><tr>
-      <td><div class="cli">RE/MAX PRO WORK (BT)</div><div class="sub">S5 · Semana 0 · kickoff</div></td>
-      <td><span class="tag tag-neu">Semana 0</span></td>
-      <td><span class="tag tag-neu">—</span></td>
-      <td><span class="tag tag-tier">TINY</span><div class="sub">Medium</div></td>
-      <td>Sem dado<div class="sub">CSAT — · NPS —</div></td>
-      <td>R$ 0</td>
-      <td><div class="obs-cell">—<br>—</div></td>
-    </tr><tr>
-      <td><div class="cli">RM Burguer Itabira  (BS)</div><div class="sub">S5 · Semana 0 · kickoff</div></td>
-      <td><span class="tag tag-neu">Semana 0</span></td>
-      <td><span class="tag tag-neu">—</span></td>
-      <td><span class="tag tag-tier">SMALL</span><div class="sub"></div></td>
-      <td>Sem dado<div class="sub">CSAT — · NPS —</div></td>
-      <td>R$ 0</td>
-      <td><div class="obs-cell">—<br>projeto estava travado por falta de pagamento. Será iniciado agora nesse mês de Julho</div></td>
-    </tr><tr>
-      <td><div class="cli">Almeida e Neves (RecM)</div><div class="sub">S6 · Semanas · construir entendimento</div></td>
-      <td><span class="tag tag-neu">Semana 02</span></td>
-      <td><span class="tag tag-neu">—</span></td>
-      <td><span class="tag tag-tier">MEDIUM</span><div class="sub">Medium</div></td>
-      <td>Sem dado<div class="sub">CSAT — · NPS —</div></td>
-      <td>R$ 0</td>
-      <td><div class="obs-cell">—<br>Avaliando as semanas para montar Account Planning e estruturar a proposta</div></td>
-    </tr><tr>
-      <td><div class="cli">Estação Delta Emergência &amp; Facilities (BM)</div><div class="sub">S6 · Semanas · construir entendimento</div></td>
-      <td><span class="tag tag-neu">Semana 03</span></td>
-      <td><span class="tag tag-neu">—</span></td>
-      <td><span class="tag tag-tier">MEDIUM</span><div class="sub">Medium</div></td>
-      <td>Sem dado<div class="sub">CSAT — · NPS —</div></td>
-      <td>R$ 0</td>
-      <td><div class="obs-cell">—<br>Avaliando as semanas para montar Account Planning e estruturar a proposta</div></td>
-    </tr><tr>
-      <td><div class="cli">Fernando Móveis e Eletro (BM)</div><div class="sub">S6 · Semanas · construir entendimento · EE+Exec</div></td>
-      <td><span class="tag tag-neu">Semana 02</span></td>
-      <td><span class="tag tag-neu">—</span></td>
-      <td><span class="tag tag-tier">MEDIUM</span><div class="sub">Medium</div></td>
-      <td>Médio<div class="sub">CSAT 4.0 · NPS —</div></td>
-      <td>R$ 0</td>
-      <td><div class="obs-cell">—<br>Cliente entrou com assessoria e no momento não vamos levar proposta. Estaremos fazendo um Account Planning na base ativa</div></td>
-    </tr><tr>
-      <td><div class="cli">G6 INTERNET</div><div class="sub">S6 · Semanas · construir entendimento</div></td>
-      <td><span class="tag tag-neu">Semana 02</span></td>
-      <td><span class="tag tag-neu">—</span></td>
-      <td><span class="tag tag-tier">LARGE</span><div class="sub">Large</div></td>
-      <td>Sem dado<div class="sub">CSAT — · NPS —</div></td>
-      <td>R$ 0</td>
-      <td><div class="obs-cell">—<br>—</div></td>
-    </tr><tr>
-      <td><div class="cli">Hanaro (BL)</div><div class="sub">S6 · Semanas · construir entendimento</div></td>
-      <td><span class="tag tag-neu">Semana 03</span></td>
-      <td><span class="tag tag-neu">—</span></td>
-      <td><span class="tag tag-tier">LARGE</span><div class="sub">Large</div></td>
-      <td>Sem dado<div class="sub">CSAT — · NPS —</div></td>
-      <td>R$ 0</td>
-      <td><div class="obs-cell">—<br>Avaliando as semanas para montar Account Planning e estruturar a proposta</div></td>
-    </tr><tr>
-      <td><div class="cli">Medicar (BL)</div><div class="sub">S6 · Semanas · construir entendimento · EE+Exec</div></td>
-      <td><span class="tag tag-neu">Semana 03</span></td>
-      <td><span class="tag tag-neu">—</span></td>
-      <td><span class="tag tag-tier">LARGE</span><div class="sub">Medium</div></td>
-      <td>Sem dado<div class="sub">CSAT — · NPS —</div></td>
-      <td>R$ 0</td>
-      <td><div class="obs-cell">—<br>Cliente entrou com assessoria e no momento não vamos levar proposta. Estaremos fazendo um Account Planning na base ativa</div></td>
-    </tr><tr>
-      <td><div class="cli">Protesol tendas (BS)</div><div class="sub">S6 · Semanas · construir entendimento</div></td>
-      <td><span class="tag tag-neu">Semana 03</span></td>
-      <td><span class="tag tag-neu">—</span></td>
-      <td><span class="tag tag-tier">SMALL</span><div class="sub">Medium</div></td>
-      <td>Sem dado<div class="sub">CSAT — · NPS —</div></td>
-      <td>R$ 0</td>
-      <td><div class="obs-cell">Reativação/EQV<br>Avaliando as semanas para montar Account Planning e estruturar a proposta</div></td>
-    </tr><tr>
-      <td><div class="cli">Wang (BS)</div><div class="sub">S6 · Semanas · construir entendimento</div></td>
-      <td><span class="tag tag-neu">Semana 02</span></td>
-      <td><span class="tag tag-neu">—</span></td>
-      <td><span class="tag tag-tier">SMALL</span><div class="sub">Medium</div></td>
-      <td>Sem dado<div class="sub">CSAT — · NPS —</div></td>
-      <td>R$ 0</td>
-      <td><div class="obs-cell">—<br>Avaliando as semanas para montar Account Planning e estruturar a proposta</div></td>
-    </tr><tr>
-      <td><div class="cli">Triboltech (BS)</div><div class="sub">S7 · Semana 05 · decidir</div></td>
-      <td><span class="tag tag-neu">Semana 05</span></td>
-      <td><span class="tag tag-neu">—</span></td>
-      <td><span class="tag tag-tier">SMALL</span><div class="sub">Tiny</div></td>
-      <td>Sem dado<div class="sub">CSAT — · NPS —</div></td>
-      <td>R$ 79.224,12</td>
-      <td><div class="obs-cell">—<br>projeto travado por conta da ageda do cliente. Marcamos 4 vezes para realizar os entregaveis + pith, porém cliente sempre desmarca</div></td>
-    </tr><tr>
-      <td><div class="cli">Global Cotton (BM)</div><div class="sub">S7 · Semana 05 · decidir</div></td>
-      <td><span class="tag tag-neu">Semana 05</span></td>
-      <td><span class="tag tag-neu">—</span></td>
-      <td><span class="tag tag-tier">MEDIUM</span><div class="sub"></div></td>
-      <td>Sem dado<div class="sub">CSAT — · NPS —</div></td>
-      <td>R$ 49.050,90</td>
-      <td><div class="obs-cell">—<br>—</div></td>
-    </tr><tr>
-      <td><div class="cli">Sora consultoria (BS)</div><div class="sub">S7 · Semana 05 · decidir</div></td>
-      <td><span class="tag tag-neu">Semana 05</span></td>
-      <td><span class="tag tag-neu">—</span></td>
-      <td><span class="tag tag-tier">SMALL</span><div class="sub"></div></td>
-      <td>Sem dado<div class="sub">CSAT — · NPS —</div></td>
-      <td>R$ 0</td>
-      <td><div class="obs-cell">—<br>PROJETO TRAVADO</div></td>
-    </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <section class="section">
-    <h2>7. Fontes e próximo refresh</h2>
-    <ul>
-      <li>Cockpit Monetização E.E Sara — <a href="https://docs.google.com/spreadsheets/d/1dSukhon9dIUABcbQIKGKUa-ku-_oLOn1Q5YWeWGfI6U/edit?gid=759150030#gid=759150030" target="_blank">planilha</a></li>
-      <li>Coordenação Rafaela / Comitê SABER — spreadsheet <code>1MPMzBvnZZPHyo8aUyMOJhHfBb36eFAyFiyloOsnoFCQ</code> · dashboard <a href="https://comite-saber-semana-atual.vercel.app/" target="_blank">comite-saber</a></li>
-      <li>CSAT semanal — <a href="https://docs.google.com/spreadsheets/d/1uZpB_zptujKaO5aQVo6PtG5sCvm8HF7M83scVVpbgcY/edit?gid=985872871" target="_blank">planilha pesquisas</a></li>
-      <li>Lead Score Saber EE — branch <code>cursor/lead-score-saber-ee-253e</code></li>
-    </ul>
-    <p class="mut">Se a planilha da coordenadora que você for mandar for outra aba/arquivo, mando no cruzamento fino (ticker Flow × Farmer Sara × tier oficial).</p>
-  </section>
-
-  <footer>
-    Gerado 22/07/2026 · Sara Pizzico · Gap Conversão Safra E.E · dados cockpit + Comitê SABER (15/07)
-  </footer>
+</section>
+<div class="verdict"><strong>De-para:</strong> 27/33 ativos Sara estão na coordenação (Flow · Propostas · Indicações · CSAT · NPS · Gestão).
+6 ainda não cruzam — alinhar nome/ticker com a Rafaela. Alias confirmados: <strong>Adriano = Martins Magazine</strong>, <strong>Ecco Salva = Ecco-Salva Emergencias</strong>, <strong>Academia = Skyfit Imigrantes</strong>.</div>
+<div class="kpis">
+  <div class="kpi"><div class="v red">27</div><div class="l">Ativos cruzados</div></div>
+  <div class="kpi"><div class="v">6</div><div class="l">Só no cockpit</div></div>
+  <div class="kpi"><div class="v">12</div><div class="l">Em Propostas</div></div>
+  <div class="kpi"><div class="v">7</div><div class="l">Na aba Indicações</div></div>
+  <div class="kpi"><div class="v">15</div><div class="l">No Flow ativos</div></div>
+  <div class="kpi"><div class="v">13</div><div class="l">Follow/Aceito cruzados</div></div>
 </div>
-</body>
-</html>
+<section class="section"><h2>1. Meus clientes na coordenação</h2>
+<div class="table-wrap"><table><thead><tr><th>Cockpit Sara</th><th>Status</th><th>Tier</th><th>TCV</th><th>Nome na coordenação</th><th>Onde aparece / sinal</th></tr></thead>
+<tbody><tr>
+      <td><div class="cli">Unik Benefícios (BS)</div><div class="sub">S1 · Fechar agora</div></td>
+      <td>Aceito<div class="sub">Quente</div></td>
+      <td>SMALL<div class="sub">Medium</div></td>
+      <td>R$ 74.074,44</td>
+      <td><div class="cli">Unik Benefícios</div><div class="sub">score 1.0 · Gestão/Pitch, Indicações, Propostas/Executar, Propostas/Finalizados</div></td>
+      <td class="obs-cell">status Contrato na rua · gestão Em aberto · fin 06/07/2026 · ind-CSAT 9 · AM Eder Vasconcelos · pitch 06/07/2026 · follow 14/07/2026</td></tr><tr>
+      <td><div class="cli">Adriano Martins Cardoso (BS)</div><div class="sub">S1 · Fechar agora</div></td>
+      <td>Aceito<div class="sub">Quente</div></td>
+      <td>SMALL<div class="sub">Sem tier</div></td>
+      <td>R$ 65.993,64</td>
+      <td><div class="cli">Martins Magazine</div><div class="sub">score 0.98 · CSAT Semanal, Flow/Projetos, Gestão/Pitch, Propostas/Executar</div></td>
+      <td class="obs-cell">fase sb_w3_planning_structure · status Em desenvolvimento · CSAT 5.0 · AM Aline_Silva · pitch 20/07/2026</td></tr><tr>
+      <td><div class="cli">Modular Estruturas (BM)</div><div class="sub">S1 · Fechar agora</div></td>
+      <td>Aceito<div class="sub">Quente</div></td>
+      <td>MEDIUM<div class="sub">Medium</div></td>
+      <td>R$ 28.282,98</td>
+      <td><div class="cli">Modular Estruturas</div><div class="sub">score 1.0 · CSAT Semanal, Gestão/Pitch, Indicações, Propostas/Executar, Propostas/Finalizados</div></td>
+      <td class="obs-cell">status Em negociação · gestão Em aberto · fin 10/07/2026 · CSAT 4.0 · AM Eder Vasconcelos · pitch 10/07/2026 · follow 17/07/2026</td></tr><tr>
+      <td><div class="cli">PEDRINI E AZEVEDO ADVOCACIA (BS)</div><div class="sub">S2 · Acelerar Aceito</div></td>
+      <td>Follow<div class="sub">Quente</div></td>
+      <td>SMALL<div class="sub"></div></td>
+      <td>R$ 22.400</td>
+      <td><div class="cli">Pedrini &amp; Azevedo Advocacia</div><div class="sub">score 1.0 · Gestão/Pitch, NPS Matriz</div></td>
+      <td class="obs-cell">NPS 10 · pitch 18/07/2026</td></tr><tr>
+      <td><div class="cli">Fui Aluguel de Motos (BS)</div><div class="sub">S3 · Nutrir Follow</div></td>
+      <td>Follow<div class="sub">Morno</div></td>
+      <td>SMALL<div class="sub">Sem tier</div></td>
+      <td>R$ 66.024,12</td>
+      <td><div class="cli">Fui Aluguel de Motos</div><div class="sub">score 1.0 · Indicações, Propostas/Executar, Propostas/Finalizados</div></td>
+      <td class="obs-cell">status Em negociação · gestão Em aberto · fin 10/07/2026 · AM Aline Silva · pitch 10/07/2026 · follow 17/07/2026</td></tr><tr>
+      <td><div class="cli">Academia imigrantes Ltda (BS)</div><div class="sub">S3 · Nutrir Follow</div></td>
+      <td>Follow<div class="sub">Morno</div></td>
+      <td>SMALL<div class="sub">Sem tier</div></td>
+      <td>R$ 57.600</td>
+      <td><div class="cli">Academia Imigrantes</div><div class="sub">score 1.0 · Gestão/Pitch, Propostas/Executar</div></td>
+      <td class="obs-cell">status Em desenvolvimento · pitch 15/07/2026</td></tr><tr>
+      <td><div class="cli">Rota da Linguiça (BS)</div><div class="sub">S3 · Nutrir Follow</div></td>
+      <td>Follow<div class="sub">Morno</div></td>
+      <td>SMALL<div class="sub">Tiny</div></td>
+      <td>R$ 28.400</td>
+      <td><div class="cli">Rota da Linguiça</div><div class="sub">score 1.0 · EQV, Propostas/Executar, Propostas/Finalizados</div></td>
+      <td class="obs-cell">status Reativação/EQV · gestão — · fin 25/06/2026 · AM Ruan Silva · pitch 10/07/2026 · follow 14/07/2026</td></tr><tr>
+      <td><div class="cli">Ecofitness Aldeia (BS)</div><div class="sub">S3 · Nutrir Follow</div></td>
+      <td>Follow<div class="sub">Morno</div></td>
+      <td>SMALL<div class="sub">Medium</div></td>
+      <td>R$ 17.400</td>
+      <td><div class="cli">Ecofitness Aldeia</div><div class="sub">score 1.0 · CSAT Semanal, Flow/Projetos, Gestão/Pitch, Propostas/Executar</div></td>
+      <td class="obs-cell">fase sb_w3_planning_structure · status Em desenvolvimento · CSAT 4.0 · AM Aline_Silva · pitch 16/07/2026 · follow 17/07/2026</td></tr><tr>
+      <td><div class="cli">MasterPlan (BS)</div><div class="sub">S3 · Nutrir Follow</div></td>
+      <td>Follow<div class="sub">—</div></td>
+      <td>MEDIUM<div class="sub"></div></td>
+      <td>R$ 15.461,16</td>
+      <td><div class="cli">MasterPlan</div><div class="sub">score 1.0 · Gestão/Pitch</div></td>
+      <td class="obs-cell">pitch 16/07/2026</td></tr><tr>
+      <td><div class="cli">Stylus Manaus (BS)</div><div class="sub">S3a · Unlock preço</div></td>
+      <td>Follow<div class="sub">Morno</div></td>
+      <td>SMALL<div class="sub">Small</div></td>
+      <td>R$ 92.270,76</td>
+      <td><div class="cli">Stylus Manaus</div><div class="sub">score 1.0 · Gestão/Pitch, Indicações, Propostas/Executar, Propostas/Finalizados</div></td>
+      <td class="obs-cell">status Em negociação · gestão Em aberto · fin 02/07/2026 · ind-CSAT 8 · AM Eder Vasconcelos · pitch 02/07/2026 · follow 17/07/2026</td></tr><tr>
+      <td><div class="cli">KFG Torres</div><div class="sub">S3a · Unlock preço</div></td>
+      <td>Follow<div class="sub">Morno</div></td>
+      <td>SMALL<div class="sub">Tiny</div></td>
+      <td>R$ 79.224,12</td>
+      <td><div class="cli">KFG Torres</div><div class="sub">score 1.0 · Indicações, NPS Matriz, Propostas/Executar, Propostas/Finalizados</div></td>
+      <td class="obs-cell">status Em negociação · gestão — · fin 30/06/2026 · NPS 9 · ind-CSAT 9 · AM Ruan Silva · pitch 07/07/2026 · follow 17/07/2026</td></tr><tr>
+      <td><div class="cli">AGM DISTRIBUIDORA (BS)</div><div class="sub">S3b · Unlock decisão</div></td>
+      <td>Follow<div class="sub">Morno</div></td>
+      <td>SMALL<div class="sub">Medium</div></td>
+      <td>R$ 74.198,16</td>
+      <td><div class="cli">AGM Distribuidora</div><div class="sub">score 1.0 · Gestão/Pitch, Indicações, Propostas/Executar, Propostas/Finalizados</div></td>
+      <td class="obs-cell">status Em negociação · gestão Em aberto · fin 13/07/2026 · AM Eder Vasconcelos · pitch 13/07/2026 · follow 20/07/2026</td></tr><tr>
+      <td><div class="cli">BR Distribuidora de Piercing (BS)</div><div class="sub">S4 · Recuperar / EQV</div></td>
+      <td>Follow<div class="sub">Frio</div></td>
+      <td>SMALL<div class="sub">Sem tier</div></td>
+      <td>R$ 79.224,12</td>
+      <td><div class="cli">BR DISTRIBUIDORA DE PIERCING</div><div class="sub">score 1.0 · Gestão/Pitch, Indicações, NPS Matriz, Propostas/Executar, Propostas/Finalizados</div></td>
+      <td class="obs-cell">status Em negociação · gestão Em aberto · fin 03/07/2026 · NPS 9 · ind-CSAT 9 · AM Eder Vasconcelos · pitch 03/07/2026 · follow 17/07/2026</td></tr><tr>
+      <td><div class="cli">Henri Soluções (LS)</div><div class="sub">S5 · Semana 0 · kickoff</div></td>
+      <td>Semana 0<div class="sub">—</div></td>
+      <td>SMALL<div class="sub">Small</div></td>
+      <td>R$ 0</td>
+      <td><div class="cli">Henri Solucoes</div><div class="sub">score 0.86 · Flow/Projetos</div></td>
+      <td class="obs-cell">fase onboarding · AM Aline_Silva</td></tr><tr>
+      <td><div class="cli">Ecco Salva (BL)</div><div class="sub">S5 · Semana 0 · kickoff</div></td>
+      <td>Semana 0<div class="sub">—</div></td>
+      <td>LARGE<div class="sub">Large</div></td>
+      <td>R$ 0</td>
+      <td><div class="cli">Ecco-Salva Emergencias Medicas</div><div class="sub">score 0.95 · Flow/Projetos</div></td>
+      <td class="obs-cell">fase onboarding · AM Rafaela</td></tr><tr>
+      <td><div class="cli">Brod transportes ltda (LL)</div><div class="sub">S5 · Semana 0 · kickoff</div></td>
+      <td>Semana 0<div class="sub">—</div></td>
+      <td>LARGE<div class="sub">Medium</div></td>
+      <td>R$ 0</td>
+      <td><div class="cli">Brod Transportes</div><div class="sub">score 1.0 · Flow/Projetos, Gestão/Pitch</div></td>
+      <td class="obs-cell">fase sb_w1_handover_kickoff · AM Aline_Silva · pitch 27/07/2026</td></tr><tr>
+      <td><div class="cli">Freebong (BS)</div><div class="sub">S5 · Semana 0 · kickoff</div></td>
+      <td>Semana 0<div class="sub">—</div></td>
+      <td>SMALL<div class="sub">Medium</div></td>
+      <td>R$ 0</td>
+      <td><div class="cli">Freebong</div><div class="sub">score 1.0 · Flow/Projetos</div></td>
+      <td class="obs-cell">fase onboarding · AM eder.vasconcelos</td></tr><tr>
+      <td><div class="cli">RE/MAX PRO WORK (BT)</div><div class="sub">S5 · Semana 0 · kickoff</div></td>
+      <td>Semana 0<div class="sub">—</div></td>
+      <td>TINY<div class="sub">Medium</div></td>
+      <td>R$ 0</td>
+      <td><div class="cli">RE/MAX PRO WORK</div><div class="sub">score 1.0 · Flow/Projetos</div></td>
+      <td class="obs-cell">fase onboarding · AM eder.vasconcelos</td></tr><tr>
+      <td><div class="cli">Protesol tendas (BS)</div><div class="sub">S6 · Semanas · construir entendimento</div></td>
+      <td>Semana 03<div class="sub">—</div></td>
+      <td>SMALL<div class="sub">Medium</div></td>
+      <td>R$ 0</td>
+      <td><div class="cli">Protesol Tendas</div><div class="sub">score 1.0 · Flow/Projetos, Gestão/Pitch</div></td>
+      <td class="obs-cell">fase sb_w3_planning_structure · AM ruan.silva · pitch 15/07/2026</td></tr><tr>
+      <td><div class="cli">Estação Delta Emergência &amp; Facilities (BM)</div><div class="sub">S6 · Semanas · construir entendimento</div></td>
+      <td>Semana 03<div class="sub">—</div></td>
+      <td>MEDIUM<div class="sub">Medium</div></td>
+      <td>R$ 0</td>
+      <td><div class="cli">Estação Delta Emergência</div><div class="sub">score 0.96 · Flow/Projetos, Gestão/Pitch</div></td>
+      <td class="obs-cell">fase sb_w3_planning_structure · AM eder.vasconcelos · pitch 20/07/2026</td></tr><tr>
+      <td><div class="cli">Fernando Móveis e Eletro (BM)</div><div class="sub">S6 · Semanas · construir entendimento</div></td>
+      <td>Semana 02<div class="sub">—</div></td>
+      <td>MEDIUM<div class="sub">Medium</div></td>
+      <td>R$ 0</td>
+      <td><div class="cli">Fernando móveis e eletro</div><div class="sub">score 1.0 · CSAT Semanal, Flow/Projetos, Gestão/Pitch</div></td>
+      <td class="obs-cell">fase sb_w2_audit_media · CSAT 4.0 · AM eder.vasconcelos · pitch 24/07/2026</td></tr><tr>
+      <td><div class="cli">Wang (BS)</div><div class="sub">S6 · Semanas · construir entendimento</div></td>
+      <td>Semana 02<div class="sub">—</div></td>
+      <td>SMALL<div class="sub">Medium</div></td>
+      <td>R$ 0</td>
+      <td><div class="cli">Wang Acessorios e Eletronicos</div><div class="sub">score 0.96 · Flow/Projetos, Gestão/Pitch</div></td>
+      <td class="obs-cell">fase sb_w3_planning_structure · AM eder.vasconcelos · pitch 29/07/2026</td></tr><tr>
+      <td><div class="cli">G6 INTERNET</div><div class="sub">S6 · Semanas · construir entendimento</div></td>
+      <td>Semana 02<div class="sub">—</div></td>
+      <td>LARGE<div class="sub">Large</div></td>
+      <td>R$ 0</td>
+      <td><div class="cli">G6 INTERNET</div><div class="sub">score 1.0 · Flow/Projetos, Gestão/Pitch</div></td>
+      <td class="obs-cell">fase onboarding · AM eder.vasconcelos · pitch 30/07/2026</td></tr><tr>
+      <td><div class="cli">Almeida e Neves (RecM)</div><div class="sub">S6 · Semanas · construir entendimento</div></td>
+      <td>Semana 02<div class="sub">—</div></td>
+      <td>MEDIUM<div class="sub">Medium</div></td>
+      <td>R$ 0</td>
+      <td><div class="cli">Almeida &amp; neves</div><div class="sub">score 1.0 · Flow/Projetos, Gestão/Pitch</div></td>
+      <td class="obs-cell">fase sb_w4_final_deliveries · AM ruan.silva · pitch 18/07/2026</td></tr><tr>
+      <td><div class="cli">Hanaro (BL)</div><div class="sub">S6 · Semanas · construir entendimento</div></td>
+      <td>Semana 03<div class="sub">—</div></td>
+      <td>LARGE<div class="sub">Large</div></td>
+      <td>R$ 0</td>
+      <td><div class="cli">HANARO</div><div class="sub">score 1.0 · Flow/Projetos, Gestão/Pitch</div></td>
+      <td class="obs-cell">fase sb_w3_planning_structure · AM ruan.silva · pitch 23/07/2026</td></tr><tr>
+      <td><div class="cli">Medicar (BL)</div><div class="sub">S6 · Semanas · construir entendimento</div></td>
+      <td>Semana 03<div class="sub">—</div></td>
+      <td>LARGE<div class="sub">Medium</div></td>
+      <td>R$ 0</td>
+      <td><div class="cli">Medicar Emergencias Medicas Sao Paulo Ltda</div><div class="sub">score 0.96 · Flow/Projetos, Gestão/Pitch</div></td>
+      <td class="obs-cell">fase sb_w3_planning_structure · AM eder.vasconcelos · pitch 22/07/2026</td></tr><tr>
+      <td><div class="cli">Triboltech (BS)</div><div class="sub">S7 · Semana 05 · decidir</div></td>
+      <td>Semana 05<div class="sub">—</div></td>
+      <td>SMALL<div class="sub">Tiny</div></td>
+      <td>R$ 79.224,12</td>
+      <td><div class="cli">Triboltech</div><div class="sub">score 1.0 · Propostas/Finalizados</div></td>
+      <td class="obs-cell">gestão — · fin 29/06/2026 · AM Ruan Silva</td></tr></tbody></table></div></section>
+<section class="section"><h2>2. Ativos só no seu cockpit</h2>
+<p class="mut" style="margin:0 0 10px">Inclui Motéis Fortaleza (maior TCV do Follow). Validar se está em outra aba/squad ou se o nome diverge na Propostas.</p>
+<div class="table-wrap"><table><thead><tr><th>Empresa</th><th>Status</th><th>Temp</th><th>Tier</th><th>TCV</th><th>Obs</th></tr></thead>
+<tbody><tr>
+      <td><div class="cli">Moteis Fortaleza (BM)</div><div class="sub">S3 · Nutrir Follow</div></td>
+      <td>Follow</td><td>Morno</td><td>MEDIUM</td>
+      <td>R$ 194.716,68</td><td class="obs-cell">Finalizar proposta. Assessoria de Growth para as 4 unidades. Definir data do pitch com o consultor</td></tr><tr>
+      <td><div class="cli">Dakarautomotivecenter (BS)</div><div class="sub">S3 · Nutrir Follow</div></td>
+      <td>Follow</td><td>Morno</td><td>SMALL</td>
+      <td>R$ 83.201,85</td><td class="obs-cell">Devolutiva 22/07</td></tr><tr>
+      <td><div class="cli">Global Cotton (BM)</div><div class="sub">S7 · Semana 05 · decidir</div></td>
+      <td>Semana 05</td><td>—</td><td>MEDIUM</td>
+      <td>R$ 49.050,90</td><td class="obs-cell">—</td></tr><tr>
+      <td><div class="cli">General car (BS)</div><div class="sub">S5 · Semana 0 · kickoff</div></td>
+      <td>Semana 0</td><td>—</td><td>SMALL</td>
+      <td>R$ 0</td><td class="obs-cell">projeto estava travado por falta de pagamento. Será iniciado agora nesse mês de Julho</td></tr><tr>
+      <td><div class="cli">RM Burguer Itabira  (BS)</div><div class="sub">S5 · Semana 0 · kickoff</div></td>
+      <td>Semana 0</td><td>—</td><td>SMALL</td>
+      <td>R$ 0</td><td class="obs-cell">projeto estava travado por falta de pagamento. Será iniciado agora nesse mês de Julho</td></tr><tr>
+      <td><div class="cli">Sora consultoria (BS)</div><div class="sub">S7 · Semana 05 · decidir</div></td>
+      <td>Semana 05</td><td>—</td><td>SMALL</td>
+      <td>R$ 0</td><td class="obs-cell">PROJETO TRAVADO</td></tr></tbody></table></div></section>
+<section class="section"><h2>3. Cenários de ação</h2><div class="scen"><div class="scen-head"><div><span class="scen-id">S1</span><h3>Fechar agora (Aceito)</h3></div>
+      <div class="scen-meta"><span>3 contas · R$ 168.351,06</span></div></div><ul><li><strong>Unik Benefícios (BS)</strong> · SMALL · R$ 74.074,44 · ✅ coord</li><li><strong>Adriano Martins Cardoso (BS)</strong> · SMALL · R$ 65.993,64 · ✅ coord</li><li><strong>Modular Estruturas (BM)</strong> · MEDIUM · R$ 28.282,98 · ✅ coord</li></ul></div><div class="scen"><div class="scen-head"><div><span class="scen-id">S2</span><h3>Acelerar Aceito</h3></div>
+      <div class="scen-meta"><span>1 contas · R$ 22.400</span></div></div><ul><li><strong>PEDRINI E AZEVEDO ADVOCACIA (BS)</strong> · SMALL · R$ 22.400 · ✅ coord</li></ul></div><div class="scen"><div class="scen-head"><div><span class="scen-id">S3a</span><h3>Unlock preço</h3></div>
+      <div class="scen-meta"><span>2 contas · R$ 171.494,88</span></div></div><ul><li><strong>Stylus Manaus (BS)</strong> · SMALL · R$ 92.270,76 · ✅ coord</li><li><strong>KFG Torres</strong> · SMALL · R$ 79.224,12 · ✅ coord</li></ul></div><div class="scen"><div class="scen-head"><div><span class="scen-id">S3b</span><h3>Unlock decisão</h3></div>
+      <div class="scen-meta"><span>1 contas · R$ 74.198,16</span></div></div><ul><li><strong>AGM DISTRIBUIDORA (BS)</strong> · SMALL · R$ 74.198,16 · ✅ coord</li></ul></div><div class="scen"><div class="scen-head"><div><span class="scen-id">S3</span><h3>Nutrir Follow</h3></div>
+      <div class="scen-meta"><span>7 contas · R$ 462.803,81</span></div></div><ul><li><strong>Moteis Fortaleza (BM)</strong> · MEDIUM · R$ 194.716,68 · ⚠️ só cockpit</li><li><strong>Dakarautomotivecenter (BS)</strong> · SMALL · R$ 83.201,85 · ⚠️ só cockpit</li><li><strong>Fui Aluguel de Motos (BS)</strong> · SMALL · R$ 66.024,12 · ✅ coord</li><li><strong>Academia imigrantes Ltda (BS)</strong> · SMALL · R$ 57.600 · ✅ coord</li><li><strong>Rota da Linguiça (BS)</strong> · SMALL · R$ 28.400 · ✅ coord</li><li><strong>Ecofitness Aldeia (BS)</strong> · SMALL · R$ 17.400 · ✅ coord</li><li><strong>MasterPlan (BS)</strong> · MEDIUM · R$ 15.461,16 · ✅ coord</li></ul></div><div class="scen"><div class="scen-head"><div><span class="scen-id">S4</span><h3>Recuperar / EQV</h3></div>
+      <div class="scen-meta"><span>1 contas · R$ 79.224,12</span></div></div><ul><li><strong>BR Distribuidora de Piercing (BS)</strong> · SMALL · R$ 79.224,12 · ✅ coord</li></ul></div><div class="scen"><div class="scen-head"><div><span class="scen-id">S5</span><h3>Semana 0</h3></div>
+      <div class="scen-meta"><span>7 contas · R$ 0</span></div></div><ul><li><strong>Henri Soluções (LS)</strong> · SMALL · R$ 0 · ✅ coord</li><li><strong>Ecco Salva (BL)</strong> · LARGE · R$ 0 · ✅ coord</li><li><strong>Brod transportes ltda (LL)</strong> · LARGE · R$ 0 · ✅ coord</li><li><strong>General car (BS)</strong> · SMALL · R$ 0 · ⚠️ só cockpit</li><li><strong>RM Burguer Itabira  (BS)</strong> · SMALL · R$ 0 · ⚠️ só cockpit</li><li><strong>Freebong (BS)</strong> · SMALL · R$ 0 · ✅ coord</li><li><strong>RE/MAX PRO WORK (BT)</strong> · TINY · R$ 0 · ✅ coord</li></ul></div><div class="scen"><div class="scen-head"><div><span class="scen-id">S6</span><h3>Semanas mid</h3></div>
+      <div class="scen-meta"><span>8 contas · R$ 0</span></div></div><ul><li><strong>Protesol tendas (BS)</strong> · SMALL · R$ 0 · ✅ coord</li><li><strong>Estação Delta Emergência &amp; Facilities (BM)</strong> · MEDIUM · R$ 0 · ✅ coord</li><li><strong>Fernando Móveis e Eletro (BM)</strong> · MEDIUM · R$ 0 · ✅ coord</li><li><strong>Wang (BS)</strong> · SMALL · R$ 0 · ✅ coord</li><li><strong>G6 INTERNET</strong> · LARGE · R$ 0 · ✅ coord</li><li><strong>Almeida e Neves (RecM)</strong> · MEDIUM · R$ 0 · ✅ coord</li><li><strong>Hanaro (BL)</strong> · LARGE · R$ 0 · ✅ coord</li><li><strong>Medicar (BL)</strong> · LARGE · R$ 0 · ✅ coord</li></ul></div><div class="scen"><div class="scen-head"><div><span class="scen-id">S7</span><h3>Semana 05</h3></div>
+      <div class="scen-meta"><span>3 contas · R$ 128.275,02</span></div></div><ul><li><strong>Triboltech (BS)</strong> · SMALL · R$ 79.224,12 · ✅ coord</li><li><strong>Global Cotton (BM)</strong> · MEDIUM · R$ 49.050,90 · ⚠️ só cockpit</li><li><strong>Sora consultoria (BS)</strong> · SMALL · R$ 0 · ⚠️ só cockpit</li></ul></div></section>
+<section class="section"><h2>4. Sequência P0–P2</h2>
+<div class="play p0"><strong>P0 — 48h</strong> Unik + Modular + Adriano/Martins Magazine (Aceito) · Pedrini (Quente) · Stylus/KFG/Fui (preço) · AGM (decisão).</div>
+<div class="play p1"><strong>P1</strong> Motéis (só cockpit, R$ 195k) + Dakar + Academia/Skyfit + Ecofitness + Rota: datar devolutiva e classificar blocker.</div>
+<div class="play p2"><strong>P2</strong> Semana 05 + BR Piercing · alinhar nomes dos “só cockpit” com Rafaela (Motéis, Global Cotton, General car, RM Burguer, Sora).</div>
+</section>
+<section class="section"><h2>5. Também na coordenação (fora do pipe ativo)</h2>
+<div class="table-wrap"><table><thead><tr><th>Cockpit</th><th>Status</th><th>Coord</th><th>Fontes</th><th>Motivo/Obs</th></tr></thead>
+<tbody><tr>
+      <td><div class="cli">600 MULTIMARCAS</div></td>
+      <td></td>
+      <td>600 Multi Marcas</td>
+      <td>Flow/Projetos</td>
+      <td class="obs-cell">—</td></tr><tr>
+      <td><div class="cli">Bioativos (BS)</div></td>
+      <td>Drop</td>
+      <td>Bioativos</td>
+      <td>EQV, Propostas/Executar</td>
+      <td class="obs-cell">Timing</td></tr><tr>
+      <td><div class="cli">Creative Eng (BT)</div></td>
+      <td>Drop</td>
+      <td>Creative Engenharia</td>
+      <td>Indicações, Propostas/Executar, Propostas/Finalizados</td>
+      <td class="obs-cell">Follow frio. Cliente não está engajado</td></tr><tr>
+      <td><div class="cli">Curavida (BM)</div></td>
+      <td>Drop</td>
+      <td>CURAVIDA</td>
+      <td>EQV, Indicações, NPS Matriz, Propostas/Executar, Propostas/Finalizados</td>
+      <td class="obs-cell">REATIVANDO PARA O EQV</td></tr><tr>
+      <td><div class="cli">Danah Arquitetura (BS)</div></td>
+      <td>Drop</td>
+      <td>Danah Arquitetura</td>
+      <td>EQV, Indicações, Propostas/Executar, Propostas/Finalizados</td>
+      <td class="obs-cell">Timing</td></tr><tr>
+      <td><div class="cli">Devstate (DR-X)</div></td>
+      <td>Drop</td>
+      <td>Devstate</td>
+      <td>EQV, Propostas/Executar</td>
+      <td class="obs-cell">Timing</td></tr><tr>
+      <td><div class="cli">Diveq</div></td>
+      <td>Drop</td>
+      <td>Divek</td>
+      <td>EQV, Propostas/Executar</td>
+      <td class="obs-cell">Interno</td></tr><tr>
+      <td><div class="cli">Movement (BS)</div></td>
+      <td>Drop</td>
+      <td>Movement</td>
+      <td>EQV, Propostas/Executar</td>
+      <td class="obs-cell">Timing</td></tr><tr>
+      <td><div class="cli">Positive Safety Sistemas (BS)</div></td>
+      <td>Drop</td>
+      <td>Positive Safety Sistemas</td>
+      <td>EQV, Flow/Projetos, Gestão/Pitch, Propostas/Executar</td>
+      <td class="obs-cell">Timing</td></tr><tr>
+      <td><div class="cli">Positive Solutions</div></td>
+      <td>Drop</td>
+      <td>Positive Solutions</td>
+      <td>EQV, Propostas/Executar</td>
+      <td class="obs-cell">Timing</td></tr><tr>
+      <td><div class="cli">Terra prometida (BS)</div></td>
+      <td>Drop</td>
+      <td>Terra Prometida</td>
+      <td>Gestão/Pitch, Indicações, NPS Matriz, Propostas/Executar, Propostas/Finalizados</td>
+      <td class="obs-cell">Realizamos a devolutiva no dia 15/07. 
+Cliente queria remover a clausula do resultado</td></tr><tr>
+      <td><div class="cli">U R TRANSPORTES LTDA (BS)</div></td>
+      <td>Drop</td>
+      <td>U R Transportes</td>
+      <td>EQV, Propostas/Executar</td>
+      <td class="obs-cell">Budget</td></tr><tr>
+      <td><div class="cli">Óticas Líder (BT)</div></td>
+      <td>Drop</td>
+      <td>Óticas Recris</td>
+      <td>EQV, Propostas/Executar</td>
+      <td class="obs-cell">Budget</td></tr><tr>
+      <td><div class="cli">Ez turismo (BM)</div></td>
+      <td>Já monetizado</td>
+      <td>Ez turismo</td>
+      <td>Gestão/Pitch, Propostas/Finalizados</td>
+      <td class="obs-cell">Cliente entrou com assessoria e no momento não vamos levar proposta. Estaremos fazendo um Account Pl</td></tr><tr>
+      <td><div class="cli">Prata Nobre (BM)</div></td>
+      <td>Já monetizado</td>
+      <td>Prata Nobre (BM)</td>
+      <td>Propostas/Finalizados</td>
+      <td class="obs-cell">Tratativa Ops</td></tr><tr>
+      <td><div class="cli">Rdo Pro (BL)</div></td>
+      <td>Já monetizado</td>
+      <td>Rdo Pro</td>
+      <td>Propostas/Finalizados</td>
+      <td class="obs-cell">cliente entrou com executar e por isso vamos aguardar um pouco mais para monetizar</td></tr><tr>
+      <td><div class="cli">CDGFITNESS (BM)</div></td>
+      <td>Monetizado</td>
+      <td>Ecofitness</td>
+      <td>Gestão/Pitch, Propostas/Executar</td>
+      <td class="obs-cell">—</td></tr><tr>
+      <td><div class="cli">DECANTER</div></td>
+      <td>Monetizado</td>
+      <td>Devstate</td>
+      <td>EQV, Propostas/Executar</td>
+      <td class="obs-cell">Carga Horária Customizada Fica expressamente acordado entre as partes que a
+prestação de serviços pe</td></tr><tr>
+      <td><div class="cli">Soluções Locação (BM)</div></td>
+      <td>Monetizado</td>
+      <td>Solução Locação</td>
+      <td>Indicações</td>
+      <td class="obs-cell">—</td></tr></tbody></table></div></section>
+<section class="section"><h2>6. Fontes</h2>
+<div class="grid2">
+<div class="box"><h3>Sua planilha</h3><p><a href="https://docs.google.com/spreadsheets/d/1dSukhon9dIUABcbQIKGKUa-ku-_oLOn1Q5YWeWGfI6U/edit?usp=sharing" target="_blank">1dSukhon…I6U</a><br>Aba E.E ✅ · Farmer = Sara</p></div>
+<div class="box"><h3>Planilha da coordenadora</h3><p><a href="https://docs.google.com/spreadsheets/d/1MPMzBvnZZPHyo8aUyMOJhHfBb36eFAyFiyloOsnoFCQ/edit?usp=sharing" target="_blank">1MPMz…FCQ</a><br>Abas via Comitê: <strong>Propostas</strong>, <strong>Indicações</strong> + Flow Exclusive. Sync 15/07/2026.</p></div>
+</div></section>
+<footer>Gerado 22/07/2026 · de-para cockpit Sara × coordenação Rafaela</footer>
+</div></body></html>
