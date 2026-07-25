@@ -172,6 +172,19 @@
       display: block; margin-top: 0.35rem; font-size: 0.72rem; font-weight: 700;
       letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.65);
     }
+    .compare-table {
+      width: 100%; border-collapse: collapse; margin-top: 0.75rem; font-size: 0.84rem;
+    }
+    .compare-table th, .compare-table td {
+      padding: 0.45rem 0.55rem; border-bottom: 1px solid rgba(255,255,255,0.12);
+      text-align: left; color: var(--muted);
+    }
+    .compare-table th {
+      font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
+      color: #ffe0e0; font-weight: 700;
+    }
+    .compare-table td:last-child, .compare-table th:last-child { text-align: right; white-space: nowrap; }
+    .compare-table tr.total td { color: #fff; font-weight: 700; border-bottom: none; padding-top: 0.65rem; }
     .note-box {
       margin-top: 0.7rem; padding: 0.75rem 1rem; border-radius: 12px;
       border: 1px dashed rgba(255,255,255,0.4); background: rgba(255,255,255,0.08);
@@ -201,15 +214,14 @@
 
   <nav class="nav-dots" aria-label="Slides">
     <a href="#" data-slide="1" class="active" title="Capa"></a>
-    <a href="#" data-slide="2" title="Oportunidade"></a>
-    <a href="#" data-slide="3" title="O desafio"></a>
-    <a href="#" data-slide="4" title="Metodologia 3P-IA"></a>
-    <a href="#" data-slide="5" title="A máquina"></a>
-    <a href="#" data-slide="6" title="Escopo ZapFirst"></a>
-    <a href="#" data-slide="7" title="Lead Gen"></a>
-    <a href="#" data-slide="8" title="Jornada 6 meses"></a>
+    <a href="#" data-slide="2" title="Por que isso importa"></a>
+    <a href="#" data-slide="3" title="Realidade atual"></a>
+    <a href="#" data-slide="4" title="Resultado esperado"></a>
+    <a href="#" data-slide="5" title="Jornada 3P-IA"></a>
+    <a href="#" data-slide="6" title="O que a V4 opera"></a>
+    <a href="#" data-slide="7" title="Lead Gen + SDR IA"></a>
+    <a href="#" data-slide="8" title="Preço de mercado"></a>
     <a href="#" data-slide="9" title="Investimento"></a>
-    <a href="#" data-slide="10" title="Próximo passo"></a>
   </nav>
 
   <button type="button" class="nav-arrow nav-arrow--prev" id="prevBtn" disabled aria-label="Anterior">‹</button>
@@ -231,203 +243,189 @@
           <span class="x">×</span>
           <span>V4 Company</span>
         </div>
-        <h1>Máquina de vendas<br /><em>no WhatsApp</em></h1>
+        <h1>Por que investir na<br /><em>máquina de vendas no WhatsApp</em></h1>
         <p class="lead" style="margin:0.75rem auto 0;text-align:center;max-width:680px;">
-          Plano Completo: estruturamos o canal, treinamos o time, ativamos IA —
-          e geramos leads qualificados desde o dia 1.
+          Estruturamos produto, processo e pessoas — depois ativamos IA.
+          E no Plano Completo, geramos os leads que alimentam o canal desde o dia 1.
         </p>
-        <span class="capa-badge" style="margin-top:1.25rem;">ZapFirst + Lead Gen · 6 meses</span>
+        <span class="capa-badge" style="margin-top:1.25rem;">Plano Completo · ZapFirst + Lead Gen · 6 meses</span>
         <p class="slide-hint">Setas, scroll ou swipe para avançar →</p>
       </div>
     </section>
 
-    <!-- 2 OPORTUNIDADE -->
-    <section id="oportunidade" data-slide="2">
+    <!-- 2 POR QUE IMPORTA -->
+    <section id="importancia" data-slide="2">
       <div class="inner glass">
-        <p class="eyebrow">Oportunidade</p>
-        <h2>O WhatsApp já é o maior<br />canal de vendas do Brasil</h2>
+        <p class="eyebrow">O ponto de partida</p>
+        <h2>Não é “mais WhatsApp”.<br />É parar de perder venda que já chega.</h2>
         <div class="gold-line"></div>
         <p class="lead">
-          Negócios locais que estruturam o WhatsApp como canal de vendas convertem mais,
-          fidelizam melhor e crescem mais rápido — do que qualquer outro canal digital.
+          O WhatsApp já é o maior canal de vendas do Brasil. O problema não é o cliente
+          não aparecer — é o que acontece depois que ele manda a primeira mensagem.
         </p>
-        <div class="grid-4">
-          <article class="card">
-            <p class="big-num" style="font-size:1.7rem;">80%</p>
-            <p style="margin-top:0.4rem;">usam WhatsApp antes de decidir a compra</p>
-          </article>
-          <article class="card">
-            <p class="big-num" style="font-size:1.7rem;">67%</p>
-            <p style="margin-top:0.4rem;">das vendas no Brasil passam pelo WhatsApp</p>
-          </article>
-          <article class="card">
-            <p class="big-num" style="font-size:1.7rem;">3×</p>
-            <p style="margin-top:0.4rem;">mais conversão vs e-mail ou formulário</p>
-          </article>
-          <article class="card">
-            <p class="big-num" style="font-size:1.7rem;">9/10</p>
-            <p style="margin-top:0.4rem;">preferem WhatsApp a ligar ou ir à loja</p>
-          </article>
-        </div>
-        <p class="quote">
-          A oportunidade é clara. O problema é o que acontece quando o cliente chega.
-        </p>
-      </div>
-    </section>
-
-    <!-- 3 DESAFIO -->
-    <section id="desafio" data-slide="3">
-      <div class="inner glass">
-        <p class="eyebrow">O desafio</p>
-        <h2>A maioria perde a venda<br />na chegada do WhatsApp</h2>
-        <div class="gold-line"></div>
-        <p class="lead">Você investe para aparecer. Tudo funciona até o cliente chegar no chat — aí a venda vai embora.</p>
         <div class="grid-3">
           <article class="card">
             <div class="card-num">01</div>
-            <h3>Demora no atendimento</h3>
-            <p>Mensagem às 19h, resposta no dia seguinte. O cliente já comprou do concorrente.</p>
+            <h3>Demanda sem conversão</h3>
+            <p>Tráfego, Instagram e indicação até funcionam. No chat, demora, improviso e fricção matam a venda quente.</p>
           </article>
           <article class="card">
             <div class="card-num">02</div>
-            <h3>Sem catálogo, sem processo</h3>
-            <p>Vendedor improvisa. Preço no copy-paste, sem profissionalismo, sem conversão.</p>
+            <h3>Comercial sem processo</h3>
+            <p>Cada vendedor no seu WhatsApp, sem catálogo, sem script, sem follow-up — e sem saber por que não fecha.</p>
           </article>
           <article class="card">
             <div class="card-num">03</div>
-            <h3>PIX desconectado</h3>
-            <p>Na hora de pagar, o cliente some. A fricção no pagamento mata a venda quente.</p>
-          </article>
-          <article class="card">
-            <div class="card-num">04</div>
-            <h3>Sem rastreio, sem recompra</h3>
-            <p>Quem comprou uma vez, some. Não há follow-up, não há previsibilidade.</p>
-          </article>
-          <article class="card">
-            <div class="card-num">05</div>
-            <h3>Ambiente digital fraco</h3>
-            <p>GMB sem botão, Instagram sem CTA, site sem saída para o WhatsApp.</p>
-          </article>
-          <article class="card">
-            <div class="card-num">06</div>
             <h3>IA em cima do caos</h3>
-            <p>Automatizar sem processo, produto e time treinados é escalar o erro.</p>
+            <p>Automatizar antes de ter produto, processo e time treinados é escalar o erro — não o resultado.</p>
           </article>
         </div>
+        <p class="quote">
+          “Aparecer mais” resolve só a disputa do leilão.
+          <span>Quem estrutura melhor fica com a conversão e com a margem</span>
+        </p>
       </div>
     </section>
 
-    <!-- 4 METODOLOGIA -->
-    <section id="metodologia" data-slide="4">
+    <!-- 3 REALIDADE -->
+    <section id="realidade" data-slide="3">
       <div class="inner glass">
-        <p class="eyebrow">Metodologia exclusiva</p>
-        <h2>3P-IA: Produto → Processo<br />→ Pessoas → IA</h2>
+        <p class="eyebrow">Diagnóstico típico · negócio local B2C</p>
+        <h2>O que está acontecendo<br />hoje na operação</h2>
         <div class="gold-line"></div>
-        <p class="lead">A sequência importa. A inteligência artificial entra somente depois que a base humana está sólida.</p>
+        <div class="grid-2">
+          <article class="card">
+            <h3>O que já funciona</h3>
+            <ul>
+              <li>Cliente já usa WhatsApp para comprar</li>
+              <li>Existe demanda (orgânica, indicação ou mídia)</li>
+              <li>Há alguém respondendo — mesmo que improvisando</li>
+              <li>Produto ou serviço já tem quem queira comprar</li>
+              <li>Potencial real de recompra e ticket</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>O que está vazando</h3>
+            <ul>
+              <li>Resposta lenta fora do horário — lead some</li>
+              <li>Sem catálogo, sem PIX no fluxo, sem script</li>
+              <li>GMB / Instagram / site sem saída clara para o WhatsApp</li>
+              <li>Sem CRM: não mede conversão, perda nem recompra</li>
+              <li>Follow-up fraco: orçamento vai pra rua e não volta</li>
+            </ul>
+          </article>
+        </div>
+        <p class="quote" style="margin-top:0.9rem;">
+          Precisam de uma máquina: canal estruturado, time com processo, IA no primeiro atendimento e mídia gerando lead qualificado.
+        </p>
+      </div>
+    </section>
+
+    <!-- 4 RESULTADOS -->
+    <section id="resultados" data-slide="4">
+      <div class="inner glass">
+        <p class="eyebrow">Resultado que o Completo entrega</p>
+        <h2>O que muda quando<br />máquina e combustível rodam juntos</h2>
+        <div class="gold-line"></div>
+        <div class="grid-2">
+          <article class="card">
+            <div class="card-num">ZapFirst</div>
+            <h3>Conversão com método</h3>
+            <ul>
+              <li>Ambiente digital apontando para o WhatsApp</li>
+              <li>Catálogo + PIX + scripts em todas as etapas</li>
+              <li>Time treinado com playbook editável</li>
+              <li>Kommo vivo: pipeline, réguas e relatório</li>
+              <li>SDR de IA 24/7 com handoff para o humano</li>
+            </ul>
+          </article>
+          <article class="card">
+            <div class="card-num">Lead Gen</div>
+            <h3>Atração com intenção</h3>
+            <ul>
+              <li>Estratégia Google + Meta desde o mês 1</li>
+              <li>Criativos (artes + copies) de performance</li>
+              <li>Gestão das campanhas por 6 meses</li>
+              <li>Relatório mensal de performance da mídia</li>
+              <li>Verba transparente — cliente paga as plataformas</li>
+            </ul>
+          </article>
+        </div>
+        <p class="quote">
+          Lead Gen enche o funil certo. ZapFirst converte no WhatsApp. Vocês vendem.
+          <span>Essa é a lógica completa desta proposta</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- 5 JORNADA -->
+    <section id="jornada" data-slide="5">
+      <div class="inner glass">
+        <p class="eyebrow">Sequência correta · metodologia 3P-IA</p>
+        <h2>Por que a ordem importa</h2>
+        <div class="gold-line"></div>
+        <p class="lead">Se só aumentar mídia sem processo, o WhatsApp trava. Se só automatizar sem produto e time, a IA escala o caos.</p>
         <div class="flow-row">
           <div class="flow-step">
             <div class="icon">01</div>
             <strong>Produto</strong>
-            <span>Catálogo, oferta clara e precificação definida</span>
+            <span>Catálogo, oferta e pricing claros</span>
           </div>
           <span class="flow-arrow">→</span>
           <div class="flow-step">
             <div class="icon">02</div>
             <strong>Processo</strong>
-            <span>Fluxo comercial, scripts, etapas e SLAs</span>
+            <span>Fluxo, scripts, etapas e SLAs</span>
           </div>
           <span class="flow-arrow">→</span>
           <div class="flow-step">
             <div class="icon">03</div>
             <strong>Pessoas</strong>
-            <span>Time treinado com playbook editável</span>
+            <span>Time treinado + playbook</span>
           </div>
           <span class="flow-arrow">→</span>
           <div class="flow-step">
             <div class="icon">04</div>
-            <strong>IA</strong>
-            <span>SDR 24/7 só depois dos 3 P’s</span>
+            <strong>IA + Lead Gen</strong>
+            <span>SDR 24/7 + mídia gerando demanda</span>
           </div>
         </div>
-        <p class="quote">
-          Colocar IA antes do processo é automatizar o caos — não o resultado.
-          <span>Framework proprietário ZapFirst · V4 Company</span>
-        </p>
+        <div class="grid-4" style="margin-top:0.85rem;">
+          <article class="card"><h3>Mês 1</h3><p>Kickoff, setup e Lead Gen ligando</p></article>
+          <article class="card"><h3>Mês 2</h3><p>Time, CRM, scripts e PIX no fluxo</p></article>
+          <article class="card"><h3>Mês 3</h3><p>IA calibrada + diagnóstico de maturidade</p></article>
+          <article class="card"><h3>Mês 4–6</h3><p>Escala de mídia + relatório mensal</p></article>
+        </div>
       </div>
     </section>
 
-    <!-- 5 A MÁQUINA -->
-    <section id="maquina" data-slide="5">
-      <div class="inner glass">
-        <p class="eyebrow">O que você recebe</p>
-        <h2>No mês 3, você tem uma máquina.<br />Não um projeto.</h2>
+    <!-- 6 O QUE A V4 OPERA -->
+    <section id="opera" data-slide="6">
+      <div class="inner">
+        <h2>O que a V4 opera<br />no ZapFirst</h2>
         <div class="gold-line"></div>
         <div class="grid-2">
           <article class="card">
-            <div class="card-num">Canal</div>
-            <h3>WhatsApp como e-commerce</h3>
-            <ul>
-              <li>Catálogo completo + PIX no chat</li>
-              <li>Scripts para cada etapa do funil</li>
-              <li>SDR de IA qualificando 24/7</li>
-              <li>Handoff inteligente para o time humano</li>
-            </ul>
-          </article>
-          <article class="card">
-            <div class="card-num">Operação</div>
-            <h3>Time + CRM + previsibilidade</h3>
-            <ul>
-              <li>Time treinado e consciente do processo</li>
-              <li>Kommo com pipeline e réguas de recompra</li>
-              <li>Relatório mensal de conversões</li>
-              <li>Diagnóstico de maturidade no mês 3</li>
-            </ul>
-          </article>
-        </div>
-        <div class="grid-4" style="margin-top:0.75rem;">
-          <article class="card"><h3>Processo</h3><p>Documentado e operando</p></article>
-          <article class="card"><h3>Time</h3><p>Treinado com playbook</p></article>
-          <article class="card"><h3>IA</h3><p>Calibrada e ativa</p></article>
-          <article class="card"><h3>CRM</h3><p>Pipeline visível</p></article>
-        </div>
-      </div>
-    </section>
-
-    <!-- 6 ESCOPO ZAPFIRST -->
-    <section id="escopo" data-slide="6">
-      <div class="inner">
-        <p class="eyebrow">Escopo · ZapFirst (3 meses)</p>
-        <h2>Tudo que estrutura<br />a máquina de vendas</h2>
-        <div class="gold-line"></div>
-        <div class="grid-3">
-          <article class="card">
-            <span class="tag-16h">Ambiente</span>
+            <span class="tag-16h">Ambiente + canal</span>
             <h3>Presença que converte</h3>
             <ul>
               <li>Google Meu Negócio com botão WhatsApp</li>
               <li>Instagram com CTA e link na bio</li>
               <li>LP / site com captura acima da dobra</li>
-            </ul>
-          </article>
-          <article class="card">
-            <span class="tag-16h">WhatsApp</span>
-            <h3>Canal comercial completo</h3>
-            <ul>
               <li>WhatsApp Business estruturado</li>
-              <li>Catálogo fotografado e precificado</li>
+              <li>Catálogo fotografado, descrito e precificado</li>
               <li>PIX integrado (link + QR no chat)</li>
-              <li>Scripts: recepção → fechamento → pós-venda</li>
-              <li>Fluxo comercial + SLAs de resposta</li>
             </ul>
           </article>
           <article class="card">
-            <span class="tag-16h">Time + IA</span>
+            <span class="tag-16h">Processo + time + CRM</span>
             <h3>Operação com método</h3>
             <ul>
+              <li>Scripts: recepção → proposta → objeção → fechamento → pós-venda</li>
+              <li>Fluxo comercial documentado + SLAs</li>
               <li>Treinamento do time + material permanente</li>
               <li>CRM Kommo (pipeline, tags, campos)</li>
               <li>Réguas de recompra e reativação</li>
-              <li>SDR de Inteligência Artificial 24/7</li>
               <li>Relatório final + diagnóstico de maturidade</li>
             </ul>
           </article>
@@ -435,92 +433,77 @@
       </div>
     </section>
 
-    <!-- 7 LEAD GEN -->
+    <!-- 7 LEAD GEN + SDR IA -->
     <section id="leadgen" data-slide="7">
       <div class="inner glass">
-        <p class="eyebrow">Bundle do Plano Completo</p>
-        <h2>Lead Gen: combustível<br />desde o dia 1</h2>
+        <p class="eyebrow">Plano Completo · combustível + escala</p>
+        <h2>Lead Gen e SDR IA<br />rodando juntos</h2>
         <div class="gold-line"></div>
-        <p class="lead">
-          Além de estruturar o canal, geramos os leads qualificados que vão alimentá-lo —
-          Google + Meta, com gestão V4 por 6 meses.
-        </p>
-        <div class="grid-2">
+        <div class="flow-row">
+          <div class="flow-step"><div class="icon">01</div><strong>Mídia gera</strong><span>Google + Meta</span></div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step"><div class="icon">02</div><strong>IA responde</strong><span>Na hora, 24h</span></div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step"><div class="icon">03</div><strong>Qualifica</strong><span>Fit e urgência</span></div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step"><div class="icon">04</div><strong>Vocês vendem</strong><span>Humano no fechamento</span></div>
+        </div>
+        <div class="grid-2" style="margin-top:0.85rem;">
           <article class="card">
-            <div class="card-num">Incluso na fee</div>
-            <h3>O que a V4 opera</h3>
+            <h3>Lead Gen · 6 meses</h3>
             <ul>
               <li>Estratégia de mídia paga (Google + Meta)</li>
               <li>Criação de criativos (artes + copies)</li>
               <li>Gestão das campanhas por 6 meses</li>
-              <li>Lead Gen começa no mês 1 — junto com o setup</li>
-              <li>Relatório mensal de performance da mídia</li>
+              <li>Começa no mês 1 — junto com o setup</li>
+              <li>Relatório mensal de performance</li>
             </ul>
           </article>
           <article class="card">
-            <div class="card-num">À parte</div>
-            <h3>Verba de plataforma</h3>
+            <h3>SDR de Inteligência Artificial</h3>
             <ul>
-              <li>Investimento em Google Ads e Meta Ads pago pelo cliente às plataformas</li>
-              <li>Total transparência de verba e resultado</li>
-              <li>Orçamento mínimo recomendado acordado no kickoff</li>
-              <li>Taxa de gestão de mídia: ~R$ 4.500/mês</li>
+              <li>Primeiro atendimento 24/7</li>
+              <li>Qualificação automática do lead</li>
+              <li>Handoff inteligente para o time</li>
+              <li>Entra só depois dos 3 P’s</li>
+              <li>Amplia o time — não substitui</li>
             </ul>
-          </article>
-        </div>
-        <p class="quote">
-          Máquina sem combustível não anda. Lead Gen coloca demanda qualificada no WhatsApp que acabamos de estruturar.
-        </p>
-      </div>
-    </section>
-
-    <!-- 8 JORNADA -->
-    <section id="jornada" data-slide="8">
-      <div class="inner glass">
-        <p class="eyebrow">Jornada · 6 meses</p>
-        <h2>Implementação + mídia<br />rodando em paralelo</h2>
-        <div class="gold-line"></div>
-        <div class="flow-row">
-          <div class="flow-step">
-            <div class="icon">M1</div>
-            <strong>Kickoff + setup</strong>
-            <span>Ambiente, WhatsApp, processo e Lead Gen ligando</span>
-          </div>
-          <span class="flow-arrow">→</span>
-          <div class="flow-step">
-            <div class="icon">M2</div>
-            <strong>Time + CRM</strong>
-            <span>Treinamento, Kommo, scripts e PIX no fluxo</span>
-          </div>
-          <span class="flow-arrow">→</span>
-          <div class="flow-step">
-            <div class="icon">M3</div>
-            <strong>IA + maturidade</strong>
-            <span>SDR calibrado + diagnóstico do próximo passo</span>
-          </div>
-          <span class="flow-arrow">→</span>
-          <div class="flow-step">
-            <div class="icon">M4–6</div>
-            <strong>Escala Lead Gen</strong>
-            <span>Mídia contínua + relatório mensal</span>
-          </div>
-        </div>
-        <div class="grid-3" style="margin-top:0.85rem;">
-          <article class="card">
-            <h3>ZapFirst</h3>
-            <p>3 meses de implementação completa da máquina</p>
-          </article>
-          <article class="card">
-            <h3>Lead Gen</h3>
-            <p>6 meses de gestão de mídia Google + Meta</p>
-          </article>
-          <article class="card">
-            <h3>Acompanhamento</h3>
-            <p>Operação contínua da mídia + relatório mensal de performance</p>
           </article>
         </div>
         <div class="note-box">
-          Depois do mês 3: operar de forma independente, manter Lead Gen ou evoluir para Destrava Receita — conforme o diagnóstico de maturidade.
+          Verba de ads: paga pelo cliente às plataformas. Taxa de gestão de mídia (~R$ 4.500/mês) e orçamento mínimo são alinhados no kickoff.
+        </div>
+      </div>
+    </section>
+
+    <!-- 8 PREÇO DE MERCADO -->
+    <section id="mercado" data-slide="8">
+      <div class="inner glass">
+        <p class="eyebrow">Âncora de mercado · montar sozinho</p>
+        <h2>Quanto custaria montar<br />essa máquina por conta própria</h2>
+        <div class="gold-line"></div>
+        <p class="lead">Referência de mercado para cobrir especialização equivalente (salários + encargos + gestão + ferramentas), sem contar tempo de contratação e risco de erro.</p>
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Frente</th>
+              <th>Referência</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Estruturação comercial + playbook + treinamento</td><td>R$ 8.000 a R$ 12.000</td></tr>
+            <tr><td>Setup digital (GMB, Instagram, LP) + catálogo WhatsApp</td><td>R$ 4.000 a R$ 7.000</td></tr>
+            <tr><td>CRM (Kommo) + automações + réguas</td><td>R$ 3.000 a R$ 6.000</td></tr>
+            <tr><td>SDR / automação de atendimento (setup + operação)</td><td>R$ 3.000 a R$ 6.000</td></tr>
+            <tr><td>Gestão de mídia Google + Meta (6 meses)</td><td>R$ 24.000 a R$ 30.000</td></tr>
+            <tr><td>Criativos e copy de performance</td><td>R$ 6.000 a R$ 10.000</td></tr>
+            <tr class="total"><td>Total estimado de mercado (6 meses)</td><td>R$ 48.000 a R$ 71.000</td></tr>
+          </tbody>
+        </table>
+        <div class="cta-box">
+          <p style="font-size:1.02rem;font-weight:700;color:#fff;line-height:1.4;">
+            A V4 entrega a máquina pronta + combustível de mídia, com método 3P-IA, num único projeto de 6 meses.
+          </p>
         </div>
       </div>
     </section>
@@ -528,14 +511,14 @@
     <!-- 9 INVESTIMENTO -->
     <section id="investimento" data-slide="9">
       <div class="inner glass">
-        <p class="eyebrow">Investimento · opção recomendada</p>
-        <h2>Plano Completo<br />ZapFirst + Lead Gen</h2>
+        <p class="eyebrow">Investimento · opção completa</p>
+        <h2>ZapFirst Completo<br />no cartão</h2>
         <div class="gold-line"></div>
         <div class="plans" style="margin-left:auto;margin-right:auto;">
           <article class="plan featured">
             <div class="plan-label">Recomendado · 6 meses</div>
-            <h3>ZapFirst Completo</h3>
-            <p class="plan-sub">Máquina de vendas + combustível de mídia desde o dia 1</p>
+            <h3>ZapFirst + Lead Gen</h3>
+            <p class="plan-sub">Máquina de vendas no WhatsApp + combustível desde o dia 1</p>
             <div class="price-lines">
               <div class="price-line"><span>Projeto (6 meses)</span><strong>R$ 57.000</strong></div>
               <div class="price-line"><span>Parcelado no cartão</span><strong class="ok">12× de R$ 3.916</strong></div>
@@ -555,50 +538,13 @@
             </ul>
           </article>
         </div>
-        <div class="note-box">
-          A verba de mídia (Google Ads e Meta Ads) é paga diretamente às plataformas. A taxa de gestão V4 e o orçamento mínimo são alinhados no kickoff.
-        </div>
-      </div>
-    </section>
-
-    <!-- 10 CTA -->
-    <section id="cta" data-slide="10">
-      <div class="inner glass">
-        <p class="eyebrow">Próximo passo</p>
-        <h2>Pare de perder venda<br />no WhatsApp</h2>
-        <div class="gold-line"></div>
-        <p class="lead">
-          Em 6 meses você tem canal estruturado, time operando, IA ativa e mídia
-          gerando demanda qualificada — com método 3P-IA da V4.
-        </p>
-        <div class="grid-3">
-          <article class="card">
-            <div class="card-num">01</div>
-            <h3>Kickoff</h3>
-            <p>Alinhamos metas, setor e verba mínima de mídia.</p>
-          </article>
-          <article class="card">
-            <div class="card-num">02</div>
-            <h3>Implementação</h3>
-            <p>Construímos a máquina enquanto o Lead Gen já gera leads.</p>
-          </article>
-          <article class="card">
-            <div class="card-num">03</div>
-            <h3>Escala</h3>
-            <p>Mídia contínua, CRM vivo e diagnóstico claro no mês 3.</p>
-          </article>
-        </div>
         <div class="cta-box">
-          <h3>O que esta proposta fecha</h3>
+          <h3>O que vocês levam com a V4</h3>
           <p>
-            Plano Completo ZapFirst + Lead Gen · R$ 57.000 (12× R$ 3.916) ·
-            projeto de 6 meses · gestão de mídia e verba de ads alinhadas no kickoff.
+            Uma máquina de vendas no WhatsApp pronta — com Lead Gen gerando demanda
+            desde o mês 1. Menos improviso no chat. Mais processo, IA e previsibilidade.
           </p>
         </div>
-        <p class="quote">
-          Diagnóstico gratuito · Sem compromisso · Projeto estruturado de implementação
-          <span>Produto powered by V4 Company</span>
-        </p>
       </div>
     </section>
 
@@ -607,7 +553,7 @@
   <footer class="deck-footer">
     <span>ZapFirst Completo × V4 · Máquina de vendas + Lead Gen</span>
     <div class="progress-wrap"><div class="progress-fill" id="progressFill"></div></div>
-    <span id="slideCounter">1 / 10</span>
+    <span id="slideCounter">1 / 9</span>
   </footer>
 
   <script>
@@ -617,7 +563,7 @@
       slide.insertBefore(tpl.content.cloneNode(true), slide.firstChild);
     });
 
-    const TOTAL = 10;
+    const TOTAL = 9;
     let current = 1;
     const slides = Array.from(document.querySelectorAll("#deck section[id]"));
     const navLinks = document.querySelectorAll(".nav-dots a");
