@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZapFirst Completo × V4 — Proposta Máquina de Vendas no WhatsApp + Lead Gen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --v4-red-deep: #a10f14;
+      --v4-red-mid: #c4181e;
+      --cream: #ffffff;
+      --muted: rgba(255,255,255,0.88);
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; overflow: hidden; }
+    body {
+      font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+      font-size: 1.05rem;
+      background: var(--v4-red-deep);
+      color: var(--cream);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    .slide-logo { position: absolute; top: 1.25rem; left: 1.5rem; z-index: 10; }
+    .slide-logo svg { height: clamp(22px, 3.5vh, 30px); width: auto; display: block; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.35)); }
+    .blend-progress {
+      position: fixed; top: 0; left: 0; right: 0; height: 5px; z-index: 200;
+      background: linear-gradient(90deg, #fff, #ffd0d0);
+      transform-origin: left; transform: scaleX(var(--slide-progress, 0.08));
+      transition: transform 0.4s var(--ease);
+    }
+    .nav-dots {
+      position: fixed; right: 1rem; top: 50%; transform: translateY(-50%);
+      z-index: 100; display: flex; flex-direction: column; gap: 0.38rem;
+    }
+    .nav-dots a {
+      width: 8px; height: 8px; border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.45); background: transparent;
+      transition: all 0.3s var(--ease);
+    }
+    .nav-dots a:hover, .nav-dots a.active { background: #fff; border-color: #fff; transform: scale(1.2); }
+    .nav-arrow {
+      position: fixed; top: 50%; transform: translateY(-50%); z-index: 100;
+      width: 46px; height: 46px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.35); background: rgba(161,15,20,0.55);
+      color: white; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; line-height: 1;
+    }
+    .nav-arrow:hover:not(:disabled) { background: rgba(255,255,255,0.2); border-color: #fff; }
+    .nav-arrow:disabled { opacity: 0.25; cursor: default; }
+    .nav-arrow--prev { left: 1rem; }
+    .nav-arrow--next { right: 3rem; }
+    .deck { position: relative; width: 100vw; height: 100vh; overflow: hidden; }
+    section {
+      position: absolute; inset: 0; width: 100%; height: 100vh;
+      padding: clamp(2.5rem, 5vh, 3.5rem) clamp(1.25rem, 4vw, 3rem) 4.5rem;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      overflow-y: auto; opacity: 0; visibility: hidden; transform: translateX(60px);
+      transition: opacity 0.4s var(--ease), transform 0.4s var(--ease), visibility 0.4s; z-index: 0;
+    }
+    section.slide-active { opacity: 1; visibility: visible; transform: translateX(0); z-index: 2; }
+    section.slide-exit-left { transform: translateX(-60px); opacity: 0; }
+    section.slide-exit-right { transform: translateX(60px); opacity: 0; }
+    section::before {
+      content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(255, 74, 74, 0.45) 0%, transparent 55%),
+        radial-gradient(ellipse 70% 55% at 85% 90%, rgba(255, 42, 26, 0.35) 0%, transparent 50%),
+        radial-gradient(ellipse 100% 100% at 50% 50%, var(--v4-red-mid) 0%, var(--v4-red-deep) 70%, #6b080c 100%);
+    }
+    .inner { position: relative; z-index: 2; width: 100%; max-width: 980px; max-height: calc(100vh - 5rem); }
+    .eyebrow {
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: #ffe0e0; margin-bottom: 0.5rem;
+    }
+    h1, h2, h3 { font-family: Outfit, sans-serif; font-weight: 700; line-height: 1.12; letter-spacing: -0.02em; color: #fff; }
+    h2 { font-size: clamp(1.55rem, 3.8vh, 2.35rem); margin-bottom: 0.5rem; }
+    .gold-line { width: 64px; height: 4px; background: linear-gradient(90deg, #fff, #ffd0d0); border-radius: 2px; margin: 0.5rem 0 0.9rem; }
+    .lead { font-size: clamp(0.95rem, 1.7vh, 1.1rem); color: var(--muted); max-width: 760px; line-height: 1.5; }
+    .glass {
+      background: rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.28); border-radius: 22px;
+      padding: clamp(1.1rem, 2.5vh, 1.75rem) clamp(1.2rem, 3vw, 1.85rem);
+      box-shadow: 0 12px 40px rgba(80, 0, 0, 0.25);
+    }
+    #capa .inner { text-align: center; }
+    .capa-partnership {
+      display: flex; align-items: center; justify-content: center; gap: 0.75rem;
+      margin: 1rem 0 0.65rem; font-size: 1rem; color: var(--muted);
+    }
+    .capa-partnership .x { opacity: 0.5; }
+    #capa h1 { font-size: clamp(2rem, 6vh, 3.3rem); margin-bottom: 0.75rem; }
+    #capa h1 em { font-style: normal; color: #ffe8e8; }
+    .capa-badge {
+      display: inline-block; padding: 0.45rem 1rem; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.45); font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase; background: rgba(255,255,255,0.12);
+    }
+    .slide-hint { margin-top: 1.75rem; font-size: 0.85rem; color: rgba(255,255,255,0.5); }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.65rem; margin-top: 0.85rem; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; margin-top: 0.85rem; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.55rem; margin-top: 0.85rem; }
+    .card {
+      background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 14px; padding: 0.85rem 1rem;
+    }
+    .card-num { font-family: Outfit; font-size: 0.8rem; font-weight: 800; color: #ffe0e0; margin-bottom: 0.3rem; }
+    .card h3 { font-size: 0.98rem; margin-bottom: 0.3rem; }
+    .card p, .card li { font-size: 0.86rem; color: var(--muted); line-height: 1.45; }
+    .card ul { list-style: none; margin-top: 0.35rem; }
+    .card ul li { padding-left: 0.9rem; position: relative; margin-bottom: 0.2rem; }
+    .card ul li::before { content: "·"; position: absolute; left: 0; color: #fff; font-weight: 700; }
+    .tag-16h {
+      display: inline-block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; padding: 0.2rem 0.5rem; border-radius: 6px;
+      background: rgba(255,255,255,0.2); color: #fff; margin-bottom: 0.35rem;
+    }
+    .flow-row { display: flex; align-items: stretch; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap; }
+    .flow-step {
+      flex: 1; min-width: 110px; text-align: center; padding: 0.7rem 0.45rem;
+      background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.22); border-radius: 12px;
+    }
+    .flow-step .icon { font-family: Outfit; font-size: 1.15rem; font-weight: 800; margin-bottom: 0.25rem; }
+    .flow-step strong { display: block; font-size: 0.86rem; margin-bottom: 0.2rem; }
+    .flow-step span { font-size: 0.76rem; color: var(--muted); }
+    .flow-arrow { align-self: center; color: rgba(255,255,255,0.45); }
+    .plans { display: grid; grid-template-columns: 1fr; gap: 0.85rem; margin-top: 0.85rem; max-width: 560px; }
+    .plan {
+      border-radius: 16px; padding: 1rem 1.1rem;
+      border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.34);
+    }
+    .plan.featured { border-color: #fff; background: rgba(0,0,0,0.48); box-shadow: 0 8px 32px rgba(0,0,0,0.35); }
+    .plan-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #ffe8e8; margin-bottom: 0.35rem; }
+    .plan h3 { font-size: 1.05rem; margin-bottom: 0.15rem; }
+    .plan-sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.5rem; }
+    .plan-price { font-family: Outfit; font-size: 2rem; font-weight: 800; line-height: 1; color: #fff; }
+    .plan-price small { font-size: 0.9rem; font-weight: 600; color: var(--muted); }
+    .plan-discount { font-size: 0.82rem; color: #ffe0e0; margin-top: 0.25rem; font-weight: 600; }
+    .plan ul { list-style: none; margin-top: 0.55rem; }
+    .plan ul li { font-size: 0.84rem; color: var(--muted); padding: 0.15rem 0 0.15rem 0.9rem; position: relative; }
+    .plan ul li::before { content: "·"; position: absolute; left: 0; color: #fff; font-weight: 700; }
+    .price-lines { margin: 0.4rem 0 0.55rem; }
+    .price-line {
+      display: flex; justify-content: space-between; gap: 0.75rem;
+      font-size: 0.8rem; color: var(--muted); padding: 0.2rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .price-line:last-child { border-bottom: none; }
+    .price-line strong { color: #fff; font-weight: 700; }
+    .price-line .ok { color: #b7f7d0; }
+    .cta-box {
+      margin-top: 0.75rem; padding: 0.9rem 1.1rem; border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.35); background: rgba(255,255,255,0.14);
+    }
+    .cta-box h3 { font-size: 1rem; margin-bottom: 0.35rem; }
+    .cta-box p { font-size: 0.86rem; color: var(--muted); }
+    .quote {
+      margin: 0.75rem 0 0;
+      padding-left: 0.9rem;
+      border-left: 3px solid rgba(255,255,255,0.55);
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.35;
+    }
+    .quote span {
+      display: block; margin-top: 0.35rem; font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.65);
+    }
+    .note-box {
+      margin-top: 0.7rem; padding: 0.75rem 1rem; border-radius: 12px;
+      border: 1px dashed rgba(255,255,255,0.4); background: rgba(255,255,255,0.08);
+      font-size: 0.84rem; color: #ffe8e8; font-weight: 600;
+    }
+    .big-num {
+      font-family: Outfit; font-size: clamp(1.8rem, 4vh, 2.6rem); font-weight: 800; line-height: 1; color: #fff;
+    }
+    .deck-footer {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 150;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.65rem 1.25rem; background: rgba(107, 8, 12, 0.85);
+      border-top: 1px solid rgba(255,255,255,0.15); font-size: 0.8rem; color: rgba(255,255,255,0.75);
+    }
+    .progress-wrap { flex: 1; max-width: 220px; height: 4px; background: rgba(255,255,255,0.2); border-radius: 2px; margin: 0 1rem; }
+    .progress-fill { height: 100%; background: #fff; border-radius: 2px; width: 8%; transition: width 0.4s var(--ease); }
+    @media (max-width: 760px) {
+      .grid-3, .grid-2, .grid-4, .plans { grid-template-columns: 1fr; }
+      .nav-arrow--next { right: 1rem; }
+      .flow-arrow { display: none; }
+      .slide-logo { left: 1rem; top: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="blend-progress" aria-hidden="true"></div>
+
+  <nav class="nav-dots" aria-label="Slides">
+    <a href="#" data-slide="1" class="active" title="Capa"></a>
+    <a href="#" data-slide="2" title="Oportunidade"></a>
+    <a href="#" data-slide="3" title="O desafio"></a>
+    <a href="#" data-slide="4" title="Metodologia 3P-IA"></a>
+    <a href="#" data-slide="5" title="A máquina"></a>
+    <a href="#" data-slide="6" title="Escopo ZapFirst"></a>
+    <a href="#" data-slide="7" title="Lead Gen"></a>
+    <a href="#" data-slide="8" title="Jornada 6 meses"></a>
+    <a href="#" data-slide="9" title="Investimento"></a>
+    <a href="#" data-slide="10" title="Próximo passo"></a>
+  </nav>
+
+  <button type="button" class="nav-arrow nav-arrow--prev" id="prevBtn" disabled aria-label="Anterior">‹</button>
+  <button type="button" class="nav-arrow nav-arrow--next" id="nextBtn" aria-label="Próximo">›</button>
+
+  <template id="v4-logo-tpl">
+    <div class="slide-logo" aria-label="V4 Company">
+      <svg fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 77 20"><path fill="#fff" d="M33.023 3.575c-2.001.003-3.093 1.21-3.09 3.32l.008 6.858c.003 2.11 1.098 3.315 3.1 3.312 2-.003 3.092-1.21 3.09-3.32l-.009-6.858c-.003-2.11-1.097-3.315-3.099-3.312zm.015 11.606c-.649.001-1.057-.356-1.058-1.298l-.009-7.122c-.001-.942.406-1.3 1.055-1.302.648 0 1.057.357 1.058 1.299l.009 7.122c.001.942-.407 1.3-1.055 1.301zm-6.1-3.176l.002 1.884c.001.942-.406 1.282-1.055 1.283-.648 0-1.056-.338-1.058-1.28l-.009-7.122c-.001-.942.406-1.3 1.055-1.302.648 0 1.057.357 1.058 1.299l.002 1.413 1.927-.002-.002-1.281c-.002-2.11-1.041-3.315-3.043-3.313-2 .003-3.037 1.21-3.034 3.32l.008 6.859c.003 2.11 1.042 3.314 3.043 3.312 2.002-.003 3.038-1.21 3.035-3.32l-.002-1.752-1.927.002zM13.055 6.352L8.68 10.813c-.06.062-.017.166.067.166l4.382-.006a.096.096 0 00.096-.097l-.006-4.456c0-.087-.103-.13-.163-.068zm5.862 7.88l-2.687.004a.035.035 0 00-.035.035l.004 2.879c0 .02-.015.035-.035.035l-3.01.004a.035.035 0 01-.034-.035l-.004-2.879a.035.035 0 00-.034-.035l-8.796.012a.141.141 0 01-.14-.142l-.003-2.624v-.004a.795.795 0 01.223-.588l8.758-8.928a.035.035 0 01.025-.01l2.846-.004c.005 0 .009.001.014.003a.367.367 0 01.216.348l.01 8.677c0 .019.017.035.036.035l2.641-.004a.035.035 0 00.035-.035l-.011-8.5c-.002-1.364-1.1-2.478-2.442-2.476L4.18.016a.035.035 0 00-.034.036l.008 6.856c0 .031.037.047.06.025l4.994-5.064a.034.034 0 01.024-.01l2.603-.003c.03 0 .046.037.025.06l-8.118 8.41a.034.034 0 01-.049 0l-1.529-1.55a.036.036 0 01-.01-.026L2.143.074A.035.035 0 002.104.04C.976.185.086 1.131 0 2.294v5.972l.011 8.9a2.48 2.48 0 001.937 2.424h14.974c1.15-.199 2.034-1.224 2.032-2.448l-.003-2.873a.035.035 0 00-.035-.036zM66.47 3.682l.01 7.895-2.104-7.892-2.557.003.017 13.19 1.834-.003-.012-9.553 2.55 9.55 2.094-.004-.016-13.188-1.816.002zm-23.33.031l-1.378 9.366-1.513-9.362-2.835.003.017 13.19 1.779-.003-.012-9.327 1.532 9.325 1.927-.003 1.396-9.46.012 9.458 1.928-.002-.017-13.19-2.835.005h-.001zm33.133-.043l-1.946.002-1.549 6.013-1.564-6.009-2.131.003 2.587 8.814.005 4.371 2.039-.003-.006-4.37 2.565-8.821zm-20.44.026l-2.058 13.192 1.871-.003.35-2.393 2.501-.003.355 2.392 2.057-.003-2.092-13.186-2.983.004zm.42 9.005l.974-6.67.99 6.668-1.964.002zm-5.793-8.998l-3.002.004.017 13.189 2.038-.003-.006-4.955.964-.002c2.038-.002 3.037-1.153 3.035-3.263l-.003-1.715c-.002-2.11-1.005-3.258-3.043-3.255zm.008 6.35h-.964L49.5 5.589l.964-.001c.648-.001 1.001.3 1.002 1.242l.003 1.978c.001.942-.35 1.245-1 1.245z"></path></svg>
+    </div>
+  </template>
+
+  <div class="deck" id="deck">
+
+    <!-- 1 CAPA -->
+    <section id="capa" class="slide-active" data-slide="1">
+      <div class="inner">
+        <div class="capa-partnership">
+          <span>ZapFirst</span>
+          <span class="x">×</span>
+          <span>V4 Company</span>
+        </div>
+        <h1>Máquina de vendas<br /><em>no WhatsApp</em></h1>
+        <p class="lead" style="margin:0.75rem auto 0;text-align:center;max-width:680px;">
+          Plano Completo: estruturamos o canal, treinamos o time, ativamos IA —
+          e geramos leads qualificados desde o dia 1.
+        </p>
+        <span class="capa-badge" style="margin-top:1.25rem;">ZapFirst + Lead Gen · 6 meses</span>
+        <p class="slide-hint">Setas, scroll ou swipe para avançar →</p>
+      </div>
+    </section>
+
+    <!-- 2 OPORTUNIDADE -->
+    <section id="oportunidade" data-slide="2">
+      <div class="inner glass">
+        <p class="eyebrow">Oportunidade</p>
+        <h2>O WhatsApp já é o maior<br />canal de vendas do Brasil</h2>
+        <div class="gold-line"></div>
+        <p class="lead">
+          Negócios locais que estruturam o WhatsApp como canal de vendas convertem mais,
+          fidelizam melhor e crescem mais rápido — do que qualquer outro canal digital.
+        </p>
+        <div class="grid-4">
+          <article class="card">
+            <p class="big-num" style="font-size:1.7rem;">80%</p>
+            <p style="margin-top:0.4rem;">usam WhatsApp antes de decidir a compra</p>
+          </article>
+          <article class="card">
+            <p class="big-num" style="font-size:1.7rem;">67%</p>
+            <p style="margin-top:0.4rem;">das vendas no Brasil passam pelo WhatsApp</p>
+          </article>
+          <article class="card">
+            <p class="big-num" style="font-size:1.7rem;">3×</p>
+            <p style="margin-top:0.4rem;">mais conversão vs e-mail ou formulário</p>
+          </article>
+          <article class="card">
+            <p class="big-num" style="font-size:1.7rem;">9/10</p>
+            <p style="margin-top:0.4rem;">preferem WhatsApp a ligar ou ir à loja</p>
+          </article>
+        </div>
+        <p class="quote">
+          A oportunidade é clara. O problema é o que acontece quando o cliente chega.
+        </p>
+      </div>
+    </section>
+
+    <!-- 3 DESAFIO -->
+    <section id="desafio" data-slide="3">
+      <div class="inner glass">
+        <p class="eyebrow">O desafio</p>
+        <h2>A maioria perde a venda<br />na chegada do WhatsApp</h2>
+        <div class="gold-line"></div>
+        <p class="lead">Você investe para aparecer. Tudo funciona até o cliente chegar no chat — aí a venda vai embora.</p>
+        <div class="grid-3">
+          <article class="card">
+            <div class="card-num">01</div>
+            <h3>Demora no atendimento</h3>
+            <p>Mensagem às 19h, resposta no dia seguinte. O cliente já comprou do concorrente.</p>
+          </article>
+          <article class="card">
+            <div class="card-num">02</div>
+            <h3>Sem catálogo, sem processo</h3>
+            <p>Vendedor improvisa. Preço no copy-paste, sem profissionalismo, sem conversão.</p>
+          </article>
+          <article class="card">
+            <div class="card-num">03</div>
+            <h3>PIX desconectado</h3>
+            <p>Na hora de pagar, o cliente some. A fricção no pagamento mata a venda quente.</p>
+          </article>
+          <article class="card">
+            <div class="card-num">04</div>
+            <h3>Sem rastreio, sem recompra</h3>
+            <p>Quem comprou uma vez, some. Não há follow-up, não há previsibilidade.</p>
+          </article>
+          <article class="card">
+            <div class="card-num">05</div>
+            <h3>Ambiente digital fraco</h3>
+            <p>GMB sem botão, Instagram sem CTA, site sem saída para o WhatsApp.</p>
+          </article>
+          <article class="card">
+            <div class="card-num">06</div>
+            <h3>IA em cima do caos</h3>
+            <p>Automatizar sem processo, produto e time treinados é escalar o erro.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 METODOLOGIA -->
+    <section id="metodologia" data-slide="4">
+      <div class="inner glass">
+        <p class="eyebrow">Metodologia exclusiva</p>
+        <h2>3P-IA: Produto → Processo<br />→ Pessoas → IA</h2>
+        <div class="gold-line"></div>
+        <p class="lead">A sequência importa. A inteligência artificial entra somente depois que a base humana está sólida.</p>
+        <div class="flow-row">
+          <div class="flow-step">
+            <div class="icon">01</div>
+            <strong>Produto</strong>
+            <span>Catálogo, oferta clara e precificação definida</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">
+            <div class="icon">02</div>
+            <strong>Processo</strong>
+            <span>Fluxo comercial, scripts, etapas e SLAs</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">
+            <div class="icon">03</div>
+            <strong>Pessoas</strong>
+            <span>Time treinado com playbook editável</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">
+            <div class="icon">04</div>
+            <strong>IA</strong>
+            <span>SDR 24/7 só depois dos 3 P’s</span>
+          </div>
+        </div>
+        <p class="quote">
+          Colocar IA antes do processo é automatizar o caos — não o resultado.
+          <span>Framework proprietário ZapFirst · V4 Company</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- 5 A MÁQUINA -->
+    <section id="maquina" data-slide="5">
+      <div class="inner glass">
+        <p class="eyebrow">O que você recebe</p>
+        <h2>No mês 3, você tem uma máquina.<br />Não um projeto.</h2>
+        <div class="gold-line"></div>
+        <div class="grid-2">
+          <article class="card">
+            <div class="card-num">Canal</div>
+            <h3>WhatsApp como e-commerce</h3>
+            <ul>
+              <li>Catálogo completo + PIX no chat</li>
+              <li>Scripts para cada etapa do funil</li>
+              <li>SDR de IA qualificanto 24/7</li>
+              <li>Handoff inteligente para o time humano</li>
+            </ul>
+          </article>
+          <article class="card">
+            <div class="card-num">Operação</div>
+            <h3>Time + CRM + previsibilidade</h3>
+            <ul>
+              <li>Time treinado e consciente do processo</li>
+              <li>Kommo com pipeline e réguas de recompra</li>
+              <li>Relatório mensal de conversões</li>
+              <li>Diagnóstico de maturidade no mês 3</li>
+            </ul>
+          </article>
+        </div>
+        <div class="grid-4" style="margin-top:0.75rem;">
+          <article class="card"><h3>Processo</h3><p>Documentado e operando</p></article>
+          <article class="card"><h3>Time</h3><p>Treinado com playbook</p></article>
+          <article class="card"><h3>IA</h3><p>Calibrada e ativa</p></article>
+          <article class="card"><h3>CRM</h3><p>Pipeline visível</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 ESCOPO ZAPFIRST -->
+    <section id="escopo" data-slide="6">
+      <div class="inner">
+        <p class="eyebrow">Escopo · ZapFirst (3 meses)</p>
+        <h2>Tudo que estrutura<br />a máquina de vendas</h2>
+        <div class="gold-line"></div>
+        <div class="grid-3">
+          <article class="card">
+            <span class="tag-16h">Ambiente</span>
+            <h3>Presença que converte</h3>
+            <ul>
+              <li>Google Meu Negócio com botão WhatsApp</li>
+              <li>Instagram com CTA e link na bio</li>
+              <li>LP / site com captura acima da dobra</li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="tag-16h">WhatsApp</span>
+            <h3>Canal comercial completo</h3>
+            <ul>
+              <li>WhatsApp Business estruturado</li>
+              <li>Catálogo fotografado e precificado</li>
+              <li>PIX integrado (link + QR no chat)</li>
+              <li>Scripts: recepção → fechamento → pós-venda</li>
+              <li>Fluxo comercial + SLAs de resposta</li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="tag-16h">Time + IA</span>
+            <h3>Operação com método</h3>
+            <ul>
+              <li>Treinamento do time + material permanente</li>
+              <li>CRM Kommo (pipeline, tags, campos)</li>
+              <li>Réguas de recompra e reativação</li>
+              <li>SDR de Inteligência Artificial 24/7</li>
+              <li>Relatório final + diagnóstico de maturidade</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 LEAD GEN -->
+    <section id="leadgen" data-slide="7">
+      <div class="inner glass">
+        <p class="eyebrow">Bundle do Plano Completo</p>
+        <h2>Lead Gen: combustível<br />desde o dia 1</h2>
+        <div class="gold-line"></div>
+        <p class="lead">
+          Além de estruturar o canal, geramos os leads qualificados que vão alimentá-lo —
+          Google + Meta, com gestão V4 por 6 meses.
+        </p>
+        <div class="grid-2">
+          <article class="card">
+            <div class="card-num">Incluso na fee</div>
+            <h3>O que a V4 opera</h3>
+            <ul>
+              <li>Estratégia de mídia paga (Google + Meta)</li>
+              <li>Criação de criativos (artes + copies)</li>
+              <li>Gestão das campanhas por 6 meses</li>
+              <li>Lead Gen começa no mês 1 — junto com o setup</li>
+              <li>Relatório mensal de performance da mídia</li>
+            </ul>
+          </article>
+          <article class="card">
+            <div class="card-num">À parte</div>
+            <h3>Verba de plataforma</h3>
+            <ul>
+              <li>Investimento em Google Ads e Meta Ads pago pelo cliente às plataformas</li>
+              <li>Total transparência de verba e resultado</li>
+              <li>Orçamento mínimo recomendado acordado no kickoff</li>
+              <li>Taxa de gestão de mídia: ~R$ 4.500/mês</li>
+            </ul>
+          </article>
+        </div>
+        <p class="quote">
+          Máquina sem combustível não anda. Lead Gen coloca demanda qualificada no WhatsApp que acabamos de estruturar.
+        </p>
+      </div>
+    </section>
+
+    <!-- 8 JORNADA -->
+    <section id="jornada" data-slide="8">
+      <div class="inner glass">
+        <p class="eyebrow">Jornada · 6 meses</p>
+        <h2>Implementação + mídia<br />rodando em paralelo</h2>
+        <div class="gold-line"></div>
+        <div class="flow-row">
+          <div class="flow-step">
+            <div class="icon">M1</div>
+            <strong>Kickoff + setup</strong>
+            <span>Ambiente, WhatsApp, processo e Lead Gen ligando</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">
+            <div class="icon">M2</div>
+            <strong>Time + CRM</strong>
+            <span>Treinamento, Kommo, scripts e PIX no fluxo</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">
+            <div class="icon">M3</div>
+            <strong>IA + maturidade</strong>
+            <span>SDR calibrado + diagnóstico do próximo passo</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">
+            <div class="icon">M4–6</div>
+            <strong>Escala Lead Gen</strong>
+            <span>Mídia contínua + relatório mensal</span>
+          </div>
+        </div>
+        <div class="grid-3" style="margin-top:0.85rem;">
+          <article class="card">
+            <h3>ZapFirst</h3>
+            <p>3 meses de implementação completa da máquina</p>
+          </article>
+          <article class="card">
+            <h3>Lead Gen</h3>
+            <p>6 meses de gestão de mídia Google + Meta</p>
+          </article>
+          <article class="card">
+            <h3>Acompanhamento</h3>
+            <p>Operação contínua da mídia + relatório mensal de performance</p>
+          </article>
+        </div>
+        <div class="note-box">
+          Depois do mês 3: operar de forma independente, manter Lead Gen ou evoluir para Destrava Receita — conforme o diagnóstico de maturidade.
+        </div>
+      </div>
+    </section>
+
+    <!-- 9 INVESTIMENTO -->
+    <section id="investimento" data-slide="9">
+      <div class="inner glass">
+        <p class="eyebrow">Investimento · opção recomendada</p>
+        <h2>Plano Completo<br />ZapFirst + Lead Gen</h2>
+        <div class="gold-line"></div>
+        <div class="plans" style="margin-left:auto;margin-right:auto;">
+          <article class="plan featured">
+            <div class="plan-label">Recomendado · 6 meses</div>
+            <h3>ZapFirst Completo</h3>
+            <p class="plan-sub">Máquina de vendas + combustível de mídia desde o dia 1</p>
+            <div class="price-lines">
+              <div class="price-line"><span>Projeto (6 meses)</span><strong>R$ 57.000</strong></div>
+              <div class="price-line"><span>Parcelado no cartão</span><strong class="ok">12× de R$ 3.916</strong></div>
+              <div class="price-line"><span>Gestão de mídia</span><strong>~R$ 4.500 /mês</strong></div>
+              <div class="price-line"><span>Verba de ads</span><strong>à parte · kickoff</strong></div>
+            </div>
+            <div class="plan-price">R$ 57.000</div>
+            <p class="plan-discount">12× R$ 3.916 no cartão · ZapFirst 3 meses + Lead Gen 6 meses</p>
+            <ul>
+              <li>Setup completo (GMB, Instagram, LP/Site)</li>
+              <li>WhatsApp Business + catálogo + PIX</li>
+              <li>Scripts, fluxo comercial e treinamento do time</li>
+              <li>CRM Kommo + réguas de recompra</li>
+              <li>SDR de Inteligência Artificial</li>
+              <li>Estratégia, criativos e gestão Google + Meta (6 meses)</li>
+              <li>Relatório mensal de mídia + diagnóstico de maturidade</li>
+            </ul>
+          </article>
+        </div>
+        <div class="note-box">
+          A verba de mídia (Google Ads e Meta Ads) é paga diretamente às plataformas. A taxa de gestão V4 e o orçamento mínimo são alinhados no kickoff.
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 CTA -->
+    <section id="cta" data-slide="10">
+      <div class="inner glass">
+        <p class="eyebrow">Próximo passo</p>
+        <h2>Pare de perder venda<br />no WhatsApp</h2>
+        <div class="gold-line"></div>
+        <p class="lead">
+          Em 6 meses você tem canal estruturado, time operando, IA ativa e mídia
+          gerando demanda qualificada — com método 3P-IA da V4.
+        </p>
+        <div class="grid-3">
+          <article class="card">
+            <div class="card-num">01</div>
+            <h3>Kickoff</h3>
+            <p>Alinhamos metas, setor e verba mínima de mídia.</p>
+          </article>
+          <article class="card">
+            <div class="card-num">02</div>
+            <h3>Implementação</h3>
+            <p>Construímos a máquina enquanto o Lead Gen já gera leads.</p>
+          </article>
+          <article class="card">
+            <div class="card-num">03</div>
+            <h3>Escala</h3>
+            <p>Mídia contínua, CRM vivo e diagnóstico claro no mês 3.</p>
+          </article>
+        </div>
+        <div class="cta-box">
+          <h3>O que esta proposta fecha</h3>
+          <p>
+            Plano Completo ZapFirst + Lead Gen · R$ 57.000 (12× R$ 3.916) ·
+            projeto de 6 meses · gestão de mídia e verba de ads alinhadas no kickoff.
+          </p>
+        </div>
+        <p class="quote">
+          Diagnóstico gratuito · Sem compromisso · Projeto estruturado de implementação
+          <span>Produto powered by V4 Company</span>
+        </p>
+      </div>
+    </section>
+
+  </div>
+
+  <footer class="deck-footer">
+    <span>ZapFirst Completo × V4 · Máquina de vendas + Lead Gen</span>
+    <div class="progress-wrap"><div class="progress-fill" id="progressFill"></div></div>
+    <span id="slideCounter">1 / 10</span>
+  </footer>
+
+  <script>
+  (function () {
+    const tpl = document.getElementById("v4-logo-tpl");
+    document.querySelectorAll("#deck section").forEach((slide) => {
+      slide.insertBefore(tpl.content.cloneNode(true), slide.firstChild);
+    });
+
+    const TOTAL = 10;
+    let current = 1;
+    const slides = Array.from(document.querySelectorAll("#deck section[id]"));
+    const navLinks = document.querySelectorAll(".nav-dots a");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const progressFill = document.getElementById("progressFill");
+    const slideCounter = document.getElementById("slideCounter");
+    const blendBar = document.querySelector(".blend-progress");
+
+    function updateUI() {
+      const p = current / TOTAL;
+      if (progressFill) progressFill.style.width = (p * 100) + "%";
+      if (slideCounter) slideCounter.textContent = current + " / " + TOTAL;
+      if (blendBar) blendBar.style.transform = "scaleX(" + Math.max(0.05, p) + ")";
+      document.documentElement.style.setProperty("--slide-progress", p);
+      if (prevBtn) prevBtn.disabled = current === 1;
+      if (nextBtn) nextBtn.disabled = current === TOTAL;
+      navLinks.forEach((a) => a.classList.toggle("active", Number(a.dataset.slide) === current));
+    }
+
+    function goTo(n, dir) {
+      if (n < 1 || n > TOTAL || n === current) return;
+      const prev = slides[current - 1];
+      const next = slides[n - 1];
+      const fwd = dir === "forward" || (dir !== "back" && n > current);
+      prev.classList.remove("slide-active");
+      prev.classList.add(fwd ? "slide-exit-left" : "slide-exit-right");
+      setTimeout(() => prev.classList.remove("slide-exit-left", "slide-exit-right"), 420);
+      next.classList.add("slide-active");
+      current = n;
+      updateUI();
+    }
+
+    if (prevBtn) prevBtn.addEventListener("click", () => goTo(current - 1, "back"));
+    if (nextBtn) nextBtn.addEventListener("click", () => goTo(current + 1, "forward"));
+    navLinks.forEach((a) => a.addEventListener("click", (e) => { e.preventDefault(); goTo(Number(a.dataset.slide)); }));
+
+    document.addEventListener("wheel", (e) => {
+      if (Math.abs(e.deltaY) < 20) return;
+      e.preventDefault();
+      goTo(current + (e.deltaY > 0 ? 1 : -1), e.deltaY > 0 ? "forward" : "back");
+    }, { passive: false });
+
+    document.addEventListener("keydown", (e) => {
+      if (["ArrowRight", " ", "PageDown"].includes(e.key)) { e.preventDefault(); goTo(current + 1, "forward"); }
+      if (["ArrowLeft", "PageUp"].includes(e.key)) { e.preventDefault(); goTo(current - 1, "back"); }
+    });
+
+    let tx = 0;
+    document.addEventListener("touchstart", (e) => { tx = e.changedTouches[0].screenX; }, { passive: true });
+    document.addEventListener("touchend", (e) => {
+      const dx = e.changedTouches[0].screenX - tx;
+      if (Math.abs(dx) > 50) goTo(current + (dx < 0 ? 1 : -1), dx < 0 ? "forward" : "back");
+    }, { passive: true });
+
+    updateUI();
+  })();
+  </script>
+</body>
+</html>
