@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Estação Delta × V4 — Estruturação Comercial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --v4-red-deep: #a10f14;
+      --v4-red-mid: #c4181e;
+      --cream: #ffffff;
+      --muted: rgba(255,255,255,0.88);
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; overflow: hidden; }
+    body {
+      font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+      font-size: 1.05rem;
+      background: var(--v4-red-deep);
+      color: var(--cream);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    .slide-logo { position: absolute; top: 1.25rem; left: 1.5rem; z-index: 10; }
+    .slide-logo svg { height: clamp(22px, 3.5vh, 30px); width: auto; display: block; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.35)); }
+    .blend-progress {
+      position: fixed; top: 0; left: 0; right: 0; height: 5px; z-index: 200;
+      background: linear-gradient(90deg, #fff, #ffd0d0);
+      transform-origin: left; transform: scaleX(var(--slide-progress, 0.08));
+      transition: transform 0.4s var(--ease);
+    }
+    .nav-dots {
+      position: fixed; right: 1rem; top: 50%; transform: translateY(-50%);
+      z-index: 100; display: flex; flex-direction: column; gap: 0.38rem;
+    }
+    .nav-dots a {
+      width: 8px; height: 8px; border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.45); background: transparent;
+      transition: all 0.3s var(--ease);
+    }
+    .nav-dots a:hover, .nav-dots a.active { background: #fff; border-color: #fff; transform: scale(1.2); }
+    .nav-arrow {
+      position: fixed; top: 50%; transform: translateY(-50%); z-index: 100;
+      width: 46px; height: 46px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.35); background: rgba(161,15,20,0.55);
+      color: white; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; line-height: 1;
+    }
+    .nav-arrow:hover:not(:disabled) { background: rgba(255,255,255,0.2); border-color: #fff; }
+    .nav-arrow:disabled { opacity: 0.25; cursor: default; }
+    .nav-arrow--prev { left: 1rem; }
+    .nav-arrow--next { right: 3rem; }
+    .deck { position: relative; width: 100vw; height: 100vh; overflow: hidden; }
+    section {
+      position: absolute; inset: 0; width: 100%; height: 100vh;
+      padding: clamp(2.5rem, 5vh, 3.5rem) clamp(1.25rem, 4vw, 3rem) 4.5rem;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      overflow-y: auto; opacity: 0; visibility: hidden; transform: translateX(60px);
+      transition: opacity 0.4s var(--ease), transform 0.4s var(--ease), visibility 0.4s; z-index: 0;
+    }
+    section.slide-active { opacity: 1; visibility: visible; transform: translateX(0); z-index: 2; }
+    section.slide-exit-left { transform: translateX(-60px); opacity: 0; }
+    section.slide-exit-right { transform: translateX(60px); opacity: 0; }
+    section::before {
+      content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(255, 74, 74, 0.45) 0%, transparent 55%),
+        radial-gradient(ellipse 70% 55% at 85% 90%, rgba(255, 42, 26, 0.35) 0%, transparent 50%),
+        radial-gradient(ellipse 100% 100% at 50% 50%, var(--v4-red-mid) 0%, var(--v4-red-deep) 70%, #6b080c 100%);
+    }
+    .inner { position: relative; z-index: 2; width: 100%; max-width: 980px; max-height: calc(100vh - 5rem); }
+    .eyebrow {
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: #ffe0e0; margin-bottom: 0.5rem;
+    }
+    h1, h2, h3 { font-family: Outfit, sans-serif; font-weight: 700; line-height: 1.12; letter-spacing: -0.02em; color: #fff; }
+    h2 { font-size: clamp(1.55rem, 3.8vh, 2.35rem); margin-bottom: 0.5rem; }
+    .gold-line { width: 64px; height: 4px; background: linear-gradient(90deg, #fff, #ffd0d0); border-radius: 2px; margin: 0.5rem 0 0.9rem; }
+    .lead { font-size: clamp(0.95rem, 1.7vh, 1.1rem); color: var(--muted); max-width: 760px; line-height: 1.5; }
+    .glass {
+      background: rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.28); border-radius: 22px;
+      padding: clamp(1.1rem, 2.5vh, 1.75rem) clamp(1.2rem, 3vw, 1.85rem);
+      box-shadow: 0 12px 40px rgba(80, 0, 0, 0.25);
+    }
+    #capa .inner { text-align: center; }
+    .capa-partnership {
+      display: flex; align-items: center; justify-content: center; gap: 0.75rem;
+      margin: 1rem 0 0.65rem; font-size: 1rem; color: var(--muted);
+    }
+    .capa-partnership .x { opacity: 0.5; }
+    #capa h1 { font-size: clamp(2rem, 6vh, 3.3rem); margin-bottom: 0.75rem; }
+    #capa h1 em { font-style: normal; color: #ffe8e8; }
+    .capa-badge {
+      display: inline-block; padding: 0.45rem 1rem; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.45); font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase; background: rgba(255,255,255,0.12);
+    }
+    .slide-hint { margin-top: 1.75rem; font-size: 0.85rem; color: rgba(255,255,255,0.5); }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.65rem; margin-top: 0.85rem; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; margin-top: 0.85rem; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.55rem; margin-top: 0.85rem; }
+    .card {
+      background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 14px; padding: 0.85rem 1rem;
+    }
+    .card-num { font-family: Outfit; font-size: 0.8rem; font-weight: 800; color: #ffe0e0; margin-bottom: 0.3rem; }
+    .card h3 { font-size: 0.98rem; margin-bottom: 0.3rem; }
+    .card p, .card li { font-size: 0.86rem; color: var(--muted); line-height: 1.45; }
+    .card ul { list-style: none; margin-top: 0.35rem; }
+    .card ul li { padding-left: 0.9rem; position: relative; margin-bottom: 0.2rem; }
+    .card ul li::before { content: "·"; position: absolute; left: 0; color: #fff; font-weight: 700; }
+    .tag-16h {
+      display: inline-block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; padding: 0.2rem 0.5rem; border-radius: 6px;
+      background: rgba(255,255,255,0.2); color: #fff; margin-bottom: 0.35rem;
+    }
+    .flow-row { display: flex; align-items: stretch; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap; }
+    .flow-step {
+      flex: 1; min-width: 110px; text-align: center; padding: 0.7rem 0.45rem;
+      background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.22); border-radius: 12px;
+    }
+    .flow-step .icon { font-family: Outfit; font-size: 1.15rem; font-weight: 800; margin-bottom: 0.25rem; }
+    .flow-step strong { display: block; font-size: 0.86rem; margin-bottom: 0.2rem; }
+    .flow-step span { font-size: 0.76rem; color: var(--muted); }
+    .flow-arrow { align-self: center; color: rgba(255,255,255,0.45); }
+    .plan {
+      border-radius: 16px; padding: 1rem 1.1rem;
+      border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.34);
+    }
+    .plan.featured { border-color: #fff; background: rgba(0,0,0,0.48); box-shadow: 0 8px 32px rgba(0,0,0,0.35); }
+    .plan-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #ffe8e8; margin-bottom: 0.35rem; }
+    .plan h3 { font-size: 1.05rem; margin-bottom: 0.15rem; }
+    .plan-sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.5rem; }
+    .plan-price { font-family: Outfit; font-size: 1.85rem; font-weight: 800; line-height: 1; color: #fff; }
+    .plan-price small { font-size: 0.85rem; font-weight: 600; color: var(--muted); }
+    .plan-discount { font-size: 0.82rem; color: #ffe0e0; margin-top: 0.25rem; font-weight: 600; }
+    .plan ul { list-style: none; margin-top: 0.55rem; }
+    .plan ul li { font-size: 0.84rem; color: var(--muted); padding: 0.15rem 0 0.15rem 0.9rem; position: relative; }
+    .plan ul li::before { content: "·"; position: absolute; left: 0; color: #fff; font-weight: 700; }
+    .price-lines { margin: 0.4rem 0 0.55rem; }
+    .price-line {
+      display: flex; justify-content: space-between; gap: 0.75rem;
+      font-size: 0.8rem; color: var(--muted); padding: 0.2rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .price-line:last-child { border-bottom: none; }
+    .price-line strong { color: #fff; font-weight: 700; }
+    .price-line .ok { color: #b7f7d0; }
+    .cta-box {
+      margin-top: 0.75rem; padding: 0.9rem 1.1rem; border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.35); background: rgba(255,255,255,0.14);
+    }
+    .cta-box h3 { font-size: 1rem; margin-bottom: 0.35rem; }
+    .cta-box p { font-size: 0.86rem; color: var(--muted); }
+    .quote {
+      margin: 0.75rem 0 0;
+      padding-left: 0.9rem;
+      border-left: 3px solid rgba(255,255,255,0.55);
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.35;
+    }
+    .quote span {
+      display: block; margin-top: 0.35rem; font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.65);
+    }
+    .bonus-box {
+      margin-top: 0.7rem; padding: 0.8rem 1rem; border-radius: 12px;
+      border: 1px solid rgba(183,247,208,0.35); background: rgba(52,211,153,0.14);
+    }
+    .bonus-box strong {
+      display: block; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: #b7f7d0; margin-bottom: 0.3rem;
+    }
+    .bonus-box p { font-size: 0.86rem; color: #e8fff2; }
+    .path-note {
+      margin-top: 0.75rem; padding: 0.75rem 1rem; border-radius: 12px;
+      border: 1px dashed rgba(255,255,255,0.4); background: rgba(255,255,255,0.08);
+      font-size: 0.86rem; color: #ffe8e8; font-weight: 600; text-align: center;
+    }
+    .ritual-table {
+      width: 100%; border-collapse: collapse; margin-top: 0.75rem; font-size: 0.84rem;
+    }
+    .ritual-table th, .ritual-table td {
+      padding: 0.5rem 0.55rem; border-bottom: 1px solid rgba(255,255,255,0.12);
+      text-align: left; color: var(--muted); vertical-align: top;
+    }
+    .ritual-table th {
+      font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
+      color: #ffe0e0; font-weight: 700;
+    }
+    .ritual-table td:first-child { color: #fff; font-weight: 700; white-space: nowrap; }
+    .invest-hero {
+      display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 0.85rem; margin-top: 0.85rem;
+    }
+    .strike { text-decoration: line-through; opacity: 0.65; font-size: 0.95rem; }
+    .deck-footer {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 150;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.65rem 1.25rem; background: rgba(107, 8, 12, 0.85);
+      border-top: 1px solid rgba(255,255,255,0.15); font-size: 0.8rem; color: rgba(255,255,255,0.75);
+    }
+    .progress-wrap { flex: 1; max-width: 220px; height: 4px; background: rgba(255,255,255,0.2); border-radius: 2px; margin: 0 1rem; }
+    .progress-fill { height: 100%; background: #fff; border-radius: 2px; width: 8%; transition: width 0.4s var(--ease); }
+    @keyframes rise-in {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    section.slide-active .inner > * { animation: rise-in 0.55s var(--ease) both; }
+    section.slide-active .inner > *:nth-child(2) { animation-delay: 0.06s; }
+    section.slide-active .inner > *:nth-child(3) { animation-delay: 0.12s; }
+    section.slide-active .inner > *:nth-child(4) { animation-delay: 0.18s; }
+    section.slide-active .card, section.slide-active .flow-step {
+      transition: transform 0.35s var(--ease), background 0.35s var(--ease);
+    }
+    section.slide-active .card:hover, section.slide-active .flow-step:hover {
+      transform: translateY(-3px); background: rgba(255,255,255,0.22);
+    }
+    @media (max-width: 760px) {
+      .grid-3, .grid-2, .grid-4, .invest-hero { grid-template-columns: 1fr; }
+      .nav-arrow--next { right: 1rem; }
+      .flow-arrow { display: none; }
+      .slide-logo { left: 1rem; top: 1rem; }
+      .ritual-table td:first-child { white-space: normal; }
+    }
+  </style>
+</head>
+<body>
+  <div class="blend-progress" aria-hidden="true"></div>
+
+  <nav class="nav-dots" aria-label="Slides">
+    <a href="#" data-slide="1" class="active" title="Capa"></a>
+    <a href="#" data-slide="2" title="Estratégia certa"></a>
+    <a href="#" data-slide="3" title="O que já ficou claro"></a>
+    <a href="#" data-slide="4" title="Por que EC agora"></a>
+    <a href="#" data-slide="5" title="Jornada da EC"></a>
+    <a href="#" data-slide="6" title="Entregáveis"></a>
+    <a href="#" data-slide="7" title="CRM e operação"></a>
+    <a href="#" data-slide="8" title="Treinamento"></a>
+    <a href="#" data-slide="9" title="Caminho do ROI"></a>
+    <a href="#" data-slide="10" title="Investimento"></a>
+    <a href="#" data-slide="11" title="Próximos passos"></a>
+  </nav>
+
+  <button type="button" class="nav-arrow nav-arrow--prev" id="prevBtn" disabled aria-label="Anterior">‹</button>
+  <button type="button" class="nav-arrow nav-arrow--next" id="nextBtn" aria-label="Próximo">›</button>
+
+  <template id="v4-logo-tpl">
+    <div class="slide-logo" aria-label="V4 Company">
+      <svg fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 77 20"><path fill="#fff" d="M33.023 3.575c-2.001.003-3.093 1.21-3.09 3.32l.008 6.858c.003 2.11 1.098 3.315 3.1 3.312 2-.003 3.092-1.21 3.09-3.32l-.009-6.858c-.003-2.11-1.097-3.315-3.099-3.312zm.015 11.606c-.649.001-1.057-.356-1.058-1.298l-.009-7.122c-.001-.942.406-1.3 1.055-1.302.648 0 1.057.357 1.058 1.299l.009 7.122c.001.942-.407 1.3-1.055 1.301zm-6.1-3.176l.002 1.884c.001.942-.406 1.282-1.055 1.283-.648 0-1.056-.338-1.058-1.28l-.009-7.122c-.001-.942.406-1.3 1.055-1.302.648 0 1.057.357 1.058 1.299l.002 1.413 1.927-.002-.002-1.281c-.002-2.11-1.041-3.315-3.043-3.313-2 .003-3.037 1.21-3.034 3.32l.008 6.859c.003 2.11 1.042 3.314 3.043 3.312 2.002-.003 3.038-1.21 3.035-3.32l-.002-1.752-1.927.002zM13.055 6.352L8.68 10.813c-.06.062-.017.166.067.166l4.382-.006a.096.096 0 00.096-.097l-.006-4.456c0-.087-.103-.13-.163-.068zm5.862 7.88l-2.687.004a.035.035 0 00-.035.035l.004 2.879c0 .02-.015.035-.035.035l-3.01.004a.035.035 0 01-.034-.035l-.004-2.879a.035.035 0 00-.034-.035l-8.796.012a.141.141 0 01-.14-.142l-.003-2.624v-.004a.795.795 0 01.223-.588l8.758-8.928a.035.035 0 01.025-.01l2.846-.004c.005 0 .009.001.014.003a.367.367 0 01.216.348l.01 8.677c0 .019.017.035.036.035l2.641-.004a.035.035 0 00.035-.035l-.011-8.5c-.002-1.364-1.1-2.478-2.442-2.476L4.18.016a.035.035 0 00-.034.036l.008 6.856c0 .031.037.047.06.025l4.994-5.064a.034.034 0 01.024-.01l2.603-.003c.03 0 .046.037.025.06l-8.118 8.41a.034.034 0 01-.049 0l-1.529-1.55a.036.036 0 01-.01-.026L2.143.074A.035.035 0 002.104.04C.976.185.086 1.131 0 2.294v5.972l.011 8.9a2.48 2.48 0 001.937 2.424h14.974c1.15-.199 2.034-1.224 2.032-2.448l-.003-2.873a.035.035 0 00-.035-.036zM66.47 3.682l.01 7.895-2.104-7.892-2.557.003.017 13.19 1.834-.003-.012-9.553 2.55 9.55 2.094-.004-.016-13.188-1.816.002zm-23.33.031l-1.378 9.366-1.513-9.362-2.835.003.017 13.19 1.779-.003-.012-9.327 1.532 9.325 1.927-.003 1.396-9.46.012 9.458 1.928-.002-.017-13.19-2.835.005h-.001zm33.133-.043l-1.946.002-1.549 6.013-1.564-6.009-2.131.003 2.587 8.814.005 4.371 2.039-.003-.006-4.37 2.565-8.821zm-20.44.026l-2.058 13.192 1.871-.003.35-2.393 2.501-.003.355 2.392 2.057-.003-2.092-13.186-2.983.004zm.42 9.005l.974-6.67.99 6.668-1.964.002zm-5.793-8.998l-3.002.004.017 13.189 2.038-.003-.006-4.955.964-.002c2.038-.002 3.037-1.153 3.035-3.263l-.003-1.715c-.002-2.11-1.005-3.258-3.043-3.255zm.008 6.35h-.964L49.5 5.589l.964-.001c.648-.001 1.001.3 1.002 1.242l.003 1.978c.001.942-.35 1.245-1 1.245z"></path></svg>
+    </div>
+  </template>
+
+  <div class="deck" id="deck">
+
+    <!-- 1 CAPA -->
+    <section id="capa" class="slide-active" data-slide="1">
+      <div class="inner">
+        <div class="capa-partnership">
+          <span>Estação Delta Emergência &amp; Facilities</span>
+          <span class="x">×</span>
+          <span>V4 Company</span>
+        </div>
+        <h1>Arrumar a casa<br /><em>para receber demanda</em></h1>
+        <p class="lead" style="margin:0.75rem auto 0;text-align:center;max-width:720px;">
+          Proposta de Estruturação Comercial: o passo estratégico certo para a Delta
+          converter oportunidade em receita previsível — antes de acelerar volume.
+        </p>
+        <span class="capa-badge" style="margin-top:1.25rem;">Estruturação Comercial · Implementação · Treinamento</span>
+        <p class="slide-hint">Setas, scroll ou swipe para avançar →</p>
+      </div>
+    </section>
+
+    <!-- 2 ESTRATÉGIA -->
+    <section id="estrategia" data-slide="2">
+      <div class="inner glass">
+        <p class="eyebrow">Leitura estratégica</p>
+        <h2>Crescimento na ordem certa.<br />Não é freio — é fundação.</h2>
+        <div class="gold-line"></div>
+        <p class="lead">
+          A Delta já enxerga o ROI do plano. O próximo movimento não é empilhar demanda:
+          é construir a máquina comercial que transforma cada oportunidade em contrato fechado.
+        </p>
+        <div class="grid-3">
+          <article class="card">
+            <div class="card-num">01</div>
+            <h3>Clareza de destino</h3>
+            <p>A projeção faz sentido. Sem ação estruturada, o resultado se posterga — e o cenário atual se repete.</p>
+          </article>
+          <article class="card">
+            <div class="card-num">02</div>
+            <h3>Prioridade real</h3>
+            <p>Antes de escalar atração, o comercial precisa de processo, donos, cadência e indicadores.</p>
+          </article>
+          <article class="card">
+            <div class="card-num">03</div>
+            <h3>Sequência inteligente</h3>
+            <p>Casa pronta → demanda aproveitada → crescimento sustentável. Essa é a rota alinhada ao momento da Delta.</p>
+          </article>
+        </div>
+        <p class="quote">
+          Estruturar agora é o investimento que desbloqueia o ROI que vocês já validaram.
+          <span>Estação Delta × V4 · Estratégia 2026</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- 3 O QUE FICOU CLARO -->
+    <section id="clareza" data-slide="3">
+      <div class="inner glass">
+        <p class="eyebrow">Contexto Estação Delta</p>
+        <h2>O que já ficou claro<br />na jornada juntos</h2>
+        <div class="gold-line"></div>
+        <div class="grid-2">
+          <article class="card">
+            <h3>O que vocês já validaram</h3>
+            <ul>
+              <li>A projeção de retorno faz sentido para o negócio</li>
+              <li>Sem mudança estruturada, o cenário atual se mantém — ou piora</li>
+              <li>Há abertura real para organizar o comercial</li>
+              <li>O time precisa estar pronto para receber e converter demanda</li>
+              <li>Parceria e execução prática já geram valor no dia a dia</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>O desafio de escala</h3>
+            <ul>
+              <li>Operação de emergência e facilities com rotina intensa</li>
+              <li>Mix de serviços com margens e ciclos diferentes</li>
+              <li>Comercial ainda sem governança repetível</li>
+              <li>Oportunidades que dependem de follow-up e proposta rápida</li>
+              <li>Crescimento exige base: funil, CRM, papéis e rituais</li>
+            </ul>
+          </article>
+        </div>
+        <div class="path-note">
+          Vocês disseram com clareza: é preciso arrumar a casa para receber demanda.
+          Esta proposta entrega exatamente isso.
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 POR QUE EC AGORA -->
+    <section id="porque" data-slide="4">
+      <div class="inner glass">
+        <p class="eyebrow">Por que Estruturação Comercial agora</p>
+        <h2>Demanda sem processo<br />não vira faturamento.</h2>
+        <div class="gold-line"></div>
+        <p class="lead">
+          Em emergência e facilities, a venda muitas vezes nasce de urgência, indicação e relacionamento.
+          Sem método, o time reage — e deixa receita na mesa.
+        </p>
+        <div class="grid-3">
+          <article class="card">
+            <div class="card-num">Vazamento</div>
+            <h3>Lead sem dono</h3>
+            <p>Contato entra, some no WhatsApp e a concorrência fecha. Cada silêncio é demanda já gerada.</p>
+          </article>
+          <article class="card">
+            <div class="card-num">Imprevisível</div>
+            <h3>Funil no feeling</h3>
+            <p>Sem etapas, SLA e motivos de perda, não dá para prever receita nem corrigir rota.</p>
+          </article>
+          <article class="card">
+            <div class="card-num">Escala</div>
+            <h3>Casa antes do volume</h3>
+            <p>Acelerar atração com comercial desorganizado multiplica esforço — não resultado.</p>
+          </article>
+        </div>
+        <p class="quote">
+          A EC é o produto certo neste momento: implementa a base que torna o ROI alcançável.
+          <span>Ordem certa · Valor máximo · Crescimento sustentável</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- 5 JORNADA -->
+    <section id="jornada" data-slide="5">
+      <div class="inner glass">
+        <p class="eyebrow">Como a Estruturação Comercial roda</p>
+        <h2>Do diagnóstico ao time<br />operando no padrão</h2>
+        <div class="gold-line"></div>
+        <p class="lead">Projeto de ativação com implementação, governança e treinamento — feito para a realidade da Delta.</p>
+        <div class="flow-row">
+          <div class="flow-step">
+            <div class="icon">01</div>
+            <strong>Diagnóstico</strong>
+            <span>Equipes, metas, gargalos e ICP</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">
+            <div class="icon">02</div>
+            <strong>Arquitetura</strong>
+            <span>Funil, KPIs, SLAs e papéis</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">
+            <div class="icon">03</div>
+            <strong>CRM operativo</strong>
+            <span>Pipes, automações e visão gerencial</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">
+            <div class="icon">04</div>
+            <strong>Playbooks</strong>
+            <span>Scripts, cadências e propostas</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">
+            <div class="icon">05</div>
+            <strong>Treinamento</strong>
+            <span>Imersão na nova rotina diária</span>
+          </div>
+        </div>
+        <div class="bonus-box">
+          <strong>Foco Delta</strong>
+          <p>Cada entrega é desenhada para o modelo de emergência &amp; facilities: resposta rápida, proposta clara, follow-up rígido e previsibilidade de fechamento.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 ENTREGÁVEIS -->
+    <section id="entregaveis" data-slide="6">
+      <div class="inner glass">
+        <p class="eyebrow">Escopo enriquecido · Estruturação Comercial</p>
+        <h2>Tudo que a Delta leva<br />para operar com padrão</h2>
+        <div class="gold-line"></div>
+        <div class="grid-2">
+          <article class="card">
+            <span class="tag-16h">Fundação comercial</span>
+            <h3>Diagnóstico + desenho</h3>
+            <ul>
+              <li>Mapeamento do funil atual e gargalos de conversão</li>
+              <li>Definição de ICP por linha de serviço</li>
+              <li>Metas, KPIs e indicadores de saúde do pipeline</li>
+              <li>SLAs de resposta, follow-up e passagem de bastão</li>
+              <li>Papéis claros: quem prospecta, quem fecha, quem gerencia</li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="tag-16h">Ativação</span>
+            <h3>Processo + materiais</h3>
+            <ul>
+              <li>Playbooks de abordagem, qualificação e fechamento</li>
+              <li>Scripts e cadências de follow-up pós-proposta</li>
+              <li>Estrutura de proposta comercial padronizada</li>
+              <li>Política de comissão / incentivos alinhados a meta</li>
+              <li>Rituais de gestão (daily/weekly) com pauta pronta</li>
+            </ul>
+          </article>
+        </div>
+        <div class="grid-3" style="margin-top:0.65rem;">
+          <article class="card">
+            <h3>Pré-qualificação</h3>
+            <p>Critérios para entrar no funil certo — menos tempo perdido em lead sem fit.</p>
+          </article>
+          <article class="card">
+            <h3>Motivos de perda</h3>
+            <p>Taxonomia clara para corrigir preço, prazo, escopo ou concorrência.</p>
+          </article>
+          <article class="card">
+            <h3>Visão gerencial</h3>
+            <p>Relatórios para enxergar travas na hora e tomar decisão com dados.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 CRM -->
+    <section id="crm" data-slide="7">
+      <div class="inner glass">
+        <p class="eyebrow">Incluído na Estruturação Comercial</p>
+        <h2>CRM operativo + governança<br />no dia a dia</h2>
+        <div class="gold-line"></div>
+        <p class="lead">
+          Não é só “ter CRM”. É transformar o CRM em sistema de operação:
+          cada oportunidade com dono, prazo e próximo passo.
+        </p>
+        <div class="grid-2">
+          <article class="card">
+            <h3>O que implementamos</h3>
+            <ul>
+              <li>Pipes e fases alinhados ao ciclo real da Delta</li>
+              <li>Conexão dos canais de captura (site, WhatsApp, indicação)</li>
+              <li>Automações de boas-vindas e follow-up</li>
+              <li>Campos obrigatórios para qualidade da informação</li>
+              <li>Dashboards de conversão, ciclo e gargalos</li>
+              <li>Rotina de higiene de base e atualização de status</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>O que muda na operação</h3>
+            <ul>
+              <li>Nenhuma proposta sem prazo de retorno</li>
+              <li>Pipeline legível para sócios e time comercial</li>
+              <li>Menos “cadê aquele cliente?” no grupo</li>
+              <li>Base pronta para receber mais demanda com controle</li>
+              <li>Decisão por indicador — não só por urgência</li>
+              <li>Cultura de processo repetível e treinável</li>
+            </ul>
+          </article>
+        </div>
+        <div class="bonus-box">
+          <strong>Bonificado na EC</strong>
+          <p>Reestruturação / implementação do CRM (pipes, fases, canais e automações básicas) inclusa no projeto — sem custo adicional de setup.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8 TREINAMENTO -->
+    <section id="treino" data-slide="8">
+      <div class="inner glass">
+        <p class="eyebrow">Capacitação do time</p>
+        <h2>Processo só funciona<br />quando o time opera</h2>
+        <div class="gold-line"></div>
+        <table class="ritual-table">
+          <thead>
+            <tr>
+              <th>Frente</th>
+              <th>O que acontece</th>
+              <th>Resultado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Imersão</td>
+              <td>Treinamento na nova rotina, scripts e uso do CRM</td>
+              <td>Time alinhado no mesmo padrão</td>
+            </tr>
+            <tr>
+              <td>Simulação</td>
+              <td>Roleplay de qualificação, proposta e objeção</td>
+              <td>Segurança na conversa comercial</td>
+            </tr>
+            <tr>
+              <td>Rituais</td>
+              <td>Instalação de daily/weekly com pauta e donos</td>
+              <td>Gestão leve e consistente</td>
+            </tr>
+            <tr>
+              <td>Acompanhamento</td>
+              <td>Ajustes finos após as primeiras semanas de uso</td>
+              <td>Adoção real — não só documentação</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="grid-3" style="margin-top:0.85rem;">
+          <article class="card">
+            <h3>Implementação</h3>
+            <p>Entrega hands-on: configura, documenta e coloca para rodar com o time.</p>
+          </article>
+          <article class="card">
+            <h3>Transferência</h3>
+            <p>Conhecimento fica na Delta — processo próprio, não dependência eterna.</p>
+          </article>
+          <article class="card">
+            <h3>Pronto para escala</h3>
+            <p>Quando a casa estiver organizada, o próximo nível de crescimento faz sentido.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9 CAMINHO ROI -->
+    <section id="roi" data-slide="9">
+      <div class="inner glass">
+        <p class="eyebrow">Do investimento ao retorno</p>
+        <h2>A EC é o elo entre<br />a projeção e a realidade</h2>
+        <div class="gold-line"></div>
+        <p class="lead">
+          Vocês já viram o ROI no plano. Esta etapa garante que a operação consiga
+          capturar esse retorno — com método, não com esforço solto.
+        </p>
+        <div class="flow-row">
+          <div class="flow-step">
+            <div class="icon">1</div>
+            <strong>Agora</strong>
+            <span>Estruturar comercial, CRM e time</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">
+            <div class="icon">2</div>
+            <strong>Em seguida</strong>
+            <span>Converter melhor a demanda atual</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">
+            <div class="icon">3</div>
+            <strong>Depois</strong>
+            <span>Acelerar volume com casa pronta</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">
+            <div class="icon">4</div>
+            <strong>Resultado</strong>
+            <span>ROI com previsibilidade</span>
+          </div>
+        </div>
+        <div class="grid-2" style="margin-top:0.85rem;">
+          <article class="card">
+            <h3>O que esta etapa maximiza</h3>
+            <ul>
+              <li>Taxa de conversão de propostas</li>
+              <li>Velocidade de resposta e follow-up</li>
+              <li>Previsibilidade de fechamento</li>
+              <li>Clareza de metas e accountability</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>O que fica preparado</h3>
+            <ul>
+              <li>Base para atrair mais demanda com controle</li>
+              <li>Time treinado e rituais instalados</li>
+              <li>Indicadores para decidir o próximo investimento</li>
+              <li>Caminho natural para o próximo nível com a V4</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 INVESTIMENTO -->
+    <section id="investimento" data-slide="10">
+      <div class="inner glass">
+        <p class="eyebrow">Investimento · Estruturação Comercial</p>
+        <h2>Condição especial<br />para ativar a base agora</h2>
+        <div class="gold-line"></div>
+        <div class="invest-hero">
+          <article class="plan featured">
+            <div class="plan-label">Projeto · Estruturação Comercial</div>
+            <h3>Máquina comercial da Delta</h3>
+            <p class="plan-sub">Diagnóstico · Funil · CRM · Playbooks · Treinamento</p>
+            <div class="price-lines">
+              <div class="price-line"><span>Valor do projeto</span><strong class="strike">R$ 20.283,13</strong></div>
+              <div class="price-line"><span>Condição parcelada</span><strong class="ok">12× de R$ 1.183,18</strong></div>
+            </div>
+            <div class="plan-price">R$ 1.183,18 <small>/mês · 12×</small></div>
+            <p class="plan-discount">Desconto aplicado · pagamento facilitado em 12 parcelas</p>
+            <ul>
+              <li>Diagnóstico, ICP, funil, KPIs e SLAs</li>
+              <li>Playbooks, scripts e rituais de gestão</li>
+              <li>CRM operativo com automações básicas</li>
+              <li>Treinamento e implementação com o time</li>
+              <li>Base pronta para o próximo nível de crescimento</li>
+            </ul>
+          </article>
+          <div>
+            <article class="card">
+              <h3>Por que este formato</h3>
+              <p>Investimento calibrado ao momento da Delta: ativa a fundação comercial com previsibilidade de caixa, sem comprometer a operação.</p>
+            </article>
+            <article class="card" style="margin-top:0.65rem;">
+              <h3>O que vocês compram</h3>
+              <p>Não é “consultoria de slides”. É implementação + treinamento para o comercial passar a rodar com padrão — e o ROI deixar de ser só projeção.</p>
+            </article>
+            <div class="bonus-box">
+              <strong>Incluso</strong>
+              <p>Reestruturação do CRM bonificada no projeto.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 PRÓXIMOS PASSOS -->
+    <section id="proximos" data-slide="11">
+      <div class="inner glass">
+        <p class="eyebrow">Fechamento</p>
+        <h2>Próximos passos</h2>
+        <div class="gold-line"></div>
+        <div class="flow-row">
+          <div class="flow-step">
+            <div class="icon">01</div>
+            <strong>Alinhamento</strong>
+            <span>Validar escopo e condição 12×</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">
+            <div class="icon">02</div>
+            <strong>Formalização</strong>
+            <span>Contrato e kick-off administrativo</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">
+            <div class="icon">03</div>
+            <strong>Onboarding</strong>
+            <span>Acessos, diagnóstico e mapa do funil</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">
+            <div class="icon">04</div>
+            <strong>Ativação</strong>
+            <span>CRM, playbooks e treinamento do time</span>
+          </div>
+        </div>
+        <div class="cta-box" style="margin-top:1rem;">
+          <h3>O que a Estação Delta leva com a V4</h3>
+          <p>
+            Uma estrutura comercial pronta para receber demanda, converter com método
+            e criar a base do ROI que vocês já validaram. Casa organizada. Time no padrão.
+            Crescimento na sequência certa.
+          </p>
+        </div>
+        <p class="quote" style="margin-top:0.9rem;">
+          Arrumar a casa hoje. Acelerar com previsibilidade amanhã.
+          <span>Estação Delta Emergência &amp; Facilities × V4 Company · Proposta 2026</span>
+        </p>
+      </div>
+    </section>
+
+  </div>
+
+  <footer class="deck-footer">
+    <span>Estação Delta × V4 · Estruturação Comercial</span>
+    <div class="progress-wrap"><div class="progress-fill" id="progressFill"></div></div>
+    <span id="slideCounter">1 / 11</span>
+  </footer>
+
+  <script>
+  (function () {
+    const tpl = document.getElementById("v4-logo-tpl");
+    document.querySelectorAll("#deck section").forEach((slide) => {
+      slide.insertBefore(tpl.content.cloneNode(true), slide.firstChild);
+    });
+
+    const TOTAL = 11;
+    let current = 1;
+    const slides = Array.from(document.querySelectorAll("#deck section[id]"));
+    const navLinks = document.querySelectorAll(".nav-dots a");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const progressFill = document.getElementById("progressFill");
+    const slideCounter = document.getElementById("slideCounter");
+    const blendBar = document.querySelector(".blend-progress");
+
+    function updateUI() {
+      const p = current / TOTAL;
+      if (progressFill) progressFill.style.width = (p * 100) + "%";
+      if (slideCounter) slideCounter.textContent = current + " / " + TOTAL;
+      if (blendBar) blendBar.style.transform = "scaleX(" + Math.max(0.05, p) + ")";
+      document.documentElement.style.setProperty("--slide-progress", p);
+      if (prevBtn) prevBtn.disabled = current === 1;
+      if (nextBtn) nextBtn.disabled = current === TOTAL;
+      navLinks.forEach((a) => a.classList.toggle("active", Number(a.dataset.slide) === current));
+    }
+
+    function goTo(n, dir) {
+      if (n < 1 || n > TOTAL || n === current) return;
+      const prev = slides[current - 1];
+      const next = slides[n - 1];
+      const fwd = dir === "forward" || (dir !== "back" && n > current);
+      prev.classList.remove("slide-active");
+      prev.classList.add(fwd ? "slide-exit-left" : "slide-exit-right");
+      setTimeout(() => prev.classList.remove("slide-exit-left", "slide-exit-right"), 420);
+      next.classList.add("slide-active");
+      current = n;
+      updateUI();
+    }
+
+    if (prevBtn) prevBtn.addEventListener("click", () => goTo(current - 1, "back"));
+    if (nextBtn) nextBtn.addEventListener("click", () => goTo(current + 1, "forward"));
+    navLinks.forEach((a) => a.addEventListener("click", (e) => { e.preventDefault(); goTo(Number(a.dataset.slide)); }));
+
+    document.addEventListener("wheel", (e) => {
+      if (Math.abs(e.deltaY) < 20) return;
+      e.preventDefault();
+      goTo(current + (e.deltaY > 0 ? 1 : -1), e.deltaY > 0 ? "forward" : "back");
+    }, { passive: false });
+
+    document.addEventListener("keydown", (e) => {
+      if (["ArrowRight", " ", "PageDown"].includes(e.key)) { e.preventDefault(); goTo(current + 1, "forward"); }
+      if (["ArrowLeft", "PageUp"].includes(e.key)) { e.preventDefault(); goTo(current - 1, "back"); }
+    });
+
+    let tx = 0;
+    document.addEventListener("touchstart", (e) => { tx = e.changedTouches[0].screenX; }, { passive: true });
+    document.addEventListener("touchend", (e) => {
+      const dx = e.changedTouches[0].screenX - tx;
+      if (Math.abs(dx) > 50) goTo(current + (dx < 0 ? 1 : -1), dx < 0 ? "forward" : "back");
+    }, { passive: true });
+
+    updateUI();
+  })();
+  </script>
+</body>
+</html>
