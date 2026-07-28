@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Script de Pitch · Estação Delta · Estruturação Comercial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #140608;
+      --surf: rgba(255,255,255,.06);
+      --bd: rgba(255,255,255,.14);
+      --txt: #fff;
+      --mut: rgba(255,255,255,.78);
+      --red: #e11d24;
+      --soft: #ffd0d0;
+      --ok: #86efac;
+      --warn: #fde68a;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font: 15px/1.55 "Plus Jakarta Sans", system-ui, sans-serif;
+      color: var(--txt);
+      background:
+        radial-gradient(ellipse 70% 40% at 10% 0%, rgba(225,29,36,.35), transparent 55%),
+        radial-gradient(ellipse 50% 35% at 90% 10%, rgba(255,80,80,.18), transparent 50%),
+        linear-gradient(180deg, #1a090b 0%, #0d0405 100%);
+      padding-bottom: 64px;
+    }
+    h1, h2, h3 { font-family: Outfit, sans-serif; letter-spacing: -.02em; line-height: 1.15; }
+    .top {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(13,4,5,.88);
+      border-bottom: 1px solid var(--bd);
+      padding: 14px 20px;
+      display: flex; gap: 12px; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    }
+    .brand { font-weight: 800; font-size: 15px; }
+    .brand span { color: #fda4af; }
+    .pill {
+      font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      border: 1px solid var(--bd); border-radius: 999px; padding: 6px 12px; color: var(--mut);
+    }
+    .wrap { max-width: 920px; margin: 0 auto; padding: 28px 20px 0; }
+    .hero {
+      border: 1px solid var(--bd); border-radius: 20px; padding: 28px 24px;
+      background: linear-gradient(135deg, rgba(225,29,36,.2), rgba(255,255,255,.04));
+      margin-bottom: 18px;
+    }
+    .hero h1 { margin: 0 0 10px; font-size: clamp(26px, 4vw, 36px); }
+    .hero p { margin: 0; color: var(--mut); max-width: 720px; }
+    .nav {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 8px; margin: 18px 0 8px;
+    }
+    .nav a {
+      text-decoration: none; color: var(--mut); font-size: 12px; font-weight: 700;
+      border: 1px solid var(--bd); background: var(--surf); border-radius: 12px;
+      padding: 10px 12px; transition: .2s;
+    }
+    .nav a:hover { color: #fff; border-color: rgba(255,255,255,.35); background: rgba(225,29,36,.18); }
+    .nav a small { display: block; color: #fda4af; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 3px; }
+    .callout {
+      margin: 16px 0 22px; padding: 14px 16px; border-radius: 14px;
+      border: 1px solid rgba(253,230,138,.3); background: rgba(253,230,138,.08);
+      color: var(--warn); font-size: 14px;
+    }
+    .callout strong { color: #fef08a; }
+    .slide {
+      border: 1px solid var(--bd); border-radius: 18px; background: rgba(20,8,10,.72);
+      padding: 22px 20px; margin-bottom: 16px;
+    }
+    .slide-head {
+      display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+      align-items: flex-start; margin-bottom: 14px;
+      padding-bottom: 12px; border-bottom: 1px solid var(--bd);
+    }
+    .slide-num {
+      font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #fda4af;
+    }
+    .slide h2 { margin: 4px 0 0; font-size: clamp(20px, 3vw, 26px); }
+    .slide-ref {
+      font-size: 12px; color: var(--mut); border: 1px solid var(--bd);
+      border-radius: 999px; padding: 6px 10px; white-space: nowrap;
+    }
+    .objetivo {
+      display: inline-block; margin-bottom: 12px; font-size: 12px; font-weight: 700;
+      color: var(--ok); background: rgba(134,239,172,.1); border: 1px solid rgba(134,239,172,.25);
+      border-radius: 999px; padding: 5px 10px;
+    }
+    .fala {
+      background: rgba(255,255,255,.05); border-left: 3px solid var(--red);
+      border-radius: 0 12px 12px 0; padding: 14px 16px; margin: 0 0 14px;
+      color: #fff; font-size: 15px; line-height: 1.6;
+    }
+    .fala em { color: #ffe4e6; font-style: normal; font-weight: 700; }
+    .bloco { margin-bottom: 14px; }
+    .bloco h3 {
+      margin: 0 0 8px; font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: #fda4af;
+    }
+    .bloco ul { margin: 0; padding-left: 18px; color: var(--mut); }
+    .bloco li { margin-bottom: 6px; }
+    .bloco li strong { color: #fff; }
+    .roi-bridge {
+      margin-top: 12px; padding: 12px 14px; border-radius: 12px;
+      background: rgba(134,239,172,.08); border: 1px solid rgba(134,239,172,.22);
+      color: #bbf7d0; font-size: 14px;
+    }
+    .roi-bridge strong { color: var(--ok); }
+    .ask {
+      margin-top: 12px; padding: 12px 14px; border-radius: 12px;
+      background: rgba(255,255,255,.05); border: 1px dashed rgba(255,255,255,.25);
+      color: #ffe4e6; font-size: 14px;
+    }
+    .ask strong { color: #fff; }
+    .footer-note {
+      margin-top: 8px; color: rgba(255,255,255,.55); font-size: 13px; text-align: center;
+    }
+    .links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .links a {
+      color: #fff; text-decoration: none; font-size: 12px; font-weight: 700;
+      background: rgba(225,29,36,.85); border-radius: 999px; padding: 8px 14px;
+    }
+    .links a.sec { background: transparent; border: 1px solid var(--bd); color: var(--mut); }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <div class="brand">Script de Pitch · <span>Estação Delta × V4</span></div>
+    <div class="pill">Uso interno · Exclusive · EC</div>
+  </div>
+
+  <div class="wrap">
+    <header class="hero">
+      <h1>Roteiro de apresentação · Estruturação Comercial</h1>
+      <p>
+        Script por slide para conduzir o pitch com autoridade. Cada bloco amarra a entrega
+        ao <strong>ROI que a Delta já validou</strong>: sem casa comercial pronta, a projeção não vira realidade.
+      </p>
+      <div class="links">
+        <a href="https://sarapizzico-hue.github.io/Sara/proposta-estacao-delta-ec.html" target="_blank" rel="noopener">Abrir deck do cliente</a>
+        <a class="sec" href="#s1">Ir para o roteiro ↓</a>
+      </div>
+    </header>
+
+    <div class="callout">
+      <strong>Linha mestra da call:</strong> “Vocês já entenderam o ROI. Agora o passo certo é estruturar o comercial para capturar esse retorno — arrumar a casa para receber e converter demanda.”
+      Nunca falar em “não tem caixa / não dá para pagar”. Sempre falar em <strong>sequência estratégica</strong>.
+    </div>
+
+    <nav class="nav" aria-label="Slides">
+      <a href="#s1"><small>Slide 01</small>Capa</a>
+      <a href="#s2"><small>Slide 02</small>Estratégia</a>
+      <a href="#s3"><small>Slide 03</small>Contexto</a>
+      <a href="#s4"><small>Slide 04</small>Por que EC</a>
+      <a href="#s5"><small>Slide 05</small>Jornada</a>
+      <a href="#s6"><small>Slide 06</small>Entregáveis</a>
+      <a href="#s7"><small>Slide 07</small>CRM</a>
+      <a href="#s8"><small>Slide 08</small>Treinamento</a>
+      <a href="#s9"><small>Slide 09</small>Caminho ROI</a>
+      <a href="#s10"><small>Slide 10</small>Investimento</a>
+      <a href="#s11"><small>Slide 11</small>Fechamento</a>
+    </nav>
+
+    <!-- 01 -->
+    <article class="slide" id="s1">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 01 · Capa</div>
+          <h2>Arrumar a casa para receber demanda</h2>
+        </div>
+        <div class="slide-ref">~ 45–60s</div>
+      </div>
+      <div class="objetivo">Objetivo: ancorar a tese e abrir a call com autoridade</div>
+      <div class="fala">
+        “Antes de qualquer número, quero alinhar o ponto central: a Estação Delta já enxergou o ROI do plano.
+        O que trouxemos hoje não é mais uma projeção — é o <em>passo estratégico certo</em> para esse ROI
+        começar a acontecer de verdade. Arrumar a casa comercial para receber demanda, converter com método
+        e criar previsibilidade. Em emergência e facilities, quem responde rápido e com processo fecha.
+        Quem reage no feeling deixa receita na mesa.”
+      </div>
+      <div class="bloco">
+        <h3>Enriquecimento / ancoragem</h3>
+        <ul>
+          <li><strong>Reconhecer o cliente:</strong> “Vocês entenderam o retorno — isso é raro e importante.”</li>
+          <li><strong>Nomear o produto:</strong> Estruturação Comercial com implementação + treinamento (não consultoria de PDF).</li>
+          <li><strong>Promessa da call:</strong> sair com clareza do que muda no dia a dia e como isso destrava o ROI.</li>
+        </ul>
+      </div>
+      <div class="roi-bridge"><strong>Ponte ROI:</strong> “Toda projeção assume uma máquina comercial funcionando. Hoje vamos montar essa máquina.”</div>
+      <div class="ask"><strong>Pergunta de abertura:</strong> “Só para confirmar: o que mais pesou pra vocês quando olharam a projeção — o prazo de payback ou o potencial de crescimento?”</div>
+    </article>
+
+    <!-- 02 -->
+    <article class="slide" id="s2">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 02 · Estratégia</div>
+          <h2>Crescimento na ordem certa</h2>
+        </div>
+        <div class="slide-ref">~ 1–1,5 min</div>
+      </div>
+      <div class="objetivo">Objetivo: vender a sequência (fundação → conversão → escala)</div>
+      <div class="fala">
+        “Muita empresa erra a ordem: acelera demanda antes de ter comercial pronto.
+        Isso não é crescimento — é pressão. Na Delta, a leitura estratégica é outra:
+        <em>clareza de destino</em> (vocês já têm), <em>prioridade real</em> (processo, donos, cadência, indicadores)
+        e <em>sequência inteligente</em>: casa pronta, demanda aproveitada, crescimento sustentável.
+        Estruturar agora não é freio. É o investimento que desbloqueia o ROI que vocês já validaram.”
+      </div>
+      <div class="bloco">
+        <h3>Enriquecimento por card</h3>
+        <ul>
+          <li><strong>01 Clareza:</strong> “Vocês disseram que faz sentido — e que sem ação o cenário se repete ou piora. Isso já é consciência de dono.”</li>
+          <li><strong>02 Prioridade:</strong> “Atração sem SLA, funil e follow-up é combustível sem motor.”</li>
+          <li><strong>03 Sequência:</strong> “Primeiro capturar melhor a demanda que já existe; depois sim acelerar volume com controle.”</li>
+        </ul>
+      </div>
+      <div class="roi-bridge"><strong>Ponte ROI:</strong> “O ROI não falha na planilha. Ele falha quando a operação não consegue executar a hipótese. A EC fecha essa lacuna.”</div>
+      <div class="ask"><strong>Check:</strong> “Faz sentido pra vocês essa ordem — estruturar antes de empurrar volume?”</div>
+    </article>
+
+    <!-- 03 -->
+    <article class="slide" id="s3">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 03 · Contexto</div>
+          <h2>O que já ficou claro na jornada</h2>
+        </div>
+        <div class="slide-ref">~ 1,5 min</div>
+      </div>
+      <div class="objetivo">Objetivo: espelhar o cliente e criar “foi vocês que disseram”</div>
+      <div class="fala">
+        “Quero espelhar o que já construímos juntos. Vocês validaram a projeção. Entenderam que
+        sem mudança estruturada o cenário atual se mantém. E — ponto decisivo — vocês mesmos
+        trouxeram: <em>é preciso arrumar a casa para receber demanda</em>.
+        Do outro lado, a operação de emergência e facilities é intensa, o mix de serviços tem
+        margens e ciclos diferentes, e o comercial ainda não tem governança repetível.
+        Ou seja: o desafio não é ‘acreditar no ROI’. É ter a estrutura que permite realizar o ROI.”
+      </div>
+      <div class="bloco">
+        <h3>Enriquecimento setorial</h3>
+        <ul>
+          <li><strong>Emergência:</strong> lead quente, janela curta, proposta rápida, follow-up no mesmo dia.</li>
+          <li><strong>Facilities / limpeza:</strong> recorrência, renovação, ticket e margem diferentes — ICP e discurso não podem ser iguais.</li>
+          <li><strong>Indicação / relacionamento:</strong> forte no setor; sem CRM e cadência, a indicação morre no WhatsApp.</li>
+          <li><strong>Frase âncora:</strong> repetir a fala deles — “arrumar a casa” — como título da solução.</li>
+        </ul>
+      </div>
+      <div class="roi-bridge"><strong>Ponte ROI:</strong> “O plano de ROI assume conversão. Conversão assume processo. Processo é o que estamos propondo agora.”</div>
+      <div class="ask"><strong>Validação:</strong> “Se eu resumir o gargalo em uma frase — comercial ainda sem padrão para converter a demanda que chega — vocês concordam?”</div>
+    </article>
+
+    <!-- 04 -->
+    <article class="slide" id="s4">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 04 · Por que EC agora</div>
+          <h2>Demanda sem processo não vira faturamento</h2>
+        </div>
+        <div class="slide-ref">~ 2 min</div>
+      </div>
+      <div class="objetivo">Objetivo: criar urgência racional (custo de não estruturar)</div>
+      <div class="fala">
+        “Aqui está o porquê de Estruturação Comercial ser o produto certo neste momento.
+        Em vocês, a venda nasce de urgência, indicação e relacionamento. Isso é ótimo —
+        e perigoso se não tiver método. Porque cada lead sem dono, cada proposta sem prazo
+        de retorno, cada funil no feeling é <em>ROI vazando</em>.
+        Acelerar atração com a casa desorganizada multiplica esforço, não resultado.
+        Por isso a EC agora: ela implementa a base que torna o ROI alcançável.”
+      </div>
+      <div class="bloco">
+        <h3>Dramatizar os 3 vazamentos (com exemplos Delta)</h3>
+        <ul>
+          <li><strong>Lead sem dono:</strong> “Cliente pede orçamento de equipe / limpeza / salvamento. Some no WhatsApp. Três dias depois já fechou com outro. A demanda existia — faltou processo.”</li>
+          <li><strong>Funil no feeling:</strong> “Sem etapas e motivo de perda, vocês não sabem se o problema é preço, prazo, escopo ou silêncio. Sem diagnóstico, não tem correção — e o ROI fica no escuro.”</li>
+          <li><strong>Casa antes do volume:</strong> “Trazer mais lead agora é colocar mais água num cano furado. Primeiro veda. Depois abre o registro.”</li>
+        </ul>
+      </div>
+      <div class="roi-bridge"><strong>Ponte ROI:</strong> “Cada 1% a mais de conversão no funil atual já melhora o retorno do plano — sem precisar gastar mais em mídia. A EC ataca exatamente isso.”</div>
+      <div class="ask"><strong>Micro-fechamento:</strong> “Entre gerar mais lead hoje ou converter melhor o que já chega, onde está a maior alavanca pra Delta neste trimestre?”</div>
+    </article>
+
+    <!-- 05 -->
+    <article class="slide" id="s5">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 05 · Jornada</div>
+          <h2>Do diagnóstico ao time no padrão</h2>
+        </div>
+        <div class="slide-ref">~ 1,5–2 min</div>
+      </div>
+      <div class="objetivo">Objetivo: mostrar que é implementação (não teoria)</div>
+      <div class="fala">
+        “Como a EC roda na prática: cinco etapas, todas hands-on.
+        Começamos pelo <em>diagnóstico</em> — equipes, metas, gargalos, ICP por linha de serviço.
+        Depois <em>arquitetura</em>: funil, KPIs, SLAs e papéis.
+        Em seguida o <em>CRM operativo</em> — pipes, automações, visão gerencial.
+        Depois <em>playbooks</em>: scripts, cadências, proposta padronizada.
+        E fechamos com <em>treinamento</em>, para o time operar no padrão no dia a dia.
+        Tudo desenhado para emergência e facilities: resposta rápida, proposta clara, follow-up rígido.”
+      </div>
+      <div class="bloco">
+        <h3>Enriquecimento de confiança</h3>
+        <ul>
+          <li>Enfatizar: “não entregamos só documento — instalamos rotina.”</li>
+          <li>Conectar cada etapa a um KPI do ROI: conversão, ciclo, taxa de follow-up, ticket médio, previsibilidade.</li>
+          <li>Frisar personalização: limpeza × emergência não compartilham o mesmo discurso nem o mesmo SLA.</li>
+        </ul>
+      </div>
+      <div class="roi-bridge"><strong>Ponte ROI:</strong> “O plano de ROI precisa de um ‘como’. Essa jornada é o como — do diagnóstico à operação rodando.”</div>
+      <div class="ask"><strong>Engajamento:</strong> “Hoje, se eu perguntar qual é a taxa de conversão de proposta → contrato, vocês têm esse número na ponta da língua?”</div>
+    </article>
+
+    <!-- 06 -->
+    <article class="slide" id="s6">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 06 · Entregáveis</div>
+          <h2>Tudo que a Delta leva para operar com padrão</h2>
+        </div>
+        <div class="slide-ref">~ 2–2,5 min</div>
+      </div>
+      <div class="objetivo">Objetivo: maximizar valor percebido (densidade de entrega)</div>
+      <div class="fala">
+        “Aqui está o enriquecimento do escopo — porque Estruturação Comercial, do jeito que
+        a Delta precisa, não é ‘desenhar um funil e tchau’. Vocês levam fundação e ativação.
+        Na fundação: mapa do funil e gargalos, ICP por serviço, metas e KPIs, SLAs de resposta
+        e follow-up, papéis claros de quem prospecta, quem fecha e quem gerencia.
+        Na ativação: playbooks, scripts, cadência pós-proposta, modelo de proposta,
+        política de incentivo e rituais de gestão com pauta pronta.
+        E ainda: pré-qualificação, motivos de perda e visão gerencial.
+        Isso é o sistema que faz o ROI sair da planilha e entrar no operacional.”
+      </div>
+      <div class="bloco">
+        <h3>Como vender cada bloco (ROI language)</h3>
+        <ul>
+          <li><strong>ICP por linha:</strong> “Para de gastar energia em lead que não fecha / não tem margem.”</li>
+          <li><strong>SLA:</strong> “Em emergência, velocidade é diferencial competitivo — SLA vira vantagem comercial.”</li>
+          <li><strong>Playbooks:</strong> “O fechamento deixa de depender de uma pessoa genial e vira padrão do time.”</li>
+          <li><strong>Motivos de perda:</strong> “Vocês passam a corrigir a causa — preço, prazo, escopo — em vez de chutar.”</li>
+          <li><strong>Rituais:</strong> “Gestão leve, sem reunião infinita: 15 minutos com pauta e dono.”</li>
+        </ul>
+      </div>
+      <div class="roi-bridge"><strong>Ponte ROI:</strong> “Cada entregável existe para defender uma premissa do plano: mais conversão, ciclo menor, previsibilidade maior.”</div>
+      <div class="ask"><strong>Priorização:</strong> “Se eu tivesse que escolher só três entregas para impacto em 30 dias — SLA + follow-up + CRM — isso já mudaria o jogo de vocês?”</div>
+    </article>
+
+    <!-- 07 -->
+    <article class="slide" id="s7">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 07 · CRM</div>
+          <h2>CRM operativo + governança no dia a dia</h2>
+        </div>
+        <div class="slide-ref">~ 2 min</div>
+      </div>
+      <div class="objetivo">Objetivo: transformar CRM de “ferramenta” em “sistema de ROI”</div>
+      <div class="fala">
+        “Importante: não é ‘ter CRM’. É o CRM virar o sistema nervoso do comercial.
+        Cada oportunidade com dono, prazo e próximo passo. Pipes alinhados ao ciclo real da Delta,
+        canais conectados — site, WhatsApp, indicação —, automações de boas-vindas e follow-up,
+        campos obrigatórios, dashboard de conversão e gargalos.
+        O que muda no dia a dia: nenhuma proposta sem retorno marcado; pipeline legível para sócios;
+        menos ‘cadê aquele cliente?’ no grupo; decisão por indicador, não só por urgência.
+        E isso entra <em>bonificado</em> na EC — sem custo extra de setup.”
+      </div>
+      <div class="bloco">
+        <h3>Histórias rápidas para ancorar</h3>
+        <ul>
+          <li>“Hoje o ouro está no celular de alguém. Amanhã está no funil, com SLA.”</li>
+          <li>“Se o sócio abrir o CRM às 18h e souber o que fecha esta semana, vocês saíram do feeling.”</li>
+          <li>“Indicação que entra e não é tratada em X horas é ROI evaporando.”</li>
+        </ul>
+      </div>
+      <div class="roi-bridge"><strong>Ponte ROI:</strong> “Sem CRM operativo, vocês não medem o funil. Sem medir, não gerenciam. Sem gerenciar, o ROI é fé — não gestão.”</div>
+      <div class="ask"><strong>Dor:</strong> “Hoje, quanto do pipeline está só no WhatsApp / cabeça das pessoas?”</div>
+    </article>
+
+    <!-- 08 -->
+    <article class="slide" id="s8">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 08 · Treinamento</div>
+          <h2>Processo só funciona quando o time opera</h2>
+        </div>
+        <div class="slide-ref">~ 1,5 min</div>
+      </div>
+      <div class="objetivo">Objetivo: matar objeção “vai ficar na gaveta”</div>
+      <div class="fala">
+        “Processo sem adoção é PDF. Por isso a EC inclui capacitação de verdade:
+        imersão na rotina e no CRM, simulação de qualificação/proposta/objeção,
+        instalação de daily/weekly com pauta, e acompanhamento nas primeiras semanas
+        para ajuste fino. O conhecimento fica na Delta — transferência, não dependência eterna.
+        Quando a casa estiver organizada, aí sim o próximo nível de crescimento faz sentido.”
+      </div>
+      <div class="bloco">
+        <h3>Enriquecimento</h3>
+        <ul>
+          <li><strong>Roleplay:</strong> treinar objeções típicas do setor (preço, prazo de mobilização, concorrência local).</li>
+          <li><strong>Rituais:</strong> daily comercial curta + weekly de pipeline com metas do ROI.</li>
+          <li><strong>Adoção:</strong> “A gente não considera entregue quando documenta. Considera entregue quando o time usa.”</li>
+        </ul>
+      </div>
+      <div class="roi-bridge"><strong>Ponte ROI:</strong> “O ROI depende de comportamento repetido. Treinamento + ritual transformam o plano em hábito operacional.”</div>
+      <div class="ask"><strong>Check de time:</strong> “Quem precisa estar no treinamento além de vocês para a adoção acontecer de verdade?”</div>
+    </article>
+
+    <!-- 09 -->
+    <article class="slide" id="s9">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 09 · Caminho do ROI</div>
+          <h2>A EC é o elo entre projeção e realidade</h2>
+        </div>
+        <div class="slide-ref">~ 2 min · slide-chave</div>
+      </div>
+      <div class="objetivo">Objetivo: fechar a lógica “precisa disso para o ROI”</div>
+      <div class="fala">
+        “Este é o slide mais importante. Vocês já viram o ROI no plano.
+        Esta etapa é o elo entre a projeção e a realidade.
+        Agora: estruturar comercial, CRM e time.
+        Em seguida: converter melhor a demanda atual — mais fechamento com o que já existe.
+        Depois: acelerar volume com a casa pronta.
+        Resultado: ROI com previsibilidade.
+        O que maximizamos nesta etapa: taxa de conversão, velocidade de resposta, previsibilidade,
+        clareza de meta. O que fica preparado: base para atrair mais demanda com controle,
+        time treinado, indicadores para decidir o próximo investimento.
+        Sem esse elo, a projeção continua bonita — e o resultado se posterga.”
+      </div>
+      <div class="bloco">
+        <h3>Linguagem de fechamento lógico</h3>
+        <ul>
+          <li>“Não estamos pedindo para acreditar de novo no ROI. Estamos propondo o mecanismo que realiza o ROI.”</li>
+          <li>“Adiar a estrutura é adiar o payback que vocês já entenderam.”</li>
+          <li>“O investimento da EC é o menor elo da corrente — e o que segura o resto.”</li>
+        </ul>
+      </div>
+      <div class="roi-bridge"><strong>Ponte ROI (frase de ouro):</strong> “Se o plano de ROI fosse um carro, a EC é o motor. Sem motor, combustível não adianta.”</div>
+      <div class="ask"><strong>Commit verbal:</strong> “Olhando essa sequência, faz sentido começar pela estrutura comercial como etapa 1 do ROI de vocês?”</div>
+    </article>
+
+    <!-- 10 -->
+    <article class="slide" id="s10">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 10 · Investimento</div>
+          <h2>Condição para ativar a base agora</h2>
+        </div>
+        <div class="slide-ref">~ 1,5–2 min</div>
+      </div>
+      <div class="objetivo">Objetivo: ancorar valor e apresentar 12× com leveza estratégica</div>
+      <div class="fala">
+        “Investimento do projeto de Estruturação Comercial: valor de R$ 20.283,13.
+        Condição especial aplicada: <em>12 vezes de R$ 1.183,18</em>.
+        Isso ativa a máquina comercial da Delta — diagnóstico, funil, CRM, playbooks e treinamento —
+        com previsibilidade de caixa, calibrado ao momento de vocês.
+        O que vocês compram não é consultoria de slides: é implementação + capacitação
+        para o comercial rodar com padrão e o ROI deixar de ser só projeção.
+        CRM bonificado incluso.”
+      </div>
+      <div class="bloco">
+        <h3>Como conduzir preço (sem falar ‘não tem dinheiro’)</h3>
+        <ul>
+          <li><strong>Ancoragem:</strong> mostrar R$ 20.283,13 → depois a condição 12×.</li>
+          <li><strong>Tradução:</strong> “cerca de R$ 1.183 por mês para instalar a base do ROI.”</li>
+          <li><strong>Comparação implícita:</strong> “Uma única proposta/contrato que deixa de vazar já paga parte do investimento.”</li>
+          <li><strong>Valor vs custo:</strong> “O custo real é continuar convertendo no feeling enquanto a projeção espera.”</li>
+          <li><strong>Calibragem:</strong> “Formato pensado para vocês ativarem a fundação sem desorganizar a operação.”</li>
+        </ul>
+      </div>
+      <div class="roi-bridge"><strong>Ponte ROI:</strong> “Esse valor não compete com o plano de crescimento — ele habilita o plano de crescimento.”</div>
+      <div class="ask"><strong>Pergunta de avanço:</strong> “Olhando escopo + condição, o que falta para a gente avançar para formalização?”</div>
+    </article>
+
+    <!-- 11 -->
+    <article class="slide" id="s11">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 11 · Fechamento</div>
+          <h2>Próximos passos</h2>
+        </div>
+        <div class="slide-ref">~ 1–1,5 min</div>
+      </div>
+      <div class="objetivo">Objetivo: sair com Aceito ou data firme de devolutiva</div>
+      <div class="fala">
+        “Próximos passos claros: alinhamos escopo e a condição 12×;
+        formalizamos contrato e kick-off; fazemos onboarding com acessos e mapa do funil;
+        e ativamos CRM, playbooks e treinamento.
+        O que a Estação Delta leva: estrutura pronta para receber demanda, converter com método
+        e criar a base do ROI que vocês já validaram.
+        <em>Arrumar a casa hoje. Acelerar com previsibilidade amanhã.</em>”
+      </div>
+      <div class="bloco">
+        <h3>Fechamento (escolha 1 caminho)</h3>
+        <ul>
+          <li><strong>Assumptive:</strong> “Podemos já deixar o kick-off marcado para a próxima semana?”</li>
+          <li><strong>Alternativa:</strong> “Prefere formalizar ainda hoje ou amanhã de manhã?”</li>
+          <li><strong>Se pedir tempo:</strong> “Perfeito. Qual o melhor dia/hora para devolutiva — e quem precisa estar na sala para decidir?”</li>
+          <li><strong>Meta:</strong> Aceito na call ou devolutiva ≤ 48–72h com decisor presente.</li>
+        </ul>
+      </div>
+      <div class="roi-bridge"><strong>Última ponte ROI:</strong> “Cada semana sem estrutura é uma semana a mais de payback adiado. O plano já faz sentido — agora é executar a etapa 1.”</div>
+      <div class="ask"><strong>CTA final:</strong> “Podemos seguir com a formalização da Estruturação Comercial nessa condição?”</div>
+    </article>
+
+    <div class="callout">
+      <strong>Objeções rápidas (frame certo):</strong><br />
+      • <em>“Vamos pensar em mídia/executar depois”</em> → “Perfeito — e a EC é o que torna esse depois lucrativo.”<br />
+      • <em>“Já temos WhatsApp / algum CRM”</em> → “Ótimo. A gente transforma o que existe em operação com dono, SLA e indicador.”<br />
+      • <em>“Time está sem tempo”</em> → “Justamente por isso: rituais curtos + padrão reduzem o caos que consome tempo hoje.”<br />
+      • <em>“Preciso ver se cabe”</em> → “A condição 12× existe para caber no momento e ativar a base do ROI sem travar a operação.”
+    </div>
+
+    <p class="footer-note">
+      Script interno Exclusive · Estação Delta Emergência &amp; Facilities × V4 · EC 12× R$ 1.183,18
+    </p>
+  </div>
+</body>
+</html>
