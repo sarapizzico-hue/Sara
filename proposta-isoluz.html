@@ -337,6 +337,10 @@
       margin-top: 0.9rem;
       min-height: 0;
     }
+    .price-grid.three {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.65rem;
+    }
     .price-card {
       background: var(--panel);
       border: 1px solid var(--border-strong);
@@ -345,6 +349,10 @@
       display: flex;
       flex-direction: column;
       min-height: 0;
+    }
+    .price-grid.three .price-card {
+      padding: 0.85rem 0.9rem;
+      border-radius: 14px;
     }
     .price-card.featured {
       border-color: rgba(229,9,20,0.7);
@@ -355,11 +363,16 @@
       font-weight: 700;
       margin-bottom: 0.35rem;
     }
+    .price-grid.three .price-card h3 { font-size: 0.92rem; }
     .price-card .desc {
       font-size: 0.78rem;
       color: var(--muted);
       line-height: 1.4;
       margin-bottom: 0.85rem;
+    }
+    .price-grid.three .price-card .desc {
+      font-size: 0.7rem;
+      margin-bottom: 0.65rem;
     }
     .price-card .from {
       font-size: 0.72rem;
@@ -374,6 +387,9 @@
       color: var(--gold);
       letter-spacing: -0.02em;
       margin-bottom: 0.25rem;
+    }
+    .price-grid.three .price-card .value {
+      font-size: clamp(1.05rem, 2.4vh, 1.25rem);
     }
     .price-card .value.alt { color: #fff; }
     .price-card .total {
@@ -669,13 +685,13 @@
             </div>
             <div class="scope-item">
               <div class="num">02</div>
-              <h3>Assessoria de Growth</h3>
-              <p>Account + GT + Copy + Design operando aquisição com método.</p>
+              <h3>E-commerce B2B</h3>
+              <p>Implementação em tema com adaptação visual — prazo de 30 dias.</p>
             </div>
             <div class="scope-item">
               <div class="num">03</div>
-              <h3>Crescimento controlado</h3>
-              <p>Expansão regional com filtro de CNPJ — estabilidade e margem primeiro.</p>
+              <h3>Assessoria de Growth</h3>
+              <p>Account + GT + Copy + Design operando aquisição com método.</p>
             </div>
             <div class="role-note">
               Papel da V4: conectar comercial e marketing em uma operação simples, previsível e no controle da Micheline.
@@ -684,7 +700,7 @@
         </div>
         <div class="footer">
           <span>Isoluz × V4</span>
-          <span class="page">1 / 6</span>
+          <span class="page">1 / 7</span>
         </div>
       </section>
 
@@ -724,7 +740,7 @@
         </div>
         <div class="footer">
           <span>Diagnóstico da EE</span>
-          <span class="page">2 / 6</span>
+          <span class="page">2 / 7</span>
         </div>
       </section>
 
@@ -790,13 +806,78 @@
         </div>
         <div class="footer">
           <span>Estruturação Comercial</span>
-          <span class="page">3 / 6</span>
+          <span class="page">3 / 7</span>
         </div>
       </section>
 
-      <!-- 4 GROWTH -->
+      <!-- 4 E-COMMERCE B2B -->
       <section class="slide" data-slide="4">
-        <p class="eyebrow">Produto 02 · Assessoria de Growth · 12 meses</p>
+        <p class="eyebrow">Produto 02 · E-commerce B2B · Tema · 30 dias</p>
+        <h2>E-COMMERCE B2B<br /><span class="red">TEMA COM ADAPTAÇÃO VISUAL.</span></h2>
+        <p class="lead">
+          Loja em Shopify ou Tray, pronta para o modelo B2B da Isoluz —
+          com tema padrão adaptado visualmente e go-live em 30 dias.
+        </p>
+        <div class="dual-layout">
+          <div class="stack">
+            <div class="section-label">O que entra</div>
+            <div class="block">
+              <div class="label">Plataforma</div>
+              <h3>Implementação e configuração</h3>
+              <ul>
+                <li>Implementação em Shopify ou Tray</li>
+                <li>Configuração e parametrização da plataforma</li>
+                <li>Parametrização de descontos</li>
+                <li>Integração ERP nativo, logística e gateway</li>
+              </ul>
+            </div>
+            <div class="block">
+              <div class="label">Visual e conversão</div>
+              <h3>Tema + ativos</h3>
+              <ul>
+                <li>Tema padrão com adaptação visual da Isoluz</li>
+                <li>Criação de banners</li>
+                <li>SEO da home, institucionais e categorias</li>
+                <li>Configuração de GTM e Analytics</li>
+              </ul>
+            </div>
+            <div class="section-label">Pós go-live</div>
+            <ul class="bullets-2">
+              <li>Treinamento de produto e plataforma</li>
+              <li>Monitoramento pós go-live (30 dias)</li>
+              <li>Assessoria logística e gateway</li>
+              <li>Prazo de entrega: 30 dias</li>
+            </ul>
+          </div>
+          <aside class="routines">
+            <div class="rtitle">Por que tema</div>
+            <div class="routine">
+              <h4>Rápido e objetivo</h4>
+              <p>Sem layout 100% personalizado — velocidade com identidade da Isoluz.</p>
+            </div>
+            <div class="routine">
+              <h4>Pronto para B2B</h4>
+              <p>Catálogo e operação pensados para construtoras, empreiteiras e revendas.</p>
+            </div>
+            <div class="routine">
+              <h4>Integrações essenciais</h4>
+              <p>ERP, logística e pagamento configurados desde o início.</p>
+            </div>
+            <div class="routine">
+              <h4>30 dias</h4>
+              <p>Do kickoff ao go-live com treinamento incluso.</p>
+            </div>
+          </aside>
+        </div>
+        <div class="footer">
+          <span>E-commerce B2B · Tema</span>
+          <span class="page">4 / 7</span>
+        </div>
+      </section>
+
+      <!-- 5 GROWTH -->
+      <section class="slide" data-slide="5">
+        <p class="eyebrow">Produto 03 · Assessoria de Growth · 12 meses</p>
         <h2>ASSESSORIA DE GROWTH<br /><span class="red">ACCOUNT + GT + COPY + DESIGN.</span></h2>
         <p class="lead">
           Mídia, criativos e gestão contínua com cadência definida — para atrair o CNPJ certo
@@ -850,26 +931,36 @@
         </div>
         <div class="footer">
           <span>Assessoria de Growth</span>
-          <span class="page">4 / 6</span>
+          <span class="page">5 / 7</span>
         </div>
       </section>
 
-      <!-- 5 INVESTIMENTO -->
-      <section class="slide" data-slide="5">
-        <p class="eyebrow">Investimento · duas soluções</p>
-        <h2>DUAS CONDIÇÕES PARA<br /><span class="red">COMEÇAR A OPERAR.</span></h2>
-        <p class="lead">Estruturação Comercial + Assessoria de Growth para a Isoluz — escolha A, B ou as duas.</p>
-        <div class="price-grid">
+      <!-- 6 INVESTIMENTO -->
+      <section class="slide" data-slide="6">
+        <p class="eyebrow">Investimento · três soluções</p>
+        <h2>TRÊS CONDIÇÕES PARA<br /><span class="red">COMEÇAR A OPERAR.</span></h2>
+        <p class="lead">Estruturação Comercial + E-commerce B2B + Assessoria de Growth para a Isoluz.</p>
+        <div class="price-grid three">
           <article class="price-card featured">
             <h3>Estruturação Comercial</h3>
             <p class="desc">
-              Projeto para organizar o time comercial.<br />
-              Processo · CRM · scripts · rotina · treinamento.
+              Projeto · 45 dias.<br />
+              Processo · CRM · scripts · treinamento.
             </p>
             <div class="from">De R$ 20.283,13</div>
-            <div class="value">12× R$ 1.183,18</div>
-            <div class="total">Condição especial · parcelado em 12 vezes</div>
+            <div class="value">12× R$ 960,53</div>
+            <div class="total">Total R$ 11.526,32 · 12 vezes</div>
             <span class="pill">Produto 01 · Projeto</span>
+          </article>
+          <article class="price-card">
+            <h3>E-commerce B2B</h3>
+            <p class="desc">
+              Tema com adaptação visual · 30 dias.<br />
+              Shopify/Tray · integrações · SEO.
+            </p>
+            <div class="value alt">12× R$ 333,33</div>
+            <div class="total">Total R$ 4.000,00 · 12 vezes</div>
+            <span class="pill">Produto 02 · Projeto</span>
           </article>
           <article class="price-card">
             <h3>Assessoria de Growth</h3>
@@ -879,22 +970,22 @@
             </p>
             <div class="from">De R$ 11.223,40 /mês</div>
             <div class="value alt">12× R$ 6.172,87</div>
-            <div class="total">Condição especial · parcelado em 12 vezes</div>
-            <span class="pill green">Produto 02 · Recorrente</span>
+            <div class="total">Condição especial · 12 vezes</div>
+            <span class="pill green">Produto 03 · Recorrente</span>
           </article>
         </div>
         <div class="conditions-bar">
           <span class="left">Condições comerciais</span>
-          <span class="right">As duas juntas: ~R$ 7.356,05 /mês</span>
+          <span class="right">As três juntas: ~R$ 7.466,73 /mês</span>
         </div>
         <div class="footer">
           <span>Investimento</span>
-          <span class="page">5 / 6</span>
+          <span class="page">6 / 7</span>
         </div>
       </section>
 
-      <!-- 6 EQUILÍBRIO -->
-      <section class="slide" data-slide="6">
+      <!-- 7 EQUILÍBRIO -->
+      <section class="slide" data-slide="7">
         <p class="eyebrow">Leitura de retorno · plano de 12 meses</p>
         <h2>EQUILÍBRIO ESTIMADO EM<br /><span class="red">CERCA DE 3 A 4 MESES.</span></h2>
         <p class="lead">
@@ -904,9 +995,10 @@
           <div class="be-card">
             <div class="label">Base da operação</div>
             <h3>Investimento mensal</h3>
-            <div class="be-row"><span>Estruturação Comercial</span><strong>R$ 1.183</strong></div>
+            <div class="be-row"><span>Estruturação Comercial</span><strong>R$ 961</strong></div>
+            <div class="be-row"><span>E-commerce B2B</span><strong>R$ 333</strong></div>
             <div class="be-row"><span>Assessoria de Growth</span><strong>R$ 6.173</strong></div>
-            <div class="be-row total"><span>Total mensal V4</span><strong>R$ 7.356</strong></div>
+            <div class="be-row total"><span>Total mensal V4</span><strong>R$ 7.467</strong></div>
           </div>
           <div class="be-arrow" aria-hidden="true">→</div>
           <div class="be-card featured">
@@ -924,7 +1016,7 @@
             <div class="be-result">
               <div class="big">Controle</div>
               <p class="sub">
-                Mais CNPJ certo, comercial organizado e crescimento regional sem engasgar a entrega.
+                Comercial organizado, vitrine B2B no ar e crescimento regional sem engasgar a entrega.
               </p>
             </div>
           </div>
@@ -934,8 +1026,8 @@
           (ticket, conversão, capacidade mensal e CAC) e ajustar o ritmo com segurança.
         </div>
         <div class="footer">
-          <span>Próximo passo: formalizar EC + Assessoria</span>
-          <span class="page">6 / 6</span>
+          <span>Próximo passo: formalizar EC + E-com + Assessoria</span>
+          <span class="page">7 / 7</span>
         </div>
       </section>
     </div>
