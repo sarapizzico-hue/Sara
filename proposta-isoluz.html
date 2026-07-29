@@ -397,6 +397,73 @@
       color: var(--dim);
       margin-bottom: 1rem;
     }
+    .market-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.75rem;
+      font-size: 0.78rem;
+      border: 1px solid var(--border-strong);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .market-table th,
+    .market-table td {
+      padding: 0.55rem 0.85rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .market-table th {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--dim);
+      background: rgba(255,255,255,0.04);
+      font-weight: 700;
+    }
+    .market-table td { color: var(--muted); }
+    .market-table td:last-child,
+    .market-table th:last-child {
+      text-align: right;
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      color: #fff;
+      white-space: nowrap;
+    }
+    .market-table tr.section td {
+      color: var(--red-soft);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: rgba(229,9,20,0.08);
+      padding-top: 0.45rem;
+      padding-bottom: 0.45rem;
+    }
+    .market-table tr.section td:last-child { color: var(--red-soft); }
+    .market-table tr.total td {
+      color: #fff;
+      font-weight: 700;
+      border-bottom: 0;
+      background: rgba(255,255,255,0.04);
+    }
+    .market-table tr.total td:last-child { color: var(--gold); }
+    .market-note {
+      margin-top: 0.75rem;
+      display: flex;
+      gap: 0.65rem;
+      align-items: flex-start;
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .market-note::before {
+      content: "";
+      width: 3px;
+      min-height: 2.4em;
+      background: var(--red);
+      border-radius: 2px;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
     .pill {
       margin-top: auto;
       align-self: flex-start;
@@ -701,7 +768,7 @@
         </div>
         <div class="footer">
           <span>Isoluz × V4</span>
-          <span class="page">1 / 7</span>
+          <span class="page">1 / 8</span>
         </div>
       </section>
 
@@ -741,7 +808,7 @@
         </div>
         <div class="footer">
           <span>Diagnóstico da EE</span>
-          <span class="page">2 / 7</span>
+          <span class="page">2 / 8</span>
         </div>
       </section>
 
@@ -807,7 +874,7 @@
         </div>
         <div class="footer">
           <span>Estruturação Comercial</span>
-          <span class="page">3 / 7</span>
+          <span class="page">3 / 8</span>
         </div>
       </section>
 
@@ -816,7 +883,7 @@
         <p class="eyebrow">Produto 02 · E-commerce B2B · Tema · 30 dias</p>
         <h2>E-COMMERCE B2B<br /><span class="red">TEMA COM ADAPTAÇÃO VISUAL.</span></h2>
         <p class="lead">
-          Loja em Shopify ou Tray, pronta para o modelo B2B da Isoluz —
+          Loja pronta para o modelo B2B da Isoluz —
           com tema padrão adaptado visualmente e go-live em 30 dias.
         </p>
         <div class="dual-layout">
@@ -826,7 +893,6 @@
               <div class="label">Plataforma</div>
               <h3>Implementação e configuração</h3>
               <ul>
-                <li>Implementação em Shopify ou Tray</li>
                 <li>Configuração e parametrização da plataforma</li>
                 <li>Parametrização de descontos</li>
                 <li>Integração ERP nativo, logística e gateway</li>
@@ -872,7 +938,7 @@
         </div>
         <div class="footer">
           <span>E-commerce B2B · Tema</span>
-          <span class="page">4 / 7</span>
+          <span class="page">4 / 8</span>
         </div>
       </section>
 
@@ -932,12 +998,49 @@
         </div>
         <div class="footer">
           <span>Assessoria de Growth</span>
-          <span class="page">5 / 7</span>
+          <span class="page">5 / 8</span>
         </div>
       </section>
 
-      <!-- 6 INVESTIMENTO -->
+      <!-- 6 MERCADO -->
       <section class="slide" data-slide="6">
+        <p class="eyebrow">Âncora de mercado · montar sozinho</p>
+        <h2>QUANTO CUSTARIA MONTAR<br /><span class="red">ESSE ESCOPO POR CONTA PRÓPRIA.</span></h2>
+        <p class="lead">
+          Referência de mercado para cobrir especialização equivalente (salários + encargos + gestão + ferramentas),
+          sem contar tempo de contratação e risco de erro.
+        </p>
+        <table class="market-table">
+          <thead>
+            <tr>
+              <th>Frente</th>
+              <th>Referência</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="section"><td>Projetos</td><td></td></tr>
+            <tr><td>Estruturação Comercial (processo + CRM + treinamento)</td><td>R$ 18.000 a R$ 25.000</td></tr>
+            <tr><td>E-commerce B2B (tema + integrações + SEO)</td><td>R$ 8.000 a R$ 15.000</td></tr>
+            <tr class="section"><td>Assessoria de Growth · mensal</td><td></td></tr>
+            <tr><td>Account / Head de Growth</td><td>R$ 10.000 a R$ 14.000</td></tr>
+            <tr><td>Gestão de Tráfego (Google + Meta)</td><td>R$ 8.000 a R$ 12.000</td></tr>
+            <tr><td>Copywriter de performance</td><td>R$ 5.000 a R$ 7.000</td></tr>
+            <tr><td>Designer de performance</td><td>R$ 6.000 a R$ 8.000</td></tr>
+            <tr><td>Ferramentas (ads + stack criativo)</td><td>R$ 1.000 a R$ 2.000</td></tr>
+            <tr class="total"><td>Total estimado Growth / mês</td><td>R$ 30.000 a R$ 43.000</td></tr>
+          </tbody>
+        </table>
+        <div class="market-note">
+          A V4 entrega o escopo completo — comercial, e-commerce e Growth — com método, cadência e a EE já trabalhando a favor da Isoluz.
+        </div>
+        <div class="footer">
+          <span>Preço de mercado</span>
+          <span class="page">6 / 8</span>
+        </div>
+      </section>
+
+      <!-- 7 INVESTIMENTO -->
+      <section class="slide" data-slide="7">
         <p class="eyebrow">Investimento · três soluções</p>
         <h2>TRÊS CONDIÇÕES PARA<br /><span class="red">COMEÇAR A OPERAR.</span></h2>
         <p class="lead">Estruturação Comercial + E-commerce B2B + Assessoria de Growth para a Isoluz.</p>
@@ -948,7 +1051,6 @@
               Projeto · 45 dias.<br />
               Processo · CRM · scripts · treinamento.
             </p>
-            <div class="from">De R$ 20.283,13</div>
             <div class="value">12× R$ 960,53</div>
             <div class="total">Total R$ 11.526,32 · 12 vezes</div>
             <span class="pill">Produto 01 · Projeto</span>
@@ -957,7 +1059,7 @@
             <h3>E-commerce B2B</h3>
             <p class="desc">
               Tema com adaptação visual · 30 dias.<br />
-              Shopify/Tray · integrações · SEO.
+              Integrações · SEO · treinamento.
             </p>
             <div class="value alt">12× R$ 333,33</div>
             <div class="total">Total R$ 4.000,00 · 12 vezes</div>
@@ -969,7 +1071,6 @@
               Operação recorrente por 12 meses.<br />
               Account · GT · Copy · Design.
             </p>
-            <div class="from">De R$ 11.223,40 /mês</div>
             <div class="value alt">12× R$ 6.172,87</div>
             <div class="total">Condição especial · 12 vezes</div>
             <span class="pill green">Produto 03 · Recorrente</span>
@@ -981,12 +1082,12 @@
         </div>
         <div class="footer">
           <span>Investimento</span>
-          <span class="page">6 / 7</span>
+          <span class="page">7 / 8</span>
         </div>
       </section>
 
-      <!-- 7 EQUILÍBRIO -->
-      <section class="slide" data-slide="7">
+      <!-- 8 EQUILÍBRIO -->
+      <section class="slide" data-slide="8">
         <p class="eyebrow">Leitura de retorno · plano de 12 meses</p>
         <h2>EQUILÍBRIO ESTIMADO EM<br /><span class="red">CERCA DE 3 A 4 MESES.</span></h2>
         <p class="lead">
@@ -1028,7 +1129,7 @@
         </div>
         <div class="footer">
           <span>Próximo passo: formalizar EC + E-com + Assessoria</span>
-          <span class="page">7 / 7</span>
+          <span class="page">8 / 8</span>
         </div>
       </section>
     </div>
