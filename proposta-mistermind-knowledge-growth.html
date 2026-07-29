@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Knowledge @ Business × V4 — Assessoria de Growth</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #050505;
+      --panel: #121214;
+      --panel-2: #1a1a1d;
+      --border: rgba(255,255,255,0.10);
+      --border-strong: rgba(255,255,255,0.16);
+      --red: #e50914;
+      --red-soft: #ff3d45;
+      --gold: #f0d27a;
+      --text: #f7f7f7;
+      --muted: #b7b7bd;
+      --dim: #7c7c84;
+      --ok: #5dce8a;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: Manrope, system-ui, sans-serif;
+      background: #000;
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      overflow: hidden;
+    }
+    .stage {
+      width: 100vw;
+      height: 100vh;
+      display: grid;
+      place-items: center;
+      background: #000;
+    }
+    .deck {
+      position: relative;
+      width: min(100vw, calc(100vh * 16 / 9));
+      height: min(100vh, calc(100vw * 9 / 16));
+      background:
+        radial-gradient(ellipse 55% 45% at 82% 18%, rgba(229,9,20,0.22) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 15% 90%, rgba(229,9,20,0.10) 0%, transparent 55%),
+        var(--bg);
+      overflow: hidden;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.04);
+    }
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: clamp(1.4rem, 3.2vh, 2.1rem) clamp(1.5rem, 3.5vw, 2.6rem) clamp(2.2rem, 4.2vh, 2.8rem);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(28px);
+      transition: opacity 0.35s var(--ease), transform 0.35s var(--ease), visibility 0.35s;
+      display: flex;
+      flex-direction: column;
+    }
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+      z-index: 2;
+    }
+    .slide.exit-left { transform: translateX(-28px); opacity: 0; }
+    .slide.exit-right { transform: translateX(28px); opacity: 0; }
+
+    .logo-v4 {
+      position: absolute;
+      top: clamp(0.9rem, 2vh, 1.25rem);
+      right: clamp(1rem, 2.4vw, 1.6rem);
+      z-index: 5;
+      width: 34px;
+      height: 34px;
+      border: 1.5px solid rgba(255,255,255,0.85);
+      display: grid;
+      place-items: center;
+      font-family: Manrope, sans-serif;
+      font-weight: 800;
+      font-size: 0.78rem;
+      letter-spacing: -0.04em;
+      color: #fff;
+    }
+    .footer {
+      position: absolute;
+      left: clamp(1.5rem, 3.5vw, 2.6rem);
+      right: clamp(1.5rem, 3.5vw, 2.6rem);
+      bottom: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.68rem;
+      color: var(--dim);
+      z-index: 5;
+      pointer-events: none;
+    }
+    .footer .page { letter-spacing: 0.04em; }
+
+    .eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--red-soft);
+      margin-bottom: 0.7rem;
+    }
+    h1 {
+      font-size: clamp(1.8rem, 4.6vh, 2.85rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+    h1 .red { color: var(--red-soft); }
+    h2 {
+      font-size: clamp(1.35rem, 3.4vh, 2rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+    }
+    h2 .red { color: var(--red-soft); }
+    .lead {
+      margin-top: 0.7rem;
+      font-size: clamp(0.88rem, 1.7vh, 1rem);
+      color: var(--muted);
+      max-width: 44rem;
+      line-height: 1.45;
+    }
+    .mono {
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+    }
+
+    .capa-grid {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: clamp(1rem, 2.5vw, 2rem);
+      align-items: center;
+      min-height: 0;
+    }
+    .capa-brand {
+      font-size: clamp(2.1rem, 6.2vh, 3.2rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+      color: #f7f7f7;
+    }
+    .capa-sub {
+      margin-top: 0.35rem;
+      font-size: clamp(1.05rem, 2.6vh, 1.45rem);
+      font-weight: 800;
+      color: var(--red-soft);
+      letter-spacing: -0.02em;
+    }
+    .scope-panel {
+      background: rgba(18,18,20,0.92);
+      border: 1px solid var(--border-strong);
+      border-radius: 16px;
+      padding: clamp(0.9rem, 2vh, 1.2rem);
+    }
+    .scope-panel .panel-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--red-soft);
+      margin-bottom: 0.7rem;
+    }
+    .scope-item {
+      border: 1px solid rgba(229,9,20,0.45);
+      background: rgba(0,0,0,0.35);
+      border-radius: 10px;
+      padding: 0.7rem 0.85rem;
+      margin-bottom: 0.5rem;
+    }
+    .scope-item:last-of-type { margin-bottom: 0.75rem; }
+    .scope-item .num {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--red-soft);
+      letter-spacing: 0.08em;
+      margin-bottom: 0.15rem;
+    }
+    .scope-item h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+    }
+    .scope-item p {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .role-note {
+      display: flex;
+      gap: 0.65rem;
+      align-items: flex-start;
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.4;
+      padding-top: 0.15rem;
+    }
+    .role-note::before {
+      content: "";
+      width: 3px;
+      min-height: 2.2em;
+      background: var(--red);
+      border-radius: 2px;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .dual-layout {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1.35fr 0.85fr;
+      gap: clamp(0.9rem, 2vw, 1.5rem);
+      min-height: 0;
+      margin-top: 0.85rem;
+    }
+    .stack { display: flex; flex-direction: column; gap: 0.5rem; min-height: 0; }
+    .block {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.75rem 0.9rem;
+    }
+    .block .label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--red-soft);
+      margin-bottom: 0.2rem;
+    }
+    .block h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+    .block p, .block li {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .block ul { list-style: none; }
+    .block ul li {
+      position: relative;
+      padding-left: 0.85rem;
+      margin-bottom: 0.18rem;
+    }
+    .block ul li::before {
+      content: "·";
+      position: absolute;
+      left: 0;
+      color: #fff;
+      font-weight: 700;
+    }
+    .section-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin: 0.35rem 0 0.35rem;
+    }
+    .routines {
+      border-left: 1px solid var(--border-strong);
+      padding-left: clamp(0.75rem, 1.5vw, 1.1rem);
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      min-height: 0;
+    }
+    .routines .rtitle {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 0.15rem;
+    }
+    .routine {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.65rem 0.75rem 0.65rem 0.85rem;
+      border-left: 3px solid var(--red);
+    }
+    .routine h4 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 0.15rem;
+    }
+    .routine p {
+      font-size: 0.72rem;
+      color: var(--muted);
+      line-height: 1.35;
+    }
+    .bullets-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.35rem 1rem;
+      margin-top: 0.35rem;
+    }
+    .bullets-2 li {
+      font-size: 0.74rem;
+      color: var(--muted);
+      list-style: none;
+      position: relative;
+      padding-left: 0.85rem;
+      line-height: 1.35;
+    }
+    .bullets-2 li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.45em;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--red);
+    }
+
+    .price-grid {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(0.75rem, 1.8vw, 1.2rem);
+      align-content: center;
+      margin-top: 0.9rem;
+      min-height: 0;
+    }
+    .price-card {
+      background: var(--panel);
+      border: 1px solid var(--border-strong);
+      border-radius: 16px;
+      padding: clamp(1rem, 2.4vh, 1.4rem);
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+    .price-card.featured {
+      border-color: rgba(229,9,20,0.7);
+      box-shadow: 0 0 0 1px rgba(229,9,20,0.15);
+    }
+    .price-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+    }
+    .price-card .desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.4;
+      margin-bottom: 0.85rem;
+    }
+    .price-card .from {
+      font-size: 0.72rem;
+      color: var(--dim);
+      text-decoration: line-through;
+      margin-bottom: 0.2rem;
+    }
+    .price-card .value {
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: clamp(1.35rem, 3.2vh, 1.75rem);
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: -0.02em;
+      margin-bottom: 0.25rem;
+    }
+    .price-card .value.alt { color: #fff; }
+    .price-card .total {
+      font-size: 0.72rem;
+      color: var(--dim);
+      margin-bottom: 1rem;
+    }
+    .pill {
+      margin-top: auto;
+      align-self: flex-start;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+    }
+    .pill.green {
+      border-color: var(--ok);
+      color: var(--ok);
+    }
+    .conditions-bar {
+      margin-top: 0.85rem;
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.75rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .conditions-bar .left {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--dim);
+    }
+    .conditions-bar .right {
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: clamp(0.85rem, 1.8vh, 1rem);
+      font-weight: 500;
+      color: #fff;
+    }
+
+    .be-flow {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: 0.55rem;
+      align-items: stretch;
+      margin-top: 0.9rem;
+      min-height: 0;
+    }
+    .be-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 0.85rem 0.95rem;
+      display: flex;
+      flex-direction: column;
+    }
+    .be-card.featured {
+      border-color: rgba(229,9,20,0.65);
+    }
+    .be-card .label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 0.15rem;
+    }
+    .be-card h3 {
+      font-size: 0.92rem;
+      font-weight: 700;
+      margin-bottom: 0.65rem;
+    }
+    .be-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      font-size: 0.74rem;
+      color: var(--muted);
+      padding: 0.18rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .be-row:last-child { border-bottom: 0; }
+    .be-row strong {
+      color: #fff;
+      font-weight: 700;
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: 0.74rem;
+    }
+    .be-row.total {
+      margin-top: 0.35rem;
+      padding-top: 0.4rem;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      border-bottom: 0;
+      color: #fff;
+      font-weight: 700;
+    }
+    .be-arrow {
+      display: grid;
+      place-items: center;
+      color: var(--red-soft);
+      font-size: 1.35rem;
+      font-weight: 700;
+    }
+    .be-result {
+      margin-top: auto;
+      text-align: center;
+      padding-top: 0.5rem;
+    }
+    .be-result .big {
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: clamp(1.35rem, 3.4vh, 1.85rem);
+      font-weight: 600;
+      color: var(--gold);
+      line-height: 1.1;
+    }
+    .be-result .sub {
+      margin-top: 0.35rem;
+      font-size: 0.72rem;
+      color: var(--muted);
+      line-height: 1.35;
+    }
+    .disclaimer {
+      margin-top: 0.75rem;
+      background: rgba(240,210,122,0.06);
+      border: 1px solid rgba(240,210,122,0.25);
+      border-radius: 10px;
+      padding: 0.6rem 0.85rem;
+      font-size: 0.72rem;
+      color: var(--gold);
+      line-height: 1.4;
+    }
+
+    .path-grid {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(0.75rem, 1.8vw, 1.2rem);
+      margin-top: 0.85rem;
+      min-height: 0;
+    }
+    .path-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: clamp(0.85rem, 2vh, 1.15rem);
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+    .path-card.featured {
+      border-color: rgba(229,9,20,0.65);
+      box-shadow: 0 0 0 1px rgba(229,9,20,0.12);
+    }
+    .path-card .tag {
+      align-self: flex-start;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.28rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18);
+      color: var(--muted);
+    }
+    .path-card.featured .tag {
+      border-color: rgba(229,9,20,0.55);
+      color: var(--red-soft);
+    }
+    .path-card h3 {
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .path-card p {
+      font-size: 0.76rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .path-card ul {
+      list-style: none;
+      margin-top: 0.15rem;
+    }
+    .path-card li {
+      position: relative;
+      padding-left: 0.85rem;
+      font-size: 0.74rem;
+      color: var(--muted);
+      line-height: 1.4;
+      margin-bottom: 0.2rem;
+    }
+    .path-card li::before {
+      content: "·";
+      position: absolute;
+      left: 0;
+      color: #fff;
+      font-weight: 700;
+    }
+    .path-foot {
+      margin-top: auto;
+      padding-top: 0.55rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.72rem;
+      color: var(--gold);
+      line-height: 1.35;
+      font-weight: 600;
+    }
+
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.5rem;
+      margin-top: 0.85rem;
+    }
+    .kpi {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.7rem 0.8rem;
+    }
+    .kpi .n {
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: clamp(0.95rem, 2.2vh, 1.15rem);
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 0.2rem;
+    }
+    .kpi p {
+      font-size: 0.7rem;
+      color: var(--muted);
+      line-height: 1.3;
+    }
+
+    .phase-row {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.5rem;
+      margin-top: 0.9rem;
+      min-height: 0;
+      align-content: start;
+    }
+    .phase {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.75rem 0.8rem;
+      border-top: 3px solid var(--red);
+    }
+    .phase .num {
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      color: var(--red-soft);
+      margin-bottom: 0.25rem;
+    }
+    .phase h3 {
+      font-size: 0.88rem;
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+    }
+    .phase p {
+      font-size: 0.72rem;
+      color: var(--muted);
+      line-height: 1.35;
+    }
+
+    .nav-hint {
+      position: fixed;
+      bottom: 0.6rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.28);
+      z-index: 20;
+      pointer-events: none;
+    }
+    .progress {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--red), #ff7a7f);
+      transform-origin: left;
+      transform: scaleX(0.125);
+      z-index: 30;
+      transition: transform 0.35s var(--ease);
+    }
+
+    @media (max-width: 900px) {
+      body { overflow: auto; }
+      .stage { height: auto; min-height: 100vh; display: block; }
+      .deck {
+        width: 100%;
+        height: auto;
+        min-height: 100vh;
+        overflow: visible;
+      }
+      .slide {
+        position: relative;
+        inset: auto;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        min-height: 100vh;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+      }
+      .capa-grid,
+      .dual-layout,
+      .price-grid,
+      .path-grid,
+      .be-flow,
+      .kpi-row,
+      .phase-row {
+        grid-template-columns: 1fr;
+      }
+      .routines { border-left: 0; padding-left: 0; border-top: 1px solid var(--border); padding-top: 0.75rem; }
+      .be-arrow { transform: rotate(90deg); padding: 0.2rem 0; }
+      .logo-v4 { position: absolute; }
+      .nav-hint { display: none; }
+      .footer { position: relative; left: auto; right: auto; bottom: auto; margin-top: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+
+  <div class="stage">
+    <div class="deck" id="deck">
+      <div class="logo-v4" aria-label="V4 Company">V4</div>
+
+      <!-- 1 CAPA -->
+      <section class="slide active" data-slide="1">
+        <div class="capa-grid">
+          <div>
+            <p class="eyebrow">Proposta comercial · Assessoria de Growth · 2026</p>
+            <div class="capa-brand">KNOWLEDGE<br />@ BUSINESS</div>
+            <div class="capa-sub">AQUISIÇÃO PRÓPRIA. SEM DEPENDER DE TERCEIROS.</div>
+            <p class="lead">
+              Vocês já convertem quando o lead chega. O jogo agora é construir o motor
+              que coloca o decisor certo na mesa — com método, sem engasgar a operação
+              de dois sócios.
+            </p>
+          </div>
+          <aside class="scope-panel">
+            <div class="panel-title">Escopo da proposta</div>
+            <div class="scope-item">
+              <div class="num">01</div>
+              <h3>Assessoria de Growth</h3>
+              <p>Account + GT + Copy + Design operando aquisição B2B com método.</p>
+            </div>
+            <div class="scope-item">
+              <div class="num">02</div>
+              <h3>Motor de demanda própria</h3>
+              <p>LinkedIn, Google e Meta para acessar HRBPs e decisores sem intermediário.</p>
+            </div>
+            <div class="scope-item">
+              <div class="num">03</div>
+              <h3>Social como acelerador</h3>
+              <p>Camada opcional de autoridade — reforça a marca sem mudar a tese de ROI.</p>
+            </div>
+            <div class="role-note">
+              Papel da V4: transformar reputação offline e conversão alta em canal direto, previsível e escalável.
+            </div>
+          </aside>
+        </div>
+        <div class="footer">
+          <span>Knowledge @ Business × V4 · MisterMind</span>
+          <span class="page">1 / 8</span>
+        </div>
+      </section>
+
+      <!-- 2 DIAGNÓSTICO -->
+      <section class="slide" data-slide="2">
+        <p class="eyebrow">O ponto de partida · o que a EE mostrou</p>
+        <h2>VOCÊS JÁ FECHAM.<br /><span class="red">FALTA TOPO DE FUNIL.</span></h2>
+        <p class="lead">
+          Entrega premium, conversão ~90% e carteira enterprise. O risco não é vender —
+          é continuar invisível e dependente de parceiros.
+        </p>
+        <div class="kpi-row">
+          <div class="kpi">
+            <div class="n">~R$ 1,2 mi</div>
+            <p>Faturamento no ano anterior</p>
+          </div>
+          <div class="kpi">
+            <div class="n">~90%</div>
+            <p>Conversão quando o lead chega</p>
+          </div>
+          <div class="kpi">
+            <div class="n">95%</div>
+            <p>Demanda via terceiros hoje</p>
+          </div>
+          <div class="kpi">
+            <div class="n">~70%</div>
+            <p>Margem estimada (estrutura enxuta)</p>
+          </div>
+        </div>
+        <div class="dual-layout" style="grid-template-columns: 1fr 1fr; margin-top: 0.75rem;">
+          <div class="stack">
+            <div class="section-label">O que já funciona</div>
+            <div class="block">
+              <ul>
+                <li>Autoridade real de Thiago e Joeval no C-level</li>
+                <li>Clientes como Vale, Suzano, Itaú e Bradesco</li>
+                <li>Fechamento forte — problema está no topo</li>
+                <li>Posicionamento premium em educação corporativa</li>
+                <li>Abertura alta para direcionamento externo</li>
+              </ul>
+            </div>
+          </div>
+          <div class="stack">
+            <div class="section-label">O que ainda vaza</div>
+            <div class="block">
+              <ul>
+                <li>Zero mídia paga, CRM, tracking e funil</li>
+                <li>Site e ativos digitais ainda em construção</li>
+                <li>Marca ainda depende da figura do Thiago</li>
+                <li>Sem acesso direto a HRBPs e comitê de compra</li>
+                <li>Capacidade operacional: dois sócios executando tudo</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="footer">
+          <span>Diagnóstico da EE</span>
+          <span class="page">2 / 8</span>
+        </div>
+      </section>
+
+      <!-- 3 TESE -->
+      <section class="slide" data-slide="3">
+        <p class="eyebrow">Tese estratégica · por que Growth agora</p>
+        <h2>NÃO É “MAIS CURSO”.<br /><span class="red">É CANAL DIRETO COM DECISOR.</span></h2>
+        <p class="lead">
+          A Assessoria não existe para empurrar volume genérico. Existe para consolidar
+          autoridade de marca e gerar demanda própria — com previsibilidade e margem.
+        </p>
+        <div class="dual-layout" style="grid-template-columns: 1fr 1fr;">
+          <div class="stack">
+            <div class="block">
+              <div class="label">Problema central</div>
+              <h3>Dependência de intermediários</h3>
+              <p>95% do tráfego comercial vem de consultorias. Isso corta margem, previsibilidade e controle do relacionamento com o cliente final.</p>
+            </div>
+            <div class="block">
+              <div class="label">Alavanca</div>
+              <h3>GTM + ativos + aquisição</h3>
+              <p>ICP e comitê de compra claros, narrativa replicável, presença digital mínima e mídia com intenção — nessa ordem.</p>
+            </div>
+          </div>
+          <aside class="routines">
+            <div class="rtitle">O que esta proposta resolve</div>
+            <div class="routine">
+              <h4>Demanda própria</h4>
+              <p>LinkedIn (autoridade), Google (intenção) e Meta (remarketing) como sistema — não como experimento solto.</p>
+            </div>
+            <div class="routine">
+              <h4>Marca além do Thiago</h4>
+              <p>Autoridade vira ativo da Knowledge — narrativa, conteúdo e prova social estruturados.</p>
+            </div>
+            <div class="routine">
+              <h4>Ritmo de dois soldados</h4>
+              <p>Priorização didática e executável. Sem sobrecarregar sócios com operação de mídia.</p>
+            </div>
+            <div class="routine">
+              <h4>SDR no momento certo</h4>
+              <p>Outbound só depois da base. Evita repetir a frustração anterior com SDR sem processo.</p>
+            </div>
+          </aside>
+        </div>
+        <div class="footer">
+          <span>Frame de ROI · autoridade + aquisição</span>
+          <span class="page">3 / 8</span>
+        </div>
+      </section>
+
+      <!-- 4 GROWTH -->
+      <section class="slide" data-slide="4">
+        <p class="eyebrow">Produto · Assessoria de Growth · 12 meses</p>
+        <h2>ASSESSORIA DE GROWTH<br /><span class="red">ACCOUNT + GT + COPY + DESIGN.</span></h2>
+        <p class="lead">
+          Núcleo operacional para atrair o ICP certo, transformar autoridade em demanda
+          e alimentar o comercial com oportunidades rastreáveis.
+        </p>
+        <div class="dual-layout">
+          <div class="stack">
+            <div class="section-label">Escopo</div>
+            <div class="block">
+              <div class="label">Account</div>
+              <h3>Estratégia e priorização</h3>
+              <p>GTM, ICP, oferta, ritmo de aquisição e alinhamento com a capacidade real dos sócios.</p>
+            </div>
+            <div class="block">
+              <div class="label">Gestor de tráfego</div>
+              <h3>Mídia com intenção B2B</h3>
+              <p>LinkedIn e Google para decisores; Meta para remarketing e awareness controlada — sem agressividade que a operação não absorve.</p>
+            </div>
+            <div class="block">
+              <div class="label">Copy + Design</div>
+              <h3>Narrativa e peças</h3>
+              <p>Mensagem premium para HRBP e C-level, criativos e LPs mínimos para converter interesse em conversa.</p>
+            </div>
+            <div class="section-label">Gestão contínua</div>
+            <ul class="bullets-2">
+              <li>Setup de tracking e CRM leve</li>
+              <li>Otimização semanal de campanhas</li>
+              <li>Leitura de funil até oportunidade</li>
+              <li>Priorização do que fazer agora vs depois</li>
+            </ul>
+          </div>
+          <aside class="routines">
+            <div class="rtitle">Nossas rotinas</div>
+            <div class="routine">
+              <h4>Atendimento diário</h4>
+              <p>Dias úteis: tarefas, pendências, alinhamentos, backlog e resultados do dia.</p>
+            </div>
+            <div class="routine">
+              <h4>Check-in de performance</h4>
+              <p>Reunião periódica: resultados, análise e próximos passos — com didática alta.</p>
+            </div>
+            <div class="routine">
+              <h4>Planejamento trimestral</h4>
+              <p>Budget, canais, aprendizados e quando (se) inserir SDR.</p>
+            </div>
+            <div class="routine">
+              <h4>Growths e retrospectivas</h4>
+              <p>Rituais internos de dados, copy, design, tráfego e funil.</p>
+            </div>
+          </aside>
+        </div>
+        <div class="footer">
+          <span>Assessoria de Growth</span>
+          <span class="page">4 / 8</span>
+        </div>
+      </section>
+
+      <!-- 5 COM / SEM SOCIAL -->
+      <section class="slide" data-slide="5">
+        <p class="eyebrow">Dois caminhos · mesma tese de resultado</p>
+        <h2>COM OU SEM SOCIAL,<br /><span class="red">O MOTOR É O MESMO.</span></h2>
+        <p class="lead">
+          O retorno comercial vem da Assessoria de Growth (aquisição + narrativa + funil).
+          Social é acelerador de autoridade — se ficar, é ótimo; se não, a tese de ROI não cai.
+        </p>
+        <div class="path-grid">
+          <article class="path-card">
+            <span class="tag">Caminho A · núcleo</span>
+            <h3>Growth sem Social</h3>
+            <p>Foco absoluto em demanda própria e conversão.</p>
+            <ul>
+              <li>Account + GT + Copy + Design</li>
+              <li>Campanhas LinkedIn / Google / Meta</li>
+              <li>LPs, tracking e CRM leve</li>
+              <li>Narrativa para HRBP e comitê de compra</li>
+              <li>Conteúdo pontual ligado a ads e autoridade</li>
+            </ul>
+            <div class="path-foot">Resultado buscado: pipeline direto e previsibilidade.</div>
+          </article>
+          <article class="path-card featured">
+            <span class="tag">Caminho B · recomendado</span>
+            <h3>Growth com Social</h3>
+            <p>Mesmo motor de aquisição + camada de presença contínua.</p>
+            <ul>
+              <li>Tudo do Caminho A</li>
+              <li>Operação de LinkedIn / Instagram da marca</li>
+              <li>Calendário que transforma Thiago em ativo da empresa</li>
+              <li>Prova social e brand rebuild (PW4 / Knowledge)</li>
+              <li>Remarketing mais barato e consistente</li>
+            </ul>
+            <div class="path-foot">Social não “salva” o ROI — ele amplifica autoridade e reduz atrito.</div>
+          </article>
+        </div>
+        <div class="conditions-bar">
+          <span class="left">Leitura comercial</span>
+          <span class="right">Mesma condição · Social não muda a conta de retorno</span>
+        </div>
+        <div class="footer">
+          <span>Visão com e sem Social</span>
+          <span class="page">5 / 8</span>
+        </div>
+      </section>
+
+      <!-- 6 ROADMAP -->
+      <section class="slide" data-slide="6">
+        <p class="eyebrow">Sequência correta · disciplina antes de escala</p>
+        <h2>FUNDAMENTOS PRIMEIRO.<br /><span class="red">TRAÇÃO EM SEGUIDA.</span></h2>
+        <p class="lead">
+          Empresa com zero base instalada não escala pulando etapa. O plano protege
+          a expectativa: base → sinais → previsibilidade → aceleração.
+        </p>
+        <div class="phase-row">
+          <article class="phase">
+            <div class="num">FASE 01</div>
+            <h3>Fundar</h3>
+            <p>ICP, comitê de compra, PUV, narrativa, CRM leve, tracking e ativos mínimos (site/LP).</p>
+          </article>
+          <article class="phase">
+            <div class="num">FASE 02</div>
+            <h3>Atrair</h3>
+            <p>LinkedIn autoridade + Google intenção + Meta remarketing. Primeiros leads próprios qualificados.</p>
+          </article>
+          <article class="phase">
+            <div class="num">FASE 03</div>
+            <h3>Converter</h3>
+            <p>Jornada TOFU→BOFU, scripts de abordagem e cadência leve — sem SDR prematuro.</p>
+          </article>
+          <article class="phase">
+            <div class="num">FASE 04</div>
+            <h3>Acelerar</h3>
+            <p>Budget com dados, ABM seletivo e SDR só com processo pronto e volume mínimo.</p>
+          </article>
+        </div>
+        <div class="dual-layout" style="grid-template-columns: 1fr 1fr; margin-top: 0.75rem;">
+          <div class="block">
+            <div class="label">Quick wins paralelos</div>
+            <h3>Sem pular a base</h3>
+            <ul>
+              <li>Setup de perfis e presença mínima da marca</li>
+              <li>Direcionamento do site em construção</li>
+              <li>Captura de lead e CRM básico</li>
+            </ul>
+          </div>
+          <div class="block">
+            <div class="label">O que não fazemos no começo</div>
+            <h3>Proteção de expectativa</h3>
+            <ul>
+              <li>Contratar SDR sem GTM e cadência</li>
+              <li>Escalar mídia sem tracking</li>
+              <li>Prometer volume antes de fundamento</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer">
+          <span>Plano faseado de execução</span>
+          <span class="page">6 / 8</span>
+        </div>
+      </section>
+
+      <!-- 7 INVESTIMENTO -->
+      <section class="slide" data-slide="7">
+        <p class="eyebrow">Investimento · Assessoria de Growth</p>
+        <h2>UMA CONDIÇÃO PARA<br /><span class="red">COMEÇAR A OPERAR.</span></h2>
+        <p class="lead">
+          Assessoria de Growth por 12 meses — com Social como camada recomendada,
+          sem alterar a condição comercial do núcleo.
+        </p>
+        <div class="price-grid">
+          <article class="price-card featured">
+            <h3>Assessoria de Growth</h3>
+            <p class="desc">
+              Operação recorrente por 12 meses.<br />
+              Account · GT · Copy · Design · (Social opcional).
+            </p>
+            <div class="from">De R$ 11.223,40 /mês</div>
+            <div class="value">12× R$ 6.602,00</div>
+            <div class="total">Condição especial · TCV R$ 79.224,00</div>
+            <span class="pill">Núcleo · Recorrente</span>
+          </article>
+          <article class="price-card">
+            <h3>Social na mesma conta</h3>
+            <p class="desc">
+              Se optarem por manter Social, ele entra como acelerador de autoridade —
+              LinkedIn/Instagram da marca — sem mudar a fee do Growth.
+            </p>
+            <div class="from" style="text-decoration:none;color:var(--dim);">Leitura estratégica</div>
+            <div class="value alt" style="font-size:clamp(1.05rem,2.6vh,1.35rem);">Mesma condição</div>
+            <div class="total">Social reforça marca · não redefine o ROI</div>
+            <span class="pill green">Recomendado · Brand rebuild</span>
+          </article>
+        </div>
+        <div class="conditions-bar">
+          <span class="left">O que a fee cobre</span>
+          <span class="right">Máquina de aquisição · não verba de mídia</span>
+        </div>
+        <div class="footer">
+          <span>Investimento</span>
+          <span class="page">7 / 8</span>
+        </div>
+      </section>
+
+      <!-- 8 ROI -->
+      <section class="slide" data-slide="8">
+        <p class="eyebrow">Leitura de retorno · plano de 12 meses</p>
+        <h2>O CUSTO DA ESTRUTURA É<br /><span class="red">IRRISÓRIO VS O POTENCIAL.</span></h2>
+        <p class="lead">
+          Com margem alta e conversão ~90%, o equilíbrio não depende de “viralizar” —
+          depende de poucas oportunidades diretas no mês, sem comissão de terceiro.
+        </p>
+        <div class="be-flow">
+          <div class="be-card">
+            <div class="label">Base da operação</div>
+            <h3>Investimento mensal</h3>
+            <div class="be-row"><span>Assessoria de Growth</span><strong>R$ 6.602</strong></div>
+            <div class="be-row"><span>Social (se mantido)</span><strong>incluso</strong></div>
+            <div class="be-row total"><span>Fee mensal V4</span><strong>R$ 6.602</strong></div>
+          </div>
+          <div class="be-arrow" aria-hidden="true">→</div>
+          <div class="be-card featured">
+            <div class="label">Lógica do retorno</div>
+            <h3>Por que a conta fecha</h3>
+            <div class="be-row"><span>Faturamento base</span><strong>~R$ 1,2 mi/ano</strong></div>
+            <div class="be-row"><span>Margem estimada</span><strong>~70%</strong></div>
+            <div class="be-row"><span>Conversão atual</span><strong>~90%</strong></div>
+            <div class="be-row total"><span>Gargalo</span><strong>Topo de funil</strong></div>
+          </div>
+          <div class="be-arrow" aria-hidden="true">→</div>
+          <div class="be-card">
+            <div class="label">Referência</div>
+            <h3>O que buscamos</h3>
+            <div class="be-result">
+              <div class="big">Canal próprio</div>
+              <p class="sub">
+                Menos dependência de parceiros, mais margem por venda direta e marca que vende sem depender só do Thiago.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="disclaimer">
+          Importante: esta não é garantia de resultado. É uma referência estratégica para acompanhar indicadores reais
+          (ticket, CAC, % de demanda própria e capacidade de entrega) e ajustar o ritmo com segurança.
+        </div>
+        <div class="footer">
+          <span>Próximo passo: formalizar Assessoria de Growth</span>
+          <span class="page">8 / 8</span>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <p class="nav-hint">← → ou scroll para navegar</p>
+
+  <script>
+    (function () {
+      const slides = Array.from(document.querySelectorAll(".slide"));
+      const progress = document.getElementById("progress");
+      let index = 0;
+      let locked = false;
+
+      function show(next) {
+        if (locked || next === index || next < 0 || next >= slides.length) return;
+        locked = true;
+        const dir = next > index ? 1 : -1;
+        const current = slides[index];
+        const target = slides[next];
+        current.classList.remove("active");
+        current.classList.add(dir > 0 ? "exit-left" : "exit-right");
+        target.classList.add("active");
+        target.classList.remove("exit-left", "exit-right");
+        index = next;
+        progress.style.transform = "scaleX(" + ((index + 1) / slides.length) + ")";
+        setTimeout(function () {
+          current.classList.remove("exit-left", "exit-right");
+          locked = false;
+        }, 360);
+      }
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowRight" || e.key === "PageDown" || e.key === " ") {
+          e.preventDefault();
+          show(index + 1);
+        } else if (e.key === "ArrowLeft" || e.key === "PageUp") {
+          e.preventDefault();
+          show(index - 1);
+        } else if (e.key === "Home") {
+          show(0);
+        } else if (e.key === "End") {
+          show(slides.length - 1);
+        }
+      });
+
+      let wheelLock = false;
+      document.addEventListener("wheel", function (e) {
+        if (window.matchMedia("(max-width: 900px)").matches) return;
+        if (wheelLock) return;
+        if (Math.abs(e.deltaY) < 20) return;
+        wheelLock = true;
+        show(index + (e.deltaY > 0 ? 1 : -1));
+        setTimeout(function () { wheelLock = false; }, 450);
+      }, { passive: true });
+
+      let touchY = null;
+      document.addEventListener("touchstart", function (e) {
+        touchY = e.changedTouches[0].clientY;
+      }, { passive: true });
+      document.addEventListener("touchend", function (e) {
+        if (touchY == null || window.matchMedia("(max-width: 900px)").matches) return;
+        const dy = touchY - e.changedTouches[0].clientY;
+        touchY = null;
+        if (Math.abs(dy) < 40) return;
+        show(index + (dy > 0 ? 1 : -1));
+      }, { passive: true });
+
+      progress.style.transform = "scaleX(" + (1 / slides.length) + ")";
+    })();
+  </script>
+</body>
+</html>
