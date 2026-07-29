@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Isoluz × V4 — Proposta Comercial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #050505;
+      --panel: #121214;
+      --panel-2: #1a1a1d;
+      --border: rgba(255,255,255,0.10);
+      --border-strong: rgba(255,255,255,0.16);
+      --red: #e50914;
+      --red-soft: #ff3d45;
+      --gold: #f0d27a;
+      --text: #f7f7f7;
+      --muted: #b7b7bd;
+      --dim: #7c7c84;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: Manrope, system-ui, sans-serif;
+      background: #000;
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      overflow: hidden;
+    }
+    .stage {
+      width: 100vw;
+      height: 100vh;
+      display: grid;
+      place-items: center;
+      background: #000;
+    }
+    .deck {
+      position: relative;
+      width: min(100vw, calc(100vh * 16 / 9));
+      height: min(100vh, calc(100vw * 9 / 16));
+      background:
+        radial-gradient(ellipse 55% 45% at 82% 18%, rgba(229,9,20,0.22) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 15% 90%, rgba(229,9,20,0.10) 0%, transparent 55%),
+        var(--bg);
+      overflow: hidden;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.04);
+    }
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: clamp(1.4rem, 3.2vh, 2.1rem) clamp(1.5rem, 3.5vw, 2.6rem) clamp(2.2rem, 4.2vh, 2.8rem);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(28px);
+      transition: opacity 0.35s var(--ease), transform 0.35s var(--ease), visibility 0.35s;
+      display: flex;
+      flex-direction: column;
+    }
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+      z-index: 2;
+    }
+    .slide.exit-left { transform: translateX(-28px); opacity: 0; }
+    .slide.exit-right { transform: translateX(28px); opacity: 0; }
+
+    .logo-v4 {
+      position: absolute;
+      top: clamp(0.9rem, 2vh, 1.25rem);
+      right: clamp(1rem, 2.4vw, 1.6rem);
+      z-index: 5;
+      width: 34px;
+      height: 34px;
+      border: 1.5px solid rgba(255,255,255,0.85);
+      display: grid;
+      place-items: center;
+      font-family: Manrope, sans-serif;
+      font-weight: 800;
+      font-size: 0.78rem;
+      letter-spacing: -0.04em;
+      color: #fff;
+    }
+    .footer {
+      position: absolute;
+      left: clamp(1.5rem, 3.5vw, 2.6rem);
+      right: clamp(1.5rem, 3.5vw, 2.6rem);
+      bottom: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.68rem;
+      color: var(--dim);
+      z-index: 5;
+      pointer-events: none;
+    }
+    .footer .page { letter-spacing: 0.04em; }
+
+    .eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--red-soft);
+      margin-bottom: 0.7rem;
+    }
+    h1 {
+      font-size: clamp(1.8rem, 4.6vh, 2.85rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+    h1 .red { color: var(--red-soft); }
+    h2 {
+      font-size: clamp(1.35rem, 3.4vh, 2rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+    }
+    h2 .red { color: var(--red-soft); }
+    .lead {
+      margin-top: 0.7rem;
+      font-size: clamp(0.88rem, 1.7vh, 1rem);
+      color: var(--muted);
+      max-width: 42rem;
+      line-height: 1.45;
+    }
+    .mono {
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+    }
+
+    /* CAPA */
+    .capa-grid {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: clamp(1rem, 2.5vw, 2rem);
+      align-items: center;
+      min-height: 0;
+    }
+    .capa-brand {
+      font-size: clamp(2.4rem, 7vh, 3.6rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+      color: #f7f7f7;
+    }
+    .capa-sub {
+      margin-top: 0.35rem;
+      font-size: clamp(1.05rem, 2.6vh, 1.45rem);
+      font-weight: 800;
+      color: var(--red-soft);
+      letter-spacing: -0.02em;
+    }
+    .scope-panel {
+      background: rgba(18,18,20,0.92);
+      border: 1px solid var(--border-strong);
+      border-radius: 16px;
+      padding: clamp(0.9rem, 2vh, 1.2rem);
+    }
+    .scope-panel .panel-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--red-soft);
+      margin-bottom: 0.7rem;
+    }
+    .scope-item {
+      border: 1px solid rgba(229,9,20,0.45);
+      background: rgba(0,0,0,0.35);
+      border-radius: 10px;
+      padding: 0.7rem 0.85rem;
+      margin-bottom: 0.5rem;
+    }
+    .scope-item:last-of-type { margin-bottom: 0.75rem; }
+    .scope-item .num {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--red-soft);
+      letter-spacing: 0.08em;
+      margin-bottom: 0.15rem;
+    }
+    .scope-item h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+    }
+    .scope-item p {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .role-note {
+      display: flex;
+      gap: 0.65rem;
+      align-items: flex-start;
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.4;
+      padding-top: 0.15rem;
+    }
+    .role-note::before {
+      content: "";
+      width: 3px;
+      min-height: 2.2em;
+      background: var(--red);
+      border-radius: 2px;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    /* PRODUCT SLIDES */
+    .dual-layout {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1.35fr 0.85fr;
+      gap: clamp(0.9rem, 2vw, 1.5rem);
+      min-height: 0;
+      margin-top: 0.85rem;
+    }
+    .stack { display: flex; flex-direction: column; gap: 0.5rem; min-height: 0; }
+    .block {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.75rem 0.9rem;
+    }
+    .block .label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--red-soft);
+      margin-bottom: 0.2rem;
+    }
+    .block h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+    .block p, .block li {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .block ul { list-style: none; }
+    .block ul li {
+      position: relative;
+      padding-left: 0.85rem;
+      margin-bottom: 0.18rem;
+    }
+    .block ul li::before {
+      content: "·";
+      position: absolute;
+      left: 0;
+      color: #fff;
+      font-weight: 700;
+    }
+    .section-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin: 0.35rem 0 0.35rem;
+    }
+    .routines {
+      border-left: 1px solid var(--border-strong);
+      padding-left: clamp(0.75rem, 1.5vw, 1.1rem);
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      min-height: 0;
+    }
+    .routines .rtitle {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 0.15rem;
+    }
+    .routine {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.65rem 0.75rem 0.65rem 0.85rem;
+      border-left: 3px solid var(--red);
+    }
+    .routine h4 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 0.15rem;
+    }
+    .routine p {
+      font-size: 0.72rem;
+      color: var(--muted);
+      line-height: 1.35;
+    }
+    .bullets-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.35rem 1rem;
+      margin-top: 0.35rem;
+    }
+    .bullets-2 li {
+      font-size: 0.74rem;
+      color: var(--muted);
+      list-style: none;
+      position: relative;
+      padding-left: 0.85rem;
+      line-height: 1.35;
+    }
+    .bullets-2 li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.45em;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--red);
+    }
+
+    /* INVESTMENT */
+    .price-grid {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(0.75rem, 1.8vw, 1.2rem);
+      align-content: center;
+      margin-top: 0.9rem;
+      min-height: 0;
+    }
+    .price-card {
+      background: var(--panel);
+      border: 1px solid var(--border-strong);
+      border-radius: 16px;
+      padding: clamp(1rem, 2.4vh, 1.4rem);
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+    .price-card.featured {
+      border-color: rgba(229,9,20,0.7);
+      box-shadow: 0 0 0 1px rgba(229,9,20,0.15);
+    }
+    .price-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+    }
+    .price-card .desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.4;
+      margin-bottom: 0.85rem;
+    }
+    .price-card .from {
+      font-size: 0.72rem;
+      color: var(--dim);
+      text-decoration: line-through;
+      margin-bottom: 0.2rem;
+    }
+    .price-card .value {
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: clamp(1.35rem, 3.2vh, 1.75rem);
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: -0.02em;
+      margin-bottom: 0.25rem;
+    }
+    .price-card .value.alt { color: #fff; }
+    .price-card .total {
+      font-size: 0.72rem;
+      color: var(--dim);
+      margin-bottom: 1rem;
+    }
+    .pill {
+      margin-top: auto;
+      align-self: flex-start;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+    }
+    .pill.green {
+      border-color: #5dce8a;
+      color: #5dce8a;
+    }
+    .conditions-bar {
+      margin-top: 0.85rem;
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.75rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .conditions-bar .left {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--dim);
+    }
+    .conditions-bar .right {
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: clamp(0.85rem, 1.8vh, 1rem);
+      font-weight: 500;
+      color: #fff;
+    }
+
+    /* METRICS */
+    .metrics-layout {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 0.9fr 1.3fr;
+      gap: clamp(0.75rem, 1.8vw, 1.2rem);
+      margin-top: 0.85rem;
+      min-height: 0;
+    }
+    .callout {
+      background: rgba(0,0,0,0.35);
+      border: 1px solid rgba(229,9,20,0.65);
+      border-radius: 14px;
+      padding: clamp(0.9rem, 2vh, 1.25rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .badge {
+      display: inline-block;
+      align-self: flex-start;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(240,210,122,0.55);
+      border-radius: 999px;
+      padding: 0.28rem 0.6rem;
+      margin-bottom: 0.75rem;
+    }
+    .callout strong {
+      font-size: clamp(1rem, 2.4vh, 1.25rem);
+      font-weight: 800;
+      line-height: 1.25;
+      display: block;
+      margin-bottom: 0.55rem;
+    }
+    .callout p {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .metric-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
+    .metric {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.65rem 0.75rem;
+    }
+    .metric .n {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--red-soft);
+      margin-bottom: 0.15rem;
+    }
+    .metric h4 {
+      font-size: 0.84rem;
+      font-weight: 700;
+      margin-bottom: 0.15rem;
+    }
+    .metric p {
+      font-size: 0.7rem;
+      color: var(--muted);
+      line-height: 1.35;
+    }
+
+    /* BREAKEVEN */
+    .be-flow {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: 0.55rem;
+      align-items: stretch;
+      margin-top: 0.9rem;
+      min-height: 0;
+    }
+    .be-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 0.85rem 0.95rem;
+      display: flex;
+      flex-direction: column;
+    }
+    .be-card.featured {
+      border-color: rgba(229,9,20,0.65);
+    }
+    .be-card .label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 0.15rem;
+    }
+    .be-card h3 {
+      font-size: 0.92rem;
+      font-weight: 700;
+      margin-bottom: 0.65rem;
+    }
+    .be-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      font-size: 0.74rem;
+      color: var(--muted);
+      padding: 0.18rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .be-row:last-child { border-bottom: 0; }
+    .be-row strong {
+      color: #fff;
+      font-weight: 700;
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: 0.74rem;
+    }
+    .be-row.total {
+      margin-top: 0.35rem;
+      padding-top: 0.4rem;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      border-bottom: 0;
+      color: #fff;
+      font-weight: 700;
+    }
+    .be-arrow {
+      display: grid;
+      place-items: center;
+      color: var(--red-soft);
+      font-size: 1.35rem;
+      font-weight: 700;
+    }
+    .be-result {
+      margin-top: auto;
+      text-align: center;
+      padding-top: 0.5rem;
+    }
+    .be-result .big {
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: clamp(1.5rem, 3.8vh, 2rem);
+      font-weight: 600;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .be-result .sub {
+      margin-top: 0.35rem;
+      font-size: 0.72rem;
+      color: var(--muted);
+      line-height: 1.35;
+    }
+    .disclaimer {
+      margin-top: 0.75rem;
+      background: rgba(240,210,122,0.06);
+      border: 1px solid rgba(240,210,122,0.25);
+      border-radius: 10px;
+      padding: 0.6rem 0.85rem;
+      font-size: 0.72rem;
+      color: var(--gold);
+      line-height: 1.4;
+    }
+
+    .nav-hint {
+      position: fixed;
+      bottom: 0.6rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.28);
+      z-index: 20;
+      pointer-events: none;
+    }
+    .progress {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--red), #ff7a7f);
+      transform-origin: left;
+      transform: scaleX(0.16);
+      z-index: 30;
+      transition: transform 0.35s var(--ease);
+    }
+
+    @media (max-width: 900px) {
+      body { overflow: auto; }
+      .stage { height: auto; min-height: 100vh; display: block; }
+      .deck {
+        width: 100%;
+        height: auto;
+        min-height: 100vh;
+        overflow: visible;
+      }
+      .slide {
+        position: relative;
+        inset: auto;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        min-height: 100vh;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+      }
+      .capa-grid,
+      .dual-layout,
+      .price-grid,
+      .metrics-layout,
+      .be-flow {
+        grid-template-columns: 1fr;
+      }
+      .routines { border-left: 0; padding-left: 0; border-top: 1px solid var(--border); padding-top: 0.75rem; }
+      .be-arrow { transform: rotate(90deg); padding: 0.2rem 0; }
+      .logo-v4 { position: absolute; }
+      .nav-hint { display: none; }
+      .footer { position: relative; left: auto; right: auto; bottom: auto; margin-top: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+
+  <div class="stage">
+    <div class="deck" id="deck">
+      <div class="logo-v4" aria-label="V4 Company">V4</div>
+
+      <!-- 1 CAPA -->
+      <section class="slide active" data-slide="1">
+        <div class="capa-grid">
+          <div>
+            <p class="eyebrow">Proposta comercial · 2026</p>
+            <div class="capa-brand">ISOLUZ</div>
+            <div class="capa-sub">ORGANIZAR PRA CRESCER.</div>
+            <p class="lead">
+              Uma proposta para estruturar o comercial e assumir marketing e vendas
+              no ritmo que a Isoluz aguenta — sem engasgar a operação.
+            </p>
+          </div>
+          <aside class="scope-panel">
+            <div class="panel-title">Escopo da proposta</div>
+            <div class="scope-item">
+              <div class="num">01</div>
+              <h3>Estruturação Comercial</h3>
+              <p>Processo, CRM, scripts e rotina para o time de vendas da Isoluz.</p>
+            </div>
+            <div class="scope-item">
+              <div class="num">02</div>
+              <h3>Assessoria de Growth</h3>
+              <p>Account + GT + Copy + Design operando aquisição com método.</p>
+            </div>
+            <div class="scope-item">
+              <div class="num">03</div>
+              <h3>Crescimento controlado</h3>
+              <p>Expansão regional com filtro de CNPJ — estabilidade e margem primeiro.</p>
+            </div>
+            <div class="role-note">
+              Papel da V4: conectar comercial e marketing em uma operação simples, previsível e no controle da Micheline.
+            </div>
+          </aside>
+        </div>
+        <div class="footer">
+          <span>Isoluz × V4</span>
+          <span class="page">1 / 6</span>
+        </div>
+      </section>
+
+      <!-- 2 CONTEXTO -->
+      <section class="slide" data-slide="2">
+        <p class="eyebrow">O ponto de partida · o que a EE mostrou</p>
+        <h2>VOCÊS JÁ VENDEM.<br /><span class="red">FALTA MÁQUINA SIMPLES.</span></h2>
+        <p class="lead">
+          A Isoluz tem produto forte, carteira ativa e demanda. O risco não é faltar cliente —
+          é crescer bagunçado e perder controle.
+        </p>
+        <div class="dual-layout" style="grid-template-columns: 1fr 1fr;">
+          <div class="stack">
+            <div class="section-label">O que já funciona</div>
+            <div class="block">
+              <ul>
+                <li>Faturamento saudável (~R$ 120 mil/mês)</li>
+                <li>Nicho técnico com diferencial em remanufaturado</li>
+                <li>Meta Ads já gera resultado (operado pela Micheline)</li>
+                <li>WhatsApp como canal principal de conversão</li>
+                <li>3 vendedores ativos + base de indicação</li>
+              </ul>
+            </div>
+          </div>
+          <div class="stack">
+            <div class="section-label">O que ainda vaza</div>
+            <div class="block">
+              <ul>
+                <li>Sem CRM, pipeline e follow-up padronizado</li>
+                <li>Atendimento reativo — sem script por persona</li>
+                <li>Meta sem filtro assertivo de CNPJ</li>
+                <li>Site e ativos digitais gerando atrito</li>
+                <li>Capacidade limitada: pico de demanda já engasgou a entrega</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="disclaimer" style="margin-top:0.85rem;">
+          Premissa da Micheline: crescimento gradual e controlado. Esta proposta respeita isso em todas as frentes.
+        </div>
+        <div class="footer">
+          <span>Diagnóstico da EE</span>
+          <span class="page">2 / 6</span>
+        </div>
+      </section>
+
+      <!-- 3 EC -->
+      <section class="slide" data-slide="3">
+        <p class="eyebrow">Produto 01 · Estruturação Comercial</p>
+        <h2>ESTRUTURAÇÃO COMERCIAL<br /><span class="red">PARA O TIME QUE JÁ VENDE.</span></h2>
+        <p class="lead">
+          Organizar processo, CRM e rotina dos vendedores da Isoluz — com clareza,
+          sem complexidade e sem terceirizar o fechamento.
+        </p>
+        <div class="dual-layout">
+          <div class="stack">
+            <div class="section-label">Escopo</div>
+            <div class="block">
+              <div class="label">Time e processo</div>
+              <h3>Papéis, fluxo e cadência</h3>
+              <ul>
+                <li>Mapeamento do time e fluxo atual de vendas</li>
+                <li>Papéis claros: qualificação (SDR) × fechamento (closers)</li>
+                <li>Scripts e cadências por persona (Sérgio, Cláudia, Marcos)</li>
+                <li>Régua de follow-up de orçamentos</li>
+              </ul>
+            </div>
+            <div class="block">
+              <div class="label">CRM e controle</div>
+              <h3>Pipeline simples e rastreável</h3>
+              <ul>
+                <li>Recomendação e implementação de CRM leve</li>
+                <li>Réguas automáticas de relacionamento</li>
+                <li>Motivos de perda, histórico e rotina comercial</li>
+                <li>KPIs enxutos para a Micheline acompanhar</li>
+              </ul>
+            </div>
+            <div class="section-label">Gestão contínua</div>
+            <ul class="bullets-2">
+              <li>Treino do time no novo processo</li>
+              <li>Rotina gerencial objetiva</li>
+              <li>SLA interno de resposta ao lead</li>
+              <li>Previsibilidade sem “bolo de 3 andares”</li>
+            </ul>
+          </div>
+          <aside class="routines">
+            <div class="rtitle">O que muda no dia a dia</div>
+            <div class="routine">
+              <h4>Lead com dono</h4>
+              <p>Toda oportunidade entra no pipeline com responsável e próximo passo.</p>
+            </div>
+            <div class="routine">
+              <h4>Follow-up no prazo</h4>
+              <p>Nenhum orçamento some no WhatsApp sem retorno marcado.</p>
+            </div>
+            <div class="routine">
+              <h4>Conversa certa</h4>
+              <p>Abordagem por persona — técnica, financeira ou parceria regional.</p>
+            </div>
+            <div class="routine">
+              <h4>Visão da dona</h4>
+              <p>Números simples para decidir ritmo de crescimento com segurança.</p>
+            </div>
+          </aside>
+        </div>
+        <div class="footer">
+          <span>Estruturação Comercial</span>
+          <span class="page">3 / 6</span>
+        </div>
+      </section>
+
+      <!-- 4 GROWTH -->
+      <section class="slide" data-slide="4">
+        <p class="eyebrow">Produto 02 · Assessoria de Growth · 12 meses</p>
+        <h2>ASSESSORIA DE GROWTH<br /><span class="red">ACCOUNT + GT + COPY + DESIGN.</span></h2>
+        <p class="lead">
+          Mídia, criativos e gestão contínua com cadência definida — para atrair o CNPJ certo
+          e pulverizar regiões no ritmo da entrega.
+        </p>
+        <div class="dual-layout">
+          <div class="stack">
+            <div class="section-label">Escopo</div>
+            <div class="block">
+              <div class="label">Account</div>
+              <h3>Estratégia e priorização</h3>
+              <p>Direcionamento de regiões, oferta, ritmo de aquisição e alinhamento com capacidade operacional.</p>
+            </div>
+            <div class="block">
+              <div class="label">Gestor de tráfego</div>
+              <h3>Mídia paga com filtro</h3>
+              <p>Meta com segmentação assertiva de CNPJ + Google de intenção, sem agressividade que estoure a operação.</p>
+            </div>
+            <div class="block">
+              <div class="label">Copy + Design</div>
+              <h3>Mensagem e peças</h3>
+              <p>Narrativa da Isoluz (“sua obra não para”) e criativos profissionais por formato e canal.</p>
+            </div>
+            <div class="section-label">Gestão contínua</div>
+            <ul class="bullets-2">
+              <li>Otimização semanal de campanhas</li>
+              <li>Testes de criativo e público</li>
+              <li>Leitura de funil até oportunidade</li>
+              <li>Alinhamento com metas do negócio</li>
+            </ul>
+          </div>
+          <aside class="routines">
+            <div class="rtitle">Nossas rotinas</div>
+            <div class="routine">
+              <h4>Atendimento diário</h4>
+              <p>Dias úteis: tarefas, pendências, alinhamentos, backlog e resultados do dia.</p>
+            </div>
+            <div class="routine">
+              <h4>Check-in de performance</h4>
+              <p>Reunião periódica: resultados, análise e próximos passos.</p>
+            </div>
+            <div class="routine">
+              <h4>Planejamento trimestral</h4>
+              <p>Próximos três meses, budget, prioridades e aprendizados.</p>
+            </div>
+            <div class="routine">
+              <h4>Growths e retrospectivas</h4>
+              <p>Rituais internos de dados, copy, design, tráfego e funil.</p>
+            </div>
+          </aside>
+        </div>
+        <div class="footer">
+          <span>Assessoria de Growth</span>
+          <span class="page">4 / 6</span>
+        </div>
+      </section>
+
+      <!-- 5 INVESTIMENTO -->
+      <section class="slide" data-slide="5">
+        <p class="eyebrow">Investimento · duas soluções</p>
+        <h2>DUAS CONDIÇÕES PARA<br /><span class="red">COMEÇAR A OPERAR.</span></h2>
+        <p class="lead">Estruturação Comercial + Assessoria de Growth para a Isoluz — escolha A, B ou as duas.</p>
+        <div class="price-grid">
+          <article class="price-card featured">
+            <h3>Estruturação Comercial</h3>
+            <p class="desc">
+              Projeto para organizar o time comercial.<br />
+              Processo · CRM · scripts · rotina · treinamento.
+            </p>
+            <div class="from">De R$ 20.283,13</div>
+            <div class="value">12× R$ 1.183,18</div>
+            <div class="total">Condição especial · parcelado em 12 vezes</div>
+            <span class="pill">Produto 01 · Projeto</span>
+          </article>
+          <article class="price-card">
+            <h3>Assessoria de Growth</h3>
+            <p class="desc">
+              Operação recorrente por 12 meses.<br />
+              Account · GT · Copy · Design.
+            </p>
+            <div class="from">De R$ 11.223,40 /mês</div>
+            <div class="value alt">12× R$ 6.172,87</div>
+            <div class="total">Condição especial · parcelado em 12 vezes</div>
+            <span class="pill green">Produto 02 · Recorrente</span>
+          </article>
+        </div>
+        <div class="conditions-bar">
+          <span class="left">Condições comerciais</span>
+          <span class="right">As duas juntas: ~R$ 7.356,05 /mês</span>
+        </div>
+        <div class="footer">
+          <span>Investimento</span>
+          <span class="page">5 / 6</span>
+        </div>
+      </section>
+
+      <!-- 6 EQUILÍBRIO -->
+      <section class="slide" data-slide="6">
+        <p class="eyebrow">Leitura de retorno · plano de 12 meses</p>
+        <h2>EQUILÍBRIO ESTIMADO EM<br /><span class="red">CERCA DE 3 A 4 MESES.</span></h2>
+        <p class="lead">
+          Cenário de referência com base no faturamento atual (~R$ 120 mil) e margem de contribuição saudável da Isoluz.
+        </p>
+        <div class="be-flow">
+          <div class="be-card">
+            <div class="label">Base da operação</div>
+            <h3>Investimento mensal</h3>
+            <div class="be-row"><span>Estruturação Comercial</span><strong>R$ 1.183</strong></div>
+            <div class="be-row"><span>Assessoria de Growth</span><strong>R$ 6.173</strong></div>
+            <div class="be-row total"><span>Total mensal V4</span><strong>R$ 7.356</strong></div>
+          </div>
+          <div class="be-arrow" aria-hidden="true">→</div>
+          <div class="be-card featured">
+            <div class="label">Lógica do retorno</div>
+            <h3>Por que o prazo é curto</h3>
+            <div class="be-row"><span>Faturamento atual</span><strong>~R$ 120 mil</strong></div>
+            <div class="be-row"><span>Margem de contribuição</span><strong>Alta</strong></div>
+            <div class="be-row"><span>Canal já validado</span><strong>Meta Ads</strong></div>
+            <div class="be-row total"><span>Breakeven estimado</span><strong>3–4 meses</strong></div>
+          </div>
+          <div class="be-arrow" aria-hidden="true">→</div>
+          <div class="be-card">
+            <div class="label">Referência</div>
+            <h3>O que buscamos</h3>
+            <div class="be-result">
+              <div class="big">Controle</div>
+              <p class="sub">
+                Mais CNPJ certo, comercial organizado e crescimento regional sem engasgar a entrega.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="disclaimer">
+          Importante: esta não é garantia de resultado. É uma referência para acompanhar indicadores reais da Isoluz
+          (ticket, conversão, capacidade mensal e CAC) e ajustar o ritmo com segurança.
+        </div>
+        <div class="footer">
+          <span>Próximo passo: formalizar EC + Assessoria</span>
+          <span class="page">6 / 6</span>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <p class="nav-hint">← → ou scroll para navegar</p>
+
+  <script>
+    (function () {
+      const slides = Array.from(document.querySelectorAll(".slide"));
+      const progress = document.getElementById("progress");
+      let index = 0;
+      let locked = false;
+
+      function show(next) {
+        if (locked || next === index || next < 0 || next >= slides.length) return;
+        locked = true;
+        const dir = next > index ? 1 : -1;
+        const current = slides[index];
+        const target = slides[next];
+        current.classList.remove("active");
+        current.classList.add(dir > 0 ? "exit-left" : "exit-right");
+        target.classList.add("active");
+        target.classList.remove("exit-left", "exit-right");
+        index = next;
+        progress.style.transform = "scaleX(" + ((index + 1) / slides.length) + ")";
+        setTimeout(function () {
+          current.classList.remove("exit-left", "exit-right");
+          locked = false;
+        }, 360);
+      }
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowRight" || e.key === "PageDown" || e.key === " ") {
+          e.preventDefault();
+          show(index + 1);
+        } else if (e.key === "ArrowLeft" || e.key === "PageUp") {
+          e.preventDefault();
+          show(index - 1);
+        } else if (e.key === "Home") {
+          show(0);
+        } else if (e.key === "End") {
+          show(slides.length - 1);
+        }
+      });
+
+      let wheelLock = false;
+      document.addEventListener("wheel", function (e) {
+        if (window.matchMedia("(max-width: 900px)").matches) return;
+        if (wheelLock) return;
+        if (Math.abs(e.deltaY) < 20) return;
+        wheelLock = true;
+        show(index + (e.deltaY > 0 ? 1 : -1));
+        setTimeout(function () { wheelLock = false; }, 450);
+      }, { passive: true });
+
+      let touchY = null;
+      document.addEventListener("touchstart", function (e) {
+        touchY = e.changedTouches[0].clientY;
+      }, { passive: true });
+      document.addEventListener("touchend", function (e) {
+        if (touchY == null || window.matchMedia("(max-width: 900px)").matches) return;
+        const dy = touchY - e.changedTouches[0].clientY;
+        touchY = null;
+        if (Math.abs(dy) < 40) return;
+        show(index + (dy > 0 ? 1 : -1));
+      }, { passive: true });
+
+      progress.style.transform = "scaleX(" + (1 / slides.length) + ")";
+    })();
+  </script>
+</body>
+</html>
