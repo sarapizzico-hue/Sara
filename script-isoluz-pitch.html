@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Script de Pitch · Isoluz · Narrativa Estratégica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #140608;
+      --surf: rgba(255,255,255,.06);
+      --bd: rgba(255,255,255,.14);
+      --txt: #fff;
+      --mut: rgba(255,255,255,.78);
+      --red: #e11d24;
+      --soft: #ffd0d0;
+      --ok: #86efac;
+      --warn: #fde68a;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font: 15px/1.55 "Plus Jakarta Sans", system-ui, sans-serif;
+      color: var(--txt);
+      background:
+        radial-gradient(ellipse 70% 40% at 10% 0%, rgba(225,29,36,.35), transparent 55%),
+        radial-gradient(ellipse 50% 35% at 90% 10%, rgba(255,80,80,.18), transparent 50%),
+        linear-gradient(180deg, #1a090b 0%, #0d0405 100%);
+      padding-bottom: 64px;
+    }
+    h1, h2, h3 { font-family: Outfit, sans-serif; letter-spacing: -.02em; line-height: 1.15; }
+    .top {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(13,4,5,.88);
+      border-bottom: 1px solid var(--bd);
+      padding: 14px 20px;
+      display: flex; gap: 12px; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    }
+    .brand { font-weight: 800; font-size: 15px; }
+    .brand span { color: #fda4af; }
+    .pill {
+      font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      border: 1px solid var(--bd); border-radius: 999px; padding: 6px 12px; color: var(--mut);
+    }
+    .wrap { max-width: 920px; margin: 0 auto; padding: 28px 20px 0; }
+    .hero {
+      border: 1px solid var(--bd); border-radius: 20px; padding: 28px 24px;
+      background: linear-gradient(135deg, rgba(225,29,36,.2), rgba(255,255,255,.04));
+      margin-bottom: 18px;
+    }
+    .hero h1 { margin: 0 0 10px; font-size: clamp(26px, 4vw, 36px); }
+    .hero p { margin: 0; color: var(--mut); max-width: 740px; }
+    .nav {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 8px; margin: 18px 0 8px;
+    }
+    .nav a {
+      text-decoration: none; color: var(--mut); font-size: 12px; font-weight: 700;
+      border: 1px solid var(--bd); background: var(--surf); border-radius: 12px;
+      padding: 10px 12px; transition: .2s;
+    }
+    .nav a:hover { color: #fff; border-color: rgba(255,255,255,.35); background: rgba(225,29,36,.18); }
+    .nav a small { display: block; color: #fda4af; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 3px; }
+    .callout {
+      margin: 16px 0 22px; padding: 14px 16px; border-radius: 14px;
+      border: 1px solid rgba(253,230,138,.3); background: rgba(253,230,138,.08);
+      color: var(--warn); font-size: 14px;
+    }
+    .callout strong { color: #fef08a; }
+    .perfil {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px; margin: 16px 0 8px;
+    }
+    .perfil .card {
+      border: 1px solid var(--bd); border-radius: 14px; background: var(--surf);
+      padding: 12px 14px;
+    }
+    .perfil .card h3 { margin: 0 0 6px; font-size: 13px; color: #fda4af; text-transform: uppercase; letter-spacing: .06em; }
+    .perfil .card p { margin: 0; font-size: 13px; color: var(--mut); line-height: 1.45; }
+    .slide {
+      border: 1px solid var(--bd); border-radius: 18px; background: rgba(20,8,10,.72);
+      padding: 22px 20px; margin-bottom: 16px;
+    }
+    .slide-head {
+      display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+      align-items: flex-start; margin-bottom: 14px;
+      padding-bottom: 12px; border-bottom: 1px solid var(--bd);
+    }
+    .slide-num {
+      font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #fda4af;
+    }
+    .slide h2 { margin: 4px 0 0; font-size: clamp(20px, 3vw, 26px); }
+    .slide-ref {
+      font-size: 12px; color: var(--mut); border: 1px solid var(--bd);
+      border-radius: 999px; padding: 6px 10px; white-space: nowrap;
+    }
+    .objetivo {
+      display: inline-block; margin-bottom: 12px; font-size: 12px; font-weight: 700;
+      color: var(--ok); background: rgba(134,239,172,.1); border: 1px solid rgba(134,239,172,.25);
+      border-radius: 999px; padding: 5px 10px;
+    }
+    .fala {
+      background: rgba(255,255,255,.05); border-left: 3px solid var(--red);
+      border-radius: 0 12px 12px 0; padding: 14px 16px; margin: 0 0 14px;
+      color: #fff; font-size: 15px; line-height: 1.6;
+    }
+    .fala em { color: #ffe4e6; font-style: normal; font-weight: 700; }
+    .bloco { margin-bottom: 14px; }
+    .bloco h3 {
+      margin: 0 0 8px; font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: #fda4af;
+    }
+    .bloco ul { margin: 0; padding-left: 18px; color: var(--mut); }
+    .bloco li { margin-bottom: 6px; }
+    .bloco li strong { color: #fff; }
+    .roi-bridge {
+      margin-top: 12px; padding: 12px 14px; border-radius: 12px;
+      background: rgba(134,239,172,.08); border: 1px solid rgba(134,239,172,.22);
+      color: #bbf7d0; font-size: 14px;
+    }
+    .roi-bridge strong { color: var(--ok); }
+    .ask {
+      margin-top: 12px; padding: 12px 14px; border-radius: 12px;
+      background: rgba(255,255,255,.05); border: 1px dashed rgba(255,255,255,.25);
+      color: #ffe4e6; font-size: 14px;
+    }
+    .ask strong { color: #fff; }
+    .evitar {
+      margin-top: 12px; padding: 12px 14px; border-radius: 12px;
+      background: rgba(225,29,36,.1); border: 1px solid rgba(225,29,36,.28);
+      color: #fecaca; font-size: 14px;
+    }
+    .evitar strong { color: #fda4af; }
+    .footer-note {
+      margin-top: 8px; color: rgba(255,255,255,.55); font-size: 13px; text-align: center;
+    }
+    .links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .links a {
+      color: #fff; text-decoration: none; font-size: 12px; font-weight: 700;
+      background: rgba(225,29,36,.85); border-radius: 999px; padding: 8px 14px;
+    }
+    .links a.sec { background: transparent; border: 1px solid var(--bd); color: var(--mut); }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <div class="brand">Script de Pitch · <span>Isoluz × V4</span></div>
+    <div class="pill">Uso interno · Billions · EC + E-com + Growth</div>
+  </div>
+
+  <div class="wrap">
+    <header class="hero">
+      <h1>Narrativa estratégica · Isoluz</h1>
+      <p>
+        Roteiro por slide para a Micheline Ribeiro. Linguagem curta, direta e sem jargão.
+        A tese não é “vender mais”. É <strong>organizar pra crescer sem engasgar a operação</strong> —
+        fechando o arco que a EE já abriu.
+      </p>
+      <div class="links">
+        <a href="https://sarapizzico-hue.github.io/Sara/proposta-isoluz.html" target="_blank" rel="noopener">Abrir deck do cliente</a>
+        <a class="sec" href="#s1">Ir para o roteiro ↓</a>
+      </div>
+    </header>
+
+    <div class="callout">
+      <strong>Linha mestra da call:</strong>
+      “Micheline, vocês já vendem. O risco não é faltar cliente — é crescer bagunçado e perder controle.
+      Hoje a gente mostra como a V4 assume comercial, vitrine B2B e Growth no ritmo que a Isoluz aguenta.”
+      Nunca abrir com preço. Nunca prometer explosão de demanda. Sempre falar em <strong>controle, margem e ritmo</strong>.
+    </div>
+
+    <div class="perfil">
+      <div class="card">
+        <h3>Perfil</h3>
+        <p>Decisora única · prática · TDAH · frases curtas · zero “bolo de 3 andares”.</p>
+      </div>
+      <div class="card">
+        <h3>Medo real</h3>
+        <p>Engasgar entrega · perder controle · repetir trauma com fornecedor.</p>
+      </div>
+      <div class="card">
+        <h3>O que ela quer</h3>
+        <p>Abrir região com filtro · time dela organizado · Meta mais assertiva · autonomia.</p>
+      </div>
+      <div class="card">
+        <h3>O que já comprou</h3>
+        <p>Diagnóstico da EE · confiança no Gustavo · abertura clara para executar.</p>
+      </div>
+    </div>
+
+    <nav class="nav" aria-label="Slides">
+      <a href="#s1"><small>Slide 01</small>Capa</a>
+      <a href="#s2"><small>Slide 02</small>Contexto EE</a>
+      <a href="#s3"><small>Slide 03</small>EC</a>
+      <a href="#s4"><small>Slide 04</small>E-com B2B</a>
+      <a href="#s5"><small>Slide 05</small>Growth</a>
+      <a href="#s6"><small>Slide 06</small>Mercado</a>
+      <a href="#s7"><small>Slide 07</small>Investimento</a>
+      <a href="#s8"><small>Slide 08</small>Equilíbrio</a>
+      <a href="#oral"><small>Oral</small>Só na fala</a>
+    </nav>
+
+    <!-- 01 -->
+    <article class="slide" id="s1">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 01 · Capa</div>
+          <h2>Organizar pra crescer</h2>
+        </div>
+        <div class="slide-ref">~ 40–50s</div>
+      </div>
+      <div class="objetivo">Objetivo: ancorar a tese e mostrar que isso é continuidade da EE — não venda fria</div>
+      <div class="fala">
+        “Micheline, antes de qualquer número: esta proposta não nasce hoje.
+        Nasce de tudo que a gente viu juntos nas últimas semanas.
+        A Isoluz já vende. Já tem produto forte. Já tem demanda.
+        O que falta é <em>máquina simples</em>: comercial organizado, vitrine B2B limpa e Growth no ritmo certo.
+        Três frentes. Uma lógica: organizar pra crescer — sem engasgar a operação.”
+      </div>
+      <div class="bloco">
+        <h3>Enriquecimento</h3>
+        <ul>
+          <li><strong>Reconhecer:</strong> ela contratou a EE para ver os problemas — e viu.</li>
+          <li><strong>Nomear as 3 frentes:</strong> EC · E-commerce B2B · Assessoria de Growth.</li>
+          <li><strong>Promessa da call:</strong> sair com clareza do que muda no dia a dia e como entra por etapas.</li>
+        </ul>
+      </div>
+      <div class="roi-bridge"><strong>Ponte estratégica:</strong> “Não é escala agressiva. É crescimento com controle — exatamente o que você pediu desde o início.”</div>
+      <div class="ask"><strong>Abertura:</strong> “Só pra alinhar: o que mais te preocupa hoje — organizar o time comercial ou filtrar melhor o CNPJ que chega?”</div>
+      <div class="evitar"><strong>Evitar:</strong> jargão (funil omnichannel, GTM, share of voice) · lista longa de produtos · tom de “agora a gente vende.”</div>
+    </article>
+
+    <!-- 02 -->
+    <article class="slide" id="s2">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 02 · Contexto EE</div>
+          <h2>Vocês já vendem. Falta máquina simples.</h2>
+        </div>
+        <div class="slide-ref">~ 1–1,5 min</div>
+      </div>
+      <div class="objetivo">Objetivo: espelhar o que ela já reconheceu — sem humilhar, com respeito</div>
+      <div class="fala">
+        “Olha o que a Isoluz já tem: faturamento saudável, nicho forte, Meta gerando resultado, WhatsApp convertendo, time de 3 vendedores.
+        E olha o que ainda vaza: sem CRM, follow-up irregular, atendimento reativo, site atrapalhando, Meta sem filtro de CNPJ.
+        E o ponto mais importante: quando a demanda sobe demais, a entrega engasga.
+        Então o risco real não é ‘faltar lead’. É <em>crescer bagunçado e perder controle</em>.”
+      </div>
+      <div class="bloco">
+        <h3>Como usar o slide</h3>
+        <ul>
+          <li><strong>Lado esquerdo:</strong> validar orgulho e competência (ela faz R$ 120k com operação enxuta).</li>
+          <li><strong>Lado direito:</strong> só o que a EE já mostrou — nada novo que assuste.</li>
+          <li><strong>Fechar o espelho:</strong> “Por isso a proposta começa por organização — não por acelerar mídia.”</li>
+        </ul>
+      </div>
+      <div class="roi-bridge"><strong>Ponte:</strong> “Cada vazamento aqui é margem e tempo seus. A gente veio para estancar isso na ordem certa.”</div>
+      <div class="ask"><strong>Engajamento:</strong> “Desses vazamentos, qual dói mais no dia a dia: orçamento que some no WhatsApp ou lead errado chegando?”</div>
+      <div class="evitar"><strong>Evitar:</strong> aprofundar trauma de fornecedor antigo · prometer ‘vamos explodir região X’.</div>
+    </article>
+
+    <!-- 03 -->
+    <article class="slide" id="s3">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 03 · Estruturação Comercial</div>
+          <h2>Organizar o time que já vende</h2>
+        </div>
+        <div class="slide-ref">~ 1,5–2 min</div>
+      </div>
+      <div class="objetivo">Objetivo: vender EC como controle do time dela — não terceirização de vendas</div>
+      <div class="fala">
+        “Primeira frente: Estruturação Comercial.
+        Não é a V4 virar seu time de vendas. É organizar <em>o time que já é seu</em>.
+        Papéis claros — quem qualifica e quem fecha.
+        Scripts por persona: Sérgio, Cláudia e Marcos.
+        CRM leve, régua de follow-up, nenhum orçamento sem próximo passo.
+        Em 45 dias: implementação e treinamento. Você passa a ver o comercial com número — não no feeling.”
+      </div>
+      <div class="bloco">
+        <h3>Ganchos que batem nela</h3>
+        <ul>
+          <li><strong>“Time dela”:</strong> respeita a recusa de terceirizar closers.</li>
+          <li><strong>Personas da EE:</strong> prova continuidade — não proposta genérica.</li>
+          <li><strong>45 dias:</strong> prazo concreto (ela odeia abstração).</li>
+          <li><strong>Visão da dona:</strong> KPIs enxutos para ela decidir ritmo com segurança.</li>
+        </ul>
+      </div>
+      <div class="roi-bridge"><strong>Ponte:</strong> “Com comercial organizado, dá para abrir região sem medo de engasgar — porque o fluxo fica previsível.”</div>
+      <div class="ask"><strong>Check:</strong> “Faz sentido começar pelo time interno antes de acelerar aquisição?”</div>
+      <div class="evitar"><strong>Evitar:</strong> BPMN, Diagnóstico Aeronáutico, CHA, ‘consultoria de PDF’ · CRM como upsell.</div>
+    </article>
+
+    <!-- 04 -->
+    <article class="slide" id="s4">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 04 · E-commerce B2B</div>
+          <h2>Vitrine limpa · 30 dias</h2>
+        </div>
+        <div class="slide-ref">~ 1–1,5 min</div>
+      </div>
+      <div class="objetivo">Objetivo: trocar o site que ela odeia por uma loja B2B simples e confiável</div>
+      <div class="fala">
+        “Segunda frente: e-commerce B2B.
+        Você já deixou claro: o site atual atrapalha. É lento, confunde e não representa a Isoluz.
+        Aqui a gente entrega uma <em>loja pronta para o modelo B2B da Isoluz</em> —
+        tema com adaptação visual, integrações, SEO, treinamento.
+        Prazo: 30 dias. Sem layout ‘de agência cara’. Rápido, limpo e alinhado ao jeito que vocês vendem.”
+      </div>
+      <div class="bloco">
+        <h3>Encaixe estratégico</h3>
+        <ul>
+          <li><strong>Dor EE:</strong> site rejeitado + atrito mobile + desconfiança do comprador novo.</li>
+          <li><strong>Promessa:</strong> presença digital que passa segurança para Cláudia (compradora) e Sérgio (campo).</li>
+          <li><strong>Tema (não personalizado total):</strong> velocidade + custo sob controle — casa com o perfil dela.</li>
+        </ul>
+      </div>
+      <div class="roi-bridge"><strong>Ponte:</strong> “Comercial organizado + vitrine limpa = base pronta para o Growth trazer CNPJ certo.”</div>
+      <div class="ask"><strong>Check:</strong> “Se em 30 dias a loja estiver no ar com a cara da Isoluz, isso já tira um peso da operação digital?”</div>
+      <div class="evitar"><strong>Evitar:</strong> citar plataforma (Shopify/Tray) · prometer e-commerce ‘enterprise’ · checkout complexo se ela pensar só em WhatsApp.</div>
+    </article>
+
+    <!-- 05 -->
+    <article class="slide" id="s5">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 05 · Assessoria de Growth</div>
+          <h2>Account + GT + Copy + Design</h2>
+        </div>
+        <div class="slide-ref">~ 1,5–2 min</div>
+      </div>
+      <div class="objetivo">Objetivo: assumir a mídia sem assustar com volume — vender filtro e ritmo</div>
+      <div class="fala">
+        “Terceira frente: Assessoria de Growth.
+        Você já roda Meta e já tem resultado. O ponto não é ‘começar do zero’.
+        É tirar isso das suas costas e fazer com método:
+        Account priorizando região e ritmo,
+        GT filtrando CNPJ certo,
+        Copy e Design com a mensagem certa — <em>sua obra não para</em>.
+        Meta para descoberta controlada. Google para intenção. Sem bombar a operação.”
+      </div>
+      <div class="bloco">
+        <h3>Como ancorar no perfil</h3>
+        <ul>
+          <li><strong>Respeito ao que já funciona:</strong> ela tem orgulho do Meta manual — não destruir isso.</li>
+          <li><strong>Filtro &gt; volume:</strong> “mais assertivo”, não “mais lead a qualquer custo”.</li>
+          <li><strong>Expansão regional:</strong> pulverizar (ex.: Campinas) em ondas ligadas à capacidade.</li>
+          <li><strong>Rotinas:</strong> mostrar cadência (diário / check-in / trimestral) = previsibilidade.</li>
+        </ul>
+      </div>
+      <div class="roi-bridge"><strong>Ponte:</strong> “Growth só acelera com comercial e vitrine prontos. Por isso a ordem das três frentes importa.”</div>
+      <div class="ask"><strong>Check:</strong> “Se a gente trouxesse menos lead, mas mais CNPJ certo, isso já seria vitória no primeiro ciclo?”</div>
+      <div class="evitar"><strong>Evitar:</strong> ‘vamos escalar hard’ · comparar com agência genérica · jargão de mídia.</div>
+    </article>
+
+    <!-- 06 -->
+    <article class="slide" id="s6">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 06 · Preço de mercado</div>
+          <h2>Quanto custaria montar sozinha</h2>
+        </div>
+        <div class="slide-ref">~ 1–1,5 min</div>
+      </div>
+      <div class="objetivo">Objetivo: ancorar valor antes do preço — frame de custo de fazer internamente</div>
+      <div class="fala">
+        “Antes do investimento da V4, olha o outro caminho: montar isso sozinha.
+        Contratar e gerir Account, tráfego, copy, design…
+        Mais estruturar comercial e colocar e-commerce no ar.
+        No mercado, só o núcleo de Growth já anda na casa de <em>R$ 30 a R$ 43 mil por mês</em> —
+        sem contar tempo de contratação, treinamento e risco de erro.
+        A V4 entrega o escopo completo com método e a EE já trabalhando a favor.”
+      </div>
+      <div class="bloco">
+        <h3>Como conduzir</h3>
+        <ul>
+          <li><strong>Não atacar:</strong> “você não consegue” — ela é capaz; o ponto é custo de oportunidade.</li>
+          <li><strong>Bater no tempo dela:</strong> hoje ela mesma faz mídia + decide + opera.</li>
+          <li><strong>Preparar o próximo slide:</strong> “Agora olha a condição para ter isso rodando com a V4.”</li>
+        </ul>
+      </div>
+      <div class="roi-bridge"><strong>Ponte:</strong> “O preço da proposta só faz sentido depois dessa âncora — senão vira ‘tabela’, não decisão.”</div>
+      <div class="ask"><strong>Micro-close:</strong> “Faz sentido olhar o investimento da V4 em cima desse custo de mercado?”</div>
+      <div class="evitar"><strong>Evitar:</strong> discutir salário detalhado demais · parecer que está ‘inflando’ o mercado.</div>
+    </article>
+
+    <!-- 07 -->
+    <article class="slide" id="s7">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 07 · Investimento</div>
+          <h2>Três condições · um pacote modular</h2>
+        </div>
+        <div class="slide-ref">~ 1,5–2 min</div>
+      </div>
+      <div class="objetivo">Objetivo: apresentar preço com leveza, modularidade e sem riscado/tabela antiga</div>
+      <div class="fala">
+        “Três frentes. Três condições claras.
+        Estruturação Comercial: <em>12× R$ 960,53</em> — total R$ 11.526,32.
+        E-commerce B2B: <em>12× R$ 333,33</em> — total R$ 4.000.
+        Assessoria de Growth: <em>12× R$ 6.172,87</em>.
+        As três juntas ficam em torno de R$ 7.467 por mês.
+        Modular: você entende cada peça. Sem bolo de três andares. Sem armadilha.”
+      </div>
+      <div class="bloco">
+        <h3>Ordem da fala</h3>
+        <ul>
+          <li>1) Nomear o produto · 2) O que resolve · 3) Parcela · 4) Só no final o total junto.</li>
+          <li><strong>Comparar implicitamente</strong> com o slide de mercado — não repetir a tabela.</li>
+          <li><strong>Cheque/Pix:</strong> se ela pedir forma, espelhar a linguagem que ela já usa (moeda preferencial).</li>
+        </ul>
+      </div>
+      <div class="roi-bridge"><strong>Ponte:</strong> “Uma operação que deixa de vazar orçamento e atrai CNPJ certo começa a pagar esse investimento cedo.”</div>
+      <div class="ask"><strong>Pergunta de avanço:</strong> “Olhando as três, você prefere entrar com o pacote completo ou priorizar uma frente primeiro?”</div>
+      <div class="evitar"><strong>Evitar:</strong> preços ‘de’ riscados · defensividade · pressa de fechar sem ela processar.</div>
+    </article>
+
+    <!-- 08 -->
+    <article class="slide" id="s8">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 08 · Equilíbrio + fechamento</div>
+          <h2>Controle em 3–4 meses</h2>
+        </div>
+        <div class="slide-ref">~ 1–1,5 min</div>
+      </div>
+      <div class="objetivo">Objetivo: fechar com segurança, não com pressão — pedir o próximo passo</div>
+      <div class="fala">
+        “Com faturamento na casa de R$ 120 mil e margem saudável, o equilíbrio estimado fica em cerca de 3 a 4 meses.
+        Isso não é garantia — é referência para a gente acompanhar juntos: ticket, conversão, capacidade e CAC.
+        O que buscamos no fim do dia é <em>controle</em>:
+        comercial organizado, vitrine B2B no ar, Growth trazendo o CNPJ certo — sem engasgar a entrega.
+        Se fizer sentido, o próximo passo é formalizar as três frentes e começar na ordem certa.”
+      </div>
+      <div class="bloco">
+        <h3>Fechamento estratégico</h3>
+        <ul>
+          <li><strong>Repetir a tese:</strong> organizar pra crescer.</li>
+          <li><strong>Dar segurança jurídica/emocional:</strong> modular, claro, sem prender em abstração.</li>
+          <li><strong>CTA único:</strong> formalizar · data de início · forma de pagamento.</li>
+          <li><strong>Se pedir tempo:</strong> marcar devolutiva ≤ 72h (ela é rápida quando está clara).</li>
+        </ul>
+      </div>
+      <div class="roi-bridge"><strong>CTA:</strong> “Podemos seguir com a formalização do pacote — EC, e-commerce e Assessoria — nessa condição?”</div>
+      <div class="ask"><strong>Se hesitar:</strong> “O que ainda precisa ficar mais claro pra você decidir com tranquilidade — escopo, ritmo ou investimento?”</div>
+      <div class="evitar"><strong>Evitar:</strong> urgência falsa · ‘só hoje’ · empurrar mídia agressiva no mês 1 como núcleo.</div>
+    </article>
+
+    <!-- ORAL ONLY -->
+    <article class="slide" id="oral">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Só na fala · não vai no deck</div>
+          <h2>Pontos orais combinados</h2>
+        </div>
+        <div class="slide-ref">Se perguntar</div>
+      </div>
+      <div class="objetivo">Usar só se ela puxar — não abrir sozinho no slide</div>
+      <div class="bloco">
+        <h3>Reservados para a conversa</h3>
+        <ul>
+          <li><strong>Ferramenta de CRM:</strong> recomendação leve (ex.: Datacrazy) — quem paga a mensalidade da ferramenta fica na fala.</li>
+          <li><strong>Mídia no 1º mês:</strong> Gustavo pode operar como ponte/benefício enquanto o setup roda — não colocar como linha de preço.</li>
+          <li><strong>Detalhe técnico do e-com:</strong> se perguntar plataforma, responder com tranquilidade sem fixar marca no deck.</li>
+        </ul>
+      </div>
+      <div class="evitar"><strong>Regra:</strong> se não perguntou, não abre. Mantém a narrativa limpa e o controle com ela.</div>
+    </article>
+
+    <p class="footer-note">
+      Isoluz × V4 · Narrativa estratégica para pitch · uso interno Sara / Gustavo · 2026
+    </p>
+  </div>
+</body>
+</html>
