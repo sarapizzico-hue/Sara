@@ -113,7 +113,7 @@
 <body>
 <header class="topbar">
   <div class="v4-logo">V4 <span>COMPANY</span></div>
-  <div class="sync-pill"><span class="sync-dot"></span> Sara Pizzico · Farmer AM · v0.6</div>
+  <div class="sync-pill"><span class="sync-dot"></span> Sara Pizzico · Farmer AM · v0.7</div>
 </header>
 
 <div class="wrap">
@@ -126,15 +126,15 @@
       Enquanto isso, a V4 <strong>mapeia a solução</strong>. No final, apresentamos o que se encaixa — não um catálogo genérico.
     </p>
     <div class="chips">
-      <span class="chip live">v0.6 · lead score limpo</span>
-      <span class="chip live">Decisor + pago</span>
-      <span class="chip live">Consciência + tese</span>
+      <span class="chip live">v0.7 · encaixe STEP</span>
+      <span class="chip live">Tier · margem · BE</span>
+      <span class="chip live">Lead score</span>
       <span class="chip">Dash = fase 2</span>
       <span class="chip"><a href="index.html" style="color:inherit;text-decoration:none">← Comando Estratégico</a></span>
     </div>
   </div></section>
 
-  <div class="callout ok"><strong>v0.6 · lead score (construído juntas):</strong> mede <em>prontidão para apresentar a solução</em>. Inegociável: <strong>decisor na sala + pago/pagando</strong>. Diferencia: <strong>nível de consciência</strong> + <strong>qualidade da tese/produto</strong>. <a href="lead-score-farmer.html" style="color:#86efac">Calculadora</a></div>
+  <div class="callout ok"><strong>v0.7:</strong> Lead score = <em>se</em> apresenta · Tier + margem de contribuição + break-even = <em>qual STEP</em> se encaixa. Duas camadas, sem misturar.</div>
 
   <nav class="nav">
     <div class="nav-label">Navegação do playbook</div>
@@ -936,6 +936,104 @@
         </tbody>
       </table>
       <div class="callout ok" style="margin-top:14px"><strong>CSAT / NPS / GC</strong> continuam no contrato da conta e no dash de saúde — mas <em>não</em> incham o lead score. Lead score = prontidão para apresentar.</div>
+    </div>
+
+    <div class="section">
+      <h2>Camada 2 · Qual STEP se encaixa</h2>
+      <h3>Tier · margem de contribuição · break-even</h3>
+      <p class="lead">
+        Depois que o lead score libera a apresentação, a pergunta muda:
+        <strong>qual STEP apresentar?</strong>
+        Aqui entram economia do cliente + economia do projeto — não feeling.
+      </p>
+      <div class="grid3">
+        <div class="card">
+          <span class="tag hot">1 · Tier do cliente</span>
+          <div class="t">Porte / complexidade</div>
+          <div class="d">Ex.: S · M · L · XL (ou o enum que a unidade usar). Define capacidade de investimento, ritmo e profundidade do STEP.</div>
+        </div>
+        <div class="card">
+          <span class="tag warn">2 · Margem de contribuição</span>
+          <div class="t">Cabe no negócio dele?</div>
+          <div class="d">Margem das frentes prioritárias do cliente. Sem margem, não empurra STEP que exige escala/mídia agressiva.</div>
+        </div>
+        <div class="card">
+          <span class="tag ok">3 · Break-even do projeto</span>
+          <div class="t">Quando equilibra?</div>
+          <div class="d">Em quantos meses o investimento do STEP se paga (cenário base). Se BE é longo demais pro tier/consciência, desce o STEP ou faseia.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Campos obrigatórios antes de escolher o STEP</h2>
+      <table>
+        <thead><tr><th>Campo</th><th>O que registrar</th><th>Para quê</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>tier_cliente</strong></td>
+            <td>S / M / L / XL (ou LARGE / Mid-market — alinhar enum)</td>
+            <td>Teto de complexidade e ticket do STEP</td>
+          </tr>
+          <tr>
+            <td><strong>faturamento_ref</strong></td>
+            <td>R$/mês de referência</td>
+            <td>Contextualiza tier e BE</td>
+          </tr>
+          <tr>
+            <td><strong>margem_contribuicao</strong></td>
+            <td>% (ou R$) da frente prioritária · qual linha de produto</td>
+            <td>Valida se o STEP cabe na economia dele</td>
+          </tr>
+          <tr>
+            <td><strong>break_even_meses</strong></td>
+            <td>Meses até equilibrar o investimento do STEP (cenário base)</td>
+            <td>Evita vender STEP cujo retorno ele não aguenta esperar</td>
+          </tr>
+          <tr>
+            <td><strong>step_recomendado</strong></td>
+            <td>Qual STEP/pack/módulo apresentar (ex.: Pack S/M/L/XL, EC, Growth…)</td>
+            <td>Output da camada 2 — vai no pitch</td>
+          </tr>
+          <tr>
+            <td><strong>step_nao_oferecer</strong></td>
+            <td>O que fica de fora agora</td>
+            <td>Protege encaixe (igual regra Triboltec)</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="callout warn" style="margin-top:14px"><strong>Para alinhar juntas:</strong> na sua unidade, <em>STEP</em> = Pack S/M/L/XL da planilha EE, jornada Ter/Saber/Executar, ou outro catálogo? Isso trava o enum do dash.</div>
+    </div>
+
+    <div class="section">
+      <h2>Lógica de encaixe (rascunho v0.7)</h2>
+      <p class="lead">Ainda calibrar com você — regra de bolso para não apresentar STEP errado.</p>
+      <table>
+        <thead><tr><th>Sinal</th><th>Puxa STEP para cima</th><th>Puxa STEP para baixo / faseia</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Tier</td>
+            <td>L / XL · operação complexa · multi-canal</td>
+            <td>S / M · operação enxuta · 1–2 canais</td>
+          </tr>
+          <tr>
+            <td>Margem de contribuição</td>
+            <td>Margem saudável na frente prioritária</td>
+            <td>Margem apertada · escalar demanda queima caixa</td>
+          </tr>
+          <tr>
+            <td>Break-even</td>
+            <td>BE curto e crível para o cliente</td>
+            <td>BE longo demais vs. paciência/caixa → STEP menor ou faseado</td>
+          </tr>
+          <tr>
+            <td>Consciência (do score)</td>
+            <td>Alta / muito alta — aguenta narrativa completa</td>
+            <td>Média/baixa — STEP mais simples, prova primeiro</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="callout ok" style="margin-top:14px"><strong>Ordem na prática:</strong> 1) Gate + lead score liberam apresentar · 2) Tier + margem + BE escolhem o STEP · 3) Pitch só do STEP recomendado (+ o que não oferecer).</div>
     </div>
 
     <div class="section">
