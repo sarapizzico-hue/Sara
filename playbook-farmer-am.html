@@ -514,7 +514,7 @@
         <div class="card">
           <span class="tag warn">Semanal · 45 min</span>
           <div class="t">Comando da carteira</div>
-          <div class="d">Atualizar saúde, timing de expansão, prioridades P0–P3. Espelho do sync do Comando Estratégico.</div>
+          <div class="d">Atualizar <strong>ponto de atenção</strong>, CSAT/NPS quando houver, lead score, plano de monetização e ABM. Prioridades P0–P3.</div>
         </div>
         <div class="card">
           <span class="tag info">Mensal · 60–90 min</span>
@@ -597,26 +597,27 @@
     </div>
 
     <div class="section">
-      <h2>Componentes do score (proposta v0.1)</h2>
+      <h2>Lead score · prontidão para expandir (v0.2)</h2>
+      <p class="lead">O lead score da carteira Farmer = quão pronta a conta está para o plano de monetização. Gates pesam forte.</p>
       <div class="grid2">
         <div class="card">
-          <div class="t">Engajamento · 25 pts</div>
-          <div class="d">Responde no prazo · participa kickoff/QBR · decisor acessível. Silêncio &gt; SLA derruba forte.</div>
+          <div class="t">Gates · 30 pts</div>
+          <div class="d">Kick-off feito (+15) · Projeto pago/saudável (+15). Sem isso, score teto baixo — não mascara conta “bonita” inadimplente.</div>
         </div>
         <div class="card">
-          <div class="t">Entrega percebida · 25 pts</div>
-          <div class="d">Cliente sente avanço da EE/projeto. Reclamação aberta ou atraso crítico = penalidade.</div>
+          <div class="t">CSAT + NPS · 25 pts</div>
+          <div class="d">CSAT recente (15) + NPS (10). Sem medição ainda = neutro, não punir conta nova nos primeiros 14 dias.</div>
         </div>
         <div class="card">
-          <div class="t">Comercial · 25 pts</div>
-          <div class="d">Pagamento em dia · sem disputa de escopo · caminho de expansão claro ou estável sem churn.</div>
+          <div class="t">Engajamento · 20 pts</div>
+          <div class="d">Responde · participa · decisor acessível. Silêncio &gt; SLA derruba.</div>
         </div>
         <div class="card">
-          <div class="t">Risco estrutural · 25 pts</div>
-          <div class="d">Troca de dono, budget cortado, gargalo operacional, dependência de 1 pessoa. Flags baixam score.</div>
+          <div class="t">Tese &amp; WTP · 25 pts</div>
+          <div class="d">Plano de monetização claro + timing + ABM mapeado + orçamento/caminho de pagamento. Sem tese = não sobe score.</div>
         </div>
       </div>
-      <div class="callout warn" style="margin-top:14px"><strong>Para validar juntas:</strong> pesos iguais (25/25/25/25) ou você prefere puxar mais Engajamento / Comercial?</div>
+      <div class="callout ok" style="margin-top:14px"><strong>Regra de ouro:</strong> lead score alto + kick-off não · ou · não pago = <em>não expandir</em>. Score serve para priorizar, gates mandam.</div>
     </div>
 
     <div class="section">
@@ -662,10 +663,10 @@
           <span class="tag warn">Decidir agora</span>
           <div class="d">
             <ul class="steps">
-              <li>Lista de parâmetros: falta algum campo crítico?</li>
-              <li>Pesos do score de saúde</li>
-              <li>SLA de contato por cor (verde/amarelo/vermelho)</li>
-              <li>Quais produtos entram no enum de <strong>produtos_ativos</strong></li>
+              <li>Escala do CSAT (1–5 ou 0–10) e frequência</li>
+              <li>Lista de <strong>perfis de cliente</strong> para ABM</li>
+              <li>Template do <strong>plano de ação para monetizar</strong></li>
+              <li>Preencher 3–5 contas reais no mock</li>
             </ul>
           </div>
         </div>
@@ -673,9 +674,9 @@
           <span class="tag ok">Fase 2 · Dash</span>
           <div class="d">
             <ul class="steps">
-              <li>Tabela viva da carteira com filtros</li>
-              <li>KPIs de Expansão Carteira + retenção</li>
-              <li>Alertas automáticos (sem próximo contato, P0, vermelho)</li>
+              <li>Home semanal: gates + ponto de atenção + scores + plano</li>
+              <li>Filtros: sem kick-off · não pago · P0 · lead score alto</li>
+              <li>Alertas: KO atrasado · inadimplência · sem próximo contato</li>
               <li>Ligar no Cockpit E.E / planilha fonte</li>
             </ul>
           </div>
@@ -685,7 +686,7 @@
   </div>
 
   <footer>
-    V4 Company · Playbook Farmer AM · Sara Pizzico · v0.1<br>
+    V4 Company · Playbook Farmer AM · Sara Pizzico · v0.2<br>
     Carteira: clientes via Estruturação Estratégica ·
     <a href="index.html">Comando Estratégico E.E</a>
   </footer>
