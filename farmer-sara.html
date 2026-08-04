@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Farmer Sara · Visão · Playbook · Fluxo · Score · Plano</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --brand:#e50915; --brand-light:#ff1a27; --bg:#050505; --surf:rgba(20,20,20,.92);
+      --surf2:#141414; --bd:rgba(255,255,255,.1); --txt:#fafafa; --mut:#a3a3a3;
+      --ok:#86efac; --warn:#fde68a; --hot:#fca5a5; --info:#93c5fd;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--txt);font:14px/1.55 Inter,system-ui,sans-serif;
+      background-image:radial-gradient(ellipse 80% 45% at 50% -15%,rgba(229,9,21,.18),transparent)}
+    .top{position:sticky;top:0;z-index:100;backdrop-filter:blur(14px);background:rgba(5,5,5,.9);border-bottom:1px solid var(--bd);padding:12px 20px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+    .logo{font-weight:900}.logo span{color:var(--brand-light)}
+    .pill{font-size:11px;font-weight:700;color:var(--mut);border:1px solid var(--bd);padding:5px 10px;border-radius:999px}
+    .wrap{max-width:1120px;margin:0 auto;padding:24px 18px 80px}
+    h1{margin:0 0 6px;font-size:clamp(24px,4vw,34px);font-weight:900;letter-spacing:-.03em}
+    .lead{color:var(--mut);max-width:900px;margin:0 0 16px;font-size:13px}
+    .lead a,.ext a{color:var(--ok)}
+    .nav{position:sticky;top:56px;z-index:90;margin:0 0 18px;padding:8px;background:rgba(8,8,8,.94);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.14);border-radius:16px}
+    .nav-label{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);padding:4px 10px 8px}
+    .tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+    @media(max-width:900px){.tabs{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:600px){.tabs{grid-template-columns:1fr 1fr}}
+    .tab{appearance:none;border:1px solid var(--bd);background:var(--surf2);color:var(--mut);border-radius:12px;padding:11px 10px;cursor:pointer;text-align:left;font-family:inherit;transition:.2s}
+    .tab:hover{border-color:rgba(255,255,255,.22);color:#fff}
+    .tab.active{color:#fff;border-color:var(--brand);background:linear-gradient(135deg,rgba(229,9,21,.18),rgba(20,20,20,.95))}
+    .tab .n{display:block;font-size:13px;font-weight:800;margin-bottom:2px}
+    .tab .s{font-size:10px;font-weight:700;color:#d4d4d4}
+    .panel{display:none}.panel.is-active{display:block;animation:fade .2s ease}
+    @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+    .callout{padding:14px 16px;border-radius:12px;border:1px solid rgba(96,165,250,.3);background:rgba(96,165,250,.08);color:#bfdbfe;font-size:13px;margin-bottom:14px}
+    .callout.warn{border-color:rgba(250,204,21,.28);background:rgba(250,204,21,.06);color:#fde68a}
+    .callout.ok{border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.08);color:#bbf7d0}
+    .callout.hot{border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.08);color:#fecaca}
+    .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:14px}
+    .kpi{background:var(--surf);border:1px solid var(--bd);border-radius:14px;padding:14px}
+    .kpi .v{font-size:22px;font-weight:900}.kpi .v.ok{color:var(--ok)}.kpi .v.hot{color:var(--hot)}.kpi .v.warn{color:var(--warn)}.kpi .v.info{color:var(--info)}
+    .kpi .l{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--mut);margin-top:6px;font-weight:700}
+    .section{background:var(--surf);border:1px solid var(--bd);border-radius:16px;padding:18px 20px;margin-bottom:12px}
+    .section h2{margin:0 0 4px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);font-weight:800}
+    .section h3{margin:0 0 12px;font-size:17px;font-weight:900}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:800px){.grid2{grid-template-columns:1fr}}
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}@media(max-width:900px){.grid3{grid-template-columns:1fr}}
+    .card{background:var(--surf2);border:1px solid var(--bd);border-radius:12px;padding:14px 16px}
+    .card .t{font-weight:800;margin-bottom:6px}
+    .card .d{font-size:12px;color:#d4d4d4}
+    table{width:100%;border-collapse:collapse;font-size:12.5px}
+    th,td{padding:9px 8px;border-bottom:1px solid var(--bd);text-align:left;vertical-align:top}
+    th{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);font-weight:800}
+    .tag{display:inline-block;padding:2px 8px;border-radius:999px;font-size:10px;font-weight:800;border:1px solid var(--bd)}
+    .tag.ok{color:var(--ok);border-color:rgba(34,197,94,.35)}
+    .tag.warn{color:var(--warn);border-color:rgba(250,204,21,.35)}
+    .tag.hot{color:var(--hot);border-color:rgba(239,68,68,.4)}
+    .tag.info{color:var(--info);border-color:rgba(96,165,250,.35)}
+    .bar{display:flex;height:14px;border-radius:99px;overflow:hidden;background:rgba(255,255,255,.06);margin:6px 0}
+    .bar i{display:block;height:100%}
+    .muted{color:var(--mut);font-size:12px}
+    ul.steps,ul{margin:0;padding-left:18px} li{margin:5px 0;color:#e5e5e5}
+    .scroll{overflow-x:auto}
+    .ext{font-size:12px;margin:0 0 14px}
+    footer{text-align:center;color:var(--mut);font-size:11px;margin-top:28px;padding-top:16px;border-top:1px solid var(--bd)}
+    footer a{color:var(--ok)}
+
+    /* flow */
+    .flow{display:flex;flex-direction:column;align-items:center;gap:0}
+    .node{width:min(100%,560px);background:var(--surf2);border:1px solid var(--bd);border-radius:16px;padding:14px 16px;margin:0}
+    .node.gate{border-color:rgba(250,204,21,.4);background:linear-gradient(180deg,rgba(250,204,21,.08),var(--surf2))}
+    .node.veto{border-color:rgba(239,68,68,.45);background:linear-gradient(180deg,rgba(239,68,68,.1),var(--surf2))}
+    .node.ok{border-color:rgba(34,197,94,.4);background:linear-gradient(180deg,rgba(34,197,94,.08),var(--surf2))}
+    .node.action{border-color:rgba(229,9,21,.5);background:linear-gradient(180deg,rgba(229,9,21,.12),var(--surf2))}
+    .node.info{border-color:rgba(96,165,250,.4);background:linear-gradient(180deg,rgba(96,165,250,.08),var(--surf2))}
+    .node .k{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-bottom:3px}
+    .node .t{font-size:15px;font-weight:900;margin-bottom:4px}
+    .node .d{font-size:12px;color:#d4d4d4}
+    .node ul{margin:6px 0 0;padding-left:18px;font-size:12px}
+    .arrow{width:2px;height:18px;background:linear-gradient(var(--bd),rgba(255,255,255,.28));position:relative;margin:2px 0}
+    .arrow::after{content:'';position:absolute;left:50%;bottom:-1px;transform:translateX(-50%);border-left:5px solid transparent;border-right:5px solid transparent;border-top:7px solid rgba(255,255,255,.35)}
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:min(100%,720px);margin:4px 0}
+    @media(max-width:700px){.split{grid-template-columns:1fr}}
+    .split .node{width:100%}
+    .split-label,.merge-note{width:min(100%,720px);text-align:center;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin:6px 0 2px}
+    .row3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:min(100%,720px)}
+    @media(max-width:800px){.row3{grid-template-columns:1fr}}
+    .row3 .node{width:100%;padding:12px}
+
+    /* forms */
+    label{display:block;font-size:12px;font-weight:700;margin:0 0 6px;color:#e5e5e5}
+    .hint{font-size:12px;color:var(--mut);margin:0 0 12px}
+    select,input,textarea{width:100%;background:#0a0a0a;border:1px solid var(--bd);border-radius:10px;color:var(--txt);padding:10px 12px;font:inherit;margin-bottom:12px}
+    textarea{min-height:72px;resize:vertical}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media(max-width:700px){.row{grid-template-columns:1fr}}
+    .big{font-size:52px;font-weight:900;line-height:1}
+    .big.ok{color:var(--ok)}.big.warn{color:var(--warn)}.big.hot{color:var(--hot)}
+    .gate-boxes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px}
+    .gate-box{border:1px solid var(--bd);border-radius:12px;padding:12px;background:#0a0a0a}
+    .gate-box .l{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin-bottom:4px}
+    .gate-box .v{font-size:14px;font-weight:800}
+    .gate-box.on{border-color:rgba(34,197,94,.35)}.gate-box.on .v{color:var(--ok)}
+    .gate-box.off{border-color:rgba(239,68,68,.4)}.gate-box.off .v{color:var(--hot)}
+    .msg{margin-top:12px;padding:12px 14px;border-radius:12px;font-size:13px}
+    .msg.ok{background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.3);color:#bbf7d0}
+    .msg.warn{background:rgba(250,204,21,.06);border:1px solid rgba(250,204,21,.28);color:#fde68a}
+    .msg.hot{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.35);color:#fecaca}
+    .bars{display:grid;gap:8px;margin-top:14px}
+    .bar-row{display:grid;grid-template-columns:140px 1fr 36px;gap:10px;align-items:center;font-size:12px}
+    .bar-bg{height:8px;background:rgba(255,255,255,.06);border-radius:99px;overflow:hidden}
+    .bar-fill{height:100%;background:linear-gradient(90deg,#e50915,#ff1a27);border-radius:99px}
+    .btn{appearance:none;border:0;border-radius:12px;padding:12px 16px;font:inherit;font-weight:800;cursor:pointer;background:linear-gradient(135deg,#e50915,#ff1a27);color:#fff}
+    .btn.ghost{background:transparent;border:1px solid var(--bd);color:#fff}
+    .btn-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+    #planoOut{white-space:pre-wrap;background:#0a0a0a;border:1px solid var(--bd);border-radius:12px;padding:14px;font-size:12px;line-height:1.5;display:none}
+    .flow-mini{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+    @media(max-width:800px){.flow-mini{grid-template-columns:1fr 1fr}}
+    .flow-step{background:var(--surf2);border:1px solid var(--bd);border-radius:12px;padding:12px}
+    .flow-step .n{font-size:10px;font-weight:800;color:var(--mut);letter-spacing:.08em;text-transform:uppercase}
+    .flow-step .t{font-weight:800;margin:4px 0}
+    .flow-step .d{font-size:12px;color:#d4d4d4}
+  </style>
+</head>
+<body>
+<header class="top">
+  <div class="logo">V4 <span>COMPANY</span></div>
+  <div class="pill">Farmer Sara · kit completo</div>
+</header>
+
+<div class="wrap">
+  <h1>Farmer Sara · base, método e ferramentas</h1>
+  <p class="lead">
+    Um lugar só: visão da base por safra + playbook + fluxograma + lead score + plano de ação.
+    Fonte Cockpit: <a href="https://docs.google.com/spreadsheets/d/1dSukhon9dIUABcbQIKGKUa-ku-_oLOn1Q5YWeWGfI6U/edit?gid=759150030#gid=759150030" target="_blank" rel="noopener">planilha E.E</a>.
+  </p>
+
+  <nav class="nav">
+    <div class="nav-label">Navegação</div>
+    <div class="tabs">
+      <button class="tab active" data-view="visao"><span class="n">Visão safra</span><span class="s">Base · drops · Já monet.</span></button>
+      <button class="tab" data-view="playbook"><span class="n">Playbook</span><span class="s">Contrato · STEP · S1–S3</span></button>
+      <button class="tab" data-view="fluxo"><span class="n">Fluxograma</span><span class="s">EE → pitch</span></button>
+      <button class="tab" data-view="score"><span class="n">Lead score</span><span class="s">Prontidão · v0.6</span></button>
+      <button class="tab" data-view="plano"><span class="n">Plano de ação</span><span class="s">Critérios · passos</span></button>
+    </div>
+  </nav>
+
+  <!-- ========== VISÃO ========== -->
+  <div class="panel is-active" data-view="visao">
+    <p class="ext">Página dedicada: <a href="visao-sara-safra-cockpit.html">visao-sara-safra-cockpit.html</a></p>
+    <div class="callout warn">
+      <strong>Leitura-mestra:</strong> win ~42% com Já monetizado · ~35% sem · ~52% sem Tratativa Ops.
+      Ops e “já veio com produto” distorcem o funil — filas separadas.
+    </div>
+    <div class="kpis">
+      <div class="kpi"><div class="v">125</div><div class="l">Contas Sara</div></div>
+      <div class="kpi"><div class="v ok">30</div><div class="l">Monetizado</div></div>
+      <div class="kpi"><div class="v info">10</div><div class="l">Já monetizado</div></div>
+      <div class="kpi"><div class="v hot">55</div><div class="l">Drop</div></div>
+      <div class="kpi"><div class="v warn">18</div><div class="l">Tratativa Ops</div></div>
+      <div class="kpi"><div class="v">30</div><div class="l">Pipe ativo</div></div>
+    </div>
+
+    <div class="section">
+      <h2>Safra</h2>
+      <h3>Volume e conversão por mês de entrada</h3>
+      <div class="scroll">
+        <table>
+          <thead>
+            <tr><th>Safra</th><th>N</th><th>Mon.</th><th>Já mon.</th><th>Drop</th><th>Pipe</th><th>Win*</th><th>Ops</th><th>Budget</th><th>Timing</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>2025-12</td><td>2</td><td>0</td><td>0</td><td>2</td><td>0</td><td class="hot">0%</td><td>1</td><td>0</td><td>0</td></tr>
+            <tr><td>2026-01</td><td>6</td><td>2</td><td>0</td><td>4</td><td>0</td><td>33%</td><td>2</td><td>0</td><td>2</td></tr>
+            <tr><td>2026-02</td><td>13</td><td>6</td><td>0</td><td>7</td><td>0</td><td class="ok">46%</td><td>5</td><td>1</td><td>1</td></tr>
+            <tr><td>2026-03</td><td>24</td><td>7</td><td>0</td><td>17</td><td>0</td><td class="hot">29%</td><td>5</td><td>3</td><td>8</td></tr>
+            <tr><td>2026-04</td><td>16</td><td>5</td><td>2</td><td>9</td><td>0</td><td>44%</td><td>3</td><td>3</td><td>3</td></tr>
+            <tr><td>2026-05</td><td>24</td><td>7</td><td>4</td><td>10</td><td>3</td><td class="ok">52%</td><td>1</td><td>4</td><td>3</td></tr>
+            <tr><td>2026-06</td><td>20</td><td>2</td><td>2</td><td>6</td><td>10</td><td>40%</td><td>1</td><td>3</td><td>1</td></tr>
+            <tr><td>2026-07</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>—</td><td>0</td><td>0</td><td>0</td></tr>
+            <tr><td>sem data</td><td>19</td><td>1</td><td>2</td><td>0</td><td>16</td><td>—</td><td>0</td><td>0</td><td>0</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="grid3" style="margin-top:14px">
+        <div class="card"><div class="t">Março = buraco</div><div class="d">24 entradas · 17 drops · win 29%. Timing + Ops.</div></div>
+        <div class="card"><div class="t">Fev / Mai salvam</div><div class="d">46% / 52%. Mai inflado por 4 Já monetizado.</div></div>
+        <div class="card"><div class="t">Junho aberto</div><div class="d">10 pipe + 4 Follow. Budget já aparece.</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Drops</h2>
+      <h3>55 · Ops 18 = Timing 18 · Budget 14</h3>
+      <div class="bar">
+        <i style="width:32.7%;background:#f87171"></i>
+        <i style="width:32.7%;background:#fbbf24"></i>
+        <i style="width:25.5%;background:#60a5fa"></i>
+        <i style="width:9.1%;background:#525252"></i>
+      </div>
+      <div class="grid2" style="margin-top:12px">
+        <div class="card">
+          <div class="t">Tratativa Ops · zoom</div>
+          <div class="d">10 “PROJETO TRAVADO” sem causa · 2 pagto/Churn M0 (MasterPlan, Premium Gourmet) · Globo Eventos já veio com Executar e caiu em Ops. Squad: Invictus 8 · Billions 6 · Exclusive 4.</div>
+        </div>
+        <div class="card">
+          <div class="t">Já monetizado · 10</div>
+          <div class="d">Entrou com Executar/assessoria. Conta como win no Cockpit, não como conversão Farmer pura. Postura: Account Planning / aguardar. Só 2 com TCV (Prata Nobre, Sensoria).</div>
+        </div>
+      </div>
+      <div class="callout hot" style="margin:14px 0 0">
+        <strong>Ação:</strong> fila Ops fora do pitch · higiene do motivo (banir “travado” sem causa) · Budget recente → EQV/Saber·Ter · completar 19 sem data de início.
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PLAYBOOK ========== -->
+  <div class="panel" data-view="playbook">
+    <p class="ext">Playbook completo: <a href="playbook-farmer-am.html">playbook-farmer-am.html</a></p>
+
+    <div class="section">
+      <h2>Contrato da conta</h2>
+      <h3>Como a EE + Farmer devem funcionar</h3>
+      <div class="flow-mini" style="margin-bottom:14px">
+        <div class="flow-step"><div class="n">01</div><div class="t">Entra na EE</div><div class="d">Contrato ativo</div></div>
+        <div class="flow-step"><div class="n">02 · GC</div><div class="t">Alinha expectativa</div><div class="d">O que espera × o que entrega</div></div>
+        <div class="flow-step"><div class="n">03</div><div class="t">Cliente engaja</div><div class="d">Pago · decisor · CSAT · expectativa</div></div>
+        <div class="flow-step"><div class="n">04</div><div class="t">Solução que se encaixa</div><div class="d">Apresenta o produto ideal</div></div>
+      </div>
+      <div class="grid2">
+        <div class="card">
+          <span class="tag warn">Trilha do cliente</span>
+          <ul class="steps">
+            <li>Passar pela <strong>GC</strong></li>
+            <li><strong>Estar pagando</strong></li>
+            <li><strong>Decisor</strong> semanal nas entregas</li>
+            <li>Responder <strong>NPS/CSAT</strong></li>
+            <li><strong>Trazer expectativa</strong> com clareza</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="tag ok">Trilha V4 / Farmer</span>
+          <ul class="steps">
+            <li>Ouvir e atualizar expectativa</li>
+            <li>Rodar EE S1→S3 com método</li>
+            <li><strong>Mapear solução</strong> (sem catálogo genérico)</li>
+            <li>Fechar Plano de Ação</li>
+            <li><strong>Apresentar só o que se encaixa</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>STEP</h2>
+      <h3>Filtro estratégico (não Pack S/M/L/XL)</h3>
+      <div class="grid3">
+        <div class="card"><div class="t">Destrava Receita</div><div class="d">Gargalo de receita imediato</div></div>
+        <div class="card"><div class="t">Ter</div><div class="d">Ativo/base que falta (presença, estrutura)</div></div>
+        <div class="card"><div class="t">Saber</div><div class="d">Clareza / EQV / tese / GTM</div></div>
+        <div class="card"><div class="t">Executar</div><div class="d">Operação contínua (assessoria, mídia, CRM…)</div></div>
+        <div class="card"><div class="t">Combos Performance</div><div class="d">Mix quando consciência + BE fecham</div></div>
+        <div class="card"><div class="t">Economia</div><div class="d">Tier · margem · break-even antes do pitch</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>S1 → S3</h2>
+      <h3>Perguntas semanais → Plano na S3</h3>
+      <div class="flow-mini">
+        <div class="flow-step"><div class="n">Semana 1</div><div class="t">Contexto &amp; gates</div><div class="d">KO · faturamento · decisor · trilha · CSAT</div></div>
+        <div class="flow-step"><div class="n">Semana 2</div><div class="t">Maturidade &amp; tese</div><div class="d">Gaps · PUV · interesse · objeções · budget</div></div>
+        <div class="flow-step"><div class="n">Semana 3</div><div class="t">Produto ideal</div><div class="d">Gargalo · STEP · Plano de Ação</div></div>
+        <div class="flow-step"><div class="n">S4+</div><div class="t">Executar plano</div><div class="d">Pitch / proposta / ABM com tese escrita</div></div>
+      </div>
+      <div class="callout" style="margin-top:14px">
+        Gate inegociável: <strong>decisor na sala + pago/pagando</strong>. Sem isso → não apresenta preço.
+        Lead score mede prontidão (consciência 50 + tese 50). Faixas: 70+ apresentar · 40–69 elevar · &lt;40 ainda não.
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== FLUXO ========== -->
+  <div class="panel" data-view="fluxo">
+    <p class="ext">Página dedicada: <a href="fluxograma-farmer-ee.html">fluxograma-farmer-ee.html</a></p>
+
+    <div class="flow">
+      <div class="node ok"><div class="k">01 · Entrada</div><div class="t">Cliente fecha a EE</div><div class="d">Entra na carteira Farmer. Fora da planilha → mapa de tese no KO.</div></div>
+      <div class="arrow"></div>
+      <div class="node"><div class="k">02 · GC</div><div class="t">Alinhar expectativa</div><div class="d">O que quer / não espera · 30/60/90 · mapa de decisores.</div></div>
+      <div class="arrow"></div>
+      <div class="node gate"><div class="k">03 · Gate</div><div class="t">Decisor + pago/pagando</div><div class="d">Sem os dois: diagnóstico ok, <strong>preço não</strong>.</div></div>
+      <div class="split-label">Decisão do gate</div>
+      <div class="split">
+        <div class="node veto"><div class="k">Falhou</div><div class="t">Recuperar contrato</div><ul><li>Regularizar pagamento</li><li>Decisor nas entregas</li><li>Score em espera</li></ul></div>
+        <div class="node ok"><div class="k">OK</div><div class="t">Segue ciclo EE</div><ul><li>CSAT/NPS</li><li>Cliente traz expectativa</li><li>V4 mapeia solução</li></ul></div>
+      </div>
+      <div class="arrow"></div>
+      <div class="merge-note">Ciclo semanal</div>
+      <div class="row3">
+        <div class="node info"><div class="k">S1</div><div class="t">Contexto</div><div class="d">KO · tier · trilha · CSAT</div></div>
+        <div class="node info"><div class="k">S2</div><div class="t">Tese</div><div class="d">Gaps · interesse · budget · STEP</div></div>
+        <div class="node info"><div class="k">S3</div><div class="t">Fecha mapa</div><div class="d">Produto ideal · plano</div></div>
+      </div>
+      <div class="arrow"></div>
+      <div class="node"><div class="k">04 · Lead score</div><div class="t">Pode apresentar?</div><div class="d">70+ pronto · 40–69 elevar · &lt;40 ainda não. Veto do gate manda.</div></div>
+      <div class="split-label">Score</div>
+      <div class="split">
+        <div class="node veto"><div class="k">&lt;70 ou veto</div><div class="t">Não fala preço</div><div class="d">Fecha gap #1 da semana.</div></div>
+        <div class="node ok"><div class="k">≥70 + gate</div><div class="t">Encaixe STEP</div><div class="d">Monta Plano de Ação.</div></div>
+      </div>
+      <div class="arrow"></div>
+      <div class="node info"><div class="k">05 · STEP</div><div class="t">Destrava · Ter · Saber · Executar · Combos</div><div class="d">Filtrar com tier + margem + BE. Definir o que <strong>não</strong> oferecer.</div></div>
+      <div class="arrow"></div>
+      <div class="node action"><div class="k">06 · Plano de Ação</div><div class="t">Documento da conta</div><div class="d">Critérios do playbook · ações em ordem · case sim/não · P0–P3.</div></div>
+      <div class="arrow"></div>
+      <div class="node action"><div class="k">07 · Pitch</div><div class="t">Só o que se encaixa</div><div class="d">Decisor inseguro → prova antes de preço.</div></div>
+      <div class="arrow"></div>
+      <div class="split">
+        <div class="node ok"><div class="k">Win</div><div class="t">Monetizado / Aceito</div><div class="d">KO do STEP · farming da entrega</div></div>
+        <div class="node veto"><div class="k">Não fechou</div><div class="t">Drop com motivo</div><div class="d">Budget / Timing / Ops · ou novo ciclo</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== SCORE ========== -->
+  <div class="panel" data-view="score">
+    <p class="ext">Calculadora dedicada: <a href="lead-score-farmer.html">lead-score-farmer.html</a></p>
+
+    <div class="section">
+      <h2>Conta</h2>
+      <h3>Identificação</h3>
+      <div class="row">
+        <div><label>Cliente</label><input id="cliente" placeholder="Nome da conta" /></div>
+        <div><label>Semana EE</label>
+          <select id="semana"><option>1</option><option>2</option><option selected>3</option><option>4+</option></select>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Gate · inegociável</h2>
+      <h3>Sem os dois, não apresenta</h3>
+      <div class="row">
+        <div>
+          <label>Decisor na sala</label>
+          <select id="decisor">
+            <option value="1">Sim — participou da entrega/reunião crítica</option>
+            <option value="0">Não — ausente / só influenciador</option>
+          </select>
+        </div>
+        <div>
+          <label>Pago ou pagando</label>
+          <select id="pago">
+            <option value="1">Sim — pago ou parcelas em dia</option>
+            <option value="0">Não — atraso crítico / inadimplente</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div class="section" style="margin:0">
+        <h2>Pilar 1 · 50 pts</h2>
+        <h3>Consciência</h3>
+        <p class="hint">O quanto o cliente entende dor, caminho e tipo de solução.</p>
+        <select id="consciencia">
+          <option value="10">1 · Baixa — expectativa nebulosa (10)</option>
+          <option value="25">2 · Média — reconhece problema, caminho confuso (25)</option>
+          <option value="40" selected>3 · Alta — clareza do que quer resolver (40)</option>
+          <option value="50">4 · Muito alta — pede continuidade (50)</option>
+        </select>
+      </div>
+      <div class="section" style="margin:0">
+        <h2>Pilar 2 · 50 pts</h2>
+        <h3>Tese / produto</h3>
+        <p class="hint">O que a V4 mapeou — se encaixa de verdade?</p>
+        <select id="tese">
+          <option value="10">1 · Fraca — sem produto ideal (10)</option>
+          <option value="25">2 · Hipótese — direção incompleta (25)</option>
+          <option value="40" selected>3 · Sólida — combo + o que não oferecer (40)</option>
+          <option value="50">4 · Pronta — tese + plano + timing (50)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="section" style="margin-top:12px">
+      <h2>Resultado</h2>
+      <h3 id="titulo">—</h3>
+      <div class="gate-boxes">
+        <div class="gate-box" id="gDec"><div class="l">Decisor na sala</div><div class="v" id="gDecV">—</div></div>
+        <div class="gate-box" id="gPag"><div class="l">Pago / pagando</div><div class="v" id="gPagV">—</div></div>
+      </div>
+      <div style="margin:16px 0 8px" class="big" id="score">0</div>
+      <div><span class="tag" id="faixa">—</span></div>
+      <div class="bars">
+        <div class="bar-row"><span>Consciência</span><div class="bar-bg"><div class="bar-fill" id="barC"></div></div><span id="numC">0</span></div>
+        <div class="bar-row"><span>Tese / produto</span><div class="bar-bg"><div class="bar-fill" id="barT"></div></div><span id="numT">0</span></div>
+      </div>
+      <div class="msg" id="msg">—</div>
+    </div>
+  </div>
+
+  <!-- ========== PLANO ========== -->
+  <div class="panel" data-view="plano">
+    <p class="ext">Formulário completo: <a href="plano-acao-farmer.html">plano-acao-farmer.html</a> · template curto: <a href="template-plano-acao-farmer.html">template-plano-acao-farmer.html</a></p>
+
+    <div class="section">
+      <h2>Conta</h2>
+      <h3>Cabeçalho do plano</h3>
+      <div class="row">
+        <div><label>Cliente</label><input id="pCliente" placeholder="Nome da conta" /></div>
+        <div><label>Status (1 linha)</label><input id="pStatus" placeholder="Onde está a relação agora" /></div>
+      </div>
+      <div class="row">
+        <div><label>STEP candidato</label>
+          <select id="pStep">
+            <option>Destrava Receita</option>
+            <option>Ter</option>
+            <option selected>Saber</option>
+            <option>Executar</option>
+            <option>Combos Performance</option>
+          </select>
+        </div>
+        <div><label>Prioridade</label>
+          <select id="pPrio"><option>P0</option><option selected>P1</option><option>P2</option><option>P3</option></select>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Critérios do playbook</h2>
+      <h3>Preencher com honestidade</h3>
+      <div class="row">
+        <div><label>Faturamento e margem</label><input id="pFat" placeholder="Ex.: R$ 300k/mês · frente X com melhor margem" /></div>
+        <div><label>Produtos identificados</label><input id="pProd" placeholder="Combo ideal + o que NÃO oferecer" /></div>
+      </div>
+      <div class="row">
+        <div><label>Pitch</label>
+          <select id="pPitch">
+            <option>Não realizado</option>
+            <option>Visão sem valores</option>
+            <option>Realizado com valores · decisor sim</option>
+            <option>Realizado com valores · decisor não</option>
+          </select>
+        </div>
+        <div><label>Espera proposta?</label>
+          <select id="pEspera"><option>Não</option><option>Sem clareza</option><option>Sim</option></select>
+        </div>
+      </div>
+      <div class="row">
+        <div><label>Consciência de budget</label>
+          <select id="pBudget"><option>Não mapeada</option><option>Parcial</option><option>Mapeada</option></select>
+        </div>
+        <div><label>Interesse</label>
+          <select id="pInt"><option>Baixo</option><option selected>Médio</option><option>Alto</option></select>
+        </div>
+      </div>
+      <div class="row">
+        <div><label>Objeções (top 3)</label><input id="pObj" placeholder="Preço · timing · confiança…" /></div>
+        <div><label>Decisor participando</label>
+          <select id="pDec">
+            <option>Sim</option>
+            <option selected>Não — risco</option>
+          </select>
+        </div>
+      </div>
+      <label>CSAT + percepção geral</label>
+      <textarea id="pPercep" placeholder="CSAT + 3–5 linhas + frase-mestra da próxima conversa"></textarea>
+      <label>Ações (uma por linha · ordem: reengajar → validar → propor)</label>
+      <textarea id="pAcoes" placeholder="1. Reapresentar entrega com decisor&#10;2. Levar case X&#10;3. Validar interesse&#10;4. Proposta em reunião separada"></textarea>
+      <div class="row">
+        <div><label>Case</label>
+          <select id="pCase">
+            <option value="nao">Sem case — ancorar na EE da conta</option>
+            <option value="sim">Com case</option>
+          </select>
+        </div>
+        <div><label>Qual case / por quê</label><input id="pCaseDet" placeholder="Case X · por que correlato" /></div>
+      </div>
+      <div class="row">
+        <div><label>Próximo contato</label><input id="pNext" type="date" /></div>
+        <div><label>Timing expansão</label>
+          <select id="pTiming"><option>Agora</option><option>30d</option><option>60d</option><option>90d</option><option>Bloqueado</option></select>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn" type="button" id="btnGerar">Gerar plano</button>
+        <button class="btn ghost" type="button" id="btnCopiar">Copiar</button>
+      </div>
+      <pre id="planoOut"></pre>
+    </div>
+
+    <div class="callout ok">
+      <strong>Regra:</strong> se o decisor está inseguro, a ação começa por case/prova — não por preço.
+      Proposta costuma ser o <em>último</em> passo, não o primeiro.
+    </div>
+  </div>
+
+  <footer>
+    V4 · Farmer Sara · hub ·
+    <a href="index.html">Comando Estratégico</a> ·
+    <a href="visao-sara-safra-cockpit.html">Visão detalhada</a> ·
+    <a href="playbook-farmer-am.html">Playbook</a> ·
+    <a href="analise-ee-sara-marcelo.html">Sara × Marcelo</a>
+  </footer>
+</div>
+
+<script>
+(function(){
+  document.body.classList.add('js-ready');
+  var tabs = document.querySelectorAll('.tab');
+  var panels = document.querySelectorAll('.panel');
+  function setView(v){
+    tabs.forEach(function(t){ t.classList.toggle('active', t.getAttribute('data-view')===v); });
+    panels.forEach(function(p){ p.classList.toggle('is-active', p.getAttribute('data-view')===v); });
+    try { history.replaceState(null,'','#'+v); } catch(e){}
+  }
+  tabs.forEach(function(t){ t.addEventListener('click', function(){ setView(t.getAttribute('data-view')); }); });
+  var hash = (location.hash||'').replace('#','');
+  if (['visao','playbook','fluxo','score','plano'].indexOf(hash)>=0) setView(hash);
+
+  function calc(){
+    var dec = document.getElementById('decisor').value === '1';
+    var pag = document.getElementById('pago').value === '1';
+    var C = Number(document.getElementById('consciencia').value);
+    var T = Number(document.getElementById('tese').value);
+    var total = C + T;
+    var gateOk = dec && pag;
+    var cliente = document.getElementById('cliente').value.trim() || 'Conta';
+    var semana = document.getElementById('semana').value;
+    document.getElementById('titulo').textContent = cliente + ' · Semana ' + semana;
+    document.getElementById('score').textContent = total;
+    document.getElementById('numC').textContent = C;
+    document.getElementById('numT').textContent = T;
+    document.getElementById('barC').style.width = (C/50*100) + '%';
+    document.getElementById('barT').style.width = (T/50*100) + '%';
+    var gDec = document.getElementById('gDec');
+    var gPag = document.getElementById('gPag');
+    gDec.className = 'gate-box ' + (dec ? 'on' : 'off');
+    gPag.className = 'gate-box ' + (pag ? 'on' : 'off');
+    document.getElementById('gDecV').textContent = dec ? 'OK' : 'Bloqueia';
+    document.getElementById('gPagV').textContent = pag ? 'OK' : 'Bloqueia';
+    var el = document.getElementById('score');
+    var faixa = document.getElementById('faixa');
+    var msg = document.getElementById('msg');
+    if (!gateOk) {
+      el.className = 'big hot';
+      faixa.className = 'tag hot';
+      faixa.textContent = 'Bloqueado pelo gate';
+      var gaps = [];
+      if (!dec) gaps.push('colocar o decisor na sala');
+      if (!pag) gaps.push('regularizar pagamento');
+      msg.className = 'msg hot';
+      msg.innerHTML = '<strong>Não apresenta.</strong> Gate falhou: ' + gaps.join(' + ') + '. Score ' + total + ' em espera.';
+      return;
+    }
+    if (total >= 70) {
+      el.className = 'big ok'; faixa.className = 'tag ok'; faixa.textContent = 'Pronto · Apresentar';
+      msg.className = 'msg ok';
+      msg.innerHTML = '<strong>Pode apresentar.</strong> Gate OK · consciência e tese suficientes.';
+    } else if (total >= 40) {
+      el.className = 'big warn'; faixa.className = 'tag warn'; faixa.textContent = 'Quase · Elevar';
+      msg.className = 'msg warn';
+      msg.innerHTML = '<strong>Ainda não preço.</strong> Subir consciência e/ou fechar tese.';
+    } else {
+      el.className = 'big hot'; faixa.className = 'tag hot'; faixa.textContent = 'Ainda não';
+      msg.className = 'msg hot';
+      msg.innerHTML = '<strong>Cedo demais.</strong> Continuar EE.';
+    }
+  }
+  ['decisor','pago','consciencia','tese','cliente','semana'].forEach(function(id){
+    var el = document.getElementById(id);
+    el.addEventListener('change', calc);
+    el.addEventListener('input', calc);
+  });
+  calc();
+
+  function gerar(){
+    var caseLine = document.getElementById('pCase').value === 'sim'
+      ? ('Case: sim — ' + (document.getElementById('pCaseDet').value || 'detalhar'))
+      : 'Case: sem case — ancorar na entrega EE da conta';
+    var acoes = (document.getElementById('pAcoes').value || '').trim().split(/\n+/).filter(Boolean);
+    var txt = [
+      '# Plano de Ação Farmer · ' + (document.getElementById('pCliente').value || 'Conta'),
+      'Status: ' + (document.getElementById('pStatus').value || '—'),
+      'STEP: ' + document.getElementById('pStep').value + ' · Prioridade: ' + document.getElementById('pPrio').value + ' · Timing: ' + document.getElementById('pTiming').value,
+      '',
+      '## Critérios',
+      'Faturamento/margem: ' + (document.getElementById('pFat').value || '—'),
+      'Produtos: ' + (document.getElementById('pProd').value || '—'),
+      'Pitch: ' + document.getElementById('pPitch').value,
+      'Espera proposta?: ' + document.getElementById('pEspera').value,
+      'Budget: ' + document.getElementById('pBudget').value,
+      'Interesse: ' + document.getElementById('pInt').value,
+      'Objeções: ' + (document.getElementById('pObj').value || '—'),
+      'Decisor: ' + document.getElementById('pDec').value,
+      'CSAT / percepção: ' + (document.getElementById('pPercep').value || '—'),
+      caseLine,
+      'Próximo contato: ' + (document.getElementById('pNext').value || '—'),
+      '',
+      '## Ações'
+    ].concat(acoes.length ? acoes.map(function(a,i){ return (i+1)+'. '+a.replace(/^\d+\.\s*/,''); }) : ['1. —']).join('\n');
+    var out = document.getElementById('planoOut');
+    out.style.display = 'block';
+    out.textContent = txt;
+  }
+  document.getElementById('btnGerar').addEventListener('click', gerar);
+  document.getElementById('btnCopiar').addEventListener('click', function(){
+    gerar();
+    var t = document.getElementById('planoOut').textContent;
+    if (navigator.clipboard) navigator.clipboard.writeText(t);
+  });
+})();
+</script>
+</body>
+</html>
