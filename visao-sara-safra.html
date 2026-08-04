@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Visão Sara · como está a base por safra</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --brand:#e50915; --brand-light:#ff1a27; --bg:#050505; --surf:rgba(20,20,20,.92);
+      --surf2:#141414; --bd:rgba(255,255,255,.1); --txt:#fafafa; --mut:#a3a3a3;
+      --ok:#86efac; --warn:#fde68a; --hot:#fca5a5; --info:#93c5fd;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--txt);font:14px/1.55 Inter,system-ui,sans-serif;
+      background-image:radial-gradient(ellipse 80% 45% at 50% -15%,rgba(229,9,21,.18),transparent)}
+    .top{position:sticky;top:0;z-index:10;backdrop-filter:blur(14px);background:rgba(5,5,5,.88);border-bottom:1px solid var(--bd);padding:12px 22px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+    .logo{font-weight:900}.logo span{color:var(--brand-light)}
+    .pill{font-size:11px;font-weight:700;color:var(--mut);border:1px solid var(--bd);padding:5px 10px;border-radius:999px}
+    .wrap{max-width:1120px;margin:0 auto;padding:28px 20px 70px}
+    h1{margin:0 0 8px;font-size:clamp(26px,4vw,36px);font-weight:900;letter-spacing:-.03em}
+    .lead{color:var(--mut);max-width:900px;margin:0 0 18px;font-size:13px}
+    .lead a{color:var(--ok)}
+    .callout{padding:14px 16px;border-radius:12px;border:1px solid rgba(96,165,250,.3);background:rgba(96,165,250,.08);color:#bfdbfe;font-size:13px;margin-bottom:14px}
+    .callout.warn{border-color:rgba(250,204,21,.28);background:rgba(250,204,21,.06);color:#fde68a}
+    .callout.ok{border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.08);color:#bbf7d0}
+    .callout.hot{border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.08);color:#fecaca}
+    .section{background:var(--surf);border:1px solid var(--bd);border-radius:16px;padding:18px 20px;margin-bottom:12px}
+    .section h2{margin:0 0 4px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);font-weight:800}
+    .section h3{margin:0 0 12px;font-size:17px;font-weight:900}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:800px){.grid2{grid-template-columns:1fr}}
+    .card{background:var(--surf2);border:1px solid var(--bd);border-radius:12px;padding:14px 16px}
+    .card .t{font-weight:800;margin-bottom:6px}
+    table{width:100%;border-collapse:collapse;font-size:12.5px}
+    th,td{padding:9px 8px;border-bottom:1px solid var(--bd);text-align:left;vertical-align:top}
+    th{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);font-weight:800}
+    .muted{color:var(--mut);font-size:12px}
+    .scroll{overflow-x:auto}
+    footer{text-align:center;color:var(--mut);font-size:11px;margin-top:28px;padding-top:16px;border-top:1px solid var(--bd)}
+    footer a{color:var(--ok)}
+    .month-nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+    .month-nav a{font-size:11px;font-weight:800;text-decoration:none;color:var(--mut);border:1px solid var(--bd);padding:6px 10px;border-radius:999px}
+    .month-nav a:hover{color:#fff;border-color:rgba(255,255,255,.25)}
+    .proj-list{margin:0;padding:0;list-style:none}
+    .proj-list li{padding:7px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:12.5px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+    .proj-list li:last-child{border-bottom:0}
+    .proj-list .name{font-weight:700}
+    .proj-list .meta{color:var(--mut);font-size:11px}
+    .month-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+    .month-kpis{display:flex;flex-wrap:wrap;gap:6px}
+    .month-kpis span{font-size:10px;font-weight:800;border:1px solid var(--bd);border-radius:999px;padding:4px 8px;color:var(--mut)}
+    .month-kpis span b{color:#fff}
+    .month-kpis span.ok{color:var(--ok);border-color:rgba(34,197,94,.35)}
+    .month-kpis span.hot{color:var(--hot);border-color:rgba(239,68,68,.4)}
+    .month-kpis span.info{color:var(--info);border-color:rgba(96,165,250,.35)}
+    .month-kpis span.warn{color:var(--warn);border-color:rgba(250,204,21,.35)}
+
+  </style>
+</head>
+<body>
+<header class="top">
+  <div class="logo">V4 <span>COMPANY</span></div>
+  <div class="pill">Visão Sara · base por safra</div>
+</header>
+
+<div class="wrap">
+  <h1>Visão Sara · como está a base por safra</h1>
+  <p class="lead">
+    Farmer = <strong>Sara</strong> · Cockpit E.E · safras fevereiro → julho.
+    Por mês: o que entrou · Tratativa Ops · monetizado / já monetizado · o que sobrou para pitch.
+    Fonte: <a href="https://docs.google.com/spreadsheets/d/1dSukhon9dIUABcbQIKGKUa-ku-_oLOn1Q5YWeWGfI6U/edit?gid=759150030#gid=759150030" target="_blank" rel="noopener">planilha E.E</a>.
+  </p>
+
+<div class="callout warn">
+      <strong>Recorte fev→jul:</strong> 98 entradas · por mês: quem entrou · Tratativa Ops · Monetizado / Já monetizado · o que ainda está para pitch (Semana/Follow).
+      Drops Budget/Timing/Interno aparecem como “fechados sem pitch” para fechar a conta do mês.
+    </div>
+
+    <div class="month-nav">
+      <a href="#m-fev">Fevereiro · 13</a>
+      <a href="#m-mar">Março · 24</a>
+      <a href="#m-abr">Abril · 16</a>
+      <a href="#m-mai">Maio · 24</a>
+      <a href="#m-jun">Junho · 20</a>
+      <a href="#m-jul">Julho · 1</a>
+    </div>
+
+    <!-- FEVEREIRO -->
+    <div class="section" id="m-fev">
+      <div class="month-head">
+        <div><h2>Safra</h2><h3>Fevereiro 2026 · 13 projetos</h3></div>
+        <div class="month-kpis">
+          <span><b>13</b> entrou</span>
+          <span class="hot"><b>5</b> Ops</span>
+          <span class="ok"><b>6</b> monetizado</span>
+          <span class="warn"><b>0</b> pitch</span>
+          <span><b>2</b> drop comercial</span>
+        </div>
+      </div>
+      <div class="grid2">
+        <div class="card">
+          <div class="t">Entrou</div>
+          <ul class="proj-list">
+            <li><span class="name">DECORTI</span><span class="meta">→ Monetizado</span></li>
+            <li><span class="name">Luup Perfumes</span><span class="meta">→ Monetizado</span></li>
+            <li><span class="name">PACHANE (BM)</span><span class="meta">→ Monetizado</span></li>
+            <li><span class="name">WK Carpetes - Pisotron (LM)</span><span class="meta">→ Monetizado</span></li>
+            <li><span class="name">Gigaclima</span><span class="meta">→ Monetizado</span></li>
+            <li><span class="name">Telefer Telecomunicações (BS)</span><span class="meta">→ Monetizado</span></li>
+            <li><span class="name">Casa Bella (BS)</span><span class="meta">→ Ops</span></li>
+            <li><span class="name">Joyful Feast Food Park (BT)</span><span class="meta">→ Ops</span></li>
+            <li><span class="name">Fuzinatto / Ceramica Roverotto</span><span class="meta">→ Ops</span></li>
+            <li><span class="name">Vita Mater Home Care (BS)</span><span class="meta">→ Ops</span></li>
+            <li><span class="name">L5 máquinas nutrição animal (BS)</span><span class="meta">→ Ops</span></li>
+            <li><span class="name">Madeireira Ervatti (BT)</span><span class="meta">→ Drop Timing</span></li>
+            <li><span class="name">Acarlos serviços (BS)</span><span class="meta">→ Drop Budget</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="t">Tratativa Ops · 5</div>
+          <ul class="proj-list">
+            <li><span class="name">Casa Bella</span><span class="meta">PROJETO TRAVADO</span></li>
+            <li><span class="name">Joyful Feast</span><span class="meta">PROJETO TRAVADO</span></li>
+            <li><span class="name">Fuzinatto / Roverotto</span><span class="meta">TRAVADO · E+T mapeados</span></li>
+            <li><span class="name">Vita Mater</span><span class="meta">Problema EE · Amanda</span></li>
+            <li><span class="name">L5 máquinas</span><span class="meta">PROJETO TRAVADO</span></li>
+          </ul>
+          <div class="t" style="margin-top:14px">Monetizado · 6</div>
+          <ul class="proj-list">
+            <li><span class="name">DECORTI</span><span class="meta">Saber</span></li>
+            <li><span class="name">Luup Perfumes</span><span class="meta">Ter</span></li>
+            <li><span class="name">PACHANE</span><span class="meta">Ter</span></li>
+            <li><span class="name">WK Carpetes</span><span class="meta">E+S+T</span></li>
+            <li><span class="name">Gigaclima</span><span class="meta">Executar</span></li>
+            <li><span class="name">Telefer</span><span class="meta">Ter</span></li>
+          </ul>
+          <div class="t" style="margin-top:14px">Sobrou para pitch · 0</div>
+          <p class="muted" style="margin:6px 0 0">Safra fechada. 2 drops comerciais (Ervatti Timing · Acarlos Budget).</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- MARÇO -->
+    <div class="section" id="m-mar">
+      <div class="month-head">
+        <div><h2>Safra</h2><h3>Março 2026 · 24 projetos</h3></div>
+        <div class="month-kpis">
+          <span><b>24</b> entrou</span>
+          <span class="hot"><b>5</b> Ops</span>
+          <span class="ok"><b>7</b> monetizado</span>
+          <span class="warn"><b>0</b> pitch</span>
+          <span><b>12</b> drop comercial</span>
+        </div>
+      </div>
+      <div class="callout hot">Buraco da carteira: win 29%. Timing (8) + Ops (5) + Budget (3) + Interno (1).</div>
+      <div class="grid2">
+        <div class="card">
+          <div class="t">Entrou · 24</div>
+          <ul class="proj-list">
+            <li><span class="name">Escritório Fares · Espao Zabeu · Biesky · OFOS · Creazione · Rpplass · Studio H. Hoffman</span><span class="meta">→ Monetizado (7)</span></li>
+            <li><span class="name">MasterPlan · LaundryApp · Amorelli · Fc Cursio · Lone Star BC</span><span class="meta">→ Ops (5)</span></li>
+            <li><span class="name">Punctual · Óticas Líder · Cria Nutrição</span><span class="meta">→ Budget</span></li>
+            <li><span class="name">Mayko · WZR · Becton · Devstate · Eskimó · Madeiras teresense · Mais Gôndolas · Testfy</span><span class="meta">→ Timing</span></li>
+            <li><span class="name">Diveq</span><span class="meta">→ Interno</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="t">Tratativa Ops · 5</div>
+          <ul class="proj-list">
+            <li><span class="name">MasterPlan</span><span class="meta">Falta pagto · Churn M0</span></li>
+            <li><span class="name">LaundryApp</span><span class="meta">PROJETO TRAVADO</span></li>
+            <li><span class="name">Amorelli</span><span class="meta">PROJETO TRAVADO</span></li>
+            <li><span class="name">Fc Cursio</span><span class="meta">PROJETO TRAVADO</span></li>
+            <li><span class="name">Lone Star BC</span><span class="meta">PROJETO TRAVADO</span></li>
+          </ul>
+          <div class="t" style="margin-top:14px">Monetizado · 7</div>
+          <ul class="proj-list">
+            <li><span class="name">Fares · Zabeu · Biesky · Creazione · Rpplass · Studio HH</span><span class="meta">E+T</span></li>
+            <li><span class="name">OFOS</span><span class="meta">E+S</span></li>
+          </ul>
+          <div class="t" style="margin-top:14px">Sobrou para pitch · 0</div>
+          <p class="muted" style="margin:6px 0 0">Safra fechada no Cockpit. Vários Timing com fee Executar alto (Becton, Devstate, Madeiras, Mais Gôndolas) — candidatos a reativação EQV, não pitch agora.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABRIL -->
+    <div class="section" id="m-abr">
+      <div class="month-head">
+        <div><h2>Safra</h2><h3>Abril 2026 · 16 projetos</h3></div>
+        <div class="month-kpis">
+          <span><b>16</b> entrou</span>
+          <span class="hot"><b>3</b> Ops</span>
+          <span class="ok"><b>5</b> monetizado</span>
+          <span class="info"><b>2</b> já monet.</span>
+          <span class="warn"><b>0</b> pitch</span>
+          <span><b>6</b> drop comercial</span>
+        </div>
+      </div>
+      <div class="grid2">
+        <div class="card">
+          <div class="t">Entrou · 16</div>
+          <ul class="proj-list">
+            <li><span class="name">Reveservice · FIBRANETBR · Rede Construir · Natuclen · Soluções Locação</span><span class="meta">→ Monetizado</span></li>
+            <li><span class="name">Belô Café · METAL COMERCIO</span><span class="meta">→ Já monetizado</span></li>
+            <li><span class="name">Premium Gourmet · Globo Eventos · NextPack</span><span class="meta">→ Ops</span></li>
+            <li><span class="name">Movement · Ícaro Braga · Bioativos</span><span class="meta">→ Timing</span></li>
+            <li><span class="name">Ultra Vida · Gaucho parafusos · Kidys Park</span><span class="meta">→ Budget</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="t">Tratativa Ops · 3</div>
+          <ul class="proj-list">
+            <li><span class="name">Premium Gourmet</span><span class="meta">Pagto EE + Executar</span></li>
+            <li><span class="name">Globo Eventos</span><span class="meta">Já veio c/ Executar bookado</span></li>
+            <li><span class="name">NextPack</span><span class="meta">Ops · sem detalhe</span></li>
+          </ul>
+          <div class="t" style="margin-top:14px">Monetizado + Já monetizado · 7</div>
+          <ul class="proj-list">
+            <li><span class="name">Reveservice · Fibranet</span><span class="meta">E+T</span></li>
+            <li><span class="name">Natuclen</span><span class="meta">Executar</span></li>
+            <li><span class="name">Soluções Locação</span><span class="meta">E+S</span></li>
+            <li><span class="name">Rede Construir</span><span class="meta">Saber</span></li>
+            <li><span class="name">Belô Café · METAL COMERCIO</span><span class="meta">Já monetizado / assessoria</span></li>
+          </ul>
+          <div class="t" style="margin-top:14px">Sobrou para pitch · 0</div>
+          <p class="muted" style="margin:6px 0 0">Safra fechada. Belô: aguardar pitch (perda da gerente). Metal: higiene de obs.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIO -->
+    <div class="section" id="m-mai">
+      <div class="month-head">
+        <div><h2>Safra</h2><h3>Maio 2026 · 24 projetos</h3></div>
+        <div class="month-kpis">
+          <span><b>24</b> entrou</span>
+          <span class="hot"><b>1</b> Ops</span>
+          <span class="ok"><b>7</b> monetizado</span>
+          <span class="info"><b>4</b> já monet.</span>
+          <span class="warn"><b>3</b> pitch</span>
+          <span><b>9</b> drop comercial</span>
+        </div>
+      </div>
+      <div class="grid2">
+        <div class="card">
+          <div class="t">Entrou · 24</div>
+          <ul class="proj-list">
+            <li><span class="name">CDGFITNESS · Inovar · Exclusiva Home · Stylus · BR Piercing · Modular · Academia Imigrantes</span><span class="meta">→ Monetizado</span></li>
+            <li><span class="name">Prata Nobre · Sensoria · Ez turismo · Rdo Pro</span><span class="meta">→ Já monetizado</span></li>
+            <li><span class="name">M &amp; J Green Foods</span><span class="meta">→ Ops</span></li>
+            <li><span class="name">Rota da Linguiça · Sora · Triboltech</span><span class="meta">→ Pitch / pipe</span></li>
+            <li><span class="name">UR Transportes · Ruiz · Madezatto · Unik</span><span class="meta">→ Budget</span></li>
+            <li><span class="name">Danah · Positive Safety · Fui Motos</span><span class="meta">→ Timing</span></li>
+            <li><span class="name">Curavida · Creative Eng</span><span class="meta">→ Drop (sem motivo)</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="t">Tratativa Ops · 1</div>
+          <ul class="proj-list">
+            <li><span class="name">M &amp; J Green Foods</span><span class="meta">PROJETO CAIU · KO feito</span></li>
+          </ul>
+          <div class="t" style="margin-top:14px">Monetizado · 7</div>
+          <ul class="proj-list">
+            <li><span class="name">BR Piercing · Modular · Academia Imigrantes</span><span class="meta">Executar</span></li>
+            <li><span class="name">CDGFITNESS · Exclusiva</span><span class="meta">E+T</span></li>
+            <li><span class="name">Stylus · Inovar</span><span class="meta">Saber</span></li>
+          </ul>
+          <div class="t" style="margin-top:14px">Já monetizado · 4</div>
+          <ul class="proj-list">
+            <li><span class="name">Prata Nobre</span><span class="meta">E+T rodando</span></li>
+            <li><span class="name">Sensoria · Rdo Pro</span><span class="meta">Entrou c/ Executar · aguardar</span></li>
+            <li><span class="name">Ez turismo</span><span class="meta">Assessoria · AP</span></li>
+          </ul>
+          <div class="t" style="margin-top:14px">Sobrou para pitch · 3</div>
+          <ul class="proj-list">
+            <li><span class="name">Rota da Linguiça</span><span class="meta">Follow · EQV / no-show</span></li>
+            <li><span class="name">Sora consultoria</span><span class="meta">Semana 05 · projeto travado</span></li>
+            <li><span class="name">Triboltech</span><span class="meta">Semana 05 · agenda/decisor</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- JUNHO -->
+    <div class="section" id="m-jun">
+      <div class="month-head">
+        <div><h2>Safra</h2><h3>Junho 2026 · 20 projetos</h3></div>
+        <div class="month-kpis">
+          <span><b>20</b> entrou</span>
+          <span class="hot"><b>1</b> Ops</span>
+          <span class="ok"><b>2</b> monetizado</span>
+          <span class="info"><b>2</b> já monet.</span>
+          <span class="warn"><b>10</b> pitch</span>
+          <span><b>5</b> drop comercial</span>
+        </div>
+      </div>
+      <div class="callout ok">Safra ainda aberta — maior fila de pitch da carteira (10). Budget recente: Protesol, KFG, Estação Delta.</div>
+      <div class="grid2">
+        <div class="card">
+          <div class="t">Entrou · 20</div>
+          <ul class="proj-list">
+            <li><span class="name">Nova York &amp; Você · Isoluz</span><span class="meta">→ Monetizado</span></li>
+            <li><span class="name">Brod transportes · Medicar</span><span class="meta">→ Já monetizado</span></li>
+            <li><span class="name">Conlar Shopping</span><span class="meta">→ Ops</span></li>
+            <li><span class="name">AGM · Ecofitness · Moteis Fortaleza · Adriano Martins</span><span class="meta">→ Follow (pitch)</span></li>
+            <li><span class="name">Almeida e Neves · Hanaro · Casa dos Pães · Wang · General car · RM Burguer</span><span class="meta">→ Semanas</span></li>
+            <li><span class="name">KFG · Protesol · Estação Delta</span><span class="meta">→ Budget</span></li>
+            <li><span class="name">Pedrini Advocacia</span><span class="meta">→ Timing</span></li>
+            <li><span class="name">Terra prometida</span><span class="meta">→ Drop (sem motivo)</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="t">Tratativa Ops · 1</div>
+          <ul class="proj-list">
+            <li><span class="name">Conlar Shopping</span><span class="meta">Ops · sem detalhe no Cockpit</span></li>
+          </ul>
+          <div class="t" style="margin-top:14px">Monetizado · 2</div>
+          <ul class="proj-list">
+            <li><span class="name">Nova York &amp; Você</span><span class="meta">Executar</span></li>
+            <li><span class="name">Isoluz</span><span class="meta">Saber + Ter</span></li>
+          </ul>
+          <div class="t" style="margin-top:14px">Já monetizado · 2</div>
+          <ul class="proj-list">
+            <li><span class="name">Brod transportes</span><span class="meta">Já monetizado</span></li>
+            <li><span class="name">Medicar</span><span class="meta">Assessoria · AP</span></li>
+          </ul>
+          <div class="t" style="margin-top:14px">Sobrou para pitch · 10</div>
+          <ul class="proj-list">
+            <li><span class="name">AGM DISTRIBUIDORA</span><span class="meta">Follow · avaliando proposta</span></li>
+            <li><span class="name">Ecofitness Aldeia</span><span class="meta">Follow · EQV</span></li>
+            <li><span class="name">Moteis Fortaleza</span><span class="meta">Follow · devolutiva</span></li>
+            <li><span class="name">Adriano Martins Cardoso</span><span class="meta">Follow · aguardando assinatura</span></li>
+            <li><span class="name">Almeida e Neves</span><span class="meta">Semana 05 · GTM</span></li>
+            <li><span class="name">Hanaro</span><span class="meta">Semana 03 · decisor/viagem</span></li>
+            <li><span class="name">Supermercado casa dos pães</span><span class="meta">Semana 03 · AP</span></li>
+            <li><span class="name">Wang</span><span class="meta">Semana 02 · AP</span></li>
+            <li><span class="name">General car</span><span class="meta">Semana 0 · era pagto travado</span></li>
+            <li><span class="name">RM Burguer Itabira</span><span class="meta">Semana 0 · era pagto travado</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- JULHO -->
+    <div class="section" id="m-jul">
+      <div class="month-head">
+        <div><h2>Safra</h2><h3>Julho 2026 · 1 projeto</h3></div>
+        <div class="month-kpis">
+          <span><b>1</b> entrou</span>
+          <span class="hot"><b>0</b> Ops</span>
+          <span class="ok"><b>0</b> monetizado</span>
+          <span class="warn"><b>1</b> pitch</span>
+        </div>
+      </div>
+      <div class="grid2">
+        <div class="card">
+          <div class="t">Entrou · 1</div>
+          <ul class="proj-list">
+            <li><span class="name">Freebong (BS)</span><span class="meta">→ Semana 03 · pitch</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="t">Tratativa Ops · 0</div>
+          <p class="muted">—</p>
+          <div class="t" style="margin-top:14px">Monetizado · 0</div>
+          <p class="muted">—</p>
+          <div class="t" style="margin-top:14px">Sobrou para pitch · 1</div>
+          <ul class="proj-list">
+            <li><span class="name">Freebong</span><span class="meta">Semana 03 · investiu R$14.050 na EE</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Resumo fev→jul</h2>
+      <h3>98 entradas · onde foi cada uma</h3>
+      <div class="scroll">
+        <table>
+          <thead>
+            <tr><th>Mês</th><th>Entrou</th><th>Ops</th><th>Monetizado</th><th>Já monet.</th><th>Pitch aberto</th><th>Drop comercial*</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Fevereiro</td><td>13</td><td>5</td><td>6</td><td>0</td><td>0</td><td>2</td></tr>
+            <tr><td>Março</td><td>24</td><td>5</td><td>7</td><td>0</td><td>0</td><td>12</td></tr>
+            <tr><td>Abril</td><td>16</td><td>3</td><td>5</td><td>2</td><td>0</td><td>6</td></tr>
+            <tr><td>Maio</td><td>24</td><td>1</td><td>7</td><td>4</td><td class="warn">3</td><td>9</td></tr>
+            <tr><td>Junho</td><td>20</td><td>1</td><td>2</td><td>2</td><td class="warn">10</td><td>5</td></tr>
+            <tr><td>Julho</td><td>1</td><td>0</td><td>0</td><td>0</td><td class="warn">1</td><td>0</td></tr>
+            <tr><td><strong>Total</strong></td><td><strong>98</strong></td><td><strong>15</strong></td><td><strong>27</strong></td><td><strong>8</strong></td><td><strong>14</strong></td><td><strong>34</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted" style="margin-top:10px">*Drop comercial = Budget + Timing + Interno + sem motivo (fora Tratativa Ops). Pitch aberto = Semana* / Follow.</p>
+      <div class="callout" style="margin-top:12px">
+        Fila de pitch agora (14): Triboltech · Sora · Rota da Linguiça · AGM · Ecofitness · Moteis · Adriano · Almeida e Neves · Hanaro · Casa dos Pães · Wang · General car · RM Burguer · Freebong.
+      </div>
+    </div>
+
+  <footer>
+    V4 · Visão Sara · base por safra · Cockpit E.E ·
+    <a href="index.html">Comando Estratégico</a>
+  </footer>
+</div>
+</body>
+</html>
