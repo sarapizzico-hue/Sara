@@ -281,44 +281,44 @@
   <div class="panel" data-view="jornada">
     <div class="section">
       <h2>Fluxo mestre</h2>
-      <h3>Do fechamento da EE até a expansão</h3>
-      <p class="lead">Toda conta da carteira Farmer passa por estas 4 fases. O dash filtra e ordena por fase + saúde + oportunidade.</p>
+      <h3>EE → GC → engajamento → solução que se encaixa</h3>
+      <p class="lead">O dash acompanha as duas trilhas. Conta só fica “verde para apresentar” se o cliente engajou e a solução já está mapeada.</p>
       <div class="flow">
         <div class="flow-step">
-          <div class="n">01 · Handoff</div>
-          <div class="t">Receber a conta</div>
-          <div class="d">EE paga · tese · decisor · WTP · forma pgto · riscos · próximos módulos mapeados</div>
+          <div class="n">01 · Entrada</div>
+          <div class="t">Fecha a EE</div>
+          <div class="d">Contrato ativo · projeto em pagamento</div>
         </div>
         <div class="flow-step">
-          <div class="n">02 · Onboarding</div>
-          <div class="t">Ativar confiança</div>
-          <div class="d">Kickoff ≤ 7 dias · expectativas · canal · dono da conta · 30/60/90</div>
+          <div class="n">02 · GC</div>
+          <div class="t">Alinha expectativa</div>
+          <div class="d">GC registra o que ele espera · 30/60/90 · fora de escopo</div>
         </div>
         <div class="flow-step">
-          <div class="n">03 · Farming</div>
-          <div class="t">Rodar a relação</div>
-          <div class="d">Cadência · saúde · entrega percebida · mapa de expansão vivo</div>
+          <div class="n">03 · Durante EE</div>
+          <div class="t">Engaja + mapeia</div>
+          <div class="d">Decisor semanal · CSAT/NPS · V4 mapeia solução (S1→S3)</div>
         </div>
         <div class="flow-step">
-          <div class="n">04 · Expandir</div>
-          <div class="t">Monetizar com tese</div>
-          <div class="d">Ter→Saber→Executar · timing · proposta · assinatura · sem reabrir EE</div>
+          <div class="n">04 · Final</div>
+          <div class="t">Apresenta encaixe</div>
+          <div class="d">Plano de Ação + produto ideal · sem catálogo genérico</div>
         </div>
       </div>
     </div>
 
     <div class="section">
-      <h2>Checklist de handoff EE → Farmer</h2>
-      <p class="lead">Sem isso, a conta entra “cega” e o farming vira apagar incêndio. Bloqueia kickoff se faltar P0.</p>
+      <h2>Checklist · conta pronta para apresentar solução</h2>
+      <p class="lead">Gates do contrato. Sem P0, não apresenta preço — só continua mapeando / reengaja.</p>
       <ul class="check">
-        <li><span class="box"></span><div><strong>P0 · Contrato &amp; condição:</strong> valor EE, forma de pagamento, data início, produtos já vendidos</div></li>
-        <li><span class="box"></span><div><strong>P0 · Decisor:</strong> nome, papel, canal preferido, quem influencia</div></li>
-        <li><span class="box"></span><div><strong>P0 · Tese da EE:</strong> dor principal, PUV, o que NÃO vender agora</div></li>
-        <li><span class="box"></span><div><strong>P0 · Próximo módulo natural:</strong> 1 tese de expansão + timing sugerido</div></li>
-        <li><span class="box"></span><div><strong>P1 · Capacidade:</strong> estoque, time, gargalo operacional (bloqueia mídia/escala)</div></li>
-        <li><span class="box"></span><div><strong>P1 · Budget / WTP:</strong> teto conhecido, sensibilidade a preço, moeda preferencial</div></li>
-        <li><span class="box"></span><div><strong>P1 · Squad &amp; unidade:</strong> quem entrega, quem pitchou, histórico de relacionamento</div></li>
-        <li><span class="box"></span><div><strong>P2 · Materiais:</strong> proposta, script, diagnóstico EE, gravações / notas</div></li>
+        <li><span class="box"></span><div><strong>P0 · GC feita:</strong> expectativa do cliente alinhada e registrada (o que quer · o que não espera)</div></li>
+        <li><span class="box"></span><div><strong>P0 · Projeto pago:</strong> EE em dia (pago ou parcial saudável)</div></li>
+        <li><span class="box"></span><div><strong>P0 · Decisor semanal:</strong> decisor participou das entregas (não só influenciador)</div></li>
+        <li><span class="box"></span><div><strong>P0 · CSAT + NPS:</strong> respondidos (ou ciclo de coleta ativo com data)</div></li>
+        <li><span class="box"></span><div><strong>P0 · Expectativa viva:</strong> cliente trouxe/atualizou o que quer resolver</div></li>
+        <li><span class="box"></span><div><strong>P0 · Solução mapeada:</strong> produto ideal escrito no Plano de Ação (S3)</div></li>
+        <li><span class="box"></span><div><strong>P1 · Capacidade:</strong> operação aguenta o próximo módulo</div></li>
+        <li><span class="box"></span><div><strong>P1 · Budget / WTP:</strong> consciência de investimento (mesmo que parcial)</div></li>
       </ul>
     </div>
 
@@ -536,16 +536,31 @@
     </div>
 
     <div class="section">
-      <h2>Camada 1 · Gates (bloqueiam ou liberam)</h2>
+      <h2>Camada 1 · Gates do contrato (bloqueiam ou liberam)</h2>
       <div class="param">
-        <div class="name">kickoff_realizado</div>
+        <div class="name">gc_realizada</div>
         <div class="type">Gate</div>
-        <div class="desc"><em>Obrigatório.</em> Sim/Não + data. Sem kick-off = conta ainda não “nasceu” na Farmer. Alerta no dash se &gt; 7 dias da entrada EE.</div>
+        <div class="desc"><em>Obrigatório.</em> Sim/Não + data. GC alinhou toda a expectativa do cliente. Sem GC = conta ainda não “nasceu”.</div>
+      </div>
+      <div class="param">
+        <div class="name">expectativa_cliente</div>
+        <div class="type">Gate</div>
+        <div class="desc"><em>Obrigatório + update semanal.</em> O que ele quer resolver / onde quer chegar / o que está fora. Cliente traz; Farmer registra.</div>
       </div>
       <div class="param">
         <div class="name">projeto_pago</div>
         <div class="type">Gate</div>
-        <div class="desc"><em>Obrigatório.</em> Enum: <strong>Pago · Parcial · Em atraso · Aguardando 1ª parcela · Inadimplente</strong>. Expansão agressiva só com Pago ou Parcial saudável.</div>
+        <div class="desc"><em>Obrigatório.</em> Enum: <strong>Pago · Parcial · Em atraso · Aguardando 1ª parcela · Inadimplente</strong>. Apresentação de solução só com Pago ou Parcial saudável.</div>
+      </div>
+      <div class="param">
+        <div class="name">decisor_semanal</div>
+        <div class="type">Gate</div>
+        <div class="desc"><em>Cadência.</em> Decisor participou da entrega da semana? Sim/Não. Ausência repetida = risco (padrão Triboltec).</div>
+      </div>
+      <div class="param">
+        <div class="name">kickoff_realizado</div>
+        <div class="type">Gate</div>
+        <div class="desc"><em>Obrigatório.</em> Alinhamento inicial feito (pode coincidir com a GC). Data registrada.</div>
       </div>
       <div class="param">
         <div class="name">data_entrada_ee</div>
@@ -584,12 +599,17 @@
       <div class="param">
         <div class="name">csat</div>
         <div class="type">Saúde</div>
-        <div class="desc"><em>Ritual.</em> Nota 1–5 (ou 0–10) + data. Ideal pós kick-off e a cada check-in relevante. Queda = ponto de atenção imediato.</div>
+        <div class="desc"><em>Contrato.</em> Cliente responde. Nota + data. Parte do engajamento mínimo — não é “se der tempo”.</div>
       </div>
       <div class="param">
         <div class="name">nps</div>
         <div class="type">Saúde</div>
-        <div class="desc"><em>Mensal / QBR.</em> −100 a +100 (ou 0–10). Relação e advocacia — menos volátil que CSAT.</div>
+        <div class="desc"><em>Contrato.</em> Cliente responde. Relação/advocacia. Sem NPS no ciclo = alerta no dash.</div>
+      </div>
+      <div class="param">
+        <div class="name">solucao_mapeada</div>
+        <div class="type">Comercial</div>
+        <div class="desc"><em>Trilha V4.</em> Enquanto a EE roda: rascunho → versão S3 do produto que se encaixa. Campo obrigatório antes da apresentação final.</div>
       </div>
       <div class="param">
         <div class="name">lead_score</div>
@@ -905,7 +925,7 @@
   </div>
 
   <footer>
-    V4 Company · Playbook Farmer AM · Sara Pizzico · v0.3<br>
+    V4 Company · Playbook Farmer AM · Sara Pizzico · v0.4<br>
     Carteira: clientes via Estruturação Estratégica ·
     <a href="index.html">Comando Estratégico E.E</a> ·
     <a href="https://docs.google.com/spreadsheets/d/1bCR_MxfTRJKq66Yg3WecQhF_ipPK1l6p4xNSTs0H97g/edit?usp=sharing" target="_blank" rel="noopener">Entregas EE</a> ·
