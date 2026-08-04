@@ -612,6 +612,26 @@
         <div class="desc"><em>Trilha V4.</em> Enquanto a EE roda: rascunho → versão S3 do produto que se encaixa. Campo obrigatório antes da apresentação final.</div>
       </div>
       <div class="param">
+        <div class="name">tier_cliente</div>
+        <div class="type">Comercial</div>
+        <div class="desc"><em>Camada STEP.</em> Porte/complexidade (S/M/L/XL — enum a travar). Influencia qual STEP cabe.</div>
+      </div>
+      <div class="param">
+        <div class="name">margem_contribuicao</div>
+        <div class="type">Comercial</div>
+        <div class="desc"><em>Camada STEP.</em> % ou R$ da frente prioritária + qual linha. Sem margem, não sobe STEP agressivo.</div>
+      </div>
+      <div class="param">
+        <div class="name">break_even_meses</div>
+        <div class="type">Comercial</div>
+        <div class="desc"><em>Camada STEP.</em> Meses até o projeto equilibrar (cenário base). BE longo → STEP menor ou faseado.</div>
+      </div>
+      <div class="param">
+        <div class="name">step_recomendado</div>
+        <div class="type">Comercial</div>
+        <div class="desc"><em>Output.</em> Qual STEP apresentar + <strong>step_nao_oferecer</strong>. Só depois do lead score liberar.</div>
+      </div>
+      <div class="param">
         <div class="name">lead_score</div>
         <div class="type">Saúde</div>
         <div class="desc"><em>KPI · v0.6.</em> Prontidão para apresentar. Gate: decisor + pago/pagando. Score: consciência (50) + tese/produto (50). Faixas: 70+ apresentar · 40–69 elevar · &lt;40 ainda não. <a href="lead-score-farmer.html" style="color:#86efac">Calculadora</a>.</div>
@@ -1102,7 +1122,7 @@
   </div>
 
   <footer>
-    V4 Company · Playbook Farmer AM · Sara Pizzico · v0.6<br>
+    V4 Company · Playbook Farmer AM · Sara Pizzico · v0.7<br>
     Carteira: clientes via Estruturação Estratégica ·
     <a href="index.html">Comando Estratégico E.E</a> ·
     <a href="https://docs.google.com/spreadsheets/d/1bCR_MxfTRJKq66Yg3WecQhF_ipPK1l6p4xNSTs0H97g/edit?usp=sharing" target="_blank" rel="noopener">Entregas EE</a> ·
