@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Plano de Ação Farmer · EE · Sara</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --brand:#e50915; --brand-light:#ff1a27; --bg:#050505; --surf:#141414;
+      --bd:rgba(255,255,255,.1); --txt:#fafafa; --mut:#a3a3a3;
+      --ok:#86efac; --warn:#fde68a; --hot:#fca5a5; --info:#93c5fd;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--txt);font:14px/1.55 Inter,system-ui,sans-serif;
+      background-image:radial-gradient(ellipse 80% 40% at 50% -10%,rgba(229,9,21,.16),transparent)}
+    .top{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);background:rgba(5,5,5,.88);border-bottom:1px solid var(--bd);padding:12px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+    .logo{font-weight:900;letter-spacing:-.02em}.logo span{color:var(--brand-light)}
+    .pill{font-size:11px;font-weight:700;color:var(--mut);border:1px solid var(--bd);padding:5px 10px;border-radius:999px}
+    .wrap{max-width:920px;margin:0 auto;padding:28px 20px 80px}
+    h1{margin:0 0 6px;font-size:clamp(24px,4vw,32px);font-weight:900;letter-spacing:-.03em}
+    .sub{color:var(--mut);margin:0 0 20px;font-size:13px;max-width:720px}
+    .sub a{color:var(--ok)}
+    .card{background:var(--surf);border:1px solid var(--bd);border-radius:16px;padding:20px;margin-bottom:14px}
+    .card h2{margin:0 0 4px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);font-weight:800}
+    .card h3{margin:0 0 14px;font-size:17px;font-weight:900}
+    label{display:block;font-size:10px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--mut);margin:0 0 6px}
+    .hint{font-size:11px;color:var(--mut);margin:-4px 0 10px}
+    input,textarea,select{width:100%;background:#0a0a0a;border:1px solid var(--bd);border-radius:10px;color:var(--txt);padding:10px 12px;font:inherit;margin-bottom:12px}
+    textarea{min-height:70px;resize:vertical}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+    @media(max-width:740px){.row,.row3{grid-template-columns:1fr}}
+    .gate{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px}
+    .gate-box{border:1px solid var(--bd);border-radius:12px;padding:12px;background:#0a0a0a}
+    .gate-box .l{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+    .gate-box .v{font-size:14px;font-weight:800;margin-top:4px}
+    .gate-box.on{border-color:rgba(34,197,94,.35)}.gate-box.on .v{color:var(--ok)}
+    .gate-box.off{border-color:rgba(239,68,68,.4)}.gate-box.off .v{color:var(--hot)}
+    .scoreline{display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap;margin:8px 0 12px}
+    .big{font-size:48px;font-weight:900;line-height:1}
+    .big.ok{color:var(--ok)}.big.warn{color:var(--warn)}.big.hot{color:var(--hot)}
+    .tag{display:inline-block;padding:4px 10px;border-radius:999px;font-size:11px;font-weight:800;border:1px solid var(--bd)}
+    .tag.ok{color:var(--ok);border-color:rgba(34,197,94,.35)}
+    .tag.warn{color:var(--warn);border-color:rgba(250,204,21,.35)}
+    .tag.hot{color:var(--hot);border-color:rgba(239,68,68,.4)}
+    .msg{padding:12px 14px;border-radius:12px;font-size:13px;margin-top:8px}
+    .msg.ok{background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.3);color:#bbf7d0}
+    .msg.warn{background:rgba(250,204,21,.06);border:1px solid rgba(250,204,21,.28);color:#fde68a}
+    .msg.hot{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.35);color:#fecaca}
+    .bar-row{display:grid;grid-template-columns:130px 1fr 36px;gap:10px;align-items:center;font-size:12px;margin:6px 0}
+    .bar-bg{height:8px;background:rgba(255,255,255,.06);border-radius:99px;overflow:hidden}
+    .bar-fill{height:100%;background:linear-gradient(90deg,#e50915,#ff1a27);border-radius:99px}
+    .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+    button{appearance:none;border:1px solid rgba(229,9,21,.5);background:linear-gradient(135deg,rgba(229,9,21,.28),#1a1a1a);color:#fff;font:inherit;font-weight:800;padding:12px 18px;border-radius:12px;cursor:pointer}
+    button.secondary{border-color:var(--bd);background:#111}
+    .out{white-space:pre-wrap;font-size:13px;line-height:1.65;color:#e5e5e5;background:#0a0a0a;border:1px solid var(--bd);border-radius:12px;padding:16px;min-height:240px}
+    .preview{border:1px solid var(--bd);border-radius:14px;padding:18px;background:#0c0c0c}
+    .preview h4{margin:0 0 8px;font-size:20px;font-weight:900}
+    .preview .st{color:var(--mut);font-size:13px;margin-bottom:14px}
+    .crit{display:grid;grid-template-columns:170px 1fr;gap:8px 12px;margin-bottom:14px}
+    @media(max-width:640px){.crit{grid-template-columns:1fr}}
+    .crit .k{font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);padding-top:2px}
+    .crit .v{font-size:13px;color:#e5e5e5}
+    .preview ol{margin:0;padding-left:18px}.preview li{margin:6px 0;color:#e5e5e5}
+    footer{text-align:center;color:var(--mut);font-size:11px;margin-top:28px;padding-top:18px;border-top:1px solid var(--bd)}
+    footer a{color:var(--ok)}
+  </style>
+</head>
+<body>
+<header class="top">
+  <div class="logo">V4 <span>COMPANY</span></div>
+  <div class="pill">Plano de Ação Farmer · EE · playbook v0.10</div>
+</header>
+
+<div class="wrap">
+  <h1>Plano de Ação · Farmer AM</h1>
+  <p class="sub">
+    Gerado a partir do playbook: contrato da conta → lead score → STEP → economia → critérios Triboltec → ações com case.
+    <a href="playbook-farmer-am.html">Playbook</a> ·
+    <a href="lead-score-farmer.html">Lead score</a>
+  </p>
+
+  <!-- 1 CONTA -->
+  <div class="card">
+    <h2>01 · Conta</h2>
+    <h3>Identificação</h3>
+    <div class="row">
+      <div><label>Cliente</label><input id="cliente" placeholder="Ex.: Isoluz" /></div>
+      <div><label>Data do plano</label><input id="data" placeholder="04/08/2026" /></div>
+    </div>
+    <div class="row3">
+      <div>
+        <label>Semana EE</label>
+        <select id="semana"><option>1</option><option>2</option><option selected>3</option><option>4+</option><option>Kick-off / pós-EE</option></select>
+      </div>
+      <div>
+        <label>Squad / unidade</label>
+        <input id="squad" placeholder="Exclusive · Billions · Invictus" />
+      </div>
+      <div>
+        <label>Farmer</label>
+        <input id="farmer" value="Sara Pizzico" />
+      </div>
+    </div>
+    <label>Status em 1 linha</label>
+    <input id="status" placeholder="Ex.: S3 entregue · decisor na sala · aguardando mapa de continuidade" />
+  </div>
+
+  <!-- 2 GATES -->
+  <div class="card">
+    <h2>02 · Gate · inegociável</h2>
+    <h3>Sem os dois, não apresenta solução</h3>
+    <div class="row">
+      <div>
+        <label>Decisor na sala</label>
+        <select id="decisor">
+          <option value="1">Sim — participou da entrega/reunião crítica</option>
+          <option value="0">Não — ausente / só influenciador</option>
+        </select>
+      </div>
+      <div>
+        <label>Pago ou pagando</label>
+        <select id="pago">
+          <option value="1">Sim — pago ou parcelas em dia</option>
+          <option value="0">Não — atraso crítico / inadimplente</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <label>GC / expectativa alinhada</label>
+        <select id="gc">
+          <option value="sim">Sim — expectativa registrada</option>
+          <option value="parcial">Parcial</option>
+          <option value="nao">Não</option>
+        </select>
+      </div>
+      <div>
+        <label>Expectativa do cliente (o que ele quer)</label>
+        <input id="expectativa" placeholder="Em 1–2 frases" />
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 LEAD SCORE -->
+  <div class="card">
+    <h2>03 · Lead score</h2>
+    <h3>Prontidão para apresentar</h3>
+    <div class="row">
+      <div>
+        <label>Nível de consciência (50 pts)</label>
+        <select id="consciencia">
+          <option value="10">1 · Baixa — expectativa nebulosa (10)</option>
+          <option value="25">2 · Média — reconhece problema (25)</option>
+          <option value="40" selected>3 · Alta — clareza do que quer (40)</option>
+          <option value="50">4 · Muito alta — pede continuidade (50)</option>
+        </select>
+      </div>
+      <div>
+        <label>Qualidade da tese / produto (50 pts)</label>
+        <select id="tese">
+          <option value="10">1 · Fraca (10)</option>
+          <option value="25">2 · Hipótese S1/S2 (25)</option>
+          <option value="40" selected>3 · Sólida — combo + exclusões (40)</option>
+          <option value="50">4 · Pronta — tese + plano + timing (50)</option>
+        </select>
+      </div>
+    </div>
+    <div class="gate">
+      <div class="gate-box" id="gDec"><div class="l">Decisor</div><div class="v" id="gDecV">—</div></div>
+      <div class="gate-box" id="gPag"><div class="l">Pago / pagando</div><div class="v" id="gPagV">—</div></div>
+    </div>
+    <div class="scoreline">
+      <div class="big" id="score">0</div>
+      <div><span class="tag" id="faixa">—</span></div>
+    </div>
+    <div class="bar-row"><span>Consciência</span><div class="bar-bg"><div class="bar-fill" id="barC"></div></div><span id="numC">0</span></div>
+    <div class="bar-row"><span>Tese / produto</span><div class="bar-bg"><div class="bar-fill" id="barT"></div></div><span id="numT">0</span></div>
+    <div class="msg" id="scoreMsg">—</div>
+  </div>
+
+  <!-- 4 STEP -->
+  <div class="card">
+    <h2>04 · STEP</h2>
+    <h3>Filtro estratégico · depois o produto</h3>
+    <div class="row">
+      <div>
+        <label>STEP recomendado</label>
+        <select id="step">
+          <option>Destrava Receita</option>
+          <option>Ter</option>
+          <option selected>Saber</option>
+          <option>Executar</option>
+          <option>Combos Performance</option>
+        </select>
+      </div>
+      <div>
+        <label>STEP / produto que NÃO oferecer agora</label>
+        <input id="nao_oferecer" placeholder="Ex.: Executar/mídia no mês 1 · Combo completo" />
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <label>Produtos candidatos (1–3 do catálogo)</label>
+        <input id="produtos_cand" placeholder="Ex.: EC · EQV · CRM" />
+      </div>
+      <div>
+        <label>Produto ideal (o que apresentar)</label>
+        <input id="produto_ideal" placeholder="Ex.: EC estendida / EQV faseado" />
+      </div>
+    </div>
+    <label>Mapa kick-off (se entrada nova / fora da planilha)</label>
+    <input id="mapa_ko" placeholder="Ex.: E.E pontual → mapear Saber·Ter / EQV no KO · não forçar Executar" />
+  </div>
+
+  <!-- 5 ECONOMIA -->
+  <div class="card">
+    <h2>05 · Economia</h2>
+    <h3>Tier · margem · break-even</h3>
+    <div class="row3">
+      <div>
+        <label>Tier do cliente</label>
+        <select id="tier">
+          <option>TINY</option>
+          <option>SMALL</option>
+          <option selected>MEDIUM</option>
+          <option>LARGE</option>
+        </select>
+      </div>
+      <div>
+        <label>Faturamento ref. (R$/mês)</label>
+        <input id="faturamento" placeholder="Ex.: 120000" />
+      </div>
+      <div>
+        <label>Break-even (meses)</label>
+        <input id="be" placeholder="Ex.: 3–4" />
+      </div>
+    </div>
+    <label>Margem de contribuição (frente prioritária)</label>
+    <input id="margem" placeholder="Ex.: margem saudável na linha X · ou 35%" />
+    <label>Leitura econômica (1–2 frases)</label>
+    <textarea id="leitura_eco" placeholder="Por que esse STEP/produto cabe (ou precisa fasear) dado tier + margem + BE"></textarea>
+  </div>
+
+  <!-- 6 CRITERIOS -->
+  <div class="card">
+    <h2>06 · Critérios (modelo Triboltec)</h2>
+    <h3>Avaliação da conta</h3>
+    <label>Faturamento e margem</label>
+    <textarea id="crit_fat" placeholder="Faturamento de referência + frente prioritária"></textarea>
+    <label>Produtos identificados</label>
+    <textarea id="crit_prod" placeholder="Combo ideal + o que NÃO oferecer"></textarea>
+    <div class="row">
+      <div>
+        <label>Pitch</label>
+        <select id="crit_pitch">
+          <option>Não realizado</option>
+          <option>Visão inicial sem valores</option>
+          <option>Pitch com valores</option>
+          <option>Proposta enviada</option>
+        </select>
+      </div>
+      <div>
+        <label>Espera proposta?</label>
+        <select id="crit_espera">
+          <option>Sem clareza</option>
+          <option>Sim</option>
+          <option>Não — validar interesse antes</option>
+        </select>
+      </div>
+    </div>
+    <label>Detalhe pitch / espera</label>
+    <textarea id="crit_pitch_det" placeholder="Decisor viu a entrega? Precisa reapresentar?"></textarea>
+    <label>Consciência de budget</label>
+    <textarea id="crit_budget" placeholder="Mapeada / parcial / não mapeada"></textarea>
+    <div class="row">
+      <div>
+        <label>Interesse</label>
+        <select id="crit_interesse">
+          <option>Baixo</option>
+          <option selected>Médio</option>
+          <option>Alto</option>
+        </select>
+      </div>
+      <div>
+        <label>Decisor participando (critério)</label>
+        <select id="crit_dec">
+          <option>Sim</option>
+          <option selected>Não na etapa crítica</option>
+          <option>Parcial</option>
+        </select>
+      </div>
+    </div>
+    <label>Evidência de interesse + mapa do decisor</label>
+    <textarea id="crit_interesse_det"></textarea>
+    <label>Objeções possíveis</label>
+    <textarea id="crit_obj"></textarea>
+    <label>CSAT (formal + qualitativo)</label>
+    <textarea id="crit_csat"></textarea>
+    <label>Percepção geral (+ frase-mestra da próxima conversa)</label>
+    <textarea id="crit_perc"></textarea>
+  </div>
+
+  <!-- 7 ACOES -->
+  <div class="card">
+    <h2>07 · Plano de ação</h2>
+    <h3>Passos + case em cada um</h3>
+    <p class="hint">Um passo por linha. Prefixo opcional: [CASE: nome] ou [SEM CASE]</p>
+    <label>Ações (ordem)</label>
+    <textarea id="acoes" style="min-height:140px" placeholder="[SEM CASE] Reengajar decisor na reapresentação da S3&#10;[CASE: X] Validar tese Saber·Ter com prova correlata&#10;[SEM CASE] Confirmar interesse antes de enviar proposta&#10;Apresentar proposta do produto ideal em 2ª reunião"></textarea>
+    <div class="row">
+      <div>
+        <label>Case principal (se houver)</label>
+        <input id="case_nome" placeholder="Nome do case ou vazio" />
+      </div>
+      <div>
+        <label>Por que esse case</label>
+        <input id="case_porque" placeholder="1 frase de conexão com a dor" />
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <label>Prioridade Farmer</label>
+        <select id="prio"><option>P0</option><option selected>P1</option><option>P2</option><option>P3</option></select>
+      </div>
+      <div>
+        <label>Próximo contato (data)</label>
+        <input id="prox_contato" placeholder="Ex.: 08/08 · call 15h" />
+      </div>
+    </div>
+    <div class="btns">
+      <button type="button" id="gerar">Gerar plano</button>
+      <button type="button" class="secondary" id="copiar">Copiar texto</button>
+    </div>
+  </div>
+
+  <!-- OUTPUT -->
+  <div class="card">
+    <h2>08 · Output</h2>
+    <h3>Prévia do plano</h3>
+    <div class="preview" id="preview">
+      <h4>—</h4>
+      <div class="st">Preencha e clique em Gerar plano.</div>
+    </div>
+    <label style="margin-top:16px">Texto para Doc / Notion / WhatsApp</label>
+    <div class="out" id="out">—</div>
+  </div>
+
+  <footer>
+    V4 · Farmer AM · Sara · Plano de Ação gerado do
+    <a href="playbook-farmer-am.html">playbook-farmer-am.html</a>
+  </footer>
+</div>
+
+<script>
+function $(id){ return document.getElementById(id); }
+function val(id){ return ($(id).value || '').trim(); }
+function n(id){ return Number($(id).value); }
+
+function calcScore(){
+  var dec = $('decisor').value === '1';
+  var pag = $('pago').value === '1';
+  var C = n('consciencia'), T = n('tese'), total = C + T;
+  var gateOk = dec && pag;
+
+  $('gDec').className = 'gate-box ' + (dec ? 'on' : 'off');
+  $('gPag').className = 'gate-box ' + (pag ? 'on' : 'off');
+  $('gDecV').textContent = dec ? 'OK' : 'Bloqueia';
+  $('gPagV').textContent = pag ? 'OK' : 'Bloqueia';
+  $('score').textContent = total;
+  $('numC').textContent = C; $('numT').textContent = T;
+  $('barC').style.width = (C/50*100)+'%';
+  $('barT').style.width = (T/50*100)+'%';
+
+  var el = $('score'), faixa = $('faixa'), msg = $('scoreMsg');
+  if (!gateOk) {
+    el.className = 'big hot'; faixa.className = 'tag hot'; faixa.textContent = 'Bloqueado pelo gate';
+    msg.className = 'msg hot';
+    msg.innerHTML = '<strong>Não apresentar preço.</strong> Feche decisor na sala e/ou pagamento. Score ' + total + ' em espera.';
+    return { total: total, gateOk: false, label: 'Bloqueado pelo gate' };
+  }
+  if (total >= 70) {
+    el.className = 'big ok'; faixa.className = 'tag ok'; faixa.textContent = 'Pronto · Apresentar';
+    msg.className = 'msg ok';
+    msg.innerHTML = '<strong>Pode apresentar a solução.</strong> Gate OK · consciência e tese suficientes.';
+    return { total: total, gateOk: true, label: 'Pronto · Apresentar' };
+  }
+  if (total >= 40) {
+    el.className = 'big warn'; faixa.className = 'tag warn'; faixa.textContent = 'Quase · Elevar';
+    msg.className = 'msg warn';
+    msg.innerHTML = '<strong>Ainda não forçar preço.</strong> Subir consciência e/ou fechar qualidade da tese.';
+    return { total: total, gateOk: true, label: 'Quase · Elevar' };
+  }
+  el.className = 'big hot'; faixa.className = 'tag hot'; faixa.textContent = 'Ainda não';
+  msg.className = 'msg hot';
+  msg.innerHTML = '<strong>Cedo demais.</strong> Continuar EE · mapear tese · reforçar consciência.';
+  return { total: total, gateOk: true, label: 'Ainda não' };
+}
+
+function gerar(){
+  var sc = calcScore();
+  var cliente = val('cliente') || '[Cliente]';
+  var data = val('data') || 'DD/MM';
+  var acoes = val('acoes').split(/\n+/).filter(Boolean).map(function(l){
+    return l.replace(/^\*\s*/, '');
+  });
+
+  var html = '';
+  html += '<h4>' + escapeHtml(cliente) + '</h4>';
+  html += '<div class="st">Status em ' + escapeHtml(data) + ': ' + escapeHtml(val('status') || '—') + '</div>';
+  html += '<div class="crit">';
+  html += row('Lead score', sc.total + '/100 · ' + sc.label + (sc.gateOk ? '' : ' · GATE BLOQUEADO'));
+  html += row('Semana / Squad', val('semana') + ' · ' + (val('squad') || '—') + ' · ' + (val('farmer') || 'Sara'));
+  html += row('STEP', val('step') + (val('produto_ideal') ? ' → ' + val('produto_ideal') : ''));
+  html += row('Não oferecer', val('nao_oferecer') || '—');
+  html += row('Candidatos', val('produtos_cand') || '—');
+  html += row('Tier / BE / Margem', val('tier') + ' · BE ' + (val('be') || '—') + ' · ' + (val('margem') || '—'));
+  html += row('Faturamento ref.', val('faturamento') ? 'R$ ' + val('faturamento') : '—');
+  html += row('Mapa KO', val('mapa_ko') || '—');
+  html += row('Faturamento e margem', val('crit_fat') || val('leitura_eco') || '—');
+  html += row('Produtos identificados', val('crit_prod') || val('produto_ideal') || '—');
+  html += row('Pitch', val('crit_pitch') + (val('crit_pitch_det') ? '. ' + val('crit_pitch_det') : ''));
+  html += row('Espera proposta?', val('crit_espera'));
+  html += row('Budget', val('crit_budget') || '—');
+  html += row('Interesse', val('crit_interesse') + (val('crit_interesse_det') ? '. ' + val('crit_interesse_det') : ''));
+  html += row('Objeções', val('crit_obj') || '—');
+  html += row('Decisor', val('crit_dec'));
+  html += row('CSAT', val('crit_csat') || '—');
+  html += row('Percepção geral', val('crit_perc') || '—');
+  html += row('Case', val('case_nome') ? (val('case_nome') + (val('case_porque') ? ' — ' + val('case_porque') : '')) : 'Sem case ainda');
+  html += row('Prioridade / próximo', val('prio') + ' · ' + (val('prox_contato') || '—'));
+  html += '</div>';
+  html += '<div style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin-bottom:8px">Plano de Ação</div>';
+  if (acoes.length) {
+    html += '<ol>' + acoes.map(function(a){ return '<li>' + escapeHtml(a) + '</li>'; }).join('') + '</ol>';
+  } else {
+    html += '<div class="st">Sem ações preenchidas.</div>';
+  }
+  if (!sc.gateOk) {
+    html += '<div class="msg hot" style="margin-top:12px"><strong>Gate bloqueado:</strong> o plano pode mapear e reengajar — não apresentar preço/proposta ainda.</div>';
+  }
+  $('preview').innerHTML = html;
+
+  var txt = [
+    cliente,
+    'Status em ' + data + ': ' + (val('status') || '—'),
+    '',
+    'Lead score: ' + sc.total + '/100 · ' + sc.label + (sc.gateOk ? '' : ' · GATE BLOQUEADO'),
+    'Semana EE: ' + val('semana') + ' · Squad: ' + (val('squad') || '—') + ' · Farmer: ' + (val('farmer') || 'Sara'),
+    'STEP: ' + val('step') + (val('produto_ideal') ? ' → ' + val('produto_ideal') : ''),
+    'Não oferecer: ' + (val('nao_oferecer') || '—'),
+    'Produtos candidatos: ' + (val('produtos_cand') || '—'),
+    'Tier: ' + val('tier') + ' · BE: ' + (val('be') || '—') + ' · Margem: ' + (val('margem') || '—'),
+    'Faturamento ref.: ' + (val('faturamento') || '—'),
+    'Mapa kick-off: ' + (val('mapa_ko') || '—'),
+    '',
+    'Critério\tAvaliação',
+    'Faturamento e margem\t' + (val('crit_fat') || val('leitura_eco') || '—'),
+    'Produtos identificados\t' + (val('crit_prod') || val('produto_ideal') || '—'),
+    'Pitch\t' + val('crit_pitch') + (val('crit_pitch_det') ? '. ' + val('crit_pitch_det') : ''),
+    'Espera proposta?\t' + val('crit_espera'),
+    'Consciência de budget\t' + (val('crit_budget') || '—'),
+    'Interesse\t' + val('crit_interesse') + (val('crit_interesse_det') ? '. ' + val('crit_interesse_det') : ''),
+    'Objeções possíveis\t' + (val('crit_obj') || '—'),
+    'Decisor participando\t' + val('crit_dec'),
+    'CSAT\t' + (val('crit_csat') || '—'),
+    'Percepção geral\t' + (val('crit_perc') || '—'),
+    'Case\t' + (val('case_nome') ? val('case_nome') + (val('case_porque') ? ' — ' + val('case_porque') : '') : 'Sem case ainda'),
+    '',
+    'Plano de Ação'
+  ];
+  acoes.forEach(function(a){ txt.push('* ' + a); });
+  txt.push('');
+  txt.push('Prioridade: ' + val('prio') + ' · Próximo contato: ' + (val('prox_contato') || '—'));
+  if (!sc.gateOk) txt.push('ATENÇÃO: gate bloqueado — não apresentar preço.');
+  $('out').textContent = txt.join('\n');
+  return txt.join('\n');
+}
+
+function row(k,v){ return '<div class="k">' + escapeHtml(k) + '</div><div class="v">' + escapeHtml(v) + '</div>'; }
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, function(c){
+    return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]);
+  });
+}
+
+['decisor','pago','consciencia','tese'].forEach(function(id){
+  $(id).addEventListener('change', calcScore);
+});
+$('gerar').onclick = gerar;
+$('copiar').onclick = function(){
+  var t = gerar();
+  navigator.clipboard.writeText(t).then(function(){ alert('Plano copiado.'); });
+};
+calcScore();
+</script>
+</body>
+</html>
