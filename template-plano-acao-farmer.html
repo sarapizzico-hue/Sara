@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Template Plano de Ação · Farmer AM · S3</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --brand:#e50915; --bg:#050505; --surf:#141414; --bd:rgba(255,255,255,.1);
+      --txt:#fafafa; --mut:#a3a3a3; --ok:#86efac; --warn:#fde68a;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--txt);font:14px/1.55 Inter,system-ui,sans-serif;
+      background-image:radial-gradient(ellipse 80% 40% at 50% -10%,rgba(229,9,21,.16),transparent)}
+    .wrap{max-width:820px;margin:0 auto;padding:28px 20px 60px}
+    h1{margin:0 0 6px;font-size:28px;font-weight:900}
+    .sub{color:var(--mut);margin:0 0 20px;font-size:13px}
+    .sub a{color:var(--ok)}
+    .card{background:var(--surf);border:1px solid var(--bd);border-radius:16px;padding:22px;margin-bottom:16px}
+    label{display:block;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin:0 0 6px}
+    input,textarea,select{width:100%;background:#0a0a0a;border:1px solid var(--bd);border-radius:10px;color:var(--txt);padding:10px 12px;font:inherit;margin-bottom:14px}
+    textarea{min-height:72px;resize:vertical}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media(max-width:640px){.row{grid-template-columns:1fr}}
+    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+    button{appearance:none;border:1px solid rgba(229,9,21,.5);background:linear-gradient(135deg,rgba(229,9,21,.25),#1a1a1a);color:#fff;font:inherit;font-weight:800;padding:12px 18px;border-radius:12px;cursor:pointer}
+    button.secondary{border-color:var(--bd);background:#111}
+    .out{white-space:pre-wrap;font-size:13px;line-height:1.6;color:#e5e5e5;background:#0a0a0a;border:1px solid var(--bd);border-radius:12px;padding:16px;min-height:200px}
+    .hint{font-size:12px;color:var(--warn);margin:0 0 16px}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Plano de Ação · S3</h1>
+  <p class="sub">
+    Template Farmer AM no critério Triboltec — preencher ao fim da Semana 3 da EE.
+    <a href="playbook-farmer-am.html">← Playbook</a> ·
+    <a href="https://docs.google.com/document/d/1-cSSkYetqPKdHW4m1sWO_VWaV-4UnBKVcDLe91C4Jw4/edit?usp=sharing" target="_blank" rel="noopener">Exemplo Triboltec</a>
+  </p>
+  <p class="hint">Preencha → Gerar texto. Copie para o Doc / Notion / dash.</p>
+
+  <div class="card">
+    <div class="row">
+      <div><label>Cliente</label><input id="cliente" placeholder="Ex.: Triboltec" /></div>
+      <div><label>Status em (data)</label><input id="data" placeholder="23/07" /></div>
+    </div>
+    <label>Status (1 linha)</label>
+    <input id="status" placeholder="entrega formalizada; follow-up enviado; aguardando retorno..." />
+
+    <label>Faturamento e margem</label>
+    <textarea id="fat" placeholder="Faturamento de referência + frente prioritária de margem"></textarea>
+
+    <label>Produtos identificados (ideal + o que NÃO oferecer)</label>
+    <textarea id="prod" placeholder="EC + ... · sem Social/Meta · site ..."></textarea>
+
+    <div class="row">
+      <div>
+        <label>Pitch</label>
+        <select id="pitch">
+          <option>Não realizado</option>
+          <option>Visão inicial sem valores</option>
+          <option>Pitch com valores</option>
+          <option>Proposta enviada</option>
+        </select>
+      </div>
+      <div>
+        <label>Espera proposta?</label>
+        <select id="espera">
+          <option>Sem clareza</option>
+          <option>Sim</option>
+          <option>Não — validar interesse antes</option>
+        </select>
+      </div>
+    </div>
+    <label>Detalhe pitch / espera proposta</label>
+    <textarea id="pitch_det" placeholder="Decisor saiu antes? Precisa reapresentar?"></textarea>
+
+    <label>Consciência de budget</label>
+    <textarea id="budget" placeholder="Mapeada / parcial / não mapeada + contexto"></textarea>
+
+    <div class="row">
+      <div>
+        <label>Interesse</label>
+        <select id="interesse">
+          <option>Baixo</option>
+          <option selected>Médio</option>
+          <option>Alto</option>
+        </select>
+      </div>
+      <div>
+        <label>Decisor participando</label>
+        <select id="decisor">
+          <option>Sim</option>
+          <option selected>Não na etapa crítica</option>
+          <option>Parcial</option>
+        </select>
+      </div>
+    </div>
+    <label>Evidência de interesse + mapa do decisor</label>
+    <textarea id="interesse_det" placeholder="Quem decide, quem influencia, o que verbalizou"></textarea>
+
+    <label>Objeções possíveis</label>
+    <textarea id="obj" placeholder="Trauma de mídia, ROI, cases, preço..."></textarea>
+
+    <label>CSAT (formal + qualitativo)</label>
+    <textarea id="csat" placeholder="Formalmente ok, porém..."></textarea>
+
+    <label>Percepção geral (+ frase-mestra da próxima conversa)</label>
+    <textarea id="perc" placeholder="Como está a cabeça do cliente e por onde começar a continuidade"></textarea>
+
+    <label>Plano de Ação (um passo por linha)</label>
+    <textarea id="plano" style="min-height:120px" placeholder="Reengajar...&#10;Reapresentar entrega...&#10;Cases...&#10;Validar intenção...&#10;Proposta em 2ª reunião..."></textarea>
+
+    <div class="row">
+      <div>
+        <label>Timing expansão</label>
+        <select id="timing">
+          <option>Agora</option>
+          <option>30d</option>
+          <option>60d</option>
+          <option>90d</option>
+          <option>Bloqueado</option>
+        </select>
+      </div>
+      <div>
+        <label>Prioridade Farmer</label>
+        <select id="prio">
+          <option>P0</option>
+          <option>P1</option>
+          <option>P2</option>
+          <option>P3</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button type="button" id="gerar">Gerar texto</button>
+      <button type="button" class="secondary" id="copiar">Copiar</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <label>Saída</label>
+    <div class="out" id="out">O texto gerado aparece aqui.</div>
+  </div>
+</div>
+<script>
+function val(id){ return (document.getElementById(id).value || '').trim(); }
+function gerar(){
+  var plano = val('plano').split(/\n+/).filter(Boolean).map(function(l){ return '* ' + l.replace(/^\*\s*/, ''); }).join('\n');
+  var txt = [
+    val('cliente') || '[Cliente]',
+    'Status em ' + (val('data') || 'DD/MM') + ': ' + (val('status') || '—'),
+    '',
+    'Critério\tAvaliação',
+    'Faturamento e margem\t' + (val('fat') || '—'),
+    'Produtos identificados\t' + (val('prod') || '—'),
+    'Pitch\t' + val('pitch') + (val('pitch_det') ? '. ' + val('pitch_det') : ''),
+    'Espera proposta?\t' + val('espera') + (val('pitch_det') ? '' : ''),
+    'Consciência de budget\t' + (val('budget') || '—'),
+    'Interesse\t' + val('interesse') + (val('interesse_det') ? '. ' + val('interesse_det') : ''),
+    'Objeções possíveis\t' + (val('obj') || '—'),
+    'Decisor participando\t' + val('decisor') + (val('interesse_det') ? '' : ''),
+    'CSAT\t' + (val('csat') || '—'),
+    'Percepção geral\t' + (val('perc') || '—'),
+    '',
+    'Plano de Ação',
+    plano || '* —',
+    '',
+    'Timing: ' + val('timing') + ' · Prioridade: ' + val('prio')
+  ].join('\n');
+  document.getElementById('out').textContent = txt;
+  return txt;
+}
+document.getElementById('gerar').onclick = gerar;
+document.getElementById('copiar').onclick = function(){
+  var t = gerar();
+  navigator.clipboard.writeText(t).then(function(){ alert('Copiado.'); });
+};
+</script>
+</body>
+</html>

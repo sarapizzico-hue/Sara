@@ -36,8 +36,17 @@
     .chip.live{border-color:rgba(34,197,94,.35);color:#86efac}
     .nav{position:sticky;top:56px;z-index:90;margin:0 0 20px;padding:8px;background:rgba(8,8,8,.93);backdrop-filter:blur(14px);border:1px solid var(--bd-strong);border-radius:16px}
     .nav-label{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);padding:4px 10px 10px}
-    .tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
-    @media(max-width:900px){.tabs{grid-template-columns:repeat(2,1fr)}}
+    .tabs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+    @media(max-width:1100px){.tabs{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:700px){.tabs{grid-template-columns:repeat(2,1fr)}}
+    .q{border:1px solid var(--bd);border-radius:12px;padding:12px 14px;margin:0 0 10px;background:var(--surf2)}
+    .q .ql{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--brand-light);margin-bottom:4px}
+    .q .qt{font-size:13px;font-weight:700;margin-bottom:4px;color:#fff}
+    .q .qh{font-size:12px;color:var(--mut)}
+    .crit-grid{display:grid;grid-template-columns:200px 1fr;gap:8px 14px}
+    @media(max-width:700px){.crit-grid{grid-template-columns:1fr}}
+    .crit-grid .ck{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);padding-top:2px}
+    .crit-grid .cv{font-size:13px;color:#e5e5e5}
     .tab{appearance:none;border:1px solid var(--bd);background:var(--surf2);color:var(--mut);border-radius:12px;padding:12px;cursor:pointer;text-align:left;font-family:inherit;transition:.2s}
     .tab:hover{border-color:var(--bd-strong);color:#fff}
     .tab.active{color:#fff;border-color:var(--brand);background:linear-gradient(135deg,rgba(229,9,21,.18),rgba(20,20,20,.95));box-shadow:0 0 24px var(--brand-dim)}
@@ -104,7 +113,7 @@
 <body>
 <header class="topbar">
   <div class="v4-logo">V4 <span>COMPANY</span></div>
-  <div class="sync-pill"><span class="sync-dot"></span> Sara Pizzico · Farmer AM · v0.2</div>
+  <div class="sync-pill"><span class="sync-dot"></span> Sara Pizzico · Farmer AM · v0.3</div>
 </header>
 
 <div class="wrap">
@@ -117,21 +126,22 @@
       Os parâmetros abaixo são a fonte da verdade — o dashboard futuro lê exatamente esta lista.
     </p>
     <div class="chips">
-      <span class="chip live">v0.2 · leitura da Sara</span>
-      <span class="chip live">CSAT · NPS · Lead score</span>
-      <span class="chip live">Kick-off · Pago · ABM</span>
+      <span class="chip live">v0.3 · perguntas S1→S3</span>
+      <span class="chip live">Modelo Triboltec</span>
+      <span class="chip live">Entregas EE</span>
       <span class="chip">Dash = fase 2</span>
       <span class="chip"><a href="index.html" style="color:inherit;text-decoration:none">← Comando Estratégico</a></span>
     </div>
   </div></section>
 
-  <div class="callout ok"><strong>Sua leitura está certa.</strong> Organizamos em 4 camadas: <em>gates</em> (kick-off + pago) → <em>pulso semanal</em> (ponto de atenção) → <em>saúde</em> (CSAT · NPS · lead score) → <em>monetização</em> (plano de ação + ABM por perfil). Isso vira a home do dash.</div>
+  <div class="callout ok"><strong>Novo em v0.3:</strong> roteiro de perguntas semanais alinhado às entregas da EE — na <strong>Semana 3</strong> fecha o <em>Plano de Ação</em> no modelo Triboltec (produto ideal + próximos passos).</div>
 
   <nav class="nav">
     <div class="nav-label">Navegação do playbook</div>
     <div class="tabs">
       <button class="tab active" data-view="papel"><span class="n">Papel</span><span class="s">Missão · escopo · metas</span></button>
       <button class="tab" data-view="jornada"><span class="n">Jornada</span><span class="s">EE → carteira → expansão</span></button>
+      <button class="tab" data-view="s1s3"><span class="n">S1 → S3</span><span class="s">Perguntas → plano</span></button>
       <button class="tab" data-view="params"><span class="n">Parâmetros</span><span class="s">Fonte do futuro dash</span></button>
       <button class="tab" data-view="rituais"><span class="n">Rituais</span><span class="s">Cadência · checklists</span></button>
       <button class="tab" data-view="saude"><span class="n">Saúde</span><span class="s">Score · risco · prioridade</span></button>
@@ -283,6 +293,158 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- S1 → S3 -->
+  <div class="panel" data-view="s1s3">
+    <div class="section">
+      <h2>Lógica</h2>
+      <h3>Perguntas semanais → Plano de Ação na S3</h3>
+      <p class="lead">
+        Cada semana da EE gera entregas. A Farmer não espera a S4 para pensar continuidade:
+        <strong>S1 coleta contexto</strong>, <strong>S2 lê maturidade e posicionamento</strong>,
+        <strong>S3 fecha o diagnóstico comercial/operacional e escreve o Plano de Ação</strong>
+        no mesmo critério do modelo Triboltec — para enxergar o produto ideal.
+      </p>
+      <div class="flow">
+        <div class="flow-step">
+          <div class="n">Semana 1</div>
+          <div class="t">Contexto &amp; gates</div>
+          <div class="d">Kick-off · faturamento · decisor · trilha · CSAT inicial</div>
+        </div>
+        <div class="flow-step">
+          <div class="n">Semana 2</div>
+          <div class="t">Maturidade &amp; tese</div>
+          <div class="d">Gaps digitais · PUV · interesse · objeções · budget</div>
+        </div>
+        <div class="flow-step">
+          <div class="n">Semana 3</div>
+          <div class="t">Produto ideal</div>
+          <div class="d">Funil/CRM/CRO · critérios Triboltec · Plano de Ação</div>
+        </div>
+        <div class="flow-step">
+          <div class="n">S4+</div>
+          <div class="t">Executar plano</div>
+          <div class="d">Pitch / proposta / ABM com tese já escrita</div>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:14px">
+        Fontes:
+        <a href="https://docs.google.com/spreadsheets/d/1bCR_MxfTRJKq66Yg3WecQhF_ipPK1l6p4xNSTs0H97g/edit?usp=sharing" style="color:#93c5fd" target="_blank" rel="noopener">Processos &amp; entregas EE</a> ·
+        <a href="https://docs.google.com/document/d/1-cSSkYetqPKdHW4m1sWO_VWaV-4UnBKVcDLe91C4Jw4/edit?usp=sharing" style="color:#93c5fd" target="_blank" rel="noopener">Exemplo Plano de Ação (Triboltec)</a>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Entregas EE que alimentam as perguntas</h2>
+      <div class="grid3">
+        <div class="card">
+          <span class="tag hot">S1 · Setup</span>
+          <div class="t">Descoberta</div>
+          <div class="d">Grupo + boas-vindas · V4 Marketing · alinhamento · acessos · SWOT · auditoria digital · Persona/ICP · arquitetura digital · TAM/SAM/SOM · reunião</div>
+        </div>
+        <div class="card">
+          <span class="tag warn">S2 · Diagnóstico</span>
+          <div class="t">Mídia + posicionamento</div>
+          <div class="d">Mídia paga · orgânico · criativos · maturidade digital · PUV + taglines · reunião</div>
+        </div>
+        <div class="card">
+          <span class="tag ok">S3 · Trilha</span>
+          <div class="t">Inside · E-com · PDV</div>
+          <div class="d">CRO/funil/CRM (inside) · checkout/marketplace (e-com) · base ativa/GMN/WhatsApp (PDV) · reunião</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Semana 1 · perguntas (contexto + gates)</h2>
+      <p class="lead">Objetivo: conta “nascida” na Farmer com decisor, trilha e leitura inicial de dinheiro/expectativa. Preenche: kick-off, pago, faturamento, decisor, perfil.</p>
+      <div class="q"><div class="ql">Gate</div><div class="qt">O kick-off / alinhamento de expectativas aconteceu? Em qual data?</div><div class="qh">Se não → prioridade P0. Sem isso, não força plano de monetização.</div></div>
+      <div class="q"><div class="ql">Gate</div><div class="qt">O projeto da EE está pago / em dia? Qual a condição (Pix, parcelas, atraso)?</div><div class="qh">Alimenta <em>projeto_pago</em> e trava expansão se inadimplente.</div></div>
+      <div class="q"><div class="ql">Faturamento e margem</div><div class="qt">Qual o faturamento de referência (mês) e qual frente tem melhor margem / retorno?</div><div class="qh">Vem do V4 Marketing + reunião S1. Ex. Triboltec: R$ 350k/mês · engenharia &gt; facilities.</div></div>
+      <div class="q"><div class="ql">Decisor</div><div class="qt">Quem é o decisor final? Quem influencia? O decisor está no grupo e nas reuniões?</div><div class="qh">Mapa de poder. Se o decisor não participa, anotar risco cedo (caso André/Triboltec).</div></div>
+      <div class="q"><div class="ql">Trilha S3</div><div class="qt">O modelo de venda é Inside Sales, E-commerce ou PDV? Isso já está claro?</div><div class="qh">Define qual Semana 3 roda — e o tipo de produto ideal depois.</div></div>
+      <div class="q"><div class="ql">ICP / Persona</div><div class="qt">Quem é o cliente ideal deles e por onde o lead entra de verdade hoje?</div><div class="qh">Saída da Persona/ICP + Arquitetura de Presença Digital. Base do ABM.</div></div>
+      <div class="q"><div class="ql">Expectativa</div><div class="qt">O que o cliente espera “ganhar” com a EE em 30/60/90 dias — e o que NÃO espera?</div><div class="qh">Alinhamento S1. Evita frustração de CSAT na S2/S3.</div></div>
+      <div class="q"><div class="ql">CSAT S1</div><div class="qt">Como foi a percepção da 1ª reunião/entrega? Houve atrito de acesso, agenda ou expectativa?</div><div class="qh">Nota + 1 frase qualitativa → <em>ponto_atencao_semana</em>.</div></div>
+      <div class="q"><div class="ql">Ponto de atenção</div><div class="qt">Em 1–2 frases: o que precisa de olho nesta conta nesta semana?</div><div class="qh">Campo semanal da home do dash.</div></div>
+    </div>
+
+    <div class="section">
+      <h2>Semana 2 · perguntas (maturidade + tese emergente)</h2>
+      <p class="lead">Objetivo: sair da S2 com gaps claros, PUV validada e primeiros candidatos a produto — ainda sem pitch de preço.</p>
+      <div class="q"><div class="ql">Maturidade</div><div class="qt">Qual o score/leitura de maturidade digital (mídia, orgânico, criativos, CRM, CRO)? Qual pilar é o gargalo #1?</div><div class="qh">Síntese dos diagnósticos S2. Prioriza o que vira produto depois.</div></div>
+      <div class="q"><div class="ql">Posicionamento / PUV</div><div class="qt">A PUV e o território de marca estão claros e o cliente comprou a narrativa?</div><div class="qh">Se não comprou a PUV, produto de continuidade fica frágil.</div></div>
+      <div class="q"><div class="ql">Produtos candidatos (rascunho)</div><div class="qt">Olhando os gaps S1–S2, quais 1–3 frentes V4 já aparecem como óbvias? O que explicitamente NÃO oferecer?</div><div class="qh">Ex.: EC sim · Meta não · Google depois. Ainda é hipótese — fecha na S3.</div></div>
+      <div class="q"><div class="ql">Interesse</div><div class="qt">Em uma escala Baixo / Médio / Alto: qual o interesse real do cliente em continuar além da EE? O que ele verbalizou?</div><div class="qh">Critério Triboltec. Separar entusiasmo educado de urgência real.</div></div>
+      <div class="q"><div class="ql">Objeções</div><div class="qt">Quais medos ou resistências já apareceram (trauma de mídia, ROI, “já tentei”, preço, time interno)?</div><div class="qh">Banco vivo de objeções — entra no Plano de Ação.</div></div>
+      <div class="q"><div class="ql">Budget</div><div class="qt">Já existe consciência de investimento para continuidade (mídia, EC, site, Growth)? Há teto ou trauma de gasto?</div><div class="qh">Pode estar “não mapeado” — anote isso. Não invente número.</div></div>
+      <div class="q"><div class="ql">Decisor na sala</div><div class="qt">O decisor participou da apresentação S2? Se não, quando reapresentamos?</div><div class="qh">Mesmo risco Triboltec: entrega sem decisor = plano bloqueado.</div></div>
+      <div class="q"><div class="ql">CSAT S2 · Lead score</div><div class="qt">CSAT da semana? Lead score atual (gates + engajamento + tese emergente)?</div><div class="qh">Atualiza saúde da conta no dash.</div></div>
+      <div class="q"><div class="ql">ABM (mapear, não executar)</div><div class="qt">Pelo perfil/ICP, qual seria a lógica ABM se formos de Growth/mídia depois? Contas-alvo, canal, mensagem?</div><div class="qh">Deixar mapeado — execução só com gates ok + plano S3.</div></div>
+    </div>
+
+    <div class="section">
+      <h2>Semana 3 · perguntas (fecha produto ideal + Plano de Ação)</h2>
+      <p class="lead">Objetivo: ao fim da reunião S3 (ou até 48h depois), o doc de Plano de Ação está escrito no formato Triboltec. Trilha define o ângulo.</p>
+      <div class="grid3" style="margin-bottom:14px">
+        <div class="card"><span class="tag info">Inside Sales</span><div class="d">CRO site/LP · cliente oculto · funil · métricas · pipeline · CRM · scripts SDR</div></div>
+        <div class="card"><span class="tag info">E-com</span><div class="d">CRO checkout/PDP · funil e-com · marketplace · régua CRM · carrinho / pós-venda</div></div>
+        <div class="card"><span class="tag info">PDV</span><div class="d">Base ativa/ERP · GMN · LP · experiência PDV · régua WhatsApp loja</div></div>
+      </div>
+      <div class="q"><div class="ql">Gargalo comercial/operacional</div><div class="qt">Onde a venda/conversão morre de verdade na trilha deles? Qual etapa do funil é o #1?</div><div class="qh">Saída do diagnóstico S3 — âncora do produto ideal.</div></div>
+      <div class="q"><div class="ql">Produtos identificados</div><div class="qt">Qual o produto / combo ideal de continuidade (ordem e o que fica de fora)?</div><div class="qh">Ex. Triboltec: EC + outbound · Google agora · LinkedIn depois · sem Social/Meta · site novo.</div></div>
+      <div class="q"><div class="ql">Pitch</div><div class="qt">Já houve pitch de continuidade com valores? Ou só visão de frentes? O decisor estava?</div><div class="qh">Critério obrigatório do modelo.</div></div>
+      <div class="q"><div class="ql">Espera proposta?</div><div class="qt">O cliente espera proposta agora, ou ainda precisa validar interesse / reapresentar entrega?</div><div class="qh">Evita mandar preço cedo demais (erro Triboltec).</div></div>
+      <div class="q"><div class="ql">Consciência de budget</div><div class="qt">Budget está mapeado, parcial ou não mapeado? Qual a leitura de WTP?</div><div class="qh">Preencher com honestidade — “não mapeado” é resposta válida.</div></div>
+      <div class="q"><div class="ql">Interesse · Objeções · Decisor</div><div class="qt">Fechar as 3 leituras: interesse (B/M/A) · top 3 objeções · decisor participando (sim/não + risco)</div><div class="qh">Copia direto para o doc.</div></div>
+      <div class="q"><div class="ql">CSAT · Percepção geral</div><div class="qt">CSAT formal + leitura qualitativa. Em 3–5 linhas: como está a cabeça do cliente e o que priorizar na conversa de continuidade?</div><div class="qh">Inclui a frase-mestra: por onde a próxima conversa deve começar (cases, operação, ROI…).</div></div>
+      <div class="q"><div class="ql">Plano de Ação</div><div class="qt">Quais 4–6 próximos passos concretos (com ordem)? Separar reengajar/validar de propor preço.</div><div class="qh">Bullets no estilo Triboltec. Último passo costuma ser proposta — não o primeiro.</div></div>
+      <div class="q"><div class="ql">Timing &amp; prioridade</div><div class="qt">Timing de expansão (Agora / 30 / 60 / 90 / Bloqueado) + prioridade Farmer (P0–P3) + lead score final S3</div><div class="qh">Alimenta o dash e a fila semanal da Sara.</div></div>
+    </div>
+
+    <div class="section">
+      <h2>Output S3 · template Plano de Ação (modelo Triboltec)</h2>
+      <p class="lead">Preencher um por conta ao fim da Semana 3. Depois vira card no dash + base do pitch.</p>
+      <div class="card" style="margin-bottom:14px">
+        <div class="t">[Nome do cliente]</div>
+        <div class="d" style="margin-bottom:12px"><strong>Status em DD/MM:</strong> [1 linha — onde está a relação agora]</div>
+        <div class="crit-grid">
+          <div class="ck">Faturamento e margem</div><div class="cv">…</div>
+          <div class="ck">Produtos identificados</div><div class="cv">… (combo ideal + o que NÃO oferecer)</div>
+          <div class="ck">Pitch</div><div class="cv">Realizado / não · valores, sim ou não · decisor na sala?</div>
+          <div class="ck">Espera proposta?</div><div class="cv">Sim / Não / Sem clareza — por quê</div>
+          <div class="ck">Consciência de budget</div><div class="cv">Mapeada / parcial / não mapeada</div>
+          <div class="ck">Interesse</div><div class="cv">Baixo / Médio / Alto + evidência</div>
+          <div class="ck">Objeções possíveis</div><div class="cv">Lista</div>
+          <div class="ck">Decisor participando</div><div class="cv">Sim / Não + risco</div>
+          <div class="ck">CSAT</div><div class="cv">Formal + leitura qualitativa</div>
+          <div class="ck">Percepção geral</div><div class="cv">3–5 linhas + frase-mestra da próxima conversa</div>
+        </div>
+        <div style="margin-top:16px;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--mut)">Plano de Ação</div>
+        <ol class="steps">
+          <li>…</li>
+          <li>…</li>
+          <li>…</li>
+          <li>…</li>
+          <li>…</li>
+        </ol>
+      </div>
+      <div class="callout warn"><strong>Regra do modelo:</strong> se o decisor não viu a entrega ou o interesse ainda é frágil, o plano começa por <em>reengajar + cases/prova</em> — proposta de valor/preço vem depois, em reunião separada quando necessário.</div>
+      <p class="lead" style="margin-top:14px;margin-bottom:0">Ferramenta: <a href="template-plano-acao-farmer.html" style="color:#86efac">abrir template preenchível → gerar texto</a></p>
+    </div>
+
+    <div class="section">
+      <h2>Checklist Farmer · fim da Semana 3</h2>
+      <ul class="check">
+        <li><span class="box"></span><div>Doc Plano de Ação preenchido (todos os critérios Triboltec)</div></li>
+        <li><span class="box"></span><div>Produto ideal ordenado (o que entra / o que fica de fora)</div></li>
+        <li><span class="box"></span><div>Gates atualizados: kick-off · projeto pago</div></li>
+        <li><span class="box"></span><div>CSAT S3 + lead score + ponto de atenção da semana</div></li>
+        <li><span class="box"></span><div>Estratégia ABM mapeada por perfil (mesmo que timing 60/90d)</div></li>
+        <li><span class="box"></span><div>Próximo contato datado com dono (Farmer) e objetivo claro</div></li>
+      </ul>
     </div>
   </div>
 
@@ -686,9 +848,11 @@
   </div>
 
   <footer>
-    V4 Company · Playbook Farmer AM · Sara Pizzico · v0.2<br>
+    V4 Company · Playbook Farmer AM · Sara Pizzico · v0.3<br>
     Carteira: clientes via Estruturação Estratégica ·
-    <a href="index.html">Comando Estratégico E.E</a>
+    <a href="index.html">Comando Estratégico E.E</a> ·
+    <a href="https://docs.google.com/spreadsheets/d/1bCR_MxfTRJKq66Yg3WecQhF_ipPK1l6p4xNSTs0H97g/edit?usp=sharing" target="_blank" rel="noopener">Entregas EE</a> ·
+    <a href="https://docs.google.com/document/d/1-cSSkYetqPKdHW4m1sWO_VWaV-4UnBKVcDLe91C4Jw4/edit?usp=sharing" target="_blank" rel="noopener">Modelo Triboltec</a>
   </footer>
 </div>
 
