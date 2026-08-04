@@ -113,7 +113,7 @@
 <body>
 <header class="topbar">
   <div class="v4-logo">V4 <span>COMPANY</span></div>
-  <div class="sync-pill"><span class="sync-dot"></span> Sara Pizzico · Farmer AM · v0.4</div>
+  <div class="sync-pill"><span class="sync-dot"></span> Sara Pizzico · Farmer AM · v0.5</div>
 </header>
 
 <div class="wrap">
@@ -126,7 +126,7 @@
       Enquanto isso, a V4 <strong>mapeia a solução</strong>. No final, apresentamos o que se encaixa — não um catálogo genérico.
     </p>
     <div class="chips">
-      <span class="chip live">v0.4 · contrato da conta</span>
+      <span class="chip live">v0.5 · lead score</span>
       <span class="chip live">GC · pago · decisor</span>
       <span class="chip live">CSAT · NPS · solução</span>
       <span class="chip">Dash = fase 2</span>
@@ -134,7 +134,7 @@
     </div>
   </div></section>
 
-  <div class="callout ok"><strong>Contrato da conta (v0.4):</strong> duas trilhas em paralelo — <em>cliente traz expectativa e engaja</em> · <em>V4 mapeia a solução</em> → apresentação final com o produto que se encaixa.</div>
+  <div class="callout ok"><strong>v0.5:</strong> Lead score definido em cima do contrato da conta — 4 pilares, regras de veto e faixas de ação. Calculadora: <a href="lead-score-farmer.html" style="color:#86efac">abrir scorecard</a>.</div>
 
   <nav class="nav">
     <div class="nav-label">Navegação do playbook</div>
@@ -825,38 +825,132 @@
   <!-- SAUDE -->
   <div class="panel" data-view="saude">
     <div class="section">
-      <h2>Score de saúde</h2>
-      <h3>Como pintar Verde / Amarelo / Vermelho</h3>
-      <p class="lead">Score 0–100. O dash ordena a carteira por saúde × oportunidade × prioridade.</p>
+      <h2>Lead score · definição (v0.5)</h2>
+      <h3>Prontidão para apresentar a solução que se encaixa</h3>
+      <p class="lead">
+        Não é score de lead frio. É o score da <strong>conta na EE</strong>:
+        o cliente está cumprindo o contrato? A V4 já mapeou a solução?
+        Escala <strong>0–100</strong>. Calculadora: <a href="lead-score-farmer.html" style="color:#86efac">lead-score-farmer.html</a>
+      </p>
       <div class="score">
-        <div class="score-item green"><div class="l">Verde</div><div class="v">70–100</div><div style="font-size:12px;color:var(--mut);margin-top:6px">Relação estável · pode expandir se timing ok</div></div>
-        <div class="score-item yellow"><div class="l">Amarelo</div><div class="v">40–69</div><div style="font-size:12px;color:var(--mut);margin-top:6px">Atenção · expandir só com plano</div></div>
-        <div class="score-item red"><div class="l">Vermelho</div><div class="v">0–39</div><div style="font-size:12px;color:var(--mut);margin-top:6px">Recuperar · expansão bloqueada</div></div>
+        <div class="score-item green"><div class="l">Pronto · 75–100</div><div class="v">Apresentar</div><div style="font-size:12px;color:var(--mut);margin-top:6px">Pode ir para pitch/proposta da solução mapeada</div></div>
+        <div class="score-item yellow"><div class="l">Quase · 50–74</div><div class="v">Mapear</div><div style="font-size:12px;color:var(--mut);margin-top:6px">Fecha gaps (decisor, CSAT, tese) esta semana</div></div>
+        <div class="score-item red"><div class="l">Cedo / Risco · 0–49</div><div class="v">Recuperar</div><div style="font-size:12px;color:var(--mut);margin-top:6px">Não apresenta preço · reforça contrato</div></div>
       </div>
     </div>
 
     <div class="section">
-      <h2>Lead score · prontidão para expandir (v0.2)</h2>
-      <p class="lead">O lead score da carteira Farmer = quão pronta a conta está para o plano de monetização. Gates pesam forte.</p>
-      <div class="grid2">
-        <div class="card">
-          <div class="t">Gates · 30 pts</div>
-          <div class="d">Kick-off feito (+15) · Projeto pago/saudável (+15). Sem isso, score teto baixo — não mascara conta “bonita” inadimplente.</div>
-        </div>
-        <div class="card">
-          <div class="t">CSAT + NPS · 25 pts</div>
-          <div class="d">CSAT recente (15) + NPS (10). Sem medição ainda = neutro, não punir conta nova nos primeiros 14 dias.</div>
-        </div>
-        <div class="card">
-          <div class="t">Engajamento · 20 pts</div>
-          <div class="d">Responde · participa · decisor acessível. Silêncio &gt; SLA derruba.</div>
-        </div>
-        <div class="card">
-          <div class="t">Tese &amp; WTP · 25 pts</div>
-          <div class="d">Plano de monetização claro + timing + ABM mapeado + orçamento/caminho de pagamento. Sem tese = não sobe score.</div>
-        </div>
+      <h2>4 pilares · 100 pontos</h2>
+      <p class="lead">Espelho do contrato: cliente engaja + V4 mapeia.</p>
+
+      <div class="card" style="margin-bottom:12px">
+        <span class="tag hot">A · Contrato / Gates · 30 pts</span>
+        <div class="t" style="margin-top:8px">GC · pago · expectativa</div>
+        <table>
+          <thead><tr><th>Critério</th><th>Pts</th><th>Como pontuar</th></tr></thead>
+          <tbody>
+            <tr><td>GC realizada</td><td>10</td><td>Sim = 10 · Não = 0</td></tr>
+            <tr><td>Projeto pago</td><td>10</td><td>Pago = 10 · Parcial saudável = 6 · Atraso/aguardando = 2 · Inadimplente = 0</td></tr>
+            <tr><td>Expectativa registrada</td><td>10</td><td>Clara e atualizada = 10 · Parcial = 5 · Nebulosa/ausente = 0</td></tr>
+          </tbody>
+        </table>
       </div>
-      <div class="callout ok" style="margin-top:14px"><strong>Regra de ouro:</strong> lead score alto + kick-off não · ou · não pago = <em>não expandir</em>. Score serve para priorizar, gates mandam.</div>
+
+      <div class="card" style="margin-bottom:12px">
+        <span class="tag warn">B · Engajamento do decisor · 25 pts</span>
+        <div class="t" style="margin-top:8px">Participa semanalmente nas entregas</div>
+        <table>
+          <thead><tr><th>Critério</th><th>Pts</th><th>Como pontuar</th></tr></thead>
+          <tbody>
+            <tr><td>Decisor nas últimas 2 entregas</td><td>15</td><td>2/2 = 15 · 1/2 = 8 · 0/2 = 0</td></tr>
+            <tr><td>Responde / agenda no prazo</td><td>10</td><td>No prazo = 10 · Atrasa mas responde = 5 · Silêncio &gt; SLA = 0</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card" style="margin-bottom:12px">
+        <span class="tag info">C · CSAT + NPS · 20 pts</span>
+        <div class="t" style="margin-top:8px">Cliente responde (contrato)</div>
+        <table>
+          <thead><tr><th>Critério</th><th>Pts</th><th>Como pontuar</th></tr></thead>
+          <tbody>
+            <tr><td>CSAT respondido + nota</td><td>12</td><td>≥4/5 (ou ≥8/10) = 12 · 3 ou 6–7 = 7 · &lt;3 ou &lt;6 = 2 · Não respondeu = 0*</td></tr>
+            <tr><td>NPS respondido + nota</td><td>8</td><td>Promotor (9–10) = 8 · Neutro (7–8) = 5 · Detrator (0–6) = 2 · Não respondeu = 0*</td></tr>
+          </tbody>
+        </table>
+        <p class="lead" style="margin:10px 0 0">*Conta com &lt;14 dias na EE e ainda sem ciclo de coleta = neutro temporário (CSAT 6 + NPS 4), para não punir onboarding.</p>
+      </div>
+
+      <div class="card" style="margin-bottom:12px">
+        <span class="tag ok">D · Solução mapeada · 25 pts</span>
+        <div class="t" style="margin-top:8px">Trilha V4 — o que se encaixa</div>
+        <table>
+          <thead><tr><th>Critério</th><th>Pts</th><th>Como pontuar</th></tr></thead>
+          <tbody>
+            <tr><td>Produto ideal escrito</td><td>10</td><td>Combo claro + o que NÃO oferecer = 10 · Hipótese S1/S2 = 5 · Vazio = 0</td></tr>
+            <tr><td>Plano de Ação (Triboltec) completo</td><td>10</td><td>Todos os critérios preenchidos = 10 · Parcial = 5 · Não existe = 0</td></tr>
+            <tr><td>Timing + WTP / budget</td><td>5</td><td>Timing definido + budget ao menos parcial = 5 · Só um dos dois = 3 · Nenhum = 0</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout" style="margin-top:4px"><strong>Soma:</strong> A(30) + B(25) + C(20) + D(25) = <strong>100</strong></div>
+    </div>
+
+    <div class="section">
+      <h2>Regras de veto (mandam sobre o número)</h2>
+      <p class="lead">Mesmo com score alto, estes itens bloqueiam apresentação de preço/proposta.</p>
+      <ul class="check">
+        <li><span class="box"></span><div><strong>Veto pagamento:</strong> inadimplente ou atraso crítico → não apresenta</div></li>
+        <li><span class="box"></span><div><strong>Veto GC / expectativa:</strong> GC não feita ou expectativa nebulosa → não apresenta</div></li>
+        <li><span class="box"></span><div><strong>Veto decisor:</strong> decisor ausente nas 2 últimas entregas → reengajar antes do pitch</div></li>
+        <li><span class="box"></span><div><strong>Veto solução:</strong> produto ideal não escrito → continua mapeando (S1–S3), não inventa na hora</div></li>
+        <li><span class="box"></span><div><strong>Veto CSAT crítico:</strong> CSAT &lt;3 (ou &lt;6/10) sem plano de recuperação → não apresenta</div></li>
+      </ul>
+      <div class="callout ok" style="margin-top:14px"><strong>Regra de ouro:</strong> score prioriza a fila · veto decide se pode apresentar. Lead score alto com veto ativo = “quase” — fecha o gap, não força.</div>
+    </div>
+
+    <div class="section">
+      <h2>O que fazer por faixa</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Score</th>
+            <th>Leitura</th>
+            <th>Ação Farmer</th>
+            <th>Prioridade típica</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="pill ok">75–100</span></td>
+            <td>Pronto para apresentar a solução</td>
+            <td>Agendar pitch/proposta do encaixe · devolutiva ≤ 5 dias úteis</td>
+            <td><span class="pill hot">P0</span></td>
+          </tr>
+          <tr>
+            <td><span class="pill warn">50–74</span></td>
+            <td>Quase — falta engajamento ou tese</td>
+            <td>Fechar gap #1 da semana (decisor / CSAT / plano Triboltec)</td>
+            <td><span class="pill warn">P1</span></td>
+          </tr>
+          <tr>
+            <td><span class="pill hot">0–49</span></td>
+            <td>Cedo demais ou conta em risco</td>
+            <td>Reforçar contrato (GC, pago, decisor) · não falar preço</td>
+            <td><span class="pill hot">P0</span> se risco · senão <span class="pill info">P2</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>Saúde visual (derivada do lead score + vetos)</h2>
+      <div class="score">
+        <div class="score-item green"><div class="l">Verde</div><div class="v">≥75 · sem veto</div><div style="font-size:12px;color:var(--mut);margin-top:6px">Apresentar / expandir</div></div>
+        <div class="score-item yellow"><div class="l">Amarelo</div><div class="v">50–74 · ou veto leve</div><div style="font-size:12px;color:var(--mut);margin-top:6px">Mapear / destravar</div></div>
+        <div class="score-item red"><div class="l">Vermelho</div><div class="v">&lt;50 · ou veto duro</div><div style="font-size:12px;color:var(--mut);margin-top:6px">Recuperar contrato</div></div>
+      </div>
     </div>
 
     <div class="section">
