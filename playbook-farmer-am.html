@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Playbook Farmer AM · Estruturação Estratégica · Sara</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --brand:#e50915; --brand-light:#ff1a27; --brand-dim:rgba(229,9,21,.12);
+      --brand-glow:rgba(229,9,21,.35); --bg:#050505; --surf:rgba(20,20,20,.88);
+      --surf2:#141414; --glass:rgba(255,255,255,.04); --bd:rgba(255,255,255,.08);
+      --bd-strong:rgba(255,255,255,.14); --txt:#fafafa; --mut:#a3a3a3;
+      --ok:#22c55e; --warn:#facc15; --info:#60a5fa; --radius:16px;
+      --shadow:0 24px 80px rgba(0,0,0,.55);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--txt);font:14px/1.55 Inter,system-ui,sans-serif;padding-bottom:72px;
+      background-image:radial-gradient(ellipse 80% 50% at 50% -20%,rgba(229,9,21,.18),transparent),radial-gradient(circle at 100% 0%,rgba(229,9,21,.06),transparent 40%)}
+    .topbar{position:sticky;top:0;z-index:100;backdrop-filter:blur(16px);background:rgba(5,5,5,.84);border-bottom:1px solid var(--bd);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+    .v4-logo{font-weight:900;font-size:18px;letter-spacing:-.02em}.v4-logo span{color:var(--brand-light)}
+    .sync-pill{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:600;color:var(--mut);background:var(--glass);border:1px solid var(--bd);padding:6px 12px;border-radius:999px}
+    .sync-dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok)}
+    .wrap{max-width:1180px;margin:0 auto;padding:28px 24px 0}
+    .hero{position:relative;border-radius:var(--radius);padding:34px 32px;margin-bottom:20px;background:linear-gradient(135deg,rgba(229,9,21,.16) 0%,rgba(20,20,20,.92) 48%,var(--surf2) 100%);border:1px solid var(--bd-strong);box-shadow:var(--shadow);overflow:hidden}
+    .hero::after{content:'';position:absolute;top:-40%;right:-8%;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,var(--brand-glow),transparent 70%);pointer-events:none}
+    .hero-inner{position:relative;z-index:1}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#fca5a5;margin-bottom:10px}
+    .hero-eyebrow::before{content:'';width:24px;height:3px;background:var(--brand);border-radius:2px}
+    .hero h1{margin:0 0 10px;font-size:clamp(26px,4vw,38px);font-weight:900;letter-spacing:-.03em}
+    .hero .meta{color:var(--mut);font-size:13px;max-width:920px}.hero .meta strong{color:var(--txt)}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+    .chip{font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:5px 10px;border-radius:999px;border:1px solid var(--bd);background:var(--glass);color:var(--mut)}
+    .chip.live{border-color:rgba(34,197,94,.35);color:#86efac}
+    .nav{position:sticky;top:56px;z-index:90;margin:0 0 20px;padding:8px;background:rgba(8,8,8,.93);backdrop-filter:blur(14px);border:1px solid var(--bd-strong);border-radius:16px}
+    .nav-label{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);padding:4px 10px 10px}
+    .tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+    @media(max-width:900px){.tabs{grid-template-columns:repeat(2,1fr)}}
+    .tab{appearance:none;border:1px solid var(--bd);background:var(--surf2);color:var(--mut);border-radius:12px;padding:12px;cursor:pointer;text-align:left;font-family:inherit;transition:.2s}
+    .tab:hover{border-color:var(--bd-strong);color:#fff}
+    .tab.active{color:#fff;border-color:var(--brand);background:linear-gradient(135deg,rgba(229,9,21,.18),rgba(20,20,20,.95));box-shadow:0 0 24px var(--brand-dim)}
+    .tab .n{display:block;font-size:13px;font-weight:800;margin-bottom:3px}.tab .s{font-size:10px;font-weight:700;color:#d4d4d4}
+    .panel{display:none;animation:fade .25s ease;margin-bottom:8px}
+    .panel.is-active{display:block}
+    @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+    .section{background:var(--surf);border:1px solid var(--bd);border-radius:var(--radius);padding:22px 24px;margin-bottom:16px}
+    .section h2{margin:0 0 8px;font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--mut);font-weight:800}
+    .section h3{margin:0 0 8px;font-size:18px;font-weight:900;letter-spacing:-.02em}
+    .lead{color:var(--mut);font-size:13px;margin:0 0 16px;max-width:860px}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:800px){.grid2{grid-template-columns:1fr}}
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}@media(max-width:900px){.grid3{grid-template-columns:1fr}}
+    .card{background:var(--surf2);border:1px solid var(--bd);border-radius:14px;padding:16px 18px}
+    .card .t{font-size:14px;font-weight:800;margin-bottom:6px}
+    .card .d{font-size:12px;color:var(--mut);line-height:1.5}
+    .card .tag{display:inline-block;margin-bottom:8px;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:999px;border:1px solid var(--bd);color:#d4d4d4}
+    .card .tag.p0{border-color:rgba(239,68,68,.4);color:#fca5a5}
+    .card .tag.p1{border-color:rgba(250,204,21,.4);color:#fde68a}
+    .card .tag.ok{border-color:rgba(34,197,94,.35);color:#86efac}
+    .card .tag.info{border-color:rgba(96,165,250,.35);color:#93c5fd}
+    .callout{margin-bottom:14px;padding:14px 16px;border-radius:12px;border:1px solid rgba(96,165,250,.3);background:rgba(96,165,250,.08);color:#bfdbfe;font-size:13px}
+    .callout strong{color:#bfdbfe}
+    .callout.warn{border-color:rgba(250,204,21,.28);background:rgba(250,204,21,.06);color:#fde68a}.callout.warn strong{color:#fef08a}
+    .callout.ok{border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.08);color:#bbf7d0}.callout.ok strong{color:#bbf7d0}
+    .steps{margin:0;padding-left:18px}.steps li{margin:8px 0;color:#e5e5e5}
+    .steps li strong{color:#fff}
+    .param{display:grid;grid-template-columns:160px 110px 1fr;gap:10px 14px;padding:12px 0;border-bottom:1px solid var(--bd);align-items:start}
+    .param:last-child{border-bottom:0}
+    @media(max-width:800px){.param{grid-template-columns:1fr}}
+    .param .name{font-weight:800;font-size:13px}
+    .param .type{font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#93c5fd;padding-top:2px}
+    .param .desc{font-size:12px;color:#d4d4d4}
+    .param .desc em{color:#f5f5f5;font-style:normal;font-weight:600}
+    .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}@media(max-width:900px){.flow{grid-template-columns:1fr 1fr}}
+    .flow-step{background:var(--surf2);border:1px solid var(--bd);border-radius:12px;padding:14px;position:relative}
+    .flow-step .n{font-size:11px;font-weight:800;color:var(--brand-light);margin-bottom:6px}
+    .flow-step .t{font-size:14px;font-weight:800;margin-bottom:4px}
+    .flow-step .d{font-size:11px;color:var(--mut)}
+    .check{list-style:none;margin:0;padding:0}
+    .check li{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--bd);font-size:13px;color:#e5e5e5}
+    .check li:last-child{border-bottom:0}
+    .check .box{flex:0 0 16px;width:16px;height:16px;margin-top:2px;border:1.5px solid var(--bd-strong);border-radius:4px;background:rgba(255,255,255,.02)}
+    .score{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}@media(max-width:700px){.score{grid-template-columns:1fr}}
+    .score-item{border:1px solid var(--bd);border-radius:12px;padding:14px;background:var(--surf2)}
+    .score-item .l{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin-bottom:6px}
+    .score-item .v{font-size:20px;font-weight:900}
+    .score-item.green .v{color:#86efac}.score-item.yellow .v{color:#fde68a}.score-item.red .v{color:#fca5a5}
+    table{width:100%;border-collapse:collapse;font-size:13px}
+    th,td{padding:11px 10px;text-align:left;border-bottom:1px solid var(--bd);vertical-align:top}
+    th{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--mut);font-weight:800;background:rgba(255,255,255,.02)}
+    tbody tr:hover{background:rgba(255,255,255,.02)}
+    .pill{display:inline-block;padding:3px 8px;border-radius:999px;font-size:10px;font-weight:800;border:1px solid var(--bd)}
+    .pill.ok{color:#86efac;border-color:rgba(34,197,94,.35)}
+    .pill.warn{color:#fde68a;border-color:rgba(250,204,21,.35)}
+    .pill.hot{color:#fca5a5;border-color:rgba(239,68,68,.4)}
+    .pill.info{color:#93c5fd;border-color:rgba(96,165,250,.35)}
+    footer{text-align:center;color:var(--mut);font-size:11px;margin-top:40px;padding:24px 0;border-top:1px solid var(--bd)}
+    footer a{color:#86efac}
+    .todo{border-left:3px solid var(--warn);padding:12px 16px;margin:0 0 12px;background:rgba(250,204,21,.06);border-radius:0 10px 10px 0;font-size:13px;color:#fde68a}
+    .todo strong{color:#fef08a}
+  </style>
+</head>
+<body>
+<header class="topbar">
+  <div class="v4-logo">V4 <span>COMPANY</span></div>
+  <div class="sync-pill"><span class="sync-dot"></span> Sara Pizzico · Farmer AM · v0.1</div>
+</header>
+
+<div class="wrap">
+  <section class="hero"><div class="hero-inner">
+    <div class="hero-eyebrow">Playbook operacional · base para o dash</div>
+    <h1>Farmer Account Manager · Carteira E.E</h1>
+    <p class="meta">
+      Playbook da Sara para cuidar da <strong>carteira de clientes que entram na V4 pela Estruturação Estratégica</strong>:
+      onboarding, saúde da conta, expansão (Ter → Saber → Executar) e rituais semanais.
+      Os parâmetros abaixo são a fonte da verdade — o dashboard futuro lê exatamente esta lista.
+    </p>
+    <div class="chips">
+      <span class="chip live">v0.1 · construir juntos</span>
+      <span class="chip live">Parâmetros mapeados</span>
+      <span class="chip">Dash = fase 2</span>
+      <span class="chip"><a href="index.html" style="color:inherit;text-decoration:none">← Comando Estratégico</a></span>
+    </div>
+  </div></section>
+
+  <div class="todo"><strong>Em construção:</strong> valide comigo o que entra/sai dos parâmetros, cadências e critérios de saúde. Tudo que travarmos aqui vira coluna no dash.</div>
+
+  <nav class="nav">
+    <div class="nav-label">Navegação do playbook</div>
+    <div class="tabs">
+      <button class="tab active" data-view="papel"><span class="n">Papel</span><span class="s">Missão · escopo · metas</span></button>
+      <button class="tab" data-view="jornada"><span class="n">Jornada</span><span class="s">EE → carteira → expansão</span></button>
+      <button class="tab" data-view="params"><span class="n">Parâmetros</span><span class="s">Fonte do futuro dash</span></button>
+      <button class="tab" data-view="rituais"><span class="n">Rituais</span><span class="s">Cadência · checklists</span></button>
+      <button class="tab" data-view="saude"><span class="n">Saúde</span><span class="s">Score · risco · prioridade</span></button>
+    </div>
+  </nav>
+
+  <!-- PAPEL -->
+  <div class="panel is-active" data-view="papel">
+    <div class="section">
+      <h2>Definição</h2>
+      <h3>O que a Farmer AM faz nesta carteira</h3>
+      <p class="lead">
+        A Farmer AM assume o cliente <strong>depois que ele entra pela Estruturação Estratégica</strong>.
+        Missão: proteger a relação, garantir entrega percebida, e expandir a conta com método —
+        sem virar “follow genérico” e sem reabrir escopo à toa.
+      </p>
+      <div class="grid3">
+        <div class="card">
+          <span class="tag ok">Proteger</span>
+          <div class="t">Retenção &amp; confiança</div>
+          <div class="d">Kickoff limpo, expectativas claras, CSAT/NPS sob controle, risco de churn antecipado.</div>
+        </div>
+        <div class="card">
+          <span class="tag info">Operar</span>
+          <div class="t">Orquestração da conta</div>
+          <div class="d">Conectar EE → squad → entrega. Saber o que foi vendido, o que está rodando e o próximo passo comercial.</div>
+        </div>
+        <div class="card">
+          <span class="tag p0">Expandir</span>
+          <div class="t">Monetização da carteira</div>
+          <div class="d">Mover Ter → Saber → Executar e Expansão Carteira com tese, timing e WTP — não com empurrão de produto.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Fronteiras</h2>
+      <div class="grid2">
+        <div class="card">
+          <span class="tag ok">É da Farmer</span>
+          <div class="d">
+            <ul class="steps">
+              <li>Receber handoff da EE com critério completo</li>
+              <li>Conduzir onboarding / kickoff comercial</li>
+              <li>Mapear saúde, risco e oportunidade por conta</li>
+              <li>Priorizar expansão com playbook (não feeling)</li>
+              <li>Puxar assinatura / upgrade / novo módulo</li>
+              <li>Manter pipe da carteira atualizado</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <span class="tag warn">Não é da Farmer</span>
+          <div class="d">
+            <ul class="steps">
+              <li>Fazer hunting de conta nova fria (isso é hunter / pipe E.E)</li>
+              <li>Substituir o time de entrega no dia a dia</li>
+              <li>Vender mídia/escopo sem capacidade ou tese da EE</li>
+              <li>Reabrir diagnóstico do zero sem motivo</li>
+              <li>Aceitar “vou pensar” sem data de devolutiva</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Metas que o dash vai mostrar</h2>
+      <p class="lead">Espelho do Cockpit — a Farmer acompanha a fatia de carteira, não o hunting.</p>
+      <div class="grid2">
+        <div class="card"><div class="t">Expansão Carteira · Executar</div><div class="d">Receita / meta do mês em upgrades e novos módulos Executar na carteira ativa.</div></div>
+        <div class="card"><div class="t">Expansão Carteira · Ter / Saber</div><div class="d">Receita / meta em avanços de jornada ainda na fase Ter ou Saber.</div></div>
+        <div class="card"><div class="t">Retenção da carteira</div><div class="d">% contas ativas sem risco vermelho + churn evitado / renovação no prazo.</div></div>
+        <div class="card"><div class="t">Cobertura de rituais</div><div class="d">% contas com QBR/check-in no prazo + handoff EE completo.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JORNADA -->
+  <div class="panel" data-view="jornada">
+    <div class="section">
+      <h2>Fluxo mestre</h2>
+      <h3>Do fechamento da EE até a expansão</h3>
+      <p class="lead">Toda conta da carteira Farmer passa por estas 4 fases. O dash filtra e ordena por fase + saúde + oportunidade.</p>
+      <div class="flow">
+        <div class="flow-step">
+          <div class="n">01 · Handoff</div>
+          <div class="t">Receber a conta</div>
+          <div class="d">EE paga · tese · decisor · WTP · forma pgto · riscos · próximos módulos mapeados</div>
+        </div>
+        <div class="flow-step">
+          <div class="n">02 · Onboarding</div>
+          <div class="t">Ativar confiança</div>
+          <div class="d">Kickoff ≤ 7 dias · expectativas · canal · dono da conta · 30/60/90</div>
+        </div>
+        <div class="flow-step">
+          <div class="n">03 · Farming</div>
+          <div class="t">Rodar a relação</div>
+          <div class="d">Cadência · saúde · entrega percebida · mapa de expansão vivo</div>
+        </div>
+        <div class="flow-step">
+          <div class="n">04 · Expandir</div>
+          <div class="t">Monetizar com tese</div>
+          <div class="d">Ter→Saber→Executar · timing · proposta · assinatura · sem reabrir EE</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Checklist de handoff EE → Farmer</h2>
+      <p class="lead">Sem isso, a conta entra “cega” e o farming vira apagar incêndio. Bloqueia kickoff se faltar P0.</p>
+      <ul class="check">
+        <li><span class="box"></span><div><strong>P0 · Contrato &amp; condição:</strong> valor EE, forma de pagamento, data início, produtos já vendidos</div></li>
+        <li><span class="box"></span><div><strong>P0 · Decisor:</strong> nome, papel, canal preferido, quem influencia</div></li>
+        <li><span class="box"></span><div><strong>P0 · Tese da EE:</strong> dor principal, PUV, o que NÃO vender agora</div></li>
+        <li><span class="box"></span><div><strong>P0 · Próximo módulo natural:</strong> 1 tese de expansão + timing sugerido</div></li>
+        <li><span class="box"></span><div><strong>P1 · Capacidade:</strong> estoque, time, gargalo operacional (bloqueia mídia/escala)</div></li>
+        <li><span class="box"></span><div><strong>P1 · Budget / WTP:</strong> teto conhecido, sensibilidade a preço, moeda preferencial</div></li>
+        <li><span class="box"></span><div><strong>P1 · Squad &amp; unidade:</strong> quem entrega, quem pitchou, histórico de relacionamento</div></li>
+        <li><span class="box"></span><div><strong>P2 · Materiais:</strong> proposta, script, diagnóstico EE, gravações / notas</div></li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Play de expansão (quando puxar o próximo módulo)</h2>
+      <div class="grid2">
+        <div class="card">
+          <span class="tag ok">Pode expandir</span>
+          <div class="d">
+            <ul class="steps">
+              <li>Kickoff feito e relação estável</li>
+              <li>Saúde verde ou amarela com plano</li>
+              <li>Tese da EE ainda válida</li>
+              <li>Capacidade do cliente aguenta o próximo passo</li>
+              <li>Há WTP ou caminho de pagamento claro</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <span class="tag hot">Não expandir ainda</span>
+          <div class="d">
+            <ul class="steps">
+              <li>Entrega da fase atual instável / CSAT baixo</li>
+              <li>Decisor sumiu ou comitê sem dono</li>
+              <li>Budget travado sem reframe</li>
+              <li>Cliente pediu pausa operacional</li>
+              <li>Próximo módulo = “empurrar produto”, sem tese</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PARAMETROS -->
+  <div class="panel" data-view="params">
+    <div class="section">
+      <h2>Dicionário de parâmetros</h2>
+      <h3>Fonte da verdade do futuro dashboard</h3>
+      <p class="lead">
+        Cada linha vira campo no dash. Marcamos o que é <em>obrigatório no handoff</em>,
+        o que é <em>atualizado na cadência</em> e o que é <em>KPI de carteira</em>.
+      </p>
+      <div class="callout"><strong>Como ler o tipo:</strong> Identidade = cadastro · Jornada = estágio · Saúde = risco · Comercial = dinheiro/oportunidade · Ritual = processo</div>
+
+      <div class="param">
+        <div class="name">cliente_nome</div>
+        <div class="type">Identidade</div>
+        <div class="desc"><em>Obrigatório.</em> Nome fantasia / razão. Ex.: Isoluz, Modular Estruturas.</div>
+      </div>
+      <div class="param">
+        <div class="name">unidade_squad</div>
+        <div class="type">Identidade</div>
+        <div class="desc"><em>Obrigatório.</em> Unidade V4 + squad (Exclusive, Invictus, Billions…) e closer/EE de origem.</div>
+      </div>
+      <div class="param">
+        <div class="name">farmer_owner</div>
+        <div class="type">Identidade</div>
+        <div class="desc"><em>Obrigatório.</em> Quem farming — hoje: Sara. Prepara multi-AM no dash.</div>
+      </div>
+      <div class="param">
+        <div class="name">data_entrada_ee</div>
+        <div class="type">Jornada</div>
+        <div class="desc"><em>Obrigatório.</em> Data em que a EE foi monetizada / conta entrou na carteira Farmer.</div>
+      </div>
+      <div class="param">
+        <div class="name">fase_jornada</div>
+        <div class="type">Jornada</div>
+        <div class="desc"><em>KPI.</em> Enum: <strong>Handoff · Onboarding · Farming · Expansão · Renovação · Risco · Churn</strong>.</div>
+      </div>
+      <div class="param">
+        <div class="name">estagio_produto</div>
+        <div class="type">Jornada</div>
+        <div class="desc"><em>KPI.</em> Posição na metodologia V4: <strong>Ter · Saber · Executar</strong> (+ expansão carteira).</div>
+      </div>
+      <div class="param">
+        <div class="name">produtos_ativos</div>
+        <div class="type">Comercial</div>
+        <div class="desc"><em>Obrigatório.</em> Lista do que já está contratado (EE, EC, Growth, CRM, site, mídia…).</div>
+      </div>
+      <div class="param">
+        <div class="name">tcv_atual</div>
+        <div class="type">Comercial</div>
+        <div class="desc"><em>KPI.</em> Valor total contratado ativo na conta (R$).</div>
+      </div>
+      <div class="param">
+        <div class="name">mrr_potencial_expansao</div>
+        <div class="type">Comercial</div>
+        <div class="desc"><em>Cadência.</em> Upside mapeado do próximo módulo / upgrade (R$).</div>
+      </div>
+      <div class="param">
+        <div class="name">proxima_tese</div>
+        <div class="type">Comercial</div>
+        <div class="desc"><em>Obrigatório após handoff.</em> 1 frase: o que vender depois e por quê (tese EE).</div>
+      </div>
+      <div class="param">
+        <div class="name">timing_expansao</div>
+        <div class="type">Comercial</div>
+        <div class="desc"><em>Cadência.</em> Enum: <strong>Agora · 30d · 60d · 90d · Bloqueado</strong> + motivo do bloqueio.</div>
+      </div>
+      <div class="param">
+        <div class="name">wtp_budget</div>
+        <div class="type">Comercial</div>
+        <div class="desc"><em>Handoff + update.</em> Teto, sensibilidade, forma de pgto preferida (Pix, cheque, recorrente).</div>
+      </div>
+      <div class="param">
+        <div class="name">decisor_mapa</div>
+        <div class="type">Identidade</div>
+        <div class="desc"><em>Obrigatório.</em> Decisor + influenciadores + canal (WhatsApp, e-mail, call).</div>
+      </div>
+      <div class="param">
+        <div class="name">saude_conta</div>
+        <div class="type">Saúde</div>
+        <div class="desc"><em>KPI.</em> Enum: <strong>Verde · Amarelo · Vermelho</strong> (ver aba Saúde).</div>
+      </div>
+      <div class="param">
+        <div class="name">score_saude</div>
+        <div class="type">Saúde</div>
+        <div class="desc"><em>KPI.</em> 0–100 composto: engajamento + entrega + comercial + risco.</div>
+      </div>
+      <div class="param">
+        <div class="name">risco_churn</div>
+        <div class="type">Saúde</div>
+        <div class="desc"><em>Cadência.</em> Flag + motivo (silêncio, insatisfação, budget, operação, troca de dono).</div>
+      </div>
+      <div class="param">
+        <div class="name">csat_nps</div>
+        <div class="type">Saúde</div>
+        <div class="desc"><em>Ritual.</em> Última nota + data. Alimenta score.</div>
+      </div>
+      <div class="param">
+        <div class="name">ultimo_contato</div>
+        <div class="type">Ritual</div>
+        <div class="desc"><em>Cadência.</em> Data + tipo (check-in, QBR, pitch expansão, crise).</div>
+      </div>
+      <div class="param">
+        <div class="name">proximo_contato</div>
+        <div class="type">Ritual</div>
+        <div class="desc"><em>Cadência.</em> Data firme. Conta sem próximo contato = alerta no dash.</div>
+      </div>
+      <div class="param">
+        <div class="name">prioridade_semana</div>
+        <div class="type">Ritual</div>
+        <div class="desc"><em>KPI semanal.</em> P0 / P1 / P2 / P3 — o que a Farmer ataca esta semana.</div>
+      </div>
+      <div class="param">
+        <div class="name">bloqueio_operacional</div>
+        <div class="type">Saúde</div>
+        <div class="desc"><em>Cadência.</em> Estoque, time, entrega, capacidade — impede escalar demanda/mídia.</div>
+      </div>
+      <div class="param">
+        <div class="name">status_comercial</div>
+        <div class="type">Comercial</div>
+        <div class="desc"><em>KPI.</em> Enum: <strong>Estável · Oportunidade · Proposta · Contrato rua · Monetizado · Pausado</strong>.</div>
+      </div>
+      <div class="param">
+        <div class="name">notas_contexto</div>
+        <div class="type">Ritual</div>
+        <div class="desc"><em>Livre.</em> Leitura da conta em 2–4 linhas (igual critério dos playbooks de pitch).</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Visão prévia · o que o dash vai listar</h2>
+      <p class="lead">Mock de colunas — dados ilustrativos só para validar o layout mental.</p>
+      <div class="table-wrap" style="overflow-x:auto">
+        <table>
+          <thead>
+            <tr>
+              <th>Cliente</th>
+              <th>Fase</th>
+              <th>Estágio</th>
+              <th>Saúde</th>
+              <th>Status comercial</th>
+              <th>Próxima tese</th>
+              <th>Timing</th>
+              <th>Prioridade</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Modular Estruturas</strong><div style="color:var(--mut);font-size:11px">Billions · pós-EE</div></td>
+              <td>Farming</td>
+              <td>Executar</td>
+              <td><span class="pill ok">Verde</span></td>
+              <td><span class="pill info">Oportunidade</span></td>
+              <td>Manter kickoff · mapear upgrade 60d</td>
+              <td>60d</td>
+              <td><span class="pill warn">P1</span></td>
+            </tr>
+            <tr>
+              <td><strong>BR Piercing</strong><div style="color:var(--mut);font-size:11px">pós-EE · Executar</div></td>
+              <td>Onboarding</td>
+              <td>Executar</td>
+              <td><span class="pill ok">Verde</span></td>
+              <td><span class="pill ok">Monetizado</span></td>
+              <td>Estabilizar entrega · expansão depois</td>
+              <td>90d</td>
+              <td><span class="pill info">P2</span></td>
+            </tr>
+            <tr>
+              <td><strong>Isoluz</strong><div style="color:var(--mut);font-size:11px">Billions · Gustavo</div></td>
+              <td>Expansão</td>
+              <td>Saber→Executar</td>
+              <td><span class="pill warn">Amarelo</span></td>
+              <td><span class="pill hot">Proposta</span></td>
+              <td>EC + CRM + Growth no ritmo da capacidade</td>
+              <td>Agora</td>
+              <td><span class="pill hot">P0</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- RITUAIS -->
+  <div class="panel" data-view="rituais">
+    <div class="section">
+      <h2>Cadência Farmer</h2>
+      <h3>O que roda toda semana / mês</h3>
+      <div class="grid3">
+        <div class="card">
+          <span class="tag hot">Diário · 15 min</span>
+          <div class="t">Triage P0</div>
+          <div class="d">Olhar contas vermelhas, contratos na rua, silêncio &gt; SLA, próximos contatos do dia. Zero inbox morto.</div>
+        </div>
+        <div class="card">
+          <span class="tag warn">Semanal · 45 min</span>
+          <div class="t">Comando da carteira</div>
+          <div class="d">Atualizar saúde, timing de expansão, prioridades P0–P3. Espelho do sync do Comando Estratégico.</div>
+        </div>
+        <div class="card">
+          <span class="tag info">Mensal · 60–90 min</span>
+          <div class="t">QBR leve / portfolio review</div>
+          <div class="d">Por conta estratégica: resultado, tese, próximo módulo, risco. Alimenta meta de Expansão Carteira.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Rituais por fase</h2>
+      <div class="grid2">
+        <div class="card">
+          <div class="t">Handoff → Onboarding</div>
+          <div class="d">
+            <ul class="steps">
+              <li><strong>D0–D2:</strong> validar checklist handoff; pedir o que faltou</li>
+              <li><strong>D3–D7:</strong> kickoff com decisor — 30/60/90 + canal oficial</li>
+              <li><strong>D7:</strong> saúde inicial + próxima tese registrada</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <div class="t">Farming contínuo</div>
+          <div class="d">
+            <ul class="steps">
+              <li>Check-in conforme criticidade (verde 30d / amarelo 14d / vermelho 72h)</li>
+              <li>Todo contato termina com <em>próximo contato datado</em></li>
+              <li>Se saúde cair: pausar expansão e abrir plano de recuperação</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <div class="t">Play de expansão</div>
+          <div class="d">
+            <ul class="steps">
+              <li>Validar tese + capacidade + WTP</li>
+              <li>Pitch / proposta com devolutiva ≤ 5 dias úteis</li>
+              <li>Contrato na rua → pressão multi-canal até assinatura</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <div class="t">Conta em risco</div>
+          <div class="d">
+            <ul class="steps">
+              <li>Diagnosticar motivo em 1 frase</li>
+              <li>Plano 72h com dono e data</li>
+              <li>Só reabre expansão depois de saúde ≥ amarelo com plano</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Checklist semanal da Farmer</h2>
+      <ul class="check">
+        <li><span class="box"></span><div>Todas as contas P0 têm próximo passo e data</div></li>
+        <li><span class="box"></span><div>Nenhuma conta sem <strong>proximo_contato</strong> há mais de 7 dias (exceto pausa justificada)</div></li>
+        <li><span class="box"></span><div>Handoffs da semana com checklist P0 completo</div></li>
+        <li><span class="box"></span><div>Oportunidades “Agora” com tese escrita (não só nome de produto)</div></li>
+        <li><span class="box"></span><div>Meta Expansão Carteira atualizada (Executar + Ter/Saber)</div></li>
+        <li><span class="box"></span><div>Riscos vermelhos com plano 72h</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SAUDE -->
+  <div class="panel" data-view="saude">
+    <div class="section">
+      <h2>Score de saúde</h2>
+      <h3>Como pintar Verde / Amarelo / Vermelho</h3>
+      <p class="lead">Score 0–100. O dash ordena a carteira por saúde × oportunidade × prioridade.</p>
+      <div class="score">
+        <div class="score-item green"><div class="l">Verde</div><div class="v">70–100</div><div style="font-size:12px;color:var(--mut);margin-top:6px">Relação estável · pode expandir se timing ok</div></div>
+        <div class="score-item yellow"><div class="l">Amarelo</div><div class="v">40–69</div><div style="font-size:12px;color:var(--mut);margin-top:6px">Atenção · expandir só com plano</div></div>
+        <div class="score-item red"><div class="l">Vermelho</div><div class="v">0–39</div><div style="font-size:12px;color:var(--mut);margin-top:6px">Recuperar · expansão bloqueada</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Componentes do score (proposta v0.1)</h2>
+      <div class="grid2">
+        <div class="card">
+          <div class="t">Engajamento · 25 pts</div>
+          <div class="d">Responde no prazo · participa kickoff/QBR · decisor acessível. Silêncio &gt; SLA derruba forte.</div>
+        </div>
+        <div class="card">
+          <div class="t">Entrega percebida · 25 pts</div>
+          <div class="d">Cliente sente avanço da EE/projeto. Reclamação aberta ou atraso crítico = penalidade.</div>
+        </div>
+        <div class="card">
+          <div class="t">Comercial · 25 pts</div>
+          <div class="d">Pagamento em dia · sem disputa de escopo · caminho de expansão claro ou estável sem churn.</div>
+        </div>
+        <div class="card">
+          <div class="t">Risco estrutural · 25 pts</div>
+          <div class="d">Troca de dono, budget cortado, gargalo operacional, dependência de 1 pessoa. Flags baixam score.</div>
+        </div>
+      </div>
+      <div class="callout warn" style="margin-top:14px"><strong>Para validar juntas:</strong> pesos iguais (25/25/25/25) ou você prefere puxar mais Engajamento / Comercial?</div>
+    </div>
+
+    <div class="section">
+      <h2>Matriz de prioridade semanal</h2>
+      <p class="lead">Como a Farmer decide o que atacar — mesma lógica P0–P3 do Comando Estratégico.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Prioridade</th>
+            <th>Quando usar</th>
+            <th>Ação típica</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="pill hot">P0</span></td>
+            <td>Contrato na rua · churn iminente · pitch expansão “Agora” · silêncio crítico</td>
+            <td>Ação no dia · multi-canal · dono claro</td>
+          </tr>
+          <tr>
+            <td><span class="pill warn">P1</span></td>
+            <td>Saúde amarela · timing 30d · handoff incompleto · QBR atrasado</td>
+            <td>Destravar esta semana</td>
+          </tr>
+          <tr>
+            <td><span class="pill info">P2</span></td>
+            <td>Conta estável · timing 60–90d · nutrir relação</td>
+            <td>Cadência + preparar tese</td>
+          </tr>
+          <tr>
+            <td><span class="pill">P3</span></td>
+            <td>Higiene de dados · materiais · contas pausadas com motivo</td>
+            <td>Manter limpo sem roubar foco do P0</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>Próximos passos · construir juntas</h2>
+      <div class="grid2">
+        <div class="card">
+          <span class="tag warn">Decidir agora</span>
+          <div class="d">
+            <ul class="steps">
+              <li>Lista de parâmetros: falta algum campo crítico?</li>
+              <li>Pesos do score de saúde</li>
+              <li>SLA de contato por cor (verde/amarelo/vermelho)</li>
+              <li>Quais produtos entram no enum de <strong>produtos_ativos</strong></li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <span class="tag ok">Fase 2 · Dash</span>
+          <div class="d">
+            <ul class="steps">
+              <li>Tabela viva da carteira com filtros</li>
+              <li>KPIs de Expansão Carteira + retenção</li>
+              <li>Alertas automáticos (sem próximo contato, P0, vermelho)</li>
+              <li>Ligar no Cockpit E.E / planilha fonte</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    V4 Company · Playbook Farmer AM · Sara Pizzico · v0.1<br>
+    Carteira: clientes via Estruturação Estratégica ·
+    <a href="index.html">Comando Estratégico E.E</a>
+  </footer>
+</div>
+
+<script>
+  document.querySelectorAll('.tab').forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      var view = tab.getAttribute('data-view');
+      document.querySelectorAll('.tab').forEach(function (t) { t.classList.remove('active'); });
+      document.querySelectorAll('.panel').forEach(function (p) { p.classList.remove('is-active'); });
+      tab.classList.add('active');
+      var panel = document.querySelector('.panel[data-view="' + view + '"]');
+      if (panel) panel.classList.add('is-active');
+    });
+  });
+</script>
+</body>
+</html>
