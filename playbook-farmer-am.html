@@ -113,7 +113,7 @@
 <body>
 <header class="topbar">
   <div class="v4-logo">V4 <span>COMPANY</span></div>
-  <div class="sync-pill"><span class="sync-dot"></span> Sara Pizzico · Farmer AM · v0.9</div>
+  <div class="sync-pill"><span class="sync-dot"></span> Sara Pizzico · Farmer AM · v0.10</div>
 </header>
 
 <div class="wrap">
@@ -126,15 +126,15 @@
       Enquanto isso, a V4 <strong>mapeia a solução</strong>. No final, apresentamos o que se encaixa — não um catálogo genérico.
     </p>
     <div class="chips">
-      <span class="chip live">v0.9 · STEPs</span>
-      <span class="chip live">Destrava · Ter · Saber · Executar</span>
-      <span class="chip live">Combos Performance</span>
-      <span class="chip">Dash = fase 2</span>
+      <span class="chip live">v0.10 · kick-off + cenários</span>
+      <span class="chip live">Tese no KO</span>
+      <span class="chip live">Projeção sem inventar</span>
+      <span class="chip">Case na ação</span>
       <span class="chip"><a href="index.html" style="color:inherit;text-decoration:none">← Comando Estratégico</a></span>
     </div>
   </div></section>
 
-  <div class="callout ok"><strong>v0.9:</strong> STEP = filtro estratégico (<strong>Destrava Receita · Ter · Saber · Executar · Combos Performance</strong>). Os 30+ produtos do catálogo entram <em>dentro</em> de cada STEP. Lead score libera apresentar · economia escolhe o STEP · produto específico vem depois.</div>
+  <div class="callout ok"><strong>v0.10:</strong> do debrief Marcelo — <em>ganho em jul / ciclo em ago</em>: mapa de tese no kick-off · projetar sem inventar número · faixa P/R/O · ações com case quando houver. <a href="https://marcelofigueiredo23.github.io/pipediario/ago2026/debrief-plano-ago2026-marcelo.html#ee-cenarios" style="color:#86efac" target="_blank" rel="noopener">Fonte</a></div>
 
   <nav class="nav">
     <div class="nav-label">Navegação do playbook</div>
@@ -632,6 +632,21 @@
         <div class="desc"><em>Output.</em> Enum: <strong>Destrava Receita · Ter · Saber · Executar · Combos Performance</strong>. Produto do catálogo 30+ vem em <em>produto_ideal</em>.</div>
       </div>
       <div class="param">
+        <div class="name">mapa_kickoff</div>
+        <div class="type">Jornada</div>
+        <div class="desc"><em>Entradas novas.</em> Tese no KO: EQV/Saber·Ter · ou estabilizar se já veio Executar. Conta fora da planilha E.E = P0 mapear.</div>
+      </div>
+      <div class="param">
+        <div class="name">case_na_acao</div>
+        <div class="type">Comercial</div>
+        <div class="desc"><em>Plano.</em> Case nome + por que serve · ou “sem case”. Toda ação de pitch/devolutiva declara isso.</div>
+      </div>
+      <div class="param">
+        <div class="name">projecao_faixa</div>
+        <div class="type">Ritual</div>
+        <div class="desc"><em>Dash.</em> Chão (FA×taxa) + Pessimista/Realista/Otimista — sem multiplicar Semana*/entradas antes do pitch.</div>
+      </div>
+      <div class="param">
         <div class="name">lead_score</div>
         <div class="type">Saúde</div>
         <div class="desc"><em>KPI · v0.6.</em> Prontidão para apresentar. Gate: decisor + pago/pagando. Score: consciência (50) + tese/produto (50). Faixas: 70+ apresentar · 40–69 elevar · &lt;40 ainda não. <a href="lead-score-farmer.html" style="color:#86efac">Calculadora</a>.</div>
@@ -1117,6 +1132,146 @@
     </div>
 
     <div class="section">
+      <h2>Ganho em jul · kick-off / ciclo em ago</h2>
+      <h3>Fora da planilha E.E · mapa de tese no kick-off</h3>
+      <p class="lead">
+        Conta entrou (Data de Ganho) e ainda <strong>não está na planilha E.E</strong> do Farmer?
+        O ciclo começa no kick-off: mapear tese — não esperar “aparecer sozinha” no pipe.
+        Fonte: <a href="https://marcelofigueiredo23.github.io/pipediario/ago2026/debrief-plano-ago2026-marcelo.html#ee-cenarios" style="color:#86efac" target="_blank" rel="noopener">debrief Ago/2026</a>.
+      </p>
+      <table>
+        <thead><tr><th>Situação na entrada</th><th>Mapa de tese no kick-off</th><th>Não fazer</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Entrou só com <strong>E.E pontual</strong></td>
+            <td>Mapear <strong>EQV / estruturação</strong> e/ou produtos <strong>Saber · Ter</strong></td>
+            <td>Deixar sem tese · empurrar Executar cedo demais</td>
+          </tr>
+          <tr>
+            <td>Já entrou com <strong>Executar</strong></td>
+            <td>Estabilizar entrega · próxima tese só depois</td>
+            <td>Forçar EQV cedo</td>
+          </tr>
+          <tr>
+            <td>Tier <strong>MEDIUM+</strong></td>
+            <td>Prioridade de agenda (melhor hist. de conversão)</td>
+            <td>Tratar igual TINY/SMALL sem critério</td>
+          </tr>
+          <tr>
+            <td>Tier <strong>TINY / baixo</strong></td>
+            <td>Saber · Ter pontual · EQV só se houver fit</td>
+            <td>Combo Performance / ticket alto</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="callout warn" style="margin-top:14px"><strong>Ação Farmer:</strong> toda entrada “fora da planilha” ganha linha no dash com <em>mapa_kickoff</em> + STEP candidato + data do KO. Sem isso, ago depende só de limpar Follow — e o debrief mostra que isso não basta.</div>
+    </div>
+
+    <div class="section">
+      <h2>Como projetar sem inventar número</h2>
+      <p class="lead">Mesmo racional do debrief: taxa observada × estoque que já teve pitch. Topo do funil (Semana* / entradas novas) só conta depois de virar pitch com data.</p>
+      <div class="grid2">
+        <div class="card">
+          <span class="tag ok">Entra na conta</span>
+          <div class="d">
+            <ul class="steps">
+              <li><strong>Follow + Aceito</strong> (já tiveram pitch)</li>
+              <li>Taxa hist. = Monetizado ÷ pitches (por tier, se der)</li>
+              <li>Wins ref. = estoque × taxa · TCV ref. = wins × TM</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <span class="tag warn">Ainda não multiplica</span>
+          <div class="d">
+            <ul class="steps">
+              <li><strong>Semana*</strong> abertas (virar pitch)</li>
+              <li><strong>Entradas novas</strong> fora da planilha (kick-off → tese → pitch)</li>
+              <li>Só viram projeção depois do gate = pitch com data</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <p class="lead" style="margin-top:14px;margin-bottom:8px">Faixa de referência (exemplo do debrief · unidade Sara/Marcelo · ago):</p>
+      <table>
+        <thead><tr><th>Cenário</th><th>Lógica</th><th>Leitura</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Chão</strong></td>
+            <td>Só Follow/Aceito × taxa hist.</td>
+            <td>Sem pitch novo — piso</td>
+          </tr>
+          <tr>
+            <td><strong>Pessimista</strong></td>
+            <td>Volume ↓ · conv. da cohorte aberta</td>
+            <td>Perto/abaixo do mês anterior</td>
+          </tr>
+          <tr>
+            <td><strong>Realista</strong></td>
+            <td>Patamar de pitches do mês anterior × conv. hist. geral</td>
+            <td>Referência operacional</td>
+          </tr>
+          <tr>
+            <td><strong>Otimista</strong></td>
+            <td>Mais pitch + mix MEDIUM + conv. de tier forte</td>
+            <td>Só com kick-off + estoque fechando de verdade</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="callout" style="margin-top:14px"><strong>Para o dash:</strong> mostrar sempre <em>chão</em> (FA × taxa) separado da faixa P/R/O — assim ninguém confunde estoque com forecast inventado.</div>
+    </div>
+
+    <div class="section">
+      <h2>Ações do plano · trazer case (quando tiver)</h2>
+      <p class="lead">Toda ação de continuidade/pitch deve dizer se há case. Case = prova, não decoração. Padrão do debrief: repetir um case forte (ex. SEO/gestão) sem misturar outros.</p>
+      <table>
+        <thead><tr><th>Campo</th><th>Como preencher</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>case_nome</strong></td>
+            <td>Nome do case (ex.: Maidpad SEO) ou “sem case ainda”</td>
+          </tr>
+          <tr>
+            <td><strong>case_por_que</strong></td>
+            <td>1 frase: por que esse case conecta com a dor/tese desta conta</td>
+          </tr>
+          <tr>
+            <td><strong>case_quando_usar</strong></td>
+            <td>No kick-off · na devolutiva · no pitch · só se decisor pedir prova</td>
+          </tr>
+          <tr>
+            <td><strong>acao_com_case</strong></td>
+            <td>Bullet do plano: o que fazer + se leva case (sim/não + qual)</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="grid2" style="margin-top:14px">
+        <div class="card">
+          <span class="tag ok">Com case</span>
+          <div class="d">“Reapresentar tese Saber·Ter para Rhama · levar case X de estruturação em MEDIUM B2B.”</div>
+        </div>
+        <div class="card">
+          <span class="tag warn">Sem case</span>
+          <div class="d">“Mapear EQV no KO · sem case correlato ainda · ancorar na entrega EE da conta.”</div>
+        </div>
+      </div>
+      <div class="callout ok" style="margin-top:14px"><strong>Regra Triboltec continua:</strong> se o decisor está inseguro, a ação começa por case/prova — não por preço. Se não há case, escreva isso no plano (transparência &gt; inventar analogia fraca).</div>
+    </div>
+
+    <div class="section">
+      <h2>Checklist · entradas New → ciclo Farmer</h2>
+      <ul class="check">
+        <li><span class="box"></span><div>Conta na planilha E.E? Se não → criar linha + <strong>mapa_kickoff</strong></div></li>
+        <li><span class="box"></span><div>Kick-off datado · decisor na sala · pago/pagando</div></li>
+        <li><span class="box"></span><div>STEP candidato (Saber · Ter · Executar · Destrava · Combo) + produtos a mapear</div></li>
+        <li><span class="box"></span><div>Se já veio Executar → estabilizar; senão → EQV / Saber·Ter</div></li>
+        <li><span class="box"></span><div>Tier registrado (TINY/SMALL/MEDIUM/LARGE) para priorizar agenda</div></li>
+        <li><span class="box"></span><div>Ação do plano com <strong>case sim/não</strong></div></li>
+        <li><span class="box"></span><div>Próximo gate = pitch com data (sem data não entra em projeção)</div></li>
+      </ul>
+    </div>
+
+    <div class="section">
       <h2>Matriz de prioridade semanal</h2>
       <p class="lead">Como a Farmer decide o que atacar — mesma lógica P0–P3 do Comando Estratégico.</p>
       <table>
@@ -1182,11 +1337,12 @@
   </div>
 
   <footer>
-    V4 Company · Playbook Farmer AM · Sara Pizzico · v0.9<br>
+    V4 Company · Playbook Farmer AM · Sara Pizzico · v0.10<br>
     Carteira: clientes via Estruturação Estratégica ·
     <a href="index.html">Comando Estratégico E.E</a> ·
     <a href="https://docs.google.com/spreadsheets/d/1bCR_MxfTRJKq66Yg3WecQhF_ipPK1l6p4xNSTs0H97g/edit?usp=sharing" target="_blank" rel="noopener">Entregas EE</a> ·
-    <a href="https://docs.google.com/document/d/1-cSSkYetqPKdHW4m1sWO_VWaV-4UnBKVcDLe91C4Jw4/edit?usp=sharing" target="_blank" rel="noopener">Modelo Triboltec</a>
+    <a href="https://docs.google.com/document/d/1-cSSkYetqPKdHW4m1sWO_VWaV-4UnBKVcDLe91C4Jw4/edit?usp=sharing" target="_blank" rel="noopener">Modelo Triboltec</a> ·
+    <a href="https://marcelofigueiredo23.github.io/pipediario/ago2026/debrief-plano-ago2026-marcelo.html#ee-cenarios" target="_blank" rel="noopener">Debrief cenários E.E</a>
   </footer>
 </div>
 
