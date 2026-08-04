@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fluxograma · Farmer AM · EE → Plano de Ação</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --brand:#e50915; --brand-light:#ff1a27; --bg:#050505; --surf:#141414;
+      --bd:rgba(255,255,255,.12); --txt:#fafafa; --mut:#a3a3a3;
+      --ok:#86efac; --warn:#fde68a; --hot:#fca5a5; --info:#93c5fd;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--txt);font:14px/1.5 Inter,system-ui,sans-serif;
+      background-image:radial-gradient(ellipse 80% 40% at 50% -12%,rgba(229,9,21,.18),transparent)}
+    .top{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);background:rgba(5,5,5,.9);border-bottom:1px solid var(--bd);padding:12px 20px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+    .logo{font-weight:900}.logo span{color:var(--brand-light)}
+    .pill{font-size:11px;font-weight:700;color:var(--mut);border:1px solid var(--bd);padding:5px 10px;border-radius:999px}
+    .wrap{max-width:980px;margin:0 auto;padding:28px 18px 80px}
+    h1{margin:0 0 8px;font-size:clamp(24px,4vw,34px);font-weight:900;letter-spacing:-.03em}
+    .sub{color:var(--mut);font-size:13px;margin:0 0 22px;max-width:720px}
+    .sub a{color:var(--ok)}
+    .legend{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+    .legend i{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:var(--mut);border:1px solid var(--bd);padding:5px 10px;border-radius:999px;font-style:normal}
+    .legend i::before{content:'';width:8px;height:8px;border-radius:50%}
+    .legend .g::before{background:var(--ok)}.legend .d::before{background:var(--warn)}.legend .v::before{background:var(--hot)}.legend .p::before{background:var(--info)}.legend .a::before{background:var(--brand-light)}
+
+    .flow{display:flex;flex-direction:column;align-items:center;gap:0}
+    .node{
+      width:min(100%,560px);background:var(--surf);border:1px solid var(--bd);border-radius:16px;padding:16px 18px;position:relative;
+      box-shadow:0 12px 40px rgba(0,0,0,.35)
+    }
+    .node.gate{border-color:rgba(250,204,21,.4);background:linear-gradient(180deg,rgba(250,204,21,.08),var(--surf))}
+    .node.veto{border-color:rgba(239,68,68,.45);background:linear-gradient(180deg,rgba(239,68,68,.1),var(--surf))}
+    .node.ok{border-color:rgba(34,197,94,.4);background:linear-gradient(180deg,rgba(34,197,94,.08),var(--surf))}
+    .node.action{border-color:rgba(229,9,21,.5);background:linear-gradient(180deg,rgba(229,9,21,.12),var(--surf))}
+    .node.info{border-color:rgba(96,165,250,.4);background:linear-gradient(180deg,rgba(96,165,250,.08),var(--surf))}
+    .node .k{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-bottom:4px}
+    .node .t{font-size:16px;font-weight:900;margin-bottom:6px}
+    .node .d{font-size:12px;color:#d4d4d4}
+    .node ul{margin:8px 0 0;padding-left:18px;font-size:12px;color:#e5e5e5}
+    .node li{margin:4px 0}
+
+    .arrow{width:2px;height:22px;background:linear-gradient(var(--bd),rgba(255,255,255,.28));position:relative;margin:2px 0}
+    .arrow::after{content:'';position:absolute;left:50%;bottom:-1px;transform:translateX(-50%);border-left:5px solid transparent;border-right:5px solid transparent;border-top:7px solid rgba(255,255,255,.35)}
+
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:min(100%,720px);margin:4px 0}
+    @media(max-width:700px){.split{grid-template-columns:1fr}}
+    .split .node{width:100%}
+    .split-label{width:min(100%,720px);text-align:center;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin:6px 0 2px}
+
+    .row3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:min(100%,720px)}
+    @media(max-width:800px){.row3{grid-template-columns:1fr}}
+    .row3 .node{width:100%;padding:12px 14px}
+    .row3 .t{font-size:14px}
+
+    .merge-note{width:min(100%,560px);text-align:center;font-size:11px;color:var(--mut);margin:4px 0}
+
+    .section{margin-top:36px;background:rgba(20,20,20,.7);border:1px solid var(--bd);border-radius:16px;padding:18px 20px}
+    .section h2{margin:0 0 6px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+    .section h3{margin:0 0 10px;font-size:17px;font-weight:900}
+    table{width:100%;border-collapse:collapse;font-size:12px}
+    th,td{padding:9px 8px;border-bottom:1px solid var(--bd);text-align:left;vertical-align:top}
+    th{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut)}
+    footer{text-align:center;color:var(--mut);font-size:11px;margin-top:36px;padding-top:16px;border-top:1px solid var(--bd)}
+    footer a{color:var(--ok)}
+  </style>
+</head>
+<body>
+<header class="top">
+  <div class="logo">V4 <span>COMPANY</span></div>
+  <div class="pill">Fluxograma Farmer AM · EE → Plano de Ação</div>
+</header>
+
+<div class="wrap">
+  <h1>Fluxograma do processo</h1>
+  <p class="sub">
+    Do cliente entrar na Estruturação Estratégica até o Plano de Ação e a apresentação do STEP.
+    Critérios do plano são o padrão do playbook (não um case específico).
+    <a href="playbook-farmer-am.html">Playbook</a> ·
+    <a href="plano-acao-farmer.html">Plano de Ação</a> ·
+    <a href="lead-score-farmer.html">Lead score</a>
+  </p>
+
+  <div class="legend">
+    <i class="g">Processo</i>
+    <i class="d">Gate</i>
+    <i class="v">Veto / não apresentar</i>
+    <i class="p">Diagnóstico EE</i>
+    <i class="a">Plano de Ação / pitch</i>
+  </div>
+
+  <div class="flow">
+
+    <div class="node ok">
+      <div class="k">01 · Entrada</div>
+      <div class="t">Cliente fecha a Estruturação Estratégica</div>
+      <div class="d">Conta entra na carteira Farmer. Registrar na planilha E.E (se estiver fora, mapa de tese no kick-off).</div>
+    </div>
+    <div class="arrow"></div>
+
+    <div class="node">
+      <div class="k">02 · GC</div>
+      <div class="t">Alinhar expectativa</div>
+      <div class="d">GC registra o que o cliente quer, o que não espera, 30/60/90 e fora de escopo.</div>
+      <ul>
+        <li>Expectativa do cliente (consciência inicial)</li>
+        <li>Canal oficial + mapa de decisores</li>
+      </ul>
+    </div>
+    <div class="arrow"></div>
+
+    <div class="node gate">
+      <div class="k">03 · Gate (inegociável)</div>
+      <div class="t">Decisor na sala + pago ou pagando</div>
+      <div class="d">Sem os dois, o processo continua em diagnóstico — mas <strong>não apresenta solução/preço</strong>.</div>
+    </div>
+
+    <div class="split-label">Decisão do gate</div>
+    <div class="split">
+      <div class="node veto">
+        <div class="k">Gate falhou</div>
+        <div class="t">Recuperar contrato</div>
+        <ul>
+          <li>Regularizar pagamento</li>
+          <li>Colocar decisor nas entregas</li>
+          <li>Atualizar ponto de atenção semanal</li>
+          <li>Lead score em espera</li>
+        </ul>
+      </div>
+      <div class="node ok">
+        <div class="k">Gate OK</div>
+        <div class="t">Segue o ciclo EE</div>
+        <ul>
+          <li>CSAT / NPS no contrato</li>
+          <li>Cliente traz expectativa</li>
+          <li>V4 mapeia solução em paralelo</li>
+        </ul>
+      </div>
+    </div>
+    <div class="arrow"></div>
+
+    <div class="merge-note">Ciclo semanal da EE (enquanto o gate se mantém)</div>
+    <div class="row3">
+      <div class="node info">
+        <div class="k">Semana 1</div>
+        <div class="t">Contexto</div>
+        <div class="d">Kick-off · faturamento · tier · trilha · expectativa · CSAT S1</div>
+      </div>
+      <div class="node info">
+        <div class="k">Semana 2</div>
+        <div class="t">Maturidade + tese</div>
+        <div class="d">Gaps · PUV · interesse · objeções · budget · rascunho de STEP</div>
+      </div>
+      <div class="node info">
+        <div class="k">Semana 3</div>
+        <div class="t">Fecha o mapa</div>
+        <div class="d">Gargalo da trilha · produto ideal · timing · insumos do plano</div>
+      </div>
+    </div>
+    <div class="arrow"></div>
+
+    <div class="node">
+      <div class="k">04 · Lead score</div>
+      <div class="t">Pode apresentar a solução?</div>
+      <div class="d">Gate OK + consciência (50) + qualidade da tese (50).</div>
+      <ul>
+        <li><strong>70–100</strong> → Pronto</li>
+        <li><strong>40–69</strong> → Elevar consciência/tese</li>
+        <li><strong>0–39</strong> → Ainda não falar preço</li>
+      </ul>
+    </div>
+
+    <div class="split-label">Decisão do score</div>
+    <div class="split">
+      <div class="node veto">
+        <div class="k">&lt; 70 ou veto</div>
+        <div class="t">Não apresenta preço</div>
+        <div class="d">Continua EE · fecha gap #1 da semana · atualiza ponto de atenção.</div>
+      </div>
+      <div class="node ok">
+        <div class="k">≥ 70 e gate OK</div>
+        <div class="t">Liberado para encaixe</div>
+        <div class="d">Escolhe STEP e monta o Plano de Ação.</div>
+      </div>
+    </div>
+    <div class="arrow"></div>
+
+    <div class="node info">
+      <div class="k">05 · Encaixe do STEP</div>
+      <div class="t">Qual filtro estratégico?</div>
+      <div class="d">Destrava Receita · Ter · Saber · Executar · Combos Performance</div>
+      <ul>
+        <li>Filtrar com <strong>tier</strong> + <strong>margem de contribuição</strong> + <strong>break-even</strong></li>
+        <li>Escolher 1–3 produtos do catálogo (30+) dentro do STEP</li>
+        <li>Definir o que <strong>não oferecer</strong> agora</li>
+      </ul>
+    </div>
+    <div class="arrow"></div>
+
+    <div class="node action">
+      <div class="k">06 · Plano de Ação</div>
+      <div class="t">Documento da conta (padrão playbook)</div>
+      <div class="d">Preencher critérios + passos. Case só entra se houver prova real — não é obrigatório inventar.</div>
+      <ul>
+        <li>Status da relação (1 linha)</li>
+        <li>Critérios: faturamento/margem · produtos · pitch · espera proposta? · budget · interesse · objeções · decisor · CSAT · percepção</li>
+        <li>STEP + produto ideal + o que não oferecer</li>
+        <li>Ações em ordem (reengajar → validar → propor)</li>
+        <li>Case: sim (qual + por quê) ou “sem case”</li>
+        <li>Prioridade P0–P3 · próximo contato datado</li>
+      </ul>
+    </div>
+    <div class="arrow"></div>
+
+    <div class="node action">
+      <div class="k">07 · Apresentação</div>
+      <div class="t">Pitch / proposta só do que se encaixa</div>
+      <div class="d">Sem catálogo genérico. Devolutiva curta. Se decisor inseguro: prova/case antes de preço.</div>
+    </div>
+    <div class="arrow"></div>
+
+    <div class="split-label">Saída</div>
+    <div class="split">
+      <div class="node ok">
+        <div class="k">Win</div>
+        <div class="t">Monetizado / Aceito</div>
+        <div class="d">Kick-off do STEP · não reabrir escopo · farming da entrega</div>
+      </div>
+      <div class="node veto">
+        <div class="k">Não fechou</div>
+        <div class="t">Drop com motivo · ou novo ciclo</div>
+        <div class="d">Registrar Budget / Timing / Ops · EQV ou remarcar só com tese nova</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Como ler o fluxo</h2>
+    <h3>Duas trilhas em paralelo</h3>
+    <table>
+      <thead><tr><th>Trilha do cliente</th><th>Trilha da V4 / Farmer</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>GC · paga · decisor semanal · CSAT/NPS · traz expectativa</td>
+          <td>Entregas EE · mapeia solução · lead score · STEP · plano · apresenta encaixe</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Ferramentas deste fluxo</h2>
+    <h3>Onde executar cada etapa</h3>
+    <table>
+      <thead><tr><th>Etapa</th><th>Onde</th></tr></thead>
+      <tbody>
+        <tr><td>Playbook completo</td><td><a href="playbook-farmer-am.html" style="color:var(--ok)">playbook-farmer-am.html</a></td></tr>
+        <tr><td>Lead score</td><td><a href="lead-score-farmer.html" style="color:var(--ok)">lead-score-farmer.html</a></td></tr>
+        <tr><td>Plano de Ação (preencher/gerar)</td><td><a href="plano-acao-farmer.html" style="color:var(--ok)">plano-acao-farmer.html</a></td></tr>
+        <tr><td>Análise Sara × Marcelo</td><td><a href="analise-ee-sara-marcelo.html" style="color:var(--ok)">analise-ee-sara-marcelo.html</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer>
+    V4 · Farmer AM · Fluxograma EE → Plano de Ação ·
+    critérios do playbook (case específico ≠ padrão)
+  </footer>
+</div>
+</body>
+</html>
