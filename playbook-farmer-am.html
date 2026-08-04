@@ -113,7 +113,7 @@
 <body>
 <header class="topbar">
   <div class="v4-logo">V4 <span>COMPANY</span></div>
-  <div class="sync-pill"><span class="sync-dot"></span> Sara Pizzico · Farmer AM · v0.5</div>
+  <div class="sync-pill"><span class="sync-dot"></span> Sara Pizzico · Farmer AM · v0.6</div>
 </header>
 
 <div class="wrap">
@@ -126,15 +126,15 @@
       Enquanto isso, a V4 <strong>mapeia a solução</strong>. No final, apresentamos o que se encaixa — não um catálogo genérico.
     </p>
     <div class="chips">
-      <span class="chip live">v0.5 · lead score</span>
-      <span class="chip live">GC · pago · decisor</span>
-      <span class="chip live">CSAT · NPS · solução</span>
+      <span class="chip live">v0.6 · lead score limpo</span>
+      <span class="chip live">Decisor + pago</span>
+      <span class="chip live">Consciência + tese</span>
       <span class="chip">Dash = fase 2</span>
       <span class="chip"><a href="index.html" style="color:inherit;text-decoration:none">← Comando Estratégico</a></span>
     </div>
   </div></section>
 
-  <div class="callout ok"><strong>v0.5:</strong> Lead score definido em cima do contrato da conta — 4 pilares, regras de veto e faixas de ação. Calculadora: <a href="lead-score-farmer.html" style="color:#86efac">abrir scorecard</a>.</div>
+  <div class="callout ok"><strong>v0.6 · lead score (construído juntas):</strong> mede <em>prontidão para apresentar a solução</em>. Inegociável: <strong>decisor na sala + pago/pagando</strong>. Diferencia: <strong>nível de consciência</strong> + <strong>qualidade da tese/produto</strong>. <a href="lead-score-farmer.html" style="color:#86efac">Calculadora</a></div>
 
   <nav class="nav">
     <div class="nav-label">Navegação do playbook</div>
@@ -825,132 +825,117 @@
   <!-- SAUDE -->
   <div class="panel" data-view="saude">
     <div class="section">
-      <h2>Lead score · definição (v0.5)</h2>
-      <h3>Prontidão para apresentar a solução que se encaixa</h3>
+      <h2>Lead score · definição (v0.6)</h2>
+      <h3>Prontidão para apresentar a solução</h3>
       <p class="lead">
-        Não é score de lead frio. É o score da <strong>conta na EE</strong>:
-        o cliente está cumprindo o contrato? A V4 já mapeou a solução?
-        Escala <strong>0–100</strong>. Calculadora: <a href="lead-score-farmer.html" style="color:#86efac">lead-score-farmer.html</a>
+        Travado juntas: o score <strong>não</strong> mede saúde geral da conta.
+        Mede só: <em>podemos apresentar a solução que se encaixa?</em>
+        Calculadora: <a href="lead-score-farmer.html" style="color:#86efac">lead-score-farmer.html</a>
       </p>
+      <div class="grid2" style="margin-bottom:14px">
+        <div class="card">
+          <span class="tag hot">Inegociável (gate)</span>
+          <div class="t">Decisor na sala</div>
+          <div class="d">+ pago ou pagando em dia. Sem os dois = não apresenta, ponto.</div>
+        </div>
+        <div class="card">
+          <span class="tag ok">O que diferencia (score)</span>
+          <div class="t">Consciência + tese</div>
+          <div class="d">Nível de consciência do cliente + qualidade da tese/produto mapeado.</div>
+        </div>
+      </div>
       <div class="score">
-        <div class="score-item green"><div class="l">Pronto · 75–100</div><div class="v">Apresentar</div><div style="font-size:12px;color:var(--mut);margin-top:6px">Pode ir para pitch/proposta da solução mapeada</div></div>
-        <div class="score-item yellow"><div class="l">Quase · 50–74</div><div class="v">Mapear</div><div style="font-size:12px;color:var(--mut);margin-top:6px">Fecha gaps (decisor, CSAT, tese) esta semana</div></div>
-        <div class="score-item red"><div class="l">Cedo / Risco · 0–49</div><div class="v">Recuperar</div><div style="font-size:12px;color:var(--mut);margin-top:6px">Não apresenta preço · reforça contrato</div></div>
+        <div class="score-item green"><div class="l">Pronto · 70–100</div><div class="v">Apresentar</div><div style="font-size:12px;color:var(--mut);margin-top:6px">Gates ok · consciência alta · tese forte</div></div>
+        <div class="score-item yellow"><div class="l">Quase · 40–69</div><div class="v">Elevar</div><div style="font-size:12px;color:var(--mut);margin-top:6px">Subir consciência ou fechar qualidade da tese</div></div>
+        <div class="score-item red"><div class="l">Não · 0–39</div><div class="v">Ainda não</div><div style="font-size:12px;color:var(--mut);margin-top:6px">Gate falhou e/ou tese/consciência fracas</div></div>
       </div>
     </div>
 
     <div class="section">
-      <h2>4 pilares · 100 pontos</h2>
-      <p class="lead">Espelho do contrato: cliente engaja + V4 mapeia.</p>
-
-      <div class="card" style="margin-bottom:12px">
-        <span class="tag hot">A · Contrato / Gates · 30 pts</span>
-        <div class="t" style="margin-top:8px">GC · pago · expectativa</div>
-        <table>
-          <thead><tr><th>Critério</th><th>Pts</th><th>Como pontuar</th></tr></thead>
-          <tbody>
-            <tr><td>GC realizada</td><td>10</td><td>Sim = 10 · Não = 0</td></tr>
-            <tr><td>Projeto pago</td><td>10</td><td>Pago = 10 · Parcial saudável = 6 · Atraso/aguardando = 2 · Inadimplente = 0</td></tr>
-            <tr><td>Expectativa registrada</td><td>10</td><td>Clara e atualizada = 10 · Parcial = 5 · Nebulosa/ausente = 0</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="card" style="margin-bottom:12px">
-        <span class="tag warn">B · Engajamento do decisor · 25 pts</span>
-        <div class="t" style="margin-top:8px">Participa semanalmente nas entregas</div>
-        <table>
-          <thead><tr><th>Critério</th><th>Pts</th><th>Como pontuar</th></tr></thead>
-          <tbody>
-            <tr><td>Decisor nas últimas 2 entregas</td><td>15</td><td>2/2 = 15 · 1/2 = 8 · 0/2 = 0</td></tr>
-            <tr><td>Responde / agenda no prazo</td><td>10</td><td>No prazo = 10 · Atrasa mas responde = 5 · Silêncio &gt; SLA = 0</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="card" style="margin-bottom:12px">
-        <span class="tag info">C · CSAT + NPS · 20 pts</span>
-        <div class="t" style="margin-top:8px">Cliente responde (contrato)</div>
-        <table>
-          <thead><tr><th>Critério</th><th>Pts</th><th>Como pontuar</th></tr></thead>
-          <tbody>
-            <tr><td>CSAT respondido + nota</td><td>12</td><td>≥4/5 (ou ≥8/10) = 12 · 3 ou 6–7 = 7 · &lt;3 ou &lt;6 = 2 · Não respondeu = 0*</td></tr>
-            <tr><td>NPS respondido + nota</td><td>8</td><td>Promotor (9–10) = 8 · Neutro (7–8) = 5 · Detrator (0–6) = 2 · Não respondeu = 0*</td></tr>
-          </tbody>
-        </table>
-        <p class="lead" style="margin:10px 0 0">*Conta com &lt;14 dias na EE e ainda sem ciclo de coleta = neutro temporário (CSAT 6 + NPS 4), para não punir onboarding.</p>
-      </div>
-
-      <div class="card" style="margin-bottom:12px">
-        <span class="tag ok">D · Solução mapeada · 25 pts</span>
-        <div class="t" style="margin-top:8px">Trilha V4 — o que se encaixa</div>
-        <table>
-          <thead><tr><th>Critério</th><th>Pts</th><th>Como pontuar</th></tr></thead>
-          <tbody>
-            <tr><td>Produto ideal escrito</td><td>10</td><td>Combo claro + o que NÃO oferecer = 10 · Hipótese S1/S2 = 5 · Vazio = 0</td></tr>
-            <tr><td>Plano de Ação (Triboltec) completo</td><td>10</td><td>Todos os critérios preenchidos = 10 · Parcial = 5 · Não existe = 0</td></tr>
-            <tr><td>Timing + WTP / budget</td><td>5</td><td>Timing definido + budget ao menos parcial = 5 · Só um dos dois = 3 · Nenhum = 0</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="callout" style="margin-top:4px"><strong>Soma:</strong> A(30) + B(25) + C(20) + D(25) = <strong>100</strong></div>
+      <h2>Gate · sem isso, score não libera apresentação</h2>
+      <table>
+        <thead><tr><th>Gate</th><th>OK</th><th>Bloqueia</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Decisor na sala</strong></td>
+            <td>Decisor participou da última entrega (ou da reunião crítica)</td>
+            <td>Só influenciador · decisor sumiu · nunca entrou</td>
+          </tr>
+          <tr>
+            <td><strong>Pago ou pagando</strong></td>
+            <td>Pago · ou parcelas/em dia (“pagando”)</td>
+            <td>Inadimplente · atraso crítico · sem 1ª parcela e sem previsão</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="callout warn" style="margin-top:14px"><strong>Gate falhou = apresentação bloqueada</strong>, mesmo que a tese esteja linda. Ação: reengajar decisor / regularizar pagamento.</div>
     </div>
 
     <div class="section">
-      <h2>Regras de veto (mandam sobre o número)</h2>
-      <p class="lead">Mesmo com score alto, estes itens bloqueiam apresentação de preço/proposta.</p>
-      <ul class="check">
-        <li><span class="box"></span><div><strong>Veto pagamento:</strong> inadimplente ou atraso crítico → não apresenta</div></li>
-        <li><span class="box"></span><div><strong>Veto GC / expectativa:</strong> GC não feita ou expectativa nebulosa → não apresenta</div></li>
-        <li><span class="box"></span><div><strong>Veto decisor:</strong> decisor ausente nas 2 últimas entregas → reengajar antes do pitch</div></li>
-        <li><span class="box"></span><div><strong>Veto solução:</strong> produto ideal não escrito → continua mapeando (S1–S3), não inventa na hora</div></li>
-        <li><span class="box"></span><div><strong>Veto CSAT crítico:</strong> CSAT &lt;3 (ou &lt;6/10) sem plano de recuperação → não apresenta</div></li>
-      </ul>
-      <div class="callout ok" style="margin-top:14px"><strong>Regra de ouro:</strong> score prioriza a fila · veto decide se pode apresentar. Lead score alto com veto ativo = “quase” — fecha o gap, não força.</div>
+      <h2>2 pilares que pontuam · 100 pontos</h2>
+      <p class="lead">Só entram no cálculo se quisermos priorizar a fila. Apresentação só com gate OK.</p>
+
+      <div class="card" style="margin-bottom:12px">
+        <span class="tag warn">1 · Nível de consciência · 50 pts</span>
+        <div class="t" style="margin-top:8px">Expectativa clara = consciência do cliente</div>
+        <p class="lead">Não é “ele é gente boa”. É o quanto ele entende a dor, o caminho e o tipo de solução.</p>
+        <table>
+          <thead><tr><th>Nível</th><th>Pts</th><th>Leitura</th></tr></thead>
+          <tbody>
+            <tr><td><strong>1 · Baixa</strong></td><td>10</td><td>Expectativa nebulosa · não formula a dor · quer “mídia/resultado” sem contexto</td></tr>
+            <tr><td><strong>2 · Média</strong></td><td>25</td><td>Reconhece o problema · ainda confuso no caminho / prioridade</td></tr>
+            <tr><td><strong>3 · Alta</strong></td><td>40</td><td>Clareza do que quer resolver · entende o tipo de solução (ex.: EC antes de mídia)</td></tr>
+            <tr><td><strong>4 · Muito alta</strong></td><td>50</td><td>Pede continuidade · conecta entrega EE à próxima etapa · aberto a proposta no timing certo</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card" style="margin-bottom:12px">
+        <span class="tag ok">2 · Qualidade da tese / produto · 50 pts</span>
+        <div class="t" style="margin-top:8px">O que a V4 mapeou — se encaixa de verdade?</div>
+        <table>
+          <thead><tr><th>Nível</th><th>Pts</th><th>Leitura</th></tr></thead>
+          <tbody>
+            <tr><td><strong>1 · Fraca</strong></td><td>10</td><td>Sem produto ideal · ou catálogo genérico sem exclusões</td></tr>
+            <tr><td><strong>2 · Hipótese</strong></td><td>25</td><td>Direção existe (S1/S2) · ainda sem ordem clara nem “o que não oferecer”</td></tr>
+            <tr><td><strong>3 · Sólida</strong></td><td>40</td><td>Produto/combo claro + o que fica de fora + ancorado na EE</td></tr>
+            <tr><td><strong>4 · Pronta</strong></td><td>50</td><td>Tese sólida + Plano de Ação (critérios Triboltec) + timing de apresentação</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout"><strong>Soma:</strong> Consciência (50) + Tese (50) = <strong>100</strong> · só conta para apresentar se gate (decisor + pago/pagando) = OK</div>
     </div>
 
     <div class="section">
-      <h2>O que fazer por faixa</h2>
+      <h2>O que fazer por faixa (com gate OK)</h2>
       <table>
         <thead>
           <tr>
             <th>Score</th>
             <th>Leitura</th>
             <th>Ação Farmer</th>
-            <th>Prioridade típica</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><span class="pill ok">75–100</span></td>
-            <td>Pronto para apresentar a solução</td>
-            <td>Agendar pitch/proposta do encaixe · devolutiva ≤ 5 dias úteis</td>
-            <td><span class="pill hot">P0</span></td>
+            <td><span class="pill ok">70–100</span></td>
+            <td>Pronto para apresentar</td>
+            <td>Pitch/proposta da solução mapeada · devolutiva curta</td>
           </tr>
           <tr>
-            <td><span class="pill warn">50–74</span></td>
-            <td>Quase — falta engajamento ou tese</td>
-            <td>Fechar gap #1 da semana (decisor / CSAT / plano Triboltec)</td>
-            <td><span class="pill warn">P1</span></td>
+            <td><span class="pill warn">40–69</span></td>
+            <td>Quase</td>
+            <td>Elevar consciência (GC/entregas) e/ou fechar qualidade da tese na S2–S3</td>
           </tr>
           <tr>
-            <td><span class="pill hot">0–49</span></td>
-            <td>Cedo demais ou conta em risco</td>
-            <td>Reforçar contrato (GC, pago, decisor) · não falar preço</td>
-            <td><span class="pill hot">P0</span> se risco · senão <span class="pill info">P2</span></td>
+            <td><span class="pill hot">0–39</span></td>
+            <td>Ainda não</td>
+            <td>Continuar EE · não falar preço · fortalecer consciência e mapeamento</td>
           </tr>
         </tbody>
       </table>
-    </div>
-
-    <div class="section">
-      <h2>Saúde visual (derivada do lead score + vetos)</h2>
-      <div class="score">
-        <div class="score-item green"><div class="l">Verde</div><div class="v">≥75 · sem veto</div><div style="font-size:12px;color:var(--mut);margin-top:6px">Apresentar / expandir</div></div>
-        <div class="score-item yellow"><div class="l">Amarelo</div><div class="v">50–74 · ou veto leve</div><div style="font-size:12px;color:var(--mut);margin-top:6px">Mapear / destravar</div></div>
-        <div class="score-item red"><div class="l">Vermelho</div><div class="v">&lt;50 · ou veto duro</div><div style="font-size:12px;color:var(--mut);margin-top:6px">Recuperar contrato</div></div>
-      </div>
+      <div class="callout ok" style="margin-top:14px"><strong>CSAT / NPS / GC</strong> continuam no contrato da conta e no dash de saúde — mas <em>não</em> incham o lead score. Lead score = prontidão para apresentar.</div>
     </div>
 
     <div class="section">
