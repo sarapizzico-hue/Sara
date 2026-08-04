@@ -104,7 +104,7 @@
 <body>
 <header class="topbar">
   <div class="v4-logo">V4 <span>COMPANY</span></div>
-  <div class="sync-pill"><span class="sync-dot"></span> Sara Pizzico · Farmer AM · v0.1</div>
+  <div class="sync-pill"><span class="sync-dot"></span> Sara Pizzico · Farmer AM · v0.2</div>
 </header>
 
 <div class="wrap">
@@ -117,14 +117,15 @@
       Os parâmetros abaixo são a fonte da verdade — o dashboard futuro lê exatamente esta lista.
     </p>
     <div class="chips">
-      <span class="chip live">v0.1 · construir juntos</span>
-      <span class="chip live">Parâmetros mapeados</span>
+      <span class="chip live">v0.2 · leitura da Sara</span>
+      <span class="chip live">CSAT · NPS · Lead score</span>
+      <span class="chip live">Kick-off · Pago · ABM</span>
       <span class="chip">Dash = fase 2</span>
       <span class="chip"><a href="index.html" style="color:inherit;text-decoration:none">← Comando Estratégico</a></span>
     </div>
   </div></section>
 
-  <div class="todo"><strong>Em construção:</strong> valide comigo o que entra/sai dos parâmetros, cadências e critérios de saúde. Tudo que travarmos aqui vira coluna no dash.</div>
+  <div class="callout ok"><strong>Sua leitura está certa.</strong> Organizamos em 4 camadas: <em>gates</em> (kick-off + pago) → <em>pulso semanal</em> (ponto de atenção) → <em>saúde</em> (CSAT · NPS · lead score) → <em>monetização</em> (plano de ação + ABM por perfil). Isso vira a home do dash.</div>
 
   <nav class="nav">
     <div class="nav-label">Navegação do playbook</div>
@@ -288,178 +289,210 @@
   <!-- PARAMETROS -->
   <div class="panel" data-view="params">
     <div class="section">
-      <h2>Dicionário de parâmetros</h2>
-      <h3>Fonte da verdade do futuro dashboard</h3>
-      <p class="lead">
-        Cada linha vira campo no dash. Marcamos o que é <em>obrigatório no handoff</em>,
-        o que é <em>atualizado na cadência</em> e o que é <em>KPI de carteira</em>.
-      </p>
-      <div class="callout"><strong>Como ler o tipo:</strong> Identidade = cadastro · Jornada = estágio · Saúde = risco · Comercial = dinheiro/oportunidade · Ritual = processo</div>
+      <h2>Leitura da Sara · 4 camadas</h2>
+      <h3>O que avaliar em cada conta</h3>
+      <p class="lead">Sua lista virou o núcleo do playbook. Ordem importa: sem gate, não força expansão; sem pulso semanal, o dash fica morto.</p>
+      <div class="grid2">
+        <div class="card">
+          <span class="tag hot">1 · Gates</span>
+          <div class="t">Kick-off · Projeto pago</div>
+          <div class="d">Binários. Se kick-off não rolou ou pagamento está aberto, a conta fica em onboarding/risco — ABM e monetização ficam mapeados, mas não acelerados.</div>
+        </div>
+        <div class="card">
+          <span class="tag warn">2 · Pulso semanal</span>
+          <div class="t">Ponto de atenção</div>
+          <div class="d">Toda semana: “como está?” em 1–2 linhas + prioridade. É o campo que você lê no café — não relatório longo.</div>
+        </div>
+        <div class="card">
+          <span class="tag info">3 · Saúde</span>
+          <div class="t">CSAT · NPS · Lead score</div>
+          <div class="d">CSAT = pulso da entrega (mais frequente). NPS = relação/advocacia. Lead score = prontidão para expandir (não é lead frio — é score da conta na carteira).</div>
+        </div>
+        <div class="card">
+          <span class="tag ok">4 · Monetização</span>
+          <div class="t">Plano de ação · ABM por perfil</div>
+          <div class="d">Dependendo do perfil do cliente, já deixar estratégia e ABM mapeados + plano de ação para monetizar (próximo módulo, timing, dono, status).</div>
+        </div>
+      </div>
+    </div>
 
+    <div class="section">
+      <h2>Camada 1 · Gates (bloqueiam ou liberam)</h2>
       <div class="param">
-        <div class="name">cliente_nome</div>
-        <div class="type">Identidade</div>
-        <div class="desc"><em>Obrigatório.</em> Nome fantasia / razão. Ex.: Isoluz, Modular Estruturas.</div>
+        <div class="name">kickoff_realizado</div>
+        <div class="type">Gate</div>
+        <div class="desc"><em>Obrigatório.</em> Sim/Não + data. Sem kick-off = conta ainda não “nasceu” na Farmer. Alerta no dash se &gt; 7 dias da entrada EE.</div>
       </div>
       <div class="param">
-        <div class="name">unidade_squad</div>
-        <div class="type">Identidade</div>
-        <div class="desc"><em>Obrigatório.</em> Unidade V4 + squad (Exclusive, Invictus, Billions…) e closer/EE de origem.</div>
-      </div>
-      <div class="param">
-        <div class="name">farmer_owner</div>
-        <div class="type">Identidade</div>
-        <div class="desc"><em>Obrigatório.</em> Quem farming — hoje: Sara. Prepara multi-AM no dash.</div>
+        <div class="name">projeto_pago</div>
+        <div class="type">Gate</div>
+        <div class="desc"><em>Obrigatório.</em> Enum: <strong>Pago · Parcial · Em atraso · Aguardando 1ª parcela · Inadimplente</strong>. Expansão agressiva só com Pago ou Parcial saudável.</div>
       </div>
       <div class="param">
         <div class="name">data_entrada_ee</div>
         <div class="type">Jornada</div>
-        <div class="desc"><em>Obrigatório.</em> Data em que a EE foi monetizada / conta entrou na carteira Farmer.</div>
+        <div class="desc"><em>Obrigatório.</em> Quando a EE foi monetizada / conta entrou na carteira.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Camada 2 · Pulso semanal</h2>
+      <div class="param">
+        <div class="name">ponto_atencao_semana</div>
+        <div class="type">Ritual</div>
+        <div class="desc"><em>Atualizar toda semana.</em> 1–2 frases: o que precisa de olho agora. Ex.: “Decisor viajou · retoma 12/08 · não pressionar upgrade”.</div>
       </div>
       <div class="param">
-        <div class="name">fase_jornada</div>
-        <div class="type">Jornada</div>
-        <div class="desc"><em>KPI.</em> Enum: <strong>Handoff · Onboarding · Farming · Expansão · Renovação · Risco · Churn</strong>.</div>
-      </div>
-      <div class="param">
-        <div class="name">estagio_produto</div>
-        <div class="type">Jornada</div>
-        <div class="desc"><em>KPI.</em> Posição na metodologia V4: <strong>Ter · Saber · Executar</strong> (+ expansão carteira).</div>
-      </div>
-      <div class="param">
-        <div class="name">produtos_ativos</div>
-        <div class="type">Comercial</div>
-        <div class="desc"><em>Obrigatório.</em> Lista do que já está contratado (EE, EC, Growth, CRM, site, mídia…).</div>
-      </div>
-      <div class="param">
-        <div class="name">tcv_atual</div>
-        <div class="type">Comercial</div>
-        <div class="desc"><em>KPI.</em> Valor total contratado ativo na conta (R$).</div>
-      </div>
-      <div class="param">
-        <div class="name">mrr_potencial_expansao</div>
-        <div class="type">Comercial</div>
-        <div class="desc"><em>Cadência.</em> Upside mapeado do próximo módulo / upgrade (R$).</div>
-      </div>
-      <div class="param">
-        <div class="name">proxima_tese</div>
-        <div class="type">Comercial</div>
-        <div class="desc"><em>Obrigatório após handoff.</em> 1 frase: o que vender depois e por quê (tese EE).</div>
-      </div>
-      <div class="param">
-        <div class="name">timing_expansao</div>
-        <div class="type">Comercial</div>
-        <div class="desc"><em>Cadência.</em> Enum: <strong>Agora · 30d · 60d · 90d · Bloqueado</strong> + motivo do bloqueio.</div>
-      </div>
-      <div class="param">
-        <div class="name">wtp_budget</div>
-        <div class="type">Comercial</div>
-        <div class="desc"><em>Handoff + update.</em> Teto, sensibilidade, forma de pgto preferida (Pix, cheque, recorrente).</div>
-      </div>
-      <div class="param">
-        <div class="name">decisor_mapa</div>
-        <div class="type">Identidade</div>
-        <div class="desc"><em>Obrigatório.</em> Decisor + influenciadores + canal (WhatsApp, e-mail, call).</div>
+        <div class="name">prioridade_semana</div>
+        <div class="type">Ritual</div>
+        <div class="desc"><em>KPI semanal.</em> P0 / P1 / P2 / P3 — o que a Farmer ataca.</div>
       </div>
       <div class="param">
         <div class="name">saude_conta</div>
         <div class="type">Saúde</div>
-        <div class="desc"><em>KPI.</em> Enum: <strong>Verde · Amarelo · Vermelho</strong> (ver aba Saúde).</div>
+        <div class="desc"><em>KPI.</em> Verde · Amarelo · Vermelho — síntese visual do pulso.</div>
       </div>
       <div class="param">
-        <div class="name">score_saude</div>
+        <div class="name">ultimo_contato / proximo_contato</div>
+        <div class="type">Ritual</div>
+        <div class="desc"><em>Cadência.</em> Conta sem próximo contato datado = alerta automático no dash.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Camada 3 · Saúde &amp; scores</h2>
+      <div class="callout"><strong>Por que os três:</strong> CSAT responde “a entrega está ok?” · NPS responde “indicaria a V4?” · Lead score responde “está pronto para o próximo módulo?”</div>
+      <div class="param">
+        <div class="name">csat</div>
         <div class="type">Saúde</div>
-        <div class="desc"><em>KPI.</em> 0–100 composto: engajamento + entrega + comercial + risco.</div>
+        <div class="desc"><em>Ritual.</em> Nota 1–5 (ou 0–10) + data. Ideal pós kick-off e a cada check-in relevante. Queda = ponto de atenção imediato.</div>
+      </div>
+      <div class="param">
+        <div class="name">nps</div>
+        <div class="type">Saúde</div>
+        <div class="desc"><em>Mensal / QBR.</em> −100 a +100 (ou 0–10). Relação e advocacia — menos volátil que CSAT.</div>
+      </div>
+      <div class="param">
+        <div class="name">lead_score</div>
+        <div class="type">Saúde</div>
+        <div class="desc"><em>KPI de expansão.</em> 0–100: prontidão da conta para monetizar (engajamento + pago + kick-off + tese clara + WTP). Nome “lead score” mantido; no dash pode aparecer como <strong>Score de expansão</strong>.</div>
       </div>
       <div class="param">
         <div class="name">risco_churn</div>
         <div class="type">Saúde</div>
         <div class="desc"><em>Cadência.</em> Flag + motivo (silêncio, insatisfação, budget, operação, troca de dono).</div>
       </div>
+    </div>
+
+    <div class="section">
+      <h2>Camada 4 · Monetização &amp; ABM</h2>
       <div class="param">
-        <div class="name">csat_nps</div>
-        <div class="type">Saúde</div>
-        <div class="desc"><em>Ritual.</em> Última nota + data. Alimenta score.</div>
+        <div class="name">perfil_cliente</div>
+        <div class="type">Comercial</div>
+        <div class="desc"><em>Handoff.</em> Perfil que define o tipo de jogo. Ex.: <strong>B2B consultivo · E-commerce · Multiunidade · Budget sensível · LARGE · Operação gargalo</strong>.</div>
       </div>
       <div class="param">
-        <div class="name">ultimo_contato</div>
-        <div class="type">Ritual</div>
-        <div class="desc"><em>Cadência.</em> Data + tipo (check-in, QBR, pitch expansão, crise).</div>
+        <div class="name">estrategia_abm</div>
+        <div class="type">Comercial</div>
+        <div class="desc"><em>Mapear cedo.</em> Já deixar estratégia ABM desenhada por perfil: contas-alvo, mensagem, canal, oferta, momento. Não precisa executar já — precisa estar mapeado.</div>
       </div>
       <div class="param">
-        <div class="name">proximo_contato</div>
-        <div class="type">Ritual</div>
-        <div class="desc"><em>Cadência.</em> Data firme. Conta sem próximo contato = alerta no dash.</div>
+        <div class="name">plano_acao_monetizar</div>
+        <div class="type">Comercial</div>
+        <div class="desc"><em>Semanal.</em> Plano com: próximo módulo · tese · timing · dono · status (Ideia · Em conversa · Proposta · Contrato · Fechado · Bloqueado).</div>
       </div>
       <div class="param">
-        <div class="name">prioridade_semana</div>
-        <div class="type">Ritual</div>
-        <div class="desc"><em>KPI semanal.</em> P0 / P1 / P2 / P3 — o que a Farmer ataca esta semana.</div>
+        <div class="name">proxima_tese</div>
+        <div class="type">Comercial</div>
+        <div class="desc"><em>Obrigatório.</em> 1 frase: o que vender depois e por quê (ancorado na EE).</div>
       </div>
       <div class="param">
-        <div class="name">bloqueio_operacional</div>
-        <div class="type">Saúde</div>
-        <div class="desc"><em>Cadência.</em> Estoque, time, entrega, capacidade — impede escalar demanda/mídia.</div>
+        <div class="name">timing_expansao</div>
+        <div class="type">Comercial</div>
+        <div class="desc"><em>Cadência.</em> Agora · 30d · 60d · 90d · Bloqueado (+ motivo).</div>
+      </div>
+      <div class="param">
+        <div class="name">mrr_potencial_expansao</div>
+        <div class="type">Comercial</div>
+        <div class="desc"><em>KPI.</em> Upside em R$ do plano de monetização atual.</div>
       </div>
       <div class="param">
         <div class="name">status_comercial</div>
         <div class="type">Comercial</div>
-        <div class="desc"><em>KPI.</em> Enum: <strong>Estável · Oportunidade · Proposta · Contrato rua · Monetizado · Pausado</strong>.</div>
-      </div>
-      <div class="param">
-        <div class="name">notas_contexto</div>
-        <div class="type">Ritual</div>
-        <div class="desc"><em>Livre.</em> Leitura da conta em 2–4 linhas (igual critério dos playbooks de pitch).</div>
+        <div class="desc"><em>KPI.</em> Estável · Oportunidade · Proposta · Contrato rua · Monetizado · Pausado.</div>
       </div>
     </div>
 
     <div class="section">
-      <h2>Visão prévia · o que o dash vai listar</h2>
-      <p class="lead">Mock de colunas — dados ilustrativos só para validar o layout mental.</p>
+      <h2>Cadastro de apoio (sempre no dash, menos na home)</h2>
+      <div class="param">
+        <div class="name">cliente_nome · unidade_squad · farmer_owner</div>
+        <div class="type">Identidade</div>
+        <div class="desc">Quem é a conta, de onde veio, quem farming.</div>
+      </div>
+      <div class="param">
+        <div class="name">produtos_ativos · tcv_atual · wtp_budget · decisor_mapa</div>
+        <div class="type">Identidade</div>
+        <div class="desc">O que está contratado, valor, dinheiro e quem decide.</div>
+      </div>
+      <div class="param">
+        <div class="name">fase_jornada · estagio_produto · bloqueio_operacional</div>
+        <div class="type">Jornada</div>
+        <div class="desc">Onde está na jornada Farmer e na metodologia Ter/Saber/Executar + se operação trava escala.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Visão prévia · home do dash (sua lógica)</h2>
+      <p class="lead">Colunas que você lê semanalmente — mock ilustrativo.</p>
       <div class="table-wrap" style="overflow-x:auto">
         <table>
           <thead>
             <tr>
               <th>Cliente</th>
-              <th>Fase</th>
-              <th>Estágio</th>
-              <th>Saúde</th>
-              <th>Status comercial</th>
-              <th>Próxima tese</th>
-              <th>Timing</th>
-              <th>Prioridade</th>
+              <th>Kick-off</th>
+              <th>Pago</th>
+              <th>Ponto de atenção</th>
+              <th>CSAT</th>
+              <th>NPS</th>
+              <th>Lead score</th>
+              <th>Plano monetizar / ABM</th>
+              <th>Prio</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><strong>Modular Estruturas</strong><div style="color:var(--mut);font-size:11px">Billions · pós-EE</div></td>
-              <td>Farming</td>
-              <td>Executar</td>
-              <td><span class="pill ok">Verde</span></td>
-              <td><span class="pill info">Oportunidade</span></td>
-              <td>Manter kickoff · mapear upgrade 60d</td>
-              <td>60d</td>
+              <td><strong>Isoluz</strong><div style="color:var(--mut);font-size:11px">B2B · capacidade</div></td>
+              <td><span class="pill warn">Não</span></td>
+              <td><span class="pill ok">Pago</span></td>
+              <td>Pitch/EC em curso · travar condição</td>
+              <td>—</td>
+              <td>—</td>
+              <td><span class="pill warn">62</span></td>
+              <td>EC + CRM · ABM CNPJ certo · Agora</td>
+              <td><span class="pill hot">P0</span></td>
+            </tr>
+            <tr>
+              <td><strong>Modular</strong><div style="color:var(--mut);font-size:11px">pós-EE · Executar</div></td>
+              <td><span class="pill ok">Sim</span></td>
+              <td><span class="pill ok">Pago</span></td>
+              <td>Kickoff estável · mapear upgrade</td>
+              <td>4.5</td>
+              <td>70</td>
+              <td><span class="pill ok">78</span></td>
+              <td>Upgrade 60d · ABM regional mapeado</td>
               <td><span class="pill warn">P1</span></td>
             </tr>
             <tr>
-              <td><strong>BR Piercing</strong><div style="color:var(--mut);font-size:11px">pós-EE · Executar</div></td>
-              <td>Onboarding</td>
-              <td>Executar</td>
-              <td><span class="pill ok">Verde</span></td>
-              <td><span class="pill ok">Monetizado</span></td>
-              <td>Estabilizar entrega · expansão depois</td>
-              <td>90d</td>
+              <td><strong>BR Piercing</strong><div style="color:var(--mut);font-size:11px">Onboarding</div></td>
+              <td><span class="pill warn">Agendado</span></td>
+              <td><span class="pill ok">Pago</span></td>
+              <td>Garantir kick-off sem reabrir escopo</td>
+              <td>—</td>
+              <td>—</td>
+              <td><span class="pill info">45</span></td>
+              <td>Estabilizar · ABM depois do KO</td>
               <td><span class="pill info">P2</span></td>
-            </tr>
-            <tr>
-              <td><strong>Isoluz</strong><div style="color:var(--mut);font-size:11px">Billions · Gustavo</div></td>
-              <td>Expansão</td>
-              <td>Saber→Executar</td>
-              <td><span class="pill warn">Amarelo</span></td>
-              <td><span class="pill hot">Proposta</span></td>
-              <td>EC + CRM + Growth no ritmo da capacidade</td>
-              <td>Agora</td>
-              <td><span class="pill hot">P0</span></td>
             </tr>
           </tbody>
         </table>
