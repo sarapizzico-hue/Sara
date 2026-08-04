@@ -3,55 +3,56 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Lead Score Farmer · Carteira E.E</title>
+  <title>Lead Score Farmer · v0.6</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     :root {
       --brand:#e50915; --bg:#050505; --surf:#141414; --bd:rgba(255,255,255,.1);
-      --txt:#fafafa; --mut:#a3a3a3; --ok:#86efac; --warn:#fde68a; --hot:#fca5a5; --info:#93c5fd;
+      --txt:#fafafa; --mut:#a3a3a3; --ok:#86efac; --warn:#fde68a; --hot:#fca5a5;
     }
     *{box-sizing:border-box}
     body{margin:0;background:var(--bg);color:var(--txt);font:14px/1.55 Inter,system-ui,sans-serif;
       background-image:radial-gradient(ellipse 80% 40% at 50% -10%,rgba(229,9,21,.16),transparent)}
-    .wrap{max-width:880px;margin:0 auto;padding:28px 20px 70px}
+    .wrap{max-width:760px;margin:0 auto;padding:28px 20px 70px}
     h1{margin:0 0 6px;font-size:28px;font-weight:900}
     .sub{color:var(--mut);margin:0 0 18px;font-size:13px}
     .sub a{color:var(--ok)}
     .card{background:var(--surf);border:1px solid var(--bd);border-radius:16px;padding:20px;margin-bottom:14px}
     .card h2{margin:0 0 6px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);font-weight:800}
-    .card h3{margin:0 0 14px;font-size:17px;font-weight:900}
+    .card h3{margin:0 0 12px;font-size:17px;font-weight:900}
     label{display:block;font-size:12px;font-weight:700;margin:0 0 6px;color:#e5e5e5}
-    .hint{font-size:11px;color:var(--mut);margin:-2px 0 10px}
+    .hint{font-size:12px;color:var(--mut);margin:0 0 12px}
     select,input{width:100%;background:#0a0a0a;border:1px solid var(--bd);border-radius:10px;color:var(--txt);padding:10px 12px;font:inherit;margin-bottom:14px}
     .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
     @media(max-width:700px){.row{grid-template-columns:1fr}}
-    .result{display:grid;grid-template-columns:160px 1fr;gap:16px;align-items:center}
-    @media(max-width:700px){.result{grid-template-columns:1fr}}
-    .big{font-size:56px;font-weight:900;line-height:1;letter-spacing:-.03em}
+    .big{font-size:56px;font-weight:900;line-height:1}
     .big.ok{color:var(--ok)}.big.warn{color:var(--warn)}.big.hot{color:var(--hot)}
     .pill{display:inline-block;padding:4px 10px;border-radius:999px;font-size:11px;font-weight:800;border:1px solid var(--bd)}
     .pill.ok{color:var(--ok);border-color:rgba(34,197,94,.35)}
     .pill.warn{color:var(--warn);border-color:rgba(250,204,21,.35)}
     .pill.hot{color:var(--hot);border-color:rgba(239,68,68,.4)}
-    .bars{display:grid;gap:8px}
-    .bar-row{display:grid;grid-template-columns:120px 1fr 40px;gap:10px;align-items:center;font-size:12px}
+    .gate{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px}
+    .gate-box{border:1px solid var(--bd);border-radius:12px;padding:12px;background:#0a0a0a}
+    .gate-box .l{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin-bottom:4px}
+    .gate-box .v{font-size:14px;font-weight:800}
+    .gate-box.on{border-color:rgba(34,197,94,.35)}.gate-box.on .v{color:var(--ok)}
+    .gate-box.off{border-color:rgba(239,68,68,.4)}.gate-box.off .v{color:var(--hot)}
+    .msg{margin-top:12px;padding:12px 14px;border-radius:12px;font-size:13px}
+    .msg.ok{background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.3);color:#bbf7d0}
+    .msg.warn{background:rgba(250,204,21,.06);border:1px solid rgba(250,204,21,.28);color:#fde68a}
+    .msg.hot{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.35);color:#fecaca}
+    .bars{display:grid;gap:8px;margin-top:14px}
+    .bar-row{display:grid;grid-template-columns:140px 1fr 36px;gap:10px;align-items:center;font-size:12px}
     .bar-bg{height:8px;background:rgba(255,255,255,.06);border-radius:99px;overflow:hidden}
     .bar-fill{height:100%;background:linear-gradient(90deg,#e50915,#ff1a27);border-radius:99px}
-    .veto{border:1px solid rgba(239,68,68,.35);background:rgba(239,68,68,.08);color:#fecaca;border-radius:12px;padding:12px 14px;margin-top:12px;font-size:13px}
-    .veto.ok{border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.08);color:#bbf7d0}
-    .actions{margin-top:10px;font-size:13px;color:#e5e5e5}
-    .actions strong{color:#fff}
-    table{width:100%;border-collapse:collapse;font-size:12px}
-    th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--bd);vertical-align:top}
-    th{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut)}
   </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>Lead Score Farmer</h1>
+  <h1>Lead Score Farmer · v0.6</h1>
   <p class="sub">
-    Score 0–100 · prontidão para apresentar a solução que se encaixa.
-    Base: contrato da conta (GC · pago · decisor · CSAT/NPS · solução mapeada).
+    Mede só: <strong style="color:#fff">prontidão para apresentar a solução</strong>.
+    Gate: decisor na sala + pago/pagando · Score: consciência + qualidade da tese.
     <a href="playbook-farmer-am.html">← Playbook</a>
   </p>
 
@@ -62,226 +63,137 @@
       <div><label>Cliente</label><input id="cliente" placeholder="Ex.: Isoluz" /></div>
       <div><label>Semana EE</label>
         <select id="semana">
-          <option value="1">Semana 1</option>
-          <option value="2">Semana 2</option>
-          <option value="3" selected>Semana 3</option>
-          <option value="4">Semana 4+</option>
+          <option>1</option><option>2</option><option selected>3</option><option>4+</option>
         </select>
       </div>
     </div>
   </div>
 
   <div class="card">
-    <h2>Pilar A · 30 pts</h2>
-    <h3>Contrato / Gates</h3>
+    <h2>Gate · inegociável</h2>
+    <h3>Sem os dois, não apresenta</h3>
     <div class="row">
       <div>
-        <label>GC realizada</label>
-        <select id="gc" data-score>
-          <option value="10">Sim — 10</option>
-          <option value="0">Não — 0</option>
+        <label>Decisor na sala</label>
+        <select id="decisor">
+          <option value="1">Sim — participou da entrega/reunião crítica</option>
+          <option value="0">Não — ausente / só influenciador</option>
         </select>
       </div>
       <div>
-        <label>Projeto pago</label>
-        <select id="pago" data-score>
-          <option value="10">Pago — 10</option>
-          <option value="6">Parcial saudável — 6</option>
-          <option value="2">Atraso / aguardando — 2</option>
-          <option value="0">Inadimplente — 0</option>
+        <label>Pago ou pagando</label>
+        <select id="pago">
+          <option value="1">Sim — pago ou parcelas em dia</option>
+          <option value="0">Não — atraso crítico / inadimplente / sem previsão</option>
         </select>
       </div>
     </div>
-    <label>Expectativa do cliente</label>
-    <select id="expectativa" data-score>
-      <option value="10">Clara e atualizada — 10</option>
-      <option value="5">Parcial — 5</option>
-      <option value="0">Nebulosa / ausente — 0</option>
+  </div>
+
+  <div class="card">
+    <h2>Pilar 1 · 50 pts</h2>
+    <h3>Nível de consciência (expectativa clara)</h3>
+    <p class="hint">O quanto o cliente entende a dor, o caminho e o tipo de solução.</p>
+    <label>Nível</label>
+    <select id="consciencia">
+      <option value="10">1 · Baixa — expectativa nebulosa (10)</option>
+      <option value="25">2 · Média — reconhece o problema, caminho confuso (25)</option>
+      <option value="40" selected>3 · Alta — clareza do que quer resolver (40)</option>
+      <option value="50">4 · Muito alta — pede continuidade / aberto a proposta (50)</option>
     </select>
   </div>
 
   <div class="card">
-    <h2>Pilar B · 25 pts</h2>
-    <h3>Engajamento do decisor</h3>
-    <div class="row">
-      <div>
-        <label>Decisor nas últimas 2 entregas</label>
-        <select id="decisor" data-score>
-          <option value="15">2 de 2 — 15</option>
-          <option value="8">1 de 2 — 8</option>
-          <option value="0">0 de 2 — 0</option>
-        </select>
-      </div>
-      <div>
-        <label>Responde / agenda no prazo</label>
-        <select id="agenda" data-score>
-          <option value="10">No prazo — 10</option>
-          <option value="5">Atrasa, mas responde — 5</option>
-          <option value="0">Silêncio &gt; SLA — 0</option>
-        </select>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>Pilar C · 20 pts</h2>
-    <h3>CSAT + NPS</h3>
-    <p class="hint">Conta &lt;14 dias sem coleta ainda: use “Neutro onboarding”.</p>
-    <div class="row">
-      <div>
-        <label>CSAT</label>
-        <select id="csat" data-score>
-          <option value="12">≥4/5 ou ≥8/10 — 12</option>
-          <option value="7">3/5 ou 6–7/10 — 7</option>
-          <option value="6">Neutro onboarding (&lt;14d) — 6</option>
-          <option value="2">&lt;3/5 ou &lt;6/10 — 2</option>
-          <option value="0">Não respondeu — 0</option>
-        </select>
-      </div>
-      <div>
-        <label>NPS</label>
-        <select id="nps" data-score>
-          <option value="8">Promotor 9–10 — 8</option>
-          <option value="5">Neutro 7–8 — 5</option>
-          <option value="4">Neutro onboarding (&lt;14d) — 4</option>
-          <option value="2">Detrator 0–6 — 2</option>
-          <option value="0">Não respondeu — 0</option>
-        </select>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>Pilar D · 25 pts</h2>
-    <h3>Solução mapeada (V4)</h3>
-    <div class="row">
-      <div>
-        <label>Produto ideal escrito</label>
-        <select id="produto" data-score>
-          <option value="10">Combo claro + o que não oferecer — 10</option>
-          <option value="5">Hipótese S1/S2 — 5</option>
-          <option value="0">Vazio — 0</option>
-        </select>
-      </div>
-      <div>
-        <label>Plano de Ação Triboltec</label>
-        <select id="plano" data-score>
-          <option value="10">Completo — 10</option>
-          <option value="5">Parcial — 5</option>
-          <option value="0">Não existe — 0</option>
-        </select>
-      </div>
-    </div>
-    <label>Timing + WTP / budget</label>
-    <select id="timing" data-score>
-      <option value="5">Timing + budget (ao menos parcial) — 5</option>
-      <option value="3">Só um dos dois — 3</option>
-      <option value="0">Nenhum — 0</option>
+    <h2>Pilar 2 · 50 pts</h2>
+    <h3>Qualidade da tese / produto</h3>
+    <p class="hint">O que a V4 mapeou — se encaixa de verdade?</p>
+    <label>Nível</label>
+    <select id="tese">
+      <option value="10">1 · Fraca — sem produto ideal / genérico (10)</option>
+      <option value="25">2 · Hipótese — direção S1/S2, ainda incompleta (25)</option>
+      <option value="40" selected>3 · Sólida — combo claro + o que não oferecer (40)</option>
+      <option value="50">4 · Pronta — tese + plano Triboltec + timing (50)</option>
     </select>
   </div>
 
   <div class="card">
     <h2>Resultado</h2>
     <h3 id="titulo">—</h3>
-    <div class="result">
-      <div>
-        <div class="big" id="score">0</div>
-        <div style="margin-top:8px"><span class="pill" id="faixa">—</span></div>
-      </div>
-      <div>
-        <div class="bars">
-          <div class="bar-row"><span>A · Gates</span><div class="bar-bg"><div class="bar-fill" id="barA"></div></div><span id="numA">0</span></div>
-          <div class="bar-row"><span>B · Decisor</span><div class="bar-bg"><div class="bar-fill" id="barB"></div></div><span id="numB">0</span></div>
-          <div class="bar-row"><span>C · CSAT/NPS</span><div class="bar-bg"><div class="bar-fill" id="barC"></div></div><span id="numC">0</span></div>
-          <div class="bar-row"><span>D · Solução</span><div class="bar-bg"><div class="bar-fill" id="barD"></div></div><span id="numD">0</span></div>
-        </div>
-        <div id="vetoBox" class="veto ok">Sem veto ativo.</div>
-        <div class="actions" id="acao"></div>
-      </div>
+    <div class="gate">
+      <div class="gate-box" id="gDec"><div class="l">Decisor na sala</div><div class="v" id="gDecV">—</div></div>
+      <div class="gate-box" id="gPag"><div class="l">Pago / pagando</div><div class="v" id="gPagV">—</div></div>
     </div>
-  </div>
-
-  <div class="card">
-    <h2>Referência rápida</h2>
-    <h3>Faixas</h3>
-    <table>
-      <thead><tr><th>Score</th><th>Leitura</th><th>Ação</th></tr></thead>
-      <tbody>
-        <tr><td>75–100</td><td>Pronto</td><td>Apresentar solução mapeada</td></tr>
-        <tr><td>50–74</td><td>Quase</td><td>Fechar gap #1 da semana</td></tr>
-        <tr><td>0–49</td><td>Cedo / risco</td><td>Reforçar contrato · sem preço</td></tr>
-      </tbody>
-    </table>
+    <div style="margin:16px 0 8px" class="big" id="score">0</div>
+    <div><span class="pill" id="faixa">—</span></div>
+    <div class="bars">
+      <div class="bar-row"><span>Consciência</span><div class="bar-bg"><div class="bar-fill" id="barC"></div></div><span id="numC">0</span></div>
+      <div class="bar-row"><span>Tese / produto</span><div class="bar-bg"><div class="bar-fill" id="barT"></div></div><span id="numT">0</span></div>
+    </div>
+    <div class="msg" id="msg">—</div>
   </div>
 </div>
 <script>
-function n(id){ return Number(document.getElementById(id).value); }
 function calc(){
-  var A = n('gc') + n('pago') + n('expectativa');
-  var B = n('decisor') + n('agenda');
-  var C = n('csat') + n('nps');
-  var D = n('produto') + n('plano') + n('timing');
-  var total = A + B + C + D;
-
-  var vetos = [];
-  if (n('pago') === 0) vetos.push('Veto pagamento (inadimplente)');
-  if (n('pago') === 2) vetos.push('Atenção pagamento (atraso/aguardando)');
-  if (n('gc') === 0) vetos.push('Veto GC não realizada');
-  if (n('expectativa') === 0) vetos.push('Veto expectativa nebulosa');
-  if (n('decisor') === 0) vetos.push('Veto decisor ausente nas 2 últimas entregas');
-  if (n('produto') === 0) vetos.push('Veto solução não mapeada');
-  if (n('csat') === 2) vetos.push('Veto CSAT crítico — abrir recuperação');
-
-  var hardVeto = vetos.some(function(v){ return v.indexOf('Veto') === 0; });
-  var el = document.getElementById('score');
-  var faixa = document.getElementById('faixa');
-  var acao = document.getElementById('acao');
-  var titulo = document.getElementById('titulo');
+  var dec = document.getElementById('decisor').value === '1';
+  var pag = document.getElementById('pago').value === '1';
+  var C = Number(document.getElementById('consciencia').value);
+  var T = Number(document.getElementById('tese').value);
+  var total = C + T;
+  var gateOk = dec && pag;
   var cliente = document.getElementById('cliente').value.trim() || 'Conta';
   var semana = document.getElementById('semana').value;
 
-  el.textContent = total;
-  el.className = 'big ' + (total >= 75 ? 'ok' : total >= 50 ? 'warn' : 'hot');
+  document.getElementById('titulo').textContent = cliente + ' · Semana ' + semana;
+  document.getElementById('score').textContent = total;
+  document.getElementById('numC').textContent = C;
+  document.getElementById('numT').textContent = T;
+  document.getElementById('barC').style.width = (C/50*100) + '%';
+  document.getElementById('barT').style.width = (T/50*100) + '%';
 
-  var label, cls, texto;
-  if (hardVeto) {
-    label = 'Bloqueado por veto'; cls = 'hot';
-    texto = 'Score ' + total + ', mas há veto. Fecha o gap do contrato antes de apresentar preço.';
-  } else if (total >= 75) {
-    label = 'Pronto · Apresentar'; cls = 'ok';
-    texto = 'Agendar pitch/proposta da solução que se encaixa. Devolutiva ≤ 5 dias úteis.';
-  } else if (total >= 50) {
-    label = 'Quase · Mapear'; cls = 'warn';
-    texto = 'Fechar o maior gap entre pilares B/C/D esta semana. Ainda não forçar preço.';
-  } else {
-    label = 'Cedo / Risco'; cls = 'hot';
-    texto = 'Reforçar contrato: GC, pago, decisor semanal, CSAT/NPS. Sem apresentação de preço.';
+  var gDec = document.getElementById('gDec');
+  var gPag = document.getElementById('gPag');
+  gDec.className = 'gate-box ' + (dec ? 'on' : 'off');
+  gPag.className = 'gate-box ' + (pag ? 'on' : 'off');
+  document.getElementById('gDecV').textContent = dec ? 'OK' : 'Bloqueia';
+  document.getElementById('gPagV').textContent = pag ? 'OK' : 'Bloqueia';
+
+  var el = document.getElementById('score');
+  var faixa = document.getElementById('faixa');
+  var msg = document.getElementById('msg');
+
+  if (!gateOk) {
+    el.className = 'big hot';
+    faixa.className = 'pill hot';
+    faixa.textContent = 'Bloqueado pelo gate';
+    var gaps = [];
+    if (!dec) gaps.push('colocar o decisor na sala');
+    if (!pag) gaps.push('regularizar pagamento (pago ou pagando)');
+    msg.className = 'msg hot';
+    msg.innerHTML = '<strong>Não apresenta.</strong> Gate falhou: ' + gaps.join(' + ') + '. Score ' + total + ' fica em espera.';
+    return;
   }
 
-  faixa.textContent = label;
-  faixa.className = 'pill ' + cls;
-  titulo.textContent = cliente + ' · Semana ' + semana;
-  acao.innerHTML = '<strong>Ação:</strong> ' + texto;
-
-  document.getElementById('numA').textContent = A;
-  document.getElementById('numB').textContent = B;
-  document.getElementById('numC').textContent = C;
-  document.getElementById('numD').textContent = D;
-  document.getElementById('barA').style.width = (A/30*100) + '%';
-  document.getElementById('barB').style.width = (B/25*100) + '%';
-  document.getElementById('barC').style.width = (C/20*100) + '%';
-  document.getElementById('barD').style.width = (D/25*100) + '%';
-
-  var box = document.getElementById('vetoBox');
-  if (vetos.length) {
-    box.className = 'veto';
-    box.innerHTML = '<strong>Atenções:</strong> ' + vetos.join(' · ');
+  if (total >= 70) {
+    el.className = 'big ok';
+    faixa.className = 'pill ok';
+    faixa.textContent = 'Pronto · Apresentar';
+    msg.className = 'msg ok';
+    msg.innerHTML = '<strong>Pode apresentar a solução.</strong> Gate OK · consciência e tese suficientes. Agendar pitch/proposta com devolutiva curta.';
+  } else if (total >= 40) {
+    el.className = 'big warn';
+    faixa.className = 'pill warn';
+    faixa.textContent = 'Quase · Elevar';
+    msg.className = 'msg warn';
+    msg.innerHTML = '<strong>Ainda não apresentar preço.</strong> Gate OK, mas falta subir consciência e/ou fechar qualidade da tese.';
   } else {
-    box.className = 'veto ok';
-    box.textContent = 'Sem veto ativo.';
+    el.className = 'big hot';
+    faixa.className = 'pill hot';
+    faixa.textContent = 'Ainda não';
+    msg.className = 'msg hot';
+    msg.innerHTML = '<strong>Cedo demais.</strong> Continuar EE: fortalecer consciência do cliente e mapear tese/produto.';
   }
 }
-['gc','pago','expectativa','decisor','agenda','csat','nps','produto','plano','timing','cliente','semana'].forEach(function(id){
+['decisor','pago','consciencia','tese','cliente','semana'].forEach(function(id){
   document.getElementById(id).addEventListener('change', calc);
   document.getElementById(id).addEventListener('input', calc);
 });
