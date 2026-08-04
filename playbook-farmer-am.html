@@ -113,7 +113,7 @@
 <body>
 <header class="topbar">
   <div class="v4-logo">V4 <span>COMPANY</span></div>
-  <div class="sync-pill"><span class="sync-dot"></span> Sara Pizzico · Farmer AM · v0.7</div>
+  <div class="sync-pill"><span class="sync-dot"></span> Sara Pizzico · Farmer AM · v0.8</div>
 </header>
 
 <div class="wrap">
@@ -126,15 +126,15 @@
       Enquanto isso, a V4 <strong>mapeia a solução</strong>. No final, apresentamos o que se encaixa — não um catálogo genérico.
     </p>
     <div class="chips">
-      <span class="chip live">v0.7 · encaixe STEP</span>
-      <span class="chip live">Tier · margem · BE</span>
+      <span class="chip live">v0.8 · catálogo STEP</span>
+      <span class="chip live">EC · Growth · EQV</span>
       <span class="chip live">Lead score</span>
       <span class="chip">Dash = fase 2</span>
       <span class="chip"><a href="index.html" style="color:inherit;text-decoration:none">← Comando Estratégico</a></span>
     </div>
   </div></section>
 
-  <div class="callout ok"><strong>v0.7:</strong> Lead score = <em>se</em> apresenta · Tier + margem de contribuição + break-even = <em>qual STEP</em> se encaixa. Duas camadas, sem misturar.</div>
+  <div class="callout ok"><strong>v0.8:</strong> STEP = <strong>catálogo da Sara</strong> (EC · Growth · EQV · etc.) — não Pack S/M/L/XL. Lead score libera apresentar · tier + margem + BE escolhem o STEP do catálogo.</div>
 
   <nav class="nav">
     <div class="nav-label">Navegação do playbook</div>
@@ -614,7 +614,7 @@
       <div class="param">
         <div class="name">tier_cliente</div>
         <div class="type">Comercial</div>
-        <div class="desc"><em>Camada STEP.</em> Porte/complexidade (S/M/L/XL — enum a travar). Influencia qual STEP cabe.</div>
+        <div class="desc"><em>Camada STEP.</em> Porte/complexidade da conta. Influencia se cabe EC robusta, Growth, EQV ou combo.</div>
       </div>
       <div class="param">
         <div class="name">margem_contribuicao</div>
@@ -629,7 +629,7 @@
       <div class="param">
         <div class="name">step_recomendado</div>
         <div class="type">Comercial</div>
-        <div class="desc"><em>Output.</em> Qual STEP apresentar + <strong>step_nao_oferecer</strong>. Só depois do lead score liberar.</div>
+        <div class="desc"><em>Output.</em> Item/combo do catálogo (EC · Growth · EQV · …) + <strong>step_nao_oferecer</strong>. Só depois do lead score liberar.</div>
       </div>
       <div class="param">
         <div class="name">lead_score</div>
@@ -959,28 +959,49 @@
     </div>
 
     <div class="section">
-      <h2>Camada 2 · Qual STEP se encaixa</h2>
-      <h3>Tier · margem de contribuição · break-even</h3>
+      <h2>Camada 2 · Qual STEP do catálogo se encaixa</h2>
+      <h3>Catálogo Sara · não é Pack S/M/L/XL</h3>
       <p class="lead">
-        Depois que o lead score libera a apresentação, a pergunta muda:
-        <strong>qual STEP apresentar?</strong>
-        Aqui entram economia do cliente + economia do projeto — não feeling.
+        STEP = produto/combo do <strong>seu catálogo</strong>.
+        Lead score libera apresentar · tier + margem + break-even escolhem <em>qual</em> item (ou combo) do catálogo.
       </p>
+      <div class="grid3" style="margin-bottom:14px">
+        <div class="card">
+          <span class="tag ok">EC</span>
+          <div class="t">Estruturação Comercial</div>
+          <div class="d">Processo, funil, CRM, cadências, papéis, treino — quando o gargalo é máquina comercial.</div>
+        </div>
+        <div class="card">
+          <span class="tag info">Growth</span>
+          <div class="t">Assessoria / Growth</div>
+          <div class="d">Aquisição e escala com método — quando consciência e capacidade aguentam demanda.</div>
+        </div>
+        <div class="card">
+          <span class="tag warn">EQV</span>
+          <div class="t">Equivalente / caminho faseado</div>
+          <div class="d">Quando ticket cheio não cabe — oferta EQV clara (budget, fase, próximo passo).</div>
+        </div>
+      </div>
+      <div class="callout warn"><strong>Completar juntas o enum:</strong> além de EC · Growth · EQV, entram também? (ex.: ZapFirst · Social · Site/LP · CRM · Mídia/Executar · outro). Lista final vira dropdown do dash.</div>
+    </div>
+
+    <div class="section">
+      <h2>Filtros econômicos do catálogo</h2>
       <div class="grid3">
         <div class="card">
           <span class="tag hot">1 · Tier do cliente</span>
           <div class="t">Porte / complexidade</div>
-          <div class="d">Ex.: S · M · L · XL (ou o enum que a unidade usar). Define capacidade de investimento, ritmo e profundidade do STEP.</div>
+          <div class="d">Define se aguenta EC robusta, Growth multi-frente, ou precisa EQV/faseado.</div>
         </div>
         <div class="card">
           <span class="tag warn">2 · Margem de contribuição</span>
           <div class="t">Cabe no negócio dele?</div>
-          <div class="d">Margem das frentes prioritárias do cliente. Sem margem, não empurra STEP que exige escala/mídia agressiva.</div>
+          <div class="d">Sem margem na frente prioritária → não empurra Growth/mídia agressiva; prioriza EC / organização.</div>
         </div>
         <div class="card">
           <span class="tag ok">3 · Break-even do projeto</span>
           <div class="t">Quando equilibra?</div>
-          <div class="d">Em quantos meses o investimento do STEP se paga (cenário base). Se BE é longo demais pro tier/consciência, desce o STEP ou faseia.</div>
+          <div class="d">BE longo demais vs. caixa/paciência → EQV, faseamento ou STEP mais leve.</div>
         </div>
       </div>
     </div>
@@ -992,8 +1013,8 @@
         <tbody>
           <tr>
             <td><strong>tier_cliente</strong></td>
-            <td>S / M / L / XL (ou LARGE / Mid-market — alinhar enum)</td>
-            <td>Teto de complexidade e ticket do STEP</td>
+            <td>Porte/complexidade (enum a travar com você)</td>
+            <td>Teto do que o catálogo aguenta nesta conta</td>
           </tr>
           <tr>
             <td><strong>faturamento_ref</strong></td>
@@ -1002,8 +1023,8 @@
           </tr>
           <tr>
             <td><strong>margem_contribuicao</strong></td>
-            <td>% (ou R$) da frente prioritária · qual linha de produto</td>
-            <td>Valida se o STEP cabe na economia dele</td>
+            <td>% (ou R$) da frente prioritária · qual linha</td>
+            <td>Valida se Growth/mídia cabe ou se EC/EQV é mais honesto</td>
           </tr>
           <tr>
             <td><strong>break_even_meses</strong></td>
@@ -1012,48 +1033,47 @@
           </tr>
           <tr>
             <td><strong>step_recomendado</strong></td>
-            <td>Qual STEP/pack/módulo apresentar (ex.: Pack S/M/L/XL, EC, Growth…)</td>
+            <td>Item/combo do catálogo: EC · Growth · EQV · …</td>
             <td>Output da camada 2 — vai no pitch</td>
           </tr>
           <tr>
             <td><strong>step_nao_oferecer</strong></td>
-            <td>O que fica de fora agora</td>
-            <td>Protege encaixe (igual regra Triboltec)</td>
+            <td>O que fica de fora agora (ex.: Meta, Social, mídia no mês 1)</td>
+            <td>Protege encaixe (regra Triboltec)</td>
           </tr>
         </tbody>
       </table>
-      <div class="callout warn" style="margin-top:14px"><strong>Para alinhar juntas:</strong> na sua unidade, <em>STEP</em> = Pack S/M/L/XL da planilha EE, jornada Ter/Saber/Executar, ou outro catálogo? Isso trava o enum do dash.</div>
     </div>
 
     <div class="section">
-      <h2>Lógica de encaixe (rascunho v0.7)</h2>
-      <p class="lead">Ainda calibrar com você — regra de bolso para não apresentar STEP errado.</p>
+      <h2>Lógica de encaixe (rascunho · catálogo Sara)</h2>
+      <p class="lead">Regra de bolso — calibrar com casos reais (Isoluz, Modular, Ecofitness…).</p>
       <table>
-        <thead><tr><th>Sinal</th><th>Puxa STEP para cima</th><th>Puxa STEP para baixo / faseia</th></tr></thead>
+        <thead><tr><th>Leitura</th><th>STEP que tende a encaixar</th><th>Evitar agora</th></tr></thead>
         <tbody>
           <tr>
-            <td>Tier</td>
-            <td>L / XL · operação complexa · multi-canal</td>
-            <td>S / M · operação enxuta · 1–2 canais</td>
+            <td>Gargalo = comercial / processo / CRM · margem ok · BE de EC crível</td>
+            <td><strong>EC</strong> (núcleo)</td>
+            <td>Growth/mídia antes da casa pronta</td>
           </tr>
           <tr>
-            <td>Margem de contribuição</td>
-            <td>Margem saudável na frente prioritária</td>
-            <td>Margem apertada · escalar demanda queima caixa</td>
+            <td>Casa comercial ok · consciência alta · margem saudável · BE curto</td>
+            <td><strong>Growth</strong> (e mídia no ritmo certo)</td>
+            <td>Empurrar só tráfego sem tese</td>
           </tr>
           <tr>
-            <td>Break-even</td>
-            <td>BE curto e crível para o cliente</td>
-            <td>BE longo demais vs. paciência/caixa → STEP menor ou faseado</td>
+            <td>Quer continuar, mas ticket cheio / budget / BE longo</td>
+            <td><strong>EQV</strong> ou faseado</td>
+            <td>Forçar combo completo “salgado”</td>
           </tr>
           <tr>
-            <td>Consciência (do score)</td>
-            <td>Alta / muito alta — aguenta narrativa completa</td>
-            <td>Média/baixa — STEP mais simples, prova primeiro</td>
+            <td>Tier alto + multi-frente clara na EE</td>
+            <td>Combo (ex.: EC + Growth) com ordem</td>
+            <td>Catálogo inteiro de uma vez</td>
           </tr>
         </tbody>
       </table>
-      <div class="callout ok" style="margin-top:14px"><strong>Ordem na prática:</strong> 1) Gate + lead score liberam apresentar · 2) Tier + margem + BE escolhem o STEP · 3) Pitch só do STEP recomendado (+ o que não oferecer).</div>
+      <div class="callout ok" style="margin-top:14px"><strong>Ordem:</strong> 1) Gate + lead score liberam · 2) Tier + margem + BE escolhem o STEP do catálogo · 3) Pitch só do recomendado (+ o que não oferecer).</div>
     </div>
 
     <div class="section">
@@ -1122,7 +1142,7 @@
   </div>
 
   <footer>
-    V4 Company · Playbook Farmer AM · Sara Pizzico · v0.7<br>
+    V4 Company · Playbook Farmer AM · Sara Pizzico · v0.8<br>
     Carteira: clientes via Estruturação Estratégica ·
     <a href="index.html">Comando Estratégico E.E</a> ·
     <a href="https://docs.google.com/spreadsheets/d/1bCR_MxfTRJKq66Yg3WecQhF_ipPK1l6p4xNSTs0H97g/edit?usp=sharing" target="_blank" rel="noopener">Entregas EE</a> ·
