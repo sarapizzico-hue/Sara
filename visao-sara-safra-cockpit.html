@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Visão Sara · Base por safra · Cockpit E.E</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --brand:#e50915; --brand-light:#ff1a27; --bg:#050505; --surf:rgba(20,20,20,.92);
+      --surf2:#141414; --bd:rgba(255,255,255,.1); --txt:#fafafa; --mut:#a3a3a3;
+      --ok:#86efac; --warn:#fde68a; --hot:#fca5a5; --info:#93c5fd;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--txt);font:14px/1.55 Inter,system-ui,sans-serif;
+      background-image:radial-gradient(ellipse 80% 45% at 50% -15%,rgba(229,9,21,.18),transparent)}
+    .top{position:sticky;top:0;z-index:10;backdrop-filter:blur(14px);background:rgba(5,5,5,.88);border-bottom:1px solid var(--bd);padding:12px 22px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+    .logo{font-weight:900}.logo span{color:var(--brand-light)}
+    .pill{font-size:11px;font-weight:700;color:var(--mut);border:1px solid var(--bd);padding:5px 10px;border-radius:999px}
+    .wrap{max-width:1120px;margin:0 auto;padding:28px 20px 70px}
+    h1{margin:0 0 8px;font-size:clamp(26px,4vw,36px);font-weight:900;letter-spacing:-.03em}
+    .lead{color:var(--mut);max-width:880px;margin:0 0 18px;font-size:13px}
+    .lead a{color:var(--ok)}
+    .callout{padding:14px 16px;border-radius:12px;border:1px solid rgba(96,165,250,.3);background:rgba(96,165,250,.08);color:#bfdbfe;font-size:13px;margin-bottom:16px}
+    .callout.warn{border-color:rgba(250,204,21,.28);background:rgba(250,204,21,.06);color:#fde68a}
+    .callout.ok{border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.08);color:#bbf7d0}
+    .callout.hot{border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.08);color:#fecaca}
+    .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:10px;margin-bottom:16px}
+    .kpi{background:var(--surf);border:1px solid var(--bd);border-radius:14px;padding:14px 16px}
+    .kpi .v{font-size:22px;font-weight:900}.kpi .v.ok{color:var(--ok)}.kpi .v.hot{color:var(--hot)}.kpi .v.warn{color:var(--warn)}.kpi .v.info{color:var(--info)}
+    .kpi .l{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--mut);margin-top:6px;font-weight:700}
+    .section{background:var(--surf);border:1px solid var(--bd);border-radius:16px;padding:20px 22px;margin-bottom:14px}
+    .section h2{margin:0 0 6px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);font-weight:800}
+    .section h3{margin:0 0 12px;font-size:18px;font-weight:900}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:800px){.grid2{grid-template-columns:1fr}}
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}@media(max-width:900px){.grid3{grid-template-columns:1fr}}
+    .card{background:var(--surf2);border:1px solid var(--bd);border-radius:12px;padding:14px 16px}
+    .card .t{font-weight:800;margin-bottom:6px}
+    .card .d{font-size:12px;color:#d4d4d4}
+    table{width:100%;border-collapse:collapse;font-size:12.5px}
+    th,td{padding:9px 8px;border-bottom:1px solid var(--bd);text-align:left;vertical-align:top}
+    th{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);font-weight:800}
+    .tag{display:inline-block;padding:2px 8px;border-radius:999px;font-size:10px;font-weight:800;border:1px solid var(--bd);white-space:nowrap}
+    .tag.ok{color:var(--ok);border-color:rgba(34,197,94,.35)}
+    .tag.warn{color:var(--warn);border-color:rgba(250,204,21,.35)}
+    .tag.hot{color:var(--hot);border-color:rgba(239,68,68,.4)}
+    .tag.info{color:var(--info);border-color:rgba(96,165,250,.35)}
+    .bar{display:flex;height:14px;border-radius:99px;overflow:hidden;background:rgba(255,255,255,.06);margin:6px 0}
+    .bar i{display:block;height:100%}
+    .muted{color:var(--mut);font-size:12px}
+    ul{margin:0;padding-left:18px} li{margin:6px 0;color:#e5e5e5}
+    .sub{color:var(--mut);font-size:11px;margin-top:2px}
+    footer{text-align:center;color:var(--mut);font-size:11px;margin-top:36px;padding-top:18px;border-top:1px solid var(--bd)}
+    footer a{color:var(--ok)}
+    .scroll{overflow-x:auto}
+  </style>
+</head>
+<body>
+<header class="top">
+  <div class="logo">V4 <span>COMPANY</span></div>
+  <div class="pill">Visão Sara · base por safra · Cockpit E.E</div>
+</header>
+
+<div class="wrap">
+  <h1>Visão Sara · como está a base por safra</h1>
+  <p class="lead">
+    Fonte: <a href="https://docs.google.com/spreadsheets/d/1dSukhon9dIUABcbQIKGKUa-ku-_oLOn1Q5YWeWGfI6U/edit?gid=759150030#gid=759150030" target="_blank" rel="noopener">Cockpit E.E</a>
+    · Farmer = <strong>Sara</strong> · <strong>125 contas</strong>.
+    Safra = mês da <em>Data de início</em>. Status lido da coluna <em>Status</em> (não “Status Monetização”).
+    Foco: motivos de Drop (Ops) e entradas <em>Já monetizado</em> / com Executar.
+  </p>
+
+  <div class="callout warn">
+    <strong>Leitura-mestra:</strong> a base fecha ~42% win/(win+drop) incluindo Já monetizado.
+    Tirando Já monetizado cai para ~35%. Tirando os 18 drops de Tratativa Ops sobe para ~52%.
+    Ou seja: Ops e “já veio com produto” distorcem o funil Farmer — precisam de fila separada.
+  </div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="v">125</div><div class="l">Contas Sara</div></div>
+    <div class="kpi"><div class="v ok">30</div><div class="l">Monetizado</div></div>
+    <div class="kpi"><div class="v info">10</div><div class="l">Já monetizado</div></div>
+    <div class="kpi"><div class="v hot">55</div><div class="l">Drop</div></div>
+    <div class="kpi"><div class="v warn">18</div><div class="l">Drop Tratativa Ops</div></div>
+    <div class="kpi"><div class="v">30</div><div class="l">Pipe ativo*</div></div>
+  </div>
+  <p class="muted">*Pipe ativo = Semana* + Follow + status vazio (ainda em ciclo / sem data).</p>
+
+  <!-- SAFRA -->
+  <div class="section">
+    <h2>Safra</h2>
+    <h3>Volume e conversão por mês de entrada</h3>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Safra</th><th>N</th><th>Monetizado</th><th>Já monet.</th><th>Drop</th><th>Pipe</th>
+            <th>Win rate*</th><th>Drop Ops</th><th>Drop Budget</th><th>Drop Timing</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>2025-12</td><td>2</td><td>0</td><td>0</td><td>2</td><td>0</td><td class="hot">0%</td><td>1</td><td>0</td><td>0</td></tr>
+          <tr><td>2026-01</td><td>6</td><td>2</td><td>0</td><td>4</td><td>0</td><td>33%</td><td>2</td><td>0</td><td>2</td></tr>
+          <tr><td>2026-02</td><td>13</td><td>6</td><td>0</td><td>7</td><td>0</td><td class="ok">46%</td><td>5</td><td>1</td><td>1</td></tr>
+          <tr><td>2026-03</td><td>24</td><td>7</td><td>0</td><td>17</td><td>0</td><td class="hot">29%</td><td>5</td><td>3</td><td>8</td></tr>
+          <tr><td>2026-04</td><td>16</td><td>5</td><td>2</td><td>9</td><td>0</td><td>44%</td><td>3</td><td>3</td><td>3</td></tr>
+          <tr><td>2026-05</td><td>24</td><td>7</td><td>4</td><td>10</td><td>3</td><td class="ok">52%</td><td>1</td><td>4</td><td>3</td></tr>
+          <tr><td>2026-06</td><td>20</td><td>2</td><td>2</td><td>6</td><td>10</td><td>40%</td><td>1</td><td>3</td><td>1</td></tr>
+          <tr><td>2026-07</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>—</td><td>0</td><td>0</td><td>0</td></tr>
+          <tr><td>sem data</td><td>19</td><td>1</td><td>2</td><td>0</td><td>16</td><td>—</td><td>0</td><td>0</td><td>0</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted" style="margin-top:10px">*Win rate = (Monetizado + Já monetizado) / (esses + Drop). Pipe = Semana/Follow/vazio.</p>
+
+    <div class="grid3" style="margin-top:14px">
+      <div class="card">
+        <div class="t">Março foi o buraco</div>
+        <div class="d">24 entradas · 17 drops · win 29%. Timing (8) + Ops (5) dominam. Maior safra “morta” comercialmente.</div>
+      </div>
+      <div class="card">
+        <div class="t">Fevereiro e maio salvam</div>
+        <div class="d">Fev 46% / Mai 52%. Maio traz 4 Já monetizado — infla win rate; Monetizado puro = 7/17 closed ≈ 41%.</div>
+      </div>
+      <div class="card">
+        <div class="t">Junho ainda aberto</div>
+        <div class="d">10 em pipe + 4 Follow. Cedo para julgar a safra — Budget já aparece (Protesol, KFG, Estação Delta).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DROPS -->
+  <div class="section">
+    <h2>Motivos de Drop</h2>
+    <h3>55 drops · distribuição</h3>
+    <div class="bar" title="Ops 18 · Timing 18 · Budget 14 · Interno 2 · vazio 3">
+      <i style="width:32.7%;background:#f87171"></i>
+      <i style="width:32.7%;background:#fbbf24"></i>
+      <i style="width:25.5%;background:#60a5fa"></i>
+      <i style="width:3.6%;background:#a3a3a3"></i>
+      <i style="width:5.5%;background:#525252"></i>
+    </div>
+    <div class="muted">Tratativa Ops 18 · Timing 18 · Budget 14 · Interno 2 · sem motivo 3</div>
+
+    <div class="grid2" style="margin-top:16px">
+      <div class="card">
+        <div class="t">Empate Ops = Timing (18)</div>
+        <div class="d">Ops mata <em>antes</em> do pitch comercial. Timing mata <em>depois</em> de interesse. São problemas diferentes — mesma fila no Cockpit esconde isso.</div>
+      </div>
+      <div class="card">
+        <div class="t">Budget 14 · subindo nas safras recentes</div>
+        <div class="d">Mai–Jun concentram Budget (Unik ghost, Protesol “salgado”, KFG obra, Madezatto → EQV). Consciência/WTP, não só preço.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPS DETAIL -->
+  <div class="section">
+    <h2>Zoom · Tratativa Ops (18)</h2>
+    <h3>Quase 1 em cada 3 drops da Sara</h3>
+    <div class="callout hot">
+      <strong>Padrão:</strong> 10/18 são “PROJETO TRAVADO” genérico no Cockpit — pouco diagnóstico acionável.
+      Quando há detalhe: pagamento EE / Churn M0, problema na entrega EE, ou cliente que já veio com Executar bookado.
+      Squad: Invictus 8 · Billions 6 · Exclusive 4. Need: SMALL 8 · TINY 6 · MEDIUM 2.
+    </div>
+
+    <div class="grid3" style="margin-bottom:14px">
+      <div class="card"><div class="t">10 · Projeto travado</div><div class="d">Obs só “PROJETO TRAVADO” — falta causa (ops? cliente? pagto? escopo?).</div></div>
+      <div class="card"><div class="t">2 · Pagamento / Churn M0</div><div class="d">MasterPlan · Premium Gourmet — gate pago falhou. Playbook: veto de apresentação.</div></div>
+      <div class="card"><div class="t">6 · Outros</div><div class="d">Projeto caiu · handoff Amanda · coord no Follow · veio com Executar · sem detalhe.</div></div>
+    </div>
+
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Conta</th><th>Safra</th><th>Squad</th><th>Leitura</th><th>Obs / sinal</th></tr></thead>
+        <tbody>
+          <tr><td>Ntec instalações</td><td>2025-12</td><td>Invictus</td><td><span class="tag hot">Travado</span></td><td>PROJETO TRAVADO</td></tr>
+          <tr><td>Equilibra</td><td>2026-01</td><td>Invictus</td><td><span class="tag warn">Coord/Follow</span></td><td>Coordenador cuidando do Follow · pitch marcado</td></tr>
+          <tr><td>Financial Sistemas</td><td>2026-01</td><td>Exclusive</td><td><span class="tag hot">Travado + FB</span></td><td>PROJETO TRAVADO · feedback: análise superficial SaaS / cliente não viu valor</td></tr>
+          <tr><td>Casa Bella</td><td>2026-02</td><td>Billions</td><td><span class="tag hot">Travado</span></td><td>PROJETO TRAVADO · pitch 23/03</td></tr>
+          <tr><td>Joyful Feast</td><td>2026-02</td><td>Billions</td><td><span class="tag hot">Travado</span></td><td>PROJETO TRAVADO · tinha fee Ter</td></tr>
+          <tr><td>Fuzinatto / Roverotto</td><td>2026-02</td><td>Invictus</td><td><span class="tag hot">Travado</span></td><td>PROJETO TRAVADO · fee E R$7.8k + T R$25k já mapeados</td></tr>
+          <tr><td>Vita Mater</td><td>2026-02</td><td>Billions</td><td><span class="tag warn">EE / handoff</span></td><td>Problema no EE · com Amanda</td></tr>
+          <tr><td>L5 máquinas</td><td>2026-02</td><td>Invictus</td><td><span class="tag hot">Travado</span></td><td>PROJETO TRAVADO</td></tr>
+          <tr><td>MasterPlan</td><td>2026-03</td><td>Exclusive</td><td><span class="tag hot">Pagto / Churn M0</span></td><td>Falta pagamento · KO feito · fee Ter mapeado</td></tr>
+          <tr><td>LaundryApp</td><td>2026-03</td><td>Billions</td><td><span class="tag hot">Travado</span></td><td>PROJETO TRAVADO</td></tr>
+          <tr><td>Amorelli</td><td>2026-03</td><td>Billions</td><td><span class="tag hot">Travado</span></td><td>PROJETO TRAVADO</td></tr>
+          <tr><td>Fc Cursio</td><td>2026-03</td><td>Invictus</td><td><span class="tag hot">Travado</span></td><td>PROJETO TRAVADO</td></tr>
+          <tr><td>Lone Star BC</td><td>2026-03</td><td>Invictus</td><td><span class="tag hot">Travado</span></td><td>PROJETO TRAVADO · pitch TRUE</td></tr>
+          <tr><td>Premium Gourmet</td><td>2026-04</td><td>Invictus</td><td><span class="tag hot">Pagto EE</span></td><td>Problemas de pagamento no EE + Executar</td></tr>
+          <tr><td>Globo Eventos</td><td>2026-04</td><td>Invictus</td><td><span class="tag info">Já veio c/ Executar</span></td><td>Tiny/small · Executar bookado + CRM já implementado · negociando EC/social</td></tr>
+          <tr><td>NextPack</td><td>2026-04</td><td>Exclusive</td><td><span class="tag">Sem detalhe</span></td><td>Motivo Ops · obs vazia</td></tr>
+          <tr><td>M &amp; J Green Foods</td><td>2026-05</td><td>Billions</td><td><span class="tag hot">Caiu</span></td><td>PROJETO CAIU · KO feito</td></tr>
+          <tr><td>Conlar Shopping</td><td>2026-06</td><td>Exclusive</td><td><span class="tag">Sem detalhe</span></td><td>Motivo Ops · obs vazia</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout" style="margin-top:14px">
+      <strong>Ação Farmer:</strong> Tratativa Ops não compete com pitch de STEP.
+      Separar fila “recuperar contrato EE” (pago + entrega) da fila “plano de ação / lead score”.
+      Exigir causa no Cockpit além de “PROJETO TRAVADO” (pagto · escopo · agenda ops · churn · handoff).
+    </div>
+  </div>
+
+  <!-- JA MONETIZADO -->
+  <div class="section">
+    <h2>Já monetizado · entrou com Executar / assessoria</h2>
+    <h3>10 contas · não são “win Farmer” puro</h3>
+    <div class="callout ok">
+      Status do Cockpit para quem <strong>já chegou com produto ativo</strong> (Executar ou assessoria).
+      A regra da carteira: Account Planning / aguardar estabilizar — <em>não</em> forçar pitch de continuidade cedo.
+      Só 2/10 têm TCV preenchido (Prata Nobre R$50.6k · Sensoria R$24k).
+    </div>
+
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Conta</th><th>Safra</th><th>Tipo de entrada</th><th>Fees</th><th>Postura</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Belô Café</td><td>2026-04</td><td><span class="tag info">Assessoria</span></td><td>—</td>
+            <td>Aguardar pitch · perda da gerente geral · medo de cair o projeto</td>
+          </tr>
+          <tr>
+            <td>METAL COMERCIO</td><td>2026-04</td><td><span class="tag">Já monetizado</span></td><td>—</td>
+            <td>Obs vazia — higiene</td>
+          </tr>
+          <tr>
+            <td>Prata Nobre</td><td>2026-05</td><td><span class="tag ok">E + Ter</span></td><td>E 3.6k · T 7.5k · TCV 50.6k</td>
+            <td>Social + CRM MKT (já rodando)</td>
+          </tr>
+          <tr>
+            <td>Sensoria</td><td>2026-05</td><td><span class="tag ok">Entrou c/ Executar</span></td><td>E 0.5k · T 18k · TCV 24k</td>
+            <td>Aguardar mais para monetizar de novo</td>
+          </tr>
+          <tr>
+            <td>Ez turismo</td><td>2026-05</td><td><span class="tag info">Assessoria</span></td><td>—</td>
+            <td>Sem proposta agora · Account Planning na base ativa</td>
+          </tr>
+          <tr>
+            <td>Rdo Pro</td><td>2026-05</td><td><span class="tag ok">Entrou c/ Executar</span></td><td>—</td>
+            <td>Aguardar mais para monetizar</td>
+          </tr>
+          <tr>
+            <td>Brod transportes</td><td>2026-06</td><td><span class="tag">Já monetizado</span></td><td>—</td>
+            <td>Obs vazia — higiene</td>
+          </tr>
+          <tr>
+            <td>Medicar</td><td>2026-06</td><td><span class="tag info">Assessoria</span></td><td>—</td>
+            <td>Account Planning · sem proposta agora</td>
+          </tr>
+          <tr>
+            <td>Fernando Móveis</td><td>sem data</td><td><span class="tag info">Assessoria</span></td><td>—</td>
+            <td>Account Planning · sem proposta agora</td>
+          </tr>
+          <tr>
+            <td>Espaço Palazzo Prado</td><td>sem data</td><td><span class="tag">Já monetizado</span></td><td>—</td>
+            <td>Obs vazia — higiene</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid2" style="margin-top:14px">
+      <div class="card">
+        <div class="t">O que isso muda no número</div>
+        <div class="d">
+          Closed total: 40 wins / 95 = <strong>42%</strong>.<br>
+          Sem Já monetizado: 30 / 85 = <strong>35%</strong>.<br>
+          Monetização “nova” da Farmer é mais dura do que o headline do Cockpit.
+        </div>
+      </div>
+      <div class="card">
+        <div class="t">Globo Eventos (Drop Ops)</td>
+        <div class="d">Caso-limite: Tiny que <em>já veio com Executar bookado</em> + CRM — caiu em Tratativa Ops, não em win Já monetizado. Entrada Executar ≠ sucesso automático.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIMING / BUDGET -->
+  <div class="section">
+    <h2>Timing &amp; Budget · o lado comercial</h2>
+    <h3>Depois que o projeto sobe, o que mata</h3>
+    <div class="grid2">
+      <div>
+        <div class="card" style="margin-bottom:10px"><div class="t">Timing · 18</div><div class="d">Interesse existe, momento não. FUP futuro, luto, lançamento, decidir com sócios, EQV depois. Safras pesadas: mar (8).</div></div>
+        <ul>
+          <li><strong>Becton / Devstate / Madeiras / Mais Gôndolas</strong> — fee Executar alto já na mesa, timing travou</li>
+          <li><strong>Positive Safety / Pedrini / Fui Motos</strong> — reativando EQV / avaliar com sócio</li>
+          <li><strong>Eskimó</strong> — ainda em lançamento</li>
+        </ul>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:10px"><div class="t">Budget · 14</div><div class="d">WTP insuficiente ou capital comprometido. Cresce em mai–jun. Vários com fee E preenchido = preço bateu na parede.</div></div>
+        <ul>
+          <li><strong>Protesol</strong> — “salgado” (ZapFirst + custos)</li>
+          <li><strong>KFG</strong> — obra atrasou capital</li>
+          <li><strong>Unik</strong> — ghost pós-proposta</li>
+          <li><strong>Ultra Vida</strong> — margem ~7,6% · pouca folga</li>
+          <li><strong>Madezatto</strong> — reativando EQV</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- WINS -->
+  <div class="section">
+    <h2>Wins reais · Monetizado (30)</h2>
+    <h3>TCV médio ~R$ 49,8k · mix não é só Executar</h3>
+    <div class="grid3">
+      <div class="card"><div class="t">20 com fee Executar</div><div class="d">7 só Executar · resto mistura E+T / E+S</div></div>
+      <div class="card"><div class="t">Mix forte E+T</div><div class="d">Fares, Biesky, Espaço Zabeu, Rpplass, Reveservice, Fibranet, CDG…</div></div>
+      <div class="card"><div class="t">Wins sem Executar</div><div class="d">Stylus (Saber) · Isoluz (S+T) · Knowledge · DECORTI · Luup · Pachane · Telefer · Rede Construir · Inovar</div></div>
+    </div>
+    <p class="muted" style="margin-top:12px">Melhores safras de Monetizado puro: fev (6) · mar (7) · mai (7). Jun ainda com poucos fechados (2).</p>
+  </div>
+
+  <!-- ACOES -->
+  <div class="section">
+    <h2>Plano de ação da visão</h2>
+    <h3>O que fazer com esse retrato</h3>
+    <ol>
+      <li><strong>Fila Ops aparte:</strong> 18 Tratativa Ops fora do ranking de pitch. Gate pago + entrega EE antes de lead score.</li>
+      <li><strong>Higiene do motivo:</strong> banir “PROJETO TRAVADO” sem causa (pagto / escopo / agenda / churn / handoff).</li>
+      <li><strong>Já monetizado com cadência:</strong> 10 contas — Account Planning datado; não contar como win de conversão EE→STEP.</li>
+      <li><strong>Março como case negativo:</strong> volume alto + Timing/Ops — revisar handoff da safra e qualidade de entrada.</li>
+      <li><strong>Budget recente → EQV/Saber·Ter:</strong> Protesol, KFG, Unik, Madezatto — consciência antes de fee Executar cheio.</li>
+      <li><strong>19 sem data de início:</strong> completar no Cockpit (safra e forecast ficam cegos).</li>
+    </ol>
+  </div>
+
+  <div class="callout">
+    Ferramentas: <a href="fluxograma-farmer-ee.html" style="color:#86efac">Fluxograma</a> ·
+    <a href="playbook-farmer-am.html" style="color:#86efac">Playbook</a> ·
+    <a href="plano-acao-farmer.html" style="color:#86efac">Plano de Ação</a> ·
+    <a href="analise-ee-sara-marcelo.html" style="color:#86efac">Sara × Marcelo</a>
+  </div>
+
+  <footer>
+    V4 · Visão Sara · Cockpit E.E por safra · sync Aug/2026 ·
+    <a href="https://docs.google.com/spreadsheets/d/1dSukhon9dIUABcbQIKGKUa-ku-_oLOn1Q5YWeWGfI6U/edit?gid=759150030#gid=759150030" target="_blank" rel="noopener">Planilha</a> ·
+    <a href="index.html">Comando Estratégico</a>
+  </footer>
+</div>
+</body>
+</html>
