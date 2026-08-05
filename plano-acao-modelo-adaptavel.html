@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Plano de Ação adaptável · modelo G6 / call Rafaela</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --brand:#e50915; --brand-light:#ff1a27; --bg:#050505; --surf:rgba(20,20,20,.92);
+      --surf2:#141414; --bd:rgba(255,255,255,.1); --txt:#fafafa; --mut:#a3a3a3;
+      --ok:#86efac; --warn:#fde68a; --hot:#fca5a5; --info:#93c5fd;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--txt);font:14px/1.55 Inter,system-ui,sans-serif;
+      background-image:radial-gradient(ellipse 80% 45% at 50% -15%,rgba(229,9,21,.18),transparent)}
+    .top{position:sticky;top:0;z-index:10;backdrop-filter:blur(14px);background:rgba(5,5,5,.88);border-bottom:1px solid var(--bd);padding:12px 22px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+    .logo{font-weight:900}.logo span{color:var(--brand-light)}
+    .pill{font-size:11px;font-weight:700;color:var(--mut);border:1px solid var(--bd);padding:5px 10px;border-radius:999px}
+    .wrap{max-width:1100px;margin:0 auto;padding:28px 20px 70px}
+    h1{margin:0 0 8px;font-size:clamp(24px,4vw,34px);font-weight:900;letter-spacing:-.03em}
+    .lead{color:var(--mut);max-width:880px;margin:0 0 18px;font-size:13px}
+    .lead a{color:var(--ok)}
+    .callout{padding:14px 16px;border-radius:12px;border:1px solid rgba(96,165,250,.3);background:rgba(96,165,250,.08);color:#bfdbfe;font-size:13px;margin-bottom:14px}
+    .callout.warn{border-color:rgba(250,204,21,.28);background:rgba(250,204,21,.06);color:#fde68a}
+    .callout.ok{border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.08);color:#bbf7d0}
+    .callout.hot{border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.08);color:#fecaca}
+    .section{background:var(--surf);border:1px solid var(--bd);border-radius:16px;padding:20px 22px;margin-bottom:14px}
+    .section h2{margin:0 0 6px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);font-weight:800}
+    .section h3{margin:0 0 12px;font-size:18px;font-weight:900}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:800px){.grid2{grid-template-columns:1fr}}
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}@media(max-width:900px){.grid3{grid-template-columns:1fr}}
+    .card{background:var(--surf2);border:1px solid var(--bd);border-radius:12px;padding:14px 16px}
+    .card .t{font-weight:800;margin-bottom:6px}
+    .card .d{font-size:12px;color:#d4d4d4}
+    .tag{display:inline-block;padding:2px 8px;border-radius:999px;font-size:10px;font-weight:800;border:1px solid var(--bd);margin-bottom:8px}
+    .tag.ok{color:var(--ok);border-color:rgba(34,197,94,.35)}
+    .tag.warn{color:var(--warn);border-color:rgba(250,204,21,.35)}
+    .tag.hot{color:var(--hot);border-color:rgba(239,68,68,.4)}
+    .tag.info{color:var(--info);border-color:rgba(96,165,250,.35)}
+    ol.steps,ul{margin:0;padding-left:18px} li{margin:6px 0;color:#e5e5e5}
+    table{width:100%;border-collapse:collapse;font-size:12.5px}
+    th,td{padding:9px 8px;border-bottom:1px solid var(--bd);text-align:left;vertical-align:top}
+    th{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);font-weight:800}
+    .muted{color:var(--mut);font-size:12px}
+    .flow{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}@media(max-width:900px){.flow{grid-template-columns:1fr 1fr}}
+    .flow-step{background:var(--surf2);border:1px solid var(--bd);border-radius:12px;padding:12px}
+    .flow-step .n{font-size:10px;font-weight:800;color:var(--mut);letter-spacing:.08em;text-transform:uppercase}
+    .flow-step .t{font-weight:800;margin:4px 0}
+    .flow-step .d{font-size:12px;color:#d4d4d4}
+    .check li{list-style:none;margin-left:-18px;display:flex;gap:10px;align-items:flex-start}
+    .check .box{width:16px;height:16px;border:1px solid var(--bd);border-radius:4px;flex-shrink:0;margin-top:3px}
+    footer{text-align:center;color:var(--mut);font-size:11px;margin-top:28px;padding-top:16px;border-top:1px solid var(--bd)}
+    footer a{color:var(--ok)}
+  </style>
+</head>
+<body>
+<header class="top">
+  <div class="logo">V4 <span>COMPANY</span></div>
+  <div class="pill">Plano de Ação adaptável · modelo call G6 / Rafaela</div>
+</header>
+
+<div class="wrap">
+  <h1>Plano de Ação adaptável</h1>
+  <p class="lead">
+    Extraído da call Sara × Rafaela (G6 Internet + fila pós–semana 3).
+    O caso G6 é o exemplo; o método serve para os demais pitches da carteira.
+    Hub: <a href="farmer-sara.html">farmer-sara.html</a> ·
+    Visão safra: <a href="visao-sara-safra.html">visao-sara-safra.html</a>.
+  </p>
+
+  <div class="callout warn">
+    <strong>Frase-mestra da call:</strong> nada solto no pitch.
+    GC alinhada · decisor na sala · CSAT · case · projeção · dores específicas · preço único com desconto já embutido · narrativa que amarra diagnóstico → solução → decisão.
+  </div>
+
+  <!-- EXEMPLO G6 -->
+  <div class="section">
+    <h2>Caso âncora</h2>
+    <h3>G6 Internet · o que estava amarrado</h3>
+    <div class="grid3">
+      <div class="card">
+        <span class="tag ok">Produto</span>
+        <div class="t">Combo Performance</div>
+        <div class="d">~R$ 7.920 · 100% performance · sem social. Cliente já roda campanha / tem demanda; gap = tracking + retenção + CRM.</div>
+      </div>
+      <div class="card">
+        <span class="tag info">Economia</span>
+        <div class="t">Projeção + case Fibranet</div>
+        <div class="d">BE conservador ~mês 6–7 (custo ~7k + mídia ~10k). Se taxas Fibranet 100% → BE ~mês 3 — usar como “pode ser antes”, não como promessa.</div>
+      </div>
+      <div class="card">
+        <span class="tag warn">Gate</span>
+        <div class="t">Sala pronta</div>
+        <div class="d">Decisor João na GC · CSAT 100% · stakeholder (Laura) não quer agência interna · Esdras (mkt) comprado, sem braço.</div>
+      </div>
+    </div>
+    <div class="grid2" style="margin-top:12px">
+      <div class="card">
+        <div class="t">Dores G6 (listar no pitch)</div>
+        <ul>
+          <li><strong>Rastreamento</strong> quebrado → resultado subjetivo; não escala verba</li>
+          <li><strong>Retenção</strong> sem jornada / oferta na base → perde para concorrente de preço</li>
+          <li><strong>Esdras multifunção</strong> + agência externa sem entrega (ex.: UTM campanha vs anúncio)</li>
+          <li><strong>CRM/RD</strong> sem visão de jornada, tags, DM; funil “não sei / não sei”</li>
+          <li>Digital = canal principal · ~150–200 vendas/mês · ticket ~R$100 · 25 cidades</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="t">Preço / pagamento (regra)</div>
+        <ul>
+          <li><strong>Um preço só</strong> — desconto e fee cartão já embutidos</li>
+          <li>Mesma forma de pagamento da EE</li>
+          <li>Não abrir “à vista vs cartão vs…” → confunde cliente objetivo</li>
+          <li>Upsell CRM: ancorar Performance → fechar kit 12m com CRM em condição (~10k) como essencial, não opcional</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODELO ADAPTÁVEL -->
+  <div class="section">
+    <h2>Modelo para qualquer conta</h2>
+    <h3>Checklist do Plano de Ação (copiar por cliente)</h3>
+    <div class="flow" style="margin-bottom:16px">
+      <div class="flow-step"><div class="n">01</div><div class="t">Gate</div><div class="d">Decisor · pago · CSAT · stakeholders</div></div>
+      <div class="flow-step"><div class="n">02</div><div class="t">Diagnóstico</div><div class="d">Dores específicas + “perde na mesa”</div></div>
+      <div class="flow-step"><div class="n">03</div><div class="t">Case</div><div class="d">Interno correlato (ex. Fibranet)</div></div>
+      <div class="flow-step"><div class="n">04</div><div class="t">Projeção</div><div class="d">Conservadora + BE · validar c/ ops</div></div>
+      <div class="flow-step"><div class="n">05</div><div class="t">Oferta</div><div class="d">Core + essencial (não “opcional”)</div></div>
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>Bloco</th><th>Pergunta a responder</th><th>Exemplo G6</th><th>Adaptar na conta X</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1 · Gate da sala</strong></td>
+          <td>Decisor na call? CSAT? Quem influencia? Quem está comprado?</td>
+          <td>João + Laura + Esdras · GC 100%</td>
+          <td>…</td>
+        </tr>
+        <tr>
+          <td><strong>2 · O que já roda</strong></td>
+          <td>Já tem demanda / mídia / time? Gap é Ter, Saber ou Executar?</td>
+          <td>Já campanha + demanda; gap tracking/CRM/retenção</td>
+          <td>…</td>
+        </tr>
+        <tr>
+          <td><strong>3 · Dores nomeadas</strong></td>
+          <td>Lista específica (não genérica). Quem sofre no dia a dia?</td>
+          <td>UTM, CRM cego, Esdras sem braço, retenção</td>
+          <td>…</td>
+        </tr>
+        <tr>
+          <td><strong>4 · Case</strong></td>
+          <td>Qual case interno com mesmas travas? O que pode compartilhar?</td>
+          <td>Fibranet (retenção / performance / BE)</td>
+          <td>…</td>
+        </tr>
+        <tr>
+          <td><strong>5 · Projeção</strong></td>
+          <td>Conservadora vs “se case 100%”. BE em qual mês? Não prometer abaixo do que já vende sem LTV.</td>
+          <td>BE 6–7 · Fibranet rates → ~3</td>
+          <td>…</td>
+        </tr>
+        <tr>
+          <td><strong>6 · Produto core</strong></td>
+          <td>1 STEP/combo que resolve a dor #1. O que NÃO oferecer.</td>
+          <td>Combo Performance · sem social</td>
+          <td>…</td>
+        </tr>
+        <tr>
+          <td><strong>7 · Essencial (upsell)</strong></td>
+          <td>O que sem isso o core não resolve 100%? Vender como obrigatório, não complemento.</td>
+          <td>Profissional CRM 12m no pacote</td>
+          <td>…</td>
+        </tr>
+        <tr>
+          <td><strong>8 · Preço</strong></td>
+          <td>Âncora → condição de fechar agora · 1 preço · pagamento = EE</td>
+          <td>~8k → kit ~10k cartão 12m</td>
+          <td>…</td>
+        </tr>
+        <tr>
+          <td><strong>9 · Próximos passos</strong></td>
+          <td>Slide de sprints (semana 1 / 2…) se fechar agora</td>
+          <td>Prioridade + case Fibranet na narrativa</td>
+          <td>…</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- NARRATIVA PITCH -->
+  <div class="section">
+    <h2>Narrativa de pitch (da call)</h2>
+    <h3>Ordem que amarra — adaptar texto, manter lógica</h3>
+    <ol class="steps">
+      <li><strong>Diagnóstico / dores</strong> — listar gaps específicos (tracking, retenção, braço do time, sistema). “O que está vazando na mesa.”</li>
+      <li><strong>Case</strong> — “Validamos isso internamente (Fibranet / case X): mesmas travas, resultado Y.” Autoridade, não slide solto.</li>
+      <li><strong>Core = assumir responsabilidade</strong> — Performance/time padrão. Esdras (ou equivalente) atesta: faz sentido.</li>
+      <li><strong>Apertar</strong> — “Mídia sozinha melhora compra, mas não resolve 100%. O sistema/CRM está quebrado; sem dono técnico continua vazando.”</li>
+      <li><strong>Essencial</strong> — Profissional de CRM/sistema como o que fecha o problema (não “opcionalzinho”).</li>
+      <li><strong>Ancoragem de preço</strong> — Mostra core (âncora) → condição kit 12m com essencial em valor favorecido para fechar agora / cartão.</li>
+      <li><strong>Projeção</strong> — Conservadora + “pode vir antes como no case”; cuidado para não parecer regressão vs vendas atuais (usar LTV se ticket baixo).</li>
+      <li><strong>Próximos passos</strong> — Sprints se fechar agora (o que acontece semana a semana).</li>
+      <li><strong>Um preço · uma decisão</strong> — Sem menu de condições confuso.</li>
+    </ol>
+    <div class="callout hot" style="margin-top:14px">
+      <strong>Posicionamento do upsell:</strong> “Não é escopo complementar. É o que resolve 100% o problema.
+      Contratar só mídia agora e descobrir o CRM em 3 meses = 3× o valor. Hoje está na mesa com condição.”
+    </div>
+  </div>
+
+  <!-- REGRAS -->
+  <div class="section">
+    <h2>Regras que saíram da sala</h2>
+    <h3>Para repetir nos outros clientes</h3>
+    <div class="grid2">
+      <div class="card">
+        <div class="t">Fazer</div>
+        <ul>
+          <li>Nada solto: case + projeção + dores + gate batidos com ops (Éder/Juan/Eric)</li>
+          <li>Case interno amarrado na estratégia (não “cita no final”)</li>
+          <li>Preço único com desconto embutido</li>
+          <li>Vender essencial como autoridade (porquê técnico)</li>
+          <li>Conta de padaria na mesa (ticket/CPV/LTV) para urgência</li>
+          <li>Pós–semana 3 → sala de plano com pacote completo</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="t">Evitar</div>
+        <ul>
+          <li>Várias formas de pagamento na mesma proposta</li>
+          <li>Upsell “se quiser a gente também faz CRM”</li>
+          <li>Projeção sem LTV que parece pior que o mês atual do cliente</li>
+          <li>Prometer taxas 100% do case maduro</li>
+          <li>Pitch sem decisor / sem CSAT / com ponta solta de GTM</li>
+          <li>Slide de projeção quebrado / número não validado</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- FILA -->
+  <div class="section">
+    <h2>Fila da call (prioridade)</h2>
+    <h3>Como a Rafaela ranqueou — espelho para a carteira Sara</h3>
+    <table>
+      <thead><tr><th>Prioridade</th><th>Conta</th><th>Por quê</th><th>Status plano</th></tr></thead>
+      <tbody>
+        <tr><td><span class="tag hot">P0 · inaceitável não fechar</span></td><td>G6</td><td>Grana · dor clara · gate ok · case Fibranet</td><td>Combo + CRM · pit</td></tr>
+        <tr><td><span class="tag warn">P0/P1</span></td><td>AP Equipamentos</td><td>~R$ 3,75M · B2B engenharia · presencial</td><td>Produto ok; falta case; Aline plano até sex</td></tr>
+        <tr><td><span class="tag info">P1</span></td><td>Remax / Freebong</td><td>Remax ver; Freebong validar estratégia</td><td>Em desenho</td></tr>
+        <tr><td><span class="tag">Watch</span></td><td>Ecossalva · Medicar · Tamiya · ABC71…</td><td>Tier / semana / capacidade</td><td>Passar semana 3 → entra na sala com pacote</td></tr>
+      </tbody>
+    </table>
+    <p class="muted" style="margin-top:10px">Regra Eric: tudo que passa da 3ª semana vem para essa sala com projeção + plano + case + stakeholders alinhados. Pits novos a partir do dia 12.</p>
+  </div>
+
+  <!-- TEMPLATE VAZIO -->
+  <div class="section">
+    <h2>Template em branco</h2>
+    <h3>Preencher por conta (antes do pitch)</h3>
+    <ul class="check">
+      <li><span class="box"></span><div><strong>Conta / tier / faturamento</strong> — …</div></li>
+      <li><span class="box"></span><div><strong>Decisor na sala + influenciadores comprados</strong> — …</div></li>
+      <li><span class="box"></span><div><strong>CSAT / expectativa / forma de pagamento EE</strong> — …</div></li>
+      <li><span class="box"></span><div><strong>Top 3–5 dores específicas</strong> — …</div></li>
+      <li><span class="box"></span><div><strong>O que já roda vs o que falta (Ter / Saber / Executar)</strong> — …</div></li>
+      <li><span class="box"></span><div><strong>Case interno + o que compartilhar</strong> — …</div></li>
+      <li><span class="box"></span><div><strong>Projeção conservadora + BE + validado por</strong> — …</div></li>
+      <li><span class="box"></span><div><strong>Produto core + o que NÃO oferecer</strong> — …</div></li>
+      <li><span class="box"></span><div><strong>Essencial (upsell obrigatório) + porquê</strong> — …</div></li>
+      <li><span class="box"></span><div><strong>Âncora de preço → condição fechar agora (1 preço)</strong> — …</div></li>
+      <li><span class="box"></span><div><strong>Slide próximos passos / sprints</strong> — …</div></li>
+      <li><span class="box"></span><div><strong>Objeções a matar antes do preço</strong> — …</div></li>
+      <li><span class="box"></span><div><strong>Dono do HTML/proposta + quem valida (Juan/Éder/Eric)</strong> — …</div></li>
+    </ul>
+  </div>
+
+  <div class="callout ok">
+    <strong>Para a Sara:</strong> este modelo casa com o playbook (gate · STEP · case · plano) e com o coaching do Rodrigo (perguntas, antecipar objeção, um preço).
+    Na G6: Performance é o fechamento óbvio; CRM é a narrativa de “resolve 100%”. Nos demais: achar o par core + essencial da mesma forma.
+  </div>
+
+  <footer>
+    V4 · Plano de Ação adaptável · baseado na call G6 / Rafaela ·
+    <a href="farmer-sara.html">Hub Farmer Sara</a> ·
+    <a href="plano-acao-farmer.html">Gerador de plano</a> ·
+    <a href="visao-sara-safra.html">Visão safra</a>
+  </footer>
+</div>
+</body>
+</html>
