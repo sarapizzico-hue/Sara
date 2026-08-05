@@ -1,0 +1,118 @@
+{
+  "generated_at": "2026-07-17",
+  "ativos": 30,
+  "avg": 44.9,
+  "bands": {
+    "B": 4,
+    "C": 17,
+    "D": 9
+  },
+  "ee_executar": [
+    "Brod transportes ltda (LL)",
+    "Fernando Móveis e Eletro (BM)",
+    "Medicar (BL)"
+  ],
+  "com_csat": [
+    "Brod transportes ltda (LL)",
+    "Academia imigrantes Ltda (BS)",
+    "Adriano Martins Cardoso (BS)",
+    "Modular Estruturas (BM)",
+    "Fernando Móveis e Eletro (BM)",
+    "Ecofitness Aldeia (BS)"
+  ],
+  "com_nps": [
+    "PEDRINI E AZEVEDO ADVOCACIA (BS)",
+    "Stylus Manaus (BS)",
+    "Unik Benefícios (BS)",
+    "KFG Torres",
+    "AGM DISTRIBUIDORA (BS)",
+    "BR Distribuidora de Piercing (BS)",
+    "Terra prometida (BS)"
+  ],
+  "top": [
+    {
+      "empresa": "PEDRINI E AZEVEDO ADVOCACIA (BS)",
+      "score": 66,
+      "band": "B",
+      "sat_src": "proxy",
+      "nps": 10.0
+    },
+    {
+      "empresa": "Brod transportes ltda (LL)",
+      "score": 62,
+      "band": "B",
+      "sat_src": "csat_semanal",
+      "nps": null
+    },
+    {
+      "empresa": "Stylus Manaus (BS)",
+      "score": 61,
+      "band": "B",
+      "sat_src": "proxy",
+      "nps": 8.0
+    },
+    {
+      "empresa": "Unik Benefícios (BS)",
+      "score": 60,
+      "band": "B",
+      "sat_src": "proxy",
+      "nps": 9.0
+    },
+    {
+      "empresa": "KFG Torres",
+      "score": 59,
+      "band": "C",
+      "sat_src": "proxy",
+      "nps": 9.0
+    },
+    {
+      "empresa": "Academia imigrantes Ltda (BS)",
+      "score": 58,
+      "band": "C",
+      "sat_src": "csat_semanal",
+      "nps": null
+    },
+    {
+      "empresa": "AGM DISTRIBUIDORA (BS)",
+      "score": 58,
+      "band": "C",
+      "sat_src": "proxy",
+      "nps": 9.0
+    },
+    {
+      "empresa": "Adriano Martins Cardoso (BS)",
+      "score": 58,
+      "band": "C",
+      "sat_src": "csat_semanal",
+      "nps": null
+    },
+    {
+      "empresa": "Modular Estruturas (BM)",
+      "score": 56,
+      "band": "C",
+      "sat_src": "csat_semanal",
+      "nps": null
+    },
+    {
+      "empresa": "Rota da Linguiça (BS)",
+      "score": 55,
+      "band": "C",
+      "sat_src": "proxy",
+      "nps": null
+    },
+    {
+      "empresa": "Fernando Móveis e Eletro (BM)",
+      "score": 55,
+      "band": "C",
+      "sat_src": "csat_semanal",
+      "nps": null
+    },
+    {
+      "empresa": "Fui Aluguel de Motos (BS)",
+      "score": 53,
+      "band": "C",
+      "sat_src": "proxy",
+      "nps": null
+    }
+  ]
+}
