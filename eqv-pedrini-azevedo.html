@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Empresa que Vende — Pedrini e Azevedo Advocacia | V4 Company</title>
+  <style>
+    @page { size: 720px 405px; margin: 0; }
+    :root {
+      --bg: #0d0d0d;
+      --bg2: #1a1a1a;
+      --red: #cc0000;
+      --red-deep: #3c0909;
+      --text: #ffffff;
+      --muted: #c2c2c2;
+      --dim: #8a8a8a;
+      --card: #1f1f1f;
+      --line: #4a1010;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #000;
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .slide {
+      width: 720px;
+      height: 405px;
+      margin: 0 auto 24px;
+      padding: 36px 40px;
+      position: relative;
+      overflow: hidden;
+      background: var(--bg);
+      page-break-after: always;
+      break-after: page;
+    }
+    .slide::before {
+      content: "";
+      position: absolute;
+      width: 420px; height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(204,0,0,.22), transparent 68%);
+      left: -160px; top: -80px;
+      pointer-events: none;
+    }
+    .slide::after {
+      content: "";
+      position: absolute;
+      width: 380px; height: 380px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(204,0,0,.18), transparent 70%);
+      right: -140px; bottom: -120px;
+      pointer-events: none;
+    }
+    .slide > * { position: relative; z-index: 1; }
+    .eyebrow {
+      color: var(--red);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .footer {
+      position: absolute;
+      left: 40px; right: 40px; bottom: 18px;
+      font-size: 8px;
+      letter-spacing: .18em;
+      color: var(--dim);
+      text-transform: uppercase;
+      z-index: 2;
+    }
+    h1 {
+      font-size: 38px;
+      font-weight: 800;
+      letter-spacing: -.02em;
+      line-height: 1.05;
+      margin-bottom: 8px;
+    }
+    .sub {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+    .cover {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding-top: 20px;
+    }
+    .cover .brand {
+      color: var(--red);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .28em;
+      margin-bottom: 28px;
+    }
+    .cover h1 {
+      font-size: 72px;
+      line-height: .95;
+      margin: 0;
+    }
+    .cover h1 .red { color: var(--red); display: block; }
+    .cover .tagline {
+      margin-top: 22px;
+      font-size: 14px;
+      font-style: italic;
+      color: var(--muted);
+    }
+    .cover .client {
+      margin-top: 18px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: #fff;
+      border: 1px solid rgba(204,0,0,.45);
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: rgba(204,0,0,.1);
+    }
+    .big-muted {
+      position: absolute;
+      left: 28px; top: 40px;
+      font-size: 110px;
+      font-weight: 800;
+      color: rgba(204,0,0,.12);
+      letter-spacing: -.04em;
+      line-height: .85;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .problem-list { margin-top: 18px; max-width: 520px; }
+    .problem-list p {
+      font-size: 15px;
+      color: var(--muted);
+      margin-bottom: 10px;
+      line-height: 1.35;
+    }
+    .grid5 {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .pill-card {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 12px;
+      padding: 14px 12px;
+      min-height: 150px;
+    }
+    .pill-card .k {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--red);
+      letter-spacing: .08em;
+      margin-bottom: 8px;
+    }
+    .pill-card .t {
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      line-height: 1.15;
+    }
+    .pill-card .d {
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.35;
+    }
+    .wrong {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .wrong article {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 18px 16px;
+      border-top: 3px solid var(--red);
+      min-height: 190px;
+    }
+    .wrong .k { font-size: 10px; font-weight: 800; color: var(--red); letter-spacing: .12em; margin-bottom: 10px; }
+    .wrong h3 { font-size: 18px; margin-bottom: 10px; }
+    .wrong p { font-size: 12px; color: var(--muted); line-height: 1.4; }
+    .result-line {
+      margin-top: 16px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .solution-lead {
+      font-size: 28px;
+      font-weight: 800;
+      max-width: 520px;
+      line-height: 1.15;
+      margin: 8px 0 14px;
+    }
+    .solution-lead strong { color: var(--red); }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 28px;
+      max-width: 560px;
+    }
+    .metrics div {
+      border-left: 3px solid var(--red);
+      padding-left: 12px;
+    }
+    .metrics .n { font-size: 28px; font-weight: 800; }
+    .metrics .l { font-size: 11px; color: var(--muted); margin-top: 4px; }
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .pillar {
+      background: linear-gradient(180deg, #221010, #171717);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px 12px;
+      min-height: 220px;
+    }
+    .pillar .n {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--red);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 800;
+      display: grid;
+      place-items: center;
+      margin-bottom: 10px;
+    }
+    .pillar h3 { font-size: 14px; line-height: 1.15; margin-bottom: 8px; }
+    .pillar p { font-size: 11px; color: var(--muted); line-height: 1.35; }
+    .squad {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .squad article {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 14px 12px;
+      min-height: 230px;
+      border: 1px solid rgba(255,255,255,.05);
+    }
+    .squad .dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--red);
+      margin-bottom: 10px;
+    }
+    .squad h3 { font-size: 13px; margin-bottom: 10px; letter-spacing: .04em; }
+    .squad ul { list-style: none; }
+    .squad li {
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.35;
+      margin-bottom: 8px;
+      padding-left: 10px;
+      position: relative;
+    }
+    .squad li::before {
+      content: "";
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--red);
+      position: absolute;
+      left: 0; top: 6px;
+    }
+    .extra-banner {
+      margin-top: 12px;
+      border: 1px solid rgba(204,0,0,.45);
+      background: rgba(204,0,0,.12);
+      border-radius: 10px;
+      padding: 10px 14px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px;
+      align-items: center;
+    }
+    .extra-banner .badge {
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: #fff;
+      background: var(--red);
+      padding: 6px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+    .extra-banner ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+      list-style: none;
+    }
+    .extra-banner li {
+      font-size: 11px;
+      color: #fff;
+      font-weight: 600;
+    }
+    .extra-banner li span { color: var(--red); margin-right: 4px; }
+    .journey {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .journey article {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 14px 12px;
+      min-height: 210px;
+      border-top: 3px solid var(--red);
+    }
+    .journey .m { font-size: 9px; color: var(--dim); letter-spacing: .08em; margin-bottom: 8px; }
+    .journey .n {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: var(--red);
+      font-size: 11px;
+      font-weight: 800;
+      display: grid;
+      place-items: center;
+      margin-bottom: 8px;
+    }
+    .journey h3 { font-size: 13px; margin-bottom: 8px; line-height: 1.15; }
+    .journey p { font-size: 11px; color: var(--muted); line-height: 1.35; }
+    .along {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .along article {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 14px 16px;
+      border-left: 3px solid var(--red);
+      min-height: 88px;
+    }
+    .along h3 { font-size: 12px; margin-bottom: 6px; letter-spacing: .04em; }
+    .along p { font-size: 11px; color: var(--muted); line-height: 1.35; }
+    .invest {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 18px;
+      margin-top: 10px;
+      align-items: stretch;
+    }
+    .cashbox {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 18px 18px 14px;
+      background: rgba(40,0,0,.35);
+      min-height: 210px;
+    }
+    .cashbox .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .cashbox .lbl { font-size: 12px; color: var(--muted); }
+    .cashbox .val { font-size: 28px; font-weight: 800; }
+    .cashbox .val.red { color: var(--red); font-size: 24px; }
+    .cashbox .note {
+      margin-top: 8px;
+      font-size: 10px;
+      color: var(--dim);
+      line-height: 1.35;
+    }
+    .price-stack { display: grid; gap: 12px; }
+    .price-card {
+      border-radius: 14px;
+      padding: 16px 18px;
+      min-height: 88px;
+    }
+    .price-card.primary { background: var(--red); }
+    .price-card.secondary {
+      background: #151515;
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    .price-card .lbl {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .price-card .val { font-size: 36px; font-weight: 800; line-height: 1; }
+    .price-card .hint { font-size: 11px; margin-top: 6px; opacity: .9; }
+    .margin-note {
+      position: absolute;
+      left: 40px; bottom: 40px;
+      font-size: 10px;
+      color: var(--dim);
+      z-index: 2;
+    }
+    .cta {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+      padding-bottom: 20px;
+    }
+    .cta h1 { font-size: 54px; line-height: .95; margin-bottom: 14px; }
+    .cta .lead { font-size: 16px; color: var(--muted); margin-bottom: 18px; max-width: 420px; }
+    .cta .box {
+      display: inline-flex;
+      flex-direction: column;
+      gap: 6px;
+      background: rgba(204,0,0,.12);
+      border: 1px solid rgba(204,0,0,.4);
+      border-radius: 12px;
+      padding: 14px 18px;
+      width: fit-content;
+    }
+    .cta .box strong { font-size: 18px; }
+    .cta .box span { font-size: 12px; color: var(--muted); }
+    @media print {
+      body { background: #000; }
+      .slide { margin: 0; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1 COVER -->
+  <section class="slide cover">
+    <div class="brand">V4 COMPANY APRESENTA</div>
+    <h1>EMPRESA<span class="red">QUE VENDE</span></h1>
+    <p class="tagline">Estrutura o negócio. Treina o time. Acompanha a execução.</p>
+    <div class="client">Pedrini e Azevedo Advocacia</div>
+    <div class="footer">V4 Company · Empresa que Vende · 2026</div>
+  </section>
+
+  <!-- 2 PROBLEM -->
+  <section class="slide">
+    <div class="big-muted">PROBLEMA</div>
+    <div class="eyebrow">O PROBLEMA</div>
+    <h1 style="font-size:34px;max-width:520px;margin-top:70px">Você trabalha muito.<br>Mas a receita ainda não é previsível.</h1>
+    <div class="problem-list">
+      <p>Vendas oscilam todo mês — sem processo, sem previsibilidade.</p>
+      <p>Quando o melhor vendedor sai, o processo some com ele.</p>
+      <p>A agência executa por você — e o crescimento para quando o contrato termina.</p>
+      <p style="font-style:italic;color:#fff;margin-top:16px">Este é o empresário que o Empresa que Vende foi criado para atender.</p>
+    </div>
+  </section>
+
+  <!-- 3 PARA QUEM -->
+  <section class="slide">
+    <h1>PARA QUEM É</h1>
+    <p class="sub">O perfil do cliente ideal do Empresa que Vende</p>
+    <div class="grid5">
+      <div class="pill-card"><div class="k">PORTE</div><div class="t">Tiny e Small</div><div class="d">até 50 funcionários</div></div>
+      <div class="pill-card"><div class="k">FATURAMENTO</div><div class="t">R$ 600K – R$ 2,4M</div><div class="d">anuais</div></div>
+      <div class="pill-card"><div class="k">MERCADO</div><div class="t">B2B / serviços</div><div class="d">com operação de vendas ativa</div></div>
+      <div class="pill-card"><div class="k">CANAL DE VENDAS</div><div class="t">Inside Sales</div><div class="d">WhatsApp · Meta Ads · CRM</div></div>
+      <div class="pill-card"><div class="k">MATURIDADE GTM</div><div class="t">Baixo a médio</div><div class="d">N1 ou N2 no diagnóstico V4</div></div>
+    </div>
+    <div class="footer">Proposta · Pedrini e Azevedo Advocacia</div>
+  </section>
+
+  <!-- 4 O QUE ESTÁ ERRADO -->
+  <section class="slide">
+    <h1>O QUE ESTÁ ERRADO</h1>
+    <p class="sub">Por que as soluções tradicionais não resolvem o problema real</p>
+    <div class="wrong">
+      <article>
+        <div class="k">AGÊNCIA</div>
+        <h3>Executa por você.</h3>
+        <p>Quando o contrato termina, o resultado vai junto. Você nunca aprendeu a operar a máquina.</p>
+      </article>
+      <article>
+        <div class="k">CURSO</div>
+        <h3>Ensina teoria.</h3>
+        <p>Sem aplicação no seu negócio real. O playbook fica na gaveta e nada muda na prática.</p>
+      </article>
+      <article>
+        <div class="k">CONSULTORIA</div>
+        <h3>Diagnostica.</h3>
+        <p>Entrega um relatório detalhado. Ninguém implementa. O problema continua exatamente onde estava.</p>
+      </article>
+    </div>
+    <p class="result-line">Resultado: o empresário continua sem máquina de vendas previsível.</p>
+  </section>
+
+  <!-- 5 SOLUÇÃO -->
+  <section class="slide">
+    <div class="big-muted" style="font-size:96px">SOLUÇÃO</div>
+    <div class="eyebrow">A SOLUÇÃO</div>
+    <p class="solution-lead" style="margin-top:60px">Empresa que Vende <strong>não executa para você.</strong></p>
+    <p style="font-size:18px;font-weight:800;margin-bottom:10px">Estrutura o negócio. Treina o time. Acompanha a execução.</p>
+    <p style="font-size:14px;color:var(--muted)"><strong style="color:#fff">Quem faz é o cliente.</strong> É exatamente por isso que funciona.</p>
+    <div class="metrics">
+      <div><div class="n">NPS 55+</div><div class="l">vs. 35 das agências tradicionais</div></div>
+      <div><div class="n">6 meses</div><div class="l">de acompanhamento contínuo</div></div>
+      <div><div class="n">4 squads</div><div class="l">especializados no seu negócio</div></div>
+    </div>
+  </section>
+
+  <!-- 6 PROGRAMA -->
+  <section class="slide">
+    <h1>O PROGRAMA</h1>
+    <p class="sub">5 pilares que compõem o Empresa que Vende</p>
+    <div class="pillars">
+      <div class="pillar"><div class="n">01</div><h3>Diagnóstico Contínuo</h3><p>Maturidade GTM monitorada. Gargalos identificados a cada ciclo — sem achismo.</p></div>
+      <div class="pillar"><div class="n">02</div><h3>Consultoria Estratégica</h3><p>1h/mês com consultor V4: define prioridades e aloca os créditos do squad.</p></div>
+      <div class="pillar"><div class="n">03</div><h3>Execução Assistida</h3><p>Squad de 4 especialistas: Conteúdo, Mídia Paga, Comercial e CRM.</p></div>
+      <div class="pillar"><div class="n">04</div><h3>Comunidade</h3><p>Peers do mesmo segmento e lives mensais temáticas alinhadas ao calendário.</p></div>
+      <div class="pillar"><div class="n">05</div><h3>Fábrica de Receita</h3><p>Imersão presencial: hot seats, cases reais e workshops práticos com a V4.</p></div>
+    </div>
+  </section>
+
+  <!-- 7 EXECUÇÃO ASSISTIDA + EXTRAS -->
+  <section class="slide" style="padding-top:28px;padding-bottom:28px">
+    <h1 style="font-size:30px">EXECUÇÃO ASSISTIDA</h1>
+    <p class="sub" style="margin-bottom:8px">O consultor V4 (1h/mês) define as prioridades e distribui as horas entre os 4 especialistas do squad.</p>
+    <div class="squad">
+      <article>
+        <div class="dot"></div>
+        <h3>CONTEÚDO</h3>
+        <ul>
+          <li>Roteiro de vídeo viral calibrado ao negócio</li>
+          <li>Briefing de posts Instagram</li>
+          <li>Suporte à produção e publicação</li>
+        </ul>
+      </article>
+      <article>
+        <div class="dot"></div>
+        <h3>MÍDIA PAGA</h3>
+        <ul>
+          <li>Gestão de campanhas Meta / Google</li>
+          <li>Segmentação, pixel, leitura de dados</li>
+          <li>Decisão por ROAS e CPL</li>
+          <li><strong style="color:#fff">Tracking + rastreamento</strong></li>
+        </ul>
+      </article>
+      <article>
+        <div class="dot"></div>
+        <h3>COMERCIAL</h3>
+        <ul>
+          <li>Revisão de scripts + análise de objeções</li>
+          <li>Role play com vendedores</li>
+          <li>Atualização das réguas de follow-up</li>
+        </ul>
+      </article>
+      <article>
+        <div class="dot"></div>
+        <h3>CRM</h3>
+        <ul>
+          <li>Configuração e manutenção do CRM ativo</li>
+          <li>Fluxos de cadência e automações</li>
+          <li>Análise do pipeline e conversão</li>
+          <li><strong style="color:#fff">Tracking WhatsApp (MQL → SQL → Vendas)</strong></li>
+        </ul>
+      </article>
+    </div>
+    <div class="extra-banner">
+      <div class="badge">Incluso neste ciclo</div>
+      <ul>
+        <li><span>+</span> Implementação de Landing Page</li>
+        <li><span>+</span> Tracking + rastreamento completo</li>
+        <li><span>+</span> Tracking WhatsApp · MQL → SQL → Vendas</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 8 JORNADA -->
+  <section class="slide">
+    <h1>A JORNADA</h1>
+    <p class="sub">5 fases em 6 meses — ciclo contínuo de crescimento</p>
+    <div class="journey">
+      <article><div class="m">MÊS 1</div><div class="n">1</div><h3>Onboarding + Diagnóstico</h3><p>Kickoff, maturidade GTM e definição de prioridades do ciclo. Setup de LP e tracking.</p></article>
+      <article><div class="m">MÊS 2</div><div class="n">2</div><h3>EE Completa</h3><p>Estruturação: 3P-IA, posicionamento e canal de vendas ativo.</p></article>
+      <article><div class="m">MÊS 3</div><div class="n">3</div><h3>Consultoria + Conteúdo</h3><p>Squad de conteúdo em produção assistida + consultoria mensal.</p></article>
+      <article><div class="m">MÊS 4</div><div class="n">4</div><h3>Mídia + Performance</h3><p>Squad de mídia paga: campanhas, pixel, tracking e otimização de canais.</p></article>
+      <article><div class="m">MÊS 5/6</div><div class="n">5</div><h3>Comercial + CRM</h3><p>Scripts, follow-up, pipeline WhatsApp e monetização do funil completo.</p></article>
+    </div>
+  </section>
+
+  <!-- 9 AO LONGO -->
+  <section class="slide">
+    <h1 style="font-size:30px">AO LONGO DO PROGRAMA</h1>
+    <p class="sub">Além das sessões de execução assistida, você tem acesso permanente a:</p>
+    <div class="along">
+      <article>
+        <h3>COMUNIDADE PRIVADA</h3>
+        <p>Peers do mesmo segmento. Troca de experiências, benchmarks e networking qualificado com quem está no mesmo estágio de negócio.</p>
+      </article>
+      <article>
+        <h3>MENTORIAS COLETIVAS MENSAIS</h3>
+        <p>Lives mensais temáticas alinhadas ao calendário comercial. Todo mês, um tema prático com aplicação direta no seu negócio.</p>
+      </article>
+      <article>
+        <h3>PLATAFORMA DE CONTEÚDO</h3>
+        <p>Trilhas de aprendizagem, artefatos editáveis, templates e playbooks organizados por especialidade e fase da jornada.</p>
+      </article>
+      <article>
+        <h3>FÁBRICA DE RECEITA</h3>
+        <p>Imersão presencial inclusa no programa. Hot seats ao vivo, cases reais de outros empresários e workshops de tráfego, conteúdo e comercial.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- 10 INVESTIMENTO -->
+  <section class="slide">
+    <h1>INVESTIMENTO</h1>
+    <p class="sub">Política de preço — Empresa que Vende (formato semestral) · Pedrini e Azevedo</p>
+    <div class="invest">
+      <div class="cashbox">
+        <div class="row">
+          <span class="lbl">Estruturação Estratégica (EE)</span>
+          <span class="val" style="font-size:24px">R$ 15.000,00</span>
+        </div>
+        <div class="row">
+          <span class="lbl">Cashback EE na compra do EQV</span>
+          <span class="val red">– R$ 15.000,00</span>
+        </div>
+        <p class="note">
+          Inclui no ciclo: implementação de LP, tracking + rastreamento e tracking WhatsApp (MQL → SQL → Vendas) — adicional de R$ 5.000,00 em relação ao pacote base.
+        </p>
+      </div>
+      <div class="price-stack">
+        <div class="price-card primary">
+          <div class="lbl">À vista (com cashback EE)</div>
+          <div class="val">R$ 22.000</div>
+          <div class="hint">Pacote base R$ 17.000 + setup técnico R$ 5.000</div>
+        </div>
+        <div class="price-card secondary">
+          <div class="lbl">Parcelado</div>
+          <div class="val" style="font-size:32px">6x R$ 3.733,33</div>
+          <div class="hint">Total R$ 22.400 · setup técnico incluso</div>
+        </div>
+      </div>
+    </div>
+    <div class="margin-note">Setup técnico incluso: LP · Tracking · WhatsApp (MQL → SQL → Vendas)</div>
+  </section>
+
+  <!-- 11 CTA -->
+  <section class="slide">
+    <div class="cta">
+      <h1>PRÓXIMO<br>PASSO</h1>
+      <p class="lead">Qualifique a Pedrini e Azevedo Advocacia para o Empresa que Vende.</p>
+      <div class="box">
+        <strong>Fale com um especialista V4</strong>
+        <span>Devolutiva de valores · sexta-feira, 11h</span>
+        <span>v4.empresaquevende.com.br</span>
+      </div>
+    </div>
+    <div class="footer">V4 Company · Empresa que Vende · 2026 · Pedrini e Azevedo Advocacia</div>
+  </section>
+
+</body>
+</html>
