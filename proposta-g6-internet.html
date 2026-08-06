@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <title>G6 Internet × V4 — Performance + CRM · 12 meses</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -94,9 +95,10 @@
       margin: 0.5rem 0 1rem; flex-wrap: wrap;
     }
     .capa-partnership img {
-      height: clamp(42px, 7vh, 58px); width: auto; max-width: 200px;
-      object-fit: contain; filter: drop-shadow(0 4px 16px rgba(0,0,0,0.35));
-      background: rgba(255,255,255,0.95); border-radius: 12px; padding: 0.45rem 0.7rem;
+      height: clamp(48px, 8vh, 64px); width: auto; max-width: 220px;
+      object-fit: contain;
+      background: #fff; border-radius: 14px; padding: 0.55rem 0.85rem;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.28);
     }
     .capa-partnership .x { opacity: 0.55; font-size: 1.1rem; font-weight: 600; }
     .capa-partnership .v4-name { font-family: Outfit; font-weight: 800; font-size: 1.15rem; letter-spacing: -0.02em; }
@@ -126,61 +128,63 @@
     .card ul { list-style: none; margin-top: 0.35rem; }
     .card ul li { padding-left: 0.9rem; position: relative; margin-bottom: 0.2rem; }
     .card ul li::before { content: "·"; position: absolute; left: 0; color: #fff; font-weight: 700; }
-    .flow-step { text-align: center; background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.22); border-radius: 12px; padding: 0.7rem 0.45rem; }
-    .flow-step .n { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #ffe0e0; }
-    .flow-step .t { font-family: Outfit; font-size: 0.9rem; font-weight: 700; margin: 0.25rem 0 0.15rem; }
-    .flow-step .d { font-size: 0.75rem; color: var(--muted); }
-    .quote {
-      margin-top: 0.9rem; padding: 0.75rem 1rem; border-left: 3px solid #fff;
-      background: rgba(0,0,0,0.15); border-radius: 0 12px 12px 0;
-      font-size: 0.95rem; font-weight: 600; color: #fff;
-    }
-    .quote span { display: block; margin-top: 0.25rem; font-weight: 500; color: var(--muted); font-size: 0.88rem; }
-    .chip-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.55rem 0 0.35rem; }
+    .chip-row { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0.45rem 0 0.55rem; }
     .chip {
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
-      padding: 0.35rem 0.65rem; border-radius: 999px; border: 1px solid rgba(255,255,255,0.35);
-      background: rgba(255,255,255,0.12);
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em;
+      padding: 0.22rem 0.55rem; border-radius: 999px;
+      background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.28); color: #fff;
     }
-    .steps { list-style: none; margin-top: 0.6rem; }
+    .flow-step {
+      text-align: center; padding: 0.65rem 0.4rem;
+      background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.22); border-radius: 12px;
+    }
+    .flow-step .n { font-family: Outfit; font-size: 0.75rem; font-weight: 800; color: #ffe0e0; margin-bottom: 0.2rem; }
+    .flow-step .t { font-size: 0.86rem; font-weight: 700; color: #fff; }
+    .flow-step .d { font-size: 0.74rem; color: var(--muted); margin-top: 0.15rem; }
+    .quote {
+      margin: 0.85rem 0 0; padding-left: 0.9rem;
+      border-left: 3px solid rgba(255,255,255,0.55);
+      font-size: 1.02rem; font-weight: 700; color: #fff; line-height: 1.35;
+    }
+    .quote span {
+      display: block; margin-top: 0.35rem; font-size: 0.78rem; font-weight: 600;
+      color: rgba(255,255,255,0.7); letter-spacing: 0;
+      text-transform: none;
+    }
+    .steps { list-style: none; margin-top: 0.75rem; display: grid; gap: 0.45rem; }
     .steps li {
-      display: grid; grid-template-columns: 2.2rem 1fr; gap: 0.65rem;
-      padding: 0.55rem 0; border-bottom: 1px solid rgba(255,255,255,0.15);
+      display: flex; gap: 0.75rem; align-items: flex-start;
+      padding: 0.65rem 0.8rem; border-radius: 12px;
+      background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.2);
     }
-    .steps li:last-child { border-bottom: 0; }
-    .steps .n { font-family: Outfit; font-weight: 800; color: #ffe0e0; font-size: 0.9rem; }
-    .steps strong { display: block; font-size: 0.95rem; margin-bottom: 0.15rem; }
-    .steps span { font-size: 0.84rem; color: var(--muted); }
-    .price-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 0.75rem; margin-top: 0.85rem; }
+    .steps .n { font-family: Outfit; font-weight: 800; color: #ffe0e0; min-width: 1.6rem; }
+    .steps strong { display: block; color: #fff; font-size: 0.95rem; }
+    .steps span { display: block; font-size: 0.84rem; color: var(--muted); margin-top: 0.1rem; }
+    .price-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 0.75rem; margin-top: 1rem; }
     @media (max-width: 700px) { .price-grid { grid-template-columns: 1fr; } }
     .price-ref, .price-anchor {
-      border-radius: 16px; padding: 1.1rem 1.2rem; border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 16px; padding: 1.1rem 1.2rem;
+      border: 1px solid rgba(255,255,255,0.22); background: rgba(0,0,0,0.28);
     }
-    .price-ref { background: rgba(255,255,255,0.12); }
-    .price-anchor {
-      background: rgba(255,255,255,0.22);
-      box-shadow: 0 12px 36px rgba(0,0,0,0.2);
-    }
+    .price-anchor { border-color: #fff; background: rgba(0,0,0,0.45); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
     .price-ref .l, .price-anchor .l {
-      font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #ffe0e0;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: #ffe8e8; margin-bottom: 0.4rem;
     }
     .price-ref .v, .price-anchor .v {
-      font-family: Outfit; font-size: clamp(1.45rem, 3.5vh, 1.9rem); font-weight: 800; margin: 0.35rem 0;
+      font-family: Outfit; font-size: clamp(1.6rem, 3.5vh, 2.2rem); font-weight: 800; line-height: 1.1;
     }
-    .price-anchor .v { font-size: clamp(1.7rem, 4vh, 2.25rem); }
-    .price-ref .s, .price-anchor .s { font-size: 0.84rem; color: var(--muted); }
+    .price-ref .s, .price-anchor .s { font-size: 0.84rem; color: var(--muted); margin-top: 0.35rem; }
     .deck-footer {
-      position: fixed; left: 0; right: 0; bottom: 0; z-index: 90;
-      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-      padding: 0.65rem 1.25rem 0.75rem;
-      background: rgba(80, 8, 12, 0.75); backdrop-filter: blur(10px);
-      border-top: 1px solid rgba(255,255,255,0.12); font-size: 0.75rem; color: rgba(255,255,255,0.7);
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 150;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.65rem 1.25rem; background: rgba(107, 8, 12, 0.85);
+      border-top: 1px solid rgba(255,255,255,0.15); font-size: 0.8rem; color: rgba(255,255,255,0.75);
     }
-    .progress-wrap { flex: 1; max-width: 220px; height: 3px; background: rgba(255,255,255,0.15); border-radius: 99px; overflow: hidden; }
-    .progress-fill { height: 100%; width: 12.5%; background: #fff; border-radius: 99px; transition: width 0.35s var(--ease); }
-    @media (max-width: 600px) {
+    .progress-wrap { flex: 1; max-width: 220px; height: 4px; background: rgba(255,255,255,0.2); border-radius: 2px; margin: 0 1rem; }
+    .progress-fill { height: 100%; background: #fff; border-radius: 2px; width: 12.5%; transition: width 0.4s var(--ease); }
+    @media (max-width: 760px) {
       .slide-logo { left: 1rem; top: 1rem; }
-      .deck-footer span:first-child { display: none; }
     }
   </style>
 </head>
@@ -209,11 +213,11 @@
 
   <div class="deck" id="deck">
 
-    <!-- 1 CAPA -->
+    <!-- 01 CAPA -->
     <section id="capa" class="slide-active" data-slide="1">
       <div class="inner">
         <div class="capa-partnership">
-          <img src="assets/g6-logo.png" alt="G6 Internet" width="180" height="120"
+          <img src="assets/g6-logo.png" alt="G6 Internet"
                onerror="this.src='https://www.g6internet.com.br/wp-content/uploads/2024/09/g6-internet-fibra-logo.png'" />
           <span class="x">×</span>
           <span class="v4-name">V4 Company</span>
@@ -225,41 +229,42 @@
           Assessoria de Growth e Profissional de CRM no mesmo sistema.
         </p>
         <span class="capa-badge" style="margin-top:1.25rem;">Growth · CRM · 12 meses</span>
-        <p class="slide-hint">Setas, scroll ou swipe para avançar →</p>
+        <p class="slide-hint">Clique nas setas laterais para virar a página →</p>
       </div>
     </section>
 
-    <!-- 2 MAPA -->
+    <!-- 02 MAPA -->
     <section id="mapa" data-slide="2">
       <div class="inner glass">
-        <p class="eyebrow">Diagnóstico estratégico</p>
+        <p class="eyebrow">02 · Mapa estratégico</p>
         <h2>O digital já é o principal canal.<br />O valor escapa entre as etapas.</h2>
         <div class="gold-line"></div>
         <p class="lead">
           No modelo de assinatura, o jogo não é só gerar venda —
           é quanto custa trazer × quanto tempo o cliente fica (LTV).
-          Com ticket na casa de R$&nbsp;100/mês, a margem de erro é pequena.
+          Com ticket na casa de R$&nbsp;100/mês, a margem de erro é pequena:
+          qualquer desperdício em aquisição ou quebra cedo na base compromete o unit economics.
         </p>
         <div class="grid-2">
           <article class="card">
-            <div class="card-num">01</div>
-            <h3>Intenção e investimento em mídia</h3>
-            <p>Palavras-chave e campanhas trazem quem pede o serviço agora. Sem leitura do que vira assinante, o investimento fica no escuro.</p>
+            <div class="card-num">Intenção e mídia</div>
+            <h3>Palavras-chave e campanhas</h3>
+            <p>Trazem quem pede o serviço agora. Sem leitura do que vira assinante, o investimento fica no escuro — e a decisão vira segurar verba, não escalar com segurança.</p>
           </article>
           <article class="card">
-            <div class="card-num">02</div>
+            <div class="card-num">Prova</div>
             <h3>Trackeamento</h3>
-            <p>UTMs, eventos e devolução de lead/venda existem para provar qual mensagem e canal geram LTV. Sem isso, o resultado fica subjetivo.</p>
+            <p>UTMs, eventos e devolução de lead/venda existem para provar qual mensagem e canal geram LTV de verdade. Sem isso, o resultado fica subjetivo.</p>
           </article>
           <article class="card">
-            <div class="card-num">03</div>
-            <h3>CRM e jornada</h3>
-            <p>Do primeiro contato à ativação: etapas, origem e priorização. Sem visão ponta a ponta, a mídia opera sem feedback.</p>
+            <div class="card-num">Jornada</div>
+            <h3>CRM</h3>
+            <p>Do primeiro contato à ativação: etapas, origem e priorização. Sem visão ponta a ponta, a mídia opera sem feedback e a operação não conduz quem trava no meio.</p>
           </article>
           <article class="card">
-            <div class="card-num">04</div>
+            <div class="card-num">Base</div>
             <h3>Retenção e LTV</h3>
-            <p>Ticket mensal se paga no tempo. Sem jornada na base, o custo de adquirir se perde cedo — e o concorrente de preço ganha.</p>
+            <p>Ticket mensal se paga no tempo. Sem jornada na base, o custo de adquirir se perde cedo — e o concorrente de preço ganha quem já era da G6.</p>
           </article>
         </div>
         <div class="grid-5">
@@ -271,15 +276,15 @@
         </div>
         <p class="quote">
           As pontas existem. O que falta é o ciclo fechado.
-          <span>Cada real investido e cada cliente da base com leitura e condução.</span>
+          <span>Investimento em mídia → assinante → tempo de vida — só fecha com prova (trackeamento) + jornada (CRM) + retenção.</span>
         </p>
       </div>
     </section>
 
-    <!-- 3 CASE -->
+    <!-- 03 CASE -->
     <section id="case" data-slide="3">
       <div class="inner glass">
-        <p class="eyebrow">Referência</p>
+        <p class="eyebrow">03 · Referência</p>
         <h2>Fibranet</h2>
         <div class="gold-line"></div>
         <p class="lead">
@@ -288,20 +293,20 @@
         </p>
         <p class="lead" style="margin-top:0.75rem;">
           O time detalha os números na conversa.
-          Aqui fica o método: mesmo tipo de complexidade, mesma disciplina de ciclo.
+          Aqui fica o método: mesma complexidade de telecom/ISP, mesma disciplina de ciclo.
         </p>
       </div>
     </section>
 
-    <!-- 4 PLANO -->
+    <!-- 04 PLANO -->
     <section id="plano" data-slide="4">
       <div class="inner glass">
-        <p class="eyebrow">Plano · 12 meses</p>
+        <p class="eyebrow">04 · Core + essencial · 12 meses</p>
         <h2>Assessoria de Growth +<br />Profissional de CRM</h2>
         <div class="gold-line"></div>
         <p class="lead">
-          Um único desenho. Performance que lê demanda com método;
-          CRM que faz essa demanda e a base andarem no mesmo sistema.
+          Um único desenho. Growth compra e lê demanda com método;
+          CRM faz essa demanda e a base andarem no mesmo sistema.
         </p>
         <div class="grid-2">
           <article class="card">
@@ -333,11 +338,11 @@
       </div>
     </section>
 
-    <!-- 5 RESULTADO -->
+    <!-- 05 RESULTADO -->
     <section id="resultado" data-slide="5">
       <div class="inner glass">
-        <p class="eyebrow">Com o ciclo fechado</p>
-        <h2>O que muda na operação</h2>
+        <p class="eyebrow">05 · Resultado</p>
+        <h2>O que muda com o ciclo fechado</h2>
         <div class="gold-line"></div>
         <div class="grid-2">
           <article class="card"><div class="card-num">01</div><h3>Clareza</h3><p>Saber o que a mídia gera — menos decisão no feeling.</p></article>
@@ -348,10 +353,10 @@
       </div>
     </section>
 
-    <!-- 6 PROXIMOS -->
+    <!-- 07 PROXIMOS (06 omitido) -->
     <section id="proximos" data-slide="6">
       <div class="inner glass">
-        <p class="eyebrow">Próximos passos</p>
+        <p class="eyebrow">07 · Próximos passos</p>
         <h2>Rotina com a V4</h2>
         <div class="gold-line"></div>
         <p class="lead">Começamos pelo que fecha o ciclo — e sustentamos 12 meses.</p>
@@ -365,10 +370,10 @@
       </div>
     </section>
 
-    <!-- 7 PROPOSTA -->
+    <!-- 08 PROPOSTA -->
     <section id="proposta" data-slide="7">
       <div class="inner glass">
-        <p class="eyebrow">Proposta</p>
+        <p class="eyebrow">08 · Proposta</p>
         <h2>O que está sendo contratado</h2>
         <div class="gold-line"></div>
         <article class="card" style="margin-top:0.5rem;">
@@ -382,10 +387,10 @@
       </div>
     </section>
 
-    <!-- 8 INVESTIMENTO -->
+    <!-- 09 INVESTIMENTO -->
     <section id="investimento" data-slide="8">
       <div class="inner glass">
-        <p class="eyebrow">Investimento</p>
+        <p class="eyebrow">09 · Investimento</p>
         <h2>Primeiro, quanto vale.<br />Depois, a condição.</h2>
         <div class="gold-line"></div>
         <p class="lead">Assessoria de Growth + Profissional de CRM · 12 meses · cartão de crédito.</p>
@@ -428,6 +433,7 @@
     const progressFill = document.getElementById("progressFill");
     const slideCounter = document.getElementById("slideCounter");
     const blendBar = document.querySelector(".blend-progress");
+    let locked = false;
 
     function updateUI() {
       const p = current / TOTAL;
@@ -441,13 +447,17 @@
     }
 
     function goTo(n, dir) {
-      if (n < 1 || n > TOTAL || n === current) return;
+      if (locked || n < 1 || n > TOTAL || n === current) return;
+      locked = true;
       const prev = slides[current - 1];
       const next = slides[n - 1];
       const fwd = dir === "forward" || (dir !== "back" && n > current);
       prev.classList.remove("slide-active");
       prev.classList.add(fwd ? "slide-exit-left" : "slide-exit-right");
-      setTimeout(() => prev.classList.remove("slide-exit-left", "slide-exit-right"), 420);
+      setTimeout(() => {
+        prev.classList.remove("slide-exit-left", "slide-exit-right");
+        locked = false;
+      }, 420);
       next.classList.add("slide-active");
       current = n;
       updateUI();
