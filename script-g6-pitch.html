@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <title>Script de Pitch · G6 Internet · Growth + CRM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #140608;
+      --surf: rgba(255,255,255,.06);
+      --bd: rgba(255,255,255,.14);
+      --txt: #fff;
+      --mut: rgba(255,255,255,.78);
+      --red: #e11d24;
+      --soft: #ffd0d0;
+      --ok: #86efac;
+      --warn: #fde68a;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font: 15px/1.55 "Plus Jakarta Sans", system-ui, sans-serif;
+      color: var(--txt);
+      background:
+        radial-gradient(ellipse 70% 40% at 10% 0%, rgba(225,29,36,.35), transparent 55%),
+        radial-gradient(ellipse 50% 35% at 90% 10%, rgba(255,80,80,.18), transparent 50%),
+        linear-gradient(180deg, #1a090b 0%, #0d0405 100%);
+      padding-bottom: 72px;
+    }
+    h1, h2, h3 { font-family: Outfit, sans-serif; letter-spacing: -.02em; line-height: 1.15; }
+    .top {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(13,4,5,.9);
+      border-bottom: 1px solid var(--bd);
+      padding: 14px 20px;
+      display: flex; gap: 12px; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    }
+    .brand { font-weight: 800; font-size: 15px; }
+    .brand span { color: #fda4af; }
+    .pill {
+      font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      border: 1px solid var(--bd); border-radius: 999px; padding: 6px 12px; color: var(--mut);
+      text-decoration: none;
+    }
+    .pill:hover { color: #fff; border-color: rgba(255,255,255,.35); }
+    .wrap { max-width: 920px; margin: 0 auto; padding: 28px 20px 0; }
+    .hero {
+      border: 1px solid var(--bd); border-radius: 20px; padding: 28px 24px;
+      background: linear-gradient(135deg, rgba(225,29,36,.2), rgba(255,255,255,.04));
+      margin-bottom: 18px;
+    }
+    .hero h1 { margin: 0 0 10px; font-size: clamp(26px, 4vw, 36px); }
+    .hero p { margin: 0; color: var(--mut); max-width: 760px; }
+    .nav {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 8px; margin: 18px 0 8px;
+    }
+    .nav a {
+      text-decoration: none; color: var(--mut); font-size: 12px; font-weight: 700;
+      border: 1px solid var(--bd); background: var(--surf); border-radius: 12px;
+      padding: 10px 12px; transition: .2s;
+    }
+    .nav a:hover { color: #fff; border-color: rgba(255,255,255,.35); background: rgba(225,29,36,.18); }
+    .nav a small { display: block; color: #fda4af; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 3px; }
+    .callout {
+      margin: 16px 0 22px; padding: 14px 16px; border-radius: 14px;
+      border: 1px solid rgba(253,230,138,.3); background: rgba(253,230,138,.08);
+      color: var(--warn); font-size: 14px;
+    }
+    .callout strong { color: #fef08a; }
+    .callout.ok {
+      border-color: rgba(134,239,172,.3); background: rgba(134,239,172,.08); color: var(--ok);
+    }
+    .callout.ok strong { color: #bbf7d0; }
+    .perfil {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px; margin: 16px 0 8px;
+    }
+    .perfil .card, .obj-grid .card {
+      border: 1px solid var(--bd); border-radius: 14px; background: var(--surf);
+      padding: 12px 14px;
+    }
+    .perfil h3, .obj-grid h3 { margin: 0 0 6px; font-size: 14px; }
+    .perfil p, .obj-grid p { margin: 0; font-size: 13px; color: var(--mut); }
+    .slide {
+      border: 1px solid var(--bd); border-radius: 18px; background: rgba(255,255,255,.04);
+      padding: 22px 20px; margin: 14px 0;
+    }
+    .slide-head {
+      display: flex; justify-content: space-between; gap: 12px; align-items: flex-start;
+      margin-bottom: 10px; flex-wrap: wrap;
+    }
+    .slide-num { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #fda4af; margin-bottom: 4px; }
+    .slide-head h2 { margin: 0; font-size: clamp(18px, 3vw, 24px); }
+    .slide-ref { font-size: 12px; color: var(--mut); white-space: nowrap; }
+    .objetivo {
+      font-size: 13px; color: #fecdd3; background: rgba(225,29,36,.16);
+      border: 1px solid rgba(225,29,36,.35); border-radius: 10px; padding: 10px 12px; margin-bottom: 12px;
+    }
+    .fala {
+      font-size: 15px; line-height: 1.6; color: #fff;
+      border-left: 3px solid var(--red); padding: 4px 0 4px 14px; margin: 10px 0;
+    }
+    .fala em { color: #fda4af; font-style: normal; font-weight: 700; }
+    .bloco {
+      margin-top: 12px; padding: 12px 14px; border-radius: 12px;
+      background: var(--surf); border: 1px solid var(--bd);
+    }
+    .bloco h3 { margin: 0 0 8px; font-size: 13px; color: #fda4af; }
+    .bloco ul { margin: 0; padding-left: 18px; color: var(--mut); font-size: 13px; }
+    .bloco li { margin: 5px 0; }
+    .ask {
+      margin-top: 12px; padding: 12px 14px; border-radius: 12px;
+      background: rgba(134,239,172,.1); border: 1px solid rgba(134,239,172,.28);
+      color: #bbf7d0; font-size: 14px;
+    }
+    .ask strong { color: #86efac; }
+    .evitar {
+      margin-top: 10px; padding: 12px 14px; border-radius: 12px;
+      background: rgba(253,230,138,.08); border: 1px solid rgba(253,230,138,.25);
+      color: #fde68a; font-size: 13px;
+    }
+    .evitar strong { color: #fef08a; }
+    .roi-bridge {
+      margin-top: 10px; font-size: 13px; color: var(--soft);
+      padding: 10px 12px; border-radius: 10px; background: rgba(255,255,255,.04);
+    }
+    .obj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+    @media (max-width: 720px) { .obj-grid { grid-template-columns: 1fr; } }
+    .tag {
+      display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: .08em;
+      text-transform: uppercase; padding: 3px 8px; border-radius: 999px; margin-right: 6px;
+      background: rgba(225,29,36,.25); color: #fda4af;
+    }
+    footer {
+      margin: 28px 20px 0; text-align: center; font-size: 12px; color: var(--mut);
+    }
+    footer a { color: #fda4af; }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <div class="brand">Script G6 · <span>Sara × Pitch</span></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <a class="pill" href="proposta-g6-internet.html?v=3">Abrir proposta</a>
+      <a class="pill" href="farmer-sara.html">Hub Farmer</a>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <header class="hero">
+      <h1>Narrativa leve para fechar decisão</h1>
+      <p>
+        Script da proposta G6 (Growth + CRM · 12 meses), no tom que o Rodrigo pediu:
+        conversa, perguntas abertas, objeções mortas <em>antes</em> do preço —
+        e quando o valor entrar, só discute valor.
+      </p>
+    </header>
+
+    <div class="callout">
+      <strong>Regra de ouro (Rodrigo):</strong>
+      quando o preço aparecer, a única discussão que pode restar é o valor.
+      Timing, escopo, time, “quem executa” e “outra opção” já foram alinhados antes.
+    </div>
+
+    <div class="perfil">
+      <div class="card">
+        <h3>Seu papel na call</h3>
+        <p>Você amarra o próximo passo. O time da EE entrega o mapa; você conduz a decisão.</p>
+      </div>
+      <div class="card">
+        <h3>O cliente precisa saber</h3>
+        <p>Quem é a Sara, o que você faz na parceria e que está ali para solução — não “só comercial”.</p>
+      </div>
+      <div class="card">
+        <h3>Tom</h3>
+        <p>Leve, sênior, sem falar mal da agência, sem nomear pessoas internas do cliente, sem plantar dúvida.</p>
+      </div>
+      <div class="card">
+        <h3>Pacote</h3>
+        <p>Um plano: Growth + CRM · 12 meses · cartão · R$ 9.480,75/mês (de R$ 17.237,73).</p>
+      </div>
+    </div>
+
+    <nav class="nav" aria-label="Blocos">
+      <a href="#b0"><small>0</small>Antes de abrir</a>
+      <a href="#b1"><small>1</small>Abertura</a>
+      <a href="#b2"><small>2</small>Mapa</a>
+      <a href="#b3"><small>3</small>Fibranet</a>
+      <a href="#b4"><small>4</small>Plano</a>
+      <a href="#b5"><small>5</small>Alinhamento</a>
+      <a href="#b6"><small>6</small>Proposta + preço</a>
+      <a href="#b7"><small>7</small>Pedir a venda</a>
+      <a href="#obj"><small>Mapa</small>Objeções</a>
+      <a href="#evitar"><small>Lista</small>Não plantar</a>
+    </nav>
+
+    <!-- 0 -->
+    <article class="slide" id="b0">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Bloco 0 · Antes da tela</div>
+          <h2>Entrar leve — não afoita</h2>
+        </div>
+        <div class="slide-ref">~ 30–45s</div>
+      </div>
+      <div class="objetivo">Objetivo: criar clima de conversa. Cliente fala. Você escuta. Zero monólogo.</div>
+      <div class="fala">
+        “E aí, pessoal — tudo bem? Antes de eu abrir a tela: como vocês estão saindo da Estruturação?
+        O que mais ficou marcado pra vocês até aqui?”
+      </div>
+      <div class="bloco">
+        <h3>Checklist Rodrigo (na cabeça)</h3>
+        <ul>
+          <li>Pergunta <strong>aberta</strong> — não “faz sentido?”</li>
+          <li>Deixa eles falarem; use a resposta na narrativa depois</li>
+          <li>Se ainda não se apresentaram bem: “Eu sou a Sara, fico na linha de frente com vocês no próximo passo”</li>
+          <li>Não abrir com preço. Não abrir com “última semana / acabou”</li>
+        </ul>
+      </div>
+      <div class="ask">
+        <strong>Perguntas abertas (escolhe 1–2):</strong><br />
+        “O que vocês mais gostaram da estratégia até agora?”<br />
+        “O que vocês sentem que não pode deixar de sair do papel?”<br />
+        “Se a gente desenhar o próximo passo, quando faria sentido começar?”
+      </div>
+      <div class="evitar"><strong>Evitar:</strong> “Faz sentido? Faz sentido? Faz sentido?” · entrar correndo · empilhar 5 minutos sem perguntar.</div>
+    </article>
+
+    <!-- 1 -->
+    <article class="slide" id="b1">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Bloco 1 · Capa (slide 1)</div>
+          <h2>O mapa está pronto. Agora é executar com critério.</h2>
+        </div>
+        <div class="slide-ref">~ 40–60s</div>
+      </div>
+      <div class="objetivo">Objetivo: posicionar a call como continuidade da EE — não venda fria.</div>
+      <div class="fala">
+        “O que a Estruturação entregou foi o mapa: onde a G6 ganha e onde o valor escapa.
+        Hoje a gente não vai reinventar isso. Vamos olhar o próximo passo —
+        um plano de 12 meses para <em>fechar o ciclo da performance até o LTV</em>:
+        Growth e CRM no mesmo sistema.”
+      </div>
+      <div class="ask">
+        <strong>Gancho leve:</strong>
+        “Só pra alinhar comigo: o que vocês mais querem desse próximo passo —
+        clareza do que a mídia gera, ou condução da base / retenção?”
+      </div>
+      <div class="evitar"><strong>Evitar:</strong> jargão interno (FI, Executar, “já monetizado”) · tom de “acabou, não faço mais nada”.</div>
+    </article>
+
+    <!-- 2 -->
+    <article class="slide" id="b2">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Bloco 2 · Mapa (slide 2)</div>
+          <h2>Ticket × LTV — o jogo real</h2>
+        </div>
+        <div class="slide-ref">~ 2–2,5 min</div>
+      </div>
+      <div class="objetivo">Objetivo: devolver a dor com leveza e espertice — sem vilão, sem “10k”.</div>
+      <div class="fala">
+        “No modelo de vocês, o jogo não é só gerar venda.
+        É quanto custa trazer o assinante × quanto tempo ele fica.
+        Com ticket na casa de R$ 100/mês, a margem de erro é pequena.
+        <br /><br />
+        Intenção e mídia trazem quem pede agora.
+        Trackeamento prova se isso vira LTV de verdade — ou só volume.
+        CRM conduz a jornada.
+        E a base é onde o plano se paga.
+        <br /><br />
+        As pontas existem. O que falta é o <em>ciclo fechado</em>.”
+      </div>
+      <div class="bloco">
+        <h3>Como usar o slide</h3>
+        <ul>
+          <li>Passa rápido pelos 4 cards — não lê cada parágrafo</li>
+          <li>Fecha no fluxo: Intenção → Prova → Jornada → Assinatura → LTV</li>
+          <li>Usa o que eles falaram na abertura (“você comentou que…”)</li>
+        </ul>
+      </div>
+      <div class="ask">
+        <strong>Perguntas abertas:</strong><br />
+        “Desses pontos — intenção, prova, jornada, retenção — onde vocês mais sentem que o valor escapa hoje?”<br />
+        “O que vocês acham que a gente não pode deixar de resolver primeiro?”
+      </div>
+      <div class="roi-bridge"><strong>Ponte:</strong> “Com ticket baixo, performance sem LTV é vanity. Por isso o plano precisa fechar o ciclo inteiro.”</div>
+      <div class="evitar"><strong>Evitar:</strong> culpar agência · citar nomes internos · falar de verba específica inventada · “vocês estão perdendo 10k”.</div>
+    </article>
+
+    <!-- 3 -->
+    <article class="slide" id="b3">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Bloco 3 · Fibranet (slide 3)</div>
+          <h2>Referência de método — não cópia de praça</h2>
+        </div>
+        <div class="slide-ref">~ 1–1,5 min</div>
+      </div>
+      <div class="objetivo">Objetivo: autoridade leve. Validar a tese. Sem prometer número na boca se o time não for trazer.</div>
+      <div class="fala">
+        “Essa tese não é teórica. Na Fibranet, cliente da nossa base, a mesma lógica já roda:
+        performance com leitura de resultado e trabalho forte na retenção —
+        porque em telecom o plano se paga no tempo de vida do assinante.
+        <br /><br />
+        Não é copiar praça. É a mesma disciplina de ciclo:
+        investir com prova e proteger LTV. É isso que a gente desenhou para a G6.”
+      </div>
+      <div class="ask">
+        <strong>Engajamento:</strong>
+        “Faz sentido pra vocês olhar a Fibranet como referência de método — mesma complexidade, mesma lógica de assinatura?”
+        <br /><span style="opacity:.85;font-size:13px">Se quiser abrir: “O que dessa lógica mais conecta com o momento da G6?”</span>
+      </div>
+      <div class="evitar"><strong>Evitar:</strong> inventar BE/números · “o time vai mostrar depois” como muleta · comparar praça a praça.</div>
+    </article>
+
+    <!-- 4 -->
+    <article class="slide" id="b4">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Bloco 4 · Plano (slide 4–5)</div>
+          <h2>Growth + CRM — um desenho só</h2>
+        </div>
+        <div class="slide-ref">~ 2–2,5 min</div>
+      </div>
+      <div class="objetivo">Objetivo: matar objeção de time/escopo ANTES do preço. Cliente entende o que entra — e por quê.</div>
+      <div class="fala">
+        “O plano é um: Assessoria de Growth e Profissional de CRM, 12 meses, juntos.
+        <br /><br />
+        No Growth: Account, Gestor de Tráfego, Copy e Designer.
+        Rotina leve e próxima — diário no grupo, ritual de performance, Account orquestrando.
+        <br /><br />
+        No CRM: alguém dono da jornada — etapas, origem, handoff com a mídia,
+        e rotinas de base para ativação e retenção.
+        <br /><br />
+        Growth lê a demanda. CRM faz a demanda e a base andarem no mesmo sistema.
+        É isso que fecha o ciclo que a gente acabou de olhar.”
+      </div>
+      <div class="bloco">
+        <h3>Matar escopo aqui (não depois do preço)</h3>
+        <ul>
+          <li>“Esse é o desenho que a estratégia pediu — performance com leitura + jornada na base.”</li>
+          <li>Não abrir menu do que “não entra”. Se perguntarem social: “Para o ciclo que mapeamos, priorizamos Growth + CRM — é o que destrava LTV agora.”</li>
+          <li>Depois do time: pergunta — não preço.</li>
+        </ul>
+      </div>
+      <div class="ask">
+        <strong>Perguntas (mata time/escopo):</strong><br />
+        “Olhando esse time e essa rotina — o que vocês mais gostaram?”<br />
+        “Tem alguma peça desse desenho que vocês sentem que precisa estar mais clara antes da gente avançar?”
+      </div>
+      <div class="roi-bridge"><strong>Resultado (slide 5, 30–40s):</strong> “Com isso no ar: clareza do que a mídia gera, condição de escalar com prova, jornada visível e base conduzida.”</div>
+      <div class="evitar"><strong>Evitar:</strong> plantar “e o social?” · “não entra X” · listar o que a V4 não faz · jargão de squad.</div>
+    </article>
+
+    <!-- 5 -->
+    <article class="slide" id="b5">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Bloco 5 · Alinhamento (antes do preço)</div>
+          <h2>Antecipar objeções — leve e direto</h2>
+        </div>
+        <div class="slide-ref">~ 1,5–2 min</div>
+      </div>
+      <div class="objetivo">Objetivo: quando o preço entrar, só sobra preço. Aqui você mata timing, quem executa e outra opção.</div>
+      <div class="fala">
+        “Antes de eu trazer a condição comercial, quero alinhar quatro coisas com vocês —
+        pra gente não chegar no valor com dúvida aberta.”
+      </div>
+      <div class="ask">
+        <strong>Sequência Rodrigo (abre, escuta, amarra):</strong><br /><br />
+        1. “O que vocês mais gostaram da estratégia / do plano até aqui?”<br />
+        2. “O que vocês acham que a gente não pode deixar de executar?”<br />
+        3. “Quando vocês querem que isso comece a rodar?”<br />
+        4. “Vocês querem a V4 executando esse próximo passo — ou estão avaliando outro caminho?”<br /><br />
+        <span style="opacity:.9">Se disserem “V4 / para ontem”: “Perfeito. Então o que falta é a condição para a gente avançar.”</span>
+      </div>
+      <div class="bloco">
+        <h3>Se aparecer “preciso pensar”</h3>
+        <ul>
+          <li>Não empurra contrato. Descobre a objeção: “Claro — o que te faz precisar pensar: valor, timing ou escopo?”</li>
+          <li>Se for sócio: “Quem mais precisa estar na decisão? Conseguimos trazer nessa call ou marcar já com os dois?”</li>
+          <li>Se for viagem: “Entendi o início em X semanas — a decisão do plano a gente consegue alinhar agora?”</li>
+        </ul>
+      </div>
+      <div class="evitar"><strong>Evitar:</strong> “vou mandar o contrato e vocês pensam” · “tenho 3 dias de validade” · oferecer valor menor sem pedido · plantar boleto/30 dias/cancelamento.</div>
+    </article>
+
+    <!-- 6 -->
+    <article class="slide" id="b6">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Bloco 6 · Proposta + investimento (slides 7–8)</div>
+          <h2>Um preço. Uma decisão.</h2>
+        </div>
+        <div class="slide-ref">~ 1,5–2 min</div>
+      </div>
+      <div class="objetivo">Objetivo: apresentar valor com leveza. Condição em destaque. Sem menu. Sem âncora verbal confusa.</div>
+      <div class="fala">
+        “O que estamos contratando: programa de 12 meses — Assessoria de Growth e Profissional de CRM,
+        no mesmo plano, com a rotina que a gente viu.
+        <br /><br />
+        Valor de referência do pacote: R$ 17.237,73 por mês.
+        A condição que eu trouxe para a gente avançar: <em>R$ 9.480,75 por mês</em>,
+        12 meses, no cartão de crédito —
+        economia de cerca de R$ 7.750 por mês sobre a referência.
+        <br /><br />
+        Cobrança recorrente de R$ 9.480,75 no cartão.”
+      </div>
+      <div class="bloco">
+        <h3>Como falar o card (estilo da foto)</h3>
+        <ul>
+          <li>Primeiro o “de” (referência) — rápido</li>
+          <li>Depois a economia (caixa verde) — uma frase</li>
+          <li>Depois o preço grande — para e respira</li>
+          <li>Não chama de “âncora” / “essencial” / “FI” na boca do cliente</li>
+        </ul>
+      </div>
+      <div class="ask">
+        <strong>Pergunta de avanço (não fechada demais):</strong><br />
+        “Olhando essa condição — o que vocês precisam alinhar para a gente avançar nesse plano?”
+        <br />ou<br />
+        “Se essa condição fizer sentido para o que vocês querem executar, a gente consegue tomar a decisão aqui?”
+      </div>
+      <div class="evitar"><strong>Evitar:</strong> discutir escopo de novo · “posso ver um valor menor” · comparar tabela de mercado confusa · abrir menu de pagamento.</div>
+    </article>
+
+    <!-- 7 -->
+    <article class="slide" id="b7">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Bloco 7 · Fechamento</div>
+          <h2>Pedir a venda com segurança</h2>
+        </div>
+        <div class="slide-ref">~ 1 min</div>
+      </div>
+      <div class="objetivo">Objetivo: confiança + próximo passo claro. Eles pedem o contrato — ou você amarra a decisão.</div>
+      <div class="fala">
+        “Eu quero conduzir esse próximo passo com vocês.
+        Kick-off, acessos, primeira onda de prova e leitura, jornada no CRM e rotina na base —
+        12 meses com a gente perto, no grupo, no ritual, no alinhamento.
+        <br /><br />
+        Se o plano fechou: a gente avança com o contrato e já agenda o kick-off.
+        Eu fico na linha de frente com vocês.”
+      </div>
+      <div class="ask">
+        <strong>Pedir a venda (leve, segura):</strong><br />
+        “Podemos avançar com essa condição e começar o kick-off?”
+        <br />
+        Se hesitarem: “O que ainda está em aberto para vocês — valor, início ou alguma peça do plano?”
+      </div>
+      <div class="callout ok" style="margin-top:12px">
+        <strong>Próximos passos se fechar:</strong>
+        contrato · kick-off · Sprint 1 (prova/leitura) · Sprint 2 (jornada) · Sprint 3 (base) · cadência 12 meses.
+      </div>
+      <div class="evitar"><strong>Evitar:</strong> “eu te envio e vocês vão conversando” sem amarrar · sumir do pedido de venda · plantar “pensa e me fala”.</div>
+    </article>
+
+    <!-- Objeções -->
+    <article class="slide" id="obj">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Mapa de objeções</div>
+          <h2>Tratar antes — ou na hora, sem plantar</h2>
+        </div>
+      </div>
+      <div class="obj-grid">
+        <div class="card">
+          <h3><span class="tag">Antes</span> Timing</h3>
+          <p>“Quando vocês querem começar?” → se viagem/atraso: amarra decisão agora, início depois.</p>
+        </div>
+        <div class="card">
+          <h3><span class="tag">Antes</span> Quem executa</h3>
+          <p>“Vocês querem a V4 nesse próximo passo ou outro caminho?” → mata agência futura.</p>
+        </div>
+        <div class="card">
+          <h3><span class="tag">Antes</span> Escopo / time</h3>
+          <p>“O que acharam desse time?” → não deixa sobrar “e o social?” depois do preço.</p>
+        </div>
+        <div class="card">
+          <h3><span class="tag">Antes</span> Estratégia</h3>
+          <p>“O que mais gostaram? O que não pode deixar de executar?” → eles verbalizam o sim.</p>
+        </div>
+        <div class="card">
+          <h3><span class="tag">Na hora</span> “Preciso pensar”</h3>
+          <p>“Boa — pensar em quê: valor, timing ou escopo?” · não inventa prazo artificial.</p>
+        </div>
+        <div class="card">
+          <h3><span class="tag">Na hora</span> “Como acompanha?”</h3>
+          <p>Diário no grupo · ritual de performance · alinhamento periódico · você na linha de frente.</p>
+        </div>
+        <div class="card">
+          <h3><span class="tag">Na hora</span> Sócio / cartão</h3>
+          <p>Descobre cedo. Se precisa de outro decisor, traz para a sala — não depois do preço.</p>
+        </div>
+        <div class="card">
+          <h3><span class="tag">Cuidado</span> Objeção sua</h3>
+          <p>Rodrigo: às vezes a objeção é nossa. Não plante dúvida que o cliente não trouxe.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Evitar -->
+    <article class="slide" id="evitar">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Lista rápida</div>
+          <h2>O que não plantar na G6</h2>
+        </div>
+      </div>
+      <div class="bloco">
+        <h3>Frases / movimentos que geram objeção herdada</h3>
+        <ul>
+          <li>“Posso ver um valor menor / tenho condição se fechar agora” sem eles pedirem</li>
+          <li>“Vocês têm 3 dias / 1 semana para decidir”</li>
+          <li>“Vou mandar o contrato e vocês pensam”</li>
+          <li>“E o social? / o que não entra…” (abre buraco)</li>
+          <li>Falar mal da agência ou nomear Esdras</li>
+          <li>“Sua meta é a minha” (vira objeção de meta depois)</li>
+          <li>“Faz sentido?” em loop — troca por pergunta aberta</li>
+          <li>Monólogo de 10 minutos sem o cliente falar</li>
+          <li>Jargão: FI, âncora, Executar, já monetizado</li>
+        </ul>
+      </div>
+      <div class="callout ok" style="margin-top:14px">
+        <strong>Em uma frase:</strong>
+        leve no início · perguntas abertas · mata objeção antes · um preço · pede a venda com segurança.
+      </div>
+    </article>
+
+    <footer>
+      G6 Internet × V4 · Script de pitch ·
+      <a href="proposta-g6-internet.html?v=3">Proposta</a> ·
+      <a href="plano-acao-modelo-adaptavel.html">Plano adaptável</a> ·
+      <a href="farmer-sara.html">Hub Farmer</a>
+    </footer>
+  </div>
+</body>
+</html>
