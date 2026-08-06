@@ -1,320 +1,482 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>G6 Internet × V4 Company — Performance + CRM · 12 meses</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>G6 Internet × V4 — Performance + CRM · 12 meses</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@550;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --navy:#022062; --blue:#0a49a3; --red:#e3040a; --ink:#071126;
-      --paper:#f6f8fc; --white:#fff; --muted:#627089; --line:#dfe5ef;
-      --soft:#eef2fa; --max:920px;
+      --v4-red-deep: #a10f14;
+      --v4-red-mid: #c4181e;
+      --cream: #ffffff;
+      --muted: rgba(255,255,255,0.88);
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
     }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.55 Inter,system-ui,sans-serif}
-    h1,h2,h3,.brand{font-family:Sora,Inter,sans-serif}
-    .nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(12px);background:rgba(246,248,252,.92);border-bottom:1px solid var(--line);padding:12px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-    .brand{font-weight:800;font-size:14px;color:var(--navy)}.brand span{color:var(--red)}
-    .nav-links{display:flex;gap:8px;flex-wrap:wrap}
-    .nav-links a{font-size:12px;font-weight:600;color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:999px;border:1px solid transparent}
-    .nav-links a:hover{border-color:var(--line);color:var(--navy);background:var(--white)}
-    .btn{appearance:none;border:0;border-radius:999px;padding:10px 16px;font:inherit;font-weight:700;font-size:13px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
-    .btn.primary{background:var(--red);color:#fff}
-    .btn.ghost{background:var(--white);color:var(--navy);border:1px solid var(--line)}
-    .wrap{max-width:var(--max);margin:0 auto;padding:28px 20px 72px}
-    .hero{background:linear-gradient(145deg,#022062 0%,#0a49a3 55%,#061833 100%);color:#fff;border-radius:24px;padding:36px 32px;margin-bottom:22px;box-shadow:0 24px 60px rgba(2,32,98,.25)}
-    .eyebrow{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:10px}
-    .hero h1{margin:0 0 12px;font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-.03em;line-height:1.15}
-    .hero p{margin:0;max-width:560px;color:rgba(255,255,255,.88);font-size:15px}
-    .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
-    .section{background:var(--white);border:1px solid var(--line);border-radius:20px;padding:26px 28px;margin-bottom:14px}
-    .section-head{margin-bottom:14px}
-    .section-head .k{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:4px}
-    .section-head h2{margin:0;font-size:clamp(20px,3vw,26px);font-weight:800;color:var(--navy);letter-spacing:-.02em;line-height:1.2}
-    .section-head p{margin:8px 0 0;color:var(--muted);font-size:14px;max-width:640px}
-    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:720px){.grid2{grid-template-columns:1fr}}
-    .card{background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
-    .card h3{margin:0 0 6px;font-size:15px;font-weight:700;color:var(--navy)}
-    .card p,.card li{font-size:13px;color:#3a4660;margin:0}
-    .card ul{margin:8px 0 0;padding-left:16px}
-    .card li{margin:4px 0}
-    .flow{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:14px}
-    @media(max-width:800px){.flow{grid-template-columns:1fr 1fr}}
-    .flow-step{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:12px}
-    .flow-step .n{font-size:10px;font-weight:800;color:var(--red);letter-spacing:.08em;text-transform:uppercase}
-    .flow-step .t{font-size:13px;font-weight:700;color:var(--navy);margin:4px 0 2px}
-    .flow-step .d{font-size:12px;color:var(--muted);line-height:1.4}
-    .quote{border-left:3px solid var(--red);padding:4px 0 4px 14px;margin:14px 0 0;font-size:14px;font-weight:600;color:var(--navy)}
-    .team{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
-    @media(max-width:700px){.team{grid-template-columns:1fr 1fr}}
-    .chip{background:var(--white);border:1px solid var(--line);border-radius:10px;padding:10px;text-align:center;font-size:12px;font-weight:700;color:var(--navy)}
-    .steps{margin:0;padding-left:0;list-style:none;counter-reset:s}
-    .steps li{counter-increment:s;display:grid;grid-template-columns:36px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
-    .steps li:last-child{border-bottom:0}
-    .steps li::before{content:counter(s, decimal-leading-zero);font-family:Sora,sans-serif;font-weight:800;font-size:13px;color:var(--red);padding-top:2px}
-    .steps strong{display:block;color:var(--navy);font-size:14px;margin-bottom:2px}
-    .steps span{font-size:13px;color:var(--muted)}
-    .price-box{display:grid;grid-template-columns:1fr 1.2fr;gap:12px;margin-top:8px}
-    @media(max-width:700px){.price-box{grid-template-columns:1fr}}
-    .price-ref{background:var(--soft);border:1px solid var(--line);border-radius:16px;padding:18px}
-    .price-ref .l{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-    .price-ref .v{font-size:22px;font-weight:800;color:var(--navy);margin:6px 0;font-family:Sora,sans-serif}
-    .price-ref .s{font-size:12px;color:var(--muted)}
-    .price-anchor{background:linear-gradient(145deg,#022062,#0a49a3);color:#fff;border-radius:16px;padding:20px 18px;box-shadow:0 16px 40px rgba(2,32,98,.2)}
-    .price-anchor .l{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.7)}
-    .price-anchor .v{font-size:28px;font-weight:800;margin:8px 0;font-family:Sora,sans-serif}
-    .price-anchor .s{font-size:13px;color:rgba(255,255,255,.85)}
-    .muted{color:var(--muted);font-size:13px}
-    footer{text-align:center;color:var(--muted);font-size:12px;margin-top:8px;padding-top:18px}
-    @media print{
-      .nav{position:static}.nav-links,.hero-actions .ghost{display:none}
-      .hero,.section{break-inside:avoid;box-shadow:none}
-      body{background:#fff}
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; overflow: hidden; }
+    body {
+      font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+      font-size: 1.05rem;
+      background: var(--v4-red-deep);
+      color: var(--cream);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    .slide-logo { position: absolute; top: 1.25rem; left: 1.5rem; z-index: 10; }
+    .slide-logo svg { height: clamp(22px, 3.5vh, 30px); width: auto; display: block; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.35)); }
+    .blend-progress {
+      position: fixed; top: 0; left: 0; right: 0; height: 5px; z-index: 200;
+      background: linear-gradient(90deg, #fff, #ffd0d0);
+      transform-origin: left; transform: scaleX(var(--slide-progress, 0.08));
+      transition: transform 0.4s var(--ease);
+    }
+    .nav-dots {
+      position: fixed; right: 1rem; top: 50%; transform: translateY(-50%);
+      z-index: 100; display: flex; flex-direction: column; gap: 0.38rem;
+    }
+    .nav-dots a {
+      width: 8px; height: 8px; border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.45); background: transparent;
+      transition: all 0.3s var(--ease);
+    }
+    .nav-dots a:hover, .nav-dots a.active { background: #fff; border-color: #fff; transform: scale(1.2); }
+    .nav-arrow {
+      position: fixed; top: 50%; transform: translateY(-50%); z-index: 100;
+      width: 46px; height: 46px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.35); background: rgba(161,15,20,0.55);
+      color: white; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; line-height: 1;
+    }
+    .nav-arrow:hover:not(:disabled) { background: rgba(255,255,255,0.2); border-color: #fff; }
+    .nav-arrow:disabled { opacity: 0.25; cursor: default; }
+    .nav-arrow--prev { left: 1rem; }
+    .nav-arrow--next { right: 3rem; }
+    .deck { position: relative; width: 100vw; height: 100vh; overflow: hidden; }
+    section {
+      position: absolute; inset: 0; width: 100%; height: 100vh;
+      padding: clamp(2.5rem, 5vh, 3.5rem) clamp(1.25rem, 4vw, 3rem) 4.5rem;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      overflow-y: auto; opacity: 0; visibility: hidden; transform: translateX(60px);
+      transition: opacity 0.4s var(--ease), transform 0.4s var(--ease), visibility 0.4s; z-index: 0;
+    }
+    section.slide-active { opacity: 1; visibility: visible; transform: translateX(0); z-index: 2; }
+    section.slide-exit-left { transform: translateX(-60px); opacity: 0; }
+    section.slide-exit-right { transform: translateX(60px); opacity: 0; }
+    section::before {
+      content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(255, 74, 74, 0.45) 0%, transparent 55%),
+        radial-gradient(ellipse 70% 55% at 85% 90%, rgba(255, 42, 26, 0.35) 0%, transparent 50%),
+        radial-gradient(ellipse 100% 100% at 50% 50%, var(--v4-red-mid) 0%, var(--v4-red-deep) 70%, #6b080c 100%);
+    }
+    .inner { position: relative; z-index: 2; width: 100%; max-width: 980px; max-height: calc(100vh - 5rem); }
+    .eyebrow {
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: #ffe0e0; margin-bottom: 0.5rem;
+    }
+    h1, h2, h3 { font-family: Outfit, sans-serif; font-weight: 700; line-height: 1.12; letter-spacing: -0.02em; color: #fff; }
+    h2 { font-size: clamp(1.55rem, 3.8vh, 2.35rem); margin-bottom: 0.5rem; }
+    .gold-line { width: 64px; height: 4px; background: linear-gradient(90deg, #fff, #ffd0d0); border-radius: 2px; margin: 0.5rem 0 0.9rem; }
+    .lead { font-size: clamp(0.95rem, 1.7vh, 1.1rem); color: var(--muted); max-width: 760px; line-height: 1.5; }
+    .glass {
+      background: rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.28); border-radius: 22px;
+      padding: clamp(1.1rem, 2.5vh, 1.75rem) clamp(1.2rem, 3vw, 1.85rem);
+      box-shadow: 0 12px 40px rgba(80, 0, 0, 0.25);
+    }
+    #capa .inner { text-align: center; }
+    .capa-partnership {
+      display: flex; align-items: center; justify-content: center; gap: 1rem;
+      margin: 0.5rem 0 1rem; flex-wrap: wrap;
+    }
+    .capa-partnership img {
+      height: clamp(42px, 7vh, 58px); width: auto; max-width: 200px;
+      object-fit: contain; filter: drop-shadow(0 4px 16px rgba(0,0,0,0.35));
+      background: rgba(255,255,255,0.95); border-radius: 12px; padding: 0.45rem 0.7rem;
+    }
+    .capa-partnership .x { opacity: 0.55; font-size: 1.1rem; font-weight: 600; }
+    .capa-partnership .v4-name { font-family: Outfit; font-weight: 800; font-size: 1.15rem; letter-spacing: -0.02em; }
+    #capa h1 { font-size: clamp(2rem, 5.5vh, 3.1rem); margin-bottom: 0.75rem; }
+    #capa h1 em { font-style: normal; color: #ffe8e8; }
+    .capa-badge {
+      display: inline-block; padding: 0.45rem 1rem; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.45); font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase; background: rgba(255,255,255,0.12);
+    }
+    .slide-hint { margin-top: 1.5rem; font-size: 0.85rem; color: rgba(255,255,255,0.5); }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; margin-top: 0.85rem; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.55rem; margin-top: 0.85rem; }
+    .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.45rem; margin-top: 0.9rem; }
+    @media (max-width: 800px) {
+      .grid-2, .grid-4, .grid-5 { grid-template-columns: 1fr 1fr; }
+      .nav-arrow--next { right: 1rem; }
+      .nav-dots { display: none; }
+    }
+    .card {
+      background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 14px; padding: 0.85rem 1rem;
+    }
+    .card-num { font-family: Outfit; font-size: 0.8rem; font-weight: 800; color: #ffe0e0; margin-bottom: 0.3rem; }
+    .card h3 { font-size: 0.98rem; margin-bottom: 0.3rem; }
+    .card p, .card li { font-size: 0.86rem; color: var(--muted); line-height: 1.45; }
+    .card ul { list-style: none; margin-top: 0.35rem; }
+    .card ul li { padding-left: 0.9rem; position: relative; margin-bottom: 0.2rem; }
+    .card ul li::before { content: "·"; position: absolute; left: 0; color: #fff; font-weight: 700; }
+    .flow-step { text-align: center; background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.22); border-radius: 12px; padding: 0.7rem 0.45rem; }
+    .flow-step .n { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #ffe0e0; }
+    .flow-step .t { font-family: Outfit; font-size: 0.9rem; font-weight: 700; margin: 0.25rem 0 0.15rem; }
+    .flow-step .d { font-size: 0.75rem; color: var(--muted); }
+    .quote {
+      margin-top: 0.9rem; padding: 0.75rem 1rem; border-left: 3px solid #fff;
+      background: rgba(0,0,0,0.15); border-radius: 0 12px 12px 0;
+      font-size: 0.95rem; font-weight: 600; color: #fff;
+    }
+    .quote span { display: block; margin-top: 0.25rem; font-weight: 500; color: var(--muted); font-size: 0.88rem; }
+    .chip-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.55rem 0 0.35rem; }
+    .chip {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+      padding: 0.35rem 0.65rem; border-radius: 999px; border: 1px solid rgba(255,255,255,0.35);
+      background: rgba(255,255,255,0.12);
+    }
+    .steps { list-style: none; margin-top: 0.6rem; }
+    .steps li {
+      display: grid; grid-template-columns: 2.2rem 1fr; gap: 0.65rem;
+      padding: 0.55rem 0; border-bottom: 1px solid rgba(255,255,255,0.15);
+    }
+    .steps li:last-child { border-bottom: 0; }
+    .steps .n { font-family: Outfit; font-weight: 800; color: #ffe0e0; font-size: 0.9rem; }
+    .steps strong { display: block; font-size: 0.95rem; margin-bottom: 0.15rem; }
+    .steps span { font-size: 0.84rem; color: var(--muted); }
+    .price-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 0.75rem; margin-top: 0.85rem; }
+    @media (max-width: 700px) { .price-grid { grid-template-columns: 1fr; } }
+    .price-ref, .price-anchor {
+      border-radius: 16px; padding: 1.1rem 1.2rem; border: 1px solid rgba(255,255,255,0.25);
+    }
+    .price-ref { background: rgba(255,255,255,0.12); }
+    .price-anchor {
+      background: rgba(255,255,255,0.22);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.2);
+    }
+    .price-ref .l, .price-anchor .l {
+      font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #ffe0e0;
+    }
+    .price-ref .v, .price-anchor .v {
+      font-family: Outfit; font-size: clamp(1.45rem, 3.5vh, 1.9rem); font-weight: 800; margin: 0.35rem 0;
+    }
+    .price-anchor .v { font-size: clamp(1.7rem, 4vh, 2.25rem); }
+    .price-ref .s, .price-anchor .s { font-size: 0.84rem; color: var(--muted); }
+    .deck-footer {
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 90;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      padding: 0.65rem 1.25rem 0.75rem;
+      background: rgba(80, 8, 12, 0.75); backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(255,255,255,0.12); font-size: 0.75rem; color: rgba(255,255,255,0.7);
+    }
+    .progress-wrap { flex: 1; max-width: 220px; height: 3px; background: rgba(255,255,255,0.15); border-radius: 99px; overflow: hidden; }
+    .progress-fill { height: 100%; width: 12.5%; background: #fff; border-radius: 99px; transition: width 0.35s var(--ease); }
+    @media (max-width: 600px) {
+      .slide-logo { left: 1rem; top: 1rem; }
+      .deck-footer span:first-child { display: none; }
     }
   </style>
 </head>
 <body>
-  <nav class="nav">
-    <div class="brand">V4 <span>COMPANY</span> · G6 Internet</div>
-    <div class="nav-links">
-      <a href="#mapa">Mapa</a>
-      <a href="#plano">Plano</a>
-      <a href="#proposta">Proposta</a>
-      <a href="#investimento">Investimento</a>
-    </div>
-    <button class="btn ghost" type="button" onclick="window.print()">Imprimir / PDF</button>
+  <div class="blend-progress" aria-hidden="true"></div>
+
+  <nav class="nav-dots" aria-label="Slides">
+    <a href="#capa" data-slide="1" class="active" aria-label="Capa"></a>
+    <a href="#mapa" data-slide="2" aria-label="Mapa"></a>
+    <a href="#case" data-slide="3" aria-label="Case"></a>
+    <a href="#plano" data-slide="4" aria-label="Plano"></a>
+    <a href="#resultado" data-slide="5" aria-label="Resultado"></a>
+    <a href="#proximos" data-slide="6" aria-label="Próximos passos"></a>
+    <a href="#proposta" data-slide="7" aria-label="Proposta"></a>
+    <a href="#investimento" data-slide="8" aria-label="Investimento"></a>
   </nav>
 
-  <div class="wrap">
-    <header class="hero" id="topo">
-      <div class="eyebrow">Proposta estratégica · Executar · 12 meses</div>
-      <h1>Fechar o ciclo da performance até o LTV.</h1>
-      <p>
-        A Estruturação Estratégica entregou o mapa.
-        O próximo passo é um único plano de 12 meses:
-        Assessoria de Growth e Profissional de CRM trabalhando juntos —
-        da intenção do cliente à retenção na base.
-      </p>
-      <div class="hero-actions">
-        <a class="btn primary" href="#mapa">Ver o mapa</a>
-        <a class="btn ghost" href="#investimento" style="border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff">Ver investimento</a>
-      </div>
-    </header>
+  <button type="button" class="nav-arrow nav-arrow--prev" id="prevBtn" disabled aria-label="Anterior">‹</button>
+  <button type="button" class="nav-arrow nav-arrow--next" id="nextBtn" aria-label="Próximo">›</button>
 
-    <!-- 02 MAPA -->
-    <section class="section" id="mapa">
-      <div class="section-head">
-        <div class="k">Diagnóstico estratégico</div>
-        <h2>O digital já é o principal canal. O valor escapa entre as etapas.</h2>
-        <p>
+  <template id="v4-logo-tpl">
+    <div class="slide-logo" aria-label="V4 Company">
+      <svg fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 77 20"><path fill="#fff" d="M33.023 3.575c-2.001.003-3.093 1.21-3.09 3.32l.008 6.858c.003 2.11 1.098 3.315 3.1 3.312 2-.003 3.092-1.21 3.09-3.32l-.009-6.858c-.003-2.11-1.097-3.315-3.099-3.312zm.015 11.606c-.649.001-1.057-.356-1.058-1.298l-.009-7.122c-.001-.942.406-1.3 1.055-1.302.648 0 1.057.357 1.058 1.299l.009 7.122c.001.942-.407 1.3-1.055 1.301zm-6.1-3.176l.002 1.884c.001.942-.406 1.282-1.055 1.283-.648 0-1.056-.338-1.058-1.28l-.009-7.122c-.001-.942.406-1.3 1.055-1.302.648 0 1.057.357 1.058 1.299l.002 1.413 1.927-.002-.002-1.281c-.002-2.11-1.041-3.315-3.043-3.313-2 .003-3.037 1.21-3.034 3.32l.008 6.859c.003 2.11 1.042 3.314 3.043 3.312 2.002-.003 3.038-1.21 3.035-3.32l-.002-1.752-1.927.002zM13.055 6.352L8.68 10.813c-.06.062-.017.166.067.166l4.382-.006a.096.096 0 00.096-.097l-.006-4.456c0-.087-.103-.13-.163-.068zm5.862 7.88l-2.687.004a.035.035 0 00-.035.035l.004 2.879c0 .02-.015.035-.035.035l-3.01.004a.035.035 0 01-.034-.035l-.004-2.879a.035.035 0 00-.034-.035l-8.796.012a.141.141 0 01-.14-.142l-.003-2.624v-.004a.795.795 0 01.223-.588l8.758-8.928a.035.035 0 01.025-.01l2.846-.004c.005 0 .009.001.014.003a.367.367 0 01.216.348l.01 8.677c0 .019.017.035.036.035l2.641-.004a.035.035 0 00.035-.035l-.011-8.5c-.002-1.364-1.1-2.478-2.442-2.476L4.18.016a.035.035 0 00-.034.036l.008 6.856c0 .031.037.047.06.025l4.994-5.064a.034.034 0 01.024-.01l2.603-.003c.03 0 .046.037.025.06l-8.118 8.41a.034.034 0 01-.049 0l-1.529-1.55a.036.036 0 01-.01-.026L2.143.074A.035.035 0 002.104.04C.976.185.086 1.131 0 2.294v5.972l.011 8.9a2.48 2.48 0 001.937 2.424h14.974c1.15-.199 2.034-1.224 2.032-2.448l-.003-2.873a.035.035 0 00-.035-.036zM66.47 3.682l.01 7.895-2.104-7.892-2.557.003.017 13.19 1.834-.003-.012-9.553 2.55 9.55 2.094-.004-.016-13.188-1.816.002zm-23.33.031l-1.378 9.366-1.513-9.362-2.835.003.017 13.19 1.779-.003-.012-9.327 1.532 9.325 1.927-.003 1.396-9.46.012 9.458 1.928-.002-.017-13.19-2.835.005h-.001zm33.133-.043l-1.946.002-1.549 6.013-1.564-6.009-2.131.003 2.587 8.814.005 4.371 2.039-.003-.006-4.37 2.565-8.821zm-20.44.026l-2.058 13.192 1.871-.003.35-2.393 2.501-.003.355 2.392 2.057-.003-2.092-13.186-2.983.004zm.42 9.005l.974-6.67.99 6.668-1.964.002zm-5.793-8.998l-3.002.004.017 13.189 2.038-.003-.006-4.955.964-.002c2.038-.002 3.037-1.153 3.035-3.263l-.003-1.715c-.002-2.11-1.005-3.258-3.043-3.255zm.008 6.35h-.964L49.5 5.589l.964-.001c.648-.001 1.001.3 1.002 1.242l.003 1.978c.001.942-.35 1.245-1 1.245z"></path></svg>
+    </div>
+  </template>
+
+  <div class="deck" id="deck">
+
+    <!-- 1 CAPA -->
+    <section id="capa" class="slide-active" data-slide="1">
+      <div class="inner">
+        <div class="capa-partnership">
+          <img src="assets/g6-logo.png" alt="G6 Internet" width="180" height="120"
+               onerror="this.src='https://www.g6internet.com.br/wp-content/uploads/2024/09/g6-internet-fibra-logo.png'" />
+          <span class="x">×</span>
+          <span class="v4-name">V4 Company</span>
+        </div>
+        <h1>Fechar o ciclo da<br /><em>performance até o LTV</em></h1>
+        <p class="lead" style="margin:0.75rem auto 0;text-align:center;max-width:680px;">
+          A Estruturação Estratégica entregou o mapa.
+          O próximo passo é um plano de 12 meses:
+          Assessoria de Growth e Profissional de CRM no mesmo sistema.
+        </p>
+        <span class="capa-badge" style="margin-top:1.25rem;">Growth · CRM · 12 meses</span>
+        <p class="slide-hint">Setas, scroll ou swipe para avançar →</p>
+      </div>
+    </section>
+
+    <!-- 2 MAPA -->
+    <section id="mapa" data-slide="2">
+      <div class="inner glass">
+        <p class="eyebrow">Diagnóstico estratégico</p>
+        <h2>O digital já é o principal canal.<br />O valor escapa entre as etapas.</h2>
+        <div class="gold-line"></div>
+        <p class="lead">
           No modelo de assinatura, o jogo não é só gerar venda —
           é quanto custa trazer × quanto tempo o cliente fica (LTV).
           Com ticket na casa de R$&nbsp;100/mês, a margem de erro é pequena.
         </p>
-      </div>
-
-      <div class="grid2">
-        <div class="card">
-          <h3>Intenção e investimento em mídia</h3>
-          <p>
-            Palavras-chave e campanhas trazem quem pede o serviço agora.
-            Sem leitura clara do que vira assinante, o investimento em mídia
-            fica no escuro — e a decisão vira segurar verba, não escalar com segurança.
-          </p>
+        <div class="grid-2">
+          <article class="card">
+            <div class="card-num">01</div>
+            <h3>Intenção e investimento em mídia</h3>
+            <p>Palavras-chave e campanhas trazem quem pede o serviço agora. Sem leitura do que vira assinante, o investimento fica no escuro.</p>
+          </article>
+          <article class="card">
+            <div class="card-num">02</div>
+            <h3>Trackeamento</h3>
+            <p>UTMs, eventos e devolução de lead/venda existem para provar qual mensagem e canal geram LTV. Sem isso, o resultado fica subjetivo.</p>
+          </article>
+          <article class="card">
+            <div class="card-num">03</div>
+            <h3>CRM e jornada</h3>
+            <p>Do primeiro contato à ativação: etapas, origem e priorização. Sem visão ponta a ponta, a mídia opera sem feedback.</p>
+          </article>
+          <article class="card">
+            <div class="card-num">04</div>
+            <h3>Retenção e LTV</h3>
+            <p>Ticket mensal se paga no tempo. Sem jornada na base, o custo de adquirir se perde cedo — e o concorrente de preço ganha.</p>
+          </article>
         </div>
-        <div class="card">
-          <h3>Trackeamento</h3>
-          <p>
-            UTMs, eventos e devolução de lead/venda existem para provar
-            qual mensagem e qual canal geram LTV de verdade.
-            Sem isso, o resultado fica subjetivo.
-          </p>
+        <div class="grid-5">
+          <div class="flow-step"><div class="n">01</div><div class="t">Intenção</div><div class="d">Busca / criativo</div></div>
+          <div class="flow-step"><div class="n">02</div><div class="t">Prova</div><div class="d">Trackeamento</div></div>
+          <div class="flow-step"><div class="n">03</div><div class="t">Jornada</div><div class="d">CRM</div></div>
+          <div class="flow-step"><div class="n">04</div><div class="t">Assinatura</div><div class="d">Ticket</div></div>
+          <div class="flow-step"><div class="n">05</div><div class="t">LTV</div><div class="d">Base</div></div>
         </div>
-        <div class="card">
-          <h3>CRM e jornada</h3>
-          <p>
-            Do primeiro contato à ativação: etapas, origem e priorização.
-            Sem visão ponta a ponta, a mídia compra sem feedback
-            e a operação não conduz quem trava no meio do caminho.
-          </p>
-        </div>
-        <div class="card">
-          <h3>Retenção e LTV</h3>
-          <p>
-            Ticket mensal baixo se paga no tempo.
-            Sem jornada na base, o custo de adquirir se perde cedo —
-            e o concorrente de preço ganha quem já era da G6.
-          </p>
-        </div>
-      </div>
-
-      <div class="flow">
-        <div class="flow-step"><div class="n">01</div><div class="t">Intenção</div><div class="d">Busca / criativo</div></div>
-        <div class="flow-step"><div class="n">02</div><div class="t">Prova</div><div class="d">Trackeamento</div></div>
-        <div class="flow-step"><div class="n">03</div><div class="t">Jornada</div><div class="d">CRM</div></div>
-        <div class="flow-step"><div class="n">04</div><div class="t">Assinatura</div><div class="d">Ticket</div></div>
-        <div class="flow-step"><div class="n">05</div><div class="t">LTV</div><div class="d">Base / retenção</div></div>
-      </div>
-
-      <p class="quote">
-        As pontas existem. O que falta é o ciclo fechado —
-        em que cada real investido e cada cliente da base tenham leitura e condução.
-      </p>
-    </section>
-
-    <!-- 03 CASE -->
-    <section class="section" id="case">
-      <div class="section-head">
-        <div class="k">Referência</div>
-        <h2>Fibranet</h2>
-        <p>
-          Essa tese já opera na nossa base. Na <strong>Fibranet</strong>,
-          trabalhamos a mesma lógica: performance com leitura de resultado
-          e atenção à base. O time detalha os números na conversa —
-          aqui fica o método: mesmo tipo de complexidade, mesma disciplina de ciclo.
+        <p class="quote">
+          As pontas existem. O que falta é o ciclo fechado.
+          <span>Cada real investido e cada cliente da base com leitura e condução.</span>
         </p>
       </div>
     </section>
 
-    <!-- 04 PLANO -->
-    <section class="section" id="plano">
-      <div class="section-head">
-        <div class="k">Plano · 12 meses</div>
-        <h2>Assessoria de Growth + Profissional de CRM</h2>
-        <p>
+    <!-- 3 CASE -->
+    <section id="case" data-slide="3">
+      <div class="inner glass">
+        <p class="eyebrow">Referência</p>
+        <h2>Fibranet</h2>
+        <div class="gold-line"></div>
+        <p class="lead">
+          Essa tese já opera na nossa base. Na <strong style="color:#fff">Fibranet</strong>,
+          trabalhamos a mesma lógica: performance com leitura de resultado e atenção à base.
+        </p>
+        <p class="lead" style="margin-top:0.75rem;">
+          O time detalha os números na conversa.
+          Aqui fica o método: mesmo tipo de complexidade, mesma disciplina de ciclo.
+        </p>
+      </div>
+    </section>
+
+    <!-- 4 PLANO -->
+    <section id="plano" data-slide="4">
+      <div class="inner glass">
+        <p class="eyebrow">Plano · 12 meses</p>
+        <h2>Assessoria de Growth +<br />Profissional de CRM</h2>
+        <div class="gold-line"></div>
+        <p class="lead">
           Um único desenho. Performance que lê demanda com método;
           CRM que faz essa demanda e a base andarem no mesmo sistema.
         </p>
-      </div>
-
-      <div class="grid2">
-        <div class="card">
-          <h3>Assessoria de Growth</h3>
-          <div class="team">
-            <div class="chip">Account</div>
-            <div class="chip">Gestor de Tráfego</div>
-            <div class="chip">Copy</div>
-            <div class="chip">Designer</div>
-          </div>
-          <ul>
-            <li><strong>Diário</strong> — acompanhamento no grupo: o que rodou, o que ajustar</li>
-            <li><strong>Ritual de performance</strong> — canais, criativos, palavras-chave, hipóteses</li>
-            <li><strong>Account</strong> orquestra; GT otimiza; copy e design sustentam a narrativa</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3>Profissional de CRM</h3>
-          <ul style="margin-top:14px">
-            <li>Desenho e evolução da jornada no CRM</li>
-            <li>Origem, etapas e handoff com leitura para a mídia</li>
-            <li>Rotinas de base: ativação, retenção, prevenção de churn</li>
-            <li>Integração contínua com o time de Growth ao longo dos 12 meses</li>
-          </ul>
+        <div class="grid-2">
+          <article class="card">
+            <div class="card-num">Core</div>
+            <h3>Assessoria de Growth</h3>
+            <div class="chip-row">
+              <span class="chip">Account</span>
+              <span class="chip">Gestor de Tráfego</span>
+              <span class="chip">Copy</span>
+              <span class="chip">Designer</span>
+            </div>
+            <ul>
+              <li>Diário no grupo: o que rodou, o que ajustar</li>
+              <li>Ritual de performance: canais, criativos, palavras-chave</li>
+              <li>Account orquestra; GT otimiza; copy e design sustentam a narrativa</li>
+            </ul>
+          </article>
+          <article class="card">
+            <div class="card-num">Essencial</div>
+            <h3>Profissional de CRM</h3>
+            <ul>
+              <li>Desenho e evolução da jornada no CRM</li>
+              <li>Origem, etapas e handoff com leitura para a mídia</li>
+              <li>Rotinas de base: ativação, retenção, prevenção de churn</li>
+              <li>Integração contínua com o Growth ao longo dos 12 meses</li>
+            </ul>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- 05 RESULTADO -->
-    <section class="section" id="resultado">
-      <div class="section-head">
-        <div class="k">Com o ciclo fechado</div>
+    <!-- 5 RESULTADO -->
+    <section id="resultado" data-slide="5">
+      <div class="inner glass">
+        <p class="eyebrow">Com o ciclo fechado</p>
         <h2>O que muda na operação</h2>
-      </div>
-      <div class="grid2">
-        <div class="card"><h3>Clareza</h3><p>Saber o que a mídia gera — menos decisão no feeling.</p></div>
-        <div class="card"><h3>Escala com critério</h3><p>Condição de aumentar investimento quando a prova existir.</p></div>
-        <div class="card"><h3>Jornada visível</h3><p>Funil com etapas, origem e priorização.</p></div>
-        <div class="card"><h3>Base conduzida</h3><p>Menos perda na retenção; LTV no centro do jogo.</p></div>
+        <div class="gold-line"></div>
+        <div class="grid-2">
+          <article class="card"><div class="card-num">01</div><h3>Clareza</h3><p>Saber o que a mídia gera — menos decisão no feeling.</p></article>
+          <article class="card"><div class="card-num">02</div><h3>Escala com critério</h3><p>Condição de aumentar investimento quando a prova existir.</p></article>
+          <article class="card"><div class="card-num">03</div><h3>Jornada visível</h3><p>Funil com etapas, origem e priorização.</p></article>
+          <article class="card"><div class="card-num">04</div><h3>Base conduzida</h3><p>Menos perda na retenção; LTV no centro do jogo.</p></article>
+        </div>
       </div>
     </section>
 
-    <!-- 07 PROXIMOS -->
-    <section class="section" id="proximos">
-      <div class="section-head">
-        <div class="k">Próximos passos</div>
+    <!-- 6 PROXIMOS -->
+    <section id="proximos" data-slide="6">
+      <div class="inner glass">
+        <p class="eyebrow">Próximos passos</p>
         <h2>Rotina com a V4</h2>
-        <p>Se alinharmos o plano, começamos pelo que fecha o ciclo — e sustentamos 12 meses.</p>
+        <div class="gold-line"></div>
+        <p class="lead">Começamos pelo que fecha o ciclo — e sustentamos 12 meses.</p>
+        <ol class="steps">
+          <li><span class="n">01</span><div><strong>Kick-off do Executar</strong><span>Time, acessos, canais e prioridades da primeira onda.</span></div></li>
+          <li><span class="n">02</span><div><strong>Sprint 1 · Prova e leitura</strong><span>Trackeamento, higiene de campanha e leitura do CRM.</span></div></li>
+          <li><span class="n">03</span><div><strong>Sprint 2 · Jornada</strong><span>Etapas prioritárias no CRM + ritual de performance.</span></div></li>
+          <li><span class="n">04</span><div><strong>Sprint 3 · Base</strong><span>Retenção e ciclos de otimização com dado voltando para a mídia.</span></div></li>
+          <li><span class="n">05</span><div><strong>Cadência contínua · 12 meses</strong><span>Grupo diário · ritual de performance · alinhamento estratégico.</span></div></li>
+        </ol>
       </div>
-      <ol class="steps">
-        <li>
-          <div>
-            <strong>Kick-off do Executar</strong>
-            <span>Time, acessos, canais e prioridades da primeira onda.</span>
-          </div>
-        </li>
-        <li>
-          <div>
-            <strong>Sprint 1 · Prova e leitura</strong>
-            <span>Trackeamento, higiene de campanha e leitura do CRM.</span>
-          </div>
-        </li>
-        <li>
-          <div>
-            <strong>Sprint 2 · Jornada</strong>
-            <span>Etapas prioritárias no CRM + ritual de performance rodando.</span>
-          </div>
-        </li>
-        <li>
-          <div>
-            <strong>Sprint 3 · Base</strong>
-            <span>Retenção e primeiros ciclos de otimização com dado voltando para a mídia.</span>
-          </div>
-        </li>
-        <li>
-          <div>
-            <strong>Cadência contínua · 12 meses</strong>
-            <span>Grupo diário · ritual de performance · alinhamento estratégico periódico.</span>
-          </div>
-        </li>
-      </ol>
     </section>
 
-    <!-- 08 PROPOSTA -->
-    <section class="section" id="proposta">
-      <div class="section-head">
-        <div class="k">Proposta</div>
+    <!-- 7 PROPOSTA -->
+    <section id="proposta" data-slide="7">
+      <div class="inner glass">
+        <p class="eyebrow">Proposta</p>
         <h2>O que está sendo contratado</h2>
-      </div>
-      <div class="card">
-        <h3>Programa de 12 meses · G6 Internet</h3>
-        <p style="margin-top:8px">
-          <strong>Assessoria de Growth</strong> — Account, Gestor de Tráfego, Copy e Designer —
-          e <strong>Profissional de CRM</strong>, no mesmo plano:
-          performance com leitura + jornada e base no mesmo sistema,
-          com a cadência descrita acima.
-        </p>
-      </div>
-    </section>
-
-    <!-- 09 INVESTIMENTO -->
-    <section class="section" id="investimento">
-      <div class="section-head">
-        <div class="k">Investimento</div>
-        <h2>Primeiro, quanto vale. Depois, a condição.</h2>
-        <p>Assessoria de Growth + Profissional de CRM · 12 meses · cartão de crédito.</p>
-      </div>
-      <div class="price-box">
-        <div class="price-ref">
-          <div class="l">Valor de referência</div>
-          <div class="v">R$ 17.237,73<span style="font-size:14px;font-weight:600"> / mês</span></div>
-          <div class="s">Tabela do pacote Growth + CRM</div>
-        </div>
-        <div class="price-anchor">
-          <div class="l">Condição · âncora</div>
-          <div class="v">R$ 9.480,75<span style="font-size:15px;font-weight:600"> / mês</span></div>
-          <div class="s">45% sobre a tabela · 12 meses · cartão de crédito</div>
-        </div>
+        <div class="gold-line"></div>
+        <article class="card" style="margin-top:0.5rem;">
+          <h3>Programa de 12 meses · G6 Internet</h3>
+          <p style="margin-top:0.45rem;">
+            <strong style="color:#fff;">Assessoria de Growth</strong> — Account, Gestor de Tráfego, Copy e Designer —
+            e <strong style="color:#fff;">Profissional de CRM</strong>, no mesmo plano:
+            performance com leitura + jornada e base no mesmo sistema.
+          </p>
+        </article>
       </div>
     </section>
 
-    <footer>
-      V4 Company · Proposta G6 Internet · Performance + CRM · 12 meses<br />
-      Documento para alinhamento estratégico · sujeito a validação de acessos e escopo operacional
-    </footer>
+    <!-- 8 INVESTIMENTO -->
+    <section id="investimento" data-slide="8">
+      <div class="inner glass">
+        <p class="eyebrow">Investimento</p>
+        <h2>Primeiro, quanto vale.<br />Depois, a condição.</h2>
+        <div class="gold-line"></div>
+        <p class="lead">Assessoria de Growth + Profissional de CRM · 12 meses · cartão de crédito.</p>
+        <div class="price-grid">
+          <div class="price-ref">
+            <div class="l">Valor de referência</div>
+            <div class="v">R$ 17.237,73 <small style="font-size:0.9rem;font-weight:600;">/mês</small></div>
+            <div class="s">Tabela do pacote Growth + CRM</div>
+          </div>
+          <div class="price-anchor">
+            <div class="l">Condição · âncora</div>
+            <div class="v">R$ 9.480,75 <small style="font-size:0.95rem;font-weight:600;">/mês</small></div>
+            <div class="s">45% sobre a tabela · 12 meses · cartão de crédito</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </div>
+
+  <footer class="deck-footer">
+    <span>G6 Internet × V4 · Growth + CRM · 12 meses</span>
+    <div class="progress-wrap"><div class="progress-fill" id="progressFill"></div></div>
+    <span id="slideCounter">1 / 8</span>
+  </footer>
+
+  <script>
+  (function () {
+    const tpl = document.getElementById("v4-logo-tpl");
+    document.querySelectorAll("#deck section").forEach((slide) => {
+      slide.insertBefore(tpl.content.cloneNode(true), slide.firstChild);
+    });
+
+    const TOTAL = 8;
+    let current = 1;
+    const slides = Array.from(document.querySelectorAll("#deck section[id]"));
+    const navLinks = document.querySelectorAll(".nav-dots a");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const progressFill = document.getElementById("progressFill");
+    const slideCounter = document.getElementById("slideCounter");
+    const blendBar = document.querySelector(".blend-progress");
+
+    function updateUI() {
+      const p = current / TOTAL;
+      if (progressFill) progressFill.style.width = (p * 100) + "%";
+      if (slideCounter) slideCounter.textContent = current + " / " + TOTAL;
+      if (blendBar) blendBar.style.transform = "scaleX(" + Math.max(0.05, p) + ")";
+      document.documentElement.style.setProperty("--slide-progress", p);
+      if (prevBtn) prevBtn.disabled = current === 1;
+      if (nextBtn) nextBtn.disabled = current === TOTAL;
+      navLinks.forEach((a) => a.classList.toggle("active", Number(a.dataset.slide) === current));
+    }
+
+    function goTo(n, dir) {
+      if (n < 1 || n > TOTAL || n === current) return;
+      const prev = slides[current - 1];
+      const next = slides[n - 1];
+      const fwd = dir === "forward" || (dir !== "back" && n > current);
+      prev.classList.remove("slide-active");
+      prev.classList.add(fwd ? "slide-exit-left" : "slide-exit-right");
+      setTimeout(() => prev.classList.remove("slide-exit-left", "slide-exit-right"), 420);
+      next.classList.add("slide-active");
+      current = n;
+      updateUI();
+    }
+
+    if (prevBtn) prevBtn.addEventListener("click", () => goTo(current - 1, "back"));
+    if (nextBtn) nextBtn.addEventListener("click", () => goTo(current + 1, "forward"));
+    navLinks.forEach((a) => a.addEventListener("click", (e) => { e.preventDefault(); goTo(Number(a.dataset.slide)); }));
+
+    document.addEventListener("wheel", (e) => {
+      if (Math.abs(e.deltaY) < 20) return;
+      e.preventDefault();
+      goTo(current + (e.deltaY > 0 ? 1 : -1), e.deltaY > 0 ? "forward" : "back");
+    }, { passive: false });
+
+    document.addEventListener("keydown", (e) => {
+      if (["ArrowRight", " ", "PageDown"].includes(e.key)) { e.preventDefault(); goTo(current + 1, "forward"); }
+      if (["ArrowLeft", "PageUp"].includes(e.key)) { e.preventDefault(); goTo(current - 1, "back"); }
+    });
+
+    let tx = 0;
+    document.addEventListener("touchstart", (e) => { tx = e.changedTouches[0].screenX; }, { passive: true });
+    document.addEventListener("touchend", (e) => {
+      const dx = e.changedTouches[0].screenX - tx;
+      if (Math.abs(dx) > 50) goTo(current + (dx < 0 ? 1 : -1), dx < 0 ? "forward" : "back");
+    }, { passive: true });
+
+    updateUI();
+  })();
+  </script>
 </body>
 </html>
