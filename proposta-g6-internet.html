@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>G6 Internet × V4 Company — Performance + CRM · 12 meses</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@550;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:#022062; --blue:#0a49a3; --red:#e3040a; --ink:#071126;
+      --paper:#f6f8fc; --white:#fff; --muted:#627089; --line:#dfe5ef;
+      --soft:#eef2fa; --max:920px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.55 Inter,system-ui,sans-serif}
+    h1,h2,h3,.brand{font-family:Sora,Inter,sans-serif}
+    .nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(12px);background:rgba(246,248,252,.92);border-bottom:1px solid var(--line);padding:12px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+    .brand{font-weight:800;font-size:14px;color:var(--navy)}.brand span{color:var(--red)}
+    .nav-links{display:flex;gap:8px;flex-wrap:wrap}
+    .nav-links a{font-size:12px;font-weight:600;color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:999px;border:1px solid transparent}
+    .nav-links a:hover{border-color:var(--line);color:var(--navy);background:var(--white)}
+    .btn{appearance:none;border:0;border-radius:999px;padding:10px 16px;font:inherit;font-weight:700;font-size:13px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
+    .btn.primary{background:var(--red);color:#fff}
+    .btn.ghost{background:var(--white);color:var(--navy);border:1px solid var(--line)}
+    .wrap{max-width:var(--max);margin:0 auto;padding:28px 20px 72px}
+    .hero{background:linear-gradient(145deg,#022062 0%,#0a49a3 55%,#061833 100%);color:#fff;border-radius:24px;padding:36px 32px;margin-bottom:22px;box-shadow:0 24px 60px rgba(2,32,98,.25)}
+    .eyebrow{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:10px}
+    .hero h1{margin:0 0 12px;font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-.03em;line-height:1.15}
+    .hero p{margin:0;max-width:560px;color:rgba(255,255,255,.88);font-size:15px}
+    .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+    .section{background:var(--white);border:1px solid var(--line);border-radius:20px;padding:26px 28px;margin-bottom:14px}
+    .section-head{margin-bottom:14px}
+    .section-head .k{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:4px}
+    .section-head h2{margin:0;font-size:clamp(20px,3vw,26px);font-weight:800;color:var(--navy);letter-spacing:-.02em;line-height:1.2}
+    .section-head p{margin:8px 0 0;color:var(--muted);font-size:14px;max-width:640px}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:720px){.grid2{grid-template-columns:1fr}}
+    .card{background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+    .card h3{margin:0 0 6px;font-size:15px;font-weight:700;color:var(--navy)}
+    .card p,.card li{font-size:13px;color:#3a4660;margin:0}
+    .card ul{margin:8px 0 0;padding-left:16px}
+    .card li{margin:4px 0}
+    .flow{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:14px}
+    @media(max-width:800px){.flow{grid-template-columns:1fr 1fr}}
+    .flow-step{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:12px}
+    .flow-step .n{font-size:10px;font-weight:800;color:var(--red);letter-spacing:.08em;text-transform:uppercase}
+    .flow-step .t{font-size:13px;font-weight:700;color:var(--navy);margin:4px 0 2px}
+    .flow-step .d{font-size:12px;color:var(--muted);line-height:1.4}
+    .quote{border-left:3px solid var(--red);padding:4px 0 4px 14px;margin:14px 0 0;font-size:14px;font-weight:600;color:var(--navy)}
+    .team{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+    @media(max-width:700px){.team{grid-template-columns:1fr 1fr}}
+    .chip{background:var(--white);border:1px solid var(--line);border-radius:10px;padding:10px;text-align:center;font-size:12px;font-weight:700;color:var(--navy)}
+    .steps{margin:0;padding-left:0;list-style:none;counter-reset:s}
+    .steps li{counter-increment:s;display:grid;grid-template-columns:36px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+    .steps li:last-child{border-bottom:0}
+    .steps li::before{content:counter(s, decimal-leading-zero);font-family:Sora,sans-serif;font-weight:800;font-size:13px;color:var(--red);padding-top:2px}
+    .steps strong{display:block;color:var(--navy);font-size:14px;margin-bottom:2px}
+    .steps span{font-size:13px;color:var(--muted)}
+    .price-box{display:grid;grid-template-columns:1fr 1.2fr;gap:12px;margin-top:8px}
+    @media(max-width:700px){.price-box{grid-template-columns:1fr}}
+    .price-ref{background:var(--soft);border:1px solid var(--line);border-radius:16px;padding:18px}
+    .price-ref .l{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+    .price-ref .v{font-size:22px;font-weight:800;color:var(--navy);margin:6px 0;font-family:Sora,sans-serif}
+    .price-ref .s{font-size:12px;color:var(--muted)}
+    .price-anchor{background:linear-gradient(145deg,#022062,#0a49a3);color:#fff;border-radius:16px;padding:20px 18px;box-shadow:0 16px 40px rgba(2,32,98,.2)}
+    .price-anchor .l{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+    .price-anchor .v{font-size:28px;font-weight:800;margin:8px 0;font-family:Sora,sans-serif}
+    .price-anchor .s{font-size:13px;color:rgba(255,255,255,.85)}
+    .muted{color:var(--muted);font-size:13px}
+    footer{text-align:center;color:var(--muted);font-size:12px;margin-top:8px;padding-top:18px}
+    @media print{
+      .nav{position:static}.nav-links,.hero-actions .ghost{display:none}
+      .hero,.section{break-inside:avoid;box-shadow:none}
+      body{background:#fff}
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="brand">V4 <span>COMPANY</span> · G6 Internet</div>
+    <div class="nav-links">
+      <a href="#mapa">Mapa</a>
+      <a href="#plano">Plano</a>
+      <a href="#proposta">Proposta</a>
+      <a href="#investimento">Investimento</a>
+    </div>
+    <button class="btn ghost" type="button" onclick="window.print()">Imprimir / PDF</button>
+  </nav>
+
+  <div class="wrap">
+    <header class="hero" id="topo">
+      <div class="eyebrow">Proposta estratégica · Executar · 12 meses</div>
+      <h1>Fechar o ciclo da performance até o LTV.</h1>
+      <p>
+        A Estruturação Estratégica entregou o mapa.
+        O próximo passo é um único plano de 12 meses:
+        Assessoria de Growth e Profissional de CRM trabalhando juntos —
+        da intenção do cliente à retenção na base.
+      </p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#mapa">Ver o mapa</a>
+        <a class="btn ghost" href="#investimento" style="border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff">Ver investimento</a>
+      </div>
+    </header>
+
+    <!-- 02 MAPA -->
+    <section class="section" id="mapa">
+      <div class="section-head">
+        <div class="k">Diagnóstico estratégico</div>
+        <h2>O digital já é o principal canal. O valor escapa entre as etapas.</h2>
+        <p>
+          No modelo de assinatura, o jogo não é só gerar venda —
+          é quanto custa trazer × quanto tempo o cliente fica (LTV).
+          Com ticket na casa de R$&nbsp;100/mês, a margem de erro é pequena.
+        </p>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <h3>Intenção e investimento em mídia</h3>
+          <p>
+            Palavras-chave e campanhas trazem quem pede o serviço agora.
+            Sem leitura clara do que vira assinante, o investimento em mídia
+            fica no escuro — e a decisão vira segurar verba, não escalar com segurança.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Trackeamento</h3>
+          <p>
+            UTMs, eventos e devolução de lead/venda existem para provar
+            qual mensagem e qual canal geram LTV de verdade.
+            Sem isso, o resultado fica subjetivo.
+          </p>
+        </div>
+        <div class="card">
+          <h3>CRM e jornada</h3>
+          <p>
+            Do primeiro contato à ativação: etapas, origem e priorização.
+            Sem visão ponta a ponta, a mídia compra sem feedback
+            e a operação não conduz quem trava no meio do caminho.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Retenção e LTV</h3>
+          <p>
+            Ticket mensal baixo se paga no tempo.
+            Sem jornada na base, o custo de adquirir se perde cedo —
+            e o concorrente de preço ganha quem já era da G6.
+          </p>
+        </div>
+      </div>
+
+      <div class="flow">
+        <div class="flow-step"><div class="n">01</div><div class="t">Intenção</div><div class="d">Busca / criativo</div></div>
+        <div class="flow-step"><div class="n">02</div><div class="t">Prova</div><div class="d">Trackeamento</div></div>
+        <div class="flow-step"><div class="n">03</div><div class="t">Jornada</div><div class="d">CRM</div></div>
+        <div class="flow-step"><div class="n">04</div><div class="t">Assinatura</div><div class="d">Ticket</div></div>
+        <div class="flow-step"><div class="n">05</div><div class="t">LTV</div><div class="d">Base / retenção</div></div>
+      </div>
+
+      <p class="quote">
+        As pontas existem. O que falta é o ciclo fechado —
+        em que cada real investido e cada cliente da base tenham leitura e condução.
+      </p>
+    </section>
+
+    <!-- 03 CASE -->
+    <section class="section" id="case">
+      <div class="section-head">
+        <div class="k">Referência</div>
+        <h2>Fibranet</h2>
+        <p>
+          Essa tese já opera na nossa base. Na <strong>Fibranet</strong>,
+          trabalhamos a mesma lógica: performance com leitura de resultado
+          e atenção à base. O time detalha os números na conversa —
+          aqui fica o método: mesmo tipo de complexidade, mesma disciplina de ciclo.
+        </p>
+      </div>
+    </section>
+
+    <!-- 04 PLANO -->
+    <section class="section" id="plano">
+      <div class="section-head">
+        <div class="k">Plano · 12 meses</div>
+        <h2>Assessoria de Growth + Profissional de CRM</h2>
+        <p>
+          Um único desenho. Performance que lê demanda com método;
+          CRM que faz essa demanda e a base andarem no mesmo sistema.
+        </p>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <h3>Assessoria de Growth</h3>
+          <div class="team">
+            <div class="chip">Account</div>
+            <div class="chip">Gestor de Tráfego</div>
+            <div class="chip">Copy</div>
+            <div class="chip">Designer</div>
+          </div>
+          <ul>
+            <li><strong>Diário</strong> — acompanhamento no grupo: o que rodou, o que ajustar</li>
+            <li><strong>Ritual de performance</strong> — canais, criativos, palavras-chave, hipóteses</li>
+            <li><strong>Account</strong> orquestra; GT otimiza; copy e design sustentam a narrativa</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Profissional de CRM</h3>
+          <ul style="margin-top:14px">
+            <li>Desenho e evolução da jornada no CRM</li>
+            <li>Origem, etapas e handoff com leitura para a mídia</li>
+            <li>Rotinas de base: ativação, retenção, prevenção de churn</li>
+            <li>Integração contínua com o time de Growth ao longo dos 12 meses</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 RESULTADO -->
+    <section class="section" id="resultado">
+      <div class="section-head">
+        <div class="k">Com o ciclo fechado</div>
+        <h2>O que muda na operação</h2>
+      </div>
+      <div class="grid2">
+        <div class="card"><h3>Clareza</h3><p>Saber o que a mídia gera — menos decisão no feeling.</p></div>
+        <div class="card"><h3>Escala com critério</h3><p>Condição de aumentar investimento quando a prova existir.</p></div>
+        <div class="card"><h3>Jornada visível</h3><p>Funil com etapas, origem e priorização.</p></div>
+        <div class="card"><h3>Base conduzida</h3><p>Menos perda na retenção; LTV no centro do jogo.</p></div>
+      </div>
+    </section>
+
+    <!-- 07 PROXIMOS -->
+    <section class="section" id="proximos">
+      <div class="section-head">
+        <div class="k">Próximos passos</div>
+        <h2>Rotina com a V4</h2>
+        <p>Se alinharmos o plano, começamos pelo que fecha o ciclo — e sustentamos 12 meses.</p>
+      </div>
+      <ol class="steps">
+        <li>
+          <div>
+            <strong>Kick-off do Executar</strong>
+            <span>Time, acessos, canais e prioridades da primeira onda.</span>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>Sprint 1 · Prova e leitura</strong>
+            <span>Trackeamento, higiene de campanha e leitura do CRM.</span>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>Sprint 2 · Jornada</strong>
+            <span>Etapas prioritárias no CRM + ritual de performance rodando.</span>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>Sprint 3 · Base</strong>
+            <span>Retenção e primeiros ciclos de otimização com dado voltando para a mídia.</span>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>Cadência contínua · 12 meses</strong>
+            <span>Grupo diário · ritual de performance · alinhamento estratégico periódico.</span>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- 08 PROPOSTA -->
+    <section class="section" id="proposta">
+      <div class="section-head">
+        <div class="k">Proposta</div>
+        <h2>O que está sendo contratado</h2>
+      </div>
+      <div class="card">
+        <h3>Programa de 12 meses · G6 Internet</h3>
+        <p style="margin-top:8px">
+          <strong>Assessoria de Growth</strong> — Account, Gestor de Tráfego, Copy e Designer —
+          e <strong>Profissional de CRM</strong>, no mesmo plano:
+          performance com leitura + jornada e base no mesmo sistema,
+          com a cadência descrita acima.
+        </p>
+      </div>
+    </section>
+
+    <!-- 09 INVESTIMENTO -->
+    <section class="section" id="investimento">
+      <div class="section-head">
+        <div class="k">Investimento</div>
+        <h2>Primeiro, quanto vale. Depois, a condição.</h2>
+        <p>Assessoria de Growth + Profissional de CRM · 12 meses · cartão de crédito.</p>
+      </div>
+      <div class="price-box">
+        <div class="price-ref">
+          <div class="l">Valor de referência</div>
+          <div class="v">R$ 17.237,73<span style="font-size:14px;font-weight:600"> / mês</span></div>
+          <div class="s">Tabela do pacote Growth + CRM</div>
+        </div>
+        <div class="price-anchor">
+          <div class="l">Condição · âncora</div>
+          <div class="v">R$ 9.480,75<span style="font-size:15px;font-weight:600"> / mês</span></div>
+          <div class="s">45% sobre a tabela · 12 meses · cartão de crédito</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      V4 Company · Proposta G6 Internet · Performance + CRM · 12 meses<br />
+      Documento para alinhamento estratégico · sujeito a validação de acessos e escopo operacional
+    </footer>
+  </div>
+</body>
+</html>
