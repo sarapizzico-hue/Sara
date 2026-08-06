@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Script de fala natural · Almeida e Neves · Perguntas + Preço</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #140608; --surf: rgba(255,255,255,.06); --bd: rgba(255,255,255,.14);
+      --txt: #fff; --mut: rgba(255,255,255,.78); --red: #e11d24; --soft: #ffd0d0;
+      --ok: #86efac; --warn: #fde68a;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font: 15px/1.55 "Plus Jakarta Sans", system-ui, sans-serif;
+      color: var(--txt);
+      background:
+        radial-gradient(ellipse 70% 40% at 10% 0%, rgba(225,29,36,.35), transparent 55%),
+        radial-gradient(ellipse 50% 35% at 90% 10%, rgba(255,80,80,.18), transparent 50%),
+        linear-gradient(180deg, #1a090b 0%, #0d0405 100%);
+      padding-bottom: 64px;
+    }
+    h1, h2, h3 { font-family: Outfit, sans-serif; letter-spacing: -.02em; line-height: 1.15; }
+    .top {
+      position: sticky; top: 0; z-index: 50; backdrop-filter: blur(14px);
+      background: rgba(13,4,5,.88); border-bottom: 1px solid var(--bd);
+      padding: 14px 20px; display: flex; gap: 12px; flex-wrap: wrap;
+      align-items: center; justify-content: space-between;
+    }
+    .brand { font-weight: 800; font-size: 15px; }
+    .brand span { color: #fda4af; }
+    .pill {
+      font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      border: 1px solid var(--bd); border-radius: 999px; padding: 6px 12px; color: var(--mut);
+    }
+    .wrap { max-width: 880px; margin: 0 auto; padding: 28px 20px 0; }
+    .hero {
+      border: 1px solid var(--bd); border-radius: 20px; padding: 28px 24px;
+      background: linear-gradient(135deg, rgba(225,29,36,.2), rgba(255,255,255,.04));
+      margin-bottom: 18px;
+    }
+    .hero h1 { margin: 0 0 10px; font-size: clamp(26px, 4vw, 34px); }
+    .hero p { margin: 0; color: var(--mut); max-width: 720px; }
+    .links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+    .links a {
+      text-decoration: none; color: #fff; font-size: 13px; font-weight: 700;
+      background: var(--red); border-radius: 12px; padding: 10px 14px;
+    }
+    .links a.sec { background: transparent; border: 1px solid var(--bd); color: var(--mut); }
+    .callout {
+      margin: 0 0 16px; padding: 14px 16px; border-radius: 14px;
+      border: 1px solid rgba(253,230,138,.3); background: rgba(253,230,138,.08);
+      color: var(--warn); font-size: 14px;
+    }
+    .callout strong { color: #fef08a; }
+    .rules {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 8px; margin-bottom: 18px;
+    }
+    .rules div {
+      border: 1px solid var(--bd); border-radius: 12px; background: var(--surf);
+      padding: 12px 14px; font-size: 13px; color: var(--mut);
+    }
+    .rules b { display: block; color: #fda4af; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 4px; }
+    .nav {
+      display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 18px;
+    }
+    .nav a {
+      text-decoration: none; color: var(--mut); font-size: 12px; font-weight: 700;
+      border: 1px solid var(--bd); background: var(--surf); border-radius: 999px; padding: 8px 12px;
+    }
+    .nav a:hover { color: #fff; border-color: rgba(255,255,255,.35); }
+    .bloco {
+      border: 1px solid var(--bd); border-radius: 18px; background: rgba(20,8,10,.72);
+      padding: 22px 20px; margin-bottom: 14px;
+    }
+    .bloco.price {
+      border-color: rgba(253,230,138,.35);
+      background: linear-gradient(180deg, rgba(253,230,138,.08), rgba(20,8,10,.72));
+    }
+    .bloco-head {
+      display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+      margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--bd);
+    }
+    .bloco-num { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #fda4af; margin-bottom: 6px; }
+    .bloco-head h2 { margin: 0; font-size: 20px; }
+    .tempo {
+      font-size: 12px; font-weight: 700; color: var(--mut);
+      border: 1px solid var(--bd); border-radius: 999px; padding: 6px 10px; white-space: nowrap;
+    }
+    .intencao {
+      font-size: 13px; font-weight: 700; color: var(--ok);
+      margin-bottom: 12px; padding: 10px 12px; border-radius: 12px;
+      background: rgba(134,239,172,.08); border: 1px solid rgba(134,239,172,.22);
+    }
+    .fala {
+      border-left: 3px solid var(--red); padding: 12px 14px; margin-bottom: 12px;
+      background: rgba(225,29,36,.1); border-radius: 0 12px 12px 0;
+      color: #ffe4e6; font-size: 15px; white-space: pre-line;
+    }
+    .fala em { color: #fff; font-style: normal; font-weight: 700; }
+    .pausa {
+      margin: 10px 0; padding: 10px 12px; border-radius: 12px;
+      border: 1px solid rgba(96,165,250,.3); background: rgba(96,165,250,.08);
+      color: #bfdbfe; font-size: 14px;
+    }
+    .pausa strong { color: #dbeafe; }
+    .se {
+      margin-top: 10px; padding: 12px 14px; border-radius: 12px;
+      border: 1px solid var(--bd); background: rgba(255,255,255,.04);
+      color: var(--mut); font-size: 14px;
+    }
+    .se strong { color: #fff; }
+    .evitar {
+      margin-top: 10px; padding: 10px 12px; border-radius: 12px;
+      border: 1px solid rgba(248,113,113,.3); background: rgba(248,113,113,.08);
+      color: #fecaca; font-size: 13px;
+    }
+    .evitar strong { color: #fee2e2; }
+    .copy-box {
+      margin: 0 0 18px; padding: 16px; border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.04);
+      color: var(--mut); font-size: 14px; white-space: pre-wrap;
+    }
+    .copy-box b { color: #fff; }
+    .footer-note { color: rgba(255,255,255,.45); font-size: 12px; text-align: center; margin: 28px 0 8px; }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <div class="brand">Fala natural · <span>Almeida e Neves × V4</span></div>
+    <div class="pill">Perguntas inteligentes → preço</div>
+  </div>
+
+  <div class="wrap">
+    <header class="hero">
+      <h1>Script para falar · sem parecer robô</h1>
+      <p>
+        Não é checklist. É conversa: você afirma o que já ficou claro, pergunta de verdade,
+        <strong>espera a resposta</strong>, e só depois abre investimento.
+      </p>
+      <div class="links">
+        <a href="https://relatorios.collieassociados.com/alnv-proposta-comercial-estruturacao/" target="_blank" rel="noopener">Abrir deck</a>
+        <a class="sec" href="#parte1">Parte 1 · Perguntas</a>
+        <a class="sec" href="#parte2">Parte 2 · Preço</a>
+      </div>
+    </header>
+
+    <div class="callout">
+      <strong>Como não parecer robô:</strong> não “disparar pergunta”.
+      Fale 2–3 frases → uma pergunta → pause → use a resposta dele na próxima fala.
+      Máximo <strong>uma pergunta por bloco</strong>. Se Antônio já confirmou sozinho, não pergunte de novo.
+    </div>
+
+    <div class="rules">
+      <div><b>Tom</b>Leve, parceiro, seguro. Sem interrogatório.</div>
+      <div><b>Ritmo</b>Fala curta. Silêncio depois da pergunta.</div>
+      <div><b>Gate</b>Só abre preço depois do “faz sentido” do resultado.</div>
+      <div><b>Depois do nº</b>Traduz + pergunta de avanço. Sem silêncio morto.</div>
+    </div>
+
+    <nav class="nav">
+      <a href="#parte1">Parte 1 · Perguntas</a>
+      <a href="#b1">Abertura</a>
+      <a href="#b2">Piloto</a>
+      <a href="#b3">Núcleo</a>
+      <a href="#b4">Dono</a>
+      <a href="#b5">Gate</a>
+      <a href="#parte2">Parte 2 · Preço</a>
+      <a href="#fechamento">Fechamento</a>
+    </nav>
+
+    <!-- ========== PARTE 1 ========== -->
+    <h2 id="parte1" style="margin:8px 0 14px;font-size:22px;">Parte 1 · Perguntas inteligentes (antes do preço)</h2>
+
+    <article class="bloco" id="b1">
+      <div class="bloco-head">
+        <div>
+          <div class="bloco-num">Bloco 01 · Slides 01–03</div>
+          <h2>Abrir alinhando — não vendendo</h2>
+        </div>
+        <div class="tempo">~ 2–3 min</div>
+      </div>
+      <div class="intencao">Intenção: ele sentir que você entendeu o jogo (diversificar com método), não que veio com script.</div>
+      <div class="fala">“Antônio, antes de entrar nos números, deixa eu alinhar o que eu entendi do momento de vocês —
+pra gente não perder tempo.
+
+Vocês já têm capacidade técnica forte e relacionamento.
+O ponto não é ‘começar do zero’.
+É transformar isso em operação comercial — oferta clara, processo, registro —
+pra validar uma nova rota sem depender tanto de um único eixo.
+
+Se eu resumir assim: <em>diversificar com previsibilidade</em>…
+isso ainda é o que mais importa pra vocês agora?”</div>
+      <div class="pausa"><strong>Pause 3–5s.</strong> Deixa ele falar. Acene. Não complete a frase por ele.</div>
+      <div class="se">
+        <strong>Se ele confirmar:</strong> “Perfeito — então a gente vai nessa linha.”<br>
+        <strong>Se nuance:</strong> “Entendi — então o peso maior pra você é [repetir a palavra dele]. Vou usar isso como fio.”
+      </div>
+      <div class="evitar"><strong>Não diga:</strong> “Pergunta número um…” · “Vocês concordam com o diagnóstico?” · tom de auditoria.</div>
+    </article>
+
+    <article class="bloco" id="b2">
+      <div class="bloco-head">
+        <div>
+          <div class="bloco-num">Bloco 02 · Slides 02–04</div>
+          <h2>Piloto antes de volume</h2>
+        </div>
+        <div class="tempo">~ 2 min</div>
+      </div>
+      <div class="intencao">Intenção: matar mídia/escala cedo, sem parecer que está “negando” crescimento.</div>
+      <div class="fala">“Olhando o caminho, a gente tá propondo validar antes de ampliar —
+começar com prestadoras conhecidas, lista controlada, aprender de verdade…
+e só depois pensar em volume.
+
+Porque relacionamento abre a porta — mas não prova interesse nem compra.
+
+Eu queria te ouvir nisso:
+pra vocês, faz mais sentido <em>um piloto curto pra aprender</em>…
+ou já partir pra volume sem essa evidência?”</div>
+      <div class="pausa"><strong>Pause.</strong> Quase sempre ele escolhe piloto. Se escolher volume, não brigue — reconecte: “volume sem oferta e processo costuma gastar energia.”</div>
+      <div class="se">
+        <strong>Se escolher piloto:</strong> “Ótimo. Então a gente desenhou a proposta exatamente assim.”<br>
+        <strong>Se falar de mídia:</strong> “Mídia entra depois — quando o piloto mostrar o que converte. Senão a gente acelera no escuro.”
+      </div>
+      <div class="evitar"><strong>Não diga:</strong> “Vocês não podem fazer mídia agora.” · “Volume está fora do escopo.” (soa trava)</div>
+    </article>
+
+    <article class="bloco" id="b3">
+      <div class="bloco-head">
+        <div>
+          <div class="bloco-num">Bloco 03 · Slides 05–11</div>
+          <h2>EC como núcleo (sem listar entregável)</h2>
+        </div>
+        <div class="tempo">~ 3–4 min</div>
+      </div>
+      <div class="intencao">Intenção: ele comprar a hierarquia EC > site > social — em linguagem de negócio.</div>
+      <div class="fala">“Deixa eu te mostrar o desenho sem virar lista.
+
+O núcleo é a Estruturação Comercial:
+produto claro, GTM piloto, materiais, CRM mínimo e acompanhamento nos primeiros ciclos —
+90 dias pra estruturar, 90 pra executar com a gente perto.
+
+Site e redes entram pra sustentar a conversa —
+pra quando alguém sair da reunião e te buscar, a presença confirmar o que foi falado.
+Não é campanha. Não é mídia paga.
+
+Me fala com sinceridade:
+isso como núcleo — <em>comercial primeiro, digital como apoio</em> —
+encaixa na prioridade de vocês… ou você tá sentindo que o digital deveria vir antes?”</div>
+      <div class="pausa"><strong>Pause.</strong> Se ele puxar “só site”, não contra-ataque. Pergunte o porquê e reconecte à diversificação.</div>
+      <div class="se">
+        <strong>Se sim:</strong> “Perfeito — então a gente mantém essa ordem.”<br>
+        <strong>Se “quero site”:</strong> “Site sozinho sustenta uma conversa que ainda improvisa. O que destrava diversificar é oferta + condução + registro. O site apoia isso.”
+      </div>
+    </article>
+
+    <article class="bloco" id="b4">
+      <div class="bloco-head">
+        <div>
+          <div class="bloco-num">Bloco 04 · Slides 14–15</div>
+          <h2>Dono do piloto (pergunta leve, crítica)</h2>
+        </div>
+        <div class="tempo">~ 1–1,5 min</div>
+      </div>
+      <div class="intencao">Intenção: testar adoção sem soar cobrança de RH.</div>
+      <div class="fala">“Uma coisa que define se isso vira operação de verdade:
+do lado de vocês, alguém precisa segurar o piloto no dia a dia —
+decidir oferta, registrar, conduzir as primeiras conversas.
+
+Não precisa ser um time grande.
+Mas precisa ter dono.
+
+Olhando pra aí… <em>quem seria essa pessoa na prática?</em>
+Você mesmo, ou tem alguém que já entra junto?”</div>
+      <div class="pausa"><strong>Pause.</strong> Anote o nome. Use depois no fechamento (“com você / com [nome] no piloto…”).</div>
+      <div class="se">
+        <strong>Se ele for o dono:</strong> “Ótimo — aí a gente desenha o ritmo cabendo na sua agenda.”<br>
+        <strong>Se ninguém:</strong> “Então o primeiro passo do projeto é exatamente nomear isso. Sem dono, vira PDF.”
+      </div>
+      <div class="evitar"><strong>Não diga:</strong> “Vocês precisam designar responsáveis contratuais.” (juridiquês)</div>
+    </article>
+
+    <article class="bloco" id="b5">
+      <div class="bloco-head">
+        <div>
+          <div class="bloco-num">Bloco 05 · Slide 16 · GATE</div>
+          <h2>Travar valor antes do preço</h2>
+        </div>
+        <div class="tempo">~ 1–1,5 min</div>
+      </div>
+      <div class="intencao">Intenção: commit verbal. Sem isso, não vira o slide de investimento.</div>
+      <div class="fala">“Antes de te mostrar o investimento, eu quero travar o que vocês levam —
+pra gente não olhar número solto.
+
+No fim, a Almeida e Neves sai com uma base comercial funcional:
+clareza de oferta e piloto,
+operação com materiais, CRM e rotina,
+e aprendizado real pra evoluir.
+
+Não é garantia de receita.
+É a estrutura pra validar a nova rota com método.
+
+Olhando isso… <em>é esse o resultado que faz sentido pra vocês agora?</em>”</div>
+      <div class="pausa"><strong>Pause longa.</strong> Espere o sim. Se vier “mais ou menos”, não abra preço.</div>
+      <div class="se">
+        <strong>Se sim claro:</strong> “Beleza. Aí o investimento fica fácil de olhar — porque a gente já sabe o que está comprando.” → vá para Parte 2.<br>
+        <strong>Se frio:</strong> “O que ainda não ficou claro — o núcleo, o prazo, o papel de vocês, ou o fato de mídia não entrar no começo?” → volte 1 bloco. <em>Não abra 17/18.</em>
+      </div>
+      <div class="evitar"><strong>Não diga:</strong> “Agora vamos para a parte comercial.” · “Vou te passar a tabela.”</div>
+    </article>
+
+    <!-- ========== PARTE 2 ========== -->
+    <h2 id="parte2" style="margin:22px 0 14px;font-size:22px;">Parte 2 · Preço (só depois do gate)</h2>
+
+    <article class="bloco price" id="preco">
+      <div class="bloco-head">
+        <div>
+          <div class="bloco-num">Slides 17–18</div>
+          <h2>Âncora → condição → tradução → avanço</h2>
+        </div>
+        <div class="tempo">~ 2–2,5 min</div>
+      </div>
+      <div class="intencao">Intenção: preço com leveza. Composição primeiro, condição depois, parcela no fim.</div>
+      <div class="fala">“Beleza. Então deixa eu te mostrar o investimento com transparência.
+
+Primeiro, o que cada peça representa sozinha —
+só pra você enxergar a composição:
+
+Setup de Redes: cerca de cinco mil.
+Site com Blog: cerca de vinte mil.
+Estruturação Comercial — com três meses de acompanhamento: cerca de sessenta e dois mil.
+
+Se fosse separado, chegaria perto de <em>oitenta e sete mil</em>.
+
+Agora a condição da solução completa — as três juntas, numa contratação só:
+<em>sessenta e dois mil, cento e vinte e dois</em>.
+Uma economia de uns vinte e cinco mil em cima da composição.
+
+Em condição de parcelamento: <em>doze vezes de cinco mil, cento e setenta e seis</em>.
+
+Traduzindo: mais ou menos cinco mil e duzentos por mês
+pra instalar a base comercial e a presença que sustenta o piloto —
+sem comprar mídia agora.
+
+Olhando escopo e condição…
+o que ainda precisa ficar mais claro pra avançar:
+<em>escopo, ritmo ou o investimento em si?</em>”</div>
+      <div class="pausa"><strong>Pause.</strong> Deixa ele processar. Não justifique o preço no silêncio.</div>
+      <div class="se">
+        <strong>Se “faz sentido”:</strong> vá para fechamento.<br>
+        <strong>Se “salgado”:</strong> “Entendi. É mais o valor total, a parcela, ou o que entra no pacote?” → classifica. Traduz de novo o 12×.<br>
+        <strong>Se “só EC”:</strong> “Dá pra priorizar a EC. O pacote completo existe porque site e setup sustentam o mesmo piloto — mas a gente pode olhar a ordem.”
+      </div>
+      <div class="evitar"><strong>Não diga:</strong> “É um descontinão” · “Só hoje” · defender tabela · ficar em silêncio depois do número.</div>
+    </article>
+
+    <article class="bloco" id="fechamento">
+      <div class="bloco-head">
+        <div>
+          <div class="bloco-num">Depois do slide 18 · oral</div>
+          <h2>Fechar a call — não o slide</h2>
+        </div>
+        <div class="tempo">~ 1–1,5 min</div>
+      </div>
+      <div class="intencao">Intenção: próximo passo concreto. O deck acabou; a conversa não.</div>
+      <div class="fala">“Pra gente não ficar só no número…
+
+Se a direção tá clara, o próximo passo é simples:
+formalizar nessa condição, nomear o dono do piloto do lado de vocês,
+e marcar o kick-off da estruturação.
+
+<em>Estruturar agora. Aprender no piloto. Ampliar depois.</em>
+
+Faz sentido a gente seguir com a formalização nessa condição —
+ou você prefere a gente já marcar um horário curto de devolutiva ainda esta semana?”</div>
+      <div class="se">
+        <strong>Sinal verde:</strong> “Perfeito. Eu te mando o resumo ainda hoje e a gente alinhamos contrato/kick-off.”<br>
+        <strong>Pediu tempo:</strong> “Combinado. Qual dia e horário — e a decisão fica com você ou tem mais alguém na mesa?”<br>
+        <strong>Meta:</strong> Aceito ou devolutiva ≤ 5 dias úteis com Antônio.
+      </div>
+    </article>
+
+    <div class="callout">
+      <strong>Cola rápida (se travar na call):</strong>
+    </div>
+    <div class="copy-box"><b>1.</b> Diversificar com previsibilidade — ainda é o foco?
+<b>2.</b> Piloto pra aprender ou volume sem evidência?
+<b>3.</b> Comercial como núcleo e digital como apoio — encaixa?
+<b>4.</b> Quem segura o piloto no dia a dia?
+<b>5. GATE:</b> Esse resultado (clareza + operação + aprendizado) faz sentido agora?
+→ só então preço
+<b>Preço:</b> 87k separado → 62.122 completo → 12× 5.176 → “~5,2k/mês”
+<b>Avanço:</b> escopo, ritmo ou investimento?
+<b>Fecha:</b> formaliza agora ou marca devolutiva esta semana?</div>
+
+    <p class="footer-note">
+      Uso interno · Almeida e Neves × V4 · fala natural · perguntas antes do preço · 2026
+    </p>
+  </div>
+</body>
+</html>
