@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Script de Pitch · Almeida e Neves · Estruturação Comercial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #140608;
+      --surf: rgba(255,255,255,.06);
+      --bd: rgba(255,255,255,.14);
+      --txt: #fff;
+      --mut: rgba(255,255,255,.78);
+      --red: #e11d24;
+      --soft: #ffd0d0;
+      --ok: #86efac;
+      --warn: #fde68a;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font: 15px/1.55 "Plus Jakarta Sans", system-ui, sans-serif;
+      color: var(--txt);
+      background:
+        radial-gradient(ellipse 70% 40% at 10% 0%, rgba(225,29,36,.35), transparent 55%),
+        radial-gradient(ellipse 50% 35% at 90% 10%, rgba(255,80,80,.18), transparent 50%),
+        linear-gradient(180deg, #1a090b 0%, #0d0405 100%);
+      padding-bottom: 64px;
+    }
+    h1, h2, h3 { font-family: Outfit, sans-serif; letter-spacing: -.02em; line-height: 1.15; }
+    .top {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(13,4,5,.88);
+      border-bottom: 1px solid var(--bd);
+      padding: 14px 20px;
+      display: flex; gap: 12px; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    }
+    .brand { font-weight: 800; font-size: 15px; }
+    .brand span { color: #fda4af; }
+    .pill {
+      font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      border: 1px solid var(--bd); border-radius: 999px; padding: 6px 12px; color: var(--mut);
+    }
+    .wrap { max-width: 920px; margin: 0 auto; padding: 28px 20px 0; }
+    .hero {
+      border: 1px solid var(--bd); border-radius: 20px; padding: 28px 24px;
+      background: linear-gradient(135deg, rgba(225,29,36,.2), rgba(255,255,255,.04));
+      margin-bottom: 18px;
+    }
+    .hero h1 { margin: 0 0 10px; font-size: clamp(26px, 4vw, 36px); }
+    .hero p { margin: 0; color: var(--mut); max-width: 760px; }
+    .links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+    .links a {
+      text-decoration: none; color: #fff; font-size: 13px; font-weight: 700;
+      background: var(--red); border-radius: 12px; padding: 10px 14px;
+    }
+    .links a.sec { background: transparent; border: 1px solid var(--bd); color: var(--mut); }
+    .nav {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 8px; margin: 18px 0 8px;
+    }
+    .nav a {
+      text-decoration: none; color: var(--mut); font-size: 12px; font-weight: 700;
+      border: 1px solid var(--bd); background: var(--surf); border-radius: 12px;
+      padding: 10px 12px; transition: .2s;
+    }
+    .nav a:hover { color: #fff; border-color: rgba(255,255,255,.35); background: rgba(225,29,36,.18); }
+    .nav a small { display: block; color: #fda4af; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 3px; }
+    .callout {
+      margin: 16px 0 22px; padding: 14px 16px; border-radius: 14px;
+      border: 1px solid rgba(253,230,138,.3); background: rgba(253,230,138,.08);
+      color: var(--warn); font-size: 14px;
+    }
+    .callout strong { color: #fef08a; }
+    .callout.ok {
+      border-color: rgba(134,239,172,.3); background: rgba(134,239,172,.08);
+      color: #bbf7d0;
+    }
+    .callout.ok strong { color: #dcfce7; }
+    .perfil {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px; margin: 16px 0 8px;
+    }
+    .perfil .card {
+      border: 1px solid var(--bd); border-radius: 14px; background: var(--surf);
+      padding: 12px 14px;
+    }
+    .perfil .card b { display: block; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #fda4af; margin-bottom: 4px; }
+    .perfil .card span { color: var(--mut); font-size: 13px; }
+    .slide {
+      border: 1px solid var(--bd); border-radius: 18px; background: rgba(20,8,10,.72);
+      padding: 22px 20px; margin-bottom: 16px;
+    }
+    .slide-head {
+      display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+      align-items: flex-start; margin-bottom: 14px;
+      padding-bottom: 12px; border-bottom: 1px solid var(--bd);
+    }
+    .slide-num { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #fda4af; margin-bottom: 6px; }
+    .slide-head h2 { margin: 0; font-size: 22px; }
+    .slide-ref {
+      font-size: 12px; font-weight: 700; color: var(--mut);
+      border: 1px solid var(--bd); border-radius: 999px; padding: 6px 10px; white-space: nowrap;
+    }
+    .objetivo {
+      font-size: 13px; font-weight: 700; color: var(--ok);
+      margin-bottom: 12px; padding: 10px 12px; border-radius: 12px;
+      background: rgba(134,239,172,.08); border: 1px solid rgba(134,239,172,.22);
+    }
+    .fala {
+      border-left: 3px solid var(--red); padding: 12px 14px; margin-bottom: 14px;
+      background: rgba(225,29,36,.1); border-radius: 0 12px 12px 0;
+      color: #ffe4e6; font-size: 15px;
+    }
+    .fala em { color: #fff; font-style: normal; font-weight: 700; }
+    .bloco { margin-bottom: 12px; }
+    .bloco h3 { margin: 0 0 8px; font-size: 14px; color: var(--soft); }
+    .bloco ul { margin: 0; padding-left: 18px; color: var(--mut); }
+    .bloco li { margin-bottom: 6px; }
+    .bloco li strong { color: #fff; }
+    .roi-bridge, .ask, .evitar {
+      margin-top: 10px; padding: 12px 14px; border-radius: 12px; font-size: 14px;
+    }
+    .roi-bridge { border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.04); color: var(--mut); }
+    .roi-bridge strong { color: #fff; }
+    .ask { border: 1px solid rgba(96,165,250,.3); background: rgba(96,165,250,.08); color: #bfdbfe; }
+    .ask strong { color: #dbeafe; }
+    .evitar { border: 1px solid rgba(248,113,113,.3); background: rgba(248,113,113,.08); color: #fecaca; }
+    .evitar strong { color: #fee2e2; }
+    .footer-note { color: rgba(255,255,255,.45); font-size: 12px; text-align: center; margin: 28px 0 8px; }
+    .arco {
+      display: grid; gap: 8px; margin: 14px 0 4px;
+    }
+    .arco-step {
+      display: grid; grid-template-columns: 88px 1fr; gap: 12px; align-items: start;
+      border: 1px solid var(--bd); border-radius: 12px; padding: 10px 12px; background: var(--surf);
+    }
+    .arco-step b { color: #fda4af; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; }
+    .arco-step span { color: var(--mut); font-size: 13px; }
+    @media (max-width: 640px) {
+      .arco-step { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <div class="brand">Script de Pitch · <span>Almeida e Neves × V4</span></div>
+    <div class="pill">Uso interno · RecM · Antônio</div>
+  </div>
+
+  <div class="wrap">
+    <header class="hero">
+      <h1>Roteiro de apresentação · não terminar no preço</h1>
+      <p>
+        Script para conduzir o deck da Almeida e Neves com autoridade.
+        A tese da call é <strong>operação comercial antes de escala</strong>.
+        O preço fecha a conversa — não a substitui. Depois do investimento, você ancora
+        <em>próximo passo, responsável e prazo de devolutiva</em>.
+      </p>
+      <div class="links">
+        <a href="https://relatorios.collieassociados.com/alnv-proposta-comercial-estruturacao/" target="_blank" rel="noopener">Abrir deck do cliente</a>
+        <a class="sec" href="#arco">Ver arco da call ↓</a>
+      </div>
+    </header>
+
+    <div class="callout">
+      <strong>Linha mestra:</strong> “Vocês já têm capacidade técnica e relacionamento.
+      O que falta é transformar isso em operação comercial — oferta clara, piloto controlado,
+      registro e presença coerente — para validar a nova rota sem depender só da Mosaic.”
+      <br><br>
+      <strong>Regra de ouro:</strong> não “passar slides até o preço”. Em cada bloco, vender uma decisão.
+      No final: preço → significado → próximo passo. Nunca silêncio depois do número.
+    </div>
+
+    <div class="perfil">
+      <div class="card"><b>Decisor</b><span>Antônio (integral). Não puxar Erick/conselho sem validação.</span></div>
+      <div class="card"><b>Contexto</b><span>~R$ 500 mil/mês · concentração Mosaic · urgência de diversificar.</span></div>
+      <div class="card"><b>Núcleo</b><span>EC estendida + GTM piloto + site/setup. Mídia só depois de evidência.</span></div>
+      <div class="card"><b>Budget</b><span>Baixa/inexistente — educar valor e condição; não defender tabela.</span></div>
+    </div>
+
+    <div class="callout ok" id="arco">
+      <strong>Arco da apresentação (o que importa na fala):</strong>
+      <div class="arco">
+        <div class="arco-step"><b>01–04</b><span>Direção + maturidade: validar antes de escalar; preparação ≠ operação.</span></div>
+        <div class="arco-step"><b>05–11</b><span>Solução: EC como núcleo (produto, GTM, materiais, CRM, Sales Enablement).</span></div>
+        <div class="arco-step"><b>12–14</b><span>Presença digital como apoio — sem vender mídia/inbound em escala.</span></div>
+        <div class="arco-step"><b>15–16</b><span>Responsabilidades + resultado: fechar valor percebido antes do preço.</span></div>
+        <div class="arco-step"><b>17–18 + oral</b><span>Âncora individual → condição especial → 12× → próximo passo firme.</span></div>
+      </div>
+    </div>
+
+    <nav class="nav" aria-label="Slides">
+      <a href="#s1"><small>01</small>Capa</a>
+      <a href="#s2"><small>02</small>Direção</a>
+      <a href="#s3"><small>03</small>Maturidade</a>
+      <a href="#s4"><small>04</small>N2</a>
+      <a href="#s5"><small>05</small>Arquitetura</a>
+      <a href="#s6"><small>06</small>Prazo</a>
+      <a href="#s7"><small>07</small>Produto</a>
+      <a href="#s8"><small>08</small>GTM</a>
+      <a href="#s9"><small>09</small>Materiais</a>
+      <a href="#s10"><small>10</small>Operação</a>
+      <a href="#s11"><small>11</small>Enablement</a>
+      <a href="#s12"><small>12</small>Site</a>
+      <a href="#s13"><small>13</small>Social</a>
+      <a href="#s14"><small>14</small>Sequência</a>
+      <a href="#s15"><small>15</small>Responsáveis</a>
+      <a href="#s16"><small>16</small>Resultado</a>
+      <a href="#s17"><small>17</small>Âncora</a>
+      <a href="#s18"><small>18</small>Oferta</a>
+      <a href="#fechamento"><small>Oral</small>Fechamento</a>
+    </nav>
+
+    <!-- 01 -->
+    <article class="slide" id="s1">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 01 · Capa</div>
+          <h2>Da capacidade técnica à operação comercial</h2>
+        </div>
+        <div class="slide-ref">~ 45–60s</div>
+      </div>
+      <div class="objetivo">Objetivo: ancorar a tese e abrir com respeito ao que eles já têm</div>
+      <div class="fala">
+        “Antônio, antes de qualquer número, quero alinhar o ponto central:
+        a Almeida e Neves já tem <em>capacidade técnica e relacionamento</em>.
+        O que trouxemos hoje é o caminho para transformar isso em
+        <em>operação comercial</em> — oferta clara, processo, registro e presença coerente —
+        para colocar o novo GTM em operação sem improvisar em cada conversa.”
+      </div>
+      <div class="bloco">
+        <h3>Enriquecimento / ancoragem</h3>
+        <ul>
+          <li><strong>Reconhecer:</strong> conhecimento + acesso a prestadoras conhecidas já existem.</li>
+          <li><strong>Nomear o gap:</strong> capacidade ≠ operação repetível.</li>
+          <li><strong>Promessa da call:</strong> sair com clareza do que instalar, em que ordem e o que a Almeida e Neves precisa fazer.</li>
+        </ul>
+      </div>
+      <div class="roi-bridge"><strong>Ponte:</strong> “Hoje não vamos falar de volume de mídia. Vamos falar de base para vender com método.”</div>
+      <div class="ask"><strong>Abertura:</strong> “Se eu resumir o objetivo de vocês como diversificar com previsibilidade — sem depender só de um cliente-âncora — faz sentido?”</div>
+      <div class="evitar"><strong>Evitar:</strong> abrir com preço · vender Meta/Google · soar como ‘vocês não sabem vender’.</div>
+    </article>
+
+    <!-- 02 -->
+    <article class="slide" id="s2">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 02 · Direção estratégica</div>
+          <h2>Validar antes de escalar</h2>
+        </div>
+        <div class="slide-ref">~ 1–1,5 min</div>
+      </div>
+      <div class="objetivo">Objetivo: vender a sequência (piloto relacional → aprender → ampliar)</div>
+      <div class="fala">
+        “A direção estratégica que escolhemos juntos é clara:
+        <em>validar antes de escalar</em>.
+        Partimos da capacidade e do relacionamento que vocês já têm.
+        Testamos oferta, mensagem e processo com uma lista controlada de prestadoras conhecidas.
+        Só depois — com evidência e capacidade de condução — ampliamos canais.
+        Relacionamento abre a porta. Não prova interesse nem compra.”
+      </div>
+      <div class="bloco">
+        <h3>Como conduzir</h3>
+        <ul>
+          <li><strong>01 Partida:</strong> “O acesso já existe — isso reduz fricção.”</li>
+          <li><strong>02 Decisão:</strong> “O piloto é o coração. Lista controlada, não campanha.”</li>
+          <li><strong>03 Depois:</strong> “Novos canais entram só com evidência.”</li>
+        </ul>
+      </div>
+      <div class="ask"><strong>Check:</strong> “Faz sentido pra vocês começar pelo piloto relacional antes de pensar em volume?”</div>
+      <div class="evitar"><strong>Evitar:</strong> prometer escala no mês 1 · tratar LinkedIn/Instagram como aquisição principal.</div>
+    </article>
+
+    <!-- 03 -->
+    <article class="slide" id="s3">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 03 · Diagnóstico</div>
+          <h2>Preparação ainda não é operação</h2>
+        </div>
+        <div class="slide-ref">~ 1,5 min</div>
+      </div>
+      <div class="objetivo">Objetivo: espelhar maturidade N1 sem humilhar — criar urgência racional</div>
+      <div class="fala">
+        “Olhando Oferta, Marketing e Vendas, o diagnóstico é o mesmo nos três pilares:
+        vocês estão em <em>N1</em> — não por falta de inteligência, e sim porque os ativos
+        ainda não foram adotados em ciclos reais.
+        Oferta ainda sem escopo e preço estáveis na prática.
+        Marketing com preparação, sem operação integrada.
+        Vendas sem CRM, processo, histórico ou ritual de pipeline.
+        <em>Preparação não é N2.</em> N2 exige uso, evidência e adoção.”
+      </div>
+      <div class="bloco">
+        <h3>Frase âncora</h3>
+        <ul>
+          <li>“O que já existe é preparação. O projeto instala a condição de uso.”</li>
+          <li>Conectar à Mosaic: concentração alta aumenta o custo de não ter um segundo canal rodando com método.</li>
+        </ul>
+      </div>
+      <div class="ask"><strong>Validação:</strong> “Se eu disser que o gargalo não é ‘ter ideia’ — é ‘operar com padrão’ — vocês concordam?”</div>
+    </article>
+
+    <!-- 04 -->
+    <article class="slide" id="s4">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 04 · Evolução</div>
+          <h2>N2 nasce do uso</h2>
+        </div>
+        <div class="slide-ref">~ 1 min</div>
+      </div>
+      <div class="objetivo">Objetivo: baixar expectativa mágica e elevar expectativa de execução</div>
+      <div class="fala">
+        “Importante: a implantação cria as <em>condições</em> de N2.
+        A evolução só se confirma com uso, registro e aprendizado em oportunidades reais.
+        Do N1 intuitivo para o N2 funcional, a ponte é exatamente o que vamos instalar:
+        produto comercial, GTM piloto, materiais, CRM mínimo e acompanhamento dos primeiros ciclos.”
+      </div>
+      <div class="roi-bridge"><strong>Ponte:</strong> “Condição criada ≠ resultado comprovado. Por isso o projeto inclui executar — não só desenhar.”</div>
+      <div class="ask"><strong>Micro-close:</strong> “Vocês topam olhar a solução como ponte de uso — e não como PDF de recomendação?”</div>
+    </article>
+
+    <!-- 05 -->
+    <article class="slide" id="s5">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 05 · Arquitetura</div>
+          <h2>Três componentes, uma implantação</h2>
+        </div>
+        <div class="slide-ref">~ 1,5 min</div>
+      </div>
+      <div class="objetivo">Objetivo: posicionar EC como núcleo; site/social como apoio</div>
+      <div class="fala">
+        “A solução tem três componentes, mas um núcleo.
+        <em>Estruturação Comercial</em> — 90 dias para estruturar + 90 para executar com Sales Enablement.
+        <em>Site com Blog</em> — fundação de confiança em 60 dias.
+        <em>LinkedIn + Instagram</em> — setup inicial em 30 dias.
+        A estrutura instala o processo. Os ativos digitais dão coerência à presença que apoia a venda.
+        Não estamos vendendo mídia. Estamos alinhando a presença ao GTM.”
+      </div>
+      <div class="bloco">
+        <h3>Hierarquia na fala</h3>
+        <ul>
+          <li>1º EC · 2º Site · 3º Setup social.</li>
+          <li>Se tempo apertar depois: detalhar EC a fundo; site/social em 1 frase cada.</li>
+        </ul>
+      </div>
+      <div class="ask"><strong>Check:</strong> “Faz sentido a EC como núcleo e o digital como apoio da conversa comercial?”</div>
+      <div class="evitar"><strong>Evitar:</strong> dar o mesmo peso aos três · abrir inbound/mídia paga neste slide.</div>
+    </article>
+
+    <!-- 06 -->
+    <article class="slide" id="s6">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 06 · Prazo</div>
+          <h2>Seis meses para estruturar e executar</h2>
+        </div>
+        <div class="slide-ref">~ 1,5–2 min</div>
+      </div>
+      <div class="objetivo">Objetivo: mostrar que não é ‘projeto de slides’ — tem fase de uso</div>
+      <div class="fala">
+        “A Estruturação Comercial roda em seis meses.
+        Nos primeiros 90 dias a gente <em>estrutura</em>: produto, GTM piloto, materiais, CRM mínimo, funil e treinamento.
+        Nos 90 seguintes a Almeida e Neves <em>executa</em> em oportunidades reais —
+        conduzem abordagens, registram, e a gente acompanha para aprimorar com evidência.
+        É implantação + Sales Enablement. Não é só desenho.”
+      </div>
+      <div class="bloco">
+        <h3>Reforçar papéis</h3>
+        <ul>
+          <li><strong>Estruturar:</strong> V4 organiza a base com vocês.</li>
+          <li><strong>Executar:</strong> o time Almeida e Neves opera; V4 orienta e ajusta.</li>
+        </ul>
+      </div>
+      <div class="ask"><strong>Engajamento:</strong> “Quem do lado de vocês estaria na operação do piloto nos primeiros ciclos?”</div>
+    </article>
+
+    <!-- 07 -->
+    <article class="slide" id="s7">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 07 · Produto Comercial</div>
+          <h2>A oferta deixa de depender de improvisação</h2>
+        </div>
+        <div class="slide-ref">~ 2 min</div>
+      </div>
+      <div class="objetivo">Objetivo: deixar claro o que é / não é / por que vale / como precifica — e o papel de cada um</div>
+      <div class="fala">
+        “Primeira frente: produto comercial.
+        Organizamos as decisões para a Almeida e Neves ter oferta clara:
+        o que é, o que não é, por que vale e como precifica.
+        Ponto crítico de governança: <em>vocês definem e validam</em> escopo, formatos, limites, valor e precificação.
+        Nosso papel é orientar com critérios e boas práticas — sem assumir a criação do produto por vocês.
+        Sem essa clareza, o piloto vira conversa solta.”
+      </div>
+      <div class="ask"><strong>Check:</strong> “Antônio, você enxerga espaço para decidir escopo e precificação com o time nas primeiras semanas?”</div>
+      <div class="evitar"><strong>Evitar:</strong> parecer que a V4 ‘inventa’ o produto técnico da Almeida e Neves.</div>
+    </article>
+
+    <!-- 08 -->
+    <article class="slide" id="s8">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 08 · GTM piloto</div>
+          <h2>O piloto aprende antes de ampliar</h2>
+        </div>
+        <div class="slide-ref">~ 2 min</div>
+      </div>
+      <div class="objetivo">Objetivo: vender aprendizado controlado — não campanha</div>
+      <div class="fala">
+        “O GTM piloto é a estrutura de aprendizagem.
+        Quem abordar, como abrir, como conduzir, o que registrar e o que aprender.
+        Volume fica fora do primeiro ciclo.
+        A gente testa mensagem, interesse, objeções e capacidade de condução
+        com uma lista controlada — especialmente prestadoras conhecidas —
+        antes de buscar escala.”
+      </div>
+      <div class="bloco">
+        <h3>Conectar à dor Mosaic</h3>
+        <ul>
+          <li>“Diversificar sem piloto é trocar concentração por dispersão.”</li>
+          <li>“O piloto prova se a nova rota conversa — e se o time consegue conduzir.”</li>
+        </ul>
+      </div>
+      <div class="ask"><strong>Micro-close:</strong> “Prefere um piloto curto com aprendizado claro, ou já partir para volume sem evidência?”</div>
+      <div class="evitar"><strong>Evitar:</strong> prometer pipeline cheio · vender ABM/mídia como etapa 1.</div>
+    </article>
+
+    <!-- 09 -->
+    <article class="slide" id="s9">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 09 · Materiais</div>
+          <h2>Materiais traduzem técnica em valor</h2>
+        </div>
+        <div class="slide-ref">~ 1 min</div>
+      </div>
+      <div class="objetivo">Objetivo: mostrar densidade de entrega sem virar inventário</div>
+      <div class="fala">
+        “Materiais e enablement inicial: apresentação, one-page, proposta padrão,
+        scripts, roteiro de diagnóstico, materiais de apoio e treinamentos.
+        A função é uma só — <em>menos improvisação</em> e a mesma narrativa de valor
+        em toda conversa comercial.”
+      </div>
+      <div class="ask"><strong>Passagem rápida:</strong> “Isso é o que tira a venda do feeling e coloca no padrão.”</div>
+    </article>
+
+    <!-- 10 -->
+    <article class="slide" id="s10">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 10 · Operação</div>
+          <h2>O processo passa a produzir dados</h2>
+        </div>
+        <div class="slide-ref">~ 1,5–2 min</div>
+      </div>
+      <div class="objetivo">Objetivo: vender CRM/ritual como fonte de decisão — não ferramenta por vaidade</div>
+      <div class="fala">
+        “Operação comercial: CRM ou registro equivalente, funil, follow-up e ritual semanal.
+        Registrar → conduzir → aprender → revisar.
+        Tiramos as oportunidades da memória e criamos uma fonte mínima de decisão.
+        Ferramenta e licenças ainda não estão travadas — o princípio vem antes da marca do software.”
+      </div>
+      <div class="roi-bridge"><strong>Ponte:</strong> “Sem registro, o piloto não ensina. Com registro, cada objeção vira ajuste.”</div>
+      <div class="ask"><strong>Check:</strong> “Hoje, se eu perguntar quantas conversas estão abertas e qual a próxima ação de cada uma — isso está num lugar só?”</div>
+      <div class="evitar"><strong>Evitar:</strong> empurrar ferramenta específica sem pergunta · discutir preço de licença agora.</div>
+    </article>
+
+    <!-- 11 -->
+    <article class="slide" id="s11">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 11 · Sales Enablement</div>
+          <h2>A implantação continua no uso</h2>
+        </div>
+        <div class="slide-ref">~ 1–1,5 min</div>
+      </div>
+      <div class="objetivo">Objetivo: justificar os +90 dias como parte do valor (não ‘extra’)</div>
+      <div class="fala">
+        “Os 90 dias adicionais de Sales Enablement existem porque estrutura sem adoção morre.
+        Acompanhamos rotina, preparamos reuniões, revisamos abordagens e propostas,
+        lemos objeções e motivos de perda, e evoluímos CRM, mensagem e cadência.
+        O ciclo é: executar → observar → orientar → ajustar → executar de novo.”
+      </div>
+      <div class="ask"><strong>Reforço:</strong> “Isso é o que separa ‘recebemos um playbook’ de ‘o time está usando’.”</div>
+    </article>
+
+    <!-- 12 -->
+    <article class="slide" id="s12">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 12 · Site com Blog</div>
+          <h2>O site sustenta a conversa comercial</h2>
+        </div>
+        <div class="slide-ref">~ 1 min</div>
+      </div>
+      <div class="objetivo">Objetivo: vender confiança pós-reunião — sem autorizar mídia</div>
+      <div class="fala">
+        “O Site com Blog não é campanha. É fundação de confiança em cerca de 60 dias.
+        Quando o prospect sai da reunião e te busca, a presença precisa
+        <em>confirmar</em> — e não contradizer — a narrativa comercial.
+        Escopo detalhado a validar antes da contratação.
+        Isso <em>não</em> autoriza mídia ou inbound em escala.”
+      </div>
+      <div class="evitar"><strong>Evitar:</strong> vender SEO/tráfego pago neste slide · reabrir LP antiga como se fosse entrega nova.</div>
+    </article>
+
+    <!-- 13 -->
+    <article class="slide" id="s13">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 13 · Setup social</div>
+          <h2>Os perfis passam a contar a mesma história</h2>
+        </div>
+        <div class="slide-ref">~ 45–60s</div>
+      </div>
+      <div class="objetivo">Objetivo: delimitar setup (não gestão contínua)</div>
+      <div class="fala">
+        “LinkedIn e Instagram: ajuste de perfil, narrativa alinhada e publicações de partida —
+        até 10 no total. Setup de cerca de 30 dias.
+        Não inclui gestão contínua nem mídia paga.
+        Canais distintos, mensagem coerente com a oferta do piloto.”
+      </div>
+      <div class="ask"><strong>Passagem:</strong> “Isso é alinhamento de presença — não operação de growth.”</div>
+    </article>
+
+    <!-- 14 -->
+    <article class="slide" id="s14">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 14 · Sequência</div>
+          <h2>A implantação respeita dependências</h2>
+        </div>
+        <div class="slide-ref">~ 1 min</div>
+      </div>
+      <div class="objetivo">Objetivo: reforçar ordem — oferta antes da abordagem; registro antes da escala</div>
+      <div class="fala">
+        “A sequência importa: estruturar oferta → desenhar GTM → construir materiais e presença →
+        instalar CRM e ritual → acompanhar.
+        Oferta antes da abordagem. Registro antes da escala.
+        Cada etapa habilita a seguinte — por isso não começamos por volume.”
+      </div>
+      <div class="ask"><strong>Commit verbal:</strong> “Essa ordem — estrutura antes de ampliar — continua fazendo sentido pra vocês?”</div>
+    </article>
+
+    <!-- 15 -->
+    <article class="slide" id="s15">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 15 · Responsabilidades</div>
+          <h2>A adoção é responsabilidade compartilhada</h2>
+        </div>
+        <div class="slide-ref">~ 1–1,5 min</div>
+      </div>
+      <div class="objetivo">Objetivo: preparar o terreno para investimento — sem surpresa de esforço</div>
+      <div class="fala">
+        “Maturidade só evolui se a Almeida e Neves designar responsáveis,
+        decidir oferta, trazer contexto, adotar registros, conduzir conversas e incorporar ajustes.
+        A consultoria estrutura e acompanha. O cliente usa.
+        Gate inicial: nomear quem decide e quem opera.”
+      </div>
+      <div class="ask"><strong>Pergunta dura (leve):</strong> “Quem, do lado de vocês, seria o dono do piloto na prática?”</div>
+      <div class="evitar"><strong>Evitar:</strong> soar como ‘vocês que fazem tudo’ · esconder a necessidade de adoção.</div>
+    </article>
+
+    <!-- 16 -->
+    <article class="slide" id="s16">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 16 · Resultado</div>
+          <h2>O resultado é uma base funcional</h2>
+        </div>
+        <div class="slide-ref">~ 1–1,5 min</div>
+      </div>
+      <div class="objetivo">Objetivo: FECHAR VALOR antes do preço — este slide é a ponte, não o fim</div>
+      <div class="fala">
+        “Antes do investimento, quero travar o que vocês levam:
+        uma <em>base comercial funcional</em> — clareza de oferta e GTM piloto,
+        operação com materiais, CRM mínimo e rotina,
+        e aprendizado com evidência para evoluir.
+        O projeto aumenta capacidade de execução.
+        Não garante receita nem validação definitiva do mercado —
+        garante a estrutura para validar com método.”
+      </div>
+      <div class="bloco">
+        <h3>Por que parar aqui 10 segundos</h3>
+        <ul>
+          <li>Pedir confirmação de valor <em>antes</em> de mostrar número.</li>
+          <li>Se Antônio não comprar o resultado, preço vira objeção automática.</li>
+        </ul>
+      </div>
+      <div class="ask"><strong>Pergunta obrigatória:</strong> “Olhando clareza + operação + aprendizado — isso é o resultado que faz sentido para a Almeida e Neves agora?”</div>
+      <div class="evitar"><strong>Evitar:</strong> pular direto do 16 para 18 · falar preço sem essa confirmação.</div>
+    </article>
+
+    <!-- 17 -->
+    <article class="slide" id="s17">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 17 · Valores individuais</div>
+          <h2>O que cada solução representa</h2>
+        </div>
+        <div class="slide-ref">~ 1–1,5 min</div>
+      </div>
+      <div class="objetivo">Objetivo: ancorar (não fechar). Mostrar peça a peça antes da condição especial</div>
+      <div class="fala">
+        “Aqui está o investimento individual de cada componente —
+        para vocês enxergarem o que cada solução representa isoladamente.
+        Setup de Redes: <em>R$ 5.125,87</em>.
+        Site com Blog: <em>R$ 20.265,32</em>.
+        Estruturação Comercial — com Sales Enablement de 3 meses: <em>R$ 62.336,82</em>.
+        Se contratado separado, o total chega a <em>R$ 87.728,01</em>.
+        Isso é a âncora. No próximo slide mostro a condição da solução completa.”
+      </div>
+      <div class="bloco">
+        <h3>Como conduzir preço aqui</h3>
+        <ul>
+          <li><strong>Não negociar ainda.</strong> Este slide educa composição.</li>
+          <li><strong>Nomear o núcleo:</strong> EC é a peça maior porque carrega processo + enablement.</li>
+          <li><strong>Preparar o 18:</strong> “Agora a condição especial da contratação única.”</li>
+        </ul>
+      </div>
+      <div class="ask"><strong>Passagem:</strong> “Faz sentido olhar a condição da solução completa em cima dessa composição?”</div>
+      <div class="evitar"><strong>Evitar:</strong> defender R$ 87k como pedido · pedir fechamento neste slide · parecer desconto ‘por dó’.</div>
+    </article>
+
+    <!-- 18 -->
+    <article class="slide" id="s18">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 18 · Oferta final</div>
+          <h2>Solução completa · condição especial</h2>
+        </div>
+        <div class="slide-ref">~ 2 min</div>
+      </div>
+      <div class="objetivo">Objetivo: apresentar condição com leveza — e NÃO terminar a call neste slide</div>
+      <div class="fala">
+        “Solução completa em uma contratação:
+        Estruturação Comercial com Sales Enablement por 3 meses,
+        Site com Blog e Setup de Redes.
+        Valor integral das soluções: <em>R$ 87.728,01</em>.
+        Condição especial: <em>R$ 62.122,87</em> — economia de cerca de R$ 25,6 mil.
+        Em condições de parcelamento: <em>12× de R$ 5.176,91</em>.
+        Na prática: EC a R$ 45 mil, Site a R$ 14 mil, Setup a R$ 3.122,87 —
+        o pacote que coloca o novo GTM em operação com presença coerente.”
+      </div>
+      <div class="bloco">
+        <h3>Ordem da fala (obrigatória)</h3>
+        <ul>
+          <li>1) Nomear o pacote completo · 2) Âncora R$ 87.728 · 3) Condição R$ 62.122,87 · 4) 12× · 5) Traduzir o que ativa.</li>
+          <li><strong>Tradução:</strong> “cerca de R$ 5,2 mil/mês para instalar base comercial + presença que sustenta o piloto.”</li>
+          <li><strong>Não ficar em silêncio</strong> depois do número — ir direto para o fechamento oral.</li>
+        </ul>
+      </div>
+      <div class="roi-bridge"><strong>Ponte:</strong> “Esse investimento não é mídia. É a condição para diversificar com método — oferta, processo, registro e presença alinhados.”</div>
+      <div class="ask"><strong>Pergunta de avanço (ainda no 18):</strong> “Olhando escopo + condição, o que ainda precisa ficar claro para avançarmos — escopo, ritmo ou investimento?”</div>
+      <div class="evitar"><strong>Evitar:</strong> encerrar a reunião no preço · ‘é isso, qualquer dúvida me chama’ · pressa falsa · abrir mídia como consolação.</div>
+    </article>
+
+    <!-- FECHAMENTO ORAL -->
+    <article class="slide" id="fechamento">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Depois do slide 18 · só na fala</div>
+          <h2>Fechamento · próximos passos</h2>
+        </div>
+        <div class="slide-ref">~ 1,5–2 min</div>
+      </div>
+      <div class="objetivo">Objetivo: o deck termina no preço — a call NÃO. Sair com Aceito ou devolutiva ≤ 5 dias úteis</div>
+      <div class="fala">
+        “Para não ficarmos só no número: o próximo passo é simples.
+        Se a direção faz sentido, formalizamos a solução completa nessa condição,
+        designamos os responsáveis do lado Almeida e Neves e marcamos o kick-off
+        da fase de estruturação — produto, GTM piloto e operação.
+        O que vocês levam não é um PDF: é a base para validar a nova rota com método
+        e reduzir a dependência de um único eixo de receita.
+        <em>Estruturar agora. Aprender no piloto. Ampliar depois.</em>”
+      </div>
+      <div class="bloco">
+        <h3>Escolha 1 caminho de fechamento</h3>
+        <ul>
+          <li><strong>Assumptive:</strong> “Podemos já deixar o kick-off na próxima semana e seguir com a formalização?”</li>
+          <li><strong>Alternativa:</strong> “Prefere avançar com o pacote completo ou priorizar só a Estruturação Comercial neste momento?”</li>
+          <li><strong>Se pedir tempo:</strong> “Perfeito. Qual o melhor dia/hora para devolutiva — e você decide sozinho ou precisa alinhar com alguém?”</li>
+          <li><strong>Meta:</strong> Aceito na call ou devolutiva ≤ 5 dias úteis com Antônio presente.</li>
+        </ul>
+      </div>
+      <div class="bloco">
+        <h3>Se quiser fasear (só se o preço travar)</h3>
+        <ul>
+          <li><strong>Caminho A:</strong> EC + Sales Enablement agora · site/social na sequência.</li>
+          <li><strong>Caminho B:</strong> pacote completo com a condição especial (preferencial — coerência da implantação).</li>
+          <li>Não oferecer mídia como ‘consolo’ de desconto.</li>
+        </ul>
+      </div>
+      <div class="ask"><strong>CTA final:</strong> “Podemos seguir com a formalização da solução completa nessa condição especial?”</div>
+    </article>
+
+    <div class="callout">
+      <strong>Objeções rápidas (frame certo):</strong><br>
+      • <em>“Está salgado / preciso ver se cabe”</em> → “Por isso mostramos a composição e a condição.
+      A pergunta útil é: o que falta clareza — escopo, ritmo ou forma de investimento?
+      Em 12×, ativamos a base por cerca de R$ 5,2 mil/mês.”<br>
+      • <em>“Vamos pensar em mídia depois”</em> → “Perfeito — e a EC + GTM piloto são o que tornam esse depois lucrativo. Mídia sem oferta e processo é combustível sem motor.”<br>
+      • <em>“Já temos relacionamento / LP”</em> → “Ótimo. Relacionamento abre porta; LP é preparação.
+      O que falta é oferta estável, condução, registro e presença alinhada à nova solução.”<br>
+      • <em>“Time sem tempo”</em> → “Justamente: ritual + padrão + enablement reduzem o caos que consome tempo hoje. Sem dono do piloto, nenhum projeto funciona — por isso o gate de responsáveis.”<br>
+      • <em>“Quero só o site”</em> → “Site sem oferta e processo sustenta uma conversa que ainda improvisa.
+      O núcleo que destrava diversificação é a Estruturação Comercial.”
+    </div>
+
+    <div class="callout ok">
+      <strong>Checklist pós-call (não pular):</strong>
+      1) Confirmar entendimento do pacote ·
+      2) Registrar objeção real (se houver) ·
+      3) Combinar devolutiva com data/hora ·
+      4) Enviar resumo escrito em até 24h ·
+      5) Não deixar o último áudio/texto da call ser só o preço.
+    </div>
+
+    <p class="footer-note">
+      Script interno RecM · Almeida e Neves × V4 · deck
+      <a href="https://relatorios.collieassociados.com/alnv-proposta-comercial-estruturacao/" style="color:#fda4af">alnv-proposta-comercial-estruturacao</a>
+      · condição especial R$ 62.122,87 · 12× R$ 5.176,91
+    </p>
+  </div>
+</body>
+</html>
