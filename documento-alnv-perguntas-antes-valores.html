@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Almeida e Neves × V4 — Perguntas antes dos valores</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --red: #a10f14; --red2: #c4181e; --txt: #1c1c1c; --mut: #5a5a5a;
+      --bg: #faf7f7; --card: #fff; --line: #ead4d4; --ok: #167846;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font: 16px/1.6 "Plus Jakarta Sans", system-ui, sans-serif; color: var(--txt);
+      background:
+        radial-gradient(ellipse 80% 40% at 50% -10%, rgba(196,24,30,.12), transparent 60%),
+        linear-gradient(180deg, #fff 0%, var(--bg) 40%, #f3ecec 100%);
+    }
+    h1,h2,h3 { font-family: Outfit, sans-serif; letter-spacing: -.02em; line-height: 1.15; }
+    .wrap { max-width: 820px; margin: 0 auto; padding: 36px 20px 64px; }
+    .hero {
+      text-align: center; padding: 28px 22px; border-radius: 22px;
+      background: linear-gradient(145deg, #a10f14, #7a0b10 55%, #4a070a);
+      color: #fff; box-shadow: 0 18px 50px rgba(120,0,0,.25); margin-bottom: 22px;
+    }
+    .hero .eyebrow { font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #ffd0d0; margin-bottom: 10px; }
+    .hero h1 { margin: 0 0 8px; font-size: clamp(26px, 5vw, 38px); }
+    .hero p { margin: 0 auto; max-width: 580px; color: rgba(255,255,255,.88); }
+    .badge {
+      display: inline-block; margin-top: 16px; padding: 10px 16px; border-radius: 999px;
+      background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.35);
+      font-size: 13px; font-weight: 800; letter-spacing: .02em;
+    }
+    .toolbar {
+      display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: -6px 0 20px;
+    }
+    .toolbar a {
+      display: inline-block; padding: 10px 16px; border-radius: 999px; text-decoration: none;
+      font-weight: 700; font-size: 13px; background: var(--red); color: #fff;
+    }
+    .toolbar a.sec { background: #fff; color: var(--red); border: 1px solid var(--line); }
+    .section {
+      background: var(--card); border: 1px solid var(--line); border-radius: 18px;
+      padding: 22px; margin-bottom: 14px; box-shadow: 0 8px 24px rgba(100,0,0,.04);
+    }
+    .section h2 { margin: 0 0 10px; font-size: 22px; color: var(--red); }
+    .section h3 { margin: 18px 0 8px; font-size: 16px; color: var(--red2); }
+    .section p { margin: 0 0 10px; color: var(--mut); }
+    .section ul, .section ol { margin: 0 0 8px; padding-left: 18px; color: var(--mut); }
+    .section li { margin-bottom: 8px; }
+    .section li strong { color: var(--txt); }
+    .callout {
+      margin: 14px 0 0; padding: 14px 16px; border-radius: 14px;
+      background: #f8e8e8; border-left: 4px solid var(--red); color: var(--txt); font-weight: 600;
+    }
+    .callout small {
+      display: block; font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--red); margin-bottom: 4px; font-weight: 800;
+    }
+    .callout.ok { background: #eef8f2; border-left-color: var(--ok); }
+    .callout.ok small { color: var(--ok); }
+    .q {
+      border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px;
+      margin: 10px 0; background: #fffafa;
+    }
+    .q .meta {
+      display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 8px;
+    }
+    .q .tag {
+      font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+      padding: 4px 8px; border-radius: 999px; background: #f8e8e8; color: var(--red);
+    }
+    .q .tag.gate { background: #167846; color: #fff; }
+    .q .slide { font-size: 12px; font-weight: 700; color: var(--mut); }
+    .q .ask {
+      margin: 0 0 8px; font-size: 15px; font-weight: 700; color: var(--txt);
+      font-family: Outfit, sans-serif; letter-spacing: -.01em;
+    }
+    .q .why { margin: 0; font-size: 13px; color: var(--mut); }
+    .q .why strong { color: var(--txt); }
+    table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+    th, td { border: 1px solid var(--line); padding: 10px 12px; text-align: left; vertical-align: top; }
+    th { background: var(--red); color: #fff; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; }
+    tr:nth-child(even) td { background: #fafafa; }
+    .flow {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 12px;
+    }
+    @media (max-width:720px){ .flow { grid-template-columns: 1fr 1fr; } }
+    .flow .step {
+      background: #fff5f5; border: 1px solid var(--line); border-radius: 12px;
+      padding: 12px; text-align: center;
+    }
+    .flow .step .n { font-family: Outfit; font-weight: 800; color: var(--red); font-size: 18px; }
+    .flow .step strong { display: block; font-size: 13px; margin: 4px 0; }
+    .flow .step span { font-size: 12px; color: var(--mut); }
+    .footer { text-align: center; margin-top: 22px; color: var(--mut); font-size: 13px; }
+    .footer strong { color: var(--red); display: block; font-size: 16px; margin-bottom: 4px; }
+    @media print {
+      body { background: #fff; }
+      .toolbar { display: none; }
+      .section, .hero { box-shadow: none; break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <div class="eyebrow">Almeida e Neves × V4 Company · Uso interno</div>
+      <h1>Perguntas antes dos valores</h1>
+      <p>Narrativa alinhada para a apresentação: travar entendimento e compromisso verbal antes de abrir investimento.</p>
+      <div class="badge">Regra: slide 16 confirma valor · só então 17 e 18</div>
+    </header>
+
+    <div class="toolbar">
+      <a href="assets/narrativa-alnv-perguntas-antes-valores.docx">Baixar Word (.docx)</a>
+      <a class="sec" href="script-alnv-pitch.html">Abrir script de pitch</a>
+      <a class="sec" href="https://relatorios.collieassociados.com/alnv-proposta-comercial-estruturacao/" target="_blank" rel="noopener">Abrir deck</a>
+    </div>
+
+    <section class="section">
+      <h2>1. Por que perguntas antes do preço</h2>
+      <p>O deck da Almeida e Neves termina no investimento. Se a call só “passa slides” até o número, o preço vira o protagonista — e a objeção nasce sozinha.</p>
+      <p>A narrativa que estamos alinhando inverte isso: <strong>cada bloco vende uma decisão</strong>. Só abrimos valores depois que Antônio confirma o resultado desejado.</p>
+      <div class="callout">
+        <small>Tese em uma frase</small>
+        Preço fecha a conversa — não a substitui. Sem commit verbal no resultado, o investimento vira tabela.
+      </div>
+      <div class="flow">
+        <div class="step"><div class="n">01</div><strong>Alinhar</strong><span>Direção e gap</span></div>
+        <div class="step"><div class="n">02</div><strong>Construir</strong><span>EC + GTM + base</span></div>
+        <div class="step"><div class="n">03</div><strong>Travar</strong><span>Resultado (slide 16)</span></div>
+        <div class="step"><div class="n">04</div><strong>Investir</strong><span>Âncora → condição → próximo passo</span></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>2. Linha mestra da call</h2>
+      <p>“Vocês já têm capacidade técnica e relacionamento. O que falta é transformar isso em operação comercial — oferta clara, piloto controlado, registro e presença coerente — para validar a nova rota sem depender só da Mosaic.”</p>
+      <ul>
+        <li><strong>Decisor:</strong> Antônio (integral).</li>
+        <li><strong>Núcleo:</strong> Estruturação Comercial + GTM piloto.</li>
+        <li><strong>Apoio:</strong> Site com Blog + setup social.</li>
+        <li><strong>Fora agora:</strong> mídia / inbound em escala como premissa.</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>3. Sequência de perguntas (antes dos valores)</h2>
+      <p>Use as perguntas abaixo na ordem. Não precisa ler todas como roteiro rígido — precisa <strong>sair de cada bloco com um “sim”</strong> (ou ajuste explícito).</p>
+
+      <h3>Bloco A · Abertura e direção</h3>
+
+      <div class="q">
+        <div class="meta"><span class="tag">P1</span><span class="slide">Slide 01 · Capa</span></div>
+        <p class="ask">“Se eu resumir o objetivo de vocês como diversificar com previsibilidade — sem depender só de um cliente-âncora — faz sentido?”</p>
+        <p class="why"><strong>Para que serve:</strong> ancorar Mosaic/diversificação sem acusar. Se não confirmar, recalibrar a tese antes de seguir.</p>
+      </div>
+
+      <div class="q">
+        <div class="meta"><span class="tag">P2</span><span class="slide">Slide 02 · Validar antes de escalar</span></div>
+        <p class="ask">“Faz sentido pra vocês começar pelo piloto relacional antes de pensar em volume?”</p>
+        <p class="why"><strong>Para que serve:</strong> matar a expectativa de mídia/escala no mês 1. Sem esse sim, o resto da proposta parece “pequeno”.</p>
+      </div>
+
+      <div class="q">
+        <div class="meta"><span class="tag">P3</span><span class="slide">Slide 03 · Maturidade N1</span></div>
+        <p class="ask">“Se eu disser que o gargalo não é ‘ter ideia’ — é ‘operar com padrão’ — vocês concordam?”</p>
+        <p class="why"><strong>Para que serve:</strong> separar preparação de operação. Evita defesa (“já temos LP / relacionamento”).</p>
+      </div>
+
+      <h3>Bloco B · Solução e adoção</h3>
+
+      <div class="q">
+        <div class="meta"><span class="tag">P4</span><span class="slide">Slide 04–05 · N2 e arquitetura</span></div>
+        <p class="ask">“Faz sentido a Estruturação Comercial como núcleo e o digital como apoio da conversa comercial?”</p>
+        <p class="why"><strong>Para que serve:</strong> hierarquizar EC &gt; Site &gt; Social. Impede “quero só o site”.</p>
+      </div>
+
+      <div class="q">
+        <div class="meta"><span class="tag">P5</span><span class="slide">Slide 06–08 · Prazo, produto, GTM</span></div>
+        <p class="ask">“Prefere um piloto curto com aprendizado claro, ou já partir para volume sem evidência?”</p>
+        <p class="why"><strong>Para que serve:</strong> forçar escolha racional. Quase sempre fecha no piloto — e isso valida o desenho da proposta.</p>
+      </div>
+
+      <div class="q">
+        <div class="meta"><span class="tag">P6</span><span class="slide">Slide 10 · Operação / CRM</span></div>
+        <p class="ask">“Hoje, se eu perguntar quantas conversas estão abertas e qual a próxima ação de cada uma — isso está num lugar só?”</p>
+        <p class="why"><strong>Para que serve:</strong> revelar ausência de fonte única sem humilhar. Justifica CRM/ritual como decisão, não ferramenta.</p>
+      </div>
+
+      <div class="q">
+        <div class="meta"><span class="tag">P7</span><span class="slide">Slide 14–15 · Sequência e responsáveis</span></div>
+        <p class="ask">“Quem, do lado de vocês, seria o dono do piloto na prática?”</p>
+        <p class="why"><strong>Para que serve:</strong> testar adoção. Sem dono, preço depois vira “não temos tempo”.</p>
+      </div>
+
+      <h3>Bloco C · Gate obrigatório (antes de abrir valores)</h3>
+
+      <div class="q">
+        <div class="meta"><span class="tag gate">GATE</span><span class="slide">Slide 16 · Resultado esperado</span></div>
+        <p class="ask">“Olhando clareza + operação + aprendizado — isso é o resultado que faz sentido para a Almeida e Neves agora?”</p>
+        <p class="why"><strong>Para que serve:</strong> commit verbal no valor percebido. <strong>Se não vier um sim claro, não avance para os slides 17 e 18.</strong> Volte ao ponto que ficou frouxo (núcleo, prazo, dono ou expectativa de mídia).</p>
+      </div>
+
+      <div class="callout ok">
+        <small>Regra de ouro do gate</small>
+        Só mostre investimento depois desta confirmação. Sem ela, o número compete com dúvida — e perde.
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>4. Como abrir os valores (depois do gate)</h2>
+      <p>Com o sim do slide 16, a ordem da fala no investimento é fixa:</p>
+      <ol>
+        <li><strong>Slide 17 — Âncora:</strong> valores individuais (Setup R$ 5.125,87 · Site R$ 20.265,32 · EC R$ 62.336,82 · total separado R$ 87.728,01). Não negociar aqui.</li>
+        <li><strong>Slide 18 — Condição:</strong> solução completa R$ 62.122,87 · economia ~R$ 25,6 mil · 12× R$ 5.176,91.</li>
+        <li><strong>Tradução imediata:</strong> “cerca de R$ 5,2 mil/mês para instalar base comercial + presença que sustenta o piloto.”</li>
+        <li><strong>Não ficar em silêncio</strong> depois do número — ir para a pergunta de avanço.</li>
+      </ol>
+
+      <div class="q">
+        <div class="meta"><span class="tag">P8</span><span class="slide">Slide 18 · Ainda no preço</span></div>
+        <p class="ask">“Olhando escopo + condição, o que ainda precisa ficar claro para avançarmos — escopo, ritmo ou investimento?”</p>
+        <p class="why"><strong>Para que serve:</strong> classificar a objeção. Impede o “vou pensar” genérico.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>5. Fechamento oral (o deck acaba no preço — a call não)</h2>
+      <p>Depois do 18, escolha um caminho:</p>
+      <table>
+        <thead>
+          <tr><th>Situação</th><th>Pergunta / CTA</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Sinal verde</strong></td>
+            <td>“Podemos seguir com a formalização da solução completa nessa condição especial?”</td>
+          </tr>
+          <tr>
+            <td><strong>Assumptive</strong></td>
+            <td>“Podemos já deixar o kick-off na próxima semana e seguir com a formalização?”</td>
+          </tr>
+          <tr>
+            <td><strong>Alternativa</strong></td>
+            <td>“Prefere avançar com o pacote completo ou priorizar só a Estruturação Comercial neste momento?”</td>
+          </tr>
+          <tr>
+            <td><strong>Pediu tempo</strong></td>
+            <td>“Qual o melhor dia/hora para devolutiva — e você decide sozinho ou precisa alinhar com alguém?”</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="callout">
+        <small>Meta da call</small>
+        Aceito na sala ou devolutiva ≤ 5 dias úteis com Antônio presente. Nunca deixar o último áudio ser só o preço.
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>6. Se a resposta ao gate for “não” ou fria</h2>
+      <ul>
+        <li><strong>Não abrir 17/18.</strong> Pergunte: “O que ainda não ficou claro — o núcleo da EC, o prazo de 6 meses, o papel de vocês no piloto ou a ausência de mídia no começo?”</li>
+        <li><strong>Recuar um bloco</strong> (quase sempre P4 ou P7) e reconstruir.</li>
+        <li><strong>Só então</strong> voltar ao slide 16 e repetir o gate.</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>7. Objeções depois do preço (frame certo)</h2>
+      <table>
+        <thead>
+          <tr><th>Objeção</th><th>Resposta-guia</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>“Está salgado / preciso ver se cabe”</strong></td>
+            <td>Voltar à P8: escopo, ritmo ou investimento? Traduzir 12× (~R$ 5,2 mil/mês).</td>
+          </tr>
+          <tr>
+            <td><strong>“Vamos pensar em mídia depois”</strong></td>
+            <td>Concordar — e reforçar que EC + GTM piloto tornam esse depois lucrativo.</td>
+          </tr>
+          <tr>
+            <td><strong>“Já temos relacionamento / LP”</strong></td>
+            <td>Relacionamento abre porta; LP é preparação. Falta oferta, condução e registro.</td>
+          </tr>
+          <tr>
+            <td><strong>“Time sem tempo”</strong></td>
+            <td>Voltar à P7: sem dono do piloto, nenhum projeto funciona.</td>
+          </tr>
+          <tr>
+            <td><strong>“Quero só o site”</strong></td>
+            <td>Voltar à P4: site sem oferta e processo sustenta conversa que ainda improvisa.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>8. Checklist rápido (imprimir / ter na tela)</h2>
+      <ol>
+        <li>☐ P1–P3: direção e gap confirmados</li>
+        <li>☐ P4–P7: núcleo EC + dono do piloto</li>
+        <li>☐ <strong>GATE P (slide 16): resultado confirmado</strong></li>
+        <li>☐ 17 âncora → 18 condição → tradução 12×</li>
+        <li>☐ P8 + CTA / data de devolutiva</li>
+        <li>☐ Resumo escrito em até 24h</li>
+      </ol>
+    </section>
+
+    <div class="footer">
+      <strong>Almeida e Neves × V4 · Perguntas antes dos valores</strong>
+      Documento interno · narrativa alinhada à proposta comercial de estruturação · 2026
+    </div>
+  </div>
+</body>
+</html>
