@@ -36,9 +36,9 @@
     .chip.live{border-color:rgba(34,197,94,.35);color:#86efac}
     .nav{position:sticky;top:56px;z-index:90;margin:0 0 20px;padding:8px;background:rgba(8,8,8,.93);backdrop-filter:blur(14px);border:1px solid var(--bd-strong);border-radius:16px}
     .nav-label{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);padding:4px 10px 10px}
-    .tabs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
-    @media(max-width:1100px){.tabs{grid-template-columns:repeat(3,1fr)}}
-    @media(max-width:700px){.tabs{grid-template-columns:repeat(2,1fr)}}
+    .tabs{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
+    @media(max-width:1200px){.tabs{grid-template-columns:repeat(4,1fr)}}
+    @media(max-width:800px){.tabs{grid-template-columns:repeat(2,1fr)}}
     .q{border:1px solid var(--bd);border-radius:12px;padding:12px 14px;margin:0 0 10px;background:var(--surf2)}
     .q .ql{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--brand-light);margin-bottom:4px}
     .q .qt{font-size:13px;font-weight:700;margin-bottom:4px;color:#fff}
@@ -113,28 +113,29 @@
 <body>
 <header class="topbar">
   <div class="v4-logo">V4 <span>COMPANY</span></div>
-  <div class="sync-pill"><span class="sync-dot"></span> Sara Pizzico · Farmer AM · v0.10</div>
+  <div class="sync-pill"><span class="sync-dot"></span> Sara Pizzico · Farmer AM · v1.0</div>
 </header>
 
 <div class="wrap">
   <section class="hero"><div class="hero-inner">
-    <div class="hero-eyebrow">Playbook operacional · base para o dash</div>
+    <div class="hero-eyebrow">Playbook operacional · 8 camadas · base para o dash</div>
     <h1>Farmer Account Manager · Carteira E.E</h1>
     <p class="meta">
       Cliente entra na <strong>Estruturação Estratégica</strong> → passa pela <strong>GC</strong> para alinhar expectativa →
       paga o projeto → <strong>decisor participa toda semana</strong> → responde <strong>NPS e CSAT</strong> → traz a expectativa.
-      Enquanto isso, a V4 <strong>mapeia a solução</strong>. No final, apresentamos o que se encaixa — não um catálogo genérico.
+      Enquanto isso, a V4 <strong>mapeia a solução</strong>. No final, apresentamos o que se encaixa — com <strong>coaching de pitch (Rodrigo)</strong> e plano adaptável.
     </p>
     <div class="chips">
-      <span class="chip live">v0.10 · kick-off + cenários</span>
+      <span class="chip live">v1.0 · + Pitch Rodrigo</span>
       <span class="chip live">Tese no KO</span>
       <span class="chip live">Projeção sem inventar</span>
-      <span class="chip">Case na ação</span>
+      <span class="chip live">Case na ação</span>
+      <span class="chip"><a href="mapa-playbook-completo.html" style="color:inherit;text-decoration:none">Mapa completo</a></span>
       <span class="chip"><a href="index.html" style="color:inherit;text-decoration:none">← Comando Estratégico</a></span>
     </div>
   </div></section>
 
-  <div class="callout ok"><strong>Usar agora:</strong> <a href="farmer-sara.html" style="color:#86efac">Hub Farmer Sara</a> · <a href="fluxograma-farmer-ee.html" style="color:#86efac">Fluxograma</a> · <a href="plano-acao-farmer.html" style="color:#86efac">Plano de Ação</a> — visão safra · playbook · score · plano.</div>
+  <div class="callout ok"><strong>Usar agora:</strong> <a href="mapa-playbook-completo.html" style="color:#86efac">Mapa do playbook completo</a> · <a href="farmer-sara.html" style="color:#86efac">Hub Farmer Sara</a> · <a href="fluxograma-farmer-ee.html" style="color:#86efac">Fluxograma</a> · <a href="plano-acao-farmer.html" style="color:#86efac">Plano de Ação</a> · <a href="plano-acao-modelo-adaptavel.html" style="color:#86efac">Modelo adaptável</a>.</div>
 
   <nav class="nav">
     <div class="nav-label">Navegação do playbook</div>
@@ -143,6 +144,7 @@
       <button class="tab" data-view="jornada"><span class="n">Jornada</span><span class="s">EE → carteira → expansão</span></button>
       <button class="tab" data-view="s1s3"><span class="n">S1 → S3</span><span class="s">Perguntas → plano</span></button>
       <button class="tab" data-view="params"><span class="n">Parâmetros</span><span class="s">Fonte do futuro dash</span></button>
+      <button class="tab" data-view="pitch"><span class="n">Pitch</span><span class="s">Rodrigo · 1 preço</span></button>
       <button class="tab" data-view="rituais"><span class="n">Rituais</span><span class="s">Cadência · checklists</span></button>
       <button class="tab" data-view="saude"><span class="n">Saúde</span><span class="s">Score · risco · prioridade</span></button>
     </div>
@@ -489,7 +491,11 @@
         </ol>
       </div>
       <div class="callout warn"><strong>Regra do modelo:</strong> se o decisor não viu a entrega ou o interesse ainda é frágil, o plano começa por <em>reengajar + cases/prova</em> — proposta de valor/preço vem depois, em reunião separada quando necessário.</div>
-      <p class="lead" style="margin-top:14px;margin-bottom:0">Ferramentas: <a href="fluxograma-farmer-ee.html" style="color:#86efac">Fluxograma</a> · <a href="plano-acao-farmer.html" style="color:#86efac">Plano de Ação Farmer</a> · <a href="template-plano-acao-farmer.html" style="color:#86efac">template curto</a></p>
+      <div class="callout ok" style="margin-top:12px">
+        <strong>Pré-pitch (call Rafaela / G6):</strong> além dos critérios acima, fechar dores nomeadas · case interno · projeção/BE · core + essencial · um preço.
+        Modelo completo: <a href="plano-acao-modelo-adaptavel.html" style="color:#86efac">plano-acao-modelo-adaptavel.html</a>.
+      </div>
+      <p class="lead" style="margin-top:14px;margin-bottom:0">Ferramentas: <a href="fluxograma-farmer-ee.html" style="color:#86efac">Fluxograma</a> · <a href="plano-acao-farmer.html" style="color:#86efac">Plano de Ação Farmer</a> · <a href="template-plano-acao-farmer.html" style="color:#86efac">template curto</a> · <a href="mapa-playbook-completo.html" style="color:#86efac">Mapa completo</a></p>
     </div>
 
     <div class="section">
@@ -770,6 +776,105 @@
             </tr>
           </tbody>
         </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- PITCH · RODRIGO -->
+  <div class="panel" data-view="pitch">
+    <div class="section">
+      <h2>Camada Pitch</h2>
+      <h3>Coaching Rodrigo Paranhos · checklist permanente</h3>
+      <p class="lead">
+        Sai das calls e do script G6. Vira regra do playbook: o método EE monta a tese;
+        o Rodrigo conduz a decisão. Aplicação por conta = script (ex. G6); aqui fica o padrão.
+      </p>
+      <div class="callout ok">
+        <strong>Regra de ouro (Rodrigo):</strong> quando o preço aparecer, a única discussão que pode restar é o valor.
+        Timing, escopo, time, “quem executa” e “outra opção” já foram alinhados antes.
+      </div>
+      <div class="grid3">
+        <div class="card">
+          <span class="tag hot">Antes de abrir</span>
+          <div class="t">Clima de conversa</div>
+          <div class="d">Pergunta aberta. Cliente fala. Zero monólogo. Não abrir com preço nem com “última semana / acabou”.</div>
+        </div>
+        <div class="card">
+          <span class="tag info">Antes do preço</span>
+          <div class="t">Matar objeção</div>
+          <div class="d">Timing · quem executa · outra opção · escopo. Só então traz a condição comercial.</div>
+        </div>
+        <div class="card">
+          <span class="tag ok">No preço</span>
+          <div class="t">Um preço · pedir a venda</div>
+          <div class="d">Sem menu de pagamento. Desconto já embutido. Pedir a venda com segurança e próximo passo claro.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Sequência Rodrigo</h2>
+      <h3>Abre · escuta · amarra (antes do card de preço)</h3>
+      <div class="q"><div class="ql">1</div><div class="qt">O que vocês mais gostaram da estratégia / do plano até aqui?</div><div class="qh">Abre. Usa a resposta na narrativa depois.</div></div>
+      <div class="q"><div class="ql">2</div><div class="qt">O que vocês acham que a gente não pode deixar de executar?</div><div class="qh">Amarra o essencial (core + upsell de autoridade).</div></div>
+      <div class="q"><div class="ql">3</div><div class="qt">Quando vocês querem que isso comece a rodar?</div><div class="qh">Mata timing antes do preço.</div></div>
+      <div class="q"><div class="ql">4</div><div class="qt">Vocês querem a V4 executando esse próximo passo — ou estão avaliando outro caminho?</div><div class="qh">Mata “outra opção”. Se disserem V4: “Perfeito — o que falta é a condição.”</div></div>
+      <div class="callout warn" style="margin-top:12px"><strong>Se aparecer “preciso pensar”:</strong> não empurra contrato. Descobre a objeção: valor, timing ou escopo? Se for sócio ausente → traz para a sala, não depois do preço.</div>
+    </div>
+
+    <div class="section">
+      <h2>Narrativa de pitch (padrão adaptável)</h2>
+      <h3>Ordem da call Rafaela — manter lógica, trocar texto</h3>
+      <ol class="steps">
+        <li><strong>Dores nomeadas</strong> — o que está vazando na mesa (específico, não genérico).</li>
+        <li><strong>Case</strong> — interno correlato amarrado na estratégia (não “cita no final”).</li>
+        <li><strong>Core</strong> — assume a responsabilidade da dor #1.</li>
+        <li><strong>Apertar</strong> — por que o core sozinho não resolve 100%.</li>
+        <li><strong>Essencial</strong> — upsell como autoridade (não “se quiser também fazemos”).</li>
+        <li><strong>Âncora → condição</strong> — um preço, desconto embutido, pagamento = EE.</li>
+        <li><strong>Projeção</strong> — conservadora + “pode vir antes como no case”; sem inventar.</li>
+        <li><strong>Sprints</strong> — o que acontece se fechar agora.</li>
+        <li><strong>Pedir a venda</strong> — “Podemos avançar com essa condição e começar o kick-off?”</li>
+      </ol>
+      <p class="lead" style="margin-top:14px;margin-bottom:0">
+        Modelo: <a href="plano-acao-modelo-adaptavel.html" style="color:#86efac">plano-acao-modelo-adaptavel.html</a> ·
+        Script âncora: <a href="script-g6-pitch.html" style="color:#86efac">script-g6-pitch.html</a>
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>Fazer · Evitar</h2>
+      <div class="grid2">
+        <div class="card">
+          <span class="tag ok">Fazer</span>
+          <div class="d">
+            <ul class="steps">
+              <li>Perguntas abertas (não “faz sentido?” em loop)</li>
+              <li>Gate ok: decisor na sala · pago · CSAT</li>
+              <li>Case + projeção validados com ops antes</li>
+              <li>Um preço · uma decisão</li>
+              <li>Descobrir objeção cedo (“o que te faz precisar pensar?”)</li>
+              <li>Pedir a venda com segurança</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <span class="tag hot">Evitar (não plantar dúvida)</span>
+          <div class="d">
+            <ul class="steps">
+              <li>Plantar objeção que o cliente não trouxe</li>
+              <li>Menu de pagamento / “posso ver um valor menor”</li>
+              <li>Abrir com preço ou com “acabou a EE”</li>
+              <li>Falar mal de agência / nomear pessoas internas</li>
+              <li>Prometer taxas 100% do case maduro</li>
+              <li>“Vou mandar o contrato e vocês pensam”</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:14px">
+        <strong>Rodrigo:</strong> às vezes a objeção é nossa. Não plante dúvida. Mapa completo das 8 camadas:
+        <a href="mapa-playbook-completo.html" style="color:#93c5fd">mapa-playbook-completo.html</a>.
       </div>
     </div>
   </div>
@@ -1308,16 +1413,16 @@
     </div>
 
     <div class="section">
-      <h2>Próximos passos · construir juntas</h2>
+      <h2>Próximos passos · v1.0 → dash</h2>
       <div class="grid2">
         <div class="card">
-          <span class="tag warn">Decidir agora</span>
+          <span class="tag warn">Validar no campo</span>
           <div class="d">
             <ul class="steps">
-              <li>Validar pesos do lead score com 3 contas reais</li>
-              <li>Confirmar escala CSAT (1–5 ou 0–10) na operação</li>
+              <li>Pesos do lead score com 3 contas reais</li>
+              <li>Escala CSAT (1–5 ou 0–10) na operação</li>
               <li>Lista de <strong>perfis de cliente</strong> para ABM</li>
-              <li>Home do dash com coluna lead score + vetos</li>
+              <li>Biblioteca de cases (nome · dor · quando usar)</li>
             </ul>
           </div>
         </div>
@@ -1328,20 +1433,26 @@
               <li>Home semanal: gates + ponto de atenção + scores + plano</li>
               <li>Filtros: sem kick-off · não pago · P0 · lead score alto</li>
               <li>Alertas: KO atrasado · inadimplência · sem próximo contato</li>
-              <li>Ligar no Cockpit E.E / planilha fonte</li>
+              <li>Script-template vazio (estilo G6) para qualquer pitch</li>
             </ul>
           </div>
         </div>
+      </div>
+      <div class="callout ok" style="margin-top:14px">
+        <strong>Arquitetura das 8 camadas:</strong>
+        <a href="mapa-playbook-completo.html" style="color:#86efac">mapa-playbook-completo.html</a>
       </div>
     </div>
   </div>
 
   <footer>
-    V4 Company · Playbook Farmer AM · Sara Pizzico · v0.11<br>
+    V4 Company · Playbook Farmer AM · Sara Pizzico · v1.0<br>
     Carteira: clientes via Estruturação Estratégica ·
+    <a href="mapa-playbook-completo.html">Mapa completo</a> ·
     <a href="index.html">Comando Estratégico E.E</a> ·
     <a href="https://docs.google.com/spreadsheets/d/1bCR_MxfTRJKq66Yg3WecQhF_ipPK1l6p4xNSTs0H97g/edit?usp=sharing" target="_blank" rel="noopener">Entregas EE</a> ·
     <a href="fluxograma-farmer-ee.html">Fluxograma EE → Plano</a> ·
+    <a href="script-g6-pitch.html">Script Pitch (Rodrigo)</a> ·
     <a href="https://docs.google.com/document/d/1-cSSkYetqPKdHW4m1sWO_VWaV-4UnBKVcDLe91C4Jw4/edit?usp=sharing" target="_blank" rel="noopener">Exemplo Plano (Triboltec)</a> ·
     <a href="https://marcelofigueiredo23.github.io/pipediario/ago2026/debrief-plano-ago2026-marcelo.html#ee-cenarios" target="_blank" rel="noopener">Debrief cenários E.E</a>
   </footer>
