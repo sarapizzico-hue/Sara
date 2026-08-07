@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kick-off Farmer · Apresentação + Perguntas · Sara</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --brand: #e50915;
+      --brand-light: #ff2a35;
+      --ink: #090909;
+      --surf: #131313;
+      --surf2: #1b1b1b;
+      --line: rgba(255,255,255,.1);
+      --line2: rgba(255,255,255,.16);
+      --txt: #f7f7f7;
+      --mut: #a3a3a3;
+      --ok: #86efac;
+      --warn: #fde68a;
+      --hot: #fca5a5;
+      --info: #93c5fd;
+    }
+    * { box-sizing: border-box; margin: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--ink); color: var(--txt);
+      font: 15px/1.55 "DM Sans", system-ui, sans-serif;
+      background-image:
+        radial-gradient(ellipse 85% 50% at 50% -15%, rgba(229,9,21,.22), transparent 55%),
+        radial-gradient(circle at 100% 0%, rgba(229,9,21,.08), transparent 40%);
+      padding-bottom: 90px;
+    }
+    a { color: var(--ok); }
+    .top {
+      position: sticky; top: 0; z-index: 60;
+      backdrop-filter: blur(16px);
+      background: rgba(9,9,9,.9);
+      border-bottom: 1px solid var(--line);
+      padding: 12px 20px;
+      display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
+    }
+    .logo { font-weight: 800; } .logo span { color: var(--brand-light); }
+    .pill {
+      font-size: 11px; font-weight: 700; color: var(--mut);
+      border: 1px solid var(--line); padding: 5px 11px; border-radius: 999px;
+      text-decoration: none;
+    }
+    .pill:hover { color: #fff; border-color: var(--line2); }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 24px 18px 0; }
+
+    .hero {
+      padding: 28px 0 22px; border-bottom: 1px solid var(--line); margin-bottom: 18px;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+      color: #fca5a5; margin-bottom: 10px;
+    }
+    .eyebrow::before { content: ""; width: 20px; height: 2px; background: var(--brand); }
+    .hero h1 {
+      font-family: "Instrument Serif", Georgia, serif;
+      font-weight: 400; font-size: clamp(30px, 5vw, 46px);
+      line-height: 1.08; letter-spacing: -.02em; margin-bottom: 12px;
+    }
+    .hero h1 em { font-style: italic; color: #fecaca; }
+    .hero p { color: var(--mut); max-width: 740px; font-size: 14px; }
+    .hero p strong { color: #fff; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .chip {
+      font-size: 10px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+      padding: 5px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--mut);
+    }
+    .chip.live { color: var(--ok); border-color: rgba(34,197,94,.35); }
+
+    .mode {
+      position: sticky; top: 52px; z-index: 50;
+      background: rgba(8,8,8,.95); backdrop-filter: blur(14px);
+      border: 1px solid var(--line2); border-radius: 16px;
+      padding: 8px; margin-bottom: 16px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+    }
+    .mode button {
+      appearance: none; border: 1px solid var(--line); background: var(--surf2);
+      color: var(--mut); border-radius: 12px; padding: 12px; cursor: pointer;
+      font: inherit; text-align: left; transition: .2s;
+    }
+    .mode button:hover { color: #fff; border-color: var(--line2); }
+    .mode button.active {
+      color: #fff; border-color: var(--brand);
+      background: linear-gradient(135deg, rgba(229,9,21,.22), rgba(20,20,20,.95));
+    }
+    .mode button .n { display: block; font-weight: 800; font-size: 14px; margin-bottom: 2px; }
+    .mode button .s { font-size: 11px; color: #d4d4d4; }
+
+    .panel { display: none; }
+    .panel.is-active { display: block; animation: fade .2s ease; }
+    @keyframes fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+    .callout {
+      padding: 13px 15px; border-radius: 12px; font-size: 13px; margin-bottom: 14px;
+      border: 1px solid rgba(96,165,250,.3); background: rgba(96,165,250,.08); color: #bfdbfe;
+    }
+    .callout.ok { border-color: rgba(34,197,94,.3); background: rgba(34,197,94,.08); color: #bbf7d0; }
+    .callout.warn { border-color: rgba(250,204,21,.28); background: rgba(250,204,21,.06); color: #fde68a; }
+    .callout.hot { border-color: rgba(239,68,68,.35); background: rgba(239,68,68,.08); color: #fecaca; }
+
+    /* PRESENTATION SLIDES */
+    .deck-nav {
+      display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; align-items: center;
+    }
+    .deck-nav button {
+      appearance: none; border: 1px solid var(--line); background: var(--surf2);
+      color: #fff; border-radius: 10px; padding: 10px 14px; font: inherit; font-weight: 700; cursor: pointer;
+    }
+    .deck-nav button.primary {
+      background: linear-gradient(135deg, #e50915, #ff1a27); border-color: transparent;
+    }
+    .deck-nav .count { font-size: 12px; color: var(--mut); margin-left: auto; font-weight: 700; }
+
+    .slide {
+      display: none;
+      min-height: 58vh;
+      background: linear-gradient(160deg, rgba(229,9,21,.14), rgba(18,18,18,.95) 42%, var(--surf));
+      border: 1px solid var(--line2);
+      border-radius: 20px;
+      padding: 36px 32px;
+      box-shadow: 0 24px 80px rgba(0,0,0,.45);
+      position: relative;
+      overflow: hidden;
+    }
+    .slide.is-on { display: block; animation: fade .25s ease; }
+    .slide::after {
+      content: ""; position: absolute; right: -60px; top: -60px;
+      width: 220px; height: 220px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(229,9,21,.25), transparent 70%);
+      pointer-events: none;
+    }
+    .slide .num {
+      font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+      color: #fca5a5; margin-bottom: 14px; position: relative; z-index: 1;
+    }
+    .slide h2 {
+      font-family: "Instrument Serif", Georgia, serif;
+      font-weight: 400; font-size: clamp(28px, 4.5vw, 40px);
+      line-height: 1.1; margin-bottom: 14px; position: relative; z-index: 1; max-width: 16ch;
+    }
+    .slide .sub {
+      color: var(--mut); font-size: 15px; max-width: 52ch; margin-bottom: 22px; position: relative; z-index: 1;
+    }
+    .slide ul { position: relative; z-index: 1; padding-left: 18px; max-width: 560px; }
+    .slide li { margin: 8px 0; color: #e8e8e8; font-size: 15px; }
+    .slide .ask {
+      position: relative; z-index: 1;
+      margin-top: 22px; padding: 14px 16px; border-radius: 12px;
+      border: 1px solid rgba(134,239,172,.28); background: rgba(34,197,94,.08);
+      color: #bbf7d0; font-size: 14px; max-width: 560px;
+    }
+    .slide .ask strong { color: #dcfce7; }
+    .slide .grid {
+      position: relative; z-index: 1;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 8px;
+    }
+    @media (max-width: 700px) {
+      .slide { padding: 24px 18px; min-height: auto; }
+      .slide .grid { grid-template-columns: 1fr; }
+    }
+    .slide .box {
+      background: rgba(0,0,0,.35); border: 1px solid var(--line);
+      border-radius: 14px; padding: 14px 16px;
+    }
+    .slide .box .t { font-weight: 800; margin-bottom: 6px; font-size: 14px; }
+    .slide .box .d { font-size: 13px; color: #d4d4d4; }
+
+    /* QUESTIONS */
+    .section {
+      background: rgba(20,20,20,.92); border: 1px solid var(--line);
+      border-radius: 16px; padding: 18px 20px; margin-bottom: 12px;
+    }
+    .section h2 {
+      font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--mut); font-weight: 800; margin-bottom: 4px;
+    }
+    .section h3 {
+      font-family: "Instrument Serif", Georgia, serif;
+      font-weight: 400; font-size: 22px; margin-bottom: 10px;
+    }
+    .q {
+      border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px;
+      margin: 0 0 8px; background: var(--surf2);
+    }
+    .q .ql {
+      font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--brand-light); margin-bottom: 4px;
+    }
+    .q .qt { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+    .q .qh { font-size: 12px; color: var(--mut); }
+    .q .fala {
+      margin-top: 8px; padding: 10px 12px; border-radius: 10px;
+      background: rgba(255,255,255,.03); border-left: 3px solid var(--brand);
+      font-size: 13px; color: #e5e5e5; font-style: italic;
+    }
+    .tag {
+      display: inline-block; margin-bottom: 8px;
+      font-size: 10px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
+      padding: 3px 8px; border-radius: 999px; border: 1px solid var(--line); color: #d4d4d4;
+    }
+    .tag.ok { color: var(--ok); border-color: rgba(34,197,94,.35); }
+    .tag.warn { color: var(--warn); border-color: rgba(250,204,21,.35); }
+    .tag.hot { color: var(--hot); border-color: rgba(239,68,68,.4); }
+    .tag.info { color: var(--info); border-color: rgba(96,165,250,.35); }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 800px) { .grid2 { grid-template-columns: 1fr; } }
+    .card {
+      background: var(--surf2); border: 1px solid var(--line);
+      border-radius: 12px; padding: 14px 16px;
+    }
+    .card .t { font-weight: 800; margin-bottom: 6px; }
+    .card .d { font-size: 13px; color: #d4d4d4; }
+    ul.steps { margin: 0; padding-left: 18px; }
+    ul.steps li { margin: 6px 0; color: #e5e5e5; }
+    .check { list-style: none; margin: 0; padding: 0; }
+    .check li {
+      display: flex; gap: 10px; align-items: flex-start;
+      padding: 9px 0; border-bottom: 1px solid var(--line); font-size: 13px;
+    }
+    .check li:last-child { border-bottom: 0; }
+    .check .box {
+      flex: 0 0 16px; width: 16px; height: 16px; margin-top: 2px;
+      border: 1.5px solid var(--line2); border-radius: 4px;
+    }
+    .toc {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px;
+    }
+    .toc a {
+      font-size: 11px; font-weight: 700; text-decoration: none; color: var(--mut);
+      border: 1px solid var(--line); padding: 6px 10px; border-radius: 999px;
+    }
+    .toc a:hover { color: #fff; border-color: var(--line2); }
+    footer {
+      text-align: center; color: var(--mut); font-size: 11px;
+      margin-top: 28px; padding: 20px 0; border-top: 1px solid var(--line);
+    }
+  </style>
+</head>
+<body>
+<header class="top">
+  <div class="logo">V4 <span>COMPANY</span></div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <a class="pill" href="assets/kickoff-farmer-sara.docx" download>⬇ Google Docs (.docx)</a>
+    <a class="pill" href="playbook-farmer-completo.html">Playbook</a>
+    <a class="pill" href="farmer-sara.html">Hub</a>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="eyebrow">Kit Kick-off · Farmer AM</div>
+    <h1>Entrar bem. <em>Ouvir melhor.</em> Sair com mapa.</h1>
+    <p>
+      Apresentação para compartilhar na tela + banco de perguntas no tom do Rodrigo:
+      <strong>abertas, leves, sem plantar dúvida</strong>. Objetivo do KO: alinhar expectativa,
+      mapear decisor/dinheiro/dor e registrar a tese — <strong>não vender preço</strong>.
+    </p>
+    <div class="chips">
+      <span class="chip live">~35–45 min</span>
+      <span class="chip live">Decisor na sala</span>
+      <span class="chip live">30 / 60 / 90</span>
+      <span class="chip">Tese no KO</span>
+    </div>
+  </section>
+
+  <div class="mode">
+    <button class="active" data-mode="apresentacao" type="button">
+      <span class="n">Apresentação</span>
+      <span class="s">Slides para compartilhar na call</span>
+    </button>
+    <button data-mode="perguntas" type="button">
+      <span class="n">Perguntas</span>
+      <span class="s">Roteiro + falas prontas (só você vê)</span>
+    </button>
+  </div>
+
+  <!-- ===================== APRESENTAÇÃO ===================== -->
+  <div class="panel is-active" data-mode="apresentacao">
+    <div class="callout ok">
+      <strong>Como usar:</strong> compartilhe a tela neste modo. Avance com as setas ← → ou botões.
+      As perguntas profundas ficam na aba “Perguntas” — não precisa ler tudo em voz alta.
+    </div>
+
+    <div class="deck-nav">
+      <button type="button" id="prev">← Anterior</button>
+      <button type="button" class="primary" id="next">Próximo →</button>
+      <span class="count" id="count">1 / 9</span>
+    </div>
+
+    <!-- S1 -->
+    <article class="slide is-on" data-i="0">
+      <div class="num">Kick-off · 01</div>
+      <h2>Bem-vindos. Hoje a gente alinha o mapa.</h2>
+      <p class="sub">
+        Não é reunião de venda. É o ponto de partida da parceria:
+        o que vocês esperam · o que a Estruturação entrega · como a gente trabalha juntos.
+      </p>
+      <div class="ask"><strong>Abertura leve:</strong> “Antes de eu abrir a tela — o que mais ficou marcado pra vocês até aqui, desde que fecharam conosco?”</div>
+    </article>
+
+    <!-- S2 -->
+    <article class="slide" data-i="1">
+      <div class="num">Kick-off · 02</div>
+      <h2>Quem eu sou na parceria</h2>
+      <p class="sub">Sara · Farmer Account Manager. Fico na linha de frente com vocês no ciclo da EE e no próximo passo.</p>
+      <div class="grid">
+        <div class="box"><div class="t">Meu papel</div><div class="d">Ouvir expectativa · garantir engajamento · mapear a solução que se encaixa · conduzir continuidade com critério.</div></div>
+        <div class="box"><div class="t">O que não é</div><div class="d">Não substituo a entrega técnica. Não empurro catálogo. Não invento promessa fora do diagnóstico.</div></div>
+      </div>
+      <div class="ask"><strong>Pergunta:</strong> “Quem mais precisa estar nessa conversa com vocês nas próximas semanas — e quem decide no final?”</div>
+    </article>
+
+    <!-- S3 -->
+    <article class="slide" data-i="2">
+      <div class="num">Kick-off · 03</div>
+      <h2>Como funciona o contrato da conta</h2>
+      <p class="sub">Duas trilhas andam juntas. Se uma falha, o final fica frágil.</p>
+      <div class="grid">
+        <div class="box">
+          <div class="t">De vocês</div>
+          <div class="d">GC · estar pagando · decisor nas entregas · responder CSAT/NPS · trazer a expectativa com clareza.</div>
+        </div>
+        <div class="box">
+          <div class="t">Da V4</div>
+          <div class="d">Rodar a EE com método · ouvir toda semana · mapear a solução · no final apresentar só o que se encaixa.</div>
+        </div>
+      </div>
+    </article>
+
+    <!-- S4 -->
+    <article class="slide" data-i="3">
+      <div class="num">Kick-off · 04</div>
+      <h2>O que a EE entrega (e o que não é)</h2>
+      <ul>
+        <li>Mapa: mercado, presença, maturidade, gargalos, posicionamento</li>
+        <li>Clareza de jornada (Inside / E-com / PDV) e próximos passos possíveis</li>
+        <li><strong>Não é:</strong> mídia rodando “já amanhã” sem tese · catálogo genérico · promessa de ROI sem base</li>
+      </ul>
+      <div class="ask"><strong>Alinhar:</strong> “O que vocês esperam ganhar em 30, 60 e 90 dias — e o que explicitamente NÃO esperam dessa fase?”</div>
+    </article>
+
+    <!-- S5 -->
+    <article class="slide" data-i="4">
+      <div class="num">Kick-off · 05</div>
+      <h2>Cadência · como vamos trabalhar</h2>
+      <div class="grid">
+        <div class="box"><div class="t">Semanal</div><div class="d">Entrega + reunião com decisor (ou influenciador + data para o decisor).</div></div>
+        <div class="box"><div class="t">Canal oficial</div><div class="d">Grupo / WhatsApp / e-mail — um canal, donos claros, sem “perdi no privado”.</div></div>
+        <div class="box"><div class="t">Acessos</div><div class="d">Ads, Analytics, CRM, site, redes — lista na 1ª semana.</div></div>
+        <div class="box"><div class="t">Pulso</div><div class="d">CSAT após entregas-chave. Feedback curto > silêncio.</div></div>
+      </div>
+    </article>
+
+    <!-- S6 -->
+    <article class="slide" data-i="5">
+      <div class="num">Kick-off · 06</div>
+      <h2>O que eu preciso entender hoje</h2>
+      <p class="sub">Quatro blocos. Sem isso, o mapa da EE fica cego — e a continuidade também.</p>
+      <ul>
+        <li><strong>Negócio</strong> — como ganham dinheiro, margem, ticket, sazonalidade</li>
+        <li><strong>Decisão</strong> — quem manda, quem influencia, quem trava</li>
+        <li><strong>Dor #1</strong> — o que está vazando na mesa agora</li>
+        <li><strong>Histórico</strong> — o que já tentaram e o que não querem repetir</li>
+      </ul>
+    </article>
+
+    <!-- S7 -->
+    <article class="slide" data-i="6">
+      <div class="num">Kick-off · 07</div>
+      <h2>Sucesso, para vocês, parece o quê?</h2>
+      <p class="sub">Vamos escrever juntos — em linguagem de vocês, não jargão nosso.</p>
+      <div class="grid">
+        <div class="box"><div class="t">30 dias</div><div class="d">O que precisa estar claro / entregue / alinhado?</div></div>
+        <div class="box"><div class="t">60 dias</div><div class="d">Qual movimento já deveria ter começado?</div></div>
+        <div class="box"><div class="t">90 dias</div><div class="d">Como vocês saberiam que “deu certo”?</div></div>
+        <div class="box"><div class="t">Fora</div><div class="d">O que está explicitamente fora desta fase?</div></div>
+      </div>
+    </article>
+
+    <!-- S8 -->
+    <article class="slide" data-i="7">
+      <div class="num">Kick-off · 08</div>
+      <h2>Próximos passos (já datados)</h2>
+      <ul>
+        <li>Confirmar acessos e donos até <em>[data]</em></li>
+        <li>Próxima entrega / reunião: <em>[data]</em> · decisor confirmado</li>
+        <li>Canal oficial do projeto ativado hoje</li>
+        <li>Eu registro o mapa do kick-off e devolvo em 1 linha o que ouvi (expectativa + dor #1)</li>
+      </ul>
+      <div class="ask"><strong>Fechar:</strong> “Faz sentido essa cadência? Tem algo que a gente precisa ajustar antes da Semana 1?”</div>
+    </article>
+
+    <!-- S9 -->
+    <article class="slide" data-i="8">
+      <div class="num">Kick-off · 09</div>
+      <h2>Uma frase para lembrar</h2>
+      <p class="sub" style="font-size:18px;color:#fff;max-width:28ch">
+        Vocês trazem a expectativa. A gente mapeia a solução. No final, apresentamos o que se encaixa — não um catálogo.
+      </p>
+      <div class="ask"><strong>Última pergunta aberta:</strong> “Se a gente acertar uma coisa só neste ciclo, qual tem que ser?”</div>
+    </article>
+  </div>
+
+  <!-- ===================== PERGUNTAS ===================== -->
+  <div class="panel" data-mode="perguntas">
+    <div class="callout warn">
+      <strong>Regra Rodrigo no KO:</strong> pergunta aberta · deixa falar · usa a resposta depois.
+      Não abrir com preço. Não plantar “ROI garantido”. Não “faz sentido?” em loop.
+    </div>
+
+    <div class="toc">
+      <a href="#pq0">Antes</a>
+      <a href="#pq1">Abertura</a>
+      <a href="#pq2">Negócio</a>
+      <a href="#pq3">Decisão</a>
+      <a href="#pq4">Dor</a>
+      <a href="#pq5">Expectativa</a>
+      <a href="#pq6">Histórico</a>
+      <a href="#pq7">Trilha</a>
+      <a href="#pq8">Fechamento</a>
+      <a href="#pq9">Checklist</a>
+    </div>
+
+    <div class="section" id="pq0">
+      <h2>Antes de entrar</h2>
+      <h3>Checklist de 2 minutos</h3>
+      <ul class="check">
+        <li><span class="box"></span><div>Decisor confirmado na call (ou data marcada para reapresentar)</div></li>
+        <li><span class="box"></span><div>Nome, cargo e quem mais entra — anotado</div></li>
+        <li><span class="box"></span><div>Status de pagamento EE (pago / parcial) — sem surpresa</div></li>
+        <li><span class="box"></span><div>1 hipótese de dor (do comercial) — para validar, não empurrar</div></li>
+        <li><span class="box"></span><div>Tom: leve, sênior, curioso — não afoita</div></li>
+      </ul>
+    </div>
+
+    <div class="section" id="pq1">
+      <h2>Bloco 1 · Abertura</h2>
+      <h3>~ 3–5 min · clima + escuta</h3>
+      <div class="q">
+        <div class="ql">Aberta</div>
+        <div class="qt">O que mais ficou marcado pra vocês desde que fecharam a EE?</div>
+        <div class="qh">Deixa falar. Anota palavras deles — vira linguagem do plano depois.</div>
+        <div class="fala">“E aí, pessoal — tudo bem? Antes de eu abrir qualquer slide: o que mais ficou marcado pra vocês até aqui?”</div>
+      </div>
+      <div class="q">
+        <div class="ql">Aberta</div>
+        <div class="qt">O que vocês mais querem que essa parceria resolva de verdade?</div>
+        <div class="qh">Separar desejo genérico (“crescer”) de dor operacional.</div>
+        <div class="fala">“Se a gente acertar uma coisa só neste ciclo, qual tem que ser?”</div>
+      </div>
+      <div class="q">
+        <div class="ql">Apresentação</div>
+        <div class="qt">Eu sou a Sara — fico na linha de frente com vocês. Quem mais está com a gente hoje e qual o papel de cada um?</div>
+        <div class="qh">Mapa de poder começa aqui.</div>
+      </div>
+    </div>
+
+    <div class="section" id="pq2">
+      <h2>Bloco 2 · Negócio</h2>
+      <h3>Como ganham dinheiro · sem interrogatório</h3>
+      <div class="q">
+        <div class="ql">Receita</div>
+        <div class="qt">Como a receita entra hoje — e qual frente tem a melhor margem?</div>
+        <div class="qh">Alimenta faturamento_ref + margem. Não force número se travarem; peça faixa.</div>
+        <div class="fala">“Pra eu não inventar tese: a receita de vocês hoje vem mais de onde — e o que mais sobra no bolso?”</div>
+      </div>
+      <div class="q">
+        <div class="ql">Ticket / ciclo</div>
+        <div class="qt">Qual o ticket médio e quanto tempo leva um cliente do primeiro contato até fechar?</div>
+        <div class="qh">Base de BE e STEP depois.</div>
+      </div>
+      <div class="q">
+        <div class="ql">Canal</div>
+        <div class="qt">Hoje o lead entra por onde de verdade — indicação, Google, time interno, marketplace…?</div>
+        <div class="qh">Arquitetura real ≠ o que está no site.</div>
+      </div>
+      <div class="q">
+        <div class="ql">Sazonalidade</div>
+        <div class="qt">Tem época do ano que muda tudo? O que está acontecendo neste trimestre?</div>
+        <div class="qh">Evita pitch genérico fora de timing.</div>
+      </div>
+    </div>
+
+    <div class="section" id="pq3">
+      <h2>Bloco 3 · Decisão</h2>
+      <h3>Gate · quem precisa estar na sala</h3>
+      <div class="q">
+        <div class="ql">Decisor</div>
+        <div class="qt">Quem decide o “sim” final de investimento — e quem pode dizer não no meio do caminho?</div>
+        <div class="qh">Decisor ≠ influenciador. Anote os dois.</div>
+        <div class="fala">“Quem precisa estar nas reuniões semanais pra gente não ter que ‘repetir depois pro chefe’?”</div>
+      </div>
+      <div class="q">
+        <div class="ql">Comitê</div>
+        <div class="qt">Tem sócio, financeiro ou time interno que precisa validar antes de qualquer continuidade?</div>
+        <div class="qh">Mata objeção de “preciso pensar / falar com o sócio” cedo.</div>
+      </div>
+      <div class="q">
+        <div class="ql">Cadência</div>
+        <div class="qt">Que dia/horário funciona toda semana para o decisor?</div>
+        <div class="qh">Sem agenda = gate frágil.</div>
+      </div>
+    </div>
+
+    <div class="section" id="pq4">
+      <h2>Bloco 4 · Dor #1</h2>
+      <h3>O que está vazando na mesa</h3>
+      <div class="q">
+        <div class="ql">Dor</div>
+        <div class="qt">Onde a venda ou a operação trava hoje — na geração, na conversão, no time, no sistema…?</div>
+        <div class="qh">Uma dor #1. Não lista de 12 problemas.</div>
+        <div class="fala">“Se eu olhasse a operação de vocês por uma semana, o que eu veria vazando primeiro?”</div>
+      </div>
+      <div class="q">
+        <div class="ql">Custo da dor</div>
+        <div class="qt">O que essa trava custa hoje — leads, tempo do time, margem, reputação?</div>
+        <div class="qh">Urgência real vs desconforto educado.</div>
+      </div>
+      <div class="q">
+        <div class="ql">Já tentou</div>
+        <div class="qt">O que vocês já tentaram para resolver isso — e o que não querem repetir?</div>
+        <div class="qh">Trauma de agência/mídia entra aqui. Ouça sem julgar.</div>
+      </div>
+    </div>
+
+    <div class="section" id="pq5">
+      <h2>Bloco 5 · Expectativa 30 / 60 / 90</h2>
+      <h3>Alinhar o que a EE é (e não é)</h3>
+      <div class="q">
+        <div class="ql">30 dias</div>
+        <div class="qt">Em 30 dias, o que precisa estar claro ou entregue pra vocês sentirem que valeu?</div>
+        <div class="qh">Expectativa registrada — campo vivo do dash.</div>
+      </div>
+      <div class="q">
+        <div class="ql">60 / 90</div>
+        <div class="qt">Em 60 e 90 dias, sucesso parece o quê na linguagem de vocês?</div>
+        <div class="qh">Evita “crescer 10x” sem âncora.</div>
+      </div>
+      <div class="q">
+        <div class="ql">Fora de escopo</div>
+        <div class="qt">O que está explicitamente fora desta fase — e que a gente não deve prometer?</div>
+        <div class="qh">Protege CSAT. Ex.: mídia pesada sem tracking, site novo na S1…</div>
+        <div class="fala">“Quero alinhar o que NÃO esperam também — pra gente não frustrar sem querer.”</div>
+      </div>
+    </div>
+
+    <div class="section" id="pq6">
+      <h2>Bloco 6 · Histórico &amp; confiança</h2>
+      <h3>Onde já se queimaram</h3>
+      <div class="q">
+        <div class="ql">Agência / mídia</div>
+        <div class="qt">Já trabalharam com agência ou gestor de tráfego? O que funcionou e o que doeu?</div>
+        <div class="qh">Banco de objeções vivo — sem falar mal de ninguém.</div>
+      </div>
+      <div class="q">
+        <div class="ql">Interno</div>
+        <div class="qt">Tem time de marketing/comercial interno? Onde falta braço — e onde já tem opinião formada?</div>
+        <div class="qh">Esdras-like: comprado, sem braço.</div>
+      </div>
+      <div class="q">
+        <div class="ql">Budget</div>
+        <div class="qt">Já existe consciência de investimento para o próximo passo, ou ainda vamos descobrir juntos na EE?</div>
+        <div class="qh">“Não mapeado” é resposta válida. Não invente número.</div>
+      </div>
+    </div>
+
+    <div class="section" id="pq7">
+      <h2>Bloco 7 · Trilha &amp; operação</h2>
+      <h3>Inside · E-com · PDV</h3>
+      <div class="q">
+        <div class="ql">Modelo</div>
+        <div class="qt">A venda de vocês é mais conversa (Inside), site/e-com, ou loja/PDV — ou mistura?</div>
+        <div class="qh">Define a Semana 3 e o tipo de produto ideal.</div>
+      </div>
+      <div class="q">
+        <div class="ql">Sistema</div>
+        <div class="qt">CRM, ERP, WhatsApp, planilha — o que é a “fonte da verdade” hoje?</div>
+        <div class="qh">Gap de tracking/CRM aparece cedo.</div>
+      </div>
+      <div class="q">
+        <div class="ql">Acessos</div>
+        <div class="qt">Quem libera acesso a Ads, Analytics, site, redes — e até quando conseguimos?</div>
+        <div class="qh">Sem acesso = Semana 1 atrasa.</div>
+      </div>
+    </div>
+
+    <div class="section" id="pq8">
+      <h2>Bloco 8 · Fechamento do KO</h2>
+      <h3>Amarra + próximo passo datado</h3>
+      <div class="q">
+        <div class="ql">Espelho</div>
+        <div class="qt">Deixa eu devolver o que ouvi em 30 segundos — se eu errei, me corrige.</div>
+        <div class="qh">Expectativa + dor #1 + decisor. Cliente valida = registro oficial.</div>
+        <div class="fala">“O que eu ouvi: vocês querem X em 90 dias, a dor #1 é Y, e quem decide é Z. É isso?”</div>
+      </div>
+      <div class="q">
+        <div class="ql">Cadência</div>
+        <div class="qt">Próxima reunião: [data]. Decisor confirmado?</div>
+        <div class="qh">Sem data = KO incompleto.</div>
+      </div>
+      <div class="q">
+        <div class="ql">Canal</div>
+        <div class="qt">Grupo oficial criado? Quem entra?</div>
+        <div class="qh">Canal único.</div>
+      </div>
+      <div class="callout ok" style="margin-top:12px;margin-bottom:0">
+        <strong>Não fazer no KO:</strong> abrir preço de continuidade · prometer STEP · empurrar case · “última semana da EE”.
+        Tese fica mapeada; pitch vem depois do gate + score.
+      </div>
+    </div>
+
+    <div class="section" id="pq9">
+      <h2>Depois da call</h2>
+      <h3>O que você registra no dash / plano</h3>
+      <div class="grid2">
+        <div class="card">
+          <span class="tag hot">Obrigatório</span>
+          <div class="t">Campos do KO</div>
+          <ul class="steps">
+            <li>kickoff_realizado + data</li>
+            <li>decisor_mapa</li>
+            <li>expectativa_cliente (30/60/90 + fora)</li>
+            <li>projeto_pago</li>
+            <li>ponto_atencao_semana</li>
+            <li>mapa_kickoff / STEP candidato (hipótese)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="tag ok">Em 24h</span>
+          <div class="t">Devolutiva curta</div>
+          <ul class="steps">
+            <li>Mensagem no grupo: “o que ouvi”</li>
+            <li>Próxima data + donos de acesso</li>
+            <li>1 frase de dor #1</li>
+            <li>Sem proposta de preço</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Frases que funcionam</h2>
+      <h3>Banco rápido (tom Rodrigo)</h3>
+      <div class="q"><div class="ql">Abrir</div><div class="qt">“Antes de eu abrir a tela…”</div><div class="qh">Cliente fala primeiro.</div></div>
+      <div class="q"><div class="ql">Aprofundar</div><div class="qt">“Conta mais sobre isso — o que acontece na prática?”</div><div class="qh">Sai do slogan.</div></div>
+      <div class="q"><div class="ql">Espelhar</div><div class="qt">“O que eu ouvi foi X. É isso ou eu distorci?”</div><div class="qh">Validação sem ‘faz sentido?’.</div></div>
+      <div class="q"><div class="ql">Limitar</div><div class="qt">“Quero alinhar também o que NÃO esperam.”</div><div class="qh">Protege expectativa.</div></div>
+      <div class="q"><div class="ql">Fechar</div><div class="qt">“Próximo passo: data, acessos, canal. Posso registrar assim?”</div><div class="qh">Compromisso concreto.</div></div>
+    </div>
+  </div>
+
+  <footer>
+    V4 · Kick-off Farmer · Sara ·
+    <a href="assets/kickoff-farmer-sara.docx">Baixar .docx (Google Docs)</a> ·
+    <a href="playbook-farmer-completo.html">Playbook completo</a> ·
+    <a href="script-g6-pitch.html">Script pitch (depois do KO)</a>
+  </footer>
+</div>
+
+<script>
+(function () {
+  // mode switch
+  var modeBtns = document.querySelectorAll('.mode button');
+  var panels = document.querySelectorAll('.panel');
+  modeBtns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var m = b.getAttribute('data-mode');
+      modeBtns.forEach(function (x) { x.classList.toggle('active', x === b); });
+      panels.forEach(function (p) { p.classList.toggle('is-active', p.getAttribute('data-mode') === m); });
+    });
+  });
+
+  // deck
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var i = 0;
+  var count = document.getElementById('count');
+  function show(n) {
+    if (n < 0) n = 0;
+    if (n >= slides.length) n = slides.length - 1;
+    i = n;
+    slides.forEach(function (s, idx) { s.classList.toggle('is-on', idx === i); });
+    count.textContent = (i + 1) + ' / ' + slides.length;
+  }
+  document.getElementById('prev').addEventListener('click', function () { show(i - 1); });
+  document.getElementById('next').addEventListener('click', function () { show(i + 1); });
+  document.addEventListener('keydown', function (e) {
+    if (!document.querySelector('.panel[data-mode="apresentacao"]').classList.contains('is-active')) return;
+    if (e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); show(i + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); show(i - 1); }
+  });
+  show(0);
+})();
+</script>
+</body>
+</html>
