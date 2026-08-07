@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mapa · Playbook Farmer completo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --brand:#e50915; --brand-light:#ff1a27; --bg:#050505; --surf:rgba(20,20,20,.92);
+      --surf2:#141414; --bd:rgba(255,255,255,.1); --txt:#fafafa; --mut:#a3a3a3;
+      --ok:#86efac; --warn:#fde68a; --hot:#fca5a5; --info:#93c5fd;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--txt);font:14px/1.55 Inter,system-ui,sans-serif;
+      background-image:radial-gradient(ellipse 80% 45% at 50% -15%,rgba(229,9,21,.18),transparent)}
+    .top{position:sticky;top:0;z-index:10;backdrop-filter:blur(14px);background:rgba(5,5,5,.88);border-bottom:1px solid var(--bd);padding:12px 22px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+    .logo{font-weight:900}.logo span{color:var(--brand-light)}
+    .pill{font-size:11px;font-weight:700;color:var(--mut);border:1px solid var(--bd);padding:5px 10px;border-radius:999px}
+    .wrap{max-width:1100px;margin:0 auto;padding:28px 20px 70px}
+    h1{margin:0 0 8px;font-size:clamp(24px,4vw,34px);font-weight:900;letter-spacing:-.03em}
+    .lead{color:var(--mut);max-width:920px;margin:0 0 18px;font-size:13px}
+    .lead a,.section a{color:var(--ok)}
+    .callout{padding:14px 16px;border-radius:12px;border:1px solid rgba(96,165,250,.3);background:rgba(96,165,250,.08);color:#bfdbfe;font-size:13px;margin-bottom:14px}
+    .callout.warn{border-color:rgba(250,204,21,.28);background:rgba(250,204,21,.06);color:#fde68a}
+    .callout.ok{border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.08);color:#bbf7d0}
+    .callout.hot{border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.08);color:#fecaca}
+    .section{background:var(--surf);border:1px solid var(--bd);border-radius:16px;padding:20px 22px;margin-bottom:14px}
+    .section h2{margin:0 0 6px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);font-weight:800}
+    .section h3{margin:0 0 12px;font-size:18px;font-weight:900}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:800px){.grid2{grid-template-columns:1fr}}
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}@media(max-width:900px){.grid3{grid-template-columns:1fr}}
+    .card{background:var(--surf2);border:1px solid var(--bd);border-radius:12px;padding:14px 16px}
+    .card .t{font-weight:800;margin-bottom:6px}
+    .card .d{font-size:12px;color:#d4d4d4}
+    .tag{display:inline-block;padding:2px 8px;border-radius:999px;font-size:10px;font-weight:800;border:1px solid var(--bd);margin-bottom:8px}
+    .tag.ok{color:var(--ok);border-color:rgba(34,197,94,.35)}
+    .tag.warn{color:var(--warn);border-color:rgba(250,204,21,.35)}
+    .tag.hot{color:var(--hot);border-color:rgba(239,68,68,.4)}
+    .tag.info{color:var(--info);border-color:rgba(96,165,250,.35)}
+    ol.steps,ul{margin:0;padding-left:18px} li{margin:6px 0;color:#e5e5e5}
+    table{width:100%;border-collapse:collapse;font-size:12.5px}
+    th,td{padding:9px 8px;border-bottom:1px solid var(--bd);text-align:left;vertical-align:top}
+    th{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);font-weight:800}
+    .muted{color:var(--mut);font-size:12px}
+    .layers{display:grid;gap:8px}
+    .layer{display:grid;grid-template-columns:48px 1fr 120px;gap:12px;align-items:start;background:var(--surf2);border:1px solid var(--bd);border-radius:12px;padding:12px 14px}
+    @media(max-width:700px){.layer{grid-template-columns:1fr}}
+    .layer .n{font-size:18px;font-weight:900;color:var(--brand-light)}
+    .layer .t{font-weight:800;margin-bottom:4px}
+    .layer .d{font-size:12px;color:#d4d4d4}
+    .status{font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:4px 8px;border-radius:999px;border:1px solid var(--bd);text-align:center}
+    .status.ok{color:var(--ok);border-color:rgba(34,197,94,.35)}
+    .status.warn{color:var(--warn);border-color:rgba(250,204,21,.35)}
+    .status.info{color:var(--info);border-color:rgba(96,165,250,.35)}
+    .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}@media(max-width:900px){.flow{grid-template-columns:1fr 1fr}}
+    .flow-step{background:var(--surf2);border:1px solid var(--bd);border-radius:12px;padding:12px}
+    .flow-step .n{font-size:10px;font-weight:800;color:var(--mut);letter-spacing:.08em;text-transform:uppercase}
+    .flow-step .t{font-weight:800;margin:4px 0}
+    .flow-step .d{font-size:12px;color:#d4d4d4}
+    footer{text-align:center;color:var(--mut);font-size:11px;margin-top:28px;padding-top:16px;border-top:1px solid var(--bd)}
+    footer a{color:var(--ok)}
+  </style>
+</head>
+<body>
+<header class="top">
+  <div class="logo">V4 <span>COMPANY</span></div>
+  <div class="pill">Como montar o playbook completo · Sara + Rodrigo + salas</div>
+</header>
+
+<div class="wrap">
+  <h1>Mapa · Playbook Farmer completo</h1>
+  <p class="lead">
+    Resposta direta: o playbook não é um documento novo do zero — é a <strong style="color:#fff">síntese em 8 camadas</strong>
+    do que já construímos (método EE/Sara), do coaching do Rodrigo Paranhos (pitch), das calls
+    (Rafaela/G6, Marcelo, Colli) e dos cases da carteira. Cada fonte alimenta uma camada; as ferramentas
+    (score, fluxograma, gerador de plano, scripts) ficam como satélites.
+  </p>
+
+  <div class="callout ok">
+    <strong>Veredito:</strong> método + score + plano já estavam no
+    <a href="playbook-farmer-am.html">playbook-farmer-am.html</a>.
+    O HTML único das 8 camadas está em
+    <a href="playbook-farmer-completo.html">playbook-farmer-completo.html</a>.
+    Coaching Rodrigo e modelo adaptável agora são camadas oficiais.
+  </div>
+
+  <!-- FONTES -->
+  <div class="section">
+    <h2>Inventário de fontes</h2>
+    <h3>De onde sai cada pedaço</h3>
+    <table>
+      <thead>
+        <tr><th>Fonte</th><th>O que entra no playbook</th><th>Onde já está</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Método Sara · EE</strong></td>
+          <td>Contrato da conta · gates · S1→S3 · 4 camadas de avaliação · lead score · rituais</td>
+          <td><a href="playbook-farmer-am.html">playbook</a> · <a href="farmer-sara.html">hub</a></td>
+        </tr>
+        <tr>
+          <td><strong>Rodrigo Paranhos</strong></td>
+          <td>Perguntas abertas · matar objeção antes do preço · um preço · pedir a venda · não plantar dúvida</td>
+          <td><a href="script-g6-pitch.html">script G6</a> → agora aba <em>Pitch</em> do playbook</td>
+        </tr>
+        <tr>
+          <td><strong>Call Rafaela / G6</strong></td>
+          <td>Gate → dores → case → projeção → core + essencial · preço único · fila pós–S3</td>
+          <td><a href="plano-acao-modelo-adaptavel.html">modelo adaptável</a></td>
+        </tr>
+        <tr>
+          <td><strong>Debrief Marcelo</strong></td>
+          <td>Tese no kick-off · faixas de projeção sem inventar · case na ação do plano</td>
+          <td>Seção saúde/cenários do playbook v0.10+</td>
+        </tr>
+        <tr>
+          <td><strong>Colli Farmer AM</strong></td>
+          <td>Cadência diária/semanal/mensal · fronteiras do papel · metas de carteira</td>
+          <td>Abas Papel + Rituais</td>
+        </tr>
+        <tr>
+          <td><strong>Pipe / Comando</strong></td>
+          <td>Prioridade P0–P3 · Follow · playbooks por conta · safra fev→jul</td>
+          <td><a href="index.html">index</a> · <a href="visao-sara-safra.html">visão safra</a></td>
+        </tr>
+        <tr>
+          <td><strong>Cases reais</strong></td>
+          <td>G6/Fibranet · Isoluz · Modular · Delta · Triboltec · … (prova, não decoração)</td>
+          <td>Propostas + scripts + campo <code>case_na_acao</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 8 CAMADAS -->
+  <div class="section">
+    <h2>Arquitetura</h2>
+    <h3>8 camadas = playbook completo</h3>
+    <p class="muted" style="margin:0 0 12px">Ordem importa: sem gate não há pitch; sem plano não há Rodrigo; sem case a objeção volta.</p>
+    <div class="layers">
+      <div class="layer">
+        <div class="n">01</div>
+        <div>
+          <div class="t">Papel &amp; contrato</div>
+          <div class="d">Missão Farmer · trilha cliente × trilha V4 · fronteiras · metas de Expansão Carteira.</div>
+        </div>
+        <div class="status ok">Pronto</div>
+      </div>
+      <div class="layer">
+        <div class="n">02</div>
+        <div>
+          <div class="t">Jornada EE → encaixe</div>
+          <div class="d">Fecha EE → GC → engaja (pago · decisor · CSAT/NPS) → apresenta só o que se encaixa.</div>
+        </div>
+        <div class="status ok">Pronto</div>
+      </div>
+      <div class="layer">
+        <div class="n">03</div>
+        <div>
+          <div class="t">S1 → S3 · perguntas</div>
+          <div class="d">Semana a semana: contexto → maturidade/tese → produto ideal + Plano de Ação.</div>
+        </div>
+        <div class="status ok">Pronto</div>
+      </div>
+      <div class="layer">
+        <div class="n">04</div>
+        <div>
+          <div class="t">Parâmetros (fonte do dash)</div>
+          <div class="d">Gates · pulso · saúde · STEP · case · projeção · lead score — campos nomeados.</div>
+        </div>
+        <div class="status ok">Pronto</div>
+      </div>
+      <div class="layer">
+        <div class="n">05</div>
+        <div>
+          <div class="t">Saúde &amp; lead score</div>
+          <div class="d">Gate inegociável + consciência 50 + tese 50 · faixas 70+ / 40–69 / &lt;40.</div>
+        </div>
+        <div class="status ok">Pronto</div>
+      </div>
+      <div class="layer">
+        <div class="n">06</div>
+        <div>
+          <div class="t">Plano de Ação (critérios + adaptável)</div>
+          <div class="d">Template Triboltec + modelo G6/Rafaela (dores · case · projeção · core+essencial · 1 preço).</div>
+        </div>
+        <div class="status warn">Integrar</div>
+      </div>
+      <div class="layer">
+        <div class="n">07</div>
+        <div>
+          <div class="t">Pitch · coaching Rodrigo</div>
+          <div class="d">Abre/escuta/amarra · mata objeção antes · um preço · pede a venda · não planta dúvida.</div>
+        </div>
+        <div class="status warn">Integrar</div>
+      </div>
+      <div class="layer">
+        <div class="n">08</div>
+        <div>
+          <div class="t">Rituais · prioridade · safra</div>
+          <div class="d">Triage diária · comando semanal · P0–P3 · visão safra · fila pós–S3 (regra Eric).</div>
+        </div>
+        <div class="status ok">Pronto</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMO MONTAR -->
+  <div class="section">
+    <h2>Método de montagem</h2>
+    <h3>4 passos para fechar o “todo”</h3>
+    <div class="flow" style="margin-bottom:16px">
+      <div class="flow-step">
+        <div class="n">Passo 1</div>
+        <div class="t">Congelar núcleo</div>
+        <div class="d">Camadas 1–5 + score já são canônicas. Não reescrever — versionar.</div>
+      </div>
+      <div class="flow-step">
+        <div class="n">Passo 2</div>
+        <div class="t">Absorver salas</div>
+        <div class="d">Rodrigo → aba Pitch. Rafaela → bloco no Plano. Marcelo já está em cenários/case.</div>
+      </div>
+      <div class="flow-step">
+        <div class="n">Passo 3</div>
+        <div class="t">Satélites como tools</div>
+        <div class="d">Fluxograma · calculadora · gerador · scripts por conta · propostas.</div>
+      </div>
+      <div class="flow-step">
+        <div class="n">Passo 4</div>
+        <div class="t">Hub + v1.0</div>
+        <div class="d">farmer-sara como porta. Playbook v1.0 quando Pitch + adaptável estiverem dentro.</div>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <span class="tag ok">Regra de ouro da montagem</span>
+        <div class="t">Uma verdade, muitos satélites</div>
+        <div class="d">
+          O playbook é a fonte canônica. Scripts (G6, Isoluz, Delta) são <em>aplicações</em> do playbook
+          numa conta — não versões concorrentes do método. Se o Rodrigo muda uma regra, sobe no playbook
+          e só depois replica nos scripts.
+        </div>
+      </div>
+      <div class="card">
+        <span class="tag warn">O que não misturar</span>
+        <div class="t">Método ≠ pipe do dia ≠ proposta</div>
+        <div class="d">
+          <ul>
+            <li><strong>Playbook</strong> = como sempre fazemos</li>
+            <li><strong>Comando / safra</strong> = o que está quente agora</li>
+            <li><strong>Proposta / script</strong> = execução numa conta</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RODRIGO -->
+  <div class="section">
+    <h2>Camada 07 · detalhe</h2>
+    <h3>Coaching Rodrigo → checklist permanente</h3>
+    <div class="grid3">
+      <div class="card">
+        <span class="tag hot">Regra de ouro</span>
+        <div class="t">Quando o preço aparece</div>
+        <div class="d">A única discussão que pode restar é o valor. Timing, escopo, time e “outra opção” já foram alinhados.</div>
+      </div>
+      <div class="card">
+        <span class="tag info">Sequência</span>
+        <div class="t">Abre · escuta · amarra</div>
+        <div class="d">O que gostaram · o que não pode ficar de fora · quando começar · V4 ou outro caminho?</div>
+      </div>
+      <div class="card">
+        <span class="tag warn">Evitar</span>
+        <div class="t">Não plantar dúvida</div>
+        <div class="d">Às vezes a objeção é nossa. Sem “faz sentido?” em loop · sem menu de pagamento · sem oferecer desconto sem pedido.</div>
+      </div>
+    </div>
+    <p class="muted" style="margin-top:12px">Aplicação completa por conta: <a href="script-g6-pitch.html">script-g6-pitch.html</a> (modelo). Genérico no playbook: aba Pitch.</p>
+  </div>
+
+  <!-- ADAPTÁVEL -->
+  <div class="section">
+    <h2>Camada 06 · detalhe</h2>
+    <h3>Do template Triboltec ao modelo adaptável</h3>
+    <div class="grid2">
+      <div class="card">
+        <span class="tag info">Critérios (já no playbook)</span>
+        <ul>
+          <li>Faturamento e margem</li>
+          <li>Produtos identificados (+ o que não oferecer)</li>
+          <li>Pitch · espera proposta · budget</li>
+          <li>Interesse · objeções · decisor · CSAT</li>
+          <li>Percepção + plano em passos</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="tag ok">Bloco adaptável (call Rafaela)</span>
+        <ul>
+          <li>Dores nomeadas (não genéricas)</li>
+          <li>Case interno amarrado na narrativa</li>
+          <li>Projeção conservadora + BE validado</li>
+          <li>Core + essencial (upsell como autoridade)</li>
+          <li>Um preço · pagamento = EE · sprints se fechar</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout" style="margin-top:14px">
+      <strong>Como usar juntos:</strong> critérios = diagnóstico da conta; bloco adaptável = checklist pré-pitch.
+      Gerador HTML: <a href="plano-acao-farmer.html">plano-acao-farmer.html</a> ·
+      modelo: <a href="plano-acao-modelo-adaptavel.html">plano-acao-modelo-adaptavel.html</a>.
+    </div>
+  </div>
+
+  <!-- FLUXO OPERACIONAL -->
+  <div class="section">
+    <h2>Fluxo operacional</h2>
+    <h3>Da EE ao fechamento — uma linha</h3>
+    <ol class="steps">
+      <li><strong>Gate</strong> — decisor + pago/pagando (+ GC · CSAT quando for pitch).</li>
+      <li><strong>S1–S3</strong> — perguntas do playbook; lead score sobe com consciência + tese.</li>
+      <li><strong>Plano</strong> — critérios + dores + case + projeção + core/essencial.</li>
+      <li><strong>Score ≥70</strong> — liberado para apresentar; &lt;70 eleva gap #1.</li>
+      <li><strong>Pitch Rodrigo</strong> — perguntas abertas → mata objeção → um preço → pede a venda.</li>
+      <li><strong>Win / drop</strong> — motivo no pipe; case declarado; próximo contato datado.</li>
+    </ol>
+  </div>
+
+  <!-- KIT -->
+  <div class="section">
+    <h2>Kit canônico</h2>
+    <h3>Onde clicar no dia a dia</h3>
+    <div class="grid3">
+      <div class="card">
+        <span class="tag ok">Método</span>
+        <div class="t"><a href="playbook-farmer-completo.html">Playbook completo (HTML único)</a></div>
+        <div class="d">8 camadas numa página · v1.0. Detalhe: <a href="playbook-farmer-am.html">abas AM</a>.</div>
+      </div>
+      <div class="card">
+        <span class="tag info">Porta</span>
+        <div class="t"><a href="farmer-sara.html">Hub Farmer Sara</a></div>
+        <div class="d">Safra · resumo · score · plano.</div>
+      </div>
+      <div class="card">
+        <span class="tag warn">Tools</span>
+        <div class="t">Fluxograma · Score · Gerador</div>
+        <div class="d">
+          <a href="fluxograma-farmer-ee.html">fluxo</a> ·
+          <a href="lead-score-farmer.html">score</a> ·
+          <a href="plano-acao-farmer.html">plano</a>
+        </div>
+      </div>
+      <div class="card">
+        <span class="tag">Pitch</span>
+        <div class="t"><a href="script-g6-pitch.html">Script modelo (G6)</a></div>
+        <div class="d">Rodrigo aplicado; copiar lógica, trocar case.</div>
+      </div>
+      <div class="card">
+        <span class="tag">Adaptável</span>
+        <div class="t"><a href="plano-acao-modelo-adaptavel.html">Modelo Rafaela</a></div>
+        <div class="d">Pré-pitch para qualquer conta.</div>
+      </div>
+      <div class="card">
+        <span class="tag">Agora</span>
+        <div class="t"><a href="index.html">Comando</a> · <a href="visao-sara-safra.html">Safra</a></div>
+        <div class="d">Pipe do dia / mês — não substitui o método.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRÓXIMO -->
+  <div class="section">
+    <h2>Próximo ciclo</h2>
+    <h3>Para fechar v1.0 do playbook</h3>
+    <div class="grid2">
+      <div class="card">
+        <span class="tag hot">Nesta entrega</span>
+        <ul>
+          <li>Este mapa (arquitetura + fontes)</li>
+          <li>Aba Pitch no playbook com checklist Rodrigo</li>
+          <li>Links cruzados hub ↔ mapa ↔ adaptável ↔ script</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="tag warn">Depois (sem reinventar)</span>
+        <ul>
+          <li>Validar pesos do score em 3 contas reais</li>
+          <li>Biblioteca de cases (nome · dor · quando usar)</li>
+          <li>Home do dash com colunas da camada 04</li>
+          <li>Script-template vazio (estilo G6) para qualquer pitch</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    V4 · Mapa do Playbook Farmer completo ·
+    <a href="playbook-farmer-am.html">Playbook</a> ·
+    <a href="farmer-sara.html">Hub</a> ·
+    <a href="plano-acao-modelo-adaptavel.html">Modelo adaptável</a>
+  </footer>
+</div>
+</body>
+</html>
