@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <title>Análise · Pitch G6 × Playbook Farmer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #140608;
+      --surf: rgba(255,255,255,.06);
+      --bd: rgba(255,255,255,.14);
+      --txt: #fff;
+      --mut: rgba(255,255,255,.78);
+      --red: #e11d24;
+      --ok: #86efac;
+      --warn: #fde68a;
+      --bad: #fda4af;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font: 15px/1.55 "Plus Jakarta Sans", system-ui, sans-serif;
+      color: var(--txt);
+      background:
+        radial-gradient(ellipse 70% 40% at 10% 0%, rgba(225,29,36,.32), transparent 55%),
+        linear-gradient(180deg, #1a090b 0%, #0d0405 100%);
+      padding-bottom: 72px;
+    }
+    h1, h2, h3 { font-family: Outfit, sans-serif; letter-spacing: -.02em; line-height: 1.15; }
+    .top {
+      position: sticky; top: 0; z-index: 40;
+      backdrop-filter: blur(14px);
+      background: rgba(13,4,5,.92);
+      border-bottom: 1px solid var(--bd);
+      padding: 12px 18px;
+      display: flex; gap: 10px; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    }
+    .brand { font-weight: 800; font-size: 14px; }
+    .brand span { color: #fda4af; }
+    .pill {
+      font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+      border: 1px solid var(--bd); border-radius: 999px; padding: 6px 11px; color: var(--mut);
+      text-decoration: none;
+    }
+    .pill:hover { color: #fff; border-color: rgba(255,255,255,.35); }
+    .wrap { max-width: 960px; margin: 0 auto; padding: 26px 18px 0; }
+    .hero {
+      border: 1px solid var(--bd); border-radius: 20px; padding: 26px 22px;
+      background: linear-gradient(135deg, rgba(225,29,36,.2), rgba(255,255,255,.04));
+      margin-bottom: 16px;
+    }
+    .hero h1 { margin: 0 0 10px; font-size: clamp(24px, 4vw, 34px); }
+    .hero p { margin: 0; color: var(--mut); max-width: 820px; }
+    .nav {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 8px; margin: 14px 0 18px;
+    }
+    .nav a {
+      text-decoration: none; color: var(--mut); font-size: 12px; font-weight: 700;
+      border: 1px solid var(--bd); background: var(--surf); border-radius: 12px; padding: 10px 12px;
+    }
+    .nav a:hover { color: #fff; background: rgba(225,29,36,.18); }
+    .nav a small { display: block; color: #fda4af; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 3px; }
+    .section {
+      border: 1px solid var(--bd); border-radius: 18px; background: rgba(255,255,255,.04);
+      padding: 20px 18px; margin: 12px 0;
+    }
+    .section h2 { margin: 0 0 8px; font-size: clamp(18px, 3vw, 24px); }
+    .section .k {
+      font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
+      color: #fda4af; margin-bottom: 6px;
+    }
+    .lead { color: var(--mut); margin: 0 0 12px; font-size: 14px; }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    @media (max-width: 760px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+    .card {
+      border: 1px solid var(--bd); border-radius: 14px; background: var(--surf);
+      padding: 12px 14px;
+    }
+    .card h3 { margin: 0 0 6px; font-size: 14px; }
+    .card p, .card li { margin: 0; font-size: 13px; color: var(--mut); }
+    .card ul { margin: 6px 0 0; padding-left: 16px; }
+    .card li { margin: 4px 0; }
+    .tag {
+      display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: .08em;
+      text-transform: uppercase; padding: 3px 8px; border-radius: 999px; margin-bottom: 6px;
+    }
+    .tag.ok { background: rgba(134,239,172,.15); color: var(--ok); }
+    .tag.warn { background: rgba(253,230,138,.12); color: var(--warn); }
+    .tag.bad { background: rgba(253,164,175,.15); color: var(--bad); }
+    .tag.neutral { background: rgba(255,255,255,.08); color: var(--mut); }
+    .callout {
+      margin: 12px 0; padding: 12px 14px; border-radius: 12px; font-size: 14px;
+    }
+    .callout.warn { border: 1px solid rgba(253,230,138,.3); background: rgba(253,230,138,.08); color: var(--warn); }
+    .callout.ok { border: 1px solid rgba(134,239,172,.3); background: rgba(134,239,172,.08); color: var(--ok); }
+    .callout.bad { border: 1px solid rgba(253,164,175,.3); background: rgba(253,164,175,.08); color: var(--bad); }
+    .callout strong { color: inherit; filter: brightness(1.15); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 8px; }
+    th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--bd); vertical-align: top; }
+    th { color: #fda4af; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+    td { color: var(--mut); }
+    td strong { color: #fff; }
+    .flow {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 10px;
+    }
+    @media (max-width: 900px) { .flow { grid-template-columns: 1fr 1fr; } }
+    .flow-step {
+      border: 1px solid var(--bd); border-radius: 12px; background: var(--surf); padding: 10px;
+    }
+    .flow-step .n { font-size: 10px; font-weight: 800; color: #fda4af; letter-spacing: .08em; text-transform: uppercase; }
+    .flow-step .t { font-size: 13px; font-weight: 700; color: #fff; margin: 4px 0 2px; }
+    .flow-step .d { font-size: 12px; color: var(--mut); }
+    .ask {
+      margin-top: 10px; padding: 11px 13px; border-radius: 12px;
+      background: rgba(134,239,172,.1); border: 1px solid rgba(134,239,172,.28);
+      color: #bbf7d0; font-size: 13px;
+    }
+    .ban {
+      margin-top: 10px; padding: 11px 13px; border-radius: 12px;
+      background: rgba(253,164,175,.1); border: 1px solid rgba(253,164,175,.28);
+      color: #fecdd3; font-size: 13px;
+    }
+    ol.steps { margin: 8px 0 0; padding-left: 18px; color: var(--mut); font-size: 13px; }
+    ol.steps li { margin: 6px 0; }
+    ol.steps strong { color: #fff; }
+    footer { margin: 24px 0 0; text-align: center; font-size: 12px; color: var(--mut); }
+    footer a { color: #fda4af; }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <div class="brand">Análise · <span>Pitch G6 × Playbook</span></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <a class="pill" href="playbook-farmer-am.html">Playbook</a>
+      <a class="pill" href="fluxograma-farmer-ee.html">Fluxograma</a>
+      <a class="pill" href="script-g6-pitch.html">Script G6</a>
+      <a class="pill" href="farmer-sara.html">Hub Sara</a>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <header class="hero">
+      <h1>O playbook pediu condução. O pitch virou monólogo + preço.</h1>
+      <p>
+        Análise do pitch G6 Internet cruzada com o fluxo Farmer (EE → Plano → Pitch)
+        e com o coaching do Rodrigo. Objetivo: transformar as observações em padrão operacional —
+        não em culpa de uma call.
+      </p>
+    </header>
+
+    <div class="callout warn">
+      <strong>Leitura em uma frase:</strong>
+      pré-pitch e mapa de objeção estavam no playbook; na sala faltou abrir com perguntas,
+      conectar dor → profissional → ROI, tratar Social/agência <em>antes</em> do valor,
+      e fechar sem falar pelo cliente.
+    </div>
+
+    <nav class="nav">
+      <a href="#fluxo"><small>01</small>Fluxo × o que rolou</a>
+      <a href="#obs"><small>02</small>12 observações</a>
+      <a href="#gaps"><small>03</small>Gaps no processo</a>
+      <a href="#padrao"><small>04</small>Padrão corrigido</a>
+      <a href="#perguntas"><small>05</small>Perguntas</a>
+      <a href="#roi"><small>06</small>ROI ≠ breakeven</a>
+      <a href="#social"><small>07</small>Social / agência</a>
+      <a href="#acao"><small>08</small>Ações</a>
+    </nav>
+
+    <!-- 01 -->
+    <section class="section" id="fluxo">
+      <div class="k">01 · Onde o pitch senta no fluxo</div>
+      <h2>Playbook: o pitch é o fim da trilha — não o começo da venda</h2>
+      <p class="lead">
+        No fluxograma e no playbook, a conta só chega no preço depois de GC, gate, S1→S3,
+        plano de ação e balizamento. O pitch é <strong>apresentar encaixe</strong> — com o cliente
+        já consciente do problema e do próximo passo.
+      </p>
+      <div class="flow">
+        <div class="flow-step"><div class="n">01</div><div class="t">GC / KO</div><div class="d">Expectativa · quem é a Farmer · budget / agência atual</div></div>
+        <div class="flow-step"><div class="n">02</div><div class="t">S1→S3</div><div class="d">Dores · objeções · interesse · produto ideal</div></div>
+        <div class="flow-step"><div class="n">03</div><div class="t">Plano</div><div class="d">Growth + CRM (± Social) amarrado às dores</div></div>
+        <div class="flow-step"><div class="n">04</div><div class="t">Abertura do pitch</div><div class="d">3 perguntas de balizamento — cliente fala</div></div>
+        <div class="flow-step"><div class="n">05</div><div class="t">Valor + fecho</div><div class="d">Âncora · condição · decisão (eles falam o próximo passo)</div></div>
+      </div>
+      <div class="callout bad" style="margin-top:14px">
+        <strong>No G6:</strong> reunião longa · Éder assumiu o pitch · abertura sem as 3 perguntas ·
+        Fibranet citado sem case · profissionais genéricos · Social tratado tarde ·
+        fechamento falando pelo cliente (“vocês vão analisar…”).
+      </div>
+    </section>
+
+    <!-- 02 -->
+    <section class="section" id="obs">
+      <div class="k">02 · Observações da call</div>
+      <h2>O que foi apontado — e o que o playbook já previa</h2>
+      <table>
+        <thead>
+          <tr><th>#</th><th>Observação</th><th>O que o fluxo/playbook pedia</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1</strong></td>
+            <td>Duas horas de reunião — Geraldo estava balizado?</td>
+            <td>Pré-pitch: timing, quem decide, o que esperam; não empilhar deck longo</td>
+            <td><span class="tag bad">Gap</span></td>
+          </tr>
+          <tr>
+            <td><strong>2</strong></td>
+            <td>Éder assumiu o pitch</td>
+            <td>Farmer conduz decisão; time traz prova (case/números). Papéis claros no KO</td>
+            <td><span class="tag warn">Atenção</span></td>
+          </tr>
+          <tr>
+            <td><strong>3</strong></td>
+            <td>Sem perguntas: estratégia clara? o que esperam? quando iniciar?</td>
+            <td>Rodrigo + script: abrir a sala com perguntas abertas <em>antes</em> do monólogo</td>
+            <td><span class="tag bad">Gap</span></td>
+          </tr>
+          <tr>
+            <td><strong>4</strong></td>
+            <td>Dores pouco conectadas / resumidas</td>
+            <td>S2–S3: gaps + “o que perde na mesa” → espelho no início do pitch</td>
+            <td><span class="tag bad">Gap</span></td>
+          </tr>
+          <tr>
+            <td><strong>5</strong></td>
+            <td>Fibranet citada, não apresentada (sem número / base telecom)</td>
+            <td>Case como prova da tese — ou base (“X clientes telecom”) com número real do time</td>
+            <td><span class="tag bad">Gap</span></td>
+          </tr>
+          <tr>
+            <td><strong>6</strong></td>
+            <td>Pouco valor nos profissionais (só “time Growth + CRM”)</td>
+            <td>Narrativa: cada profissional fecha uma peça do ciclo (intenção→prova→jornada→LTV)</td>
+            <td><span class="tag bad">Gap</span></td>
+          </tr>
+          <tr>
+            <td><strong>7</strong></td>
+            <td>Laurelise perguntou Social — respondemos “não tem” sem entender se era fundamental; agência apareceu tarde</td>
+            <td>Mapear agência/Social no KO–S2; no pitch: perguntar se querem no escopo <em>antes</em> do preço</td>
+            <td><span class="tag bad">Gap crítico</span></td>
+          </tr>
+          <tr>
+            <td><strong>8</strong></td>
+            <td>Perguntas só aos ~10 min; depois 6 perguntas de uma vez (muitas fechadas)</td>
+            <td>1 pergunta aberta por vez; proibido “faz sentido / ficou claro / até aqui ok?”</td>
+            <td><span class="tag bad">Gap</span></td>
+          </tr>
+          <tr>
+            <td><strong>9</strong></td>
+            <td>Demora · Geraldo sem paciência · tudo num slide</td>
+            <td>Pitch enxuto; ritmo; não “explicar o deck” — conduzir decisão</td>
+            <td><span class="tag warn">Gap</span></td>
+          </tr>
+          <tr>
+            <td><strong>10</strong></td>
+            <td>Valor sem ancoragem; fecho fraco (“olhar projeção / tirar travas”)</td>
+            <td>Referência → condição; narrativa de ROI (ganhar), não só “tirar trava”</td>
+            <td><span class="tag bad">Gap</span></td>
+          </tr>
+          <tr>
+            <td><strong>11</strong></td>
+            <td>Objeção Social no preço — “quanto fica?”</td>
+            <td>Matar escopo/Social <em>antes</em> do valor (senão vira objeção herdada)</td>
+            <td><span class="tag bad">Gap</span></td>
+          </tr>
+          <tr>
+            <td><strong>12</strong></td>
+            <td>Fechamento: “vocês vão analisar…” — falamos pelo cliente</td>
+            <td>Eles verbalizam o próximo passo; Farmer pergunta o que falta para decidir</td>
+            <td><span class="tag bad">Gap</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="callout warn">
+        <strong>Dúvidas que a sala trouxe (e o mapa deveria ter):</strong>
+        comercial estava bom no caso deles? · mídia offline · agência de Social já existente.
+        Isso é input de S1–S2 / Plano de Ação — não surpresa no slide de preço.
+      </div>
+    </section>
+
+    <!-- 03 -->
+    <section class="section" id="gaps">
+      <div class="k">03 · Diagnóstico de processo</div>
+      <h2>Três camadas que falharam juntas</h2>
+      <div class="grid3">
+        <div class="card">
+          <span class="tag bad">Pré-pitch</span>
+          <h3>Balizamento incompleto</h3>
+          <p>Agência de Social, paciência de Geraldo, quem conduz o pitch, se querem Social no escopo — deveriam estar no plano / WhatsApp / S3, não descobertos no valor.</p>
+        </div>
+        <div class="card">
+          <span class="tag bad">Durante</span>
+          <h3>Condução da sala</h3>
+          <p>Monólogo longo, perguntas atrasadas e empilhadas, case sem prova, profissionais sem valor agregado, ritmo que queima paciência do decisor.</p>
+        </div>
+        <div class="card">
+          <span class="tag bad">Fecho</span>
+          <h3>Decisão terceirizada</h3>
+          <p>Sem âncora clara, Social depois do preço (+1,8k), e a Farmer verbalizando “vocês vão analisar” no lugar de pedir a decisão.</p>
+        </div>
+      </div>
+      <div class="callout ok">
+        <strong>O que já estava construído e ajuda:</strong>
+        hub safra · playbook S1–S3 · fluxograma com gate · script G6 · narrativa dos profissionais · proposta com/sem Social.
+        O gap não é falta de material — é <em>disciplina de uso na sala</em>.
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section class="section" id="padrao">
+      <div class="k">04 · Padrão corrigido</div>
+      <h2>Como o pitch G6 (e os próximos) devem rodar</h2>
+      <ol class="steps">
+        <li>
+          <strong>Antes de abrir o deck (obrigatório)</strong> —
+          Estratégia ficou clara? O que esperam da V4 como próximo passo? Quando querem iniciar?
+          Uma pergunta por vez. Escuta. Usa a resposta na narrativa.
+        </li>
+        <li>
+          <strong>Espelho das dores (60–90s)</strong> —
+          Resumo em 3–4 linhas do que a EE mostrou na G6 (prova, jornada, retenção/LTV).
+          Pergunta: “O que mais dói disso no dia a dia de vocês?”
+        </li>
+        <li>
+          <strong>Prova (Fibranet / base telecom)</strong> —
+          Ou apresenta com número real do time, ou fala base (“já operamos essa lógica em telecom na nossa carteira”) —
+          <em>não citar case sem trazer</em>.
+        </li>
+        <li>
+          <strong>Profissionais com valor</strong> —
+          Account / GT / Copy / Design / (Social se no escopo) / CRM — cada um amarrado a uma dor do mapa.
+          Não “um time de Growth e um de CRM”.
+        </li>
+        <li>
+          <strong>Escopo Social (antes do preço)</strong> —
+          “Vocês querem Social Media dentro desse plano? É fundamental agora ou a agência atual cobre?”
+          Só depois: condição sem Social × com Social.
+        </li>
+        <li>
+          <strong>Valor com âncora</strong> —
+          Referência → condição. Um pacote. Cartão. Sem menu.
+        </li>
+        <li>
+          <strong>Fecho</strong> —
+          “O que ainda está em aberto para vocês avançarem?” /
+          “Conseguimos tomar a decisão nessa condição?”
+          Eles falam o que vão fazer — a Farmer não narra por eles.
+        </li>
+      </ol>
+      <div class="ask">
+        <strong>Papéis na sala:</strong>
+        Farmer conduz pergunta e fecho · time (Éder etc.) traz prova/números do case quando combinado ·
+        ninguém “assume o pitch” sem o balizamento inicial.
+      </div>
+    </section>
+
+    <!-- 05 -->
+    <section class="section" id="perguntas">
+      <div class="k">05 · Disciplina de pergunta</div>
+      <h2>Abertas, uma de cada vez — sem falar pelo cliente</h2>
+      <div class="grid2">
+        <div class="card">
+          <span class="tag ok">Usar</span>
+          <h3>Abertura (antes do deck)</h3>
+          <ul>
+            <li>O que mais ficou claro da estratégia até aqui?</li>
+            <li>O que vocês esperam da V4 como próximo passo?</li>
+            <li>Quando faria sentido iniciar a execução?</li>
+          </ul>
+          <h3 style="margin-top:12px">No meio</h3>
+          <ul>
+            <li>O que mais ficou marcado até agora?</li>
+            <li>O que vocês não podem deixar de executar?</li>
+            <li>Social Media: querem no escopo ou a operação atual cobre?</li>
+          </ul>
+          <h3 style="margin-top:12px">Fecho</h3>
+          <ul>
+            <li>O que ainda está em aberto para avançar?</li>
+            <li>Olhando a condição — o que precisam alinhar para decidir?</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="tag bad">Proibido</span>
+          <h3>Perguntas fechadas / empilhadas</h3>
+          <ul>
+            <li>Até aqui tudo bem?</li>
+            <li>Faz sentido para vocês?</li>
+            <li>Até aqui, ok?</li>
+            <li>Ficou claro? / Entendeu o projeto?</li>
+            <li>Ficou alguma dúvida? (sozinha, em loop)</li>
+          </ul>
+          <div class="ban">
+            <strong>Também proibido no fecho:</strong>
+            “Agora vocês vão analisar os números, a projeção, o escopo…” —
+            quem define o que vão analisar são <em>eles</em>.
+          </div>
+        </div>
+      </div>
+      <p class="lead" style="margin-top:12px">
+        Na call: aos ~10 min vieram perguntas boas (“o que ficou marcado?”), mas em seguida
+        abriram 6 de uma vez — várias fechadas. Manter <strong>uma</strong> aberta, esperar,
+        aprofundar. Laurelise fez 2 perguntas: isso é ouro — explorar em vez de cobrir com mais fala.
+      </p>
+    </section>
+
+    <!-- 06 -->
+    <section class="section" id="roi">
+      <div class="k">06 · Narrativa de resultado</div>
+      <h2>Parar de vender breakeven. Vender ROI.</h2>
+      <div class="grid2">
+        <div class="card">
+          <span class="tag bad">Evitar</span>
+          <h3>Lógica de “se pagar”</h3>
+          <p>Narrativa centrada no mês 5 em que o projeto só zera.
+          Ninguém quer 12 meses de trabalho só para empatar. Quebra desejo e vira objeção de preço.</p>
+        </div>
+        <div class="card">
+          <span class="tag ok">Usar</span>
+          <h3>Lógica de ganhar</h3>
+          <p>Projeto de 12 meses. Conservador: o ciclo fecha e o retorno aparece com o tempo —
+          a conversa é <em>quando passam a ganhar</em> (ex. visão mês 10), não quando param de perder no BE.</p>
+        </div>
+      </div>
+      <div class="ask">
+        <strong>Frase-guia:</strong>
+        “O plano não existe para o projeto se pagar. Existe para a G6 ganhar com performance com prova e LTV na base — com leitura ao longo dos 12 meses.”
+      </div>
+      <p class="lead" style="margin-top:10px">
+        Números de Fibranet / projeção: só entram com dado real do time na sala.
+        Sem número, não citar case vazio — usar método + base telecom com o que for verdade.
+      </p>
+    </section>
+
+    <!-- 07 -->
+    <section class="section" id="social">
+      <div class="k">07 · Social Media · agência · objeção</div>
+      <h2>Tratar no mapa — não depois de +R$ 1,8k</h2>
+      <p class="lead">
+        Laurelise perguntou do profissional de Mídia Social. A sala respondeu “não está”
+        e seguiu, sem validar se era fundamental. No preço do Social (+~1,8k) apareceu a agência.
+        Isso é objeção plantada por falta de mapa.
+      </p>
+      <div class="grid2">
+        <div class="card">
+          <span class="tag warn">No KO / S2 (playbook)</span>
+          <h3>Já deveria estar escrito</h3>
+          <ul>
+            <li>Tem agência de Social hoje? O que ela cobre?</li>
+            <li>Cliente quer Social dentro da V4 ou manter separado?</li>
+            <li>É fundamental para o ciclo LTV agora — ou é ruído?</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="tag ok">No pitch (antes do valor)</span>
+          <h3>Script curto</h3>
+          <ul>
+            <li>“Vocês querem Social Media dentro desse plano?”</li>
+            <li>“A operação atual de Social cobre o que precisam — ou está faltando braço?”</li>
+            <li>Se sim → condição R$ 13.083,71 · se não → R$ 9.480,75</li>
+            <li>Só então abre o slide de investimento</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout bad">
+        <strong>Regra Rodrigo aplicada:</strong>
+        se não tratarmos Social antes, a objeção “quanto fica a rede social?” nasce no preço —
+        exatamente o que aconteceu.
+      </div>
+    </section>
+
+    <!-- 08 -->
+    <section class="section" id="acao">
+      <div class="k">08 · Ações para o sistema Farmer</div>
+      <h2>O que muda no playbook de trabalho a partir daqui</h2>
+      <div class="grid2">
+        <div class="card">
+          <span class="tag ok">Checklist pré-pitch (S3 / véspera)</span>
+          <ul>
+            <li>Decisor + paciência/agenda alinhados (Geraldo balizado?)</li>
+            <li>Quem conduz: Farmer na decisão · time na prova</li>
+            <li>Agência atual / Social mapeados</li>
+            <li>Dores em 4 linhas (espelho)</li>
+            <li>Case: número pronto <em>ou</em> não citar</li>
+            <li>Valor dos 5–6 profissionais escrito</li>
+            <li>Duas condições de preço se Social for opção</li>
+            <li>3 perguntas de abertura decoradas</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="tag warn">Atualizar nos artefatos</span>
+          <ul>
+            <li><a href="script-g6-pitch.html" style="color:#fda4af">Script G6</a> — abertura obrigatória + ban de fechadas + ROI + Social antes</li>
+            <li><a href="plano-acao-modelo-adaptavel.html" style="color:#fda4af">Plano adaptável</a> — campo “agência / Social hoje”</li>
+            <li><a href="playbook-farmer-am.html" style="color:#fda4af">Playbook</a> — gate de pergunta pré-deck no bloco pitch</li>
+            <li><a href="proposta-g6-internet-social.html" style="color:#fda4af">Proposta + Social</a> — só depois de validar desejo de Social</li>
+            <li><a href="assets/narrativa-g6-profissionais.docx" style="color:#fda4af">Word profissionais</a> — usar no meio, não pular</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout warn" style="margin-top:14px">
+        <strong>Sobre a dúvida “estava insegura pelo tamanho da conta?”</strong>
+        Isso é pergunta de coaching para a Sara — não conclusão desta análise.
+        O que o processo mostra: conta grande exige <em>mais</em> balizamento e menos monólogo,
+        não mais slides. Insegurança (se houver) se corrige com mapa de objeção + perguntas,
+        não com empilhar informação.
+      </div>
+
+      <div class="callout ok">
+        <strong>Padrão de ouro (fecha playbook + Rodrigo + G6):</strong>
+        balizar → perguntar → espelhar dor → provar → valorizar profissional → matar Social/escopo →
+        ancorar preço → eles dizem o próximo passo. Ritmo curto. ROI, não breakeven.
+      </div>
+    </section>
+
+    <footer>
+      V4 · Farmer Sara · Análise Pitch G6 × Playbook ·
+      <a href="farmer-sara.html">Hub</a> ·
+      <a href="playbook-farmer-am.html">Playbook</a> ·
+      <a href="fluxograma-farmer-ee.html">Fluxograma</a> ·
+      <a href="script-g6-pitch.html">Script</a>
+    </footer>
+  </div>
+</body>
+</html>
