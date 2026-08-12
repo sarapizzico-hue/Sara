@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Account Planning · Casa dos Pães × ZapFirst · V4</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --brand:#e50915; --brand-light:#ff1a27; --bg:#050505; --surf:rgba(20,20,20,.92);
+      --surf2:#141414; --bd:rgba(255,255,255,.1); --txt:#fafafa; --mut:#a3a3a3;
+      --ok:#86efac; --warn:#fde68a; --hot:#fca5a5; --info:#93c5fd;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--txt);font:14px/1.55 Inter,system-ui,sans-serif;
+      background-image:radial-gradient(ellipse 80% 45% at 50% -15%,rgba(229,9,21,.18),transparent)}
+    .top{position:sticky;top:0;z-index:100;backdrop-filter:blur(14px);background:rgba(5,5,5,.9);border-bottom:1px solid var(--bd);padding:12px 20px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+    .logo{font-weight:900}.logo span{color:var(--brand-light)}
+    .pill{font-size:11px;font-weight:700;color:var(--mut);border:1px solid var(--bd);padding:5px 10px;border-radius:999px}
+    .wrap{max-width:1120px;margin:0 auto;padding:24px 18px 80px}
+    h1{margin:0 0 6px;font-size:clamp(24px,4vw,34px);font-weight:900;letter-spacing:-.03em}
+    .lead{color:var(--mut);max-width:920px;margin:0 0 16px;font-size:13px}
+    .lead a{color:var(--ok)}
+    .nav{position:sticky;top:56px;z-index:90;margin:0 0 18px;padding:8px;background:rgba(8,8,8,.94);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.14);border-radius:16px}
+    .nav-label{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);padding:4px 10px 8px}
+    .tabs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+    @media(max-width:980px){.tabs{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:600px){.tabs{grid-template-columns:1fr 1fr}}
+    .tab{appearance:none;border:1px solid var(--bd);background:var(--surf2);color:var(--mut);border-radius:12px;padding:11px 10px;cursor:pointer;text-align:left;font-family:inherit;transition:.2s}
+    .tab:hover{border-color:rgba(255,255,255,.22);color:#fff}
+    .tab.active{color:#fff;border-color:var(--brand);background:linear-gradient(135deg,rgba(229,9,21,.18),rgba(20,20,20,.95))}
+    .tab .n{display:block;font-size:13px;font-weight:800;margin-bottom:2px}
+    .tab .s{font-size:10px;font-weight:700;color:#d4d4d4}
+    .panel{display:none}.panel.is-active{display:block;animation:fade .2s ease}
+    @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+    .callout{padding:14px 16px;border-radius:12px;border:1px solid rgba(96,165,250,.3);background:rgba(96,165,250,.08);color:#bfdbfe;font-size:13px;margin-bottom:14px}
+    .callout.warn{border-color:rgba(250,204,21,.28);background:rgba(250,204,21,.06);color:#fde68a}
+    .callout.ok{border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.08);color:#bbf7d0}
+    .callout.hot{border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.08);color:#fecaca}
+    .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:14px}
+    .kpi{background:var(--surf);border:1px solid var(--bd);border-radius:14px;padding:14px}
+    .kpi .v{font-size:22px;font-weight:900}.kpi .v.ok{color:var(--ok)}.kpi .v.hot{color:var(--hot)}.kpi .v.warn{color:var(--warn)}.kpi .v.info{color:var(--info)}
+    .kpi .l{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--mut);margin-top:6px;font-weight:700}
+    .section{background:var(--surf);border:1px solid var(--bd);border-radius:16px;padding:18px 20px;margin-bottom:12px}
+    .section h2{margin:0 0 4px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);font-weight:800}
+    .section h3{margin:0 0 12px;font-size:17px;font-weight:900}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:800px){.grid2{grid-template-columns:1fr}}
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}@media(max-width:900px){.grid3{grid-template-columns:1fr}}
+    .card{background:var(--surf2);border:1px solid var(--bd);border-radius:12px;padding:14px 16px}
+    .card .t{font-weight:800;margin-bottom:6px}
+    .card .d{font-size:12px;color:#d4d4d4}
+    table{width:100%;border-collapse:collapse;font-size:12.5px}
+    th,td{padding:9px 8px;border-bottom:1px solid var(--bd);text-align:left;vertical-align:top}
+    th{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);font-weight:800}
+    .tag{display:inline-block;padding:2px 8px;border-radius:999px;font-size:10px;font-weight:800;border:1px solid var(--bd)}
+    .tag.ok{color:var(--ok);border-color:rgba(34,197,94,.35)}
+    .tag.warn{color:var(--warn);border-color:rgba(250,204,21,.35)}
+    .tag.hot{color:var(--hot);border-color:rgba(239,68,68,.4)}
+    .tag.info{color:var(--info);border-color:rgba(96,165,250,.35)}
+    .muted{color:var(--mut);font-size:12px}
+    ul{margin:0;padding-left:18px} li{margin:5px 0;color:#e5e5e5}
+    .scroll{overflow-x:auto}
+    .phase{border-left:3px solid var(--brand);padding:12px 14px;margin-bottom:10px;background:rgba(229,9,21,.08);border-radius:0 10px 10px 0}
+    .phase .m{font-size:11px;font-weight:800;color:var(--brand-light);margin-bottom:4px}
+    .phase .t{font-weight:800;margin-bottom:4px}
+    .phase .d{font-size:12px;color:#d4d4d4}
+    .quote{font-size:15px;font-weight:700;line-height:1.45;padding:16px 18px;border-radius:14px;border:1px solid rgba(229,9,21,.35);background:linear-gradient(135deg,rgba(229,9,21,.14),rgba(20,20,20,.95));margin-bottom:14px}
+    .crit{display:grid;grid-template-columns:160px 1fr;gap:8px 14px;margin-bottom:12px}
+    @media(max-width:700px){.crit{grid-template-columns:1fr}}
+    .crit .k{font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);padding-top:2px}
+    .crit .v{font-size:13px;color:#e5e5e5}
+    .funnel{display:flex;gap:10px;flex-wrap:wrap}
+    .funnel-step{flex:1;min-width:100px;background:var(--surf2);border:1px solid var(--bd);border-radius:12px;padding:14px 10px;text-align:center}
+    .funnel-step.hot{border-color:var(--brand)}
+    .funnel-step .n{font-size:20px;font-weight:900}.funnel-step .lbl{font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);margin-top:4px;font-weight:700}
+    footer{text-align:center;color:var(--mut);font-size:11px;margin-top:28px;padding-top:16px;border-top:1px solid var(--bd)}
+    footer a{color:var(--ok)}
+  </style>
+</head>
+<body>
+<header class="top">
+  <div class="logo">V4 <span>COMPANY</span></div>
+  <div class="pill">Account Planning · Casa dos Pães × ZapFirst · 12/08/2026</div>
+</header>
+
+<div class="wrap">
+  <h1>Account Planning · Casa dos Pães</h1>
+  <p class="lead">
+    Estratégia de monetização via <strong style="color:#fff">ZapFirst</strong> — transformar WhatsApp em máquina de vendas, tirar a Nilda-dependência e criar base para saltar de R$ 200k → R$ 500k/mês.
+    Produto: <a href="https://steady-croissant-cd822a.netlify.app/" target="_blank" rel="noopener">ZapFirst · V4</a>
+  </p>
+
+  <div class="quote">
+    “Antes de gastar mais em mídia, a gente transforma o WhatsApp em máquina de vendas — com processo, time e resposta 24h — para você parar de perder pedido quando estiver na rua comprando.”
+  </div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="v hot">R$ 200k</div><div class="l">Faturamento atual</div></div>
+    <div class="kpi"><div class="v ok">R$ 500k</div><div class="l">Meta mensal</div></div>
+    <div class="kpi"><div class="v warn">+150%</div><div class="l">Gap de crescimento</div></div>
+    <div class="kpi"><div class="v info">R$ 18–30k</div><div class="l">ZapFirst Base (3m)</div></div>
+    <div class="kpi"><div class="v">R$ 57k</div><div class="l">Completo + Lead Gen</div></div>
+    <div class="kpi"><div class="v hot">R$ 4k/mês</div><div class="l">Carro de som hoje</div></div>
+  </div>
+
+  <nav class="nav">
+    <div class="nav-label">Visões do account</div>
+    <div class="tabs">
+      <button class="tab active" data-view="conta"><span class="n">01 Conta</span><span class="s">Perfil · Decisor · Momento</span></button>
+      <button class="tab" data-view="dor"><span class="n">02 Diagnóstico</span><span class="s">Gaps · ROI · Riscos</span></button>
+      <button class="tab" data-view="oferta"><span class="n">03 Oferta</span><span class="s">ZapFirst × Dor</span></button>
+      <button class="tab" data-view="jornada"><span class="n">04 Jornada</span><span class="s">90 dias · 3P-IA</span></button>
+      <button class="tab" data-view="comercial"><span class="n">05 Comercial</span><span class="s">Pitch · Objeções · Plano</span></button>
+      <button class="tab" data-view="sucesso"><span class="n">06 Sucesso</span><span class="s">KPIs · Gates · Upsell</span></button>
+    </div>
+  </nav>
+
+  <!-- 01 CONTA -->
+  <div class="panel is-active" data-view="conta">
+    <div class="section">
+      <h2>01 · Conta</h2>
+      <h3>Identificação &amp; mapa de poder</h3>
+      <div class="crit">
+        <div class="k">Cliente</div><div class="v">Casa dos Pães (supermercado / varejo de bairro)</div>
+        <div class="k">Decisora</div><div class="v"><strong>Nilda</strong> — proprietária · concentra compras, atendimento, marketing e finanças</div>
+        <div class="k">Perfil</div><div class="v">Gestão intuitiva · alta carga operacional · medo de investir sem retorno · expectativa inicial de “execução mágica”</div>
+        <div class="k">Praça</div><div class="v">Bairro Mafrense + rua própria · potencial: Aeroporto, São Joaquim, Poty Velho, Santa Maria</div>
+        <div class="k">Proposta de valor</div><div class="v">Preços competitivos + variedade · gap crítico = <strong>distribuição / atendimento / dados</strong></div>
+        <div class="k">Momento</div><div class="v">Pós-diagnóstico V4 · alinhamento de expectativa · foco em “básico bem feito” antes de escalar mídia</div>
+        <div class="k">Score de fit</div><div class="v"><span class="tag ok">ALTO</span> Dor = exatamente o que ZapFirst resolve · Gate: precisa de 1 pessoa de atendimento</div>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div class="section">
+        <h2>Stakeholder map</h2>
+        <h3>Quem move a conta</h3>
+        <table>
+          <thead><tr><th>Papel</th><th>Nome</th><th>Influência</th><th>Nota</th></tr></thead>
+          <tbody>
+            <tr><td>Decisora / Champion</td><td>Nilda</td><td><span class="tag hot">100%</span></td><td>Única assinante · também o gargalo</td></tr>
+            <tr><td>Operação</td><td>Equipe loja (a definir)</td><td><span class="tag warn">Baixa</span></td><td>Sem processo · sem ownership de WhatsApp</td></tr>
+            <tr><td>V4 Farmer / AM</td><td>Sara / time</td><td><span class="tag info">Alta</span></td><td>Orquestra expectativa + implementação</td></tr>
+            <tr><td>Concorrência</td><td>Supers maiores</td><td><span class="tag warn">Média</span></td><td>Ganham por delivery, não por preço</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="section">
+        <h2>Estado atual dos canais</h2>
+        <h3>O que já existe</h3>
+        <ul>
+          <li><strong>Carro de som</strong> — R$ 1k/semana (~R$ 4k/mês) · genérico · sem tracking</li>
+          <li><strong>GMN básico</strong> — presença digital mínima</li>
+          <li><strong>WhatsApp</strong> — tentou pedidos + ofertas · sem resposta quando Nilda está na rua</li>
+          <li><strong>Curva ABC</strong> — levantamento de indicadores de base em andamento</li>
+          <li><strong>Delivery</strong> — só proximidade · bike cargueira · mínimo R$ 150 · sem apps</li>
+          <li><strong>Sorteio TV</strong> — executado sem estrutura de captura de contatos</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <strong>Gate inegociável antes de pitch de solução:</strong> Nilda na sala (decisora) + acordo explícito de que haverá <em>pelo menos 1 pessoa</em> responsável por atendimento WhatsApp (mesmo part-time). Sem isso, ZapFirst não roda.
+    </div>
+  </div>
+
+  <!-- 02 DIAGNOSTICO -->
+  <div class="panel" data-view="dor">
+    <div class="section">
+      <h2>02 · Diagnóstico</h2>
+      <h3>Os 4 gaps que destroem ROI</h3>
+      <div class="grid2">
+        <div class="card">
+          <div class="t">1. Nilda-dependência</div>
+          <div class="d">Centraliza compras, atendimento e marketing. Qualquer estratégia nova trava na velocidade dela. Escala impossível.</div>
+        </div>
+        <div class="card">
+          <div class="t">2. Demanda sem atendimento</div>
+          <div class="d">WhatsApp atrai interesse, mas fica sem resposta. Marketing gera lead → operação mata a venda. ROI negativo por estrutura, não por mídia.</div>
+        </div>
+        <div class="card">
+          <div class="t">3. Cegueira de dados</div>
+          <div class="d">Sem ticket médio, fluxo, CAC, LTV, margem. Investimento = chute. Impossível otimizar ou comprovar retorno.</div>
+        </div>
+        <div class="card">
+          <div class="t">4. Maturidade digital baixa</div>
+          <div class="d">Táticas isoladas (tráfego pago, sorteio) sem base. Expectativa de execução mágica. Constância e processo ausentes.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Riscos estruturais</h2>
+      <h3>O que o diagnóstico V4 já mapeou</h3>
+      <div class="funnel">
+        <div class="funnel-step hot"><div class="n">Dados</div><div class="lbl">Ausência total</div></div>
+        <div class="funnel-step hot"><div class="n">Preço</div><div class="lbl">Guerra sem margem</div></div>
+        <div class="funnel-step hot"><div class="n">Operação</div><div class="lbl">Gargalo Nilda</div></div>
+        <div class="funnel-step"><div class="n">Canal</div><div class="lbl">Carro de som único</div></div>
+        <div class="funnel-step"><div class="n">Raio</div><div class="lbl">Só Mafrense</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Insight de conta</h2>
+      <h3>O problema não é falta de mídia</h3>
+      <p class="muted" style="margin:0 0 10px">A Casa dos Pães já tem proposta de valor (preço + variedade). O que falta é <strong style="color:#fff">capacidade de atender, medir e reter</strong>. Por isso a sequência correta é:</p>
+      <ol>
+        <li><strong>Organizar a casa</strong> (processo + atendimento + base) ← <span class="tag ok">ZapFirst</span></li>
+        <li><strong>Capturar dados no PDV</strong> (nome + WhatsApp) ← combustível orgânico</li>
+        <li><strong>Delivery / expansão de bairro</strong> ← distribuição</li>
+        <li><strong>Mídia paga</strong> ← só depois da máquina pronta (Lead Gen opcional)</li>
+      </ol>
+    </div>
+
+    <div class="callout hot">
+      <strong>Se vender tráfego agora:</strong> aumenta demanda num canal que já perde venda por demora. Isso reforça o medo dela de “investir e não ter resultado”. ZapFirst inverte: primeiro para de sangrar, depois acelera.
+    </div>
+  </div>
+
+  <!-- 03 OFERTA -->
+  <div class="panel" data-view="oferta">
+    <div class="section">
+      <h2>03 · Oferta</h2>
+      <h3>ZapFirst como solução âncora</h3>
+      <p class="muted" style="margin:0 0 12px">Metodologia <strong style="color:#fff">3P-IA</strong>: Produto → Processo → Pessoas → Inteligência Artificial. IA só depois da base humana sólida.</p>
+      <div class="scroll">
+        <table>
+          <thead>
+            <tr><th>Dor Casa dos Pães</th><th>Entrega ZapFirst</th><th>Impacto no negócio</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Expectativa de mágica / medo de prejuízo</td>
+              <td>Sequência 3P-IA + métricas no CRM</td>
+              <td>Alinha expectativa · investimento rastreável</td>
+            </tr>
+            <tr>
+              <td>Nilda-dependência</td>
+              <td>Scripts + treinamento + SDR IA 24/7</td>
+              <td>Libera Nilda para compras / estratégia</td>
+            </tr>
+            <tr>
+              <td>WhatsApp sem resposta</td>
+              <td>Fluxo comercial + SLA + handoff IA→humano</td>
+              <td>Para de perder pedido quente</td>
+            </tr>
+            <tr>
+              <td>Sem base de clientes</td>
+              <td>CRM Kommo + réguas de recompra</td>
+              <td>Vende de novo sem carro de som</td>
+            </tr>
+            <tr>
+              <td>GMN / IG fracos</td>
+              <td>GMB + Instagram CTA + LP WhatsApp</td>
+              <td>Autoridade local + entrada de lead</td>
+            </tr>
+            <tr>
+              <td>Sem catálogo / improvisação</td>
+              <td>Catálogo WhatsApp + PIX integrado</td>
+              <td>Pedido profissional · fecha no chat</td>
+            </tr>
+            <tr>
+              <td>Delivery limitado / falta distribuição</td>
+              <td>WhatsApp como canal de pedidos</td>
+              <td>Ponte para bairros vizinhos</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div class="section">
+        <h2>Plano recomendado</h2>
+        <h3>ZapFirst Base · 3 meses</h3>
+        <div class="crit">
+          <div class="k">Investimento</div><div class="v">R$ 18.000 à vista · ou 12× R$ 1.666,67 (de R$ 30.000)</div>
+          <div class="k">Por quê Base</div><div class="v">Ela já tem demanda orgânica + carro de som. Precisa de <strong>máquina de conversão</strong>, não de mais lead ainda.</div>
+          <div class="k">Inclui</div><div class="v">GMB · IG · LP · Catálogo · PIX · Scripts · Fluxo · Treino · Kommo · Réguas · SDR IA · Diagnóstico M3</div>
+          <div class="k">Não inclui</div><div class="v">Gestão de mídia paga (deixar para fase 2)</div>
+        </div>
+        <div class="callout ok" style="margin:0"><strong>Pitch de preço:</strong> o carro de som já custa ~R$ 4k/mês. Em 4–5 meses ela gasta o equivalente do ZapFirst à vista — sem base, sem CRM, sem recompra.</div>
+      </div>
+      <div class="section">
+        <h2>Upsell futuro</h2>
+        <h3>Quando ativar Lead Gen</h3>
+        <ul>
+          <li>Máquina rodando (SLA &lt; X min · conversão estável)</li>
+          <li>≥ 1 pessoa de atendimento operando o playbook</li>
+          <li>Base mínima de contatos no CRM (caixa + WhatsApp)</li>
+          <li>Nilda enxergando relatório de recompra</li>
+        </ul>
+        <p class="muted" style="margin-top:10px">Plano Completo: R$ 57k · ZapFirst 3m + Lead Gen 6m (taxa gestão R$ 4.500/mês · mídia aparte).</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Pacote complementar (fora do ZapFirst)</h2>
+      <h3>Combustível orgânico no PDV</h3>
+      <div class="grid3">
+        <div class="card"><div class="t">Captura no caixa</div><div class="d">Nome + WhatsApp em toda compra · script curto · incentivo (sorteio estruturado / cupom).</div></div>
+        <div class="card"><div class="t">Indicadores de base</div><div class="d">Ticket médio · volume · frequência · horário · giro/margem · curva ABC.</div></div>
+        <div class="card"><div class="t">Delivery fase 2</div><div class="d">Após WhatsApp estável: ampliar raio, revisar mínimo R$150, avaliar apps.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 JORNADA -->
+  <div class="panel" data-view="jornada">
+    <div class="section">
+      <h2>04 · Jornada 90 dias</h2>
+      <h3>Implementação ZapFirst · Casa dos Pães</h3>
+
+      <div class="phase">
+        <div class="m">MÊS 1 · PRODUTO + AMBIENTE</div>
+        <div class="t">Organizar a vitrine digital e a oferta</div>
+        <div class="d">
+          <ul>
+            <li>Kick-off com Nilda: objetivo do WhatsApp (promoção + pedidos) · papéis · SLA</li>
+            <li>GMB otimizado com botão WhatsApp · Instagram com CTA · LP/link de captura</li>
+            <li>Catálogo WhatsApp Business (prioridade: alto giro + margem da curva ABC)</li>
+            <li>PIX integrado no fluxo de fechamento</li>
+            <li>Início da captura nome+WhatsApp no caixa (processo simples)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="m">MÊS 2 · PROCESSO + PESSOAS</div>
+        <div class="t">Descentralizar o atendimento e profissionalizar a venda</div>
+        <div class="d">
+          <ul>
+            <li>Fluxo comercial documentado: recepção → qualificação → pedido → pagamento → pós-venda</li>
+            <li>Scripts editáveis (promoção, pedido, objeção de preço, delivery, fora de estoque)</li>
+            <li>Treinamento do time / auxiliar de atendimento</li>
+            <li>CRM Kommo: pipeline, tags (bairro, ticket, origem), stages</li>
+            <li>Nilda sai do “primeiro atendimento” — entra só em exceções / compras / estratégia</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="m">MÊS 3 · IA + RETENÇÃO + DIAGNÓSTICO</div>
+        <div class="t">Ampliar capacidade e provar o ROI</div>
+        <div class="d">
+          <ul>
+            <li>SDR IA 24/7: resposta imediata fora do horário + qualificação + handoff</li>
+            <li>Réguas de recompra e reativação (substituindo dependência do carro de som)</li>
+            <li>Relatório de maturidade: conversão, tempo de resposta, recompra 30d, origem</li>
+            <li>Recomendação: operar sozinho · Lead Gen · ou Destrava Receita / delivery expandido</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div class="section">
+        <h2>Quick wins · 30 dias</h2>
+        <h3>O que Nilda precisa sentir cedo</h3>
+        <ul>
+          <li>Mensagens respondidas mesmo quando ela está comprando</li>
+          <li>Catálogo no WhatsApp (para de improvisar preço no copy-paste)</li>
+          <li>Primeiros contatos estruturados no CRM</li>
+          <li>GMB/IG com caminho claro até o WhatsApp</li>
+        </ul>
+      </div>
+      <div class="section">
+        <h2>Dependências críticas</h2>
+        <h3>Bloqueadores de implementação</h3>
+        <ul>
+          <li><span class="tag hot">GATE</span> Designar atendente WhatsApp (não pode ser só Nilda)</li>
+          <li>Fotos/preços dos produtos prioritários</li>
+          <li>Acesso GMB, Instagram, WhatsApp Business</li>
+          <li>Acordo de horário de atendimento + SLA</li>
+          <li>Processo mínimo de captura no caixa</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 COMERCIAL -->
+  <div class="panel" data-view="comercial">
+    <div class="section">
+      <h2>05 · Comercial</h2>
+      <h3>Narrativa de fechamento</h3>
+      <div class="crit">
+        <div class="k">Dor #1</div><div class="v">“Eu invisto e não vejo resultado” — no passado, tráfego e ações isoladas falharam</div>
+        <div class="k">Dor #2</div><div class="v">“Tudo depende de mim” — compra, atende, divulga; WhatsApp morre quando ela sai</div>
+        <div class="k">Promessa</div><div class="v">Organizar a casa · autoridade local · fidelização · liberar a Nilda para outra frente</div>
+        <div class="k">Prova de lógica</div><div class="v">Sem atendimento, mais mídia = mais prejuízo. Com máquina, o mesmo lead vira venda e recompra.</div>
+        <div class="k">Âncora de preço</div><div class="v">Carro de som R$4k/mês · genérico · sem base. ZapFirst cria ativo próprio.</div>
+        <div class="k">CTA</div><div class="v">Kick-off ZapFirst Base 90 dias · meta: WhatsApp operando sem Nilda no front</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Roteiro de reunião (45–60 min)</h2>
+      <h3>Ordem sugerida</h3>
+      <ol>
+        <li><strong>Espelhar o diagnóstico</strong> (5’) — “Você está sobrecarregada e o WhatsApp perde venda quando você está na rua.”</li>
+        <li><strong>Mostrar o custo do status quo</strong> (5’) — carro de som + leads sem resposta + medo de investir de novo.</li>
+        <li><strong>Apresentar 3P-IA</strong> (8’) — por que não começamos por tráfego/IA.</li>
+        <li><strong>Demo da máquina</strong> (10’) — catálogo, PIX, CRM, IA, recompra (site ZapFirst).</li>
+        <li><strong>Encaixe Casa dos Pães</strong> (8’) — tabela dor × entrega · PDV + WhatsApp + bairros.</li>
+        <li><strong>Plano Base + investimento</strong> (7’) — 90 dias · o que entra · o que não entra.</li>
+        <li><strong>Gate de compromisso</strong> (5’) — quem vai atender? Sem isso não fechamos.</li>
+        <li><strong>Fechamento</strong> (5’) — à vista R$18k ou 12× · data de kick-off.</li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <h2>Objeções previstas</h2>
+      <h3>Respostas prontas</h3>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Objeção</th><th>Resposta</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>“Quero tráfego / filmagem agora”</td>
+              <td>Podemos. Mas se o WhatsApp não responde, você paga para frustrar cliente. Primeiro a máquina; Lead Gen no mês 1 só se a operação estiver designada.</td>
+            </tr>
+            <tr>
+              <td>“Já gastei e não deu certo”</td>
+              <td>Antes faltou processo e constância. Aqui a entrega é estrutura funcionando + time + métrica — não campanha solta.</td>
+            </tr>
+            <tr>
+              <td>“Está caro”</td>
+              <td>R$4k/mês no carro de som sem base. Em ~4–5 meses você gasta o ZapFirst à vista — e fica com CRM, catálogo e recompra.</td>
+            </tr>
+            <tr>
+              <td>“Não tenho time”</td>
+              <td>Precisamos de pelo menos 1 pessoa (mesmo meio período). A IA faz a porta; humano fecha. Sem isso, qualquer solução falha — inclusive a nossa.</td>
+            </tr>
+            <tr>
+              <td>“WhatsApp é só pra promoção”</td>
+              <td>Definimos juntos: promoção + pedidos. Scripts e pipeline separam os dois fluxos para não virar caos.</td>
+            </tr>
+            <tr>
+              <td>“E o delivery?”</td>
+              <td>É a alavanca de R$500k. Mas delivery sem atendimento é pedido perdido. ZapFirst prepara o canal; expansão de raio vem em seguida.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="callout ok">
+      <strong>Fechamento ideal:</strong> ZapFirst Base (R$18k à vista) + compromisso de atendente + kick-off em até 7 dias + meta compartilhada: reduzir dependência do carro de som via base + recompra em 90 dias.
+    </div>
+  </div>
+
+  <!-- 06 SUCESSO -->
+  <div class="panel" data-view="sucesso">
+    <div class="section">
+      <h2>06 · Sucesso da conta</h2>
+      <h3>KPIs que provam ROI para a Nilda</h3>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>KPI</th><th>Baseline (hoje)</th><th>Meta 90 dias</th><th>Por quê importa</th></tr></thead>
+          <tbody>
+            <tr><td>Tempo 1ª resposta WhatsApp</td><td>Horas / dia seguinte</td><td>&lt; 5 min (horário) · IA 24/7</td><td>Para de perder venda quente</td></tr>
+            <tr><td>% mensagens sem resposta</td><td>Alto (Nilda na rua)</td><td>&lt; 10%</td><td>Prova fim do gargalo</td></tr>
+            <tr><td>Taxa de conversão WhatsApp</td><td>Não medida</td><td>Definir + ↑ mês a mês</td><td>ROI do canal</td></tr>
+            <tr><td>Contatos no CRM</td><td>~0 estruturado</td><td>Base crescente via caixa+WA</td><td>Ativo vs carro de som</td></tr>
+            <tr><td>Recompra 30 dias</td><td>Não medida</td><td>Régua ativa · meta acordada</td><td>Fidelização barata</td></tr>
+            <tr><td>Ticket médio</td><td>Percepção</td><td>Medido no PDV/CRM</td><td>Base para LTV</td></tr>
+            <tr><td>Horas da Nilda em atendimento</td><td>Alta</td><td>↓ relevante (só exceções)</td><td>Liberdade operacional</td></tr>
+            <tr><td>Dependência carro de som</td><td>R$4k/mês</td><td>Reduzir peso relativo</td><td>Canal diversificado</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div class="section">
+        <h2>Cadência pós-venda</h2>
+        <h3>Governança V4 × Cliente</h3>
+        <ul>
+          <li><strong>Semanal:</strong> status implementação · blockers · SLA</li>
+          <li><strong>Mensal:</strong> relatório conversão · base · recompra</li>
+          <li><strong>Mês 3:</strong> diagnóstico de maturidade + next step</li>
+          <li><strong>QBR light:</strong> caminho R$200k → R$500k (delivery + mídia)</li>
+        </ul>
+      </div>
+      <div class="section">
+        <h2>Roadmap de expansão</h2>
+        <h3>Depois da máquina</h3>
+        <ul>
+          <li><span class="tag ok">M4+</span> Lead Gen (Google + Meta) com orçamento controlado</li>
+          <li><span class="tag info">M4+</span> Delivery ampliado (bairros vizinhos)</li>
+          <li><span class="tag warn">Contínuo</span> PDV: margem, ABC, horários de pico</li>
+          <li><span class="tag">Opcional</span> Destrava Receita se maturidade subir</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Riscos &amp; mitigações</h2>
+      <h3>Account risk register</h3>
+      <table>
+        <thead><tr><th>Risco</th><th>Severidade</th><th>Mitigação</th></tr></thead>
+        <tbody>
+          <tr><td>Nilda não delega atendimento</td><td><span class="tag hot">Alta</span></td><td>Gate pré-contrato · auxiliar nomeado no kick-off</td></tr>
+          <tr><td>Ansiedade por mídia cedo</td><td><span class="tag warn">Média</span></td><td>Narrativa 3P-IA · quick wins M1 · Lead Gen só com gate</td></tr>
+          <tr><td>Catálogo incompleto / preços confusos</td><td><span class="tag warn">Média</span></td><td>Priorizar curva ABC · começar com top giro</td></tr>
+          <tr><td>Caixa não captura WhatsApp</td><td><span class="tag warn">Média</span></td><td>Script + meta diária + incentivo simples</td></tr>
+          <tr><td>Expectativa de R$500k em 90 dias</td><td><span class="tag hot">Alta</span></td><td>Meta 90d = estrutura; R$500k = jornada (WA + delivery + mídia)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout">
+      <strong>Definição de vitória (Account Planning):</strong> em 90 dias, Casa dos Pães opera WhatsApp com processo, catálogo, CRM e resposta sem Nilda no front — com base de clientes crescendo e relatório que justifica o próximo investimento (Lead Gen / delivery).
+    </div>
+  </div>
+
+  <footer>
+    V4 Company · Account Planning Casa dos Pães × ZapFirst · 12/08/2026 ·
+    <a href="https://steady-croissant-cd822a.netlify.app/" target="_blank" rel="noopener">Produto ZapFirst</a>
+  </footer>
+</div>
+
+<script>
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const view = tab.dataset.view;
+      document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t === tab));
+      document.querySelectorAll('.panel').forEach(p => p.classList.toggle('is-active', p.dataset.view === view));
+    });
+  });
+</script>
+</body>
+</html>
