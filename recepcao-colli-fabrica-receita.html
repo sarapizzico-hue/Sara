@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Recepção Colli&CO · Fábrica de Receita · 18/08</title>
+  <meta name="description" content="Plano de ação estratégico — Recepção Colli&CO para clientes Saber antes da Fábrica de Receita." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --brand:#e50915;
+      --brand-light:#ff1a27;
+      --brand-dim:rgba(229,9,21,.14);
+      --brand-glow:rgba(229,9,21,.35);
+      --bg:#050505;
+      --surf:rgba(18,18,18,.92);
+      --surf2:#121212;
+      --bd:rgba(255,255,255,.1);
+      --bd-strong:rgba(255,255,255,.16);
+      --txt:#fafafa;
+      --mut:#a3a3a3;
+      --ok:#86efac;
+      --warn:#fde68a;
+      --info:#93c5fd;
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;background:var(--bg);color:var(--txt);
+      font:14px/1.55 Inter,system-ui,sans-serif;
+      background-image:
+        radial-gradient(ellipse 90% 45% at 50% -15%,rgba(229,9,21,.2),transparent),
+        radial-gradient(circle at 100% 0%,rgba(229,9,21,.06),transparent 42%);
+    }
+    a{color:var(--ok)}
+    .top{
+      position:sticky;top:0;z-index:40;
+      backdrop-filter:blur(16px);background:rgba(5,5,5,.88);
+      border-bottom:1px solid var(--bd);
+      padding:12px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+    }
+    .logo{font-weight:900;font-size:17px;letter-spacing:-.02em}
+    .logo span{color:var(--brand-light)}
+    .pills{display:flex;flex-wrap:wrap;gap:8px}
+    .pill{
+      font-size:11px;font-weight:700;color:var(--mut);
+      border:1px solid var(--bd);background:rgba(255,255,255,.03);
+      padding:5px 10px;border-radius:999px;
+    }
+    .pill.live{color:#fecaca;border-color:rgba(229,9,21,.45);background:var(--brand-dim)}
+    .wrap{max-width:1040px;margin:0 auto;padding:28px 20px 90px}
+    .hero{
+      position:relative;overflow:hidden;
+      border:1px solid var(--bd-strong);border-radius:20px;
+      padding:30px 28px;margin-bottom:18px;
+      background:linear-gradient(135deg,rgba(229,9,21,.18) 0%,rgba(16,16,16,.95) 46%,var(--surf2) 100%);
+      box-shadow:0 24px 70px rgba(0,0,0,.45);
+    }
+    .hero::after{
+      content:"";position:absolute;right:-60px;top:-80px;width:280px;height:280px;border-radius:50%;
+      background:radial-gradient(circle,var(--brand-glow),transparent 70%);pointer-events:none;
+    }
+    .hero-inner{position:relative;z-index:1}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:8px;
+      font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#fca5a5;margin-bottom:10px;
+    }
+    .eyebrow::before{content:"";width:22px;height:3px;background:var(--brand);border-radius:2px}
+    .hero h1{margin:0 0 10px;font-size:clamp(26px,4.4vw,38px);font-weight:900;letter-spacing:-.03em;line-height:1.1}
+    .hero .lead{margin:0;max-width:760px;color:#d4d4d4;font-size:14px}
+    .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+    .chip{
+      font-size:11px;font-weight:700;padding:7px 11px;border-radius:999px;
+      border:1px solid var(--bd);background:rgba(0,0,0,.28);color:#e5e5e5;
+    }
+    .chip strong{color:#fff}
+    .kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:18px}
+    @media(max-width:820px){.kpis{grid-template-columns:1fr 1fr}}
+    .kpi{
+      background:var(--surf);border:1px solid var(--bd);border-radius:var(--radius);padding:16px 16px;
+    }
+    .kpi .v{font-size:24px;font-weight:900;line-height:1;letter-spacing:-.02em}
+    .kpi .v.red{color:var(--brand-light)}
+    .kpi .l{margin-top:8px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+    .nav{
+      position:sticky;top:56px;z-index:30;margin-bottom:16px;padding:8px;
+      background:rgba(8,8,8,.94);backdrop-filter:blur(14px);
+      border:1px solid var(--bd-strong);border-radius:14px;
+      display:flex;flex-wrap:wrap;gap:8px;
+    }
+    .nav a{
+      text-decoration:none;color:var(--mut);font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;
+      padding:9px 12px;border-radius:10px;border:1px solid transparent;
+    }
+    .nav a:hover{color:#fff;border-color:var(--bd);background:rgba(255,255,255,.03)}
+    .section{
+      background:var(--surf);border:1px solid var(--bd);border-radius:var(--radius);
+      padding:22px 22px;margin-bottom:14px;
+    }
+    .section h2{
+      margin:0 0 4px;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);
+    }
+    .section h3{margin:0 0 14px;font-size:20px;font-weight:900;letter-spacing:-.02em}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media(max-width:760px){.grid2{grid-template-columns:1fr}}
+    .box{
+      background:var(--surf2);border:1px solid var(--bd);border-radius:14px;padding:16px;
+    }
+    .box .t{font-size:14px;font-weight:800;margin-bottom:6px}
+    .box .d{font-size:13px;color:#d4d4d4}
+    .callout{
+      padding:14px 16px;border-radius:12px;border:1px solid rgba(250,204,21,.28);
+      background:rgba(250,204,21,.06);color:#fde68a;font-size:13px;margin-bottom:12px;
+    }
+    .callout strong{color:#fef08a}
+    .callout.ok{border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.08);color:#bbf7d0}
+    .callout.ok strong{color:#bbf7d0}
+    .callout.info{border-color:rgba(96,165,250,.3);background:rgba(96,165,250,.08);color:#bfdbfe}
+    .callout.info strong{color:#bfdbfe}
+    .callout.danger{border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.08);color:#fecaca}
+    .callout.danger strong{color:#fecaca}
+    .flow{display:flex;flex-direction:column;gap:10px}
+    .step{
+      display:grid;grid-template-columns:88px 1fr;gap:14px;align-items:stretch;
+      background:var(--surf2);border:1px solid var(--bd);border-radius:14px;overflow:hidden;
+    }
+    @media(max-width:560px){.step{grid-template-columns:1fr}}
+    .step-time{
+      background:linear-gradient(180deg,rgba(229,9,21,.22),rgba(229,9,21,.06));
+      border-right:1px solid rgba(229,9,21,.25);
+      padding:14px 12px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+    }
+    @media(max-width:560px){.step-time{border-right:0;border-bottom:1px solid rgba(229,9,21,.25);flex-direction:row;gap:10px;justify-content:flex-start;padding:12px 14px}}
+    .step-time .h{font-size:16px;font-weight:900;color:#fff}
+    .step-time .m{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fca5a5;margin-top:4px}
+    @media(max-width:560px){.step-time .m{margin-top:0}}
+    .step-body{padding:14px 16px}
+    .step-body .title{font-size:15px;font-weight:800;margin-bottom:4px}
+    .step-body .desc{font-size:13px;color:#d4d4d4}
+    .step-body .owner{margin-top:8px;font-size:11px;font-weight:700;color:var(--mut)}
+    .step.highlight{border-color:rgba(229,9,21,.45);box-shadow:0 0 0 1px rgba(229,9,21,.12)}
+    table{width:100%;border-collapse:collapse;font-size:13px}
+    th,td{padding:11px 10px;text-align:left;border-bottom:1px solid var(--bd);vertical-align:top}
+    th{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--mut);font-weight:800;background:rgba(255,255,255,.02)}
+    tbody tr:hover{background:rgba(255,255,255,.02)}
+    .money{font-weight:800;white-space:nowrap}
+    .total-row td{border-bottom:0;padding-top:14px;font-weight:900;font-size:15px}
+    .total-row .money{color:var(--brand-light);font-size:18px}
+    .checklist{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+    .checklist li{
+      display:grid;grid-template-columns:22px 1fr;gap:10px;align-items:start;
+      padding:12px 14px;border-radius:12px;border:1px solid var(--bd);background:var(--surf2);
+    }
+    .checklist .box-check{
+      width:18px;height:18px;border-radius:5px;border:1.5px solid rgba(229,9,21,.55);
+      margin-top:1px;background:rgba(229,9,21,.08);
+    }
+    .checklist .txt{font-size:13px;color:#e5e5e5}
+    .checklist .txt strong{color:#fff}
+    .tag{
+      display:inline-block;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:700;
+      background:rgba(229,9,21,.12);color:#fecaca;border:1px solid rgba(229,9,21,.28);
+    }
+    .tag.ok{background:rgba(34,197,94,.12);color:var(--ok);border-color:rgba(34,197,94,.28)}
+    .tag.info{background:rgba(96,165,250,.12);color:var(--info);border-color:rgba(96,165,250,.28)}
+    .tag.warn{background:rgba(250,204,21,.1);color:var(--warn);border-color:rgba(250,204,21,.28)}
+    footer{
+      text-align:center;color:var(--mut);font-size:11px;margin-top:26px;padding-top:18px;border-top:1px solid var(--bd);
+    }
+    @media print{
+      body{background:#fff;color:#111;background-image:none}
+      .top,.nav{position:static;background:#fff;color:#111}
+      .section,.kpi,.hero,.box,.step{break-inside:avoid;background:#fff;border-color:#ddd;color:#111}
+      .hero .lead,.box .d,.step-body .desc,.kpi .l{color:#444}
+      .pill,.chip{border-color:#ccc;color:#333}
+      a{color:#111}
+    }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="logo">V4 <span>COMPANY</span> · Colli&amp;CO</div>
+    <div class="pills">
+      <span class="pill live">Plano de Ação · Pré-evento</span>
+      <span class="pill">18/08/2026</span>
+      <span class="pill">HQ Campinas</span>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="eyebrow">Fábrica de Receita · Antes do evento principal</div>
+        <h1>Recepção Colli&amp;CO</h1>
+        <p class="lead">
+          Experiência personalizada para <strong>15 convidados</strong> da fase de
+          <strong>Estruturação Estratégica</strong> — reforçar autoridade da Colli,
+          aquecer desejo de performance e criar conexão antes da Fábrica de Receita.
+        </p>
+        <div class="meta-row">
+          <span class="chip"><strong>Data:</strong> Sexta, 18/08/2026</span>
+          <span class="chip"><strong>Horário:</strong> 11h30 – 12h30</span>
+          <span class="chip"><strong>Local:</strong> Sala reservada · HQ V4 Campinas</span>
+          <span class="chip"><strong>Depois:</strong> Fábrica de Receita 13h30 – 20h</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="kpis">
+      <div class="kpi"><div class="v red">15</div><div class="l">Convidados</div></div>
+      <div class="kpi"><div class="v">60 min</div><div class="l">Recepção</div></div>
+      <div class="kpi"><div class="v">R$650</div><div class="l">Café personalizado</div></div>
+      <div class="kpi"><div class="v">Pitch</div><div class="l">Previsto no mês</div></div>
+    </div>
+
+    <nav class="nav">
+      <a href="#objetivo">Objetivo</a>
+      <a href="#convidados">Convidados</a>
+      <a href="#elenco">Elenco</a>
+      <a href="#fluxo">Fluxo</a>
+      <a href="#conteudo">Conteúdo</a>
+      <a href="#investimento">Investimento</a>
+      <a href="#checklist">Checklist</a>
+    </nav>
+
+    <section class="section" id="objetivo">
+      <h2>01 · Estratégia</h2>
+      <h3>Por que existe essa recepção</h3>
+      <div class="callout ok">
+        <strong>Objetivo central:</strong> fazer o institucional da Colli com um sócio para reforçar autoridade,
+        gerar performance percebida e criar desejo — com clientes que estão em EE / Saber e vão ao evento no mesmo dia.
+      </div>
+      <div class="grid2">
+        <div class="box">
+          <div class="t">O que queremos que sintam</div>
+          <div class="d">“A Colli/V4 me vê, me prioriza e tem método.” Autoridade + exclusividade + desejo de avançar no pitch.</div>
+        </div>
+        <div class="box">
+          <div class="t">O que queremos que façam</div>
+          <div class="d">Chegar aquecidos na Fábrica, publicar o café personalizado, lembrar do case Saber → Executar e abrir espaço para o pitch do mês.</div>
+        </div>
+        <div class="box">
+          <div class="t">Por que agora</div>
+          <div class="d">Contas em desenvolvimento na semana, todas com pitch previsto ainda neste mês. O evento principal abre a porta; a recepção cria a diferença.</div>
+        </div>
+        <div class="box">
+          <div class="t">Não é</div>
+          <div class="d">Não é coffee solto nem tour genérico. É sala reservada + narrativa + prova social + ponte clara para o pitch.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="convidados">
+      <h2>02 · Público</h2>
+      <h3>Quem entra na sala</h3>
+      <div class="callout info">
+        <strong>Perfil:</strong> clientes em <strong>Estruturação Estratégica</strong>, em desenvolvimento na semana —
+        todos com <strong>pitch previsto para este mês</strong>. Capacidade planejada: <strong>15 convidados</strong>.
+      </div>
+      <div class="grid2">
+        <div class="box">
+          <div class="t">Filtro de entrada</div>
+          <div class="d">
+            · Fase Saber / EE<br />
+            · Em desenvolvimento na semana<br />
+            · Confirmados na Fábrica de Receita<br />
+            · Pitch ainda no mês
+          </div>
+        </div>
+        <div class="box">
+          <div class="t">Controle</div>
+          <div class="d">
+            · Lista nominativa na planilha de confirmação<br />
+            · Sócio / acompanhante só se couber no limite<br />
+            · Bater cadastro com a matriz antes do dia
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="elenco">
+      <h2>03 · Elenco na sala</h2>
+      <h3>Quem precisa estar</h3>
+      <div class="grid2">
+        <div class="box">
+          <div class="t">Sócio Colli <span class="tag">Obrigatório</span></div>
+          <div class="d">Conduz o institucional (~10 min). Autoridade e narrativa da casa.</div>
+        </div>
+        <div class="box">
+          <div class="t">Coordenadora do Saber <span class="tag info">Obrigatório</span></div>
+          <div class="d">Acompanha a recepção, ancora a jornada EE e o case Saber → Executar.</div>
+        </div>
+        <div class="box">
+          <div class="t">Farmer / anfitriã</div>
+          <div class="d">Recebe, controla fluxo, coffee, fotos, brinde e ponte para a Fábrica.</div>
+        </div>
+        <div class="box">
+          <div class="t">Case Saber → Executar</div>
+          <div class="d">Prova viva: alguém que saiu do Saber e avançou para Executar. 15 min de storytelling + resultado.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="fluxo">
+      <h2>04 · Fluxo do dia</h2>
+      <h3>11h30 → 12h30 · minuto a minuto</h3>
+      <div class="callout">
+        <strong>Regra de ouro:</strong> coffee e fotos rodam em paralelo desde a chegada.
+        O conteúdo (institucional + case) é o núcleo; o tour e o brinde fecham a experiência antes da Fábrica.
+      </div>
+      <div class="flow">
+        <div class="step">
+          <div class="step-time"><div class="h">11:30</div><div class="m">10 min</div></div>
+          <div class="step-body">
+            <div class="title">Chegada e recepção</div>
+            <div class="desc">Receber na sala reservada, credenciar, apresentar anfitriões, liberar mini café personalizado e estimular fotos / publicação.</div>
+            <div class="owner">Dono: Farmer · Apoio: time Colli</div>
+          </div>
+        </div>
+        <div class="step highlight">
+          <div class="step-time"><div class="h">11:40</div><div class="m">10 min</div></div>
+          <div class="step-body">
+            <div class="title">Institucional Colli com sócio</div>
+            <div class="desc">Autoridade da casa, posicionamento e por que esses clientes foram escolhidos. Criar desejo e reforçar que estão no lugar certo.</div>
+            <div class="owner">Dono: Sócio Colli</div>
+          </div>
+        </div>
+        <div class="step highlight">
+          <div class="step-time"><div class="h">11:50</div><div class="m">15 min</div></div>
+          <div class="step-body">
+            <div class="title">Case Saber → Executar</div>
+            <div class="desc">História real: diagnóstico, virada e resultado. Coordenadora do Saber ancora o método; o case prova o caminho possível para quem está em EE.</div>
+            <div class="owner">Dono: Coordenadora do Saber + case convidado</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-time"><div class="h">12:05</div><div class="m">15 min</div></div>
+          <div class="step-body">
+            <div class="title">Tour pelo camp (em grupo)</div>
+            <div class="desc">Percurso pela sede: ambiente, cultura e operação. Manter tom de exclusividade — “vocês estão vendo a casa por dentro”.</div>
+            <div class="owner">Dono: Farmer / anfitrião</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-time"><div class="h">12:20</div><div class="m">10 min</div></div>
+          <div class="step-body">
+            <div class="title">Brinde + fechamento + ponte</div>
+            <div class="desc">Presentear (brinde a definir), reforçar o valor do dia e direcionar o grupo para a Fábrica de Receita (início 13h30).</div>
+            <div class="owner">Dono: Farmer · Brinde: a definir</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="conteudo">
+      <h2>05 · Roteiro de conteúdo</h2>
+      <h3>O que precisa estar amarrado antes do dia</h3>
+      <div class="grid2">
+        <div class="box">
+          <div class="t">Institucional Colli · 10 min</div>
+          <div class="d">
+            1. Quem somos e por que existimos<br />
+            2. Como operamos performance de verdade<br />
+            3. Por que esses 15 foram priorizados<br />
+            4. Convite implícito: “o próximo passo é natural”
+          </div>
+        </div>
+        <div class="box">
+          <div class="t">Case Saber → Executar · 15 min</div>
+          <div class="d">
+            1. Cenário antes (dor / travas)<br />
+            2. O que o Saber destravou<br />
+            3. Por que viraram Executar<br />
+            4. Resultado / aprendizado aplicável à sala
+          </div>
+        </div>
+      </div>
+      <div class="callout danger" style="margin-top:12px">
+        <strong>Pendências críticas:</strong> confirmar sócio Colli · confirmar coordenadora do Saber · escolher e briefar o case · definir o brinde.
+      </div>
+    </section>
+
+    <section class="section" id="investimento">
+      <h2>06 · Investimento</h2>
+      <h3>Coffee personalizado Colli</h3>
+      <div class="callout ok">
+        <strong>Função do coffee:</strong> recepcionar + gerar foto/publicação. Os lanches personalizados da Colli são mídia e prova de cuidado — não só lanche.
+      </div>
+      <div style="overflow-x:auto;border-radius:12px;border:1px solid var(--bd)">
+        <table>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Qtd</th>
+              <th>Valor</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Pão de queijo</td>
+              <td>25 un.</td>
+              <td class="money">R$ 75,00</td>
+            </tr>
+            <tr>
+              <td>Mini lanche peito de peru e queijo</td>
+              <td>25 un.</td>
+              <td class="money">R$ 162,50</td>
+            </tr>
+            <tr>
+              <td>Mini bolo</td>
+              <td>25 un.</td>
+              <td class="money">R$ 137,50</td>
+            </tr>
+            <tr>
+              <td>Mini salada de fruta</td>
+              <td>25 un.</td>
+              <td class="money">R$ 175,00</td>
+            </tr>
+            <tr>
+              <td>Suco</td>
+              <td>5 L</td>
+              <td class="money">R$ 100,00</td>
+            </tr>
+            <tr class="total-row">
+              <td colspan="2">Total café personalizado</td>
+              <td class="money">R$ 650,00</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin:12px 0 0;color:var(--mut);font-size:12px">
+        Brinde: <span class="tag warn">a definir</span> · fora deste total · incluir no checklist de compra.
+      </p>
+    </section>
+
+    <section class="section" id="checklist">
+      <h2>07 · Checklist de execução</h2>
+      <h3>Antes · no dia · depois</h3>
+      <div class="grid2">
+        <div>
+          <div class="box" style="margin-bottom:12px"><div class="t">Antes do 18/08</div></div>
+          <ul class="checklist">
+            <li><span class="box-check"></span><span class="txt"><strong>Lista final</strong> dos 15 convidados (nome + empresa + contato)</span></li>
+            <li><span class="box-check"></span><span class="txt"><strong>Confirmar</strong> sócio Colli + coordenadora do Saber</span></li>
+            <li><span class="box-check"></span><span class="txt"><strong>Escolher e briefar</strong> o case Saber → Executar</span></li>
+            <li><span class="box-check"></span><span class="txt"><strong>Reservar sala</strong> e alinhar tour do camp</span></li>
+            <li><span class="box-check"></span><span class="txt"><strong>Pedir coffee</strong> personalizado (R$650) e montar display pra foto</span></li>
+            <li><span class="box-check"></span><span class="txt"><strong>Definir e comprar</strong> brinde</span></li>
+            <li><span class="box-check"></span><span class="txt"><strong>Bater cadastros</strong> com a matriz (quem confirmou × quem se cadastrou)</span></li>
+          </ul>
+        </div>
+        <div>
+          <div class="box" style="margin-bottom:12px"><div class="t">No dia + depois</div></div>
+          <ul class="checklist">
+            <li><span class="box-check"></span><span class="txt"><strong>11h15</strong> — sala montada, coffee, brinde e roteiro impresso/celular</span></li>
+            <li><span class="box-check"></span><span class="txt"><strong>Receber</strong>, estimular foto/post e rodar o fluxo sem atraso</span></li>
+            <li><span class="box-check"></span><span class="txt"><strong>12h30</strong> — direcionar o grupo para a Fábrica de Receita</span></li>
+            <li><span class="box-check"></span><span class="txt"><strong>Registrar</strong> presença real vs lista (controle Farmer)</span></li>
+            <li><span class="box-check"></span><span class="txt"><strong>Pós:</strong> follow-up individual ancorando case + pitch do mês</span></li>
+            <li><span class="box-check"></span><span class="txt"><strong>Salvar prints</strong> de posts / menções do coffee personalizado</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>08 · Ponte comercial</h2>
+      <h3>Da recepção para o pitch</h3>
+      <div class="grid2">
+        <div class="box">
+          <div class="t">Durante a Fábrica</div>
+          <div class="d">Observar engajamento, anotar gatilhos e quem reagiu ao case / institucional. Não forçar pitch no evento — aquecer.</div>
+        </div>
+        <div class="box">
+          <div class="t">Semana seguinte</div>
+          <div class="d">Follow-up com referência à sala Colli + case visto. Objetivo: avançar o pitch já previsto no mês, com prova social fresca.</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      V4 · Colli&amp;CO · Recepção Fábrica de Receita · 18/08/2026 ·
+      <a href="farmer-sara.html">Hub Farmer Sara</a> ·
+      <a href="https://lp.v4company.com/fabrica-de-receita-agosto">LP do evento</a>
+    </footer>
+  </div>
+</body>
+</html>
