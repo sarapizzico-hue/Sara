@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Relatório E.E · Visão Gerente de Expansão · Ago/2026 · Sara & Marcelo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --brand:#e50915; --brand-light:#ff1a27; --brand-dim:rgba(229,9,21,.12);
+      --brand-glow:rgba(229,9,21,.35); --bg:#050505; --surf:rgba(20,20,20,.88);
+      --surf2:#141414; --glass:rgba(255,255,255,.04); --bd:rgba(255,255,255,.08);
+      --bd-strong:rgba(255,255,255,.14); --txt:#fafafa; --mut:#a3a3a3;
+      --ok:#22c55e; --warn:#facc15; --danger:#f87171; --info:#60a5fa;
+      --radius:16px; --shadow:0 24px 80px rgba(0,0,0,.55);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;background:var(--bg);color:var(--txt);
+      font:15px/1.6 Inter,system-ui,sans-serif;padding-bottom:80px;
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% -20%,rgba(229,9,21,.18),transparent),
+        radial-gradient(circle at 100% 0%,rgba(229,9,21,.06),transparent 40%);
+    }
+    a{color:#fca5a5;text-decoration:none}
+    a:hover{color:#fff}
+    .topbar{
+      position:sticky;top:0;z-index:100;backdrop-filter:blur(16px);
+      background:rgba(5,5,5,.9);border-bottom:1px solid var(--bd);
+      padding:12px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;
+    }
+    .v4-logo{font-weight:900;font-size:18px;letter-spacing:-.02em}
+    .v4-logo span{color:var(--brand-light)}
+    .sync-pill{
+      display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:600;
+      color:var(--mut);background:var(--glass);border:1px solid var(--bd);padding:6px 12px;border-radius:999px;
+    }
+    .sync-dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok)}
+    .wrap{max-width:1180px;margin:0 auto;padding:28px 24px 0}
+    .hero{
+      position:relative;border-radius:var(--radius);padding:34px 32px;margin-bottom:20px;
+      background:linear-gradient(135deg,rgba(229,9,21,.16) 0%,rgba(20,20,20,.92) 48%,var(--surf2) 100%);
+      border:1px solid var(--bd-strong);box-shadow:var(--shadow);overflow:hidden;
+    }
+    .hero::after{
+      content:'';position:absolute;top:-40%;right:-8%;width:340px;height:340px;border-radius:50%;
+      background:radial-gradient(circle,var(--brand-glow),transparent 70%);pointer-events:none;
+    }
+    .hero-inner{position:relative;z-index:1}
+    .hero-eyebrow{
+      display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:800;
+      letter-spacing:.14em;text-transform:uppercase;color:#fca5a5;margin-bottom:10px;
+    }
+    .hero-eyebrow::before{content:'';width:24px;height:3px;background:var(--brand);border-radius:2px}
+    .hero h1{margin:0 0 12px;font-size:clamp(26px,4vw,40px);font-weight:900;letter-spacing:-.03em;line-height:1.1}
+    .hero .lead{color:var(--mut);font-size:15px;max-width:920px;margin:0 0 8px}
+    .hero .lead strong{color:var(--txt)}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+    .chip{
+      font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+      padding:5px 10px;border-radius:999px;border:1px solid var(--bd);background:var(--glass);color:var(--mut);
+    }
+    .chip.live{border-color:rgba(34,197,94,.35);color:#86efac}
+    .chip.warn{border-color:rgba(250,204,21,.35);color:#fde047}
+    .nav{
+      position:sticky;top:56px;z-index:90;margin:0 0 20px;padding:10px;
+      background:rgba(8,8,8,.94);backdrop-filter:blur(14px);border:1px solid var(--bd-strong);border-radius:16px;
+      display:flex;flex-wrap:wrap;gap:8px;
+    }
+    .nav a{
+      font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+      color:var(--mut);padding:8px 12px;border-radius:10px;border:1px solid transparent;
+    }
+    .nav a:hover{color:#fff;border-color:var(--bd);background:var(--surf2)}
+    .section{
+      background:var(--surf);border:1px solid var(--bd);border-radius:var(--radius);
+      padding:24px 26px;margin-bottom:16px;
+    }
+    .section h2{
+      margin:0 0 6px;font-size:22px;font-weight:900;letter-spacing:-.02em;
+    }
+    .section .eyebrow{
+      font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+      color:var(--mut);margin-bottom:8px;
+    }
+    .section .intro{color:var(--mut);margin:0 0 18px;max-width:920px}
+    .section .intro strong{color:var(--txt)}
+    .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:18px}
+    .kpi{background:var(--surf2);border:1px solid var(--bd);border-radius:14px;padding:16px 18px}
+    .kpi .v{font-size:26px;font-weight:900;line-height:1.05}
+    .kpi .v.ok{color:#86efac}.kpi .v.warn{color:#fde047}.kpi .v.danger{color:var(--danger)}.kpi .v.red{color:var(--brand-light)}
+    .kpi .l{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--mut);margin-top:8px;font-weight:700}
+    .kpi small{display:block;color:var(--mut);font-size:12px;margin-top:6px}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    @media(max-width:860px){.grid2{grid-template-columns:1fr}}
+    .card{
+      background:var(--surf2);border:1px solid var(--bd);border-radius:14px;padding:18px;
+    }
+    .card h3{margin:0 0 10px;font-size:15px;font-weight:800}
+    .card p,.card li{color:var(--mut);font-size:14px}
+    .card strong{color:var(--txt)}
+    .card ul{margin:0;padding-left:18px}
+    .card li{margin-bottom:6px}
+    table{width:100%;border-collapse:collapse;font-size:13px}
+    th,td{padding:11px 10px;text-align:left;border-bottom:1px solid var(--bd);vertical-align:top}
+    th{
+      font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--mut);
+      font-weight:800;background:rgba(255,255,255,.02);
+    }
+    tbody tr:hover{background:rgba(255,255,255,.02)}
+    .num{font-variant-numeric:tabular-nums;white-space:nowrap}
+    .tag{
+      display:inline-block;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:700;
+    }
+    .tag-ok{background:rgba(34,197,94,.14);color:#86efac}
+    .tag-warn{background:rgba(250,204,21,.12);color:#fde047}
+    .tag-bad{background:rgba(248,113,113,.14);color:#fca5a5}
+    .tag-info{background:rgba(96,165,250,.14);color:#93c5fd}
+    .tag-p0{background:rgba(229,9,21,.18);color:#fca5a5}
+    .tag-p1{background:rgba(250,204,21,.12);color:#fde047}
+    .tag-p2{background:rgba(255,255,255,.06);color:#d4d4d4}
+    .callout{
+      border:1px solid rgba(229,9,21,.35);background:linear-gradient(135deg,rgba(229,9,21,.14),rgba(20,20,20,.6));
+      border-radius:14px;padding:18px 20px;margin:16px 0;
+    }
+    .callout h3{margin:0 0 8px;font-size:18px;font-weight:900}
+    .callout p{margin:0;color:var(--mut)}
+    .callout strong{color:#fff}
+    .diag-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+    .diag{
+      border-radius:14px;padding:16px 18px;border:1px solid var(--bd);background:var(--surf2);
+    }
+    .diag .lbl{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+    .diag.problem .lbl{color:#fca5a5}
+    .diag.look .lbl{color:#93c5fd}
+    .diag.solve .lbl{color:#86efac}
+    .diag h4{margin:0 0 8px;font-size:15px}
+    .diag p{margin:0;color:var(--mut);font-size:13.5px}
+    .prio{display:flex;flex-direction:column;gap:10px}
+    .prio-item{
+      display:grid;grid-template-columns:48px 1fr auto;gap:14px;align-items:start;
+      background:var(--surf2);border:1px solid var(--bd);border-radius:14px;padding:16px 18px;
+    }
+    @media(max-width:700px){.prio-item{grid-template-columns:40px 1fr}}
+    .prio-item .n{
+      width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+      font-weight:900;background:rgba(229,9,21,.18);color:var(--brand-light);border:1px solid rgba(229,9,21,.35);
+    }
+    .prio-item h4{margin:0 0 6px;font-size:15px}
+    .prio-item p{margin:0;color:var(--mut);font-size:13.5px}
+    .prio-item strong{color:#fff}
+    .src{color:var(--mut);font-size:12px;margin-top:10px}
+    .footer-note{color:var(--mut);font-size:12px;text-align:center;padding:24px 0 8px}
+    .split-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    @media(max-width:900px){.split-3{grid-template-columns:1fr}}
+    .scenario{border-radius:14px;padding:18px;border:1px solid var(--bd);background:var(--surf2)}
+    .scenario h3{margin:0 0 4px;font-size:16px}
+    .scenario .amount{font-size:28px;font-weight:900;margin:8px 0}
+    .scenario.bad .amount{color:var(--danger)}
+    .scenario.warn .amount{color:#fde047}
+    .scenario.ok .amount{color:#86efac}
+    .scenario ul{margin:10px 0 0;padding-left:18px;color:var(--mut);font-size:13px}
+    .scenario li{margin-bottom:4px}
+    .scenario li strong{color:#fff}
+    .matrix{overflow-x:auto}
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="v4-logo">V4 <span>Expansão</span> · Relatório E.E</div>
+    <div class="sync-pill"><span class="sync-dot"></span> Dados 03/08 · Sara & Marcelo · só E.E</div>
+  </div>
+
+  <div class="wrap">
+    <header class="hero">
+      <div class="hero-inner">
+        <div class="hero-eyebrow">Gerente de Expansão · Debrief Jul + Plano Ago/2026</div>
+        <h1>E.E: o que está acontecendo e como destravar agosto.</h1>
+        <p class="lead">
+          Leitura gerencial exclusiva da frente <strong>Entrada Especial (Sara + Marcelo)</strong>.
+          Julho fechou <strong>6 wins / R$ 194.153</strong> com 25 pitches. O estoque aberto sozinho
+          não basta para superar julho — sem pitch novo, o chão cai para ~<strong>R$ 155k</strong>.
+          A saída está em <strong>fechar Follow/Aceito</strong>, <strong>gerar pitch</strong> a partir de Semana* + Entradas 07
+          e <strong>priorizar MEDIUM</strong>.
+        </p>
+        <div class="chips">
+          <span class="chip live">Escopo: só E.E</span>
+          <span class="chip">Farmers: Sara · Marcelo</span>
+          <span class="chip warn">Gate: pitch com data</span>
+          <span class="chip">Fonte: CRM + planilha E.E + Entradas 07</span>
+        </div>
+      </div>
+    </header>
+
+    <nav class="nav">
+      <a href="#veredito">Veredito</a>
+      <a href="#julho">Julho</a>
+      <a href="#pipe">Pipe aberto</a>
+      <a href="#entradas">Entradas 07</a>
+      <a href="#tier">Tier & projeção</a>
+      <a href="#cenarios">Cenários</a>
+      <a href="#diagnostico">Diagnóstico</a>
+      <a href="#plano">Plano de ação</a>
+      <a href="#cadencia">Cadência</a>
+    </nav>
+
+    <!-- VEREDITO -->
+    <section class="section" id="veredito">
+      <div class="eyebrow">1 · Veredito executivo</div>
+      <h2>Estamos com volume de pitch, mas conversão e mix ainda não pagam o upside.</h2>
+      <p class="intro">
+        Em julho a máquina <strong>gerou demanda</strong> (25 pitches — Sara 17 / Marcelo 8),
+        mas a cohorte ainda carrega <strong>11 opps abertas</strong> e conversão aparente de 28%.
+        O mix de wins foi puxado por <strong>Executar</strong> (4 de 6). Agosto sobe de patamar
+        se olharmos para quatro frentes: estoque quente, conversão pós-pitch, topo do funil e qualidade de tier.
+      </p>
+
+      <div class="kpis">
+        <div class="kpi">
+          <div class="v">R$ 194k</div>
+          <div class="l">TCV jul fechado</div>
+          <small>6 wins · TM R$ 32.359</small>
+        </div>
+        <div class="kpi">
+          <div class="v warn">28%</div>
+          <div class="l">Conv. cohorte jul</div>
+          <small>7 monetizados / 25 pitches</small>
+        </div>
+        <div class="kpi">
+          <div class="v">12</div>
+          <div class="l">Follow + Aceito agora</div>
+          <small>TCV est. R$ 690.084</small>
+        </div>
+        <div class="kpi">
+          <div class="v danger">~4,8</div>
+          <div class="l">Wins se não abrir pitch</div>
+          <small>Chão ~R$ 155k · abaixo de jul</small>
+        </div>
+        <div class="kpi">
+          <div class="v ok">R$ 294k</div>
+          <div class="l">Cenário realista ago</div>
+          <small>25 pitches × 36,4% · +52% vs jul</small>
+        </div>
+        <div class="kpi">
+          <div class="v red">MEDIUM</div>
+          <div class="l">Melhor alavanca</div>
+          <small>48,6% conv · TM ~R$ 59,8k</small>
+        </div>
+      </div>
+
+      <div class="callout">
+        <h3>Mensagem para a gestão</h3>
+        <p>
+          Não é problema de “falta de conta”. É problema de <strong>gestão de ciclo</strong>:
+          Aceito sem assinatura, Follow sem próximo passo datado, Semana* sem virar pitch,
+          e Entradas New 07 ainda fora da planilha E.E. Se a rotina semanal olhar só para TCV fechado,
+          agosto repete julho. Se olhar para <strong>pitch → Follow datado → Aceito → assinatura</strong>
+          e priorizar MEDIUM no kick-off, o cenário realista (~R$ 294k) vira o caminho base.
+        </p>
+      </div>
+    </section>
+
+    <!-- JULHO -->
+    <section class="section" id="julho">
+      <div class="eyebrow">2 · O que aconteceu em julho</div>
+      <h2>Funil E.E jul · cohorte de pitch (Sara + Marcelo).</h2>
+      <p class="intro">
+        Unidade do funil E.E = <strong>pitch com data</strong> (não reunião de Base Ativa).
+        Julho teve volume saudável de pitches; o gap está no pós-pitch e no mix de produto.
+      </p>
+
+      <div class="kpis">
+        <div class="kpi"><div class="v">25</div><div class="l">Pitches com data</div><small>Sara 17 · Marcelo 8</small></div>
+        <div class="kpi"><div class="v ok">7</div><div class="l">Monetizados na cohorte</div><small>Conv. 28,0%</small></div>
+        <div class="kpi"><div class="v">6</div><div class="l">Fechamentos do mês</div><small>R$ 194.153,41</small></div>
+        <div class="kpi"><div class="v warn">11</div><div class="l">Ainda abertos na cohorte</div><small>Follow 9 · Aceito 2</small></div>
+        <div class="kpi"><div class="v danger">6</div><div class="l">Drops</div><small>Timing 2 · Budget 2 · Sem motivo 2</small></div>
+        <div class="kpi"><div class="v">13,8d</div><div class="l">TTC médio</div><small>Ciclo razoável quando fecha</small></div>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <h3>Funil da cohorte</h3>
+          <div class="matrix">
+            <table>
+              <thead><tr><th>Etapa</th><th>Qtd</th><th>Leitura gerencial</th></tr></thead>
+              <tbody>
+                <tr><td>Pitches com data</td><td class="num">25</td><td>Topo aconteceu — capacidade existe</td></tr>
+                <tr><td>Monetizado / Já</td><td class="num">7</td><td>28% aparente; ainda há Follow aberto</td></tr>
+                <tr><td>Follow</td><td class="num">9</td><td>Maior risco de evaporação</td></tr>
+                <tr><td>Aceito</td><td class="num">2</td><td>Dinheiro na mesa — falta assinatura</td></tr>
+                <tr><td>Drop</td><td class="num">6</td><td>1/3 sem motivo documentado</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="src">Entre concluídos (6 win ÷ 6 drop) a conversão sobe para 50%. Ou seja: quando o ciclo fecha, converte bem. O problema é ciclo aberto sem disciplina.</p>
+        </div>
+        <div class="card">
+          <h3>Wins por produto (fechamento mês)</h3>
+          <div class="matrix">
+            <table>
+              <thead><tr><th>Produto</th><th>Wins</th><th>TCV</th></tr></thead>
+              <tbody>
+                <tr><td>Executar</td><td class="num">4</td><td class="num">R$ 150.395,70</td></tr>
+                <tr><td>Saber</td><td class="num">1</td><td class="num">R$ 28.518,00</td></tr>
+                <tr><td>Saber + Ter</td><td class="num">1</td><td class="num">R$ 15.239,71</td></tr>
+                <tr><td><strong>Total</strong></td><td class="num"><strong>6</strong></td><td class="num"><strong>R$ 194.153,41</strong></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="src">Mix $: Saber R$ 39.757 · Ter R$ 4.000 · Executar fee R$ 19.715. TCV alto veio de Executar; para expansão sustentável, EQV / SABER·TER precisam entrar mais cedo no kick-off.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PIPE -->
+    <section class="section" id="pipe">
+      <div class="eyebrow">3 · Pipe aberto agora</div>
+      <h2>30 abertas no CRM · o dinheiro está no Follow e no Aceito.</h2>
+      <p class="intro">
+        Dump atual: <strong>Aceito 2 · Follow 10 · Semana* 18</strong>.
+        Pitch com data já em agosto: 2 (Knowledge 03/08 · AP Equipamentos 11/08).
+        Abaixo, o estoque quente (Aceito + Follow) com priorização gerencial.
+      </p>
+
+      <div class="callout">
+        <h3>Como ler este pipe</h3>
+        <p>
+          <strong>Aceito</strong> = fechar assinatura esta semana ou declarar bloqueio.
+          <strong>Follow &gt;14 dias</strong> = data de devolutiva ou DROP com motivo.
+          <strong>Semana*</strong> = ainda não é forecast; só vira número depois do pitch com data.
+        </p>
+      </div>
+
+      <div class="matrix">
+        <table>
+          <thead>
+            <tr>
+              <th>Prio</th><th>Conta</th><th>Farmer</th><th>Squad</th><th>Status</th><th>TCV est.</th><th>O que olhar</th><th>Como resolver</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="tag tag-p0">P0</span></td>
+              <td>Adriano Martins Cardoso (BS)</td>
+              <td>Sara</td><td>Exclusive</td><td>Aceito</td>
+              <td class="num">R$ 65.994</td>
+              <td>Assinatura pendente</td>
+              <td>Ritual diário até assinar · remover qualquer atrito de contrato</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-p0">P0</span></td>
+              <td>Tchau Entrega (BS)</td>
+              <td>Marcelo</td><td>Exclusive</td><td>Aceito</td>
+              <td class="num">R$ 52.200</td>
+              <td>Nova proposta (orgânico) · risco de timing</td>
+              <td>Validar proposta e fechar janela esta semana</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-p0">P0</span></td>
+              <td>Motéis Fortaleza (BM)</td>
+              <td>Sara</td><td>Billions</td><td>Follow</td>
+              <td class="num">R$ 194.717</td>
+              <td>Maior TCV do Follow · devolutiva</td>
+              <td>Call de devolutiva com próximo passo datado · não deixar “marcando”</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-p0">P0</span></td>
+              <td>Dakar Automotive Center (BS)</td>
+              <td>Sara</td><td>Billions</td><td>Follow</td>
+              <td class="num">R$ 83.202</td>
+              <td>Gostou · avaliando cartão/pagamento</td>
+              <td>Destravar forma de pagamento · oferecer alternativa (Pix/boleto) se cartão travar</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-p1">P1</span></td>
+              <td>AGM Distribuidora (BS)</td>
+              <td>Sara</td><td>Exclusive</td><td>Follow</td>
+              <td class="num">R$ 74.198</td>
+              <td>Gostou · freio financeiro</td>
+              <td>Reescopar / fasear · prazo máximo de resposta · DROP se estourar</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-p1">P1</span></td>
+              <td>Loteria Caimbá (BS)</td>
+              <td>Marcelo</td><td>Exclusive</td><td>Follow</td>
+              <td class="num">R$ 54.000</td>
+              <td>Pitch 17/07 · ciclo longo</td>
+              <td>Forçar data ou motivo DROP · não manter Follow “zumbi”</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-p1">P1</span></td>
+              <td>Global Cotton (BM)</td>
+              <td>Marcelo</td><td>Invictus</td><td>Follow</td>
+              <td class="num">R$ 49.051</td>
+              <td>Só assina presencial · PA desalinhado</td>
+              <td>Presencial 06/08 com plano de ação alinhado antes da visita</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-p1">P1</span></td>
+              <td>CYber Guru</td>
+              <td>Marcelo</td><td>Exclusive</td><td>Follow</td>
+              <td class="num">R$ 33.000</td>
+              <td>No-show recuperado</td>
+              <td>Recuperar na mesma semana · nova data + confirmação dupla</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-p2">P2</span></td>
+              <td>Rota da Linguiça (BS)</td>
+              <td>Sara</td><td>Invictus</td><td>Follow</td>
+              <td class="num">R$ 28.400</td>
+              <td>No-show · saúde do cliente</td>
+              <td>Manter nurturing leve · não forçar · reavaliar em 7–14d</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-p2">P2</span></td>
+              <td>Protesol Tendas (BS)</td>
+              <td>Sara</td><td>Invictus</td><td>Follow</td>
+              <td class="num">R$ 23.400</td>
+              <td>Preço “salgado”</td>
+              <td>Reescopo ZapFirst / fase 1 · ou DROP Budget com motivo</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-p2">P2</span></td>
+              <td>Ecofitness Aldeia (BS)</td>
+              <td>Sara</td><td>Exclusive</td><td>Follow</td>
+              <td class="num">R$ 17.400</td>
+              <td>Montar proposta EQV</td>
+              <td>Entregar proposta + data de devolutiva na mesma sprint</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-p2">P2</span></td>
+              <td>Estação Delta (BM)</td>
+              <td>Sara</td><td>Exclusive</td><td>Follow</td>
+              <td class="num">R$ 14.523</td>
+              <td>Devolutiva 31/07</td>
+              <td>Fechar ciclo: aceita / faseia / DROP</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="src">Soma Aceito+Follow listados ≈ R$ 690k TCV estimado. Referência histórica por tier aponta ~4,8 wins se não houver pitch novo — insuficiente para bater julho.</p>
+    </section>
+
+    <!-- ENTRADAS -->
+    <section class="section" id="entradas">
+      <div class="eyebrow">4 · Entradas New 07 · combustível de agosto</div>
+      <h2>28 ganhos em julho · 14 ainda fora da planilha E.E.</h2>
+      <p class="intro">
+        Entradas [Aquisição] com Data de Ganho 07/2026: <strong>28 contas · R$ 515.268 TCV</strong>
+        (quase todas E.E pontual). Na planilha E.E (Sara/Marcelo) já estão 14.
+        As outras 14 são a principal fonte de <strong>pitch novo</strong> via kick-off → EQV / SABER·TER.
+      </p>
+
+      <div class="kpis">
+        <div class="kpi"><div class="v">28</div><div class="l">Entradas New 07</div><small>R$ 515.268 TCV</small></div>
+        <div class="kpi"><div class="v ok">14</div><div class="l">Já na planilha E.E</div><small>Match Sara/Marcelo</small></div>
+        <div class="kpi"><div class="v warn">14</div><div class="l">Fora · mapear</div><small>EQV / SABER·TER no KO</small></div>
+        <div class="kpi"><div class="v red">17</div><div class="l">MEDIUM+</div><small>MEDIUM 15 · LARGE 2</small></div>
+      </div>
+
+      <div class="grid2" style="margin-bottom:16px">
+        <div class="card">
+          <h3>Prioridade de mapeamento (sem Executar na entrada)</h3>
+          <ul>
+            <li><strong>MEDIUM primeiro:</strong> Rhama Analysis, Wollp, MBFlex Express, Castanheira, Dental Muller, R.Chagas, Splendor Elétrica</li>
+            <li><strong>SMALL volume:</strong> Mantiqueira, Mundi Sport, Clínica Polivida, Biju Mania</li>
+            <li><strong>TINY:</strong> MB Comércio — só SABER·TER pontual (EQV só com fit claro)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Já entraram com Executar · não forçar EQV cedo</h3>
+          <ul>
+            <li><strong>J.N Vinatex / Ravi tecidos</strong> — R$ 47,6k · estabilizar entrega → próxima tese</li>
+            <li><strong>Clube do Sonho</strong> — R$ 39,6k · mesma lógica</li>
+            <li>Forçar EQV cedo nestes dois aumenta risco de atrito e churn de percepção.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="matrix">
+        <table>
+          <thead>
+            <tr><th>Conta</th><th>Tier</th><th>Mix</th><th>TCV entrada</th><th>Mapa no kick-off</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Rhama Analysis (LM)</td><td>MEDIUM</td><td>E.E</td><td class="num">R$ 19.600</td><td>EQV / estruturação e/ou SABER·TER</td></tr>
+            <tr><td>Wollp (BM)</td><td>MEDIUM</td><td>E.E</td><td class="num">R$ 15.000</td><td>EQV / SABER·TER</td></tr>
+            <tr><td>MBFlex Express (BM)</td><td>MEDIUM</td><td>E.E</td><td class="num">R$ 14.612</td><td>EQV / SABER·TER</td></tr>
+            <tr><td>Castanheira (LM)</td><td>MEDIUM</td><td>E.E</td><td class="num">R$ 14.050</td><td>EQV / SABER·TER</td></tr>
+            <tr><td>Dental Muller (LM)</td><td>MEDIUM</td><td>E.E</td><td class="num">R$ 12.000</td><td>EQV / SABER·TER</td></tr>
+            <tr><td>R.Chagas Ltda (BM)</td><td>MEDIUM</td><td>E.E</td><td class="num">R$ 12.000</td><td>EQV / SABER·TER</td></tr>
+            <tr><td>Splendor Elétrica (BM)</td><td>MEDIUM</td><td>E.E</td><td class="num">R$ 12.000</td><td>EQV / SABER·TER</td></tr>
+            <tr><td>Mantiqueira Recauchutadora (LS)</td><td>SMALL</td><td>E.E</td><td class="num">R$ 19.108</td><td>EQV enxuto / SABER·TER</td></tr>
+            <tr><td>Mundi Sport (LS)</td><td>SMALL</td><td>E.E</td><td class="num">R$ 15.000</td><td>EQV enxuto / SABER·TER</td></tr>
+            <tr><td>Clínica Polivida (BS)</td><td>SMALL</td><td>E.E</td><td class="num">R$ 12.000</td><td>EQV enxuto / SABER·TER</td></tr>
+            <tr><td>Biju Mania (RecS)</td><td>SMALL</td><td>E.E</td><td class="num">R$ 12.000</td><td>EQV enxuto / SABER·TER</td></tr>
+            <tr><td>MB Comércio (RecT)</td><td>TINY</td><td>E.E</td><td class="num">R$ 17.400</td><td>Só SABER·TER pontual</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- TIER -->
+    <section class="section" id="tier">
+      <div class="eyebrow">5 · O que o histórico por tier sustenta</div>
+      <h2>MEDIUM converte mais e com ticket maior. SMALL é volume.</h2>
+      <p class="intro">
+        Taxas = Monetizado ÷ pitches (Sara/Marcelo, Data do pitch abr–jul).
+        Projeção de referência só multiplica estoque <strong>Follow/Aceito</strong>.
+        Semana* e Entradas 07 só entram depois de virar pitch.
+      </p>
+
+      <div class="kpis">
+        <div class="kpi"><div class="v ok">36,4%</div><div class="l">Conv. abr–jul</div><small>36 / 99 pitches</small></div>
+        <div class="kpi"><div class="v warn">28,0%</div><div class="l">Conv. jul (cohorte)</div><small>Puxada por Follow aberto</small></div>
+        <div class="kpi"><div class="v">50%</div><div class="l">Conv. jul concluídos</div><small>6 win ÷ (6+6 drop)</small></div>
+        <div class="kpi"><div class="v ok">48,6%</div><div class="l">MEDIUM hist.</div><small>TM win ~R$ 59.817</small></div>
+      </div>
+
+      <div class="matrix" style="margin-bottom:16px">
+        <table>
+          <thead>
+            <tr><th>Tier</th><th>Pitches</th><th>Conv.</th><th>TM win</th><th>Pitches jul</th><th>Conv. jul</th><th>Leitura</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>MEDIUM</strong></td>
+              <td class="num">35</td><td class="num">48,6%</td><td class="num">R$ 59.817</td>
+              <td class="num">5</td><td class="num">40,0%</td>
+              <td><span class="tag tag-ok">Prioridade de agenda</span></td>
+            </tr>
+            <tr>
+              <td><strong>SMALL</strong></td>
+              <td class="num">49</td><td class="num">36,7%</td><td class="num">R$ 38.508</td>
+              <td class="num">17</td><td class="num">23,5%</td>
+              <td><span class="tag tag-info">Volume · EQV enxuto</span></td>
+            </tr>
+            <tr>
+              <td><strong>TINY</strong></td>
+              <td class="num">9</td><td class="num">11,1%</td><td class="num">—</td>
+              <td class="num">2</td><td class="num">50,0%</td>
+              <td><span class="tag tag-warn">Amostra fraca · só pontual</span></td>
+            </tr>
+            <tr>
+              <td><strong>LARGE</strong></td>
+              <td class="num">2</td><td class="num">0,0%</td><td class="num">—</td>
+              <td class="num">0</td><td class="num">0%</td>
+              <td><span class="tag tag-bad">Não projetar com taxa própria</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <h3>Estoque FA → referência (não é meta)</h3>
+          <table>
+            <thead><tr><th>Tier</th><th>FA</th><th>Taxa</th><th>Wins ref.</th><th>TCV ref.</th></tr></thead>
+            <tbody>
+              <tr><td>SMALL</td><td class="num">8</td><td class="num">36,7%</td><td class="num">2,9</td><td class="num">R$ 146.357</td></tr>
+              <tr><td>MEDIUM</td><td class="num">3</td><td class="num">48,6%</td><td class="num">1,5</td><td class="num">R$ 125.529</td></tr>
+              <tr><td>sem_tier</td><td class="num">1</td><td class="num">36,4%</td><td class="num">0,4</td><td class="num">R$ 12.012</td></tr>
+              <tr><td><strong>Total</strong></td><td class="num"><strong>12</strong></td><td class="num">—</td><td class="num"><strong>4,8</strong></td><td class="num"><strong>R$ 283.899*</strong></td></tr>
+            </tbody>
+          </table>
+          <p class="src">*TCV ref. por taxa×TM hist. Por TM jul, o chão cai para ~R$ 155k. Em qualquer leitura: FA sozinho &lt; julho (6 wins).</p>
+        </div>
+        <div class="card">
+          <h3>Topo do funil (ainda sem taxa)</h3>
+          <table>
+            <thead><tr><th>Fonte</th><th>Qtd</th><th>Próximo gate</th></tr></thead>
+            <tbody>
+              <tr><td>Semana* abertas</td><td class="num">18</td><td>Virar pitch com data</td></tr>
+              <tr><td>Entradas 07 fora p/ mapear</td><td class="num">13</td><td>Kick-off → EQV/SABER·TER → pitch</td></tr>
+              <tr><td>··· MEDIUM</td><td class="num">8</td><td>Prioridade máxima</td></tr>
+              <tr><td>··· SMALL</td><td class="num">4</td><td>Volume controlado</td></tr>
+              <tr><td>··· TINY</td><td class="num">1</td><td>Só pontual</td></tr>
+              <tr><td>Patamar pitches jul</td><td class="num">25</td><td>Piso operacional de ago</td></tr>
+            </tbody>
+          </table>
+          <p class="src">Não multiplicar Semana*/Entradas por 28%. Contam como capacidade de topo, não como forecast.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CENARIOS -->
+    <section class="section" id="cenarios">
+      <div class="eyebrow">6 · Cenários agosto · P / R / O</div>
+      <h2>Fórmula: wins = pitches × conv · TCV = wins × TM.</h2>
+      <p class="intro">
+        Âncoras históricas (não inventadas). Jul fato: <strong>6 wins · R$ 194.153 · TM R$ 32.359 · 25 pitches</strong>.
+        Meta gerencial implícita: operar no <strong>Realista</strong> e construir condições do Otimista via mix MEDIUM.
+      </p>
+
+      <div class="split-3">
+        <div class="scenario bad">
+          <span class="tag tag-bad">Pessimista</span>
+          <div class="amount">R$ 183.298</div>
+          <div style="color:var(--mut);font-size:13px">5,6 wins · TM R$ 32.732 · −5,6% vs jul</div>
+          <ul>
+            <li><strong>20</strong> pitches</li>
+            <li>Conv. <strong>28%</strong> (cohorte jul)</li>
+            <li>Mix mais SMALL · volume abaixo do patamar</li>
+            <li>Resultado: perto/abaixo de julho</li>
+          </ul>
+        </div>
+        <div class="scenario warn">
+          <span class="tag tag-warn">Realista · caminho base</span>
+          <div class="amount">R$ 294.466</div>
+          <div style="color:var(--mut);font-size:13px">9,1 wins · TM R$ 32.359 · +51,7% vs jul</div>
+          <ul>
+            <li><strong>25</strong> pitches (repetir jul)</li>
+            <li>Conv. <strong>36,4%</strong> (abr–jul)</li>
+            <li>TM igual aos fechamentos jul</li>
+            <li>Já supera julho se a operação segurar ritmo</li>
+          </ul>
+        </div>
+        <div class="scenario ok">
+          <span class="tag tag-ok">Otimista</span>
+          <div class="amount">R$ 531.564</div>
+          <div style="color:var(--mut);font-size:13px">11,2 wins · TM R$ 47.461 · +174% vs jul</div>
+          <ul>
+            <li><strong>28</strong> pitches</li>
+            <li>Conv. <strong>40%</strong> (stretch MEDIUM jul)</li>
+            <li>Mix puxado a MEDIUM nas Entradas 07</li>
+            <li>+ fechar estoque Follow/Aceito</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout" style="margin-top:16px">
+        <h3>Chão sem pitch novo: ~R$ 155.323</h3>
+        <p>
+          ~4,8 wins × TM jul. Mensagem clara: <strong>limpar Follow não é estratégia de crescimento</strong> —
+          é higiene. Crescimento exige Semana* → pitch e kick-off das Entradas 07 com tese.
+        </p>
+      </div>
+    </section>
+
+    <!-- DIAGNOSTICO -->
+    <section class="section" id="diagnostico">
+      <div class="eyebrow">7 · Diagnóstico gerencial</div>
+      <h2>O que está acontecendo · o que olhar · como resolver.</h2>
+      <p class="intro">Quadro de decisão para a mesa de expansão. Cada linha liga sintoma → indicador → ação.</p>
+
+      <div class="diag-grid">
+        <div class="diag problem">
+          <div class="lbl">O que está acontecendo</div>
+          <h4>1. Ciclo pós-pitch aberto demais</h4>
+          <p>9 Follow + 2 Aceito na cohorte. Aceito sem assinatura e Follow sem data viram “TCV fantasma”.</p>
+        </div>
+        <div class="diag look">
+          <div class="lbl">Olhar para</div>
+          <h4>Aging do Follow/Aceito</h4>
+          <p>% Follow &gt;14d · dias em Aceito · % com próximo passo datado no CRM.</p>
+        </div>
+        <div class="diag solve">
+          <div class="lbl">Como resolver</div>
+          <h4>Ritual 2x/semana</h4>
+          <p>Aceito → assinatura. Follow &gt;14d → data ou DROP com motivo (Timing/Budget/Fit).</p>
+        </div>
+
+        <div class="diag problem">
+          <div class="lbl">O que está acontecendo</div>
+          <h4>2. Conversão aparente baixa (28%)</h4>
+          <p>Entre concluídos jul = 50%. A taxa cai porque o ciclo não fecha — não porque o pitch é ruim.</p>
+        </div>
+        <div class="diag look">
+          <div class="lbl">Olhar para</div>
+          <h4>Conv. concluídos vs cohorte</h4>
+          <p>Monetizado ÷ (Monetizado+Drop). No-shows na semana. Motivo de DROP preenchido.</p>
+        </div>
+        <div class="diag solve">
+          <div class="lbl">Como resolver</div>
+          <h4>Proposta + passo datado</h4>
+          <p>Todo Follow com proposta e data. Recuperar no-show na mesma semana. Cada +4pp em 25 pitches ≈ +1 win.</p>
+        </div>
+
+        <div class="diag problem">
+          <div class="lbl">O que está acontecendo</div>
+          <h4>3. Topo depende de virar pitch</h4>
+          <p>18 Semana* + 13 Entradas fora. Sem isso, o funil morre em 1 ciclo (~4,8 wins).</p>
+        </div>
+        <div class="diag look">
+          <div class="lbl">Olhar para</div>
+          <h4>Pitches/semana e KO feitos</h4>
+          <p>Pitches com data MTD · % Semana* convertida em pitch · # kick-offs Entradas 07 com tese.</p>
+        </div>
+        <div class="diag solve">
+          <div class="lbl">Como resolver</div>
+          <h4>Piso ≥ 25 pitches</h4>
+          <p>Agenda semanal de pitch a partir de Semana* + mapeamento EQV/SABER·TER nas Entradas 07.</p>
+        </div>
+
+        <div class="diag problem">
+          <div class="lbl">O que está acontecendo</div>
+          <h4>4. Mix SMALL demais no topo</h4>
+          <p>Jul: 17 pitches SMALL vs 5 MEDIUM. MEDIUM histórico converte 48,6% com TM ~R$ 60k.</p>
+        </div>
+        <div class="diag look">
+          <div class="lbl">Olhar para</div>
+          <h4>% pitches MEDIUM</h4>
+          <p>Share de pitch por tier · TCV e conv. por tier na semana · fila de KO MEDIUM.</p>
+        </div>
+        <div class="diag solve">
+          <div class="lbl">Como resolver</div>
+          <h4>MEDIUM primeiro na agenda</h4>
+          <p>8 MEDIUM fora da planilha entram primeiro. TINY só SABER·TER. Não gastar EQV pesado em tier fraco.</p>
+        </div>
+
+        <div class="diag problem">
+          <div class="lbl">O que está acontecendo</div>
+          <h4>5. Wins concentrados em Executar</h4>
+          <p>4/6 wins jul = Executar (R$ 150k). SABER·TER ainda é exceção — limita recorrência de expansão.</p>
+        </div>
+        <div class="diag look">
+          <div class="lbl">Olhar para</div>
+          <h4>Mix de tese no kick-off</h4>
+          <p># pitches EQV/SABER·TER · wins fee ≥ piso · taxa de upsell pós-Executar (após estabilizar).</p>
+        </div>
+        <div class="diag solve">
+          <div class="lbl">Como resolver</div>
+          <h4>Tese no KO, não no improviso</h4>
+          <p>Entradas pontuais E.E: mapear EQV/SABER·TER no kick-off. Quem já entrou com Executar: só depois da entrega estabilizar.</p>
+        </div>
+
+        <div class="diag problem">
+          <div class="lbl">O que está acontecendo</div>
+          <h4>6. Drops sem causa útil</h4>
+          <p>De 6 drops: 2 sem motivo. Sem causa, não há correção de playbook.</p>
+        </div>
+        <div class="diag look">
+          <div class="lbl">Olhar para</div>
+          <h4>% DROP com motivo</h4>
+          <p>Taxonomia: Timing · Budget · Fit · No-show · Concorrência. Meta: 100% classificado.</p>
+        </div>
+        <div class="diag solve">
+          <div class="lbl">Como resolver</div>
+          <h4>DROP obrigatório com tag</h4>
+          <p>Não arquivar Follow sem motivo. Revisar padrões na sexta (ex.: budget → reescopo; no-show → confirmação).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLANO -->
+    <section class="section" id="plano">
+      <div class="eyebrow">8 · Plano de ação · agosto</div>
+      <h2>Quatro alavancas. Ordem importa.</h2>
+      <p class="intro">
+        Sequência recomendada para a dupla Sara/Marcelo: primeiro proteger o dinheiro do estoque,
+        depois subir conversão, depois alimentar o topo, depois melhorar o mix.
+      </p>
+
+      <div class="prio">
+        <div class="prio-item">
+          <div class="n">1</div>
+          <div>
+            <h4>Fechar estoque Follow/Aceito (higiene que paga a conta)</h4>
+            <p>
+              <strong>Fato:</strong> 12 opps · ~R$ 690k TCV est.<br />
+              <strong>Ação:</strong> Adriano + Tchau Entrega (Aceito) com dono diário até assinatura.
+              Motéis Fortaleza, Dakar, AGM, Global Cotton com devolutiva datada nesta semana.
+              Follow &gt;14d sem data → DROP com motivo.<br />
+              <strong>Olhar:</strong> # Aceito abertos, aging médio Follow, TCV recuperado na semana.
+            </p>
+          </div>
+          <span class="tag tag-p0">P0</span>
+        </div>
+        <div class="prio-item">
+          <div class="n">2</div>
+          <div>
+            <h4>Subir conversão pós-pitch (28% → rumo a 36,4%)</h4>
+            <p>
+              <strong>Fato:</strong> Abr–jul 36,4% · concluídos jul 50%.<br />
+              <strong>Ação:</strong> Todo Follow com proposta + próximo passo datado.
+              No-show recuperado em ≤7 dias (padrão CYber Guru).<br />
+              <strong>Olhar:</strong> conv. cohorte MTD, conv. entre concluídos, % Follow com data.
+            </p>
+          </div>
+          <span class="tag tag-p0">P0</span>
+        </div>
+        <div class="prio-item">
+          <div class="n">3</div>
+          <div>
+            <h4>Gerar pitch novo (Semana* + Entradas 07)</h4>
+            <p>
+              <strong>Fato:</strong> 18 Semana* · 13 Entradas fora para mapear.<br />
+              <strong>Ação:</strong> Meta operacional ≥ <strong>25 pitches</strong> no mês.
+              Kick-off com tese EQV/SABER·TER nas 11 contas priorizadas (MEDIUM primeiro).<br />
+              <strong>Olhar:</strong> pitches com data/semana, # KO realizados, Semana* → pitch %.
+            </p>
+          </div>
+          <span class="tag tag-p0">P0</span>
+        </div>
+        <div class="prio-item">
+          <div class="n">4</div>
+          <div>
+            <h4>Priorizar MEDIUM (mesmo volume, mais TCV)</h4>
+            <p>
+              <strong>Fato:</strong> MEDIUM 48,6% conv · TM ~R$ 59,8k.<br />
+              <strong>Ação:</strong> Agenda de pitch/EQV primeiro nos 8 MEDIUM fora da planilha.
+              TINY só pontual. LARGE sem taxa própria — tratar caso a caso, sem “projetar”.<br />
+              <strong>Olhar:</strong> % pitches MEDIUM, TCV por tier, wins MEDIUM MTD.
+            </p>
+          </div>
+          <span class="tag tag-p1">P1</span>
+        </div>
+      </div>
+
+      <div class="grid2" style="margin-top:16px">
+        <div class="card">
+          <h3>Metas operacionais ago (E.E)</h3>
+          <table>
+            <thead><tr><th>Indicador</th><th>Jul</th><th>Alvo ago</th></tr></thead>
+            <tbody>
+              <tr><td>Pitches com data</td><td class="num">25</td><td class="num">≥ 25 (ideal 28)</td></tr>
+              <tr><td>Conv. cohorte</td><td class="num">28%</td><td class="num">≥ 36% (abr–jul)</td></tr>
+              <tr><td>Wins</td><td class="num">6</td><td class="num">≥ 9 (realista)</td></tr>
+              <tr><td>TCV</td><td class="num">R$ 194k</td><td class="num">≥ R$ 294k</td></tr>
+              <tr><td>% pitches MEDIUM</td><td class="num">20% (5/25)</td><td class="num">≥ 35%</td></tr>
+              <tr><td>Aceito sem assinatura &gt;7d</td><td class="num">—</td><td class="num">0</td></tr>
+              <tr><td>DROP sem motivo</td><td class="num">2/6</td><td class="num">0</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card">
+          <h3>Continuar · Parar · Testar (E.E)</h3>
+          <p><strong style="color:#86efac">Continuar</strong></p>
+          <ul>
+            <li>Volume de pitch no patamar 25+</li>
+            <li>TTC curto quando tese está pronta (~14d)</li>
+            <li>Dupla Sara/Marcelo com cobertura Exclusive + Billions + Invictus</li>
+          </ul>
+          <p style="margin-top:12px"><strong style="color:#fca5a5">Parar</strong></p>
+          <ul>
+            <li>Contar Semana* como forecast</li>
+            <li>Manter Follow sem data / Aceito sem dono de assinatura</li>
+            <li>Forçar EQV em conta que acabou de entrar com Executar</li>
+            <li>Gastar ciclo pesado em TINY</li>
+          </ul>
+          <p style="margin-top:12px"><strong style="color:#fde047">Testar</strong></p>
+          <ul>
+            <li>Fila MEDIUM no kick-off das Entradas 07</li>
+            <li>Reescopo rápido em objeção de budget (Dakar/AGM/Protesol)</li>
+            <li>Presencial só com PA alinhado (Global Cotton)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CADENCIA -->
+    <section class="section" id="cadencia">
+      <div class="eyebrow">9 · Cadência de gestão</div>
+      <h2>O que a expansão olha toda semana.</h2>
+      <p class="intro">Ritual mínimo para não operar no escuro. Sexta = scoreboard; terça = destravar.</p>
+
+      <div class="grid2">
+        <div class="card">
+          <h3>Terça · Destravar</h3>
+          <ul>
+            <li>Lista Aceito: status de assinatura (Sara/Marcelo)</li>
+            <li>Follow &gt;14d: data ou DROP</li>
+            <li>No-shows da semana anterior: reagendados?</li>
+            <li>Bloqueios de pagamento (cartão/Pix) com alternativa</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Sexta · Scoreboard E.E</h3>
+          <ul>
+            <li>Pitches com data (MTD vs 25)</li>
+            <li>Conv. cohorte e conv. concluídos</li>
+            <li>Wins + TCV + TM da semana</li>
+            <li>% pitches MEDIUM</li>
+            <li>Entradas 07: KO feitos / tese mapeada</li>
+            <li>DROP com motivo = 100%</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout" style="margin-top:16px">
+        <h3>Definição de sucesso em agosto</h3>
+        <p>
+          Operar no <strong>cenário realista (≥ R$ 294k / ~9 wins)</strong>, com
+          <strong>≥ 25 pitches</strong>, conversão se aproximando de <strong>36%</strong>,
+          estoque Aceito zerado em aging &gt;7d, e fila MEDIUM das Entradas 07 com tese no kick-off.
+          Otimista (~R$ 532k) só entra no discurso se o mix MEDIUM estiver de fato na agenda — não como wishful thinking.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="fontes">
+      <div class="eyebrow">Fontes</div>
+      <h2>De onde veio (somente E.E).</h2>
+      <div class="matrix">
+        <table>
+          <thead><tr><th>Bloco</th><th>Fonte</th></tr></thead>
+          <tbody>
+            <tr><td>Funil E.E jul / pitches / conv. / wins</td><td>CRM · <code>crm-funil-jul2026-data.json</code> · Sara & Marcelo</td></tr>
+            <tr><td>Pipe E.E aberto</td><td><code>planilha-crm-ee-latest.csv</code> · dump 03/08</td></tr>
+            <tr><td>Entradas New 07</td><td>Entradas [Aquisição] · Data de Ganho 07/2026 · gid=756369191</td></tr>
+            <tr><td>Gap planilha × entradas</td><td><code>ee-visao-ago2026-data.json</code></td></tr>
+            <tr><td>Projeção por tier</td><td><code>ee-funil-tier-ago2026.json</code></td></tr>
+            <tr><td>Cenários P/R/O</td><td><code>ee-cenarios-ago2026.json</code></td></tr>
+            <tr><td>Contexto de prioridades</td><td>Daily Monetização 03/08 · debrief Marcelo</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <p class="footer-note">
+      Relatório E.E · Visão Gerente de Expansão · Sara & Marcelo · Ago/2026 · gerado a partir do debrief 03/08 · escopo exclusivo E.E (sem Base Ativa).
+    </p>
+  </div>
+</body>
+</html>
