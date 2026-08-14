@@ -1,0 +1,1039 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <title>G6 Internet · Estruturação Comercial | V4 Company</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+
+    :root {
+      --v4-red: #e50914;
+      --v4-red-hover: #c40712;
+      --v4-orange: #ff481f;
+      --v4-flame: #f0141e;
+      --v4-dark: #280001;
+      --v4-darker: #280000;
+      --v4-grey: #e1dcdc;
+      --v4-white: #ffffff;
+      --v4-cream: #ffebc8;
+      --v4-salmon: #ffb4a0;
+      --ink: #141414;
+      --ink-soft: #5a5a5a;
+      --line: rgba(20, 20, 20, .12);
+      --radius: 22px;
+      --radius-pill: 999px;
+      --hero: radial-gradient(120% 130% at 50% -10%, #ff5a2c 0%, #e50914 30%, #b00610 62%, #280001 100%);
+    }
+
+    * { box-sizing: border-box; }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: #171313;
+      color: var(--ink);
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: geometricPrecision;
+    }
+
+    button { font-family: inherit; }
+
+    #viewport {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 10%, rgba(229, 9, 20, .18), transparent 38%),
+        #171313;
+    }
+
+    #deck {
+      --deck-scale: 1;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 1600px;
+      height: 900px;
+      overflow: hidden;
+      transform: translate(-50%, -50%) scale(var(--deck-scale));
+      transform-origin: center;
+      background: #f5f4f2;
+      box-shadow: 0 40px 120px rgba(0, 0, 0, .45);
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      width: 1600px;
+      height: 900px;
+      padding: 76px 96px 108px;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(24px);
+      transition: opacity .28s ease, transform .28s ease;
+      background:
+        radial-gradient(circle at 92% 8%, rgba(229, 9, 20, .055), transparent 24%),
+        #f5f4f2;
+    }
+
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(0);
+    }
+
+    .slide.red {
+      color: white;
+      background: var(--hero);
+    }
+
+    .slide.dark {
+      color: white;
+      background:
+        radial-gradient(circle at 78% 15%, rgba(229, 9, 20, .5), transparent 32%),
+        linear-gradient(145deg, #280001 0%, #130001 100%);
+    }
+
+    .slide.white { background: white; }
+
+    .topline {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--v4-red), var(--v4-orange), transparent 76%);
+    }
+
+    h1,
+    h2,
+    h3,
+    p { margin-top: 0; }
+
+    h1 {
+      margin-bottom: 24px;
+      font-size: 88px;
+      line-height: .98;
+      letter-spacing: -.055em;
+      font-weight: 600;
+    }
+
+    h2 {
+      margin-bottom: 18px;
+      font-size: 60px;
+      line-height: 1.02;
+      letter-spacing: -.045em;
+      font-weight: 600;
+    }
+
+    h3 {
+      margin-bottom: 10px;
+      font-size: 26px;
+      line-height: 1.1;
+      letter-spacing: -.025em;
+      font-weight: 600;
+    }
+
+    .lede {
+      max-width: 1000px;
+      color: var(--ink-soft);
+      font-size: 27px;
+      line-height: 1.42;
+      font-weight: 300;
+    }
+
+    .red .lede,
+    .dark .lede { color: rgba(255, 255, 255, .72); }
+
+    .accent { color: var(--v4-red); }
+    .red .accent,
+    .dark .accent { color: var(--v4-cream); }
+
+    .mono { font-family: "IBM Plex Mono", monospace; }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 7px 15px;
+      border: 1px solid rgba(229, 9, 20, .18);
+      border-radius: var(--radius-pill);
+      color: var(--v4-red);
+      background: rgba(229, 9, 20, .07);
+      font-size: 12px;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+
+    .red .eyebrow,
+    .dark .eyebrow {
+      color: rgba(255, 255, 255, .92);
+      background: rgba(255, 255, 255, .06);
+      border-color: rgba(255, 255, 255, .35);
+      box-shadow:
+        inset 0 0 80px rgba(255, 255, 255, .12),
+        inset 0 1px 8px rgba(255, 255, 255, .35),
+        -5px 5px 20px rgba(0, 0, 0, .10);
+      backdrop-filter: blur(14px) saturate(140%);
+    }
+
+    .card {
+      position: relative;
+      padding: 28px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: white;
+    }
+
+    .glass {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .35);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, .06);
+      box-shadow:
+        inset 0 0 150px rgba(255, 255, 255, .13),
+        inset 0 1px 10px rgba(255, 255, 255, .38),
+        inset 0 -2px 10px rgba(255, 255, 255, .22),
+        inset 0 0 100px rgba(255, 255, 255, .08),
+        -5px 5px 20px rgba(0, 0, 0, .10);
+      backdrop-filter: blur(14px) saturate(140%);
+    }
+
+    .glass::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      background:
+        radial-gradient(120% 90% at 50% 115%, rgba(255, 170, 80, .34), transparent 55%),
+        linear-gradient(180deg, rgba(255, 255, 255, .22), transparent 40%);
+      mix-blend-mode: screen;
+    }
+
+    .sphere {
+      position: absolute;
+      border: 1px solid rgba(255, 255, 255, .24);
+      border-radius: 50%;
+      pointer-events: none;
+      background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, .38), rgba(255, 255, 255, .045) 48%, transparent 66%);
+      box-shadow:
+        inset 0 0 120px rgba(255, 255, 255, .13),
+        inset 25px 18px 70px rgba(255, 160, 70, .28);
+      backdrop-filter: blur(3px);
+    }
+
+    .icon {
+      width: 30px;
+      height: 30px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .icon-box {
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      border: 1px solid rgba(229, 9, 20, .18);
+      border-radius: 17px;
+      color: var(--v4-red);
+      background: rgba(229, 9, 20, .07);
+    }
+
+    .red .icon-box,
+    .dark .icon-box {
+      color: white;
+      border-color: rgba(255, 255, 255, .28);
+      background: rgba(255, 255, 255, .08);
+    }
+
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+
+    .big-number {
+      color: var(--v4-red);
+      font-size: 72px;
+      line-height: 1;
+      letter-spacing: -.06em;
+      font-weight: 700;
+    }
+
+    .metric-label {
+      margin-top: 8px;
+      color: var(--ink-soft);
+      font-size: 16px;
+      line-height: 1.2;
+    }
+
+    .bullet-list {
+      display: grid;
+      gap: 16px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .bullet-list li {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      min-height: 76px;
+      padding: 14px 18px;
+      border: 1px solid rgba(20, 20, 20, .08);
+      border-radius: 17px;
+      background: rgba(255, 255, 255, .74);
+      font-size: 21px;
+      line-height: 1.2;
+    }
+
+    .hub-layout {
+      position: relative;
+      height: 540px;
+      isolation: isolate;
+    }
+
+    .hub-line {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 420px;
+      height: 420px;
+      border: 1px dashed rgba(229, 9, 20, .26);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .hub {
+      position: absolute;
+      z-index: 3;
+      left: 50%;
+      top: 50%;
+      width: 240px;
+      height: 240px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: white;
+      background: var(--hero);
+      box-shadow: 0 30px 80px rgba(229, 9, 20, .3);
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .hub-node {
+      position: absolute;
+      z-index: 2;
+      width: 240px;
+      min-height: 110px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 18px;
+      animation: node-float 5.2s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    .node-nw { left: 65px; top: 38px; animation-delay: -.6s; }
+    .node-ne { right: 65px; top: 38px; animation-delay: -1.8s; }
+    .node-sw { left: 65px; bottom: 38px; animation-delay: -2.8s; }
+    .node-se { right: 65px; bottom: 38px; animation-delay: -3.8s; }
+
+    .cover-content {
+      position: relative;
+      z-index: 3;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+    }
+
+    .brand-lockup img {
+      width: 330px;
+      display: block;
+      object-fit: contain;
+    }
+
+    .cover-title {
+      max-width: 1100px;
+      margin: 28px 0 0;
+      font-size: 92px;
+    }
+
+    .slide-footer {
+      position: absolute;
+      z-index: 8;
+      left: 96px;
+      right: 96px;
+      bottom: 32px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      pointer-events: none;
+    }
+
+    .slide-footer img {
+      width: 155px;
+      height: 48px;
+      object-fit: contain;
+      object-position: left center;
+    }
+
+    .navigation {
+      position: absolute;
+      z-index: 20;
+      right: 52px;
+      bottom: 25px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-btn {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(20, 20, 20, .12);
+      border-radius: 50%;
+      color: var(--ink);
+      background: rgba(255, 255, 255, .92);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .12);
+      cursor: pointer;
+      transition: transform .15s ease, background .15s ease, opacity .15s ease;
+    }
+
+    .nav-btn:hover { transform: translateY(-2px); background: white; }
+    .nav-btn:disabled { opacity: .3; cursor: default; transform: none; }
+
+    .progress-track {
+      position: absolute;
+      z-index: 21;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 7px;
+      background: rgba(20, 20, 20, .1);
+    }
+
+    .progress-fill {
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--v4-red), var(--v4-orange));
+      box-shadow: 0 0 20px rgba(229, 9, 20, .35);
+      transition: width .3s ease;
+    }
+
+    .slide-counter {
+      position: absolute;
+      z-index: 22;
+      right: 176px;
+      bottom: 39px;
+      color: rgba(20, 20, 20, .52);
+      font: 500 12px/1 "IBM Plex Mono", monospace;
+      letter-spacing: .04em;
+    }
+
+
+    /* Deck-renderer applied layouts */
+    .profile-grid{display:grid;grid-template-columns:1fr 430px;gap:84px;align-items:center;margin-top:44px}.profile-photo{height:560px;border-radius:28px;overflow:hidden;border:1px solid rgba(20,20,20,.12);background:#280001}.profile-photo img{width:100%;height:100%;object-fit:cover;object-position:center top}.badge-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}.badge{display:inline-flex;align-items:center;min-height:34px;padding:8px 14px;border-radius:999px;color:var(--v4-red);background:rgba(229,9,20,.07);border:1px solid rgba(229,9,20,.18);font:700 12px/1 "IBM Plex Mono",monospace;letter-spacing:.08em;text-transform:uppercase}.metric-wall{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:50px}.metric-wall.four{grid-template-columns:repeat(4,1fr)}.metric-card{min-height:270px;padding:32px;border-radius:24px}.metric-card p{margin:0;color:var(--ink-soft);font-size:20px;line-height:1.32}.dark .metric-card p,.red .metric-card p{color:rgba(255,255,255,.72)}.source{position:absolute;left:96px;bottom:86px;max-width:1020px;color:rgba(20,20,20,.44);font:500 11px/1.25 "IBM Plex Mono",monospace}.dark .source,.red .source{color:rgba(255,255,255,.42)}.diagnosis-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:28px;margin-top:44px}.stack{display:grid;gap:16px}.line-card{display:grid;grid-template-columns:58px 1fr;gap:18px;align-items:center;min-height:104px;padding:18px 22px;border-radius:20px;background:rgba(255,255,255,.78);border:1px solid var(--line)}.dark .line-card{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.16)}.line-card h3{margin:0 0 5px;font-size:25px}.line-card p{margin:0;color:var(--ink-soft);font-size:18px;line-height:1.32}.dark .line-card p{color:rgba(255,255,255,.72)}.quote{margin-top:42px;padding-left:26px;border-left:6px solid var(--v4-red);max-width:1040px;font-size:31px;line-height:1.2;font-weight:600}.dark .quote,.red .quote{border-color:var(--v4-cream)}.table-layout{display:grid;grid-template-columns:1fr 315px;gap:40px;margin-top:42px}.table{width:100%;border-collapse:collapse}.table th{padding:16px 14px;border-bottom:1px solid var(--line);color:var(--v4-red);text-align:left;font:700 12px/1.15 "IBM Plex Mono",monospace;letter-spacing:.08em;text-transform:uppercase}.table td{padding:18px 14px;border-bottom:1px solid var(--line);color:var(--ink-soft);font-size:20px;line-height:1.26}.table tr:nth-child(even) td{background:rgba(229,9,20,.055)}.side-metric{padding-bottom:22px;border-bottom:1px solid var(--line)}.side-metric .big-number{font-size:66px}.side-metric p{margin:8px 0 0;color:var(--ink-soft);font-size:18px;line-height:1.3}.bowtie-card{margin-top:30px;width:1180px;height:390px;padding:18px;border-radius:22px;border:1px solid var(--line);background:white}.process{display:flex;align-items:stretch;gap:10px;margin-top:46px}.stage{flex:1;min-height:136px;padding:22px 18px;border-radius:19px;background:white;border:1px solid var(--line)}.dark .stage{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.18)}.stage h3{font-size:21px;margin-bottom:9px}.stage p{margin:0;color:var(--ink-soft);font-size:16px;line-height:1.25}.dark .stage p{color:rgba(255,255,255,.72)}.arrow{display:grid;place-items:center;color:var(--v4-red);font-size:30px;font-weight:700}.funnel-area{display:grid;grid-template-columns:860px 1fr;gap:52px;align-items:center;margin-top:28px}.funnel{display:flex;flex-direction:column;align-items:center;gap:9px}.funnel-step{height:58px;display:flex;align-items:center;justify-content:center;color:white;background:linear-gradient(90deg,var(--v4-red),var(--v4-dark));border-radius:8px;font-weight:600}.funnel-step strong{font-size:25px;margin-right:10px}.funnel-step span{font-size:20px;color:rgba(255,255,255,.82)}.funnel-note{font-size:26px;line-height:1.35;color:var(--ink-soft)}.check-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px 34px;margin-top:44px}.check-card{display:grid;grid-template-columns:58px 1fr;gap:18px;align-items:center;min-height:88px;padding:18px;border-radius:20px;background:white;border:1px solid var(--line)}.check-card h3{font-size:23px;margin:0}
+    .bowtie-image-stage{position:absolute;left:96px;right:96px;top:204px;bottom:76px;display:flex;align-items:center;justify-content:center;overflow:hidden}.bowtie-image-stage img{width:auto;height:100%;max-width:100%;max-height:100%;object-fit:contain;display:block;border-radius:18px;border:1px solid var(--line);background:white;box-shadow:0 22px 70px rgba(20,20,20,.12)}.diagram-slide .eyebrow{position:relative;z-index:3}.diagram-slide h2{position:relative;z-index:3;font-size:48px;max-width:920px;margin-top:24px}.diagram-slide .source{left:320px;right:320px;bottom:38px;max-width:none;text-align:center}
+    @keyframes node-float {
+      0%, 100% { transform: var(--node-base, translate(0, 0)) translateY(0) rotate(0deg); }
+      25% { transform: var(--node-base, translate(0, 0)) translateY(-9px) rotate(-1.5deg); }
+      50% { transform: var(--node-base, translate(0, 0)) translateY(3px) rotate(1deg); }
+      75% { transform: var(--node-base, translate(0, 0)) translateY(-5px) rotate(.5deg); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  
+
+    /* G6 customizations */
+    .brand-lockup { display:flex; align-items:center; gap:18px; }
+    .brand-lockup img { height:42px; width:auto; object-fit:contain; }
+    .brand-lockup .x { opacity:.55; font-weight:600; font-size:22px; }
+    .partner-pill {
+      display:inline-flex; align-items:center; gap:10px;
+      padding:10px 16px; border-radius:999px;
+      background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.22);
+      font:600 14px/1 "IBM Plex Mono", monospace; letter-spacing:.06em; text-transform:uppercase;
+    }
+    .partner-pill img { height:22px; width:auto; background:#fff; border-radius:6px; padding:2px 6px; }
+    .split-2 { display:grid; grid-template-columns:1fr 1fr; gap:28px; margin-top:40px; }
+    .split-card { padding:28px 30px; border-radius:24px; border:1px solid var(--line); background:white; min-height:360px; }
+    .dark .split-card { background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.16); }
+    .split-card h3 { margin:0 0 18px; font-size:28px; }
+    .split-card ul { margin:0; padding-left:20px; color:var(--ink-soft); font-size:20px; line-height:1.45; }
+    .dark .split-card ul { color:rgba(255,255,255,.75); }
+    .split-card li { margin:10px 0; }
+    .split-card.ok { border-color:rgba(229,9,20,.25); }
+    .split-card.gap { background:linear-gradient(180deg, rgba(229,9,20,.06), white); }
+    .dark .split-card.gap { background:rgba(229,9,20,.16); }
+    .phase-rail {
+      display:grid; grid-template-columns:repeat(6,1fr); gap:12px; margin-top:40px;
+    }
+    .phase {
+      min-height:280px; padding:20px 16px; border-radius:20px;
+      background:white; border:1px solid var(--line);
+    }
+    .dark .phase { background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.16); }
+    .phase .n {
+      font:700 12px/1 "IBM Plex Mono", monospace; letter-spacing:.1em;
+      text-transform:uppercase; color:var(--v4-red); margin-bottom:12px;
+    }
+    .dark .phase .n { color:var(--v4-cream); }
+    .phase h3 { margin:0 0 10px; font-size:20px; line-height:1.2; }
+    .phase p { margin:0; color:var(--ink-soft); font-size:15px; line-height:1.35; }
+    .dark .phase p { color:rgba(255,255,255,.72); }
+    .price-hero {
+      display:grid; grid-template-columns:1.1fr .9fr; gap:36px; margin-top:36px; align-items:stretch;
+    }
+    .price-box {
+      padding:36px 40px; border-radius:28px; background:white; border:1px solid var(--line);
+      min-height:340px; display:flex; flex-direction:column; justify-content:center;
+    }
+    .price-box .tag {
+      font:700 12px/1 "IBM Plex Mono", monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--v4-red);
+    }
+    .price-box .amount { font-size:96px; font-weight:700; letter-spacing:-.04em; margin:12px 0 8px; line-height:1; }
+    .price-box .amount span { font-size:36px; vertical-align:super; margin-right:4px; }
+    .price-box p { margin:0; color:var(--ink-soft); font-size:22px; line-height:1.35; max-width:420px; }
+    .clock-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:44px; }
+    .clock-card {
+      min-height:300px; padding:30px; border-radius:24px;
+      background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.16);
+    }
+    .clock-card .big-number { font-size:54px; margin:18px 0 12px; }
+    .clock-card h3 { margin:0 0 10px; font-size:26px; }
+    .clock-card p { margin:0; color:rgba(255,255,255,.72); font-size:19px; line-height:1.35; }
+    .success-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px 24px; margin-top:36px; }
+    .success-item {
+      display:grid; grid-template-columns:48px 1fr; gap:14px; align-items:center;
+      padding:16px 18px; border-radius:18px; background:white; border:1px solid var(--line);
+    }
+    .success-item h3 { margin:0; font-size:20px; }
+    .cta-steps { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:48px; }
+    .cta-step {
+      padding:28px; border-radius:22px; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.18);
+    }
+    .cta-step .n { font:700 12px/1 "IBM Plex Mono", monospace; letter-spacing:.1em; color:var(--v4-cream); }
+    .cta-step h3 { margin:14px 0 8px; font-size:26px; }
+    .cta-step p { margin:0; color:rgba(255,255,255,.75); font-size:18px; line-height:1.35; }
+    .lede-tight { max-width:1080px; }
+    .mini-note {
+      margin-top:28px; font:500 14px/1.4 "IBM Plex Mono", monospace; color:rgba(20,20,20,.45);
+    }
+    .dark .mini-note, .red .mini-note { color:rgba(255,255,255,.45); }
+    .compare-side .side-metric:last-child { border-bottom:0; }
+    .cover-client {
+      display:flex; align-items:center; gap:14px; margin-top:28px;
+      color:rgba(255,255,255,.85); font-size:18px;
+    }
+    .cover-client img {
+      height:44px; width:auto; background:#fff; border-radius:10px; padding:6px 10px;
+    }
+
+  </style>
+</head>
+<body>
+  <svg aria-hidden="true" width="0" height="0" style="position:absolute">
+    <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+    <symbol id="i-brand" viewBox="0 0 24 24"><path d="M4 18V6l8-3 8 3v12l-8 3-8-3Z"/><path d="M9 9h6M9 13h6M9 17h3"/></symbol>
+    <symbol id="i-store" viewBox="0 0 24 24"><path d="M3 10h18"/><path d="M5 10v10h14V10"/><path d="m4 4-1 6h18l-1-6H4Z"/><path d="M9 20v-6h6v6"/></symbol>
+    <symbol id="i-expand" viewBox="0 0 24 24"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/><path d="m3 8 6-6m12 6-6-6M3 16l6 6m12-6-6 6"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 19V9M10 19V5M16 19v-7M22 19V3"/><path d="M2 19h21"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+    <symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="19" r="3"/><circle cx="18" cy="5" r="3"/><path d="M9 19h2a4 4 0 0 0 4-4v-6"/></symbol>
+    <symbol id="i-megaphone" viewBox="0 0 24 24"><path d="m3 11 14-6v14L3 13v-2Z"/><path d="M11 16v4H7l-1-6"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3-9 5 9 5 9-5-9-5Z"/><path d="m3 12 9 5 9-5"/><path d="m3 16 9 5 9-5"/></symbol>
+    <symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></symbol>
+    <symbol id="i-brush" viewBox="0 0 24 24"><path d="m14 4 6 6-8 8H6v-6l8-8Z"/><path d="M4 20h8"/></symbol>
+    <symbol id="i-page" viewBox="0 0 24 24"><path d="M6 2h9l3 3v17H6V2Z"/><path d="M14 2v5h5M9 12h6M9 16h6"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><circle cx="18" cy="9" r="3"/><path d="M2 21c0-5 3-8 7-8s7 3 7 8M16 14c4 0 6 2 6 7"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></symbol>
+    <symbol id="i-sale" viewBox="0 0 24 24"><path d="M4 6h16l-2 12H6L4 6Z"/><path d="M8 6a4 4 0 0 1 8 0"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></symbol>
+    <symbol id="i-message" viewBox="0 0 24 24"><path d="M4 4h16v13H8l-4 4V4Z"/><path d="M8 9h8M8 13h5"/></symbol>
+    <symbol id="i-dashboard" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 10h18M10 10v11"/><path d="m14 16 2-2 2 2"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="m13 2-8 12h7l-1 8 8-12h-7l1-8Z"/></symbol>
+    <symbol id="i-lightbulb" viewBox="0 0 24 24"><path d="M9 18h6M10 22h4"/><path d="M8 14c-2-1-3-3-3-6a7 7 0 0 1 14 0c0 3-1 5-3 6l-1 2H9l-1-2Z"/></symbol>
+    <symbol id="i-money" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M7 9H5v2M17 15h2v-2"/></symbol>
+    <symbol id="i-trend" viewBox="0 0 24 24"><path d="m3 17 6-6 4 4 8-9"/><path d="M16 6h5v5"/></symbol>
+  </svg>
+
+  <div id="viewport">
+    <main id="deck" aria-live="polite">
+
+      <!-- 01 CAPA -->
+      <section class="slide red active" data-title="Capa">
+        <div class="sphere" style="width:430px;height:430px;right:-80px;top:-115px;opacity:.55"></div>
+        <div class="sphere" style="width:245px;height:245px;right:285px;top:115px;opacity:.32"></div>
+        <div class="cover-content">
+          <div class="brand-lockup">
+            <img src="assets/colli-white.png" alt="V4 Company">
+          </div>
+          <div>
+            <span class="eyebrow">G6 Internet × V4 Company · Estruturação Comercial</span>
+            <h1 class="cover-title">A fundação comercial<br>para o Growth funcionar</h1>
+            <p class="lede">Processo, uso real do CRM, gestão e rotina — instalados em 12 semanas, antes do Mateus sentar e antes da Laura assumir.</p>
+            <div class="cover-client"><img src="assets/g6-logo.png" alt="G6 Internet"> Proposta personalizada · Implementação assistida</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 02 ESPELHO DA DOR -->
+      <section class="slide dark" data-title="Espelho da dor">
+        <span class="eyebrow">O que já ficou claro</span>
+        <h2 style="margin-top:28px;max-width:1200px">Vocês não têm um problema de lead.<br>Têm um comercial reativo.</h2>
+        <div class="diagnosis-grid">
+          <div class="stack">
+            <div class="line-card">
+              <div class="icon-box"><svg class="icon"><use href="#i-users"></use></svg></div>
+              <div><h3>Entra ~1.000 / sai ~800</h3><p>Volume alto, retenção frágil — o crescimento líquido vaza todo mês.</p></div>
+            </div>
+            <div class="line-card">
+              <div class="icon-box"><svg class="icon"><use href="#i-dashboard"></use></svg></div>
+              <div><h3>CRM existe, mas não governa</h3><p>RD não é usado como rotina. Sem registro, sem motivo de perda, sem próximo passo.</p></div>
+            </div>
+            <div class="line-card">
+              <div class="icon-box"><svg class="icon"><use href="#i-target"></use></svg></div>
+              <div><h3>Meta vira comodidade</h3><p>Quando aperta, a meta desce. O time acomoda. O processo nunca cobra comportamento.</p></div>
+            </div>
+            <div class="line-card">
+              <div class="icon-box"><svg class="icon"><use href="#i-route"></use></svg></div>
+              <div><h3>Loja e PAP sem padrão</h3><p>Cinco internos + dois porta a porta — cada um vende de um jeito, sem playbook.</p></div>
+            </div>
+          </div>
+          <div class="metric-card glass" style="min-height:464px">
+            <div class="icon-box"><svg class="icon"><use href="#i-bolt"></use></svg></div>
+            <div class="big-number" style="font-size:64px;margin-top:36px;line-height:1.05">Comercial<br>reativo</div>
+            <h3 style="margin-top:22px">Dor verbalizada</h3>
+            <p>“Eu não quero meu comercial reativo. Eu não quero não ter processo.” — Geraldo</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 03 SANGRIA -->
+      <section class="slide white" data-title="Conta da sangria">
+        <div class="topline"></div>
+        <span class="eyebrow">Raio-X financeiro</span>
+        <h2 style="margin-top:28px;max-width:1180px">Cada saída queima o CAC — e o payback só começa no 8º mês</h2>
+        <div class="metric-wall" style="margin-top:44px">
+          <div class="metric-card card">
+            <div class="icon-box"><svg class="icon"><use href="#i-money"></use></svg></div>
+            <div class="big-number">~R$1.000</div>
+            <h3>CAC + instalação</h3>
+            <p>Custo para trazer e instalar cada cliente na base.</p>
+          </div>
+          <div class="metric-card card">
+            <div class="icon-box"><svg class="icon"><use href="#i-calendar"></use></svg></div>
+            <div class="big-number">8 meses</div>
+            <h3>Payback</h3>
+            <p>Tempo mínimo na base para o cliente se pagar.</p>
+          </div>
+          <div class="metric-card card">
+            <div class="icon-box"><svg class="icon"><use href="#i-trend"></use></svg></div>
+            <div class="big-number">~3.755</div>
+            <h3>Saídas (jan–jun)</h3>
+            <p>Volume que justifica olhar retenção como alavanca de receita.</p>
+          </div>
+        </div>
+        <div class="quote">Se a retenção sobe só 2%, a conta muda. Estruturar o comercial é proteger o dinheiro que a aquisição já pagou.</div>
+      </section>
+
+      <!-- 04 CAUSA RAIZ -->
+      <section class="slide" data-title="Causa-raiz">
+        <div class="topline"></div>
+        <span class="eyebrow">Diagnóstico</span>
+        <h2 style="margin-top:28px;max-width:1180px">Não falta ferramenta. Falta sistema comercial em uso.</h2>
+        <div class="table-layout">
+          <table class="table">
+            <tr><th>Sintoma</th><th>Causa</th><th>O que precisa existir</th></tr>
+            <tr><td>Cliente some sem o time saber</td><td>Sem processo de ativação/retenção</td><td>Rotina + dono da etapa</td></tr>
+            <tr><td>Comissão sem ativação</td><td>Vendeu e acabou</td><td>Critério de etapa no CRM</td></tr>
+            <tr><td>Objeção = inadimplência</td><td>Sem script de save</td><td>Motivo de perda + playbook</td></tr>
+            <tr><td>Meta abaixada</td><td>Gestão por resultado final</td><td>Gestão por atividade e conversão</td></tr>
+            <tr><td>PAP sem rota clara</td><td>Sem padrão de abordagem</td><td>Script + meta/dia por canal</td></tr>
+          </table>
+          <div class="side-metrics compare-side">
+            <div class="side-metric"><div class="big-number">CRM</div><p>já existe — o gap é adesão e governança.</p></div>
+            <div class="side-metric"><div class="big-number">Growth</div><p>já gera demanda — o comercial precisa converter e reter.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 05 POR QUE AGORA -->
+      <section class="slide dark" data-title="Por que agora">
+        <span class="eyebrow">Janela de decisão</span>
+        <h2 style="margin-top:28px;max-width:1180px">Três relógios alinhados. Adiar é deixar o Mateus montar a casa.</h2>
+        <div class="clock-grid">
+          <div class="clock-card">
+            <div class="icon-box"><svg class="icon"><use href="#i-users"></use></svg></div>
+            <div class="big-number">30 dias</div>
+            <h3>Mateus chega</h3>
+            <p>Gestor novo precisa achar processo, CRM e rituais prontos — para executar, não estruturar.</p>
+          </div>
+          <div class="clock-card">
+            <div class="icon-box"><svg class="icon"><use href="#i-calendar"></use></svg></div>
+            <div class="big-number">1º jan</div>
+            <h3>Laura assume</h3>
+            <p>Sucessão do Geraldo exige máquina rodando, com visibilidade e previsibilidade.</p>
+          </div>
+          <div class="clock-card">
+            <div class="icon-box"><svg class="icon"><use href="#i-megaphone"></use></svg></div>
+            <div class="big-number">Growth</div>
+            <h3>Já contratado</h3>
+            <p>Sem fundação comercial, a demanda gerada vaza — e o resultado da assessoria sofre.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 06 JA TEMOS X FALTA -->
+      <section class="slide white" data-title="Já temos × o que falta">
+        <div class="topline"></div>
+        <span class="eyebrow">Leitura da parceria</span>
+        <h2 style="margin-top:28px;max-width:1180px">Growth + CRM já estão dentro.<br>Esta proposta ataca a outra dor.</h2>
+        <div class="split-2">
+          <div class="split-card ok">
+            <h3>Já contratado</h3>
+            <ul>
+              <li>Assessoria de Growth gerando demanda</li>
+              <li>CRM (RD) no contrato — configuração e base</li>
+              <li>Acompanhamento da unidade na operação de mídia</li>
+            </ul>
+          </div>
+          <div class="split-card gap">
+            <h3>O que ainda falta</h3>
+            <ul>
+              <li>Processo loja × PAP com critérios de etapa</li>
+              <li>CRM em uso real (higiene, motivos de perda, dashboard)</li>
+              <li>Scripts, cadência, rituais de gestão</li>
+              <li>Treinamento com instalação assistida + roleplay</li>
+              <li>Plano básico de retenção / save na rotina comercial</li>
+            </ul>
+          </div>
+        </div>
+        <div class="quote" style="margin-top:34px;font-size:26px">Não é outro CRM. É o comercial rodando o sistema — todos os dias.</div>
+      </section>
+
+      <!-- 07 PRODUTO COMO SOLUCAO -->
+      <section class="slide red" data-title="Estruturação Comercial">
+        <div class="sphere" style="width:380px;height:380px;right:-60px;top:-90px;opacity:.4"></div>
+        <span class="eyebrow">Solução · Produto V4 Sales</span>
+        <h2 style="margin-top:28px;max-width:1240px;font-size:56px">Estruturação Comercial</h2>
+        <p class="lede lede-tight" style="margin-top:18px">Produto de implementação assistida: em um projeto fechado, a V4 constrói e <strong>instala</strong> a fundação comercial — processo, CRM em uso, scripts, cadências, indicadores e rituais de gestão operando de verdade.</p>
+        <div class="metric-wall" style="margin-top:40px">
+          <div class="metric-card glass">
+            <div class="big-number">12 sem</div>
+            <h3>Duração</h3>
+            <p>Projeto consultivo com checkpoints semanais.</p>
+          </div>
+          <div class="metric-card glass">
+            <div class="big-number">106h</div>
+            <h3>Carga V4</h3>
+            <p>Construção + instalação — não só entrega de PDF.</p>
+          </div>
+          <div class="metric-card glass">
+            <div class="big-number">6 fases</div>
+            <h3>Método</h3>
+            <p>Do diagnóstico ao handover com plano de 60 dias.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 08 O QUE MUDA -->
+      <section class="slide" data-title="O que muda">
+        <div class="topline"></div>
+        <span class="eyebrow">Diferença do produto</span>
+        <h2 style="margin-top:28px;max-width:1180px">Não termina no artefato.<br>Termina com capacidade instalada.</h2>
+        <table class="table" style="margin-top:40px">
+          <tr><th>EC antiga (risco)</th><th>Estruturação Comercial (este produto)</th></tr>
+          <tr><td>Forte em documentos e configurações</td><td>Forte em instalação operacional</td></tr>
+          <tr><td>Treinamento pontual</td><td>Treinamento + primeira execução assistida</td></tr>
+          <tr><td>CRM implementado</td><td>CRM com governança, higiene e dashboard de uso</td></tr>
+          <tr><td>Encerramento por entrega</td><td>Encerramento por rotina rodando</td></tr>
+          <tr><td>Playbook que vira gaveta</td><td>Checkpoints de adesão durante o projeto</td></tr>
+        </table>
+      </section>
+
+      <!-- 09 JORNADA 6 FASES -->
+      <section class="slide dark" data-title="Jornada 6 fases">
+        <span class="eyebrow">Como funciona</span>
+        <h2 style="margin-top:24px;max-width:1180px;font-size:42px">Seis fases. Uma fundação comercial instalada.</h2>
+        <div class="phase-rail">
+          <div class="phase">
+            <div class="n">Fase 01</div>
+            <h3>Diagnóstico operacional</h3>
+            <p>Entrevistas, auditoria do CRM, mapa de gargalos e priorização do que impede venda previsível.</p>
+          </div>
+          <div class="phase">
+            <div class="n">Fase 02</div>
+            <h3>Arquitetura comercial</h3>
+            <p>Pipeline, papéis, SLA, scripts, cadências e metas de atividade — o sistema operacional.</p>
+          </div>
+          <div class="phase">
+            <div class="n">Fase 03</div>
+            <h3>CRM e controle</h3>
+            <p>Reorganização em paralelo: campos, motivos de perda, atividades e dashboard de gestão.</p>
+          </div>
+          <div class="phase">
+            <div class="n">Fase 04</div>
+            <h3>Camada estratégica</h3>
+            <p>Playbook de uso, política de comissão (loja×PAP) e breakeven da operação comercial.</p>
+          </div>
+          <div class="phase">
+            <div class="n">Fase 05</div>
+            <h3>Instalação da rotina</h3>
+            <p>Imersão, roleplay, pipeline review e reunião semanal assistida — adesão de verdade.</p>
+          </div>
+          <div class="phase">
+            <div class="n">Fase 06</div>
+            <h3>Handover 60 dias</h3>
+            <p>Score antes/depois, plano de continuidade e retenção básica para o gestor manter.</p>
+          </div>
+        </div>
+        <p class="mini-note">Fases 2 e 3 rodam em paralelo. Presencial crítico: diagnóstico (F1) + instalação/treino (F5).</p>
+      </section>
+
+      <!-- 10 PERSONALIZACAO G6 -->
+      <section class="slide white" data-title="Personalização G6">
+        <div class="topline"></div>
+        <span class="eyebrow">Sob medida para a G6</span>
+        <h2 style="margin-top:28px;max-width:1180px">Não é escopo genérico.<br>É dual-track loja × PAP + sucessão.</h2>
+        <div class="grid-4" style="margin-top:44px;display:grid;grid-template-columns:repeat(2,1fr);gap:18px">
+          <div class="card" style="padding:28px;border-radius:22px;border:1px solid var(--line);background:#fff">
+            <div class="icon-box"><svg class="icon"><use href="#i-store"></use></svg></div>
+            <h3 style="margin:14px 0 8px;font-size:26px">Loja (5 vendedores)</h3>
+            <p style="margin:0;color:var(--ink-soft);font-size:18px;line-height:1.35">Script de conversão, ativação pós-venda, save/upsell e disciplina de CRM no balcão.</p>
+          </div>
+          <div class="card" style="padding:28px;border-radius:22px;border:1px solid var(--line);background:#fff">
+            <div class="icon-box"><svg class="icon"><use href="#i-pin"></use></svg></div>
+            <h3 style="margin:14px 0 8px;font-size:26px">PAP (2 porta a porta)</h3>
+            <p style="margin:0;color:var(--ink-soft);font-size:18px;line-height:1.35">Abordagem, meta/dia, rota e registro — playbook diferente do time interno.</p>
+          </div>
+          <div class="card" style="padding:28px;border-radius:22px;border:1px solid var(--line);background:#fff">
+            <div class="icon-box"><svg class="icon"><use href="#i-layers"></use></svg></div>
+            <h3 style="margin:14px 0 8px;font-size:26px">Comissão + gestão</h3>
+            <p style="margin:0;color:var(--ink-soft);font-size:18px;line-height:1.35">Alinhar incentivo à conduta desejada — meta como piso, não como freio paternalista.</p>
+          </div>
+          <div class="card" style="padding:28px;border-radius:22px;border:1px solid var(--line);background:#fff">
+            <div class="icon-box"><svg class="icon"><use href="#i-check"></use></svg></div>
+            <h3 style="margin:14px 0 8px;font-size:26px">Onboarding do Mateus</h3>
+            <p style="margin:0;color:var(--ink-soft);font-size:18px;line-height:1.35">Ele entra no meio do projeto: recebe a máquina pronta e assume a rotina com a V4.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 11 CRITERIO DE SUCESSO -->
+      <section class="slide" data-title="Critério de sucesso">
+        <div class="topline"></div>
+        <span class="eyebrow">Como medimos que funcionou</span>
+        <h2 style="margin-top:28px;max-width:1180px">Sucesso = um ciclo comercial operando com método</h2>
+        <div class="success-grid">
+          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-dashboard"></use></svg></div><h3>Pipeline configurado e usado</h3></div>
+          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-calendar"></use></svg></div><h3>Reunião semanal acontecendo</h3></div>
+          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-message"></use></svg></div><h3>Follow-up sendo executado</h3></div>
+          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-chart"></use></svg></div><h3>Gestor nos indicadores</h3></div>
+          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-page"></use></svg></div><h3>Time treinado nos scripts</h3></div>
+          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-users"></use></svg></div><h3>Onboarding de vendedor documentado</h3></div>
+          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-trend"></use></svg></div><h3>Plano básico de retenção entregue</h3></div>
+          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-target"></use></svg></div><h3>Dono com previsibilidade mínima</h3></div>
+        </div>
+        <div class="quote" style="margin-top:28px;font-size:24px">O que não entra: coaching recorrente, forecast avançado e expansão contínua — isso é N2, depois da fundação.</div>
+      </section>
+
+      <!-- 12 INVESTIMENTO -->
+      <section class="slide white" data-title="Investimento">
+        <div class="topline"></div>
+        <span class="eyebrow">Investimento</span>
+        <h2 style="margin-top:28px;max-width:1100px">Barato frente à sangria.<br>Caro só se continuar igual.</h2>
+        <div class="price-hero">
+          <div class="price-box">
+            <div class="tag">Projeto · 12 semanas · 106h</div>
+            <div class="amount"><span>R$</span>70.000</div>
+            <p>Estruturação Comercial personalizada para a G6 — implementação assistida, dual-track loja×PAP e presenciais nas fases críticas.</p>
+          </div>
+          <div>
+            <div class="side-metric" style="padding:18px 0"><div class="big-number" style="font-size:42px">Inclui</div>
+              <p style="margin-top:12px;font-size:19px;color:var(--ink-soft);line-height:1.4">Diagnóstico presencial · arquitetura · CRM em uso · comissão/breakeven · imersão + roleplay · handover 60 dias</p>
+            </div>
+            <div class="side-metric" style="padding:18px 0;border-bottom:0"><div class="big-number" style="font-size:42px">Lógica</div>
+              <p style="margin-top:12px;font-size:19px;color:var(--ink-soft);line-height:1.4">O investimento se justifica pelo CAC queimado e pelas saídas evitáveis — não pelo número de horas.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 13 PROXIMO PASSO -->
+      <section class="slide red" data-title="Próximos passos">
+        <div class="sphere" style="width:400px;height:400px;right:-70px;top:-100px;opacity:.45"></div>
+        <span class="eyebrow">Próximo passo</span>
+        <h2 style="margin-top:28px;max-width:1200px;font-size:52px">Começar agora para o Mateus achar a casa pronta.</h2>
+        <div class="cta-steps">
+          <div class="cta-step">
+            <div class="n">01</div>
+            <h3>Alinhamento</h3>
+            <p>Validar escopo, sponsor (Laura) e janela de kickoff com a chegada do gestor.</p>
+          </div>
+          <div class="cta-step">
+            <div class="n">02</div>
+            <h3>Kickoff + F1</h3>
+            <p>Diagnóstico operacional presencial: entrevistas, auditoria e mapa de gargalos.</p>
+          </div>
+          <div class="cta-step">
+            <div class="n">03</div>
+            <h3>Instalar</h3>
+            <p>12 semanas até handover — rotina rodando, time treinado, gestor no comando.</p>
+          </div>
+        </div>
+        <div class="quote" style="margin-top:40px;font-size:28px;border-color:var(--v4-cream)">Growth já está ligado. A fundação comercial é o que protege o resultado.</div>
+      </section>
+
+
+      <div class="slide-footer">
+        <img id="footerLogo" src="assets/colli-red.png" alt="">
+      </div>
+
+      <div class="slide-counter" id="slideCounter">01 / 13</div>
+
+      <nav class="navigation" aria-label="Navegação da apresentação">
+        <button class="nav-btn" id="prevBtn" aria-label="Slide anterior" data-testid="prev-slide">
+          <svg class="icon"><use href="#i-arrow-left"></use></svg>
+        </button>
+        <button class="nav-btn" id="nextBtn" aria-label="Próximo slide" data-testid="next-slide">
+          <svg class="icon"><use href="#i-arrow-right"></use></svg>
+        </button>
+      </nav>
+
+      <div class="progress-track" aria-hidden="true">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </main>
+  </div>
+
+
+  <script>
+    const deck = document.getElementById("deck");
+    const slides = Array.from(document.querySelectorAll(".slide"));
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const slideCounter = document.getElementById("slideCounter");
+    const progressFill = document.getElementById("progressFill");
+    const footerLogo = document.getElementById("footerLogo");
+    let current = 0;
+
+    function fitDeck() {
+      const viewportWidth = window.visualViewport?.width || window.innerWidth;
+      const viewportHeight = window.visualViewport?.height || window.innerHeight;
+      const scale = Math.max(
+        .1,
+        Math.min(
+          (viewportWidth - 16) / 1600,
+          (viewportHeight - 16) / 900,
+          1
+        )
+      );
+      deck.style.setProperty("--deck-scale", scale);
+    }
+
+    function goTo(index) {
+      current = Math.max(0, Math.min(slides.length - 1, index));
+      slides.forEach((slide, slideIndex) => {
+        slide.classList.toggle("active", slideIndex === current);
+      });
+
+      const number = String(current + 1).padStart(2, "0");
+      const total = String(slides.length).padStart(2, "0");
+      const activeSlide = slides[current];
+      const isDark =
+        activeSlide.classList.contains("red") ||
+        activeSlide.classList.contains("dark");
+
+      slideCounter.textContent = `${number} / ${total}`;
+      slideCounter.style.color = isDark
+        ? "rgba(255,255,255,.58)"
+        : "rgba(20,20,20,.52)";
+      progressFill.style.width = `${((current + 1) / slides.length) * 100}%`;
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === slides.length - 1;
+      footerLogo.src = isDark
+        ? "assets/colli-white.png"
+        : "assets/colli-red.png";
+      footerLogo.style.opacity =
+        current === 0 || current === slides.length - 1 ? "0" : "1";
+      document.title =
+        `${number} | ${activeSlide.dataset.title || "G6 · Estruturação Comercial"}`;
+    }
+
+    prevBtn.addEventListener("click", () => goTo(current - 1));
+    nextBtn.addEventListener("click", () => goTo(current + 1));
+    window.addEventListener("resize", fitDeck);
+    window.visualViewport?.addEventListener("resize", fitDeck);
+    window.addEventListener("keydown", (event) => {
+      if (["ArrowRight", "PageDown", " "].includes(event.key)) {
+        event.preventDefault();
+        goTo(current + 1);
+      }
+      if (["ArrowLeft", "PageUp"].includes(event.key)) {
+        event.preventDefault();
+        goTo(current - 1);
+      }
+      if (event.key === "Home") goTo(0);
+      if (event.key === "End") goTo(slides.length - 1);
+    });
+
+    let touchStartX = null;
+    deck.addEventListener("touchstart", (event) => {
+      touchStartX = event.changedTouches[0].clientX;
+    }, { passive: true });
+    deck.addEventListener("touchend", (event) => {
+      if (touchStartX === null) return;
+      const delta = event.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(delta) > 70) {
+        goTo(current + (delta < 0 ? 1 : -1));
+      }
+      touchStartX = null;
+    }, { passive: true });
+
+    fitDeck();
+    goTo(0);
+  </script>
+
+</body>
+</html>
