@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <style>
 
+
     :root {
       --v4-red: #e50914;
       --v4-red-hover: #c40712;
@@ -566,6 +567,64 @@
       height:44px; width:auto; background:#fff; border-radius:10px; padding:6px 10px;
     }
 
+  
+    .hours-table { width:100%; border-collapse:collapse; margin-top:22px; font-size:15px; }
+    .hours-table th {
+      padding:10px 10px; border-bottom:1px solid var(--line); color:var(--v4-red);
+      text-align:left; font:700 11px/1.15 "IBM Plex Mono",monospace; letter-spacing:.08em; text-transform:uppercase;
+    }
+    .hours-table td {
+      padding:8px 10px; border-bottom:1px solid var(--line); color:var(--ink-soft); font-size:15px; line-height:1.25;
+    }
+    .hours-table tr:nth-child(even) td { background:rgba(229,9,20,.04); }
+    .hours-table td.num, .hours-table th.num { text-align:right; white-space:nowrap; font-variant-numeric:tabular-nums; }
+    .hours-table tr.subtotal td { color:var(--ink); font-weight:600; background:rgba(229,9,20,.08); }
+    .hours-table tr.total td { color:var(--ink); font-weight:700; background:rgba(229,9,20,.12); }
+    .map-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px 22px; margin-top:32px; }
+    .map-item {
+      display:grid; grid-template-columns:10px 1fr; gap:14px; padding:16px 18px;
+      border-radius:18px; background:white; border:1px solid var(--line);
+    }
+    .map-item .dot { width:10px; height:10px; border-radius:50%; background:var(--v4-red); margin-top:8px; }
+    .map-item h3 { margin:0 0 4px; font-size:18px; }
+    .map-item p { margin:0; color:var(--ink-soft); font-size:15px; line-height:1.35; }
+    .map-item .g6 { color:var(--v4-red); font:700 11px/1 "IBM Plex Mono",monospace; letter-spacing:.06em; text-transform:uppercase; margin-bottom:6px; }
+    .format-row { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:40px; }
+    .format-card {
+      min-height:200px; padding:26px; border-radius:22px; background:white; border:1px solid var(--line);
+    }
+    .dark .format-card { background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.16); }
+    .format-card .k { font:700 12px/1 "IBM Plex Mono",monospace; letter-spacing:.08em; text-transform:uppercase; color:var(--v4-red); }
+    .dark .format-card .k { color:var(--v4-cream); }
+    .format-card h3 { margin:14px 0 8px; font-size:28px; }
+    .format-card p { margin:0; color:var(--ink-soft); font-size:18px; line-height:1.35; }
+    .dark .format-card p { color:rgba(255,255,255,.72); }
+    .phase-detail { display:grid; grid-template-columns:280px 1fr; gap:36px; margin-top:28px; align-items:start; }
+    .phase-side {
+      padding:28px; border-radius:24px; background:rgba(229,9,20,.06); border:1px solid rgba(229,9,20,.15);
+      min-height:420px;
+    }
+    .dark .phase-side { background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.16); }
+    .phase-side .n { font:700 12px/1 "IBM Plex Mono",monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--v4-red); }
+    .dark .phase-side .n { color:var(--v4-cream); }
+    .phase-side h3 { margin:14px 0 12px; font-size:34px; line-height:1.15; }
+    .phase-side .hours { font-size:48px; font-weight:700; letter-spacing:-.03em; margin:18px 0 6px; }
+    .phase-side p { margin:0; color:var(--ink-soft); font-size:17px; line-height:1.35; }
+    .dark .phase-side p { color:rgba(255,255,255,.72); }
+    .phase-body h4 { margin:0 0 12px; font-size:18px; color:var(--v4-red); font:700 12px/1 "IBM Plex Mono",monospace; letter-spacing:.08em; text-transform:uppercase; }
+    .dark .phase-body h4 { color:var(--v4-cream); }
+    .phase-body ul { margin:0 0 22px; padding-left:18px; color:var(--ink-soft); font-size:18px; line-height:1.4; }
+    .dark .phase-body ul { color:rgba(255,255,255,.75); }
+    .phase-body li { margin:7px 0; }
+    .phase-body .fit {
+      padding:16px 18px; border-radius:16px; border-left:5px solid var(--v4-red);
+      background:rgba(229,9,20,.05); font-size:18px; line-height:1.35; color:var(--ink);
+    }
+    .dark .phase-body .fit { background:rgba(255,255,255,.06); color:rgba(255,255,255,.88); border-color:var(--v4-cream); }
+    .two-col-hours { display:grid; grid-template-columns:1fr 1fr; gap:28px; margin-top:18px; align-items:start; }
+    .compact-lede { font-size:22px; line-height:1.35; max-width:1100px; color:var(--ink-soft); }
+    .dark .compact-lede, .red .compact-lede { color:rgba(255,255,255,.78); }
+
   </style>
 </head>
 <body>
@@ -605,46 +664,32 @@
         <div class="sphere" style="width:430px;height:430px;right:-80px;top:-115px;opacity:.55"></div>
         <div class="sphere" style="width:245px;height:245px;right:285px;top:115px;opacity:.32"></div>
         <div class="cover-content">
-          <div class="brand-lockup">
-            <img src="assets/colli-white.png" alt="V4 Company">
-          </div>
+          <div class="brand-lockup"><img src="assets/colli-white.png" alt="V4 Company"></div>
           <div>
             <span class="eyebrow">G6 Internet × V4 Company · Estruturação Comercial</span>
             <h1 class="cover-title">A fundação comercial<br>para o Growth funcionar</h1>
-            <p class="lede">Processo, uso real do CRM, gestão e rotina — instalados em 12 semanas, antes do Mateus sentar e antes da Laura assumir.</p>
-            <div class="cover-client"><img src="assets/g6-logo.png" alt="G6 Internet"> Proposta personalizada · Implementação assistida</div>
+            <p class="lede">Construir e instalar processo, CRM em uso, scripts, indicadores e rituais de gestão — em 12 semanas, com implementação assistida.</p>
+            <div class="cover-client"><img src="assets/g6-logo.png" alt="G6 Internet"> Proposta personalizada · Produto Sales V4</div>
           </div>
         </div>
       </section>
 
-      <!-- 02 ESPELHO DA DOR -->
-      <section class="slide dark" data-title="Espelho da dor">
-        <span class="eyebrow">O que já ficou claro</span>
-        <h2 style="margin-top:28px;max-width:1200px">Vocês não têm um problema de lead.<br>Têm um comercial reativo.</h2>
+      <!-- 02 CONTEXTO G6 -->
+      <section class="slide dark" data-title="Contexto G6">
+        <span class="eyebrow">Contexto G6 Internet</span>
+        <h2 style="margin-top:28px;max-width:1200px">Vocês não têm problema de lead.<br>Têm um comercial reativo sem sistema.</h2>
         <div class="diagnosis-grid">
           <div class="stack">
-            <div class="line-card">
-              <div class="icon-box"><svg class="icon"><use href="#i-users"></use></svg></div>
-              <div><h3>Entra ~1.000 / sai ~800</h3><p>Volume alto, retenção frágil — o crescimento líquido vaza todo mês.</p></div>
-            </div>
-            <div class="line-card">
-              <div class="icon-box"><svg class="icon"><use href="#i-dashboard"></use></svg></div>
-              <div><h3>CRM existe, mas não governa</h3><p>RD não é usado como rotina. Sem registro, sem motivo de perda, sem próximo passo.</p></div>
-            </div>
-            <div class="line-card">
-              <div class="icon-box"><svg class="icon"><use href="#i-target"></use></svg></div>
-              <div><h3>Meta vira comodidade</h3><p>Quando aperta, a meta desce. O time acomoda. O processo nunca cobra comportamento.</p></div>
-            </div>
-            <div class="line-card">
-              <div class="icon-box"><svg class="icon"><use href="#i-route"></use></svg></div>
-              <div><h3>Loja e PAP sem padrão</h3><p>Cinco internos + dois porta a porta — cada um vende de um jeito, sem playbook.</p></div>
-            </div>
+            <div class="line-card"><div class="icon-box"><svg class="icon"><use href="#i-users"></use></svg></div><div><h3>Entra ~1.000 / sai ~800</h3><p>Volume alto, retenção frágil. O crescimento líquido vaza todo mês.</p></div></div>
+            <div class="line-card"><div class="icon-box"><svg class="icon"><use href="#i-dashboard"></use></svg></div><div><h3>CRM existe, mas não governa</h3><p>RD sem rotina de uso: sem motivo de perda, sem próximo passo, sem previsibilidade.</p></div></div>
+            <div class="line-card"><div class="icon-box"><svg class="icon"><use href="#i-target"></use></svg></div><div><h3>Meta vira comodidade</h3><p>Quando aperta, a meta desce. O time acomoda. Falta cobrança de comportamento.</p></div></div>
+            <div class="line-card"><div class="icon-box"><svg class="icon"><use href="#i-route"></use></svg></div><div><h3>Loja e PAP sem padrão</h3><p>5 internos + 2 porta a porta — cada canal vende de um jeito, sem playbook.</p></div></div>
           </div>
           <div class="metric-card glass" style="min-height:464px">
             <div class="icon-box"><svg class="icon"><use href="#i-bolt"></use></svg></div>
-            <div class="big-number" style="font-size:64px;margin-top:36px;line-height:1.05">Comercial<br>reativo</div>
+            <div class="big-number" style="font-size:58px;margin-top:36px;line-height:1.05">Comercial<br>reativo</div>
             <h3 style="margin-top:22px">Dor verbalizada</h3>
-            <p>“Eu não quero meu comercial reativo. Eu não quero não ter processo.” — Geraldo</p>
+            <p>“Não quero comercial reativo. Não quero ficar sem processo.”</p>
           </div>
         </div>
       </section>
@@ -655,77 +700,81 @@
         <span class="eyebrow">Raio-X financeiro</span>
         <h2 style="margin-top:28px;max-width:1180px">Cada saída queima o CAC — e o payback só começa no 8º mês</h2>
         <div class="metric-wall" style="margin-top:44px">
-          <div class="metric-card card">
-            <div class="icon-box"><svg class="icon"><use href="#i-money"></use></svg></div>
-            <div class="big-number">~R$1.000</div>
-            <h3>CAC + instalação</h3>
-            <p>Custo para trazer e instalar cada cliente na base.</p>
-          </div>
-          <div class="metric-card card">
-            <div class="icon-box"><svg class="icon"><use href="#i-calendar"></use></svg></div>
-            <div class="big-number">8 meses</div>
-            <h3>Payback</h3>
-            <p>Tempo mínimo na base para o cliente se pagar.</p>
-          </div>
-          <div class="metric-card card">
-            <div class="icon-box"><svg class="icon"><use href="#i-trend"></use></svg></div>
-            <div class="big-number">~3.755</div>
-            <h3>Saídas (jan–jun)</h3>
-            <p>Volume que justifica olhar retenção como alavanca de receita.</p>
-          </div>
+          <div class="metric-card card"><div class="icon-box"><svg class="icon"><use href="#i-money"></use></svg></div><div class="big-number">~R$1.000</div><h3>CAC + instalação</h3><p>Custo para trazer e instalar cada cliente na base.</p></div>
+          <div class="metric-card card"><div class="icon-box"><svg class="icon"><use href="#i-calendar"></use></svg></div><div class="big-number">8 meses</div><h3>Payback</h3><p>Tempo mínimo na base para o cliente se pagar.</p></div>
+          <div class="metric-card card"><div class="icon-box"><svg class="icon"><use href="#i-trend"></use></svg></div><div class="big-number">~3.755</div><h3>Saídas (jan–jun)</h3><p>Volume que torna retenção e processo alavancas de receita.</p></div>
         </div>
         <div class="quote">Se a retenção sobe só 2%, a conta muda. Estruturar o comercial é proteger o dinheiro que a aquisição já pagou.</div>
       </section>
 
-      <!-- 04 CAUSA RAIZ -->
-      <section class="slide" data-title="Causa-raiz">
+      <!-- 04 DEFINICAO -->
+      <section class="slide" data-title="Definição do produto">
         <div class="topline"></div>
-        <span class="eyebrow">Diagnóstico</span>
-        <h2 style="margin-top:28px;max-width:1180px">Não falta ferramenta. Falta sistema comercial em uso.</h2>
-        <div class="table-layout">
-          <table class="table">
-            <tr><th>Sintoma</th><th>Causa</th><th>O que precisa existir</th></tr>
-            <tr><td>Cliente some sem o time saber</td><td>Sem processo de ativação/retenção</td><td>Rotina + dono da etapa</td></tr>
-            <tr><td>Comissão sem ativação</td><td>Vendeu e acabou</td><td>Critério de etapa no CRM</td></tr>
-            <tr><td>Objeção = inadimplência</td><td>Sem script de save</td><td>Motivo de perda + playbook</td></tr>
-            <tr><td>Meta abaixada</td><td>Gestão por resultado final</td><td>Gestão por atividade e conversão</td></tr>
-            <tr><td>PAP sem rota clara</td><td>Sem padrão de abordagem</td><td>Script + meta/dia por canal</td></tr>
-          </table>
-          <div class="side-metrics compare-side">
-            <div class="side-metric"><div class="big-number">CRM</div><p>já existe — o gap é adesão e governança.</p></div>
-            <div class="side-metric"><div class="big-number">Growth</div><p>já gera demanda — o comercial precisa converter e reter.</p></div>
+        <span class="eyebrow">Produto · Definição</span>
+        <h2 style="margin-top:28px;max-width:1200px">Estruturação Comercial</h2>
+        <p class="compact-lede" style="margin-top:18px">Produto de implementação assistida para empresas N1 que têm faturamento para investir em consultoria V4, mas ainda não têm fundação comercial funcionando.</p>
+        <div class="split-2" style="margin-top:36px">
+          <div class="split-card ok">
+            <h3>O que ele é</h3>
+            <ul>
+              <li>Constrói a fundação comercial <strong>junto</strong> com o cliente</li>
+              <li>Não termina na entrega de artefatos</li>
+              <li>Instala rotina de uso, treina liderança e acompanha os primeiros ciclos</li>
+              <li>Deixa o cliente operando o sistema</li>
+            </ul>
+          </div>
+          <div class="split-card gap">
+            <h3>Por que para a G6</h3>
+            <ul>
+              <li>Já tem time (loja + PAP) e volume para testar processo</li>
+              <li>Já tem caixa e Growth rodando</li>
+              <li>Não montaria sozinha a base com adesão</li>
+              <li>Gestor novo (Mateus) chega em ~30 dias — precisa achar a casa pronta</li>
+            </ul>
           </div>
         </div>
       </section>
 
-      <!-- 05 POR QUE AGORA -->
-      <section class="slide dark" data-title="Por que agora">
-        <span class="eyebrow">Janela de decisão</span>
-        <h2 style="margin-top:28px;max-width:1180px">Três relógios alinhados. Adiar é deixar o Mateus montar a casa.</h2>
-        <div class="clock-grid">
-          <div class="clock-card">
-            <div class="icon-box"><svg class="icon"><use href="#i-users"></use></svg></div>
-            <div class="big-number">30 dias</div>
-            <h3>Mateus chega</h3>
-            <p>Gestor novo precisa achar processo, CRM e rituais prontos — para executar, não estruturar.</p>
-          </div>
-          <div class="clock-card">
-            <div class="icon-box"><svg class="icon"><use href="#i-calendar"></use></svg></div>
-            <div class="big-number">1º jan</div>
-            <h3>Laura assume</h3>
-            <p>Sucessão do Geraldo exige máquina rodando, com visibilidade e previsibilidade.</p>
-          </div>
-          <div class="clock-card">
-            <div class="icon-box"><svg class="icon"><use href="#i-megaphone"></use></svg></div>
-            <div class="big-number">Growth</div>
-            <h3>Já contratado</h3>
-            <p>Sem fundação comercial, a demanda gerada vaza — e o resultado da assessoria sofre.</p>
-          </div>
+      <!-- 05 DORES PRODUTO x G6 -->
+      <section class="slide dark" data-title="Dores × G6">
+        <span class="eyebrow">Dores que o produto resolve · encaixe G6</span>
+        <h2 style="margin-top:24px;max-width:1200px;font-size:42px">As dores do produto são as dores que vocês já verbalizaram.</h2>
+        <div class="map-grid">
+          <div class="map-item"><div class="dot"></div><div><div class="g6">G6</div><h3>Processo comercial inconsistente</h3><p>Loja e PAP vendem sem padrão; não há jornada nem critério de etapa.</p></div></div>
+          <div class="map-item"><div class="dot"></div><div><div class="g6">G6</div><h3>Cada vendedor vende de um jeito</h3><p>Sem script compartilhado; performance depende de pessoa, não de método.</p></div></div>
+          <div class="map-item"><div class="dot"></div><div><div class="g6">G6</div><h3>CRM não representa a realidade</h3><p>RD existe e não é usado — pipeline não reflete ativação, perda nem follow-up.</p></div></div>
+          <div class="map-item"><div class="dot"></div><div><div class="g6">G6</div><h3>Gestor não conduz reunião comercial</h3><p>Hoje falta ritual; Mateus precisa herdar rituais prontos, não inventar do zero.</p></div></div>
+          <div class="map-item"><div class="dot"></div><div><div class="g6">G6</div><h3>Sem cadência e passagem de bastão</h3><p>Vendeu e acabou: ativação, save e retenção ficam soltos entre áreas.</p></div></div>
+          <div class="map-item"><div class="dot"></div><div><div class="g6">G6</div><h3>Treino não vira rotina</h3><p>Time culturalmente acomodado — artefato sem instalação assistida regride.</p></div></div>
         </div>
       </section>
 
-      <!-- 06 JA TEMOS X FALTA -->
-      <section class="slide white" data-title="Já temos × o que falta">
+      <!-- 06 PROMESSA -->
+      <section class="slide red" data-title="Promessa">
+        <div class="sphere" style="width:380px;height:380px;right:-60px;top:-90px;opacity:.4"></div>
+        <span class="eyebrow">Promessa</span>
+        <h2 style="margin-top:36px;max-width:1280px;font-size:52px">Em um projeto fechado, a V4 constrói e instala a fundação comercial da G6.</h2>
+        <p class="lede" style="margin-top:28px;max-width:1100px">Processo, CRM em uso, scripts, cadências, indicadores e rituais de gestão — operando de verdade pelo time de loja e PAP.</p>
+        <div class="quote" style="margin-top:48px;border-color:var(--v4-cream);font-size:28px">Não é entregar PDF. É deixar a operação rodando.</div>
+      </section>
+
+      <!-- 07 FORMATO -->
+      <section class="slide white" data-title="Formato">
+        <div class="topline"></div>
+        <span class="eyebrow">Formato</span>
+        <h2 style="margin-top:28px;max-width:1100px">Projeto consultivo com implementação assistida</h2>
+        <div class="format-row">
+          <div class="format-card"><div class="k">Duração</div><h3>12 semanas</h3><p>Tempo para diagnosticar, construir, instalar e fazer handover com adesão.</p></div>
+          <div class="format-card"><div class="k">Carga V4</div><h3>106,5h</h3><p>Carga média/alta: análise, desenho, CRM, QA e instalação — não só calls.</p></div>
+          <div class="format-card"><div class="k">Execução</div><h3>V4 + G6</h3><p>V4 constrói e conduz a instalação; o time G6 opera no dia a dia.</p></div>
+          <div class="format-card"><div class="k">Ritmo</div><h3>Semanal</h3><p>Encontros com sponsor/gestor e checkpoints com o time comercial.</p></div>
+          <div class="format-card"><div class="k">Presencial</div><h3>F1 + F5</h3><p>Diagnóstico e instalação/treino presenciais — onde a adesão se decide.</p></div>
+          <div class="format-card"><div class="k">Saída</div><h3>Handover</h3><p>Rotina de gestão instalada + plano de continuidade 60 dias.</p></div>
+        </div>
+      </section>
+
+      <!-- 08 JA x FALTA -->
+      <section class="slide" data-title="Já temos × o que falta">
         <div class="topline"></div>
         <span class="eyebrow">Leitura da parceria</span>
         <h2 style="margin-top:28px;max-width:1180px">Growth + CRM já estão dentro.<br>Esta proposta ataca a outra dor.</h2>
@@ -734,51 +783,52 @@
             <h3>Já contratado</h3>
             <ul>
               <li>Assessoria de Growth gerando demanda</li>
-              <li>CRM (RD) no contrato — configuração e base</li>
+              <li>CRM (RD) no contrato — base e configuração</li>
               <li>Acompanhamento da unidade na operação de mídia</li>
             </ul>
           </div>
           <div class="split-card gap">
-            <h3>O que ainda falta</h3>
+            <h3>O que a Estruturação Comercial entrega</h3>
             <ul>
-              <li>Processo loja × PAP com critérios de etapa</li>
+              <li>Arquitetura loja × PAP com critérios de etapa</li>
               <li>CRM em uso real (higiene, motivos de perda, dashboard)</li>
               <li>Scripts, cadência, rituais de gestão</li>
               <li>Treinamento com instalação assistida + roleplay</li>
-              <li>Plano básico de retenção / save na rotina comercial</li>
+              <li>Plano básico de retenção/save na rotina comercial</li>
             </ul>
           </div>
         </div>
-        <div class="quote" style="margin-top:34px;font-size:26px">Não é outro CRM. É o comercial rodando o sistema — todos os dias.</div>
+        <div class="quote" style="margin-top:30px;font-size:24px">Não é outro CRM. É o comercial rodando o sistema — todos os dias.</div>
       </section>
 
-      <!-- 07 PRODUTO COMO SOLUCAO -->
-      <section class="slide red" data-title="Estruturação Comercial">
-        <div class="sphere" style="width:380px;height:380px;right:-60px;top:-90px;opacity:.4"></div>
-        <span class="eyebrow">Solução · Produto V4 Sales</span>
-        <h2 style="margin-top:28px;max-width:1240px;font-size:56px">Estruturação Comercial</h2>
-        <p class="lede lede-tight" style="margin-top:18px">Produto de implementação assistida: em um projeto fechado, a V4 constrói e <strong>instala</strong> a fundação comercial — processo, CRM em uso, scripts, cadências, indicadores e rituais de gestão operando de verdade.</p>
-        <div class="metric-wall" style="margin-top:40px">
-          <div class="metric-card glass">
-            <div class="big-number">12 sem</div>
-            <h3>Duração</h3>
-            <p>Projeto consultivo com checkpoints semanais.</p>
+      <!-- 09 POR QUE AGORA -->
+      <section class="slide dark" data-title="Por que agora">
+        <span class="eyebrow">Janela de decisão</span>
+        <h2 style="margin-top:28px;max-width:1180px">Três razões para começar agora — não depois do gestor chegar.</h2>
+        <div class="clock-grid">
+          <div class="clock-card">
+            <div class="icon-box"><svg class="icon"><use href="#i-users"></use></svg></div>
+            <div class="big-number">30 dias</div>
+            <h3>Mateus chega</h3>
+            <p>Gestor novo precisa achar processo, CRM e rituais prontos — para executar, não estruturar.</p>
           </div>
-          <div class="metric-card glass">
-            <div class="big-number">106h</div>
-            <h3>Carga V4</h3>
-            <p>Construção + instalação — não só entrega de PDF.</p>
+          <div class="clock-card">
+            <div class="icon-box"><svg class="icon"><use href="#i-megaphone"></use></svg></div>
+            <div class="big-number">Growth</div>
+            <h3>Já ligado</h3>
+            <p>Sem fundação comercial, a demanda gerada vaza — e o resultado da assessoria sofre.</p>
           </div>
-          <div class="metric-card glass">
-            <div class="big-number">6 fases</div>
-            <h3>Método</h3>
-            <p>Do diagnóstico ao handover com plano de 60 dias.</p>
+          <div class="clock-card">
+            <div class="icon-box"><svg class="icon"><use href="#i-trend"></use></svg></div>
+            <div class="big-number">Churn</div>
+            <h3>Sangria contínua</h3>
+            <p>Cada mês reativo queima CAC e atrasa o payback de quem já entrou na base.</p>
           </div>
         </div>
       </section>
 
-      <!-- 08 O QUE MUDA -->
-      <section class="slide" data-title="O que muda">
+      <!-- 10 O QUE MUDA -->
+      <section class="slide white" data-title="O que muda">
         <div class="topline"></div>
         <span class="eyebrow">Diferença do produto</span>
         <h2 style="margin-top:28px;max-width:1180px">Não termina no artefato.<br>Termina com capacidade instalada.</h2>
@@ -792,137 +842,356 @@
         </table>
       </section>
 
-      <!-- 09 JORNADA 6 FASES -->
-      <section class="slide dark" data-title="Jornada 6 fases">
-        <span class="eyebrow">Como funciona</span>
+      <!-- 11 FASES OVERVIEW -->
+      <section class="slide dark" data-title="Fases do produto">
+        <span class="eyebrow">Fases do produto</span>
         <h2 style="margin-top:24px;max-width:1180px;font-size:42px">Seis fases. Uma fundação comercial instalada.</h2>
         <div class="phase-rail">
-          <div class="phase">
+          <div class="phase"><div class="n">Fase 01 · 18h</div><h3>Diagnóstico operacional</h3><p>Operação real, não documento bonito para o problema errado.</p></div>
+          <div class="phase"><div class="n">Fase 02 · 15h</div><h3>Arquitetura comercial</h3><p>Sistema operacional que o time consegue executar.</p></div>
+          <div class="phase"><div class="n">Fase 03 · 15,5h</div><h3>CRM e controle</h3><p>Em paralelo à F2 — método vira workflow.</p></div>
+          <div class="phase"><div class="n">Fase 04 · 20h</div><h3>Camada estratégica</h3><p>Playbook, comissão e breakeven da operação.</p></div>
+          <div class="phase"><div class="n">Fase 05 · 22h</div><h3>Instalação da rotina</h3><p>Adesão: imersão, roleplay e rituais assistidos.</p></div>
+          <div class="phase"><div class="n">Fase 06 · 10h</div><h3>Handover 60 dias</h3><p>Continuidade + retenção básica + riscos de regressão.</p></div>
+        </div>
+        <p class="mini-note">+ 6h de gestão de projeto, QA e alinhamentos internos · Total 106,5h</p>
+      </section>
+
+      <!-- 12 FASE 1 -->
+      <section class="slide" data-title="Fase 1 · Diagnóstico">
+        <div class="topline"></div>
+        <span class="eyebrow">Fases · detalhe</span>
+        <div class="phase-detail">
+          <div class="phase-side">
             <div class="n">Fase 01</div>
             <h3>Diagnóstico operacional</h3>
-            <p>Entrevistas, auditoria do CRM, mapa de gargalos e priorização do que impede venda previsível.</p>
+            <div class="hours">18h</div>
+            <p>Entender a operação real da G6 antes de desenhar qualquer playbook.</p>
           </div>
-          <div class="phase">
+          <div class="phase-body">
+            <h4>Entregas</h4>
+            <ul>
+              <li>Diagnóstico comercial detalhado</li>
+              <li>Entrevistas com sponsor, gestor, top e bottom performer</li>
+              <li>Auditoria do CRM / RD atual</li>
+              <li>Mapa de gargalos por etapa</li>
+              <li>Priorização das dores que impedem venda previsível</li>
+            </ul>
+            <h4>Resolve porque</h4>
+            <ul><li>Impede entregar playbook bonito para o problema errado</li></ul>
+            <div class="fit"><strong>Encaixe G6:</strong> presencial no onboarding — time fechado, loja + PAP, cultura acomodada. Diagnóstico separado por canal.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 13 FASE 2 -->
+      <section class="slide white" data-title="Fase 2 · Arquitetura">
+        <div class="topline"></div>
+        <span class="eyebrow">Fases · detalhe</span>
+        <div class="phase-detail">
+          <div class="phase-side">
             <div class="n">Fase 02</div>
-            <h3>Arquitetura comercial</h3>
-            <p>Pipeline, papéis, SLA, scripts, cadências e metas de atividade — o sistema operacional.</p>
+            <h3>Arquitetura operacional comercial</h3>
+            <div class="hours">15h</div>
+            <p>Desenhar o sistema que a G6 realmente consegue executar no dia a dia.</p>
           </div>
-          <div class="phase">
-            <div class="n">Fase 03</div>
+          <div class="phase-body">
+            <h4>Entregas</h4>
+            <ul>
+              <li>ICP / segmentos prioritários e jornada comercial alvo</li>
+              <li>Pipeline e critérios de etapa · papéis e responsabilidades</li>
+              <li>SLA marketing ↔ comercial ↔ gestor</li>
+              <li>Metas de atividade e indicadores de controle</li>
+              <li>Scripts (diagnóstico, vendas, follow-up) · cadências · BPMN · matriz CHA</li>
+            </ul>
+            <div class="fit"><strong>Encaixe G6:</strong> dual-track loja × PAP — scripts, metas/dia e cadências diferentes por canal.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 14 FASE 3 -->
+      <section class="slide" data-title="Fase 3 · CRM">
+        <div class="topline"></div>
+        <span class="eyebrow">Fases · detalhe</span>
+        <div class="phase-detail">
+          <div class="phase-side">
+            <div class="n">Fase 03 · paralelo à F2</div>
             <h3>CRM e controle</h3>
-            <p>Reorganização em paralelo: campos, motivos de perda, atividades e dashboard de gestão.</p>
+            <div class="hours">15,5h</div>
+            <p>Transformar a arquitetura em workflow e gestão — no RD que já existe.</p>
           </div>
-          <div class="phase">
+          <div class="phase-body">
+            <h4>Entregas</h4>
+            <ul>
+              <li>Reorganização do pipeline no CRM</li>
+              <li>Campos obrigatórios por etapa · motivos de perda padronizados</li>
+              <li>Atividades obrigatórias e próximas ações</li>
+              <li>Dashboard básico de gestão e conversão</li>
+              <li>Regras de higiene · rotina mínima de registro</li>
+            </ul>
+            <div class="fit"><strong>Encaixe G6:</strong> não é “implantar CRM de novo” — é adesão, governança e motivo de perda (inadimplência, concorrência, sem save).</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 15 FASE 4 -->
+      <section class="slide white" data-title="Fase 4 · Estratégica">
+        <div class="topline"></div>
+        <span class="eyebrow">Fases · detalhe</span>
+        <div class="phase-detail">
+          <div class="phase-side">
             <div class="n">Fase 04</div>
             <h3>Camada estratégica</h3>
-            <p>Playbook de uso, política de comissão (loja×PAP) e breakeven da operação comercial.</p>
+            <div class="hours">20h</div>
+            <p>Conectar processo, gestão, metas, incentivo e viabilidade financeira.</p>
           </div>
-          <div class="phase">
-            <div class="n">Fase 05</div>
+          <div class="phase-body">
+            <h4>Entregas</h4>
+            <ul>
+              <li>Playbook comercial orientado ao uso</li>
+              <li>Política de comissionamento (quando aplicável)</li>
+              <li>Breakeven da operação comercial (quando aplicável)</li>
+            </ul>
+            <div class="fit"><strong>Encaixe G6:</strong> comissão loja (2%/4%/6%) ≠ PAP (30/40/60). Meta como piso de gestão — sem baixar a barra quando aperta. Breakeven amarra CAC, payback e retenção.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 16 FASE 5 -->
+      <section class="slide dark" data-title="Fase 5 · Instalação">
+        <span class="eyebrow">Fases · detalhe</span>
+        <div class="phase-detail">
+          <div class="phase-side">
+            <div class="n">Fase 05 · presencial</div>
             <h3>Instalação da rotina</h3>
-            <p>Imersão, roleplay, pipeline review e reunião semanal assistida — adesão de verdade.</p>
+            <div class="hours">22h</div>
+            <p>Garantir que os artefatos sejam usados — o gap que mata EC clássica.</p>
           </div>
-          <div class="phase">
+          <div class="phase-body">
+            <h4>Entregas</h4>
+            <ul>
+              <li>Onboarding operacional de vendedores</li>
+              <li>Treinamento de imersão do time + treinamento do gestor</li>
+              <li>Simulações / roleplay de abordagem (loja e PAP)</li>
+              <li>Primeira pipeline review e reunião semanal assistidas</li>
+              <li>Checklist de gestão semanal · plano de correção dos desvios</li>
+            </ul>
+            <div class="fit"><strong>Encaixe G6:</strong> imersão presencial + roleplay. Mateus entra no treinamento para herdar a rotina, não só o material.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 17 FASE 6 -->
+      <section class="slide" data-title="Fase 6 · Handover">
+        <div class="topline"></div>
+        <span class="eyebrow">Fases · detalhe</span>
+        <div class="phase-detail">
+          <div class="phase-side">
             <div class="n">Fase 06</div>
-            <h3>Handover 60 dias</h3>
-            <p>Score antes/depois, plano de continuidade e retenção básica para o gestor manter.</p>
+            <h3>Handover e continuidade</h3>
+            <div class="hours">10h</div>
+            <p>Deixar a G6 capaz de manter a rotina nos próximos 60 dias.</p>
           </div>
-        </div>
-        <p class="mini-note">Fases 2 e 3 rodam em paralelo. Presencial crítico: diagnóstico (F1) + instalação/treino (F5).</p>
-      </section>
-
-      <!-- 10 PERSONALIZACAO G6 -->
-      <section class="slide white" data-title="Personalização G6">
-        <div class="topline"></div>
-        <span class="eyebrow">Sob medida para a G6</span>
-        <h2 style="margin-top:28px;max-width:1180px">Não é escopo genérico.<br>É dual-track loja × PAP + sucessão.</h2>
-        <div class="grid-4" style="margin-top:44px;display:grid;grid-template-columns:repeat(2,1fr);gap:18px">
-          <div class="card" style="padding:28px;border-radius:22px;border:1px solid var(--line);background:#fff">
-            <div class="icon-box"><svg class="icon"><use href="#i-store"></use></svg></div>
-            <h3 style="margin:14px 0 8px;font-size:26px">Loja (5 vendedores)</h3>
-            <p style="margin:0;color:var(--ink-soft);font-size:18px;line-height:1.35">Script de conversão, ativação pós-venda, save/upsell e disciplina de CRM no balcão.</p>
-          </div>
-          <div class="card" style="padding:28px;border-radius:22px;border:1px solid var(--line);background:#fff">
-            <div class="icon-box"><svg class="icon"><use href="#i-pin"></use></svg></div>
-            <h3 style="margin:14px 0 8px;font-size:26px">PAP (2 porta a porta)</h3>
-            <p style="margin:0;color:var(--ink-soft);font-size:18px;line-height:1.35">Abordagem, meta/dia, rota e registro — playbook diferente do time interno.</p>
-          </div>
-          <div class="card" style="padding:28px;border-radius:22px;border:1px solid var(--line);background:#fff">
-            <div class="icon-box"><svg class="icon"><use href="#i-layers"></use></svg></div>
-            <h3 style="margin:14px 0 8px;font-size:26px">Comissão + gestão</h3>
-            <p style="margin:0;color:var(--ink-soft);font-size:18px;line-height:1.35">Alinhar incentivo à conduta desejada — meta como piso, não como freio paternalista.</p>
-          </div>
-          <div class="card" style="padding:28px;border-radius:22px;border:1px solid var(--line);background:#fff">
-            <div class="icon-box"><svg class="icon"><use href="#i-check"></use></svg></div>
-            <h3 style="margin:14px 0 8px;font-size:26px">Onboarding do Mateus</h3>
-            <p style="margin:0;color:var(--ink-soft);font-size:18px;line-height:1.35">Ele entra no meio do projeto: recebe a máquina pronta e assume a rotina com a V4.</p>
+          <div class="phase-body">
+            <h4>Entregas</h4>
+            <ul>
+              <li>Reunião final de transferência</li>
+              <li>Score de maturidade antes/depois</li>
+              <li>Plano de 60 dias</li>
+              <li>Plano básico de retenção e expansão da carteira</li>
+              <li>Riscos de regressão · recomendação de evolução</li>
+            </ul>
+            <div class="fit"><strong>Encaixe G6:</strong> retenção básica com motivos de perda, script de save/upsell e ritual — sem prometer motor de retention recorrente (N2).</div>
           </div>
         </div>
       </section>
 
-      <!-- 11 CRITERIO DE SUCESSO -->
-      <section class="slide" data-title="Critério de sucesso">
+      <!-- 18 CRITERIOS -->
+      <section class="slide white" data-title="Critérios de sucesso">
         <div class="topline"></div>
-        <span class="eyebrow">Como medimos que funcionou</span>
+        <span class="eyebrow">Critérios de sucesso</span>
         <h2 style="margin-top:28px;max-width:1180px">Sucesso = um ciclo comercial operando com método</h2>
+        <p class="compact-lede" style="margin-top:12px">Ao final, a G6 não só possui os materiais — consegue operar com:</p>
         <div class="success-grid">
           <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-dashboard"></use></svg></div><h3>Pipeline configurado e usado</h3></div>
           <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-calendar"></use></svg></div><h3>Reunião semanal acontecendo</h3></div>
           <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-message"></use></svg></div><h3>Follow-up sendo executado</h3></div>
-          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-chart"></use></svg></div><h3>Gestor nos indicadores</h3></div>
-          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-page"></use></svg></div><h3>Time treinado nos scripts</h3></div>
+          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-chart"></use></svg></div><h3>Gestor usando indicadores</h3></div>
+          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-page"></use></svg></div><h3>Time nos scripts e critérios de etapa</h3></div>
           <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-users"></use></svg></div><h3>Onboarding de vendedor documentado</h3></div>
           <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-trend"></use></svg></div><h3>Plano básico de retenção entregue</h3></div>
-          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-target"></use></svg></div><h3>Dono com previsibilidade mínima</h3></div>
+          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-target"></use></svg></div><h3>Sponsor com previsibilidade mínima</h3></div>
         </div>
-        <div class="quote" style="margin-top:28px;font-size:24px">O que não entra: coaching recorrente, forecast avançado e expansão contínua — isso é N2, depois da fundação.</div>
       </section>
 
-      <!-- 12 INVESTIMENTO -->
+      <!-- 19 O QUE NAO ENTRA -->
+      <section class="slide" data-title="O que não entra">
+        <div class="topline"></div>
+        <span class="eyebrow">Escopo · limites</span>
+        <h2 style="margin-top:28px;max-width:1100px">Clareza do que não entra — para não prometer N2</h2>
+        <div class="metric-wall" style="margin-top:44px">
+          <div class="metric-card card"><div class="icon-box"><svg class="icon"><use href="#i-calendar"></use></svg></div><h3 style="margin-top:20px">Sem recorrência 6 meses</h3><p>Acompanhamento contínuo pós-handover não faz parte deste projeto.</p></div>
+          <div class="metric-card card"><div class="icon-box"><svg class="icon"><use href="#i-users"></use></svg></div><h3 style="margin-top:20px">Sem coaching contínuo</h3><p>Capacitação do gestor está na F5/F6 — não coaching mensal infinito.</p></div>
+          <div class="metric-card card"><div class="icon-box"><svg class="icon"><use href="#i-chart"></use></svg></div><h3 style="margin-top:20px">Sem forecast avançado</h3><p>Nem otimização mensal de funil nem projetos de expansão contínua.</p></div>
+        </div>
+        <div class="quote" style="margin-top:36px;font-size:24px">Isso pertence ao N2. Na G6, o acompanhamento de Growth já cobre a continuidade de mídia — a EC instala a fundação.</div>
+      </section>
+
+      <!-- 20 DIMENSIONAMENTO RESUMO -->
+      <section class="slide dark" data-title="Dimensionamento">
+        <span class="eyebrow">Dimensionamento de horas V4</span>
+        <h2 style="margin-top:24px;max-width:1100px">106,5 horas · carga por bloco</h2>
+        <table class="table" style="margin-top:36px">
+          <tr><th>Bloco</th><th style="text-align:right">Horas V4</th></tr>
+          <tr><td>Fase 1 · Diagnóstico operacional</td><td style="text-align:right">18h</td></tr>
+          <tr><td>Fase 2 · Arquitetura operacional comercial</td><td style="text-align:right">15h</td></tr>
+          <tr><td>Fase 3 · CRM e controle</td><td style="text-align:right">15,5h</td></tr>
+          <tr><td>Fase 4 · Estratégica</td><td style="text-align:right">20h</td></tr>
+          <tr><td>Fase 5 · Instalação da rotina</td><td style="text-align:right">22h</td></tr>
+          <tr><td>Fase 6 · Handover e continuidade</td><td style="text-align:right">10h</td></tr>
+          <tr><td>Gestão de projeto, QA e alinhamentos internos</td><td style="text-align:right">6h</td></tr>
+          <tr><td><strong>Total estimado</strong></td><td style="text-align:right"><strong>106,5h</strong></td></tr>
+        </table>
+        <p class="mini-note">Premissa: calls ≤1h · entrevistas ≤30min · carga principal em análise, desenho, CRM, QA e preparação. F2∥F3.</p>
+      </section>
+
+      <!-- 21 HORAS F1-F3 -->
+      <section class="slide white" data-title="Horas · Fases 1–3">
+        <div class="topline"></div>
+        <span class="eyebrow">Dimensionamento por fase e tarefa</span>
+        <h2 style="margin-top:18px;font-size:36px">Fases 1 a 3 · 48,5h</h2>
+        <div class="two-col-hours">
+          <table class="hours-table">
+            <tr><th>Fase 1 · Diagnóstico</th><th class="num">Horas</th></tr>
+            <tr><td>Preparação do kickoff e roteiro</td><td class="num">1h</td></tr>
+            <tr><td>Kickoff com sponsor</td><td class="num">1h</td></tr>
+            <tr><td>Coleta e leitura de materiais</td><td class="num">3h</td></tr>
+            <tr><td>Entrevistas (dono/gestor/top/bottom)</td><td class="num">2h</td></tr>
+            <tr><td>Síntese das entrevistas</td><td class="num">2h</td></tr>
+            <tr><td>Auditoria de CRM / controle atual</td><td class="num">3h</td></tr>
+            <tr><td>Mapa de gargalos e priorização</td><td class="num">4h</td></tr>
+            <tr><td>Devolutiva diagnóstica + ajustes</td><td class="num">2h</td></tr>
+            <tr class="subtotal"><td>Subtotal F1</td><td class="num">18h</td></tr>
+          </table>
+          <table class="hours-table">
+            <tr><th>Fase 2 · Arquitetura</th><th class="num">Horas</th></tr>
+            <tr><td>ICP, segmentos e jornada alvo</td><td class="num">3h</td></tr>
+            <tr><td>Pipeline e critérios de etapa</td><td class="num">2h</td></tr>
+            <tr><td>SLA · papéis · metas/indicadores</td><td class="num">3h</td></tr>
+            <tr><td>Scripts · cadências · BPMN · CHA</td><td class="num">5h</td></tr>
+            <tr><td>Validação + ajustes</td><td class="num">2h</td></tr>
+            <tr class="subtotal"><td>Subtotal F2</td><td class="num">15h</td></tr>
+            <tr><th style="padding-top:16px">Fase 3 · CRM (∥ F2)</th><th class="num" style="padding-top:16px">Horas</th></tr>
+            <tr><td>Pipeline · campos · motivos de perda</td><td class="num">5,5h</td></tr>
+            <tr><td>Atividades · dashboard · higiene</td><td class="num">5,5h</td></tr>
+            <tr><td>Validação pipeline + rotina + reunião</td><td class="num">4,5h</td></tr>
+            <tr class="subtotal"><td>Subtotal F3</td><td class="num">15,5h</td></tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- 22 HORAS F4-F6 -->
+      <section class="slide" data-title="Horas · Fases 4–6">
+        <div class="topline"></div>
+        <span class="eyebrow">Dimensionamento por fase e tarefa</span>
+        <h2 style="margin-top:18px;font-size:36px">Fases 4 a 6 + gestão · 58h</h2>
+        <div class="two-col-hours">
+          <table class="hours-table">
+            <tr><th>Fase 4 · Estratégica</th><th class="num">Horas</th></tr>
+            <tr><td>Playbook comercial orientado ao uso</td><td class="num">8h</td></tr>
+            <tr><td>Política de comissionamento</td><td class="num">5h</td></tr>
+            <tr><td>Breakeven da operação comercial</td><td class="num">5h</td></tr>
+            <tr><td>Alinhamento estratégico + ajustes</td><td class="num">2h</td></tr>
+            <tr class="subtotal"><td>Subtotal F4</td><td class="num">20h</td></tr>
+            <tr><th style="padding-top:14px">Fase 5 · Instalação</th><th class="num" style="padding-top:14px">Horas</th></tr>
+            <tr><td>Prep. onboarding + imersão do time</td><td class="num">3h</td></tr>
+            <tr><td>Prep. + treinamento do gestor</td><td class="num">2h</td></tr>
+            <tr><td>Simulações / roleplay</td><td class="num">2h</td></tr>
+            <tr><td>Pipeline review + reunião semanal</td><td class="num">2h</td></tr>
+            <tr><td>Checklist · correção · ajustes · registro</td><td class="num">13h</td></tr>
+            <tr class="subtotal"><td>Subtotal F5</td><td class="num">22h</td></tr>
+          </table>
+          <table class="hours-table">
+            <tr><th>Fase 6 · Handover</th><th class="num">Horas</th></tr>
+            <tr><td>Reunião final de transferência</td><td class="num">1h</td></tr>
+            <tr><td>Score de maturidade antes/depois</td><td class="num">2h</td></tr>
+            <tr><td>Plano 60 dias + retenção básica</td><td class="num">2h</td></tr>
+            <tr><td>Riscos de regressão + evolução</td><td class="num">2h</td></tr>
+            <tr><td>Organização final dos materiais</td><td class="num">1h</td></tr>
+            <tr class="subtotal"><td>Subtotal F6</td><td class="num">10h</td></tr>
+            <tr><th style="padding-top:14px">Gestão / QA</th><th class="num" style="padding-top:14px">Horas</th></tr>
+            <tr><td>Cronograma, alinhamentos internos, QA</td><td class="num">6h</td></tr>
+            <tr class="total"><td>Total do projeto</td><td class="num">106,5h</td></tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- 23 AGENDA + FAIXAS -->
+      <section class="slide white" data-title="Agenda e faixas">
+        <div class="topline"></div>
+        <span class="eyebrow">Controle de agenda · faixas</span>
+        <h2 style="margin-top:22px;font-size:36px">14 interações síncronas · 13h de contato</h2>
+        <div class="table-layout" style="margin-top:28px">
+          <table class="table">
+            <tr><th>Interação</th><th>Qtd</th><th>Máx</th></tr>
+            <tr><td>Kickoff · devolutiva · validações · alinhamento</td><td>5</td><td>1h</td></tr>
+            <tr><td>Entrevistas</td><td>4</td><td>30min</td></tr>
+            <tr><td>Imersão time · treino gestor</td><td>2</td><td>1h</td></tr>
+            <tr><td>Pipeline review · reunião semanal</td><td>2</td><td>1h</td></tr>
+            <tr><td>Handover final</td><td>1</td><td>1h</td></tr>
+          </table>
+          <div class="side-metrics compare-side">
+            <div class="side-metric"><div class="big-number" style="font-size:42px">Padrão</div><p>G6: operação principal + gestor + CRM a reorganizar → faixa 110–130h de referência; escopo base 106,5h com dual-track.</p></div>
+            <div class="side-metric" style="border:0"><div class="big-number" style="font-size:42px">Ajuste</div><p>Presenciais F1+F5 e loja×PAP entram na personalização — sem mudar a espinha dorsal do produto.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 24 PERSONALIZACAO -->
+      <section class="slide dark" data-title="Personalização G6">
+        <span class="eyebrow">Sob medida para a G6</span>
+        <h2 style="margin-top:24px;max-width:1180px">Como o produto vira proposta G6</h2>
+        <div class="grid-4" style="margin-top:40px;display:grid;grid-template-columns:repeat(2,1fr);gap:18px">
+          <div class="metric-card glass" style="min-height:auto;padding:26px"><div class="icon-box"><svg class="icon"><use href="#i-store"></use></svg></div><h3 style="margin-top:14px">Loja · 5 vendedores</h3><p>Script de conversão, ativação pós-venda, save/upsell e disciplina de CRM no balcão.</p></div>
+          <div class="metric-card glass" style="min-height:auto;padding:26px"><div class="icon-box"><svg class="icon"><use href="#i-pin"></use></svg></div><h3 style="margin-top:14px">PAP · 2 porta a porta</h3><p>Abordagem, meta/dia, rota e registro — playbook diferente do time interno.</p></div>
+          <div class="metric-card glass" style="min-height:auto;padding:26px"><div class="icon-box"><svg class="icon"><use href="#i-layers"></use></svg></div><h3 style="margin-top:14px">Comissão + gestão</h3><p>Alinhar incentivo à conduta desejada. Meta como piso — gestão por atividade e conversão.</p></div>
+          <div class="metric-card glass" style="min-height:auto;padding:26px"><div class="icon-box"><svg class="icon"><use href="#i-check"></use></svg></div><h3 style="margin-top:14px">Onboarding do Mateus</h3><p>Ele entra no meio do projeto: recebe a máquina pronta e assume a rotina com a V4.</p></div>
+        </div>
+      </section>
+
+      <!-- 25 INVESTIMENTO -->
       <section class="slide white" data-title="Investimento">
         <div class="topline"></div>
         <span class="eyebrow">Investimento</span>
         <h2 style="margin-top:28px;max-width:1100px">Barato frente à sangria.<br>Caro só se continuar igual.</h2>
         <div class="price-hero">
           <div class="price-box">
-            <div class="tag">Projeto · 12 semanas · 106h</div>
+            <div class="tag">Projeto · 12 semanas · 106,5h</div>
             <div class="amount"><span>R$</span>70.000</div>
             <p>Estruturação Comercial personalizada para a G6 — implementação assistida, dual-track loja×PAP e presenciais nas fases críticas.</p>
           </div>
           <div>
-            <div class="side-metric" style="padding:18px 0"><div class="big-number" style="font-size:42px">Inclui</div>
-              <p style="margin-top:12px;font-size:19px;color:var(--ink-soft);line-height:1.4">Diagnóstico presencial · arquitetura · CRM em uso · comissão/breakeven · imersão + roleplay · handover 60 dias</p>
+            <div class="side-metric" style="padding:18px 0"><div class="big-number" style="font-size:40px">Inclui</div>
+              <p style="margin-top:12px;font-size:18px;color:var(--ink-soft);line-height:1.4">Definição completa do produto: diagnóstico → arquitetura → CRM em uso → estratégica → instalação → handover 60 dias.</p>
             </div>
-            <div class="side-metric" style="padding:18px 0;border-bottom:0"><div class="big-number" style="font-size:42px">Lógica</div>
-              <p style="margin-top:12px;font-size:19px;color:var(--ink-soft);line-height:1.4">O investimento se justifica pelo CAC queimado e pelas saídas evitáveis — não pelo número de horas.</p>
+            <div class="side-metric" style="padding:18px 0;border-bottom:0"><div class="big-number" style="font-size:40px">Lógica</div>
+              <p style="margin-top:12px;font-size:18px;color:var(--ink-soft);line-height:1.4">O investimento se justifica pelo CAC queimado e pelas saídas evitáveis — não pelo número de horas.</p>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- 13 PROXIMO PASSO -->
+      <!-- 26 PROXIMOS PASSOS -->
       <section class="slide red" data-title="Próximos passos">
         <div class="sphere" style="width:400px;height:400px;right:-70px;top:-100px;opacity:.45"></div>
         <span class="eyebrow">Próximo passo</span>
-        <h2 style="margin-top:28px;max-width:1200px;font-size:52px">Começar agora para o Mateus achar a casa pronta.</h2>
+        <h2 style="margin-top:28px;max-width:1200px;font-size:48px">Começar agora para o Mateus achar a casa pronta.</h2>
         <div class="cta-steps">
-          <div class="cta-step">
-            <div class="n">01</div>
-            <h3>Alinhamento</h3>
-            <p>Validar escopo, sponsor (Laura) e janela de kickoff com a chegada do gestor.</p>
-          </div>
-          <div class="cta-step">
-            <div class="n">02</div>
-            <h3>Kickoff + F1</h3>
-            <p>Diagnóstico operacional presencial: entrevistas, auditoria e mapa de gargalos.</p>
-          </div>
-          <div class="cta-step">
-            <div class="n">03</div>
-            <h3>Instalar</h3>
-            <p>12 semanas até handover — rotina rodando, time treinado, gestor no comando.</p>
-          </div>
+          <div class="cta-step"><div class="n">01</div><h3>Alinhamento</h3><p>Validar escopo, sponsor e janela de kickoff com a chegada do gestor.</p></div>
+          <div class="cta-step"><div class="n">02</div><h3>Kickoff + F1</h3><p>Diagnóstico operacional presencial: entrevistas, auditoria e mapa de gargalos.</p></div>
+          <div class="cta-step"><div class="n">03</div><h3>Instalar</h3><p>12 semanas até handover — rotina rodando, time treinado, gestor no comando.</p></div>
         </div>
-        <div class="quote" style="margin-top:40px;font-size:28px;border-color:var(--v4-cream)">Growth já está ligado. A fundação comercial é o que protege o resultado.</div>
+        <div class="quote" style="margin-top:40px;font-size:26px;border-color:var(--v4-cream)">Growth já está ligado. A fundação comercial é o que protege o resultado.</div>
       </section>
 
 
@@ -930,7 +1199,7 @@
         <img id="footerLogo" src="assets/colli-red.png" alt="">
       </div>
 
-      <div class="slide-counter" id="slideCounter">01 / 13</div>
+      <div class="slide-counter" id="slideCounter">01 / 26</div>
 
       <nav class="navigation" aria-label="Navegação da apresentação">
         <button class="nav-btn" id="prevBtn" aria-label="Slide anterior" data-testid="prev-slide">
@@ -961,14 +1230,7 @@
     function fitDeck() {
       const viewportWidth = window.visualViewport?.width || window.innerWidth;
       const viewportHeight = window.visualViewport?.height || window.innerHeight;
-      const scale = Math.max(
-        .1,
-        Math.min(
-          (viewportWidth - 16) / 1600,
-          (viewportHeight - 16) / 900,
-          1
-        )
-      );
+      const scale = Math.max(.1, Math.min((viewportWidth - 16) / 1600, (viewportHeight - 16) / 900, 1));
       deck.style.setProperty("--deck-scale", scale);
     }
 
@@ -977,28 +1239,18 @@
       slides.forEach((slide, slideIndex) => {
         slide.classList.toggle("active", slideIndex === current);
       });
-
       const number = String(current + 1).padStart(2, "0");
       const total = String(slides.length).padStart(2, "0");
       const activeSlide = slides[current];
-      const isDark =
-        activeSlide.classList.contains("red") ||
-        activeSlide.classList.contains("dark");
-
+      const isDark = activeSlide.classList.contains("red") || activeSlide.classList.contains("dark");
       slideCounter.textContent = `${number} / ${total}`;
-      slideCounter.style.color = isDark
-        ? "rgba(255,255,255,.58)"
-        : "rgba(20,20,20,.52)";
+      slideCounter.style.color = isDark ? "rgba(255,255,255,.58)" : "rgba(20,20,20,.52)";
       progressFill.style.width = `${((current + 1) / slides.length) * 100}%`;
       prevBtn.disabled = current === 0;
       nextBtn.disabled = current === slides.length - 1;
-      footerLogo.src = isDark
-        ? "assets/colli-white.png"
-        : "assets/colli-red.png";
-      footerLogo.style.opacity =
-        current === 0 || current === slides.length - 1 ? "0" : "1";
-      document.title =
-        `${number} | ${activeSlide.dataset.title || "G6 · Estruturação Comercial"}`;
+      footerLogo.src = isDark ? "assets/colli-white.png" : "assets/colli-red.png";
+      footerLogo.style.opacity = current === 0 || current === slides.length - 1 ? "0" : "1";
+      document.title = `${number} | ${activeSlide.dataset.title || "G6 · Estruturação Comercial"}`;
     }
 
     prevBtn.addEventListener("click", () => goTo(current - 1));
@@ -1006,28 +1258,18 @@
     window.addEventListener("resize", fitDeck);
     window.visualViewport?.addEventListener("resize", fitDeck);
     window.addEventListener("keydown", (event) => {
-      if (["ArrowRight", "PageDown", " "].includes(event.key)) {
-        event.preventDefault();
-        goTo(current + 1);
-      }
-      if (["ArrowLeft", "PageUp"].includes(event.key)) {
-        event.preventDefault();
-        goTo(current - 1);
-      }
+      if (["ArrowRight", "PageDown", " "].includes(event.key)) { event.preventDefault(); goTo(current + 1); }
+      if (["ArrowLeft", "PageUp"].includes(event.key)) { event.preventDefault(); goTo(current - 1); }
       if (event.key === "Home") goTo(0);
       if (event.key === "End") goTo(slides.length - 1);
     });
 
     let touchStartX = null;
-    deck.addEventListener("touchstart", (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
+    deck.addEventListener("touchstart", (event) => { touchStartX = event.changedTouches[0].clientX; }, { passive: true });
     deck.addEventListener("touchend", (event) => {
       if (touchStartX === null) return;
       const delta = event.changedTouches[0].clientX - touchStartX;
-      if (Math.abs(delta) > 70) {
-        goTo(current + (delta < 0 ? 1 : -1));
-      }
+      if (Math.abs(delta) > 70) goTo(current + (delta < 0 ? 1 : -1));
       touchStartX = null;
     }, { passive: true });
 
