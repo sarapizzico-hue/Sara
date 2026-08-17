@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sistema de Proposta · V4 · Sara</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --brand:#e50915; --brand-light:#ff1a27; --bg:#050505; --surf:rgba(20,20,20,.92);
+      --surf2:#141414; --bd:rgba(255,255,255,.1); --txt:#fafafa; --mut:#a3a3a3;
+      --ok:#86efac; --warn:#fde68a; --hot:#fca5a5; --info:#93c5fd;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--txt);font:14px/1.55 Inter,system-ui,sans-serif;
+      background-image:radial-gradient(ellipse 80% 45% at 50% -15%,rgba(229,9,21,.18),transparent)}
+    .top{position:sticky;top:0;z-index:100;backdrop-filter:blur(14px);background:rgba(5,5,5,.9);border-bottom:1px solid var(--bd);padding:12px 20px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+    .logo{font-weight:900}.logo span{color:var(--brand-light)}
+    .pill{font-size:11px;font-weight:700;color:var(--mut);border:1px solid var(--bd);padding:5px 10px;border-radius:999px}
+    .wrap{max-width:1080px;margin:0 auto;padding:24px 18px 80px}
+    h1{margin:0 0 6px;font-size:clamp(24px,4vw,34px);font-weight:900;letter-spacing:-.03em}
+    .lead{color:var(--mut);max-width:900px;margin:0 0 18px;font-size:13px}
+    .lead a{color:var(--ok)}
+    .nav{position:sticky;top:56px;z-index:90;margin:0 0 18px;padding:8px;background:rgba(8,8,8,.94);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.14);border-radius:16px}
+    .nav-label{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);padding:4px 10px 8px}
+    .tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+    @media(max-width:900px){.tabs{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:600px){.tabs{grid-template-columns:1fr 1fr}}
+    .tab{appearance:none;border:1px solid var(--bd);background:var(--surf2);color:var(--mut);border-radius:12px;padding:11px 10px;cursor:pointer;text-align:left;font-family:inherit;transition:.2s}
+    .tab:hover{border-color:rgba(255,255,255,.22);color:#fff}
+    .tab.active{color:#fff;border-color:var(--brand);background:linear-gradient(135deg,rgba(229,9,21,.18),rgba(20,20,20,.95))}
+    .tab .n{display:block;font-size:13px;font-weight:800;margin-bottom:2px}
+    .tab .s{font-size:10px;font-weight:700;color:#d4d4d4}
+    .panel{display:none}.panel.is-active{display:block;animation:fade .2s ease}
+    @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+    .callout{padding:14px 16px;border-radius:12px;border:1px solid rgba(96,165,250,.3);background:rgba(96,165,250,.08);color:#bfdbfe;font-size:13px;margin-bottom:14px}
+    .callout.warn{border-color:rgba(250,204,21,.28);background:rgba(250,204,21,.06);color:#fde68a}
+    .callout.ok{border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.08);color:#bbf7d0}
+    .callout.hot{border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.08);color:#fecaca}
+    .section{background:var(--surf);border:1px solid var(--bd);border-radius:16px;padding:18px 20px;margin-bottom:12px}
+    .section h2{margin:0 0 4px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);font-weight:800}
+    .section h3{margin:0 0 12px;font-size:17px;font-weight:900}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:800px){.grid2{grid-template-columns:1fr}}
+    .card{background:var(--surf2);border:1px solid var(--bd);border-radius:12px;padding:14px 16px}
+    .card .t{font-weight:800;margin-bottom:6px}
+    .card .d{font-size:12px;color:#d4d4d4}
+    .card.lock{border-color:rgba(34,197,94,.35)}
+    .card.open{border-color:rgba(250,204,21,.35)}
+    ul{margin:0;padding-left:18px} li{margin:5px 0;color:#e5e5e5}
+    .muted{color:var(--mut);font-size:12px}
+    .tag{display:inline-block;padding:2px 8px;border-radius:999px;font-size:10px;font-weight:800;border:1px solid var(--bd);margin-right:4px}
+    .tag.ok{color:var(--ok);border-color:rgba(34,197,94,.35)}
+    .tag.warn{color:var(--warn);border-color:rgba(250,204,21,.35)}
+    .tag.hot{color:var(--hot);border-color:rgba(239,68,68,.4)}
+    .tag.info{color:var(--info);border-color:rgba(96,165,250,.35)}
+    table{width:100%;border-collapse:collapse;font-size:12.5px}
+    th,td{padding:9px 8px;border-bottom:1px solid var(--bd);text-align:left;vertical-align:top}
+    th{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);font-weight:800}
+    pre,code,textarea{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+    .prompt{width:100%;min-height:220px;background:#0a0a0a;border:1px solid var(--bd);border-radius:12px;color:var(--txt);padding:14px;font-size:12px;line-height:1.5;resize:vertical}
+    .btn-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+    .btn{appearance:none;border:0;border-radius:12px;padding:11px 16px;font:inherit;font-weight:800;cursor:pointer;background:linear-gradient(135deg,#e50915,#ff1a27);color:#fff}
+    .btn.ghost{background:transparent;border:1px solid var(--bd);color:#fff}
+    .btn.ok{background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.35);color:var(--ok)}
+    .check{display:grid;gap:8px;margin:0}
+    .check label{display:flex;gap:10px;align-items:flex-start;background:var(--surf2);border:1px solid var(--bd);border-radius:10px;padding:10px 12px;cursor:pointer;font-size:13px}
+    .check input{margin-top:3px}
+    .steps{counter-reset:s;list-style:none;padding:0;margin:0}
+    .steps li{counter-increment:s;position:relative;padding:12px 12px 12px 48px;margin-bottom:8px;background:var(--surf2);border:1px solid var(--bd);border-radius:12px}
+    .steps li::before{content:counter(s, decimal-leading-zero);position:absolute;left:12px;top:12px;font-weight:900;color:var(--brand-light);font-size:13px}
+    .inv a{color:var(--ok);text-decoration:none}.inv a:hover{text-decoration:underline}
+    footer{text-align:center;color:var(--mut);font-size:11px;margin-top:28px;padding-top:16px;border-top:1px solid var(--bd)}
+    footer a{color:var(--ok)}
+    .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#14532d;color:#bbf7d0;border:1px solid rgba(34,197,94,.4);padding:10px 16px;border-radius:999px;font-size:12px;font-weight:700;opacity:0;pointer-events:none;transition:.25s;z-index:300}
+    .toast.show{opacity:1}
+  </style>
+</head>
+<body>
+<header class="top">
+  <div class="logo">V4 <span>COMPANY</span></div>
+  <div class="pill">Sistema de proposta · decisões travadas</div>
+</header>
+
+<div class="wrap">
+  <h1>Organizar para parar de reajustar</h1>
+  <p class="lead">
+    O retrabalho não é falta de esforço — é falta de <strong style="color:#fff">fonte da verdade</strong>.
+    Aqui ficam travados: brief mínimo, catálogo de produtos, visual do deck, narrativa e kit de entregáveis.
+    Pipe e safra continuam em <a href="index.html">Comando</a> e <a href="farmer-sara.html">Farmer Sara</a>.
+  </p>
+
+  <div class="callout hot">
+    <strong>Regra de ouro:</strong> sem brief completo, não começa proposta.
+    Mudança de visual, escopo ou preço no meio do caminho só com brief atualizado — não por “ajuste rápido”.
+  </div>
+
+  <nav class="nav">
+    <div class="nav-label">Sistema</div>
+    <div class="tabs">
+      <button class="tab active" data-view="travado"><span class="n">Travado</span><span class="s">O que não reabre</span></button>
+      <button class="tab" data-view="brief"><span class="n">Brief</span><span class="s">Antes de pedir</span></button>
+      <button class="tab" data-view="catalogo"><span class="n">Catálogo</span><span class="s">Produtos V4</span></button>
+      <button class="tab" data-view="deck"><span class="n">Deck + kit</span><span class="s">Visual · slides · arquivos</span></button>
+      <button class="tab" data-view="inventario"><span class="n">Inventário</span><span class="s">Onde puxar</span></button>
+    </div>
+  </nav>
+
+  <!-- ========== TRAVADO ========== -->
+  <div class="panel is-active" data-view="travado">
+    <div class="callout warn">
+      <strong>Por que reajustamos toda hora:</strong> cada pedido reinventa visual (Outfit vs Sora vs IBM Plex),
+      mistura produtos sem nome canônico, muda preço no meio e pede “igual à última” sem dizer qual.
+    </div>
+
+    <div class="section">
+      <h2>Decisões</h2>
+      <h3>O que está travado a partir de agora</h3>
+      <div class="grid2">
+        <div class="card lock">
+          <div class="t"><span class="tag ok">TRAVADO</span> Visual do deck cliente</div>
+          <div class="d">Vermelho V4 · Outfit + Plus Jakarta Sans · slides full-bleed (padrão Modular / Martins / Motéis / Estação Delta). Não reabrir Sora/azul/“outro HTML” no meio do pedido.</div>
+        </div>
+        <div class="card lock">
+          <div class="t"><span class="tag ok">TRAVADO</span> Hub interno</div>
+          <div class="d">Pipe, safra, score e plano ficam dark (Inter) — são ferramenta da Sara, não proposta comercial.</div>
+        </div>
+        <div class="card lock">
+          <div class="t"><span class="tag ok">TRAVADO</span> Nomes de produto</div>
+          <div class="d">Só usar nomes do catálogo: EC · Growth · CRM · Social · SDR IA · E-com B2B. Sem renomear por cliente.</div>
+        </div>
+        <div class="card lock">
+          <div class="t"><span class="tag ok">TRAVADO</span> Preço</div>
+          <div class="d">Preço vem do brief (valores finais fechados). Agente não “acha” preço. Uma decisão principal no slide de investimento — pacotes A/B só se o brief pedir.</div>
+        </div>
+        <div class="card lock">
+          <div class="t"><span class="tag ok">TRAVADO</span> Kit padrão</div>
+          <div class="d">Proposta HTML (deck) + Script de pitch. Word/PDF/PPTX só se o brief marcar.</div>
+        </div>
+        <div class="card open">
+          <div class="t"><span class="tag warn">POR DEAL</span> Narrativa e âncoras</div>
+          <div class="d">Dor, case, condição comercial e tom da call mudam por cliente — mas entram no brief, não no meio do desenvolvimento.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Fluxo</h2>
+      <h3>Como pedir sem retrabalho</h3>
+      <ol class="steps">
+        <li><strong>Preencher o brief</strong> (aba Brief) — cliente, produtos, preços, referência visual, o que NÃO mudar.</li>
+        <li><strong>Escolher referência canônica</strong> no inventário (ex.: Modular para Growth+EC, Martins para Growth pós-EE).</li>
+        <li><strong>Colar o prompt</strong> no agente. Se faltar campo, o agente para e pergunta — não inventa.</li>
+        <li><strong>Um ciclo de revisão</strong>: conteúdo/preço. Visual e estrutura do deck não reabrem salvo erro.</li>
+        <li><strong>Fechar</strong>: link Pages + script. Só então pedir Word/PDF se precisar.</li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <h2>Anti-padrão</h2>
+      <h3>O que causa o ciclo de reajuste</h3>
+      <ul>
+        <li>“Faz igual à G6” sem dizer se é a versão HTML1, deck vermelho ou +Social.</li>
+        <li>Mudar tipografia/layout depois do 1º draft.</li>
+        <li>Colocar dois preços no slide final sem ter pedido pacotes no brief.</li>
+        <li>Pedir script e proposta em threads separadas com regras diferentes.</li>
+        <li>Terminar a call/script no preço (ver lição ALNV: gate antes do valor).</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ========== BRIEF ========== -->
+  <div class="panel" data-view="brief">
+    <div class="callout ok">
+      <strong>Checklist mínimo.</strong> Marque o que já tem. Se faltar item obrigatório, não dispare o agente.
+    </div>
+
+    <div class="section">
+      <h2>Checklist</h2>
+      <h3>Antes de desenvolver</h3>
+      <div class="check" id="briefCheck">
+        <label><input type="checkbox" data-req="1" /> <span><strong>Cliente + contexto</strong> — nome, segmento, o que já rolou (EE, call, AP)</span></label>
+        <label><input type="checkbox" data-req="1" /> <span><strong>Produto(s)</strong> — lista do catálogo (ex.: Growth + CRM)</span></label>
+        <label><input type="checkbox" data-req="1" /> <span><strong>Preços finais</strong> — mensal / único / bonificações / condição especial</span></label>
+        <label><input type="checkbox" data-req="1" /> <span><strong>Referência visual</strong> — arquivo canônico (Modular, Martins, Motéis…)</span></label>
+        <label><input type="checkbox" data-req="1" /> <span><strong>Ângulo da narrativa</strong> — 1 frase do problema → 1 frase da oferta</span></label>
+        <label><input type="checkbox" /> <span><strong>Pacotes</strong> — se houver A/B, listar os dois preços e o que muda</span></label>
+        <label><input type="checkbox" /> <span><strong>Logo do cliente</strong> — URL ou arquivo</span></label>
+        <label><input type="checkbox" /> <span><strong>Extras</strong> — Word / PDF / PPTX / script de pitch / coaching (ex.: Rodrigo)</span></label>
+        <label><input type="checkbox" /> <span><strong>O que NÃO mudar</strong> — frases, números, slides que já estão ok</span></label>
+      </div>
+      <p class="muted" id="briefStatus" style="margin-top:10px">0/5 obrigatórios marcados</p>
+    </div>
+
+    <div class="section">
+      <h2>Prompt</h2>
+      <h3>Copie, preencha e cole no agente</h3>
+      <textarea class="prompt" id="promptBox" spellcheck="false">QUERO UMA PROPOSTA — seguir sistema-proposta.html e AGENTS.md
+
+Cliente:
+Segmento:
+Contexto (EE / calls / o que já foi dito):
+
+Produtos (só catálogo): 
+  [ ] Estruturação Comercial (EC)
+  [ ] Assessoria de Growth
+  [ ] CRM (bonificado? sim/não)
+  [ ] Social Media
+  [ ] SDR IA
+  [ ] E-commerce B2B
+  [ ] Outro (só se brief justificar): ___
+
+Preços FINAIS (não inventar):
+  - Produto / valor / recorrência:
+  - Bonificações:
+  - Condição especial / âncora de mercado:
+
+Pacotes: [ ] um preço  [ ] A/B — descrever:
+
+Referência visual OBRIGATÓRIA (copiar CSS/estrutura):
+  proposta-modular-estruturas.html  |  proposta-martins-magazine-growth.html  |  proposta-moteis-fortaleza-consultiva.html  |  outra: ___
+
+Narrativa em 1 linha (dor → oferta):
+
+Slides desejados (ou “usar sequência canônica”):
+
+Kit:
+  [x] proposta HTML deck
+  [x] script de pitch
+  [ ] Word
+  [ ] PDF
+  [ ] PPTX
+
+Regras:
+  - Não mudar visual no meio
+  - Não inventar preço
+  - Um preço principal no investimento (salvo A/B pedido)
+  - Script: perguntas abertas, objeções antes do preço, pedir a venda
+  - NÃO fazer: ___
+</textarea>
+      <div class="btn-row">
+        <button class="btn" type="button" id="copyPrompt">Copiar prompt</button>
+        <button class="btn ghost" type="button" id="resetPrompt">Restaurar modelo</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== CATÁLOGO ========== -->
+  <div class="panel" data-view="catalogo">
+    <div class="callout">
+      <strong>Nomes canônicos.</strong> Use estes nomes na capa, badges e slides.
+      Preço é por deal (brief) — abaixo só escopo típico + exemplos já usados no repo.
+    </div>
+
+    <div class="section">
+      <h2>Produtos</h2>
+      <h3>Catálogo V4 (Sara / E.E → Executar)</h3>
+      <div class="table-wrap" style="overflow-x:auto">
+        <table>
+          <thead>
+            <tr>
+              <th>Produto</th>
+              <th>Tipo</th>
+              <th>Escopo típico</th>
+              <th>Exemplo no repo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Estruturação Comercial (EC)</strong></td>
+              <td><span class="tag info">projeto</span></td>
+              <td>Diagnóstico, funil, KPIs, playbooks, treinamento, governança. CRM muitas vezes incluso/bonificado.</td>
+              <td class="inv"><a href="proposta-estacao-delta-ec.html">Estação Delta</a> · <a href="proposta-modular-estruturas.html">Modular</a></td>
+            </tr>
+            <tr>
+              <td><strong>Assessoria de Growth</strong></td>
+              <td><span class="tag ok">mensal</span></td>
+              <td>Account + GT + Copy + Design (time varia). Rotina, mídia, criativo, rituais com o cliente.</td>
+              <td class="inv"><a href="proposta-martins-magazine-growth.html">Martins</a> · <a href="proposta-g6-internet.html">G6</a></td>
+            </tr>
+            <tr>
+              <td><strong>CRM</strong></td>
+              <td><span class="tag warn">setup / bonus</span></td>
+              <td>Pipes, fases, captura, bot, higiene. Quase sempre “bonificado” na EC ou no combo Growth.</td>
+              <td class="inv"><a href="proposta-modular-estruturas.html">Modular</a> · <a href="proposta-moteis-fortaleza-consultiva.html">Motéis</a></td>
+            </tr>
+            <tr>
+              <td><strong>Social Media</strong></td>
+              <td><span class="tag ok">add-on mensal</span></td>
+              <td>Conteúdo/perfis no pacote Growth. Só entra se o brief marcar — não “surpresa” no draft.</td>
+              <td class="inv"><a href="proposta-g6-internet-social.html">G6 + Social</a></td>
+            </tr>
+            <tr>
+              <td><strong>SDR IA</strong></td>
+              <td><span class="tag ok">mensal + setup</span></td>
+              <td>Qualificação WhatsApp/CRM, ativações, implementação. Setup pode ser bonificado.</td>
+              <td class="inv"><a href="proposta-moteis-fortaleza-consultiva.html">Motéis Fortaleza</a></td>
+            </tr>
+            <tr>
+              <td><strong>E-commerce B2B</strong></td>
+              <td><span class="tag info">projeto</span></td>
+              <td>Loja/canal B2B (tema, integrações, SEO). Produto especial — Isoluz.</td>
+              <td class="inv"><a href="proposta-isoluz.html">Isoluz</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted" style="margin-top:12px">Combos comuns: EC só · Growth só · EC + Growth · Growth + CRM · Growth + Social + CRM · Growth + SDR IA (+ CRM).</p>
+    </div>
+
+    <div class="section">
+      <h2>Referência de preço</h2>
+      <h3>Exemplos já publicados (não são tabela oficial)</h3>
+      <ul>
+        <li><strong>Modular:</strong> EC R$ 10.141,57 (único) · Growth R$ 4.713,83/mês · CRM reestruturado bonificado</li>
+        <li><strong>Martins Magazine:</strong> Growth fee final R$ 5.700/mês (após abatimento EE)</li>
+        <li><strong>G6:</strong> Growth + CRM R$ 9.480,75/mês · variante +Social R$ 13.083,71/mês</li>
+        <li><strong>Motéis Fortaleza:</strong> Growth R$ 17.304,67/mês · SDR IA R$ 3.678,06/mês · setups bonificados</li>
+      </ul>
+      <p class="muted">Use só como âncora de conversa. O valor da proposta nova vem do brief comercial do deal.</p>
+    </div>
+  </div>
+
+  <!-- ========== DECK ========== -->
+  <div class="panel" data-view="deck">
+    <div class="section">
+      <h2>Visual</h2>
+      <h3>Deck cliente canônico</h3>
+      <div class="grid2">
+        <div class="card lock">
+          <div class="t">Identidade</div>
+          <div class="d">Fundo vermelho V4 (#a10f14 / #c4181e) · texto branco · logo V4 no canto · tipografia Outfit (títulos) + Plus Jakarta Sans (corpo). Sem azul. Sem tema dark “hub”.</div>
+        </div>
+        <div class="card lock">
+          <div class="t">Interação</div>
+          <div class="d">Slides full viewport · setas / scroll / swipe · dots laterais · barra de progresso. Copiar o JS/CSS da referência escolhida no brief.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Narrativa</h2>
+      <h3>Sequência canônica de slides</h3>
+      <ol class="steps">
+        <li><strong>Capa</strong> — Cliente × V4 · oferta em uma linha · badge dos produtos</li>
+        <li><strong>Dor / contexto</strong> — o que já ficou claro (sem números sensíveis se o brief proibir)</li>
+        <li><strong>Diagnóstico</strong> — o que trava o crescimento agora</li>
+        <li><strong>Produto(s)</strong> — um bloco por produto do catálogo (não misturar nomes)</li>
+        <li><strong>Como opera</strong> — rotina, time, CRM/rituais</li>
+        <li><strong>Âncora de mercado</strong> (opcional) — “quanto custaria montar”</li>
+        <li><strong>Investimento</strong> — preço(s) do brief · condição · o que está incluso</li>
+        <li><strong>Próximos passos</strong> — assinatura / acessos / kickoff</li>
+      </ol>
+      <p class="muted">Se o brief pedir sequência diferente, ela prevalece — mas fica escrita no brief, não no chat solto.</p>
+    </div>
+
+    <div class="section">
+      <h2>Kit</h2>
+      <h3>Arquivos e nomes</h3>
+      <table>
+        <thead><tr><th>Entrega</th><th>Nome</th><th>Quando</th></tr></thead>
+        <tbody>
+          <tr><td>Proposta deck</td><td><code>proposta-{cliente}-{oferta}.html</code></td><td>Sempre</td></tr>
+          <tr><td>Script pitch</td><td><code>script-{cliente}-pitch.html</code></td><td>Sempre (salvo brief dizer não)</td></tr>
+          <tr><td>Word</td><td><code>assets/{nome}.docx</code> ou raiz só se já for padrão do deal</td><td>Se brief pedir</td></tr>
+          <tr><td>Logo / assets</td><td><code>assets/</code></td><td>Sempre que houver mídia</td></tr>
+        </tbody>
+      </table>
+      <p class="muted" style="margin-top:10px">Não criar variante paralela (“-v2”, “-novo”) sem arquivar a anterior no brief. G6 Social foi exceção justificada (dois preços).</p>
+    </div>
+
+    <div class="section">
+      <h2>Script</h2>
+      <h3>Regras de pitch (travadas)</h3>
+      <ul>
+        <li>Tom de conversa, não monólogo</li>
+        <li>Perguntas abertas — evitar “faz sentido?”</li>
+        <li>Matar objeções antes do preço</li>
+        <li>Gate de avanço antes de abrir valor (lição ALNV)</li>
+        <li>Um preço / uma decisão (ou A/B explícito)</li>
+        <li>Pedir a venda com segurança + próximo passo concreto</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ========== INVENTÁRIO ========== -->
+  <div class="panel" data-view="inventario">
+    <div class="callout">
+      <strong>Onde puxar.</strong> Links vivos no Pages. Preferir a referência canônica da coluna “puxar de”.
+    </div>
+
+    <div class="section">
+      <h2>Propostas cliente</h2>
+      <h3>Decks publicados</h3>
+      <table class="inv">
+        <thead><tr><th>Cliente</th><th>Arquivo</th><th>Puxar de quando…</th></tr></thead>
+        <tbody>
+          <tr><td>Modular Estruturas</td><td><a href="proposta-modular-estruturas.html">proposta-modular-estruturas.html</a></td><td><strong>Canônica</strong> Growth + EC + CRM bonus</td></tr>
+          <tr><td>Martins Magazine</td><td><a href="proposta-martins-magazine-growth.html">proposta-martins-magazine-growth.html</a></td><td>Growth pós-EE com abatimento</td></tr>
+          <tr><td>Motéis Fortaleza</td><td><a href="proposta-moteis-fortaleza-consultiva.html">proposta-moteis-fortaleza-consultiva.html</a></td><td>Growth + SDR IA + CRM</td></tr>
+          <tr><td>Estação Delta</td><td><a href="proposta-estacao-delta-ec.html">proposta-estacao-delta-ec.html</a></td><td>EC pura + ROI/doc</td></tr>
+          <tr><td>Isoluz</td><td><a href="proposta-isoluz.html">proposta-isoluz.html</a></td><td>EC + E-com B2B + Growth (deck próprio)</td></tr>
+          <tr><td>G6 Internet</td><td><a href="proposta-g6-internet.html">proposta-g6-internet.html</a></td><td>Growth + CRM (visual Sora — não copiar visual; só conteúdo)</td></tr>
+          <tr><td>G6 + Social</td><td><a href="proposta-g6-internet-social.html">proposta-g6-internet-social.html</a></td><td>Dois preços Growth vs Growth+Social</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>Scripts</h2>
+      <h3>Pitch oral</h3>
+      <table class="inv">
+        <thead><tr><th>Cliente</th><th>Arquivo</th></tr></thead>
+        <tbody>
+          <tr><td>G6</td><td><a href="script-g6-pitch.html">script-g6-pitch.html</a></td></tr>
+          <tr><td>Isoluz</td><td><a href="script-isoluz-pitch.html">script-isoluz-pitch.html</a></td></tr>
+          <tr><td>Estação Delta</td><td><a href="script-estacao-delta-ec.html">script-estacao-delta-ec.html</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>Operação Sara</h2>
+      <h3>Hubs e método (não são proposta)</h3>
+      <table class="inv">
+        <thead><tr><th>Peça</th><th>Arquivo</th></tr></thead>
+        <tbody>
+          <tr><td>Comando / pipe</td><td><a href="index.html">index.html</a></td></tr>
+          <tr><td>Farmer kit</td><td><a href="farmer-sara.html">farmer-sara.html</a></td></tr>
+          <tr><td>Visão safra</td><td><a href="visao-sara-safra.html">visao-sara-safra.html</a></td></tr>
+          <tr><td>Playbook Farmer AM</td><td><a href="playbook-farmer-am.html">playbook-farmer-am.html</a></td></tr>
+          <tr><td>Fluxograma EE → plano</td><td><a href="fluxograma-farmer-ee.html">fluxograma-farmer-ee.html</a></td></tr>
+          <tr><td>Lead score</td><td><a href="lead-score-farmer.html">lead-score-farmer.html</a></td></tr>
+          <tr><td>Plano de ação</td><td><a href="plano-acao-farmer.html">plano-acao-farmer.html</a></td></tr>
+          <tr><td>Plano adaptável (modelo G6)</td><td><a href="plano-acao-modelo-adaptavel.html">plano-acao-modelo-adaptavel.html</a></td></tr>
+          <tr><td>Template plano S3</td><td><a href="template-plano-acao-farmer.html">template-plano-acao-farmer.html</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer>
+    V4 Company · Sistema de proposta Sara · decisões travadas no repo<br>
+    <a href="index.html">Comando</a> ·
+    <a href="farmer-sara.html">Farmer Sara</a> ·
+    <a href="AGENTS.md">AGENTS.md</a>
+  </footer>
+</div>
+
+<div class="toast" id="toast">Prompt copiado</div>
+
+<script>
+(function(){
+  const tabs=[...document.querySelectorAll('.tab')];
+  const panels=[...document.querySelectorAll('.panel')];
+  const valid=['travado','brief','catalogo','deck','inventario'];
+  const defaultPrompt=document.getElementById('promptBox').value;
+
+  function setView(v){
+    if(!valid.includes(v)) v='travado';
+    tabs.forEach(t=>t.classList.toggle('active', t.dataset.view===v));
+    panels.forEach(p=>p.classList.toggle('is-active', p.dataset.view===v));
+    history.replaceState(null,'','#'+v);
+  }
+  tabs.forEach(t=>t.addEventListener('click',()=>setView(t.dataset.view)));
+  setView((location.hash||'#travado').slice(1));
+  window.addEventListener('hashchange',()=>setView(location.hash.slice(1)));
+
+  const checks=[...document.querySelectorAll('#briefCheck input[data-req="1"]')];
+  const status=document.getElementById('briefStatus');
+  function updateCheck(){
+    const n=checks.filter(c=>c.checked).length;
+    status.textContent=n+'/5 obrigatórios marcados'+(n===5?' · brief mínimo ok':' · complete os obrigatórios');
+    status.style.color=n===5?'#86efac':'#a3a3a3';
+  }
+  checks.forEach(c=>c.addEventListener('change',updateCheck));
+  updateCheck();
+
+  const toast=document.getElementById('toast');
+  document.getElementById('copyPrompt').addEventListener('click',async()=>{
+    const text=document.getElementById('promptBox').value;
+    try{ await navigator.clipboard.writeText(text); }
+    catch(e){
+      const ta=document.getElementById('promptBox'); ta.select(); document.execCommand('copy');
+    }
+    toast.classList.add('show');
+    setTimeout(()=>toast.classList.remove('show'),1600);
+  });
+  document.getElementById('resetPrompt').addEventListener('click',()=>{
+    document.getElementById('promptBox').value=defaultPrompt;
+  });
+})();
+</script>
+</body>
+</html>
