@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Processos Farmer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --brand:#e50915; --brand-light:#ff1a27; --bg:#050505; --surf:rgba(20,20,20,.92);
+      --surf2:#141414; --bd:rgba(255,255,255,.1); --txt:#fafafa; --mut:#a3a3a3;
+      --ok:#86efac; --warn:#fde68a; --hot:#fca5a5; --info:#93c5fd;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--txt);font:14px/1.55 Inter,system-ui,sans-serif;
+      background-image:radial-gradient(ellipse 80% 45% at 50% -15%,rgba(229,9,21,.18),transparent)}
+    .top{position:sticky;top:0;z-index:10;backdrop-filter:blur(14px);background:rgba(5,5,5,.88);
+      border-bottom:1px solid var(--bd);padding:12px 22px;display:flex;justify-content:space-between;
+      gap:12px;flex-wrap:wrap;align-items:center}
+    .logo{font-weight:900}.logo span{color:var(--brand-light)}
+    .pill{font-size:11px;font-weight:700;color:var(--mut);border:1px solid var(--bd);padding:5px 10px;border-radius:999px}
+    .wrap{max-width:980px;margin:0 auto;padding:28px 20px 70px}
+    h1{margin:0 0 8px;font-size:clamp(26px,4vw,36px);font-weight:900;letter-spacing:-.03em}
+    .lead{color:var(--mut);max-width:820px;margin:0 0 18px;font-size:13px}
+    .nav{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin:0 0 18px}
+    .nav a{text-decoration:none;color:var(--mut);font-size:12px;font-weight:700;border:1px solid var(--bd);
+      background:var(--surf2);border-radius:12px;padding:10px 12px}
+    .nav a:hover{color:#fff;border-color:rgba(255,255,255,.22)}
+    .nav a small{display:block;color:#fca5a5;font-size:10px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px}
+    .section{background:var(--surf);border:1px solid var(--bd);border-radius:16px;padding:20px 22px;margin-bottom:14px}
+    .section h2{margin:0 0 6px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);font-weight:800}
+    .section h3{margin:0 0 12px;font-size:18px;font-weight:900}
+    .callout{padding:14px 16px;border-radius:12px;border:1px solid rgba(96,165,250,.3);background:rgba(96,165,250,.08);color:#bfdbfe;font-size:13px;margin-bottom:14px}
+    .callout.warn{border-color:rgba(250,204,21,.28);background:rgba(250,204,21,.06);color:#fde68a}
+    .callout.ok{border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.08);color:#bbf7d0}
+    .callout.hot{border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.08);color:#fecaca}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:800px){.grid2{grid-template-columns:1fr}}
+    .card{background:var(--surf2);border:1px solid var(--bd);border-radius:12px;padding:14px 16px}
+    .card .t{font-weight:800;margin-bottom:6px}
+    .card .d,.card li{font-size:13px;color:#d4d4d4}
+    .card ul{margin:0;padding-left:18px}
+    .card li{margin:5px 0}
+    .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:0 0 14px}
+    @media(max-width:900px){.flow{grid-template-columns:1fr 1fr}}
+    .flow-step{background:var(--surf2);border:1px solid var(--bd);border-radius:12px;padding:12px}
+    .flow-step .n{font-size:10px;font-weight:800;color:var(--mut);letter-spacing:.08em;text-transform:uppercase}
+    .flow-step .t{font-weight:800;margin:4px 0 0;font-size:13px;color:#e5e5e5}
+    .steps{margin:0;padding-left:18px}
+    .steps li{margin:10px 0;color:#e5e5e5}
+    .steps strong{color:#fff}
+    .quote{border-left:3px solid var(--brand);padding:10px 14px;margin:10px 0 0;background:rgba(229,9,21,.08);
+      color:#e5e5e5;font-size:13px;border-radius:0 10px 10px 0}
+    .fala{margin:10px 0;padding:12px 14px;border-radius:12px;border:1px solid rgba(134,239,172,.25);
+      background:rgba(134,239,172,.06);color:#bbf7d0;font-size:13px}
+    .fala .k{display:block;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin-bottom:4px}
+    .tag{display:inline-block;padding:2px 8px;border-radius:999px;font-size:10px;font-weight:800;border:1px solid var(--bd);margin-bottom:8px}
+    .tag.ok{color:var(--ok);border-color:rgba(34,197,94,.35)}
+    .tag.warn{color:var(--warn);border-color:rgba(250,204,21,.35)}
+    .tag.hot{color:var(--hot);border-color:rgba(239,68,68,.4)}
+    .tag.info{color:var(--info);border-color:rgba(96,165,250,.35)}
+    .line{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:10px}
+    .chip{font-size:11px;font-weight:700;border:1px solid var(--bd);border-radius:999px;padding:5px 10px;color:#d4d4d4;background:#0a0a0a}
+    .chip.arrow::after{content:'→';margin-left:8px;color:var(--mut)}
+    .chip:last-child.arrow::after{content:''}
+    footer{text-align:center;color:var(--mut);font-size:11px;margin-top:28px;padding-top:16px;border-top:1px solid var(--bd)}
+  </style>
+</head>
+<body>
+<header class="top">
+  <div class="logo">V4 <span>COMPANY</span></div>
+  <div class="pill">Processos Farmer · disciplina de uso na sala</div>
+</header>
+
+<div class="wrap">
+  <h1>Processos Farmer</h1>
+  <p class="lead">
+    disciplina de uso na sala.
+  </p>
+
+  <nav class="nav">
+    <a href="#sala"><small>01</small>Uso na sala</a>
+    <a href="#roi"><small>02</small>ROI</a>
+    <a href="#fluxo"><small>03</small>Fluxo</a>
+    <a href="#trilhas"><small>04</small>Trilhas</a>
+    <a href="#pitch"><small>05</small>Para pitch</a>
+    <a href="#produto"><small>06</small>Definir produto</a>
+    <a href="#kickoff"><small>07</small>Kick-off</a>
+  </nav>
+
+  <!-- 01 SALA -->
+  <section class="section" id="sala">
+    <h2>01 · Disciplina</h2>
+    <h3>disciplina de uso na sala.</h3>
+    <ol class="steps">
+      <li><strong>Antes de abrir o deck (obrigatório)</strong> — Estratégia ficou clara? O que esperam da V4 como próximo passo? Quando querem iniciar? Uma pergunta por vez. Escuta. Usa a resposta na narrativa.</li>
+      <li><strong>Espelho das dores (60–90s)</strong> — Resumo em 3–4 linhas do que a EE mostrou na X EMPRESA (prova, jornada, retenção/LTV). Pergunta: “O que mais dói disso no dia a dia de vocês?”</li>
+      <li><strong>Prova (CASE)</strong> — Ou apresenta com número real do time, ou fala base (“já operamos essa lógica em X NICHO na nossa carteira”) — não citar case sem trazer.</li>
+      <li><strong>Profissionais com valor</strong> — Account / GT / Copy / Design / (Social se no escopo) / CRM — cada um amarrado a uma dor do mapa. Não “um time de Growth e um de CRM”.</li>
+      <li><strong>Escopo Social (antes do preço)</strong> — “Vocês querem Social Media dentro desse plano? É fundamental agora ou a agência atual cobre?” Só depois: condição sem Social × com Social.</li>
+      <li><strong>Valor com âncora</strong> — Referência → condição. Um pacote. Cartão. Sem menu.</li>
+      <li><strong>Fecho</strong> — “O que ainda está em aberto para vocês avançarem?” / “Conseguimos tomar a decisão nessa condição?” Eles falam o que vão fazer — a Farmer não narra por eles.</li>
+    </ol>
+  </section>
+
+  <!-- 02 ROI -->
+  <section class="section" id="roi">
+    <h2>02 · Posicionamento</h2>
+    <h3>Parar de vender breakeven. Vender ROI.</h3>
+    <div class="callout warn">
+      O plano não existe para o projeto se pagar. Existe para a X EMPRESA ganhar com performance com prova e LTV na base. Com leitura ao longo dos 12 meses.
+    </div>
+    <div class="card">
+      <span class="tag warn">SOCIAL NA PROPOSTA?</span>
+      <div class="t">É fundamental para o ciclo LTV agora ou é ruído?</div>
+    </div>
+  </section>
+
+  <!-- 03 FLUXO -->
+  <section class="section" id="fluxo">
+    <h2>03 · Fluxo</h2>
+    <h3>Ritmo curto na sala</h3>
+    <div class="line" style="margin-bottom:14px">
+      <span class="chip arrow">Balizar</span>
+      <span class="chip arrow">perguntar</span>
+      <span class="chip arrow">espelhar dor</span>
+      <span class="chip arrow">provar</span>
+      <span class="chip arrow">valorizar profissional</span>
+      <span class="chip arrow">matar Social/escopo</span>
+      <span class="chip arrow">ancorar preço</span>
+      <span class="chip">eles dizem o próximo passo</span>
+    </div>
+    <p class="lead" style="margin:0 0 14px">Ritmo curto. ROI, não breakeven.</p>
+    <div class="callout hot">
+      Não negociar cedo. Diagnosticar valor → prioridade → escopo → retorno → custo total → autoridade. Só então falar condição.
+    </div>
+  </section>
+
+  <!-- 04 TRILHAS -->
+  <section class="section" id="trilhas">
+    <h2>04 · Contrato</h2>
+    <h3>Duas trilhas em paralelo</h3>
+    <div class="grid2">
+      <div class="card">
+        <span class="tag ok">Cliente</span>
+        <div class="d">GC → pago → decisor toda semana → CSAT/NPS → expectativa clara</div>
+      </div>
+      <div class="card">
+        <span class="tag info">V4/Farmer</span>
+        <div class="d">entrega EE → mapeia solução → score → STEP → Plano de Ação → apresenta só o que encaixa</div>
+      </div>
+    </div>
+    <div class="callout hot" style="margin-top:12px;margin-bottom:0">Sem isso, pitch vira catálogo e drop.</div>
+  </section>
+
+  <!-- 05 PITCH -->
+  <section class="section" id="pitch">
+    <h2>05 · PARA PITCH</h2>
+    <h3>Diagnosticar antes da condição</h3>
+    <div class="flow">
+      <div class="flow-step"><div class="n">01</div><div class="t">O que mais valorizou na estratégia?</div></div>
+      <div class="flow-step"><div class="n">02</div><div class="t">Qual problema é prioritário?</div></div>
+      <div class="flow-step"><div class="n">03</div><div class="t">O escopo resolve essa prioridade?</div></div>
+      <div class="flow-step"><div class="n">04</div><div class="t">Qual retorno espera e em quanto tempo?</div></div>
+      <div class="flow-step"><div class="n">05</div><div class="t">Custo total claro (fee + mídia + ferramentas)?</div></div>
+      <div class="flow-step"><div class="n">06</div><div class="t">Quem decide e o que ainda falta analisar?</div></div>
+    </div>
+
+    <div class="grid2" style="margin-bottom:12px">
+      <div class="card">
+        <div class="t">Antes do investimento</div>
+        <div class="d">qual ponto da estratégia é prioritário?</div>
+      </div>
+      <div class="card">
+        <div class="t">Escopo / custo total</div>
+        <div class="d">“Fee + mídia + responsabilidades internas — está adequado ou ajustamos escopo?”</div>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:12px">
+      <div class="t">No fechamento</div>
+      <div class="d">“Para decidirem hoje, o que precisa estar validado entre os sócios?”</div>
+    </div>
+
+    <div class="fala">
+      <span class="k">Antes do investimento</span>
+      “Antes de falarmos do investimento, quero ouvir cada um. Qual ponto da estratégia vocês consideram mais prioritário para executar?”
+    </div>
+    <div class="fala">
+      <span class="k">Depois (escopo / custo total)</span>
+      “Considerando fee, mídia e as responsabilidades internas, essa configuração está adequada ou existe algum ponto de escopo que precisamos ajustar?”
+    </div>
+    <div class="fala">
+      <span class="k">No fechamento</span>
+      “Para vocês decidirem hoje, o que precisa estar validado entre os sócios?”
+    </div>
+  </section>
+
+  <!-- 06 PRODUTO -->
+  <section class="section" id="produto">
+    <h2>06 · PARA DEFINIR O PRODUTO</h2>
+    <h3>Antes do catálogo</h3>
+    <div class="callout warn">
+      <strong>Onde:</strong> Account Planning com o time (operação cuidando da conta na base).
+      Aqui estruturamos o produto: levantamos essas respostas na EE / acompanhamento — alimenta o Plano de Ação e a escolha do encaixe. Não é roteiro de pitch da Farmer na sala com o cliente.
+    </div>
+    <ol class="steps">
+      <li><strong>Por que o cliente comprou a EE?</strong> Qual dor motivou a compra?</li>
+      <li>O que ele fala que é o problema dele hoje?</li>
+      <li><strong>Qual é a alavanca 80/20</strong> — o que gera resultado de verdade para esse cara?</li>
+      <li>Quanto investe em marketing no total (overall)?</li>
+      <li>Quanto tem de time de marketing?</li>
+      <li>Quanto paga hoje para a agência / estrutura atual?</li>
+      <li><strong>Tem grana + problema claro?</strong> (filtro de prioridade: …)</li>
+    </ol>
+    <div class="quote">
+      “quero entender por que você comprou isso… pegar o que o cliente fala que é o problema… montar um plano que culmina nisso.”
+    </div>
+
+    <div class="grid2" style="margin-top:14px">
+      <div class="card">
+        <span class="tag info">O que já roda</span>
+        <ul>
+          <li>Já tem demanda / já roda campanha?</li>
+          <li>Digital é o principal canal?</li>
+          <li>Precisa de Social agora ou já tem internamente?</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="tag warn">Números</span>
+        <ul>
+          <li>Qual a verba de mídia?</li>
+          <li>Qual CPV?</li>
+          <li>Quantas vendas/mês? Ticket médio? Em quantas praças/cidades?</li>
+          <li>Qual a margem real de melhoria na performance?</li>
+          <li>Qual o potencial de crescimento? (market share / praças)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:12px">
+      <span class="tag hot">Dores (antes do produto)</span>
+      <ul>
+        <li>Quais as grandes dores? (ex.: rastreamento, retenção)</li>
+        <li>Por que não aumentam a verba?</li>
+        <li>Como está o CRM / jornada / tags / funil?</li>
+        <li>Qual o gap do time interno? Tem braço? Tem alguém técnico de sistema?</li>
+        <li>Qual a crítica da agência atual(SE TIVER) ? Vão continuar com ela?</li>
+      </ul>
+    </div>
+
+    <div class="callout ok" style="margin-top:12px">
+      Só depois disso veio o produto: amarrado nas dores, não no catálogo.
+    </div>
+
+    <div class="card" style="margin-top:12px">
+      <span class="tag ok">Em uma linha</span>
+      <div class="t">A ordem delas era:</div>
+      <div class="line">
+        <span class="chip arrow">por que comprou</span>
+        <span class="chip arrow">dor</span>
+        <span class="chip arrow">o que já roda</span>
+        <span class="chip arrow">dinheiro/time/agência</span>
+        <span class="chip arrow">potencial</span>
+        <span class="chip">aí produto</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 KICK-OFF -->
+  <section class="section" id="kickoff">
+    <h2>07 · PARA O KICK-OFF</h2>
+    <h3>o kick-off é descoberta + relacionamento + alinhamento.</h3>
+    <p class="lead">Perguntas:</p>
+    <div class="grid2">
+      <div class="card">
+        <ul>
+          <li>O que motivou contratar a EE agora?</li>
+          <li>O que já tentaram em marketing/comercial que funcionou ou não?</li>
+          <li>O que está travando crescimento neste momento?</li>
+          <li>O que não esperam que a EE resolva agora?</li>
+          <li>Onde já investem (mídia, orgânico, indicação, PDV, time interno, agência)?</li>
+          <li>Qual canal realmente traz resultado hoje?</li>
+        </ul>
+      </div>
+      <div class="card">
+        <ul>
+          <li>Quais produtos/serviços puxam resultado e margem?</li>
+          <li>Qual tem melhor LTV / recorrência?</li>
+          <li>Onde está a curva ABC (o que mais vende × o que mais lucra)?</li>
+          <li>O que já validaram com resultado real?</li>
+          <li>O que já tentaram e não escala / não medi?</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    V4 · Processos Farmer · conteúdo do Word · apresentação estratégica
+  </footer>
+</div>
+</body>
+</html>
