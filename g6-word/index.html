@@ -86,13 +86,14 @@
     <p class="lead">Documento consolidado da proposta e da reunião de 14/08/2026. Baixe em Word ou suba no Google Docs e exporte de lá.</p>
 
     <div class="btns">
-      <a class="btn btn-word" id="btn-word" href="../documento-g6-internet-estruturacao-comercial.doc" download="G6-Internet-Estruturacao-Comercial.doc">
+      <a class="btn btn-word" id="btn-word" href="G6-Internet-Estruturacao-Comercial.doc" download="G6-Internet-Estruturacao-Comercial.doc">
         Baixar Word
       </a>
-      <a class="btn btn-google" id="btn-google" target="_blank" rel="noopener" href="https://docs.google.com/gview?url=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2Fsarapizzico-hue%2FSara%40cursor%2Fg6-documento-word-ec-2a89%2Fdocumento-g6-internet-estruturacao-comercial.docx&amp;embedded=false">
+      <a class="btn btn-google" id="btn-google" target="_blank" rel="noopener"
+         href="https://docs.google.com/gview?url=https%3A%2F%2Fsarapizzico-hue.github.io%2FSara%2Fg6-word%2FG6-Internet-Estruturacao-Comercial.docx&amp;embedded=false">
         Subir no <span>Google Docs</span>
       </a>
-      <a class="btn btn-docx" id="btn-docx" href="../documento-g6-internet-estruturacao-comercial.docx" download="G6-Internet-Estruturacao-Comercial.docx">
+      <a class="btn btn-docx" href="G6-Internet-Estruturacao-Comercial.docx" download="G6-Internet-Estruturacao-Comercial.docx">
         Baixar .docx (Word moderno)
       </a>
     </div>
@@ -100,7 +101,7 @@
     <div class="share">
       <label>Link para enviar</label>
       <div class="share-row">
-        <input id="share-url" readonly />
+        <input id="share-url" readonly value="https://sarapizzico-hue.github.io/Sara/g6-word/" />
         <button type="button" id="copy">Copiar</button>
       </div>
       <p class="ok" id="copied">Link copiado.</p>
@@ -108,25 +109,22 @@
 
     <ol>
       <li><strong>Baixar Word</strong> — baixa o arquivo e abre no Microsoft Word.</li>
-      <li><strong>Subir no Google Docs</strong> — abre o arquivo no visualizador do Google. Clique em <em>Abrir com o Documentos Google</em> para gravar no seu Drive.</li>
+      <li><strong>Subir no Google Docs</strong> — abre no visualizador do Google. Clique em <em>Abrir com o Documentos Google</em> para gravar no Drive.</li>
       <li>No Google Docs: <em>Arquivo → Fazer download → Microsoft Word (.docx)</em>.</li>
     </ol>
   </div>
 
   <script>
     (function () {
-      var FILE = "documento-g6-internet-estruturacao-comercial.docx";
-      var PAGES = "https://sarapizzico-hue.github.io/Sara/" + FILE;
-      var RAW = "https://raw.githubusercontent.com/sarapizzico-hue/Sara/cursor/g6-documento-word-ec-2a89/" + FILE;
-      var CDN = "https://cdn.jsdelivr.net/gh/sarapizzico-hue/Sara@cursor/g6-documento-word-ec-2a89/" + FILE;
-      var publicUrl = location.hostname.indexOf("github.io") >= 0 ? PAGES : CDN;
-      var gview = "https://docs.google.com/gview?url=" + encodeURIComponent(publicUrl) + "&embedded=false";
-
+      var PAGES = "https://sarapizzico-hue.github.io/Sara/g6-word/";
+      var DOCX = PAGES + "G6-Internet-Estruturacao-Comercial.docx";
+      var gview = "https://docs.google.com/gview?url=" + encodeURIComponent(DOCX) + "&embedded=false";
       document.getElementById("btn-google").href = gview;
+
       var share = document.getElementById("share-url");
-      share.value = location.origin && location.pathname
-        ? (location.href.split("?")[0])
-        : "https://sarapizzico-hue.github.io/Sara/g6-word/";
+      if (location.hostname.indexOf("github.io") >= 0) {
+        share.value = location.href.split("?")[0];
+      }
 
       document.getElementById("copy").onclick = function () {
         share.select();
