@@ -1,0 +1,1402 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <title>Empresa que Vende · Proposta comercial | V4 Company</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --v4-red: #e50914;
+      --v4-red-hover: #c40712;
+      --v4-orange: #ff481f;
+      --v4-flame: #f0141e;
+      --v4-dark: #280001;
+      --v4-darker: #280000;
+      --v4-grey: #e1dcdc;
+      --v4-white: #ffffff;
+      --v4-cream: #ffebc8;
+      --v4-salmon: #ffb4a0;
+      --ink: #141414;
+      --ink-soft: #5a5a5a;
+      --line: rgba(20, 20, 20, .12);
+      --radius: 22px;
+      --radius-pill: 999px;
+      --hero: radial-gradient(120% 130% at 50% -10%, #ff5a2c 0%, #e50914 30%, #b00610 62%, #280001 100%);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: #171313;
+      color: var(--ink);
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: geometricPrecision;
+    }
+
+    button { font-family: inherit; }
+
+    #viewport {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 10%, rgba(229, 9, 20, .18), transparent 38%),
+        #171313;
+    }
+
+    #deck {
+      --deck-scale: 1;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 1600px;
+      height: 900px;
+      overflow: hidden;
+      transform: translate(-50%, -50%) scale(var(--deck-scale));
+      transform-origin: center;
+      background: #f5f4f2;
+      box-shadow: 0 40px 120px rgba(0, 0, 0, .45);
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      width: 1600px;
+      height: 900px;
+      padding: 76px 96px 108px;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(24px);
+      transition: opacity .28s ease, transform .28s ease;
+      background:
+        radial-gradient(circle at 92% 8%, rgba(229, 9, 20, .055), transparent 24%),
+        #f5f4f2;
+    }
+
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(0);
+    }
+
+    .slide.red {
+      color: white;
+      background: var(--hero);
+    }
+
+    .slide.dark {
+      color: white;
+      background:
+        radial-gradient(circle at 78% 15%, rgba(229, 9, 20, .5), transparent 32%),
+        linear-gradient(145deg, #280001 0%, #130001 100%);
+    }
+
+    .slide.white { background: white; }
+
+    .topline {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 5px;
+      background: linear-gradient(90deg, var(--v4-red), var(--v4-orange), transparent 76%);
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      margin-bottom: 24px;
+      font-size: 88px;
+      line-height: .98;
+      letter-spacing: -.055em;
+      font-weight: 600;
+    }
+
+    h2 {
+      margin-bottom: 18px;
+      font-size: 52px;
+      line-height: 1.04;
+      letter-spacing: -.045em;
+      font-weight: 600;
+    }
+
+    h3 {
+      margin-bottom: 10px;
+      font-size: 26px;
+      line-height: 1.1;
+      letter-spacing: -.025em;
+      font-weight: 600;
+    }
+
+    .lede {
+      max-width: 1040px;
+      color: var(--ink-soft);
+      font-size: 26px;
+      line-height: 1.42;
+      font-weight: 300;
+    }
+
+    .red .lede,
+    .dark .lede { color: rgba(255, 255, 255, .72); }
+
+    .accent { color: var(--v4-red); }
+    .red .accent,
+    .dark .accent { color: var(--v4-cream); }
+
+    .mono { font-family: "IBM Plex Mono", monospace; }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 7px 15px;
+      border: 1px solid rgba(229, 9, 20, .18);
+      border-radius: var(--radius-pill);
+      color: var(--v4-red);
+      background: rgba(229, 9, 20, .07);
+      font-size: 12px;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+
+    .red .eyebrow,
+    .dark .eyebrow {
+      color: rgba(255, 255, 255, .92);
+      background: rgba(255, 255, 255, .06);
+      border-color: rgba(255, 255, 255, .35);
+      box-shadow:
+        inset 0 0 80px rgba(255, 255, 255, .12),
+        inset 0 1px 8px rgba(255, 255, 255, .35),
+        -5px 5px 20px rgba(0, 0, 0, .10);
+      backdrop-filter: blur(14px) saturate(140%);
+    }
+
+    .card {
+      position: relative;
+      padding: 28px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: white;
+    }
+
+    .glass {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .35);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, .06);
+      box-shadow:
+        inset 0 0 150px rgba(255, 255, 255, .13),
+        inset 0 1px 10px rgba(255, 255, 255, .38),
+        inset 0 -2px 10px rgba(255, 255, 255, .22),
+        -5px 5px 20px rgba(0, 0, 0, .10);
+      backdrop-filter: blur(14px) saturate(140%);
+    }
+
+    .glass::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      background:
+        radial-gradient(120% 90% at 50% 115%, rgba(255, 170, 80, .34), transparent 55%),
+        linear-gradient(180deg, rgba(255, 255, 255, .22), transparent 40%);
+      mix-blend-mode: screen;
+    }
+
+    .sphere {
+      position: absolute;
+      border: 1px solid rgba(255, 255, 255, .24);
+      border-radius: 50%;
+      pointer-events: none;
+      background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, .38), rgba(255, 255, 255, .045) 48%, transparent 66%);
+      box-shadow:
+        inset 0 0 120px rgba(255, 255, 255, .13),
+        inset 25px 18px 70px rgba(255, 160, 70, .28);
+    }
+
+    .icon {
+      width: 30px; height: 30px;
+      fill: none; stroke: currentColor; stroke-width: 2.3;
+      stroke-linecap: round; stroke-linejoin: round;
+    }
+
+    .icon-box {
+      width: 58px; height: 58px;
+      display: grid; place-items: center; flex: 0 0 auto;
+      border: 1px solid rgba(229, 9, 20, .18);
+      border-radius: 17px;
+      color: var(--v4-red);
+      background: rgba(229, 9, 20, .07);
+    }
+
+    .red .icon-box,
+    .dark .icon-box {
+      color: white;
+      border-color: rgba(255, 255, 255, .28);
+      background: rgba(255, 255, 255, .08);
+    }
+
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+
+    .big-number {
+      color: var(--v4-red);
+      font-size: 72px;
+      line-height: 1;
+      letter-spacing: -.06em;
+      font-weight: 700;
+    }
+
+    .cover-content {
+      position: relative;
+      z-index: 3;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .v4-mark {
+      font-family: "IBM Plex Sans", sans-serif;
+      font-weight: 700;
+      font-size: 42px;
+      letter-spacing: -.06em;
+      line-height: 1;
+    }
+
+    .v4-mark span { color: var(--v4-cream); }
+
+    .cover-title {
+      max-width: 1180px;
+      margin: 28px 0 0;
+      font-size: 86px;
+    }
+
+    .cover-client {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 28px;
+      color: rgba(255, 255, 255, .85);
+      font-size: 18px;
+    }
+
+    .slide-footer {
+      position: absolute;
+      z-index: 8;
+      left: 96px; right: 96px; bottom: 32px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      pointer-events: none;
+    }
+
+    .footer-mark {
+      font-weight: 700;
+      font-size: 22px;
+      letter-spacing: -.04em;
+      color: var(--v4-red);
+    }
+
+    .footer-mark.light { color: #fff; }
+
+    .navigation {
+      position: absolute;
+      z-index: 20;
+      right: 52px; bottom: 25px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-btn {
+      width: 48px; height: 48px;
+      display: grid; place-items: center;
+      border: 1px solid rgba(20, 20, 20, .12);
+      border-radius: 50%;
+      color: var(--ink);
+      background: rgba(255, 255, 255, .92);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .12);
+      cursor: pointer;
+      transition: transform .15s ease, background .15s ease, opacity .15s ease;
+    }
+
+    .nav-btn:hover { transform: translateY(-2px); background: white; }
+    .nav-btn:disabled { opacity: .3; cursor: default; transform: none; }
+
+    .progress-track {
+      position: absolute;
+      z-index: 21;
+      left: 0; right: 0; bottom: 0;
+      height: 7px;
+      background: rgba(20, 20, 20, .1);
+    }
+
+    .progress-fill {
+      width: 6%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--v4-red), var(--v4-orange));
+      box-shadow: 0 0 20px rgba(229, 9, 20, .35);
+      transition: width .3s ease;
+    }
+
+    .slide-counter {
+      position: absolute;
+      z-index: 22;
+      right: 176px; bottom: 39px;
+      color: rgba(20, 20, 20, .52);
+      font: 500 12px/1 "IBM Plex Mono", monospace;
+      letter-spacing: .04em;
+    }
+
+    .split-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 40px; }
+    .split-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 22px; margin-top: 36px; }
+
+    .split-card {
+      padding: 28px 30px;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      background: white;
+      min-height: 320px;
+    }
+
+    .dark .split-card,
+    .red .split-card {
+      background: rgba(255, 255, 255, .07);
+      border-color: rgba(255, 255, 255, .16);
+    }
+
+    .split-card h3 { margin: 0 0 14px; font-size: 26px; }
+    .split-card p, .split-card li {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 18px;
+      line-height: 1.4;
+    }
+    .dark .split-card p, .dark .split-card li,
+    .red .split-card p, .red .split-card li { color: rgba(255, 255, 255, .75); }
+    .split-card ul { margin: 8px 0 0; padding-left: 18px; }
+    .split-card li { margin: 8px 0; }
+
+    .split-card .k {
+      font: 700 12px/1 "IBM Plex Mono", monospace;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--v4-red);
+      margin-bottom: 12px;
+    }
+    .dark .split-card .k,
+    .red .split-card .k { color: var(--v4-cream); }
+
+    .phase-rail {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+      margin-top: 36px;
+    }
+
+    .phase {
+      min-height: 340px;
+      padding: 22px 18px;
+      border-radius: 20px;
+      background: white;
+      border: 1px solid var(--line);
+    }
+
+    .dark .phase {
+      background: rgba(255, 255, 255, .07);
+      border-color: rgba(255, 255, 255, .16);
+    }
+
+    .phase .n {
+      font: 700 12px/1 "IBM Plex Mono", monospace;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--v4-red);
+      margin-bottom: 12px;
+    }
+
+    .dark .phase .n { color: var(--v4-cream); }
+    .phase h3 { margin: 0 0 10px; font-size: 22px; line-height: 1.2; }
+    .phase p { margin: 0; color: var(--ink-soft); font-size: 16px; line-height: 1.35; }
+    .dark .phase p { color: rgba(255, 255, 255, .72); }
+
+    .phase-detail {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 36px;
+      margin-top: 28px;
+      align-items: start;
+    }
+
+    .phase-side {
+      padding: 28px;
+      border-radius: 24px;
+      background: rgba(229, 9, 20, .06);
+      border: 1px solid rgba(229, 9, 20, .15);
+      min-height: 420px;
+    }
+
+    .dark .phase-side {
+      background: rgba(255, 255, 255, .07);
+      border-color: rgba(255, 255, 255, .16);
+    }
+
+    .phase-side .n {
+      font: 700 12px/1 "IBM Plex Mono", monospace;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--v4-red);
+    }
+
+    .dark .phase-side .n { color: var(--v4-cream); }
+    .phase-side h3 { margin: 14px 0 12px; font-size: 34px; line-height: 1.15; }
+    .phase-side .hours { font-size: 42px; font-weight: 700; letter-spacing: -.03em; margin: 18px 0 6px; }
+    .phase-side p { margin: 0; color: var(--ink-soft); font-size: 17px; line-height: 1.35; }
+    .dark .phase-side p { color: rgba(255, 255, 255, .72); }
+
+    .phase-body h4 {
+      margin: 0 0 12px;
+      color: var(--v4-red);
+      font: 700 12px/1 "IBM Plex Mono", monospace;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .dark .phase-body h4 { color: var(--v4-cream); }
+    .phase-body ul {
+      margin: 0 0 22px;
+      padding-left: 18px;
+      color: var(--ink-soft);
+      font-size: 18px;
+      line-height: 1.4;
+    }
+    .dark .phase-body ul { color: rgba(255, 255, 255, .75); }
+    .phase-body li { margin: 7px 0; }
+    .phase-body .fit {
+      padding: 16px 18px;
+      border-radius: 16px;
+      border-left: 5px solid var(--v4-red);
+      background: rgba(229, 9, 20, .05);
+      font-size: 18px;
+      line-height: 1.35;
+      color: var(--ink);
+    }
+    .dark .phase-body .fit {
+      background: rgba(255, 255, 255, .06);
+      color: rgba(255, 255, 255, .88);
+      border-color: var(--v4-cream);
+    }
+
+    .format-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 40px; }
+    .format-card {
+      min-height: 220px;
+      padding: 26px;
+      border-radius: 22px;
+      background: white;
+      border: 1px solid var(--line);
+    }
+    .dark .format-card {
+      background: rgba(255, 255, 255, .07);
+      border-color: rgba(255, 255, 255, .16);
+    }
+    .format-card .k {
+      font: 700 12px/1 "IBM Plex Mono", monospace;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--v4-red);
+    }
+    .dark .format-card .k { color: var(--v4-cream); }
+    .format-card h3 { margin: 14px 0 8px; font-size: 28px; }
+    .format-card p { margin: 0; color: var(--ink-soft); font-size: 18px; line-height: 1.35; }
+    .dark .format-card p { color: rgba(255, 255, 255, .72); }
+
+    .check-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px 34px; margin-top: 36px; }
+    .check-card {
+      display: grid;
+      grid-template-columns: 58px 1fr;
+      gap: 18px;
+      align-items: center;
+      min-height: 88px;
+      padding: 18px;
+      border-radius: 20px;
+      background: white;
+      border: 1px solid var(--line);
+    }
+    .check-card h3 { font-size: 22px; margin: 0 0 4px; }
+    .check-card p { margin: 0; color: var(--ink-soft); font-size: 16px; }
+
+    .quote {
+      margin-top: 36px;
+      padding-left: 26px;
+      border-left: 6px solid var(--v4-red);
+      max-width: 1100px;
+      font-size: 28px;
+      line-height: 1.25;
+      font-weight: 600;
+    }
+    .dark .quote, .red .quote { border-color: var(--v4-cream); }
+
+    .price-layout {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 28px;
+      margin-top: 28px;
+      align-items: stretch;
+    }
+
+    .price-main {
+      padding: 40px 42px;
+      border-radius: 28px;
+      background: linear-gradient(145deg, #280001 0%, #e50914 100%);
+      color: white;
+      min-height: 440px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .price-main .was {
+      font: 700 14px/1 "IBM Plex Mono", monospace;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .7);
+      margin-bottom: 10px;
+    }
+
+    .price-main .ref {
+      font-size: 34px;
+      font-weight: 600;
+      text-decoration: line-through;
+      opacity: .55;
+      margin-bottom: 8px;
+    }
+
+    .price-main .now-label {
+      font: 700 12px/1 "IBM Plex Mono", monospace;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--v4-cream);
+      margin: 18px 0 8px;
+    }
+
+    .price-main .now {
+      font-size: 72px;
+      font-weight: 700;
+      letter-spacing: -.04em;
+      line-height: 1;
+      margin: 0 0 16px;
+    }
+
+    .price-main p {
+      margin: 0;
+      color: rgba(255, 255, 255, .8);
+      font-size: 20px;
+      line-height: 1.35;
+      max-width: 520px;
+    }
+
+    .price-side { display: grid; gap: 16px; }
+    .price-side .box {
+      padding: 24px 26px;
+      border-radius: 22px;
+      background: white;
+      border: 1px solid var(--line);
+    }
+    .price-side .box h3 { margin: 0 0 8px; font-size: 26px; }
+    .price-side .box p { margin: 0; color: var(--ink-soft); font-size: 17px; line-height: 1.4; }
+    .price-side .box .tag {
+      font: 700 11px/1 "IBM Plex Mono", monospace;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--v4-red);
+      margin-bottom: 10px;
+    }
+
+    .cta-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 42px; }
+    .cta-step {
+      padding: 28px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, .1);
+      border: 1px solid rgba(255, 255, 255, .18);
+    }
+    .cta-step .n {
+      font: 700 12px/1 "IBM Plex Mono", monospace;
+      letter-spacing: .1em;
+      color: var(--v4-cream);
+    }
+    .cta-step h3 { margin: 14px 0 8px; font-size: 26px; }
+    .cta-step p { margin: 0; color: rgba(255, 255, 255, .75); font-size: 18px; line-height: 1.35; }
+
+    .mini-note {
+      margin-top: 22px;
+      font: 500 14px/1.4 "IBM Plex Mono", monospace;
+      color: rgba(20, 20, 20, .45);
+    }
+    .dark .mini-note, .red .mini-note { color: rgba(255, 255, 255, .45); }
+
+    .partner-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 14px;
+      margin-top: 28px;
+    }
+
+    .partner-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .12);
+      border: 1px solid rgba(255, 255, 255, .22);
+      font: 600 13px/1 "IBM Plex Mono", monospace;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .seal {
+      width: 220px; height: 220px;
+      margin: 0 auto 28px;
+      border: 3px solid var(--v4-cream);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      font: 700 14px/1.2 "IBM Plex Mono", monospace;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .seal strong {
+      display: block;
+      font-family: "IBM Plex Sans", sans-serif;
+      font-size: 28px;
+      letter-spacing: -.03em;
+      margin-top: 6px;
+    }
+
+    .icp-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+      margin-top: 40px;
+    }
+
+    .icp-card {
+      min-height: 260px;
+      padding: 22px 18px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, .07);
+      border: 1px solid rgba(255, 255, 255, .16);
+    }
+
+    .icp-card .k {
+      font: 700 11px/1 "IBM Plex Mono", monospace;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--v4-cream);
+      margin-bottom: 14px;
+    }
+
+    .icp-card h3 { margin: 0 0 8px; font-size: 22px; line-height: 1.2; }
+    .icp-card p { margin: 0; color: rgba(255, 255, 255, .7); font-size: 16px; line-height: 1.35; }
+
+    .artifact-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 18px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .artifact-list li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, .72);
+      border: 1px solid var(--line);
+      font-size: 17px;
+      line-height: 1.3;
+      color: var(--ink);
+    }
+
+    .artifact-list li::before {
+      content: "→";
+      color: var(--v4-red);
+      font-weight: 700;
+      flex: 0 0 auto;
+    }
+
+    .dark .artifact-list li {
+      background: rgba(255, 255, 255, .07);
+      border-color: rgba(255, 255, 255, .16);
+      color: rgba(255, 255, 255, .88);
+    }
+
+    .dark .artifact-list li::before { color: var(--v4-cream); }
+  </style>
+</head>
+<body>
+  <svg aria-hidden="true" width="0" height="0" style="position:absolute">
+    <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3-9 5 9 5 9-5-9-5Z"/><path d="m3 12 9 5 9-5"/><path d="m3 16 9 5 9-5"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><circle cx="18" cy="9" r="3"/><path d="M2 21c0-5 3-8 7-8s7 3 7 8M16 14c4 0 6 2 6 7"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 19V9M10 19V5M16 19v-7M22 19V3"/><path d="M2 19h21"/></symbol>
+    <symbol id="i-message" viewBox="0 0 24 24"><path d="M4 4h16v13H8l-4 4V4Z"/><path d="M8 9h8M8 13h5"/></symbol>
+    <symbol id="i-megaphone" viewBox="0 0 24 24"><path d="m3 11 14-6v14L3 13v-2Z"/><path d="M11 16v4H7l-1-6"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="m13 2-8 12h7l-1 8 8-12h-7l1-8Z"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></symbol>
+    <symbol id="i-money" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-trend" viewBox="0 0 24 24"><path d="m3 17 6-6 4 4 8-9"/><path d="M16 6h5v5"/></symbol>
+    <symbol id="i-lightbulb" viewBox="0 0 24 24"><path d="M9 18h6M10 22h4"/><path d="M8 14c-2-1-3-3-3-6a7 7 0 0 1 14 0c0 3-1 5-3 6l-1 2H9l-1-2Z"/></symbol>
+  </svg>
+
+  <div id="viewport">
+    <main id="deck" aria-live="polite">
+
+      <!-- 01 CAPA -->
+      <section class="slide red active" data-title="Capa">
+        <div class="sphere" style="width:420px;height:420px;right:-80px;top:-120px;"></div>
+        <div class="sphere" style="width:220px;height:220px;left:70px;bottom:80px;opacity:.7;"></div>
+        <div class="cover-content">
+          <div class="brand-lockup">
+            <div class="v4-mark">V<span>4</span></div>
+            <span class="eyebrow">Proposta comercial · Empresa que Vende</span>
+          </div>
+          <div>
+            <h1 class="cover-title">Estrutura. Treina.<br>Acompanha a execução.</h1>
+            <p class="lede" style="max-width:820px;margin-top:8px;">Consultoria, acompanhamento e execução assistida para transformar marketing e comercial em uma máquina de receita previsível — em 6 meses.</p>
+            <div class="cover-client">Programa semestral · Quem opera é você · A V4 instala o método</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 02 PROBLEMA -->
+      <section class="slide dark" data-title="O problema">
+        <span class="eyebrow">Leitura central</span>
+        <h2 style="margin-top:28px;max-width:1240px">Você trabalha muito.<br>A receita ainda não é previsível.</h2>
+        <div class="split-3">
+          <article class="split-card">
+            <p class="k">Sintoma 01</p>
+            <h3>Vendas oscilam todo mês</h3>
+            <p>Sem processo, o resultado mora no esforço. Quando o melhor vendedor sai, o método sai junto.</p>
+          </article>
+          <article class="split-card">
+            <p class="k">Sintoma 02</p>
+            <h3>Marketing no achismo</h3>
+            <p>Canal, conteúdo e mídia sem tese. Investe, testa, para. O crescimento não vira sistema.</p>
+          </article>
+          <article class="split-card">
+            <p class="k">Sintoma 03</p>
+            <h3>Agência executa — você não aprende</h3>
+            <p>Quando o contrato termina, o resultado vai junto. A operação nunca herdou a máquina.</p>
+          </article>
+        </div>
+        <p class="quote">Este é o empresário para quem o Empresa que Vende foi desenhado.</p>
+      </section>
+
+      <!-- 03 TRADICIONAL FALHA -->
+      <section class="slide white" data-title="Por que o tradicional falha">
+        <div class="topline"></div>
+        <span class="eyebrow">Diagnóstico de mercado</span>
+        <h2 style="margin-top:24px;max-width:1180px">As soluções tradicionais não resolvem o problema real.</h2>
+        <div class="split-3" style="margin-top:32px">
+          <article class="split-card">
+            <p class="k">Agência</p>
+            <h3>Executa por você</h3>
+            <p>Quando o contrato acaba, o resultado acaba. Você nunca aprendeu a operar a máquina — só alugou uma.</p>
+          </article>
+          <article class="split-card">
+            <p class="k">Curso</p>
+            <h3>Ensina teoria</h3>
+            <p>Sem aplicação no negócio real. O playbook fica na gaveta. Nada muda na prática da semana.</p>
+          </article>
+          <article class="split-card">
+            <p class="k">Consultoria clássica</p>
+            <h3>Diagnostica e entrega PDF</h3>
+            <p>Relatório detalhado. Ninguém implementa. O problema continua exatamente onde estava.</p>
+          </article>
+        </div>
+        <p class="quote">Resultado: o empresário continua sem máquina de vendas previsível.</p>
+      </section>
+
+      <!-- 04 PARA QUEM -->
+      <section class="slide dark" data-title="Para quem é">
+        <span class="eyebrow">Fit do programa</span>
+        <h2 style="margin-top:24px;max-width:1180px">Para quem o Empresa que Vende foi desenhado.</h2>
+        <div class="icp-grid">
+          <article class="icp-card">
+            <p class="k">Porte</p>
+            <h3>Tiny e Small</h3>
+            <p>Até 50 pessoas. Operação que o dono ainda puxa — e precisa sair da cabeça dele.</p>
+          </article>
+          <article class="icp-card">
+            <p class="k">Faturamento</p>
+            <h3>R$ 600 mil a R$ 2,4 mi</h3>
+            <p>Anual. Já vende. Ainda não tem sistema para repetir o mês com previsibilidade.</p>
+          </article>
+          <article class="icp-card">
+            <p class="k">Mercado</p>
+            <h3>B2B / serviços</h3>
+            <p>Com operação de vendas ativa. Não é “começar a vender”. É estruturar o que já existe.</p>
+          </article>
+          <article class="icp-card">
+            <p class="k">Canal</p>
+            <h3>Inside sales</h3>
+            <p>WhatsApp · Meta Ads · CRM. O funil existe. Falta método, leitura e cadência.</p>
+          </article>
+          <article class="icp-card">
+            <p class="k">Maturidade GTM</p>
+            <h3>N1 ou N2</h3>
+            <p>Baixo a médio no diagnóstico V4. Consciência existe. Sistema ainda não.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- 05 SINAIS -->
+      <section class="slide white" data-title="Sinais de encaixe">
+        <div class="topline"></div>
+        <span class="eyebrow">Se você se reconhece</span>
+        <h2 style="margin-top:24px;max-width:1180px">Esse serviço foi desenhado para estas situações.</h2>
+        <div class="check-grid">
+          <div class="check-card">
+            <div class="icon-box"><svg class="icon"><use href="#i-users"></use></svg></div>
+            <div><h3>Agências frustrantes</h3><p>Já pagou para executar e não herdou método.</p></div>
+          </div>
+          <div class="check-card">
+            <div class="icon-box"><svg class="icon"><use href="#i-megaphone"></use></svg></div>
+            <div><h3>Marketing inexperiente</h3><p>Time interno ainda não opera com tese e dado.</p></div>
+          </div>
+          <div class="check-card">
+            <div class="icon-box"><svg class="icon"><use href="#i-message"></use></svg></div>
+            <div><h3>Comercial amador</h3><p>Script, follow-up e pipeline ainda improvisados.</p></div>
+          </div>
+          <div class="check-card">
+            <div class="icon-box"><svg class="icon"><use href="#i-target"></use></svg></div>
+            <div><h3>Sem plano definido</h3><p>Cada mês recomeça. Prioridade muda no achismo.</p></div>
+          </div>
+          <div class="check-card">
+            <div class="icon-box"><svg class="icon"><use href="#i-lightbulb"></use></svg></div>
+            <div><h3>Decisão no feeling</h3><p>Mídia, oferta e canal sem leitura de resultado.</p></div>
+          </div>
+          <div class="check-card">
+            <div class="icon-box"><svg class="icon"><use href="#i-search"></use></svg></div>
+            <div><h3>Posicionamento frouxo</h3><p>A marca não escolheu ICP. O mercado escolhe preço.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 06 PROMESSA -->
+      <section class="slide red" data-title="Promessa">
+        <div class="sphere" style="width:380px;height:380px;right:-60px;bottom:-80px;"></div>
+        <span class="eyebrow">Promessa</span>
+        <h2 style="margin-top:36px;max-width:1280px;font-size:52px">O Empresa que Vende não executa para você.<br>Estrutura o negócio. Treina o time. Acompanha a execução.</h2>
+        <p class="lede" style="margin-top:12px;max-width:980px">Quem faz é o cliente. É exatamente por isso que funciona: a máquina fica na empresa quando o ciclo acaba.</p>
+        <div class="format-row" style="margin-top:48px">
+          <article class="format-card">
+            <p class="k">NPS</p>
+            <h3>55+</h3>
+            <p>Versus ~35 das agências tradicionais. Prescrição, não pacote empurrado.</p>
+          </article>
+          <article class="format-card">
+            <p class="k">Ciclo</p>
+            <h3>6 meses</h3>
+            <p>Acompanhamento contínuo. Diagnóstico, execução assistida e comunidade no mesmo programa.</p>
+          </article>
+          <article class="format-card">
+            <p class="k">Squad</p>
+            <h3>4 frentes</h3>
+            <p>Conteúdo, mídia paga, comercial e CRM — alocados pelo consultor, não por catálogo.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- 07 5 PILARES -->
+      <section class="slide white" data-title="Cinco pilares">
+        <div class="topline"></div>
+        <span class="eyebrow">O programa</span>
+        <h2 style="margin-top:24px;max-width:1180px">Cinco pilares que compõem o Empresa que Vende.</h2>
+        <div class="phase-rail">
+          <article class="phase">
+            <p class="n">01</p>
+            <h3>Diagnóstico contínuo</h3>
+            <p>Maturidade GTM monitorada. Gargalos identificados a cada ciclo — sem achismo.</p>
+          </article>
+          <article class="phase">
+            <p class="n">02</p>
+            <h3>Consultoria estratégica</h3>
+            <p>1h/mês com consultor V4: define prioridades e aloca os créditos do squad.</p>
+          </article>
+          <article class="phase">
+            <p class="n">03</p>
+            <h3>Execução assistida</h3>
+            <p>Squad de 4 especialistas: Conteúdo, Mídia Paga, Comercial e CRM.</p>
+          </article>
+          <article class="phase">
+            <p class="n">04</p>
+            <h3>Comunidade</h3>
+            <p>Peers do mesmo estágio, lives mensais temáticas e grupo fechado.</p>
+          </article>
+          <article class="phase">
+            <p class="n">05</p>
+            <h3>Fábrica de Receita</h3>
+            <p>Imersão presencial: hot seats, cases reais e workshops com a V4.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- 08 FORMATO -->
+      <section class="slide" data-title="Formato">
+        <div class="topline"></div>
+        <span class="eyebrow">Formato</span>
+        <h2 style="margin-top:24px;max-width:1180px">Consultoria com execução assistida — não um PDF para a gaveta.</h2>
+        <p class="lede">O consultor V4 define as prioridades do mês e distribui as horas entre os 4 especialistas. Você opera. A V4 instala o método ao lado.</p>
+        <div class="format-row">
+          <article class="format-card">
+            <p class="k">Papel da V4</p>
+            <h3>Prescreve e conduz</h3>
+            <p>Diagnóstico, tese, artefatos e acompanhamento. Não empurra pacote. Aloca o necessário.</p>
+          </article>
+          <article class="format-card">
+            <p class="k">Papel do cliente</p>
+            <h3>Opera no dia a dia</h3>
+            <p>Time interno executa conteúdo, mídia e comercial com o squad ao lado — e herda a máquina.</p>
+          </article>
+          <article class="format-card">
+            <p class="k">Ritmo</p>
+            <h3>Ciclo mensal</h3>
+            <p>1h de consultoria + execução assistida + monitoria coletiva. Prioridade revisada todo mês.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- 09 JORNADA -->
+      <section class="slide dark" data-title="Jornada de 6 meses">
+        <span class="eyebrow">A jornada</span>
+        <h2 style="margin-top:22px;max-width:1180px;font-size:46px">Cinco fases em 6 meses. Um ciclo contínuo de crescimento.</h2>
+        <div class="phase-rail">
+          <article class="phase">
+            <p class="n">Mês 01</p>
+            <h3>Onboarding</h3>
+            <p>Kickoff, maturidade GTM e definição de prioridades do ciclo.</p>
+          </article>
+          <article class="phase">
+            <p class="n">Mês 02</p>
+            <h3>EE 3.0 completa</h3>
+            <p>3P-IA, posicionamento ativo e canal de vendas no ar.</p>
+          </article>
+          <article class="phase">
+            <p class="n">Mês 03</p>
+            <h3>Conteúdo</h3>
+            <p>Produção assistida + consultoria mensal. Linha editorial no método.</p>
+          </article>
+          <article class="phase">
+            <p class="n">Mês 04</p>
+            <h3>Mídia</h3>
+            <p>Campanhas, pixel, audiência e otimização de canais por resultado.</p>
+          </article>
+          <article class="phase">
+            <p class="n">Mês 05/06</p>
+            <h3>Comercial + CRM</h3>
+            <p>Scripts, follow-up, pipeline e monetização do funil completo.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- 10 SESSAO 01 -->
+      <section class="slide white" data-title="Sessão 01 · Conteúdo">
+        <div class="topline"></div>
+        <span class="eyebrow">Execução assistida · 01</span>
+        <div class="phase-detail">
+          <aside class="phase-side">
+            <p class="n">Sessão 01</p>
+            <h3>Produto, oferta, posicionamento e conteúdo</h3>
+            <p class="hours">Mês 03</p>
+            <p>A marca para de postar no feeling e passa a gerar demanda com tese.</p>
+          </aside>
+          <div class="phase-body">
+            <h4>O que o especialista faz com você</h4>
+            <ul>
+              <li>Orienta a estratégia e calibra a mensagem para o ICP.</li>
+              <li>Acompanha a execução mês a mês — não entrega um calendário e some.</li>
+              <li>Conecta conteúdo ao funil: atração, conversão e prova.</li>
+            </ul>
+            <h4>Artefatos</h4>
+            <ul class="artifact-list">
+              <li>Roteiros de vídeo viral calibrados (prontos para gravar)</li>
+              <li>Brief de posts complementares para Instagram</li>
+              <li>Modelo de linha editorial</li>
+              <li>Funil de creator-led growth</li>
+            </ul>
+            <p class="fit">Encaixe: linha editorial, roteiros e criadores alinhados ao negócio — conteúdo com método, não volume.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 11 SESSAO 02 -->
+      <section class="slide" data-title="Sessão 02 · Mídia">
+        <div class="topline"></div>
+        <span class="eyebrow">Execução assistida · 02</span>
+        <div class="phase-detail">
+          <aside class="phase-side">
+            <p class="n">Sessão 02</p>
+            <h3>Mídia e performance</h3>
+            <p class="hours">Mês 04</p>
+            <p>Você para de apostar em canal e passa a decidir por ROAS e CPL.</p>
+          </aside>
+          <div class="phase-body">
+            <h4>O que o especialista faz com você</h4>
+            <ul>
+              <li>Conduz a escolha de canais e a leitura dos dados.</li>
+              <li>Estrutura pixel, audiência e plano de mídia.</li>
+              <li>Capacita o time a gerir mídia paga com critério — não dependência eterna.</li>
+            </ul>
+            <h4>Artefatos</h4>
+            <ul class="artifact-list">
+              <li>Configuração e leitura de pixel</li>
+              <li>Plano de mídia estruturado</li>
+              <li>Segmentação de audiências definida</li>
+              <li>Interpretação de dados das campanhas</li>
+              <li>Capacitação para gestão de mídia paga</li>
+              <li>Tomada de decisão por resultado</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 12 SESSAO 03 -->
+      <section class="slide white" data-title="Sessão 03 · Comercial">
+        <div class="topline"></div>
+        <span class="eyebrow">Execução assistida · 03</span>
+        <div class="phase-detail">
+          <aside class="phase-side">
+            <p class="n">Sessão 03</p>
+            <h3>Comercial e CRM</h3>
+            <p class="hours">Mês 05/06</p>
+            <p>O processo de vendas deixa de ser artesanal. Fecha com cadência.</p>
+          </aside>
+          <div class="phase-body">
+            <h4>O que o especialista faz com você</h4>
+            <ul>
+              <li>Revisa scripts e analisa as objeções reais do mês.</li>
+              <li>Ajusta o processo de vendas com o time — não só com o dono.</li>
+              <li>Estrutura CRM, réguas e follow-up para o funil não vazar.</li>
+            </ul>
+            <h4>Artefatos</h4>
+            <ul class="artifact-list">
+              <li>Revisão dos scripts de venda e cliente oculto</li>
+              <li>Análise de objeções reais + treinamento comercial</li>
+              <li>Atualização das réguas de conversão e follow-up</li>
+              <li>CRM ativo: cadência, pipeline e conversão</li>
+            </ul>
+            <p class="fit">Encaixe: comercial que fecha — scripts, objeções e follow-up calibrados no que realmente converte.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 13 SQUAD -->
+      <section class="slide dark" data-title="Squad de 4">
+        <span class="eyebrow">Execução assistida</span>
+        <h2 style="margin-top:22px;max-width:1180px">O consultor aloca. O squad instala. Você opera.</h2>
+        <div class="grid-4" style="margin-top:36px">
+          <article class="split-card">
+            <p class="k">Conteúdo</p>
+            <h3>Demanda com tese</h3>
+            <ul>
+              <li>Roteiro de vídeo viral calibrado</li>
+              <li>Briefing de posts Instagram</li>
+              <li>Suporte à produção e publicação</li>
+            </ul>
+          </article>
+          <article class="split-card">
+            <p class="k">Mídia paga</p>
+            <h3>Decisão por dado</h3>
+            <ul>
+              <li>Campanhas Meta / Google</li>
+              <li>Segmentação, pixel, leitura</li>
+              <li>Decisão por ROAS e CPL</li>
+            </ul>
+          </article>
+          <article class="split-card">
+            <p class="k">Comercial</p>
+            <h3>Conversão com método</h3>
+            <ul>
+              <li>Scripts + análise de objeções</li>
+              <li>Role play com vendedores</li>
+              <li>Réguas de follow-up</li>
+            </ul>
+          </article>
+          <article class="split-card">
+            <p class="k">CRM</p>
+            <h3>Pipeline que governa</h3>
+            <ul>
+              <li>CRM ativo, não agenda</li>
+              <li>Fluxos e automações</li>
+              <li>Análise de conversão</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <!-- 14 COMUNIDADE + FABRICA -->
+      <section class="slide red" data-title="Comunidade e Fábrica">
+        <span class="eyebrow">Além das sessões</span>
+        <h2 style="margin-top:24px;max-width:1180px">Você não faz isso sozinho. Entra numa rede que já opera o método.</h2>
+        <div class="split-2" style="margin-top:36px">
+          <article class="split-card">
+            <p class="k">Comunidade</p>
+            <h3>Ao vivo, WhatsApp e framework</h3>
+            <ul>
+              <li>Monitoria coletiva mensal com especialistas e peers</li>
+              <li>Grupo exclusivo no WhatsApp para alinhamento contínuo</li>
+              <li>Conteúdo semanal em aquisição, retenção e monetização</li>
+            </ul>
+          </article>
+          <article class="split-card">
+            <p class="k">Evento exclusivo</p>
+            <h3>Fábrica de Receita</h3>
+            <ul>
+              <li>2 dias de imersão presencial anual</li>
+              <li>Hot seats ao vivo do seu negócio com especialistas V4</li>
+              <li>Workshops práticos e networking com os melhores empresários do programa</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <!-- 15 POR QUE V4 -->
+      <section class="slide white" data-title="Por que a V4">
+        <div class="topline"></div>
+        <span class="eyebrow">Nosso negócio é vender o seu</span>
+        <h2 style="margin-top:24px;max-width:1180px">Por que a V4 — e não mais uma agência.</h2>
+        <div class="check-grid">
+          <div class="check-card">
+            <div class="icon-box"><svg class="icon"><use href="#i-layers"></use></svg></div>
+            <div>
+              <h3>Você para de apostar e começa a operar com método</h3>
+              <p>Menos tentativa e perda de investimento. Mais decisão em método testado.</p>
+            </div>
+          </div>
+          <div class="check-card">
+            <div class="icon-box"><svg class="icon"><use href="#i-chart"></use></svg></div>
+            <div>
+              <h3>Dados de mercado + experiência real</h3>
+              <p>Não são achismos. São aprendizados de milhares de operações de receita.</p>
+            </div>
+          </div>
+          <div class="check-card">
+            <div class="icon-box"><svg class="icon"><use href="#i-target"></use></svg></div>
+            <div>
+              <h3>Não empurramos serviços. Prescrevemos o necessário</h3>
+              <p>Você não compra um pacote. Recebe a solução que destrava a receita agora.</p>
+            </div>
+          </div>
+          <div class="check-card">
+            <div class="icon-box"><svg class="icon"><use href="#i-check"></use></svg></div>
+            <div>
+              <h3>Garantia incondicional de risco zero</h3>
+              <p>Se o método não fizer sentido, você não assume o risco. Nós assumimos.</p>
+            </div>
+          </div>
+        </div>
+        <div class="partner-row" style="margin-top:40px">
+          <span class="partner-pill" style="background:rgba(229,9,20,.07);border-color:rgba(229,9,20,.18);color:var(--ink)">Como já fizemos com</span>
+          <span class="partner-pill" style="background:rgba(229,9,20,.07);border-color:rgba(229,9,20,.18);color:var(--ink)">Ortobom</span>
+          <span class="partner-pill" style="background:rgba(229,9,20,.07);border-color:rgba(229,9,20,.18);color:var(--ink)">Spotify</span>
+          <span class="partner-pill" style="background:rgba(229,9,20,.07);border-color:rgba(229,9,20,.18);color:var(--ink)">GioLaser</span>
+          <span class="partner-pill" style="background:rgba(229,9,20,.07);border-color:rgba(229,9,20,.18);color:var(--ink)">Lugano</span>
+          <span class="partner-pill" style="background:rgba(229,9,20,.07);border-color:rgba(229,9,20,.18);color:var(--ink)">XP Inc.</span>
+          <span class="partner-pill" style="background:rgba(229,9,20,.07);border-color:rgba(229,9,20,.18);color:var(--ink)">Smart Fit</span>
+        </div>
+      </section>
+
+      <!-- 16 RECAP -->
+      <section class="slide dark" data-title="O que está em jogo">
+        <span class="eyebrow">Recap antes da decisão</span>
+        <h2 style="margin-top:22px;max-width:1180px">O que está em jogo neste ciclo.</h2>
+        <div class="split-3">
+          <article class="split-card">
+            <p class="k">Se não fizer</p>
+            <h3>Mais 6 meses no achismo</h3>
+            <p>Mídia continua tentando. Comercial continua artesanal. O dono continua sendo o processo.</p>
+          </article>
+          <article class="split-card">
+            <p class="k">Se contratar agência</p>
+            <h3>Aluga resultado</h3>
+            <p>Executa por você. Quando o contrato acaba, a máquina não ficou. Você volta ao ponto zero.</p>
+          </article>
+          <article class="split-card">
+            <p class="k">Se entrar no EQV</p>
+            <h3>Instala a máquina</h3>
+            <p>Tese, conteúdo, mídia, comercial e CRM no mesmo ciclo. O time herda o método.</p>
+          </article>
+        </div>
+        <p class="quote">A ordem certa: clareza e sistema antes de fee de execução cheio. Por isso o EQV existe.</p>
+      </section>
+
+      <!-- 17 INVESTIMENTO -->
+      <section class="slide white" data-title="Investimento">
+        <div class="topline"></div>
+        <span class="eyebrow">Investimento</span>
+        <h2 style="margin-top:16px;max-width:1180px;font-size:42px">Investimento estratégico para instalar o método — não para alugar uma agência.</h2>
+        <div class="price-layout">
+          <div class="price-main">
+            <p class="was">Valor de referência</p>
+            <p class="ref">R$ 32.875,63</p>
+            <p class="now-label">Condição comercial · à vista</p>
+            <p class="now">R$ 14.552,00</p>
+            <p>Programa semestral · consultoria + squad + comunidade + Fábrica de Receita. Cashback da Estruturação Estratégica já aplicado.</p>
+          </div>
+          <div class="price-side">
+            <div class="box">
+              <p class="tag">Parcelado</p>
+              <h3>6x de R$ 2.425,33</h3>
+              <p>Total R$ 14.552,00. Sem juros. O valor da parcela é o investimento mensal para ter método, não tentativa.</p>
+            </div>
+            <div class="box">
+              <p class="tag">Economia nesta condição</p>
+              <h3>R$ 18.323,63</h3>
+              <p>55,7% sobre a referência. Cliente da base ativa: o que já foi investido na EE vira combustível do ciclo EQV.</p>
+            </div>
+            <div class="box">
+              <p class="tag">Leitura de decisão</p>
+              <h3>Menos da metade da tabela</h3>
+              <p>Por 6 meses de método instalado no time — conteúdo, mídia, comercial e CRM no mesmo programa.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 18 GARANTIA -->
+      <section class="slide red" data-title="Garantia">
+        <div class="sphere" style="width:340px;height:340px;left:-90px;top:-90px;"></div>
+        <div style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;">
+          <div class="seal">
+            Garantia de<br><strong>reembolso</strong>
+          </div>
+          <h2 style="max-width:1100px;font-size:46px">Se após 30 dias de serviço você não estiver satisfeito com a entrega, devolvemos o investimento efetuado.</h2>
+          <p class="lede" style="margin:0 auto;text-align:center;">Risco zero para entrar. O método precisa fazer sentido na operação — não só no papel.</p>
+        </div>
+      </section>
+
+      <!-- 19 PROXIMOS PASSOS -->
+      <section class="slide dark" data-title="Próximos passos">
+        <span class="eyebrow">Próximo passo</span>
+        <h2 style="margin-top:22px;max-width:1180px">Qualificar e formalizar o start do Empresa que Vende.</h2>
+        <div class="cta-steps">
+          <article class="cta-step">
+            <p class="n">01</p>
+            <h3>Validar a condição</h3>
+            <p>R$ 14.552,00 à vista ou 6x de R$ 2.425,33. Referência R$ 32.875,63 com cashback da EE aplicado.</p>
+          </article>
+          <article class="cta-step">
+            <p class="n">02</p>
+            <h3>Kickoff do mês 01</h3>
+            <p>Diagnóstico de maturidade GTM, prioridades do ciclo e alocação do squad.</p>
+          </article>
+          <article class="cta-step">
+            <p class="n">03</p>
+            <h3>Entrar na comunidade</h3>
+            <p>Grupo, monitoria mensal e calendário da Fábrica de Receita a partir da assinatura.</p>
+          </article>
+        </div>
+        <p class="mini-note">V4 Company · Empresa que Vende · Proposta confidencial · Condição comercial de cliente da base ativa.</p>
+      </section>
+
+    </main>
+
+    <div class="slide-footer"><div class="footer-mark" id="footerLogo">V4</div></div>
+    <div class="slide-counter" id="slideCounter">01 / 19</div>
+    <div class="navigation">
+      <button class="nav-btn" id="prevBtn" aria-label="Anterior">
+        <svg class="icon"><use href="#i-arrow-left"></use></svg>
+      </button>
+      <button class="nav-btn" id="nextBtn" aria-label="Próximo">
+        <svg class="icon"><use href="#i-arrow-right"></use></svg>
+      </button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+
+  <script>
+    const deck = document.getElementById("deck");
+    const slidesEls = Array.from(document.querySelectorAll(".slide"));
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const slideCounter = document.getElementById("slideCounter");
+    const progressFill = document.getElementById("progressFill");
+    const footerLogo = document.getElementById("footerLogo");
+    let current = 0;
+
+    function fitDeck() {
+      const w = window.visualViewport?.width || window.innerWidth;
+      const h = window.visualViewport?.height || window.innerHeight;
+      deck.style.setProperty("--deck-scale", Math.max(.1, Math.min((w - 16) / 1600, (h - 16) / 900, 1)));
+    }
+
+    function goTo(index) {
+      current = Math.max(0, Math.min(slidesEls.length - 1, index));
+      slidesEls.forEach((s, i) => s.classList.toggle("active", i === current));
+      const number = String(current + 1).padStart(2, "0");
+      const total = String(slidesEls.length).padStart(2, "0");
+      const active = slidesEls[current];
+      const isDark = active.classList.contains("red") || active.classList.contains("dark");
+      slideCounter.textContent = number + " / " + total;
+      slideCounter.style.color = isDark ? "rgba(255,255,255,.58)" : "rgba(20,20,20,.52)";
+      progressFill.style.width = ((current + 1) / slidesEls.length) * 100 + "%";
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === slidesEls.length - 1;
+      footerLogo.classList.toggle("light", isDark);
+      footerLogo.style.opacity = (current === 0 || current === slidesEls.length - 1) ? "0" : "1";
+      document.title = number + " | " + (active.dataset.title || "Empresa que Vende");
+    }
+
+    prevBtn.onclick = () => goTo(current - 1);
+    nextBtn.onclick = () => goTo(current + 1);
+    window.addEventListener("resize", fitDeck);
+    window.visualViewport?.addEventListener("resize", fitDeck);
+    window.addEventListener("keydown", e => {
+      if (["ArrowRight", "PageDown", " "].includes(e.key)) { e.preventDefault(); goTo(current + 1); }
+      if (["ArrowLeft", "PageUp"].includes(e.key)) { e.preventDefault(); goTo(current - 1); }
+      if (e.key === "Home") goTo(0);
+      if (e.key === "End") goTo(slidesEls.length - 1);
+    });
+    let tx = null;
+    deck.addEventListener("touchstart", e => { tx = e.changedTouches[0].clientX; }, { passive: true });
+    deck.addEventListener("touchend", e => {
+      if (tx == null) return;
+      const d = e.changedTouches[0].clientX - tx;
+      if (Math.abs(d) > 70) goTo(current + (d < 0 ? 1 : -1));
+      tx = null;
+    }, { passive: true });
+    fitDeck();
+    goTo(0);
+  </script>
+</body>
+</html>
