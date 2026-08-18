@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Estratégia de abordagem · Recuperação DROP · Sara</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --brand:#e50915; --brand-light:#ff1a27; --bg:#050505; --surf:rgba(20,20,20,.92);
+      --surf2:#141414; --bd:rgba(255,255,255,.1); --txt:#fafafa; --mut:#a3a3a3;
+      --ok:#86efac; --warn:#fde68a; --hot:#fca5a5; --info:#93c5fd;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--txt);font:14px/1.55 Inter,system-ui,sans-serif;
+      background-image:radial-gradient(ellipse 80% 45% at 50% -15%,rgba(229,9,21,.18),transparent)}
+    .top{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);background:rgba(5,5,5,.88);border-bottom:1px solid var(--bd);padding:12px 22px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+    .logo{font-weight:900}.logo span{color:var(--brand-light)}
+    .pill{font-size:11px;font-weight:700;color:var(--mut);border:1px solid var(--bd);padding:5px 10px;border-radius:999px}
+    .wrap{max-width:1120px;margin:0 auto;padding:28px 20px 80px}
+    h1{margin:0 0 8px;font-size:clamp(26px,4vw,36px);font-weight:900;letter-spacing:-.03em}
+    .lead{color:var(--mut);max-width:920px;margin:0 0 18px;font-size:13px}
+    .lead a{color:var(--ok)}
+    .callout{padding:14px 16px;border-radius:12px;border:1px solid rgba(96,165,250,.3);background:rgba(96,165,250,.08);color:#bfdbfe;font-size:13px;margin-bottom:14px}
+    .callout.warn{border-color:rgba(250,204,21,.28);background:rgba(250,204,21,.06);color:#fde68a}
+    .callout.ok{border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.08);color:#bbf7d0}
+    .callout.hot{border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.08);color:#fecaca}
+    .nav{position:sticky;top:56px;z-index:15;margin:0 0 18px;padding:8px;background:rgba(8,8,8,.94);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.14);border-radius:16px}
+    .nav-label{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);padding:4px 10px 8px}
+    .tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+    @media(max-width:900px){.tabs{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:600px){.tabs{grid-template-columns:1fr 1fr}}
+    .tab{appearance:none;border:1px solid var(--bd);background:var(--surf2);color:var(--mut);border-radius:12px;padding:11px 10px;cursor:pointer;text-align:left;font-family:inherit}
+    .tab:hover{border-color:rgba(255,255,255,.22);color:#fff}
+    .tab.active{color:#fff;border-color:var(--brand);background:linear-gradient(135deg,rgba(229,9,21,.18),rgba(20,20,20,.95))}
+    .tab .n{display:block;font-size:13px;font-weight:800;margin-bottom:2px}
+    .tab .s{font-size:10px;font-weight:700;color:#d4d4d4}
+    .panel{display:none}.panel.is-active{display:block;animation:fade .2s ease}
+    @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+    .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:10px;margin-bottom:14px}
+    .kpi{background:var(--surf);border:1px solid var(--bd);border-radius:14px;padding:14px}
+    .kpi .v{font-size:22px;font-weight:900;line-height:1}.kpi .v.ok{color:var(--ok)}.kpi .v.hot{color:var(--hot)}.kpi .v.warn{color:var(--warn)}.kpi .v.info{color:var(--info)}
+    .kpi .l{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--mut);margin-top:6px;font-weight:700}
+    .section{background:var(--surf);border:1px solid var(--bd);border-radius:16px;padding:18px 20px;margin-bottom:12px}
+    .section h2{margin:0 0 4px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);font-weight:800}
+    .section h3{margin:0 0 12px;font-size:17px;font-weight:900}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:800px){.grid2{grid-template-columns:1fr}}
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}@media(max-width:900px){.grid3{grid-template-columns:1fr}}
+    .card{background:var(--surf2);border:1px solid var(--bd);border-radius:12px;padding:14px 16px}
+    .card .t{font-weight:800;margin-bottom:6px}
+    .card .d{font-size:12px;color:#d4d4d4}
+    .tag{display:inline-block;padding:2px 8px;border-radius:999px;font-size:10px;font-weight:800;border:1px solid var(--bd);margin-bottom:8px}
+    .tag.ok{color:var(--ok);border-color:rgba(34,197,94,.35)}
+    .tag.warn{color:var(--warn);border-color:rgba(250,204,21,.35)}
+    .tag.hot{color:var(--hot);border-color:rgba(239,68,68,.4)}
+    .tag.info{color:var(--info);border-color:rgba(96,165,250,.35)}
+    table{width:100%;border-collapse:collapse;font-size:12.5px}
+    th,td{padding:9px 8px;border-bottom:1px solid var(--bd);text-align:left;vertical-align:top}
+    th{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);font-weight:800;background:rgba(255,255,255,.02)}
+    .muted{color:var(--mut);font-size:12px}
+    ul,ol{margin:0;padding-left:18px} li{margin:6px 0;color:#e5e5e5}
+    .scroll{overflow-x:auto}
+    .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}@media(max-width:900px){.flow{grid-template-columns:1fr 1fr}}
+    .flow-step{background:var(--surf2);border:1px solid var(--bd);border-radius:12px;padding:12px}
+    .flow-step .n{font-size:10px;font-weight:800;color:var(--brand-light);letter-spacing:.08em;text-transform:uppercase}
+    .flow-step .t{font-weight:800;margin:4px 0}
+    .flow-step .d{font-size:12px;color:#d4d4d4}
+    .script{background:#0a0a0a;border:1px solid var(--bd);border-radius:12px;padding:14px 16px;font-size:13px;color:#e5e5e5;white-space:pre-wrap;line-height:1.65;margin:0 0 8px}
+    .copy{appearance:none;border:1px solid var(--bd);background:#111;color:#fff;font:inherit;font-weight:800;font-size:11px;padding:8px 12px;border-radius:10px;cursor:pointer;margin:0 0 14px}
+    .copy:hover{border-color:rgba(255,255,255,.28)}
+    footer{text-align:center;color:var(--mut);font-size:11px;margin-top:28px;padding-top:16px;border-top:1px solid var(--bd)}
+    footer a{color:var(--ok)}
+    .prio{border-left:3px solid var(--brand);padding:12px 14px;margin-bottom:10px;background:rgba(229,9,21,.08);border-radius:0 10px 10px 0}
+    .prio.p0{border-color:#ef4444;background:rgba(239,68,68,.08)}
+    .prio.p1{border-color:#facc15;background:rgba(250,204,21,.06)}
+    .prio .h{font-weight:800;margin-bottom:4px}
+    .prio .s{font-size:12px;color:#d4d4d4}
+  </style>
+</head>
+<body>
+<header class="top">
+  <div class="logo">V4 <span>COMPANY</span></div>
+  <div class="pill">Abordagem · Recuperação DROP · Sara</div>
+</header>
+
+<div class="wrap">
+  <h1>Como falar com quem dropou</h1>
+  <p class="lead">
+    Mesa de trabalho:
+    <a href="https://docs.google.com/spreadsheets/d/13CWiDWpxBecny-_9xWJzvPX_DQ2eq4HJmvZvgo7oL9k/edit?gid=1948775673#gid=1948775673" target="_blank" rel="noopener">planilha Recuperação DROP</a>.
+    Não voltamos para vender o mesmo pacote. Voltamos para <strong>atualizar a tese</strong> e marcar <strong>25 min</strong> — ou uma data honesta.
+    Filas: <a href="plano-reativacao-drops.html">plano de reativação</a> ·
+    <a href="farmer-sara.html">hub</a>.
+  </p>
+
+  <div class="callout warn">
+    <strong>Postura:</strong> “a gente já fez a EE juntos — vim só alinhar o próximo passo”.
+    Um CTA. Sem desconto. Sem “vocês dropou”. Sem PDF do Executar no primeiro toque.
+  </div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="v">C1</div><div class="l">Zap · 1 pedido</div></div>
+    <div class="kpi"><div class="v warn">48h</div><div class="l">Sem resposta → liga</div></div>
+    <div class="kpi"><div class="v">C2</div><div class="l">Toque curto + tese</div></div>
+    <div class="kpi"><div class="v info">C3</div><div class="l">Fecha o ciclo</div></div>
+    <div class="kpi"><div class="v ok">25 min</div><div class="l">Call se conectar</div></div>
+    <div class="kpi"><div class="v hot">0</div><div class="l">Proposta no 1º toque</div></div>
+  </div>
+
+  <nav class="nav">
+    <div class="nav-label">Estratégia</div>
+    <div class="tabs">
+      <button class="tab active" data-view="regra"><span class="n">Regra</span><span class="s">Postura · cadência · planilha</span></button>
+      <button class="tab" data-view="c1"><span class="n">C1 · abrir</span><span class="s">Scripts por motivo</span></button>
+      <button class="tab" data-view="c2c3"><span class="n">C2 · C3</span><span class="s">Sem conexão · fechar ciclo</span></button>
+      <button class="tab" data-view="call"><span class="n">Call 25 min</span><span class="s">Se atender / se responder</span></button>
+      <button class="tab" data-view="p0"><span class="n">P0 da semana</span><span class="s">Quem · qual script</span></button>
+    </div>
+  </nav>
+
+  <!-- REGRA -->
+  <div class="panel is-active" data-view="regra">
+    <div class="section">
+      <h2>Contrato da conversa</h2>
+      <h3>O cliente não deve sentir cobrança. Deve sentir continuidade.</h3>
+      <div class="grid2">
+        <div class="card">
+          <span class="tag ok">Fazer</span>
+          <div class="t">4 peças em toda mensagem</div>
+          <div class="d">
+            <ol>
+              <li><strong>Nome + contexto da EE</strong> — “na estruturação a gente tinha mapeado X”.</li>
+              <li><strong>Por que agora</strong> — gatilho (mês, sócio, obra, assinatura, devolutiva).</li>
+              <li><strong>Um pedido só</strong> — 25 min ou uma data. Nunca os dois + PDF + “o que achou?”.</li>
+              <li><strong>Saída honesta</strong> — se o momento não é agora, ele manda a data e a gente some até lá.</li>
+            </ol>
+          </div>
+        </div>
+        <div class="card">
+          <span class="tag hot">Não fazer</span>
+          <div class="t">Frases que queimam a reabertura</div>
+          <div class="d">
+            <ul>
+              <li>“Vocês dropou / desistiu / sumiu.”</li>
+              <li>“Tenho um desconto / condição especial se fechar hoje.”</li>
+              <li>“Última chance” · validade de proposta · pressão de cota.</li>
+              <li>Reenviar o PDF/contrato do Executar cheio no C1.</li>
+              <li>Menu de pagamento (Pix vs cartão vs boleto) no Zap.</li>
+              <li>Três WhatsApps iguais em três dias — parece cobrança de CS.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Cadência na planilha</h2>
+      <h3>C1 → ligação → C2 → C3. Status REC no mesmo dia.</h3>
+      <div class="flow" style="margin-bottom:16px">
+        <div class="flow-step">
+          <div class="n">C1 · D0</div>
+          <div class="t">WhatsApp</div>
+          <div class="d">4–7 linhas. Tese em 1 frase. Dois horários OU “me manda a data”. Marca Cadência = C1.</div>
+        </div>
+        <div class="flow-step">
+          <div class="n">+48h</div>
+          <div class="t">Ligação curta</div>
+          <div class="d">Se Sem conexão. 40 segundos. Não ler o Zap no telefone. Se não atender: recado de 1 frase.</div>
+        </div>
+        <div class="flow-step">
+          <div class="n">C2 · D+3</div>
+          <div class="t">Toque diferente</div>
+          <div class="d">Mais curto. Agrega 1 dado (dor / tese). Áudio de 20s vale mais que texto 2. Cadência = C2.</div>
+        </div>
+        <div class="flow-step">
+          <div class="n">C3 · D+7</div>
+          <div class="t">Fecha o ciclo</div>
+          <div class="d">“Deixo no radar até [mês].” Park 60–90d. Não perseguir. Cadência = C3 · Status REC honesto.</div>
+        </div>
+      </div>
+      <div class="callout ok">
+        <strong>Se Status REC = Conexão:</strong> para a sequência de chase. Agenda a call de 25 min. Não manda C2/C3 de “sumiu”.
+        Bioativos já está aqui — próximo passo é reunião, não outro Zap de abertura.
+      </div>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Coluna</th><th>O que escrever no mesmo dia do toque</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Motivo Drop</strong></td><td>Timing · Budget · Interno · Tratativa Ops. Sem isso a fila mistura pitch com projeto travado.</td></tr>
+            <tr><td><strong>Cadência</strong></td><td>C1 / C2 / C3 — o toque que você acabou de dar, não o que pretende dar.</td></tr>
+            <tr><td><strong>Status REC</strong></td><td>Conexão (respondeu ou atendeu) · Sem conexão (silêncio). Vazio = você ainda não tocou.</td></tr>
+            <tr><td><strong>Observação</strong></td><td>1 linha: o que ele disse + próxima data. Ex.: “sócio 02/09 · call 25 min sem proposta”.</td></tr>
+            <tr><td><strong>Temperatura</strong></td><td>Quente = conversa + data. Morno = respondeu sem data. Frio = silêncio ou “agora não” sem gatilho.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Quem usa qual play</h2>
+      <h3>Antes de copiar o script, escolhe o motivo</h3>
+      <div class="grid3">
+        <div class="card">
+          <span class="tag info">Timing</span>
+          <div class="t">“Não é não. É agora não.”</div>
+          <div class="d">Pedido = data ou 25 min para atualizar tese. Não reabre preço. Moteis, Adriano, AGM, Becton, Devstate, Madeiras, Pedrini, Positive Safety, Fui Motos, Dakar, Curavida, Rota.</div>
+        </div>
+        <div class="card">
+          <span class="tag warn">Budget</span>
+          <div class="t">“O pacote cheio não entra. O recorte cabe.”</div>
+          <div class="d">Pedido = 20 min só do recorte (Saber/Ter/EQV). Não fala desconto. Unik, Protesol, KFG, Ecofitness, Estação Delta, Madezatto, Creative Eng.</div>
+        </div>
+        <div class="card">
+          <span class="tag hot">Ops / Interno</span>
+          <div class="t">Não é pitch.</div>
+          <div class="d">Ops: “a EE volta?” — dono ops. Interno (Diveq, ZLS): 1 pergunta de causa. MasterPlan / Premium Gourmet: nem mensagem comercial.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- C1 -->
+  <div class="panel" data-view="c1">
+    <div class="section">
+      <h2>C1 · Timing</h2>
+      <h3>Interesse existiu. Abrir a porta, não a proposta</h3>
+      <p class="muted">Troque os colchetes. Mande de manhã (9h–11h) no número do decisor — não no grupo da EE se o decisor não lê.</p>
+      <div class="script" id="s-t1">Oi [Nome], tudo bem?
+
+Passando porque na EE a gente tinha mapeado [tese em 1 frase — ex.: growth sem social + CRM / EC + fee Executar].
+
+Vim só alinhar o próximo passo: consigo 25 min esta semana pra atualizar a tese — sem proposta nova na mesa. Tenho [terça 10h] ou [quinta 16h].
+
+Se o momento ainda não é agora, me manda a data certa que eu deixo no radar.</div>
+      <button class="copy" data-copy="s-t1">Copiar C1 Timing</button>
+    </div>
+
+    <div class="section">
+      <h2>C1 · Budget</h2>
+      <h3>Não defender o preço antigo. Oferecer recorte</h3>
+      <div class="script" id="s-b1">Oi [Nome], tudo bem?
+
+Revimos a tese da EE. O pacote cheio não cabe no caixa de vocês agora — e está tudo bem.
+
+O que faz sentido é um recorte de [Saber / Ter / fase 1] só pra destrava [dor #1 em 5 palavras].
+
+Posso te mostrar isso em 20 min, sem o combo anterior. [Quarta 11h] ou [sexta 9h] — ou me fala o dia.</div>
+      <button class="copy" data-copy="s-b1">Copiar C1 Budget</button>
+    </div>
+
+    <div class="section">
+      <h2>C1 · assinatura / “me dá uma semana”</h2>
+      <h3>Adriano · AGM · Fui Motos · Unik · Kidys</h3>
+      <p class="muted">Eles já viram preço. O toque é destravar decisão, não reexplicar produto.</p>
+      <div class="script" id="s-a1">Oi [Nome], tudo bem?
+
+A proposta continua com vocês — não vim cobrar assinatura.
+
+Só preciso de um sim, um não ou uma data: o que travou foi [caixa / sócio / forma de pagamento / outro tema]?
+
+Se for timing, eu reorganizo. Se for o recorte da oferta, marco 20 min e a gente ajusta — sem recomeçar a EE.</div>
+      <button class="copy" data-copy="s-a1">Copiar C1 decisão</button>
+    </div>
+
+    <div class="section">
+      <h2>C1 · cuidado (luto, saúde, obra)</h2>
+      <h3>Madeiras teresense · Rota da Linguiça · KFG</h3>
+      <div class="script" id="s-c1">Oi [Nome], passando com calma.
+
+Não tem nenhuma urgência comercial da nossa parte. Só queria deixar o canal aberto: quando fizer sentido retomar o que mapeamos na EE, me fala. Eu organizo em 25 min, no tempo de vocês.
+
+Se preferir uma data daqui [30/60] dias, eu já deixo marcado do lado de cá.</div>
+      <button class="copy" data-copy="s-c1">Copiar C1 cuidado</button>
+    </div>
+
+    <div class="section">
+      <h2>C1 · Ops (não é Farmer pitch)</h2>
+      <h3>Só se o dono ops pediu. Senão, não manda.</h3>
+      <div class="script" id="s-o1">Oi [Nome], tudo bem?
+
+Passando sobre a EE — queria só confirmar se o projeto volta a andar do lado de vocês (agenda / pagamento / entrega) ou se a gente pausa de forma oficial.
+
+Não é proposta comercial. É alinhar o status pra não ficar no limbo.</div>
+      <button class="copy" data-copy="s-o1">Copiar C1 Ops</button>
+    </div>
+
+    <div class="section">
+      <h2>Se for ligar no C1 (decisor conhecido)</h2>
+      <h3>40 segundos. Não é pitch.</h3>
+      <div class="script" id="s-lig">[Nome], oi, é a Sara da V4. Te mando um Zap também.
+
+Na EE a gente tinha [tese]. Não tô ligando pra reapresentar pacote — é pra marcar 25 min e atualizar, ou pra você me dar a data certa.
+
+Teve dois horários no Zap. Qual cabe?</div>
+      <button class="copy" data-copy="s-lig">Copiar ligação C1</button>
+    </div>
+  </div>
+
+  <!-- C2 C3 -->
+  <div class="panel" data-view="c2c3">
+    <div class="section">
+      <h2>C2 · Sem conexão</h2>
+      <h3>D+3. Outro formato. Não reenviar o C1.</h3>
+      <div class="grid2">
+        <div>
+          <p class="muted">Texto curto — quando C1 foi Zap longo.</p>
+          <div class="script" id="s-c2t">[Nome], um recado curto: o ponto da EE era [dor em 6 palavras].
+
+Se fizer sentido retomar, responde este Zap com um “sim” que eu te mando dois horários. Se não for o momento, um “depois” + mês já resolve.</div>
+          <button class="copy" data-copy="s-c2t">Copiar C2 texto</button>
+        </div>
+        <div>
+          <p class="muted">Áudio 15–20s — melhor em C2. Não passar de 25s.</p>
+          <div class="script" id="s-c2a">Oi [Nome], Sara da V4. Te mandei um Zap no começo da semana.
+
+Não preciso de decisão agora. Só de 25 min pra atualizar o que a gente mapeou na EE — [tese].
+
+Se não for o mês, me fala qual é. Valeu.</div>
+          <button class="copy" data-copy="s-c2a">Copiar roteiro do áudio</button>
+        </div>
+      </div>
+      <div class="callout">
+        <strong>Quem já está C2 + Sem conexão na planilha:</strong> Moteis · Pedrini · Protesol.
+        Não manda C1 de novo. Usa este C2 (áudio) e, se silêncio, C3 na semana seguinte.
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>C2 · C1 já deu Sem conexão (Creative Eng, Ecofitness, Estação Delta, Terra, Curavida)</h2>
+      <h3>Eles já foram tocados. Próximo toque = valor, não “oi de novo”</h3>
+      <div class="script" id="s-c2v">[Nome], complementando o que te mandei: na EE o gap que mais pesava era [dor #1].
+
+Se retomar, o caminho agora é [EQV / Saber / recorte], não o combo inteiro.
+
+Me responde com “agora”, “setembro” ou “não faz sentido” — qualquer um dos três eu respeito.</div>
+      <button class="copy" data-copy="s-c2v">Copiar C2 com valor</button>
+    </div>
+
+    <div class="section">
+      <h2>C3 · fecha o ciclo</h2>
+      <h3>D+7. Uma mensagem. Depois, park. Perseguir destrói a marca Farmer.</h3>
+      <div class="script" id="s-c3">[Nome], último recado meu neste ciclo: deixo o material da EE parado comigo até [mês — ex.: outubro].
+
+Se quiser retomar, é só responder este Zap. Não vou insistir.
+
+Quando fizer sentido, a gente atualiza a tese em 25 min — sem recomeçar do zero.</div>
+      <button class="copy" data-copy="s-c3">Copiar C3</button>
+      <p class="muted">Na planilha: Cadência C3 · Status REC Sem conexão · Observação “park [mês]” · Temperatura Frio. Radar 60–90d no calendário da Sara, não no Zap do cliente.</p>
+    </div>
+
+    <div class="section">
+      <h2>Se ele responder “depois”</h2>
+      <h3>Isso é vitória. Congele com data.</h3>
+      <div class="script" id="s-depois">Perfeito — fico com [mês] no radar.
+
+Te chamo na primeira semana de [mês]. Até lá não te cobro. Qualquer coisa, o canal continua este.</div>
+      <button class="copy" data-copy="s-depois">Copiar “depois”</button>
+    </div>
+  </div>
+
+  <!-- CALL -->
+  <div class="panel" data-view="call">
+    <div class="section">
+      <h2>Call de 25 min</h2>
+      <h3>Só existe se Status REC = Conexão. Sem preço nos primeiros 15 min.</h3>
+      <ol>
+        <li><strong>0–3 min · reabrir</strong> — “não vim vender o pacote antigo. Vim ver o que mudou desde a EE.”</li>
+        <li><strong>3–10 min · o que mudou</strong> — caixa, sócio, operação, o que ainda dói. Uma pergunta: “se a gente resolvesse uma coisa só nos próximos 45 dias, qual seria?”</li>
+        <li><strong>10–18 min · tese atualizada</strong> — Timing: “então o gatilho é X; a oferta continua Y, a gente retoma em [data] ou agora em EQV.” Budget: “o cheio não cabe; o recorte que cabe é Z.”</li>
+        <li><strong>18–25 min · um próximo passo</strong> — call 2 com decisor · EQV datado · recorte enviado · ou park com mês. Nunca “vou te mandar três opções”.</li>
+      </ol>
+      <div class="callout hot" style="margin-top:14px">
+        <strong>Gate:</strong> se o decisor não está na call, não apresenta número. Marca a reapresentação com ele na sala. Mesma regra do playbook.
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Objeções na hora</h2>
+      <h3>Responder em 1 frase + um pedido. Não debate.</h3>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Ele diz</th><th>Você diz</th><th>Pedido</th></tr></thead>
+          <tbody>
+            <tr><td>“Tá caro / salgado”</td><td>Não defende o fee. “O cheio não é pra agora. O recorte que ataca [dor] cabe em [Saber/Ter].”</td><td>20 min só do recorte.</td></tr>
+            <tr><td>“Agora não”</td><td>“Ótimo — não é não, é data.”</td><td>Qual mês. Grava e some.</td></tr>
+            <tr><td>“Tenho que falar com o sócio”</td><td>“Aí a call certa é com os dois. 25 min, tese atualizada, sem contrato na mesa.”</td><td>Data com os dois.</td></tr>
+            <tr><td>“Manda a proposta de novo”</td><td>“Mando depois da call de 25 min. Senão a gente reenvia o que já não coube.”</td><td>Horário esta semana.</td></tr>
+            <tr><td>“Vou pensar”</td><td>“Pensar em cima de quê — caixa, escopo ou prioridade?”</td><td>Nomeia a trava. Marca retorno em 5 dias úteis.</td></tr>
+            <tr><td>Silêncio na ligação</td><td>Recado: “Sara da V4. 25 min pra atualizar a EE. Te mandei Zap.”</td><td>Não liga 3x no mesmo dia.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Quem já conectou</h2>
+      <h3>Não usa script de abertura</h3>
+      <div class="prio p0">
+        <div class="h">Bioativos · C2 · Conexão</div>
+        <div class="s">Mandar dois horários de 25 min. Tese Timing, TCV R$94k. Call sem reenviar Executar. Se o decisor não puder, remarcar — não mandar PDF.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- P0 -->
+  <div class="panel" data-view="p0">
+    <div class="section">
+      <h2>Quem abordar esta semana</h2>
+      <h3>Script certo · toque certo. Não abrir 43 de uma vez.</h3>
+      <p class="muted">Ritmo: 5 conversas novas/dia no máximo. Qualidade de Observação na planilha &gt; volume de Zap.</p>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Ordem</th><th>Conta</th><th>Motivo</th><th>Na planilha agora</th><th>Script</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Bioativos</td><td>Timing</td><td>C2 · Conexão</td><td>Não é C1. Dois horários de call 25 min.</td></tr>
+            <tr><td>2</td><td>Adriano Martins</td><td>Timing</td><td>C2 · sem REC</td><td>C1 decisão (assinatura). Se silêncio 48h, liga.</td></tr>
+            <tr><td>3</td><td>AGM</td><td>Timing</td><td>sem cadência</td><td>C1 decisão. TCV R$74k · “uma semana” já passou.</td></tr>
+            <tr><td>4</td><td>Moteis Fortaleza</td><td>Timing</td><td>C2 · Sem conexão</td><td>Áudio C2. Não reabre E R$16k no Zap. TCV R$195k.</td></tr>
+            <tr><td>5</td><td>Dakar</td><td>Timing</td><td>sem cadência</td><td>C1 Timing + trava = cartão/pagamento.</td></tr>
+            <tr><td>6</td><td>Positive Safety · Pedrini · Curavida · Fui Motos</td><td>Timing / EQV</td><td>C2 ou Sem conexão</td><td>C2 valor ou C1 cuidado. Datar EQV.</td></tr>
+            <tr><td>7</td><td>Madezatto · Ecofitness · Estação Delta</td><td>Budget</td><td>C1 Sem conexão / EQV</td><td>C2 valor (recorte). Não Executar.</td></tr>
+            <tr><td>8</td><td>Protesol · KFG · Unik</td><td>Budget</td><td>C2 / C1 / sem cadência</td><td>C1 Budget ou C2. Unik: decisão, depois park 60d.</td></tr>
+            <tr><td>9</td><td>Becton · Devstate · Madeiras · Mais Gôndolas</td><td>Timing alto TCV</td><td>sem cadência</td><td>C1 Timing (Madeiras = C1 cuidado). 1 toque cada, não rajada.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Depois de cada toque</h2>
+      <h3>30 segundos na planilha. Senão a cadência mente.</h3>
+      <ul>
+        <li>Cadência = o toque de hoje.</li>
+        <li>Status REC = Conexão ou Sem conexão (não deixar vazio se você tocou).</li>
+        <li>Observação = frase do cliente ou “silêncio · próximo [data]”.</li>
+        <li>Motivo Drop = Timing / Budget / Interno / Tratativa Ops (copiar do Cockpit se ainda estiver vazio — hoje está vazio em 62/62).</li>
+      </ul>
+      <div class="callout warn" style="margin-top:12px">
+        <strong>Higiene primeiro, se ainda não fez:</strong> preencher Motivo Drop dos 62.
+        Sem filtro, a Sara vai pitchar Fuzinatto e MasterPlan como se fossem Moteis.
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    V4 · Abordagem Recuperação DROP · Sara ·
+    <a href="https://docs.google.com/spreadsheets/d/13CWiDWpxBecny-_9xWJzvPX_DQ2eq4HJmvZvgo7oL9k/edit?gid=1948775673#gid=1948775673" target="_blank" rel="noopener">Planilha</a> ·
+    <a href="plano-reativacao-drops.html">Plano de reativação</a> ·
+    <a href="farmer-sara.html">Hub</a> ·
+    <a href="playbook-farmer-am.html">Playbook</a>
+  </footer>
+</div>
+
+<script>
+(function(){
+  document.querySelectorAll('.tab').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.tab').forEach(function(b){ b.classList.remove('active'); });
+      document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('is-active'); });
+      btn.classList.add('active');
+      var panel = document.querySelector('.panel[data-view="'+btn.getAttribute('data-view')+'"]');
+      if (panel) panel.classList.add('is-active');
+    });
+  });
+  document.querySelectorAll('.copy').forEach(function(btn){
+    var label = btn.textContent;
+    btn.addEventListener('click', function(){
+      var el = document.getElementById(btn.getAttribute('data-copy'));
+      if (!el) return;
+      var t = el.textContent;
+      if (navigator.clipboard) navigator.clipboard.writeText(t).then(function(){
+        btn.textContent = 'Copiado';
+        setTimeout(function(){ btn.textContent = label; }, 1400);
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>
