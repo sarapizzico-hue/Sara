@@ -6,7 +6,7 @@
 **Referência comercial:** condição **R$ 71.582,32** (referência R$ 89.635,85)  
 **Prazo:** 12 semanas | **Carga V4:** 106,5 horas
 
-A presente Observação integra o instrumento contratual e descreve os entregáveis, o formato de execução e os critérios de sucesso combinados para o projeto de Estruturação Comercial da G6 Internet.
+A presente Observação integra o instrumento contratual e descreve os entregáveis, o formato de execução, a forma de pagamento e os critérios de sucesso combinados para o projeto de Estruturação Comercial da G6 Internet.
 
 ## 1. Objeto
 Instalação, pela Contratada, da fundação comercial da Contratante — processo, CRM em uso, scripts, cadências, indicadores, rituais de gestão e rotinas de ativação/follow-up/retenção — com implementação assistida nos canais **loja e PAP (dual-track)**, visando maior previsibilidade (“Receita Previsível”).
@@ -111,12 +111,18 @@ Referência de acompanhamento ao final da implantação assistida:
 - Garantia de metas, churn ou ROI específico
 - Ampliação para canais/unidades fora do dual-track sem novo escopo
 
-## 8. Investimento (referência)
+## 8. Investimento e forma de pagamento
 - Valor de referência: R$ 89.635,85
-- Condição comercial G6: R$ 71.582,32
-- Pagamento, reajuste, multa e vigência: conforme Contrato principal
+- Condição comercial G6: **R$ 71.582,32**
 
-Em divergência entre deck/PDF e Contrato, **prevalece o Contrato**, integrado por esta Observação quanto aos entregáveis.
+### Forma de pagamento (combinada)
+- **Entrada:** R$ 20.000,00 (na assinatura / início do projeto)
+- **Saldo:** R$ 51.582,32 em **6 parcelas no boleto**
+- Parcela de referência: R$ 8.597,05 (com ajuste de centavos na última, se necessário, para fechar o saldo)
+- Boletos com vencimentos mensais sucessivos, conforme faturamento da Contratada
+
+Reajuste, multa, mora e vigência: conforme Contrato principal.  
+Em divergência entre deck/PDF e Contrato, **prevalece o Contrato**, integrado por esta Observação quanto aos entregáveis e à forma de pagamento.
 
 ## 9. Referências de proposta
 - Deck: https://sarapizzico-hue.github.io/Sara/g6/
