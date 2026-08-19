@@ -1,132 +1,92 @@
-# OBSERVAÇÃO AO CONTRATO — ENTREGÁVEIS ACORDADOS
+# OBSERVAÇÃO AO CONTRATO — ENTREGÁVEIS E PAGAMENTO ACORDADOS
 
 **Produto:** Estruturação Comercial (Sales V4)  
 **Contratada:** V4 Company / Colli&Co  
 **Contratante:** G6 Internet  
-**Referência comercial:** condição **R$ 71.582,32** (referência R$ 89.635,85)  
+**Valor acordado:** **R$ 69.867,88**  
 **Prazo:** 12 semanas | **Carga V4:** 106,5 horas
 
-A presente Observação integra o instrumento contratual e descreve os entregáveis, o formato de execução, a forma de pagamento e os critérios de sucesso combinados para o projeto de Estruturação Comercial da G6 Internet.
+Esta Observação integra o Contrato e descreve o **escopo completo combinado**, o formato, a forma de pagamento e os critérios de sucesso.
 
 ## 1. Objeto
-Instalação, pela Contratada, da fundação comercial da Contratante — processo, CRM em uso, scripts, cadências, indicadores, rituais de gestão e rotinas de ativação/follow-up/retenção — com implementação assistida nos canais **loja e PAP (dual-track)**, visando maior previsibilidade (“Receita Previsível”).
+Instalação da fundação comercial da G6 (processo, CRM em uso, scripts, cadências, indicadores, rituais e rotinas de ativação/follow-up/retenção), com implementação assistida loja × PAP (dual-track), visando **Receita Previsível**.
 
-O objeto **não se limita** a documentos ou treinamentos pontuais: o compromisso é de **capacidade instalada** na operação, com adesão assistida do time.
+Não é entrega de PDF: é **capacidade instalada**. Todo o escopo abaixo está incluído no valor acordado.
 
-## 2. Formato de execução
+## 2. Formato
 - Projeto consultivo com implementação assistida
-- 12 semanas | 106,5h V4 (análise, desenho, CRM, QA, instalação e gestão — não só calls)
-- Coexecução: V4 constrói e conduz; time G6 opera no dia a dia
-- Ritmo semanal com sponsor/gestor e checkpoints comerciais
-- **Presencial:** Fase 1 (Diagnóstico) e Fase 5 (Instalação/treino)
-- Saída: handover + plano de continuidade **60 dias**
-- Canais: dual-track loja × PAP
+- 12 semanas | 106,5h V4
+- Coexecução V4 + G6 | ritmo semanal
+- Presencial: F1 (Diagnóstico) e F5 (Instalação/treino)
+- Handover + plano de continuidade 60 dias
+- Dual-track loja × PAP
 
-## 3. Escopo consolidado
+## 3. Escopo consolidado (incluído)
 
-### 3.1 Fundação operacional
-- Arquitetura loja × PAP com critérios de etapa e papéis
+### Fundação operacional
+- Arquitetura loja × PAP com critérios e papéis
 - Scripts, cadências e jornada por canal
-- Rituais de gestão (diária / semanal / pipeline review)
+- Rituais (diária / semanal / pipeline review)
 - Onboarding operacional de vendedores
 
-### 3.2 Controle e adesão
+### Controle e adesão
 - CRM como painel de receita
-- Higiene, motivos de perda, próximas ações obrigatórias e dashboard
-- Instalação assistida + roleplay (loja e PAP)
-- Rotinas de ativação, follow-up e save/retenção no processo
+- Higiene, motivos de perda, próximas ações e dashboard
+- Instalação assistida + roleplay
+- Rotinas de ativação, follow-up e save/retenção
 
-## 4. Fases, horas e entregáveis
+## 4. Fases e entregáveis (escopo completo) — 106,5h
 
-**Total 106,5h** (inclui 6h de gestão de projeto, QA e alinhamentos internos).
+### F1 Diagnóstico (18h) · presencial
+Diagnóstico; entrevistas sponsor/gestor/top/bottom; auditoria CRM/RD; mapa de gargalos; imersão presencial loja+PAP.
 
-### FASE 1 — Diagnóstico operacional (18h) · presencial
-- Diagnóstico comercial detalhado
-- Entrevistas com sponsor, gestor, top e bottom performer
-- Auditoria do CRM/RD atual
-- Mapa de gargalos por etapa e priorização de dores
-- Imersão presencial com time fechado (loja + PAP)
+### F2 Arquitetura (15h)
+ICP/jornada; pipeline/critérios/papéis; SLA; metas de atividade; scripts/cadências/BPMN/CHA; dual-track loja×PAP.
 
-### FASE 2 — Arquitetura operacional comercial (15h)
-- ICP/segmentos e jornada alvo
-- Pipeline com critérios de etapa e papéis
-- SLA marketing ↔ comercial ↔ gestor
-- Metas de atividade e indicadores
-- Scripts, cadências, BPMN e matriz CHA
-- Desenho dual-track loja × PAP
+### F3 CRM e controle (15,5h) · paralelo F2
+Pipeline no CRM; campos e motivos de perda; atividades/próximas ações; dashboard; higiene; campos G6 (origem, tempo de resposta, status, dor, capacidade, produto, próxima ação, motivo de perda).
 
-### FASE 3 — CRM e controle (15,5h) · paralelo à F2
-- Reorganização do pipeline no CRM
-- Campos obrigatórios e motivos de perda
-- Atividades e próximas ações obrigatórias
-- Dashboard de gestão e conversão
-- Regras de higiene e rotina de registro
-- Campos mínimos G6: origem, tempo de resposta, status, dor, capacidade, produto, próxima ação e motivo de perda
+### F4 Estratégica (20h)
+Playbook; comissionamento loja≠PAP; breakeven (CAC/payback/retenção); meta como piso.
 
-### FASE 4 — Camada estratégica (20h)
-- Playbook comercial orientado ao uso
-- Política de comissionamento (loja ≠ PAP)
-- Breakeven da operação (CAC, payback e retenção)
-- Meta como piso de performance
+### F5 Instalação (22h) · presencial
+Onboarding; imersão + treino do gestor; roleplay; pipeline review e reunião semanal assistidas; checklist/desvios; transferência à liderança.
 
-### FASE 5 — Instalação da rotina (22h) · presencial
-- Onboarding operacional de vendedores
-- Imersão do time e treinamento do gestor
-- Roleplay loja e PAP
-- Pipeline review e reunião semanal assistidas
-- Checklist semanal e correção de desvios
-- Transferência da rotina para a liderança comercial
-
-### FASE 6 — Handover e continuidade (10h)
-- Reunião final de transferência
-- Score de maturidade antes/depois
-- Plano de continuidade de 60 dias
-- Rotinas de retenção e expansão (save/upsell)
-- Riscos de regressão e evolução
+### F6 Handover (10h)
+Transferência; score antes/depois; plano 60 dias; retenção/expansão; riscos de regressão.  
+(+ 6h gestão/QA/alinhamentos)
 
 ## 5. Critérios de sucesso (Receita Previsível)
-Referência de acompanhamento ao final da implantação assistida:
-1. Pipeline configurado e usado
-2. Reunião semanal acontecendo
-3. Follow-up executado conforme cadência
-4. Gestor usando indicadores
-5. Time nos scripts e critérios
-6. Onboarding documentado
-7. Rotinas de retenção em operação
-8. Sponsor com previsibilidade
+Pipeline usado · reunião semanal · follow-up · gestor com indicadores · scripts/critérios · onboarding documentado · retenção em operação · sponsor com previsibilidade.
 
-> Orientam qualidade da instalação; **não constituem garantia** de resultado financeiro específico (receita, churn ou ROI), dependente também da execução contínua da G6 após o handover.
+> Não são garantia de ROI/churn/receita específica.
 
-## 6. Cooperação da Contratante (G6)
-- Disponibilizar sponsor, gestor e time (loja/PAP), inclusive presenciais F1 e F5
-- Acesso ao CRM/RD e informações operacionais
-- Interlocutores para validação de artefatos e decisões
-- Liderança conduzindo rituais após a instalação
-- Mudanças de escopo somente por aditivo
+## 6. Cooperação G6
+Agenda (incl. F1/F5 presenciais) · acesso CRM/RD · interlocutores · liderança nos rituais · mudanças só por aditivo.
 
 ## 7. Fora de escopo (salvo aditivo)
-- Troca/migração ampla de CRM além do necessário à reorganização acordada
-- Gestão diária do time pela V4 após handover
-- Mídia paga / criativo / operação contínua de marketing
-- Garantia de metas, churn ou ROI específico
-- Ampliação para canais/unidades fora do dual-track sem novo escopo
+Troca ampla de CRM · gestão diária pós-handover pela V4 · mídia/marketing contínuo · garantia de metas/ROI · outros canais fora do dual-track.
 
-## 8. Investimento e forma de pagamento
-- Valor de referência: R$ 89.635,85
-- Condição comercial G6: **R$ 71.582,32**
+## 8. Valor e forma de pagamento (ACORDADO)
 
-### Forma de pagamento (combinada)
-- **Entrada:** R$ 20.000,00 (na assinatura / início do projeto)
-- **Saldo:** R$ 51.582,32 em **6 parcelas no boleto**
-- Parcela de referência: R$ 8.597,05 (com ajuste de centavos na última, se necessário, para fechar o saldo)
-- Boletos com vencimentos mensais sucessivos, conforme faturamento da Contratada
+**Valor total:** R$ 69.867,88  
+(escopo completo das seções 2–5)
 
-Reajuste, multa, mora e vigência: conforme Contrato principal.  
-Em divergência entre deck/PDF e Contrato, **prevalece o Contrato**, integrado por esta Observação quanto aos entregáveis e à forma de pagamento.
+| Item | Valor | Meio |
+|------|-------|------|
+| Entrada | R$ 20.000,00 | **Pix** |
+| 6 parcelas | R$ 8.311,31 cada | **Boleto** |
 
-## 9. Referências de proposta
+- Entrada na assinatura / início do projeto (Pix, conforme faturamento V4)
+- 6 boletos mensais sucessivos de R$ 8.311,31
+- 20.000,00 + 6×8.311,31 = 69.867,86; ajuste de R$ 0,02 na última parcela para fechar **69.867,88**, se aplicável
+
+Reajuste/multa/mora/vigência: Contrato principal.  
+Divergência deck/PDF × Contrato: prevalece o Contrato + esta Observação.
+
+## 9. Referências
 - Deck: https://sarapizzico-hue.github.io/Sara/g6/
 - PDF: G6-Internet_Estruturacao-Comercial_V4.pdf
 
-## 10. Ciência das Partes
-As Partes reconhecem que os entregáveis acima correspondem ao combinado e autorizam a inclusão deste texto como anexo/observação ao Contrato.
+## 10. Ciência
+As Partes reconhecem o escopo completo e o pagamento acordado (**R$ 69.867,88**; entrada R$ 20.000,00 Pix; 6× R$ 8.311,31 boleto) e autorizam este texto como anexo/observação ao Contrato.
