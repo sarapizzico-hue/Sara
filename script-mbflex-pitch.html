@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Script de Pitch · MBFlex Express · Narrativa Estratégica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #140608;
+      --surf: rgba(255,255,255,.06);
+      --bd: rgba(255,255,255,.14);
+      --txt: #fff;
+      --mut: rgba(255,255,255,.78);
+      --red: #e11d24;
+      --ok: #86efac;
+      --warn: #fde68a;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font: 15px/1.55 "Plus Jakarta Sans", system-ui, sans-serif;
+      color: var(--txt);
+      background:
+        radial-gradient(ellipse 70% 40% at 10% 0%, rgba(225,29,36,.35), transparent 55%),
+        radial-gradient(ellipse 50% 35% at 90% 10%, rgba(255,80,80,.18), transparent 50%),
+        linear-gradient(180deg, #1a090b 0%, #0d0405 100%);
+      padding-bottom: 64px;
+    }
+    h1, h2, h3 { font-family: Outfit, sans-serif; letter-spacing: -.02em; line-height: 1.15; }
+    .top {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(13,4,5,.88);
+      border-bottom: 1px solid var(--bd);
+      padding: 14px 20px;
+      display: flex; gap: 12px; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    }
+    .brand { font-weight: 800; font-size: 15px; }
+    .brand span { color: #fda4af; }
+    .pill {
+      font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      border: 1px solid var(--bd); border-radius: 999px; padding: 6px 12px; color: var(--mut);
+    }
+    .wrap { max-width: 920px; margin: 0 auto; padding: 28px 20px 0; }
+    .hero {
+      border: 1px solid var(--bd); border-radius: 20px; padding: 28px 24px;
+      background: linear-gradient(135deg, rgba(225,29,36,.2), rgba(255,255,255,.04));
+      margin-bottom: 18px;
+    }
+    .hero h1 { margin: 0 0 10px; font-size: clamp(26px, 4vw, 36px); }
+    .hero p { margin: 0; color: var(--mut); max-width: 740px; }
+    .nav {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 8px; margin: 18px 0 8px;
+    }
+    .nav a {
+      text-decoration: none; color: var(--mut); font-size: 12px; font-weight: 700;
+      border: 1px solid var(--bd); background: var(--surf); border-radius: 12px;
+      padding: 10px 12px; transition: .2s;
+    }
+    .nav a:hover { color: #fff; border-color: rgba(255,255,255,.35); background: rgba(225,29,36,.18); }
+    .nav a small { display: block; color: #fda4af; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 3px; }
+    .callout {
+      margin: 16px 0 22px; padding: 14px 16px; border-radius: 14px;
+      border: 1px solid rgba(253,230,138,.3); background: rgba(253,230,138,.08);
+      color: var(--warn); font-size: 14px;
+    }
+    .callout strong { color: #fef08a; }
+    .perfil {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px; margin: 16px 0 8px;
+    }
+    .perfil .card {
+      border: 1px solid var(--bd); border-radius: 14px; background: var(--surf);
+      padding: 12px 14px;
+    }
+    .perfil .card h3 { margin: 0 0 6px; font-size: 13px; color: #fda4af; text-transform: uppercase; letter-spacing: .06em; }
+    .perfil .card p { margin: 0; font-size: 13px; color: var(--mut); line-height: 1.45; }
+    .slide {
+      border: 1px solid var(--bd); border-radius: 18px; background: rgba(20,8,10,.72);
+      padding: 22px 20px; margin-bottom: 16px;
+    }
+    .slide-head {
+      display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+      align-items: flex-start; margin-bottom: 14px;
+      padding-bottom: 12px; border-bottom: 1px solid var(--bd);
+    }
+    .slide-num {
+      font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #fda4af;
+    }
+    .slide h2 { margin: 4px 0 0; font-size: clamp(20px, 3vw, 26px); }
+    .slide-ref {
+      font-size: 12px; color: var(--mut); border: 1px solid var(--bd);
+      border-radius: 999px; padding: 6px 10px; white-space: nowrap;
+    }
+    .objetivo {
+      display: inline-block; margin-bottom: 12px; font-size: 12px; font-weight: 700;
+      color: var(--ok); background: rgba(134,239,172,.1); border: 1px solid rgba(134,239,172,.25);
+      border-radius: 999px; padding: 5px 10px;
+    }
+    .fala {
+      background: rgba(255,255,255,.05); border-left: 3px solid var(--red);
+      border-radius: 0 12px 12px 0; padding: 14px 16px; margin: 0 0 14px;
+      color: #fff; font-size: 15px; line-height: 1.6;
+    }
+    .fala em { color: #ffe4e6; font-style: normal; font-weight: 700; }
+    .bloco { margin-bottom: 14px; }
+    .bloco h3 {
+      margin: 0 0 8px; font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: #fda4af;
+    }
+    .bloco ul { margin: 0; padding-left: 18px; color: var(--mut); }
+    .bloco li { margin-bottom: 6px; }
+    .bloco li strong { color: #fff; }
+    .ask {
+      margin-top: 12px; padding: 12px 14px; border-radius: 12px;
+      background: rgba(255,255,255,.05); border: 1px dashed rgba(255,255,255,.25);
+      color: #ffe4e6; font-size: 14px;
+    }
+    .ask strong { color: #fff; }
+    .evitar {
+      margin-top: 12px; padding: 12px 14px; border-radius: 12px;
+      background: rgba(225,29,36,.1); border: 1px solid rgba(225,29,36,.28);
+      color: #fecaca; font-size: 14px;
+    }
+    .evitar strong { color: #fda4af; }
+    .links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .links a {
+      color: #fff; text-decoration: none; font-size: 12px; font-weight: 700;
+      background: rgba(225,29,36,.85); border-radius: 999px; padding: 8px 14px;
+    }
+    .links a.sec { background: transparent; border: 1px solid var(--bd); color: var(--mut); }
+    .footer-note { margin-top: 8px; color: rgba(255,255,255,.55); font-size: 13px; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <div class="brand">Script de Pitch · <span>MBFlex × V4</span></div>
+    <div class="pill">Uso interno · EC + Growth · leitura pública</div>
+  </div>
+
+  <div class="wrap">
+    <header class="hero">
+      <h1>Narrativa estratégica · MBFlex Express</h1>
+      <p>
+        Roteiro por slide para a primeira reunião. Tese: <strong>a malha já existe; o comercial precisa encher e reter</strong>.
+        Leitura feita pelo site (mbflex.com.br) — validar números e processo interno no kick-off, não fingir EE.
+      </p>
+      <div class="links">
+        <a href="proposta-mbflex.html">Abrir deck do cliente</a>
+        <a class="sec" href="#s1">Ir para o roteiro ↓</a>
+      </div>
+    </header>
+
+    <div class="callout">
+      <strong>Linha mestra da call:</strong>
+      “Vocês já fazem same day em São Paulo. O jogo do Flex não se ganha repetindo ‘entrega no mesmo dia’ no site —
+      se ganha respondendo primeiro, ativando o lojista e impedindo ele de ir para o WhatsApp do concorrente.”
+      Nunca abrir com preço. Nunca atacar a operação. Sempre falar em <strong>occupancy, retenção e dono do lead</strong>.
+    </div>
+
+    <div class="perfil">
+      <div class="card">
+        <h3>Cliente</h3>
+        <p>MBFlex Express · last mile Flex ML / Shopee / e-commerce · Cambuci · SP capital + Grande SP.</p>
+      </div>
+      <div class="card">
+        <h3>O que o site vende</h3>
+        <p>+5.000 entregas/dia · 100 mil/mês · +180 motoboys · 99% · 24/6 · sem fidelidade · 15% no 1º mês.</p>
+      </div>
+      <div class="card">
+        <h3>Dor provável</h3>
+        <p>Lead no WhatsApp sem dono · guerra de preço · churn porque não tem contrato · malha ociosa.</p>
+      </div>
+      <div class="card">
+        <h3>O que não sabemos ainda</h3>
+        <p>Ticket médio · CAC · taxa de ativação do simulador · churn real · tamanho do time comercial.</p>
+      </div>
+    </div>
+
+    <nav class="nav" aria-label="Slides">
+      <a href="#s1"><small>01</small>Capa</a>
+      <a href="#s2"><small>02</small>Mercado</a>
+      <a href="#s3"><small>03</small>Leitura</a>
+      <a href="#s4"><small>04</small>Vazamento</a>
+      <a href="#s5"><small>05</small>Dois funis</a>
+      <a href="#s6"><small>06</small>Produtos</a>
+      <a href="#s7"><small>07</small>EC</a>
+      <a href="#s8"><small>08</small>CRM</a>
+      <a href="#s9"><small>09</small>Growth</a>
+      <a href="#s10"><small>10</small>Rotinas</a>
+      <a href="#s11"><small>11</small>Preço</a>
+      <a href="#s12"><small>12</small>Close</a>
+    </nav>
+
+    <article class="slide" id="s1">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 01 · Capa</div>
+          <h2>Encher a malha. Reter o lojista.</h2>
+        </div>
+        <span class="slide-ref">Abrir e pausar 8s</span>
+      </div>
+      <span class="objetivo">Objetivo: mostrar que estudamos o negócio antes da call</span>
+      <p class="fala">
+        “Trouxemos uma proposta feita em cima do que vocês já publicam: same day, Flex Mercado Livre e Shopee, malha em SP.
+        A tese é simples: <em>operação vocês já têm. O que vamos discutir é como o comercial enche essa malha e segura o lojista.</em>”
+      </p>
+      <div class="evitar"><strong>Evitar:</strong> “vocês precisam de marketing”. Eles já têm site, simulador e WhatsApp. O gap é máquina, não presença.</div>
+    </article>
+
+    <article class="slide" id="s2">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 02 · Mercado</div>
+          <h2>Todo mundo vende o mesmo dia</h2>
+        </div>
+        <span class="slide-ref">J3, Easy, Flexboys, Pex</span>
+      </div>
+      <p class="fala">
+        “Em São Paulo o Flex virou commodity. O lojista compara frete no Zap e troca. Vocês mesmos anunciam sem fidelidade —
+        isso acelera a entrada e torna a retenção o P&amp;L verdadeiro. Motoboy parado custa. Occupancy é a meta.”
+      </p>
+      <div class="ask"><strong>Perguntar:</strong> “Hoje, o que mais tira lojista de vocês: preço, atraso, cobertura ou sumiço no follow-up?”</div>
+    </article>
+
+    <article class="slide" id="s3">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 03 · Leitura</div>
+          <h2>Os números do site</h2>
+        </div>
+        <span class="slide-ref">Validar, não confrontar</span>
+      </div>
+      <p class="fala">
+        “+5.000/dia, 100 mil/mês, +180 motoboys, 99%. Se isso está na rua, o comercial precisa de um funil à altura.
+        Se parte é meta, a gente usa o kick-off para cravar o número real. De qualquer forma, a pergunta é a mesma:
+        <em>quantos lojistas novos vocês ativam por semana — e quantos saem?</em>”
+      </p>
+      <div class="evitar"><strong>Evitar:</strong> tratar os números do site como auditoria. São ponto de partida, não acusação.</div>
+    </article>
+
+    <article class="slide" id="s4">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 04 · Vazamento</div>
+          <h2>O que já funciona × o que vaza</h2>
+        </div>
+        <span class="slide-ref">Hipótese pública</span>
+      </div>
+      <p class="fala">
+        “O simulador pede cubagem antes de saber se o lojista tem volume. Tem dois WhatsApps, formulário, Zequinha e SAC.
+        A copy é a mesma da concorrência. E a oferta de 15% sem fidelidade puxa entrada sem trava de saída.
+        Se isso bater com o dia a dia de vocês, o vazamento não é operacional — é comercial.”
+      </p>
+      <div class="ask"><strong>Perguntar:</strong> “Quando alguém simula no site, quem responde, em quanto tempo, e onde isso fica registrado?”</div>
+    </article>
+
+    <article class="slide" id="s5">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 05 · Dois funis</div>
+          <h2>Lojista, motoboy e SAC no mesmo inbox</h2>
+        </div>
+        <span class="slide-ref">Momento “aha”</span>
+      </div>
+      <p class="fala">
+        “Last mile é dois lados: quem envia e quem entrega. Se o orçamento do seller compete com currículo de motoboy
+        e reclamação de atraso no mesmo chat, o comercial vira plantão. A gente separa os três funis com dono e SLA.”
+      </p>
+    </article>
+
+    <article class="slide" id="s6">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 06 · Produtos</div>
+          <h2>A ou B ou os dois</h2>
+        </div>
+        <span class="slide-ref">Independência</span>
+      </div>
+      <p class="fala">
+        “Duas frentes, sem amarra. Estruturação Comercial arruma a casa: ICP, funil, CRM, cotação, onboarding e save.
+        Growth traz lojista com intenção em SP. Podem começar por uma. O ideal, se a malha tem folga, é as duas.”
+      </p>
+      <div class="bloco">
+        <h3>Como escolher na call</h3>
+        <ul>
+          <li><strong>Se o WhatsApp já enche e não fecha:</strong> começar pela EC.</li>
+          <li><strong>Se a malha está ociosa e falta lojista:</strong> Growth — mas avisar o risco de vazar sem processo.</li>
+          <li><strong>Se tem os dois sintomas:</strong> A+B.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="slide" id="s7">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 07 · EC</div>
+          <h2>Do simulador ao volume recorrente</h2>
+        </div>
+        <span class="slide-ref">Produto 01</span>
+      </div>
+      <p class="fala">
+        “A EC não é PDF. É diagnóstico, funil, playbook de cotação, onboarding da primeira coleta e cadência de save.
+        Qualificação por pacotes/dia, canal e CEP. Menos tempo com quem não cabe na malha. Mais ativação de quem cabe.”
+      </p>
+    </article>
+
+    <article class="slide" id="s8">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 08 · CRM</div>
+          <h2>Simulador + Zap + Zequinha no mesmo pipe</h2>
+        </div>
+        <span class="slide-ref">Bonificado</span>
+      </div>
+      <p class="fala">
+        “Toda simulação nasce com dono. Lojista, motoboy e SAC em pipes separados.
+        Motivo de perda vira dado: preço, cobertura, cutoff, concorrente. Isso é o que permite corrigir a oferta —
+        e o que deixa a mídia escalar sem virar bagunça.”
+      </p>
+    </article>
+
+    <article class="slide" id="s9">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 09 · Growth</div>
+          <h2>Lojista com volume, não curioso</h2>
+        </div>
+        <span class="slide-ref">Produto 02</span>
+      </div>
+      <p class="fala">
+        “Google de quem busca transportadora Flex agora. Meta para seller com operação em SP.
+        KPI não é lead: é lojista ativado — primeira coleta feita. O 15% do primeiro mês vira isca com critério, não o único argumento.”
+      </p>
+      <div class="evitar"><strong>Evitar:</strong> prometer encher a malha em 30 dias. Prometer demanda qualificada com leitura até ativação.</div>
+    </article>
+
+    <article class="slide" id="s10">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 10 · Rotinas</div>
+          <h2>Cadência</h2>
+        </div>
+        <span class="slide-ref">Cadência</span>
+      </div>
+      <p class="fala">
+        “Diário no tráfego e no SLA do lead. Semanal no pipeline se a EC estiver rodando.
+        Quinzenal de performance. Trimestral com vocês olhando occupancy e churn. Sem caixa-preta.”
+      </p>
+    </article>
+
+    <article class="slide" id="s11">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 11 · Investimento</div>
+          <h2>A, B ou A+B · até 05/09</h2>
+        </div>
+        <span class="slide-ref">Não abrir a call aqui</span>
+      </div>
+      <p class="fala">
+        “EC: R$ 10.141,57 à vista ou 12× de R$ 845,13, com CRM incluso. Growth: R$ 4.713,83 por mês, Account + tráfego + copy + design.
+        Independentes. Condição da EC até 5 de setembro.”
+      </p>
+      <div class="ask"><strong>Ask:</strong> “Faz sentido começar pela casa, pela demanda, ou pelas duas? Qual decisão vocês querem sair daqui com ela tomada?”</div>
+      <div class="evitar"><strong>Evitar:</strong> empilhar desconto. Se pedirem, voltar para escopo — não para preço.</div>
+    </article>
+
+    <article class="slide" id="s12">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 12 · Close</div>
+          <h2>Próximo passo</h2>
+        </div>
+        <span class="slide-ref">Data na agenda</span>
+      </div>
+      <p class="fala">
+        “Same day vocês já fazem. O próximo passo é formalizar A, B ou A+B e no onboarding cravar os números reais:
+        simulações/semana, tempo de resposta, ativação e saída de lojista. Aí a malha para de depender de feeling.”
+      </p>
+      <div class="ask"><strong>Fechar a call com:</strong> data de assinatura ou data de devolutiva. Não sair com “vamos pensar” sem prazo.</div>
+    </article>
+
+    <p class="footer-note">MBFlex Express × V4 · script interno · agosto/2026 · não enviar ao cliente</p>
+  </div>
+</body>
+</html>
