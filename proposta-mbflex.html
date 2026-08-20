@@ -815,59 +815,34 @@
     }
     .ctx-fact h3 { margin: 0 0 10px; font-size: 24px; }
     .ctx-fact p { margin: 0; color: rgba(255,255,255,.72); font-size: 17px; line-height: 1.35; }
-    .statement {
+    .leitura {
       margin-top: 24px;
-      padding: 28px 34px;
+      padding: 28px 32px;
       border-radius: 24px;
-      display: grid;
-      grid-template-columns: 1fr 280px;
-      gap: 36px;
-      align-items: center;
     }
-    .statement > *,
-    .ctx-fact > * { position: relative; z-index: 1; }
-    .statement .mark {
+    .leitura > *,
+    .leitura-grid > * { position: relative; z-index: 1; }
+    .leitura .mark {
       font: 700 12px/1 "IBM Plex Mono", monospace;
       letter-spacing: .12em;
       text-transform: uppercase;
       color: var(--v4-cream);
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
-    .statement blockquote {
-      margin: 0;
-      font-size: 34px;
-      font-weight: 600;
-      letter-spacing: -.035em;
-      line-height: 1.18;
+    .leitura h3 {
+      margin: 0 0 22px;
+      font-size: 28px;
+      letter-spacing: -.03em;
+      line-height: 1.2;
+      max-width: 1040px;
     }
-    .statement .turn {
-      margin: 14px 0 0;
-      color: rgba(255,255,255,.72);
-      font-size: 18px;
-      line-height: 1.4;
+    .leitura-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px 32px;
     }
-    .statement .who {
-      padding-left: 28px;
-      border-left: 1px solid rgba(255,255,255,.2);
-    }
-    .statement .who .name {
-      margin: 0;
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: -.02em;
-    }
-    .statement .who .role {
-      margin: 8px 0 0;
-      font: 700 12px/1.35 "IBM Plex Mono", monospace;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: var(--v4-cream);
-    }
-    .statement .who .co {
-      margin: 10px 0 0;
-      color: rgba(255,255,255,.7);
-      font-size: 16px;
-    }
+    .leitura-grid h4 { margin: 0 0 6px; font-size: 18px; }
+    .leitura-grid p { margin: 0; color: rgba(255,255,255,.72); font-size: 16px; line-height: 1.35; }
 
   </style>
 
@@ -929,16 +904,22 @@
             <p>200+ clientes no fim do ano. Perdeu um tubarão para quem tinha mais volume.</p>
           </article>
         </div>
-        <aside class="statement glass">
-          <div>
-            <div class="mark">A conta, na voz de quem decide</div>
-            <blockquote>“Preciso ser uma máquina de captar cliente.”</blockquote>
-            <p class="turn">Hoje essa máquina é a plataforma. Sem canal próprio, a frase não vira operação.</p>
-          </div>
-          <div class="who">
-            <p class="name">Márcio Beccari</p>
-            <p class="role">Sócio · Comercial</p>
-            <p class="co">MBFlex Express</p>
+        <aside class="leitura glass">
+          <div class="mark">Leitura estratégica</div>
+          <h3>A operação entrega. O comercial não escolhe o público.</h3>
+          <div class="leitura-grid">
+            <div>
+              <h4>Público na mão da plataforma</h4>
+              <p>Preço e homologação ditam quem entra. A MBFlex não escolhe o ICP — recebe o que o marketplace envia.</p>
+            </div>
+            <div>
+              <h4>Motoboy é 60/40 do P&amp;L</h4>
+              <p>7 mil pacotes/dia já recusou demanda. Volume errado esvazia a rua; volume certo segura o prestador.</p>
+            </div>
+            <div>
+              <h4>500 no mesmo jogo</h4>
+              <p>Sem origem de loja própria, a meta só aprofunda o mix 100/0. Diversificar o público é a decisão — não acelerar a indicação.</p>
+            </div>
           </div>
         </aside>
       </section>
