@@ -1,844 +1,1118 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MBFlex Express × V4 — Proposta Growth + Estruturação Comercial</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <title>MBFlex Express · Assessoria de Growth | V4 Company</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+
+
+
+
+
+
+
     :root {
-      --v4-red-deep: #a10f14;
-      --v4-red-mid: #c4181e;
-      --cream: #ffffff;
-      --muted: rgba(255,255,255,0.88);
-      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --v4-red: #e50914;
+      --v4-red-hover: #c40712;
+      --v4-orange: #ff481f;
+      --v4-flame: #f0141e;
+      --v4-dark: #280001;
+      --v4-darker: #280000;
+      --v4-grey: #e1dcdc;
+      --v4-white: #ffffff;
+      --v4-cream: #ffebc8;
+      --v4-salmon: #ffb4a0;
+      --ink: #141414;
+      --ink-soft: #5a5a5a;
+      --line: rgba(20, 20, 20, .12);
+      --radius: 22px;
+      --radius-pill: 999px;
+      --hero: radial-gradient(120% 130% at 50% -10%, #ff5a2c 0%, #e50914 30%, #b00610 62%, #280001 100%);
     }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; overflow: hidden; }
+
+    * { box-sizing: border-box; }
+
+    html,
     body {
-      font-family: "Plus Jakarta Sans", system-ui, sans-serif;
-      font-size: 1.05rem;
-      background: var(--v4-red-deep);
-      color: var(--cream);
-      line-height: 1.55;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: #171313;
+      color: var(--ink);
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
       -webkit-font-smoothing: antialiased;
+      text-rendering: geometricPrecision;
     }
-    .slide-logo { position: absolute; top: 1.25rem; left: 1.5rem; z-index: 10; }
-    .slide-logo svg { height: clamp(22px, 3.5vh, 30px); width: auto; display: block; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.35)); }
-    .blend-progress {
-      position: fixed; top: 0; left: 0; right: 0; height: 5px; z-index: 200;
-      background: linear-gradient(90deg, #fff, #ffd0d0);
-      transform-origin: left; transform: scaleX(var(--slide-progress, 0.08));
-      transition: transform 0.4s var(--ease);
-    }
-    .nav-dots {
-      position: fixed; right: 1rem; top: 50%; transform: translateY(-50%);
-      z-index: 100; display: flex; flex-direction: column; gap: 0.38rem;
-    }
-    .nav-dots a {
-      width: 8px; height: 8px; border-radius: 50%;
-      border: 2px solid rgba(255,255,255,0.45); background: transparent;
-      transition: all 0.3s var(--ease);
-    }
-    .nav-dots a:hover, .nav-dots a.active { background: #fff; border-color: #fff; transform: scale(1.2); }
-    .nav-arrow {
-      position: fixed; top: 50%; transform: translateY(-50%); z-index: 100;
-      width: 46px; height: 46px; border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.35); background: rgba(161,15,20,0.55);
-      color: white; cursor: pointer; display: flex; align-items: center; justify-content: center;
-      font-size: 1.5rem; line-height: 1;
-    }
-    .nav-arrow:hover:not(:disabled) { background: rgba(255,255,255,0.2); border-color: #fff; }
-    .nav-arrow:disabled { opacity: 0.25; cursor: default; }
-    .nav-arrow--prev { left: 1rem; }
-    .nav-arrow--next { right: 3rem; }
-    .deck { position: relative; width: 100vw; height: 100vh; overflow: hidden; }
-    section {
-      position: absolute; inset: 0; width: 100%; height: 100vh;
-      padding: clamp(2.5rem, 5vh, 3.5rem) clamp(1.25rem, 4vw, 3rem) 4.5rem;
-      display: flex; flex-direction: column; justify-content: center; align-items: center;
-      overflow-y: auto; opacity: 0; visibility: hidden; transform: translateX(60px);
-      transition: opacity 0.4s var(--ease), transform 0.4s var(--ease), visibility 0.4s; z-index: 0;
-    }
-    section.slide-active { opacity: 1; visibility: visible; transform: translateX(0); z-index: 2; }
-    section.slide-exit-left { transform: translateX(-60px); opacity: 0; }
-    section.slide-exit-right { transform: translateX(60px); opacity: 0; }
-    section::before {
-      content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+
+    button { font-family: inherit; }
+
+    #viewport {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
       background:
-        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(255, 74, 74, 0.45) 0%, transparent 55%),
-        radial-gradient(ellipse 70% 55% at 85% 90%, rgba(255, 42, 26, 0.35) 0%, transparent 50%),
-        radial-gradient(ellipse 100% 100% at 50% 50%, var(--v4-red-mid) 0%, var(--v4-red-deep) 70%, #6b080c 100%);
+        radial-gradient(circle at 50% 10%, rgba(229, 9, 20, .18), transparent 38%),
+        #171313;
     }
-    .inner { position: relative; z-index: 2; width: 100%; max-width: 980px; max-height: calc(100vh - 5rem); }
+
+    #deck {
+      --deck-scale: 1;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 1600px;
+      height: 900px;
+      overflow: hidden;
+      transform: translate(-50%, -50%) scale(var(--deck-scale));
+      transform-origin: center;
+      background: #f5f4f2;
+      box-shadow: 0 40px 120px rgba(0, 0, 0, .45);
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      width: 1600px;
+      height: 900px;
+      padding: 76px 96px 108px;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(24px);
+      transition: opacity .28s ease, transform .28s ease;
+      background:
+        radial-gradient(circle at 92% 8%, rgba(229, 9, 20, .055), transparent 24%),
+        #f5f4f2;
+    }
+
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(0);
+    }
+
+    .slide.red {
+      color: white;
+      background: var(--hero);
+    }
+
+    .slide.dark {
+      color: white;
+      background:
+        radial-gradient(circle at 78% 15%, rgba(229, 9, 20, .5), transparent 32%),
+        linear-gradient(145deg, #280001 0%, #130001 100%);
+    }
+
+    .slide.white { background: white; }
+
+    .topline {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--v4-red), var(--v4-orange), transparent 76%);
+    }
+
+    h1,
+    h2,
+    h3,
+    p { margin-top: 0; }
+
+    h1 {
+      margin-bottom: 24px;
+      font-size: 88px;
+      line-height: .98;
+      letter-spacing: -.055em;
+      font-weight: 600;
+    }
+
+    h2 {
+      margin-bottom: 18px;
+      font-size: 60px;
+      line-height: 1.02;
+      letter-spacing: -.045em;
+      font-weight: 600;
+    }
+
+    h3 {
+      margin-bottom: 10px;
+      font-size: 26px;
+      line-height: 1.1;
+      letter-spacing: -.025em;
+      font-weight: 600;
+    }
+
+    .lede {
+      max-width: 1000px;
+      color: var(--ink-soft);
+      font-size: 27px;
+      line-height: 1.42;
+      font-weight: 300;
+    }
+
+    .red .lede,
+    .dark .lede { color: rgba(255, 255, 255, .72); }
+
+    .accent { color: var(--v4-red); }
+    .red .accent,
+    .dark .accent { color: var(--v4-cream); }
+
+    .mono { font-family: "IBM Plex Mono", monospace; }
+
     .eyebrow {
-      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.16em;
-      text-transform: uppercase; color: #ffe0e0; margin-bottom: 0.5rem;
-    }
-    h1, h2, h3 { font-family: Outfit, sans-serif; font-weight: 700; line-height: 1.12; letter-spacing: -0.02em; color: #fff; }
-    h2 { font-size: clamp(1.55rem, 3.8vh, 2.35rem); margin-bottom: 0.5rem; }
-    .gold-line { width: 64px; height: 4px; background: linear-gradient(90deg, #fff, #ffd0d0); border-radius: 2px; margin: 0.5rem 0 0.9rem; }
-    .lead { font-size: clamp(0.95rem, 1.7vh, 1.1rem); color: var(--muted); max-width: 760px; line-height: 1.5; }
-    .glass {
-      background: rgba(255, 255, 255, 0.14);
-      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-      border: 1px solid rgba(255,255,255,0.28); border-radius: 22px;
-      padding: clamp(1.1rem, 2.5vh, 1.75rem) clamp(1.2rem, 3vw, 1.85rem);
-      box-shadow: 0 12px 40px rgba(80, 0, 0, 0.25);
-    }
-    #capa .inner { text-align: center; }
-    .capa-partnership {
-      display: flex; align-items: center; justify-content: center; gap: 0.75rem;
-      margin: 1rem 0 0.65rem; font-size: 1rem; color: var(--muted);
-    }
-    .capa-partnership .x { opacity: 0.5; }
-    #capa h1 { font-size: clamp(2rem, 6vh, 3.3rem); margin-bottom: 0.75rem; }
-    #capa h1 em { font-style: normal; color: #ffe8e8; }
-    .capa-badge {
-      display: inline-block; padding: 0.45rem 1rem; border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.45); font-size: 0.8rem; font-weight: 600;
-      letter-spacing: 0.06em; text-transform: uppercase; background: rgba(255,255,255,0.12);
-    }
-    .slide-hint { margin-top: 1.75rem; font-size: 0.85rem; color: rgba(255,255,255,0.5); }
-    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.65rem; margin-top: 0.85rem; }
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; margin-top: 0.85rem; }
-    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.55rem; margin-top: 0.85rem; }
-    .card {
-      background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.22);
-      border-radius: 14px; padding: 0.85rem 1rem;
-    }
-    .card-num { font-family: Outfit; font-size: 0.8rem; font-weight: 800; color: #ffe0e0; margin-bottom: 0.3rem; }
-    .card h3 { font-size: 0.98rem; margin-bottom: 0.3rem; }
-    .card p, .card li { font-size: 0.86rem; color: var(--muted); line-height: 1.45; }
-    .card ul { list-style: none; margin-top: 0.35rem; }
-    .card ul li { padding-left: 0.9rem; position: relative; margin-bottom: 0.2rem; }
-    .card ul li::before { content: "·"; position: absolute; left: 0; color: #fff; font-weight: 700; }
-    .tag-16h {
-      display: inline-block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em;
-      text-transform: uppercase; padding: 0.2rem 0.5rem; border-radius: 6px;
-      background: rgba(255,255,255,0.2); color: #fff; margin-bottom: 0.35rem;
-    }
-    .kpi-num {
-      font-family: Outfit; font-size: clamp(1.35rem, 3vh, 1.85rem); font-weight: 800;
-      line-height: 1; color: #fff; margin: 0.15rem 0 0.35rem;
-    }
-    .flow-row { display: flex; align-items: stretch; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap; }
-    .flow-step {
-      flex: 1; min-width: 110px; text-align: center; padding: 0.7rem 0.45rem;
-      background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.22); border-radius: 12px;
-    }
-    .flow-step .icon { font-family: Outfit; font-size: 1.15rem; font-weight: 800; margin-bottom: 0.25rem; }
-    .flow-step strong { display: block; font-size: 0.86rem; margin-bottom: 0.2rem; }
-    .flow-step span { font-size: 0.76rem; color: var(--muted); }
-    .flow-arrow { align-self: center; color: rgba(255,255,255,0.45); }
-    .plans { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; margin-top: 0.85rem; }
-    .plan {
-      border-radius: 16px; padding: 1rem 1.1rem;
-      border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.34);
-    }
-    .plan.featured { border-color: #fff; background: rgba(0,0,0,0.48); box-shadow: 0 8px 32px rgba(0,0,0,0.35); }
-    .plan-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #ffe8e8; margin-bottom: 0.35rem; }
-    .plan h3 { font-size: 1.05rem; margin-bottom: 0.15rem; }
-    .plan-sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.5rem; }
-    .plan-price { font-family: Outfit; font-size: 1.85rem; font-weight: 800; line-height: 1; color: #fff; }
-    .plan-price small { font-size: 0.85rem; font-weight: 600; color: var(--muted); }
-    .plan-discount { font-size: 0.82rem; color: #ffe0e0; margin-top: 0.25rem; font-weight: 600; }
-    .plan ul { list-style: none; margin-top: 0.55rem; }
-    .plan ul li { font-size: 0.84rem; color: var(--muted); padding: 0.15rem 0 0.15rem 0.9rem; position: relative; }
-    .plan ul li::before { content: "·"; position: absolute; left: 0; color: #fff; font-weight: 700; }
-    .price-lines { margin: 0.4rem 0 0.55rem; }
-    .price-line {
-      display: flex; justify-content: space-between; gap: 0.75rem;
-      font-size: 0.8rem; color: var(--muted); padding: 0.2rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-    .price-line:last-child { border-bottom: none; }
-    .price-line strong { color: #fff; font-weight: 700; }
-    .price-line .ok { color: #b7f7d0; }
-    .cta-box {
-      margin-top: 0.75rem; padding: 0.9rem 1.1rem; border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.35); background: rgba(255,255,255,0.14);
-    }
-    .cta-box h3 { font-size: 1rem; margin-bottom: 0.35rem; }
-    .cta-box p { font-size: 0.86rem; color: var(--muted); }
-    .quote {
-      margin: 0.75rem 0 0;
-      padding-left: 0.9rem;
-      border-left: 3px solid rgba(255,255,255,0.55);
-      font-size: 1.02rem;
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 7px 15px;
+      border: 1px solid rgba(229, 9, 20, .18);
+      border-radius: var(--radius-pill);
+      color: var(--v4-red);
+      background: rgba(229, 9, 20, .07);
+      font-size: 12px;
+      line-height: 1;
       font-weight: 700;
-      color: #fff;
-      line-height: 1.35;
+      letter-spacing: .09em;
+      text-transform: uppercase;
     }
-    .quote span {
-      display: block; margin-top: 0.35rem; font-size: 0.72rem; font-weight: 700;
-      letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.65);
+
+    .red .eyebrow,
+    .dark .eyebrow {
+      color: rgba(255, 255, 255, .92);
+      background: rgba(255, 255, 255, .06);
+      border-color: rgba(255, 255, 255, .35);
+      box-shadow:
+        inset 0 0 80px rgba(255, 255, 255, .12),
+        inset 0 1px 8px rgba(255, 255, 255, .35),
+        -5px 5px 20px rgba(0, 0, 0, .10);
+      backdrop-filter: blur(14px) saturate(140%);
     }
-    .bonus-box {
-      margin-top: 0.7rem; padding: 0.8rem 1rem; border-radius: 12px;
-      border: 1px solid rgba(183,247,208,0.35); background: rgba(52,211,153,0.14);
+
+    .card {
+      position: relative;
+      padding: 28px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: white;
     }
-    .bonus-box strong {
-      display: block; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
-      color: #b7f7d0; margin-bottom: 0.3rem;
+
+    .glass {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .35);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, .06);
+      box-shadow:
+        inset 0 0 150px rgba(255, 255, 255, .13),
+        inset 0 1px 10px rgba(255, 255, 255, .38),
+        inset 0 -2px 10px rgba(255, 255, 255, .22),
+        inset 0 0 100px rgba(255, 255, 255, .08),
+        -5px 5px 20px rgba(0, 0, 0, .10);
+      backdrop-filter: blur(14px) saturate(140%);
     }
-    .bonus-box p { font-size: 0.86rem; color: #e8fff2; }
-    .independence-note {
-      margin-top: 0.75rem; padding: 0.75rem 1rem; border-radius: 12px;
-      border: 1px dashed rgba(255,255,255,0.4); background: rgba(255,255,255,0.08);
-      font-size: 0.86rem; color: #ffe8e8; font-weight: 600; text-align: center;
+
+    .glass::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      background:
+        radial-gradient(120% 90% at 50% 115%, rgba(255, 170, 80, .34), transparent 55%),
+        linear-gradient(180deg, rgba(255, 255, 255, .22), transparent 40%);
+      mix-blend-mode: screen;
     }
-    .compare-table {
-      width: 100%; border-collapse: collapse; margin-top: 0.75rem; font-size: 0.84rem;
+
+    .sphere {
+      position: absolute;
+      border: 1px solid rgba(255, 255, 255, .24);
+      border-radius: 50%;
+      pointer-events: none;
+      background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, .38), rgba(255, 255, 255, .045) 48%, transparent 66%);
+      box-shadow:
+        inset 0 0 120px rgba(255, 255, 255, .13),
+        inset 25px 18px 70px rgba(255, 160, 70, .28);
+      backdrop-filter: blur(3px);
     }
-    .compare-table th, .compare-table td {
-      padding: 0.45rem 0.55rem; border-bottom: 1px solid rgba(255,255,255,0.12);
-      text-align: left; color: var(--muted);
+
+    .icon {
+      width: 30px;
+      height: 30px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
-    .compare-table th {
-      font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
-      color: #ffe0e0; font-weight: 700;
+
+    .icon-box {
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      border: 1px solid rgba(229, 9, 20, .18);
+      border-radius: 17px;
+      color: var(--v4-red);
+      background: rgba(229, 9, 20, .07);
     }
-    .compare-table td:last-child, .compare-table th:last-child { text-align: right; white-space: nowrap; }
-    .compare-table tr.total td { color: #fff; font-weight: 700; border-bottom: none; padding-top: 0.65rem; }
-    .ritual-table {
-      width: 100%; border-collapse: collapse; margin-top: 0.75rem; font-size: 0.84rem;
+
+    .red .icon-box,
+    .dark .icon-box {
+      color: white;
+      border-color: rgba(255, 255, 255, .28);
+      background: rgba(255, 255, 255, .08);
     }
-    .ritual-table th, .ritual-table td {
-      padding: 0.5rem 0.55rem; border-bottom: 1px solid rgba(255,255,255,0.12);
-      text-align: left; color: var(--muted); vertical-align: top;
+
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+
+    .big-number {
+      color: var(--v4-red);
+      font-size: 72px;
+      line-height: 1;
+      letter-spacing: -.06em;
+      font-weight: 700;
     }
-    .ritual-table th {
-      font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
-      color: #ffe0e0; font-weight: 700;
+
+    .metric-label {
+      margin-top: 8px;
+      color: var(--ink-soft);
+      font-size: 16px;
+      line-height: 1.2;
     }
-    .ritual-table td:first-child { color: #fff; font-weight: 700; white-space: nowrap; }
-    .source-note {
-      margin-top: 0.7rem; font-size: 0.72rem; color: rgba(255,255,255,0.55); font-weight: 600;
-      letter-spacing: 0.04em;
+
+    .bullet-list {
+      display: grid;
+      gap: 16px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
     }
-    .deck-footer {
-      position: fixed; bottom: 0; left: 0; right: 0; z-index: 150;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0.65rem 1.25rem; background: rgba(107, 8, 12, 0.85);
-      border-top: 1px solid rgba(255,255,255,0.15); font-size: 0.8rem; color: rgba(255,255,255,0.75);
+
+    .bullet-list li {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      min-height: 76px;
+      padding: 14px 18px;
+      border: 1px solid rgba(20, 20, 20, .08);
+      border-radius: 17px;
+      background: rgba(255, 255, 255, .74);
+      font-size: 21px;
+      line-height: 1.2;
     }
-    .progress-wrap { flex: 1; max-width: 220px; height: 4px; background: rgba(255,255,255,0.2); border-radius: 2px; margin: 0 1rem; }
-    .progress-fill { height: 100%; background: #fff; border-radius: 2px; width: 8%; transition: width 0.4s var(--ease); }
-    @keyframes rise-in {
-      from { opacity: 0; transform: translateY(14px); }
-      to { opacity: 1; transform: translateY(0); }
+
+    .hub-layout {
+      position: relative;
+      height: 540px;
+      isolation: isolate;
     }
-    section.slide-active .inner > * { animation: rise-in 0.55s var(--ease) both; }
-    section.slide-active .inner > *:nth-child(2) { animation-delay: 0.06s; }
-    section.slide-active .inner > *:nth-child(3) { animation-delay: 0.12s; }
-    section.slide-active .inner > *:nth-child(4) { animation-delay: 0.18s; }
-    section.slide-active .card, section.slide-active .flow-step {
-      transition: transform 0.35s var(--ease), background 0.35s var(--ease);
+
+    .hub-line {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 420px;
+      height: 420px;
+      border: 1px dashed rgba(229, 9, 20, .26);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
     }
-    section.slide-active .card:hover, section.slide-active .flow-step:hover {
-      transform: translateY(-3px); background: rgba(255,255,255,0.22);
+
+    .hub {
+      position: absolute;
+      z-index: 3;
+      left: 50%;
+      top: 50%;
+      width: 240px;
+      height: 240px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: white;
+      background: var(--hero);
+      box-shadow: 0 30px 80px rgba(229, 9, 20, .3);
+      transform: translate(-50%, -50%);
+      text-align: center;
     }
-    @media (max-width: 760px) {
-      .grid-3, .grid-2, .grid-4, .plans { grid-template-columns: 1fr; }
-      .nav-arrow--next { right: 1rem; }
-      .flow-arrow { display: none; }
-      .slide-logo { left: 1rem; top: 1rem; }
-      .ritual-table td:first-child { white-space: normal; }
+
+    .hub-node {
+      position: absolute;
+      z-index: 2;
+      width: 240px;
+      min-height: 110px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 18px;
+      animation: node-float 5.2s ease-in-out infinite;
+      will-change: transform;
     }
+
+    .node-nw { left: 65px; top: 38px; animation-delay: -.6s; }
+    .node-ne { right: 65px; top: 38px; animation-delay: -1.8s; }
+    .node-sw { left: 65px; bottom: 38px; animation-delay: -2.8s; }
+    .node-se { right: 65px; bottom: 38px; animation-delay: -3.8s; }
+
+    .cover-content {
+      position: relative;
+      z-index: 3;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+    }
+
+    .brand-lockup img {
+      width: 330px;
+      display: block;
+      object-fit: contain;
+    }
+
+    .cover-title {
+      max-width: 1100px;
+      margin: 28px 0 0;
+      font-size: 92px;
+    }
+
+    .slide-footer {
+      position: absolute;
+      z-index: 8;
+      left: 96px;
+      right: 96px;
+      bottom: 32px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      pointer-events: none;
+    }
+
+    .slide-footer img {
+      width: 155px;
+      height: 48px;
+      object-fit: contain;
+      object-position: left center;
+    }
+
+    .navigation {
+      position: absolute;
+      z-index: 20;
+      right: 52px;
+      bottom: 25px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-btn {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(20, 20, 20, .12);
+      border-radius: 50%;
+      color: var(--ink);
+      background: rgba(255, 255, 255, .92);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .12);
+      cursor: pointer;
+      transition: transform .15s ease, background .15s ease, opacity .15s ease;
+    }
+
+    .nav-btn:hover { transform: translateY(-2px); background: white; }
+    .nav-btn:disabled { opacity: .3; cursor: default; transform: none; }
+
+    .progress-track {
+      position: absolute;
+      z-index: 21;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 7px;
+      background: rgba(20, 20, 20, .1);
+    }
+
+    .progress-fill {
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--v4-red), var(--v4-orange));
+      box-shadow: 0 0 20px rgba(229, 9, 20, .35);
+      transition: width .3s ease;
+    }
+
+    .slide-counter {
+      position: absolute;
+      z-index: 22;
+      right: 176px;
+      bottom: 39px;
+      color: rgba(20, 20, 20, .52);
+      font: 500 12px/1 "IBM Plex Mono", monospace;
+      letter-spacing: .04em;
+    }
+
+
+    /* Deck-renderer applied layouts */
+    .profile-grid{display:grid;grid-template-columns:1fr 430px;gap:84px;align-items:center;margin-top:44px}.profile-photo{height:560px;border-radius:28px;overflow:hidden;border:1px solid rgba(20,20,20,.12);background:#280001}.profile-photo img{width:100%;height:100%;object-fit:cover;object-position:center top}.badge-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}.badge{display:inline-flex;align-items:center;min-height:34px;padding:8px 14px;border-radius:999px;color:var(--v4-red);background:rgba(229,9,20,.07);border:1px solid rgba(229,9,20,.18);font:700 12px/1 "IBM Plex Mono",monospace;letter-spacing:.08em;text-transform:uppercase}.metric-wall{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:50px}.metric-wall.four{grid-template-columns:repeat(4,1fr)}.metric-card{min-height:270px;padding:32px;border-radius:24px}.metric-card p{margin:0;color:var(--ink-soft);font-size:20px;line-height:1.32}.dark .metric-card p,.red .metric-card p{color:rgba(255,255,255,.72)}.source{position:absolute;left:96px;bottom:86px;max-width:1020px;color:rgba(20,20,20,.44);font:500 11px/1.25 "IBM Plex Mono",monospace}.dark .source,.red .source{color:rgba(255,255,255,.42)}.diagnosis-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:28px;margin-top:44px}.stack{display:grid;gap:16px}.line-card{display:grid;grid-template-columns:58px 1fr;gap:18px;align-items:center;min-height:104px;padding:18px 22px;border-radius:20px;background:rgba(255,255,255,.78);border:1px solid var(--line)}.dark .line-card{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.16)}.line-card h3{margin:0 0 5px;font-size:25px}.line-card p{margin:0;color:var(--ink-soft);font-size:18px;line-height:1.32}.dark .line-card p{color:rgba(255,255,255,.72)}.quote{margin-top:42px;padding-left:26px;border-left:6px solid var(--v4-red);max-width:1040px;font-size:31px;line-height:1.2;font-weight:600}.dark .quote,.red .quote{border-color:var(--v4-cream)}.table-layout{display:grid;grid-template-columns:1fr 315px;gap:40px;margin-top:42px}.table{width:100%;border-collapse:collapse}.table th{padding:16px 14px;border-bottom:1px solid var(--line);color:var(--v4-red);text-align:left;font:700 12px/1.15 "IBM Plex Mono",monospace;letter-spacing:.08em;text-transform:uppercase}.table td{padding:18px 14px;border-bottom:1px solid var(--line);color:var(--ink-soft);font-size:20px;line-height:1.26}.table tr:nth-child(even) td{background:rgba(229,9,20,.055)}.side-metric{padding-bottom:22px;border-bottom:1px solid var(--line)}.side-metric .big-number{font-size:66px}.side-metric p{margin:8px 0 0;color:var(--ink-soft);font-size:18px;line-height:1.3}.bowtie-card{margin-top:30px;width:1180px;height:390px;padding:18px;border-radius:22px;border:1px solid var(--line);background:white}.process{display:flex;align-items:stretch;gap:10px;margin-top:46px}.stage{flex:1;min-height:136px;padding:22px 18px;border-radius:19px;background:white;border:1px solid var(--line)}.dark .stage{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.18)}.stage h3{font-size:21px;margin-bottom:9px}.stage p{margin:0;color:var(--ink-soft);font-size:16px;line-height:1.25}.dark .stage p{color:rgba(255,255,255,.72)}.arrow{display:grid;place-items:center;color:var(--v4-red);font-size:30px;font-weight:700}.funnel-area{display:grid;grid-template-columns:860px 1fr;gap:52px;align-items:center;margin-top:28px}.funnel{display:flex;flex-direction:column;align-items:center;gap:9px}.funnel-step{height:58px;display:flex;align-items:center;justify-content:center;color:white;background:linear-gradient(90deg,var(--v4-red),var(--v4-dark));border-radius:8px;font-weight:600}.funnel-step strong{font-size:25px;margin-right:10px}.funnel-step span{font-size:20px;color:rgba(255,255,255,.82)}.funnel-note{font-size:26px;line-height:1.35;color:var(--ink-soft)}.check-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px 34px;margin-top:44px}.check-card{display:grid;grid-template-columns:58px 1fr;gap:18px;align-items:center;min-height:88px;padding:18px;border-radius:20px;background:white;border:1px solid var(--line)}.check-card h3{font-size:23px;margin:0}
+    .bowtie-image-stage{position:absolute;left:96px;right:96px;top:204px;bottom:76px;display:flex;align-items:center;justify-content:center;overflow:hidden}.bowtie-image-stage img{width:auto;height:100%;max-width:100%;max-height:100%;object-fit:contain;display:block;border-radius:18px;border:1px solid var(--line);background:white;box-shadow:0 22px 70px rgba(20,20,20,.12)}.diagram-slide .eyebrow{position:relative;z-index:3}.diagram-slide h2{position:relative;z-index:3;font-size:48px;max-width:920px;margin-top:24px}.diagram-slide .source{left:320px;right:320px;bottom:38px;max-width:none;text-align:center}
+    @keyframes node-float {
+      0%, 100% { transform: var(--node-base, translate(0, 0)) translateY(0) rotate(0deg); }
+      25% { transform: var(--node-base, translate(0, 0)) translateY(-9px) rotate(-1.5deg); }
+      50% { transform: var(--node-base, translate(0, 0)) translateY(3px) rotate(1deg); }
+      75% { transform: var(--node-base, translate(0, 0)) translateY(-5px) rotate(.5deg); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  
+
+    /* G6 customizations */
+    .brand-lockup { display:flex; align-items:center; gap:18px; }
+    .brand-lockup img { height:42px; width:auto; object-fit:contain; }
+    .brand-lockup .x { opacity:.55; font-weight:600; font-size:22px; }
+    .partner-pill {
+      display:inline-flex; align-items:center; gap:10px;
+      padding:10px 16px; border-radius:999px;
+      background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.22);
+      font:600 14px/1 "IBM Plex Mono", monospace; letter-spacing:.06em; text-transform:uppercase;
+    }
+    .partner-pill img { height:22px; width:auto; background:#fff; border-radius:6px; padding:2px 6px; }
+    .split-2 { display:grid; grid-template-columns:1fr 1fr; gap:28px; margin-top:40px; }
+    .split-card { padding:28px 30px; border-radius:24px; border:1px solid var(--line); background:white; min-height:360px; }
+    .dark .split-card { background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.16); }
+    .split-card h3 { margin:0 0 18px; font-size:28px; }
+    .split-card ul { margin:0; padding-left:20px; color:var(--ink-soft); font-size:20px; line-height:1.45; }
+    .dark .split-card ul,
+    .red .split-card ul { color:rgba(255,255,255,.75); }
+    .red .split-card { background:rgba(255,255,255,.1); border-color:rgba(255,255,255,.22); }
+    .split-card li { margin:10px 0; }
+    .split-card.ok { border-color:rgba(229,9,20,.25); }
+    .split-card.gap { background:linear-gradient(180deg, rgba(229,9,20,.06), white); }
+    .dark .split-card.gap { background:rgba(229,9,20,.16); }
+    .phase-rail {
+      display:grid; grid-template-columns:repeat(6,1fr); gap:12px; margin-top:40px;
+    }
+    .phase {
+      min-height:280px; padding:20px 16px; border-radius:20px;
+      background:white; border:1px solid var(--line);
+    }
+    .dark .phase { background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.16); }
+    .phase .n {
+      font:700 12px/1 "IBM Plex Mono", monospace; letter-spacing:.1em;
+      text-transform:uppercase; color:var(--v4-red); margin-bottom:12px;
+    }
+    .dark .phase .n { color:var(--v4-cream); }
+    .phase h3 { margin:0 0 10px; font-size:20px; line-height:1.2; }
+    .phase p { margin:0; color:var(--ink-soft); font-size:15px; line-height:1.35; }
+    .dark .phase p { color:rgba(255,255,255,.72); }
+    .price-hero {
+      display:grid; grid-template-columns:1.1fr .9fr; gap:36px; margin-top:36px; align-items:stretch;
+    }
+    .price-box {
+      padding:36px 40px; border-radius:28px; background:white; border:1px solid var(--line);
+      min-height:340px; display:flex; flex-direction:column; justify-content:center;
+    }
+    .price-box .tag {
+      font:700 12px/1 "IBM Plex Mono", monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--v4-red);
+    }
+    .price-box .amount { font-size:96px; font-weight:700; letter-spacing:-.04em; margin:12px 0 8px; line-height:1; }
+    .price-box .amount span { font-size:36px; vertical-align:super; margin-right:4px; }
+    .price-box p { margin:0; color:var(--ink-soft); font-size:22px; line-height:1.35; max-width:420px; }
+    .clock-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:44px; }
+    .clock-card {
+      min-height:300px; padding:30px; border-radius:24px;
+      background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.16);
+    }
+    .clock-card .big-number { font-size:54px; margin:18px 0 12px; }
+    .clock-card h3 { margin:0 0 10px; font-size:26px; }
+    .clock-card p { margin:0; color:rgba(255,255,255,.72); font-size:19px; line-height:1.35; }
+    .success-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px 24px; margin-top:36px; }
+    .success-item {
+      display:grid; grid-template-columns:48px 1fr; gap:14px; align-items:center;
+      padding:16px 18px; border-radius:18px; background:white; border:1px solid var(--line);
+    }
+    .success-item h3 { margin:0; font-size:20px; }
+    .dark .success-item { background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.16); }
+    .cta-steps { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:48px; }
+    .cta-step {
+      padding:28px; border-radius:22px; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.18);
+    }
+    .cta-step .n { font:700 12px/1 "IBM Plex Mono", monospace; letter-spacing:.1em; color:var(--v4-cream); }
+    .cta-step h3 { margin:14px 0 8px; font-size:26px; }
+    .cta-step p { margin:0; color:rgba(255,255,255,.75); font-size:18px; line-height:1.35; }
+    .lede-tight { max-width:1080px; }
+    .mini-note {
+      margin-top:28px; font:500 14px/1.4 "IBM Plex Mono", monospace; color:rgba(20,20,20,.45);
+    }
+    .dark .mini-note, .red .mini-note { color:rgba(255,255,255,.45); }
+    .compare-side .side-metric:last-child { border-bottom:0; }
+    .cover-client {
+      display:flex; align-items:center; gap:14px; margin-top:28px;
+      color:rgba(255,255,255,.85); font-size:18px;
+    }
+    .cover-client img {
+      height:44px; width:auto; background:#fff; border-radius:10px; padding:6px 10px;
+    }
+
+  
+    .hours-table { width:100%; border-collapse:collapse; margin-top:22px; font-size:15px; }
+    .hours-table th {
+      padding:10px 10px; border-bottom:1px solid var(--line); color:var(--v4-red);
+      text-align:left; font:700 11px/1.15 "IBM Plex Mono",monospace; letter-spacing:.08em; text-transform:uppercase;
+    }
+    .hours-table td {
+      padding:8px 10px; border-bottom:1px solid var(--line); color:var(--ink-soft); font-size:15px; line-height:1.25;
+    }
+    .hours-table tr:nth-child(even) td { background:rgba(229,9,20,.04); }
+    .hours-table td.num, .hours-table th.num { text-align:right; white-space:nowrap; font-variant-numeric:tabular-nums; }
+    .hours-table tr.subtotal td { color:var(--ink); font-weight:600; background:rgba(229,9,20,.08); }
+    .hours-table tr.total td { color:var(--ink); font-weight:700; background:rgba(229,9,20,.12); }
+    .map-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px 22px; margin-top:32px; }
+    .map-item {
+      display:grid; grid-template-columns:10px 1fr; gap:14px; padding:16px 18px;
+      border-radius:18px; background:white; border:1px solid var(--line);
+    }
+    .map-item .dot { width:10px; height:10px; border-radius:50%; background:var(--v4-red); margin-top:8px; }
+    .map-item h3 { margin:0 0 4px; font-size:18px; }
+    .map-item p { margin:0; color:var(--ink-soft); font-size:15px; line-height:1.35; }
+    .map-item .g6 { color:var(--v4-red); font:700 11px/1 "IBM Plex Mono",monospace; letter-spacing:.06em; text-transform:uppercase; margin-bottom:6px; }
+    .format-row { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:40px; }
+    .format-card {
+      min-height:200px; padding:26px; border-radius:22px; background:white; border:1px solid var(--line);
+    }
+    .dark .format-card { background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.16); }
+    .format-card .k { font:700 12px/1 "IBM Plex Mono",monospace; letter-spacing:.08em; text-transform:uppercase; color:var(--v4-red); }
+    .dark .format-card .k { color:var(--v4-cream); }
+    .format-card h3 { margin:14px 0 8px; font-size:28px; }
+    .format-card p { margin:0; color:var(--ink-soft); font-size:18px; line-height:1.35; }
+    .dark .format-card p { color:rgba(255,255,255,.72); }
+    .phase-detail { display:grid; grid-template-columns:280px 1fr; gap:36px; margin-top:28px; align-items:start; }
+    .phase-side {
+      padding:28px; border-radius:24px; background:rgba(229,9,20,.06); border:1px solid rgba(229,9,20,.15);
+      min-height:420px;
+    }
+    .dark .phase-side { background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.16); }
+    .phase-side .n { font:700 12px/1 "IBM Plex Mono",monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--v4-red); }
+    .dark .phase-side .n { color:var(--v4-cream); }
+    .phase-side h3 { margin:14px 0 12px; font-size:34px; line-height:1.15; }
+    .phase-side .hours { font-size:48px; font-weight:700; letter-spacing:-.03em; margin:18px 0 6px; }
+    .phase-side p { margin:0; color:var(--ink-soft); font-size:17px; line-height:1.35; }
+    .dark .phase-side p { color:rgba(255,255,255,.72); }
+    .phase-body h4 { margin:0 0 12px; font-size:18px; color:var(--v4-red); font:700 12px/1 "IBM Plex Mono",monospace; letter-spacing:.08em; text-transform:uppercase; }
+    .dark .phase-body h4 { color:var(--v4-cream); }
+    .phase-body ul { margin:0 0 22px; padding-left:18px; color:var(--ink-soft); font-size:18px; line-height:1.4; }
+    .dark .phase-body ul { color:rgba(255,255,255,.75); }
+    .phase-body li { margin:7px 0; }
+    .phase-body .fit {
+      padding:16px 18px; border-radius:16px; border-left:5px solid var(--v4-red);
+      background:rgba(229,9,20,.05); font-size:18px; line-height:1.35; color:var(--ink);
+    }
+    .dark .phase-body .fit { background:rgba(255,255,255,.06); color:rgba(255,255,255,.88); border-color:var(--v4-cream); }
+    .two-col-hours { display:grid; grid-template-columns:1fr 1fr; gap:28px; margin-top:18px; align-items:start; }
+    .compact-lede { font-size:22px; line-height:1.35; max-width:1100px; color:var(--ink-soft); }
+    .dark .compact-lede, .red .compact-lede { color:rgba(255,255,255,.78); }
+
+  
+  
+  
+  
+    .leak-grid { display:grid; grid-template-columns:1fr 1fr; gap:22px; margin-top:28px; }
+    .leak-card {
+      padding:28px 30px; border-radius:24px; background:white; border:1px solid var(--line); min-height:360px;
+    }
+    .dark .leak-card { background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.16); }
+    .leak-card .k {
+      font:700 12px/1 "IBM Plex Mono",monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--v4-red);
+    }
+    .leak-card .num { font-size:84px; font-weight:700; letter-spacing:-.04em; color:var(--v4-red); margin:10px 0 6px; line-height:1; }
+    .leak-card .cap { margin:0 0 16px; color:var(--ink-soft); font-size:17px; line-height:1.35; }
+    .leak-card ul { margin:0; padding-left:18px; color:var(--ink-soft); font-size:17px; line-height:1.4; }
+    .leak-card li { margin:8px 0; }
+    .bars { display:flex; align-items:flex-end; gap:10px; height:150px; margin-top:18px; }
+    .bar-col { flex:1; display:flex; flex-direction:column; align-items:center; gap:6px; height:100%; justify-content:flex-end; }
+    .bar {
+      width:100%; border-radius:8px 8px 4px 4px;
+      background:linear-gradient(180deg, #ff5a2c 0%, #e50914 70%, #280001 100%);
+      min-height:8px;
+    }
+    .bar-col span { font:600 12px/1 "IBM Plex Mono",monospace; color:var(--ink-soft); }
+    .bar-col strong { font:700 13px/1 "IBM Plex Sans",sans-serif; color:var(--ink); }
+    .leak-banner {
+      margin-top:22px; padding:22px 26px; border-radius:20px;
+      background:linear-gradient(135deg, #e50914, #280001); color:white;
+      display:grid; grid-template-columns:58px 1fr; gap:18px; align-items:start;
+    }
+    .leak-banner h3 { margin:0 0 8px; font-size:22px; }
+    .leak-banner p { margin:0; color:rgba(255,255,255,.82); font-size:16px; line-height:1.4; }
+    .price-layout {
+      display:grid; grid-template-columns:1.15fr .85fr; gap:28px; margin-top:32px; align-items:stretch;
+    }
+    .price-main {
+      padding:40px 42px; border-radius:28px;
+      background:linear-gradient(145deg, #280001 0%, #e50914 100%); color:white;
+      min-height:420px; display:flex; flex-direction:column; justify-content:center;
+    }
+    .price-main .was {
+      font:700 14px/1 "IBM Plex Mono",monospace; letter-spacing:.08em; text-transform:uppercase;
+      color:rgba(255,255,255,.7); margin-bottom:10px;
+    }
+    .price-main .ref {
+      font-size:34px; font-weight:600; text-decoration:line-through; opacity:.55; margin-bottom:8px;
+    }
+    .price-main .now-label {
+      font:700 12px/1 "IBM Plex Mono",monospace; letter-spacing:.1em; text-transform:uppercase;
+      color:var(--v4-cream); margin:18px 0 8px;
+    }
+    .price-main .now {
+      font-size:78px; font-weight:700; letter-spacing:-.04em; line-height:1; margin:0 0 16px;
+    }
+    .price-main .now small { font-size:34px; }
+    .price-main p { margin:0; color:rgba(255,255,255,.8); font-size:20px; line-height:1.35; max-width:460px; }
+    .price-side { display:grid; gap:16px; }
+    .price-side .box {
+      padding:24px 26px; border-radius:22px; background:white; border:1px solid var(--line);
+    }
+    .price-side .box h3 { margin:0 0 8px; font-size:22px; }
+    .price-side .box p { margin:0; color:var(--ink-soft); font-size:17px; line-height:1.4; }
+    .price-side .box .tag {
+      font:700 11px/1 "IBM Plex Mono",monospace; letter-spacing:.08em; text-transform:uppercase;
+      color:var(--v4-red); margin-bottom:10px;
+    }
+
+  
+    .leak-grid { display:grid; grid-template-columns:1fr 1fr; gap:22px; margin-top:24px; }
+    .leak-card { padding:28px 30px; border-radius:24px; background:white; border:1px solid var(--line); min-height:340px; }
+    .leak-card .k { font:700 12px/1 "IBM Plex Mono",monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--v4-red); }
+    .leak-card .num { font-size:84px; font-weight:700; letter-spacing:-.04em; color:var(--v4-red); margin:10px 0 6px; line-height:1; }
+    .leak-card .cap { margin:0 0 16px; color:var(--ink-soft); font-size:17px; line-height:1.35; }
+    .leak-card ul { margin:0; padding-left:18px; color:var(--ink-soft); font-size:17px; line-height:1.4; }
+    .leak-card li { margin:8px 0; }
+    .bars { display:flex; align-items:flex-end; gap:10px; height:150px; margin-top:18px; }
+    .bar-col { flex:1; display:flex; flex-direction:column; align-items:center; gap:6px; height:100%; justify-content:flex-end; }
+    .bar { width:100%; border-radius:8px 8px 4px 4px; background:linear-gradient(180deg, #ff5a2c 0%, #e50914 70%, #280001 100%); min-height:8px; }
+    .bar-col span { font:600 12px/1 "IBM Plex Mono",monospace; color:var(--ink-soft); }
+    .bar-col strong { font:700 13px/1 "IBM Plex Sans",sans-serif; color:var(--ink); }
+    .leak-banner { margin-top:22px; padding:22px 26px; border-radius:20px; background:linear-gradient(135deg, #e50914, #280001); color:white; display:grid; grid-template-columns:58px 1fr; gap:18px; align-items:start; }
+    .leak-banner h3 { margin:0 0 8px; font-size:22px; }
+    .leak-banner p { margin:0; color:rgba(255,255,255,.82); font-size:16px; line-height:1.4; }
+    .price-layout { display:grid; grid-template-columns:1.15fr .85fr; gap:28px; margin-top:32px; align-items:stretch; }
+    .price-main { padding:40px 42px; border-radius:28px; background:linear-gradient(145deg, #280001 0%, #e50914 100%); color:white; min-height:420px; display:flex; flex-direction:column; justify-content:center; }
+    .price-main .was { font:700 14px/1 "IBM Plex Mono",monospace; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.7); margin-bottom:10px; }
+    .price-main .ref { font-size:34px; font-weight:600; text-decoration:line-through; opacity:.55; margin-bottom:8px; }
+    .price-main .now-label { font:700 12px/1 "IBM Plex Mono",monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--v4-cream); margin:18px 0 8px; }
+    .price-main .now { font-size:78px; font-weight:700; letter-spacing:-.04em; line-height:1; margin:0 0 16px; }
+    .price-main .now small { font-size:34px; }
+    .price-main p { margin:0; color:rgba(255,255,255,.8); font-size:20px; line-height:1.35; max-width:460px; }
+    .price-side { display:grid; gap:16px; }
+    .price-side .box { padding:24px 26px; border-radius:22px; background:white; border:1px solid var(--line); }
+    .price-side .box h3 { margin:0 0 8px; font-size:22px; }
+    .price-side .box p { margin:0; color:var(--ink-soft); font-size:17px; line-height:1.4; }
+    .price-side .box .tag { font:700 11px/1 "IBM Plex Mono",monospace; letter-spacing:.08em; text-transform:uppercase; color:var(--v4-red); margin-bottom:10px; }
+
+  
+    .nav-btn svg { width: 22px; height: 22px; }
+    .v4-word {
+      font-weight: 800; letter-spacing: -.04em; font-size: 22px; color: var(--ink);
+    }
+    .red .slide-footer .v4-word,
+    .dark .slide-footer .v4-word { color: #fff; }
+    .cover-kicker {
+      font: 700 14px/1 "IBM Plex Mono", monospace;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--v4-cream); margin-bottom: 18px;
+    }
+    .price-lines { margin-top: 10px; }
+    .price-line {
+      display: flex; justify-content: space-between; align-items: baseline; gap: 18px;
+      padding: 16px 0; border-bottom: 1px solid var(--line); font-size: 22px; color: var(--ink-soft);
+    }
+    .price-line strong { color: var(--ink); font-size: 26px; font-weight: 700; }
+    .price-line .ok { color: #1a7a3a; }
+    .price-line.total { border-bottom: 0; padding-top: 20px; }
+    .price-line.total strong { font-size: 42px; letter-spacing: -.03em; color: var(--v4-red); }
+    .mix-track {
+      display: grid; grid-template-columns: 1fr 1fr; height: 22px; border-radius: 999px;
+      overflow: hidden; margin: 8px 0 28px; border: 1px solid rgba(255,255,255,.2);
+    }
+    .mix-track span:first-child { background: var(--v4-cream); }
+    .mix-track span:last-child { background: rgba(255,255,255,.22); }
+    .mix-labels { display: flex; justify-content: space-between; font: 700 14px/1 "IBM Plex Mono", monospace; letter-spacing: .08em; text-transform: uppercase; }
+    .anchor-note {
+      margin-top: 22px; padding: 18px 22px; border-radius: 16px;
+      background: rgba(229,9,20,.06); border: 1px solid rgba(229,9,20,.15);
+      font-size: 18px; color: var(--ink-soft); line-height: 1.4;
+    }
+    .cover-meta { color: rgba(255,255,255,.72); font-size: 22px; max-width: 860px; line-height: 1.4; font-weight: 300; }
+    .card-num {
+      font: 700 12px/1 "IBM Plex Mono", monospace;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--v4-red);
+    }
+
   </style>
+
 </head>
 <body>
-  <div class="blend-progress" aria-hidden="true"></div>
+  <svg aria-hidden="true" width="0" height="0" style="position:absolute">
+    <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+    <symbol id="i-store" viewBox="0 0 24 24"><path d="M3 10h18"/><path d="M5 10v10h14V10"/><path d="m4 4-1 6h18l-1-6H4Z"/><path d="M9 20v-6h6v6"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 19V9M10 19V5M16 19v-7M22 19V3"/><path d="M2 19h21"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+    <symbol id="i-megaphone" viewBox="0 0 24 24"><path d="m3 11 14-6v14L3 13v-2Z"/><path d="M11 16v4H7l-1-6"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><circle cx="18" cy="9" r="3"/><path d="M2 21c0-5 3-8 7-8s7 3 7 8M16 14c4 0 6 2 6 7"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></symbol>
+    <symbol id="i-brush" viewBox="0 0 24 24"><path d="m14 4 6 6-8 8H6v-6l8-8Z"/><path d="M4 20h8"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="m13 2-8 12h7l-1 8 8-12h-7l1-8Z"/></symbol>
+    <symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="19" r="3"/><circle cx="18" cy="5" r="3"/><path d="M9 19h2a4 4 0 0 0 4-4v-6"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></symbol>
+    <symbol id="i-money" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3"/></symbol>
+  </svg>
+  <div id="viewport">
+    <main id="deck" aria-live="polite">
 
-  <nav class="nav-dots" aria-label="Slides">
-    <a href="#" data-slide="1" class="active" title="Capa"></a>
-    <a href="#" data-slide="2" title="Mercado Flex SP"></a>
-    <a href="#" data-slide="3" title="Leitura MBFlex"></a>
-    <a href="#" data-slide="4" title="O que vaza"></a>
-    <a href="#" data-slide="5" title="Dois funis"></a>
-    <a href="#" data-slide="6" title="Dois produtos"></a>
-    <a href="#" data-slide="7" title="Estruturação Comercial"></a>
-    <a href="#" data-slide="8" title="CRM e inbound"></a>
-    <a href="#" data-slide="9" title="Assessoria de Growth"></a>
-    <a href="#" data-slide="10" title="Rotinas"></a>
-    <a href="#" data-slide="11" title="Investimento"></a>
-    <a href="#" data-slide="12" title="Próximos passos"></a>
-  </nav>
-
-  <button type="button" class="nav-arrow nav-arrow--prev" id="prevBtn" disabled aria-label="Anterior">‹</button>
-  <button type="button" class="nav-arrow nav-arrow--next" id="nextBtn" aria-label="Próximo">›</button>
-
-  <template id="v4-logo-tpl">
-    <div class="slide-logo" aria-label="V4 Company">
-      <svg fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 77 20"><path fill="#fff" d="M33.023 3.575c-2.001.003-3.093 1.21-3.09 3.32l.008 6.858c.003 2.11 1.098 3.315 3.1 3.312 2-.003 3.092-1.21 3.09-3.32l-.009-6.858c-.003-2.11-1.097-3.315-3.099-3.312zm.015 11.606c-.649.001-1.057-.356-1.058-1.298l-.009-7.122c-.001-.942.406-1.3 1.055-1.302.648 0 1.057.357 1.058 1.299l.009 7.122c.001.942-.407 1.3-1.055 1.301zm-6.1-3.176l.002 1.884c.001.942-.406 1.282-1.055 1.283-.648 0-1.056-.338-1.058-1.28l-.009-7.122c-.001-.942.406-1.3 1.055-1.302.648 0 1.057.357 1.058 1.299l.002 1.413 1.927-.002-.002-1.281c-.002-2.11-1.041-3.315-3.043-3.313-2 .003-3.037 1.21-3.034 3.32l.008 6.859c.003 2.11 1.042 3.314 3.043 3.312 2.002-.003 3.038-1.21 3.035-3.32l-.002-1.752-1.927.002zM13.055 6.352L8.68 10.813c-.06.062-.017.166.067.166l4.382-.006a.096.096 0 00.096-.097l-.006-4.456c0-.087-.103-.13-.163-.068zm5.862 7.88l-2.687.004a.035.035 0 00-.035.035l.004 2.879c0 .02-.015.035-.035.035l-3.01.004a.035.035 0 01-.034-.035l-.004-2.879a.035.035 0 00-.034-.035l-8.796.012a.141.141 0 01-.14-.142l-.003-2.624v-.004a.795.795 0 01.223-.588l8.758-8.928a.035.035 0 01.025-.01l2.846-.004c.005 0 .009.001.014.003a.367.367 0 01.216.348l.01 8.677c0 .019.017.035.036.035l2.641-.004a.035.035 0 00.035-.035l-.011-8.5c-.002-1.364-1.1-2.478-2.442-2.476L4.18.016a.035.035 0 00-.034.036l.008 6.856c0 .031.037.047.06.025l4.994-5.064a.034.034 0 01.024-.01l2.603-.003c.03 0 .046.037.025.06l-8.118 8.41a.034.034 0 01-.049 0l-1.529-1.55a.036.036 0 01-.01-.026L2.143.074A.035.035 0 002.104.04C.976.185.086 1.131 0 2.294v5.972l.011 8.9a2.48 2.48 0 001.937 2.424h14.974c1.15-.199 2.034-1.224 2.032-2.448l-.003-2.873a.035.035 0 00-.035-.036zM66.47 3.682l.01 7.895-2.104-7.892-2.557.003.017 13.19 1.834-.003-.012-9.553 2.55 9.55 2.094-.004-.016-13.188-1.816.002zm-23.33.031l-1.378 9.366-1.513-9.362-2.835.003.017 13.19 1.779-.003-.012-9.327 1.532 9.325 1.927-.003 1.396-9.46.012 9.458 1.928-.002-.017-13.19-2.835.005h-.001zm33.133-.043l-1.946.002-1.549 6.013-1.564-6.009-2.131.003 2.587 8.814.005 4.371 2.039-.003-.006-4.37 2.565-8.821zm-20.44.026l-2.058 13.192 1.871-.003.35-2.393 2.501-.003.355 2.392 2.057-.003-2.092-13.186-2.983.004zm.42 9.005l.974-6.67.99 6.668-1.964.002zm-5.793-8.998l-3.002.004.017 13.189 2.038-.003-.006-4.955.964-.002c2.038-.002 3.037-1.153 3.035-3.263l-.003-1.715c-.002-2.11-1.005-3.258-3.043-3.255zm.008 6.35h-.964L49.5 5.589l.964-.001c.648-.001 1.001.3 1.002 1.242l.003 1.978c.001.942-.35 1.245-1 1.245z"></path></svg>
-    </div>
-  </template>
-
-  <div class="deck" id="deck">
-
-    <!-- 1 CAPA -->
-    <section id="capa" class="slide-active" data-slide="1">
-      <div class="inner">
-        <div class="capa-partnership">
-          <span>MBFlex Express</span>
-          <span class="x">×</span>
-          <span>V4 Company</span>
-        </div>
-        <h1>Encher a malha.<br /><em>Reter o lojista.</em></h1>
-        <p class="lead" style="margin:0.75rem auto 0;text-align:center;max-width:740px;">
-          A operação de same day já existe. Esta proposta instala a máquina comercial
-          para conquistar vendedores de Mercado Livre, Shopee e e-commerce — e não perdê-los no WhatsApp do concorrente.
-        </p>
-        <span class="capa-badge" style="margin-top:1.25rem;">EC · Growth · CRM bonificado</span>
-        <p class="slide-hint">Setas, scroll ou swipe para avançar →</p>
-      </div>
-    </section>
-
-    <!-- 2 MERCADO -->
-    <section id="mercado" data-slide="2">
-      <div class="inner glass">
-        <p class="eyebrow">O jogo em São Paulo</p>
-        <h2>No Flex, todo mundo vende<br />o mesmo dia. Quase ninguém vende processo.</h2>
-        <div class="gold-line"></div>
-        <p class="lead">
-          Mercado Envios Flex e Shopee Same Day viraram disputa de malha, preço e WhatsApp.
-          J3, Easy, Flexboys, Federal, Pex e dezenas de operadores repetem a mesma promessa.
-        </p>
-        <div class="grid-3">
-          <article class="card">
-            <div class="card-num">01</div>
-            <h3>Serviço commodity</h3>
-            <p>Coleta, same day, rastreio e “99% de sucesso” não diferenciam. O lojista troca de transportadora no próximo recálculo de frete.</p>
-          </article>
-          <article class="card">
-            <div class="card-num">02</div>
-            <h3>Sem fidelidade</h3>
-            <p>O próprio mercado vende “sem contrato”. Isso acelera a entrada — e torna retenção o verdadeiro P&amp;L da operação.</p>
-          </article>
-          <article class="card">
-            <div class="card-num">03</div>
-            <h3>Malha ociosa custa caro</h3>
-            <p>Motoboy parado e rota vazia destroem margem. Crescimento de verdade é occupancy: mais lojista ativo, todo dia.</p>
-          </article>
-        </div>
-        <p class="quote">
-          Quem ganha no Flex não é quem entrega mais rápido no site.
-          É quem responde primeiro, onborda sem atrito e impede o lojista de sair.
-          <span>São Paulo · last mile · Mercado Livre + Shopee + e-commerce</span>
-        </p>
-      </div>
-    </section>
-
-    <!-- 3 LEITURA -->
-    <section id="leitura" data-slide="3">
-      <div class="inner glass">
-        <p class="eyebrow">Leitura pública · mbflex.com.br</p>
-        <h2>Vocês já têm operação.<br />A pergunta é se o comercial enche essa malha.</h2>
-        <div class="gold-line"></div>
-        <div class="grid-4">
-          <article class="card">
-            <div class="card-num">Volume</div>
-            <p class="kpi-num">+5.000</p>
-            <p>entregas diárias declaradas</p>
-          </article>
-          <article class="card">
-            <div class="card-num">Escala</div>
-            <p class="kpi-num">100 mil</p>
-            <p>entregas mensais no site</p>
-          </article>
-          <article class="card">
-            <div class="card-num">Malha</div>
-            <p class="kpi-num">+180</p>
-            <p>motoboys parceiros</p>
-          </article>
-          <article class="card">
-            <div class="card-num">SLA</div>
-            <p class="kpi-num">99%</p>
-            <p>taxa de sucesso · 24/6</p>
-          </article>
-        </div>
-        <div class="grid-3" style="margin-top:0.65rem;">
-          <article class="card">
-            <h3>Cobertura</h3>
-            <p>Capital completa + Grande SP (ABC, Osasco, Guarulhos, Barueri, Cotia).</p>
-          </article>
-          <article class="card">
-            <h3>Oferta</h3>
-            <p>Flex ML, same day, Shopee, coleta programada e simulador de frete.</p>
-          </article>
-          <article class="card">
-            <h3>Base Cambuci</h3>
-            <p>Rua Espírita, 39 · WhatsApp 97607-9005 e 96314-1997 · sac@mbflex.com.br</p>
-          </article>
-        </div>
-        <p class="source-note">Números e canais citados conforme o site institucional em agosto/2026. O diagnóstico interno entra no kick-off.</p>
-      </div>
-    </section>
-
-    <!-- 4 O QUE VAZA -->
-    <section id="realidade" data-slide="4">
-      <div class="inner glass">
-        <p class="eyebrow">Diagnóstico comercial</p>
-        <h2>O que o site já entrega —<br />e o que ainda vaza no funil</h2>
-        <div class="gold-line"></div>
-        <div class="grid-2">
-          <article class="card">
-            <h3>O que já funciona</h3>
-            <ul>
-              <li>Produto claro: coleta + entrega no mesmo dia em SP</li>
-              <li>Integração com Mercado Envios Flex e Shopee</li>
-              <li>Malha e cobertura suficientes para vender escala</li>
-              <li>CTA de simulação e captura de lead no site</li>
-              <li>Atendimento 24/6 e assistente Zequinha</li>
-              <li>Oferta de entrada: 15% no 1º mês, sem fidelidade</li>
-            </ul>
-          </article>
-          <article class="card">
-            <h3>O que está vazando</h3>
-            <ul>
-              <li>Simulador pesado (medida, peso, CEP) antes de qualificar o lojista</li>
-              <li>Dois WhatsApps + formulário + chatbot + SAC: lead sem dono único</li>
-              <li>Copy igual à da concorrência — sem ICP por volume ou canal</li>
-              <li>Funil de lojista misturado com captação de motoboy no mesmo site</li>
-              <li>“Sem fidelidade” sem playbook de retenção / save visível</li>
-              <li>Prova social genérica — difícil ganhar a guerra de preço só com depoimento</li>
-            </ul>
-          </article>
-        </div>
-        <p class="quote" style="margin-top:0.9rem;">
-          A MBFlex não precisa “parecer uma transportadora”. Precisa de uma máquina que converte simulação em contrato e contrato em volume recorrente.
-        </p>
-      </div>
-    </section>
-
-    <!-- 5 DOIS FUNIS -->
-    <section id="funis" data-slide="5">
-      <div class="inner glass">
-        <p class="eyebrow">O risco operacional do comercial</p>
-        <h2>Dois negócios no mesmo inbox.<br />Três portas de entrada. Zero dono.</h2>
-        <div class="gold-line"></div>
-        <p class="lead">Last mile é marketplace de dois lados. Se o comercial trata lojista, motoboy e reclamação no mesmo WhatsApp, a malha não cresce — ela apaga incêndio.</p>
-        <div class="grid-3">
-          <article class="card">
-            <div class="card-num">Funil A</div>
-            <h3>Lojista / volume</h3>
-            <p>ICP: seller ML, Shopee e e-commerce com pacote diário em SP. Objetivo: ativar coleta e crescer drops/semana.</p>
-          </article>
-          <article class="card">
-            <div class="card-num">Funil B</div>
-            <h3>Motoboy / malha</h3>
-            <p>Oferta de vaga no mesmo site. Necessário — mas não pode competir com o orçamento do seller no mesmo chat.</p>
-          </article>
-          <article class="card">
-            <div class="card-num">Funil C</div>
-            <h3>SAC / save</h3>
-            <p>Reclamação, atraso e “vou mudar de Flex” exigem cadência própria. Senão o comercial só caça o que o churn já comeu.</p>
-          </article>
-        </div>
-        <div class="independence-note">
-          Simulador · formulário · Zequinha · 2 WhatsApps · e-mail SAC. Sem CRM e SLA, cada porta vaza sozinha.
-        </div>
-      </div>
-    </section>
-
-    <!-- 6 DOIS PRODUTOS -->
-    <section id="produtos" data-slide="6">
-      <div class="inner glass">
-        <p class="eyebrow">Arquitetura da proposta</p>
-        <h2>Dois produtos. Zero dependência.</h2>
-        <div class="gold-line"></div>
-        <p class="lead">
-          Vocês podem contratar só a Estruturação Comercial, só a Assessoria de Growth,
-          ou as duas. Uma não condiciona a outra.
-        </p>
-        <div class="grid-2">
-          <article class="card">
-            <span class="tag-16h">Produto 01 · Projeto</span>
-            <h3>Estruturação Comercial</h3>
-            <ul>
-              <li>ICP por volume, canal (ML / Shopee / e-commerce) e região</li>
-              <li>Funil, KPIs, SLAs e papéis (SDR × closer × CS)</li>
-              <li>Playbooks de orçamento, onboarding e save</li>
-              <li>Separação dos funis lojista × motoboy × SAC</li>
-              <li>CRM operativo com os canais que vocês já usam</li>
-            </ul>
-          </article>
-          <article class="card">
-            <span class="tag-16h">Produto 02 · Recorrente</span>
-            <h3>Assessoria de Growth</h3>
-            <ul>
-              <li>Account orquestrando a operação com a diretoria</li>
-              <li>Google de intenção: “entrega flex SP”, “transportadora Flex ML”</li>
-              <li>Meta Ads para sellers com volume em São Paulo</li>
-              <li>Copy e criativo de performance B2B last mile</li>
-              <li>Otimização de CAC por lojista ativado — não por clique</li>
-            </ul>
-          </article>
-        </div>
-        <div class="independence-note">
-          Contrate A, B ou A+B — a Estruturação Comercial não depende da Assessoria, e vice-versa.
-        </div>
-      </div>
-    </section>
-
-    <!-- 7 EC -->
-    <section id="ec" data-slide="7">
-      <div class="inner glass">
-        <p class="eyebrow">Produto 01 · Estruturação Comercial</p>
-        <h2>Do simulador ao volume<br />recorrente — com dono em cada etapa</h2>
-        <div class="gold-line"></div>
-        <p class="lead">Projeto de ativação para o comercial da MBFlex: qualificar o lojista certo, cotar rápido, onboardar a coleta e impedir a saída.</p>
-        <div class="flow-row">
-          <div class="flow-step">
-            <div class="icon">01</div>
-            <strong>Diagnóstico</strong>
-            <span>Canais, gargalos e occupancy da malha</span>
+      <section class="slide red active" data-title="Capa">
+        <div class="sphere" style="width:430px;height:430px;right:-80px;top:-115px;opacity:.55"></div>
+        <div class="sphere" style="width:245px;height:245px;right:285px;top:115px;opacity:.32"></div>
+        <div class="cover-content">
+          <div>
+            <div class="cover-kicker">MBFlex Express × V4 Company · Assessoria de Growth</div>
+            <h1 class="cover-title">Sair do marketplace.<br>Chegar em 500.</h1>
+            <p class="cover-meta">O primeiro marketing estruturado da MBFlex — para a metade da carteira que a plataforma não traz: loja própria.</p>
           </div>
-          <span class="flow-arrow">→</span>
-          <div class="flow-step">
-            <div class="icon">02</div>
-            <strong>Arquitetura</strong>
-            <span>ICP, funis, KPIs e SLAs</span>
-          </div>
-          <span class="flow-arrow">→</span>
-          <div class="flow-step">
-            <div class="icon">03</div>
-            <strong>CRM operativo</strong>
-            <span>Pipes, automações e dono do lead</span>
-          </div>
-          <span class="flow-arrow">→</span>
-          <div class="flow-step">
-            <div class="icon">04</div>
-            <strong>Playbooks</strong>
-            <span>Cotação, objeção de preço e save</span>
-          </div>
-          <span class="flow-arrow">→</span>
-          <div class="flow-step">
-            <div class="icon">05</div>
-            <strong>Treinamento</strong>
-            <span>Time operando o padrão no dia a dia</span>
-          </div>
+          <div class="cover-client">Account · GT · Copy · Design · condição de cliente EE</div>
         </div>
-        <div class="grid-3" style="margin-top:0.85rem;">
-          <article class="card">
-            <h3>Qualificação por volume</h3>
-            <p>Pacotes/dia, marketplace, CEP de coleta e janela. Menos cotação para quem não cabe na malha.</p>
-          </article>
-          <article class="card">
-            <h3>Onboarding de coleta</h3>
-            <p>Do “sim” à primeira rota com checklist: app Flex, cutoff, cubagem e responsável.</p>
-          </article>
-          <article class="card">
-            <h3>Save / retenção</h3>
-            <p>Cadência para o lojista que ameaça trocar de Flex por R$ 0,50 — com motivo de perda rastreável.</p>
-          </article>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- 8 CRM -->
-    <section id="crm" data-slide="8">
-      <div class="inner glass">
-        <p class="eyebrow">Incluído na Estruturação Comercial</p>
-        <h2>CRM que une simulador,<br />WhatsApp e Zequinha</h2>
-        <div class="gold-line"></div>
-        <p class="lead">
-          Não é “ter CRM”. É fazer cada simulação, cada Zap e cada conversa do chatbot
-          nascer com dono, SLA e próximo passo — lojista separado de motoboy e de SAC.
-        </p>
-        <div class="grid-2">
-          <article class="card">
-            <h3>O que implementamos</h3>
-            <ul>
-              <li>Pipes: lojista · motoboy · SAC / save</li>
-              <li>Conexão do simulador, formulário e WhatsApps</li>
-              <li>Bot de boas-vindas e triagem por intenção</li>
-              <li>Campos: volume diário, canal, região, cubagem</li>
-              <li>Automações de follow-up pós-cotação</li>
-              <li>Dashboard de conversão, ciclo e churn</li>
-            </ul>
+      <section class="slide dark" data-title="Dependência">
+        <div class="topline"></div>
+        <span class="eyebrow">A trava comercial</span>
+        <h2>Hoje a carteira é 100% marketplace.</h2>
+        <p class="lede lede-tight">ML, Shopee e Amazon indicam. O cliente vem. Por isso nunca precisou investir em marketing — e por isso o mix não muda sozinho.</p>
+        <div class="grid-3" style="margin-top:48px">
+          <article class="clock-card">
+            <div class="icon-box"><svg class="icon"><use href="#i-store"/></svg></div>
+            <h3>Dependência</h3>
+            <p>Receita ativa amarrada na plataforma. Pressão de preço e homologação ditam o ritmo.</p>
           </article>
-          <article class="card">
-            <h3>O que muda no dia a dia</h3>
-            <ul>
-              <li>Nenhuma simulação some no grupo do WhatsApp</li>
-              <li>Orçamento com prazo de retorno e responsável</li>
-              <li>Motivo de perda: preço, cobertura, cutoff, concorrente</li>
-              <li>Visão de occupancy: lojistas ativos vs malha disponível</li>
-              <li>CS enxerga risco de saída antes do volume cair</li>
-              <li>Base pronta para receber mídia sem vazar</li>
-            </ul>
+          <article class="clock-card">
+            <div class="icon-box"><svg class="icon"><use href="#i-bolt"/></svg></div>
+            <h3>Nunca investiu</h3>
+            <p>R$ 300 esporádicos no Instagram. Paulo e Renata não são operação de mídia.</p>
+          </article>
+          <article class="clock-card">
+            <div class="icon-box"><svg class="icon"><use href="#i-target"/></svg></div>
+            <h3>Loja própria = 0%</h3>
+            <p>Esse público não cai no colo. Sem canal próprio, a meta de 500 só recicla o mesmo jogo.</p>
           </article>
         </div>
-        <div class="bonus-box">
-          <strong>Bonificado na EC</strong>
-          <p>Implementação / reestruturação do CRM (pipes, canais, triagem e automações básicas) inclusa no projeto — sem custo adicional de setup.</p>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- 9 GROWTH -->
-    <section id="growth" data-slide="9">
-      <div class="inner">
-        <p class="eyebrow" style="text-align:left;">Produto 02 · Assessoria de Growth</p>
-        <h2>Atração de lojista com volume<br />em São Paulo — não de curiosos</h2>
-        <div class="gold-line"></div>
-        <p class="lead">Operação mensal para encher a malha com sellers de Mercado Livre, Shopee e e-commerce que precisam de Flex agora.</p>
-        <div class="grid-2" style="margin-top:0.85rem;">
-          <article class="card">
-            <span class="tag-16h">Account + GT</span>
-            <h3>Demanda com intenção</h3>
+      <section class="slide white" data-title="O que já existe">
+        <div class="topline"></div>
+        <span class="eyebrow">Operação real · números informados</span>
+        <h2>A malha já existe.<br>Falta o canal que o marketplace não cobre.</h2>
+        <div class="metric-wall four" style="margin-top:40px">
+          <article class="card metric-card">
+            <div class="big-number">196</div>
+            <p>clientes ativos. Meta do ano: 500.</p>
+          </article>
+          <article class="card metric-card">
+            <div class="big-number">R$ 1 mi</div>
+            <p>faturamento mensal informado.</p>
+          </article>
+          <article class="card metric-card">
+            <div class="big-number">7 mil</div>
+            <p>pacotes/dia de capacidade. Gate da escala.</p>
+          </article>
+          <article class="card metric-card">
+            <div class="big-number">5★</div>
+            <p>atendimento — o diferencial que a mídia ainda não fala.</p>
+          </article>
+        </div>
+        <p class="mini-note">Fontes: EE, SPICED 23/07 e GTM 18/08. Ticket e margem seguem em conciliação com o Vinícius.</p>
+      </section>
+
+      <section class="slide red" data-title="Mix 50/50">
+        <div class="sphere" style="width:360px;height:360px;right:-70px;bottom:-80px;opacity:.4"></div>
+        <span class="eyebrow">Meta principal do ano</span>
+        <h2>500 clientes. Metade loja própria.</h2>
+        <p class="lede">Diversificar o público. 50% e-commerce próprio. 50% marketplace. Sem isso, 500 é só mais seller de plataforma.</p>
+        <div style="margin-top:48px;max-width:1100px">
+          <div class="mix-labels"><span>50% loja própria</span><span>50% marketplace</span></div>
+          <div class="mix-track"><span></span><span></span></div>
+        </div>
+        <div class="split-2" style="margin-top:8px">
+          <article class="split-card" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.22);min-height:auto">
+            <h3>O que o marketplace já faz</h3>
             <ul>
-              <li>Google: entrega Flex SP, transportadora Mercado Livre, envio Shopee same day</li>
-              <li>Meta Ads para sellers com operação na capital e Grande SP</li>
-              <li>Campanhas por ICP: alto volume × seller médio × e-commerce próprio</li>
-              <li>Leitura do clique até lojista ativado (primeira coleta)</li>
-              <li>Testes contínuos de CAC por conta ativa — não por lead cru</li>
+              <li>Indicação orgânica de seller</li>
+              <li>Base atual e reputação 5 estrelas</li>
+              <li>Continua como 50% da carteira</li>
             </ul>
           </article>
-          <article class="card">
-            <span class="tag-16h">Copy + Design</span>
-            <h3>Narrativa que fecha</h3>
+          <article class="split-card" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.22);min-height:auto">
+            <h3>O que o Growth precisa criar</h3>
             <ul>
-              <li>Promessa de Flex traduzida em ranking, avaliação e recompra do lojista</li>
-              <li>Peças com cobertura, cutoff, coleta e prova de malha (+180 / same day)</li>
-              <li>LP e criativos alinhados ao simulador — menos atrito, mais cotação qualificada</li>
-              <li>Oferta de 15% no 1º mês usada com critério, não como único argumento</li>
-              <li>Identidade consistente nos canais pagos e no WhatsApp comercial</li>
+              <li>Canal de aquisição de loja própria</li>
+              <li>Google de intenção + cadência comercial</li>
+              <li>~250 contas novas neste lado no ano</li>
             </ul>
           </article>
         </div>
-        <div class="bonus-box">
-          <strong>Regra de ouro no Flex</strong>
-          <p>Acelerar mídia com comercial desorganizado enche o WhatsApp e esvazia a margem. Growth rende quando o funil da EC está com dono.</p>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- 10 ROTINAS -->
-    <section id="rotinas" data-slide="10">
-      <div class="inner glass">
-        <p class="eyebrow">Cadência da parceria</p>
-        <h2>Como a operação roda<br />depois do kick-off</h2>
-        <div class="gold-line"></div>
-        <table class="ritual-table">
-          <thead>
-            <tr>
-              <th>Frequência</th>
-              <th>Ritual</th>
-              <th>Foco</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Diária</td>
-              <td>Monitoramento de mídia + higiene do pipeline</td>
-              <td>Leads do simulador, anomalias e SLA de resposta</td>
-            </tr>
-            <tr>
-              <td>Semanal</td>
-              <td>Gestão comercial (quando EC estiver ativa)</td>
-              <td>Cotações, ativações, churn e occupancy da malha</td>
-            </tr>
-            <tr>
-              <td>Quinzenal</td>
-              <td>Check-in de performance</td>
-              <td>CAC por lojista ativado, criativos e calibração tática</td>
-            </tr>
-            <tr>
-              <td>Trimestral</td>
-              <td>QBR com liderança</td>
-              <td>Meta de volume, cobertura e próximo investimento</td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="grid-3" style="margin-top:0.85rem;">
+      <section class="slide dark" data-title="Dual e capacidade">
+        <div class="topline"></div>
+        <span class="eyebrow">A regra que o Vinícius já falou</span>
+        <h2>Crescer cliente sem motoboy<br>quebra a operação.</h2>
+        <p class="lede">Dois lados, duas jornadas. Mídia de loja própria só sobe quando o cluster tem capacidade — 7.000 pacotes/dia, ~140 entregadores.</p>
+        <div class="process" style="margin-top:52px">
+          <div class="stage"><h3>01 · Loja própria</h3><p>Google captura. Comercial qualifica. Atende só o que cabe na moto.</p></div>
+          <div class="arrow">→</div>
+          <div class="stage"><h3>02 · Marketplace</h3><p>Base que já existe. Não é o motor novo. É o 50% que se equilibra.</p></div>
+          <div class="arrow">→</div>
+          <div class="stage"><h3>03 · Prestador</h3><p>Jornada separada. Sem misturar no mesmo anúncio, Zap ou CRM.</p></div>
+          <div class="arrow">→</div>
+          <div class="stage"><h3>04 · Gate</h3><p>Sem cluster liberado, não escala verba. Qualidade 5 estrelas primeiro.</p></div>
+        </div>
+      </section>
+
+      <section class="slide white" data-title="Produto">
+        <div class="topline"></div>
+        <span class="eyebrow">Produto · Assessoria de Growth</span>
+        <h2>Account + GT + copy + design.<br>Operação contínua.</h2>
+        <p class="lede">Não é PDF. É o time que liga o canal de loja própria no mês — com a EE que vocês já pagaram como mapa.</p>
+        <div class="grid-4" style="margin-top:40px">
           <article class="card">
-            <h3>Mais lojista ativo</h3>
-            <p>Funil contínuo de sellers com pacote diário em SP — não só pico de orçamento.</p>
+            <div class="icon-box"><svg class="icon"><use href="#i-users"/></svg></div>
+            <h3 style="margin-top:18px">Account</h3>
+            <p style="margin:8px 0 0;color:var(--ink-soft);font-size:17px;line-height:1.35">Orquestra mix 50/50, capacidade e comercial. Dono do ritmo até 500.</p>
           </article>
           <article class="card">
-            <h3>Menos troca de Flex</h3>
-            <p>Save com cadência. Motivo de perda vira correção de preço, cobertura ou cutoff.</p>
+            <div class="icon-box"><svg class="icon"><use href="#i-search"/></svg></div>
+            <h3 style="margin-top:18px">Gestor de tráfego</h3>
+            <p style="margin:8px 0 0;color:var(--ink-soft);font-size:17px;line-height:1.35">Google Search de intenção. Meta só remarketing. Sem cluster, não escala.</p>
           </article>
           <article class="card">
-            <h3>Malha mais cheia</h3>
-            <p>Comercial e Growth olhando occupancy: volume que paga o motoboy que já está na rua.</p>
+            <div class="icon-box"><svg class="icon"><use href="#i-megaphone"/></svg></div>
+            <h3 style="margin-top:18px">Copy</h3>
+            <p style="margin:8px 0 0;color:var(--ink-soft);font-size:17px;line-height:1.35">Loja própria, atendimento humano, o que cabe na moto. Não “Flex SP” genérico.</p>
+          </article>
+          <article class="card">
+            <div class="icon-box"><svg class="icon"><use href="#i-brush"/></svg></div>
+            <h3 style="margin-top:18px">Design</h3>
+            <p style="margin:8px 0 0;color:var(--ink-soft);font-size:17px;line-height:1.35">Criativos, páginas e prova. Anúncio, LP e CTA na mesma promessa.</p>
           </article>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- 11 INVESTIMENTO -->
-    <section id="investimento" data-slide="11">
-      <div class="inner glass">
-        <p class="eyebrow">Investimento · produtos independentes · até 05/09</p>
-        <h2>Escolha A, B ou as duas</h2>
-        <div class="gold-line"></div>
-        <div class="plans">
-          <article class="plan featured">
-            <div class="plan-label">Produto 01 · Projeto</div>
-            <h3>Estruturação Comercial</h3>
-            <p class="plan-sub">Funil · KPIs · Playbooks · Treinamento · CRM</p>
+      <section class="slide white" data-title="Motor">
+        <div class="topline"></div>
+        <span class="eyebrow">Como a máquina roda</span>
+        <h2>Google captura. Meta recupera.<br>Comercial fecha.</h2>
+        <div class="process" style="margin-top:52px">
+          <div class="stage"><h3>Busca</h3><p>Intenção de loja própria, serviço e região liberada.</p></div>
+          <div class="arrow">→</div>
+          <div class="stage"><h3>Página</h3><p>Promessa aderente, filtro de carga, CTA comercial.</p></div>
+          <div class="arrow">→</div>
+          <div class="stage"><h3>CRM + SLA</h3><p>Origem, dono, próxima ação. Nada some no WhatsApp.</p></div>
+          <div class="arrow">→</div>
+          <div class="stage"><h3>Outbound</h3><p>Márcio e o time qualificam, propõem e registram o desfecho.</p></div>
+          <div class="arrow">→</div>
+          <div class="stage"><h3>Ativação</h3><p>Primeira coleta. Receita volta para a campanha.</p></div>
+        </div>
+        <p class="quote" style="margin-top:48px">KPI não é lead. É lojista de loja própria ativado — dentro de SLA e da malha.</p>
+      </section>
+
+      <section class="slide dark" data-title="Cadência">
+        <div class="topline"></div>
+        <span class="eyebrow">90 dias · execução com trava</span>
+        <h2>Fundação, piloto, depois escala.</h2>
+        <div class="clock-grid">
+          <article class="clock-card">
+            <div class="n" style="font:700 12px/1 'IBM Plex Mono',monospace;letter-spacing:.1em;color:var(--v4-cream)">DIAS 1–30</div>
+            <div class="big-number">01</div>
+            <h3>Fundação</h3>
+            <p>Clusters, tracking, CRM, claims, páginas de loja própria e lead teste. Sem isso, mídia não sobe.</p>
+          </article>
+          <article class="clock-card">
+            <div class="n" style="font:700 12px/1 'IBM Plex Mono',monospace;letter-spacing:.1em;color:var(--v4-cream)">DIAS 31–60</div>
+            <div class="big-number">02</div>
+            <h3>Piloto Google</h3>
+            <p>Search por intenção e região. SQLs com termo, custo e desfecho conhecidos.</p>
+          </article>
+          <article class="clock-card">
+            <div class="n" style="font:700 12px/1 'IBM Plex Mono',monospace;letter-spacing:.1em;color:var(--v4-cream)">DIAS 61–90</div>
+            <div class="big-number">03</div>
+            <h3>Remarketing</h3>
+            <p>Meta recupera quem não avançou. Otimiza por ativação e contribuição — não por CPL.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="slide white" data-title="EE reconhecida">
+        <div class="topline"></div>
+        <span class="eyebrow">Condição de cliente V4</span>
+        <h2>A EE que vocês já pagaram<br>entra na mensalidade.</h2>
+        <p class="lede">R$ 14.612,00 em clareza: GTM, ICP, posicionamento e o mapa do que executar. Growth não começa do zero.</p>
+        <div class="grid-3" style="margin-top:40px">
+          <article class="card">
+            <div class="card-num" style="font:700 12px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--v4-red)">Tabela</div>
+            <div class="big-number" style="font-size:54px;margin:16px 0 8px">R$ 11 mil</div>
+            <p style="margin:0;color:var(--ink-soft);font-size:18px">Assessoria de Growth / mês</p>
+          </article>
+          <article class="card">
+            <div class="card-num" style="font:700 12px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--v4-red)">EE já investida</div>
+            <div class="big-number" style="font-size:54px;margin:16px 0 8px">14.612</div>
+            <p style="margin:0;color:var(--ink-soft);font-size:18px">Abate R$ 1.217,67 na mensalidade</p>
+          </article>
+          <article class="card">
+            <div class="card-num" style="font:700 12px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--v4-red)">Fee final</div>
+            <div class="big-number" style="font-size:54px;margin:16px 0 8px">9.259</div>
+            <p style="margin:0;color:var(--ink-soft);font-size:18px">R$ 9.259,31 / mês · recorrente</p>
+          </article>
+        </div>
+        <div class="anchor-note">Tabela R$ 11.000 − equivalente mensal da EE (R$ 1.217,67) − condição comercial (R$ 523,02) = <strong style="color:var(--ink)">R$ 9.259,31</strong>.</div>
+      </section>
+
+      <section class="slide white" data-title="Investimento">
+        <div class="topline"></div>
+        <span class="eyebrow">Investimento · Assessoria de Growth</span>
+        <h2>Condição de quem já fez a EE.</h2>
+        <div class="price-hero">
+          <article class="price-box">
+            <div class="tag">Fee mensal · cartão recorrente</div>
+            <div class="amount"><span>R$</span>9.259<small style="font-size:32px;font-weight:600;letter-spacing:0">,31</small></div>
+            <p>Account + GT + copy + design. Verba de mídia à parte, definida com o Vinícius.</p>
+          </article>
+          <div>
             <div class="price-lines">
-              <div class="price-line"><span>À vista</span><strong>R$ 10.141,57</strong></div>
-              <div class="price-line"><span>Condição 12×</span><strong class="ok">R$ 845,13 /mês</strong></div>
+              <div class="price-line"><span>Tabela</span><strong>R$ 11.000,00</strong></div>
+              <div class="price-line"><span>EE já investida (12×)</span><strong>− R$ 1.217,67</strong></div>
+              <div class="price-line"><span>Condição comercial</span><strong>− R$ 523,02</strong></div>
+              <div class="price-line total"><span>Fee final</span><strong class="ok">R$ 9.259,31</strong></div>
             </div>
-            <div class="plan-price">R$ 845,13 <small>/mês · 12×</small></div>
-            <p class="plan-discount">Projeto de ativação · válido até 05/09</p>
-            <ul>
-              <li>ICP, funis lojista / motoboy / SAC e SLAs</li>
-              <li>Playbooks de cotação, onboarding e save</li>
-              <li>Rituais de gestão + treinamento do time</li>
-              <li>CRM dos canais atuais (bonificado)</li>
-            </ul>
-          </article>
-          <article class="plan featured">
-            <div class="plan-label">Produto 02 · Recorrente</div>
-            <h3>Assessoria de Growth</h3>
-            <p class="plan-sub">Account + GT + Copy + Design</p>
-            <div class="plan-price">R$ 4.713,83 <small>/mês</small></div>
-            <p class="plan-discount">Mensalidade recorrente · operação contínua</p>
-            <ul>
-              <li>Account Manager (não dedicado)</li>
-              <li>Gestão de Tráfego (Google + Meta)</li>
-              <li>Copywriter de performance last mile</li>
-              <li>Designer de criativos comerciais</li>
-              <li>Cadência diária / quinzenal / trimestral</li>
-            </ul>
-          </article>
+            <p class="mini-note">Mídia não entra no fee. Projeção inicial da planilha: R$ 3.500/mês, com gate de cluster.</p>
+          </div>
         </div>
-        <div class="independence-note">
-          A Estruturação Comercial não depende da Assessoria de Growth — e a Assessoria não exige a EC para começar.
-        </div>
-        <div class="bonus-box">
-          <strong>Bonificado na EC · até 05/09</strong>
-          <p>CRM (pipes, simulador, WhatsApp e triagem) incluso. Depois desta data, retorna a condição padrão do projeto.</p>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- 12 PRÓXIMOS PASSOS -->
-    <section id="proximos" data-slide="12">
-      <div class="inner glass">
-        <p class="eyebrow">Fechamento</p>
-        <h2>Próximos passos comerciais</h2>
-        <div class="gold-line"></div>
-        <div class="flow-row">
-          <div class="flow-step">
-            <div class="icon">01</div>
-            <strong>Validação</strong>
-            <span>Alinhar escopos e escolher A, B ou A+B</span>
-          </div>
-          <span class="flow-arrow">→</span>
-          <div class="flow-step">
-            <div class="icon">02</div>
-            <strong>Formalização</strong>
-            <span>Contrato e kick-off administrativo</span>
-          </div>
-          <span class="flow-arrow">→</span>
-          <div class="flow-step">
-            <div class="icon">03</div>
-            <strong>Onboarding</strong>
-            <span>Acessos, canais e mapa do funil real</span>
-          </div>
-          <span class="flow-arrow">→</span>
-          <div class="flow-step">
-            <div class="icon">04</div>
-            <strong>Start</strong>
-            <span>Ativação do(s) produto(s) contratado(s)</span>
-          </div>
+      <section class="slide dark" data-title="Sucesso">
+        <div class="topline"></div>
+        <span class="eyebrow">O que vamos olhar juntos</span>
+        <h2>Receita previsível de loja própria — sem fingir os 500 na mídia.</h2>
+        <div class="success-grid" style="margin-top:40px">
+          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-check"/></svg></div><h3>Origem rastreável até ativação</h3></div>
+          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-check"/></svg></div><h3>Mix visível: loja própria × marketplace</h3></div>
+          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-check"/></svg></div><h3>SLA de resposta e motivo de perda</h3></div>
+          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-check"/></svg></div><h3>Google no ar só com cluster liberado</h3></div>
+          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-check"/></svg></div><h3>Jornada de motoboy fora do funil de seller</h3></div>
+          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-check"/></svg></div><h3>500 é meta da empresa; Growth é o motor dos 50%</h3></div>
         </div>
-        <div class="cta-box" style="margin-top:1rem;">
-          <h3>O que a MBFlex leva com a V4</h3>
-          <p>
-            Processo para converter simulação em lojista ativo — e/ou atração contínua de sellers em São Paulo.
-            Cada frente com valor próprio. Menos WhatsApp perdido. Mais occupancy. Mais volume recorrente.
-          </p>
-        </div>
-        <p class="quote" style="margin-top:0.9rem;">
-          Same day vocês já fazem. Agora o comercial precisa acompanhar a malha.
-          <span>MBFlex Express × V4 Company · Proposta agosto/2026</span>
-        </p>
-      </div>
-    </section>
+      </section>
 
+      <section class="slide red" data-title="Próximos passos">
+        <div class="sphere" style="width:400px;height:400px;right:-90px;top:-100px;opacity:.45"></div>
+        <span class="eyebrow">Fechamento</span>
+        <h2>Começar o canal<br>que ainda não existe.</h2>
+        <div class="cta-steps">
+          <article class="cta-step">
+            <div class="n">01</div>
+            <h3>Alinhar</h3>
+            <p>Fee R$ 9.259,31 e verba de mídia com o Vinícius.</p>
+          </article>
+          <article class="cta-step">
+            <div class="n">02</div>
+            <h3>Formalizar</h3>
+            <p>Contrato recorrente. Kick-off na semana seguinte.</p>
+          </article>
+          <article class="cta-step">
+            <div class="n">03</div>
+            <h3>Operar</h3>
+            <p>Fundação 30 dias. Piloto Google. Mix 50/50 no radar.</p>
+          </article>
+        </div>
+        <p class="quote" style="margin-top:40px">Same day vocês já fazem. Agora a carteira precisa de loja própria.</p>
+      </section>
+
+      <div class="slide-footer"><div id="footerLogo" class="v4-word">V4</div></div>
+      <div class="navigation">
+        <button class="nav-btn" id="prevBtn" type="button" aria-label="Anterior"><svg><use href="#i-arrow-left"/></svg></button>
+        <button class="nav-btn" id="nextBtn" type="button" aria-label="Próximo"><svg><use href="#i-arrow-right"/></svg></button>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="slide-counter" id="slideCounter">01 / 12</div>
+    </main>
   </div>
-
-  <footer class="deck-footer">
-    <span>MBFlex Express × V4 · Growth + EC</span>
-    <div class="progress-wrap"><div class="progress-fill" id="progressFill"></div></div>
-    <span id="slideCounter">1 / 12</span>
-  </footer>
-
   <script>
-  (function () {
-    const tpl = document.getElementById("v4-logo-tpl");
-    document.querySelectorAll("#deck section").forEach((slide) => {
-      slide.insertBefore(tpl.content.cloneNode(true), slide.firstChild);
-    });
-
-    const TOTAL = 12;
-    let current = 1;
-    const slides = Array.from(document.querySelectorAll("#deck section[id]"));
-    const navLinks = document.querySelectorAll(".nav-dots a");
+    const deck = document.getElementById("deck");
+    const slidesEls = Array.from(document.querySelectorAll(".slide"));
     const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
-    const progressFill = document.getElementById("progressFill");
     const slideCounter = document.getElementById("slideCounter");
-    const blendBar = document.querySelector(".blend-progress");
-
-    function updateUI() {
-      const p = current / TOTAL;
-      if (progressFill) progressFill.style.width = (p * 100) + "%";
-      if (slideCounter) slideCounter.textContent = current + " / " + TOTAL;
-      if (blendBar) blendBar.style.transform = "scaleX(" + Math.max(0.05, p) + ")";
-      document.documentElement.style.setProperty("--slide-progress", p);
-      if (prevBtn) prevBtn.disabled = current === 1;
-      if (nextBtn) nextBtn.disabled = current === TOTAL;
-      navLinks.forEach((a) => a.classList.toggle("active", Number(a.dataset.slide) === current));
+    const progressFill = document.getElementById("progressFill");
+    const footerLogo = document.getElementById("footerLogo");
+    let current = 0;
+    function fitDeck() {
+      const w = window.visualViewport?.width || window.innerWidth;
+      const h = window.visualViewport?.height || window.innerHeight;
+      deck.style.setProperty("--deck-scale", Math.max(.1, Math.min((w-16)/1600,(h-16)/900,1)));
     }
-
-    function goTo(n, dir) {
-      if (n < 1 || n > TOTAL || n === current) return;
-      const prev = slides[current - 1];
-      const next = slides[n - 1];
-      const fwd = dir === "forward" || (dir !== "back" && n > current);
-      prev.classList.remove("slide-active");
-      prev.classList.add(fwd ? "slide-exit-left" : "slide-exit-right");
-      setTimeout(() => prev.classList.remove("slide-exit-left", "slide-exit-right"), 420);
-      next.classList.add("slide-active");
-      current = n;
-      updateUI();
+    function goTo(index) {
+      current = Math.max(0, Math.min(slidesEls.length - 1, index));
+      slidesEls.forEach((s,i)=>s.classList.toggle("active", i===current));
+      const number = String(current+1).padStart(2,"0");
+      const total = String(slidesEls.length).padStart(2,"0");
+      const active = slidesEls[current];
+      const isDark = active.classList.contains("red") || active.classList.contains("dark");
+      slideCounter.textContent = number+" / "+total;
+      slideCounter.style.color = isDark ? "rgba(255,255,255,.58)" : "rgba(20,20,20,.52)";
+      progressFill.style.width = ((current+1)/slidesEls.length)*100+"%";
+      prevBtn.disabled = current===0; nextBtn.disabled = current===slidesEls.length-1;
+      footerLogo.style.color = isDark ? "#fff" : "";
+      footerLogo.style.opacity = (current===0 || current===slidesEls.length-1) ? "0" : "1";
+      document.title = number+" | "+(active.dataset.title||"MBFlex");
     }
-
-    if (prevBtn) prevBtn.addEventListener("click", () => goTo(current - 1, "back"));
-    if (nextBtn) nextBtn.addEventListener("click", () => goTo(current + 1, "forward"));
-    navLinks.forEach((a) => a.addEventListener("click", (e) => { e.preventDefault(); goTo(Number(a.dataset.slide)); }));
-
-    document.addEventListener("wheel", (e) => {
+    prevBtn.onclick=()=>goTo(current-1); nextBtn.onclick=()=>goTo(current+1);
+    window.addEventListener("resize", fitDeck);
+    window.visualViewport?.addEventListener("resize", fitDeck);
+    window.addEventListener("keydown", e=>{
+      if(["ArrowRight","PageDown"," "].includes(e.key)){e.preventDefault();goTo(current+1);}
+      if(["ArrowLeft","PageUp"].includes(e.key)){e.preventDefault();goTo(current-1);}
+      if(e.key==="Home")goTo(0); if(e.key==="End")goTo(slidesEls.length-1);
+    });
+    let tx=null; deck.addEventListener("touchstart",e=>tx=e.changedTouches[0].clientX,{passive:true});
+    deck.addEventListener("touchend",e=>{if(tx==null)return; const d=e.changedTouches[0].clientX-tx; if(Math.abs(d)>70)goTo(current+(d<0?1:-1)); tx=null;},{passive:true});
+    document.addEventListener("wheel", e=>{
       if (Math.abs(e.deltaY) < 20) return;
       e.preventDefault();
-      goTo(current + (e.deltaY > 0 ? 1 : -1), e.deltaY > 0 ? "forward" : "back");
-    }, { passive: false });
-
-    document.addEventListener("keydown", (e) => {
-      if (["ArrowRight", " ", "PageDown"].includes(e.key)) { e.preventDefault(); goTo(current + 1, "forward"); }
-      if (["ArrowLeft", "PageUp"].includes(e.key)) { e.preventDefault(); goTo(current - 1, "back"); }
-    });
-
-    let tx = 0;
-    document.addEventListener("touchstart", (e) => { tx = e.changedTouches[0].screenX; }, { passive: true });
-    document.addEventListener("touchend", (e) => {
-      const dx = e.changedTouches[0].screenX - tx;
-      if (Math.abs(dx) > 50) goTo(current + (dx < 0 ? 1 : -1), dx < 0 ? "forward" : "back");
-    }, { passive: true });
-
-    updateUI();
-  })();
+      goTo(current + (e.deltaY > 0 ? 1 : -1));
+    }, {passive:false});
+    fitDeck(); goTo(0);
   </script>
 </body>
 </html>
