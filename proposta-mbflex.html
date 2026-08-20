@@ -795,6 +795,79 @@
     .mix-row strong { font-size: 22px; font-weight: 700; text-align: right; }
     .team-role p { margin: 8px 0 0; color: var(--ink-soft); font-size: 17px; line-height: 1.35; }
     .team-role h3 { margin-top: 18px; }
+    .ctx-facts {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 36px;
+    }
+    .ctx-fact {
+      min-height: 168px;
+      padding: 22px 24px;
+      border-radius: 22px;
+    }
+    .ctx-fact .k {
+      font: 700 12px/1 "IBM Plex Mono", monospace;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--v4-cream);
+      margin-bottom: 14px;
+    }
+    .ctx-fact h3 { margin: 0 0 10px; font-size: 24px; }
+    .ctx-fact p { margin: 0; color: rgba(255,255,255,.72); font-size: 17px; line-height: 1.35; }
+    .statement {
+      margin-top: 24px;
+      padding: 28px 34px;
+      border-radius: 24px;
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 36px;
+      align-items: center;
+    }
+    .statement > *,
+    .ctx-fact > * { position: relative; z-index: 1; }
+    .statement .mark {
+      font: 700 12px/1 "IBM Plex Mono", monospace;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--v4-cream);
+      margin-bottom: 14px;
+    }
+    .statement blockquote {
+      margin: 0;
+      font-size: 34px;
+      font-weight: 600;
+      letter-spacing: -.035em;
+      line-height: 1.18;
+    }
+    .statement .turn {
+      margin: 14px 0 0;
+      color: rgba(255,255,255,.72);
+      font-size: 18px;
+      line-height: 1.4;
+    }
+    .statement .who {
+      padding-left: 28px;
+      border-left: 1px solid rgba(255,255,255,.2);
+    }
+    .statement .who .name {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -.02em;
+    }
+    .statement .who .role {
+      margin: 8px 0 0;
+      font: 700 12px/1.35 "IBM Plex Mono", monospace;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--v4-cream);
+    }
+    .statement .who .co {
+      margin: 10px 0 0;
+      color: rgba(255,255,255,.7);
+      font-size: 16px;
+    }
 
   </style>
 
@@ -838,21 +911,36 @@
 
       <section class="slide dark" data-title="Dependência">
         <span class="eyebrow">Contexto MBFlex Express</span>
-        <h2 style="margin-top:28px;max-width:1240px">Vocês não têm problema de operação.<br>Têm uma carteira 100% amarrada na plataforma.</h2>
-        <div class="diagnosis-grid">
-          <div class="stack">
-            <div class="line-card"><div class="icon-box"><svg class="icon"><use href="#i-store"/></svg></div><div><h3>100% marketplace</h3><p>ML, Shopee e Amazon indicam. O cliente vem. A carteira não tem origem própria.</p></div></div>
-            <div class="line-card"><div class="icon-box"><svg class="icon"><use href="#i-megaphone"/></svg></div><div><h3>Loja própria = 0%</h3><p>Esse público a plataforma não traz. Sem canal, o mix permanece 100/0.</p></div></div>
-            <div class="line-card"><div class="icon-box"><svg class="icon"><use href="#i-dashboard"/></svg></div><div><h3>O mix não muda sozinho</h3><p>Crescer na indicação aprofunda a dependência. 500 no mesmo jogo não diversifica a carteira.</p></div></div>
-            <div class="line-card"><div class="icon-box"><svg class="icon"><use href="#i-users"/></svg></div><div><h3>Motoboy é 60/40 do P&amp;L</h3><p>Recusou 200+ clientes no fim do ano. Perdeu um tubarão para quem tinha mais volume.</p></div></div>
-          </div>
-          <div class="metric-card glass" style="min-height:464px">
-            <div class="icon-box"><svg class="icon"><use href="#i-bolt"/></svg></div>
-            <div class="big-number" style="font-size:52px;margin-top:36px;line-height:1.05">Dependência<br>de plataforma</div>
-            <h3 style="margin-top:22px">Leitura</h3>
-            <p>A operação entrega. O comercial não escolhe o público. Loja própria hoje é 0% da carteira.</p>
-          </div>
+        <h2 style="margin-top:22px;max-width:1240px;font-size:46px">Vocês não têm problema de operação.<br>Têm uma carteira 100% amarrada na plataforma.</h2>
+        <div class="ctx-facts">
+          <article class="ctx-fact glass">
+            <div class="k">01 · Origem</div>
+            <h3>100% marketplace</h3>
+            <p>ML, Shopee e Amazon indicam. O cliente vem. A carteira não tem origem própria.</p>
+          </article>
+          <article class="ctx-fact glass">
+            <div class="k">02 · Mix</div>
+            <h3>Loja própria = 0%</h3>
+            <p>Esse público a plataforma não traz. Sem canal, o mix permanece 100/0.</p>
+          </article>
+          <article class="ctx-fact glass">
+            <div class="k">03 · Teto</div>
+            <h3>A malha já recusou</h3>
+            <p>200+ clientes no fim do ano. Perdeu um tubarão para quem tinha mais volume.</p>
+          </article>
         </div>
+        <aside class="statement glass">
+          <div>
+            <div class="mark">A conta, na voz de quem decide</div>
+            <blockquote>“Preciso ser uma máquina de captar cliente.”</blockquote>
+            <p class="turn">Hoje essa máquina é a plataforma. Sem canal próprio, a frase não vira operação.</p>
+          </div>
+          <div class="who">
+            <p class="name">Márcio Beccari</p>
+            <p class="role">Sócio · Comercial</p>
+            <p class="co">MBFlex Express</p>
+          </div>
+        </aside>
       </section>
 
       <section class="slide white" data-title="Os dados">
@@ -901,7 +989,7 @@
           <div class="format-card"><div class="k">02</div><h3>Prestador vai embora</h3><p>O tubarão saiu para o concorrente com mais volume. Motoboy é 60/40. Volume certo segura malha.</p></div>
           <div class="format-card"><div class="k">03</div><h3>Loja própria = 0%</h3><p>Esse público não cai no colo da plataforma. Sem canal, o mix permanece 100/0.</p></div>
         </div>
-        <div class="quote" style="margin-top:36px;border-color:rgba(255,255,255,.35);font-size:26px;color:#fff">“Preciso ser uma máquina de captar cliente.” — Márcio. Hoje a máquina é a plataforma.</div>
+        <div class="quote" style="margin-top:36px;border-color:rgba(255,255,255,.35);font-size:26px;color:#fff">Sem canal próprio, 500 recicla a dependência. Com canal próprio, 500 é carteira.</div>
       </section>
 
       <section class="slide dark" data-title="Dores × MBFlex">
@@ -933,7 +1021,7 @@
         <div class="sphere" style="width:380px;height:380px;right:-60px;top:-90px;opacity:.4"></div>
         <span class="eyebrow">Promessa</span>
         <h2 style="margin-top:36px;max-width:1280px;font-size:52px">A V4 opera o canal de loja própria que a plataforma não traz.</h2>
-        <p class="lede" style="margin-top:28px;max-width:1100px">Assessoria de Growth contínua: Account, gestor de tráfego, copy e design. A EE que vocês já pagaram é o mapa. Daqui para frente, é execução com trava de capacidade.</p>
+        <p class="lede" style="margin-top:28px;max-width:1100px">Assessoria de Growth contínua: Account, gestor de tráfego, copy e design. Execução com trava de capacidade — o canal de loja própria, todo mês.</p>
         <div class="quote" style="margin-top:48px;border-color:var(--v4-cream);font-size:28px">Não é PDF. É o time que liga o canal — e para quando a malha pede.</div>
       </section>
 
