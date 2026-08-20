@@ -770,6 +770,31 @@
       text-transform: uppercase;
       color: var(--v4-red);
     }
+    .brand-lockup .v4-mark { height: 38px; width: auto; display: block; }
+    .map-item h3 { color: var(--ink); }
+    .map-item p { color: var(--ink-soft); }
+    .red .format-card {
+      background: rgba(255,255,255,.08);
+      border-color: rgba(255,255,255,.18);
+    }
+    .red .format-card .k { color: var(--v4-cream); }
+    .red .format-card h3 { color: #fff; }
+    .red .format-card p { color: rgba(255,255,255,.78); }
+    .phase-rail.four { grid-template-columns: repeat(4, 1fr); }
+    .recap-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 28px; }
+    .recap-3 .split-card { min-height: auto; padding: 22px 24px; }
+    .recap-3 h3 { font-size: 22px; }
+    .recap-3 ul { font-size: 16px; }
+    .mix-stack { display: grid; gap: 22px; margin-top: 36px; max-width: 1100px; }
+    .mix-row { display: grid; grid-template-columns: 160px 1fr 120px; gap: 18px; align-items: center; }
+    .mix-row label {
+      font: 700 12px/1 "IBM Plex Mono", monospace;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--v4-cream);
+    }
+    .mix-row strong { font-size: 22px; font-weight: 700; text-align: right; }
+    .team-role p { margin: 8px 0 0; color: var(--ink-soft); font-size: 17px; line-height: 1.35; }
+    .team-role h3 { margin-top: 18px; }
 
   </style>
 
@@ -783,6 +808,7 @@
     <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
     <symbol id="i-megaphone" viewBox="0 0 24 24"><path d="m3 11 14-6v14L3 13v-2Z"/><path d="M11 16v4H7l-1-6"/></symbol>
     <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><circle cx="18" cy="9" r="3"/><path d="M2 21c0-5 3-8 7-8s7 3 7 8M16 14c4 0 6 2 6 7"/></symbol>
+    <symbol id="i-dashboard" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></symbol>
     <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></symbol>
     <symbol id="i-brush" viewBox="0 0 24 24"><path d="m14 4 6 6-8 8H6v-6l8-8Z"/><path d="M4 20h8"/></symbol>
     <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
@@ -799,264 +825,246 @@
         <div class="sphere" style="width:245px;height:245px;right:285px;top:115px;opacity:.32"></div>
         <div class="cover-content">
           <div>
-            <div class="cover-kicker">MBFlex Express × V4 Company · Assessoria de Growth</div>
-            <h1 class="cover-title">Sair do marketplace.<br>Chegar em 500.</h1>
-            <p class="cover-meta">O primeiro marketing estruturado da MBFlex — para a metade da carteira que a plataforma não traz: loja própria.</p>
+            <div class="brand-lockup">
+              <svg class="v4-mark" fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 77 20" aria-label="V4 Company"><path fill="#fff" d="M33.023 3.575c-2.001.003-3.093 1.21-3.09 3.32l.008 6.858c.003 2.11 1.098 3.315 3.1 3.312 2-.003 3.092-1.21 3.09-3.32l-.009-6.858c-.003-2.11-1.097-3.315-3.099-3.312zm.015 11.606c-.649.001-1.057-.356-1.058-1.298l-.009-7.122c-.001-.942.406-1.3 1.055-1.302.648 0 1.057.357 1.058 1.299l.009 7.122c.001.942-.407 1.3-1.055 1.301zm-6.1-3.176l.002 1.884c.001.942-.406 1.282-1.055 1.283-.648 0-1.056-.338-1.058-1.28l-.009-7.122c-.001-.942.406-1.3 1.055-1.302.648 0 1.057.357 1.058 1.299l.002 1.413 1.927-.002-.002-1.281c-.002-2.11-1.041-3.315-3.043-3.313-2 .003-3.037 1.21-3.034 3.32l.008 6.859c.003 2.11 1.042 3.314 3.043 3.312 2.002-.003 3.038-1.21 3.035-3.32l-.002-1.752-1.927.002zM13.055 6.352L8.68 10.813c-.06.062-.017.166.067.166l4.382-.006a.096.096 0 00.096-.097l-.006-4.456c0-.087-.103-.13-.163-.068zm5.862 7.88l-2.687.004a.035.035 0 00-.035.035l.004 2.879c0 .02-.015.035-.035.035l-3.01.004a.035.035 0 01-.034-.035l-.004-2.879a.035.035 0 00-.034-.035l-8.796.012a.141.141 0 01-.14-.142l-.003-2.624v-.004a.795.795 0 01.223-.588l8.758-8.928a.035.035 0 01.025-.01l2.846-.004c.005 0 .009.001.014.003a.367.367 0 01.216.348l.01 8.677c0 .019.017.035.036.035l2.641-.004a.035.035 0 00.035-.035l-.011-8.5c-.002-1.364-1.1-2.478-2.442-2.476L4.18.016a.035.035 0 00-.034.036l.008 6.856c0 .031.037.047.06.025l4.994-5.064a.034.034 0 01.024-.01l2.603-.003c.03 0 .046.037.025.06l-8.118 8.41a.034.034 0 01-.049 0l-1.529-1.55a.036.036 0 01-.01-.026L2.143.074A.035.035 0 002.104.04C.976.185.086 1.131 0 2.294v5.972l.011 8.9a2.48 2.48 0 001.937 2.424h14.974c1.15-.199 2.034-1.224 2.032-2.448l-.003-2.873a.035.035 0 00-.035-.036zM66.47 3.682l.01 7.895-2.104-7.892-2.557.003.017 13.19 1.834-.003-.012-9.553 2.55 9.55 2.094-.004-.016-13.188-1.816.002zm-23.33.031l-1.378 9.366-1.513-9.362-2.835.003.017 13.19 1.779-.003-.012-9.327 1.532 9.325 1.927-.003 1.396-9.46.012 9.458 1.928-.002-.017-13.19-2.835.005h-.001zm33.133-.043l-1.946.002-1.549 6.013-1.564-6.009-2.131.003 2.587 8.814.005 4.371 2.039-.003-.006-4.37 2.565-8.821zm-20.44.026l-2.058 13.192 1.871-.003.35-2.393 2.501-.003.355 2.392 2.057-.003-2.092-13.186-2.983.004zm.42 9.005l.974-6.67.99 6.668-1.964.002zm-5.793-8.998l-3.002.004.017 13.189 2.038-.003-.006-4.955.964-.002c2.038-.002 3.037-1.153 3.035-3.263l-.003-1.715c-.002-2.11-1.005-3.258-3.043-3.255zm.008 6.35h-.964L49.5 5.589l.964-.001c.648-.001 1.001.3 1.002 1.242l.003 1.978c.001.942-.35 1.245-1 1.245z"></path></svg>
+            </div>
+            <span class="eyebrow" style="margin-top:28px">MBFlex Express × V4 Company · Assessoria de Growth</span>
+            <h1 class="cover-title">Da dependência do marketplace<br>à máquina de loja própria</h1>
+            <p class="lede" style="max-width:1040px">A malha já existe. O canal de loja própria, não. Esta proposta instala a máquina de captação — com mix, capacidade e time — para a meta de 500 clientes no ano.</p>
           </div>
-          <div class="cover-client">Account · GT · Copy · Design · condição de cliente EE</div>
+          <div class="cover-client">Proposta personalizada · cliente EE · Product Sales V4</div>
         </div>
       </section>
 
       <section class="slide dark" data-title="Dependência">
-        <div class="topline"></div>
-        <span class="eyebrow">A trava comercial</span>
-        <h2>Hoje a carteira é 100% marketplace.</h2>
-        <p class="lede lede-tight">ML, Shopee e Amazon indicam. O cliente vem. Por isso nunca precisou investir em marketing — e por isso o mix não muda sozinho.</p>
-        <div class="grid-3" style="margin-top:48px">
-          <article class="clock-card">
-            <div class="icon-box"><svg class="icon"><use href="#i-store"/></svg></div>
-            <h3>Dependência</h3>
-            <p>Receita ativa amarrada na plataforma. Pressão de preço e homologação ditam o ritmo.</p>
-          </article>
-          <article class="clock-card">
+        <span class="eyebrow">Contexto MBFlex Express</span>
+        <h2 style="margin-top:28px;max-width:1240px">Vocês não têm problema de operação.<br>Têm uma carteira 100% amarrada na plataforma.</h2>
+        <div class="diagnosis-grid">
+          <div class="stack">
+            <div class="line-card"><div class="icon-box"><svg class="icon"><use href="#i-store"/></svg></div><div><h3>100% marketplace</h3><p>ML, Shopee e Amazon indicam. O cliente vem. A carteira não tem origem própria.</p></div></div>
+            <div class="line-card"><div class="icon-box"><svg class="icon"><use href="#i-megaphone"/></svg></div><div><h3>Nunca investiu em marketing</h3><p>Crescimento orgânico. R$ 300 esporádicos no Instagram não são operação de mídia.</p></div></div>
+            <div class="line-card"><div class="icon-box"><svg class="icon"><use href="#i-dashboard"/></svg></div><div><h3>Sem CRM, sem rastro</h3><p>Origem, desfecho e motivo de perda não governam. Pipeline é conversa no Zap.</p></div></div>
+            <div class="line-card"><div class="icon-box"><svg class="icon"><use href="#i-users"/></svg></div><div><h3>Motoboy é 60/40 do P&amp;L</h3><p>Recusou 200+ clientes no fim do ano. Perdeu um tubarão para quem tinha mais volume.</p></div></div>
+          </div>
+          <div class="metric-card glass" style="min-height:464px">
             <div class="icon-box"><svg class="icon"><use href="#i-bolt"/></svg></div>
-            <h3>Nunca investiu</h3>
-            <p>R$ 300 esporádicos no Instagram. Paulo e Renata não são operação de mídia.</p>
-          </article>
-          <article class="clock-card">
-            <div class="icon-box"><svg class="icon"><use href="#i-target"/></svg></div>
-            <h3>Loja própria = 0%</h3>
-            <p>Esse público não cai no colo. Sem canal próprio, a meta de 500 só recicla o mesmo jogo.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="slide white" data-title="O que já existe">
-        <div class="topline"></div>
-        <span class="eyebrow">Operação real · números informados</span>
-        <h2>A malha já existe.<br>Falta o canal que o marketplace não cobre.</h2>
-        <div class="metric-wall four" style="margin-top:40px">
-          <article class="card metric-card">
-            <div class="big-number">196</div>
-            <p>clientes ativos. Meta do ano: 500.</p>
-          </article>
-          <article class="card metric-card">
-            <div class="big-number">R$ 1 mi</div>
-            <p>faturamento mensal informado.</p>
-          </article>
-          <article class="card metric-card">
-            <div class="big-number">7 mil</div>
-            <p>pacotes/dia de capacidade. Gate da escala.</p>
-          </article>
-          <article class="card metric-card">
-            <div class="big-number">5★</div>
-            <p>atendimento — o diferencial que a mídia ainda não fala.</p>
-          </article>
-        </div>
-        <p class="mini-note">Fontes: EE, SPICED 23/07 e GTM 18/08. Ticket e margem seguem em conciliação com o Vinícius.</p>
-      </section>
-
-      <section class="slide red" data-title="Mix 50/50">
-        <div class="sphere" style="width:360px;height:360px;right:-70px;bottom:-80px;opacity:.4"></div>
-        <span class="eyebrow">Meta principal do ano</span>
-        <h2>500 clientes. Metade loja própria.</h2>
-        <p class="lede">Diversificar o público. 50% e-commerce próprio. 50% marketplace. Sem isso, 500 é só mais seller de plataforma.</p>
-        <div style="margin-top:48px;max-width:1100px">
-          <div class="mix-labels"><span>50% loja própria</span><span>50% marketplace</span></div>
-          <div class="mix-track"><span></span><span></span></div>
-        </div>
-        <div class="split-2" style="margin-top:8px">
-          <article class="split-card" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.22);min-height:auto">
-            <h3>O que o marketplace já faz</h3>
-            <ul>
-              <li>Indicação orgânica de seller</li>
-              <li>Base atual e reputação 5 estrelas</li>
-              <li>Continua como 50% da carteira</li>
-            </ul>
-          </article>
-          <article class="split-card" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.22);min-height:auto">
-            <h3>O que o Growth precisa criar</h3>
-            <ul>
-              <li>Canal de aquisição de loja própria</li>
-              <li>Google de intenção + cadência comercial</li>
-              <li>~250 contas novas neste lado no ano</li>
-            </ul>
-          </article>
-        </div>
-      </section>
-
-      <section class="slide dark" data-title="Dual e capacidade">
-        <div class="topline"></div>
-        <span class="eyebrow">A regra que o Vinícius já falou</span>
-        <h2>Crescer cliente sem motoboy<br>quebra a operação.</h2>
-        <p class="lede">Dois lados, duas jornadas. Mídia de loja própria só sobe quando o cluster tem capacidade — 7.000 pacotes/dia, ~140 entregadores.</p>
-        <div class="process" style="margin-top:52px">
-          <div class="stage"><h3>01 · Loja própria</h3><p>Google captura. Comercial qualifica. Atende só o que cabe na moto.</p></div>
-          <div class="arrow">→</div>
-          <div class="stage"><h3>02 · Marketplace</h3><p>Base que já existe. Não é o motor novo. É o 50% que se equilibra.</p></div>
-          <div class="arrow">→</div>
-          <div class="stage"><h3>03 · Prestador</h3><p>Jornada separada. Sem misturar no mesmo anúncio, Zap ou CRM.</p></div>
-          <div class="arrow">→</div>
-          <div class="stage"><h3>04 · Gate</h3><p>Sem cluster liberado, não escala verba. Qualidade 5 estrelas primeiro.</p></div>
-        </div>
-      </section>
-
-      <section class="slide white" data-title="Produto">
-        <div class="topline"></div>
-        <span class="eyebrow">Produto · Assessoria de Growth</span>
-        <h2>Account + GT + copy + design.<br>Operação contínua.</h2>
-        <p class="lede">Não é PDF. É o time que liga o canal de loja própria no mês — com a EE que vocês já pagaram como mapa.</p>
-        <div class="grid-4" style="margin-top:40px">
-          <article class="card">
-            <div class="icon-box"><svg class="icon"><use href="#i-users"/></svg></div>
-            <h3 style="margin-top:18px">Account</h3>
-            <p style="margin:8px 0 0;color:var(--ink-soft);font-size:17px;line-height:1.35">Orquestra mix 50/50, capacidade e comercial. Dono do ritmo até 500.</p>
-          </article>
-          <article class="card">
-            <div class="icon-box"><svg class="icon"><use href="#i-search"/></svg></div>
-            <h3 style="margin-top:18px">Gestor de tráfego</h3>
-            <p style="margin:8px 0 0;color:var(--ink-soft);font-size:17px;line-height:1.35">Google Search de intenção. Meta só remarketing. Sem cluster, não escala.</p>
-          </article>
-          <article class="card">
-            <div class="icon-box"><svg class="icon"><use href="#i-megaphone"/></svg></div>
-            <h3 style="margin-top:18px">Copy</h3>
-            <p style="margin:8px 0 0;color:var(--ink-soft);font-size:17px;line-height:1.35">Loja própria, atendimento humano, o que cabe na moto. Não “Flex SP” genérico.</p>
-          </article>
-          <article class="card">
-            <div class="icon-box"><svg class="icon"><use href="#i-brush"/></svg></div>
-            <h3 style="margin-top:18px">Design</h3>
-            <p style="margin:8px 0 0;color:var(--ink-soft);font-size:17px;line-height:1.35">Criativos, páginas e prova. Anúncio, LP e CTA na mesma promessa.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="slide white" data-title="Motor">
-        <div class="topline"></div>
-        <span class="eyebrow">Como a máquina roda</span>
-        <h2>Google captura. Meta recupera.<br>Comercial fecha.</h2>
-        <div class="process" style="margin-top:52px">
-          <div class="stage"><h3>Busca</h3><p>Intenção de loja própria, serviço e região liberada.</p></div>
-          <div class="arrow">→</div>
-          <div class="stage"><h3>Página</h3><p>Promessa aderente, filtro de carga, CTA comercial.</p></div>
-          <div class="arrow">→</div>
-          <div class="stage"><h3>CRM + SLA</h3><p>Origem, dono, próxima ação. Nada some no WhatsApp.</p></div>
-          <div class="arrow">→</div>
-          <div class="stage"><h3>Outbound</h3><p>Márcio e o time qualificam, propõem e registram o desfecho.</p></div>
-          <div class="arrow">→</div>
-          <div class="stage"><h3>Ativação</h3><p>Primeira coleta. Receita volta para a campanha.</p></div>
-        </div>
-        <p class="quote" style="margin-top:48px">KPI não é lead. É lojista de loja própria ativado — dentro de SLA e da malha.</p>
-      </section>
-
-      <section class="slide dark" data-title="Cadência">
-        <div class="topline"></div>
-        <span class="eyebrow">90 dias · execução com trava</span>
-        <h2>Fundação, piloto, depois escala.</h2>
-        <div class="clock-grid">
-          <article class="clock-card">
-            <div class="n" style="font:700 12px/1 'IBM Plex Mono',monospace;letter-spacing:.1em;color:var(--v4-cream)">DIAS 1–30</div>
-            <div class="big-number">01</div>
-            <h3>Fundação</h3>
-            <p>Clusters, tracking, CRM, claims, páginas de loja própria e lead teste. Sem isso, mídia não sobe.</p>
-          </article>
-          <article class="clock-card">
-            <div class="n" style="font:700 12px/1 'IBM Plex Mono',monospace;letter-spacing:.1em;color:var(--v4-cream)">DIAS 31–60</div>
-            <div class="big-number">02</div>
-            <h3>Piloto Google</h3>
-            <p>Search por intenção e região. SQLs com termo, custo e desfecho conhecidos.</p>
-          </article>
-          <article class="clock-card">
-            <div class="n" style="font:700 12px/1 'IBM Plex Mono',monospace;letter-spacing:.1em;color:var(--v4-cream)">DIAS 61–90</div>
-            <div class="big-number">03</div>
-            <h3>Remarketing</h3>
-            <p>Meta recupera quem não avançou. Otimiza por ativação e contribuição — não por CPL.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="slide white" data-title="EE reconhecida">
-        <div class="topline"></div>
-        <span class="eyebrow">Condição de cliente V4</span>
-        <h2>A EE que vocês já pagaram<br>entra na mensalidade.</h2>
-        <p class="lede">R$ 14.612,00 em clareza: GTM, ICP, posicionamento e o mapa do que executar. Growth não começa do zero.</p>
-        <div class="grid-3" style="margin-top:40px">
-          <article class="card">
-            <div class="card-num" style="font:700 12px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--v4-red)">Tabela</div>
-            <div class="big-number" style="font-size:54px;margin:16px 0 8px">R$ 11 mil</div>
-            <p style="margin:0;color:var(--ink-soft);font-size:18px">Assessoria de Growth / mês</p>
-          </article>
-          <article class="card">
-            <div class="card-num" style="font:700 12px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--v4-red)">EE já investida</div>
-            <div class="big-number" style="font-size:54px;margin:16px 0 8px">14.612</div>
-            <p style="margin:0;color:var(--ink-soft);font-size:18px">Abate R$ 1.217,67 na mensalidade</p>
-          </article>
-          <article class="card">
-            <div class="card-num" style="font:700 12px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--v4-red)">Fee final</div>
-            <div class="big-number" style="font-size:54px;margin:16px 0 8px">9.259</div>
-            <p style="margin:0;color:var(--ink-soft);font-size:18px">R$ 9.259,31 / mês · recorrente</p>
-          </article>
-        </div>
-        <div class="anchor-note">Tabela R$ 11.000 − equivalente mensal da EE (R$ 1.217,67) − condição comercial (R$ 523,02) = <strong style="color:var(--ink)">R$ 9.259,31</strong>.</div>
-      </section>
-
-      <section class="slide white" data-title="Investimento">
-        <div class="topline"></div>
-        <span class="eyebrow">Investimento · Assessoria de Growth</span>
-        <h2>Condição de quem já fez a EE.</h2>
-        <div class="price-hero">
-          <article class="price-box">
-            <div class="tag">Fee mensal · cartão recorrente</div>
-            <div class="amount"><span>R$</span>9.259<small style="font-size:32px;font-weight:600;letter-spacing:0">,31</small></div>
-            <p>Account + GT + copy + design. Verba de mídia à parte, definida com o Vinícius.</p>
-          </article>
-          <div>
-            <div class="price-lines">
-              <div class="price-line"><span>Tabela</span><strong>R$ 11.000,00</strong></div>
-              <div class="price-line"><span>EE já investida (12×)</span><strong>− R$ 1.217,67</strong></div>
-              <div class="price-line"><span>Condição comercial</span><strong>− R$ 523,02</strong></div>
-              <div class="price-line total"><span>Fee final</span><strong class="ok">R$ 9.259,31</strong></div>
-            </div>
-            <p class="mini-note">Mídia não entra no fee. Projeção inicial da planilha: R$ 3.500/mês, com gate de cluster.</p>
+            <div class="big-number" style="font-size:52px;margin-top:36px;line-height:1.05">Dependência<br>de plataforma</div>
+            <h3 style="margin-top:22px">Leitura</h3>
+            <p>A operação entrega. O comercial não escolhe o público. Loja própria hoje é 0% da carteira.</p>
           </div>
         </div>
       </section>
 
-      <section class="slide dark" data-title="Sucesso">
+      <section class="slide white" data-title="Os dados">
         <div class="topline"></div>
-        <span class="eyebrow">O que vamos olhar juntos</span>
-        <h2>Receita previsível de loja própria — sem fingir os 500 na mídia.</h2>
-        <div class="success-grid" style="margin-top:40px">
-          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-check"/></svg></div><h3>Origem rastreável até ativação</h3></div>
-          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-check"/></svg></div><h3>Mix visível: loja própria × marketplace</h3></div>
-          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-check"/></svg></div><h3>SLA de resposta e motivo de perda</h3></div>
-          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-check"/></svg></div><h3>Google no ar só com cluster liberado</h3></div>
-          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-check"/></svg></div><h3>Jornada de motoboy fora do funil de seller</h3></div>
-          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-check"/></svg></div><h3>500 é meta da empresa; Growth é o motor dos 50%</h3></div>
+        <div style="display:inline-flex;align-items:center;padding:8px 14px;border-radius:999px;background:rgba(229,9,20,.08);border:1px solid rgba(229,9,20,.18);font:700 12px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#e50914;margin-bottom:18px">A conta que explica a meta de 500</div>
+        <h2 style="margin:0;max-width:1180px;font-size:42px;line-height:1.12">Os números da operação — e o buraco do canal.</h2>
+        <p style="margin:12px 0 0;max-width:980px;color:#5a5a5a;font-size:20px;line-height:1.35">A malha já é grande o suficiente para ser seletiva. O que não existe é origem fora do marketplace.</p>
+        <div class="leak-grid">
+          <div class="leak-card">
+            <div class="k">O que já existe</div>
+            <div class="num">196</div>
+            <p class="cap">clientes ativos · ~R$ 1 mi/mês informado</p>
+            <ul>
+              <li>Capacidade: 7 mil pacotes/dia · ~140 entregadores</li>
+              <li>+100 mil entregas/mês · 80% moto / 20% carro</li>
+              <li>Atendimento 5★ no Google · churn de cliente baixo</li>
+            </ul>
+          </div>
+          <div class="leak-card">
+            <div class="k">O que não existe</div>
+            <div class="num">0%</div>
+            <p class="cap">da carteira em loja própria / e-commerce</p>
+            <ul>
+              <li>100% da origem hoje é indicação de marketplace</li>
+              <li>Marketing informal: Paulo (TI) + Renata (Instagram)</li>
+              <li>Sem CRM · sem tracking · sem cadência comercial</li>
+            </ul>
+          </div>
+        </div>
+        <div class="leak-banner">
+          <div class="icon-box" style="background:rgba(255,255,255,.15)"><svg class="icon" style="stroke:#fff"><use href="#i-target"/></svg></div>
+          <div>
+            <h3>A pergunta que a meta de 500 exige: de onde vêm os próximos 304 clientes?</h3>
+            <p>Se a resposta for “a plataforma indica”, o mix não muda — e 500 é só mais seller no mesmo jogo. Fontes: EE, SPICED 23/07 e GTM 18/08. Ticket e margem seguem em conciliação com o Vinícius.</p>
+          </div>
         </div>
       </section>
 
-      <section class="slide red" data-title="Próximos passos">
-        <div class="sphere" style="width:400px;height:400px;right:-90px;top:-100px;opacity:.45"></div>
-        <span class="eyebrow">Fechamento</span>
-        <h2>Começar o canal<br>que ainda não existe.</h2>
-        <div class="cta-steps">
-          <article class="cta-step">
-            <div class="n">01</div>
-            <h3>Alinhar</h3>
-            <p>Fee R$ 9.259,31 e verba de mídia com o Vinícius.</p>
+      <section class="slide red" data-title="A trava">
+        <div class="sphere" style="width:400px;height:400px;right:-70px;top:-100px;opacity:.45"></div>
+        <span class="eyebrow">A trava comercial</span>
+        <h2 style="margin-top:28px;max-width:1280px;font-size:48px">Crescer no mesmo jogo não muda o mix — e a malha já mostrou o teto.</h2>
+        <p class="lede" style="margin-top:24px;max-width:1100px">Vocês já recusaram demanda. Já perderam entregador para quem tinha mais volume. Sem canal próprio, a meta de 500 recicla a dependência.</p>
+        <div class="format-row" style="margin-top:40px">
+          <div class="format-card"><div class="k">01</div><h3>Demanda recusada</h3><p>200+ clientes no fim do ano. Capacidade é gate — não é falta de quem quer enviar.</p></div>
+          <div class="format-card"><div class="k">02</div><h3>Prestador vai embora</h3><p>O tubarão saiu para o concorrente com mais volume. Motoboy é 60/40. Volume certo segura malha.</p></div>
+          <div class="format-card"><div class="k">03</div><h3>Loja própria = 0%</h3><p>Esse público não cai no colo da plataforma. Sem canal, o mix permanece 100/0.</p></div>
+        </div>
+        <div class="quote" style="margin-top:36px;border-color:rgba(255,255,255,.35);font-size:26px;color:#fff">“Preciso ser uma máquina de captar cliente.” — Márcio. Hoje a máquina é a plataforma.</div>
+      </section>
+
+      <section class="slide dark" data-title="Dores × MBFlex">
+        <span class="eyebrow">Encaixe MBFlex</span>
+        <h2 style="margin-top:24px;max-width:1200px;font-size:40px">Onde a previsibilidade quebra — e o que precisa existir antes de escalar mídia.</h2>
+        <div class="map-grid">
+          <div class="map-item"><div class="dot"></div><div><div class="g6">MBF</div><h3>Origem 100% marketplace</h3><p>Pressão de preço e homologação ditam o ritmo. Vocês não escolhem o público.</p></div></div>
+          <div class="map-item"><div class="dot"></div><div><div class="g6">MBF</div><h3>Marketing nunca foi operação</h3><p>Não há gestor, verba contínua, criativo nem página de loja própria em cadência.</p></div></div>
+          <div class="map-item"><div class="dot"></div><div><div class="g6">MBF</div><h3>CRM não governa</h3><p>Lead no WhatsApp sem dono, sem SLA, sem motivo de perda. Mídia nisso vira bagunça.</p></div></div>
+          <div class="map-item"><div class="dot"></div><div><div class="g6">MBF</div><h3>Capacidade é o teto</h3><p>7 mil pacotes/dia. Sem cluster liberado, Google não sobe. Qualidade 5★ primeiro.</p></div></div>
+          <div class="map-item"><div class="dot"></div><div><div class="g6">MBF</div><h3>Dois públicos, um risco</h3><p>Seller e motoboy no mesmo anúncio, Zap ou CRM destroem conversão e reputação.</p></div></div>
+          <div class="map-item"><div class="dot"></div><div><div class="g6">MBF</div><h3>500 sem canal próprio</h3><p>Meta da empresa. Sem os 50% de loja própria, é só mais volume na mesma dependência.</p></div></div>
+        </div>
+      </section>
+
+      <section class="slide white" data-title="Visão estratégica">
+        <div class="topline"></div>
+        <span class="eyebrow">Visão estratégica</span>
+        <h2 style="margin-top:28px;max-width:1180px">A ordem certa: mix e capacidade antes de pressão de mídia.</h2>
+        <div class="format-row" style="margin-top:44px">
+          <div class="format-card"><div class="k">01 · Mix</div><h3>50% / 50%</h3><p>Metade loja própria, metade marketplace. Diversificar o público — não abandonar a plataforma.</p></div>
+          <div class="format-card"><div class="k">02 · Gate</div><h3>Malha primeiro</h3><p>Mídia de seller só sobe com cluster liberado. Motoboy em jornada separada, porque volume errado esvazia a rua.</p></div>
+          <div class="format-card"><div class="k">03 · Canal</div><h3>Intenção, não alcance</h3><p>Google captura quem busca now. Meta recupera. Comercial fecha. KPI é lojista ativado.</p></div>
+        </div>
+        <div class="quote" style="margin-top:36px;font-size:24px">Sem canal próprio, 500 é mais seller de plataforma. Com canal próprio, 500 é carteira.</div>
+      </section>
+
+      <section class="slide red" data-title="Promessa">
+        <div class="sphere" style="width:380px;height:380px;right:-60px;top:-90px;opacity:.4"></div>
+        <span class="eyebrow">Promessa</span>
+        <h2 style="margin-top:36px;max-width:1280px;font-size:52px">A V4 opera o canal de loja própria que a plataforma não traz.</h2>
+        <p class="lede" style="margin-top:28px;max-width:1100px">Assessoria de Growth contínua: Account, gestor de tráfego, copy e design. A EE que vocês já pagaram é o mapa. Daqui para frente, é execução com trava de capacidade.</p>
+        <div class="quote" style="margin-top:48px;border-color:var(--v4-cream);font-size:28px">Não é PDF. É o time que liga o canal — e para quando a malha pede.</div>
+      </section>
+
+      <section class="slide white" data-title="Time">
+        <div class="topline"></div>
+        <span class="eyebrow">Solução · o time na conta</span>
+        <h2 style="margin-top:22px;max-width:1180px">Account + GT + copy + design. Operação contínua.</h2>
+        <div class="grid-4" style="margin-top:40px">
+          <article class="card team-role">
+            <div class="icon-box"><svg class="icon"><use href="#i-users"/></svg></div>
+            <h3>Account</h3>
+            <p>Dono do mix 50/50, do gate de cluster e do ritmo com Márcio e Vinícius. Orquestra até ativação.</p>
           </article>
-          <article class="cta-step">
-            <div class="n">02</div>
-            <h3>Formalizar</h3>
-            <p>Contrato recorrente. Kick-off na semana seguinte.</p>
+          <article class="card team-role">
+            <div class="icon-box"><svg class="icon"><use href="#i-search"/></svg></div>
+            <h3>Gestor de tráfego</h3>
+            <p>Google Search de intenção e região. Meta só remarketing. Sem cluster liberado, não escala verba.</p>
           </article>
-          <article class="cta-step">
-            <div class="n">03</div>
-            <h3>Operar</h3>
-            <p>Fundação 30 dias. Piloto Google. Mix 50/50 no radar.</p>
+          <article class="card team-role">
+            <div class="icon-box"><svg class="icon"><use href="#i-megaphone"/></svg></div>
+            <h3>Copy</h3>
+            <p>Loja própria, atendimento 5★, o que cabe na moto. Jornada de motoboy fora do funil de seller.</p>
+          </article>
+          <article class="card team-role">
+            <div class="icon-box"><svg class="icon"><use href="#i-brush"/></svg></div>
+            <h3>Design</h3>
+            <p>Criativo, página e prova na mesma promessa. Anúncio, LP e CTA sem “Flex SP” genérico.</p>
           </article>
         </div>
-        <p class="quote" style="margin-top:40px">Same day vocês já fazem. Agora a carteira precisa de loja própria.</p>
+        <div class="quote" style="margin-top:36px;font-size:24px">EE já entregou clareza. Growth é quem opera o canal todo mês.</div>
+      </section>
+
+      <section class="slide dark" data-title="Motor e cadência">
+        <span class="eyebrow">Como a máquina roda · 90 dias</span>
+        <h2 style="margin-top:24px;max-width:1180px;font-size:42px">Google captura. Meta recupera. Comercial fecha. Fundação antes de escala.</h2>
+        <div class="process" style="margin-top:36px">
+          <div class="stage"><h3>Busca</h3><p>Intenção de loja própria e região com cluster.</p></div>
+          <div class="arrow">→</div>
+          <div class="stage"><h3>Página</h3><p>Promessa aderente, filtro de carga, CTA.</p></div>
+          <div class="arrow">→</div>
+          <div class="stage"><h3>CRM + SLA</h3><p>Origem, dono, próxima ação, perda.</p></div>
+          <div class="arrow">→</div>
+          <div class="stage"><h3>Outbound</h3><p>Márcio e o time qualificam e registram.</p></div>
+          <div class="arrow">→</div>
+          <div class="stage"><h3>Ativação</h3><p>Primeira coleta. Receita volta na campanha.</p></div>
+        </div>
+        <div class="format-row" style="margin-top:28px">
+          <div class="format-card"><div class="k">Dias 1–30</div><h3>Fundação</h3><p>Clusters, tracking, CRM, claims e páginas. Sem isso, mídia não sobe.</p></div>
+          <div class="format-card"><div class="k">Dias 31–60</div><h3>Piloto Google</h3><p>Search por intenção. SQL com termo, custo e desfecho conhecidos.</p></div>
+          <div class="format-card"><div class="k">Dias 61–90</div><h3>Remarketing</h3><p>Meta recupera quem não avançou. Otimiza por ativação — não por CPL.</p></div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Sucesso">
+        <div class="topline"></div>
+        <span class="eyebrow">Receita previsível de loja própria</span>
+        <h2 style="margin-top:28px;max-width:1180px">O que vamos olhar juntos — sem fingir os 500 na mídia.</h2>
+        <div class="success-grid" style="margin-top:28px">
+          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-dashboard"/></svg></div><h3>Origem rastreável até a ativação</h3></div>
+          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-chart"/></svg></div><h3>Mix visível: loja própria × marketplace</h3></div>
+          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-calendar"/></svg></div><h3>SLA de resposta e motivo de perda</h3></div>
+          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-search"/></svg></div><h3>Google no ar só com cluster liberado</h3></div>
+          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-route"/></svg></div><h3>Jornada de motoboy fora do funil de seller</h3></div>
+          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-users"/></svg></div><h3>Account no ritmo com Márcio e Vinícius</h3></div>
+          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-target"/></svg></div><h3>500 é meta da empresa; Growth opera os 50%</h3></div>
+          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-bolt"/></svg></div><h3>Sponsor com previsibilidade de canal</h3></div>
+        </div>
+      </section>
+
+      <section class="slide white" data-title="Encaixe">
+        <div class="topline"></div>
+        <span class="eyebrow">Personalização MBFlex</span>
+        <h2 style="margin-top:24px;max-width:1180px">Não é um pacote genérico — é a operação de vocês no desenho.</h2>
+        <div class="format-row" style="margin-top:36px">
+          <div class="format-card"><div class="k">Públicos</div><h3>Dual-track seller × motoboy</h3><p>Mesma governança, jornadas separadas. Vinícius pediu atratividade de prestador — sem misturar no anúncio do lojista.</p></div>
+          <div class="format-card"><div class="k">Fundação</div><h3>EE já paga o mapa</h3><p>GTM, ICP e posicionamento de 18/08. Growth não reabre diagnóstico: executa o canal com o que já foi comprado.</p></div>
+          <div class="format-card"><div class="k">Teto</div><h3>7 mil/dia como gate</h3><p>Verba não escala no escuro. Cluster, SLA e 5★ vêm antes de mídia. Recusar demanda de novo não pode ser o plano.</p></div>
+        </div>
+        <div class="split-2" style="margin-top:28px">
+          <div class="split-card ok" style="min-height:auto"><h3>O que o Growth cria</h3><ul><li>Canal de aquisição de loja própria</li><li>Google de intenção + cadência comercial</li><li>CRM com origem, dono e desfecho</li></ul></div>
+          <div class="split-card gap" style="min-height:auto"><h3>O que a plataforma continua</h3><ul><li>Indicação orgânica de seller</li><li>Base atual e reputação 5★</li><li>Os outros 50% da carteira</li></ul></div>
+        </div>
+      </section>
+
+      <section class="slide dark" data-title="Recap">
+        <span class="eyebrow">Recap antes da decisão</span>
+        <h2 style="margin-top:22px;max-width:1180px">O que está em jogo na MBFlex</h2>
+        <div class="recap-3">
+          <div class="split-card gap" style="min-height:auto"><h3>Dores</h3><ul>
+            <li>Carteira 100% marketplace</li>
+            <li>Loja própria = 0% · nunca investiu em marketing</li>
+            <li>Sem CRM — lead sem dono nem motivo de perda</li>
+            <li>Motoboy 60/40 · recusou 200+ · perdeu tubarão</li>
+            <li>500 no mesmo jogo só aprofunda a dependência</li>
+          </ul></div>
+          <div class="split-card ok" style="min-height:auto"><h3>Dados</h3><ul>
+            <li>196 clientes · ~R$ 1 mi/mês · 5★</li>
+            <li>7 mil pacotes/dia · ~140 entregadores</li>
+            <li>+100 mil entregas/mês · 80% moto / 20% carro</li>
+            <li>EE Saber+Ter: R$ 14.612,00 (início 27/07)</li>
+            <li>Meta do ano: 500 · mix alvo 50/50</li>
+          </ul></div>
+          <div class="split-card" style="min-height:auto;background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.16)"><h3>Solução</h3><ul>
+            <li>Assessoria de Growth contínua</li>
+            <li>Account + GT + copy + design</li>
+            <li>Google captura · Meta recupera · comercial fecha</li>
+            <li>90 dias: fundação → piloto → remarketing</li>
+            <li>Gate de cluster · jornada de motoboy à parte</li>
+          </ul></div>
+        </div>
+        <div class="quote" style="margin-top:28px;font-size:24px">Growth liga o canal dos 50% de loja própria. Os 500 são meta da empresa — não uma promessa de mídia.</div>
+      </section>
+
+      <section class="slide white" data-title="Investimento">
+        <div class="topline"></div>
+        <span class="eyebrow">Investimento</span>
+        <h2 style="margin-top:18px;max-width:1100px">Investimento estratégico no canal que ainda não existe</h2>
+        <div class="price-layout">
+          <div class="price-main">
+            <div class="was">Valor de tabela · Assessoria de Growth</div>
+            <div class="ref">R$ 11.000,00</div>
+            <div class="now-label">Condição comercial · cliente EE</div>
+            <div class="now">R$ 9.259<small>,31</small></div>
+            <p>Fee mensal · cartão recorrente · Account + GT + copy + design. Verba de mídia à parte, alinhada com o Vinícius.</p>
+          </div>
+          <div class="price-side">
+            <div class="box"><div class="tag">Como se chega no fee</div><h3>EE reconhecida</h3><p>Tabela R$ 11.000 − equivalente mensal da EE (R$ 1.217,67) − condição comercial (R$ 523,02) = R$ 9.259,31.</p></div>
+            <div class="box"><div class="tag">O que está incluso</div><h3>Time na conta</h3><p>Account, gestor de tráfego, copy e design. Fundação 30 dias, piloto Google, remarketing com gate de cluster.</p></div>
+            <div class="box"><div class="tag">Mídia</div><h3>À parte do fee</h3><p>Projeção inicial da planilha: R$ 3.500/mês. Não escala sem CRM, tracking e capacidade liberada.</p></div>
+          </div>
+        </div>
       </section>
 
       <div class="slide-footer"><div id="footerLogo" class="v4-word">V4</div></div>
@@ -1065,8 +1073,9 @@
         <button class="nav-btn" id="nextBtn" type="button" aria-label="Próximo"><svg><use href="#i-arrow-right"/></svg></button>
       </div>
       <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-      <div class="slide-counter" id="slideCounter">01 / 12</div>
+      <div class="slide-counter" id="slideCounter">01 / 13</div>
     </main>
+
   </div>
   <script>
     const deck = document.getElementById("deck");
