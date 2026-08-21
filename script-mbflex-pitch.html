@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta name="mbflex-script-version" content="20260821-v4">
+  <title>Script de Pitch · MBFlex Express · Narrativa Estratégica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #140608;
+      --surf: rgba(255,255,255,.06);
+      --bd: rgba(255,255,255,.14);
+      --txt: #fff;
+      --mut: rgba(255,255,255,.78);
+      --red: #e11d24;
+      --soft: #ffd0d0;
+      --ok: #86efac;
+      --warn: #fde68a;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font: 15px/1.55 "Plus Jakarta Sans", system-ui, sans-serif;
+      color: var(--txt);
+      background:
+        radial-gradient(ellipse 70% 40% at 10% 0%, rgba(225,29,36,.35), transparent 55%),
+        radial-gradient(ellipse 50% 35% at 90% 10%, rgba(255,80,80,.18), transparent 50%),
+        linear-gradient(180deg, #1a090b 0%, #0d0405 100%);
+      padding-bottom: 72px;
+    }
+    h1, h2, h3 { font-family: Outfit, sans-serif; letter-spacing: -.02em; line-height: 1.15; }
+    .top {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(13,4,5,.9);
+      border-bottom: 1px solid var(--bd);
+      padding: 14px 20px;
+      display: flex; gap: 12px; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    }
+    .brand { font-weight: 800; font-size: 15px; }
+    .brand span { color: #fda4af; }
+    .pill {
+      font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      border: 1px solid var(--bd); border-radius: 999px; padding: 6px 12px; color: var(--mut);
+      text-decoration: none;
+    }
+    .pill:hover { color: #fff; border-color: rgba(255,255,255,.35); }
+    .wrap { max-width: 920px; margin: 0 auto; padding: 28px 20px 0; }
+    .hero {
+      border: 1px solid var(--bd); border-radius: 20px; padding: 28px 24px;
+      background: linear-gradient(135deg, rgba(225,29,36,.2), rgba(255,255,255,.04));
+      margin-bottom: 18px;
+    }
+    .hero h1 { margin: 0 0 10px; font-size: clamp(26px, 4vw, 36px); }
+    .hero p { margin: 0; color: var(--mut); max-width: 760px; }
+    .nav {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 8px; margin: 18px 0 8px;
+    }
+    .nav a {
+      text-decoration: none; color: var(--mut); font-size: 12px; font-weight: 700;
+      border: 1px solid var(--bd); background: var(--surf); border-radius: 12px;
+      padding: 10px 12px; transition: .2s;
+    }
+    .nav a:hover { color: #fff; border-color: rgba(255,255,255,.35); background: rgba(225,29,36,.18); }
+    .nav a small { display: block; color: #fda4af; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 3px; }
+    .callout {
+      margin: 16px 0 22px; padding: 14px 16px; border-radius: 14px;
+      border: 1px solid rgba(253,230,138,.3); background: rgba(253,230,138,.08);
+      color: var(--warn); font-size: 14px;
+    }
+    .callout strong { color: #fef08a; }
+    .callout.ok {
+      border-color: rgba(134,239,172,.3); background: rgba(134,239,172,.08); color: var(--ok);
+    }
+    .callout.ok strong { color: #bbf7d0; }
+    .perfil {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px; margin: 16px 0 8px;
+    }
+    .perfil .card, .obj-grid .card {
+      border: 1px solid var(--bd); border-radius: 14px; background: var(--surf);
+      padding: 12px 14px;
+    }
+    .perfil h3, .obj-grid h3 { margin: 0 0 6px; font-size: 14px; }
+    .perfil p, .obj-grid p { margin: 0; font-size: 13px; color: var(--mut); line-height: 1.45; }
+    .slide {
+      border: 1px solid var(--bd); border-radius: 18px; background: rgba(255,255,255,.04);
+      padding: 22px 20px; margin: 14px 0;
+    }
+    .slide-head {
+      display: flex; justify-content: space-between; gap: 12px; align-items: flex-start;
+      margin-bottom: 10px; flex-wrap: wrap;
+    }
+    .slide-num { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #fda4af; margin-bottom: 4px; }
+    .slide-head h2 { margin: 0; font-size: clamp(18px, 3vw, 24px); }
+    .slide-ref { font-size: 12px; color: var(--mut); white-space: nowrap; }
+    .objetivo {
+      font-size: 13px; color: #fecdd3; background: rgba(225,29,36,.16);
+      border: 1px solid rgba(225,29,36,.35); border-radius: 10px; padding: 10px 12px; margin-bottom: 12px;
+    }
+    .fala {
+      font-size: 15px; line-height: 1.6; color: #fff;
+      border-left: 3px solid var(--red); padding: 4px 0 4px 14px; margin: 10px 0;
+    }
+    .fala em { color: #fda4af; font-style: normal; font-weight: 700; }
+    .bloco {
+      margin-top: 12px; padding: 12px 14px; border-radius: 12px;
+      background: var(--surf); border: 1px solid var(--bd);
+    }
+    .bloco h3 { margin: 0 0 8px; font-size: 13px; color: #fda4af; }
+    .bloco ul { margin: 0; padding-left: 18px; color: var(--mut); font-size: 13px; }
+    .bloco li { margin: 5px 0; }
+    .bloco li strong { color: #fff; }
+    .ask {
+      margin-top: 12px; padding: 12px 14px; border-radius: 12px;
+      background: rgba(134,239,172,.1); border: 1px solid rgba(134,239,172,.28);
+      color: #bbf7d0; font-size: 14px;
+    }
+    .ask strong { color: #86efac; }
+    .evitar {
+      margin-top: 10px; padding: 12px 14px; border-radius: 12px;
+      background: rgba(253,230,138,.08); border: 1px solid rgba(253,230,138,.25);
+      color: #fde68a; font-size: 13px;
+    }
+    .evitar strong { color: #fef08a; }
+    .fonte {
+      margin-top: 10px; font-size: 13px; color: var(--soft);
+      padding: 10px 12px; border-radius: 10px; background: rgba(255,255,255,.04);
+    }
+    .obj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+    @media (max-width: 720px) { .obj-grid { grid-template-columns: 1fr; } }
+    .tag {
+      display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: .08em;
+      text-transform: uppercase; padding: 3px 8px; border-radius: 999px; margin-right: 6px;
+      background: rgba(225,29,36,.25); color: #fda4af;
+    }
+    footer {
+      margin: 28px 20px 0; text-align: center; font-size: 12px; color: var(--mut);
+    }
+    footer a { color: #fda4af; }
+    .quote-int {
+      margin-top: 10px; padding: 12px 14px; border-radius: 12px;
+      border-left: 3px solid #fda4af; background: rgba(255,255,255,.04);
+      color: rgba(255,255,255,.82); font-size: 13.5px; line-height: 1.5;
+    }
+    .quote-int small { display: block; margin-top: 6px; color: #fda4af; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; font-size: 10px; }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <div class="brand">Script MBFlex · <span>Sara × Pitch</span></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <a class="pill" href="https://sarapizzico-hue.github.io/Sara/proposta-mbflex-v4.html" target="_blank" rel="noopener">Abrir deck 11 slides</a>
+      <span class="pill">Uso interno · não enviar</span>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <header class="hero">
+      <h1>Narrativa estratégica · MBFlex Express</h1>
+      <p>
+        Script da proposta de <strong>Assessoria de Growth</strong> (11 slides), no tom que o Márcio compra:
+        estudo de conta, dados primeiro, preço por último. Tudo que está aqui veio da BM de 22/07,
+        do SPICED, da GTM de 18/08, da EE e da planilha — traduzido para a sala, sem jargão e sem slide de fala do cliente.
+      </p>
+    </header>
+
+    <div class="callout">
+      <strong>Linha mestra (não abre a call com isso na boca, mas não sai da cabeça):</strong>
+      A malha já existe. A carteira é 100% marketplace. Loja própria é zero. A meta de 500 sem canal de e-commerce próprio recicla a dependência.
+      Growth liga os 50% de loja própria. Os 500 são meta da empresa — não promessa de mídia.
+    </div>
+
+    <div class="callout ok">
+      <strong>Regra de ouro (Márcio audita):</strong>
+      quando o número aparecer, a única discussão que pode restar é a condição.
+      Mix, capacidade, dual-track, time e “não é os 500 na mídia” já foram alinhados antes.
+      A conta fecha: 11.000 − 1.217,67 − 523,02 = <strong>9.259,31</strong>. Decore. Ele vai conferir.
+    </div>
+
+    <div class="perfil">
+      <div class="card">
+        <h3>Sala</h3>
+        <p><strong>Márcio Beccari</strong> — sócio, comercial, “quadradão”. Decisor. Prático, cauteloso, não compra fantasia.<br>
+        <strong>Vinícius Dinelli</strong> — financeiro/contador. Co-decisor. Sem ele a call não anda. Caixa, capacidade, qualidade.<br>
+        <strong>Rafael</strong> — operação. Crítico na execução. Fora da venda.</p>
+      </div>
+      <div class="card">
+        <h3>Já compraram</h3>
+        <p>EE Saber+Ter · R$ 14.612,00 · início 27/07/2026 · GTM aprovada 18/08. Não vender EC de novo. Não reabrir diagnóstico.</p>
+      </div>
+      <div class="card">
+        <h3>Produto desta call</h3>
+        <p>Assessoria de Growth · Account + GT + copy + design · projeto 12 meses · 12× R$ 9.259,31 · mídia à parte (planilha R$ 3.500, com gate de cluster).</p>
+      </div>
+      <div class="card">
+        <h3>O que eles querem (BM)</h3>
+        <p>Subir de ~196 para 500 clientes <em>bons</em>, com qualidade, sem explodir a malha. Dual: seller + prestador. Começar do início — não “escalar agora”.</p>
+      </div>
+    </div>
+
+    <nav class="nav" aria-label="Blocos">
+      <a href="#b0"><small>0</small>Antes de abrir</a>
+      <a href="#s1"><small>01</small>Capa</a>
+      <a href="#s2"><small>02</small>Dependência</a>
+      <a href="#s3"><small>03</small>Dados</a>
+      <a href="#s4"><small>04</small>Dores</a>
+      <a href="#s5"><small>05</small>Promessa</a>
+      <a href="#s6"><small>06</small>Time</a>
+      <a href="#s7"><small>07</small>Motor</a>
+      <a href="#s8"><small>08</small>Sucesso</a>
+      <a href="#s9"><small>09</small>Encaixe</a>
+      <a href="#s10"><small>10</small>Recap</a>
+      <a href="#alin"><small>10b</small>Alinhamento</a>
+      <a href="#s11"><small>11</small>Investimento</a>
+      <a href="#close"><small>12</small>Pedir a venda</a>
+      <a href="#obj"><small>Mapa</small>Objeções</a>
+      <a href="#evitar"><small>Lista</small>Não plantar</a>
+    </nav>
+
+    <!-- 0 -->
+    <article class="slide" id="b0">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Bloco 0 · Antes da tela</div>
+          <h2>Entrar como continuidade da EE — não como agência</h2>
+        </div>
+        <div class="slide-ref">~ 45–60s</div>
+      </div>
+      <div class="objetivo">Objetivo: clima de estudo de conta. Cliente fala. Você escuta. Zero monólogo, zero preço.</div>
+      <div class="fala">
+        “Antes de eu abrir a tela: como vocês estão saindo da Estruturação?
+        O que mais ficou marcado pra vocês até aqui — o mix, a capacidade da malha, ou o canal que ainda não existe?”
+      </div>
+      <div class="bloco">
+        <h3>Na cabeça, sem falar</h3>
+        <ul>
+          <li>Márcio compra segurança e conta que fecha. Se pular diagnóstico, perde autoridade.</li>
+          <li>Vinícius compra previsibilidade e qualidade. Se a mídia parecer “encher o Zap”, ele trava.</li>
+          <li>Rafael, se entrar, é operação. Não puxa ele para decidir o projeto.</li>
+          <li>Pergunta <strong>aberta</strong>. Não “faz sentido?”.</li>
+        </ul>
+      </div>
+      <div class="quote-int">
+        “Eu preciso aquecer o meu comercial, preciso ser uma máquina de captar cliente.”
+        <small>Márcio · BM 22/07 · escuta — não joga de volta no slide</small>
+      </div>
+      <div class="ask">
+        <strong>Escolhe 1–2:</strong><br>
+        “O que vocês mais querem desse próximo passo — origem de loja própria, ou controle de quem entra na malha?”<br>
+        “Se a gente ligar o canal, o que não pode acontecer na operação?”
+      </div>
+      <div class="evitar"><strong>Evitar:</strong> slogan · “chegamos a 500” · abrir valor · “vocês nunca investiram em marketing” · citar Paulo/Renata.</div>
+    </article>
+
+    <!-- 1 -->
+    <article class="slide" id="s1">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 01 · Capa</div>
+          <h2>Da dependência do marketplace à máquina de loja própria</h2>
+        </div>
+        <div class="slide-ref">~ 20–30s</div>
+      </div>
+      <div class="objetivo">Objetivo: parecer estudo de conta. Institucional. Não pitch de captação.</div>
+      <div class="fala">
+        “Montamos isso em cima da EE e da GTM de 18/08 — não em cima do site.
+        A tese que vocês já têm na mesa: <em>a malha já existe. O canal de loja própria, não.
+        Sem ele, a carteira continua nas mãos da plataforma.</em>
+        Números e dependência primeiro. Solução e investimento vêm depois.”
+      </div>
+      <div class="fonte"><strong>Fonte:</strong> você cravou “100% ativo = dependência do marketplace” + mix 50% loja própria. A capa não promete os 500.</div>
+      <div class="evitar"><strong>Evitar:</strong> “esta proposta instala a máquina de captação para 500 no ano” — saiu do deck de propósito.</div>
+    </article>
+
+    <!-- 2 -->
+    <article class="slide" id="s2">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 02 · Dependência</div>
+          <h2>Não é problema de operação. É carteira amarrada.</h2>
+        </div>
+        <div class="slide-ref">~ 2 min</div>
+      </div>
+      <div class="objetivo">Objetivo: devolver a BM com leitura estratégica — sem citar a frase do Márcio.</div>
+      <div class="fala">
+        “Vocês não têm problema de malha. Têm carteira 100% amarrada em Mercado Livre, Shopee e Amazon.
+        O cliente vem. A origem não é de vocês. Loja própria hoje é zero — esse público a plataforma não traz.
+        <br><br>
+        E a malha já mostrou o teto: recusou mais de 200 no fim do ano, porque a operação estava lotada.
+        Perderam um tubarão de prestador para quem tinha mais volume e mais constância.
+        <br><br>
+        <em>A operação entrega. O comercial não escolhe o público.</em>
+        Preço e homologação ditam quem entra. Prestador é a maior linha de custo —
+        volume errado esvazia a rua, volume certo segura o motoboy.
+        500 no mesmo jogo só aprofunda o mix 100/0. Diversificar o público é a decisão — não acelerar a indicação.”
+      </div>
+      <div class="bloco">
+        <h3>Como usar o slide</h3>
+        <ul>
+          <li>Três cards rápido: origem · mix · teto.</li>
+          <li>Fecha na leitura de baixo. Não lê cada parágrafo.</li>
+          <li>Se Márcio puxar “máquina de captar”: “é exatamente isso — e hoje essa máquina é a plataforma.” Sem repetir a frase dele como citação.</li>
+        </ul>
+      </div>
+      <div class="quote-int">
+        “Hoje em dia tá vindo tudo orgânico. A gente não vai atrás de nenhum cliente.” · “Eu quero qualidade e não quantidade. Com quantidade no nosso setor a gente se bagaça todo.” · “A gente perdeu tubarão esses dias… foi para uma outra que tem muito mais pacote, mais constância.”
+        <small>Márcio · BM 22/07</small>
+      </div>
+      <div class="quote-int">
+        “Passou 200… a gente já tava super lotado, final do ano é uma demanda enorme.”
+        <small>Vinícius · BM 22/07</small>
+      </div>
+      <div class="ask">
+        <strong>Pergunta aberta:</strong><br>
+        “Olhando esses três pontos — origem, mix e teto — o que mais preocupa vocês se os próximos 304 vierem do mesmo jeito?”
+      </div>
+      <div class="evitar"><strong>Evitar:</strong> “60/40 do P&amp;L” (jargão; Márcio pede de onde veio o 60). Se <em>eles</em> falarem 60/40, espelha: “prestador é a maior linha de custo”. Não usar CRM. Não usar “nunca investiu”.</div>
+    </article>
+
+    <!-- 3 -->
+    <article class="slide" id="s3">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 03 · Os dados</div>
+          <h2>196 existem. O canal, não. De onde vêm os 304?</h2>
+        </div>
+        <div class="slide-ref">~ 2 min</div>
+      </div>
+      <div class="objetivo">Objetivo: operação real de um lado, buraco do canal do outro. Sem tratar ticket de R$ 10k como fato.</div>
+      <div class="fala">
+        “Os números da operação: cerca de 196 clientes, um milhão por mês informado, 7 mil pacotes por dia, uns 140 entregadores,
+        mais de 100 mil entregas no mês, 80% moto e 20% carro, cinco estrelas no Google, churn de cliente baixo.
+        Isso é malha que já entrega.
+        <br><br>
+        O outro lado: <em>0% da carteira em loja própria.</em> 100% da origem é indicação de marketplace.
+        Não há canal de e-commerce próprio. Google e Meta ainda não operam intenção de loja própria.
+        <br><br>
+        A meta de 500 pede 304 contas novas. Se a resposta for ‘a plataforma indica’, o mix não muda —
+        e 500 é só mais seller no mesmo jogo.”
+      </div>
+      <div class="fonte">
+        <strong>Fontes no slide:</strong> EE, SPICED 23/07, GTM 18/08.<br>
+        <strong>Furo para não cravar:</strong> GTM usa ticket ~R$ 10 mil/mês. 10 mil × 196 ≈ R$ 2 mi — e o faturamento informado é ~R$ 1 mi. 100 mil entregas × ~R$ 10 também dá ~R$ 1 mi. Os dois tickets não fecham. Márcio pega inconsistência.
+      </div>
+      <div class="ask">
+        <strong>Para o Vinícius, sem confrontar:</strong><br>
+        “O ticket que usamos no GTM ainda precisa conciliar com esse R$ 1 mi em 196. Podemos cravar isso no kick-off — não precisa ser agora, mas não vou tratar os R$ 10 mil como fato nesta conversa.”
+      </div>
+      <div class="evitar"><strong>Evitar:</strong> Paulo, Renata, R$ 300, “nunca investiu”. O diagnóstico é mix, não amadorismo de marketing.</div>
+    </article>
+
+    <!-- 4 -->
+    <article class="slide" id="s4">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 04 · Dores × MBFlex</div>
+          <h2>O que precisa existir antes de escalar mídia</h2>
+        </div>
+        <div class="slide-ref">~ 1,5 min</div>
+      </div>
+      <div class="objetivo">Objetivo: matar “vamos anunciar já” antes do produto. Capacidade é gate.</div>
+      <div class="fala">
+        “Seis travas, na ordem.
+        Origem 100% marketplace — vocês não escolhem o ICP.
+        Canal de loja própria não existe — não há busca, página nem cadência para o e-commerce que a plataforma não indica.
+        Qualificação ainda é conversa no Zap — o que cabe na malha se decide ali. Mídia sem critério de carga vira volume errado.
+        Capacidade é o teto: 7 mil por dia. Sem cluster liberado, Google não sobe. Qualidade 5 estrelas primeiro.
+        Dois públicos, um risco: seller e motoboy no mesmo anúncio ou no mesmo Zap destroem conversão e reputação.
+        E 500 sem canal próprio é meta da empresa no mesmo jogo.
+        <br><br>
+        <em>Escalar Google em cima disso é pagar para bagunçar a malha.</em>”
+      </div>
+      <div class="quote-int">
+        “Esses dias vem um cara querendo entregar a geladeira. Linha branca. Não tem como.” · “A gente não quer explodir do dia para a noite.”
+        <small>Vinícius · filtro de carga e qualidade · BM 22/07</small>
+      </div>
+      <div class="ask">
+        <strong>Pergunta:</strong><br>
+        “Dessas seis, qual vocês sentem que quebra primeiro se a gente ligar mídia amanhã?”
+      </div>
+      <div class="evitar"><strong>Evitar:</strong> CRM no mapa. Seller e motoboy no mesmo funil. “Encher a malha.”</div>
+    </article>
+
+    <!-- 5 -->
+    <article class="slide" id="s5">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 05 · Promessa</div>
+          <h2>O canal que a plataforma não traz</h2>
+        </div>
+        <div class="slide-ref">~ 20s · duas linhas</div>
+      </div>
+      <div class="objetivo">Objetivo: uma frase. Sem selo, sem parágrafo de produto, sem “EE já paga o mapa”.</div>
+      <div class="fala">
+        “A V4 opera o canal de loja própria que a plataforma não traz.
+        <em>Não é PDF. É o time que liga o canal.</em>”
+      </div>
+      <div class="bloco">
+        <h3>Por que o slide é curto</h3>
+        <ul>
+          <li>Produto e time vêm no próximo. Aqui é só a tese.</li>
+          <li>Não vender EC. Já compraram Saber+Ter.</li>
+          <li>Motoboy não some — é gate, não segundo produto nesta proposta.</li>
+        </ul>
+      </div>
+      <div class="evitar"><strong>Evitar:</strong> “e para quando a malha pede” · “a EE que vocês já pagaram é o mapa”.</div>
+    </article>
+
+    <!-- 6 -->
+    <article class="slide" id="s6">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 06 · Time</div>
+          <h2>Account + GT + copy + design. Operação contínua.</h2>
+        </div>
+        <div class="slide-ref">~ 1,5–2 min · slide congelado</div>
+      </div>
+      <div class="objetivo">Objetivo: matar objeção de “quem executa” ANTES do preço. Não listar RH — conectar cada um à tese.</div>
+      <div class="fala">
+        “Quem entra na conta, todo mês.
+        <br><br>
+        Account: dono do mix 50/50, do gate de cluster e do ritmo com Márcio e Vinícius. Orquestra até a ativação — primeira coleta.
+        Gestor de tráfego: Google Search de intenção e região. Meta só remarketing. Sem cluster liberado, não escala verba.
+        Copy: loja própria, atendimento 5 estrelas, o que cabe na moto. Jornada de motoboy fora do funil de seller.
+        Design: criativo, página e prova na mesma promessa. Sem ‘Flex SP’ genérico.
+        <br><br>
+        A EE já entregou clareza. Growth é quem opera o canal todo mês.”
+      </div>
+      <div class="fonte"><strong>Este slide não se mexe.</strong> Você pediu manter inteiro. Vinícius pode aparecer aqui — é o ritmo da conta, não “o Vinícius pediu”.</div>
+      <div class="quote-int">
+        “Tem aqui de interessante, de atrativo para o motoboy, para ele ficar aqui? A V4 poderia não só ajudar na questão de clientes, mas ter um olhar para os entregadores.”
+        <small>Vinícius · BM · responde no dual-track, não misturando anúncio</small>
+      </div>
+      <div class="ask">
+        <strong>Mata escopo aqui:</strong><br>
+        “Olhando esse time e essa rotina — o que mais conecta com o que vocês precisam operar?”<br>
+        “Tem alguma peça que precisa estar mais clara antes da gente avançar?”
+      </div>
+      <div class="evitar"><strong>Evitar:</strong> oferecer treinar Paulo/Renata como produto. Na BM o Rafa perguntou isso; a decisão desta proposta é a V4 operar o canal.</div>
+    </article>
+
+    <!-- 7 -->
+    <article class="slide" id="s7">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 07 · Motor e cadência</div>
+          <h2>Google captura. Meta recupera. Comercial fecha.</h2>
+        </div>
+        <div class="slide-ref">~ 2 min</div>
+      </div>
+      <div class="objetivo">Objetivo: motor da GTM + primeiro ciclo de um projeto de 12 meses. Sem vender “90 dias”.</div>
+      <div class="fala">
+        “Como a máquina roda: busca de intenção de loja própria e região com cluster → página com filtro de carga e CTA →
+        qualificação do que cabe na moto, na região e no cluster → outbound de vocês → primeira coleta, receita de volta na campanha.
+        <br><br>
+        Isso é o primeiro ciclo de um <em>projeto de 12 meses</em>.
+        Mês 1, fundação: clusters, claims, páginas. Sem cluster, mídia não sobe.
+        Mês 2, piloto Google Search: SQL com termo, custo e ativação conhecidos.
+        Mês 3, remarketing: Meta recupera quem não avançou. Otimiza por ativação — não por CPL.”
+      </div>
+      <div class="bloco">
+        <h3>Se Márcio perguntar “por que 90 dias?”</h3>
+        <ul>
+          <li>Não é número deles. É a cadência de ligar o canal com trava.</li>
+          <li>Não é garantia de 500 clientes em 90 dias.</li>
+          <li>Depois do mês 3 o time continua — o produto é 12 meses.</li>
+        </ul>
+      </div>
+      <div class="fonte"><strong>GTM 18/08:</strong> Google captura intenção. Meta recupera. Outbound fecha. Capacidade trava a escala. Beachhead: seller multicanal, produto leve, demanda recorrente, cluster comprovado — não “qualquer Flex de SP”.</div>
+      <div class="ask">
+        <strong>Pergunta:</strong><br>
+        “Esse ritmo — fundação antes de verba — é o que vocês querem para não bagunçar a malha?”
+      </div>
+      <div class="evitar"><strong>Evitar:</strong> Meta fria para encher o Zap. Funil da planilha (cara de CPM/CTR). Prometer 500 no trimestre.</div>
+    </article>
+
+    <!-- 8 -->
+    <article class="slide" id="s8">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 08 · Sucesso</div>
+          <h2>O que vamos olhar juntos</h2>
+        </div>
+        <div class="slide-ref">~ 1 min</div>
+      </div>
+      <div class="objetivo">Objetivo: KPI honesto. 500 é meta da empresa. Growth opera os 50% que hoje são 0%.</div>
+      <div class="fala">
+        “O que a gente olha junto, mês a mês:
+        campanha amarrada à primeira coleta.
+        Mix visível — loja própria versus marketplace.
+        Custo por ativação, não por lead.
+        Google no ar só com cluster liberado.
+        Jornada de motoboy fora do funil de seller.
+        Account no ritmo com vocês dois.
+        500 é meta da empresa; Growth opera os 50%.
+        Sponsor com previsibilidade de canal.
+        <br><br>
+        <em>Não vamos tratar mídia como se ela sozinha entregasse os 304.</em>”
+      </div>
+      <div class="fonte">
+        <strong>Planilha de breakeven (interno, não abre na tela):</strong> ~27 clientes novos no ano com R$ 3.500 de mídia — não 304.
+        27 ≠ 500. A planilha ainda trata venda única; last mile é recorrente e churn é baixo — o payback em MRR é outro papo, com o Vinícius, depois.
+        CMV/MDA da planilha (~50%) vs margem líquida 18–20% da GTM: não use a planilha para provar payback na call.
+      </div>
+      <div class="evitar"><strong>Evitar a frase do slide antigo:</strong> “sem fingir os 500 na mídia”. A ideia fica; as palavras, não.</div>
+    </article>
+
+    <!-- 9 -->
+    <article class="slide" id="s9">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 09 · Encaixe</div>
+          <h2>A operação de vocês no desenho</h2>
+        </div>
+        <div class="slide-ref">~ 1,5 min</div>
+      </div>
+      <div class="objetivo">Objetivo: personalização sem nomear Vinícius como autor da estratégia. Sem caixa de teto. Sem “EE já paga”.</div>
+      <div class="fala">
+        “A operação de vocês no desenho.
+        Dois públicos, duas jornadas: seller e motoboy. Mesma governança, funis separados.
+        Prestador e lojista não competem no mesmo anúncio, no mesmo Zap, na mesma oferta.
+        <br><br>
+        Fundação: executar o canal, não reabrir diagnóstico. ICP, posição e mix já estão claros.
+        Growth liga a origem de loja própria em cima do que a conta já definiu.
+        <br><br>
+        O que o Growth cria: canal de loja própria, Google de intenção, cadência até a primeira coleta.
+        O que a plataforma continua: indicação orgânica, base 5 estrelas, os outros 50%.”
+      </div>
+      <div class="ask">
+        <strong>Pergunta:</strong><br>
+        “Esse recorte — a gente cria a origem que falta, a plataforma continua com o que já funciona — está do tamanho certo?”
+      </div>
+      <div class="evitar"><strong>Evitar:</strong> “o Vinícius pediu atratividade de prestador” · “EE já paga o mapa” · “não é um pacote genérico” · reabrir teto de 7 mil (já está no 2 e no 4).</div>
+    </article>
+
+    <!-- 10 -->
+    <article class="slide" id="s10">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 10 · Recap</div>
+          <h2>Antes do número — o que está em jogo</h2>
+        </div>
+        <div class="slide-ref">pausa 5s</div>
+      </div>
+      <div class="objetivo">Objetivo: eles verbalizam o sim. Se Márcio quiser discutir mix ou motoboy, não vira o 11.</div>
+      <div class="fala">
+        “Em uma frase: dependência de plataforma, números de malha que já existem, zero de loja própria,
+        time de Growth para ligar os 50%.
+        Growth liga o canal de loja própria. Os 500 são meta da empresa — não uma promessa de mídia.
+        Se isso estiver alinhado, o próximo passo é a condição do projeto de 12 meses.”
+      </div>
+      <div class="ask">
+        <strong>Não vira o 11 ainda.</strong> Vai para o bloco de alinhamento.
+      </div>
+    </article>
+
+    <!-- alinhamento -->
+    <article class="slide" id="alin">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Bloco 10b · Alinhamento (antes do preço)</div>
+          <h2>Quando o valor entrar, só sobra valor</h2>
+        </div>
+        <div class="slide-ref">~ 1,5–2 min</div>
+      </div>
+      <div class="objetivo">Objetivo: matar timing, quem executa, escopo e “outra opção” antes da condição.</div>
+      <div class="fala">
+        “Antes de eu trazer a condição, quero alinhar quatro coisas — pra gente não chegar no valor com dúvida aberta.”
+      </div>
+      <div class="ask">
+        <strong>Sequência (abre, escuta, amarra):</strong><br><br>
+        1. “O que vocês mais gostaram da leitura até aqui?”<br>
+        2. “O que vocês acham que a gente não pode deixar de executar?”<br>
+        3. “Quando vocês querem que o canal comece a rodar — fundação no mês 1?”<br>
+        4. “Vocês querem a V4 operando esse próximo passo, ou estão avaliando outro caminho?”<br><br>
+        Se disserem V4 / para ontem: “Perfeito. Então o que falta é a condição para avançar.”
+      </div>
+      <div class="bloco">
+        <h3>Se Márcio puxar o número cedo</h3>
+        <ul>
+          <li>“Eu te trago a conta no fim, porque ela só fecha se o desenho estiver claro. Me dá dois slides.”</li>
+          <li>Se insistir: vai ao 11, mas não discute escopo de novo em cima do valor.</li>
+        </ul>
+      </div>
+      <div class="evitar"><strong>Evitar:</strong> “vou mandar e vocês pensam” · validade artificial · oferecer valor menor sem pedido.</div>
+    </article>
+
+    <!-- 11 -->
+    <article class="slide" id="s11">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 11 · Investimento</div>
+          <h2>Projeto 12 meses · 12× R$ 9.259,31</h2>
+        </div>
+        <div class="slide-ref">~ 1,5–2 min · último slide</div>
+      </div>
+      <div class="objetivo">Objetivo: âncora redonda + EE visível + condição. Sem a palavra desconto, fee ou cartão.</div>
+      <div class="fala">
+        “O que estamos contratando: Assessoria de Growth, projeto de 12 meses —
+        Account, gestor de tráfego, copy e design, com a cadência que a gente viu.
+        <br><br>
+        Valor de tabela: R$ 11.000 por mês.
+        Vocês já investiram R$ 14.612 na Estruturação. A gente reconhece isso na mensalidade —
+        equivalente a R$ 1.217,67 por mês — e entra uma condição comercial de R$ 523,02.
+        <br><br>
+        Fica <em>12 vezes R$ 9.259,31</em> ao mês. Valor mensal. Verba de mídia à parte.
+        A planilha parte de R$ 3.500 por mês, e não escala sem cluster liberado e leitura de ativação.”
+      </div>
+      <div class="bloco">
+        <h3>A conta (decore — ele audita)</h3>
+        <ul>
+          <li>Tabela <strong>R$ 11.000,00</strong></li>
+          <li>− EE/12 <strong>R$ 1.217,67</strong> (14.612 ÷ 12)</li>
+          <li>− condição <strong>R$ 523,02</strong></li>
+          <li>= <strong>R$ 9.259,31</strong> · ano R$ 111.111,72</li>
+        </ul>
+      </div>
+      <div class="ask">
+        <strong>Pergunta de avanço (não “faz sentido?”):</strong><br>
+        “Olhando essa condição — o que vocês precisam alinhar para avançar no projeto de 12 meses?”<br>
+        ou<br>
+        “Se o desenho fechou, a gente consegue tomar a decisão do projeto nesta conversa e cravar a verba de mídia nesta semana?”
+      </div>
+      <div class="evitar">
+        <strong>Nunca na boca:</strong> fee · desconto · cartão recorrente · “alinhada com o Vinícius” · payback com CMV da planilha · 27 clientes como se fossem 500.
+      </div>
+    </article>
+
+    <!-- close -->
+    <article class="slide" id="close">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Bloco 12 · Fechamento</div>
+          <h2>Pedir a venda com segurança</h2>
+        </div>
+        <div class="slide-ref">~ 1 min</div>
+      </div>
+      <div class="objetivo">Objetivo: próximo passo claro. Eles pedem o contrato — ou você amarra a decisão.</div>
+      <div class="fala">
+        “Eu quero conduzir esse próximo passo com vocês dois.
+        Kick-off, clusters, páginas de loja própria, piloto Google com trava de malha —
+        12 meses com Account no ritmo, no grupo, na leitura de ativação.
+        <br><br>
+        Se o plano fechou: a gente avança com o contrato e já agenda o kick-off.”
+      </div>
+      <div class="quote-int">
+        “Ô Rafael, eu preciso que você me ajude a dar certo.”
+        <small>Márcio no close da BM · não cita. Responde no tom: segurança, conta que fecha, malha no gate.</small>
+      </div>
+      <div class="ask">
+        <strong>Pedir a venda:</strong><br>
+        “Podemos avançar com o projeto de 12 meses nessa condição e marcar o kick-off?”<br>
+        Se hesitarem: “O que ainda está em aberto — valor, início ou alguma peça do desenho?”
+      </div>
+      <div class="callout ok" style="margin-top:12px">
+        <strong>Se fechar:</strong> contrato · kick-off · mês 1 fundação (cluster, claims, páginas) · mês 2 piloto Google · mês 3 remarketing · cadência 12 meses. Mídia só com cluster.
+      </div>
+      <div class="evitar"><strong>Evitar:</strong> “eu te envio e vocês vão conversando” sem amarrar · sumir do pedido de venda · plantar “pensa e me fala”.</div>
+    </article>
+
+    <!-- Objeções -->
+    <article class="slide" id="obj">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Mapa de objeções</div>
+          <h2>Tratar antes — ou na hora, sem plantar</h2>
+        </div>
+      </div>
+      <div class="obj-grid">
+        <div class="card">
+          <h3><span class="tag">Antes</span> Timing</h3>
+          <p>“Quando vocês querem o canal no ar?” → se “devagar”: amarra decisão agora, fundação no mês 1, mídia só com cluster. Vinícius pediu começar ajustando, não explodindo.</p>
+        </div>
+        <div class="card">
+          <h3><span class="tag">Antes</span> Quem executa</h3>
+          <p>“Vocês querem a V4 operando ou treinar o time interno?” → na BM o Rafa abriu Paulo/Renata. Esta proposta é a V4 no canal. Não reabre EC.</p>
+        </div>
+        <div class="card">
+          <h3><span class="tag">Antes</span> Escopo / time</h3>
+          <p>“O que acharam desse time?” → mata “e o CRM?” / “e o motoboy na mídia?” antes do preço.</p>
+        </div>
+        <div class="card">
+          <h3><span class="tag">Antes</span> Estratégia</h3>
+          <p>“O que mais gostaram? O que não pode deixar de executar?” → eles verbalizam o sim.</p>
+        </div>
+        <div class="card">
+          <h3><span class="tag">Na hora</span> “Preciso pensar”</h3>
+          <p>“Boa — pensar em quê: valor, início ou desenho?” · não inventa prazo. Se for sócio: Vinícius já está na sala. Se faltar alguém, traz agora.</p>
+        </div>
+        <div class="card">
+          <h3><span class="tag">Na hora</span> “Isso entrega os 500?”</h3>
+          <p>Não. 500 é meta da empresa. Growth opera a metade de loja própria que hoje é 0%. Marketplace orgânico continua. Planilha de mídia ~27 no ano — não use como prova de 500.</p>
+        </div>
+        <div class="card">
+          <h3><span class="tag">Na hora</span> “Por que 90 dias?”</h3>
+          <p>Primeiro ciclo de 12 meses: fundação → piloto Google → remarketing. Não é projeto fechado. Não é 500 em 90 dias.</p>
+        </div>
+        <div class="card">
+          <h3><span class="tag">Na hora</span> Márcio audita a conta</h3>
+          <p>11.000 − 1.217,67 − 523,02 = 9.259,31. Fala “condição comercial” e “reconhece a EE”. Nunca “desconto”.</p>
+        </div>
+        <div class="card">
+          <h3><span class="tag">Na hora</span> Ticket / margem</h3>
+          <p>Não crava R$ 10k. “Concilia no kick-off com o Vinícius.” Não use MDA 50% da planilha contra 18–20% da GTM.</p>
+        </div>
+        <div class="card">
+          <h3><span class="tag">Na hora</span> Motoboy / iFood</h3>
+          <p>Dual-track, jornada à parte, volume certo segura a rua. Não é segunda Assessoria nesta proposta. Não mistura no anúncio do lojista.</p>
+        </div>
+        <div class="card">
+          <h3><span class="tag">Na hora</span> “Como acompanha?”</h3>
+          <p>Account no ritmo com Márcio e Vinícius. Mix visível. Custo por ativação. Cluster como gate.</p>
+        </div>
+        <div class="card">
+          <h3><span class="tag">Cuidado</span> Objeção sua</h3>
+          <p>Não plante dúvida que eles não trouxeram. Não cite CRM, “nunca investiu”, 60/40, ou a fala do Márcio como slide.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Evitar -->
+    <article class="slide" id="evitar">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Lista rápida</div>
+          <h2>O que não entra na boca — e por quê</h2>
+        </div>
+      </div>
+      <div class="bloco">
+        <h3>Bloqueado nesta conta</h3>
+        <ul>
+          <li><strong>CRM</strong> — você tirou do deck. Qualificação do que cabe na malha + campanha amarrada à primeira coleta.</li>
+          <li><strong>“Nunca investiu em marketing”</strong> — Paulo, Renata, R$ 300. Diagnóstico é dependência, não amadorismo.</li>
+          <li><strong>Fala do Márcio no slide</strong> — “máquina de captar” e “me ajude a dar certo” são escuta, não citação.</li>
+          <li><strong>60/40 do P&amp;L</strong> — jargão. Prestador é a maior linha de custo.</li>
+          <li><strong>Fee · desconto · cartão recorrente</strong> — projeto 12 meses, valor mensal, condição comercial.</li>
+          <li><strong>“Alinhada com o Vinícius” / “o Vinícius pediu”</strong> — estratégia da conta, não justificativa com nome.</li>
+          <li><strong>EC de novo</strong> — já compraram Saber+Ter. Growth executa, não reabre mapa.</li>
+          <li><strong>500 como KPI de mídia</strong> — meta da empresa. Planilha ~27. Não finja.</li>
+          <li><strong>Meta fria / “Flex SP” genérico / misturar seller e motoboy</strong></li>
+          <li><strong>Rafael na decisão</strong> — operação, fora da venda.</li>
+        </ul>
+      </div>
+      <div class="bloco">
+        <h3>O que veio das reuniões e entra na conversa (sem jogar no slide)</h3>
+        <ul>
+          <li>Orgânico de plataforma; não caçam; fecham 2–3/semana, às vezes zero.</li>
+          <li>Qualidade &gt; quantidade; 5 estrelas como diferencial, não “same day”.</li>
+          <li>Recusou 200+; perdeu tubarão; motoboy compete com iFood/ML/Kita.</li>
+          <li>Filtro de carga (geladeira, vaso, linha branca não entra).</li>
+          <li>Começar devagar; regionalizar equipe junto com carteira.</li>
+          <li>Márcio quadradão: se não for viável e real, não vai.</li>
+        </ul>
+      </div>
+      <div class="callout ok" style="margin-top:14px">
+        <strong>Em uma frase:</strong>
+        estudo de conta no início · perguntas abertas · mata objeção antes · um projeto de 12 meses · 12× R$ 9.259,31 · pede a venda com segurança.
+      </div>
+    </article>
+
+    <footer>
+      MBFlex Express × V4 · Script interno · agosto/2026 · alinhado ao deck v4 (11 slides) ·
+      <a href="https://sarapizzico-hue.github.io/Sara/proposta-mbflex-v4.html">Deck</a>
+      · fontes: BM 22/07 · SPICED · GTM 18/08 · EE R$ 14.612 · planilha de breakeven
+    </footer>
+  </div>
+</body>
+</html>
