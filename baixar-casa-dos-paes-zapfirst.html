@@ -36,18 +36,26 @@
     <p class="sub">Proposta comercial (Plano Base) + Account Planning — baixar Word, abrir no Word Online ou no Google Docs.</p>
 
     <div class="block">
-      <div class="t">1. Proposta comercial · ZapFirst Plano Base</div>
+      <div class="t">1. Proposta HTML · abrir direto</div>
+      <div class="d">Deck interativo no navegador (mesmo padrão de abrir Word no Google/Word Online)</div>
+      <div class="btns">
+        <a class="btn primary" id="html-open" href="#" target="_blank" rel="noopener">Abrir proposta HTML</a>
+        <a class="btn ghost" id="html-gh" href="#" target="_blank" rel="noopener">Ver arquivo no GitHub</a>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="t">2. Proposta comercial · Word (ZapFirst Plano Base)</div>
       <div class="d">proposta-casa-dos-paes-zapfirst.docx · para apresentar / formalizar</div>
       <div class="btns">
         <a class="btn primary" id="dl-prop" href="#">Baixar proposta Word</a>
         <a class="btn word" id="word-prop" href="#" target="_blank" rel="noopener">Abrir proposta no Word Online</a>
         <a class="btn google" id="google-prop" href="#" target="_blank" rel="noopener">Abrir proposta no Google Docs</a>
-        <a class="btn ghost" href="proposta-casa-dos-paes-zapfirst.html">Ver deck HTML da proposta</a>
       </div>
     </div>
 
     <div class="block">
-      <div class="t">2. Account Planning (interno / consultor)</div>
+      <div class="t">3. Account Planning (interno / consultor)</div>
       <div class="d">account-planning-casa-dos-paes-zapfirst.docx · diagnóstico × solução</div>
       <div class="btns">
         <a class="btn primary" id="dl-ap" href="#">Baixar Account Planning Word</a>
@@ -75,6 +83,10 @@
     var branch='cursor/account-planning-casa-dos-paes-zapfirst-3d7c';
     var base='https://raw.githubusercontent.com/sarapizzico-hue/Sara/'+branch+'/';
     var gh='https://github.com/sarapizzico-hue/Sara/raw/'+branch+'/';
+    var blob='https://github.com/sarapizzico-hue/Sara/blob/'+branch+'/proposta-casa-dos-paes-zapfirst.html';
+    var htmlOpen='https://htmlpreview.github.io/?'+blob;
+    document.getElementById('html-open').href=htmlOpen;
+    document.getElementById('html-gh').href=blob;
     function wire(dl, word, google, file){
       var raw=base+file, dlUrl=gh+file;
       document.getElementById(dl).href=dlUrl;
