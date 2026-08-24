@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Baixar · Casa dos Pães × ZapFirst</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root { --brand:#e50915; --bg:#050505; --surf:#141414; --bd:rgba(255,255,255,.12); --txt:#fafafa; --mut:#a3a3a3; --ok:#86efac; }
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;color:var(--txt);font:15px/1.55 Inter,system-ui,sans-serif;background:var(--bg);
+      background-image:radial-gradient(ellipse 80% 50% at 50% -20%,rgba(229,9,21,.2),transparent);
+      display:flex;align-items:center;justify-content:center;padding:28px 16px}
+    .card{width:min(600px,100%);background:var(--surf);border:1px solid var(--bd);border-radius:20px;padding:28px 26px 24px;box-shadow:0 24px 80px rgba(0,0,0,.45)}
+    .logo{font-weight:900;font-size:15px;margin-bottom:18px}.logo span{color:#ff1a27}
+    h1{margin:0 0 8px;font-size:clamp(22px,4vw,28px);font-weight:900;letter-spacing:-.03em}
+    .sub{color:var(--mut);font-size:13px;margin:0 0 20px}
+    .block{padding:14px;border-radius:12px;border:1px solid var(--bd);background:#0a0a0a;margin-bottom:12px}
+    .block .t{font-weight:800;font-size:14px;margin-bottom:4px}
+    .block .d{font-size:12px;color:var(--mut);margin-bottom:10px}
+    .btns{display:grid;gap:8px}
+    a.btn{display:block;text-align:center;text-decoration:none;padding:12px 14px;border-radius:12px;font-weight:800;font-size:13px;border:1px solid transparent}
+    a.primary{color:#fff;background:linear-gradient(135deg,rgba(229,9,21,.95),#b40a14)}
+    a.word{color:#fff;background:linear-gradient(135deg,#2b579a,#1e3f73)}
+    a.google{color:#111;background:#fff}
+    a.ghost{color:#fff;border-color:var(--bd);background:#111}
+    .hint{margin-top:14px;padding:12px 14px;border-radius:12px;border:1px solid rgba(96,165,250,.28);background:rgba(96,165,250,.08);color:#bfdbfe;font-size:12px}
+    .hint ol{margin:8px 0 0;padding-left:18px}.hint li{margin:4px 0}
+    footer{margin-top:18px;text-align:center;font-size:11px;color:var(--mut)} footer a{color:var(--ok)}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">V4 <span>COMPANY</span></div>
+    <h1>Casa dos Pães × ZapFirst</h1>
+    <p class="sub">Proposta comercial (Plano Base) + Account Planning — baixar Word, abrir no Word Online ou no Google Docs.</p>
+
+    <div class="block">
+      <div class="t">1. Proposta comercial · ZapFirst Plano Base</div>
+      <div class="d">proposta-casa-dos-paes-zapfirst.docx · para apresentar / formalizar</div>
+      <div class="btns">
+        <a class="btn primary" id="dl-prop" href="#">Baixar proposta Word</a>
+        <a class="btn word" id="word-prop" href="#" target="_blank" rel="noopener">Abrir proposta no Word Online</a>
+        <a class="btn google" id="google-prop" href="#" target="_blank" rel="noopener">Abrir proposta no Google Docs</a>
+        <a class="btn ghost" href="proposta-casa-dos-paes-zapfirst.html">Ver deck HTML da proposta</a>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="t">2. Account Planning (interno / consultor)</div>
+      <div class="d">account-planning-casa-dos-paes-zapfirst.docx · diagnóstico × solução</div>
+      <div class="btns">
+        <a class="btn primary" id="dl-ap" href="#">Baixar Account Planning Word</a>
+        <a class="btn word" id="word-ap" href="#" target="_blank" rel="noopener">Abrir AP no Word Online</a>
+        <a class="btn google" id="google-ap" href="#" target="_blank" rel="noopener">Abrir AP no Google Docs</a>
+      </div>
+    </div>
+
+    <div class="hint">
+      <strong style="color:#fff">Para editar e salvar no Google Drive:</strong>
+      <ol>
+        <li>Baixe o .docx</li>
+        <li>Abra o <a href="https://drive.google.com/" target="_blank" rel="noopener" style="color:#93c5fd">Google Drive</a></li>
+        <li>Upload do arquivo → botão direito → Abrir com → Google Docs</li>
+      </ol>
+    </div>
+
+    <footer>
+      Produto: <a href="https://steady-croissant-cd822a.netlify.app/" target="_blank" rel="noopener">ZapFirst</a> ·
+      <a href="https://github.com/sarapizzico-hue/Sara/tree/cursor/account-planning-casa-dos-paes-zapfirst-3d7c">GitHub</a>
+    </footer>
+  </div>
+  <script>
+  (function(){
+    var branch='cursor/account-planning-casa-dos-paes-zapfirst-3d7c';
+    var base='https://raw.githubusercontent.com/sarapizzico-hue/Sara/'+branch+'/';
+    var gh='https://github.com/sarapizzico-hue/Sara/raw/'+branch+'/';
+    function wire(dl, word, google, file){
+      var raw=base+file, dlUrl=gh+file;
+      document.getElementById(dl).href=dlUrl;
+      document.getElementById(word).href='https://view.officeapps.live.com/op/view.aspx?src='+encodeURIComponent(raw);
+      document.getElementById(google).href='https://docs.google.com/viewer?url='+encodeURIComponent(raw)+'&embedded=false';
+    }
+    wire('dl-prop','word-prop','google-prop','proposta-casa-dos-paes-zapfirst.docx');
+    wire('dl-ap','word-ap','google-ap','account-planning-casa-dos-paes-zapfirst.docx');
+  })();
+  </script>
+</body>
+</html>
