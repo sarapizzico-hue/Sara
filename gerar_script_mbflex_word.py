@@ -247,7 +247,7 @@ def build():
     set_run_font(r, size=14, color="FFEBC8")
     p4 = cell.add_paragraph()
     p4.paragraph_format.space_before = Pt(10)
-    r = p4.add_run("Márcio e Vinícius  ·  11 slides  ·  projeto 12 meses  ·  12× R$ 9.259,31")
+    r = p4.add_run("Márcio e Vinícius  ·  11 slides  ·  projeto 12 meses  ·  12× R$ 7.457,82")
     set_run_font(r, size=11, color="FFB4A0")
     doc.add_paragraph().paragraph_format.space_after = Pt(10)
 
@@ -540,8 +540,8 @@ def build():
         doc,
         "O que estamos contratando: um projeto de 12 meses. Assessoria de Growth. As quatro pessoas que a gente viu, todo mês.\n\n"
         "O valor de tabela desse time é R$ 11.000 por mês.\n\n"
-        "Vocês já investiram R$ 14.612 na Estruturação. A gente reconhece isso na mensalidade — dá R$ 1.217,67 por mês — e entra uma condição comercial de R$ 523,02.\n\n"
-        "Fica 12 vezes R$ 9.259,31 ao mês. É valor mensal, projeto de um ano.\n\n"
+        "Vocês já investiram R$ 14.612 na Estruturação. A gente reconhece isso na mensalidade — dá R$ 1.217,67 por mês — e entra uma condição comercial de R$ 2.324,51.\n\n"
+        "Fica 12 vezes R$ 7.457,82 ao mês. É valor mensal, projeto de um ano.\n\n"
         "Dinheiro de anúncio é à parte. A conta de partida é R$ 3.500 por mês. Esse valor não sobe se a região não aguentar e se a gente não estiver vendo primeira coleta de verdade.",
     )
 
@@ -550,9 +550,9 @@ def build():
     lines = [
         ("Valor de tabela", "R$ 11.000,00 / mês"),
         ("Estruturação reconhecida (14.612 ÷ 12)", "− R$ 1.217,67"),
-        ("Condição comercial", "− R$ 523,02"),
-        ("Valor mensal do projeto", "R$ 9.259,31"),
-        ("Projeto 12 meses", "12 × R$ 9.259,31"),
+        ("Condição comercial", "− R$ 2.324,51"),
+        ("Valor mensal do projeto", "R$ 7.457,82"),
+        ("Projeto 12 meses", "12 × R$ 7.457,82"),
     ]
     for i, (a, b) in enumerate(lines):
         for ci, val in enumerate((a, b)):
@@ -612,7 +612,7 @@ def build():
     objs = [
         ("“Isso entrega os 500?”", "Não sozinho. 500 é a meta de vocês no ano. Este trabalho liga a parte que hoje é zero: loja própria. A plataforma continua indicando."),
         ("“Por que 90 dias / três meses?”", "É só o começo com segurança, dentro de um projeto de 12 meses. Não é prazo de 500 clientes."),
-        ("“Está caro.” / ele pega a calculadora", "Tabela 11 mil. Menos o que já investiram na Estruturação, mês a mês. Menos a condição. Fecha 9.259,31. Pode conferir: 11.000 menos 1.217,67 menos 523,02."),
+        ("“Está caro.” / ele pega a calculadora", "Tabela 11 mil. Menos o que já investiram na Estruturação, mês a mês. Menos a condição. Fecha 7.457,82. Pode conferir: 11.000 menos 1.217,67 menos 2.324,51."),
         ("“Preciso pensar.”", "Claro. Pensar em quê — valor, data de começar, ou alguma peça do desenho? Assim eu te ajudo no ponto certo."),
         ("“E o motoboy?”", "Caminho separado. Volume certo na região é o que segura ele. Não mistura com o anúncio do lojista."),
         ("“Vamos anunciar já.”", "Anúncio sem região e sem filtro vira pedido que vocês recusam de novo. A gente liga o Google quando a malha aguenta."),
@@ -648,7 +648,7 @@ def build():
     box(
         doc,
         "Leva isto na cabeça",
-        "Estudo de conta no começo. Uma ideia por vez. Anúncio só quando a região aguenta. 500 é meta deles, não promessa sua. Um projeto de 12 meses. 12 vezes R$ 9.259,31. Pede a venda com calma.",
+        "Estudo de conta no começo. Uma ideia por vez. Anúncio só quando a região aguenta. 500 é meta deles, não promessa sua. Um projeto de 12 meses. 12 vezes R$ 7.457,82. Pede a venda com calma.",
         fill="F0FDF4",
         border=GREEN,
     )
