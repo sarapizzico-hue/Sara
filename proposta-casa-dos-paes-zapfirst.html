@@ -416,12 +416,13 @@
 
     .navigation {
       position: absolute;
-      z-index: 20;
+      z-index: 50;
       right: 52px;
       bottom: 25px;
       display: flex;
       align-items: center;
       gap: 10px;
+      pointer-events: auto;
     }
 
     .nav-btn {
@@ -461,9 +462,10 @@
 
     .slide-counter {
       position: absolute;
-      z-index: 22;
+      z-index: 45;
       right: 176px;
       bottom: 39px;
+      pointer-events: none;
       color: rgba(20, 20, 20, .52);
       font: 500 12px/1 "IBM Plex Mono", monospace;
       letter-spacing: .04em;
@@ -1186,66 +1188,7 @@
         <button class="nav-btn" id="nextBtn" type="button" aria-label="Próximo"><svg><use href="#i-arrow-right"/></svg></button>
       </div>
       <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-      <div class="slide-counter" id="slideCounter">01 / 11</div>
-    </main>
-
-  </div>
-  <script>
-    const deck = document.getElementById("deck");
-    const slidesEls = Array.from(document.querySelectorAll(".slide"));
-    const prevBtn = document.getElementById("prevBtn");
-    const nextBtn = document.getElementById("nextBtn");
-    const slideCounter = document.getElementById("slideCounter");
-    const progressFill = document.getElementById("progressFill");
-    const footerLogo = document.getElementById("footerLogo");
-    let current = 0;
-    function fitDeck() {
-      const w = window.visualViewport?.width || window.innerWidth;
-      const h = window.visualViewport?.height || window.innerHeight;
-      deck.style.setProperty("--deck-scale", Math.max(.1, Math.min((w-16)/1600,(h-16)/900,1)));
-    }
-    function goTo(index) {
-      current = Math.max(0, Math.min(slidesEls.length - 1, index));
-      slidesEls.forEach((s,i)=>s.classList.toggle("active", i===current));
-      const number = String(current+1).padStart(2,"0");
-      const total = String(slidesEls.length).padStart(2,"0");
-      const = slidesEls[current];
-      const isDark = active.classList.contains("red") || active.classList.contains("dark");
-      slideCounter.textContent = number+" / "+total;
-      slideCounter.style.color = isDark ? "rgba(255,255,255,.58)" : "rgba(20,20,20,.52)";
-      progressFill.style.width = ((current+1)/slidesEls.length)*100+"%";
-      prevBtn.disabled = current===0; nextBtn.disabled = current===slidesEls.length-1;
-      footerLogo.style.color = isDark ? "#fff" : "";
-      footerLogo.style.opacity = (current===0 || current===slidesEls.length-1) ? "0" : "1";
-      document.title = number+" | "+(active.dataset.title||"Casa dos Pães");
-    }
-    prevBtn.onclick=()=>goTo(current-1); nextBtn.onclick=()=>goTo(current+1);
-    window.addEventListener("resize", fitDeck);
-    window.visualViewport?.addEventListener("resize", fitDeck);
-    window.addEventListener("keydown", e=>{
-      if(["ArrowRight","PageDown"," "].includes(e.key)){e.preventDefault();goTo(current+1);}
-      if(["ArrowLeft","PageUp"].includes(e.key)){e.preventDefault();goTo(current-1);}
-      if(e.key==="Home")goTo(0); if(e.key==="End")goTo(slidesEls.length-1);
-    });
-    let tx=null; deck.addEventListener("touchstart",e=>tx=e.changedTouches[0].clientX,{passive:true});
-    deck.addEventListener("touchend",e=>{if(tx==null)return; const d=e.changedTouches[0].clientX-tx; if(Math.abs(d)>70)goTo(current+(d<0?1:-1)); tx=null;},{passive:true});
-    document.addEventListener("wheel", e=>{
-      if (Math.abs(e.deltaY) < 20) return;
-      e.preventDefault();
-      goTo(current + (e.deltaY > 0 ? 1 : -1));
-    }, {passive:false});
-    fitDeck(); goTo(0);
-  </script>
-</body>
-</html>
-
-      <div class="slide-footer"><div id="footerLogo" class="v4-word">V4</div></div>
-      <div class="navigation">
-        <button class="nav-btn" id="prevBtn" type="button" aria-label="Anterior"><svg><use href="#i-arrow-left"/></svg></button>
-        <button class="nav-btn" id="nextBtn" type="button" aria-label="Próximo"><svg><use href="#i-arrow-right"/></svg></button>
-      </div>
-      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-      <div class="slide-counter" id="slideCounter">01 / 11</div>
+      <div class="slide-counter" id="slideCounter">01 / 10</div>
     </main>
 
   </div>
@@ -1273,12 +1216,14 @@
       slideCounter.textContent = number+" / "+total;
       slideCounter.style.color = isDark ? "rgba(255,255,255,.58)" : "rgba(20,20,20,.52)";
       progressFill.style.width = ((current+1)/slidesEls.length)*100+"%";
-      prevBtn.disabled = current===0; nextBtn.disabled = current===slidesEls.length-1;
+      prevBtn.disabled = current===0;
+      nextBtn.disabled = current===slidesEls.length-1;
       footerLogo.style.color = isDark ? "#fff" : "";
       footerLogo.style.opacity = (current===0 || current===slidesEls.length-1) ? "0" : "1";
       document.title = number+" | "+(active.dataset.title||"Casa dos Pães");
     }
-    prevBtn.onclick=()=>goTo(current-1); nextBtn.onclick=()=>goTo(current+1);
+    prevBtn.addEventListener("click", () => goTo(current-1));
+    nextBtn.addEventListener("click", () => goTo(current+1));
     window.addEventListener("resize", fitDeck);
     window.visualViewport?.addEventListener("resize", fitDeck);
     window.addEventListener("keydown", e=>{
