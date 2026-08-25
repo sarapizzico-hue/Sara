@@ -6,9 +6,9 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <meta name="casa-paes-deck-version" content="20260824-g6-mbflex">
-  <title>Casa dos Pães · ZapFirst Plano Base | V4 Company</title>
-  <!-- Gerado 24/08/2026 · 11 páginas · V4 Company · Casa dos Pães × ZapFirst · layout G6/MBFlex -->
+  <meta name="casa-paes-deck-version" content="20260825-eqv">
+  <title>Casa dos Pães · Proposta estratégica | V4 Company</title>
+  <!-- Casa dos Pães × V4 · layout EQV/Colli · ZapFirst Plano Base (narrativa de conta) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -849,6 +849,101 @@
     .leitura-grid h4 { margin: 0 0 6px; font-size: 18px; }
     .leitura-grid p { margin: 0; color: rgba(255,255,255,.72); font-size: 16px; line-height: 1.35; }
 
+  
+    /* Casa dos Pães · motion layer */
+    .slide.active .cover-title,
+    .slide.active h2,
+    .slide.active .eyebrow,
+    .slide.active .lede,
+    .slide.active .ctx-facts,
+    .slide.active .leak-grid,
+    .slide.active .map-grid,
+    .slide.active .grid-4,
+    .slide.active .grid-3,
+    .slide.active .process,
+    .slide.active .format-row,
+    .slide.active .success-grid,
+    .slide.active .price-layout,
+    .slide.active .quote,
+    .slide.active .leitura,
+    .slide.active .leak-banner {
+      animation: rise-in .55s cubic-bezier(.22,1,.36,1) both;
+    }
+    .slide.active .ctx-fact:nth-child(1),
+    .slide.active .leak-card:nth-child(1),
+    .slide.active .map-item:nth-child(1),
+    .slide.active .card:nth-child(1),
+    .slide.active .format-card:nth-child(1),
+    .slide.active .success-item:nth-child(1) { animation-delay: .06s; }
+    .slide.active .ctx-fact:nth-child(2),
+    .slide.active .leak-card:nth-child(2),
+    .slide.active .map-item:nth-child(2),
+    .slide.active .card:nth-child(2),
+    .slide.active .format-card:nth-child(2),
+    .slide.active .success-item:nth-child(2) { animation-delay: .12s; }
+    .slide.active .ctx-fact:nth-child(3),
+    .slide.active .map-item:nth-child(3),
+    .slide.active .card:nth-child(3),
+    .slide.active .format-card:nth-child(3),
+    .slide.active .success-item:nth-child(3) { animation-delay: .18s; }
+    .slide.active .map-item:nth-child(4),
+    .slide.active .card:nth-child(4),
+    .slide.active .success-item:nth-child(4) { animation-delay: .24s; }
+    .slide.active .map-item:nth-child(5),
+    .slide.active .success-item:nth-child(5) { animation-delay: .3s; }
+    .slide.active .map-item:nth-child(6),
+    .slide.active .success-item:nth-child(6) { animation-delay: .36s; }
+    .slide.active .success-item:nth-child(7) { animation-delay: .42s; }
+    .slide.active .success-item:nth-child(8) { animation-delay: .48s; }
+    @keyframes rise-in {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .slide.active .sphere {
+      animation: sphere-drift 7s ease-in-out infinite alternate;
+    }
+    @keyframes sphere-drift {
+      from { transform: translate(0,0) scale(1); }
+      to { transform: translate(-18px, 12px) scale(1.04); }
+    }
+    .impact-line {
+      margin-top: 28px;
+      max-width: 1100px;
+      font-size: 34px;
+      line-height: 1.25;
+      font-weight: 600;
+      letter-spacing: -.03em;
+    }
+    .red .impact-line, .dark .impact-line { color: var(--v4-cream); }
+    .install-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 36px;
+    }
+    .install-card {
+      min-height: 210px;
+      padding: 26px 24px;
+      border-radius: 22px;
+      background: white;
+      border: 1px solid var(--line);
+    }
+    .dark .install-card {
+      background: rgba(255,255,255,.07);
+      border-color: rgba(255,255,255,.16);
+    }
+    .install-card .k {
+      font: 700 12px/1 "IBM Plex Mono", monospace;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--v4-red);
+      margin-bottom: 14px;
+    }
+    .dark .install-card .k { color: var(--v4-cream); }
+    .install-card h3 { margin: 0 0 10px; font-size: 24px; }
+    .install-card p { margin: 0; color: var(--ink-soft); font-size: 17px; line-height: 1.35; }
+    .dark .install-card p { color: rgba(255,255,255,.72); }
+
   </style>
 
 </head>
@@ -882,246 +977,288 @@
             <div class="brand-lockup">
               <svg class="v4-mark" fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 77 20" aria-label="V4 Company"><path fill="#fff" d="M33.023 3.575c-2.001.003-3.093 1.21-3.09 3.32l.008 6.858c.003 2.11 1.098 3.315 3.1 3.312 2-.003 3.092-1.21 3.09-3.32l-.009-6.858c-.003-2.11-1.097-3.315-3.099-3.312zm.015 11.606c-.649.001-1.057-.356-1.058-1.298l-.009-7.122c-.001-.942.406-1.3 1.055-1.302.648 0 1.057.357 1.058 1.299l.009 7.122c.001.942-.407 1.3-1.055 1.301zm-6.1-3.176l.002 1.884c.001.942-.406 1.282-1.055 1.283-.648 0-1.056-.338-1.058-1.28l-.009-7.122c-.001-.942.406-1.3 1.055-1.302.648 0 1.057.357 1.058 1.299l.002 1.413 1.927-.002-.002-1.281c-.002-2.11-1.041-3.315-3.043-3.313-2 .003-3.037 1.21-3.034 3.32l.008 6.859c.003 2.11 1.042 3.314 3.043 3.312 2.002-.003 3.038-1.21 3.035-3.32l-.002-1.752-1.927.002zM13.055 6.352L8.68 10.813c-.06.062-.017.166.067.166l4.382-.006a.096.096 0 00.096-.097l-.006-4.456c0-.087-.103-.13-.163-.068zm5.862 7.88l-2.687.004a.035.035 0 00-.035.035l.004 2.879c0 .02-.015.035-.035.035l-3.01.004a.035.035 0 01-.034-.035l-.004-2.879a.035.035 0 00-.034-.035l-8.796.012a.141.141 0 01-.14-.142l-.003-2.624v-.004a.795.795 0 01.223-.588l8.758-8.928a.035.035 0 01.025-.01l2.846-.004c.005 0 .009.001.014.003a.367.367 0 01.216.348l.01 8.677c0 .019.017.035.036.035l2.641-.004a.035.035 0 00.035-.035l-.011-8.5c-.002-1.364-1.1-2.478-2.442-2.476L4.18.016a.035.035 0 00-.034.036l.008 6.856c0 .031.037.047.06.025l4.994-5.064a.034.034 0 01.024-.01l2.603-.003c.03 0 .046.037.025.06l-8.118 8.41a.034.034 0 01-.049 0l-1.529-1.55a.036.036 0 01-.01-.026L2.143.074A.035.035 0 002.104.04C.976.185.086 1.131 0 2.294v5.972l.011 8.9a2.48 2.48 0 001.937 2.424h14.974c1.15-.199 2.034-1.224 2.032-2.448l-.003-2.873a.035.035 0 00-.035-.036zM66.47 3.682l.01 7.895-2.104-7.892-2.557.003.017 13.19 1.834-.003-.012-9.553 2.55 9.55 2.094-.004-.016-13.188-1.816.002zm-23.33.031l-1.378 9.366-1.513-9.362-2.835.003.017 13.19 1.779-.003-.012-9.327 1.532 9.325 1.927-.003 1.396-9.46.012 9.458 1.928-.002-.017-13.19-2.835.005h-.001zm33.133-.043l-1.946.002-1.549 6.013-1.564-6.009-2.131.003 2.587 8.814.005 4.371 2.039-.003-.006-4.37 2.565-8.821zm-20.44.026l-2.058 13.192 1.871-.003.35-2.393 2.501-.003.355 2.392 2.057-.003-2.092-13.186-2.983.004zm.42 9.005l.974-6.67.99 6.668-1.964.002zm-5.793-8.998l-3.002.004.017 13.189 2.038-.003-.006-4.955.964-.002c2.038-.002 3.037-1.153 3.035-3.263l-.003-1.715c-.002-2.11-1.005-3.258-3.043-3.255zm.008 6.35h-.964L49.5 5.589l.964-.001c.648-.001 1.001.3 1.002 1.242l.003 1.978c.001.942-.35 1.245-1 1.245z"></path></svg>
             </div>
-            <span class="eyebrow" style="margin-top:28px">Casa dos Pães × V4 Company · ZapFirst Plano Base</span>
-            <h1 class="cover-title">Do WhatsApp improvisado<br>à máquina de vendas</h1>
-            <p class="lede" style="max-width:980px">Preço e variedade já existem. O que falta é estrutura para atender, medir e reter — antes de escalar mídia.</p>
+            <span class="eyebrow" style="margin-top:28px">Casa dos Pães × V4 Company</span>
+            <h1 class="cover-title">A demanda já chega.<br>Falta a operação segurar.</h1>
+            <p class="lede" style="max-width:980px">Preço e variedade já existem. O que falta é estrutura para atender, medir e reter.</p>
           </div>
-          <div class="cover-client">Proposta personalizada · Nilda · ZapFirst · 3 meses</div>
+          <div class="cover-client">Proposta personalizada · Nilda · 3 meses</div>
         </div>
       </section>
 
-      <section class="slide dark" data-title="Dependência">
-        <span class="eyebrow">Contexto Casa dos Pães</span>
-        <h2 style="margin-top:22px;max-width:1240px;font-size:46px">Vocês não têm problema de preço.<br>Têm uma operação 100% amarrada na Nilda.</h2>
+      <section class="slide dark" data-title="O gargalo">
+        <span class="eyebrow">Leitura da conta</span>
+        <h2 style="margin-top:22px;max-width:1240px;font-size:46px">Vocês não têm problema de preço.<br>Têm uma operação que só anda se a Nilda estiver no meio.</h2>
         <div class="ctx-facts">
           <article class="ctx-fact glass">
-            <div class="k">01 · Gargalo</div>
-            <h3>Nilda-dependência</h3>
-            <p>Compras, atendimento e marketing passam por uma pessoa. Sem delegação, nada escala.</p>
+            <div class="k">01 · Centralização</div>
+            <h3>Compras, atendimento e marketing na mesma pessoa</h3>
+            <p>Qualquer ação nova compete com a rua, o caixa e a decisão do dia.</p>
           </article>
           <article class="ctx-fact glass">
-            <div class="k">02 · Canal</div>
-            <h3>WhatsApp sem resposta</h3>
-            <p>Quando ela está na rua comprando, o cliente manda mensagem — e a venda esfria.</p>
+            <div class="k">02 · Vazamento</div>
+            <h3>WhatsApp sem dono quando ela sai</h3>
+            <p>Cliente manda mensagem. Silêncio. A concorrência — mesmo mais cara — fecha porque responde.</p>
           </article>
           <article class="ctx-fact glass">
-            <div class="k">03 · Medo</div>
-            <h3>Investir sem retorno</h3>
-            <p>Tráfego e ações isoladas já falharam. Expectativa de “execução mágica” esbarra na falta de base.</p>
+            <div class="k">03 · Histórico</div>
+            <h3>Medo de investir de novo sem retorno</h3>
+            <p>Tráfego e ações isoladas já falharam. Não por falta de vontade — por falta de base.</p>
           </article>
         </div>
         <aside class="leitura glass">
-          <div class="mark">Leitura estratégica</div>
-          <h3>A proposta de valor entrega. O comercial não consegue sustentar a demanda.</h3>
+          <div class="mark">Tese estratégica</div>
+          <h3>A Casa dos Pães já gera interesse. O ROI morre entre a mensagem e a resposta.</h3>
           <div class="leitura-grid">
             <div>
-              <h4>Demanda sem atendimento</h4>
-              <p>Campanha ou carro de som que atrai interesse vira lead perdido se ninguém responde no WhatsApp.</p>
+              <h4>Demanda existe</h4>
+              <p>Loja, bairro, carro de som e indicação já trazem gente. O problema não é “aparecer”.</p>
             </div>
             <div>
-              <h4>Decisão no feeling</h4>
-              <p>Sem ticket, fluxo, CAC ou LTV, qualquer investimento continua sendo chute.</p>
+              <h4>Captura falha</h4>
+              <p>Sem processo, SLA e base, cada oportunidade depende do humor do dia e da agenda da Nilda.</p>
             </div>
             <div>
-              <h4>R$ 500 mil no mesmo jogo</h4>
-              <p>Sem máquina de atendimento e retenção, a meta só aprofunda a sobrecarga — não multiplica receita com previsibilidade.</p>
+              <h4>Crescimento trava</h4>
+              <p>Meta de R$ 500 mil exige sistema. Sem ele, a meta só aumenta a sobrecarga.</p>
             </div>
           </div>
         </aside>
       </section>
 
-      <section class="slide white" data-title="Os dados">
+      <section class="slide white" data-title="Os números">
         <div class="topline"></div>
-        <div style="display:inline-flex;align-items:center;padding:8px 14px;border-radius:999px;background:rgba(229,9,20,.08);border:1px solid rgba(229,9,20,.18);font:700 12px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#e50914;margin-bottom:18px">A conta que explica a meta de R$ 500 mil</div>
-        <h2 style="margin:0;max-width:1180px;font-size:42px;line-height:1.12">Os números da operação — e o buraco do canal.</h2>
-        <p style="margin:12px 0 0;max-width:980px;color:#5a5a5a;font-size:20px;line-height:1.35">Há demanda local e preço competitivo. O que não existe é estrutura para converter e reter com previsibilidade.</p>
+        <div style="display:inline-flex;align-items:center;padding:8px 14px;border-radius:999px;background:rgba(229,9,20,.08);border:1px solid rgba(229,9,20,.18);font:700 12px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#e50914;margin-bottom:18px">Diagnóstico em números</div>
+        <h2 style="margin:0;max-width:1180px;font-size:42px;line-height:1.12">O que a operação já tem — e o que ainda não segura receita.</h2>
         <div class="leak-grid">
           <div class="leak-card">
-            <div class="k">O que já existe</div>
+            <div class="k">Já existe</div>
             <div class="num">R$ 200k</div>
-            <p class="cap">faturamento mensal · meta R$ 500k</p>
+            <p class="cap">/mês · meta declarada R$ 500k</p>
             <ul>
-              <li>Preço competitivo + variedade</li>
-              <li>Fluxo da rua + bairro Mafrense</li>
-              <li>Carro de som ≈ R$ 4 mil/mês · GMN básico</li>
-              <li>Curva ABC / indicadores em levantamento</li>
+              <li>Preço competitivo e variedade</li>
+              <li>Fluxo da rua + Mafrense</li>
+              <li>Carro de som ≈ R$ 4 mil/mês</li>
+              <li>Curva ABC em levantamento</li>
             </ul>
           </div>
           <div class="leak-card">
-            <div class="k">O que não existe</div>
-            <div class="num">0</div>
-            <p class="cap">processo, CRM e base estruturada de clientes</p>
+            <div class="k">Ainda não existe</div>
+            <div class="num">Ø</div>
+            <p class="cap">sistema comercial no WhatsApp</p>
             <ul>
-              <li>WhatsApp sem SLA · resposta depende da Nilda</li>
-              <li>Sem ticket médio, CAC, LTV ou margem no dia a dia</li>
-              <li>Delivery limitado (bike, mínimo R$ 150)</li>
-              <li>Sem recompra previsível — canal genérico e caro</li>
+              <li>Sem SLA de resposta</li>
+              <li>Sem CRM / base estruturada</li>
+              <li>Sem recompra previsível</li>
+              <li>Delivery limitado · raio curto</li>
             </ul>
           </div>
         </div>
         <div class="leak-banner">
           <div class="icon-box" style="background:rgba(255,255,255,.15)"><svg class="icon" style="stroke:#fff"><use href="#i-target"/></svg></div>
           <div>
-            <h3>A pergunta que a meta de R$ 500 mil exige: como atender e reter — sem depender só da Nilda?</h3>
-            <p>Se a resposta for “mais tráfego / mais carro de som”, o gargalo só piora. Fundação antes de escala. Fonte: Account Planning Casa dos Pães × ZapFirst.</p>
+            <h3>A pergunta certa agora não é “como atrair mais?”. É “como parar de perder quem já chegou?”</h3>
+            <p>Enquanto a resposta depender só da Nilda, qualquer real gasto em divulgação tem ROI frágil.</p>
           </div>
         </div>
       </section>
 
-      <section class="slide dark" data-title="Dores × Casa dos Pães">
-        <span class="eyebrow">Encaixe Casa dos Pães</span>
-        <h2 style="margin-top:24px;max-width:1200px;font-size:40px">Onde a previsibilidade quebra — e o que precisa existir antes de escalar mídia.</h2>
+      <section class="slide dark" data-title="Onde quebra">
+        <span class="eyebrow">Mapa da imprevisibilidade</span>
+        <h2 style="margin-top:24px;max-width:1200px;font-size:40px">Seis pontos onde a Casa dos Pães sangra previsibilidade.</h2>
         <div class="map-grid">
-          <div class="map-item"><div class="dot"></div><div><div class="g6">CDP</div><h3>Nilda-dependência</h3><p>Tudo centralizado. Velocidade de execução = disponibilidade dela.</p></div></div>
-          <div class="map-item"><div class="dot"></div><div><div class="g6">CDP</div><h3>WhatsApp sem resposta</h3><p>Demanda chega e esfria. Marketing gera interesse; a operação mata a venda.</p></div></div>
-          <div class="map-item"><div class="dot"></div><div><div class="g6">CDP</div><h3>Cegueira de dados</h3><p>Sem métricas vitais, investimento continua chute — impossível provar ROI.</p></div></div>
-          <div class="map-item"><div class="dot"></div><div><div class="g6">CDP</div><h3>Canal único e caro</h3><p>Carro de som genérico, sem rastreio, sem base própria de recompra.</p></div></div>
-          <div class="map-item"><div class="dot"></div><div><div class="g6">CDP</div><h3>Maturidade digital baixa</h3><p>GMN básico, ações isoladas, sorteio sem captura estruturada.</p></div></div>
-          <div class="map-item"><div class="dot"></div><div><div class="g6">CDP</div><h3>Raio limitado</h3><p>Vendas no Mafrense. Delivery fraco. Concorrentes ganham por entregar.</p></div></div>
+          <div class="map-item"><div class="dot"></div><div><div class="g6">01</div><h3>Nilda-dependência</h3><p>Velocidade da empresa = disponibilidade de uma pessoa.</p></div></div>
+          <div class="map-item"><div class="dot"></div><div><div class="g6">02</div><h3>Mensagem sem resposta</h3><p>Demanda quente esfria no silêncio do WhatsApp.</p></div></div>
+          <div class="map-item"><div class="dot"></div><div><div class="g6">03</div><h3>Gestão no feeling</h3><p>Sem ticket, fluxo, margem e recorrência no dia a dia.</p></div></div>
+          <div class="map-item"><div class="dot"></div><div><div class="g6">04</div><h3>Canal caro e cego</h3><p>Carro de som genérico — sem base, sem recompra, sem prova.</p></div></div>
+          <div class="map-item"><div class="dot"></div><div><div class="g6">05</div><h3>Digital incompleto</h3><p>GMN básico. Ações isoladas. Contato capturado e perdido.</p></div></div>
+          <div class="map-item"><div class="dot"></div><div><div class="g6">06</div><h3>Raio travado</h3><p>Vizinhança só. Delivery fraco. Concorrente ganha por entregar.</p></div></div>
         </div>
       </section>
 
-      <section class="slide red" data-title="Promessa">
-        <div class="sphere" style="width:380px;height:380px;right:-60px;top:-90px;opacity:.45"></div>
-        <span class="eyebrow">Promessa</span>
-        <h2 style="margin-top:48px;max-width:1280px;font-size:52px">Em um projeto fechado, a V4 instala a máquina de vendas no WhatsApp da Casa dos Pães.</h2>
-        <div class="quote" style="margin-top:48px;border-color:var(--v4-cream);font-size:28px">Não é PDF. Não é tráfego solto. É estrutura funcionando — processo, time e IA.</div>
+      <section class="slide white" data-title="Ordem certa">
+        <div class="topline"></div>
+        <span class="eyebrow">Visão estratégica</span>
+        <h2 style="margin-top:22px;max-width:1180px">A ordem certa: segurar a demanda que já existe.</h2>
+        <p class="lede" style="margin-top:8px;max-width:980px;font-size:22px">Este projeto não vende expectativa de “mais volume amanhã”. Instala o sistema para o volume de hoje não escapar — e para a Nilda sair do gargalo.</p>
+        <div class="process" style="margin-top:40px">
+          <div class="stage"><h3>1 · Organizar</h3><p>Canal, catálogo, papéis e SLA.</p></div>
+          <div class="arrow">→</div>
+          <div class="stage"><h3>2 · Atender</h3><p>Resposta com dono — com ou sem a Nilda na loja.</p></div>
+          <div class="arrow">→</div>
+          <div class="stage"><h3>3 · Registrar</h3><p>CRM, origem, bairro, ticket.</p></div>
+          <div class="arrow">→</div>
+          <div class="stage"><h3>4 · Reter</h3><p>Régua de recompra. Base própria.</p></div>
+        </div>
+        <div class="quote" style="margin-top:36px;font-size:26px">Fundação primeiro. Qualquer aceleração só faz sentido com a casa atendendo.</div>
       </section>
 
-      <section class="slide white" data-title="Produto · 3P-IA">
+      <section class="slide red" data-title="Promessa">
+        <div class="sphere" style="width:400px;height:400px;right:-70px;top:-100px;opacity:.5"></div>
+        <span class="eyebrow">Promessa</span>
+        <h2 style="margin-top:48px;max-width:1280px;font-size:50px">Em 90 dias, a Casa dos Pães opera o WhatsApp com processo, time e resposta — sem a Nilda no front.</h2>
+        <p class="impact-line">Não é consultoria de slides. É estrutura instalada na operação.</p>
+      </section>
+
+      <section class="slide white" data-title="O que fica instalado">
         <div class="topline"></div>
-        <span class="eyebrow">Solução · ZapFirst Plano Base</span>
-        <h2 style="margin-top:22px;max-width:1180px">Produto → Processo → Pessoas → IA. A sequência importa.</h2>
+        <span class="eyebrow">O que a operação passa a ter</span>
+        <h2 style="margin-top:22px;max-width:1180px">Seis capacidades que hoje não existem — e passam a existir.</h2>
+        <div class="install-grid">
+          <article class="install-card">
+            <div class="k">Autoridade local</div>
+            <h3>Caminho até o chat</h3>
+            <p>Google Meu Negócio, Instagram com CTA e página/link apontando para o WhatsApp certo.</p>
+          </article>
+          <article class="install-card">
+            <div class="k">Vitrine no chat</div>
+            <h3>Catálogo + PIX</h3>
+            <p>Produto, preço e pagamento no fluxo. Fim do improviso e da fricção na hora de fechar.</p>
+          </article>
+          <article class="install-card">
+            <div class="k">Método</div>
+            <h3>Scripts e SLA</h3>
+            <p>Recepção, pedido, objeção, delivery e pós-venda — com tempo de resposta definido.</p>
+          </article>
+          <article class="install-card">
+            <div class="k">Pessoas</div>
+            <h3>Atendimento com dono</h3>
+            <p>Treino do auxiliar. Nilda entra em exceção e decisão — não no primeiro “oi”.</p>
+          </article>
+          <article class="install-card">
+            <div class="k">Memória</div>
+            <h3>CRM + recompra</h3>
+            <p>Pipeline no Kommo, tags de origem/bairro e réguas para quem já comprou.</p>
+          </article>
+          <article class="install-card">
+            <div class="k">Cobertura</div>
+            <h3>Resposta fora do horário</h3>
+            <p>SDR de IA só depois do processo humano existir — amplia, não substitui.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="slide dark" data-title="Método">
+        <span class="eyebrow">Como a V4 instala — sem automatizar o caos</span>
+        <h2 style="margin-top:22px;max-width:1180px;font-size:42px">Produto → Processo → Pessoas → só então IA.</h2>
         <div class="grid-4" style="margin-top:40px">
           <article class="card team-role">
             <div class="icon-box"><svg class="icon"><use href="#i-store"/></svg></div>
             <h3>Produto</h3>
-            <p>Catálogo no WhatsApp, oferta clara, PIX integrado. Cliente vê e escolhe sem sair do chat.</p>
+            <p>Oferta clara no catálogo. Prioridade nos itens de giro e margem da curva ABC.</p>
           </article>
           <article class="card team-role">
             <div class="icon-box"><svg class="icon"><use href="#i-route"/></svg></div>
             <h3>Processo</h3>
-            <p>Fluxo da chegada ao pós-venda. Scripts, SLA e papéis — promoção e pedido sem virar caos.</p>
+            <p>Do primeiro contato ao pagamento. Promo e pedido em fluxos separados.</p>
           </article>
           <article class="card team-role">
             <div class="icon-box"><svg class="icon"><use href="#i-users"/></svg></div>
             <h3>Pessoas</h3>
-            <p>Atendente treinado. Nilda sai do front e fica em compras, exceções e decisão.</p>
+            <p>Quem responde, quando escala, como fecha. Playbook editável.</p>
           </article>
           <article class="card team-role">
             <div class="icon-box"><svg class="icon"><use href="#i-bolt"/></svg></div>
             <h3>IA</h3>
-            <p>SDR 24/7 só depois dos 3 P’s. Qualifica, responde fora do horário e faz handoff.</p>
+            <p>Primeiro atendimento 24/7 e handoff. Entra quando a base humana já roda.</p>
           </article>
         </div>
-        <div class="quote" style="margin-top:36px;font-size:24px">Colocar IA em cima de caos é automatizar a perda. Fundação primeiro.</div>
+        <div class="quote" style="margin-top:36px;font-size:24px">IA em cima de bagunça só multiplica silêncio e erro. A sequência é o produto.</div>
       </section>
 
-      <section class="slide dark" data-title="Motor · 90 dias">
-        <span class="eyebrow">Como a máquina roda</span>
-        <h2 style="margin-top:24px;max-width:1180px;font-size:42px">Ambiente. Processo. Time. IA. Fundação antes de escala.</h2>
-        <p class="compact-lede" style="margin:8px 0 0;max-width:1100px">Projeto de 3 meses. Lead Gen e delivery ampliado só depois da máquina converter.</p>
-        <div class="process" style="margin-top:36px">
-          <div class="stage"><h3>Chegada</h3><p>GMB, Instagram e LP apontam para o WhatsApp.</p></div>
-          <div class="arrow">→</div>
-          <div class="stage"><h3>Catálogo</h3><p>Produto, preço e PIX no chat.</p></div>
-          <div class="arrow">→</div>
-          <div class="stage"><h3>Atendimento</h3><p>Script + SLA. Humano no horário.</p></div>
-          <div class="arrow">→</div>
-          <div class="stage"><h3>CRM</h3><p>Pipeline, origem, bairro, ticket.</p></div>
-          <div class="arrow">→</div>
-          <div class="stage"><h3>Recompra</h3><p>Réguas. Base própria. Menos carro de som.</p></div>
-        </div>
-        <div class="format-row" style="margin-top:28px">
-          <div class="format-card"><div class="k">Mês 1</div><h3>Produto + ambiente</h3><p>GMB, IG, LP, catálogo (curva ABC), PIX e captura no caixa.</p></div>
-          <div class="format-card"><div class="k">Mês 2</div><h3>Processo + pessoas</h3><p>Fluxo, scripts, treino do atendente, Kommo. Nilda fora do 1º atendimento.</p></div>
-          <div class="format-card"><div class="k">Mês 3</div><h3>IA + retenção</h3><p>SDR 24/7, réguas de recompra e diagnóstico de maturidade.</p></div>
-        </div>
-      </section>
-
-      <section class="slide" data-title="Sucesso">
+      <section class="slide" data-title="90 dias">
         <div class="topline"></div>
-        <span class="eyebrow">Receita previsível no WhatsApp</span>
-        <h2 style="margin-top:28px;max-width:1180px">O que vamos olhar juntos.</h2>
+        <span class="eyebrow">Cadência do projeto</span>
+        <h2 style="margin-top:22px;max-width:1180px">Três meses. Uma fundação. Sem promessa de atalho.</h2>
+        <div class="format-row" style="margin-top:40px">
+          <div class="format-card"><div class="k">Mês 1</div><h3>Organizar a porta de entrada</h3><p>GMB, Instagram, link, catálogo, PIX. Kick-off de papéis e SLA. Captura nome + WhatsApp no caixa começa aqui.</p></div>
+          <div class="format-card"><div class="k">Mês 2</div><h3>Descentralizar o atendimento</h3><p>Fluxo documentado, scripts, treino, CRM. Nilda sai do primeiro atendimento.</p></div>
+          <div class="format-card"><div class="k">Mês 3</div><h3>Ampliar e reter</h3><p>SDR IA, réguas de recompra, relatório de maturidade e próximo passo com evidência.</p></div>
+        </div>
+        <div class="quote" style="margin-top:36px;font-size:24px">R$ 500 mil continua sendo meta da empresa. Este projeto entrega o alicerce para a operação aguentar o caminho.</div>
+      </section>
+
+      <section class="slide dark" data-title="Sucesso">
+        <span class="eyebrow">O que vamos olhar juntos</span>
+        <h2 style="margin-top:22px;max-width:1180px">Indicadores de operação — não de vaidade.</h2>
         <div class="success-grid" style="margin-top:28px">
-          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-bolt"/></svg></div><h3>Tempo de 1ª resposta (horário + IA 24/7)</h3></div>
-          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-check"/></svg></div><h3>% de conversas sem resposta caindo</h3></div>
-          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-dashboard"/></svg></div><h3>Base no CRM (caixa + WhatsApp)</h3></div>
-          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-calendar"/></svg></div><h3>Réguas de recompra ativas</h3></div>
-          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-users"/></svg></div><h3>Horas da Nilda no atendimento ↓</h3></div>
-          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-chart"/></svg></div><h3>Ticket / origem / bairro mensuráveis</h3></div>
-          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-megaphone"/></svg></div><h3>Peso relativo do carro de som ↓</h3></div>
-          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-target"/></svg></div><h3>R$ 500k é meta da empresa; ZapFirst é o alicerce</h3></div>
+          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-bolt"/></svg></div><h3>Tempo de 1ª resposta</h3></div>
+          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-check"/></svg></div><h3>Conversas sem resposta ↓</h3></div>
+          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-dashboard"/></svg></div><h3>Base viva no CRM</h3></div>
+          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-calendar"/></svg></div><h3>Régua de recompra ativa</h3></div>
+          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-users"/></svg></div><h3>Horas da Nilda no front ↓</h3></div>
+          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-chart"/></svg></div><h3>Ticket / origem / bairro visíveis</h3></div>
+          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-megaphone"/></svg></div><h3>Dependência do carro de som ↓</h3></div>
+          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-target"/></svg></div><h3>Atendimento com dono nomeado</h3></div>
         </div>
       </section>
 
       <section class="slide white" data-title="Encaixe">
         <div class="topline"></div>
         <span class="eyebrow">Personalização Casa dos Pães</span>
-        <h2 style="margin-top:24px;max-width:1180px">A operação de vocês no desenho.</h2>
+        <h2 style="margin-top:22px;max-width:1180px">Desenhado para a rotina da Nilda — não para um manual genérico.</h2>
         <div class="grid-3" style="margin-top:36px">
           <article class="card">
             <div class="card-num">01</div>
-            <h3>WhatsApp com dois fluxos</h3>
-            <p>Promoção e pedidos com scripts separados. Sem improvisar preço no copy-paste.</p>
+            <h3>Dois fluxos no WhatsApp</h3>
+            <p>Promoção e pedido separados. O chat deixa de ser “caixa de recado” e vira canal com regra.</p>
           </article>
           <article class="card">
             <div class="card-num">02</div>
             <h3>Caixa alimenta a base</h3>
-            <p>Nome + WhatsApp no PDV. Combustível orgânico barato para recompra.</p>
+            <p>Nome + WhatsApp no PDV. Quem já compra vira ativo — mais barato que conquistar de novo todo dia.</p>
           </article>
           <article class="card">
             <div class="card-num">03</div>
-            <h3>Delivery depois</h3>
-            <p>WhatsApp vira ponte de pedidos. Ampliar raio (Aeroporto, São Joaquim, Poty Velho, Santa Maria) só com atendimento estável.</p>
+            <h3>Gate inegociável</h3>
+            <p>Pelo menos 1 pessoa de atendimento (mesmo meio período). Sem isso, nenhuma estrutura segura.</p>
           </article>
         </div>
-        <div class="quote" style="margin-top:36px;font-size:24px">Gate do projeto: pelo menos 1 pessoa no atendimento. Sem isso, a máquina não roda.</div>
+        <div class="quote" style="margin-top:36px;font-size:24px">Delivery ampliado e novos bairros entram depois — quando o WhatsApp já responde sem a Nilda na frente.</div>
       </section>
 
       <section class="slide dark" data-title="Recap">
-        <span class="eyebrow">Recap antes da decisão</span>
-        <h2 style="margin-top:22px;max-width:1180px">O que está em jogo na Casa dos Pães</h2>
+        <span class="eyebrow">Antes da decisão</span>
+        <h2 style="margin-top:22px;max-width:1180px">O que está em jogo</h2>
         <div class="grid-2" style="margin-top:32px">
           <div class="box" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.2)">
-            <div class="tag" style="color:var(--v4-cream)">Sem mudança</div>
-            <h3 style="color:#fff">Mais do mesmo</h3>
+            <div class="tag" style="color:var(--v4-cream)">Se nada mudar</div>
+            <h3 style="color:#fff">O padrão se repete</h3>
             <ul class="bullet-list" style="color:rgba(255,255,255,.78)">
               <li>Nilda continua no gargalo</li>
-              <li>WhatsApp perde venda na rua</li>
-              <li>Carro de som sem base</li>
-              <li>Meta de R$ 500k sem motor</li>
+              <li>Mensagem sem resposta = venda perdida</li>
+              <li>Carro de som sem ativo</li>
+              <li>Medo de investir permanece</li>
             </ul>
           </div>
           <div class="box" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.2)">
-            <div class="tag" style="color:var(--v4-cream)">Com ZapFirst Base</div>
-            <h3 style="color:#fff">Fundação instalada</h3>
+            <div class="tag" style="color:var(--v4-cream)">Com a fundação instalada</div>
+            <h3 style="color:#fff">A operação segura demanda</h3>
             <ul class="bullet-list" style="color:rgba(255,255,255,.78)">
-              <li>Processo + time + IA no WhatsApp</li>
-              <li>Autoridade local (GMB / IG / LP)</li>
-              <li>CRM + recompra</li>
-              <li>Nilda livre para outra frente</li>
+              <li>WhatsApp com processo e dono</li>
+              <li>Base e recompra no CRM</li>
+              <li>Autoridade local com caminho claro</li>
+              <li>Nilda livre para compras e decisão</li>
             </ul>
           </div>
         </div>
-        <div class="quote" style="margin-top:28px;font-size:24px">R$ 500 mil é meta da empresa. ZapFirst é o alicerce de 90 dias — não uma promessa de mídia.</div>
+        <div class="quote" style="margin-top:28px;font-size:24px">A demanda já chega. Este projeto existe para a operação finalmente segurar.</div>
       </section>
 
       <section class="slide white" data-title="Investimento">
         <div class="topline"></div>
         <span class="eyebrow">Investimento</span>
-        <h2 style="margin-top:18px;max-width:1100px">Investimento estratégico na máquina de vendas do WhatsApp</h2>
+        <h2 style="margin-top:18px;max-width:1100px">Projeto de 3 meses para instalar a fundação comercial no WhatsApp</h2>
         <div class="price-layout">
           <div class="price-main">
-            <div class="was">Valor de tabela · ZapFirst Plano Base</div>
+            <div class="was">Referência de tabela</div>
             <div class="ref">R$ 30.000,00</div>
-            <div class="now-label">Condição comercial · projeto 3 meses</div>
+            <div class="now-label">Condição comercial · implementação completa</div>
             <div class="now">R$ 18.000<small> à vista</small></div>
-            <p>ou 12× de R$ 1.666,67 no cartão. Setup completo sem mídia paga.</p>
+            <p>ou 12× de R$ 1.666,67 no cartão. Sem gestão de mídia paga neste escopo.</p>
           </div>
           <div class="price-side">
-            <div class="box"><div class="tag">Âncora de contexto</div><h3>Carro de som hoje</h3><p>≈ R$ 4 mil/mês, genérico, sem CRM. Em ~4–5 meses se aproxima do ZapFirst à vista — sem ativo próprio.</p></div>
-            <div class="box"><div class="tag">O que está incluso</div><h3>Máquina completa</h3><p>GMB, Instagram, LP, WhatsApp, catálogo, PIX, scripts, fluxo, treino, Kommo, réguas, SDR IA e diagnóstico M3.</p></div>
+            <div class="box"><div class="tag">Comparativo do dia a dia</div><h3>Carro de som</h3><p>≈ R$ 4 mil/mês hoje. Em poucos meses se aproxima do projeto — sem CRM, sem base, sem processo.</p></div>
+            <div class="box"><div class="tag">O que entra</div><h3>Estrutura + operação</h3><p>Ambiente digital, WhatsApp, catálogo, PIX, scripts, fluxo, treino, Kommo, réguas, SDR IA e diagnóstico de maturidade.</p></div>
           </div>
         </div>
       </section>
