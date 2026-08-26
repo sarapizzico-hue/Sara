@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Scripts AM · reativar conta sem contexto · Sara</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --brand:#e50915; --brand-light:#ff1a27; --bg:#050505; --surf:rgba(20,20,20,.92);
+      --surf2:#141414; --bd:rgba(255,255,255,.1); --txt:#fafafa; --mut:#a3a3a3;
+      --ok:#86efac; --warn:#fde68a; --hot:#fca5a5; --info:#93c5fd;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--txt);font:14px/1.55 Inter,system-ui,sans-serif;
+      background-image:radial-gradient(ellipse 80% 45% at 50% -15%,rgba(229,9,21,.18),transparent)}
+    .top{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);background:rgba(5,5,5,.88);border-bottom:1px solid var(--bd);padding:12px 22px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+    .logo{font-weight:900}.logo span{color:var(--brand-light)}
+    .pill{font-size:11px;font-weight:700;color:var(--mut);border:1px solid var(--bd);padding:5px 10px;border-radius:999px}
+    .wrap{max-width:1120px;margin:0 auto;padding:28px 20px 80px}
+    h1{margin:0 0 8px;font-size:clamp(26px,4vw,36px);font-weight:900;letter-spacing:-.03em}
+    .lead{color:var(--mut);max-width:920px;margin:0 0 18px;font-size:13px}
+    .lead a{color:var(--ok)}
+    .callout{padding:14px 16px;border-radius:12px;border:1px solid rgba(96,165,250,.3);background:rgba(96,165,250,.08);color:#bfdbfe;font-size:13px;margin-bottom:14px}
+    .callout.warn{border-color:rgba(250,204,21,.28);background:rgba(250,204,21,.06);color:#fde68a}
+    .callout.ok{border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.08);color:#bbf7d0}
+    .callout.hot{border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.08);color:#fecaca}
+    .nav{position:sticky;top:56px;z-index:15;margin:0 0 18px;padding:8px;background:rgba(8,8,8,.94);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.14);border-radius:16px}
+    .nav-label{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);padding:4px 10px 8px}
+    .tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+    @media(max-width:900px){.tabs{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:600px){.tabs{grid-template-columns:1fr 1fr}}
+    .tab{appearance:none;border:1px solid var(--bd);background:var(--surf2);color:var(--mut);border-radius:12px;padding:11px 10px;cursor:pointer;text-align:left;font-family:inherit}
+    .tab:hover{border-color:rgba(255,255,255,.22);color:#fff}
+    .tab.active{color:#fff;border-color:var(--brand);background:linear-gradient(135deg,rgba(229,9,21,.18),rgba(20,20,20,.95))}
+    .tab .n{display:block;font-size:13px;font-weight:800;margin-bottom:2px}
+    .tab .s{font-size:10px;font-weight:700;color:#d4d4d4}
+    .panel{display:none}.panel.is-active{display:block;animation:fade .2s ease}
+    @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+    .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:10px;margin-bottom:14px}
+    .kpi{background:var(--surf);border:1px solid var(--bd);border-radius:14px;padding:14px}
+    .kpi .v{font-size:22px;font-weight:900;line-height:1}.kpi .v.ok{color:var(--ok)}.kpi .v.hot{color:var(--hot)}.kpi .v.warn{color:var(--warn)}.kpi .v.info{color:var(--info)}
+    .kpi .l{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--mut);margin-top:6px;font-weight:700}
+    .section{background:var(--surf);border:1px solid var(--bd);border-radius:16px;padding:18px 20px;margin-bottom:12px}
+    .section h2{margin:0 0 4px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);font-weight:800}
+    .section h3{margin:0 0 12px;font-size:17px;font-weight:900}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:800px){.grid2{grid-template-columns:1fr}}
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}@media(max-width:900px){.grid3{grid-template-columns:1fr}}
+    .card{background:var(--surf2);border:1px solid var(--bd);border-radius:12px;padding:14px 16px}
+    .card .t{font-weight:800;margin-bottom:6px}
+    .card .d{font-size:12px;color:#d4d4d4}
+    .tag{display:inline-block;padding:2px 8px;border-radius:999px;font-size:10px;font-weight:800;border:1px solid var(--bd);margin-bottom:8px}
+    .tag.ok{color:var(--ok);border-color:rgba(34,197,94,.35)}
+    .tag.warn{color:var(--warn);border-color:rgba(250,204,21,.35)}
+    .tag.hot{color:var(--hot);border-color:rgba(239,68,68,.4)}
+    .tag.info{color:var(--info);border-color:rgba(96,165,250,.35)}
+    table{width:100%;border-collapse:collapse;font-size:12.5px}
+    th,td{padding:9px 8px;border-bottom:1px solid var(--bd);text-align:left;vertical-align:top}
+    th{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);font-weight:800;background:rgba(255,255,255,.02)}
+    .muted{color:var(--mut);font-size:12px}
+    ul,ol{margin:0;padding-left:18px} li{margin:6px 0;color:#e5e5e5}
+    .scroll{overflow-x:auto}
+    .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}@media(max-width:900px){.flow{grid-template-columns:1fr 1fr}}
+    .flow-step{background:var(--surf2);border:1px solid var(--bd);border-radius:12px;padding:12px}
+    .flow-step .n{font-size:10px;font-weight:800;color:var(--brand-light);letter-spacing:.08em;text-transform:uppercase}
+    .flow-step .t{font-weight:800;margin:4px 0}
+    .flow-step .d{font-size:12px;color:#d4d4d4}
+    .script{background:#0a0a0a;border:1px solid var(--bd);border-radius:12px;padding:14px 16px;font-size:13px;color:#e5e5e5;white-space:pre-wrap;line-height:1.65;margin:0 0 8px}
+    .copy{appearance:none;border:1px solid var(--bd);background:#111;color:#fff;font:inherit;font-weight:800;font-size:11px;padding:8px 12px;border-radius:10px;cursor:pointer;margin:0 0 14px}
+    .copy:hover{border-color:rgba(255,255,255,.28)}
+    footer{text-align:center;color:var(--mut);font-size:11px;margin-top:28px;padding-top:16px;border-top:1px solid var(--bd)}
+    footer a{color:var(--ok)}
+    .prio{border-left:3px solid var(--brand);padding:12px 14px;margin-bottom:10px;background:rgba(229,9,21,.08);border-radius:0 10px 10px 0}
+    .prio.p0{border-color:#ef4444;background:rgba(239,68,68,.08)}
+    .prio.p1{border-color:#facc15;background:rgba(250,204,21,.06)}
+    .prio .h{font-weight:800;margin-bottom:4px}
+    .prio .s{font-size:12px;color:#d4d4d4}
+  </style>
+</head>
+<body>
+<header class="top">
+  <div class="logo">V4 <span>COMPANY</span></div>
+  <div class="pill">Abordagem · Recuperação DROP · Sara</div>
+</header>
+
+<div class="wrap">
+  <h1>Scripts · reativar conta que você não conhece</h1>
+  <p class="lead">
+    Você não rodou a EE. Não inventa tese.
+    Abre como <strong>Account Manager da Estruturação Estratégica</strong>: quem é · pede pra mandar um áudio.
+    O check-in (como estão · tirar a EE do papel) vai no áudio, se ele autorizar.
+    Mesa:
+    <a href="https://docs.google.com/spreadsheets/d/13CWiDWpxBecny-_9xWJzvPX_DQ2eq4HJmvZvgo7oL9k/edit?gid=1948775673#gid=1948775673" target="_blank" rel="noopener">Recuperação DROP</a> ·
+    <a href="plano-reativacao-drops.html">filas</a> ·
+    <a href="farmer-sara.html">hub</a>.
+  </p>
+
+  <div class="callout warn">
+    <strong>Tom:</strong> simpática e profissional. Texto curto se apresenta e pede pra enviar um áudio bem curto.
+    O recado vai no áudio. Texto só se ele pedir.
+  </div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="v ok">AM</div><div class="l">Se apresenta</div></div>
+    <div class="kpi"><div class="v">Áudio</div><div class="l">Se ele autorizar</div></div>
+    <div class="kpi"><div class="v warn">C1</div><div class="l">Texto curto</div></div>
+    <div class="kpi"><div class="v">C2</div><div class="l">Se silêncio</div></div>
+    <div class="kpi"><div class="v info">+?</div><div class="l">Prioridades, se abrir</div></div>
+    <div class="kpi"><div class="v hot">0</div><div class="l">Tese inventada</div></div>
+  </div>
+
+  <nav class="nav">
+    <div class="nav-label">Estratégia</div>
+    <div class="tabs">
+      <button class="tab active" data-view="regra"><span class="n">Regra</span><span class="s">AM · se apresenta</span></button>
+      <button class="tab" data-view="c1"><span class="n">C1</span><span class="s">Abertura</span></button>
+      <button class="tab" data-view="c2c3"><span class="n">C2 · C3</span><span class="s">Silêncio · fechar</span></button>
+      <button class="tab" data-view="call"><span class="n">Call 15 min</span><span class="s">Momento · prioridades</span></button>
+      <button class="tab" data-view="p0"><span class="n">Depois</span><span class="s">Quando já souber</span></button>
+    </div>
+  </nav>
+
+  <!-- REGRA -->
+  <div class="panel is-active" data-view="regra">
+    <div class="section">
+      <h2>Como abrir</h2>
+      <h3>Texto: quem você é. Áudio: o recado. Só manda áudio se ele deixar.</h3>
+      <p class="muted" style="margin:0 0 14px">O cliente não te conhece. O primeiro Zap é apresentação + “posso te enviar um áudio bem curto?”. Calor sem informalidade. Check-in e tirar a EE do papel ficam no áudio. Se ele preferir texto, manda texto.</p>
+      <div class="grid2">
+        <div class="card">
+          <span class="tag ok">C1 · Zap</span>
+          <div class="t">Cabe</div>
+          <div class="d">
+            <ul>
+              <li>Nome, Account Manager da Estruturação Estratégica na V4.</li>
+              <li>Posso te enviar um áudio bem curto?</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <span class="tag warn">Se a conversa abrir</span>
+          <div class="t">Aí sim</div>
+          <div class="d">
+            <ul>
+              <li>Na época da EE, o que fez a continuidade não seguir — tempo, caixa, produto ou outra prioridade?</li>
+              <li>Como estão as prioridades de vocês agora?</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Prep de 60 segundos</h2>
+      <h3>Só o que está na linha da planilha. Se estiver vazio, vai cego.</h3>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Olhar</th><th>Usar no Zap?</th><th>Se estiver vazio</th></tr></thead>
+          <tbody>
+            <tr><td>Empresa + primeiro nome</td><td>Sim</td><td>Não manda.</td></tr>
+            <tr><td>Data de início (mês/ano da EE)</td><td>Sim, se tiver — “vocês fizeram a EE em [mês]”</td><td>Fala só “passaram pela EE com a V4”.</td></tr>
+            <tr><td>Observação</td><td>Só se for fato (luto, obra, assinatura). Não copia tom de Cockpit.</td><td>Script cego abaixo.</td></tr>
+            <tr><td>Motivo Drop / fee / TCV</td><td>Não. Não chuta no C1.</td><td>Pergunta de prioridade só se ele responder.</td></tr>
+            <tr><td>Need / Squad</td><td>Não fala pro cliente.</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Cadência</h2>
+      <h3>C1 Zap · 48h liga · C2 · C3. Mesmo tom o tempo todo.</h3>
+      <div class="flow" style="margin-bottom:16px">
+        <div class="flow-step">
+          <div class="n">C1 · D0</div>
+          <div class="t">Zap curto</div>
+          <div class="d">Quem é · posso te mandar um áudio?</div>
+        </div>
+        <div class="flow-step">
+          <div class="n">+48h</div>
+          <div class="t">Ligação 20s</div>
+          <div class="d">Se silêncio. Mesma frase, mais curta.</div>
+        </div>
+        <div class="flow-step">
+          <div class="n">C2 · D+3</div>
+          <div class="t">Zap curto</div>
+          <div class="d">Não reenvia o C1. Pede o áudio de novo, ou encerra.</div>
+        </div>
+        <div class="flow-step">
+          <div class="n">Se responder</div>
+          <div class="t">Áudio</div>
+          <div class="d">Como estão · como está sendo tirar a EE do papel.</div>
+        </div>
+      </div>
+      <div class="callout ok">Planilha no mesmo dia: Cadência · Status REC · o que ele falou na Observação. Motivo Drop só depois da conversa.</div>
+    </div>
+  </div>
+
+  <!-- C1 -->
+  <div class="panel" data-view="c1">
+    <div class="section">
+      <h2>C1 · Zap (usar este)</h2>
+      <h3>Só se apresenta e pede pra mandar o áudio. O recado não vai neste texto.</h3>
+      <p class="muted">Mandar no número do dono/decisor. Troque [ ]. Sem produto, sem tese, sem 15 min.</p>
+      <div class="script" id="s-cs1">Oi, [Nome], tudo bem?
+
+Aqui é [Nome], Account Manager da Estruturação Estratégica na V4.
+
+Posso te enviar um áudio bem curto?</div>
+      <button class="copy" data-copy="s-cs1">Copiar C1</button>
+    </div>
+
+    <div class="section">
+      <h2>Áudio · se ele disser que pode</h2>
+      <h3>20–25 segundos. Check-in. Como está saindo do papel — sem assumir que já executaram tudo.</h3>
+      <div class="script" id="s-audio">Oi [Nome], tudo bem com você? Aqui é [Nome] de novo.
+
+Sou Account Manager da Estruturação Estratégica na V4 e estou passando pra saber como vocês estão — e como está sendo tirar a EE do papel.
+
+Qualquer coisa, me responde aqui. Fico à disposição.</div>
+      <button class="copy" data-copy="s-audio">Copiar roteiro do áudio</button>
+    </div>
+
+    <div class="section">
+      <h2>Se ele pedir texto em vez de áudio</h2>
+      <h3>Mesmo recado, por escrito.</h3>
+      <div class="script" id="s-texto">Claro. Estou passando pra saber como vocês estão e como está sendo tirar a EE do papel. Fico à disposição.</div>
+      <button class="copy" data-copy="s-texto">Copiar texto</button>
+    </div>
+
+    <div class="section">
+      <h2>Variação do Zap, se quiser mais curta</h2>
+      <div class="grid2">
+        <div>
+          <p class="muted">Ainda mais curta</p>
+          <div class="script" id="s-curta">Oi, [Nome], tudo bem? Aqui é [Nome], Account Manager da Estruturação Estratégica na V4. Posso te enviar um áudio bem curto?</div>
+          <button class="copy" data-copy="s-curta">Copiar curta</button>
+        </div>
+        <div>
+          <p class="muted">Com o mês da EE</p>
+          <div class="script" id="s-cs1m">Oi, [Nome], tudo bem?
+
+Aqui é [Nome], Account Manager da Estruturação Estratégica na V4. Vocês passaram pela EE em [mês/ano].
+
+Posso te enviar um áudio bem curto?</div>
+          <button class="copy" data-copy="s-cs1m">Copiar com mês</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Ligação · 20 segundos</h2>
+      <h3>+48h se o Zap não tiver resposta. Não lê o áudio no telefone.</h3>
+      <div class="script" id="s-cslig">[Nome], oi, tudo bem? Aqui é [Nome], Account Manager da Estruturação Estratégica na V4. Te mandei um WhatsApp. Posso te enviar um áudio bem curto?</div>
+      <button class="copy" data-copy="s-cslig">Copiar ligação</button>
+    </div>
+
+    <div class="section">
+      <h2>Se ele responder — aí sim a pergunta de prioridade</h2>
+      <h3>Essa pergunta não vai no C1. Só depois que ele responder.</h3>
+      <div class="script" id="s-prio">Na época da EE, o que fez a continuidade não seguir — tempo, caixa, produto ou outra prioridade?
+
+Como está sendo as prioridades de vocês agora?</div>
+      <button class="copy" data-copy="s-prio">Copiar pergunta de prioridade</button>
+      <p class="muted">Com a resposta, você classifica Timing, Budget, produto ou outro — com a palavra dele, não do CRM.</p>
+    </div>
+
+    <div class="section">
+      <h2>Respostas curtas, se precisar</h2>
+      <h3>Ainda no mesmo tom. Sem vender.</h3>
+      <div class="grid3">
+        <div>
+          <p class="muted">“Quem é você / não te conheço”</p>
+          <div class="script" id="s-quem">A gente ainda não se falou — desculpa. Aqui é [Nome], Account Manager da Estruturação Estratégica na V4. Posso te enviar um áudio bem curto pra me apresentar?</div>
+          <button class="copy" data-copy="s-quem">Copiar</button>
+        </div>
+        <div>
+          <p class="muted">“Agora não / sem tempo”</p>
+          <div class="script" id="s-nao">Sem problema nenhum, [Nome]. Qual mês fica melhor eu voltar?</div>
+          <button class="copy" data-copy="s-nao">Copiar</button>
+        </div>
+        <div>
+          <p class="muted">“Pode / manda”</p>
+          <div class="script" id="s-sim">Obrigada! Mandando agora.</div>
+          <button class="copy" data-copy="s-sim">Copiar</button>
+          <p class="muted">Em seguida, o áudio do bloco acima. Sem texto extra.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- C2 C3 -->
+  <div class="panel" data-view="c2c3">
+    <div class="section">
+      <h2>C2 · ainda o mesmo tom</h2>
+      <h3>D+3. Não manda áudio sem autorização. Não reenvia o C1 inteiro.</h3>
+      <div class="grid2">
+        <div>
+          <p class="muted">Texto</p>
+          <div class="script" id="s-c2t">Oi, [Nome], tudo bem?
+
+Aqui é [Nome] de novo, da Estruturação Estratégica. Te mandei um Zap no começo da semana — posso te enviar um áudio bem curto? Se agora não for, tudo bem.</div>
+          <button class="copy" data-copy="s-c2t">Copiar C2 texto</button>
+        </div>
+        <div>
+          <p class="muted">Não use áudio no C2</p>
+          <p class="muted" style="margin:0">Se ele ignorou o pedido, áudio vira spam. C2 é texto. Áudio só depois do “pode”.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>C3 · fecha o ciclo</h2>
+      <h3>D+7. Uma mensagem. Depois, park.</h3>
+      <div class="script" id="s-c3">Oi, [Nome]. Última mensagem minha por agora.
+
+Se não for o momento, sem problema nenhum. Se quiser conversar sobre como vocês estão depois da EE, estou por aqui.</div>
+      <button class="copy" data-copy="s-c3">Copiar C3</button>
+      <p class="muted">Planilha: Cadência C3 · Status REC Sem conexão · Observação “park [mês]” · Temperatura Frio. Sem 4º toque.</p>
+    </div>
+
+    <div class="section">
+      <h2>Se responder “depois”</h2>
+      <h3>Vitória. Congele com data.</h3>
+      <div class="script" id="s-depois">Perfeito, [Nome] — fico com [mês] no radar.
+
+Te chamo na primeira semana de [mês]. Até lá, qualquer coisa, estou por aqui.</div>
+      <button class="copy" data-copy="s-depois">Copiar “depois”</button>
+    </div>
+  </div>
+
+  <!-- CALL -->
+  <div class="panel" data-view="call">
+    <div class="section">
+      <h2>Abertura da call · 15 min</h2>
+      <h3>Mesmo tom do Zap. Se apresenta, cita a EE, passa a ouvir.</h3>
+      <div class="script" id="s-callopen">[Nome], obrigada por encaixar. Eu sou [Nome], Account Manager da Estruturação Estratégica na V4.
+
+Queria saber como vocês estão e como está sendo tirar a EE do papel.
+
+Pode começar você — estou aqui pra ouvir.</div>
+      <button class="copy" data-copy="s-callopen">Copiar abertura da call</button>
+    </div>
+
+    <div class="section">
+      <h2>As perguntas (se a conversa abrir)</h2>
+      <h3>Anote a resposta na Observação. Isso vira o contexto que você não tinha.</h3>
+      <ol>
+        <li><strong>Do papel:</strong> “Como está sendo tirar a EE do papel — o que saiu e o que ficou parado?”</li>
+        <li><strong>Continuidade:</strong> “Na época da EE, o que fez a continuidade não seguir — tempo, caixa, produto ou outra prioridade?”</li>
+        <li><strong>Agora:</strong> “Como está sendo as prioridades de vocês agora?”</li>
+      </ol>
+      <p class="muted">Se a resposta for caixa → Budget. Tempo/sócio/lançamento → Timing. Pagamento/entrega da EE → Ops (não pitch). Produto ou outra prioridade → anota a frase dele.</p>
+    </div>
+
+    <div class="section">
+      <h2>Fechar os 15 min</h2>
+      <h3>Um próximo passo. Sem PDF na hora.</h3>
+      <div class="script" id="s-callend">Pelo que você falou, o que trava hoje é [repetir a frase dele].
+
+Próximo passo, se fizer sentido: [a gente se fala de novo em [mês] / eu te chamo com [pessoa] / a gente olha [o que ele priorizou]].
+
+Combinado?</div>
+      <button class="copy" data-copy="s-callend">Copiar fechamento</button>
+      <div class="callout hot" style="margin-top:14px"><strong>Gate:</strong> se quem está na call não decide, não fala número. Marca a próxima com o decisor na sala.</div>
+    </div>
+
+    <div class="section">
+      <h2>Objeções sem contexto</h2>
+      <h3>Não debate o que você não viveu na EE.</h3>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Ele diz</th><th>Você diz</th><th>Pedido</th></tr></thead>
+          <tbody>
+            <tr><td>“Você não sabe o que a gente fez”</td><td>“Por isso estou aqui. Me conta o que ficou, que eu não vou chutar.”</td><td>A pergunta de prioridade.</td></tr>
+            <tr><td>“Já falaram com a gente e não rolou”</td><td>“Justo. O que não rolou — tempo, caixa, produto ou outra prioridade?”</td><td>Nomeia a trava. Não defende a V4 antiga.</td></tr>
+            <tr><td>“Tá caro”</td><td>“Entendi. Como está sendo as prioridades de vocês agora?”</td><td>Prioridade, não fee antigo.</td></tr>
+            <tr><td>“Manda material”</td><td>“Antes eu queria entender o momento. Os 15 min já resolvem isso.”</td><td>Horário.</td></tr>
+            <tr><td>“Agora não”</td><td>“Sem problema. Qual mês eu volto?”</td><td>Data. Encerrar.</td></tr>
+            <tr><td>“Fala com [outra pessoa]”</td><td>“Perfeito. Me passa o contato e eu me apresento igual — Account Manager da Estruturação Estratégica.”</td><td>Nome + Zap do decisor.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- P0 -->
+  <div class="panel" data-view="p0">
+    <div class="section">
+      <h2>Só depois da descoberta</h2>
+      <h3>Enquanto Motivo Drop estiver vazio, todo mundo toma o mesmo C1. Não pule pra Timing/Budget.</h3>
+      <p class="muted">Na planilha Recuperação DROP o Motivo está vazio. O C1 de apresentação é o padrão. Depois da conversa, preencha Motivo e aí use o play certo.</p>
+      <div class="grid3">
+        <div class="card">
+          <span class="tag info">Virou Timing</span>
+          <div class="t">Pedido seguinte</div>
+          <div class="d">Data ou EQV. Não reabre fee. “Não é não, é agora não.”</div>
+        </div>
+        <div class="card">
+          <span class="tag warn">Virou Budget</span>
+          <div class="t">Pedido seguinte</div>
+          <div class="d">Recorte (Saber/Ter/fase 1). Não desconto do combo antigo.</div>
+        </div>
+        <div class="card">
+          <span class="tag hot">Virou Ops</span>
+          <div class="t">Para o comercial</div>
+          <div class="d">Devolve pra ops (pagto/entrega). Farmer não pitcha.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Depois da conversa (cole na Observação)</h2>
+      <div class="script" id="s-hand">Conta: [Empresa]
+Status REC: Conexão
+O que ele disse: [1–2 frases]
+Continuidade não seguiu por: [tempo / caixa / produto / outra]
+Prioridades agora: [frase dele]
+Decisor na conversa? [sim/não · nome]
+Pedido combinado: [15 min · data · park mês]</div>
+      <button class="copy" data-copy="s-hand">Copiar nota</button>
+    </div>
+
+    <div class="section">
+      <h2>Depois de cada toque</h2>
+      <ul>
+        <li>Cadência = C1 / C2 / C3 do toque de hoje.</li>
+        <li>Status REC = Conexão ou Sem conexão.</li>
+        <li>Observação = o que ele falou, não o que você acha.</li>
+        <li>Motivo Drop = preencher só depois da descoberta. Não chutar no C1.</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer>
+    V4 · Abordagem Recuperação DROP · Sara ·
+    <a href="https://docs.google.com/spreadsheets/d/13CWiDWpxBecny-_9xWJzvPX_DQ2eq4HJmvZvgo7oL9k/edit?gid=1948775673#gid=1948775673" target="_blank" rel="noopener">Planilha</a> ·
+    <a href="plano-reativacao-drops.html">Plano de reativação</a> ·
+    <a href="farmer-sara.html">Hub</a> ·
+    <a href="playbook-farmer-am.html">Playbook</a>
+  </footer>
+</div>
+
+<script>
+(function(){
+  document.querySelectorAll('.tab').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.tab').forEach(function(b){ b.classList.remove('active'); });
+      document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('is-active'); });
+      btn.classList.add('active');
+      var panel = document.querySelector('.panel[data-view="'+btn.getAttribute('data-view')+'"]');
+      if (panel) panel.classList.add('is-active');
+    });
+  });
+  document.querySelectorAll('.copy').forEach(function(btn){
+    var label = btn.textContent;
+    btn.addEventListener('click', function(){
+      var el = document.getElementById(btn.getAttribute('data-copy'));
+      if (!el) return;
+      var t = el.textContent;
+      if (navigator.clipboard) navigator.clipboard.writeText(t).then(function(){
+        btn.textContent = 'Copiado';
+        setTimeout(function(){ btn.textContent = label; }, 1400);
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>

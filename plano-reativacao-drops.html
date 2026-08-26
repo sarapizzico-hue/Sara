@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Plano de Ação · Reativação de Drops · Sara</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --brand:#e50915; --brand-light:#ff1a27; --bg:#050505; --surf:rgba(20,20,20,.92);
+      --surf2:#141414; --bd:rgba(255,255,255,.1); --txt:#fafafa; --mut:#a3a3a3;
+      --ok:#86efac; --warn:#fde68a; --hot:#fca5a5; --info:#93c5fd;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--txt);font:14px/1.55 Inter,system-ui,sans-serif;
+      background-image:radial-gradient(ellipse 80% 45% at 50% -15%,rgba(229,9,21,.18),transparent)}
+    .top{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);background:rgba(5,5,5,.88);border-bottom:1px solid var(--bd);padding:12px 22px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+    .logo{font-weight:900}.logo span{color:var(--brand-light)}
+    .pill{font-size:11px;font-weight:700;color:var(--mut);border:1px solid var(--bd);padding:5px 10px;border-radius:999px}
+    .wrap{max-width:1120px;margin:0 auto;padding:28px 20px 80px}
+    h1{margin:0 0 8px;font-size:clamp(26px,4vw,36px);font-weight:900;letter-spacing:-.03em}
+    .lead{color:var(--mut);max-width:900px;margin:0 0 18px;font-size:13px}
+    .lead a{color:var(--ok)}
+    .callout{padding:14px 16px;border-radius:12px;border:1px solid rgba(96,165,250,.3);background:rgba(96,165,250,.08);color:#bfdbfe;font-size:13px;margin-bottom:14px}
+    .callout.warn{border-color:rgba(250,204,21,.28);background:rgba(250,204,21,.06);color:#fde68a}
+    .callout.ok{border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.08);color:#bbf7d0}
+    .callout.hot{border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.08);color:#fecaca}
+    .nav{position:sticky;top:56px;z-index:15;margin:0 0 18px;padding:8px;background:rgba(8,8,8,.94);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.14);border-radius:16px}
+    .nav-label{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);padding:4px 10px 8px}
+    .tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+    @media(max-width:900px){.tabs{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:600px){.tabs{grid-template-columns:1fr 1fr}}
+    .tab{appearance:none;border:1px solid var(--bd);background:var(--surf2);color:var(--mut);border-radius:12px;padding:11px 10px;cursor:pointer;text-align:left;font-family:inherit}
+    .tab:hover{border-color:rgba(255,255,255,.22);color:#fff}
+    .tab.active{color:#fff;border-color:var(--brand);background:linear-gradient(135deg,rgba(229,9,21,.18),rgba(20,20,20,.95))}
+    .tab .n{display:block;font-size:13px;font-weight:800;margin-bottom:2px}
+    .tab .s{font-size:10px;font-weight:700;color:#d4d4d4}
+    .panel{display:none}.panel.is-active{display:block;animation:fade .2s ease}
+    @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+    .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:10px;margin-bottom:14px}
+    .kpi{background:var(--surf);border:1px solid var(--bd);border-radius:14px;padding:14px}
+    .kpi .v{font-size:22px;font-weight:900;line-height:1}.kpi .v.ok{color:var(--ok)}.kpi .v.hot{color:var(--hot)}.kpi .v.warn{color:var(--warn)}.kpi .v.info{color:var(--info)}
+    .kpi .l{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--mut);margin-top:6px;font-weight:700}
+    .section{background:var(--surf);border:1px solid var(--bd);border-radius:16px;padding:18px 20px;margin-bottom:12px}
+    .section h2{margin:0 0 4px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);font-weight:800}
+    .section h3{margin:0 0 12px;font-size:17px;font-weight:900}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:800px){.grid2{grid-template-columns:1fr}}
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}@media(max-width:900px){.grid3{grid-template-columns:1fr}}
+    .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}@media(max-width:980px){.grid4{grid-template-columns:1fr 1fr}}@media(max-width:600px){.grid4{grid-template-columns:1fr}}
+    .card{background:var(--surf2);border:1px solid var(--bd);border-radius:12px;padding:14px 16px}
+    .card .t{font-weight:800;margin-bottom:6px}
+    .card .d{font-size:12px;color:#d4d4d4}
+    .tag{display:inline-block;padding:2px 8px;border-radius:999px;font-size:10px;font-weight:800;border:1px solid var(--bd);margin-bottom:8px}
+    .tag.ok{color:var(--ok);border-color:rgba(34,197,94,.35)}
+    .tag.warn{color:var(--warn);border-color:rgba(250,204,21,.35)}
+    .tag.hot{color:var(--hot);border-color:rgba(239,68,68,.4)}
+    .tag.info{color:var(--info);border-color:rgba(96,165,250,.35)}
+    table{width:100%;border-collapse:collapse;font-size:12.5px}
+    th,td{padding:9px 8px;border-bottom:1px solid var(--bd);text-align:left;vertical-align:top}
+    th{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);font-weight:800;background:rgba(255,255,255,.02)}
+    tbody tr:hover{background:rgba(255,255,255,.02)}
+    .muted{color:var(--mut);font-size:12px}
+    ul,ol{margin:0;padding-left:18px} li{margin:6px 0;color:#e5e5e5}
+    .scroll{overflow-x:auto}
+    .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}@media(max-width:900px){.flow{grid-template-columns:1fr 1fr}}
+    .flow-step{background:var(--surf2);border:1px solid var(--bd);border-radius:12px;padding:12px}
+    .flow-step .n{font-size:10px;font-weight:800;color:var(--brand-light);letter-spacing:.08em;text-transform:uppercase}
+    .flow-step .t{font-weight:800;margin:4px 0}
+    .flow-step .d{font-size:12px;color:#d4d4d4}
+    .week{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+    .week-card{background:var(--surf2);border:1px solid var(--bd);border-radius:12px;padding:14px}
+    .week-card .d{font-size:11px;font-weight:800;color:var(--brand-light);margin-bottom:5px}
+    .week-card .t{font-size:14px;font-weight:800}.week-card .s{font-size:11px;color:var(--mut);margin-top:4px}
+    .script{background:#0a0a0a;border:1px solid var(--bd);border-radius:12px;padding:14px 16px;font-size:13px;color:#e5e5e5;white-space:pre-wrap;line-height:1.6}
+    label{display:block;font-size:10px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--mut);margin:0 0 6px}
+    input,textarea,select{width:100%;background:#0a0a0a;border:1px solid var(--bd);border-radius:10px;color:var(--txt);padding:10px 12px;font:inherit;margin-bottom:12px}
+    textarea{min-height:72px;resize:vertical}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+    @media(max-width:740px){.row,.row3{grid-template-columns:1fr}}
+    button{appearance:none;border:1px solid rgba(229,9,21,.5);background:linear-gradient(135deg,rgba(229,9,21,.28),#1a1a1a);color:#fff;font:inherit;font-weight:800;padding:12px 18px;border-radius:12px;cursor:pointer}
+    button.secondary{border-color:var(--bd);background:#111}
+    .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+    .out{white-space:pre-wrap;font-size:13px;line-height:1.65;color:#e5e5e5;background:#0a0a0a;border:1px solid var(--bd);border-radius:12px;padding:16px;min-height:200px}
+    .hint{font-size:11px;color:var(--mut);margin:-4px 0 10px}
+    .check{list-style:none;margin:0;padding:0}
+    .check li{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--bd);font-size:13px}
+    .check li:last-child{border-bottom:0}
+    .check .box{flex:0 0 16px;width:16px;height:16px;margin-top:2px;border:1.5px solid rgba(255,255,255,.22);border-radius:4px}
+    footer{text-align:center;color:var(--mut);font-size:11px;margin-top:28px;padding-top:16px;border-top:1px solid var(--bd)}
+    footer a{color:var(--ok)}
+    .prio{border-left:3px solid var(--brand);padding:12px 14px;margin-bottom:10px;background:rgba(229,9,21,.08);border-radius:0 10px 10px 0}
+    .prio.p0{border-color:#ef4444;background:rgba(239,68,68,.08)}
+    .prio.p1{border-color:#facc15;background:rgba(250,204,21,.06)}
+    .prio.p2{border-color:#60a5fa;background:rgba(96,165,250,.06)}
+    .prio .h{font-weight:800;margin-bottom:4px}
+    .prio .s{font-size:12px;color:#d4d4d4}
+  </style>
+</head>
+<body>
+<header class="top">
+  <div class="logo">V4 <span>COMPANY</span></div>
+  <div class="pill">Reativação de drops · Farmer Sara · ago/2026</div>
+</header>
+
+<div class="wrap">
+  <h1>Plano de Ação · reativar quem dropou (e quem vai dropar)</h1>
+  <p class="lead">
+    Recorte da planilha Farmer Sara (aba E.E): <strong>64 drops</strong>.
+    Tirando Tratativa Ops (<strong>20</strong>), o universo de reativação comercial é <strong>44</strong>.
+    Ops não entra nesta fila — é recuperar EE, não pitch.
+    Mesa: <a href="https://docs.google.com/spreadsheets/d/13CWiDWpxBecny-_9xWJzvPX_DQ2eq4HJmvZvgo7oL9k/edit?gid=1948775673#gid=1948775673" target="_blank" rel="noopener">Recuperação DROP</a> ·
+    <a href="estrategia-abordagem-drops.html">Como falar com eles</a> ·
+    <a href="farmer-sara.html">Hub</a> ·
+    <a href="playbook-farmer-am.html">Playbook</a>.
+  </p>
+
+  <div class="callout ok">
+    <strong>Como falar (conta que você não conhece):</strong>
+    <a href="estrategia-abordagem-drops.html" style="color:#86efac">AM da EE se apresenta</a>
+    — pede pra mandar um áudio. Check-in (como estão · tirar a EE do papel) vai no áudio, se ele autorizar.
+  </div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="v hot">64</div><div class="l">Drops Sara</div></div>
+    <div class="kpi"><div class="v warn">20</div><div class="l">Tratativa Ops (fora)</div></div>
+    <div class="kpi"><div class="v ok">44</div><div class="l">Winback comercial</div></div>
+    <div class="kpi"><div class="v info">24</div><div class="l">Timing · EQV</div></div>
+    <div class="kpi"><div class="v">16</div><div class="l">Budget · fasear</div></div>
+    <div class="kpi"><div class="v warn">28</div><div class="l">Pipe ainda aberto</div></div>
+  </div>
+
+  <nav class="nav">
+    <div class="nav-label">Como usar este plano</div>
+    <div class="tabs">
+      <button class="tab active" data-view="tese"><span class="n">Tese</span><span class="s">4 filas · regras</span></button>
+      <button class="tab" data-view="plays"><span class="n">Plays</span><span class="s">Por motivo de drop</span></button>
+      <button class="tab" data-view="filas"><span class="n">Filas</span><span class="s">Contas nomeadas</span></button>
+      <button class="tab" data-view="ondas"><span class="n">Ondas</span><span class="s">30–60–90 · ritual</span></button>
+      <button class="tab" data-view="gerar"><span class="n">Gerar plano</span><span class="s">Por conta</span></button>
+    </div>
+  </nav>
+
+  <!-- TESE -->
+  <div class="panel is-active" data-view="tese">
+    <div class="section">
+      <h2>Contrato do plano</h2>
+      <h3>O que estamos resolvendo</h3>
+      <p class="muted" style="margin:0 0 14px">
+        Os 44 são o jogo da Farmer. Os 20 Ops não competem com pitch.
+        Timing é mais da metade do winback (24/44). Vários P0 de junho (Adriano, AGM, Moteis) saíram do pipe e agora são Timing — reativar, não “salvar”.
+      </p>
+      <div class="flow" style="margin-bottom:16px">
+        <div class="flow-step">
+          <div class="n">Fila 1 · Save</div>
+          <div class="t">Ainda no pipe</div>
+          <div class="d">28 contas Semana/Follow. Foco nos que já passaram da S3 ou têm tese na mesa — não nas 10 Semana 0.</div>
+        </div>
+        <div class="flow-step">
+          <div class="n">Fila 2 · Timing</div>
+          <div class="t">Winback EQV</div>
+          <div class="d">Interesse existiu, momento não. Reabrir com data-gatilho. Não re-pitchar fee Executar agora.</div>
+        </div>
+        <div class="flow-step">
+          <div class="n">Fila 3 · Budget</div>
+          <div class="t">Winback faseado</div>
+          <div class="d">WTP/capital bateu na parede. Subir consciência · Saber/Ter · combo menor. Não descontar Executar no escuro.</div>
+        </div>
+        <div class="flow-step">
+          <div class="n">Fila 4 · Ops</div>
+          <div class="t">Recuperar EE</div>
+          <div class="d">Fora do ranking de pitch. Causa no Cockpit · pago · entrega. Só depois lead score.</div>
+        </div>
+      </div>
+      <div class="grid2">
+        <div class="card">
+          <span class="tag ok">Fazer</span>
+          <div class="t">Um motivo · um dono · uma data</div>
+          <div class="d">
+            <ul>
+              <li>Classificar cada drop com causa real (banir “PROJETO TRAVADO”).</li>
+              <li>Registrar trigger de reabertura (mês, obra, sócio, lançamento, caixa).</li>
+              <li>Oferta de retorno diferente da que dropou.</li>
+              <li>Todo contato fecha com próximo contato datado.</li>
+              <li>Gate do playbook vale no winback: decisor + pago (se ainda houver EE).</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <span class="tag hot">Não fazer</span>
+          <div class="t">Tratar drop como uma fila só</div>
+          <div class="d">
+            <ul>
+              <li>Misturar Ops com pitch de STEP.</li>
+              <li>Reenviar a mesma proposta Executar para Timing/Budget.</li>
+              <li>Desconto para “salvar” sem nova tese.</li>
+              <li>Ghost 3x e deixar no Follow eterno — qualificar drop.</li>
+              <li>Contar Já monetizado / Assessoria como winback Farmer.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Prioridade de quem reabrir</h2>
+      <h3>Score de winback (usar na triagem de 30 min)</h3>
+      <div class="scroll">
+        <table>
+          <thead>
+            <tr><th>Sinal</th><th>Peso</th><th>P0 se…</th><th>Park se…</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Tese / fee já mapeado na EE</td><td>Alto</td><td>E ou T na mesa (Fuzinatto, Becton, Devstate…)</td><td>Nada mapeado e EE incompleta</td></tr>
+            <tr><td>Motivo = Timing (não Budget/Ops)</td><td>Alto</td><td>Disse “depois” com data ou evento</td><td>Sumiu sem motivo e não retorna em 2 toques</td></tr>
+            <tr><td>CSAT / decisor esteve na sala</td><td>Alto</td><td>Decisor viu S2/S3</td><td>Só influenciador · Churn M0 sem pagto</td></tr>
+            <tr><td>Safra recente (mai–jul)</td><td>Médio</td><td>Drop &lt; 90 dias</td><td>Drop &gt; 6 meses sem trigger</td></tr>
+            <tr><td>Margem / tier aguenta STEP menor</td><td>Médio</td><td>MEDIUM+ ou margem com folga</td><td>TINY + margem ~7% (ex. Ultra Vida) — só Saber pontual</td></tr>
+            <tr><td>Pagamento EE em dia</td><td>Gate</td><td>Pago / pagando</td><td>MasterPlan · Premium Gourmet — veto de apresentação</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLAYS -->
+  <div class="panel" data-view="plays">
+    <div class="section">
+      <h2>Play A · Save</h2>
+      <h3>Pipe aberto que vai dropar se o follow morrer</h3>
+      <p class="muted">28 no pipe. Adriano, AGM, Moteis, Ecofitness e Rota da Linguiça já dropou — foram para os 44. O Save agora é não deixar a S3–S5 virar a próxima leva.</p>
+      <div class="grid3">
+        <div class="card">
+          <span class="tag hot">P0 · tese na mesa</span>
+          <div class="t">Follow / S5</div>
+          <div class="d">Almeida e Neves (Saber R$25,5k · Follow morno) · Triboltec (S5 · agenda/pitch 4x) · Hanaro (S5 · LARGE · viagem → agosto).</div>
+        </div>
+        <div class="card">
+          <span class="tag warn">P0 · S3/S4</span>
+          <div class="t">Porta de drop</div>
+          <div class="d">Freebong · Casa dos Pães (AP 11/08) · ABC71 · Ecco Salva (LARGE) · Tamiya · RE/MAX · 600 Multimarcas. Gate: decisor na sala.</div>
+        </div>
+        <div class="card">
+          <span class="tag info">P1 · S2 / pagto</span>
+          <div class="t">Ainda dá para não dropar</div>
+          <div class="d">Wang (AP) · General car · RM Burguer (eram pagto travado — se não regularizou, Ops). S2 jul/ago: nutrir, não pitchar.</div>
+        </div>
+      </div>
+      <div class="script" style="margin-top:12px">Save · WhatsApp 1º toque (contrato na rua)
+[Nome], passando para alinhar o próximo passo da proposta que está com vocês.
+Tenho dois horários esta semana para uma devolutiva de 20 min: [dia/hora] ou [dia/hora].
+Se o timing mudou, me fala a data certa — aí eu reorganizo a tese, sem pressa falsa.</div>
+    </div>
+
+    <div class="section">
+      <h2>Play B · Timing</h2>
+      <h3>Interesse existiu. O “não” foi de calendário</h3>
+      <div class="grid2">
+        <div class="card">
+          <div class="t">O que oferecer</div>
+          <div class="d">
+            <ul>
+              <li>EQV / check-in no gatilho (lançamento, sócio, caixa, pós-obra).</li>
+              <li>Saber pontual se a tese esfriou.</li>
+              <li>Fee alto já na mesa: Moteis (TCV R$195k) · Becton (R$191k) · Madeiras (R$125k) · Devstate (R$124k) · Adriano (assinatura) · AGM. Guardar tese; 1ª call sem preço novo.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <div class="t">O que não oferecer</div>
+          <div class="d">
+            <ul>
+              <li>Novo pitch completo na semana 1 do winback.</li>
+              <li>“Desconto se fechar hoje.”</li>
+              <li>Combo cheio para quem pediu para esperar o sócio / o lançamento.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="script" style="margin-top:12px">Timing · reabertura
+[Nome], na EE a gente tinha mapeado [tese em 1 frase]. Vocês pediram para retomar em [gatilho / mês].
+Chegou a hora? Se sim, marco 25 min só para atualizar a tese — sem proposta nova na primeira call.
+Se o gatilho adiou, me manda a nova data que eu deixo no radar.</div>
+    </div>
+
+    <div class="section">
+      <h2>Play C · Budget</h2>
+      <h3>A parede foi consciência / caixa — não “falta de follow”</h3>
+      <div class="callout">
+        <strong>16 Budget nos 44.</strong> Mai–jun concentram: Unik ghost, Protesol “salgado”, KFG obra, Ecofitness EQV, Estação Delta (Saber R$14,5k), Madezatto já em EQV.
+        Play = STEP menor ou fasear, não o mesmo Executar com 10% off.
+      </div>
+      <div class="grid3">
+        <div class="card">
+          <span class="tag warn">Caixa comprometido</span>
+          <div class="t">KFG · obra</div>
+          <div class="d">Gatilho = capital liberado. EQV no marco da obra. Não forçar agora.</div>
+        </div>
+        <div class="card">
+          <span class="tag hot">Preço “salgado”</span>
+          <div class="t">Protesol · Unik</div>
+          <div class="d">Reabrir consciência (o que perde na mesa) + Saber/Ter. Unik ghost: 2 toques + 1 ligação; sem resposta = park 60d.</div>
+        </div>
+        <div class="card">
+          <span class="tag info">Margem estreita</span>
+          <div class="t">Ultra Vida ~7,6%</div>
+          <div class="d">Não cabe Executar. Saber pontual ou park honesto. Protege a Farmer e o cliente.</div>
+        </div>
+      </div>
+      <div class="script" style="margin-top:12px">Budget · reabertura (não é desconto)
+[Nome], revimos a tese da EE. O pacote cheio não cabe no caixa de vocês agora — e está tudo bem.
+O que cabe é [Saber / Ter / fase 1], que destrava [dor #1] em 30–45 dias.
+Posso te mostrar só esse recorte em 20 min, sem o combo anterior na mesa.</div>
+    </div>
+
+    <div class="section">
+      <h2>Play D · Ops</h2>
+      <h3>Quase 1 em cada 3 drops · mata antes do pitch</h3>
+      <p class="muted">20 Tratativa Ops — fora dos 44. Quase 1 em cada 3 drops da Sara. Farmer não compete essa fila com pitch de STEP.</p>
+      <ol>
+        <li><strong>Higiene (esta semana):</strong> cada Ops ganha uma causa: pagto · escopo · agenda ops · churn · handoff · cliente sumiu.</li>
+        <li><strong>Recuperar EE:</strong> pago + entrega andando. Gate do playbook.</li>
+        <li><strong>Só então</strong> a conta volta para lead score / plano de ação comercial.</li>
+        <li><strong>Exceção útil:</strong> Fuzinatto (E R$7,8k + T R$25k mapeados) e Joyful (fee Ter) — se a EE voltar, já tem tese. Dono Ops + Sara no handoff.</li>
+        <li><strong>Veto:</strong> MasterPlan e Premium Gourmet (pagto / Churn M0) — não apresentar preço.</li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <h2>Play E · Interno / sem motivo / Churn M0</h2>
+      <h3>Diagnosticar em 1 toque · park se não houver causa</h3>
+      <div class="grid2">
+        <div class="card">
+          <div class="t">1 call de causa</div>
+          <div class="d">Nos 44: Diveq e ZLS (Interno) · Terra prometida (sem motivo). Creative Eng agora está Budget; Curavida está Timing/EQV. Pergunta: “caixa, timing, produto ou a EE?”. Sem resposta em 7 dias → park 90d.</div>
+        </div>
+        <div class="card">
+          <div class="t">Churn M0 sem pagto</div>
+          <div class="d">MasterPlan · Premium Gourmet. Fora do winback comercial. Financeiro / Ops. Farmer só reentra se regularizar.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FILAS -->
+  <div class="panel" data-view="filas">
+    <div class="section">
+      <h2>Universo · 44 comerciais</h2>
+      <h3>64 drops Sara − 20 Tratativa Ops</h3>
+      <p class="muted" style="margin:0 0 12px">
+        Extração nominada da aba E.E (Farmer = Sara): Timing 24 · Budget 16 · Interno 2 · sem motivo 1.
+        O recorte da Farmer fecha em 44 — 1 conta a bater no Cockpit (Status vs Motivo).
+      </p>
+      <div class="grid4">
+        <div class="card"><span class="tag info">Timing 24</span><div class="t">EQV / data</div><div class="d">Mais da metade. Inclui quem acabou de sair do pipe: Adriano, AGM, Moteis.</div></div>
+        <div class="card"><span class="tag warn">Budget 16</span><div class="t">Fasear</div><div class="d">Caixa / “salgado” / margem. Ecofitness e Estação Delta entraram nesta leva.</div></div>
+        <div class="card"><span class="tag">Interno 2</span><div class="t">1 toque</div><div class="d">ZLS hub · Diveq (proposta aceita, standby interno).</div></div>
+        <div class="card"><span class="tag hot">Sem motivo 1</span><div class="t">Diagnosticar</div><div class="d">Terra prometida — preencher Motivo esta semana.</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Fila Save · pipe aberto</h2>
+      <h3>Não é os 44 — é para não virar o 45º</h3>
+      <div class="prio p0">
+        <div class="h">P0 · tese / S5</div>
+        <div class="s">Almeida e Neves (Follow · Saber R$25,5k) · Triboltec (S5 · 4x agenda+pitch) · Hanaro (S5 · LARGE · volta em agosto).</div>
+      </div>
+      <div class="prio p1">
+        <div class="h">P1 · S3/S4 · porta de drop</div>
+        <div class="s">Freebong · Casa dos Pães · ABC71 · Ecco Salva · Tamiya · RE/MAX · 600 Multimarcas · Wang (S2 com AP).</div>
+      </div>
+      <div class="prio p2">
+        <div class="h">P2 · pagto que era travado + Semana 0</div>
+        <div class="s">General car · RM Burguer. Semana 0 (10 contas) = nutrir EE, não pitch. Se pagto falhar de novo → Ops, não Drop comercial.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Fila Timing · 24</h2>
+      <h3>Interesse existiu · atacar por TCV e gatilho fresco</h3>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Prio</th><th>Conta</th><th>Safra</th><th>Sinal na planilha</th><th>Play</th></tr></thead>
+          <tbody>
+            <tr><td><span class="tag hot">P0</span></td><td>Adriano Martins</td><td>Jun</td><td>Drop Timing · “aguardando assinatura” · TCV R$66k</td><td>Multi-canal até sim/não. Não deixar virar ghost.</td></tr>
+            <tr><td><span class="tag hot">P0</span></td><td>AGM Distribuidora</td><td>Jun</td><td>Gostou · avaliar com financeiro · TCV R$74k</td><td>Recorte / prazo. Se for caixa → Budget de verdade.</td></tr>
+            <tr><td><span class="tag hot">P0</span></td><td>Moteis Fortaleza</td><td>Jun</td><td>E R$16,2k · TCV R$195k · devolutiva 28/07</td><td>Retomar devolutiva. 1ª call sem preço novo.</td></tr>
+            <tr><td><span class="tag hot">P0</span></td><td>Dakar</td><td>—</td><td>Gostou · avaliar cartão · TCV R$83k</td><td>Destravar forma de pagamento = EE.</td></tr>
+            <tr><td><span class="tag warn">P0</span></td><td>Positive Safety · Pedrini · Curavida · Fui Motos</td><td>Mai–Jun</td><td>EQV / sócio / “uma semana”</td><td>Já em reativação — datar o próximo toque.</td></tr>
+            <tr><td><span class="tag warn">P0</span></td><td>Becton · Devstate · Madeiras · Mais Gôndolas</td><td>Mar</td><td>TCV R$99–191k · fee na mesa</td><td>EQV. Luto (Madeiras) = data humana, não pitch.</td></tr>
+            <tr><td><span class="tag info">P1</span></td><td>Rota da Linguiça</td><td>Mai</td><td>EQV no-show · saúde</td><td>FUP quando disponível. Sem pressão.</td></tr>
+            <tr><td><span class="tag info">P1</span></td><td>Bioativos · Ícaro Braga · Movement · Eskimó</td><td>Mar–Abr</td><td>Fee mapeado / lançamento</td><td>1 toque + data 2º semestre.</td></tr>
+            <tr><td><span class="tag">P2</span></td><td>Mayko · WZR · Testfy · Danah · Ervatti · ID Finanças · Positive Solutions</td><td>Jan–Mai</td><td>FUP futuro / verba interna</td><td>Toque único · park 90d se frio.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Fila Budget · 16</h2>
+      <h3>Fasear, não descontar</h3>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Prio</th><th>Conta</th><th>Safra</th><th>Sinal na planilha</th><th>Não fazer</th></tr></thead>
+          <tbody>
+            <tr><td><span class="tag warn">P0</span></td><td>Madezatto</td><td>Mai</td><td>REATIVANDO EQV</td><td>Executar cheio</td></tr>
+            <tr><td><span class="tag warn">P0</span></td><td>Ecofitness</td><td>Jun</td><td>Montar proposta EQV · E R$2,9k</td><td>Novo Executar</td></tr>
+            <tr><td><span class="tag warn">P0</span></td><td>Estação Delta</td><td>Jun</td><td>Saber R$14,5k · devolutiva 31/07</td><td>Insistir no combo</td></tr>
+            <tr><td><span class="tag warn">P0</span></td><td>Protesol · KFG</td><td>Jun</td><td>“Salgado” / obra atrasou capital</td><td>O mesmo fee E</td></tr>
+            <tr><td><span class="tag hot">P1</span></td><td>Unik</td><td>Mai</td><td>Ghost pós-assinatura</td><td>Follow eterno (2 Zap + 1 call → park 60d)</td></tr>
+            <tr><td><span class="tag">P1</span></td><td>UR Transportes · Ruiz · Creative Eng</td><td>Mai</td><td>Orçamento / follow frio</td><td>Mesma proposta</td></tr>
+            <tr><td><span class="tag">P2</span></td><td>Ultra Vida</td><td>Abr</td><td>Margem ~7,6%</td><td>Executar</td></tr>
+            <tr><td><span class="tag">P2</span></td><td>Punctual · Óticas Líder · Cria Nutrição · Gaucho · Kidys · Acarlos</td><td>Fev–Abr</td><td>NO ICP / pagto / quadro</td><td>Campanha de desconto</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Fila Ops · 20 · fora dos 44</h2>
+      <h3>Não conta na meta de reativação comercial</h3>
+      <div class="grid2">
+        <div class="card">
+          <span class="tag warn">Handoff se a EE voltar</span>
+          <div class="d">
+            <ul>
+              <li>Fuzinatto / Roverotto · Joyful Feast · Globo Eventos · Equilibra</li>
+              <li>Sora consultoria — era pipe, agora Ops (projeto travado)</li>
+              <li>Wollp Casimaria — drop Ops jul</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <span class="tag hot">Causa / veto</span>
+          <div class="d">
+            <ul>
+              <li>MasterPlan · Premium Gourmet — pagto / Churn M0 · veto de preço</li>
+              <li>Vita Mater — Amanda · M &amp; J Green Foods — caiu pós-KO</li>
+              <li>Casa Bella · LaundryApp · Amorelli · Fc Cursio · Lone Star · L5 · NextPack · Conlar · Ntec · Financial Sistemas — banir “TRAVADO” sem causa</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ONDAS -->
+  <div class="panel" data-view="ondas">
+    <div class="section">
+      <h2>30 · 60 · 90</h2>
+      <h3>O plano em ondas — dono: Sara · apoio Ops no Play D</h3>
+      <div class="week">
+        <div class="week-card">
+          <div class="d">Semana 0 · agora</div>
+          <div class="t">Triagem de 60 min</div>
+          <div class="s">Classificar os 44 nas filas Timing/Budget/Interno. Os 20 Ops ficam numa lista à parte. Causa no Cockpit. P0 Timing na parede.</div>
+        </div>
+        <div class="week-card">
+          <div class="d">Dias 1–14</div>
+          <div class="t">Onda Timing P0 fresco</div>
+          <div class="s">Adriano (assinatura) · AGM · Moteis · Dakar · EQVs já andando (Positive Safety, Pedrini, Curavida, Fui Motos, Madezatto).</div>
+        </div>
+        <div class="week-card">
+          <div class="d">Dias 15–30</div>
+          <div class="t">Onda Budget + cluster mar</div>
+          <div class="s">Ecofitness · Estação Delta · Protesol · KFG · Unik. Depois Becton / Devstate / Madeiras / Mais Gôndolas (1 toque EQV).</div>
+        </div>
+        <div class="week-card">
+          <div class="d">Dias 31–60</div>
+          <div class="t">Timing P1 + Save S3</div>
+          <div class="s">Rota, Bioativos, Ícaro, Eskimó. Save: Almeida e Neves · Triboltec · Hanaro · Freebong — decisão, não silêncio.</div>
+        </div>
+        <div class="week-card">
+          <div class="d">Dias 61–90</div>
+          <div class="t">Park honesto</div>
+          <div class="s">P2 sem gatilho → radar 90d. Medir só os 44: reabertos · park · (Ops não entra no denominador).</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Ritual semanal · 30 min</h2>
+      <h3>Toda segunda (ou no comando diário da Sara)</h3>
+      <ul class="check">
+        <li><span class="box"></span><div>Save P0: cada um tem próximo passo e data (senão é drop disfarçado)</div></li>
+        <li><span class="box"></span><div>EQVs da semana: quem vence gatilho nos próximos 7 dias</div></li>
+        <li><span class="box"></span><div>Nenhum winback recebeu a mesma proposta que dropou</div></li>
+        <li><span class="box"></span><div>Ops: zero “PROJETO TRAVADO” sem causa</div></li>
+        <li><span class="box"></span><div>Contar 3 números: Save convertidos · Winbacks reabertos · Drops qualificados no período</div></li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Metas de processo (não inventar receita)</h2>
+      <h3>O que dá para cobrar neste ciclo</h3>
+      <div class="grid3">
+        <div class="card">
+          <span class="tag hot">Save</span>
+          <div class="t">S3–S5 → 0 em silêncio</div>
+          <div class="d">Almeida e Neves, Triboltec, Hanaro, Freebong e a S3/S4 de jul saem para: monetizado, EQV datado ou drop qualificado.</div>
+        </div>
+        <div class="card">
+          <span class="tag warn">Winback · 44</span>
+          <div class="t">P0 Timing + EQV em 14 dias</div>
+          <div class="d">Adriano, AGM, Moteis, Dakar + 5 EQVs já andando. Meta de processo: conversa datada, não fechamento forçado. Ops fora da conta.</div>
+        </div>
+        <div class="card">
+          <span class="tag info">Higiene</span>
+          <div class="t">100% com causa</div>
+          <div class="d">Cockpit sem motivo vazio e sem “TRAVADO” genérico. Sem isso o plano não se atualiza.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GERAR -->
+  <div class="panel" data-view="gerar">
+    <div class="section">
+      <h2>01 · Conta</h2>
+      <h3>Identificação do winback / save</h3>
+      <div class="row">
+        <div><label>Cliente</label><input id="cliente" placeholder="Ex.: Madezatto" /></div>
+        <div><label>Data do plano</label><input id="data" placeholder="18/08/2026" /></div>
+      </div>
+      <div class="row3">
+        <div>
+          <label>Fila</label>
+          <select id="fila">
+            <option>Save · ainda no pipe</option>
+            <option selected>Winback Timing</option>
+            <option>Winback Budget</option>
+            <option>Ops · recuperar EE</option>
+            <option>Interno / sem motivo / park</option>
+          </select>
+        </div>
+        <div>
+          <label>Prioridade</label>
+          <select id="prio"><option>P0</option><option selected>P1</option><option>P2</option><option>Park</option></select>
+        </div>
+        <div>
+          <label>Safra</label>
+          <input id="safra" placeholder="Ex.: 2026-05" />
+        </div>
+      </div>
+      <label>Status em 1 linha (o que o Cockpit diz hoje)</label>
+      <input id="status" placeholder="Ex.: Drop Timing · fee Executar mapeado · pediu para voltar no 2º semestre" />
+    </div>
+
+    <div class="section">
+      <h2>02 · Diagnóstico</h2>
+      <h3>Por que dropou / por que vai dropar</h3>
+      <div class="row">
+        <div>
+          <label>Motivo real (não o rótulo genérico)</label>
+          <select id="motivo">
+            <option>Timing · calendário / sócio / lançamento</option>
+            <option>Budget · WTP / caixa / “salgado”</option>
+            <option>Ghost pós-proposta</option>
+            <option>Decisor ausente</option>
+            <option>Ops · pagto EE</option>
+            <option>Ops · entrega / travado</option>
+            <option>Ops · handoff</option>
+            <option>Churn M0</option>
+            <option>Sem motivo no Cockpit — diagnosticar</option>
+          </select>
+        </div>
+        <div>
+          <label>Gate (se ainda há EE)</label>
+          <select id="gate">
+            <option value="ok">Decisor + pago OK</option>
+            <option value="decisor">Falta decisor</option>
+            <option value="pago">Falta pagamento</option>
+            <option value="osdois">Faltam os dois</option>
+            <option value="na">EE encerrada — winback puro</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label>O que já estava na mesa</label>
+          <input id="tese" placeholder="Ex.: Executar R$ X · Ter mapeado · nada mapeado" />
+        </div>
+        <div>
+          <label>Trigger de reabertura</label>
+          <input id="trigger" placeholder="Ex.: fim da obra em set · sócio volta dia 02/09" />
+        </div>
+      </div>
+      <label>Evidência (frase do cliente / CSAT / no-show)</label>
+      <textarea id="evidencia" placeholder="O que ele disse ou fez que justifica o motivo"></textarea>
+    </div>
+
+    <div class="section">
+      <h2>03 · Oferta de retorno</h2>
+      <h3>Tem que ser diferente da que bateu na parede</h3>
+      <div class="row">
+        <div>
+          <label>O que apresentar agora</label>
+          <input id="oferecer" placeholder="Ex.: EQV 25 min · Saber pontual · Ter fase 1" />
+        </div>
+        <div>
+          <label>O que NÃO oferecer</label>
+          <input id="nao_oferecer" placeholder="Ex.: Executar cheio · desconto no combo anterior" />
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label>Case (se houver)</label>
+          <input id="case_nome" placeholder="Nome ou vazio" />
+        </div>
+        <div>
+          <label>Próximo contato</label>
+          <input id="prox" placeholder="Ex.: 21/08 · Zap 10h + call se responder" />
+        </div>
+      </div>
+      <label>Ações (uma por linha)</label>
+      <p class="hint">Sugestão: 1) toque com script da fila · 2) confirmar gatilho · 3) reunião curta sem preço · 4) só então proposta nova</p>
+      <textarea id="acoes" style="min-height:120px" placeholder="[SEM CASE] WhatsApp com tese em 1 frase e dois horários&#10;Confirmar gatilho de reabertura e gravar no Cockpit&#10;Call 25 min só para atualizar tese — sem proposta&#10;Se gate OK e consciência alta, recorte faseado"></textarea>
+      <div class="btns">
+        <button type="button" id="gerar">Gerar plano</button>
+        <button type="button" class="secondary" id="copiar">Copiar texto</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>04 · Output</h2>
+      <h3>Texto para Doc / Notion / WhatsApp interno</h3>
+      <div class="out" id="out">Preencha e clique em Gerar plano.</div>
+    </div>
+  </div>
+
+  <footer>
+    V4 · Farmer AM · Sara · Reativação de drops · ago/2026 ·
+    <a href="estrategia-abordagem-drops.html">Abordagem</a> ·
+    <a href="farmer-sara.html">Hub</a> ·
+    <a href="visao-sara-safra.html">Safra</a> ·
+    <a href="visao-sara-safra-cockpit.html">Cockpit</a> ·
+    <a href="plano-acao-farmer.html">Plano de Ação EE</a> ·
+    <a href="playbook-farmer-am.html">Playbook</a>
+  </footer>
+</div>
+
+<script>
+(function(){
+  document.querySelectorAll('.tab').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.tab').forEach(function(b){ b.classList.remove('active'); });
+      document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('is-active'); });
+      btn.classList.add('active');
+      var view = btn.getAttribute('data-view');
+      var panel = document.querySelector('.panel[data-view="'+view+'"]');
+      if (panel) panel.classList.add('is-active');
+    });
+  });
+
+  function $(id){ return document.getElementById(id); }
+  function val(id){ return (($(id).value) || '').trim(); }
+
+  function gerar(){
+    var acoes = val('acoes').split(/\n+/).filter(Boolean);
+    var gateMap = {
+      ok: 'Gate OK — pode avançar para recorte (ainda sem forçar preço se Timing/Budget)',
+      decisor: 'GATE: reengajar decisor antes de qualquer proposta',
+      pago: 'GATE: regularizar pagamento — veto de apresentação',
+      osdois: 'GATE BLOQUEADO: decisor + pagamento',
+      na: 'EE encerrada — winback puro (não usar gate de apresentação EE)'
+    };
+    var txt = [
+      'Reativação · ' + (val('cliente') || '[Cliente]'),
+      'Data: ' + (val('data') || 'DD/MM') + ' · Safra: ' + (val('safra') || '—') + ' · ' + val('prio'),
+      'Fila: ' + val('fila'),
+      'Status: ' + (val('status') || '—'),
+      '',
+      'Motivo real: ' + val('motivo'),
+      'Gate: ' + (gateMap[ $('gate').value ] || val('gate')),
+      'Tese anterior: ' + (val('tese') || '—'),
+      'Trigger de reabertura: ' + (val('trigger') || '—'),
+      'Evidência: ' + (val('evidencia') || '—'),
+      '',
+      'Oferecer agora: ' + (val('oferecer') || '—'),
+      'NÃO oferecer: ' + (val('nao_oferecer') || '—'),
+      'Case: ' + (val('case_nome') || 'Sem case — ancorar na entrega EE'),
+      '',
+      'Plano de Ação'
+    ];
+    if (acoes.length) acoes.forEach(function(a,i){ txt.push((i+1)+'. ' + a.replace(/^\d+\.\s*/, '')); });
+    else txt.push('1. —');
+    txt.push('');
+    txt.push('Próximo contato: ' + (val('prox') || '—'));
+    txt.push('Regra: oferta de retorno ≠ proposta que dropou.');
+    $('out').textContent = txt.join('\n');
+    return txt.join('\n');
+  }
+
+  $('gerar').addEventListener('click', gerar);
+  $('copiar').addEventListener('click', function(){
+    var t = gerar();
+    if (navigator.clipboard) navigator.clipboard.writeText(t).then(function(){ alert('Plano copiado.'); });
+  });
+})();
+</script>
+</body>
+</html>
