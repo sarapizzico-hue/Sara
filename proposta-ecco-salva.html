@@ -280,13 +280,14 @@
     .price-card .pc-value {
       font-family: Outfit; font-weight: 800;
       font-size: clamp(1.4rem, 3.2vh, 1.85rem);
-      color: #fff; line-height: 1.05; margin-top: auto;
+      color: #fff; line-height: 1.05; margin-top: 0;
     }
+    .pc-stack { margin-top: auto; }
     .price-card .pc-old {
       display: block; font-family: Outfit; font-weight: 700;
-      font-size: 0.95rem; color: rgba(255,255,255,0.55);
+      font-size: 1.02rem; color: rgba(255,224,224,0.78);
       text-decoration: line-through; text-decoration-thickness: 2px;
-      margin: 0.15rem 0 0.2rem; letter-spacing: -0.01em;
+      margin: 0 0 0.18rem; letter-spacing: -0.01em;
     }
     .price-card .pc-value small {
       display: block; font-size: 0.76rem; font-weight: 600;
@@ -535,15 +536,19 @@
             <p class="pc-tag">TCV · 6 meses</p>
             <h3>E. Comercial + CRM</h3>
             <p class="pc-desc">Estruturação comercial + Pipedrive operacional.</p>
-            <span class="pc-old">R$ 43.745,04</span>
-            <p class="pc-value">R$ 34.000,00<small>TCV do ciclo</small></p>
+            <div class="pc-stack">
+              <span class="pc-old">R$ 43.745,04</span>
+              <p class="pc-value">R$ 34.000,00<small>TCV do ciclo</small></p>
+            </div>
           </article>
           <article class="price-card">
             <p class="pc-tag">TCV · 6 meses</p>
             <h3>Mídia Paralela</h3>
             <p class="pc-desc">GP, gestão de mídia e criativos. <b style="color:#fff">Verba de mídia inclusa</b> no pacote.</p>
-            <span class="pc-old">R$ 257.378,47</span>
-            <p class="pc-value">R$ 200.000,00<small>TCV · mídia inclusa</small></p>
+            <div class="pc-stack">
+              <span class="pc-old">R$ 257.378,47</span>
+              <p class="pc-value">R$ 200.000,00<small>TCV · mídia inclusa</small></p>
+            </div>
           </article>
         </div>
         <div class="total-bar">
