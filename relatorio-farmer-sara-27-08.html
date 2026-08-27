@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Relatório Farmer Sara · 27/08 · TCV · conversão · NRR · reativação</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --brand:#e50915; --brand-light:#ff1a27; --bg:#050505; --surf:rgba(20,20,20,.92);
+      --surf2:#141414; --bd:rgba(255,255,255,.1); --txt:#fafafa; --mut:#a3a3a3;
+      --ok:#86efac; --warn:#fde68a; --hot:#fca5a5; --info:#93c5fd;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--txt);font:14px/1.55 Inter,system-ui,sans-serif;
+      background-image:radial-gradient(ellipse 80% 45% at 50% -15%,rgba(229,9,21,.18),transparent)}
+    .top{position:sticky;top:0;z-index:100;backdrop-filter:blur(14px);background:rgba(5,5,5,.9);border-bottom:1px solid var(--bd);padding:12px 20px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+    .logo{font-weight:900}.logo span{color:var(--brand-light)}
+    .pill{font-size:11px;font-weight:700;color:var(--mut);border:1px solid var(--bd);padding:5px 10px;border-radius:999px}
+    .wrap{max-width:1120px;margin:0 auto;padding:24px 18px 80px}
+    h1{margin:0 0 6px;font-size:clamp(24px,4vw,34px);font-weight:900;letter-spacing:-.03em}
+    h2{margin:0 0 4px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);font-weight:800}
+    h3{margin:0 0 12px;font-size:17px;font-weight:900}
+    .lead{color:var(--mut);max-width:920px;margin:0 0 16px;font-size:13px}
+    .lead a,.ext a,footer a{color:var(--ok)}
+    .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:16px}
+    .kpi{background:var(--surf);border:1px solid var(--bd);border-radius:14px;padding:14px}
+    .kpi .v{font-size:22px;font-weight:900}.kpi .v.ok{color:var(--ok)}.kpi .v.hot{color:var(--hot)}.kpi .v.warn{color:var(--warn)}.kpi .v.info{color:var(--info)}
+    .kpi .l{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--mut);margin-top:6px;font-weight:700}
+    .section{background:var(--surf);border:1px solid var(--bd);border-radius:16px;padding:18px 20px;margin-bottom:12px}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:800px){.grid2{grid-template-columns:1fr}}
+    .card{background:var(--surf2);border:1px solid var(--bd);border-radius:12px;padding:14px 16px}
+    .card .t{font-weight:800;margin-bottom:6px}
+    .card .d{font-size:12px;color:#d4d4d4}
+    table{width:100%;border-collapse:collapse;font-size:12.5px}
+    th,td{padding:9px 8px;border-bottom:1px solid var(--bd);text-align:left;vertical-align:top}
+    th{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);font-weight:800}
+    .tag{display:inline-block;padding:2px 8px;border-radius:999px;font-size:10px;font-weight:800;border:1px solid var(--bd)}
+    .tag.ok{color:var(--ok);border-color:rgba(34,197,94,.35)}
+    .tag.warn{color:var(--warn);border-color:rgba(250,204,21,.35)}
+    .tag.hot{color:var(--hot);border-color:rgba(239,68,68,.4)}
+    .tag.info{color:var(--info);border-color:rgba(96,165,250,.35)}
+    .callout{padding:14px 16px;border-radius:12px;border:1px solid rgba(96,165,250,.3);background:rgba(96,165,250,.08);color:#bfdbfe;font-size:13px;margin-bottom:14px}
+    .callout.warn{border-color:rgba(250,204,21,.28);background:rgba(250,204,21,.06);color:#fde68a}
+    .callout.ok{border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.08);color:#bbf7d0}
+    .callout.hot{border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.08);color:#fecaca}
+    .muted{color:var(--mut);font-size:12px}
+    .money{font-variant-numeric:tabular-nums;white-space:nowrap}
+    .num{font-weight:800;font-variant-numeric:tabular-nums}
+    ol.plan,ul{margin:0;padding-left:18px} li{margin:6px 0;color:#e5e5e5}
+    footer{text-align:center;color:var(--mut);font-size:11px;margin-top:28px;padding-top:16px;border-top:1px solid var(--bd)}
+    .funnel{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+    @media(max-width:800px){.funnel{grid-template-columns:1fr 1fr}}
+    .funnel .kpi .v{font-size:28px}
+    .bar{display:flex;height:12px;border-radius:99px;overflow:hidden;background:rgba(255,255,255,.06);margin:8px 0 4px}
+    .bar i{display:block;height:100%}
+  </style>
+</head>
+<body>
+<header class="top">
+  <div class="logo">V4 <span>COMPANY</span></div>
+  <div class="pill">Sara Pizzico · sync 27/08/2026 · aba E.E</div>
+</header>
+
+<div class="wrap">
+  <h1>Relatório Farmer Sara · 27/08</h1>
+  <p class="lead">
+    Bate do que você passou no cockpit (aba <strong>E.E</strong>, Farmer = Sara) com TCV, taxa de conversão e NRR (soma das parcelas dos contratos fechados).
+    Plano de ação = reativação + o que está vivo nesta onda de pitch.
+    Fonte: <a href="https://docs.google.com/spreadsheets/d/1dSukhon9dIUABcbQIKGKUa-ku-_oLOn1Q5YWeWGfI6U/edit?usp=sharing" target="_blank" rel="noopener">Cockpit Monetização / E.E</a>.
+    Planilha de reativação ainda sem acesso público — funil estruturado, números entram quando você liberar o link.
+  </p>
+
+  <div class="kpis">
+    <div class="kpi"><div class="v">36</div><div class="l">Entraram (sua conta)</div></div>
+    <div class="kpi"><div class="v">26</div><div class="l">Iniciadas</div></div>
+    <div class="kpi"><div class="v warn">7</div><div class="l">Sem kick-off</div></div>
+    <div class="kpi"><div class="v warn">7</div><div class="l">Pitch adiados</div></div>
+    <div class="kpi"><div class="v">5</div><div class="l">Pitches feitos</div></div>
+    <div class="kpi"><div class="v ok">2</div><div class="l">Monetizados</div></div>
+    <div class="kpi"><div class="v ok money">R$ 218.435</div><div class="l">TCV fechado</div></div>
+    <div class="kpi"><div class="v ok money">R$ 25.225</div><div class="l">NRR · soma das parcelas</div></div>
+    <div class="kpi"><div class="v info">40%</div><div class="l">Conversão pitch → monetizado</div></div>
+    <div class="kpi"><div class="v info">60%</div><div class="l">Pitch → monetizado + aceito</div></div>
+  </div>
+
+  <div class="callout ok">
+    <strong>O que fecha no centavo:</strong> G6 R$ 204.035,34 (duas linhas) · Knowledge R$ 14.400,00 · Ecco Follow Frio R$ 234.000,00 · Hanaro Follow Quente R$ 152.962,24 · MB Flex Aceito R$ 89.493,84 · 7 sem status · 7 datas de pitch em vermelho claro.
+  </div>
+
+  <!-- VALORES -->
+  <div class="section">
+    <h2>01 · Valores</h2>
+    <h3>O que já fechou nesta onda</h3>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th>Empresa</th><th>Status</th><th>Produto</th><th>Pitch</th><th>Fechamento</th><th>Prazo</th><th>Parcela</th><th>TCV</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>G6 Internet</td>
+            <td><span class="tag ok">Monetizado</span> Quente</td>
+            <td>Assessoria de Growth + Social</td>
+            <td>06/08</td><td>06/08</td>
+            <td>12x</td>
+            <td class="money">R$ 11.180,62</td>
+            <td class="money"><strong>R$ 134.167,44</strong></td>
+          </tr>
+          <tr>
+            <td>G6 Internet</td>
+            <td><span class="tag ok">Monetizado</span> Quente</td>
+            <td>E. Comercial</td>
+            <td>14/08</td><td>20/08</td>
+            <td>6x</td>
+            <td class="money">R$ 11.644,65</td>
+            <td class="money"><strong>R$ 69.867,90</strong></td>
+          </tr>
+          <tr>
+            <td>Knowledge @ Business</td>
+            <td><span class="tag ok">Monetizado</span> Quente</td>
+            <td>EQV</td>
+            <td>03/08 presencial</td><td>04/08 · ativado 09/08</td>
+            <td>6x</td>
+            <td class="money">R$ 2.400,00</td>
+            <td class="money"><strong>R$ 14.400,00</strong></td>
+          </tr>
+          <tr>
+            <td colspan="6"><strong>Fechado (2 empresas · 3 contratos)</strong></td>
+            <td class="money"><strong>R$ 25.225,27</strong></td>
+            <td class="money"><strong>R$ 218.435,34</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted">G6 está em duas linhas no cockpit. Soma = o TCV que você passou (R$ 204.035,34). Os dois cards ainda estão <strong>Ativado = Aberto</strong>.</p>
+
+    <h3 style="margin-top:18px">Vivo no comercial — ainda não é NRR</h3>
+    <table>
+      <thead>
+        <tr><th>Empresa</th><th>Status</th><th>Termômetro</th><th>Pitch</th><th>Prazo</th><th>Parcela se fechar</th><th>TCV</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>MB Flex Express</td>
+          <td><span class="tag ok">Aceito</span></td>
+          <td>Quente</td>
+          <td>21/08</td>
+          <td>12x · limite 05/09</td>
+          <td class="money">R$ 7.457,82</td>
+          <td class="money"><strong>R$ 89.493,84</strong></td>
+        </tr>
+        <tr>
+          <td>Hanaro</td>
+          <td><span class="tag warn">Follow</span></td>
+          <td>Quente</td>
+          <td>24/08</td>
+          <td>12x · 45d estourou 17/07</td>
+          <td class="money">R$ 12.746,85</td>
+          <td class="money"><strong>R$ 152.962,24</strong></td>
+        </tr>
+        <tr>
+          <td>Ecco Salva</td>
+          <td><span class="tag warn">Follow</span></td>
+          <td>Frio</td>
+          <td>25/08</td>
+          <td>6x · 45d = 27/08 (hoje)</td>
+          <td class="money">R$ 39.000,00</td>
+          <td class="money"><strong>R$ 234.000,00</strong></td>
+        </tr>
+        <tr>
+          <td colspan="5"><strong>Mesa comercial (aceito + follow)</strong></td>
+          <td class="money"><strong>R$ 59.204,67</strong></td>
+          <td class="money"><strong>R$ 476.456,08</strong></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="muted" style="margin-top:10px">
+      Carteira “já na mesa” (fechado + aceito + follow) = <strong>R$ 694.891,42</strong>.
+      Se o MB Flex virar Monetizado, NRR sobe de R$ 25.225,27 para <strong>R$ 32.683,09</strong>.
+    </p>
+  </div>
+
+  <!-- NRR -->
+  <div class="section">
+    <h2>02 · NRR</h2>
+    <h3>Parcelas somadas do que fechamos</h3>
+    <p class="muted" style="margin:0 0 12px">Definição que você passou: NRR = soma das parcelas mensais dos contratos monetizados nesta onda. Não é o NRR clássico de retenção da base.</p>
+    <div class="grid2">
+      <div class="card">
+        <div class="t">NRR fechado agora</div>
+        <div class="d">
+          G6 Growth 12x &nbsp; R$ 11.180,62<br>
+          G6 E. Comercial 6x &nbsp; R$ 11.644,65<br>
+          Knowledge EQV 6x &nbsp; R$ 2.400,00
+        </div>
+        <p style="font-size:28px;font-weight:900;margin:12px 0 0;color:var(--ok)">R$ 25.225,27 / mês</p>
+      </div>
+      <div class="card">
+        <div class="t">Se MB Flex ativar</div>
+        <div class="d">Parcela Executar Basic 12x = R$ 7.457,82. Contrato aceito, ainda não está Monetizado no cockpit.</div>
+        <p style="font-size:28px;font-weight:900;margin:12px 0 0;color:var(--warn)">R$ 32.683,09 / mês</p>
+      </div>
+    </div>
+    <p class="muted" style="margin-top:12px">Isoluz (30/07, TCV R$ 15.239,71) ficou de fora desta foto — você recortou os 2 monetizados da onda de agosto.</p>
+  </div>
+
+  <!-- CONVERSÃO -->
+  <div class="section">
+    <h2>03 · Taxa de conversão</h2>
+    <h3>Esta onda de pitch · agosto</h3>
+    <table>
+      <thead><tr><th>Régua</th><th>Conta</th><th>Taxa</th><th>Leitura</th></tr></thead>
+      <tbody>
+        <tr><td>Pitch → monetizado</td><td>2 / 5</td><td class="num">40%</td><td>G6 + Knowledge. G6 conta 1 empresa (2 ofertas).</td></tr>
+        <tr><td>Pitch → win (monetizado + aceito)</td><td>3 / 5</td><td class="num">60%</td><td>Entra MB Flex. Melhor régua de “fechou comercialmente”.</td></tr>
+        <tr><td>Pitch → ainda vivo</td><td>5 / 5</td><td class="num">100%</td><td>Nenhum dos 5 morreu no pitch. 2 follow ainda abertos.</td></tr>
+        <tr><td>TCV monetizado / TCV pitchado</td><td>218.435 / 694.891</td><td class="num">31%</td><td>O volume está no follow (Ecco + Hanaro = R$ 387k).</td></tr>
+        <tr><td>TCV win / TCV pitchado</td><td>307.929 / 694.891</td><td class="num">44%</td><td>Com MB Flex aceito.</td></tr>
+        <tr><td>Entrada → monetizado</td><td>2 / 36</td><td class="num">5,6%</td><td>Cedo: 7 sem KO + 7 adiados + pipe ainda rodando.</td></tr>
+        <tr><td>Iniciadas → monetizado</td><td>2 / 26</td><td class="num">7,7%</td><td>Mesma leitura: safra não fechou.</td></tr>
+      </tbody>
+    </table>
+    <p class="muted" style="margin-top:10px">
+      Os 5 pitches: Knowledge 03/08 · G6 06/08 e 14/08 · MB Flex 21/08 · Hanaro 24/08 · Ecco 25/08.
+      Fora da sua conta de 5: <strong>Almeida e Neves</strong> teve pitch 06/08 (TCV R$ 55.500) e Drop Timing na devolutiva 18/08. Se entrar na régua, vira 2/6 = 33%.
+    </p>
+  </div>
+
+  <!-- BATE -->
+  <div class="section">
+    <h2>04 · Bate do pipe</h2>
+    <h3>36 / 26 / 7 / 7 / Wang</h3>
+    <div class="callout warn">
+      No sheet o pipe aberto da Sara (não Drop, não Monetizado, não Já monetizado) = <strong>37 empresas</strong>.
+      26 iniciadas + 7 sem KO + 1 Wang + 3 Semana 0 travadas = 37.
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <div class="t">7 sem kick-off (status vazio)</div>
+        <div class="d">Atlanta Consórcios (24/08) · Mundi Sport (21/08) · Brazil Group Eventos (03/08) · Naki Distribuidora (23/07) · Clínica Polivida · Dental Muller · Studio Center Music. As 3 últimas sem data de início.</div>
+      </div>
+      <div class="card">
+        <div class="t">7 pitch adiados (data vermelha)</div>
+        <div class="d">Tamiya 26/08 · Henri 26/08 (R$ 90k) · Freebong 27/08 (R$ 21k) · 600 Multimarcas 27/08 · Nosso Boteco 27/08 · Casa dos Pães 27/08 (R$ 20k) · Castanheira 28/08 (R$ 74.136). TCV visível ≈ <strong>R$ 205.136</strong>.</div>
+      </div>
+      <div class="card">
+        <div class="t">Wang · 1 caiu</div>
+        <div class="d">Você trata como drop / tratativa de ops. O sheet ainda está <strong>Semana 02</strong>, pitch = 0, TCV 0, obs = “tratativa de ops”. Limite 31/07 estourou. Wollp Casimaria já foi para Drop com o mesmo motivo.</div>
+      </div>
+      <div class="card">
+        <div class="t">3 que você não citou</div>
+        <div class="d">General Car e RM Burguer — Semana 0 desde 11/06 (Billions). Mixconect Telecom — Semana 0 sem data de início. São o que falta para a conta 36+Wang fechar com o sheet.</div>
+      </div>
+    </div>
+    <p class="muted" style="margin-top:10px">RE/MAX Pro Work tem pitch 26/08 em <strong>verde</strong> (R$ 21.000) — não está no grupo dos adiados.</p>
+  </div>
+
+  <!-- REATIVAÇÃO -->
+  <div class="section">
+    <h2>05 · Plano de ação = reativação</h2>
+    <h3>Funil que a planilha precisa alimentar</h3>
+    <div class="callout hot">
+      A planilha <a href="https://docs.google.com/spreadsheets/d/13CWiDWpxBecny-_9xWJzvPX_DQ2eq4HJmvZvgo7oL9k/edit?usp=sharing" style="color:#fecaca">de reativação</a> ainda pede login.
+      Liberar “qualquer pessoa com o link → leitor” — igual ao cockpit. Aí entram os 4 números de verdade.
+    </div>
+    <div class="funnel">
+      <div class="kpi"><div class="v">—</div><div class="l">Para reativar</div></div>
+      <div class="kpi"><div class="v">—</div><div class="l">Entrei em contato</div></div>
+      <div class="kpi"><div class="v">—</div><div class="l">Em conexão</div></div>
+      <div class="kpi"><div class="v">—</div><div class="l">Reunião marcada</div></div>
+    </div>
+    <div class="bar"><i style="width:0%;background:#e50915"></i></div>
+    <p class="muted">Contato → conexão → reunião. Sem a planilha não dá para cravar conversão deste funil.</p>
+
+    <h3 style="margin-top:18px">Universo candidato no cockpit E.E (enquanto a planilha não abre)</h3>
+    <p class="muted">Drops da Sara: 63 no histórico (Timing 25 · Ops 21 · Budget 14 · Interno 2). Desde junho, 12 drops — estes são o recorte mais próximo de uma fila de reativação:</p>
+    <table>
+      <thead><tr><th>Empresa</th><th>Motivo</th><th>Início E.E</th><th>Nota no sheet</th></tr></thead>
+      <tbody>
+        <tr><td>AGM Distribuidora</td><td><span class="tag warn">Timing</span></td><td>01/06</td><td>—</td></tr>
+        <tr><td>Adriano Martins Cardoso</td><td><span class="tag warn">Timing</span></td><td>05/06</td><td>—</td></tr>
+        <tr><td>Almeida e Neves</td><td><span class="tag warn">Timing</span></td><td>09/06</td><td>Pitch 06/08 · devolutiva 18/08 · TCV 55.500</td></tr>
+        <tr><td>Pedrini e Azevedo Advocacia</td><td><span class="tag warn">Timing</span></td><td>11/06</td><td>Kick-off feito</td></tr>
+        <tr><td>Moteis Fortaleza</td><td><span class="tag warn">Timing</span></td><td>17/06</td><td>Deck já existe</td></tr>
+        <tr><td>Unik Benefícios</td><td><span class="tag hot">Budget</span></td><td>01/06</td><td>Kick-off</td></tr>
+        <tr><td>Protesol Tendas</td><td><span class="tag hot">Budget</span></td><td>10/06</td><td>Kick-off feito</td></tr>
+        <tr><td>Ecofitness Aldeia</td><td><span class="tag hot">Budget</span></td><td>12/06</td><td>Kick-off</td></tr>
+        <tr><td>Estação Delta</td><td><span class="tag hot">Budget</span></td><td>15/06</td><td>—</td></tr>
+        <tr><td>Terra Prometida</td><td><span class="tag">—</span></td><td>11/06</td><td>Kick-off</td></tr>
+        <tr><td>Conlar Shopping</td><td><span class="tag info">Ops</span></td><td>15/06</td><td>Não é reativação farmer</td></tr>
+        <tr><td>Wollp Casimaria</td><td><span class="tag info">Ops</span></td><td>28/07</td><td>Não é reativação farmer</td></tr>
+      </tbody>
+    </table>
+    <p class="muted">Prioridade de reativação no E.E: <strong>Timing</strong> (volta com o mesmo case). Budget só com recorte de oferta. Ops não entra na fila da Sara.</p>
+  </div>
+
+  <!-- PLANO -->
+  <div class="section">
+    <h2>06 · Plano de ação desta semana</h2>
+    <h3>Ordem para não misturar pipe novo com reativação</h3>
+    <ol class="plan">
+      <li><strong>P0 · Transformar aceito em NRR.</strong> MB Flex R$ 89.493,84 / parcela R$ 7.457,82. Contrato na rua até virar Monetizado. Limite E.E 05/09.</li>
+      <li><strong>P0 · Follow quente.</strong> Hanaro R$ 152.962,24. Termômetro quente, 45 dias estourou há 41 dias. EQV + Social + SEO + Site. Data de fechamento agora, não novo diagnóstico.</li>
+      <li><strong>P0 · Follow frio com deadline hoje.</strong> Ecco Salva R$ 234.000. Pitch 25/08, limite 27/08. Ou entra em follow controlado com nova data, ou o TCV esfria no paper.</li>
+      <li><strong>P0 · G6 ativar os 2 cards.</strong> TCV R$ 204.035,34 já conta no NRR (R$ 22.825/mês), mas Ativado = Aberto. Sem ativação o NRR é contábil.</li>
+      <li><strong>P1 · Remarcar os 7 vermelhos.</strong> Cluster 26–28/08. Começar por Henri (R$ 90k) e Castanheira (R$ 74k). TCV visível ≈ R$ 205k.</li>
+      <li><strong>P1 · Wang no status certo.</strong> Se é drop de ops, mudar Semana 02 → Drop / Tratativa Ops. Igual Wollp.</li>
+      <li><strong>P2 · 7 sem kick-off.</strong> Três sem data (Polivida, Dental Muller, Studio Center) nem entraram no calendário de 45 dias. Naki (23/07) já passou de 1 mês sem status.</li>
+      <li><strong>P3 · Reativação.</strong> Ligar a planilha no funil (base → contato → conexão → reunião). Até lá, atacar Timing de junho: AGM, Adriano, Almeida, Pedrini, Moteis. Não misturar com Budget/Ops.</li>
+    </ol>
+  </div>
+
+  <div class="callout">
+    <strong>Para construir juntos no próximo giro:</strong> (1) as 3 Semana 0 travadas entram ou saem dos 36? (2) Wang vira Drop no sheet? (3) NRR inclui só os 2 monetizados ou também o MB Flex aceito? (4) Liberar a planilha de reativação para cravar os 4 números do funil.
+  </div>
+
+  <p class="ext muted">
+    Hub: <a href="farmer-sara.html">Farmer Sara</a> ·
+    <a href="index.html">Comando 27/07</a> ·
+    <a href="visao-sara-safra.html">Visão por safra</a>
+  </p>
+
+  <footer>
+    V4 Company · Relatório Farmer Sara · 27/08/2026<br>
+    Cockpit E.E Farmer = Sara · NRR = soma das parcelas dos contratos monetizados nesta onda
+  </footer>
+</div>
+</body>
+</html>
