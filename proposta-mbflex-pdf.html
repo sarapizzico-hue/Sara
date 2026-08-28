@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>MBFlex Express · Assessoria de Growth | V4 Company</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --red: #e50914;
+      --orange: #ff481f;
+      --dark: #280001;
+      --cream: #ffebc8;
+      --ink: #141414;
+      --mut: #5a5a5a;
+      --line: rgba(20,20,20,.12);
+      --hero: radial-gradient(120% 130% at 50% -10%, #ff5a2c 0%, #e50914 30%, #b00610 62%, #280001 100%);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: #171313; }
+    body {
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
+    }
+    @page { size: 16in 9in; margin: 0; }
+    .page {
+      position: relative;
+      width: 16in;
+      height: 9in;
+      padding: .62in .78in .78in;
+      overflow: hidden;
+      page-break-after: always;
+      break-after: page;
+      background: #f5f4f2;
+    }
+    .page:last-child { page-break-after: auto; break-after: auto; }
+    .page.red {
+      color: #fff;
+      background: var(--hero);
+    }
+    .page.dark {
+      color: #fff;
+      background:
+        radial-gradient(circle at 78% 12%, rgba(229,9,20,.48), transparent 34%),
+        linear-gradient(145deg, #280001 0%, #130001 100%);
+    }
+    .page.white { background: #fff; }
+
+    h1, h2, h3, p { margin: 0; }
+    h1 { font-size: 64px; line-height: .98; letter-spacing: -.045em; font-weight: 600; }
+    h2 { font-size: 40px; line-height: 1.05; letter-spacing: -.035em; font-weight: 600; }
+    h3 { font-size: 20px; line-height: 1.15; letter-spacing: -.02em; font-weight: 600; }
+    .lede { margin-top: 18px; max-width: 1080px; font-size: 24px; line-height: 1.38; font-weight: 300; color: var(--mut); }
+    .red .lede, .dark .lede { color: rgba(255,255,255,.78); }
+
+    .mono { font-family: "IBM Plex Mono", monospace; }
+    .eyebrow {
+      display: inline-flex; align-items: center; min-height: 30px;
+      padding: 6px 14px; border-radius: 999px;
+      border: 1px solid rgba(229,9,20,.18);
+      background: rgba(229,9,20,.07);
+      color: var(--red);
+      font: 700 11px/1 "IBM Plex Mono", monospace;
+      letter-spacing: .1em; text-transform: uppercase;
+    }
+    .red .eyebrow, .dark .eyebrow {
+      color: #fff; background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.32);
+    }
+
+    .topline {
+      position: absolute; top: 0; left: 0; width: 100%; height: 5px;
+      background: linear-gradient(90deg, var(--red), var(--orange), transparent 76%);
+    }
+    .sphere {
+      position: absolute; border-radius: 50%; pointer-events: none;
+      border: 1px solid rgba(255,255,255,.24);
+      background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.38), rgba(255,255,255,.04) 48%, transparent 66%);
+    }
+
+    .foot {
+      position: absolute; left: .78in; right: .78in; bottom: .28in;
+      display: flex; justify-content: space-between; align-items: center;
+      font: 700 10px/1 "IBM Plex Mono", monospace;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: rgba(20,20,20,.42);
+    }
+    .red .foot, .dark .foot { color: rgba(255,255,255,.42); }
+    .foot .brand { font-family: "IBM Plex Sans", sans-serif; font-weight: 800; letter-spacing: -.04em; font-size: 16px; text-transform: none; }
+
+    .why {
+      position: absolute; left: .78in; right: .78in; bottom: .52in;
+      display: flex; gap: 16px; align-items: center;
+      padding: 14px 18px; border-radius: 14px;
+      background: #fff; border: 1px solid var(--line);
+    }
+    .why .k {
+      flex: 0 0 auto;
+      font: 700 10px/1 "IBM Plex Mono", monospace;
+      letter-spacing: .1em; text-transform: uppercase; color: var(--red);
+    }
+    .why p { font-size: 16px; line-height: 1.3; color: var(--ink); font-weight: 500; }
+    .red .why, .dark .why {
+      background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.2);
+    }
+    .red .why p, .dark .why p { color: #fff; }
+    .red .why .k, .dark .why .k { color: var(--cream); }
+
+    .g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 28px; }
+    .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 22px; }
+    .g4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 14px; margin-top: 26px; }
+    .g6 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px 18px; margin-top: 22px; }
+
+    .card {
+      padding: 20px 22px; border-radius: 18px;
+      background: #fff; border: 1px solid var(--line);
+    }
+    .card .k {
+      font: 700 11px/1 "IBM Plex Mono", monospace;
+      letter-spacing: .08em; text-transform: uppercase; color: var(--red); margin-bottom: 10px;
+    }
+    .card p { margin-top: 8px; color: var(--mut); font-size: 15.5px; line-height: 1.35; }
+    .dark .card, .red .card {
+      background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.16);
+    }
+    .dark .card p, .red .card p { color: rgba(255,255,255,.74); }
+
+    .stat .num {
+      font-size: 72px; font-weight: 700; letter-spacing: -.05em; line-height: .9;
+      color: var(--red); margin: 4px 0 8px;
+    }
+    .dark .stat .num, .red .stat .num { color: var(--cream); }
+    .stat .cap { font-size: 16px; color: var(--mut); line-height: 1.3; }
+    .dark .stat .cap, .red .stat .cap { color: rgba(255,255,255,.72); }
+
+    .cover-meta { margin-top: 36px; color: rgba(255,255,255,.82); font-size: 18px; }
+    .v4mark { font-weight: 800; letter-spacing: -.05em; font-size: 28px; }
+
+    .pain { display: grid; grid-template-columns: 10px 1fr; gap: 12px; padding: 14px 16px; border-radius: 16px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.14); }
+    .pain .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--cream); margin-top: 7px; }
+    .pain h3 { font-size: 17px; }
+    .pain p { margin-top: 4px; color: rgba(255,255,255,.7); font-size: 14.5px; line-height: 1.32; }
+
+    .role { min-height: 210px; }
+    .role h3 { margin-top: 4px; font-size: 22px; }
+
+    .flow { display: grid; grid-template-columns: 1fr 22px 1fr 22px 1fr 22px 1fr 22px 1fr; gap: 0; align-items: stretch; margin-top: 22px; }
+    .stage { padding: 16px 14px; border-radius: 16px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16); }
+    .stage h3 { font-size: 18px; margin-bottom: 6px; }
+    .stage p { color: rgba(255,255,255,.72); font-size: 14px; line-height: 1.3; }
+    .arr { display: grid; place-items: center; color: var(--cream); font-size: 20px; font-weight: 700; }
+
+    .ok { background: #fff8ee; border-color: rgba(229,9,20,.16); }
+    .ok h3 { color: var(--dark); }
+
+    .price-wrap { display: grid; grid-template-columns: 1.15fr .95fr .9fr; gap: 16px; margin-top: 18px; align-items: stretch; }
+    .price-hero {
+      padding: 28px 30px; border-radius: 22px;
+      background: linear-gradient(145deg, #280001 0%, #e50914 100%);
+      color: #fff; display: flex; flex-direction: column; justify-content: center;
+    }
+    .price-hero .was { font: 700 12px/1 "IBM Plex Mono", monospace; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.7); }
+    .price-hero .ref { margin-top: 10px; font-size: 26px; font-weight: 600; text-decoration: line-through; opacity: .5; }
+    .price-hero .era { margin-top: 8px; font-size: 22px; font-weight: 600; text-decoration: line-through; opacity: .55; }
+    .price-hero .now-l { margin-top: 16px; font: 700 11px/1 "IBM Plex Mono", monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--cream); }
+    .price-hero .now { margin: 8px 0 12px; font-size: 46px; font-weight: 700; letter-spacing: -.04em; line-height: .95; }
+    .price-hero .now small { font-size: 24px; }
+    .save {
+      display: inline-block; width: fit-content;
+      background: rgba(255,235,200,.16); border: 1px solid rgba(255,235,200,.38);
+      color: var(--cream); font-weight: 700; font-size: 13px;
+      padding: 8px 12px; border-radius: 999px; margin-bottom: 12px;
+    }
+    .price-hero p { color: rgba(255,255,255,.82); font-size: 15px; line-height: 1.35; }
+    .col { display: grid; gap: 12px; }
+    .box { padding: 16px 18px; border-radius: 16px; background: #fff; border: 1px solid var(--line); }
+    .box .tag { font: 700 10px/1 "IBM Plex Mono", monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--red); margin-bottom: 8px; }
+    .box h3 { font-size: 17px; margin-bottom: 6px; }
+    .box p, .box li { color: var(--mut); font-size: 14px; line-height: 1.35; }
+    .box ul { margin: 0; padding-left: 16px; }
+    .box li { margin: 3px 0; }
+    .box.bonus { background: linear-gradient(180deg, #fff8ee, #fff); border-color: rgba(229,9,20,.18); }
+
+    .math { font-variant-numeric: tabular-nums; }
+    .math-row { display: flex; justify-content: space-between; gap: 12px; padding: 7px 0; border-bottom: 1px solid var(--line); font-size: 14.5px; color: var(--mut); }
+    .math-row:last-child { border-bottom: 0; font-weight: 700; color: var(--ink); font-size: 16px; }
+    .math-row strong { color: var(--ink); }
+
+    .success { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 16px; margin-top: 18px; }
+    .success div {
+      display: flex; align-items: center; gap: 10px;
+      padding: 12px 14px; border-radius: 14px; background: #fff; border: 1px solid var(--line);
+      font-size: 16px; font-weight: 600;
+    }
+    .success b { color: var(--red); font: 700 12px/1 "IBM Plex Mono", monospace; }
+
+    @media screen {
+      body { padding: 24px 0 60px; }
+      .page {
+        margin: 0 auto 28px;
+        box-shadow: 0 32px 80px rgba(0,0,0,.45);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1 CAPA -->
+  <section class="page red">
+    <div class="sphere" style="width:430px;height:430px;right:-90px;top:-120px;opacity:.5"></div>
+    <div class="sphere" style="width:220px;height:220px;right:280px;top:90px;opacity:.28"></div>
+    <div class="v4mark">V4</div>
+    <span class="eyebrow" style="margin-top:22px">MBFlex Express × V4 Company · Assessoria de Growth</span>
+    <h1 style="margin-top:22px;max-width:1280px">Da dependência do marketplace<br>à máquina de loja própria</h1>
+    <p class="lede">A malha já existe. O canal de loja própria, não. Sem ele, a carteira continua nas mãos da plataforma.</p>
+    <div class="cover-meta">Proposta personalizada · cliente EE · projeto de 12 meses · Product Sales V4</div>
+    <div class="why">
+      <div class="k">O que está em jogo</div>
+      <p>Vocês já entregam. O que falta é origem própria — para escolher o cliente, e não só receber o que o marketplace envia.</p>
+    </div>
+    <div class="foot"><span class="brand">V4</span><span>MBFlex Express · Confidencial</span><span>01 / 08</span></div>
+  </section>
+
+  <!-- 2 PROBLEMA -->
+  <section class="page dark">
+    <span class="eyebrow">O ponto de partida</span>
+    <h2 style="margin-top:18px;max-width:1280px">Vocês não têm problema de operação.<br>Têm uma carteira 100% amarrada na plataforma.</h2>
+    <div class="g3">
+      <article class="card stat">
+        <div class="k">01 · Origem</div>
+        <div class="num">100%</div>
+        <p class="cap">marketplace. ML, Shopee e Amazon indicam. O cliente vem. A carteira não tem origem própria.</p>
+      </article>
+      <article class="card stat">
+        <div class="k">02 · Mix</div>
+        <div class="num">0%</div>
+        <p class="cap">loja própria. Esse público a plataforma não traz. Sem canal, o mix permanece 100/0.</p>
+      </article>
+      <article class="card stat">
+        <div class="k">03 · Teto</div>
+        <div class="num">200+</div>
+        <p class="cap">clientes recusados no fim do ano. Perderam um tubarão para quem tinha mais volume e constância.</p>
+      </article>
+    </div>
+    <div class="why">
+      <div class="k">Por que isso importa</div>
+      <p>A operação entrega. O comercial não escolhe o público. Preço e homologação da plataforma ditam quem entra — e 500 no mesmo jogo só aprofunda a dependência.</p>
+    </div>
+    <div class="foot"><span class="brand">V4</span><span>Contexto MBFlex Express</span><span>02 / 08</span></div>
+  </section>
+
+  <!-- 3 DADOS -->
+  <section class="page white">
+    <div class="topline"></div>
+    <span class="eyebrow">A conta que explica a meta de 500</span>
+    <h2 style="margin-top:16px">Os números da operação — e o buraco do canal.</h2>
+    <p class="lede" style="margin-top:10px;font-size:20px">A malha já é grande o suficiente para ser seletiva. O que não existe é origem fora do marketplace.</p>
+    <div class="g2" style="margin-top:20px">
+      <article class="card stat">
+        <div class="k">O que já existe</div>
+        <div class="num">196</div>
+        <p class="cap">clientes ativos · ~R$ 1 mi/mês informado</p>
+        <p style="margin-top:12px">7 mil pacotes/dia · ~140 entregadores · +100 mil entregas/mês · 80% moto / 20% carro · 5★ no Google · churn de cliente baixo.</p>
+      </article>
+      <article class="card stat">
+        <div class="k">O que não existe</div>
+        <div class="num">0%</div>
+        <p class="cap">da carteira em loja própria / e-commerce</p>
+        <p style="margin-top:12px">100% da origem é indicação de marketplace. Não há canal de aquisição de e-commerce próprio. Google e Meta ainda não operam intenção de loja própria.</p>
+      </article>
+    </div>
+    <div class="why">
+      <div class="k">A pergunta da meta</div>
+      <p>De onde vêm os próximos 304 clientes? Se a resposta for “a plataforma indica”, o mix não muda — e 500 é só mais seller no mesmo jogo.</p>
+    </div>
+    <div class="foot"><span class="brand">V4</span><span>Fontes: EE · SPICED 23/07 · GTM 18/08</span><span>03 / 08</span></div>
+  </section>
+
+  <!-- 4 DORES -->
+  <section class="page dark">
+    <span class="eyebrow">Onde a previsibilidade quebra</span>
+    <h2 style="margin-top:16px;max-width:1240px">O que precisa existir antes de escalar mídia.</h2>
+    <div class="g6">
+      <div class="pain"><div class="dot"></div><div><h3>Origem 100% marketplace</h3><p>Pressão de preço e homologação ditam o ritmo. Vocês não escolhem o ICP — recebem o que a plataforma envia.</p></div></div>
+      <div class="pain"><div class="dot"></div><div><h3>Canal de loja própria não existe</h3><p>Não há busca, página nem cadência para o e-commerce que a plataforma não indica.</p></div></div>
+      <div class="pain"><div class="dot"></div><div><h3>Qualificação ainda é conversa</h3><p>O que cabe na malha se decide no Zap. Mídia sem critério de carga vira volume errado — e recusa de novo.</p></div></div>
+      <div class="pain"><div class="dot"></div><div><h3>Capacidade é o teto</h3><p>7 mil pacotes/dia. Sem cluster liberado, Google não sobe. Qualidade 5★ vem primeiro.</p></div></div>
+      <div class="pain"><div class="dot"></div><div><h3>Dois públicos, um risco</h3><p>Seller e motoboy no mesmo anúncio ou Zap destroem conversão e reputação. Jornadas separadas.</p></div></div>
+      <div class="pain"><div class="dot"></div><div><h3>500 sem canal próprio</h3><p>Meta da empresa. Sem os 50% de loja própria, é só mais volume na mesma dependência.</p></div></div>
+    </div>
+    <div class="why">
+      <div class="k">Por que isso importa</div>
+      <p>Anúncio sem região, sem filtro e sem canal próprio vira pedido que a malha recusa. Growth liga a origem — não acelera a indicação.</p>
+    </div>
+    <div class="foot"><span class="brand">V4</span><span>Encaixe MBFlex Express</span><span>04 / 08</span></div>
+  </section>
+
+  <!-- 5 PROMESSA + TIME -->
+  <section class="page white">
+    <div class="topline"></div>
+    <span class="eyebrow">O que a V4 opera</span>
+    <h2 style="margin-top:14px;max-width:1280px">A V4 opera o canal de loja própria que a plataforma não traz.</h2>
+    <p class="lede" style="margin-top:10px;font-size:20px">Não é um diagnóstico novo. É o time na conta, todo mês, ligando busca, página, qualificação e primeira coleta. A EE já entregou clareza. Growth executa o canal.</p>
+    <div class="g4">
+      <article class="card role">
+        <div class="k">01</div>
+        <h3>Account</h3>
+        <p>Dono do mix 50/50, do gate de cluster e do ritmo com a diretoria. Orquestra até a ativação — não até o clique.</p>
+      </article>
+      <article class="card role">
+        <div class="k">02</div>
+        <h3>Gestor de tráfego</h3>
+        <p>Google Search de intenção e região. Meta só remarketing. Sem cluster liberado, a verba não sobe.</p>
+      </article>
+      <article class="card role">
+        <div class="k">03</div>
+        <h3>Copy</h3>
+        <p>Loja própria, atendimento 5★, o que cabe na moto. Jornada de motoboy fora do funil de seller.</p>
+      </article>
+      <article class="card role">
+        <div class="k">04</div>
+        <h3>Design</h3>
+        <p>Criativo, página e prova na mesma promessa. Anúncio, LP e CTA sem “Flex SP” genérico.</p>
+      </article>
+    </div>
+    <div class="why">
+      <div class="k">Por que esse time</div>
+      <p>Um canal pede quatro frentes no mesmo ritmo. Sem Account, a mídia solta. Sem GT, não há intenção. Sem copy e design, a página não converte o que a malha aceita.</p>
+    </div>
+    <div class="foot"><span class="brand">V4</span><span>Assessoria de Growth · Account + GT + copy + design</span><span>05 / 08</span></div>
+  </section>
+
+  <!-- 6 MOTOR -->
+  <section class="page dark">
+    <span class="eyebrow">Como a máquina roda · projeto 12 meses</span>
+    <h2 style="margin-top:16px;font-size:36px;max-width:1280px">Google captura. Meta recupera. Comercial fecha. Fundação antes de escala.</h2>
+    <div class="flow">
+      <div class="stage"><h3>Busca</h3><p>Intenção de loja própria e região com cluster.</p></div>
+      <div class="arr">→</div>
+      <div class="stage"><h3>Página</h3><p>Promessa aderente, filtro de carga, CTA.</p></div>
+      <div class="arr">→</div>
+      <div class="stage"><h3>Qualificação</h3><p>O que cabe na moto, na região e no cluster.</p></div>
+      <div class="arr">→</div>
+      <div class="stage"><h3>Outbound</h3><p>Comercial qualifica e fecha.</p></div>
+      <div class="arr">→</div>
+      <div class="stage"><h3>Ativação</h3><p>Primeira coleta. Receita volta na campanha.</p></div>
+    </div>
+    <div class="g3" style="margin-top:18px">
+      <article class="card"><div class="k">Mês 1</div><h3>Fundação</h3><p>Clusters, claims e páginas de loja própria. Sem cluster, mídia não sobe.</p></article>
+      <article class="card"><div class="k">Mês 2</div><h3>Piloto Google</h3><p>Search por intenção. SQL com termo, custo e ativação conhecidos.</p></article>
+      <article class="card"><div class="k">Mês 3</div><h3>Remarketing</h3><p>Meta recupera quem não avançou. Otimiza por ativação — não por CPL.</p></article>
+    </div>
+    <div class="why">
+      <div class="k">O que vamos olhar juntos</div>
+      <p>Campanha amarrada à primeira coleta · mix loja própria × marketplace · custo por ativação · Google só com cluster · jornada de motoboy à parte. Os 500 são meta da empresa; Growth opera os 50% de loja própria.</p>
+    </div>
+    <div class="foot"><span class="brand">V4</span><span>Primeiro ciclo dentro de 12 meses</span><span>06 / 08</span></div>
+  </section>
+
+  <!-- 7 ENCAIXE -->
+  <section class="page white">
+    <div class="topline"></div>
+    <span class="eyebrow">A operação de vocês no desenho</span>
+    <h2 style="margin-top:14px">Dois públicos. Um canal novo. A plataforma continua.</h2>
+    <div class="g2" style="margin-top:20px">
+      <article class="card">
+        <div class="k">Públicos</div>
+        <h3>Dual-track seller × motoboy</h3>
+        <p>Mesma governança, jornadas separadas. Prestador e lojista não competem no mesmo anúncio, Zap ou oferta. Volume certo na região é o que segura a rua.</p>
+      </article>
+      <article class="card">
+        <div class="k">Fundação</div>
+        <h3>Executar o canal, não reabrir diagnóstico</h3>
+        <p>ICP, posição e mix já estão claros na Estruturação. Growth liga a origem de loja própria em cima do que a conta já definiu.</p>
+      </article>
+    </div>
+    <div class="g2" style="margin-top:16px">
+      <article class="card ok">
+        <div class="k">O que o Growth cria</div>
+        <h3>A origem que hoje é zero</h3>
+        <p>Canal de aquisição de loja própria · Google de intenção + cadência comercial · intenção de e-commerce até a primeira coleta.</p>
+      </article>
+      <article class="card">
+        <div class="k">O que a plataforma continua</div>
+        <h3>O que já funciona</h3>
+        <p>Indicação orgânica de seller · base atual e reputação 5★ · os outros 50% da carteira. Growth não substitui a plataforma — diversifica a origem.</p>
+      </article>
+    </div>
+    <div class="why">
+      <div class="k">Antes da decisão</div>
+      <p>Malha existe. Carteira depende da plataforma. Loja própria é zero. O time liga o caminho. 500 é de vocês — não é promessa de anúncio.</p>
+    </div>
+    <div class="foot"><span class="brand">V4</span><span>Personalização MBFlex Express</span><span>07 / 08</span></div>
+  </section>
+
+  <!-- 8 INVESTIMENTO -->
+  <section class="page white">
+    <div class="topline"></div>
+    <span class="eyebrow">Investimento · projeto 12 meses</span>
+    <h2 style="margin-top:12px;font-size:32px">Investimento estratégico no canal que ainda não existe</h2>
+    <div class="price-wrap">
+      <div class="price-hero">
+        <div class="was">Valor de tabela · Assessoria de Growth</div>
+        <div class="ref">R$ 11.000,00</div>
+        <div class="now-l" style="margin-top:10px;color:rgba(255,255,255,.55)">Era</div>
+        <div class="era">12× R$ 7.457,82</div>
+        <div class="now-l">Condição comercial · projeto 12 meses</div>
+        <div class="now">12× R$ 7.070<small>,74</small></div>
+        <div class="save">Economia de R$ 387,08/mês · R$ 4.644,96 no ano</div>
+        <p>Valor mensal. Account + GT + copy + design. Um time, um canal, um ano.</p>
+      </div>
+      <div class="col">
+        <div class="box">
+          <div class="tag">Como se chega no valor</div>
+          <h3>EE reconhecida na mensalidade</h3>
+          <div class="math">
+            <div class="math-row"><span>Tabela</span><strong>R$ 11.000,00</strong></div>
+            <div class="math-row"><span>EE / 12 (R$ 14.612)</span><strong>− R$ 1.217,67</strong></div>
+            <div class="math-row"><span>Condição comercial</span><strong>− R$ 2.711,59</strong></div>
+            <div class="math-row"><span>Valor mensal</span><strong>R$ 7.070,74</strong></div>
+          </div>
+        </div>
+        <div class="box">
+          <div class="tag">O que está incluso</div>
+          <h3>Time na conta, todo mês</h3>
+          <p>Account, gestor de tráfego, copy e design. Fundação 30 dias, piloto Google, remarketing com gate de cluster.</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="box bonus">
+          <div class="tag">Bônus · incluso</div>
+          <h3>Implementação de CRM</h3>
+          <p>CRM operacional: pipes e fases, origem, dono e próxima ação em cada lead, automações básicas e treino do time. Sem custo adicional de setup.</p>
+        </div>
+        <div class="box bonus">
+          <div class="tag">Bônus · incluso</div>
+          <h3>Eventos V4 Company</h3>
+          <p>Acesso com 3 convites para os Eventos V4 Company — Mentoria com Flávio Augusto. O palco em que a operação olha o negócio de cima.</p>
+        </div>
+      </div>
+    </div>
+    <div class="why">
+      <div class="k">Por que este número</div>
+      <p>Vocês já investiram na Estruturação. A condição reconhece isso na mensalidade e fecha o time que liga o canal — CRM e mentoria inclusos, sem custo extra de setup.</p>
+    </div>
+    <div class="foot"><span class="brand">V4</span><span>Condição comercial · valor mensal · 12 meses</span><span>08 / 08</span></div>
+  </section>
+
+</body>
+</html>
