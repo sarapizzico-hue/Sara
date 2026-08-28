@@ -247,7 +247,7 @@ def build():
     set_run_font(r, size=14, color="FFEBC8")
     p4 = cell.add_paragraph()
     p4.paragraph_format.space_before = Pt(10)
-    r = p4.add_run("Márcio e Vinícius  ·  11 slides  ·  projeto 12 meses  ·  12× R$ 7.457,82")
+    r = p4.add_run("Márcio e Vinícius  ·  11 slides  ·  projeto 12 meses  ·  12× R$ 7.070,74")
     set_run_font(r, size=11, color="FFB4A0")
     doc.add_paragraph().paragraph_format.space_after = Pt(10)
 
@@ -326,7 +326,7 @@ def build():
     box(
         doc,
         "Nunca na boca — mesmo que esteja na sua cabeça",
-        "CRM  ·  “vocês nunca investiram em marketing”  ·  Paulo / Renata  ·  “desconto”  ·  “fee”  ·  cartão  ·  “60/40 do P&L”  ·  “a gente chega em 500 com anúncio”  ·  vender Estruturação de novo  ·  misturar lojista e motoboy no mesmo anúncio.",
+        "CRM como diagnóstico (“sem CRM”, Paulo/Renata, R$ 300)  ·  “vocês nunca investiram em marketing”  ·  “desconto”  ·  “fee”  ·  cartão  ·  “60/40 do P&L”  ·  “a gente chega em 500 com anúncio”  ·  vender Estruturação de novo  ·  misturar lojista e motoboy no mesmo anúncio.",
         fill="FFF4E5",
         border="C2410C",
     )
@@ -540,9 +540,9 @@ def build():
         doc,
         "O que estamos contratando: um projeto de 12 meses. Assessoria de Growth. As quatro pessoas que a gente viu, todo mês.\n\n"
         "O valor de tabela desse time é R$ 11.000 por mês.\n\n"
-        "Vocês já investiram R$ 14.612 na Estruturação. A gente reconhece isso na mensalidade — dá R$ 1.217,67 por mês — e entra uma condição comercial de R$ 2.324,51.\n\n"
-        "Fica 12 vezes R$ 7.457,82 ao mês. É valor mensal, projeto de um ano.\n\n"
-        "Dinheiro de anúncio é à parte. A conta de partida é R$ 3.500 por mês. Esse valor não sobe se a região não aguentar e se a gente não estiver vendo primeira coleta de verdade.",
+        "Vocês já investiram R$ 14.612 na Estruturação. A gente reconhece isso na mensalidade — dá R$ 1.217,67 por mês — e entra uma condição comercial de R$ 2.711,59.\n\n"
+        "A condição anterior era 12 vezes R$ 7.457,82. Fecha em 12 vezes R$ 7.070,74 ao mês. Economia de R$ 387,08 por mês, R$ 4.644,96 no ano. É valor mensal, projeto de um ano.\n\n"
+        "Dois bônus inclusos: implementação de CRM — pipes, fases, origem, dono e próxima ação, automações básicas e treino do time, sem custo de setup — e acesso com 3 convites para os Eventos V4 Company, Mentoria com Flávio Augusto.",
     )
 
     math = doc.add_table(rows=5, cols=2)
@@ -550,9 +550,9 @@ def build():
     lines = [
         ("Valor de tabela", "R$ 11.000,00 / mês"),
         ("Estruturação reconhecida (14.612 ÷ 12)", "− R$ 1.217,67"),
-        ("Condição comercial", "− R$ 2.324,51"),
-        ("Valor mensal do projeto", "R$ 7.457,82"),
-        ("Projeto 12 meses", "12 × R$ 7.457,82"),
+        ("Condição comercial", "− R$ 2.711,59"),
+        ("Valor mensal do projeto", "R$ 7.070,74"),
+        ("Projeto 12 meses", "12 × R$ 7.070,74"),
     ]
     for i, (a, b) in enumerate(lines):
         for ci, val in enumerate((a, b)):
@@ -567,6 +567,15 @@ def build():
             set_run_font(r, size=11, bold=True, color=WHITE if i >= 3 else INK)
         prevent_row_split(math.rows[i])
     doc.add_paragraph().paragraph_format.space_after = Pt(8)
+
+    box(
+        doc,
+        "Dois bônus nesta condição — fala depois do número",
+        "Implementação de CRM: pipes e fases, origem, dono e próxima ação em cada lead, automações básicas e treino do time. Incluso, sem custo de setup.\n"
+        "Eventos V4 Company: acesso com 3 convites — Mentoria com Flávio Augusto.",
+        fill="FFF8EE",
+        border=RED,
+    )
 
     box(
         doc,
@@ -612,8 +621,9 @@ def build():
     objs = [
         ("“Isso entrega os 500?”", "Não sozinho. 500 é a meta de vocês no ano. Este trabalho liga a parte que hoje é zero: loja própria. A plataforma continua indicando."),
         ("“Por que 90 dias / três meses?”", "É só o começo com segurança, dentro de um projeto de 12 meses. Não é prazo de 500 clientes."),
-        ("“Está caro.” / ele pega a calculadora", "Tabela 11 mil. Menos o que já investiram na Estruturação, mês a mês. Menos a condição. Fecha 7.457,82. Pode conferir: 11.000 menos 1.217,67 menos 2.324,51."),
+        ("“Está caro.” / ele pega a calculadora", "Tabela 11 mil. Menos o que já investiram na Estruturação, mês a mês. Menos a condição. Fecha 7.070,74. Era 7.457,82. Economia de 387,08 por mês. Pode conferir: 11.000 menos 1.217,67 menos 2.711,59."),
         ("“Preciso pensar.”", "Claro. Pensar em quê — valor, data de começar, ou alguma peça do desenho? Assim eu te ajudo no ponto certo."),
+        ("“E o CRM?”", "Entra incluso nesta condição, como bônus: implementação operacional — pipes, dono, próxima ação, automações básicas e treino. Sem custo de setup. Não é diagnóstico de “vocês não têm CRM”."),
         ("“E o motoboy?”", "Caminho separado. Volume certo na região é o que segura ele. Não mistura com o anúncio do lojista."),
         ("“Vamos anunciar já.”", "Anúncio sem região e sem filtro vira pedido que vocês recusam de novo. A gente liga o Google quando a malha aguenta."),
         ("“Como a gente acompanha?”", "A Account no ritmo com você e com o Vinícius. Mix na mesa. Custo até a primeira coleta. Anúncio só onde a região libera."),
@@ -648,7 +658,7 @@ def build():
     box(
         doc,
         "Leva isto na cabeça",
-        "Estudo de conta no começo. Uma ideia por vez. Anúncio só quando a região aguenta. 500 é meta deles, não promessa sua. Um projeto de 12 meses. 12 vezes R$ 7.457,82. Pede a venda com calma.",
+        "Estudo de conta no começo. Uma ideia por vez. Anúncio só quando a região aguenta. 500 é meta deles, não promessa sua. Um projeto de 12 meses. 12 vezes R$ 7.070,74. CRM e 3 convites Flávio como bônus. Pede a venda com calma.",
         fill="F0FDF4",
         border=GREEN,
     )
