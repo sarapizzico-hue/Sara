@@ -1282,7 +1282,8 @@
     });
     renderWeek(1);
 
-    fitDeck(); goTo(0);
+    const start = parseInt(new URLSearchParams(location.search).get("s") || "1", 10);
+    fitDeck(); goTo(Number.isFinite(start) ? start - 1 : 0);
 
   </script>
 </body>
