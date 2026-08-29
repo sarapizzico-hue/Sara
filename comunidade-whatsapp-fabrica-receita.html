@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kit Comunidade WhatsApp · Fábrica de Receita</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --brand:#e50915; --brand-light:#ff1a27; --bg:#050505; --surf:#141414;
+      --bd:rgba(255,255,255,.1); --txt:#fafafa; --mut:#a3a3a3; --ok:#86efac;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--txt);font:14px/1.55 Inter,system-ui,sans-serif;
+      background-image:radial-gradient(ellipse 80% 40% at 50% -10%,rgba(229,9,21,.18),transparent)}
+    .top{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);background:rgba(5,5,5,.9);border-bottom:1px solid var(--bd);padding:12px 20px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+    .logo{font-weight:900}.logo span{color:var(--brand-light)}
+    .pill{font-size:11px;font-weight:700;color:var(--mut);border:1px solid var(--bd);padding:5px 10px;border-radius:999px}
+    .wrap{max-width:880px;margin:0 auto;padding:28px 20px 90px}
+    h1{margin:0 0 8px;font-size:clamp(24px,4vw,34px);font-weight:900;letter-spacing:-.03em}
+    .sub{color:var(--mut);margin:0 0 18px;font-size:13px}
+    .sub a{color:var(--ok)}
+    .card{background:var(--surf);border:1px solid var(--bd);border-radius:16px;padding:18px 20px;margin-bottom:12px}
+    .card h2{margin:0 0 4px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);font-weight:800}
+    .card h3{margin:0 0 12px;font-size:18px;font-weight:900}
+    .callout{padding:12px 14px;border-radius:12px;border:1px solid rgba(34,197,94,.3);background:rgba(34,197,94,.08);color:#bbf7d0;font-size:13px;margin-bottom:12px}
+    .callout.warn{border-color:rgba(250,204,21,.28);background:rgba(250,204,21,.06);color:#fde68a}
+    .callout.info{border-color:rgba(96,165,250,.3);background:rgba(96,165,250,.08);color:#bfdbfe}
+    .msg{white-space:pre-wrap;background:#0a0a0a;border:1px solid var(--bd);border-radius:12px;padding:14px 16px;font-size:13px;line-height:1.65;color:#e5e5e5;margin:0 0 10px}
+    .btns{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:4px}
+    button{appearance:none;border:1px solid rgba(229,9,21,.5);background:linear-gradient(135deg,rgba(229,9,21,.28),#1a1a1a);color:#fff;font:inherit;font-weight:800;padding:10px 14px;border-radius:10px;cursor:pointer}
+    button.secondary{border-color:var(--bd);background:#111}
+    button.ok{border-color:rgba(34,197,94,.45);background:rgba(34,197,94,.12)}
+    .steps{margin:0;padding-left:18px}
+    .steps li{margin:8px 0;color:#e5e5e5}
+    table{width:100%;border-collapse:collapse;font-size:13px}
+    th,td{padding:10px 8px;border-bottom:1px solid var(--bd);text-align:left;vertical-align:top}
+    th{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);font-weight:800}
+    input,textarea{width:100%;background:#0a0a0a;border:1px solid var(--bd);border-radius:8px;color:var(--txt);padding:8px 10px;font:inherit}
+    textarea{min-height:42px;resize:vertical}
+    .check{width:18px;height:18px;accent-color:var(--brand)}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+    .box{background:#0c0c0c;border:1px solid var(--bd);border-radius:12px;padding:12px 14px}
+    .box .t{font-weight:800;margin-bottom:4px}
+    .box .d{font-size:12px;color:#d4d4d4}
+    footer{text-align:center;color:var(--mut);font-size:11px;margin-top:24px;padding-top:16px;border-top:1px solid var(--bd)}
+    footer a{color:var(--ok)}
+    .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#166534;color:#bbf7d0;padding:10px 16px;border-radius:999px;font-size:12px;font-weight:800;opacity:0;pointer-events:none;transition:.2s;z-index:50}
+    .toast.show{opacity:1}
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="logo">V4 <span>COMPANY</span> · Kit WA</div>
+    <div class="pill">Fábrica de Receita · 18/08</div>
+  </header>
+
+  <div class="wrap">
+    <h1>Criar a comunidade agora</h1>
+    <p class="sub">
+      Kit para montar a comunidade no WhatsApp com quem já confirmou.
+      Plano completo: <a href="recepcao-colli-fabrica-receita.html">recepção Colli&amp;CO</a>.
+    </p>
+
+    <div class="callout warn">
+      <strong>Importante:</strong> a comunidade é criada no seu WhatsApp (celular).
+      Use este kit para nome, descrição, mensagens e checklist de quem adicionar.
+      Preencha a lista abaixo com os confirmados da sua planilha.
+    </div>
+
+    <section class="card">
+      <h2>01 · Setup</h2>
+      <h3>Dados da comunidade</h3>
+      <div class="grid2">
+        <div class="box">
+          <div class="t">Nome</div>
+          <div class="d" id="nomeComunidade">Fábrica de Receita · Colli&amp;CO</div>
+        </div>
+        <div class="box">
+          <div class="t">Para quem</div>
+          <div class="d">Só clientes confirmados (recepção + evento 18/08)</div>
+        </div>
+      </div>
+      <p style="margin:12px 0 6px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)">Descrição (colar no WhatsApp)</p>
+      <pre class="msg" id="desc">Comunidade exclusiva dos clientes Colli&amp;CO confirmados na Fábrica de Receita.
+
+📅 18/08 · HQ V4 Campinas
+🕚 Recepção Colli: 11h30–12h30
+🎯 Evento: 13h30–20h
+
+Aqui você recebe avisos, bastidores e lembretes do dia.
+Grupo fechado — só confirmados.</pre>
+      <div class="btns">
+        <button type="button" data-copy="desc">Copiar descrição</button>
+        <button type="button" class="secondary" data-copy-text="Fábrica de Receita · Colli&amp;CO">Copiar nome</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>02 · Passo a passo</h2>
+      <h3>No WhatsApp (5 minutos)</h3>
+      <ol class="steps">
+        <li>Abra o WhatsApp → <strong>Comunidades</strong> → <strong>Nova comunidade</strong></li>
+        <li>Cole o <strong>nome</strong> e a <strong>descrição</strong> acima</li>
+        <li>Crie o <strong>grupo principal</strong> (avisos do evento)</li>
+        <li>Adicione só quem está na lista de confirmados (abaixo)</li>
+        <li>Envie a <strong>mensagem de boas-vindas</strong> (D0)</li>
+        <li>Para quem ainda não está no seu WhatsApp: mande o <strong>convite individual</strong> pedindo o número / aceite</li>
+      </ol>
+    </section>
+
+    <section class="card">
+      <h2>03 · Lista</h2>
+      <h3>Confirmados para adicionar</h3>
+      <div class="callout info">
+        Preencha com a planilha de confirmação. Marque quando já entrou na comunidade.
+        Meta da recepção: até <strong>15</strong> convidados.
+      </div>
+      <div style="overflow-x:auto">
+        <table id="lista">
+          <thead>
+            <tr>
+              <th>✓</th>
+              <th>#</th>
+              <th>Empresa / cliente</th>
+              <th>Contato</th>
+              <th>WhatsApp</th>
+              <th>Obs</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="btns" style="margin-top:12px">
+        <button type="button" class="secondary" id="addRow">+ linha</button>
+        <button type="button" class="ok" id="saveLocal">Salvar neste navegador</button>
+        <button type="button" class="secondary" id="exportTxt">Exportar lista</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>04 · Mensagens prontas</h2>
+      <h3>Copiar e colar</h3>
+
+      <p style="margin:0 0 6px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)">Convite individual (antes de adicionar)</p>
+      <pre class="msg" id="mConvite">Oi, [NOME]! Tudo bem?
+
+Como você confirmou presença na Fábrica de Receita, estou criando uma comunidade exclusiva no WhatsApp só com os confirmados — pra enviar avisos, bastidores e lembretes até o dia 18/08.
+
+Pode me confirmar se esse número é o melhor pra eu te adicionar?
+Assim que você entrar, te mando as orientações da recepção Colli (11h30) + evento.</pre>
+      <div class="btns"><button type="button" data-copy="mConvite">Copiar convite individual</button></div>
+
+      <p style="margin:16px 0 6px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)">Boas-vindas na comunidade (D0)</p>
+      <pre class="msg" id="mD0">Boa tarde, pessoal! 👋
+
+Sejam bem-vindos à comunidade exclusiva da Fábrica de Receita · Colli&amp;CO.
+
+Vocês estão aqui porque confirmaram presença no dia 18/08 — e essa é a nossa sala de aquecimento até lá.
+
+📅 Sexta, 18/08
+🕚 Recepção Colli&amp;CO: 11h30–12h30 (sala reservada)
+🎯 Fábrica de Receita: 13h30–20h · HQ V4 Campinas
+
+Por aqui vou compartilhar:
+• lembretes de horário e local
+• o que esperar do dia
+• bastidores e avisos importantes
+
+Qualquer dúvida, podem me chamar no privado também.
+Nos vemos em breve — vai ser um dia forte. 🚀</pre>
+      <div class="btns"><button type="button" data-copy="mD0">Copiar boas-vindas</button></div>
+
+      <p style="margin:16px 0 6px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)">Meio da semana (valor)</p>
+      <pre class="msg" id="mMeio">Pessoal, passando pra aquecer o dia 18/08 🔥
+
+Na Fábrica de Receita vocês vão viver, na prática, o método da V4 pra transformar marketing e vendas em crescimento previsível — Aquisição, Engajamento, Monetização e Retenção.
+
+E tem painel com Alfredo Soares (G4).
+
+Lembrem: antes do evento, às 11h30, tem a recepção Colli&amp;CO só pra esse grupo.
+Guardem a agenda. Qualquer ajuste de presença, me avisem.</pre>
+      <div class="btns"><button type="button" data-copy="mMeio">Copiar mensagem meio da semana</button></div>
+
+      <p style="margin:16px 0 6px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)">D-1</p>
+      <pre class="msg" id="mD1">Pessoal, amanhã é o dia!
+
+📍 HQ V4 Campinas
+🕚 Recepção Colli&amp;CO: 11h30 (cheguem nesse horário)
+🎯 Evento principal: 13h30
+
+Tragam o ingresso/confirmação do cadastro.
+Estacionamento no local (pagamento à parte).
+
+Qualquer imprevisto, me avisem aqui ou no privado.
+Te esperamos!</pre>
+      <div class="btns"><button type="button" data-copy="mD1">Copiar D-1</button></div>
+
+      <p style="margin:16px 0 6px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)">Dia D · manhã</p>
+      <pre class="msg" id="mDD">Bom dia, pessoal! Hoje é o dia 🚀
+
+Te esperamos às 11h30 na recepção Colli&amp;CO (sala reservada).
+Depois seguimos juntos para a Fábrica de Receita.
+
+Ponto de encontro e dúvidas: me chamem neste grupo.
+Vamos juntos!</pre>
+      <div class="btns"><button type="button" data-copy="mDD">Copiar dia D</button></div>
+    </section>
+
+    <section class="card">
+      <h2>05 · Regras rápidas</h2>
+      <h3>Pra comunidade não virar ruído</h3>
+      <div class="grid2">
+        <div class="box"><div class="t">Entra</div><div class="d">Só quem confirmou presença + cadastro batido com a matriz.</div></div>
+        <div class="box"><div class="t">Não entra</div><div class="d">Lead frio, “talvez”, ou quem não enviou número.</div></div>
+        <div class="box"><div class="t">Tom</div><div class="d">Exclusivo, curto, útil. Aquecer presença — não vender pitch no grupo.</div></div>
+        <div class="box"><div class="t">Pitch</div><div class="d">Só no follow-up individual depois do evento.</div></div>
+      </div>
+    </section>
+
+    <footer>
+      <a href="recepcao-colli-fabrica-receita.html">Plano recepção Colli</a> ·
+      <a href="farmer-sara.html">Hub Farmer</a> ·
+      <a href="https://lp.v4company.com/fabrica-de-receita-agosto">LP do evento</a>
+    </footer>
+  </div>
+
+  <div class="toast" id="toast">Copiado</div>
+
+  <script>
+  (function(){
+    var KEY = 'fabrica-wa-lista-v1';
+    var tbody = document.querySelector('#lista tbody');
+    var toast = document.getElementById('toast');
+
+    function showToast(t){
+      toast.textContent = t || 'Copiado';
+      toast.classList.add('show');
+      setTimeout(function(){ toast.classList.remove('show'); }, 1400);
+    }
+
+    function rowHtml(data, i){
+      data = data || {};
+      return '<tr>' +
+        '<td><input class="check" type="checkbox" '+(data.ok?'checked':'')+' data-f="ok"></td>' +
+        '<td>'+(i+1)+'</td>' +
+        '<td><input data-f="empresa" placeholder="Empresa" value="'+(data.empresa||'').replace(/"/g,'&quot;')+'"></td>' +
+        '<td><input data-f="contato" placeholder="Nome" value="'+(data.contato||'').replace(/"/g,'&quot;')+'"></td>' +
+        '<td><input data-f="wa" placeholder="55..." value="'+(data.wa||'').replace(/"/g,'&quot;')+'"></td>' +
+        '<td><input data-f="obs" placeholder="Obs" value="'+(data.obs||'').replace(/"/g,'&quot;')+'"></td>' +
+      '</tr>';
+    }
+
+    function readRows(){
+      return Array.prototype.map.call(tbody.querySelectorAll('tr'), function(tr){
+        var o = {};
+        tr.querySelectorAll('[data-f]').forEach(function(el){
+          o[el.getAttribute('data-f')] = el.type === 'checkbox' ? el.checked : el.value;
+        });
+        return o;
+      });
+    }
+
+    function render(list){
+      if(!list || !list.length){
+        list = [];
+        for(var i=0;i<15;i++) list.push({});
+      }
+      tbody.innerHTML = list.map(rowHtml).join('');
+    }
+
+    function load(){
+      try { render(JSON.parse(localStorage.getItem(KEY) || 'null')); }
+      catch(e){ render(null); }
+    }
+
+    document.querySelectorAll('[data-copy]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var el = document.getElementById(btn.getAttribute('data-copy'));
+        navigator.clipboard.writeText(el.textContent).then(function(){ showToast('Copiado'); });
+      });
+    });
+    document.querySelectorAll('[data-copy-text]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        navigator.clipboard.writeText(btn.getAttribute('data-copy-text')).then(function(){ showToast('Nome copiado'); });
+      });
+    });
+
+    document.getElementById('addRow').addEventListener('click', function(){
+      var list = readRows(); list.push({}); render(list);
+    });
+    document.getElementById('saveLocal').addEventListener('click', function(){
+      localStorage.setItem(KEY, JSON.stringify(readRows()));
+      showToast('Lista salva neste navegador');
+    });
+    document.getElementById('exportTxt').addEventListener('click', function(){
+      var lines = readRows().filter(function(r){ return r.empresa || r.contato || r.wa; })
+        .map(function(r,i){
+          return (i+1)+'. '+(r.ok?'[OK] ':'[ ] ')+(r.empresa||'-')+' | '+(r.contato||'-')+' | '+(r.wa||'-')+(r.obs?' | '+r.obs:'');
+        });
+      navigator.clipboard.writeText(lines.join('\n') || 'Lista vazia').then(function(){ showToast('Lista copiada'); });
+    });
+
+    load();
+  })();
+  </script>
+</body>
+</html>
