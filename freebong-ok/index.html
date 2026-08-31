@@ -4,598 +4,66 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta name="eqv-deck-version" content="freebong-remax-layout-19500">
   <title>Freebong · Empresa que Vende | V4 Company</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --v4-red: #e50914;
-      --v4-orange: #ff481f;
-      --v4-dark: #280001;
-      --v4-cream: #ffebc8;
-      --ink: #141414;
-      --ink-soft: #5a5a5a;
-      --line: rgba(20, 20, 20, .12);
-      --radius: 22px;
-      --hero: radial-gradient(120% 130% at 50% -10%, #ff5a2c 0%, #e50914 30%, #b00610 62%, #280001 100%);
-    }
+    :root { --v4-red: #e50914; --v4-orange: #ff481f; }
     * { box-sizing: border-box; }
-    html, body {
-      width: 100%; height: 100%; margin: 0; overflow: hidden;
-      background: #171313; color: var(--ink);
-      font-family: "IBM Plex Sans", system-ui, sans-serif;
-      -webkit-font-smoothing: antialiased;
-    }
+    html, body { width:100%; height:100%; margin:0; overflow:hidden; background:#171313; }
     button { font-family: inherit; }
-    #viewport {
-      position: fixed; inset: 0; overflow: hidden;
-      background: radial-gradient(circle at 50% 10%, rgba(229, 9, 20, .18), transparent 38%), #171313;
-    }
-    #deck {
-      --deck-scale: 1;
-      position: absolute; left: 50%; top: 50%;
-      width: 1600px; height: 900px; overflow: hidden;
-      transform: translate(-50%, -50%) scale(var(--deck-scale));
-      transform-origin: center; background: #f5f4f2;
-      box-shadow: 0 40px 120px rgba(0, 0, 0, .45);
-    }
-    .slide {
-      position: absolute; inset: 0; width: 1600px; height: 900px;
-      padding: 76px 96px 108px; overflow: hidden;
-      opacity: 0; visibility: hidden; pointer-events: none; transform: translateX(24px);
-      transition: opacity .28s ease, transform .28s ease, visibility .28s;
-      background: radial-gradient(circle at 92% 8%, rgba(229, 9, 20, .055), transparent 24%), #f5f4f2;
-    }
-    .slide.active { opacity: 1; visibility: visible; pointer-events: auto; transform: translateX(0); }
-    .slide.red { color: white; background: var(--hero); }
-    .slide.dark {
-      color: white;
-      background: radial-gradient(circle at 78% 15%, rgba(229, 9, 20, .5), transparent 32%),
-                  linear-gradient(145deg, #280001 0%, #130001 100%);
-    }
-    .slide.white { background: white; }
-    .topline {
-      position: absolute; top: 0; left: 0; width: 100%; height: 5px;
-      background: linear-gradient(90deg, var(--v4-red), var(--v4-orange), transparent 76%);
-    }
-    h1, h2, h3, p { margin-top: 0; }
-    h1 { margin-bottom: 24px; font-size: 88px; line-height: .98; letter-spacing: -.055em; font-weight: 600; }
-    h2 { margin-bottom: 18px; font-size: 52px; line-height: 1.02; letter-spacing: -.045em; font-weight: 600; }
-    h3 { margin-bottom: 10px; font-size: 24px; line-height: 1.1; letter-spacing: -.025em; font-weight: 600; }
-    .lede { max-width: 1100px; color: var(--ink-soft); font-size: 26px; line-height: 1.42; font-weight: 300; }
-    .red .lede, .dark .lede { color: rgba(255, 255, 255, .72); }
-    .accent { color: var(--v4-red); }
-    .red .accent, .dark .accent { color: var(--v4-cream); }
-    .eyebrow {
-      display: inline-flex; align-items: center; min-height: 34px; padding: 7px 15px;
-      border: 1px solid rgba(229, 9, 20, .18); border-radius: 999px;
-      color: var(--v4-red); background: rgba(229, 9, 20, .07);
-      font-size: 12px; line-height: 1; font-weight: 700; letter-spacing: .09em; text-transform: uppercase;
-    }
-    .red .eyebrow, .dark .eyebrow {
-      color: rgba(255, 255, 255, .92); background: rgba(255, 255, 255, .06);
-      border-color: rgba(255, 255, 255, .35);
-    }
-    .card {
-      padding: 26px; border: 1px solid var(--line); border-radius: var(--radius); background: white;
-    }
-    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-    .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
-    .icon {
-      width: 28px; height: 28px; fill: none; stroke: currentColor; stroke-width: 2.3;
-      stroke-linecap: round; stroke-linejoin: round;
-    }
-    .icon-box {
-      width: 54px; height: 54px; display: grid; place-items: center; flex: 0 0 auto;
-      border: 1px solid rgba(229, 9, 20, .18); border-radius: 16px;
-      color: var(--v4-red); background: rgba(229, 9, 20, .07);
-    }
-    .red .icon-box, .dark .icon-box {
-      color: white; border-color: rgba(255, 255, 255, .28); background: rgba(255, 255, 255, .08);
-    }
-    .quote {
-      margin-top: 28px; padding-left: 26px; border-left: 6px solid var(--v4-red);
-      max-width: 1200px; font-size: 26px; line-height: 1.25; font-weight: 600;
-    }
-    .dark .quote, .red .quote { border-color: var(--v4-cream); }
-    .k {
-      font: 700 12px/1 "IBM Plex Mono", monospace; letter-spacing: .1em;
-      text-transform: uppercase; color: var(--v4-red); margin-bottom: 10px;
-    }
-    .dark .k, .red .k { color: var(--v4-cream); }
-    .sphere {
-      position: absolute; border-radius: 50%; pointer-events: none;
-      background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, .38), rgba(255, 255, 255, .045) 48%, transparent 66%);
-    }
-    .cover-content { position: relative; z-index: 3; height: 100%; display: flex; flex-direction: column; justify-content: space-between; }
-    .brand-lockup { display: flex; align-items: center; gap: 18px; font: 700 18px/1 "IBM Plex Mono", monospace; letter-spacing: .08em; text-transform: uppercase; }
-    .brand-lockup .x { opacity: .55; }
-    .cover-meta { color: rgba(255,255,255,.78); font-size: 22px; max-width: 920px; line-height: 1.4; font-weight: 300; }
-    .slide-footer {
-      position: absolute; z-index: 8; left: 96px; right: 96px; bottom: 32px; height: 48px;
-      display: flex; align-items: center; pointer-events: none;
-    }
-    .v4-word { font: 800 22px/1 "IBM Plex Sans", sans-serif; letter-spacing: -.04em; color: var(--v4-red); }
-    .red .slide-footer .v4-word, .dark .slide-footer .v4-word { color: #fff; }
-    .navigation { position: absolute; z-index: 20; right: 52px; bottom: 25px; display: flex; gap: 10px; }
-    .nav-btn {
-      width: 48px; height: 48px; display: grid; place-items: center;
-      border: 1px solid rgba(20, 20, 20, .12); border-radius: 50%;
-      color: var(--ink); background: rgba(255, 255, 255, .92);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, .12); cursor: pointer;
-    }
-    .nav-btn:disabled { opacity: .3; cursor: default; }
-    .nav-btn svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.3; }
-    .progress-track { position: absolute; z-index: 21; left: 0; right: 0; bottom: 0; height: 7px; background: rgba(20, 20, 20, .1); }
-    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--v4-red), var(--v4-orange)); transition: width .3s ease; }
-    .slide-counter {
-      position: absolute; z-index: 22; right: 176px; bottom: 39px;
-      color: rgba(20, 20, 20, .52); font: 500 12px/1 "IBM Plex Mono", monospace; letter-spacing: .04em;
-    }
-    .phase-rail { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 28px; }
-    .phase {
-      min-height: 280px; padding: 20px 16px; border-radius: 20px;
-      background: white; border: 1px solid var(--line);
-    }
-    .dark .phase { background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.16); }
-    .phase .n {
-      font: 700 12px/1 "IBM Plex Mono", monospace; letter-spacing: .1em;
-      text-transform: uppercase; color: var(--v4-red); margin-bottom: 12px;
-    }
-    .dark .phase .n { color: var(--v4-cream); }
-    .phase h3 { margin: 0 0 10px; font-size: 20px; line-height: 1.2; }
-    .phase p { margin: 0; color: var(--ink-soft); font-size: 15px; line-height: 1.35; }
-    .dark .phase p { color: rgba(255,255,255,.72); }
-    .table { width: 100%; border-collapse: collapse; margin-top: 22px; }
-    .table th {
-      padding: 14px; border-bottom: 1px solid var(--line); color: var(--v4-red); text-align: left;
-      font: 700 12px/1.15 "IBM Plex Mono", monospace; letter-spacing: .08em; text-transform: uppercase;
-    }
-    .table td { padding: 16px 14px; border-bottom: 1px solid var(--line); color: var(--ink-soft); font-size: 20px; line-height: 1.3; }
-    .table td:first-child { color: var(--ink); font-weight: 700; width: 34%; }
-    .table tr:nth-child(even) td { background: rgba(229, 9, 20, .045); }
-    .price-layout { display: grid; grid-template-columns: 1.15fr .95fr .95fr; gap: 18px; margin-top: 18px; align-items: stretch; }
-    .price-main {
-      padding: 28px 30px; border-radius: 28px;
-      background: linear-gradient(145deg, #280001 0%, #e50914 100%); color: white;
-      display: flex; flex-direction: column; justify-content: center;
-    }
-    .price-main .was {
-      font: 700 12px/1 "IBM Plex Mono", monospace; letter-spacing: .08em; text-transform: uppercase;
-      color: rgba(255,255,255,.7); margin-bottom: 8px;
-    }
-    .price-main .ref { font-size: 24px; font-weight: 600; text-decoration: line-through; opacity: .52; margin-bottom: 4px; }
-    .price-main .now-label {
-      font: 700 12px/1 "IBM Plex Mono", monospace; letter-spacing: .1em; text-transform: uppercase;
-      color: var(--v4-cream); margin: 14px 0 8px;
-    }
-    .price-main .now { font-size: 46px; font-weight: 700; letter-spacing: -.04em; line-height: 1; margin: 0 0 10px; }
-    .price-main .save {
-      display: inline-block; width: fit-content;
-      background: rgba(255,235,200,.16); border: 1px solid rgba(255,235,200,.38);
-      color: var(--v4-cream); font: 700 13px/1.25 "IBM Plex Sans", sans-serif;
-      padding: 8px 12px; border-radius: 999px; margin: 0 0 12px;
-    }
-    .price-main p { margin: 0; color: rgba(255,255,255,.8); font-size: 16px; line-height: 1.35; }
-    .price-side { display: grid; gap: 14px; }
-    .price-side .box { padding: 18px 20px; border-radius: 22px; background: white; border: 1px solid var(--line); }
-    .price-side .box h3 { margin: 0 0 6px; font-size: 20px; }
-    .price-side .box p { margin: 0; color: var(--ink-soft); font-size: 15px; line-height: 1.38; }
-    .price-side .box .tag {
-      font: 700 11px/1 "IBM Plex Mono", monospace; letter-spacing: .08em; text-transform: uppercase;
-      color: var(--v4-red); margin-bottom: 8px;
-    }
-    .price-side .box.bonus { background: linear-gradient(180deg, #fff8ee, #fff); border-color: rgba(229,9,20,.18); }
-    .math {
-      margin-top: 16px; display: grid; gap: 0; border: 1px solid var(--line); border-radius: 18px; overflow: hidden;
-    }
-    .math-row {
-      display: flex; justify-content: space-between; gap: 16px; padding: 12px 18px;
-      font-size: 18px; border-bottom: 1px solid var(--line); background: white;
-    }
-    .math-row:last-child { border-bottom: 0; }
-    .math-row.minus { color: var(--v4-red); font-weight: 600; background: rgba(229,9,20,.05); }
-    .math-row.total { font-weight: 700; color: var(--ink); background: #fff8ee; }
-    .math-row.total strong { font-size: 26px; color: var(--v4-red); }
-    .cta-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 36px; }
-    .cta-step { padding: 26px; border-radius: 22px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.18); }
-    .cta-step .n { font: 700 12px/1 "IBM Plex Mono", monospace; letter-spacing: .1em; color: var(--v4-cream); }
-    .cta-step h3 { margin: 14px 0 8px; font-size: 24px; }
-    .cta-step p { margin: 0; color: rgba(255,255,255,.75); font-size: 17px; line-height: 1.35; }
-    .mini { margin: 8px 0 0; color: var(--ink-soft); font-size: 16px; line-height: 1.4; }
-    .dark .mini, .red .mini { color: rgba(255,255,255,.7); }
-    .card p { margin: 0; color: var(--ink-soft); font-size: 16px; line-height: 1.4; }
-    .dark .card { background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.16); }
-    .dark .card p { color: rgba(255,255,255,.72); }
-    ul.clean { margin: 12px 0 0; padding-left: 18px; color: var(--ink-soft); font-size: 17px; line-height: 1.45; }
-    ul.clean li { margin: 6px 0; }
-    .doc-link {
-      position: absolute; z-index: 30; left: 96px; top: 18px;
-      display: none; padding: 8px 14px; border-radius: 999px;
-      background: rgba(255,255,255,.92); color: var(--v4-red); text-decoration: none;
-      font: 700 11px/1 "IBM Plex Mono", monospace; letter-spacing: .06em; text-transform: uppercase;
-    }
-    .slide.active ~ .doc-link, #deck:has(.slide.active[data-title="Capa"]) + * { }
+    #viewport { position:fixed; inset:0; overflow:hidden; background:radial-gradient(circle at 50% 10%, rgba(229,9,20,.18), transparent 38%), #171313; }
+    #deck { --deck-scale:1; position:absolute; left:50%; top:50%; width:1600px; height:900px; overflow:hidden;
+      transform:translate(-50%,-50%) scale(var(--deck-scale)); transform-origin:center; background:#0b0000;
+      box-shadow:0 40px 120px rgba(0,0,0,.45); }
+    .slide { position:absolute; inset:0; width:1600px; height:900px; margin:0; padding:0; overflow:hidden; opacity:0; pointer-events:none; }
+    .slide.active { opacity:1; pointer-events:auto; }
+    .slide img { width:1600px; height:900px; object-fit:fill; display:block; user-select:none; -webkit-user-drag:none; }
+    .navigation { position:absolute; z-index:20; right:52px; bottom:25px; display:flex; gap:10px; }
+    .nav-btn { width:48px; height:48px; display:grid; place-items:center; border:1px solid rgba(255,255,255,.28);
+      border-radius:50%; color:#141414; background:rgba(255,255,255,.92); box-shadow:0 10px 30px rgba(0,0,0,.28); cursor:pointer; }
+    .nav-btn:disabled { opacity:.3; cursor:default; }
+    .nav-btn svg { width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:2.3; stroke-linecap:round; stroke-linejoin:round; }
+    .progress-track { position:absolute; z-index:21; left:0; right:0; bottom:0; height:6px; background:rgba(255,255,255,.18); }
+    .progress-fill { height:100%; width:5%; background:linear-gradient(90deg, var(--v4-red), var(--v4-orange)); transition:width .3s ease; }
+    .slide-counter { position:absolute; z-index:22; right:176px; bottom:39px; color:rgba(255,255,255,.7);
+      font:500 12px/1 "IBM Plex Mono", monospace; letter-spacing:.04em; text-shadow:0 1px 8px rgba(0,0,0,.7); }
   </style>
 </head>
 <body>
-  <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
-    <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></symbol>
-    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></symbol>
-    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></symbol>
-    <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
-    <symbol id="i-megaphone" viewBox="0 0 24 24"><path d="M3 11v2a1 1 0 0 0 1 1h2l7 4V6L6 10H4a1 1 0 0 0-1 1z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/></symbol>
-    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 19V5M4 19h16"/><path d="M8 16v-5M12 16V8M16 16v-8"/></symbol>
-    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></symbol>
-  </svg>
-
   <div id="viewport">
     <main id="deck">
-
-      <section class="slide red active" data-title="Capa">
-        <div class="sphere" style="width:420px;height:420px;right:-80px;top:-100px;opacity:.45"></div>
-        <div class="sphere" style="width:240px;height:240px;left:-60px;bottom:40px;opacity:.25"></div>
-        <div class="cover-content">
-          <div class="brand-lockup">Freebong <span class="x">×</span> V4 Company</div>
-          <div>
-            <span class="eyebrow">Proposta comercial · Empresa que Vende</span>
-            <h1 class="cover-title" style="margin-top:22px;max-width:1200px">Empresa que Vende</h1>
-            <p class="cover-meta">Consultoria, acompanhamento e execução assistida para a Freebong transformar marketing e comercial em uma máquina de receita previsível — em 6 meses.</p>
-          </div>
-          <p class="cover-meta" style="font-size:16px;opacity:.8">Programa semestral · squad de 4 especialistas · cashback da EE aplicado no valor</p>
-        </div>
-      </section>
-
-      <section class="slide white" data-title="Leitura">
-        <div class="topline"></div>
-        <span class="eyebrow">Leitura central</span>
-        <h2 style="margin-top:22px;max-width:1280px">A Freebong já vende. Falta sistema para repetir o mês.</h2>
-        <p class="lede">O Empresa que Vende não executa no lugar de vocês: estrutura o negócio, treina o time e acompanha a execução. Quem opera é a Freebong. É por isso que a máquina fica na empresa quando o ciclo acaba.</p>
-        <div class="grid-3" style="margin-top:36px">
-          <article class="card">
-            <div class="k">Produto</div>
-            <h3>Empresa que Vende</h3>
-            <p>Programa semestral de consultoria + execução assistida. O mesmo produto da condição EQV.</p>
-          </article>
-          <article class="card">
-            <div class="k">Prazo</div>
-            <h3>6 meses · 5 fases</h3>
-            <p>Squad de 4 especialistas: Conteúdo, Mídia Paga, Comercial e CRM.</p>
-          </article>
-          <article class="card">
-            <div class="k">Cashback</div>
-            <h3>R$ 14.050,00</h3>
-            <p>Só o que a Freebong já investiu na EE. Entra como cashback normal — sem arredondar.</p>
-          </article>
-        </div>
-        <div class="quote">Clareza → sistema → execução. Sem método, mídia vira aposta. Com método, receita vira consequência.</div>
-      </section>
-
-      <section class="slide" data-title="Objetivo">
-        <div class="topline"></div>
-        <span class="eyebrow">01 · Objetivo</span>
-        <h2 style="margin-top:22px;max-width:1280px">Instalar, em 6 meses, o método para a Freebong vender com previsibilidade.</h2>
-        <p class="lede">Diagnóstico contínuo de maturidade GTM, consultoria estratégica mensal, execução assistida nas quatro frentes, comunidade de pares e imersão presencial da Fábrica de Receita.</p>
-        <div class="grid-2" style="margin-top:36px">
-          <article class="card">
-            <div class="k">O que não é</div>
-            <h3>PDF na gaveta nem agência que some</h3>
-            <p>Quando o contrato acaba, o resultado não pode ir junto. A operação precisa herdar a máquina.</p>
-          </article>
-          <article class="card">
-            <div class="k">O que é</div>
-            <h3>Time operando com tese, artefato e cadência</h3>
-            <p>Conteúdo que gera demanda, mídia decidida por dado, comercial que fecha e CRM que governa o pipeline.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="slide dark" data-title="Problema">
-        <span class="eyebrow">02 · O problema</span>
-        <h2 style="margin-top:22px;max-width:1280px">O empresário típico do EQV já vende. O que falta é repetir o mês.</h2>
-        <table class="table" style="background:transparent">
-          <thead><tr><th>Sintoma</th><th>Efeito na operação</th></tr></thead>
-          <tbody>
-            <tr><td style="color:#fff">Receita imprevisível</td><td style="color:rgba(255,255,255,.75)">O mês é esforço, não método. Sem processo, o resultado não se repete.</td></tr>
-            <tr><td style="color:#fff">Processo na cabeça de uma pessoa</td><td style="color:rgba(255,255,255,.75)">Quando o melhor vendedor sai, o comercial sai junto.</td></tr>
-            <tr><td style="color:#fff">Marketing no achismo</td><td style="color:rgba(255,255,255,.75)">Canal, conteúdo e mídia sem tese. Investe, testa, para.</td></tr>
-            <tr><td style="color:#fff">Agência executa — você não aprende</td><td style="color:rgba(255,255,255,.75)">Quando o contrato acaba, o resultado vai junto.</td></tr>
-            <tr><td style="color:#fff">Comercial amador</td><td style="color:rgba(255,255,255,.75)">Script, follow-up e pipeline improvisados. O funil vaza depois do lead.</td></tr>
-            <tr><td style="color:#fff">Posicionamento frouxo</td><td style="color:rgba(255,255,255,.75)">A marca não escolheu ICP. O mercado escolhe preço.</td></tr>
-          </tbody>
-        </table>
-      </section>
-
-      <section class="slide white" data-title="Tradicional">
-        <div class="topline"></div>
-        <span class="eyebrow">Por que as soluções tradicionais não resolvem</span>
-        <h2 style="margin-top:22px;max-width:1200px">Agência, curso e consultoria clássica deixam a Freebong no mesmo lugar.</h2>
-        <div class="grid-3" style="margin-top:36px">
-          <article class="card">
-            <div class="k">Agência</div>
-            <h3>Executa por você</h3>
-            <p>O resultado some com o contrato. A operação nunca herdou o método.</p>
-          </article>
-          <article class="card">
-            <div class="k">Curso</div>
-            <h3>Ensina teoria</h3>
-            <p>Não aplica no negócio real. O time assiste e volta para o achismo.</p>
-          </article>
-          <article class="card">
-            <div class="k">Consultoria clássica</div>
-            <h3>Diagnostica e entrega relatório</h3>
-            <p>Ninguém implementa. O empresário continua sem máquina de vendas previsível.</p>
-          </article>
-        </div>
-        <div class="quote">O EQV prescreve, conduz e instala. Quem opera no dia a dia é a Freebong.</div>
-      </section>
-
-      <section class="slide" data-title="Para quem">
-        <div class="topline"></div>
-        <span class="eyebrow">03 · Para quem é</span>
-        <h2 style="margin-top:22px">Operação Tiny/Small que já tem venda e ainda não tem sistema.</h2>
-        <p class="lede">Não é “começar a vender”. É estruturar o que já existe — antes de um fee de execução cheio.</p>
-        <table class="table">
-          <thead><tr><th>Filtro</th><th>Perfil</th></tr></thead>
-          <tbody>
-            <tr><td>Porte</td><td>Tiny e Small · até 50 pessoas</td></tr>
-            <tr><td>Faturamento</td><td>R$ 600 mil a R$ 2,4 milhões ao ano</td></tr>
-            <tr><td>Mercado</td><td>B2B / serviços / marca com operação de vendas ativa</td></tr>
-            <tr><td>Canal</td><td>Inside sales · WhatsApp · Meta Ads · CRM</td></tr>
-            <tr><td>Maturidade GTM</td><td>Baixo a médio (N1 ou N2 no diagnóstico V4)</td></tr>
-          </tbody>
-        </table>
-      </section>
-
-      <section class="slide dark" data-title="Solução">
-        <span class="eyebrow">04 · A solução</span>
-        <h2 style="margin-top:18px;max-width:1240px">Cinco camadas. Uma máquina.</h2>
-        <div class="grid-5" style="margin-top:28px">
-          <article class="card"><div class="k">01</div><h3>Diagnóstico contínuo</h3><p>Maturidade GTM monitorada. Gargalos a cada ciclo — sem achismo.</p></article>
-          <article class="card"><div class="k">02</div><h3>Consultoria estratégica</h3><p>1h/mês com consultor V4: prioridades e créditos do squad.</p></article>
-          <article class="card"><div class="k">03</div><h3>Execução assistida</h3><p>Squad: Conteúdo, Mídia Paga, Comercial e CRM.</p></article>
-          <article class="card"><div class="k">04</div><h3>Comunidade</h3><p>Peers do mesmo estágio, lives mensais e grupo no WhatsApp.</p></article>
-          <article class="card"><div class="k">05</div><h3>Fábrica de Receita</h3><p>Imersão presencial anual: hot seats, cases e workshops.</p></article>
-        </div>
-        <div class="quote">A V4 prescreve e conduz. A Freebong opera. O consultor aloca as horas no que destrava receita naquele ciclo.</div>
-      </section>
-
-      <section class="slide white" data-title="Jornada">
-        <div class="topline"></div>
-        <span class="eyebrow">05 · Jornada de 6 meses</span>
-        <h2 style="margin-top:18px">Cinco fases. Um ciclo contínuo. A máquina fica no time.</h2>
-        <div class="phase-rail">
-          <div class="phase"><div class="n">Fase 01 · Mês 1</div><h3>Onboarding</h3><p>Kickoff, maturidade GTM e definição de prioridades do ciclo.</p></div>
-          <div class="phase"><div class="n">Fase 02 · Mês 2</div><h3>EE 3.0 completa</h3><p>3P-IA, posicionamento ativo e canal de vendas no ar.</p></div>
-          <div class="phase"><div class="n">Fase 03 · Mês 3</div><h3>Conteúdo</h3><p>Produção assistida + linha editorial no método.</p></div>
-          <div class="phase"><div class="n">Fase 04 · Mês 4</div><h3>Tráfego</h3><p>Campanhas, pixel, audiência e otimização por resultado.</p></div>
-          <div class="phase"><div class="n">Fase 05 · Mês 5/6</div><h3>Comercial + CRM</h3><p>Scripts, follow-up, pipeline e monetização do funil.</p></div>
-        </div>
-      </section>
-
-      <section class="slide" data-title="Sessão 01">
-        <div class="topline"></div>
-        <span class="eyebrow">Sessão 01 · Conteúdo</span>
-        <h2 style="margin-top:18px;max-width:1200px">Produto, oferta, posicionamento e conteúdo.</h2>
-        <p class="lede">O especialista V4 orienta a estratégia, calibra a mensagem para o ICP e acompanha a execução mês a mês. A marca para de postar no feeling e passa a gerar demanda com tese.</p>
-        <div class="grid-2" style="margin-top:32px">
-          <article class="card">
-            <div class="k">Artefatos</div>
-            <ul class="clean">
-              <li>Roteiros de vídeo viral calibrados (prontos para gravar)</li>
-              <li>Brief de posts complementares para Instagram</li>
-              <li>Modelo de linha editorial</li>
-              <li>Funil de creator-led growth</li>
-            </ul>
-          </article>
-          <article class="card">
-            <div class="k">Papel da Freebong</div>
-            <h3>Quem opera é o time</h3>
-            <p>A V4 prescreve e acompanha. A Freebong grava, publica e herda o método — para a linha editorial não morrer quando o ciclo acaba.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="slide dark" data-title="Sessão 02">
-        <span class="eyebrow">Sessão 02 · Mídia e performance</span>
-        <h2 style="margin-top:18px;max-width:1240px">Parar de apostar em canal. Decidir por ROAS e CPL.</h2>
-        <p class="lede">Acompanhamento para operar mídia paga com método: escolha de canais, leitura de dados e decisão de investimento.</p>
-        <div class="grid-4" style="margin-top:32px">
-          <article class="card"><div class="k">01</div><h3>Pixel</h3><p>Configuração e leitura. Sem pixel, não existe otimização.</p></article>
-          <article class="card"><div class="k">02</div><h3>Plano de mídia</h3><p>Estrutura, segmentação de audiências e tese de canal.</p></article>
-          <article class="card"><div class="k">03</div><h3>Dados</h3><p>Interpretação das campanhas. Decisão no número, não no feeling.</p></article>
-          <article class="card"><div class="k">04</div><h3>Capacitação</h3><p>O time aprende a gerir mídia paga e a tomar decisão por resultado.</p></article>
-        </div>
-      </section>
-
-      <section class="slide white" data-title="Sessão 03">
-        <div class="topline"></div>
-        <span class="eyebrow">Sessão 03 · Comercial e CRM</span>
-        <h2 style="margin-top:18px;max-width:1240px">O comercial deixa de ser artesanal. Fecha com cadência.</h2>
-        <p class="lede">O especialista revisa scripts, analisa as objeções reais do mês e ajusta o processo de vendas com o time.</p>
-        <div class="grid-2" style="margin-top:32px">
-          <article class="card">
-            <div class="k">Comercial</div>
-            <ul class="clean">
-              <li>Revisão dos scripts de venda e cliente oculto</li>
-              <li>Análise de objeções reais do mês e treinamento</li>
-              <li>Atualização das réguas de conversão e follow-up</li>
-            </ul>
-          </article>
-          <article class="card">
-            <div class="k">CRM</div>
-            <ul class="clean">
-              <li>CRM ativo: cadência, pipeline e conversão — não agenda</li>
-              <li>Fluxos de cadência e automações</li>
-              <li>Análise de pipeline para monetizar o funil completo</li>
-            </ul>
-          </article>
-        </div>
-      </section>
-
-      <section class="slide" data-title="Squad">
-        <div class="topline"></div>
-        <span class="eyebrow">06 · O que o squad instala</span>
-        <h2 style="margin-top:18px">Quatro frentes. Um ciclo.</h2>
-        <div class="grid-4" style="margin-top:32px">
-          <article class="card">
-            <div class="icon-box"><svg class="icon"><use href="#i-megaphone"/></svg></div>
-            <h3 style="margin-top:16px">Conteúdo</h3>
-            <p>Roteiro de vídeo viral, briefing de posts Instagram, suporte à produção e publicação.</p>
-          </article>
-          <article class="card">
-            <div class="icon-box"><svg class="icon"><use href="#i-chart"/></svg></div>
-            <h3 style="margin-top:16px">Mídia paga</h3>
-            <p>Campanhas Meta/Google, segmentação, pixel, leitura de dados, decisão por ROAS e CPL.</p>
-          </article>
-          <article class="card">
-            <div class="icon-box"><svg class="icon"><use href="#i-users"/></svg></div>
-            <h3 style="margin-top:16px">Comercial</h3>
-            <p>Scripts, análise de objeções, role play com vendedores, réguas de follow-up.</p>
-          </article>
-          <article class="card">
-            <div class="icon-box"><svg class="icon"><use href="#i-target"/></svg></div>
-            <h3 style="margin-top:16px">CRM</h3>
-            <p>CRM ativo, fluxos de cadência e automações, análise de pipeline e conversão.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="slide dark" data-title="Comunidade">
-        <span class="eyebrow">07 · Comunidade e Fábrica de Receita</span>
-        <h2 style="margin-top:18px">Além das sessões, acesso permanente.</h2>
-        <div class="grid-2" style="margin-top:32px">
-          <article class="card"><div class="k">Monitoria coletiva mensal</div><h3>Ajustar rota juntos</h3><p>Encontros com especialistas V4 e peers do mesmo estágio.</p></article>
-          <article class="card"><div class="k">Comunidade WhatsApp</div><h3>Troca rápida</h3><p>Grupo fechado para alinhamentos e suporte contínuo.</p></article>
-          <article class="card"><div class="k">Conteúdo semanal</div><h3>Manter o time no método</h3><p>Aquisição, retenção e monetização — toda semana.</p></article>
-          <article class="card"><div class="k">Fábrica de Receita</div><h3>2 dias presenciais</h3><p>Hot seats, workshops e networking de alto nível. Imersão anual.</p></article>
-        </div>
-      </section>
-
-      <section class="slide white" data-title="Por que a V4">
-        <div class="topline"></div>
-        <span class="eyebrow">08 · Por que a V4</span>
-        <h2 style="margin-top:18px">Método. Dado. Prescrição. Risco zero.</h2>
-        <div class="grid-2" style="margin-top:32px">
-          <article class="card"><div class="k">1</div><h3>Menos tentativa, mais decisão testada</h3><p>Você para de apostar e começa a operar com método.</p></article>
-          <article class="card"><div class="k">2</div><h3>Dados de mercado + experiência real</h3><p>Milhares de operações e sistemas de receita — não achismo.</p></article>
-          <article class="card"><div class="k">3</div><h3>Não empurramos serviços</h3><p>Prescrevemos o necessário para destravar a receita agora.</p></article>
-          <article class="card"><div class="k">4</div><h3>Garantia incondicional</h3><p>Se o método não fizer sentido, o risco é nosso. 30 dias.</p></article>
-        </div>
-        <p class="mini" style="margin-top:28px">Como já fizemos com Ortobom, Spotify, GioLaser, Lugano, XP Inc. e Smart Fit — entre outros.</p>
-      </section>
-
-      <section class="slide" data-title="Investimento">
-        <div class="topline"></div>
-        <span class="eyebrow">09 · Investimento</span>
-        <h2 style="margin-top:10px;font-size:40px">Mesmo produto. Cashback só do que a Freebong já investiu na EE.</h2>
-        <div class="price-layout">
-          <div class="price-main">
-            <div class="was">Valor de tabela · EQV</div>
-            <div class="ref">R$ 50.632,85</div>
-            <div class="now-label">PIX a investir agora</div>
-            <div class="now">R$ 5.450,00</div>
-            <div class="save">Cashback EE R$ 14.050,00 abatido</div>
-            <p>Programa semestral · consultoria + squad · comunidade + Fábrica de Receita. A máquina fica no time.</p>
-          </div>
-          <div class="price-side">
-            <div class="box">
-              <div class="tag">Produto EQV</div>
-              <h3>6x de R$ 3.500,00</h3>
-              <p>Valor do EQV: R$ 21.000,00. PIX / à vista do produto: R$ 19.500,00. Mesma oferta comercial.</p>
-            </div>
-            <div class="box bonus">
-              <div class="tag">Cashback normal</div>
-              <h3>R$ 14.050,00</h3>
-              <p>Exatamente o que a Freebong já investiu na Estruturação Estratégica. Sem arredondar. Sem desconto extra em cima do cashback.</p>
-            </div>
-          </div>
-          <div class="price-side">
-            <div class="box">
-              <div class="tag">Como se chega no valor</div>
-              <h3>Só tira a EE</h3>
-              <p>PIX R$ 19.500 − cashback R$ 14.050 = <strong>R$ 5.450</strong>. Parcelado R$ 21.000 − R$ 14.050 = <strong>R$ 6.950</strong> (2× R$ 3.475).</p>
-            </div>
-            <div class="box bonus">
-              <div class="tag">Garantia</div>
-              <h3>30 dias · risco zero</h3>
-              <p>Se a entrega não fizer sentido, devolvemos o investimento efetuado. Incondicional.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="slide white" data-title="Conta">
-        <div class="topline"></div>
-        <span class="eyebrow">Conta do cashback</span>
-        <h2 style="margin-top:14px;font-size:42px">O valor só tira o que já foi investido na EE.</h2>
-        <div class="grid-2" style="margin-top:20px;align-items:start">
-          <div>
-            <div class="math">
-              <div class="math-row"><span>Valor de tabela / referência</span><strong>R$ 50.632,85</strong></div>
-              <div class="math-row"><span>Valor do EQV (6× R$ 3.500)</span><strong>R$ 21.000,00</strong></div>
-              <div class="math-row"><span>PIX / à vista do produto</span><strong>R$ 19.500,00</strong></div>
-              <div class="math-row minus"><span>(−) Cashback EE — investimento já feito</span><strong>R$ 14.050,00</strong></div>
-              <div class="math-row total"><span>PIX a investir</span><strong>R$ 5.450,00</strong></div>
-              <div class="math-row total"><span>Parcelado a investir</span><strong>2× R$ 3.475,00</strong></div>
-            </div>
-            <p class="mini">Economia no PIX vs. tabela: R$ 45.182,85. O cashback não é um “já aplicado” arredondado: é o valor real da EE da Freebong.</p>
-          </div>
-          <div>
-            <article class="card" style="min-height:auto">
-              <div class="k">Leitura de decisão</div>
-              <h3>A EE já foi paga. O EQV entra no saldo.</h3>
-              <p>O ciclo instala conteúdo, mídia, comercial e CRM no mesmo programa. O R$ 14.050,00 da Estruturação Estratégica entra como cashback normal. Adiar o EQV mantém o achismo: mídia continua tentando, comercial continua artesanal, o dono continua sendo o processo.</p>
-            </article>
-            <article class="card" style="margin-top:16px;min-height:auto">
-              <div class="k">Condições</div>
-              <ul class="clean">
-                <li>PIX à vista R$ 5.450,00</li>
-                <li>Ou 2× de R$ 3.475,00 sem juros (total R$ 6.950,00)</li>
-                <li>Custo do ciclo de 6 meses. Não é aluguel de agência.</li>
-              </ul>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="slide red" data-title="Próximos passos">
-        <div class="sphere" style="width:380px;height:380px;right:-70px;top:-90px;opacity:.4"></div>
-        <span class="eyebrow">10 · Próximos passos</span>
-        <h2 style="margin-top:18px;max-width:1240px">Validar a condição e formalizar o start.</h2>
-        <div class="cta-steps">
-          <div class="cta-step">
-            <div class="n">01 · Freebong</div>
-            <h3>Decidir</h3>
-            <p>PIX R$ 5.450,00 ou 2× de R$ 3.475,00. Assinar e iniciar o ciclo.</p>
-          </div>
-          <div class="cta-step">
-            <div class="n">02 · V4</div>
-            <h3>Kickoff mês 01</h3>
-            <p>Diagnóstico de maturidade GTM, prioridades do ciclo e alocação do squad.</p>
-          </div>
-          <div class="cta-step">
-            <div class="n">03 · Juntos</div>
-            <h3>Comunidade</h3>
-            <p>Entrar na monitoria mensal e no calendário da Fábrica de Receita a partir da assinatura.</p>
-          </div>
-        </div>
-        <div class="quote" style="margin-top:40px">Freebong × V4 Company · Empresa que Vende · Confidencial</div>
-      </section>
-
-      <div class="slide-footer"><div id="footerLogo" class="v4-word">V4</div></div>
-      <div class="navigation">
-        <button class="nav-btn" id="prevBtn" type="button" aria-label="Anterior"><svg><use href="#i-arrow-left"/></svg></button>
-        <button class="nav-btn" id="nextBtn" type="button" aria-label="Próximo"><svg><use href="#i-arrow-right"/></svg></button>
-      </div>
+      <section class="slide active" data-title="Capa"><img alt="Capa" src="pages/p01.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="Crescimento previsível"><img alt="Crescimento previsível" src="pages/p02.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="O programa"><img alt="O programa" src="pages/p03.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="Vender"><img alt="Vender" src="pages/p04.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="Para quem é"><img alt="Para quem é" src="pages/p05.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="A jornada · mês 01"><img alt="A jornada · mês 01" src="pages/p06.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="A jornada · mês 02"><img alt="A jornada · mês 02" src="pages/p07.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="A jornada · mês 03"><img alt="A jornada · mês 03" src="pages/p08.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="A jornada · mês 04"><img alt="A jornada · mês 04" src="pages/p09.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="A jornada · mês 05/06"><img alt="A jornada · mês 05/06" src="pages/p10.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="3 sessões"><img alt="3 sessões" src="pages/p11.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="Sessão 01"><img alt="Sessão 01" src="pages/p12.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="Sessão 02"><img alt="Sessão 02" src="pages/p13.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="Sessão 03"><img alt="Sessão 03" src="pages/p14.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="Fábrica de Receita"><img alt="Fábrica de Receita" src="pages/p15.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="Comunidade"><img alt="Comunidade" src="pages/p16.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="Por que a V4"><img alt="Por que a V4" src="pages/p17.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="Por que a V4"><img alt="Por que a V4" src="pages/p18.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="Investimento"><img alt="Investimento" src="pages/p19.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="Garantia"><img alt="Garantia" src="pages/p20.jpg" width="1600" height="900"></section>
+      <div class="slide-counter" id="slideCounter">01 / 20</div>
+      <nav class="navigation" aria-label="Navegação">
+        <button class="nav-btn" id="prevBtn" aria-label="Anterior"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+        <button class="nav-btn" id="nextBtn" aria-label="Próximo"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+      </nav>
       <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-      <div class="slide-counter" id="slideCounter">01 / 16</div>
     </main>
   </div>
-
   <script>
     const deck = document.getElementById("deck");
     const slidesEls = Array.from(document.querySelectorAll(".slide"));
@@ -603,55 +71,34 @@
     const nextBtn = document.getElementById("nextBtn");
     const slideCounter = document.getElementById("slideCounter");
     const progressFill = document.getElementById("progressFill");
-    const footerLogo = document.getElementById("footerLogo");
     let current = 0;
     function fitDeck() {
       const w = window.visualViewport?.width || window.innerWidth;
       const h = window.visualViewport?.height || window.innerHeight;
-      deck.style.setProperty("--deck-scale", Math.max(.1, Math.min((w - 16) / 1600, (h - 16) / 900, 1)));
+      deck.style.setProperty("--deck-scale", Math.max(.1, Math.min((w-16)/1600,(h-16)/900,1)));
     }
     function goTo(index) {
-      current = Math.max(0, Math.min(slidesEls.length - 1, index));
-      slidesEls.forEach((s, i) => s.classList.toggle("active", i === current));
-      const number = String(current + 1).padStart(2, "0");
-      const total = String(slidesEls.length).padStart(2, "0");
-      const active = slidesEls[current];
-      const isDark = active.classList.contains("red") || active.classList.contains("dark");
-      slideCounter.textContent = number + " / " + total;
-      slideCounter.style.color = isDark ? "rgba(255,255,255,.58)" : "rgba(20,20,20,.52)";
-      progressFill.style.width = ((current + 1) / slidesEls.length) * 100 + "%";
-      prevBtn.disabled = current === 0;
-      nextBtn.disabled = current === slidesEls.length - 1;
-      footerLogo.style.color = isDark ? "#fff" : "";
-      footerLogo.style.opacity = (current === 0 || current === slidesEls.length - 1) ? "0" : "1";
-      document.title = number + " | " + (active.dataset.title || "EQV") + " · Freebong";
+      current = Math.max(0, Math.min(slidesEls.length-1, index));
+      slidesEls.forEach((s,i)=>s.classList.toggle("active", i===current));
+      slideCounter.textContent = String(current+1).padStart(2,"0")+" / "+String(slidesEls.length).padStart(2,"0");
+      progressFill.style.width = ((current+1)/slidesEls.length)*100+"%";
+      prevBtn.disabled = current===0; nextBtn.disabled = current===slidesEls.length-1;
+      document.title = String(current+1).padStart(2,"0")+" | "+(slidesEls[current].dataset.title||"EQV")+" · Freebong";
     }
-    prevBtn.onclick = () => goTo(current - 1);
-    nextBtn.onclick = () => goTo(current + 1);
+    prevBtn.onclick = (e)=>{ e.stopPropagation(); goTo(current-1); };
+    nextBtn.onclick = (e)=>{ e.stopPropagation(); goTo(current+1); };
+    deck.addEventListener("click", (e)=>{ if(e.target.closest(".nav-btn")) return; goTo(current+1); });
     window.addEventListener("resize", fitDeck);
     window.visualViewport?.addEventListener("resize", fitDeck);
-    window.addEventListener("keydown", e => {
-      if (["ArrowRight", "PageDown", " "].includes(e.key)) { e.preventDefault(); goTo(current + 1); }
-      if (["ArrowLeft", "PageUp"].includes(e.key)) { e.preventDefault(); goTo(current - 1); }
-      if (e.key === "Home") goTo(0);
-      if (e.key === "End") goTo(slidesEls.length - 1);
+    window.addEventListener("keydown", (e)=>{
+      if(["ArrowRight","PageDown"," "].includes(e.key)){ e.preventDefault(); goTo(current+1); }
+      if(["ArrowLeft","PageUp"].includes(e.key)){ e.preventDefault(); goTo(current-1); }
+      if(e.key==="Home") goTo(0); if(e.key==="End") goTo(slidesEls.length-1);
     });
-    let tx = null;
-    deck.addEventListener("touchstart", e => tx = e.changedTouches[0].clientX, { passive: true });
-    deck.addEventListener("touchend", e => {
-      if (tx == null) return;
-      const d = e.changedTouches[0].clientX - tx;
-      if (Math.abs(d) > 70) goTo(current + (d < 0 ? 1 : -1));
-      tx = null;
-    }, { passive: true });
-    document.addEventListener("wheel", e => {
-      if (Math.abs(e.deltaY) < 20) return;
-      e.preventDefault();
-      goTo(current + (e.deltaY > 0 ? 1 : -1));
-    }, { passive: false });
-    fitDeck();
-    const start = parseInt(new URLSearchParams(location.search).get("s") || location.hash.replace("#", ""), 10);
-    goTo(Number.isFinite(start) && start > 0 ? start - 1 : 0);
+    let tx=null;
+    deck.addEventListener("touchstart", e=>tx=e.changedTouches[0].clientX, {passive:true});
+    deck.addEventListener("touchend", e=>{ if(tx==null) return; const d=e.changedTouches[0].clientX-tx; if(Math.abs(d)>70) goTo(current+(d<0?1:-1)); tx=null; }, {passive:true});
+    fitDeck(); goTo(0);
   </script>
 </body>
 </html>
