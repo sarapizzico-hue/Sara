@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Freebong · Empresa que Vende | Abrir no Google</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root { --red:#e50914; --dark:#280001; --ink:#1a1a1a; --mut:#5a5a5a; --paper:#f7f5f4; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh;
+      font: 16px/1.5 "IBM Plex Sans", system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(ellipse 70% 40% at 50% -10%, rgba(229,9,20,.18), transparent 55%),
+        linear-gradient(180deg, #fff 0%, var(--paper) 100%);
+      display: flex; align-items: center; justify-content: center;
+      padding: 28px 16px;
+    }
+    .card {
+      width: 100%; max-width: 640px;
+      background: #fff;
+      border: 1px solid #ead4d4;
+      border-radius: 24px;
+      padding: 36px 32px 28px;
+      box-shadow: 0 24px 70px rgba(40,0,1,.08);
+    }
+    .kicker {
+      font: 600 11px/1 "IBM Plex Mono", monospace;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--red); margin: 0 0 10px;
+    }
+    h1 { margin: 0 0 8px; font-size: clamp(26px, 5vw, 34px); letter-spacing: -.03em; }
+    .lead { margin: 0 0 22px; color: var(--mut); }
+    .btns { display: grid; gap: 10px; margin-bottom: 18px; }
+    a.btn {
+      display: block; text-align: center; text-decoration: none;
+      border-radius: 14px; padding: 16px 18px; font-weight: 700;
+      transition: transform .15s ease;
+    }
+    a.btn:hover { transform: translateY(-1px); }
+    .btn-google {
+      background: var(--dark); color: #fff;
+      box-shadow: 0 12px 28px rgba(40,0,1,.22);
+    }
+    .btn-google span { color: #ffd0d0; }
+    .btn-doc {
+      background: #fff; color: var(--dark);
+      border: 2px solid var(--red);
+    }
+    .btn-print {
+      background: #f8efef; color: var(--ink); border: 1px solid #ead4d4;
+      font-weight: 600;
+    }
+    .share {
+      background: #faf7f7; border: 1px dashed #d7b4b4;
+      border-radius: 14px; padding: 12px 14px; margin-top: 6px;
+    }
+    .share label {
+      display: block; font: 600 10px/1 "IBM Plex Mono", monospace;
+      letter-spacing: .1em; text-transform: uppercase; color: var(--red);
+      margin-bottom: 8px;
+    }
+    .share-row { display: flex; gap: 8px; }
+    .share input {
+      flex: 1; border: 1px solid #ead4d4; border-radius: 10px;
+      padding: 10px 12px; font-size: 13px; color: var(--ink);
+      background: #fff;
+    }
+    .share button {
+      border: 0; border-radius: 10px; background: var(--red); color: #fff;
+      font-weight: 700; padding: 10px 14px; cursor: pointer;
+    }
+    ol { margin: 14px 0 0; padding-left: 18px; color: var(--mut); font-size: 14px; }
+    li { margin: 4px 0; }
+    .ok { display: none; margin: 8px 0 0; color: #167846; font-weight: 700; font-size: 13px; }
+    .ok.show { display: block; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <p class="kicker">Freebong × V4 Company</p>
+    <h1>Empresa que Vende</h1>
+    <p class="lead">Proposta comercial do EQV em HTML. Abre direto no Google Chrome. O documento também sobe no Google Docs / Drive.</p>
+
+    <div class="btns">
+      <a class="btn btn-google" id="btn-deck" href="index.html">
+        Abrir deck no <span>Google Chrome</span>
+      </a>
+      <a class="btn btn-doc" id="btn-doc" href="documento.html">
+        Abrir documento (imprimir / PDF / Drive)
+      </a>
+      <a class="btn btn-print" id="btn-gdocs" target="_blank" rel="noopener" href="documento.html">
+        Abrir no Google Docs
+      </a>
+    </div>
+
+    <div class="share">
+      <label>Link para enviar</label>
+      <div class="share-row">
+        <input id="share-url" readonly value="" />
+        <button type="button" id="copy">Copiar</button>
+      </div>
+      <p class="ok" id="copied">Link copiado.</p>
+    </div>
+
+    <ol>
+      <li><strong>Deck</strong> — abre em tela cheia no Chrome. Setas do teclado para avançar.</li>
+      <li><strong>Documento</strong> — HTML para ler, imprimir ou salvar PDF pelo Chrome (Ctrl+P).</li>
+      <li><strong>Google Docs</strong> — no Drive: Novo → Upload → abrir o HTML com Documentos Google.</li>
+      <li>Valores: PIX R$ 5.450,00 · 2× R$ 3.475,00 · cashback EE R$ 14.050,00.</li>
+    </ol>
+  </div>
+
+  <script>
+    (function () {
+      var BRANCH = "cursor/proposta-freebong-eqv-a21a";
+      var DECK = "https://htmlpreview.github.io/?https://github.com/sarapizzico-hue/Sara/blob/" + BRANCH + "/proposta-freebong.html";
+      var DOC = "https://htmlpreview.github.io/?https://github.com/sarapizzico-hue/Sara/blob/" + BRANCH + "/freebong-ok/documento.html";
+      var RAW_DOC = "https://raw.githubusercontent.com/sarapizzico-hue/Sara/" + BRANCH + "/freebong-ok/documento.html";
+      var gview = "https://docs.google.com/gview?url=" + encodeURIComponent(RAW_DOC) + "&embedded=false";
+
+      var local = location.protocol === "file:" || location.hostname === "localhost" || location.hostname === "127.0.0.1";
+      document.getElementById("btn-deck").href = local ? "index.html" : DECK;
+      document.getElementById("btn-doc").href = local ? "documento.html" : DOC;
+      document.getElementById("btn-gdocs").href = gview;
+
+      var share = document.getElementById("share-url");
+      share.value = DECK;
+      if (location.hostname.indexOf("github.io") >= 0 || location.hostname.indexOf("htmlpreview") >= 0) {
+        share.value = location.href.split("?")[0];
+      }
+
+      document.getElementById("copy").onclick = function () {
+        share.select();
+        navigator.clipboard.writeText(share.value).then(function () {
+          document.getElementById("copied").classList.add("show");
+        });
+      };
+    })();
+  </script>
+</body>
+</html>
