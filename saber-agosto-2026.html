@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Saber · Agosto/2026 · Volume × Conversão</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --bg: #f7f7f5;
+      --card: #ffffff;
+      --text: #1a1a1a;
+      --muted: #5c5c5c;
+      --line: #e6e6e2;
+      --red: #e50914;
+      --green: #1a7f4b;
+      --amber: #b86e00;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.45;
+    }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 28px 20px 64px; }
+    header {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 16px; margin-bottom: 28px; padding-bottom: 16px; border-bottom: 1px solid var(--line);
+    }
+    header .brand { font-weight: 700; font-size: 14px; letter-spacing: 0.02em; }
+    header nav { display: flex; gap: 14px; flex-wrap: wrap; }
+    header a { color: var(--muted); text-decoration: none; font-size: 13px; }
+    header a:hover { color: var(--text); }
+    h1 { font-size: 28px; line-height: 1.2; margin: 0 0 10px; font-weight: 700; }
+    h2 { font-size: 18px; margin: 0 0 8px; font-weight: 700; }
+    h3 { font-size: 14px; margin: 0 0 8px; font-weight: 600; }
+    p { margin: 0 0 10px; color: var(--muted); font-size: 14px; }
+    .lead { font-size: 15px; color: var(--text); max-width: 66ch; }
+    .eyebrow {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--red); margin-bottom: 6px;
+    }
+    .kpis {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+      margin: 22px 0 12px;
+    }
+    .kpi {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 10px; padding: 14px;
+    }
+    .kpi .l { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+    .kpi .v { font-size: 26px; font-weight: 700; margin-top: 4px; font-variant-numeric: tabular-nums; }
+    .kpi .s { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .kpi.warn .v { color: var(--amber); }
+    .kpi.bad .v { color: var(--red); }
+    .kpi.ok .v { color: var(--green); }
+    section { margin: 36px 0; }
+    .card {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 12px; padding: 18px;
+    }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    .fca ul { margin: 0; padding-left: 18px; font-size: 13px; color: var(--text); }
+    .fca li { margin: 0 0 6px; }
+    .chart-box { height: 220px; position: relative; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); font-weight: 600; }
+    td.num { font-family: "IBM Plex Mono", monospace; font-size: 12px; white-space: nowrap; }
+    .tag {
+      display: inline-block; font-size: 11px; font-weight: 600;
+      padding: 2px 8px; border-radius: 999px; background: #eee; color: var(--muted);
+    }
+    .tag.ok { background: #e8f5ee; color: var(--green); }
+    .tag.warn { background: #fff3e0; color: var(--amber); }
+    .tag.bad { background: #fde8ea; color: var(--red); }
+    .note {
+      font-size: 12px; color: var(--muted); background: #f0f0ec;
+      border-radius: 8px; padding: 10px 12px; margin-top: 12px;
+    }
+    .note a { color: var(--text); }
+    .sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    @media (max-width: 800px) {
+      .kpis, .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      h1 { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">V4 · Saber · agosto/2026</div>
+      <nav>
+        <a href="#resumo">Resumo</a>
+        <a href="#funil">Funil</a>
+        <a href="#monetizados">Monetizados</a>
+        <a href="#atencao">Atenção</a>
+        <a href="#fca">FCA</a>
+      </nav>
+    </header>
+
+    <section id="resumo">
+      <div class="eyebrow">Flow Saber · corte 01/09/2026</div>
+      <h1>43 projetos entraram no Saber. 13 pitch. 2 fecharam. 9 atrasaram na operação.</h1>
+      <p class="lead">
+        Volume de agosto no Saber foi alto (<strong>43 entradas</strong>, <strong>39 rodando</strong>).
+        Conversão comercial ficou em <strong>2 monetizados</strong> (fee Saber <strong>R$ 103.867,90</strong>).
+        O gargalo visível: <strong>9 pitches atrasados</strong> porque a operação não entregou a tempo — cards vermelhos no Flow.
+      </p>
+
+      <div class="kpis">
+        <div class="kpi">
+          <div class="l">Entraram Saber</div>
+          <div class="v">43</div>
+          <div class="s">projetos no mês</div>
+        </div>
+        <div class="kpi ok">
+          <div class="l">Rodando</div>
+          <div class="v">39</div>
+          <div class="s">2 drop · 2 follow</div>
+        </div>
+        <div class="kpi">
+          <div class="l">Pitches realizados</div>
+          <div class="v">13</div>
+          <div class="s">30% das entradas</div>
+        </div>
+        <div class="kpi bad">
+          <div class="l">Atrasados (ops)</div>
+          <div class="v">9</div>
+          <div class="s">vermelho no Flow</div>
+        </div>
+      </div>
+      <div class="note">
+        <strong>Regras.</strong>
+        Entrada = projeto que entrou no Saber em ago (Flow).
+        Rodando = 43 − 2 drop − 2 follow.
+        Pitch = apresentação realizada no mês.
+        Atrasado = pitch que não rolou no prazo porque a entrega da operação atrasou (marcado vermelho no Flow).
+      </div>
+    </section>
+
+    <section id="funil">
+      <div class="eyebrow">Funil · Saber ago</div>
+      <h2>Volume entrou. Pitch e caixa não acompanharam no mesmo ritmo.</h2>
+      <p>Pitch e drop/follow contam pelo evento no mês. Monetizado Saber = coluna Saber &gt; 0 e fechamento em ago no Cockpit.</p>
+
+      <div class="kpis">
+        <div class="kpi ok">
+          <div class="l">Monetizados Saber</div>
+          <div class="v">2</div>
+          <div class="s">AP Equipamentos · G6 E. Comercial</div>
+        </div>
+        <div class="kpi">
+          <div class="l">Fee Saber</div>
+          <div class="v">R$ 104k</div>
+          <div class="s">R$ 103.867,90 · ticket médio R$ 51,9k</div>
+        </div>
+        <div class="kpi warn">
+          <div class="l">Ativado no mês</div>
+          <div class="v">1</div>
+          <div class="s">G6 20/08 · AP ativa 28/09</div>
+        </div>
+        <div class="kpi">
+          <div class="l">Drop / Follow</div>
+          <div class="v">2 / 2</div>
+          <div class="s">saíram do “rodando”</div>
+        </div>
+      </div>
+
+      <div class="grid-2" style="margin-top:14px">
+        <div class="card">
+          <h3>Funil do mês</h3>
+          <p style="margin:0 0 8px;font-size:12px">Entrada → rodando → pitch → monetizado</p>
+          <div class="chart-box"><canvas id="c1"></canvas></div>
+        </div>
+        <div class="card">
+          <h3>Fee Saber dos 2 que fecharam</h3>
+          <p style="margin:0 0 8px;font-size:12px">Só coluna Saber — Executar/Ter de fora</p>
+          <div class="chart-box"><canvas id="c2"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="monetizados">
+      <div class="eyebrow">Cockpit · coluna Saber · competência 08/2026</div>
+      <h2>Quem monetizou Saber em agosto.</h2>
+      <p>
+        Critério: <strong>Saber &gt; R$ 0</strong> e data de fechamento em ago/2026.
+        G6 Assessoria, Pachane, Hanaro, Work Bank e Knowledge não entram — Saber zerado ou vazio.
+      </p>
+
+      <div class="card" style="padding:0; overflow:auto">
+        <table>
+          <thead>
+            <tr>
+              <th>Conta</th>
+              <th>Produto</th>
+              <th>Saber</th>
+              <th>Pitch</th>
+              <th>Fechamento</th>
+              <th>Ativado</th>
+              <th>Farmer</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>G6 INTERNET<div class="sub">E. Comercial · LARGE · cartão 6x</div></td>
+              <td>E. Comercial</td>
+              <td class="num">R$ 69.867,90</td>
+              <td class="num">14/08</td>
+              <td class="num">20/08</td>
+              <td><span class="tag ok">20/08</span></td>
+              <td>Sara</td>
+            </tr>
+            <tr>
+              <td>AP Equipamentos (RecM)<div class="sub">EQV + Executar R$ 23.300 · TCV R$ 173.800 · cartão 6x</div></td>
+              <td>EQV</td>
+              <td class="num">R$ 34.000,00</td>
+              <td class="num">11/08</td>
+              <td class="num">28/08</td>
+              <td><span class="tag warn">28/09</span></td>
+              <td>Marcelo</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note">
+        G6 E. Comercial: 100% Saber (sem Executar/Ter). Entrada de R$ 20.000 no dia da assinatura.
+        AP Equipamentos: mix Saber R$ 34k + Executar R$ 23,3k · observação Cockpit “somente mês 08 entrega final” · 1º pagamento em setembro.
+        Placar Saber de ago = <strong>2 assinados</strong>. Placar de ativação Saber = <strong>1</strong> (G6).
+      </div>
+    </section>
+
+    <section id="atencao">
+      <div class="eyebrow">Pontos de atenção</div>
+      <h2>9 vermelhos na operação. 1 follow de R$ 34k. 1 drop de R$ 25,5k.</h2>
+      <p>Os 9 atrasados não têm nome neste corte — estão no Flow, marcados em vermelho, porque a entrega da operação atrasou o pitch.</p>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>Ainda no Saber com $ (não fechou)</h3>
+          <table>
+            <thead>
+              <tr><th>Conta</th><th>Status</th><th>Saber</th><th>Pitch</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Ecco Salva (BL)<div class="sub">EQV + EC + mídia · TCV R$ 154.000 · Sara</div></td>
+                <td><span class="tag warn">Follow</span></td>
+                <td class="num">R$ 34.000,00</td>
+                <td class="num">25/08</td>
+              </tr>
+              <tr>
+                <td>Almeida e Neves (RecM)<div class="sub">E. Comercial · motivo Timing · Sara</div></td>
+                <td><span class="tag bad">Drop</span></td>
+                <td class="num">R$ 25.500,00</td>
+                <td class="num">06/08</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card">
+          <h3>O que trava o mês</h3>
+          <ul>
+            <li><strong>9/13 pitches</strong> dependeram de entrega da operação e escorregaram (vermelho no Flow).</li>
+            <li>13 pitches / 43 entradas = <strong>30%</strong>. Sem os 9 atrasos, o mês tinha folga para mais pitch.</li>
+            <li>Ecco Salva (R$ 34k Saber) continua em follow — colheita de setembro.</li>
+            <li>Almeida dropou por <em>Timing</em> com proposta Saber de R$ 25,5k já na mesa.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="fca" class="fca">
+      <div class="eyebrow">FCA</div>
+      <h2>Fato · Causa · Ação</h2>
+      <div class="grid-3" style="margin-top:12px">
+        <div class="card">
+          <h3>Fato</h3>
+          <ul>
+            <li>43 entradas no Saber · 39 rodando.</li>
+            <li>13 pitches · 2 drop · 2 follow.</li>
+            <li>9 pitches atrasados por entrega da operação (vermelho no Flow).</li>
+            <li>2 monetizados Saber: G6 R$ 69.867,90 · AP R$ 34.000.</li>
+            <li>1 ativado em ago (G6). AP ativa em 28/09.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Causa</h3>
+          <ul>
+            <li>Operação não entregou no ritmo do pitch — 9 cards pararam no vermelho.</li>
+            <li>Volume de entrada (43) acima da capacidade de entrega/agenda.</li>
+            <li>Ciclo Saber fecha depois da entrega: AP só monetizou após “entrega final” em ago.</li>
+            <li>Parte do $ Saber ficou em follow (Ecco) ou drop Timing (Almeida).</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Ação (set)</h3>
+          <ul>
+            <li>Destravar os 9 vermelhos: DRI de entrega + data de pitch.</li>
+            <li>Sem entrega no prazo = não abrir 43º card novo.</li>
+            <li>Colher Ecco Salva (R$ 34k Saber) antes de plantar.</li>
+            <li>KPI mãe: pitches no prazo ≥ 13, com atraso ops &lt; 9.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <p style="margin-top:8px;font-size:12px;color:var(--muted)">
+      Fonte funil: Flow Saber (43 / 39 / 13 / 2 drop / 2 follow / 9 vermelhos) · corte 01/09/2026.
+      Fonte $: <a href="https://docs.google.com/spreadsheets/d/1dSukhon9dIUABcbQIKGKUa-ku-_oLOn1Q5YWeWGfI6U/edit?gid=759150030#gid=759150030">Cockpit Monetização</a>
+      · coluna Saber · fechamento ago/2026.
+    </p>
+  </div>
+
+  <script>
+    const mute = "#8a8a8a";
+    const ink = "#1a1a1a";
+    const red = "#e50914";
+    const green = "#1a7f4b";
+    const amber = "#b86e00";
+    Chart.defaults.color = mute;
+    Chart.defaults.borderColor = "#e6e6e2";
+    Chart.defaults.font.family = "'IBM Plex Sans', system-ui, sans-serif";
+
+    new Chart(document.getElementById("c1"), {
+      type: "bar",
+      data: {
+        labels: ["Entraram", "Rodando", "Pitch", "Monetizado"],
+        datasets: [{
+          data: [43, 39, 13, 2],
+          backgroundColor: ["#cfcfc9", green, amber, ink],
+          borderRadius: 4
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: { y: { beginAtZero: true, ticks: { precision: 0 } }, x: { grid: { display: false } } }
+      }
+    });
+
+    new Chart(document.getElementById("c2"), {
+      type: "bar",
+      data: {
+        labels: ["G6 E. Comercial", "AP Equipamentos"],
+        datasets: [{
+          data: [69867.9, 34000],
+          backgroundColor: [green, amber],
+          borderRadius: 4
+        }]
+      },
+      options: {
+        indexAxis: "y",
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { beginAtZero: true, ticks: { callback: v => "R$ " + Math.round(v / 1000) + "k" } },
+          y: { grid: { display: false } }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
