@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Template · FCA indicadores · Volume × Conversão</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --bg: #f7f7f5;
+      --card: #ffffff;
+      --text: #1a1a1a;
+      --muted: #5c5c5c;
+      --line: #e6e6e2;
+      --red: #e50914;
+      --green: #1a7f4b;
+      --amber: #b86e00;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.45;
+    }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 28px 20px 64px; }
+    header {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 16px; margin-bottom: 28px; padding-bottom: 16px; border-bottom: 1px solid var(--line);
+    }
+    header .brand { font-weight: 700; font-size: 14px; letter-spacing: 0.02em; }
+    header .meta { font-size: 13px; color: var(--muted); }
+    h1 { font-size: 28px; line-height: 1.2; margin: 0 0 10px; font-weight: 700; }
+    h2 { font-size: 18px; margin: 0 0 8px; font-weight: 700; }
+    h3 { font-size: 14px; margin: 0 0 8px; font-weight: 600; }
+    p { margin: 0 0 10px; color: var(--muted); font-size: 14px; }
+    .lead { font-size: 15px; color: var(--text); max-width: 62ch; }
+    .eyebrow {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--red); margin-bottom: 6px;
+    }
+    .kpis {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+      margin: 22px 0 12px;
+    }
+    .kpi {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 10px; padding: 14px;
+    }
+    .kpi .l { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+    .kpi .v { font-size: 26px; font-weight: 700; margin-top: 4px; font-variant-numeric: tabular-nums; }
+    .kpi .s { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .kpi.warn .v { color: var(--amber); }
+    .kpi.bad .v { color: var(--red); }
+    .kpi.ok .v { color: var(--green); }
+    section { margin: 36px 0; }
+    .card {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 12px; padding: 18px;
+    }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .chart-box { height: 220px; position: relative; }
+    .chart-empty {
+      height: 220px; display: flex; align-items: center; justify-content: center;
+      color: var(--muted); font-size: 13px; background: #f0f0ec; border-radius: 8px;
+    }
+    .note {
+      font-size: 12px; color: var(--muted); background: #f0f0ec;
+      border-radius: 8px; padding: 10px 12px; margin-top: 12px;
+    }
+    .note code, .lead code { font-family: "IBM Plex Mono", monospace; font-size: 11px; }
+    .howto {
+      background: #fff; border: 1px dashed var(--line); border-radius: 12px;
+      padding: 16px 18px; margin-bottom: 28px; font-size: 13px; color: var(--muted);
+    }
+    .howto strong { color: var(--text); }
+    .howto ol { margin: 8px 0 0; padding-left: 18px; }
+    .howto li { margin: 0 0 4px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); font-weight: 600; }
+    td.num { font-family: "IBM Plex Mono", monospace; font-size: 12px; white-space: nowrap; }
+    .muted { color: var(--muted); }
+    @media (max-width: 800px) {
+      .kpis, .grid-2 { grid-template-columns: 1fr; }
+      h1 { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">V4 Farmer · template indicadores</div>
+      <div class="meta" id="hdr-meta">preencha DADOS no &lt;script&gt;</div>
+    </header>
+
+    <div class="howto">
+      <strong>Como usar.</strong> Este HTML só carrega o modelo dos indicadores da página FCA (volume × conversão). Sem tabelas de conta, sem FCA, sem plano.
+      <ol>
+        <li>Copie o arquivo e edite o objeto <code>DADOS</code> no final.</li>
+        <li>Cada KPI tem <em>valor</em>, <em>sub</em> (linha de apoio) e <em>tone</em> (<code>ok</code> · <code>warn</code> · <code>bad</code> · vazio).</li>
+        <li>A série mensal alimenta os 4 gráficos. Meses sem Flow usam <code>null</code> em conversão/topo.</li>
+      </ol>
+    </div>
+
+    <section id="resumo">
+      <div class="eyebrow" id="eyebrow-resumo"></div>
+      <h1 id="headline"></h1>
+      <p class="lead" id="lead"></p>
+      <div class="kpis" id="kpis-resumo"></div>
+      <div class="note">
+        <strong>Regras do bloco.</strong>
+        <code>finalizadosBA</code> = entrou em Finalizado (ou dataMonetizacao) no mês da competência, indiferente de quando o card abriu.
+        <code>contasCriadas</code> = opps criadas no mês.
+        <code>oppReuniaoSafra</code> = só a coorte criada no mês que já fez reunião (não é reunião total do mês).
+        <code>ttcMediano</code> = mediana de (fechamento − createdAt) dos finalizados do mês.
+      </div>
+    </section>
+
+    <section id="ativacao">
+      <div class="eyebrow">Ativação · pagamento no mês</div>
+      <h2>Assinou no mês × ativou no mês (pagou no mês).</h2>
+      <p>Ativado = 1º pagamento liquidado dentro da competência (Farmer, PIX ou cartão). Assinatura sozinha não conta.</p>
+      <div class="kpis" id="kpis-ativacao"></div>
+      <div class="note">
+        Placar comercial = <code>finalizadosBA</code>.
+        Placar de ativação = <code>ativados</code>.
+        A diferença vai para <code>primeiroPgtoDepois</code> (caixa do mês seguinte).
+      </div>
+    </section>
+
+    <section id="qualidade">
+      <div class="eyebrow">Qualidade da monetização</div>
+      <h2>Os que fecharam tinham projeto bom, BE e NPS?</h2>
+      <p>Fonte: Cockpit (flag, score, BE, NPS, meta vs realizado). Denominador = finalizados BA do mês.</p>
+      <div class="kpis" id="kpis-qualidade"></div>
+      <div class="note">
+        <code>beComprovado</code> = BE atingido no Cockpit.
+        <code>resultadoForte</code> = score ≥ 8 ou meta ok.
+        <code>nps8</code> = NPS ≥ 8.
+        <code>flagCareDanger</code> = flag Care ou Danger (não bloqueia sozinha).
+        ROI/ROAS aqui = meta do Cockpit vs realizado — não é ROAS de mídia.
+      </div>
+    </section>
+
+    <section id="graficos">
+      <div class="eyebrow">Comparativo</div>
+      <h2>Opps, reuniões no mês e vendas no mês.</h2>
+      <p>
+        Reunião e venda contam pelo mês do <em>evento</em>, não pelo mês de criação do card.
+        Jan–Mai costuma vir da planilha CRM BA; a partir de jun, do Flow.
+      </p>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="card">
+          <h3>Opps no mês</h3>
+          <p style="margin:0 0 8px;font-size:12px">Criadas no mês (CRM até o corte · Flow depois)</p>
+          <div class="chart-box" id="box-c1"></div>
+        </div>
+        <div class="card">
+          <h3>Reuniões no mês</h3>
+          <p style="margin:0 0 8px;font-size:12px">Evento no mês, qualquer safra</p>
+          <div class="chart-box" id="box-c2"></div>
+        </div>
+        <div class="card">
+          <h3>Vendas BA no mês (placar)</h3>
+          <p style="margin:0 0 8px;font-size:12px">Fechou no mês = conta</p>
+          <div class="chart-box" id="box-c3"></div>
+        </div>
+        <div class="card">
+          <h3>Taxa Opp → reunião (só safra do mês)</h3>
+          <p style="margin:0 0 8px;font-size:12px">Progressão da coorte nova — só existe no Flow</p>
+          <div class="chart-box" id="box-c4"></div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:12px; padding:0; overflow:auto">
+        <table>
+          <thead>
+            <tr>
+              <th>Mês</th>
+              <th>Opps</th>
+              <th>Reuniões no mês</th>
+              <th>Vendas no mês</th>
+              <th>Conv. safra → reunião</th>
+              <th>Ainda no topo (safra)</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-serie"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    /**
+     * MODELO DOS INDICADORES
+     * Copie DADOS, troque farmer / competência / números.
+     * Tom (tone): "ok" | "warn" | "bad" | "" 
+     */
+    const DADOS = {
+      farmer: "",
+      corte: "",
+      competencia: "",
+      mesLabel: "",
+      headline: "Título em uma linha (volume × conversão).",
+      lead: "Regra comercial: fechou no mês, conta no mês. Preencha os 4 KPIs de resumo, os 4 de ativação e os 4 de qualidade.",
+
+      resumo: {
+        finalizadosBA: { valor: "", sub: "n ativados · n 1º pgto depois", tone: "ok" },
+        contasCriadas: { valor: "", sub: "vs média dos meses anteriores", tone: "" },
+        oppReuniaoSafra: { valor: "", sub: "média anterior: —", tone: "warn" },
+        ttcMediano: { valor: "", sub: "n mesmo mês · n safra antiga", tone: "" }
+      },
+
+      ativacao: {
+        ativados: { valor: "", sub: "contas que pagaram no mês", tone: "ok" },
+        primeiroPgtoDepois: { valor: "", sub: "quem assinou e paga depois", tone: "" },
+        cartao: { valor: "", sub: "contas no cartão", tone: "" },
+        boletoPix: { valor: "", sub: "contas no boleto / PIX", tone: "" }
+      },
+
+      qualidade: {
+        beComprovado: { valor: "", sub: "n/d com BE no Cockpit", tone: "" },
+        resultadoForte: { valor: "", sub: "score ≥8 ou meta ok", tone: "ok" },
+        nps8: { valor: "", sub: "NPS ≥ 8", tone: "ok" },
+        flagCareDanger: { valor: "", sub: "Care ou Danger", tone: "warn" }
+      },
+
+      /* Um ponto por mês. convSafraPct e aindaNoTopo: null se a fonte do mês não tiver Flow. */
+      serie: {
+        meses: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago"],
+        opps: [null, null, null, null, null, null, null, null],
+        reunioes: [null, null, null, null, null, null, null, null],
+        vendasBA: [null, null, null, null, null, null, null, null],
+        convSafraPct: [null, null, null, null, null, null, null, null],
+        aindaNoTopo: [null, null, null, null, null, null, null, null],
+        destaqueIndex: 7
+      }
+    };
+
+    const dash = (v) => (v === null || v === undefined || v === "") ? "—" : v;
+    const toneClass = (t) => (t === "ok" || t === "warn" || t === "bad") ? t : "";
+
+    function kpiCard(label, item) {
+      return `<div class="kpi ${toneClass(item.tone)}">
+        <div class="l">${label}</div>
+        <div class="v">${dash(item.valor)}</div>
+        <div class="s">${dash(item.sub)}</div>
+      </div>`;
+    }
+
+    document.getElementById("hdr-meta").textContent =
+      [DADOS.farmer, DADOS.competencia && ("competência " + DADOS.competencia), DADOS.corte && ("corte " + DADOS.corte)]
+        .filter(Boolean).join(" · ") || "preencha DADOS no script";
+
+    document.getElementById("eyebrow-resumo").textContent =
+      ["Base ativa", DADOS.farmer, DADOS.corte && ("corte " + DADOS.corte)].filter(Boolean).join(" · ");
+
+    document.getElementById("headline").textContent = DADOS.headline;
+    document.getElementById("lead").textContent = DADOS.lead;
+
+    document.getElementById("kpis-resumo").innerHTML = [
+      kpiCard("Finalizado no mês (BA)", DADOS.resumo.finalizadosBA),
+      kpiCard("Contas criadas " + (DADOS.mesLabel || "no mês"), DADOS.resumo.contasCriadas),
+      kpiCard("Opp → reunião (coorte do mês)", DADOS.resumo.oppReuniaoSafra),
+      kpiCard("TTC mediano", DADOS.resumo.ttcMediano)
+    ].join("");
+
+    document.getElementById("kpis-ativacao").innerHTML = [
+      kpiCard("Ativados no mês", DADOS.ativacao.ativados),
+      kpiCard("1º pgto depois", DADOS.ativacao.primeiroPgtoDepois),
+      kpiCard("Cartão", DADOS.ativacao.cartao),
+      kpiCard("Boleto / PIX", DADOS.ativacao.boletoPix)
+    ].join("");
+
+    document.getElementById("kpis-qualidade").innerHTML = [
+      kpiCard("BE comprovado", DADOS.qualidade.beComprovado),
+      kpiCard("Resultado forte", DADOS.qualidade.resultadoForte),
+      kpiCard("NPS ≥ 8", DADOS.qualidade.nps8),
+      kpiCard("Flag Care/Danger", DADOS.qualidade.flagCareDanger)
+    ].join("");
+
+    const S = DADOS.serie;
+    const rows = (S.meses || []).map((mes, i) => {
+      const pct = S.convSafraPct[i];
+      const topo = S.aindaNoTopo[i];
+      return `<tr>
+        <td>${mes}</td>
+        <td class="num">${dash(S.opps[i])}</td>
+        <td class="num">${dash(S.reunioes[i])}</td>
+        <td class="num">${dash(S.vendasBA[i])}</td>
+        <td class="num">${pct == null || pct === "" ? "—" : pct + "%"}</td>
+        <td class="num">${dash(topo)}</td>
+      </tr>`;
+    }).join("");
+    document.getElementById("tbody-serie").innerHTML = rows || `<tr><td colspan="6" class="muted">Preencha DADOS.serie</td></tr>`;
+
+    const mute = "#8a8a8a";
+    const green = "#1a7f4b";
+    const amber = "#b86e00";
+    const ink = "#1a1a1a";
+    const crmGray = "#cfcfc9";
+    Chart.defaults.color = mute;
+    Chart.defaults.borderColor = "#e6e6e2";
+    Chart.defaults.font.family = "'IBM Plex Sans', system-ui, sans-serif";
+
+    function barColors(n, highlight) {
+      return Array.from({ length: n }, (_, i) => i === highlight ? amber : (i >= n - 3 ? mute : crmGray));
+    }
+
+    function hasNumbers(arr) {
+      return Array.isArray(arr) && arr.some((v) => v !== null && v !== "" && !Number.isNaN(Number(v)));
+    }
+
+    function mountChart(boxId, factory) {
+      const box = document.getElementById(boxId);
+      box.innerHTML = "";
+      const canvas = document.createElement("canvas");
+      box.appendChild(canvas);
+      factory(canvas);
+    }
+
+    function mountEmpty(boxId, msg) {
+      const box = document.getElementById(boxId);
+      box.innerHTML = `<div class="chart-empty">${msg}</div>`;
+    }
+
+    const n = (S.meses || []).length;
+    const hi = Number.isInteger(S.destaqueIndex) ? S.destaqueIndex : n - 1;
+
+    if (hasNumbers(S.opps)) {
+      mountChart("box-c1", (el) => new Chart(el, {
+        type: "bar",
+        data: { labels: S.meses, datasets: [{ data: S.opps, backgroundColor: barColors(n, hi), borderRadius: 4 }] },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { precision: 0 } }, x: { grid: { display: false } } } }
+      }));
+    } else mountEmpty("box-c1", "Preencha serie.opps");
+
+    if (hasNumbers(S.reunioes)) {
+      mountChart("box-c2", (el) => new Chart(el, {
+        type: "bar",
+        data: { labels: S.meses, datasets: [{ data: S.reunioes, backgroundColor: barColors(n, hi), borderRadius: 4 }] },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { precision: 0 } }, x: { grid: { display: false } } } }
+      }));
+    } else mountEmpty("box-c2", "Preencha serie.reunioes");
+
+    if (hasNumbers(S.vendasBA)) {
+      mountChart("box-c3", (el) => new Chart(el, {
+        type: "bar",
+        data: {
+          labels: S.meses,
+          datasets: [{ data: S.vendasBA, backgroundColor: S.meses.map((_, i) => i === hi ? amber : crmGray), borderRadius: 4 }]
+        },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { precision: 0 } }, x: { grid: { display: false } } } }
+      }));
+    } else mountEmpty("box-c3", "Preencha serie.vendasBA");
+
+    if (hasNumbers(S.convSafraPct)) {
+      mountChart("box-c4", (el) => new Chart(el, {
+        type: "line",
+        data: {
+          labels: S.meses,
+          datasets: [{ label: "Opp → reunião (safra)", data: S.convSafraPct, borderColor: ink, tension: 0.2, pointRadius: 3, spanGaps: true }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { position: "bottom", labels: { boxWidth: 8, font: { size: 11 } } } },
+          scales: { y: { beginAtZero: true, ticks: { callback: v => v + "%" } }, x: { grid: { display: false } } }
+        }
+      }));
+    } else mountEmpty("box-c4", "Preencha serie.convSafraPct (só meses Flow)");
+  </script>
+</body>
+</html>
