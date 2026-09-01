@@ -101,9 +101,10 @@
     <div class="howto">
       <strong>Como usar.</strong> Este HTML só carrega o modelo dos indicadores da página FCA (volume × conversão). Sem tabelas de conta, sem FCA, sem plano.
       <ol>
-        <li>Copie o arquivo e edite o objeto <code>DADOS</code> no final.</li>
+        <li>Copie o arquivo e edite o objeto <code>VAZIO</code> no <code>&lt;script&gt;</code> (ou parta do <code>DEMO</code>).</li>
         <li>Cada KPI tem <em>valor</em>, <em>sub</em> (linha de apoio) e <em>tone</em> (<code>ok</code> · <code>warn</code> · <code>bad</code> · vazio).</li>
         <li>A série mensal alimenta os 4 gráficos. Meses sem Flow usam <code>null</code> em conversão/topo.</li>
+        <li>Abra com <code>?demo=1</code> para ver o modelo preenchido (só indicadores, sem contas).</li>
       </ol>
     </div>
 
@@ -197,10 +198,10 @@
   <script>
     /**
      * MODELO DOS INDICADORES
-     * Copie DADOS, troque farmer / competência / números.
-     * Tom (tone): "ok" | "warn" | "bad" | "" 
+     * Edite VAZIO (farmer, competência, números). Tom: "ok" | "warn" | "bad" | ""
+     * ?demo=1 carrega DEMO para ver o modelo preenchido. 
      */
-    const DADOS = {
+    const VAZIO = {
       farmer: "",
       corte: "",
       competencia: "",
@@ -209,14 +210,14 @@
       lead: "Regra comercial: fechou no mês, conta no mês. Preencha os 4 KPIs de resumo, os 4 de ativação e os 4 de qualidade.",
 
       resumo: {
-        finalizadosBA: { valor: "", sub: "n ativados · n 1º pgto depois", tone: "ok" },
+        finalizadosBA: { valor: "", sub: "n ativados · n 1º pgto depois", tone: "" },
         contasCriadas: { valor: "", sub: "vs média dos meses anteriores", tone: "" },
-        oppReuniaoSafra: { valor: "", sub: "média anterior: —", tone: "warn" },
+        oppReuniaoSafra: { valor: "", sub: "média anterior: —", tone: "" },
         ttcMediano: { valor: "", sub: "n mesmo mês · n safra antiga", tone: "" }
       },
 
       ativacao: {
-        ativados: { valor: "", sub: "contas que pagaram no mês", tone: "ok" },
+        ativados: { valor: "", sub: "contas que pagaram no mês", tone: "" },
         primeiroPgtoDepois: { valor: "", sub: "quem assinou e paga depois", tone: "" },
         cartao: { valor: "", sub: "contas no cartão", tone: "" },
         boletoPix: { valor: "", sub: "contas no boleto / PIX", tone: "" }
@@ -224,9 +225,9 @@
 
       qualidade: {
         beComprovado: { valor: "", sub: "n/d com BE no Cockpit", tone: "" },
-        resultadoForte: { valor: "", sub: "score ≥8 ou meta ok", tone: "ok" },
-        nps8: { valor: "", sub: "NPS ≥ 8", tone: "ok" },
-        flagCareDanger: { valor: "", sub: "Care ou Danger", tone: "warn" }
+        resultadoForte: { valor: "", sub: "score ≥8 ou meta ok", tone: "" },
+        nps8: { valor: "", sub: "NPS ≥ 8", tone: "" },
+        flagCareDanger: { valor: "", sub: "Care ou Danger", tone: "" }
       },
 
       /* Um ponto por mês. convSafraPct e aindaNoTopo: null se a fonte do mês não tiver Flow. */
@@ -240,6 +241,49 @@
         destaqueIndex: 7
       }
     };
+
+    /* Forma preenchida do modelo (indicadores só). Cole por cima de VAZIO para outro mês. */
+    const DEMO = {
+      farmer: "Farmer",
+      corte: "01/09/2026",
+      competencia: "08/2026",
+      mesLabel: "Ago",
+      headline: "O mês gerou mais opp. Fechou N. Parte veio de card antigo.",
+      lead: "Regra comercial: fechou no mês, conta no mês (indiferente quando o card abriu).",
+
+      resumo: {
+        finalizadosBA: { valor: "8", sub: "6 ativados · 2 1º pgto depois", tone: "ok" },
+        contasCriadas: { valor: "86", sub: "+52% vs média Jun+Jul", tone: "" },
+        oppReuniaoSafra: { valor: "28%", sub: "Jun+Jul médio: 59%", tone: "warn" },
+        ttcMediano: { valor: "22d", sub: "4 mesmo mês · 4 safra antiga", tone: "" }
+      },
+
+      ativacao: {
+        ativados: { valor: "6", sub: "pagaram no mês", tone: "ok" },
+        primeiroPgtoDepois: { valor: "2", sub: "caixa no mês seguinte", tone: "" },
+        cartao: { valor: "5", sub: "forma cartão", tone: "" },
+        boletoPix: { valor: "3", sub: "boleto / PIX", tone: "" }
+      },
+
+      qualidade: {
+        beComprovado: { valor: "3/8", sub: "BE no Cockpit", tone: "" },
+        resultadoForte: { valor: "6/8", sub: "score ≥8 ou meta ok", tone: "ok" },
+        nps8: { valor: "7/8", sub: "NPS ≥ 8", tone: "ok" },
+        flagCareDanger: { valor: "4/8", sub: "Care ou Danger", tone: "warn" }
+      },
+
+      serie: {
+        meses: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago"],
+        opps: [26, 26, 24, 22, 20, 82, 31, 86],
+        reunioes: [10, 10, 4, 8, 8, 26, 38, 37],
+        vendasBA: [12, 8, 5, 6, 6, 7, 12, 8],
+        convSafraPct: [null, null, null, null, null, 47.6, 71, 27.9],
+        aindaNoTopo: [null, null, null, null, null, 25, 3, 53],
+        destaqueIndex: 7
+      }
+    };
+
+    const DADOS = new URLSearchParams(location.search).has("demo") ? DEMO : VAZIO;
 
     const dash = (v) => (v === null || v === undefined || v === "") ? "—" : v;
     const toneClass = (t) => (t === "ok" || t === "warn" || t === "bad") ? t : "";
