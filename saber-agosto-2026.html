@@ -110,8 +110,22 @@
     }
     .note a { color: var(--text); }
     .sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .caixa-hero {
+      background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+      padding: 20px 22px; margin: 18px 0 12px;
+      display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap: 16px; align-items: end;
+    }
+    .caixa-hero .big .l { font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+    .caixa-hero .big .v { font-size: 32px; font-weight: 700; color: var(--green); font-variant-numeric: tabular-nums; margin-top: 4px; }
+    .caixa-hero .split .l { font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+    .caixa-hero .split .v { font-size: 18px; font-weight: 700; margin-top: 4px; font-variant-numeric: tabular-nums; }
+    .caixa-hero .split .s { font-size: 12px; color: var(--muted); }
+    .outbox {
+      border: 1px dashed var(--line); border-radius: 12px; padding: 14px 16px; margin-top: 12px;
+      background: #fafaf7;
+    }
     @media (max-width: 800px) {
-      .kpis, .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .caixa-hero, .kpis, .grid-2, .grid-3 { grid-template-columns: 1fr; }
       h1 { font-size: 22px; }
     }
   </style>
@@ -122,6 +136,7 @@
       <div class="brand">V4 · Saber · agosto/2026</div>
       <nav>
         <a href="#resumo">Resumo</a>
+        <a href="#caixa">Caixa</a>
         <a href="#funil">Funil</a>
         <a href="#monetizados">Monetizados</a>
         <a href="#drops">Drops</a>
@@ -136,8 +151,8 @@
       <p class="lead">
         MRR Saber <strong>R$ 63.645,97</strong> · TCV Saber <strong>R$ 647.620,13</strong>.
         Conversão pitch → monetizado: <strong>7/13 = 54%</strong>.
-        2 drops (Timing). 9 adiados para setembro (entrega atrasada na operação).
-        Os 7 que fecharam foram <strong>pagos e ativados no mês</strong>.
+        Caixa que entrou em agosto: <strong>R$ 366.696,86</strong>.
+        Hanaro (PIX R$ 11.805,84 em 01/02/2026) <strong>não entra</strong> nessa soma.
       </p>
 
       <div class="kpis">
@@ -164,14 +179,14 @@
       </div>
       <div class="kpis">
         <div class="kpi ok">
-          <div class="l">MRR Saber</div>
-          <div class="v">R$ 63,6k</div>
-          <div class="s">R$ 63.645,97</div>
+          <div class="l">Caixa em agosto</div>
+          <div class="v">R$ 367k</div>
+          <div class="s">R$ 366.696,86 entrou</div>
         </div>
-        <div class="kpi ok">
+        <div class="kpi">
           <div class="l">TCV Saber</div>
           <div class="v">R$ 648k</div>
-          <div class="s">R$ 647.620,13</div>
+          <div class="s">R$ 647.620,13 · MRR R$ 63,6k</div>
         </div>
         <div class="kpi warn">
           <div class="l">Adiados → set</div>
@@ -186,26 +201,128 @@
       </div>
     </section>
 
+    <section id="caixa">
+      <div class="eyebrow">Caixa · agosto/2026</div>
+      <h2>O que entrou de caixa no mês — não é TCV, é dinheiro no mês.</h2>
+      <p>
+        TCV conta o contrato. Caixa conta o que liquidou em agosto.
+        G6 Executar entra só a parte do booking; G6 E. Comercial entra só a entrada via PIX.
+      </p>
+
+      <div class="caixa-hero">
+        <div class="big">
+          <div class="l">Receita que entrou em agosto</div>
+          <div class="v">R$ 366.696,86</div>
+        </div>
+        <div class="split">
+          <div class="l">Cartão</div>
+          <div class="v">R$ 339.676,83</div>
+          <div class="s">93% · 5 contas</div>
+        </div>
+        <div class="split">
+          <div class="l">PIX</div>
+          <div class="v">R$ 20.000,00</div>
+          <div class="s">G6 E. Comercial · entrada</div>
+        </div>
+        <div class="split">
+          <div class="l">Boleto</div>
+          <div class="v">R$ 7.020,03</div>
+          <div class="s">Global Cotton</div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card" style="padding:0; overflow:auto">
+          <table>
+            <thead>
+              <tr>
+                <th>Conta</th>
+                <th>Forma</th>
+                <th>Entrou em ago</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>AP Equipamentos<div class="sub">EQV · TCV inteiro</div></td>
+                <td><span class="tag ok">Cartão</span></td>
+                <td class="num">R$ 173.800,00</td>
+              </tr>
+              <tr>
+                <td>Pachane<div class="sub">Executar Basic · reativação mar/03</div></td>
+                <td><span class="tag ok">Cartão</span></td>
+                <td class="num">R$ 95.273,76</td>
+              </tr>
+              <tr>
+                <td>G6 Internet — Executar<div class="sub">Assessoria + Social · parte do booking</div></td>
+                <td><span class="tag ok">Cartão</span></td>
+                <td class="num">R$ 51.167,44</td>
+              </tr>
+              <tr>
+                <td>G6 Internet — E. Comercial<div class="sub">só a entrada · TCV R$ 69.867,90</div></td>
+                <td><span class="tag">PIX</span></td>
+                <td class="num">R$ 20.000,00</td>
+              </tr>
+              <tr>
+                <td>Knowledge @ Business<div class="sub">EQV · TCV inteiro</div></td>
+                <td><span class="tag ok">Cartão</span></td>
+                <td class="num">R$ 14.400,00</td>
+              </tr>
+              <tr>
+                <td>Global Cotton<div class="sub">Executar Basic · 1ª parcela</div></td>
+                <td><span class="tag warn">Boleto</span></td>
+                <td class="num">R$ 7.020,03</td>
+              </tr>
+              <tr>
+                <td>Work Bank<div class="sub">CRM vendas · one-time</div></td>
+                <td><span class="tag ok">Cartão</span></td>
+                <td class="num">R$ 5.035,63</td>
+              </tr>
+              <tr>
+                <td><strong>Total caixa agosto</strong></td>
+                <td></td>
+                <td class="num"><strong>R$ 366.696,86</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <div class="card">
+            <h3>Como o caixa se divide</h3>
+            <p style="margin:0 0 8px;font-size:12px">Cartão 93% · PIX 5% · Boleto 2%</p>
+            <div class="chart-box"><canvas id="c3"></canvas></div>
+          </div>
+          <div class="outbox">
+            <h3>Fora do caixa de agosto</h3>
+            <p style="margin:0">
+              <strong>Hanaro</strong> · Social + SEO · <span class="tag">PIX</span>
+              R$ 11.805,84 · pagamento em <strong>01/02/2026</strong>.
+              Fechou em ago, mas o PIX não entra na receita de agosto.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section id="funil">
       <div class="eyebrow">Funil · Saber ago</div>
-      <h2>13 pitches. 7 fecharam, pagaram e ativaram no mês.</h2>
+      <h2>13 pitches. 7 fecharam. Caixa de agosto: R$ 366.696,86.</h2>
       <p>
-        Os 7 monetizados da competência ago estão na tabela abaixo — todos ativados e pagos dentro do mês.
-        <strong>Pachane é reativação de março (03)</strong>, não conta nova.
-        Hanaro foi o único com pagamento em <strong>01/08/2026</strong> e ativação no mês.
+        Fechou ≠ caiu caixa. Os 7 monetizados estão na tabela; o caixa de agosto soma só o que liquidou no mês.
+        <strong>Pachane é reativação de março (03)</strong>.
+        Hanaro fechou em ago, mas o PIX de R$ 11.805,84 foi em <strong>01/02/2026</strong> — fora desta soma.
         Os 9 adiados foram para setembro porque a entrega da operação atrasou.
       </p>
 
       <div class="kpis">
         <div class="kpi ok">
-          <div class="l">Pagos no mês</div>
-          <div class="v">7</div>
-          <div class="s">todos ativados</div>
+          <div class="l">Caixa agosto</div>
+          <div class="v">R$ 367k</div>
+          <div class="s">R$ 366.696,86</div>
         </div>
         <div class="kpi ok">
-          <div class="l">Ativados</div>
-          <div class="v">7/7</div>
-          <div class="s">Hanaro pagou 01/08</div>
+          <div class="l">Linhas de caixa</div>
+          <div class="v">7</div>
+          <div class="s">Hanaro fora desta lista</div>
         </div>
         <div class="kpi">
           <div class="l">Contratos no Cockpit</div>
@@ -226,8 +343,8 @@
           <div class="chart-box"><canvas id="c1"></canvas></div>
         </div>
         <div class="card">
-          <h3>TCV dos que fecharam</h3>
-          <p style="margin:0 0 8px;font-size:12px">Soma R$ 647.620,13 · 7 empresas · G6 em 2 linhas</p>
+          <h3>Caixa que entrou em agosto</h3>
+          <p style="margin:0 0 8px;font-size:12px">Soma R$ 366.696,86 · Hanaro fora</p>
           <div class="chart-box"><canvas id="c2"></canvas></div>
         </div>
       </div>
@@ -235,10 +352,10 @@
 
     <section id="monetizados">
       <div class="eyebrow">Cockpit · competência 08/2026</div>
-      <h2>Quem monetizou em agosto — todos ativados e pagos no mês.</h2>
+      <h2>Quem monetizou em agosto — caixa do mês na última coluna.</h2>
       <p>
-        7 projetos pagos dentro do mês. G6 aparece duas vezes (Assessoria + E. Comercial).
-        Pachane = reativação de março (03). Hanaro: pagamento em 01/08/2026 e ativado.
+        7 projetos fechados. Caixa de agosto = o que liquidou (não o TCV).
+        Pachane = reativação de março (03). Hanaro fechou, mas o PIX de 01/02/2026 não entra no caixa de ago.
       </p>
 
       <div class="card" style="padding:0; overflow:auto">
@@ -247,95 +364,75 @@
             <tr>
               <th>Conta</th>
               <th>Produto</th>
-              <th>Pagamento</th>
-              <th>MRR / fee</th>
+              <th>Forma</th>
               <th>TCV</th>
-              <th>Pitch</th>
-              <th>Ativado</th>
+              <th>Caixa ago</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>AP Equipamentos (RecM)<div class="sub">MEDIUM · Farmer Marcelo</div></td>
+              <td>AP Equipamentos (RecM)<div class="sub">MEDIUM · Marcelo</div></td>
               <td>EQV</td>
-              <td>C. Crédito 6x</td>
-              <td class="num">R$ 23.300,00<div class="sub">Saber R$ 34.000</div></td>
+              <td><span class="tag ok">Cartão</span></td>
               <td class="num">R$ 173.800,00</td>
-              <td class="num">11/08</td>
-              <td><span class="tag ok">pago no mês</span></td>
+              <td class="num">R$ 173.800,00</td>
             </tr>
             <tr>
-              <td>G6 INTERNET<div class="sub">LARGE · Farmer Sara</div></td>
+              <td>G6 INTERNET<div class="sub">LARGE · Sara · parte do booking</div></td>
               <td>Assessoria de Growth + Social</td>
-              <td>C. Crédito 12x</td>
-              <td class="num">R$ 11.180,62</td>
+              <td><span class="tag ok">Cartão</span></td>
               <td class="num">R$ 134.167,44</td>
-              <td class="num">06/08</td>
-              <td><span class="tag ok">pago no mês</span></td>
+              <td class="num">R$ 51.167,44</td>
             </tr>
             <tr>
               <td>Pachane (BM)<div class="sub">MEDIUM · reativação mar/03</div></td>
               <td>Executar Basic</td>
-              <td>C. Crédito 12x</td>
-              <td class="num">R$ 7.939,48</td>
+              <td><span class="tag ok">Cartão</span></td>
               <td class="num">R$ 95.273,76</td>
-              <td class="num">31/08</td>
-              <td><span class="tag ok">31/08</span></td>
+              <td class="num">R$ 95.273,76</td>
             </tr>
             <tr>
-              <td>Work Bank (BT)<div class="sub">TINY · Farmer Sara</div></td>
+              <td>Work Bank (BT)<div class="sub">TINY · Sara</div></td>
               <td>Implementação de CRM vendas</td>
-              <td>C. Crédito 1x</td>
-              <td class="num">R$ 5.035,63<div class="sub">Ter · one-time</div></td>
+              <td><span class="tag ok">Cartão</span></td>
               <td class="num">R$ 5.035,63</td>
-              <td class="num">28/08</td>
-              <td><span class="tag ok">28/08</span></td>
+              <td class="num">R$ 5.035,63</td>
             </tr>
             <tr>
-              <td>Global Cotton (BM)<div class="sub">MEDIUM · Farmer Marcelo</div></td>
+              <td>Global Cotton (BM)<div class="sub">MEDIUM · Marcelo · 1ª parcela</div></td>
               <td>Executar Basic</td>
-              <td>Boleto</td>
-              <td class="num">R$ 7.020,03</td>
+              <td><span class="tag warn">Boleto</span></td>
               <td class="num">R$ 84.240,36</td>
-              <td class="num">23/07</td>
-              <td><span class="tag ok">04/08</span></td>
+              <td class="num">R$ 7.020,03</td>
             </tr>
             <tr>
-              <td>G6 INTERNET<div class="sub">LARGE · Farmer Sara</div></td>
+              <td>G6 INTERNET<div class="sub">LARGE · Sara · só a entrada</div></td>
               <td>E. Comercial</td>
-              <td>C. Crédito 6x</td>
-              <td class="num">R$ 69.867,90<div class="sub">Saber · entrada R$ 20k</div></td>
+              <td><span class="tag">PIX</span></td>
               <td class="num">R$ 69.867,90</td>
-              <td class="num">14/08</td>
-              <td><span class="tag ok">20/08</span></td>
+              <td class="num">R$ 20.000,00</td>
             </tr>
             <tr>
-              <td>Knowledge @ Business [RM]<div class="sub">MEDIUM · Farmer Sara</div></td>
+              <td>Knowledge @ Business [RM]<div class="sub">MEDIUM · Sara</div></td>
               <td>EQV</td>
-              <td>C. Crédito 6x</td>
-              <td class="num">R$ 2.400,00</td>
+              <td><span class="tag ok">Cartão</span></td>
               <td class="num">R$ 14.400,00</td>
-              <td class="num">03/08</td>
-              <td><span class="tag ok">09/08</span></td>
+              <td class="num">R$ 14.400,00</td>
             </tr>
             <tr>
-              <td>Hanaro (BL)<div class="sub">LARGE · Farmer Sara · único pgto 01/08</div></td>
+              <td>Hanaro (BL)<div class="sub">LARGE · Sara · PIX 01/02/2026</div></td>
               <td>Social + SEO</td>
-              <td>Boleto 6x</td>
-              <td class="num">R$ 11.805,84</td>
+              <td><span class="tag">PIX</span></td>
               <td class="num">R$ 70.835,04</td>
-              <td class="num">24/08</td>
-              <td><span class="tag ok">01/08</span></td>
+              <td><span class="tag warn">fora do caixa ago</span></td>
             </tr>
           </tbody>
         </table>
       </div>
       <div class="note">
-        Soma TCV = R$ 647.620,13 · soma fee Executar (MRR) = R$ 63.645,97
-        (Work Bank entra no TCV via Ter; G6 E. Comercial entra via Saber).
-        <strong>Todos os 7 projetos ativados e pagos no mês.</strong>
+        Soma caixa agosto = <strong>R$ 366.696,86</strong> (sem Hanaro).
+        Hanaro R$ 11.805,84 PIX em 01/02/2026 não entra nessa receita.
       </div>
-    </section>
 
     <section id="drops">
       <div class="eyebrow">Drops · Timing</div>
@@ -454,12 +551,11 @@
         <div class="card">
           <h3>Fato</h3>
           <ul>
-            <li>43 entradas no Saber · 13 pitches · 7 fecharam (54%).</li>
-            <li>1 dos 7 é reativação de março: Pachane.</li>
-            <li>MRR R$ 63.645,97 · TCV R$ 647.620,13.</li>
-            <li>7/7 pagos e ativados no mês. Hanaro pagou 01/08.</li>
-            <li>2 drops Timing: WMM (EQV, TINY) e Almeida e Neves (EC R$ 25.500, MEDIUM).</li>
-            <li>9 adiados para setembro por atraso de entrega na operação.</li>
+            <li>43 entradas · 13 pitches · 7 fecharam (54%).</li>
+            <li>Caixa que entrou em agosto: R$ 366.696,86 (cartão 93% · PIX 5% · boleto 2%).</li>
+            <li>TCV R$ 647.620,13 · MRR R$ 63.645,97.</li>
+            <li>Hanaro PIX R$ 11.805,84 em 01/02/2026 — fora do caixa de ago.</li>
+            <li>Pachane = reativação mar/03. 2 drops Timing. 9 adiados para setembro.</li>
           </ul>
         </div>
         <div class="card">
@@ -517,10 +613,10 @@
     new Chart(document.getElementById("c2"), {
       type: "bar",
       data: {
-        labels: ["AP EQV", "G6 Assessoria", "Pachane", "Global Cotton", "Hanaro", "G6 E.Com", "Knowledge", "Work Bank"],
+        labels: ["AP Equipamentos", "Pachane", "G6 Executar", "G6 E. Comercial", "Knowledge", "Global Cotton", "Work Bank"],
         datasets: [{
-          data: [173800, 134167.44, 95273.76, 84240.36, 70835.04, 69867.90, 14400, 5035.63],
-          backgroundColor: green,
+          data: [173800, 95273.76, 51167.44, 20000, 14400, 7020.03, 5035.63],
+          backgroundColor: [green, green, green, ink, green, amber, green],
           borderRadius: 4
         }]
       },
@@ -531,6 +627,32 @@
         scales: {
           x: { beginAtZero: true, ticks: { callback: v => "R$ " + Math.round(v / 1000) + "k" } },
           y: { grid: { display: false } }
+        }
+      }
+    });
+
+    new Chart(document.getElementById("c3"), {
+      type: "doughnut",
+      data: {
+        labels: ["Cartão", "PIX", "Boleto"],
+        datasets: [{
+          data: [339676.83, 20000, 7020.03],
+          backgroundColor: [green, ink, amber]
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { position: "bottom", labels: { boxWidth: 10, font: { size: 11 } } },
+          tooltip: {
+            callbacks: {
+              label: (ctx) => {
+                const v = ctx.raw;
+                const t = 366696.86;
+                return " R$ " + v.toLocaleString("pt-BR", { minimumFractionDigits: 2 }) + " (" + Math.round(v / t * 100) + "%)";
+              }
+            }
+          }
         }
       }
     });
