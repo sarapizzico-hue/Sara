@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modelo de proposta · V4</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --v4-red-deep: #a10f14;
+      --v4-red-mid: #c4181e;
+      --cream: #fff;
+      --muted: rgba(255,255,255,.88);
+      --ease: cubic-bezier(.22, 1, .36, 1);
+      --brand: #e50915;
+      --bg: #050505;
+      --surf: rgba(20,20,20,.94);
+      --surf2: #141414;
+      --bd: rgba(255,255,255,.1);
+      --txt: #fafafa;
+      --mut: #a3a3a3;
+      --ok: #86efac;
+      --warn: #fde68a;
+      --info: #93c5fd;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { min-height: 100%; }
+    body {
+      font-family: Inter, system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--txt);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    body.mode-deck { overflow: hidden; background: var(--v4-red-deep); }
+
+    /* ===== EDITOR ===== */
+    .editor-top {
+      position: sticky; top: 0; z-index: 40;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+      padding: 12px 20px;
+      background: rgba(5,5,5,.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--bd);
+    }
+    .logo { font-weight: 900; letter-spacing: -.02em; }
+    .logo span { color: #ff1a27; }
+    .top-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+    .btn {
+      appearance: none; border: 1px solid rgba(229,9,21,.5);
+      background: linear-gradient(135deg, rgba(229,9,21,.35), #1a1a1a);
+      color: #fff; font: inherit; font-weight: 800; font-size: 12px;
+      padding: 9px 14px; border-radius: 10px; cursor: pointer;
+    }
+    .btn.ghost { border-color: var(--bd); background: #111; }
+    .btn.ok { border-color: rgba(34,197,94,.4); background: rgba(34,197,94,.12); color: var(--ok); }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 24px 20px 80px; }
+    h1.ed { font-size: clamp(24px, 4vw, 34px); font-weight: 900; letter-spacing: -.03em; margin-bottom: 8px; }
+    .lead { color: var(--mut); font-size: 13px; max-width: 880px; margin-bottom: 16px; }
+    .lead a { color: var(--ok); }
+    .callout {
+      padding: 14px 16px; border-radius: 12px; margin-bottom: 14px; font-size: 13px;
+      border: 1px solid rgba(96,165,250,.3); background: rgba(96,165,250,.08); color: #bfdbfe;
+    }
+    .callout.warn { border-color: rgba(250,204,21,.28); background: rgba(250,204,21,.06); color: #fde68a; }
+    .callout.ok { border-color: rgba(34,197,94,.3); background: rgba(34,197,94,.08); color: #bbf7d0; }
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 18px; }
+    @media (max-width: 800px) { .steps { grid-template-columns: 1fr 1fr; } }
+    .step { background: var(--surf2); border: 1px solid var(--bd); border-radius: 12px; padding: 12px; }
+    .step .n { font-size: 10px; font-weight: 800; color: #ff1a27; letter-spacing: .08em; text-transform: uppercase; }
+    .step .t { font-weight: 800; font-size: 13px; margin: 4px 0 2px; }
+    .step .d { font-size: 11px; color: var(--mut); }
+    .section {
+      background: var(--surf); border: 1px solid var(--bd); border-radius: 16px;
+      padding: 18px 20px; margin-bottom: 12px;
+    }
+    .section h2 {
+      font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--mut); font-weight: 800; margin-bottom: 4px;
+    }
+    .section h3 { font-size: 17px; font-weight: 900; margin-bottom: 12px; }
+    .hint { font-size: 12px; color: var(--mut); margin: -6px 0 12px; }
+    label { display: block; font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--mut); margin: 0 0 6px; }
+    input, textarea, select {
+      width: 100%; background: #0a0a0a; border: 1px solid var(--bd); border-radius: 10px;
+      color: var(--txt); padding: 10px 12px; font: inherit; margin-bottom: 12px;
+    }
+    textarea { min-height: 92px; resize: vertical; }
+    textarea.tall { min-height: 128px; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    @media (max-width: 800px) { .row, .row3 { grid-template-columns: 1fr; } }
+    .check { display: flex; align-items: center; gap: 8px; margin: 0 0 12px; font-size: 13px; }
+    .check input { width: auto; margin: 0; }
+    .preset-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+    footer.ed {
+      text-align: center; color: var(--mut); font-size: 11px;
+      margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--bd);
+    }
+    footer.ed a { color: var(--ok); }
+    .wizard-rail {
+      display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin: 0 0 16px;
+    }
+    @media (max-width: 900px) { .wizard-rail { grid-template-columns: repeat(4, 1fr); } }
+    .wizard-rail button {
+      appearance: none; text-align: left; cursor: pointer; font: inherit;
+      background: var(--surf2); border: 1px solid var(--bd); border-radius: 10px; padding: 8px 10px; color: var(--mut);
+    }
+    .wizard-rail button .n { display: block; font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 2px; }
+    .wizard-rail button .t { display: block; font-size: 12px; font-weight: 800; color: #e5e5e5; }
+    .wizard-rail button.on { border-color: var(--brand); color: #fff; background: linear-gradient(135deg, rgba(229,9,21,.2), #141414); }
+    .wizard-rail button.done { border-color: rgba(34,197,94,.35); }
+    .coach {
+      padding: 14px 16px; border-radius: 12px; margin-bottom: 14px; font-size: 13px;
+      border: 1px solid rgba(229,9,21,.35); background: rgba(229,9,21,.08); color: #fecaca;
+    }
+    .coach strong { color: #fff; }
+    .coach .ask { color: #fde68a; margin-top: 8px; font-weight: 700; }
+    .wiz-nav {
+      position: sticky; bottom: 0; z-index: 30;
+      display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; align-items: center;
+      margin: 18px -20px 0; padding: 12px 20px;
+      background: rgba(5,5,5,.94); border-top: 1px solid var(--bd);
+    }
+    body.wizard .form-block { display: none; }
+    body.wizard .form-block.on { display: block; }
+    body.list-all .wizard-rail, body.list-all .coach, body.list-all .wiz-nav { display: none; }
+    body.list-all .form-block { display: block; }
+
+    /* ===== DECK ===== */
+    #deck-root { display: none; }
+    body.mode-deck #editor { display: none; }
+    body.mode-deck #deck-root { display: block; }
+    html.baked #editor, html.baked .edit-fab { display: none !important; }
+    html.baked #deck-root { display: block; }
+    html.baked body { overflow: hidden; background: var(--v4-red-deep); }
+
+    .blend-progress {
+      position: fixed; top: 0; left: 0; right: 0; height: 5px; z-index: 200;
+      background: linear-gradient(90deg, #fff, #ffd0d0);
+      transform-origin: left; transform: scaleX(var(--slide-progress, .08));
+      transition: transform .4s var(--ease);
+    }
+    .slide-logo { position: absolute; top: 1.25rem; left: 1.5rem; z-index: 10; }
+    .slide-logo svg { height: clamp(22px, 3.5vh, 30px); width: auto; display: block; filter: drop-shadow(0 2px 8px rgba(0,0,0,.35)); }
+    .nav-dots {
+      position: fixed; right: 1rem; top: 50%; transform: translateY(-50%);
+      z-index: 100; display: flex; flex-direction: column; gap: .38rem;
+    }
+    .nav-dots a {
+      width: 8px; height: 8px; border-radius: 50%;
+      border: 2px solid rgba(255,255,255,.45); background: transparent;
+      transition: all .3s var(--ease);
+    }
+    .nav-dots a.active, .nav-dots a:hover { background: #fff; border-color: #fff; transform: scale(1.2); }
+    .nav-arrow {
+      position: fixed; top: 50%; transform: translateY(-50%); z-index: 100;
+      width: 46px; height: 46px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.35); background: rgba(161,15,20,.55);
+      color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; line-height: 1;
+    }
+    .nav-arrow:hover:not(:disabled) { background: rgba(255,255,255,.2); border-color: #fff; }
+    .nav-arrow:disabled { opacity: .25; cursor: default; }
+    .nav-arrow--prev { left: 1rem; }
+    .nav-arrow--next { right: 3rem; }
+    .edit-fab {
+      position: fixed; top: 1rem; right: 1.2rem; z-index: 180;
+      font: 700 12px Inter, system-ui, sans-serif;
+      padding: 8px 12px; border-radius: 999px; cursor: pointer;
+      border: 1px solid rgba(255,255,255,.4); background: rgba(0,0,0,.4); color: #fff;
+    }
+    .deck { position: relative; width: 100vw; height: 100vh; overflow: hidden; }
+    .deck section {
+      position: absolute; inset: 0; width: 100%; height: 100vh;
+      padding: clamp(2.5rem, 5vh, 3.5rem) clamp(1.25rem, 4vw, 3rem) 4.5rem;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      overflow-y: auto; opacity: 0; visibility: hidden; transform: translateX(60px);
+      transition: opacity .4s var(--ease), transform .4s var(--ease), visibility .4s; z-index: 0;
+      font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    }
+    .deck section.slide-active { opacity: 1; visibility: visible; transform: translateX(0); z-index: 2; }
+    .deck section.slide-exit-left { transform: translateX(-60px); opacity: 0; }
+    .deck section.slide-exit-right { transform: translateX(60px); opacity: 0; }
+    .deck section::before {
+      content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(255,74,74,.45) 0%, transparent 55%),
+        radial-gradient(ellipse 70% 55% at 85% 90%, rgba(255,42,26,.35) 0%, transparent 50%),
+        radial-gradient(ellipse 100% 100% at 50% 50%, var(--v4-red-mid) 0%, var(--v4-red-deep) 70%, #6b080c 100%);
+    }
+    .inner { position: relative; z-index: 2; width: 100%; max-width: 980px; max-height: calc(100vh - 5rem); }
+    .eyebrow {
+      font-size: .78rem; font-weight: 700; letter-spacing: .16em;
+      text-transform: uppercase; color: #ffe0e0; margin-bottom: .5rem;
+    }
+    .deck h1, .deck h2, .deck h3 { font-family: Outfit, sans-serif; font-weight: 700; line-height: 1.12; letter-spacing: -.02em; color: #fff; }
+    .deck h2 { font-size: clamp(1.55rem, 3.8vh, 2.35rem); margin-bottom: .5rem; }
+    .gold-line { width: 64px; height: 4px; background: linear-gradient(90deg, #fff, #ffd0d0); border-radius: 2px; margin: .5rem 0 .9rem; }
+    .dlead { font-size: clamp(.95rem, 1.7vh, 1.1rem); color: var(--muted); max-width: 760px; line-height: 1.5; }
+    .glass {
+      background: rgba(255,255,255,.14);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,.28); border-radius: 22px;
+      padding: clamp(1.1rem, 2.5vh, 1.75rem) clamp(1.2rem, 3vw, 1.85rem);
+      box-shadow: 0 12px 40px rgba(80,0,0,.25);
+    }
+    #capa .inner { text-align: center; }
+    .capa-partnership {
+      display: flex; align-items: center; justify-content: center; gap: .75rem;
+      margin: 1rem 0 .65rem; font-size: 1rem; color: var(--muted);
+    }
+    .capa-partnership .x { opacity: .5; }
+    #capa h1 { font-size: clamp(2rem, 6vh, 3.3rem); margin-bottom: .75rem; }
+    #capa h1 em { font-style: normal; color: #ffe8e8; }
+    .capa-badge {
+      display: inline-block; padding: .45rem 1rem; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.45); font-size: .8rem; font-weight: 600;
+      letter-spacing: .06em; text-transform: uppercase; background: rgba(255,255,255,.12);
+    }
+    .slide-hint { margin-top: 1.75rem; font-size: .85rem; color: rgba(255,255,255,.5); }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: .65rem; margin-top: .85rem; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: .65rem; margin-top: .85rem; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: .55rem; margin-top: .85rem; }
+    .card {
+      background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.22);
+      border-radius: 14px; padding: .85rem 1rem;
+    }
+    .card-num { font-family: Outfit; font-size: .8rem; font-weight: 800; color: #ffe0e0; margin-bottom: .3rem; }
+    .card h3 { font-size: .98rem; margin-bottom: .3rem; }
+    .card p, .card li { font-size: .86rem; color: var(--muted); line-height: 1.45; }
+    .card ul { list-style: none; margin-top: .35rem; }
+    .card ul li { padding-left: .9rem; position: relative; margin-bottom: .2rem; }
+    .card ul li::before { content: "·"; position: absolute; left: 0; color: #fff; font-weight: 700; }
+    .flow-row { display: flex; align-items: stretch; gap: .5rem; margin-top: 1rem; flex-wrap: wrap; }
+    .flow-step {
+      flex: 1; min-width: 110px; text-align: center; padding: .7rem .45rem;
+      background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.22); border-radius: 12px;
+    }
+    .flow-step .icon { font-family: Outfit; font-size: 1.15rem; font-weight: 800; margin-bottom: .25rem; }
+    .flow-step strong { display: block; font-size: .86rem; margin-bottom: .2rem; color: #fff; }
+    .flow-step span { font-size: .76rem; color: var(--muted); }
+    .flow-arrow { align-self: center; color: rgba(255,255,255,.45); }
+    .quote {
+      margin: .75rem 0 0; padding-left: .9rem; border-left: 3px solid rgba(255,255,255,.55);
+      font-size: 1.02rem; font-weight: 700; color: #fff; line-height: 1.35;
+    }
+    .quote span { display: block; margin-top: .35rem; font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.65); }
+    .path-note, .cta-box, .bonus-box {
+      margin-top: .75rem; padding: .75rem 1rem; border-radius: 12px; font-size: .86rem;
+    }
+    .path-note {
+      border: 1px dashed rgba(255,255,255,.4); background: rgba(255,255,255,.08);
+      color: #ffe8e8; font-weight: 600; text-align: center;
+    }
+    .cta-box { border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.14); }
+    .cta-box h3 { font-size: 1rem; margin-bottom: .35rem; }
+    .cta-box p { color: var(--muted); }
+    .bonus-box { border: 1px solid rgba(183,247,208,.35); background: rgba(52,211,153,.14); }
+    .bonus-box strong { display: block; font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: #b7f7d0; margin-bottom: .3rem; }
+    .bonus-box p { color: #e8fff2; }
+    .plan {
+      border-radius: 16px; padding: 1rem 1.1rem;
+      border: 1px solid #fff; background: rgba(0,0,0,.48); box-shadow: 0 8px 32px rgba(0,0,0,.35);
+    }
+    .plan-label { font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #ffe8e8; margin-bottom: .35rem; }
+    .plan h3 { font-size: 1.05rem; margin-bottom: .15rem; }
+    .plan-sub { font-size: .85rem; color: var(--muted); margin-bottom: .5rem; }
+    .plan-price { font-family: Outfit; font-size: 1.85rem; font-weight: 800; line-height: 1; color: #fff; }
+    .plan-price small { font-size: .85rem; font-weight: 600; color: var(--muted); }
+    .plan-discount { font-size: .82rem; color: #ffe0e0; margin-top: .25rem; font-weight: 600; }
+    .plan ul { list-style: none; margin-top: .55rem; }
+    .plan ul li { font-size: .84rem; color: var(--muted); padding: .15rem 0 .15rem .9rem; position: relative; }
+    .plan ul li::before { content: "·"; position: absolute; left: 0; color: #fff; font-weight: 700; }
+    .price-lines { margin: .4rem 0 .55rem; }
+    .price-line {
+      display: flex; justify-content: space-between; gap: .75rem;
+      font-size: .8rem; color: var(--muted); padding: .2rem 0;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    .price-line strong { color: #fff; font-weight: 700; }
+    .price-line .ok { color: #b7f7d0; }
+    .strike { text-decoration: line-through; opacity: .65; }
+    .invest-hero { display: grid; grid-template-columns: 1.15fr .85fr; gap: .85rem; margin-top: .85rem; }
+    .deck-footer {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 150;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .65rem 1.25rem; background: rgba(107,8,12,.85);
+      border-top: 1px solid rgba(255,255,255,.15); font-size: .8rem; color: rgba(255,255,255,.75);
+      font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    }
+    .progress-wrap { flex: 1; max-width: 220px; height: 4px; background: rgba(255,255,255,.2); border-radius: 2px; margin: 0 1rem; }
+    .progress-fill { height: 100%; background: #fff; border-radius: 2px; width: 8%; transition: width .4s var(--ease); }
+    @media (max-width: 760px) {
+      .grid-3, .grid-2, .grid-4, .invest-hero { grid-template-columns: 1fr; }
+      .nav-arrow--next { right: 1rem; }
+      .flow-arrow { display: none; }
+    }
+  </style>
+</head>
+<body>
+<script type="application/json" id="proposta-json">
+{
+  "versao": 1,
+  "cliente": {
+    "nome": "G6 Internet",
+    "segmento": "Provedor de internet · ~150–200 vendas/mês · ticket ~R$ 100 · 25 cidades",
+    "footer": "G6 Internet × V4 Company"
+  },
+  "capa": {
+    "linha1": "Vocês já têm demanda.",
+    "linha2": "Falta máquina de receita.",
+    "lead": "Proposta de Combo Performance + CRM: rastrear, reter e converter com dono técnico — diagnóstico, case e um preço só.",
+    "badge": "Combo Performance · CRM 12 meses"
+  },
+  "produto": {
+    "tipo": "combo",
+    "nome": "Combo Performance + CRM",
+    "promessa": "Assumir a performance digital e fechar o vazamento do CRM — o essencial para o core funcionar 100%."
+  },
+  "contexto": {
+    "validado": "Já existe campanha e demanda no digital\nDecisor e stakeholders alinhados na GC\nCSAT em 100% — expectativa clara\nO gap não é gerar lead: é tracking, retenção e sistema",
+    "desafio": "Rastreamento quebrado — resultado subjetivo\nRetenção sem jornada / oferta na base\nTime de marketing multifunção, sem braço\nCRM/RD sem visão de jornada, tags e dono",
+    "quote": "Nada solto no pitch: dor específica, case, projeção e um preço.",
+    "quoteFonte": "G6 × V4 · Playbook Farmer"
+  },
+  "dores": "Rastreamento | UTM e conversão não fecham. Sem leitura clara, a verba não escala.\nRetenção | Sem jornada na base, o cliente cai no concorrente de preço.\nBraço do time | Marketing opera tudo e a agência externa não entrega o básico.\nCRM cego | Funil “não sei / não sei”. Sem dono técnico, a operação continua vazando.",
+  "case": {
+    "ativo": true,
+    "nome": "Fibranet",
+    "correlato": "Mesmas travas de provedor: performance, retenção e previsibilidade de receita.",
+    "resultado": "Referência interna para break-even e taxas. Usar como “pode vir antes” — não como promessa de copiar 100% o case maduro."
+  },
+  "solucao": {
+    "titulo": "Combo Performance assume a responsabilidade da mídia",
+    "lead": "O core resolve a ponta de aquisição com time padrão. O CRM entra como o que fecha o problema — não como opcional.",
+    "pilares": "Performance | Gestão de tráfego, criativo e leitura de conversão no canal que já vende.\nRetenção | Jornada e oferta na base para não competir só no preço.\nFora do escopo | Sem Social e sem SEO neste pacote — o produto certo, não o catálogo.",
+    "fora": "Sem Social · sem SEO · sem menu de add-ons soltos"
+  },
+  "essencial": {
+    "ativo": true,
+    "nome": "Profissional de CRM 12 meses",
+    "porque": "Mídia sozinha melhora a compra, mas não resolve 100%. Sem dono técnico no CRM, a operação continua vazando — e contratar isso daqui 3 meses custa o triplo.",
+    "inclui": "Pipes, tags e visão de jornada no RD/CRM\nCadência e higiene de base\nDono técnico na operação, não “se quiser a gente também faz”"
+  },
+  "jornada": "Diagnóstico | Tracking, funil, base e o que já roda hoje\nSetup | Campanhas, medição e CRM com dono\nOperação | Account + GT no ritmo semanal\nEssencial | CRM rodando junto — não depois\nRitual | Comitê de performance e próximos testes",
+  "projecao": {
+    "ativo": true,
+    "conservadora": "Break-even conservador na casa do mês 6–7 (fee + mídia), sem copiar taxa madura do case.",
+    "breakeven": "mês 6–7 · se taxas Fibranet 100%, pode antecipar (~mês 3)",
+    "disclaimer": "Não prometer o case maduro. Não projetar abaixo do que a G6 já vende sem olhar LTV."
+  },
+  "investimento": {
+    "ancora": "R$ 17.237,73 / mês",
+    "condicao": "R$ 9.480,75 / mês",
+    "forma": "mesmo pagamento da EE · um preço só",
+    "validade": "fechar nesta reunião",
+    "inclui": "Combo Performance (aquisição + leitura)\nProfissional CRM 12 meses no pacote\nDesconto e fee já embutidos — sem menu de condições",
+    "bonus": "Condição única com CRM incluso. Não abrir à vista vs cartão vs parcelas na mesma sala."
+  },
+  "proximos": "Alinhamento | Validar escopo e condição nesta call\nFormalização | Contrato no mesmo rito da EE\nOnboarding | Acessos, tracking e mapa do funil\nAtivação | Performance + CRM no ar, com dono",
+  "fechamento": {
+    "cta": "A G6 leva performance com dono e o CRM que impede o vazamento. Um produto. Um preço. Uma decisão.",
+    "quote": "Fechar o vazamento agora. Escalar verba com prova depois."
+  },
+  "gate": {
+    "decisor": "João na sala",
+    "csat": "100%",
+    "stakeholders": "Laura (não quer agência interna) · Esdras (mkt comprado, sem braço)",
+    "obs": "Uso interno — não entra no deck do cliente."
+  }
+}
+</script>
+
+<div id="editor">
+  <header class="editor-top">
+    <div class="logo">V4 <span>COMPANY</span> · modelo de proposta</div>
+    <div class="top-actions">
+      <button class="btn ok" type="button" id="btnVer">Ver proposta</button>
+      <button class="btn" type="button" id="btnBaixar">Baixar HTML do cliente</button>
+      <button class="btn ghost" type="button" id="btnJsonOut">Exportar JSON</button>
+      <button class="btn ghost" type="button" id="btnJsonIn">Importar JSON</button>
+      <button class="btn ghost" type="button" id="btnExemplo">Exemplo G6</button>
+      <button class="btn ghost" type="button" id="btnNova">Nova proposta</button>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <h1 class="ed">Vamos criar a proposta juntas</h1>
+    <p class="lead">
+      Um bloco de cada vez, na ordem do pitch: conta → gate → diagnóstico → case → solução → projeção → <strong>um preço</strong>.
+      Troca só as informações; a estrutura e o visual ficam. Hub: <a href="farmer-sara.html">farmer-sara.html</a> ·
+      <a href="plano-acao-modelo-adaptavel.html">plano adaptável</a>.
+    </p>
+
+    <div class="steps">
+      <div class="step"><div class="n">01</div><div class="t">Passo a passo</div><div class="d">A gente preenche juntas, na ordem</div></div>
+      <div class="step"><div class="n">02</div><div class="t">Ver proposta</div><div class="d">Deck V4 monta sozinho</div></div>
+      <div class="step"><div class="n">03</div><div class="t">Baixar HTML</div><div class="d">Arquivo pronto para o cliente</div></div>
+      <div class="step"><div class="n">04</div><div class="t">Próxima conta</div><div class="d">Nova proposta · só troca os dados</div></div>
+    </div>
+
+    <div class="callout warn">
+      <strong>Como vamos usar:</strong> começa em branco. Avança com “Próximo”. Se quiser ver o formato preenchido, carrega o exemplo G6.
+      <button class="btn ghost" type="button" id="btnToggleView" style="margin-left:8px">Ver todos os blocos</button>
+    </div>
+
+    <div class="wizard-rail" id="wizardRail" aria-label="Passos"></div>
+    <div class="coach" id="coachBox"></div>
+
+    <div class="section form-block" data-group="0">
+      <h2>Produto</h2>
+      <h3>Qual oferta esta proposta carrega</h3>
+      <div class="row">
+        <div>
+          <label>Tipo</label>
+          <select id="tipo">
+            <option value="ec">Estruturação Comercial</option>
+            <option value="growth">Assessoria de Growth</option>
+            <option value="combo">Combo (core + essencial)</option>
+            <option value="eqv">Empresa Que Vende</option>
+            <option value="outro">Outro</option>
+          </select>
+        </div>
+        <div>
+          <label>Nome do produto</label>
+          <input id="produtoNome" placeholder="Combo Performance + CRM" />
+        </div>
+      </div>
+      <label>Promessa em 1 frase</label>
+      <input id="promessa" placeholder="O que esta oferta resolve, em uma linha" />
+      <div class="preset-row">
+        <button class="btn ghost" type="button" id="btnPreset">Aplicar texto padrão deste produto</button>
+        <span class="hint" style="margin:8px 0 0">Preenche jornada, pilares e includes genéricos da V4. Não apaga nome do cliente nem preço.</span>
+      </div>
+    </div>
+
+    <div class="section form-block" data-group="0">
+      <h2>Identidade</h2>
+      <h3>Capa</h3>
+      <div class="row">
+        <div><label>Cliente</label><input id="clienteNome" placeholder="Nome da conta" /></div>
+        <div><label>Segmento / operação</label><input id="segmento" placeholder="O que faz · porte · canal" /></div>
+      </div>
+      <div class="row">
+        <div><label>Headline linha 1</label><input id="linha1" placeholder="Vocês já têm demanda." /></div>
+        <div><label>Headline linha 2 (destaque)</label><input id="linha2" placeholder="Falta máquina de receita." /></div>
+      </div>
+      <label>Lead da capa</label>
+      <textarea id="capaLead" placeholder="Uma frase que amarra produto + momento do cliente"></textarea>
+      <div class="row">
+        <div><label>Badge</label><input id="badge" placeholder="Estruturação Comercial · Implementação" /></div>
+        <div><label>Rodapé do deck</label><input id="footerTxt" placeholder="Cliente × V4 Company" /></div>
+      </div>
+    </div>
+
+    <div class="section form-block" data-group="1">
+      <h2>Uso interno</h2>
+      <h3>Gate da sala — não aparece no deck do cliente</h3>
+      <div class="row3">
+        <div><label>Decisor</label><input id="gateDecisor" placeholder="Nome · está na call?" /></div>
+        <div><label>CSAT / NPS</label><input id="gateCsat" placeholder="100% · percepção" /></div>
+        <div><label>Stakeholders</label><input id="gateStake" placeholder="Quem influencia / quem está comprado" /></div>
+      </div>
+      <label>Nota interna</label>
+      <input id="gateObs" placeholder="O que precisa estar amarrado com ops antes do pitch" />
+    </div>
+
+    <div class="section form-block" data-group="2">
+      <h2>Contexto</h2>
+      <h3>O que já ficou claro</h3>
+      <p class="hint">Uma ideia por linha.</p>
+      <div class="row">
+        <div>
+          <label>O que já validaram</label>
+          <textarea id="validado" class="tall" placeholder="Já tem demanda&#10;GC alinhada&#10;Abertura para organizar o comercial"></textarea>
+        </div>
+        <div>
+          <label>O desafio de escala</label>
+          <textarea id="desafio" class="tall" placeholder="Funil no feeling&#10;Follow-up no WhatsApp&#10;Sem dono de processo"></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div><label>Frase-mestra</label><input id="quote" placeholder="A frase que amarra o slide" /></div>
+        <div><label>Fonte da frase</label><input id="quoteFonte" placeholder="Cliente × V4 · 2026" /></div>
+      </div>
+    </div>
+
+    <div class="section form-block" data-group="2">
+      <h2>Diagnóstico</h2>
+      <h3>Dores específicas — não genéricas</h3>
+      <p class="hint">Uma por linha, no formato <strong>Título | texto</strong>.</p>
+      <textarea id="dores" class="tall" placeholder="Lead sem dono | Entra no WhatsApp e some&#10;Funil no feeling | Sem etapa, SLA nem motivo de perda"></textarea>
+    </div>
+
+    <div class="section form-block" data-group="3">
+      <h2>Case</h2>
+      <h3>Prova interna correlata</h3>
+      <label class="check"><input type="checkbox" id="caseAtivo" /> Incluir slide de case</label>
+      <div class="row">
+        <div><label>Nome do case</label><input id="caseNome" placeholder="Fibranet" /></div>
+        <div><label>Por que correlato</label><input id="caseCorrelato" placeholder="Mesmas travas · mesmo setor" /></div>
+      </div>
+      <label>O que pode compartilhar</label>
+      <textarea id="caseResultado" placeholder="Resultado / BE / o que usar como referência — sem prometer 100% do case maduro"></textarea>
+    </div>
+
+    <div class="section form-block" data-group="4">
+      <h2>Solução</h2>
+      <h3>Produto core</h3>
+      <label>Título do slide</label>
+      <input id="solucaoTitulo" placeholder="O que a V4 instala nesta operação" />
+      <label>Lead</label>
+      <textarea id="solucaoLead" placeholder="Como o core assume a responsabilidade da dor #1"></textarea>
+      <p class="hint">Pilares: uma por linha, <strong>Título | texto</strong>.</p>
+      <textarea id="pilares" class="tall" placeholder="Clareza de destino | ...&#10;Prioridade real | ...&#10;Sequência inteligente | ..."></textarea>
+      <label>O que NÃO oferecer</label>
+      <input id="fora" placeholder="Sem Social · sem SEO · sem add-on solto" />
+    </div>
+
+    <div class="section form-block" data-group="4">
+      <h2>Essencial</h2>
+      <h3>Upsell que fecha 100% — não “se quiser”</h3>
+      <label class="check"><input type="checkbox" id="essencialAtivo" /> Incluir slide do essencial</label>
+      <label>Nome</label>
+      <input id="essencialNome" placeholder="Profissional de CRM 12 meses" />
+      <label>Porquê técnico</label>
+      <textarea id="essencialPorque" placeholder="Sem isso o core não resolve 100%. Contratar depois custa mais."></textarea>
+      <label>O que inclui (uma por linha)</label>
+      <textarea id="essencialInclui" placeholder="Pipes e jornada&#10;Dono técnico&#10;Cadência"></textarea>
+    </div>
+
+    <div class="section form-block" data-group="4">
+      <h2>Jornada</h2>
+      <h3>Como a oferta roda</h3>
+      <p class="hint">Uma etapa por linha: <strong>Título | descrição</strong>.</p>
+      <textarea id="jornada" class="tall" placeholder="Diagnóstico | ...&#10;Arquitetura | ...&#10;Ativação | ..."></textarea>
+    </div>
+
+    <div class="section form-block" data-group="5">
+      <h2>Projeção</h2>
+      <h3>Conservadora + break-even</h3>
+      <label class="check"><input type="checkbox" id="projecaoAtivo" /> Incluir slide de projeção</label>
+      <label>Leitura conservadora</label>
+      <textarea id="projConservadora" placeholder="BE em qual mês · premissa · validado com ops"></textarea>
+      <div class="row">
+        <div><label>Break-even / âncora numérica</label><input id="breakeven" placeholder="mês 6–7" /></div>
+        <div><label>Disclaimer</label><input id="disclaimer" placeholder="Não copiar taxa madura do case" /></div>
+      </div>
+    </div>
+
+    <div class="section form-block" data-group="6">
+      <h2>Investimento</h2>
+      <h3>Um preço · desconto já embutido</h3>
+      <div class="row3">
+        <div><label>Âncora (riscado)</label><input id="ancora" placeholder="R$ 20.000" /></div>
+        <div><label>Condição (o preço da sala)</label><input id="condicao" placeholder="12× de R$ 845,13" /></div>
+        <div><label>Forma</label><input id="forma" placeholder="mesmo pagamento da EE" /></div>
+      </div>
+      <label>Validade</label>
+      <input id="validade" placeholder="fechar nesta reunião / até DD/MM" />
+      <label>O que inclui (uma por linha)</label>
+      <textarea id="investInclui" placeholder="Diagnóstico e funil&#10;CRM operativo&#10;Treinamento"></textarea>
+      <label>Bônus / condição</label>
+      <textarea id="bonus" placeholder="CRM bonificado · validade da condição"></textarea>
+    </div>
+
+    <div class="section form-block" data-group="6">
+      <h2>Fechamento</h2>
+      <h3>Próximos passos + CTA</h3>
+      <p class="hint">Uma etapa por linha: <strong>Título | descrição</strong>.</p>
+      <textarea id="proximos" class="tall" placeholder="Alinhamento | Validar escopo nesta call&#10;Formalização | Contrato&#10;Onboarding | Acessos&#10;Ativação | Time no padrão"></textarea>
+      <label>CTA</label>
+      <textarea id="cta" placeholder="O que o cliente leva se fechar agora"></textarea>
+      <label>Frase final</label>
+      <input id="quoteFinal" placeholder="Arrumar a casa hoje. Acelerar com previsibilidade amanhã." />
+    </div>
+
+    <div class="wiz-nav">
+      <button class="btn ghost" type="button" id="btnPrevStep">← Anterior</button>
+      <span id="wizCount" class="hint" style="margin:0">1 / 7</span>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn ghost" type="button" id="btnVerMini">Ver proposta</button>
+        <button class="btn ok" type="button" id="btnNextStep">Próximo →</button>
+      </div>
+    </div>
+
+    <div class="callout ok">
+      <strong>Quando o último bloco estiver preenchido:</strong> Ver proposta → navega com setas → Baixar HTML do cliente.
+      O JSON fica salvo neste navegador. Exporta se quiser guardar por conta.
+    </div>
+
+    <footer class="ed">
+      V4 · Modelo de proposta · Farmer Sara ·
+      <a href="farmer-sara.html">Hub</a> ·
+      <a href="playbook-farmer-am.html">Playbook</a> ·
+      <a href="plano-acao-modelo-adaptavel.html">Plano adaptável</a>
+    </footer>
+  </div>
+</div>
+
+<div id="deck-root" aria-live="polite"></div>
+<input type="file" id="jsonFile" accept="application/json" hidden />
+
+<script>
+(function () {
+  const $ = (id) => document.getElementById(id);
+  const LOGO = '<div class="slide-logo" aria-label="V4 Company"><svg fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 77 20"><path fill="#fff" d="M33.023 3.575c-2.001.003-3.093 1.21-3.09 3.32l.008 6.858c.003 2.11 1.098 3.315 3.1 3.312 2-.003 3.092-1.21 3.09-3.32l-.009-6.858c-.003-2.11-1.097-3.315-3.099-3.312zm.015 11.606c-.649.001-1.057-.356-1.058-1.298l-.009-7.122c-.001-.942.406-1.3 1.055-1.302.648 0 1.057.357 1.058 1.299l.009 7.122c.001.942-.407 1.3-1.055 1.301zm-6.1-3.176l.002 1.884c.001.942-.406 1.282-1.055 1.283-.648 0-1.056-.338-1.058-1.28l-.009-7.122c-.001-.942.406-1.3 1.055-1.302.648 0 1.057.357 1.058 1.299l.002 1.413 1.927-.002-.002-1.281c-.002-2.11-1.041-3.315-3.043-3.313-2 .003-3.037 1.21-3.034 3.32l.008 6.859c.003 2.11 1.042 3.314 3.043 3.312 2.002-.003 3.038-1.21 3.035-3.32l-.002-1.752-1.927.002zM13.055 6.352L8.68 10.813c-.06.062-.017.166.067.166l4.382-.006a.096.096 0 00.096-.097l-.006-4.456c0-.087-.103-.13-.163-.068zm5.862 7.88l-2.687.004a.035.035 0 00-.035.035l.004 2.879c0 .02-.015.035-.035.035l-3.01.004a.035.035 0 01-.034-.035l-.004-2.879a.035.035 0 00-.034-.035l-8.796.012a.141.141 0 01-.14-.142l-.003-2.624v-.004a.795.795 0 01.223-.588l8.758-8.928a.035.035 0 01.025-.01l2.846-.004c.005 0 .009.001.014.003a.367.367 0 01.216.348l.01 8.677c0 .019.017.035.036.035l2.641-.004a.035.035 0 00.035-.035l-.011-8.5c-.002-1.364-1.1-2.478-2.442-2.476L4.18.016a.035.035 0 00-.034.036l.008 6.856c0 .031.037.047.06.025l4.994-5.064a.034.034 0 01.024-.01l2.603-.003c.03 0 .046.037.025.06l-8.118 8.41a.034.034 0 01-.049 0l-1.529-1.55a.036.036 0 01-.01-.026L2.143.074A.035.035 0 002.104.04C.976.185.086 1.131 0 2.294v5.972l.011 8.9a2.48 2.48 0 001.937 2.424h14.974c1.15-.199 2.034-1.224 2.032-2.448l-.003-2.873a.035.035 0 00-.035-.036zM66.47 3.682l.01 7.895-2.104-7.892-2.557.003.017 13.19 1.834-.003-.012-9.553 2.55 9.55 2.094-.004-.016-13.188-1.816.002zm-23.33.031l-1.378 9.366-1.513-9.362-2.835.003.017 13.19 1.779-.003-.012-9.327 1.532 9.325 1.927-.003 1.396-9.46.012 9.458 1.928-.002-.017-13.19-2.835.005h-.001zm33.133-.043l-1.946.002-1.549 6.013-1.564-6.009-2.131.003 2.587 8.814.005 4.371 2.039-.003-.006-4.37 2.565-8.821zm-20.44.026l-2.058 13.192 1.871-.003.35-2.393 2.501-.003.355 2.392 2.057-.003-2.092-13.186-2.983.004zm.42 9.005l.974-6.67.99 6.668-1.964.002zm-5.793-8.998l-3.002.004.017 13.189 2.038-.003-.006-4.955.964-.002c2.038-.002 3.037-1.153 3.035-3.263l-.003-1.715c-.002-2.11-1.005-3.258-3.043-3.255zm.008 6.35h-.964L49.5 5.589l.964-.001c.648-.001 1.001.3 1.002 1.242l.003 1.978c.001.942-.35 1.245-1 1.245z"></path></svg></div>';
+  const STORE = "v4-modelo-proposta-v2";
+  const PRESETS = {
+    ec: {
+      produtoNome: "Estruturação Comercial",
+      promessa: "Instalar a máquina comercial: funil, CRM, playbooks e time no padrão — antes de acelerar volume.",
+      badge: "Estruturação Comercial · Implementação · Treinamento",
+      linha1: "Arrumar a casa",
+      linha2: "para receber demanda",
+      solucaoTitulo: "Tudo que o comercial leva para operar com padrão",
+      solucaoLead: "Não é consultoria de slides. É implementação + treinamento para o time rodar com método.",
+      pilares: "Fundação | Funil, ICP, metas, KPIs e SLAs no papel de cada um.\nAtivação | Playbooks, scripts, cadência pós-proposta e rituais.\nCRM operativo | Pipes, dono, prazo e próximo passo — não agenda.",
+      fora: "Sem mídia de performance neste pacote — a casa vem antes do volume",
+      jornada: "Diagnóstico | Equipes, metas, gargalos e ICP\nArquitetura | Funil, KPIs, SLAs e papéis\nCRM operativo | Pipes, automações e visão gerencial\nPlaybooks | Scripts, cadências e propostas\nTreinamento | Imersão na nova rotina diária",
+      investInclui: "Diagnóstico, ICP, funil, KPIs e SLAs\nPlaybooks, scripts e rituais de gestão\nCRM operativo com automações básicas\nTreinamento e implementação com o time",
+      proximos: "Alinhamento | Validar escopo e condição nesta call\nFormalização | Contrato e kick-off administrativo\nOnboarding | Acessos, diagnóstico e mapa do funil\nAtivação | CRM, playbooks e treinamento do time",
+      quoteFinal: "Arrumar a casa hoje. Acelerar com previsibilidade amanhã."
+    },
+    growth: {
+      produtoNome: "Assessoria de Growth",
+      promessa: "Operar o canal de aquisição com Account + GT, leitura de conversão e ritmo semanal.",
+      badge: "Assessoria de Growth · Operação contínua",
+      linha1: "Do esforço solto",
+      linha2: "à operação de canal",
+      solucaoTitulo: "O time que opera o canal toda semana",
+      solucaoLead: "Account + GT + copy + design. Fundação de medição antes de escalar verba.",
+      pilares: "Captura | Campanhas no canal certo para a oferta de vocês.\nLeitura | Tracking e conversão para decidir com dado, não feeling.\nRitmo | Comitê semanal: o que cortar, o que repetir, o que testar.",
+      fora: "Sem Social / criativos de marca fora do canal combinado — a menos que entre no essencial",
+      jornada: "Diagnóstico de canal | Oferta, ICP, tracking e baseline\nSetup | Campanhas, pixels, criativos e captura\nOperação | Account + GT no ritmo semanal\nOtimização | Corte de desperdício e escala com prova\nRitual | Comitê de performance e próximos testes",
+      investInclui: "Gestão de tráfego no canal combinado\nAccount e ritual semanal\nCopy e criativo da operação\nLeitura de conversão e próximos testes",
+      proximos: "Alinhamento | Validar canal, verba e condição\nFormalização | Contrato no rito da EE\nOnboarding | Acessos, pixels e oferta\nOperação | Primeira onda no ar",
+      quoteFinal: "Prova no canal. Escala com critério."
+    },
+    combo: {
+      produtoNome: "Core + essencial",
+      promessa: "O produto que resolve a dor #1 e o essencial que impede o vazamento — vendido junto, não como opcional.",
+      badge: "Core + essencial · um preço",
+      linha1: "Resolver a dor #1",
+      linha2: "e fechar o vazamento",
+      solucaoTitulo: "Core assume a responsabilidade. Essencial fecha 100%.",
+      solucaoLead: "Não é catálogo. É o par que a operação precisa agora — com um preço só.",
+      pilares: "Core | O STEP que ataca a dor principal.\nEssencial | O que sem isso o core não resolve 100%.\nFora | Tudo que solta a narrativa fica de fora desta proposta.",
+      fora: "Sem add-on solto · sem menu de condições",
+      jornada: "Diagnóstico | O que já roda vs o que vaza\nCore | Instalar o produto que assume a dor #1\nEssencial | Sistema / CRM / braço que fecha o problema\nRitual | Cadência conjunta e próximo teste",
+      investInclui: "Produto core no ar\nEssencial incluso na condição de fechar agora\nUm preço, desconto já embutido",
+      proximos: "Alinhamento | Validar o par core + essencial\nFormalização | Um contrato, um preço\nOnboarding | Acessos das duas frentes\nAtivação | As duas pontas juntas, não em 90 dias",
+      quoteFinal: "Fechar o vazamento agora. Escalar com prova depois."
+    },
+    eqv: {
+      produtoNome: "Empresa Que Vende",
+      promessa: "Transformar venda artesanal em processo repetível: playbook, CRM e time operando o mesmo padrão.",
+      badge: "Empresa Que Vende · Comercial",
+      linha1: "Venda com método",
+      linha2: "não no feeling",
+      solucaoTitulo: "O comercial deixa de depender de herói",
+      solucaoLead: "Playbook, pipeline e rituais para a empresa vender com previsibilidade.",
+      pilares: "Playbook | Abordagem, qualificação, objeção e fechamento no papel.\nCRM | Cada oportunidade com dono, prazo e próximo passo.\nTime | Treinamento e ritual para o padrão não morrer na primeira semana.",
+      fora: "Sem mídia neste pacote — primeiro o comercial converte o que já entra",
+      jornada: "Diagnóstico comercial | Funil, papéis e vazamentos\nPlaybook de venda | Scripts, objeções e cadência\nCRM | Pipeline com dono e próximo passo\nTreinamento | Time operando o padrão\nAcompanhamento | Ajustes nas primeiras semanas",
+      investInclui: "Diagnóstico e desenho do funil\nPlaybooks e scripts\nCRM operativo\nTreinamento do time",
+      proximos: "Alinhamento | Validar escopo nesta call\nFormalização | Contrato\nOnboarding | Mapa do funil e acessos\nAtivação | Playbook + CRM + treino",
+      quoteFinal: "Processo repetível. Receita previsível."
+    },
+    outro: {
+      produtoNome: "",
+      promessa: "",
+      badge: "Proposta comercial",
+      linha1: "",
+      linha2: "",
+      solucaoTitulo: "",
+      solucaoLead: "",
+      pilares: "",
+      fora: "",
+      jornada: "",
+      investInclui: "",
+      proximos: "Alinhamento | Validar escopo nesta call\nFormalização | Contrato\nOnboarding | Acessos\nAtivação | Primeira entrega",
+      quoteFinal: ""
+    }
+  };
+
+  const FIELDS = [
+    "tipo","produtoNome","promessa","clienteNome","segmento","linha1","linha2","capaLead","badge","footerTxt",
+    "gateDecisor","gateCsat","gateStake","gateObs","validado","desafio","quote","quoteFonte","dores",
+    "caseNome","caseCorrelato","caseResultado","solucaoTitulo","solucaoLead","pilares","fora",
+    "essencialNome","essencialPorque","essencialInclui","jornada","projConservadora","breakeven","disclaimer",
+    "ancora","condicao","forma","validade","investInclui","bonus","proximos","cta","quoteFinal"
+  ];
+  const CHECKS = ["caseAtivo","essencialAtivo","projecaoAtivo"];
+
+  function parsePageJson() {
+    try { return JSON.parse($("proposta-json").textContent); }
+    catch (e) { return null; }
+  }
+  function collect() {
+    const d = { versao: 1 };
+    const get = (id) => ($(id) && $(id).value) || "";
+    d.cliente = { nome: get("clienteNome"), segmento: get("segmento"), footer: get("footerTxt") };
+    d.capa = { linha1: get("linha1"), linha2: get("linha2"), lead: get("capaLead"), badge: get("badge") };
+    d.produto = { tipo: get("tipo"), nome: get("produtoNome"), promessa: get("promessa") };
+    d.contexto = { validado: get("validado"), desafio: get("desafio"), quote: get("quote"), quoteFonte: get("quoteFonte") };
+    d.dores = get("dores");
+    d.case = { ativo: $("caseAtivo").checked, nome: get("caseNome"), correlato: get("caseCorrelato"), resultado: get("caseResultado") };
+    d.solucao = { titulo: get("solucaoTitulo"), lead: get("solucaoLead"), pilares: get("pilares"), fora: get("fora") };
+    d.essencial = { ativo: $("essencialAtivo").checked, nome: get("essencialNome"), porque: get("essencialPorque"), inclui: get("essencialInclui") };
+    d.jornada = get("jornada");
+    d.projecao = { ativo: $("projecaoAtivo").checked, conservadora: get("projConservadora"), breakeven: get("breakeven"), disclaimer: get("disclaimer") };
+    d.investimento = { ancora: get("ancora"), condicao: get("condicao"), forma: get("forma"), validade: get("validade"), inclui: get("investInclui"), bonus: get("bonus") };
+    d.proximos = get("proximos");
+    d.fechamento = { cta: get("cta"), quote: get("quoteFinal") };
+    d.gate = { decisor: get("gateDecisor"), csat: get("gateCsat"), stakeholders: get("gateStake"), obs: get("gateObs") };
+    return d;
+  }
+  function fill(d) {
+    if (!d) return;
+    const set = (id, v) => { if ($(id)) $(id).value = v == null ? "" : v; };
+    set("tipo", (d.produto && d.produto.tipo) || "ec");
+    set("produtoNome", d.produto && d.produto.nome);
+    set("promessa", d.produto && d.produto.promessa);
+    set("clienteNome", d.cliente && d.cliente.nome);
+    set("segmento", d.cliente && d.cliente.segmento);
+    set("linha1", d.capa && d.capa.linha1);
+    set("linha2", d.capa && d.capa.linha2);
+    set("capaLead", d.capa && d.capa.lead);
+    set("badge", d.capa && d.capa.badge);
+    set("footerTxt", d.cliente && d.cliente.footer);
+    set("gateDecisor", d.gate && d.gate.decisor);
+    set("gateCsat", d.gate && d.gate.csat);
+    set("gateStake", d.gate && d.gate.stakeholders);
+    set("gateObs", d.gate && d.gate.obs);
+    set("validado", d.contexto && d.contexto.validado);
+    set("desafio", d.contexto && d.contexto.desafio);
+    set("quote", d.contexto && d.contexto.quote);
+    set("quoteFonte", d.contexto && d.contexto.quoteFonte);
+    set("dores", d.dores);
+    $("caseAtivo").checked = !!(d.case && d.case.ativo);
+    set("caseNome", d.case && d.case.nome);
+    set("caseCorrelato", d.case && d.case.correlato);
+    set("caseResultado", d.case && d.case.resultado);
+    set("solucaoTitulo", d.solucao && d.solucao.titulo);
+    set("solucaoLead", d.solucao && d.solucao.lead);
+    set("pilares", d.solucao && d.solucao.pilares);
+    set("fora", d.solucao && d.solucao.fora);
+    $("essencialAtivo").checked = !!(d.essencial && d.essencial.ativo);
+    set("essencialNome", d.essencial && d.essencial.nome);
+    set("essencialPorque", d.essencial && d.essencial.porque);
+    set("essencialInclui", d.essencial && d.essencial.inclui);
+    set("jornada", d.jornada);
+    $("projecaoAtivo").checked = !!(d.projecao && d.projecao.ativo);
+    set("projConservadora", d.projecao && d.projecao.conservadora);
+    set("breakeven", d.projecao && d.projecao.breakeven);
+    set("disclaimer", d.projecao && d.projecao.disclaimer);
+    set("ancora", d.investimento && d.investimento.ancora);
+    set("condicao", d.investimento && d.investimento.condicao);
+    set("forma", d.investimento && d.investimento.forma);
+    set("validade", d.investimento && d.investimento.validade);
+    set("investInclui", d.investimento && d.investimento.inclui);
+    set("bonus", d.investimento && d.investimento.bonus);
+    set("proximos", d.proximos);
+    set("cta", d.fechamento && d.fechamento.cta);
+    set("quoteFinal", d.fechamento && d.fechamento.quote);
+  }
+  function persist() {
+    try { localStorage.setItem(STORE, JSON.stringify(collect())); } catch (e) {}
+  }
+  function applyPreset() {
+    const tipo = $("tipo").value;
+    const p = PRESETS[tipo] || PRESETS.outro;
+    Object.keys(p).forEach((k) => { if ($(k)) $(k).value = p[k]; });
+    $("essencialAtivo").checked = tipo === "combo";
+    $("caseAtivo").checked = true;
+    $("projecaoAtivo").checked = true;
+    persist();
+  }
+  function blank() {
+    FIELDS.forEach((id) => { if ($(id) && $(id).tagName !== "SELECT") $(id).value = ""; });
+    $("tipo").value = "ec";
+    CHECKS.forEach((id) => { $(id).checked = false; });
+    $("footerTxt").value = "Cliente × V4 Company";
+    applyPreset();
+    $("clienteNome").value = "";
+    $("segmento").value = "";
+    $("capaLead").value = "";
+    $("validado").value = "";
+    $("desafio").value = "";
+    $("quote").value = "";
+    $("quoteFonte").value = "";
+    $("dores").value = "";
+    $("caseNome").value = "";
+    $("caseCorrelato").value = "";
+    $("caseResultado").value = "";
+    $("ancora").value = "";
+    $("condicao").value = "";
+    $("forma").value = "";
+    $("validade").value = "";
+    $("bonus").value = "";
+    $("cta").value = "";
+    $("gateDecisor").value = "";
+    $("gateCsat").value = "";
+    $("gateStake").value = "";
+    $("gateObs").value = "";
+    persist();
+  }
+
+  function esc(s) {
+    return String(s == null ? "" : s)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+  function lines(text) {
+    return String(text || "").split(/\n+/).map((s) => s.trim()).filter(Boolean);
+  }
+  function pairs(text) {
+    return lines(text).map((line, i) => {
+      const idx = line.indexOf("|");
+      if (idx < 0) return { titulo: line, texto: "" };
+      return { titulo: line.slice(0, idx).trim() || ("0" + (i + 1)), texto: line.slice(idx + 1).trim() };
+    });
+  }
+  function ul(items) {
+    if (!items.length) return "";
+    return "<ul>" + items.map((t) => "<li>" + esc(t) + "</li>").join("") + "</ul>";
+  }
+  function cardsPairs(list, numbered) {
+    const n = list.length;
+    const g = n >= 4 ? "grid-4" : n === 3 ? "grid-3" : "grid-2";
+    return '<div class="' + g + '">' + list.map((p, i) =>
+      '<article class="card">' +
+        (numbered ? '<div class="card-num">' + String(i + 1).padStart(2, "0") + "</div>" : "") +
+        "<h3>" + esc(p.titulo) + "</h3>" +
+        (p.texto ? "<p>" + esc(p.texto) + "</p>" : "") +
+      "</article>"
+    ).join("") + "</div>";
+  }
+  function flow(list) {
+    return '<div class="flow-row">' + list.map((p, i) =>
+      (i ? '<span class="flow-arrow">→</span>' : "") +
+      '<div class="flow-step"><div class="icon">' + String(i + 1).padStart(2, "0") + "</div><strong>" +
+      esc(p.titulo) + "</strong><span>" + esc(p.texto) + "</span></div>"
+    ).join("") + "</div>";
+  }
+
+  function buildSlides(d) {
+    const nome = (d.cliente && d.cliente.nome) || "Cliente";
+    const slides = [];
+    slides.push({
+      id: "capa", title: "Capa",
+      html: '<div class="inner">' +
+        '<div class="capa-partnership"><span>' + esc(nome) + '</span><span class="x">×</span><span>V4 Company</span></div>' +
+        "<h1>" + esc((d.capa && d.capa.linha1) || "Proposta comercial") +
+        ((d.capa && d.capa.linha2) ? "<br /><em>" + esc(d.capa.linha2) + "</em>" : "") + "</h1>" +
+        ((d.capa && d.capa.lead) ? '<p class="dlead" style="margin:.75rem auto 0;text-align:center;max-width:720px;">' + esc(d.capa.lead) + "</p>" : "") +
+        ((d.capa && d.capa.badge) ? '<span class="capa-badge" style="margin-top:1.25rem;">' + esc(d.capa.badge) + "</span>" : "") +
+        '<p class="slide-hint">Setas, scroll ou swipe para avançar →</p></div>'
+    });
+    slides.push({
+      id: "contexto", title: "Contexto",
+      html: '<div class="inner glass"><p class="eyebrow">Contexto ' + esc(nome) + "</p>" +
+        "<h2>O que já ficou claro<br />na jornada juntos</h2><div class=\"gold-line\"></div>" +
+        '<div class="grid-2"><article class="card"><h3>O que vocês já validaram</h3>' + ul(lines(d.contexto && d.contexto.validado)) +
+        '</article><article class="card"><h3>O desafio de escala</h3>' + ul(lines(d.contexto && d.contexto.desafio)) +
+        "</article></div>" +
+        ((d.contexto && d.contexto.quote) ? '<p class="quote">' + esc(d.contexto.quote) +
+          ((d.contexto.quoteFonte) ? "<span>" + esc(d.contexto.quoteFonte) + "</span>" : "") + "</p>" : "") +
+        "</div>"
+    });
+    const dores = pairs(d.dores);
+    if (dores.length) {
+      slides.push({
+        id: "dores", title: "Diagnóstico",
+        html: '<div class="inner glass"><p class="eyebrow">Diagnóstico</p>' +
+          "<h2>Onde a operação perde<br />previsibilidade</h2><div class=\"gold-line\"></div>" +
+          ((d.produto && d.produto.promessa) ? '<p class="dlead">' + esc(d.produto.promessa) + "</p>" : "") +
+          cardsPairs(dores, true) + "</div>"
+      });
+    }
+    if (d.case && d.case.ativo && d.case.nome) {
+      slides.push({
+        id: "case", title: "Case",
+        html: '<div class="inner glass"><p class="eyebrow">Prova interna</p>' +
+          "<h2>Case " + esc(d.case.nome) + "</h2><div class=\"gold-line\"></div>" +
+          '<div class="grid-2"><article class="card"><h3>Por que correlato</h3><p>' + esc(d.case.correlato || "") +
+          '</p></article><article class="card"><h3>O que usamos na mesa</h3><p>' + esc(d.case.resultado || "") +
+          "</p></article></div>" +
+          '<div class="path-note">Autoridade na narrativa — não um slide solto no final.</div></div>'
+      });
+    }
+    slides.push({
+      id: "solucao", title: "Solução",
+      html: '<div class="inner glass"><p class="eyebrow">' + esc((d.produto && d.produto.nome) || "Solução") + "</p>" +
+        "<h2>" + esc((d.solucao && d.solucao.titulo) || "O que a V4 instala") + "</h2><div class=\"gold-line\"></div>" +
+        ((d.solucao && d.solucao.lead) ? '<p class="dlead">' + esc(d.solucao.lead) + "</p>" : "") +
+        cardsPairs(pairs(d.solucao && d.solucao.pilares), true) +
+        ((d.solucao && d.solucao.fora) ? '<div class="path-note">' + esc(d.solucao.fora) + "</div>" : "") +
+        "</div>"
+    });
+    if (d.essencial && d.essencial.ativo && d.essencial.nome) {
+      slides.push({
+        id: "essencial", title: "Essencial",
+        html: '<div class="inner glass"><p class="eyebrow">Não é opcional</p>' +
+          "<h2>" + esc(d.essencial.nome) + "</h2><div class=\"gold-line\"></div>" +
+          '<p class="dlead">' + esc(d.essencial.porque || "") + "</p>" +
+          '<article class="card" style="margin-top:.85rem"><h3>O que fecha o problema</h3>' + ul(lines(d.essencial.inclui)) + "</article>" +
+          '<div class="bonus-box"><strong>Posicionamento</strong><p>Contratar só o core agora e descobrir o essencial em 90 dias custa mais. Hoje está na mesa com condição.</p></div></div>'
+      });
+    }
+    const jornada = pairs(d.jornada);
+    if (jornada.length) {
+      slides.push({
+        id: "jornada", title: "Como roda",
+        html: '<div class="inner glass"><p class="eyebrow">Como a oferta roda</p>' +
+          "<h2>Do diagnóstico ao time<br />operando no padrão</h2><div class=\"gold-line\"></div>" +
+          flow(jornada) + "</div>"
+      });
+    }
+    if (d.projecao && d.projecao.ativo && (d.projecao.conservadora || d.projecao.breakeven)) {
+      slides.push({
+        id: "projecao", title: "Projeção",
+        html: '<div class="inner glass"><p class="eyebrow">Projeção</p>' +
+          "<h2>Leitura conservadora.<br />Sem copiar o case maduro.</h2><div class=\"gold-line\"></div>" +
+          '<div class="grid-2"><article class="card"><h3>Premissa</h3><p>' + esc(d.projecao.conservadora || "") +
+          '</p></article><article class="card"><h3>Break-even / âncora</h3><p>' + esc(d.projecao.breakeven || "") +
+          "</p></article></div>" +
+          ((d.projecao.disclaimer) ? '<div class="path-note">' + esc(d.projecao.disclaimer) + "</div>" : "") +
+          "</div>"
+      });
+    }
+    const inv = d.investimento || {};
+    slides.push({
+      id: "investimento", title: "Investimento",
+      html: '<div class="inner glass"><p class="eyebrow">Investimento · um preço</p>' +
+        "<h2>Condição para fechar agora</h2><div class=\"gold-line\"></div>" +
+        '<div class="invest-hero"><article class="plan"><div class="plan-label">' + esc((d.produto && d.produto.nome) || "Projeto") + "</div>" +
+        "<h3>" + esc(nome) + "</h3>" +
+        '<p class="plan-sub">' + esc(inv.forma || "") + "</p>" +
+        '<div class="price-lines">' +
+          (inv.ancora ? '<div class="price-line"><span>Valor de referência</span><strong class="strike">' + esc(inv.ancora) + "</strong></div>" : "") +
+          (inv.condicao ? '<div class="price-line"><span>Condição</span><strong class="ok">' + esc(inv.condicao) + "</strong></div>" : "") +
+          (inv.validade ? '<div class="price-line"><span>Validade</span><strong>' + esc(inv.validade) + "</strong></div>" : "") +
+        "</div>" +
+        (inv.condicao ? '<div class="plan-price">' + esc(inv.condicao) + "</div>" : "") +
+        (inv.validade ? '<p class="plan-discount">' + esc(inv.validade) + "</p>" : "") +
+        ul(lines(inv.inclui)) + "</article>" +
+        "<div>" +
+          ((d.produto && d.produto.promessa) ? '<article class="card"><h3>O que vocês compram</h3><p>' + esc(d.produto.promessa) + "</p></article>" : "") +
+          (inv.bonus ? '<div class="bonus-box"><strong>Condição</strong><p>' + esc(inv.bonus) + "</p></div>" : "") +
+        "</div></div></div>"
+    });
+    const prox = pairs(d.proximos);
+    slides.push({
+      id: "proximos", title: "Próximos passos",
+      html: '<div class="inner glass"><p class="eyebrow">Fechamento</p>' +
+        "<h2>Próximos passos</h2><div class=\"gold-line\"></div>" +
+        (prox.length ? flow(prox) : "") +
+        ((d.fechamento && d.fechamento.cta) ? '<div class="cta-box" style="margin-top:1rem;"><h3>O que ' + esc(nome) + " leva com a V4</h3><p>" + esc(d.fechamento.cta) + "</p></div>" : "") +
+        ((d.fechamento && d.fechamento.quote) ? '<p class="quote" style="margin-top:.9rem;">' + esc(d.fechamento.quote) +
+          "<span>" + esc(nome) + " × V4 Company</span></p>" : "") +
+        "</div>"
+    });
+    return slides;
+  }
+
+  let nav = { current: 1, total: 1, slides: [] };
+
+  function bindDeck() {
+    const root = $("deck-root");
+    const sections = Array.from(root.querySelectorAll(".deck section"));
+    const navLinks = root.querySelectorAll(".nav-dots a");
+    const prevBtn = root.querySelector("#prevBtn");
+    const nextBtn = root.querySelector("#nextBtn");
+    const progressFill = root.querySelector("#progressFill");
+    const slideCounter = root.querySelector("#slideCounter");
+    const blendBar = root.querySelector(".blend-progress");
+    nav.total = sections.length;
+    nav.current = 1;
+    nav.slides = sections;
+
+    function updateUI() {
+      const p = nav.current / nav.total;
+      if (progressFill) progressFill.style.width = (p * 100) + "%";
+      if (slideCounter) slideCounter.textContent = nav.current + " / " + nav.total;
+      if (blendBar) blendBar.style.transform = "scaleX(" + Math.max(0.05, p) + ")";
+      document.documentElement.style.setProperty("--slide-progress", p);
+      if (prevBtn) prevBtn.disabled = nav.current === 1;
+      if (nextBtn) nextBtn.disabled = nav.current === nav.total;
+      navLinks.forEach((a) => a.classList.toggle("active", Number(a.dataset.slide) === nav.current));
+    }
+    function goTo(n, dir) {
+      if (n < 1 || n > nav.total || n === nav.current) return;
+      const prev = sections[nav.current - 1];
+      const next = sections[n - 1];
+      const fwd = dir === "forward" || (dir !== "back" && n > nav.current);
+      prev.classList.remove("slide-active");
+      prev.classList.add(fwd ? "slide-exit-left" : "slide-exit-right");
+      setTimeout(() => prev.classList.remove("slide-exit-left", "slide-exit-right"), 420);
+      next.classList.add("slide-active");
+      nav.current = n;
+      updateUI();
+    }
+    nav.goTo = goTo;
+    if (prevBtn) prevBtn.onclick = () => goTo(nav.current - 1, "back");
+    if (nextBtn) nextBtn.onclick = () => goTo(nav.current + 1, "forward");
+    navLinks.forEach((a) => a.addEventListener("click", (e) => { e.preventDefault(); goTo(Number(a.dataset.slide)); }));
+    const edit = root.querySelector(".edit-fab");
+    if (edit) edit.onclick = hideDeck;
+    updateUI();
+  }
+
+  function renderDeck(d) {
+    const slides = buildSlides(d);
+    const nome = (d.cliente && d.cliente.nome) || "Cliente";
+    const footer = (d.cliente && d.cliente.footer) || (nome + " × V4");
+    const dots = slides.map((s, i) =>
+      '<a href="#" data-slide="' + (i + 1) + '"' + (i === 0 ? ' class="active"' : "") + ' title="' + esc(s.title) + '"></a>'
+    ).join("");
+    const sections = slides.map((s, i) =>
+      '<section id="' + s.id + '"' + (i === 0 ? ' class="slide-active"' : "") + ' data-slide="' + (i + 1) + '">' +
+      LOGO + s.html + "</section>"
+    ).join("");
+    const baked = document.documentElement.classList.contains("baked");
+    $("deck-root").innerHTML =
+      '<div class="blend-progress" aria-hidden="true"></div>' +
+      (baked ? "" : '<button type="button" class="edit-fab">✎ Editar dados</button>') +
+      '<nav class="nav-dots" aria-label="Slides">' + dots + "</nav>" +
+      '<button type="button" class="nav-arrow nav-arrow--prev" id="prevBtn" disabled aria-label="Anterior">‹</button>' +
+      '<button type="button" class="nav-arrow nav-arrow--next" id="nextBtn" aria-label="Próximo">›</button>' +
+      '<div class="deck" id="deck">' + sections + "</div>" +
+      '<footer class="deck-footer"><span>' + esc(footer) + '</span><div class="progress-wrap"><div class="progress-fill" id="progressFill"></div></div><span id="slideCounter">1 / ' + slides.length + "</span></footer>";
+    document.title = nome + " × V4 — Proposta";
+    bindDeck();
+  }
+
+  function showDeck() {
+    persist();
+    renderDeck(collect());
+    document.body.classList.add("mode-deck");
+  }
+  function hideDeck() {
+    document.body.classList.remove("mode-deck");
+    document.title = "Modelo de proposta · V4";
+  }
+
+  function slug(name) {
+    return String(name || "cliente").normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "cliente";
+  }
+  function download(filename, text, type) {
+    const blob = new Blob([text], { type: type || "text/plain" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = filename;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  }
+  function baixarHtml() {
+    persist();
+    const data = collect();
+    const json = JSON.stringify(data, null, 2);
+    $("proposta-json").textContent = "\n" + json + "\n";
+    const html = "<!DOCTYPE html>\n" + document.documentElement.outerHTML.replace(
+      /<html([^>]*)>/i,
+      (_, attrs) => /class\s*=/.test(attrs)
+        ? `<html${attrs.replace(/class\s*=\s*["']([^"']*)["']/, (m, c) => c.includes("baked") ? m : `class="${c} baked"`)}>`
+        : `<html${attrs} class="baked">`
+    );
+    download("proposta-" + slug(data.cliente.nome) + ".html", html, "text/html;charset=utf-8");
+  }
+  function exportJson() {
+    persist();
+    const data = collect();
+    download("proposta-" + slug(data.cliente.nome) + ".json", JSON.stringify(data, null, 2), "application/json");
+  }
+
+  document.addEventListener("wheel", (e) => {
+    if (!document.body.classList.contains("mode-deck") && !document.documentElement.classList.contains("baked")) return;
+    if (Math.abs(e.deltaY) < 20) return;
+    e.preventDefault();
+    nav.goTo && nav.goTo(nav.current + (e.deltaY > 0 ? 1 : -1), e.deltaY > 0 ? "forward" : "back");
+  }, { passive: false });
+  document.addEventListener("keydown", (e) => {
+    const deckOn = document.body.classList.contains("mode-deck") || document.documentElement.classList.contains("baked");
+    if (!deckOn) return;
+    if (["ArrowRight", " ", "PageDown"].includes(e.key)) { e.preventDefault(); nav.goTo(nav.current + 1, "forward"); }
+    if (["ArrowLeft", "PageUp"].includes(e.key)) { e.preventDefault(); nav.goTo(nav.current - 1, "back"); }
+    if (e.key === "Escape" && !document.documentElement.classList.contains("baked")) hideDeck();
+  });
+  let tx = 0;
+  document.addEventListener("touchstart", (e) => { tx = e.changedTouches[0].screenX; }, { passive: true });
+  document.addEventListener("touchend", (e) => {
+    if (!document.body.classList.contains("mode-deck") && !document.documentElement.classList.contains("baked")) return;
+    const dx = e.changedTouches[0].screenX - tx;
+    if (Math.abs(dx) > 50) nav.goTo(nav.current + (dx < 0 ? 1 : -1), dx < 0 ? "forward" : "back");
+  }, { passive: true });
+
+  const GROUPS = [
+    { title: "Conta", q: "Qual conta e qual produto entra nesta proposta?", ask: "Headline no idioma do cliente — não genérico. Tipo do produto define o texto padrão da jornada." },
+    { title: "Gate", q: "A sala está pronta?", ask: "Decisor na call? CSAT? Quem influencia? Isso não vai para o deck do cliente." },
+    { title: "Diagnóstico", q: "O que já validaram — e o que está vazando?", ask: "Dores com nome. Quem sofre no dia a dia. Uma por linha: Título | texto." },
+    { title: "Case", q: "Qual prova interna correlata?", ask: "Mesmas travas, não o case mais bonito. Sem prometer o maduro." },
+    { title: "Solução", q: "Qual o core — e o que fecha 100%?", ask: "Core assume a dor #1. Essencial não é “se quiser”. Jornada é como roda." },
+    { title: "Projeção", q: "Qual a leitura conservadora?", ask: "BE em qual mês? Validado com ops? Disclaimer obrigatório." },
+    { title: "Preço", q: "Um preço, uma decisão.", ask: "Âncora riscada → condição da sala. Mesma forma da EE. Depois os sprints se fechar agora." }
+  ];
+  let wiz = 0;
+  function setWizard(n) {
+    wiz = Math.max(0, Math.min(GROUPS.length - 1, n));
+    document.querySelectorAll(".form-block").forEach((el) => {
+      el.classList.toggle("on", Number(el.dataset.group) === wiz);
+    });
+    const rail = $("wizardRail");
+    if (rail) {
+      rail.innerHTML = GROUPS.map((g, i) =>
+        '<button type="button" data-g="' + i + '" class="' + (i === wiz ? "on" : (i < wiz ? "done" : "")) + '"><span class="n">0' + (i + 1) + '</span><span class="t">' + g.title + "</span></button>"
+      ).join("");
+      rail.querySelectorAll("button").forEach((b) => b.onclick = () => setWizard(Number(b.dataset.g)));
+    }
+    const box = $("coachBox");
+    if (box) box.innerHTML = "<strong>" + GROUPS[wiz].q + "</strong><div class=\"ask\">" + GROUPS[wiz].ask + "</div>";
+    if ($("wizCount")) $("wizCount").textContent = (wiz + 1) + " / " + GROUPS.length;
+    if ($("btnPrevStep")) $("btnPrevStep").disabled = wiz === 0;
+    if ($("btnNextStep")) $("btnNextStep").textContent = wiz === GROUPS.length - 1 ? "Ver proposta →" : "Próximo →";
+    const on = document.querySelector(".form-block.on");
+    if (on) on.scrollIntoView({ block: "start", behavior: "smooth" });
+  }
+  function toggleListAll() {
+    const all = document.body.classList.toggle("list-all");
+    document.body.classList.toggle("wizard", !all);
+    if ($("btnToggleView")) $("btnToggleView").textContent = all ? "Voltar ao passo a passo" : "Ver todos os blocos";
+  }
+
+  $("btnVer").onclick = showDeck;
+  $("btnBaixar").onclick = baixarHtml;
+  $("btnJsonOut").onclick = exportJson;
+  $("btnJsonIn").onclick = () => $("jsonFile").click();
+  $("jsonFile").onchange = (e) => {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      try { fill(JSON.parse(reader.result)); persist(); }
+      catch (err) { alert("JSON inválido."); }
+    };
+    reader.readAsText(file);
+    e.target.value = "";
+  };
+  $("btnExemplo").onclick = () => { fill(parsePageJson()); persist(); setWizard(0); };
+  $("btnNova").onclick = () => { if (confirm("Limpar e aplicar o padrão do produto selecionado?")) { blank(); setWizard(0); } };
+  $("btnPreset").onclick = () => {
+    if (confirm("Aplicar textos padrão deste produto? Não mexe em cliente, dores, case nem preço.")) applyPreset();
+  };
+  if ($("btnPrevStep")) $("btnPrevStep").onclick = () => setWizard(wiz - 1);
+  if ($("btnNextStep")) $("btnNextStep").onclick = () => {
+    if (wiz === GROUPS.length - 1) showDeck();
+    else setWizard(wiz + 1);
+  };
+  if ($("btnVerMini")) $("btnVerMini").onclick = showDeck;
+  if ($("btnToggleView")) $("btnToggleView").onclick = toggleListAll;
+  if ($("clienteNome")) {
+    $("clienteNome").addEventListener("input", () => {
+      const n = $("clienteNome").value.trim();
+      if (n && $("footerTxt") && (!$("footerTxt").value || /× V4/.test($("footerTxt").value))) {
+        $("footerTxt").value = n + " × V4 Company";
+      }
+    });
+  }
+  FIELDS.forEach((id) => { const el = $(id); if (el) el.addEventListener("change", persist); });
+  CHECKS.forEach((id) => { const el = $(id); if (el) el.addEventListener("change", persist); });
+
+  let baked = document.documentElement.classList.contains("baked");
+  const forceEdit = /[?&]edit=1/.test(location.search);
+  if (baked && forceEdit) {
+    document.documentElement.classList.remove("baked");
+    baked = false;
+  }
+  const pageData = parsePageJson();
+  let start = null;
+  let hadSave = false;
+  if (!baked) {
+    try {
+      const saved = localStorage.getItem(STORE);
+      if (saved) { start = JSON.parse(saved); hadSave = true; }
+    } catch (e) {}
+  } else {
+    start = pageData;
+  }
+  document.body.classList.add("wizard");
+  if (hadSave) fill(start);
+  else if (baked) fill(pageData);
+  else { fill(pageData); blank(); }
+  setWizard(0);
+  if (baked) {
+    document.body.classList.add("mode-deck");
+    renderDeck(start || collect());
+  }
+})();
+</script>
+</body>
+</html>
