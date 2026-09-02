@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta name="eqv-deck-version" content="freebong-remax-layout-19500">
+  <title>Freebong · Empresa que Vende | V4 Company</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+  <style>
+    :root { --v4-red: #e50914; --v4-orange: #ff481f; }
+    * { box-sizing: border-box; }
+    html, body { width:100%; height:100%; margin:0; overflow:hidden; background:#171313; }
+    button { font-family: inherit; }
+    #viewport { position:fixed; inset:0; overflow:hidden; background:radial-gradient(circle at 50% 10%, rgba(229,9,20,.18), transparent 38%), #171313; }
+    #deck { --deck-scale:1; position:absolute; left:50%; top:50%; width:1600px; height:900px; overflow:hidden;
+      transform:translate(-50%,-50%) scale(var(--deck-scale)); transform-origin:center; background:#0b0000;
+      box-shadow:0 40px 120px rgba(0,0,0,.45); }
+    .slide { position:absolute; inset:0; width:1600px; height:900px; margin:0; padding:0; overflow:hidden; opacity:0; pointer-events:none; }
+    .slide.active { opacity:1; pointer-events:auto; }
+    .slide img { width:1600px; height:900px; object-fit:fill; display:block; user-select:none; -webkit-user-drag:none; }
+    .navigation { position:absolute; z-index:20; right:52px; bottom:25px; display:flex; gap:10px; }
+    .nav-btn { width:48px; height:48px; display:grid; place-items:center; border:1px solid rgba(255,255,255,.28);
+      border-radius:50%; color:#141414; background:rgba(255,255,255,.92); box-shadow:0 10px 30px rgba(0,0,0,.28); cursor:pointer; }
+    .nav-btn:disabled { opacity:.3; cursor:default; }
+    .nav-btn svg { width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:2.3; stroke-linecap:round; stroke-linejoin:round; }
+    .progress-track { position:absolute; z-index:21; left:0; right:0; bottom:0; height:6px; background:rgba(255,255,255,.18); }
+    .progress-fill { height:100%; width:5%; background:linear-gradient(90deg, var(--v4-red), var(--v4-orange)); transition:width .3s ease; }
+    .slide-counter { position:absolute; z-index:22; right:176px; bottom:39px; color:rgba(255,255,255,.7);
+      font:500 12px/1 "IBM Plex Mono", monospace; letter-spacing:.04em; text-shadow:0 1px 8px rgba(0,0,0,.7); }
+  </style>
+</head>
+<body>
+  <div id="viewport">
+    <main id="deck">
+      <section class="slide active" data-title="Capa"><img alt="Capa" src="pages/p01.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="Crescimento previsível"><img alt="Crescimento previsível" src="pages/p02.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="O programa"><img alt="O programa" src="pages/p03.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="Vender"><img alt="Vender" src="pages/p04.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="Para quem é"><img alt="Para quem é" src="pages/p05.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="A jornada · mês 01"><img alt="A jornada · mês 01" src="pages/p06.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="A jornada · mês 02"><img alt="A jornada · mês 02" src="pages/p07.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="A jornada · mês 03"><img alt="A jornada · mês 03" src="pages/p08.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="A jornada · mês 04"><img alt="A jornada · mês 04" src="pages/p09.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="A jornada · mês 05/06"><img alt="A jornada · mês 05/06" src="pages/p10.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="3 sessões"><img alt="3 sessões" src="pages/p11.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="Sessão 01"><img alt="Sessão 01" src="pages/p12.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="Sessão 02"><img alt="Sessão 02" src="pages/p13.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="Sessão 03"><img alt="Sessão 03" src="pages/p14.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="Fábrica de Receita"><img alt="Fábrica de Receita" src="pages/p15.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="Comunidade"><img alt="Comunidade" src="pages/p16.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="Por que a V4"><img alt="Por que a V4" src="pages/p17.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="Por que a V4"><img alt="Por que a V4" src="pages/p18.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="Investimento"><img alt="Investimento" src="pages/p19.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="Garantia"><img alt="Garantia" src="pages/p20.jpg" width="1600" height="900"></section>
+      <div class="slide-counter" id="slideCounter">01 / 20</div>
+      <nav class="navigation" aria-label="Navegação">
+        <button class="nav-btn" id="prevBtn" aria-label="Anterior"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+        <button class="nav-btn" id="nextBtn" aria-label="Próximo"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+      </nav>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    </main>
+  </div>
+  <script>
+    const deck = document.getElementById("deck");
+    const slidesEls = Array.from(document.querySelectorAll(".slide"));
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const slideCounter = document.getElementById("slideCounter");
+    const progressFill = document.getElementById("progressFill");
+    let current = 0;
+    function fitDeck() {
+      const w = window.visualViewport?.width || window.innerWidth;
+      const h = window.visualViewport?.height || window.innerHeight;
+      deck.style.setProperty("--deck-scale", Math.max(.1, Math.min((w-16)/1600,(h-16)/900,1)));
+    }
+    function goTo(index) {
+      current = Math.max(0, Math.min(slidesEls.length-1, index));
+      slidesEls.forEach((s,i)=>s.classList.toggle("active", i===current));
+      slideCounter.textContent = String(current+1).padStart(2,"0")+" / "+String(slidesEls.length).padStart(2,"0");
+      progressFill.style.width = ((current+1)/slidesEls.length)*100+"%";
+      prevBtn.disabled = current===0; nextBtn.disabled = current===slidesEls.length-1;
+      document.title = String(current+1).padStart(2,"0")+" | "+(slidesEls[current].dataset.title||"EQV")+" · Freebong";
+    }
+    prevBtn.onclick = (e)=>{ e.stopPropagation(); goTo(current-1); };
+    nextBtn.onclick = (e)=>{ e.stopPropagation(); goTo(current+1); };
+    deck.addEventListener("click", (e)=>{ if(e.target.closest(".nav-btn")) return; goTo(current+1); });
+    window.addEventListener("resize", fitDeck);
+    window.visualViewport?.addEventListener("resize", fitDeck);
+    window.addEventListener("keydown", (e)=>{
+      if(["ArrowRight","PageDown"," "].includes(e.key)){ e.preventDefault(); goTo(current+1); }
+      if(["ArrowLeft","PageUp"].includes(e.key)){ e.preventDefault(); goTo(current-1); }
+      if(e.key==="Home") goTo(0); if(e.key==="End") goTo(slidesEls.length-1);
+    });
+    let tx=null;
+    deck.addEventListener("touchstart", e=>tx=e.changedTouches[0].clientX, {passive:true});
+    deck.addEventListener("touchend", e=>{ if(tx==null) return; const d=e.changedTouches[0].clientX-tx; if(Math.abs(d)>70) goTo(current+(d<0?1:-1)); tx=null; }, {passive:true});
+    fitDeck(); goTo(0);
+  </script>
+</body>
+</html>
