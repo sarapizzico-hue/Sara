@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <title>Modelo de proposta · V4</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -1136,7 +1137,7 @@
   function fitDeck() {
     const deck = document.getElementById("deck");
     if (!deck) return;
-    const scale = Math.min(window.innerWidth / 1600, window.innerHeight / 900);
+    const scale = Math.min(window.innerWidth / 1600, window.innerHeight / 900) * 0.92;
     deck.style.setProperty("--deck-scale", String(scale));
   }
 
