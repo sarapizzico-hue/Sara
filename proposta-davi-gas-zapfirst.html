@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Davi Gás × V4 Company — ZapFirst Completo + Social Mídia · 6 meses</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@550;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --red: #e3040a;
+      --red-deep: #a10f14;
+      --ink: #111111;
+      --paper: #f7f5f4;
+      --white: #fff;
+      --muted: #5c5c5c;
+      --line: #e6e1df;
+      --soft: #f3efed;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; overflow: hidden; }
+    body {
+      font: 15px/1.55 Inter, system-ui, sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, .brand { font-family: Sora, Inter, sans-serif; }
+
+    .blend-progress {
+      position: fixed; top: 0; left: 0; right: 0; height: 4px; z-index: 200;
+      background: var(--red);
+      transform-origin: left; transform: scaleX(0.11);
+      transition: transform 0.35s var(--ease);
+    }
+    .nav-dots {
+      position: fixed; right: 1rem; top: 50%; transform: translateY(-50%);
+      z-index: 100; display: flex; flex-direction: column; gap: 0.38rem;
+    }
+    .nav-dots a {
+      width: 8px; height: 8px; border-radius: 50%;
+      border: 2px solid rgba(17,17,17,0.28); background: transparent;
+      transition: all 0.25s var(--ease); display: block;
+    }
+    .nav-dots a:hover, .nav-dots a.active {
+      background: var(--red); border-color: var(--red); transform: scale(1.2);
+    }
+    .nav-arrow {
+      position: fixed; top: 50%; transform: translateY(-50%); z-index: 100;
+      width: 46px; height: 46px; border-radius: 50%;
+      border: 1px solid var(--line); background: var(--white);
+      color: var(--ink); cursor: pointer; display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; line-height: 1;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+    .nav-arrow:hover:not(:disabled) { border-color: var(--red); color: var(--red); }
+    .nav-arrow:disabled { opacity: 0.3; cursor: default; }
+    .nav-arrow--prev { left: 1rem; }
+    .nav-arrow--next { right: 3rem; }
+
+    .deck { position: relative; width: 100vw; height: 100vh; overflow: hidden; }
+    section.slide {
+      position: absolute; inset: 0; width: 100%; height: 100vh;
+      padding: 1.25rem 1.25rem 3.75rem;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      overflow-y: auto;
+      opacity: 0; visibility: hidden; transform: translateX(56px);
+      transition: opacity 0.35s var(--ease), transform 0.35s var(--ease), visibility 0.35s;
+      z-index: 0;
+    }
+    section.slide.slide-active { opacity: 1; visibility: visible; transform: translateX(0); z-index: 2; }
+    section.slide.slide-exit-left { transform: translateX(-56px); opacity: 0; }
+    section.slide.slide-exit-right { transform: translateX(56px); opacity: 0; }
+
+    .inner { width: 100%; max-width: 920px; max-height: calc(100vh - 4.5rem); }
+    .slide-top {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px; margin-bottom: 14px; flex-wrap: wrap;
+    }
+    .brand { font-weight: 800; font-size: 13px; color: var(--ink); }
+    .brand span { color: var(--red); }
+    .client-badge {
+      background: #fff; border: 1px solid var(--line); border-radius: 10px;
+      padding: 6px 14px; font-family: Sora, sans-serif; font-weight: 800;
+      font-size: 13px; color: var(--ink);
+    }
+    .client-badge span { color: var(--red); }
+
+    .hero {
+      background: linear-gradient(145deg, #1a1a1a 0%, #2b0a0b 45%, var(--red-deep) 100%);
+      color: #fff; border-radius: 24px; padding: 36px 32px;
+      box-shadow: 0 24px 60px rgba(161, 15, 20, 0.22);
+    }
+    .hero .eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: rgba(255,255,255,.7); margin-bottom: 10px;
+    }
+    .hero-logos {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap;
+    }
+    .hero-logos .v4 { font-family: Sora, sans-serif; font-weight: 800; font-size: 18px; color: #fff; }
+    .hero-logos .x { opacity: .55; font-weight: 700; color: #fff; }
+    .hero-logos .client-name {
+      font-family: Sora, sans-serif; font-weight: 800; font-size: 18px; color: #fff;
+    }
+    .hero h1 {
+      margin: 0 0 12px; font-size: clamp(26px, 4vw, 38px); font-weight: 800;
+      letter-spacing: -.03em; line-height: 1.15; color: #fff;
+    }
+    .hero p { margin: 0 0 8px; max-width: 560px; color: rgba(255,255,255,.88); font-size: 15px; }
+    .slide-hint { margin-top: 18px; font-size: 13px; color: rgba(255,255,255,.55); }
+
+    .stats-row {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 18px;
+    }
+    @media (max-width: 760px) { .stats-row { grid-template-columns: 1fr 1fr; } }
+    .stat {
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 14px; padding: 14px 16px;
+    }
+    .stat .val { font-family: Sora, sans-serif; font-size: 22px; font-weight: 800; color: #fff; }
+    .stat .lbl { font-size: 11px; color: rgba(255,255,255,.65); margin-top: 2px; }
+
+    .panel {
+      background: var(--white); border: 1px solid var(--line); border-radius: 20px;
+      padding: 26px 28px; box-shadow: 0 14px 40px rgba(0,0,0,0.04);
+    }
+    .section-head { margin-bottom: 14px; }
+    .section-head .k {
+      font-size: 11px; font-weight: 800; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--red); margin-bottom: 4px;
+    }
+    .section-head h2 {
+      margin: 0; font-size: clamp(20px, 3vw, 26px); font-weight: 800;
+      color: var(--ink); letter-spacing: -.02em; line-height: 1.2;
+    }
+    .section-head p { margin: 8px 0 0; color: var(--muted); font-size: 14px; max-width: 680px; }
+
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 720px) { .grid2 { grid-template-columns: 1fr; } }
+    .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    @media (max-width: 720px) { .grid3 { grid-template-columns: 1fr; } }
+
+    .card {
+      background: var(--soft); border: 1px solid var(--line);
+      border-radius: 14px; padding: 16px 18px;
+    }
+    .card h3 { margin: 0 0 6px; font-size: 15px; font-weight: 700; color: var(--ink); }
+    .card p, .card li { font-size: 13px; color: #3d3d3d; margin: 0; }
+    .card ul { margin: 8px 0 0; padding-left: 16px; }
+    .card li { margin: 4px 0; }
+    .card .tag {
+      display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--red);
+      background: #fdeaea; border-radius: 6px; padding: 2px 8px; margin-bottom: 8px;
+    }
+
+    .flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 14px; }
+    @media (max-width: 800px) { .flow { grid-template-columns: 1fr 1fr; } }
+    .flow-step { background: var(--soft); border: 1px solid var(--line); border-radius: 12px; padding: 12px; }
+    .flow-step .n { font-size: 10px; font-weight: 800; color: var(--red); letter-spacing: .08em; text-transform: uppercase; }
+    .flow-step .t { font-size: 13px; font-weight: 700; color: var(--ink); margin: 4px 0 2px; }
+    .flow-step .d { font-size: 12px; color: var(--muted); line-height: 1.4; }
+
+    .quote {
+      border-left: 3px solid var(--red); padding: 4px 0 4px 14px; margin: 14px 0 0;
+      font-size: 14px; font-weight: 600; color: var(--ink);
+    }
+
+    .method-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 14px; }
+    @media (max-width: 760px) { .method-steps { grid-template-columns: 1fr 1fr; } }
+    .method-step {
+      border-radius: 14px; padding: 14px 16px; border: 1px solid var(--line);
+    }
+    .method-step:nth-child(1) { background: #fff3f3; }
+    .method-step:nth-child(2) { background: #fff8f0; }
+    .method-step:nth-child(3) { background: #f0f7ff; }
+    .method-step:nth-child(4) { background: #f0fff5; }
+    .method-step .num { font-family: Sora, sans-serif; font-size: 24px; font-weight: 800; color: var(--red); }
+    .method-step h3 { font-size: 14px; font-weight: 700; color: var(--ink); margin: 4px 0 6px; }
+    .method-step p { font-size: 12px; color: var(--muted); line-height: 1.4; }
+
+    .deliverables { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    @media (max-width: 760px) { .deliverables { grid-template-columns: 1fr 1fr; } }
+    .del-item {
+      background: var(--soft); border: 1px solid var(--line); border-radius: 12px; padding: 14px;
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .del-item .ico { font-size: 20px; }
+    .del-item .name { font-size: 13px; font-weight: 700; color: var(--ink); }
+    .del-item .desc { font-size: 11px; color: var(--muted); line-height: 1.3; }
+
+    .timeline { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; margin-top: 14px; }
+    @media (max-width: 760px) { .timeline { grid-template-columns: 1fr 1fr 1fr; } }
+    .tl-col {
+      background: var(--soft); border: 1px solid var(--line); border-radius: 12px;
+      padding: 12px 10px; text-align: center;
+    }
+    .tl-col .mes { font-size: 10px; font-weight: 800; color: var(--red); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 6px; }
+    .tl-col .fase { font-size: 11px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+    .tl-col .items { font-size: 10px; color: var(--muted); line-height: 1.4; }
+    .tl-col.highlight { background: #fff3f3; border-color: #f5bfbf; }
+
+    .steps { margin: 0; padding-left: 0; list-style: none; counter-reset: s; }
+    .steps li {
+      counter-increment: s; display: grid; grid-template-columns: 36px 1fr; gap: 12px;
+      padding: 12px 0; border-bottom: 1px solid var(--line);
+    }
+    .steps li:last-child { border-bottom: 0; }
+    .steps li::before {
+      content: counter(s, decimal-leading-zero); font-family: Sora, sans-serif;
+      font-weight: 800; font-size: 13px; color: var(--red); padding-top: 2px;
+    }
+    .steps strong { display: block; color: var(--ink); font-size: 14px; }
+    .steps span { display: block; color: var(--muted); font-size: 13px; margin-top: 2px; }
+
+    .offer {
+      background: var(--white); border: 2px solid var(--red); border-radius: 22px;
+      padding: 28px 26px 22px; box-shadow: 0 25px 80px rgba(227, 4, 10, 0.12);
+    }
+    .offer .label {
+      font-size: 10px; font-weight: 900; letter-spacing: .13em;
+      color: var(--red); text-transform: uppercase;
+    }
+    .offer h3 { font-size: 22px; margin: 10px 0 6px; color: var(--ink); font-weight: 800; }
+    .offer .sub { font-size: 13px; color: var(--muted); margin-bottom: 16px; }
+
+    .price-combo {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 18px;
+    }
+    @media (max-width: 700px) { .price-combo { grid-template-columns: 1fr; } }
+    .price-item {
+      background: var(--soft); border: 1px solid var(--line); border-radius: 14px;
+      padding: 14px 16px;
+    }
+    .price-item .pi-label { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px; }
+    .price-item .pi-val { font-family: Sora, sans-serif; font-size: 22px; font-weight: 800; color: var(--ink); }
+    .price-item .pi-sub { font-size: 11px; color: var(--muted); }
+
+    .price-total {
+      background: linear-gradient(135deg, #1a1a1a, #2b0a0b);
+      border-radius: 16px; padding: 20px 22px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+      margin-bottom: 14px;
+    }
+    .price-total .pt-label { font-size: 12px; font-weight: 700; color: rgba(255,255,255,.7); }
+    .price-total .pt-val { font-family: Sora, sans-serif; font-size: 28px; font-weight: 800; color: #fff; letter-spacing: -.02em; }
+    .price-total .pt-sub { font-size: 12px; color: rgba(255,255,255,.55); }
+
+    .price-card {
+      background: var(--soft); border: 1px solid var(--line); border-radius: 14px;
+      padding: 16px 18px; margin-bottom: 12px;
+    }
+    .price-card .pc-label { font-size: 11px; font-weight: 700; color: var(--red); text-transform: uppercase; letter-spacing: .06em; }
+    .price-card .pc-val { font-family: Sora, sans-serif; font-size: 30px; font-weight: 800; color: var(--ink); letter-spacing: -.02em; margin: 4px 0; }
+    .price-card .pc-sub { font-size: 12px; color: var(--muted); }
+
+    .includes { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 14px; }
+    @media (max-width: 640px) { .includes { grid-template-columns: 1fr; } }
+    .inc-item { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: #3d3d3d; padding: 6px 0; }
+    .inc-item::before { content: "✓"; color: var(--red); font-weight: 700; flex-shrink: 0; }
+
+    .note-box {
+      background: #fff7f0; border: 1px solid #f5d5b0; border-radius: 12px;
+      padding: 12px 14px; font-size: 12px; color: #7d4b10; margin-top: 12px;
+    }
+    .note-box strong { color: #a05a0a; }
+
+    .deck-footer {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 150;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 0.6rem 1.25rem; background: rgba(247,245,244,0.95);
+      border-top: 1px solid var(--line); font-size: 12px; color: var(--muted);
+      backdrop-filter: blur(8px);
+    }
+    .progress-wrap { flex: 1; max-width: 200px; height: 4px; background: var(--line); border-radius: 2px; }
+    .progress-fill { height: 100%; background: var(--red); border-radius: 2px; transition: width 0.35s var(--ease); }
+
+    @media (max-width: 760px) {
+      .nav-arrow--next { right: 1rem; }
+      .nav-dots { display: none; }
+      .hero, .panel, .offer { padding: 22px 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="blend-progress" aria-hidden="true"></div>
+
+  <nav class="nav-dots" aria-label="Slides">
+    <a href="#capa"        data-slide="1" class="active" aria-label="Capa"></a>
+    <a href="#diagnostico" data-slide="2" aria-label="Diagnóstico"></a>
+    <a href="#metodologia" data-slide="3" aria-label="Metodologia 3P-IA"></a>
+    <a href="#zapfirst"    data-slide="4" aria-label="ZapFirst Entregas"></a>
+    <a href="#social"      data-slide="5" aria-label="Social Mídia"></a>
+    <a href="#cronograma"  data-slide="6" aria-label="Cronograma"></a>
+    <a href="#proximos"    data-slide="7" aria-label="Próximos Passos"></a>
+    <a href="#investimento" data-slide="8" aria-label="Investimento"></a>
+    <a href="#roi"         data-slide="9" aria-label="ROI"></a>
+  </nav>
+
+  <button type="button" class="nav-arrow nav-arrow--prev" id="prevBtn" disabled aria-label="Anterior">‹</button>
+  <button type="button" class="nav-arrow nav-arrow--next" id="nextBtn" aria-label="Próximo">›</button>
+
+  <div class="deck" id="deck">
+
+    <!-- 1 CAPA -->
+    <section class="slide slide-active" id="capa" data-slide="1">
+      <div class="inner">
+        <div class="hero">
+          <div class="hero-logos">
+            <span class="v4">V4 <span style="color:#ff6b6f">Company</span></span>
+            <span class="x">×</span>
+            <span class="client-name">Davi Gás</span>
+          </div>
+          <div class="eyebrow">Proposta Estratégica · ZapFirst Completo + Social Mídia · 6 meses</div>
+          <h1>Transformar o WhatsApp em máquina de vendas e dominar o digital no GLP.</h1>
+          <p>
+            17.000 botijões por mês. 70% das vendas já passam pelo WhatsApp.
+            A operação existe — o que falta é estrutura, processo e presença digital para
+            crescer para 20.000 com previsibilidade e sem depender do dono.
+          </p>
+          <div class="stats-row">
+            <div class="stat">
+              <div class="val">R$ 2M</div>
+              <div class="lbl">Faturamento / mês</div>
+            </div>
+            <div class="stat">
+              <div class="val">17–18k</div>
+              <div class="lbl">Botijões P13 / mês</div>
+            </div>
+            <div class="stat">
+              <div class="val">14</div>
+              <div class="lbl">Municípios atendidos</div>
+            </div>
+            <div class="stat">
+              <div class="val">19</div>
+              <div class="lbl">Unidades / revendas</div>
+            </div>
+          </div>
+          <p class="slide-hint">Clique nas setas laterais para virar a página →</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 DIAGNÓSTICO -->
+    <section class="slide" id="diagnostico" data-slide="2">
+      <div class="inner">
+        <div class="slide-top">
+          <div class="brand">V4 <span>COMPANY</span> · Davi Gás</div>
+          <div class="client-badge">Davi <span>Gás</span></div>
+        </div>
+        <div class="panel">
+          <div class="section-head">
+            <div class="k">Diagnóstico estratégico</div>
+            <h2>A operação escala. O digital ainda não acompanha.</h2>
+            <p>
+              A Davi Gás (ADN Distribuidora) tem escala, capilaridade e canal WhatsApp ativo.
+              O que falta é estrutura digital para capturar a demanda que os concorrentes já estão roubando no Google — e um processo comercial que não dependa da presença do dono.
+            </p>
+          </div>
+          <div class="grid2">
+            <div class="card">
+              <div class="tag">Gargalo 01</div>
+              <h3>Baixa maturidade digital</h3>
+              <p>Operação depende de offline e indicações. Sem estrutura profissional de aquisição online, o crescimento fica limitado ao boca a boca.</p>
+            </div>
+            <div class="card">
+              <div class="tag">Gargalo 02</div>
+              <h3>Atraso competitivo na busca local</h3>
+              <p>Concorrentes já dominam o Google Meu Negócio e a busca local. Clientes que buscam conveniência e rapidez estão indo para o concorrente.</p>
+            </div>
+            <div class="card">
+              <div class="tag">Gargalo 03</div>
+              <h3>Dependência operacional do dono</h3>
+              <p>Alta centralização no proprietário trava a expansão. Sem processo documentado, escalar para o 15º município é arriscado.</p>
+            </div>
+            <div class="card">
+              <div class="tag">Gargalo 04</div>
+              <h3>WhatsApp sem processo comercial</h3>
+              <p>70% das vendas passam pelo WhatsApp — mas sem catálogo estruturado, scripts e CRM, cada atendimento é improvisado. Vendas escapam na chegada.</p>
+            </div>
+          </div>
+          <p class="quote">Meta: 20.000 botijões/mês até o final do ano. O caminho passa por dominar o digital e estruturar o canal que já converte.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 METODOLOGIA -->
+    <section class="slide" id="metodologia" data-slide="3">
+      <div class="inner">
+        <div class="slide-top">
+          <div class="brand">V4 <span>COMPANY</span> · Davi Gás</div>
+          <div class="client-badge">Davi <span>Gás</span></div>
+        </div>
+        <div class="panel">
+          <div class="section-head">
+            <div class="k">A metodologia do ZapFirst</div>
+            <h2>3P-IA: a sequência que garante resultado.</h2>
+            <p>
+              A ordem importa. Antes de qualquer automação, estruturamos produto, processo e pessoas.
+              A inteligência artificial entra somente depois que a base humana está sólida —
+              porque colocar IA em cima de caos é garantia de fracasso.
+            </p>
+          </div>
+          <div class="method-steps">
+            <div class="method-step">
+              <div class="num">01</div>
+              <h3>Produto</h3>
+              <p>Catálogo de botijões P5, P8, P13, P20 e P45 estruturado. Oferta clara, precificação definida por canal. Sem produto bem descrito, nenhum processo funciona.</p>
+            </div>
+            <div class="method-step">
+              <div class="num">02</div>
+              <h3>Processo</h3>
+              <p>Fluxo comercial completo: da chegada do pedido pelo WhatsApp ao fechamento e confirmação de entrega. Scripts, etapas, SLAs por unidade.</p>
+            </div>
+            <div class="method-step">
+              <div class="num">03</div>
+              <h3>Pessoas</h3>
+              <p>Time das 19 unidades treinado e com playbook. Cada atendente sabe o que responder, quando escalar e como fechar o pedido sem precisar do dono.</p>
+            </div>
+            <div class="method-step">
+              <div class="num">IA</div>
+              <h3>Inteligência Artificial</h3>
+              <p>SDR de IA entra para ampliar e automatizar o que já funciona — primeiro atendimento 24/7, qualificação do pedido e direcionamento para a unidade correta.</p>
+            </div>
+          </div>
+          <div class="flow" style="grid-template-columns: repeat(5,1fr); margin-top: 14px;">
+            <div class="flow-step"><div class="n">Mês 1</div><div class="t">Setup digital</div><div class="d">GMB, Instagram, LP, WhatsApp Business</div></div>
+            <div class="flow-step"><div class="n">Mês 1-2</div><div class="t">Produto & Processo</div><div class="d">Catálogo, scripts, fluxo comercial</div></div>
+            <div class="flow-step"><div class="n">Mês 2</div><div class="t">Pessoas</div><div class="d">Treinamento das 19 unidades</div></div>
+            <div class="flow-step"><div class="n">Mês 3</div><div class="t">IA + CRM</div><div class="d">SDR IA ativo, Kommo configurado</div></div>
+            <div class="flow-step"><div class="n">Mês 4-6</div><div class="t">Escala</div><div class="d">Social Mídia + mídia paga + otimização contínua</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 ZAPFIRST ENTREGAS -->
+    <section class="slide" id="zapfirst" data-slide="4">
+      <div class="inner">
+        <div class="slide-top">
+          <div class="brand">V4 <span>COMPANY</span> · Davi Gás</div>
+          <div class="client-badge">Davi <span>Gás</span></div>
+        </div>
+        <div class="panel">
+          <div class="section-head">
+            <div class="k">ZapFirst — Plano Completo</div>
+            <h2>10 entregas concretas. Uma máquina funcionando.</h2>
+            <p>Cada entrega é pensada para converter mais botijões no WhatsApp e capturar quem busca gás no Google — da chegada do lead ao pedido fechado.</p>
+          </div>
+          <div class="deliverables">
+            <div class="del-item">
+              <div class="ico">📍</div>
+              <div class="name">Google Meu Negócio</div>
+              <div class="desc">Perfil otimizado para as 19 unidades: fotos, categorias, botão de WhatsApp como ação principal. Dominar a busca local em 14 municípios.</div>
+            </div>
+            <div class="del-item">
+              <div class="ico">📱</div>
+              <div class="name">Instagram com CTA</div>
+              <div class="desc">Bio reescrita, link configurado, CTA direcionando para o WhatsApp de pedidos. Presença profissional alinhada à operação.</div>
+            </div>
+            <div class="del-item">
+              <div class="ico">🌐</div>
+              <div class="name">LP / Site de Conversão</div>
+              <div class="desc">Landing page focada em captura de lead com botão de WhatsApp acima da dobra. Para quem busca gás na região.</div>
+            </div>
+            <div class="del-item">
+              <div class="ico">📦</div>
+              <div class="name">Catálogo no WhatsApp</div>
+              <div class="desc">P5, P8, P13, P20 e P45 fotografados, descritos e precificados no WhatsApp Business. Cliente vê, escolhe e pede sem sair do chat.</div>
+            </div>
+            <div class="del-item">
+              <div class="ico">📝</div>
+              <div class="name">Scripts de Atendimento</div>
+              <div class="desc">Roteiros para recepção, qualificação, proposta, objeções, fechamento e pós-venda. Padroniza as 19 unidades.</div>
+            </div>
+            <div class="del-item">
+              <div class="ico">🔄</div>
+              <div class="name">Fluxo Comercial</div>
+              <div class="desc">Processo de vendas mapeado do primeiro contato ao fechamento, com SLAs de resposta por unidade. Reduz a dependência do dono.</div>
+            </div>
+            <div class="del-item">
+              <div class="ico">💳</div>
+              <div class="name">PIX Integrado</div>
+              <div class="desc">Link de cobrança por produto, QR code no chat. O cliente pede e paga sem sair do WhatsApp — zero fricção no fechamento.</div>
+            </div>
+            <div class="del-item">
+              <div class="ico">🎓</div>
+              <div class="name">Treinamento do Time</div>
+              <div class="desc">Capacitação completa com o time das unidades + playbook editável permanente. Cada atendente opera com processo.</div>
+            </div>
+            <div class="del-item">
+              <div class="ico">📊</div>
+              <div class="name">CRM Kommo</div>
+              <div class="desc">Pipeline configurado, integrado ao WhatsApp, com etapas do funil, tags por cidade/unidade e réguas de recompra.</div>
+            </div>
+            <div class="del-item">
+              <div class="ico">🤖</div>
+              <div class="name">SDR de IA</div>
+              <div class="desc">Primeiro atendimento 24/7, qualificação automática do pedido e direcionamento para a unidade mais próxima. Entra no mês 3.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 SOCIAL MÍDIA -->
+    <section class="slide" id="social" data-slide="5">
+      <div class="inner">
+        <div class="slide-top">
+          <div class="brand">V4 <span>COMPANY</span> · Davi Gás</div>
+          <div class="client-badge">Davi <span>Gás</span></div>
+        </div>
+        <div class="panel">
+          <div class="section-head">
+            <div class="k">Social Mídia — V4 Company</div>
+            <h2>Presença que constrói autoridade e alimenta o WhatsApp.</h2>
+            <p>
+              Um profissional dedicado de Social Media gerencia a comunicação digital da Davi Gás,
+              garantindo consistência, engajamento e conversão para o canal de vendas.
+            </p>
+          </div>
+          <div class="grid2">
+            <div class="card">
+              <h3>O que está incluído</h3>
+              <ul>
+                <li><strong>Planejamento e calendário editorial</strong> mensal com pilares definidos para GLP</li>
+                <li><strong>Agendamento e publicação</strong> de posts — Feed, Reels e Stories</li>
+                <li><strong>Monitoramento de engajamento</strong> e SAC 2.0 — respostas com tom de marca</li>
+                <li><strong>Pesquisa de tendências</strong> e benchmarking do setor</li>
+                <li><strong>Relatório mensal</strong> de performance com insights acionáveis</li>
+                <li><strong>Copy e Design</strong> integrados — o Social Media orquestra a entrega</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Por que a Davi Gás precisa de Social agora</h3>
+              <p style="margin-bottom:10px">O WhatsApp converte quem já decidiu comprar. O Social constrói o ambiente que faz o cliente escolher a Davi Gás antes de pedir.</p>
+              <ul>
+                <li>Concorrentes já têm presença digital — a Davi Gás não pode ficar de fora</li>
+                <li>Conteúdo de autoridade (dicas de segurança, promoções, entrega rápida) gera recompra</li>
+                <li>Instagram com CTA ativo direciona direto para o WhatsApp de pedidos</li>
+                <li>Presença consistente protege a marca na expansão para novos municípios</li>
+              </ul>
+            </div>
+          </div>
+          <div class="grid3" style="margin-top:12px">
+            <div class="card">
+              <h3>🎯 Planejamento</h3>
+              <p>Calendário editorial com pilares: Educativo (segurança com GLP), Produto, Promoções, Entrega Rápida e Prova Social (clientes satisfeitos).</p>
+            </div>
+            <div class="card">
+              <h3>📸 Publicação</h3>
+              <p>Posts regulares no Instagram e Facebook — Reels, carrosséis e Stories. Frequência e horários otimizados para o público regional.</p>
+            </div>
+            <div class="card">
+              <h3>📈 Relatório</h3>
+              <p>Análise mensal de alcance, engajamento e cliques para WhatsApp. Insights que alimentam a estratégia do próximo ciclo.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 CRONOGRAMA -->
+    <section class="slide" id="cronograma" data-slide="6">
+      <div class="inner">
+        <div class="slide-top">
+          <div class="brand">V4 <span>COMPANY</span> · Davi Gás</div>
+          <div class="client-badge">Davi <span>Gás</span></div>
+        </div>
+        <div class="panel">
+          <div class="section-head">
+            <div class="k">Cronograma · 6 meses</div>
+            <h2>No mês 3, você tem uma máquina. No mês 6, ela está em escala.</h2>
+            <p>ZapFirst e Social Mídia rodam em paralelo desde o dia 1 — enquanto estruturamos o canal, a presença digital já está sendo construída.</p>
+          </div>
+          <div class="timeline">
+            <div class="tl-col highlight">
+              <div class="mes">Mês 1</div>
+              <div class="fase">Setup</div>
+              <div class="items">GMB das unidades<br>Instagram + LP<br>WhatsApp Business<br>Social Mídia inicia<br>Calendário editorial</div>
+            </div>
+            <div class="tl-col highlight">
+              <div class="mes">Mês 2</div>
+              <div class="fase">Produto & Processo</div>
+              <div class="items">Catálogo P13 + linha<br>Scripts por etapa<br>Fluxo comercial<br>PIX integrado<br>Posts em curso</div>
+            </div>
+            <div class="tl-col highlight">
+              <div class="mes">Mês 3</div>
+              <div class="fase">Pessoas & IA</div>
+              <div class="items">Treinamento 19 unidades<br>CRM Kommo live<br>SDR IA ativado<br>Diagnóstico de maturidade<br>Relatório social #1</div>
+            </div>
+            <div class="tl-col">
+              <div class="mes">Mês 4</div>
+              <div class="fase">Otimização</div>
+              <div class="items">Refinamento de scripts<br>Réguas de recompra<br>Otimização de campanhas<br>Relatório social #2</div>
+            </div>
+            <div class="tl-col">
+              <div class="mes">Mês 5</div>
+              <div class="fase">Expansão</div>
+              <div class="items">Preparação 15º município<br>Novas unidades onboard<br>Social ampliado<br>Relatório social #3</div>
+            </div>
+            <div class="tl-col">
+              <div class="mes">Mês 6</div>
+              <div class="fase">Consolidação</div>
+              <div class="items">Relatório final ZapFirst<br>Diagnóstico próximo passo<br>Base social estabelecida<br>Relatório social #4</div>
+            </div>
+          </div>
+          <p class="quote" style="margin-top:16px">
+            Resultado esperado: meta de 20.000 botijões/mês atingida com canal digital estruturado, processo padronizado e presença regional dominante no Google e Instagram.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 PRÓXIMOS PASSOS -->
+    <section class="slide" id="proximos" data-slide="7">
+      <div class="inner">
+        <div class="slide-top">
+          <div class="brand">V4 <span>COMPANY</span> · Davi Gás</div>
+          <div class="client-badge">Davi <span>Gás</span></div>
+        </div>
+        <div class="panel">
+          <div class="section-head">
+            <div class="k">Próximos passos</div>
+            <h2>Começamos na semana que vem.</h2>
+            <p>A estrutura da Davi Gás já é forte. O que precisamos é de velocidade — cada semana sem processo no WhatsApp é venda que vai pro concorrente.</p>
+          </div>
+          <ol class="steps">
+            <li>
+              <div>
+                <strong>Proposta aprovada + contrato assinado</strong>
+                <span>Confirmação da condição de pagamento e assinatura do acordo de serviço.</span>
+              </div>
+            </li>
+            <li>
+              <div>
+                <strong>Kick-off estratégico</strong>
+                <span>Reunião com o time V4 + Davi Gás: acessos, canais, prioridades e onboarding das 19 unidades. Alinhamento de cronograma e responsáveis.</span>
+              </div>
+            </li>
+            <li>
+              <div>
+                <strong>Sprint 1 · Setup digital (semana 1–2)</strong>
+                <span>GMB de todas as unidades, Instagram, LP e WhatsApp Business configurados. Social Mídia começa o planejamento editorial.</span>
+              </div>
+            </li>
+            <li>
+              <div>
+                <strong>Sprint 2 · Produto & Processo (mês 1–2)</strong>
+                <span>Catálogo completo, scripts por etapa, fluxo comercial documentado e PIX integrado. Time começa a operar com processo.</span>
+              </div>
+            </li>
+            <li>
+              <div>
+                <strong>Sprint 3 · Pessoas, CRM e IA (mês 2–3)</strong>
+                <span>Treinamento das 19 unidades, Kommo configurado, SDR de IA ativo. Diagnóstico de maturidade no mês 3.</span>
+              </div>
+            </li>
+            <li>
+              <div>
+                <strong>Cadência contínua · meses 4–6</strong>
+                <span>Otimização, expansão para o 15º município, escalada do Social e relatórios mensais de performance.</span>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8 INVESTIMENTO -->
+    <section class="slide" id="investimento" data-slide="8">
+      <div class="inner">
+        <div class="slide-top">
+          <div class="brand">V4 <span>COMPANY</span> · Davi Gás</div>
+          <div class="client-badge">Davi <span>Gás</span></div>
+        </div>
+        <article class="offer">
+          <span class="label">Proposta · Projeto de 6 meses</span>
+          <h3>ZapFirst Completo + Social Mídia</h3>
+          <p class="sub">Um único plano: máquina de vendas no WhatsApp + presença digital que alimenta o canal.</p>
+
+          <div class="price-combo">
+            <div class="price-item">
+              <div class="pi-label">ZapFirst Completo</div>
+              <div class="pi-val">R$ 4.950,00</div>
+              <div class="pi-sub">por mês · implementação + IA + CRM</div>
+            </div>
+            <div class="price-item">
+              <div class="pi-label">Social Mídia</div>
+              <div class="pi-val">R$ 5.632,01</div>
+              <div class="pi-sub">por mês · gestão completa das redes</div>
+            </div>
+          </div>
+
+          <div class="price-total">
+            <div>
+              <div class="pt-label">Total mensal (soma individual)</div>
+              <div class="pt-val">R$ 10.852,01</div>
+            </div>
+            <div class="pt-sub">ZapFirst + Social</div>
+          </div>
+
+          <div class="price-card">
+            <div class="pc-label">Condição combo · 6 meses · cartão de crédito</div>
+            <div class="pc-val">R$ 8.829,13 <span style="font-size:16px;color:var(--muted);font-weight:500">/mês</span></div>
+            <div class="pc-sub">12× no cartão — economia de R$ 2.022,88/mês sobre o valor individual</div>
+          </div>
+
+          <div class="includes">
+            <div class="inc-item">Google Meu Negócio (todas as unidades)</div>
+            <div class="inc-item">Instagram com CTA para WhatsApp</div>
+            <div class="inc-item">Landing page de conversão</div>
+            <div class="inc-item">Catálogo P5/P8/P13/P20/P45 no WhatsApp</div>
+            <div class="inc-item">Scripts de atendimento por etapa</div>
+            <div class="inc-item">Fluxo comercial documentado</div>
+            <div class="inc-item">PIX integrado ao chat</div>
+            <div class="inc-item">Treinamento das 19 unidades</div>
+            <div class="inc-item">CRM Kommo configurado</div>
+            <div class="inc-item">SDR de Inteligência Artificial 24/7</div>
+            <div class="inc-item">Gestão de Social Mídia (6 meses)</div>
+            <div class="inc-item">Relatórios mensais de performance</div>
+          </div>
+
+          <div class="note-box">
+            <strong>⚠️ Orçamento de mídia paga:</strong> Caso a Davi Gás queira gerar leads via Google Ads ou Meta Ads durante o projeto, o investimento nas plataformas é pago diretamente pelo cliente — com total transparência. O orçamento mínimo recomendado é definido no kick-off conforme municípios e metas.
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 9 ROI -->
+    <section class="slide" id="roi" data-slide="9">
+      <div class="inner">
+        <div class="slide-top">
+          <div class="brand">V4 <span>COMPANY</span> · Davi Gás</div>
+          <div class="client-badge">Davi <span>Gás</span></div>
+        </div>
+        <div class="panel">
+          <div class="section-head">
+            <div class="k">A conta do investimento</div>
+            <h2>Quantos botijões precisam vender a mais para pagar o projeto?</h2>
+            <p>
+              Com margem de contribuição de 8% sobre um faturamento de R$ 2.000.000/mês,
+              a matemática é direta — e o retorno é rápido.
+            </p>
+          </div>
+          <div class="grid3" style="margin-bottom:14px">
+            <div class="card">
+              <h3>📦 Margem atual</h3>
+              <p style="margin-top:6px;font-size:13px;color:var(--muted)">Faturamento: <strong>R$ 2.000.000/mês</strong></p>
+              <p style="font-size:13px;color:var(--muted)">Margem: <strong>8% = R$ 160.000/mês</strong></p>
+              <p style="font-size:13px;color:var(--muted)">Ticket médio P13: <strong>~R$ 117/botijão</strong></p>
+              <p style="font-size:13px;color:var(--muted)">Margem/botijão P13: <strong>~R$ 9,36</strong></p>
+            </div>
+            <div class="card">
+              <h3>🎯 Meta do projeto</h3>
+              <p style="margin-top:6px;font-size:13px;color:var(--muted)">Volume atual: <strong>17.000–18.000/mês</strong></p>
+              <p style="font-size:13px;color:var(--muted)">Meta: <strong>20.000 botijões/mês</strong></p>
+              <p style="font-size:13px;color:var(--muted)">Crescimento necessário: <strong>~2.000–3.000/mês</strong></p>
+              <p style="font-size:13px;color:var(--muted)">Receita adicional: <strong>~R$ 234.000/mês</strong></p>
+            </div>
+            <div class="card" style="background:#f0fff5;border-color:#a8e6bf">
+              <h3 style="color:#16834a">💰 Retorno do projeto</h3>
+              <p style="margin-top:6px;font-size:13px;color:#16834a">Investimento/mês: <strong>R$ 8.829,13</strong></p>
+              <p style="font-size:13px;color:#16834a">Botijões p/ pagar: <strong>~944 botijões a mais</strong></p>
+              <p style="font-size:13px;color:#16834a">= <strong>5,5% de incremento</strong> na venda atual</p>
+              <p style="font-size:13px;color:#16834a">Meta = <strong>23× o investimento</strong> em receita nova</p>
+            </div>
+          </div>
+          <div class="grid2">
+            <div class="card">
+              <h3>O que a máquina resolve</h3>
+              <ul>
+                <li>Clientes que buscam gás no Google hoje vão para o concorrente — o GMB muda isso</li>
+                <li>Vendas que escapam no WhatsApp por demora ou sem processo — os scripts resolvem</li>
+                <li>Recompra que não acontece por falta de follow-up — o CRM e a IA garantem</li>
+                <li>Dependência do dono para operar — o playbook das 19 unidades elimina</li>
+              </ul>
+            </div>
+            <div class="card" style="background:#fff3f3;border-color:#f5bfbf">
+              <h3>Cada semana sem estrutura é custo</h3>
+              <ul>
+                <li>70% das vendas passam pelo WhatsApp — mas o processo é improvisado</li>
+                <li>Concorrentes já aparecem no Google Meu Negócio de 14 municípios</li>
+                <li>Cada mês sem IA: atendimentos perdidos fora do horário comercial</li>
+                <li>Escalar para o 15º município sem processo é repetir o problema em nova praça</li>
+              </ul>
+            </div>
+          </div>
+          <p class="quote">A Davi Gás já fatura R$ 2M/mês. O projeto custa o equivalente a vender ~944 botijões a mais — menos de 1 dia de operação. O que muda é previsibilidade e escala.</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer class="deck-footer">
+    <span>Davi Gás × V4 Company · ZapFirst + Social Mídia · 6 meses · <strong>Confidencial</strong></span>
+    <div class="progress-wrap"><div class="progress-fill" id="progressFill" style="width:11.1%"></div></div>
+    <span id="slideCounter">1 / 9</span>
+  </footer>
+
+  <script>
+  (function () {
+    const TOTAL = 9;
+    let current = 1;
+    let locked = false;
+    const slides = Array.from(document.querySelectorAll("#deck section.slide"));
+    const navLinks = document.querySelectorAll(".nav-dots a");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const progressFill = document.getElementById("progressFill");
+    const slideCounter = document.getElementById("slideCounter");
+    const blendBar = document.querySelector(".blend-progress");
+
+    function updateUI() {
+      const p = current / TOTAL;
+      if (progressFill) progressFill.style.width = (p * 100) + "%";
+      if (slideCounter) slideCounter.textContent = current + " / " + TOTAL;
+      if (blendBar) blendBar.style.transform = "scaleX(" + Math.max(0.08, p) + ")";
+      document.documentElement.style.setProperty("--slide-progress", p);
+      if (prevBtn) prevBtn.disabled = current === 1;
+      if (nextBtn) nextBtn.disabled = current === TOTAL;
+      navLinks.forEach((a) => a.classList.toggle("active", Number(a.dataset.slide) === current));
+    }
+
+    function goTo(n, dir) {
+      if (locked || n < 1 || n > TOTAL || n === current) return;
+      locked = true;
+      const prev = slides[current - 1];
+      const next = slides[n - 1];
+      const fwd = dir === "forward" || (dir !== "back" && n > current);
+      prev.classList.remove("slide-active");
+      prev.classList.add(fwd ? "slide-exit-left" : "slide-exit-right");
+      setTimeout(() => {
+        prev.classList.remove("slide-exit-left", "slide-exit-right");
+        locked = false;
+      }, 360);
+      next.classList.add("slide-active");
+      current = n;
+      updateUI();
+    }
+
+    if (prevBtn) prevBtn.addEventListener("click", () => goTo(current - 1, "back"));
+    if (nextBtn) nextBtn.addEventListener("click", () => goTo(current + 1, "forward"));
+    navLinks.forEach((a) => a.addEventListener("click", (e) => {
+      e.preventDefault();
+      goTo(Number(a.dataset.slide));
+    }));
+
+    document.addEventListener("wheel", (e) => {
+      if (Math.abs(e.deltaY) < 20) return;
+      e.preventDefault();
+      goTo(current + (e.deltaY > 0 ? 1 : -1), e.deltaY > 0 ? "forward" : "back");
+    }, { passive: false });
+
+    document.addEventListener("keydown", (e) => {
+      if (["ArrowRight", " ", "PageDown"].includes(e.key)) { e.preventDefault(); goTo(current + 1, "forward"); }
+      if (["ArrowLeft", "PageUp"].includes(e.key)) { e.preventDefault(); goTo(current - 1, "back"); }
+    });
+
+    let tx = 0;
+    document.addEventListener("touchstart", (e) => { tx = e.touches[0].clientX; }, { passive: true });
+    document.addEventListener("touchend", (e) => {
+      const dx = e.changedTouches[0].clientX - tx;
+      if (Math.abs(dx) > 40) goTo(current + (dx < 0 ? 1 : -1), dx < 0 ? "forward" : "back");
+    }, { passive: true });
+
+    updateUI();
+  })();
+  </script>
+</body>
+</html>
