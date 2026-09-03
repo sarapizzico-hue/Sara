@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Casa dos Pães × V4 Company — ZapFirst · 90 dias</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --red:#e3040a;
+  --red2:#ff3b3b;
+  --dark:#0d0d0d;
+  --dark2:#1a1a1a;
+  --ink:#111;
+  --muted:#6b6b6b;
+  --line:#e8e4e1;
+  --soft:#f6f4f2;
+  --white:#fff;
+  --green:#16a34a;
+  --green-bg:#f0fdf4;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font:16px/1.6 Inter,system-ui,sans-serif;background:var(--white);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4{font-family:Sora,Inter,sans-serif;letter-spacing:-.02em;line-height:1.15}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+
+/* ── SCROLL NAV ── */
+.topnav{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  background:rgba(255,255,255,.92);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.7rem 2rem;gap:1rem;
+}
+.topnav .logo{font-family:Sora,sans-serif;font-weight:900;font-size:14px;white-space:nowrap}
+.topnav .logo span{color:var(--red)}
+.topnav nav{display:flex;gap:1.5rem;overflow-x:auto;scrollbar-width:none}
+.topnav nav a{font-size:12px;font-weight:600;color:var(--muted);white-space:nowrap;padding:.25rem 0;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+.topnav nav a:hover,.topnav nav a.active{color:var(--red);border-color:var(--red)}
+.topnav .cta-mini{background:var(--red);color:#fff;font-size:12px;font-weight:700;padding:.45rem 1rem;border-radius:20px;white-space:nowrap;transition:opacity .2s}
+.topnav .cta-mini:hover{opacity:.85}
+@media(max-width:700px){.topnav nav{display:none}.topnav{padding:.7rem 1.2rem}}
+
+/* ── PROGRESS BAR ── */
+#prog{position:fixed;top:0;left:0;height:3px;background:var(--red);z-index:1000;width:0%;transition:width .1s linear}
+
+/* ── SECTION WRAPPER ── */
+section{width:100%;padding:5rem 1.5rem}
+.inner{max-width:960px;margin:0 auto}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  background:linear-gradient(150deg,#0d0d0d 0%,#1c0404 55%,#2b0606 100%);
+  color:#fff;position:relative;overflow:hidden;padding:6rem 1.5rem 4rem;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 60% at 80% 40%,rgba(227,4,10,.18),transparent);
+  pointer-events:none;
+}
+.hero-grid{
+  max-width:960px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 400px;gap:3rem;align-items:center;
+  position:relative;z-index:1;
+}
+@media(max-width:860px){.hero-grid{grid-template-columns:1fr}}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(227,4,10,.18);border:1px solid rgba(227,4,10,.35);
+  border-radius:20px;padding:.35rem .9rem;
+  font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.85);
+  margin-bottom:1.5rem;
+}
+.hero-tag span{width:6px;height:6px;border-radius:50%;background:var(--red2);display:inline-block;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
+.hero h1{font-size:clamp(32px,5vw,52px);font-weight:900;color:#fff;margin-bottom:1.25rem}
+.hero h1 em{font-style:normal;color:var(--red2)}
+.hero-sub{font-size:17px;color:rgba(255,255,255,.72);max-width:520px;line-height:1.65;margin-bottom:2rem}
+.hero-cta{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:var(--red);color:#fff;font-weight:700;font-size:15px;
+  padding:.85rem 2rem;border-radius:30px;
+  box-shadow:0 8px 32px rgba(227,4,10,.4);
+  transition:transform .2s var(--ease),box-shadow .2s;
+}
+.hero-cta:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(227,4,10,.5)}
+.hero-cta svg{transition:transform .2s}
+.hero-cta:hover svg{transform:translateX(3px)}
+.hero-card{
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  border-radius:24px;padding:1.75rem;backdrop-filter:blur(8px);
+}
+.hero-card h3{font-size:13px;font-weight:700;color:rgba(255,255,255,.55);letter-spacing:.08em;text-transform:uppercase;margin-bottom:1rem}
+.kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.kpi{background:rgba(255,255,255,.08);border-radius:14px;padding:.9rem 1rem}
+.kpi .val{font-family:Sora,sans-serif;font-size:22px;font-weight:900;color:#fff}
+.kpi .lbl{font-size:11px;color:rgba(255,255,255,.55);margin-top:2px}
+.hero-award{
+  display:flex;align-items:center;gap:.6rem;margin-top:1rem;
+  padding:.65rem .9rem;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+}
+.hero-award .ico{font-size:18px}
+.hero-award p{font-size:12px;color:rgba(255,255,255,.65);line-height:1.35}
+.hero-award strong{color:#fff;font-size:13px;display:block}
+
+/* ── SECTION LABEL ── */
+.slabel{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:.5rem}
+.stitle{font-size:clamp(26px,4vw,36px);font-weight:800;color:var(--ink);margin-bottom:.75rem}
+.sdesc{font-size:16px;color:var(--muted);max-width:620px;line-height:1.65}
+
+/* ── DIVIDER ── */
+.divider{height:1px;background:var(--line);width:100%;max-width:960px;margin:0 auto}
+
+/* ── DIAGNÓSTICO ── */
+.diag-bg{background:var(--soft)}
+.gap-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:640px){.gap-grid{grid-template-columns:1fr}}
+.gap-card{
+  background:var(--white);border:1px solid var(--line);border-radius:18px;padding:1.4rem 1.6rem;
+  transition:box-shadow .25s,transform .25s;
+}
+.gap-card:hover{box-shadow:0 12px 40px rgba(0,0,0,.08);transform:translateY(-2px)}
+.gap-num{font-family:Sora,sans-serif;font-size:28px;font-weight:900;color:var(--line);margin-bottom:.5rem}
+.gap-card h3{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:.4rem}
+.gap-card p{font-size:13px;color:var(--muted);line-height:1.55}
+.gap-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:.2rem .6rem;border-radius:6px;margin-bottom:.6rem}
+.tag-red{background:#fdeaea;color:var(--red)}
+.tag-orange{background:#fff3e0;color:#c85a00}
+.highlight-box{
+  background:linear-gradient(135deg,#1a1a1a,#2b0606);
+  border-radius:20px;padding:1.75rem 2rem;margin-top:1.5rem;
+  display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;
+}
+.highlight-box .hb-text{color:rgba(255,255,255,.88);font-size:15px;line-height:1.6}
+.highlight-box strong{color:#fff;font-size:18px;font-family:Sora,sans-serif;display:block;margin-bottom:.25rem}
+
+/* ── METODOLOGIA ── */
+.method-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2rem}
+@media(max-width:760px){.method-steps{grid-template-columns:1fr 1fr}}
+@media(max-width:500px){.method-steps{grid-template-columns:1fr}}
+.ms{border-radius:18px;padding:1.4rem;border:1px solid var(--line);position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s}
+.ms:hover{transform:translateY(-3px);box-shadow:0 16px 48px rgba(0,0,0,.1)}
+.ms:nth-child(1){background:#fff3f3}
+.ms:nth-child(2){background:#fff8f0}
+.ms:nth-child(3){background:#f0f7ff}
+.ms:nth-child(4){background:#f0fff5}
+.ms .mn{font-family:Sora,sans-serif;font-size:36px;font-weight:900;color:rgba(0,0,0,.07);position:absolute;top:.5rem;right:.75rem;line-height:1}
+.ms h3{font-size:16px;font-weight:800;color:var(--ink);margin-bottom:.5rem}
+.ms p{font-size:13px;color:var(--muted);line-height:1.55}
+.ms .badge{display:inline-block;background:var(--red);color:#fff;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .65rem;border-radius:8px;margin-bottom:.6rem}
+.ms:nth-child(4) .badge{background:var(--green)}
+
+.timeline-strip{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+  border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:2rem;
+}
+@media(max-width:700px){.timeline-strip{grid-template-columns:1fr}}
+.tl-cell{padding:1.2rem;border-right:1px solid var(--line);background:#fff3f3}
+.tl-cell:last-child{border-right:none}
+@media(max-width:700px){.tl-cell{border-right:none;border-bottom:1px solid var(--line)}}
+.tl-mes{font-size:10px;font-weight:800;color:var(--red);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.35rem}
+.tl-fase{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:.4rem}
+.tl-items{font-size:12px;color:var(--muted);line-height:1.55}
+
+/* ── ENTREGAS ── */
+.del-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.75rem;margin-top:1.5rem}
+@media(max-width:900px){.del-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:560px){.del-grid{grid-template-columns:repeat(2,1fr)}}
+.del{
+  background:var(--soft);border:1px solid var(--line);border-radius:16px;
+  padding:1.1rem 1rem;cursor:default;
+  transition:background .2s,transform .2s,box-shadow .2s;
+}
+.del:hover{background:var(--white);transform:translateY(-3px);box-shadow:0 12px 36px rgba(0,0,0,.08)}
+.del .ico{font-size:22px;margin-bottom:.5rem}
+.del h4{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:.3rem}
+.del p{font-size:11px;color:var(--muted);line-height:1.45}
+
+/* ── MATRIZ ── */
+.social-bg{background:var(--dark);color:#fff}
+.social-bg .stitle{color:#fff}
+.social-bg .sdesc{color:rgba(255,255,255,.65)}
+.mx-list{display:flex;flex-direction:column;gap:.75rem;margin-top:1.5rem}
+.mx-row{
+  display:grid;grid-template-columns:1.1fr 1.2fr .9fr;gap:1rem;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  border-radius:16px;padding:1.1rem 1.25rem;
+}
+@media(max-width:760px){.mx-row{grid-template-columns:1fr}}
+.mx-row h4{font-size:13px;font-weight:700;color:#fff;margin-bottom:.25rem}
+.mx-row p{font-size:12px;color:rgba(255,255,255,.62);line-height:1.45}
+.mx-k{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.38);margin-bottom:.2rem}
+.mx-head{display:grid;grid-template-columns:1.1fr 1.2fr .9fr;gap:1rem;padding:0 1.25rem .4rem}
+@media(max-width:760px){.mx-head{display:none}}
+.mx-head span{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+
+/* ── INVESTIMENTO ── */
+.invest-bg{background:var(--soft)}
+.price-hero{
+  background:linear-gradient(135deg,#1a1a1a 0%,#2b0606 100%);
+  border-radius:24px;padding:2.5rem;margin:1.5rem 0;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;
+}
+.price-hero .ph-label{font-size:12px;font-weight:700;color:rgba(255,255,255,.55);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.4rem}
+.price-hero .ph-val{font-family:Sora,sans-serif;font-size:clamp(36px,5vw,52px);font-weight:900;color:#fff;letter-spacing:-.03em}
+.price-hero .ph-sub{font-size:14px;color:rgba(255,255,255,.55);margin-top:.25rem}
+.price-hero .ph-badge{
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+  border-radius:14px;padding:1rem 1.25rem;text-align:center;
+}
+.price-hero .ph-badge .pbl{font-size:11px;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.25rem;font-weight:700}
+.price-hero .ph-badge .pbv{font-family:Sora,sans-serif;font-size:22px;font-weight:800;color:#fff}
+.price-hero .ph-badge .pbs{font-size:11px;color:rgba(255,255,255,.45)}
+
+.price-items{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:0}
+@media(max-width:580px){.price-items{grid-template-columns:1fr}}
+.pi{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:1.4rem 1.6rem}
+.pi .pil{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.35rem}
+.pi .piv{font-family:Sora,sans-serif;font-size:26px;font-weight:800;color:var(--ink)}
+.pi .pis{font-size:12px;color:var(--muted);margin-top:.2rem}
+.pi .piv s{color:var(--muted);font-weight:600;font-size:16px;margin-right:.4rem}
+
+.includes-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+@media(max-width:560px){.includes-grid{grid-template-columns:1fr}}
+.inc{display:flex;align-items:center;gap:.6rem;font-size:14px;color:var(--ink);padding:.5rem 0;border-bottom:1px solid var(--soft)}
+.inc:last-child,.inc:nth-last-child(2){border-bottom:none}
+.inc::before{content:'✓';color:var(--red);font-weight:700;font-size:12px;flex-shrink:0;width:18px;height:18px;background:#fdeaea;border-radius:50%;display:flex;align-items:center;justify-content:center;line-height:1}
+.note{background:#fff8f0;border:1px solid #f5d5b0;border-radius:12px;padding:1rem 1.2rem;font-size:13px;color:#7d4b10;margin-top:1.25rem}
+.note strong{color:#a05a0a}
+
+.gate{
+  background:var(--white);border:1px solid var(--line);border-radius:16px;
+  padding:1.2rem 1.4rem;margin-top:1.25rem;display:flex;gap:1rem;align-items:flex-start;
+}
+.gate h4{font-size:14px;font-weight:700;margin-bottom:.25rem}
+.gate p{font-size:13px;color:var(--muted);line-height:1.5}
+
+/* ── PRÓXIMOS PASSOS ── */
+.steps-bg{background:var(--white)}
+.steps-list{display:flex;flex-direction:column;gap:0;margin-top:1.75rem;position:relative}
+.steps-list::before{
+  content:'';position:absolute;left:22px;top:0;bottom:0;width:2px;
+  background:linear-gradient(to bottom,var(--red),rgba(227,4,10,.1));
+}
+.step-item{display:flex;gap:1.25rem;padding:1.25rem 0;position:relative}
+.step-num{
+  width:44px;height:44px;border-radius:50%;background:var(--red);color:#fff;
+  font-family:Sora,sans-serif;font-weight:800;font-size:14px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;
+  box-shadow:0 4px 14px rgba(227,4,10,.4);
+}
+.step-body{padding-top:8px}
+.step-body strong{font-size:15px;font-weight:700;color:var(--ink);display:block;margin-bottom:.25rem}
+.step-body span{font-size:13px;color:var(--muted);line-height:1.55}
+
+/* ── FOOTER CTA ── */
+.footer-cta{
+  background:linear-gradient(150deg,#0d0d0d 0%,#1c0404 60%,#2b0606 100%);
+  text-align:center;padding:5rem 1.5rem;
+}
+.footer-cta h2{font-size:clamp(26px,4vw,40px);font-weight:900;color:#fff;margin-bottom:.75rem}
+.footer-cta p{font-size:16px;color:rgba(255,255,255,.65);max-width:520px;margin:0 auto 2rem;line-height:1.6}
+.footer-cta .btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:var(--red);color:#fff;font-weight:700;font-size:16px;
+  padding:1rem 2.5rem;border-radius:32px;
+  box-shadow:0 8px 32px rgba(227,4,10,.45);
+  transition:transform .2s,box-shadow .2s;
+}
+.footer-cta .btn:hover{transform:translateY(-2px);box-shadow:0 14px 44px rgba(227,4,10,.55)}
+.footer-note{font-size:12px;color:rgba(255,255,255,.35);margin-top:1.25rem}
+
+/* ── ANIMATIONS ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s var(--ease),transform .65s var(--ease)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+.reveal-delay-4{transition-delay:.4s}
+</style>
+</head>
+<body>
+
+<div id="prog"></div>
+
+<header class="topnav">
+  <div class="logo">V4 <span>Company</span> × Casa dos Pães</div>
+  <nav>
+    <a href="#diagnostico">Diagnóstico</a>
+    <a href="#metodologia">Metodologia</a>
+    <a href="#zapfirst">ZapFirst</a>
+    <a href="#matriz">Encaixe</a>
+    <a href="#investimento">Investimento</a>
+    <a href="#proximos">Próximos Passos</a>
+  </nav>
+  <a href="#investimento" class="cta-mini">Ver proposta →</a>
+</header>
+
+<section class="hero" id="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="hero-tag"><span></span> Proposta estratégica · 90 dias · Confidencial</div>
+      <h1>A demanda já chega. Falta a operação <em>segurar</em>.</h1>
+      <p class="hero-sub">Preço e variedade já existem. O que falta é estrutura no WhatsApp para atender, medir e reter — sem a Nilda no meio de cada conversa.</p>
+      <a href="#diagnostico" class="hero-cta">
+        Ver diagnóstico
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <div>
+      <div class="hero-card">
+        <h3>Casa dos Pães · Nilda</h3>
+        <div class="kpi-grid">
+          <div class="kpi"><div class="val count-up" data-target="200000">R$ 0</div><div class="lbl">Faturamento atual / mês</div></div>
+          <div class="kpi"><div class="val count-up" data-target="500000">R$ 0</div><div class="lbl">Meta declarada / mês</div></div>
+          <div class="kpi"><div class="val">Mafrense</div><div class="lbl">Praça atual + rua própria</div></div>
+          <div class="kpi"><div class="val count-up" data-target="4">0</div><div class="lbl">Bairros de expansão</div></div>
+        </div>
+        <div class="hero-award">
+          <div class="ico">🎯</div>
+          <p><strong>Produto: ZapFirst · 3P-IA</strong>Organizar o básico antes de qualquer escala de mídia.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="diag-bg" id="diagnostico">
+  <div class="inner">
+    <div class="reveal">
+      <div class="slabel">Diagnóstico estratégico</div>
+      <h2 class="stitle">Boa proposta de valor. Falta distribuição — e atendimento.</h2>
+      <p class="sdesc">A Casa dos Pães opera de forma intuitiva, centralizada na Nilda, sem dados e sem capacidade de responder a demanda que já gera. Isso destrói ROI e impede o salto de R$ 200 mil para R$ 500 mil.</p>
+    </div>
+    <div class="gap-grid" style="margin-top:1.75rem">
+      <div class="gap-card reveal reveal-delay-1">
+        <div class="gap-num">01</div>
+        <div class="gap-tag tag-red">Gargalo crítico</div>
+        <h3>Nilda-dependência</h3>
+        <p>Compras, atendimento, marketing e finanças na mesma pessoa. Qualquer ação nova compete com a rua, o caixa e a decisão do dia. Sem delegação, não há escala.</p>
+      </div>
+      <div class="gap-card reveal reveal-delay-2">
+        <div class="gap-num">02</div>
+        <div class="gap-tag tag-red">Gargalo crítico</div>
+        <h3>WhatsApp sem dono</h3>
+        <p>Tentou pedidos e ofertas no chat. Quando ela sai para comprar, o cliente fica sem resposta. Interesse gerado vira silêncio — e a concorrência, mesmo mais cara, fecha.</p>
+      </div>
+      <div class="gap-card reveal reveal-delay-1">
+        <div class="gap-num">03</div>
+        <div class="gap-tag tag-orange">Gargalo de gestão</div>
+        <h3>Ausência total de dados</h3>
+        <p>Sem volume diário, ticket, margem, CAC ou LTV. Decisão por percepção. Qualquer investimento de marketing vira chute — e o medo de investir de novo só aumenta.</p>
+      </div>
+      <div class="gap-card reveal reveal-delay-2">
+        <div class="gap-num">04</div>
+        <div class="gap-tag tag-orange">Gargalo de canal</div>
+        <h3>Carro de som a R$ 4 mil / mês</h3>
+        <p>≈ R$ 1 mil por semana, alcance genérico, sem rastreio e sem recompra. Canal único e caro, enquanto a base de quem já compra não está organizada.</p>
+      </div>
+      <div class="gap-card reveal reveal-delay-1">
+        <div class="gap-num">05</div>
+        <div class="gap-tag tag-orange">Gargalo digital</div>
+        <h3>Execução solta, sem conversão</h3>
+        <p>Tráfego pago anterior sem base. Sorteio de TV sem processo — contatos inutilizáveis. Google Meu Negócio existe, mas sem caminho claro até o WhatsApp.</p>
+      </div>
+      <div class="gap-card reveal reveal-delay-2">
+        <div class="gap-num">06</div>
+        <div class="gap-tag tag-orange">Gargalo de distribuição</div>
+        <h3>Raio curto, delivery limitado</h3>
+        <p>Vendas na rua e no Mafrense. Delivery só na proximidade, bikes cargueiras, pedido mínimo R$ 150. Concorrentes maiores ganham volume mesmo com preço pior.</p>
+      </div>
+    </div>
+    <div class="highlight-box reveal">
+      <div style="font-size:32px">🎯</div>
+      <div class="hb-text">
+        <strong>A diretriz já está alinhada: dados antes de escala.</strong>
+        No curto prazo o foco não é vender no WhatsApp a qualquer custo. É organizar o básico, reduzir o canal único, criar base de relacionamento e tirar a Nilda do primeiro “oi”.
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="metodologia">
+  <div class="inner">
+    <div class="reveal">
+      <div class="slabel">Metodologia ZapFirst</div>
+      <h2 class="stitle">3P-IA: a sequência que protege o ROI.</h2>
+      <p class="sdesc">A ordem importa. Produto, processo e pessoas primeiro. IA só depois da base humana sólida — colocar automação em cima de bagunça é repetir o investimento que já falhou.</p>
+    </div>
+    <div class="method-steps">
+      <div class="ms reveal reveal-delay-1">
+        <div class="mn">P1</div>
+        <div class="badge">Primeiro</div>
+        <h3>Produto</h3>
+        <p>Catálogo fotografado, descrito e precificado. Prioridade nos itens de giro e margem da curva ABC. PIX no fluxo de fechamento.</p>
+      </div>
+      <div class="ms reveal reveal-delay-2">
+        <div class="mn">P2</div>
+        <div class="badge">Segundo</div>
+        <h3>Processo</h3>
+        <p>Do primeiro contato ao pós-venda. Dois fluxos no WhatsApp: promoção e pedido. Scripts, SLA e papéis documentados.</p>
+      </div>
+      <div class="ms reveal reveal-delay-3">
+        <div class="mn">P3</div>
+        <div class="badge">Terceiro</div>
+        <h3>Pessoas</h3>
+        <p>Auxiliar treinado. Nilda entra em exceção, decisão e compras — não no primeiro atendimento. Sem dono no chat, nada segura.</p>
+      </div>
+      <div class="ms reveal reveal-delay-4">
+        <div class="mn">IA</div>
+        <div class="badge" style="background:var(--green)">Só depois</div>
+        <h3>Inteligência Artificial</h3>
+        <p>SDR de IA 24/7 responde, qualifica e faz handoff. Entra no mês 3 — quando o processo humano já roda sem a Nilda na frente.</p>
+      </div>
+    </div>
+    <div class="timeline-strip reveal">
+      <div class="tl-cell">
+        <div class="tl-mes">Mês 1</div>
+        <div class="tl-fase">Produto + ambiente</div>
+        <div class="tl-items">Kick-off: papel do WhatsApp, papéis e SLA<br>GMB, Instagram com CTA e LP<br>Catálogo + PIX<br>Captura nome + WhatsApp no caixa</div>
+      </div>
+      <div class="tl-cell">
+        <div class="tl-mes">Mês 2</div>
+        <div class="tl-fase">Processo + pessoas</div>
+        <div class="tl-items">Fluxo documentado<br>Scripts (promo, pedido, preço, delivery)<br>Treino do auxiliar<br>Kommo live · Nilda sai do 1º atendimento</div>
+      </div>
+      <div class="tl-cell">
+        <div class="tl-mes">Mês 3</div>
+        <div class="tl-fase">IA + retenção</div>
+        <div class="tl-items">SDR IA 24/7 com handoff<br>Réguas de recompra e reativação<br>Relatório de maturidade<br>Próximo passo com evidência</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="zapfirst">
+  <div class="inner">
+    <div class="reveal">
+      <div class="slabel">ZapFirst — o que fica instalado</div>
+      <h2 class="stitle">Capacidades que hoje não existem e passam a existir.</h2>
+      <p class="sdesc">Cada entrega ataca um ponto do diagnóstico da Nilda — da porta de entrada digital até a recompra de quem já compra na loja.</p>
+    </div>
+    <div class="del-grid reveal">
+      <div class="del">
+        <div class="ico">📍</div>
+        <h4>Google Meu Negócio</h4>
+        <p>Perfil otimizado com WhatsApp como ação principal. Caminho claro para quem busca padaria/mercado no bairro.</p>
+      </div>
+      <div class="del">
+        <div class="ico">📱</div>
+        <h4>Instagram com CTA</h4>
+        <p>Bio, link e chamada apontando para o chat certo — não para uma caixa de recado sem dono.</p>
+      </div>
+      <div class="del">
+        <div class="ico">🌐</div>
+        <h4>LP / link de captura</h4>
+        <p>Página simples com botão de WhatsApp. Fecha o caminho digital que hoje se perde no GMN.</p>
+      </div>
+      <div class="del">
+        <div class="ico">📦</div>
+        <h4>Catálogo + PIX</h4>
+        <p>Produto, preço e pagamento no fluxo. Fim do copy-paste e da fricção na hora de fechar.</p>
+      </div>
+      <div class="del">
+        <div class="ico">📝</div>
+        <h4>Scripts e SLA</h4>
+        <p>Recepção, pedido, objeção de preço, delivery, ruptura de estoque e pós-venda — com tempo de resposta.</p>
+      </div>
+      <div class="del">
+        <div class="ico">🔄</div>
+        <h4>Fluxo comercial</h4>
+        <p>Dois fluxos no WhatsApp: promoção e pedido. Processo da chegada ao pagamento, com papéis claros.</p>
+      </div>
+      <div class="del">
+        <div class="ico">🎓</div>
+        <h4>Treino do auxiliar</h4>
+        <p>Playbook editável. Atendimento com dono — com ou sem a Nilda na loja.</p>
+      </div>
+      <div class="del">
+        <div class="ico">📊</div>
+        <h4>CRM Kommo</h4>
+        <p>Pipeline, tags de origem, bairro e ticket. Sai do chute: conversão, follow-up e recorrência visíveis.</p>
+      </div>
+      <div class="del">
+        <div class="ico">🔁</div>
+        <h4>Réguas de recompra</h4>
+        <p>Base própria no WhatsApp. Vender para quem já compra fica mais barato do que o carro de som todo dia.</p>
+      </div>
+      <div class="del">
+        <div class="ico">🤖</div>
+        <h4>SDR de IA 24/7</h4>
+        <p>Primeiro atendimento, qualificação e handoff. Entra no mês 3 — amplia, não substitui o processo humano.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="social-bg" id="matriz">
+  <div class="inner">
+    <div class="reveal">
+      <div class="slabel" style="color:rgba(255,255,255,.5)">Encaixe na conta</div>
+      <h2 class="stitle" style="color:#fff">Cada dor da Nilda tem uma entrega do ZapFirst.</h2>
+      <p class="sdesc" style="color:rgba(255,255,255,.65)">Cruzamento do Account Planning: o que atacar, com qual peça do produto, e o efeito no negócio.</p>
+    </div>
+    <div class="mx-head reveal">
+      <span>Ponto crítico</span>
+      <span>Como o ZapFirst resolve</span>
+      <span>Efeito no negócio</span>
+    </div>
+    <div class="mx-list reveal">
+      <div class="mx-row">
+        <div><div class="mx-k">01</div><h4>Nilda no meio de tudo</h4><p>Sobrecarga em compras, atendimento e marketing.</p></div>
+        <div><div class="mx-k">Solução</div><p>Processo + scripts + treino + SDR IA no 1º atendimento.</p></div>
+        <div><div class="mx-k">Efeito</div><p>Nilda livre para rua, compras e decisão.</p></div>
+      </div>
+      <div class="mx-row">
+        <div><div class="mx-k">02</div><h4>Chat sem resposta</h4><p>Pedido perdido quando ela sai da loja.</p></div>
+        <div><div class="mx-k">Solução</div><p>SLA, papéis claros e IA 24/7 com handoff.</p></div>
+        <div><div class="mx-k">Efeito</div><p>Demanda gerada passa a ser atendida.</p></div>
+      </div>
+      <div class="mx-row">
+        <div><div class="mx-k">03</div><h4>Cegueira de gestão</h4><p>Sem ticket, origem, conversão ou LTV.</p></div>
+        <div><div class="mx-k">Solução</div><p>Kommo com pipeline, tags e relatório.</p></div>
+        <div><div class="mx-k">Efeito</div><p>Sai do chute. Investimento futuro tem prova.</p></div>
+      </div>
+      <div class="mx-row">
+        <div><div class="mx-k">04</div><h4>Sem base / retenção fraca</h4><p>Quem já compra não volta por processo.</p></div>
+        <div><div class="mx-k">Solução</div><p>Captura no caixa + réguas de recompra.</p></div>
+        <div><div class="mx-k">Efeito</div><p>Venda recorrente mais barata que adquirir de novo.</p></div>
+      </div>
+      <div class="mx-row">
+        <div><div class="mx-k">05</div><h4>Carro de som a R$ 4 mil</h4><p>Canal único, genérico, sem rastreio.</p></div>
+        <div><div class="mx-k">Solução</div><p>Base própria + promoções com processo no WhatsApp.</p></div>
+        <div><div class="mx-k">Efeito</div><p>Diversifica canal e reduz dependência da mídia de rua.</p></div>
+      </div>
+      <div class="mx-row">
+        <div><div class="mx-k">06</div><h4>Raio limitado</h4><p>Delivery só na proximidade, mínimo R$ 150.</p></div>
+        <div><div class="mx-k">Solução</div><p>WhatsApp como canal de pedidos com processo.</p></div>
+        <div><div class="mx-k">Efeito</div><p>Ponte para Aeroporto, São Joaquim, Poty Velho e Santa Maria — depois da fundação.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="invest-bg" id="investimento">
+  <div class="inner">
+    <div class="reveal">
+      <div class="slabel">Investimento</div>
+      <h2 class="stitle">ZapFirst · 90 dias para instalar a fundação.</h2>
+      <p class="sdesc">Projeto de 3 meses. Sem gestão de mídia paga neste escopo — estrutura primeiro, escala depois.</p>
+    </div>
+
+    <div class="price-items reveal" style="margin-top:1.75rem">
+      <div class="pi">
+        <div class="pil">Referência de tabela</div>
+        <div class="piv"><s>R$ 30.000</s></div>
+        <div class="pis">implementação completa · 90 dias</div>
+      </div>
+      <div class="pi">
+        <div class="pil">12× no cartão</div>
+        <div class="piv">R$ 1.666,67</div>
+        <div class="pis">por mês · sem entrada extra</div>
+      </div>
+    </div>
+
+    <div class="price-hero reveal">
+      <div class="ph-left">
+        <div class="ph-label">Condição comercial · implementação completa</div>
+        <div class="ph-val">R$ 18.000</div>
+        <div class="ph-sub">à vista · ou 12× de R$ 1.666,67 no cartão</div>
+      </div>
+      <div>
+        <div class="ph-badge">
+          <div class="pbl">Economia</div>
+          <div class="pbv">R$ 12.000</div>
+          <div class="pbs">sobre a referência de tabela</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="includes-grid reveal">
+      <div class="inc">Google Meu Negócio + Instagram com CTA</div>
+      <div class="inc">LP / link apontando para o WhatsApp</div>
+      <div class="inc">Catálogo fotografado e precificado</div>
+      <div class="inc">PIX integrado ao chat</div>
+      <div class="inc">Scripts e fluxo comercial documentado</div>
+      <div class="inc">Treinamento do auxiliar + playbook</div>
+      <div class="inc">CRM Kommo com tags e pipeline</div>
+      <div class="inc">Réguas de recompra e reativação</div>
+      <div class="inc">SDR de Inteligência Artificial 24/7</div>
+      <div class="inc">Relatório de maturidade ao final dos 90 dias</div>
+    </div>
+
+    <div class="gate reveal">
+      <div style="font-size:22px">🚪</div>
+      <div>
+        <h4>Gate inegociável</h4>
+        <p>Pelo menos 1 pessoa de atendimento (mesmo meio período). Sem dono no WhatsApp, nenhuma estrutura segura — e a Nilda continua no gargalo.</p>
+      </div>
+    </div>
+
+    <div class="note reveal">
+      <strong>Fora deste escopo:</strong> gestão de mídia paga, carro de som e delivery expandido para novos bairros. Isso entra depois — quando o WhatsApp já responde sem a Nilda na frente e a base está viva no CRM.
+    </div>
+  </div>
+</section>
+
+<section class="steps-bg" id="proximos">
+  <div class="inner">
+    <div class="reveal">
+      <div class="slabel">Próximos passos</div>
+      <h2 class="stitle">Começamos com papéis claros — não com anúncio.</h2>
+      <p class="sdesc">Cada semana de WhatsApp sem dono é pedido que vai para quem responde. A Casa dos Pães já tem preço e variedade. Falta ligar a operação.</p>
+    </div>
+    <div class="steps-list reveal">
+      <div class="step-item">
+        <div class="step-num">01</div>
+        <div class="step-body">
+          <strong>Aprovar a proposta + contrato</strong>
+          <span>Condição comercial: R$ 18.000 à vista ou 12× de R$ 1.666,67. Escopo ZapFirst · 90 dias.</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">02</div>
+        <div class="step-body">
+          <strong>Nomear quem atende</strong>
+          <span>Gate: 1 pessoa de atendimento (mesmo meio período). Sem isso, o kick-off não instala processo — só aumenta a fila da Nilda.</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">03</div>
+        <div class="step-body">
+          <strong>Kick-off (semana 1)</strong>
+          <span>Definir o papel do WhatsApp (promoção e/ou pedidos), SLA, acessos (GMB, Instagram, WhatsApp Business) e início da captura nome + WhatsApp no caixa.</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">04</div>
+        <div class="step-body">
+          <strong>Mês 1–2 · porta de entrada e descentralização</strong>
+          <span>Ambiente digital, catálogo, PIX, scripts, treino e Kommo. Nilda sai do primeiro atendimento.</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">05</div>
+        <div class="step-body">
+          <strong>Mês 3 · IA, recompra e diagnóstico</strong>
+          <span>SDR IA 24/7, réguas de recompra e relatório de maturidade. Próximo passo (Lead Gen, delivery expandido) só com evidência — não por expectativa.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="footer-cta">
+  <h2>Pronto para instalar a fundação?</h2>
+  <p>R$ 500 mil continua sendo a meta da empresa. Este projeto entrega o alicerce para a operação aguentar o caminho — sem repetir investimento de mídia em cima de caos.</p>
+  <a href="#investimento" class="btn">
+    Ver condição comercial
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+  <div class="footer-note">Proposta válida por 7 dias · V4 Company × Casa dos Pães · Confidencial · Account Planning Thiago</div>
+</section>
+
+<script>
+const prog = document.getElementById('prog');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  prog.style.width = (window.scrollY / h * 100) + '%';
+});
+
+const navLinks = document.querySelectorAll('.topnav nav a');
+const sections = Array.from(document.querySelectorAll('section[id]'));
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id);
+      });
+    }
+  });
+}, { rootMargin: '-40% 0px -55% 0px' });
+sections.forEach(s => obs.observe(s));
+
+const reveals = document.querySelectorAll('.reveal');
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
+}, { rootMargin: '0px 0px -80px 0px', threshold: 0.1 });
+reveals.forEach(r => ro.observe(r));
+
+function countUp(el) {
+  const target = +el.dataset.target;
+  const dur = 1800;
+  const start = performance.now();
+  function format(val) {
+    if (target === 200000) return 'R$ 200 mil';
+    if (target === 500000) return 'R$ 500 mil';
+    return Math.round(val).toLocaleString('pt-BR');
+  }
+  function frame(now) {
+    const t = Math.min((now - start) / dur, 1);
+    const ease = 1 - Math.pow(1 - t, 3);
+    el.textContent = format(ease * target);
+    if (t < 1) requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+}
+const counters = document.querySelectorAll('.count-up');
+const co = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { countUp(e.target); co.unobserve(e.target); } });
+}, { threshold: 0.5 });
+counters.forEach(c => co.observe(c));
+</script>
+</body>
+</html>
