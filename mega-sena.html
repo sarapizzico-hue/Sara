@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mega-Sena · Concurso de hoje</title>
+  <meta name="description" content="Jogue a Mega-Sena agora: escolha 6 dezenas, assista o sorteio ao vivo e confira Sena, Quina e Quadra." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #03140c;
+      --bg-2: #072015;
+      --panel: rgba(7, 32, 21, .78);
+      --panel-2: rgba(10, 42, 28, .92);
+      --line: rgba(255, 210, 74, .16);
+      --line-2: rgba(255, 255, 255, .08);
+      --green: #14c45a;
+      --green-2: #00e676;
+      --green-dim: rgba(20, 196, 90, .16);
+      --gold: #ffd24a;
+      --gold-2: #ffe38a;
+      --gold-dim: rgba(255, 210, 74, .14);
+      --txt: #f4fff6;
+      --mut: #9cb8a6;
+      --danger: #ff6b6b;
+      --radius: 22px;
+      --shadow: 0 30px 80px rgba(0, 0, 0, .45);
+    }
+    * { box-sizing: border-box }
+    html, body { margin: 0; min-height: 100% }
+    body {
+      color: var(--txt);
+      font: 15px/1.5 "DM Sans", system-ui, sans-serif;
+      background:
+        radial-gradient(ellipse 90% 50% at 50% -10%, rgba(20, 196, 90, .22), transparent 55%),
+        radial-gradient(circle at 100% 0, rgba(255, 210, 74, .08), transparent 36%),
+        radial-gradient(circle at 0 100%, rgba(20, 196, 90, .08), transparent 40%),
+        var(--bg);
+      overflow-x: hidden;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='.08'/></svg>");
+      opacity: .18;
+      mix-blend-mode: overlay;
+      z-index: 0;
+    }
+    .wrap { position: relative; z-index: 1; max-width: 1180px; margin: 0 auto; padding: 22px 18px 48px }
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px }
+    .logo {
+      width: 46px; height: 46px; border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #5cff9a, #0a7a3e 62%, #053d20);
+      box-shadow: 0 0 0 3px rgba(255, 210, 74, .35), 0 8px 24px rgba(0,0,0,.35);
+      display: grid; place-items: center; font-weight: 800; color: #fff; font-size: 18px;
+    }
+    .brand h1 {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 42px; letter-spacing: .04em; margin: 0; line-height: .9;
+      background: linear-gradient(180deg, #fff, var(--gold-2));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .brand small { display: block; color: var(--mut); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; font-weight: 700 }
+    .live {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 14px; border-radius: 999px;
+      border: 1px solid var(--line); background: var(--panel);
+      font-size: 12px; font-weight: 700; color: var(--gold-2);
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: #ff4d4d; box-shadow: 0 0 10px #ff4d4d; animation: pulse 1.2s infinite }
+    @keyframes pulse { 50% { opacity: .35; transform: scale(.8) } }
+    .hero {
+      position: relative; overflow: hidden;
+      border: 1px solid var(--line); border-radius: 28px;
+      background: linear-gradient(135deg, rgba(20,196,90,.18), rgba(7,32,21,.9) 46%, rgba(255,210,74,.08));
+      padding: 26px 28px; margin-bottom: 18px; box-shadow: var(--shadow);
+    }
+    .hero::after {
+      content: ""; position: absolute; right: -80px; top: -90px; width: 280px; height: 280px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,210,74,.28), transparent 68%); pointer-events: none;
+    }
+    .hero-inner { position: relative; z-index: 1; display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; align-items: end }
+    .eyebrow { font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--gold) }
+    .prize { font-family: "Bebas Neue", sans-serif; font-size: clamp(42px, 8vw, 72px); line-height: .9; margin: 6px 0 8px; color: #fff }
+    .prize span { color: var(--gold) }
+    .hero p { margin: 0; color: var(--mut); max-width: 520px }
+    .wallet {
+      min-width: 220px; background: rgba(0,0,0,.28); border: 1px solid var(--line-2);
+      border-radius: 18px; padding: 14px 16px;
+    }
+    .wallet .k { font-size: 11px; color: var(--mut); font-weight: 700; letter-spacing: .08em; text-transform: uppercase }
+    .wallet .v { font-size: 28px; font-weight: 800; color: var(--green-2) }
+    .wallet .meta { display: flex; justify-content: space-between; color: var(--mut); font-size: 12px; margin-top: 8px }
+    .grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 16px }
+    @media (max-width: 900px) { .grid { grid-template-columns: 1fr } }
+    .card {
+      background: var(--panel); border: 1px solid var(--line-2); border-radius: var(--radius);
+      padding: 20px; box-shadow: var(--shadow); backdrop-filter: blur(16px);
+    }
+    .card h2 { margin: 0 0 4px; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold) }
+    .card .hint { color: var(--mut); font-size: 13px; margin: 0 0 16px }
+    .counter { float: right; font-weight: 800; color: var(--green-2) }
+    .volante {
+      display: grid; grid-template-columns: repeat(10, 1fr); gap: 7px;
+    }
+    @media (max-width: 640px) { .volante { grid-template-columns: repeat(6, 1fr) } }
+    .num {
+      appearance: none; border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.03); color: var(--txt);
+      aspect-ratio: 1; border-radius: 50%; cursor: pointer; font: 700 13px/1 "DM Sans", sans-serif;
+      transition: .18s transform, .18s background, .18s border, .18s box-shadow;
+    }
+    .num:hover { transform: translateY(-1px); border-color: var(--green) }
+    .num.on {
+      background: radial-gradient(circle at 32% 28%, #7dffb0, #0d8a45 58%, #065c2d);
+      border-color: var(--gold); color: #fff;
+      box-shadow: 0 0 0 2px rgba(255,210,74,.25), 0 8px 18px rgba(0,0,0,.28);
+    }
+    .num.hit {
+      background: radial-gradient(circle at 32% 28%, #ffe38a, #d4a017 60%, #8a6a08);
+      border-color: #fff; color: #1b1400;
+      animation: pop .45s ease;
+    }
+    .num:disabled { cursor: default; opacity: .72 }
+    @keyframes pop { 0% { transform: scale(.7) } 70% { transform: scale(1.12) } 100% { transform: scale(1) } }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px }
+    button.btn {
+      appearance: none; border: 0; cursor: pointer; font-family: inherit; font-weight: 800;
+      border-radius: 999px; padding: 12px 18px; letter-spacing: .02em;
+    }
+    .btn.ghost { background: rgba(255,255,255,.05); color: var(--txt); border: 1px solid var(--line-2) }
+    .btn.gold {
+      background: linear-gradient(180deg, #ffe38a, #e0b12a); color: #1b1400;
+      box-shadow: 0 10px 24px rgba(255, 210, 74, .22);
+    }
+    .btn.green { background: linear-gradient(180deg, #3dff8a, #0ea84a); color: #04140c }
+    .btn:disabled { opacity: .45; cursor: not-allowed; box-shadow: none }
+    .picked { display: flex; gap: 8px; flex-wrap: wrap; min-height: 42px; margin-top: 14px }
+    .chip {
+      min-width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center;
+      background: var(--green-dim); border: 1px solid var(--green); font-weight: 800;
+    }
+    .chip.empty { background: transparent; border-style: dashed; border-color: var(--line-2); color: var(--mut) }
+    .globe-wrap { display: grid; place-items: center; padding: 8px 0 18px }
+    .globe {
+      width: 210px; height: 210px; border-radius: 50%; position: relative;
+      background:
+        radial-gradient(circle at 32% 28%, rgba(255,255,255,.18), transparent 28%),
+        radial-gradient(circle at 50% 50%, rgba(20,196,90,.18), rgba(3,20,12,.92) 68%);
+      border: 3px solid rgba(255,210,74,.35);
+      box-shadow: inset 0 0 40px rgba(20,196,90,.25), 0 0 40px rgba(20,196,90,.18);
+      overflow: hidden;
+    }
+    .globe.spin .orb { animation: orbit 1.1s linear infinite }
+    .orb {
+      position: absolute; width: 18px; height: 18px; border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #fff, #14c45a);
+      box-shadow: 0 0 10px rgba(20,196,90,.8);
+    }
+    .orb:nth-child(1) { top: 18%; left: 42% }
+    .orb:nth-child(2) { top: 58%; left: 18% }
+    .orb:nth-child(3) { top: 62%; left: 68% }
+    .orb:nth-child(4) { top: 34%; left: 72% }
+    .orb:nth-child(5) { top: 78%; left: 44% }
+    @keyframes orbit {
+      0% { transform: translate(0,0) }
+      25% { transform: translate(18px, -10px) }
+      50% { transform: translate(-12px, 16px) }
+      75% { transform: translate(10px, 12px) }
+      100% { transform: translate(0,0) }
+    }
+    .balls { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; min-height: 64px }
+    .ball {
+      width: 58px; height: 58px; border-radius: 50%; display: grid; place-items: center;
+      font-weight: 800; font-size: 18px; color: #fff;
+      background: radial-gradient(circle at 32% 28%, #8cffb8, #0c7a40 58%, #044c26);
+      border: 2px solid rgba(255,210,74,.4);
+      box-shadow: 0 8px 18px rgba(0,0,0,.28);
+      transform: scale(0); opacity: 0;
+    }
+    .ball.show { animation: drop .45s cubic-bezier(.2,1.4,.3,1) forwards }
+    .ball.match { background: radial-gradient(circle at 32% 28%, #fff4c2, #e0b12a 58%, #8a6a08); color: #1b1400; border-color: #fff }
+    .ball.ghost { opacity: .28; transform: none; background: rgba(255,255,255,.04); border: 1px dashed var(--line-2); box-shadow: none; color: var(--mut) }
+    @keyframes drop { from { transform: translateY(-24px) scale(.4); opacity: 0 } to { transform: none; opacity: 1 } }
+    .result {
+      margin-top: 16px; border-radius: 16px; padding: 14px 16px; display: none;
+      border: 1px solid var(--line-2); background: rgba(0,0,0,.22);
+    }
+    .result.show { display: block; animation: fade .3s ease }
+    .result h3 { margin: 0 0 4px; font-size: 22px }
+    .result.sena { border-color: var(--gold); background: var(--gold-dim) }
+    .result.quina { border-color: var(--green); background: var(--green-dim) }
+    .result.quadra { border-color: rgba(96,165,250,.45); background: rgba(96,165,250,.1) }
+    @keyframes fade { from { opacity: 0; transform: translateY(8px) } to { opacity: 1; transform: none } }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 18px }
+    @media (max-width: 640px) { .stats { grid-template-columns: repeat(2, 1fr) } }
+    .stat { background: var(--panel-2); border: 1px solid var(--line-2); border-radius: 16px; padding: 12px }
+    .stat .n { font-size: 22px; font-weight: 800 }
+    .stat .l { font-size: 11px; color: var(--mut); text-transform: uppercase; letter-spacing: .08em; font-weight: 700 }
+    .history { margin-top: 16px }
+    table { width: 100%; border-collapse: collapse; font-size: 13px }
+    th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--line-2); vertical-align: middle }
+    th { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--mut) }
+    .mini { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; margin-right: 4px; background: rgba(20,196,90,.2); font-size: 11px; font-weight: 800 }
+    .mini.hit { background: var(--gold); color: #1b1400 }
+    .empty-row { color: var(--mut); text-align: center; padding: 18px }
+    .sound { display: flex; align-items: center; gap: 8px; color: var(--mut); font-size: 12px; font-weight: 700 }
+    .sound input { accent-color: var(--green) }
+    canvas#confetti { position: fixed; inset: 0; pointer-events: none; z-index: 20 }
+    .rules { color: var(--mut); font-size: 13px; margin: 0 }
+    .rules strong { color: var(--txt) }
+  </style>
+</head>
+<body>
+  <canvas id="confetti"></canvas>
+  <div class="wrap">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">MS</div>
+        <div>
+          <small>Caixa · Simulação</small>
+          <h1>Mega-Sena</h1>
+        </div>
+      </div>
+      <div class="live"><span class="dot"></span> Sorteio de hoje · <span id="today"></span></div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-inner">
+        <div>
+          <div class="eyebrow">Prêmio estimado do concurso</div>
+          <div class="prize">R$ <span id="jackpot">45.000.000</span></div>
+          <p>Escolha 6 dezenas de 01 a 60, confirme o volante e assista o globo girar. Sena, Quina e Quadra pagam. É um jogo de diversão — sem aposta real.</p>
+        </div>
+        <div class="wallet">
+          <div class="k">Seu saldo</div>
+          <div class="v" id="balance">R$ 200,00</div>
+          <div class="meta">
+            <span>Jogo simples R$ 5,00</span>
+            <label class="sound"><input id="sound" type="checkbox" checked /> Som</label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="grid">
+      <section class="card">
+        <h2>Volante <span class="counter" id="pickCount">0/6</span></h2>
+        <p class="hint">Toque nas dezenas. Use surpresinha se quiser deixar a sorte escolher.</p>
+        <div class="volante" id="volante"></div>
+        <div class="picked" id="picked"></div>
+        <div class="actions">
+          <button class="btn ghost" id="surpresa" type="button">Surpresinha</button>
+          <button class="btn ghost" id="limpar" type="button">Limpar</button>
+          <button class="btn gold" id="sortear" type="button" disabled>Sortear agora</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Globo do sorteio</h2>
+        <p class="hint" id="drawHint">Confirme 6 dezenas para girar o globo.</p>
+        <div class="globe-wrap">
+          <div class="globe" id="globe">
+            <span class="orb"></span><span class="orb"></span><span class="orb"></span><span class="orb"></span><span class="orb"></span>
+          </div>
+        </div>
+        <div class="balls" id="balls"></div>
+        <div class="result" id="result"></div>
+      </section>
+    </div>
+
+    <section class="stats">
+      <div class="stat"><div class="n" id="stPlayed">0</div><div class="l">Jogos</div></div>
+      <div class="stat"><div class="n" id="stSpent">R$ 0</div><div class="l">Investido</div></div>
+      <div class="stat"><div class="n" id="stWon">R$ 0</div><div class="l">Ganho</div></div>
+      <div class="stat"><div class="n" id="stBest">—</div><div class="l">Melhor acerto</div></div>
+    </section>
+
+    <section class="card history">
+      <h2>Últimos concursos</h2>
+      <p class="hint">Sena = 6 acertos · Quina = 5 · Quadra = 4. Três acertos não pagam, mas entram no histórico.</p>
+      <table>
+        <thead>
+          <tr><th>Quando</th><th>Seu jogo</th><th>Sorteio</th><th>Acertos</th><th>Prêmio</th></tr>
+        </thead>
+        <tbody id="history">
+          <tr><td class="empty-row" colspan="5">Ainda não houve sorteio. Marque suas dezenas e jogue.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card" style="margin-top:16px">
+      <h2>Como funciona</h2>
+      <p class="rules">O volante custa <strong>R$ 5,00</strong> do saldo virtual. O globo sorteia 6 dezenas sem repetição, como na Mega-Sena. Premiação desta casa: <strong>Sena R$ 45 milhões</strong>, <strong>Quina R$ 52 mil</strong> e <strong>Quadra R$ 1.250</strong>. Se o saldo acabar, o botão recarrega R$ 100 para continuar jogando.</p>
+    </section>
+  </div>
+
+  <script>
+    const COST = 5;
+    const PRIZES = { 6: 45000000, 5: 52000, 4: 1250 };
+    const LABELS = { 6: "SENA!", 5: "QUINA!", 4: "QUADRA!", 3: "Terno", 2: "Dois acertos", 1: "Um acerto", 0: "Não foi dessa vez" };
+    const storeKey = "megaSenaHoje";
+
+    const state = load() || {
+      balance: 200,
+      spent: 0,
+      won: 0,
+      played: 0,
+      best: 0,
+      history: [],
+    };
+
+    const picks = new Set();
+    let drawing = false;
+
+    const $ = (id) => document.getElementById(id);
+    const volante = $("volante");
+    const ballsEl = $("balls");
+    const resultEl = $("result");
+
+    $("today").textContent = new Date().toLocaleDateString("pt-BR", { weekday: "long", day: "2-digit", month: "long" });
+    $("jackpot").textContent = "45.000.000";
+
+    for (let n = 1; n <= 60; n++) {
+      const b = document.createElement("button");
+      b.className = "num";
+      b.type = "button";
+      b.dataset.n = String(n);
+      b.textContent = String(n).padStart(2, "0");
+      b.addEventListener("click", () => toggle(n));
+      volante.appendChild(b);
+    }
+
+    $("surpresa").addEventListener("click", surpresinha);
+    $("limpar").addEventListener("click", () => { if (!drawing) { picks.clear(); renderPicks(); } });
+    $("sortear").addEventListener("click", sortear);
+
+    renderPicks();
+    renderStats();
+    renderHistory();
+    renderGhostBalls();
+
+    function load() {
+      try { return JSON.parse(localStorage.getItem(storeKey) || "null"); } catch { return null; }
+    }
+    function save() {
+      localStorage.setItem(storeKey, JSON.stringify(state));
+    }
+    function money(v) {
+      return v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+    }
+    function toggle(n) {
+      if (drawing) return;
+      if (picks.has(n)) picks.delete(n);
+      else if (picks.size < 6) picks.add(n);
+      renderPicks();
+    }
+    function surpresinha() {
+      if (drawing) return;
+      picks.clear();
+      const pool = Array.from({ length: 60 }, (_, i) => i + 1);
+      for (let i = 0; i < 6; i++) {
+        const idx = Math.floor(Math.random() * pool.length);
+        picks.add(pool.splice(idx, 1)[0]);
+      }
+      renderPicks();
+    }
+    function renderPicks() {
+      volante.querySelectorAll(".num").forEach((btn) => {
+        const n = Number(btn.dataset.n);
+        btn.classList.toggle("on", picks.has(n));
+        btn.classList.remove("hit");
+        btn.disabled = drawing;
+      });
+      $("pickCount").textContent = picks.size + "/6";
+      const picked = $("picked");
+      picked.innerHTML = "";
+      const ordered = [...picks].sort((a, b) => a - b);
+      for (let i = 0; i < 6; i++) {
+        const chip = document.createElement("div");
+        chip.className = "chip" + (ordered[i] ? "" : " empty");
+        chip.textContent = ordered[i] ? String(ordered[i]).padStart(2, "0") : "—";
+        picked.appendChild(chip);
+      }
+      const canPlay = picks.size === 6 && !drawing && state.balance >= COST;
+      $("sortear").disabled = !(picks.size === 6 && !drawing);
+      $("sortear").textContent = state.balance < COST ? "Recarregar e sortear" : "Sortear agora";
+      $("surpresa").disabled = drawing;
+      $("limpar").disabled = drawing;
+    }
+    function renderGhostBalls() {
+      ballsEl.innerHTML = "";
+      for (let i = 0; i < 6; i++) {
+        const d = document.createElement("div");
+        d.className = "ball ghost";
+        d.textContent = "•";
+        ballsEl.appendChild(d);
+      }
+    }
+    function renderStats() {
+      $("balance").textContent = money(state.balance);
+      $("stPlayed").textContent = String(state.played);
+      $("stSpent").textContent = money(state.spent);
+      $("stWon").textContent = money(state.won);
+      $("stBest").textContent = state.best ? state.best + " acertos" : "—";
+    }
+    function renderHistory() {
+      const tb = $("history");
+      if (!state.history.length) {
+        tb.innerHTML = '<tr><td class="empty-row" colspan="5">Ainda não houve sorteio. Marque suas dezenas e jogue.</td></tr>';
+        return;
+      }
+      tb.innerHTML = state.history.map((row) => `
+        <tr>
+          <td>${row.when}</td>
+          <td>${row.picks.map((n) => `<span class="mini ${row.drawn.includes(n) ? "hit" : ""}">${pad(n)}</span>`).join("")}</td>
+          <td>${row.drawn.map((n) => `<span class="mini ${row.picks.includes(n) ? "hit" : ""}">${pad(n)}</span>`).join("")}</td>
+          <td><strong>${row.hits}</strong> · ${row.label}</td>
+          <td>${row.prize ? money(row.prize) : "—"}</td>
+        </tr>
+      `).join("");
+    }
+    function pad(n) { return String(n).padStart(2, "0"); }
+    function wait(ms) { return new Promise((r) => setTimeout(r, ms)); }
+    function shuffle(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+    function beep(freq, dur, type) {
+      if (!$("sound").checked) return;
+      try {
+        const ctx = beep.ctx || (beep.ctx = new (window.AudioContext || window.webkitAudioContext)());
+        const o = ctx.createOscillator();
+        const g = ctx.createGain();
+        o.type = type || "triangle";
+        o.frequency.value = freq;
+        g.gain.value = 0.05;
+        o.connect(g); g.connect(ctx.destination);
+        o.start();
+        g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + dur);
+        o.stop(ctx.currentTime + dur);
+      } catch {}
+    }
+
+    async function sortear() {
+      if (drawing || picks.size !== 6) return;
+      if (state.balance < COST) {
+        state.balance += 100;
+        renderStats();
+        save();
+      }
+      drawing = true;
+      resultEl.className = "result";
+      resultEl.classList.remove("show");
+      $("drawHint").textContent = "Globo girando... as dezenas saem uma a uma.";
+      $("globe").classList.add("spin");
+      renderPicks();
+      renderGhostBalls();
+
+      state.balance -= COST;
+      state.spent += COST;
+      state.played += 1;
+      renderStats();
+
+      const pool = shuffle(Array.from({ length: 60 }, (_, i) => i + 1));
+      const drawn = [];
+      ballsEl.innerHTML = "";
+      for (let i = 0; i < 6; i++) {
+        await wait(i === 0 ? 500 : 680);
+        const n = pool[i];
+        drawn.push(n);
+        const ball = document.createElement("div");
+        ball.className = "ball show";
+        ball.textContent = pad(n);
+        ballsEl.appendChild(ball);
+        beep(380 + i * 70, 0.16);
+      }
+
+      await wait(420);
+      $("globe").classList.remove("spin");
+      const ordered = [...drawn].sort((a, b) => a - b);
+      const my = [...picks].sort((a, b) => a - b);
+      const hits = my.filter((n) => drawn.includes(n));
+      const hitCount = hits.length;
+      const prize = PRIZES[hitCount] || 0;
+
+      ballsEl.innerHTML = "";
+      ordered.forEach((n) => {
+        const ball = document.createElement("div");
+        ball.className = "ball show" + (picks.has(n) ? " match" : "");
+        ball.textContent = pad(n);
+        ballsEl.appendChild(ball);
+      });
+
+      volante.querySelectorAll(".num").forEach((btn) => {
+        const n = Number(btn.dataset.n);
+        if (picks.has(n) && drawn.includes(n)) btn.classList.add("hit");
+      });
+
+      if (prize) {
+        state.balance += prize;
+        state.won += prize;
+      }
+      if (hitCount > state.best) state.best = hitCount;
+
+      const label = LABELS[hitCount];
+      resultEl.className = "result show" + (hitCount >= 6 ? " sena" : hitCount === 5 ? " quina" : hitCount === 4 ? " quadra" : "");
+      resultEl.innerHTML = `
+        <h3>${label}</h3>
+        <div>Você acertou <strong>${hitCount}</strong> dezena${hitCount === 1 ? "" : "s"}${prize ? " e levou " + money(prize) : "."}</div>
+      `;
+      $("drawHint").textContent = hitCount >= 4 ? "Conferência concluída. Parabéns!" : "Conferência concluída. Monte um novo volante.";
+
+      state.history.unshift({
+        when: new Date().toLocaleString("pt-BR", { hour: "2-digit", minute: "2-digit", day: "2-digit", month: "2-digit" }),
+        picks: my,
+        drawn: ordered,
+        hits: hitCount,
+        label,
+        prize,
+      });
+      state.history = state.history.slice(0, 12);
+      save();
+      renderStats();
+      renderHistory();
+
+      if (hitCount >= 4) burst(hitCount === 6 ? 180 : hitCount === 5 ? 90 : 50);
+      if (hitCount >= 4) beep(620, 0.35, "sine");
+      else beep(220, 0.2, "sawtooth");
+
+      drawing = false;
+      renderPicks();
+    }
+
+    function burst(count) {
+      const c = $("confetti");
+      const ctx = c.getContext("2d");
+      c.width = innerWidth; c.height = innerHeight;
+      const parts = Array.from({ length: count }, () => ({
+        x: Math.random() * c.width,
+        y: -20 - Math.random() * 80,
+        r: 3 + Math.random() * 5,
+        v: 2 + Math.random() * 4,
+        a: Math.random() * 6,
+        color: ["#14c45a", "#ffd24a", "#ffffff", "#3dff8a"][Math.floor(Math.random() * 4)],
+      }));
+      let frames = 0;
+      (function tick() {
+        ctx.clearRect(0, 0, c.width, c.height);
+        parts.forEach((p) => {
+          p.y += p.v; p.x += Math.sin(p.a += 0.1);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(p.x, p.y, p.r, p.r * 1.6);
+        });
+        if (++frames < 90) requestAnimationFrame(tick);
+        else ctx.clearRect(0, 0, c.width, c.height);
+      })();
+    }
+  </script>
+</body>
+</html>
