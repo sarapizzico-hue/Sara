@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pitch setembro 2026 · 41 projetos · Cockpit E.E</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --brand:#e50915; --brand-light:#ff1a27; --bg:#050505; --surf:rgba(20,20,20,.92);
+      --surf2:#141414; --bd:rgba(255,255,255,.1); --txt:#fafafa; --mut:#a3a3a3;
+      --ok:#86efac; --warn:#fde68a; --hot:#fca5a5; --info:#93c5fd;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--txt);font:14px/1.55 Inter,system-ui,sans-serif;
+      background-image:radial-gradient(ellipse 80% 45% at 50% -15%,rgba(229,9,21,.18),transparent)}
+    .top{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);background:rgba(5,5,5,.9);border-bottom:1px solid var(--bd);padding:12px 22px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+    .logo{font-weight:900}.logo span{color:var(--brand-light)}
+    .pill{font-size:11px;font-weight:700;color:var(--mut);border:1px solid var(--bd);padding:5px 10px;border-radius:999px}
+    .wrap{max-width:1180px;margin:0 auto;padding:28px 20px 70px}
+    h1{margin:0 0 8px;font-size:clamp(26px,4vw,36px);font-weight:900;letter-spacing:-.03em}
+    .lead{color:var(--mut);max-width:920px;margin:0 0 18px;font-size:13px}
+    .lead a,.ext a,footer a{color:var(--ok)}
+    .callout{padding:14px 16px;border-radius:12px;border:1px solid rgba(96,165,250,.3);background:rgba(96,165,250,.08);color:#bfdbfe;font-size:13px;margin-bottom:14px}
+    .callout.warn{border-color:rgba(250,204,21,.28);background:rgba(250,204,21,.06);color:#fde68a}
+    .callout.ok{border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.08);color:#bbf7d0}
+    .callout.hot{border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.08);color:#fecaca}
+    .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:10px;margin-bottom:16px}
+    .kpi{background:var(--surf);border:1px solid var(--bd);border-radius:14px;padding:14px 16px}
+    .kpi .v{font-size:22px;font-weight:900}.kpi .v.ok{color:var(--ok)}.kpi .v.hot{color:var(--hot)}.kpi .v.warn{color:var(--warn)}.kpi .v.info{color:var(--info)}
+    .kpi .l{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--mut);margin-top:6px;font-weight:700}
+    .kpi .s{font-size:11px;color:#d4d4d4;margin-top:4px}
+    .nav{position:sticky;top:52px;z-index:15;margin:0 0 16px;padding:8px;background:rgba(8,8,8,.94);backdrop-filter:blur(14px);border:1px solid var(--bd);border-radius:16px;display:flex;flex-wrap:wrap;gap:8px}
+    .nav a{font-size:11px;font-weight:800;text-decoration:none;color:var(--mut);border:1px solid var(--bd);padding:6px 10px;border-radius:999px}
+    .nav a:hover,.nav a:focus{color:#fff;border-color:rgba(255,255,255,.28)}
+    .section{background:var(--surf);border:1px solid var(--bd);border-radius:16px;padding:18px 20px;margin-bottom:12px}
+    .section h2{margin:0 0 4px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);font-weight:800}
+    .section h3{margin:0 0 12px;font-size:17px;font-weight:900}
+    .month-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+    .month-kpis{display:flex;flex-wrap:wrap;gap:6px}
+    .month-kpis span{font-size:10px;font-weight:800;border:1px solid var(--bd);border-radius:999px;padding:4px 8px;color:var(--mut)}
+    .month-kpis span b{color:#fff}
+    .month-kpis span.ok{color:var(--ok);border-color:rgba(34,197,94,.35)}
+    .month-kpis span.hot{color:var(--hot);border-color:rgba(239,68,68,.4)}
+    .month-kpis span.info{color:var(--info);border-color:rgba(96,165,250,.35)}
+    .month-kpis span.warn{color:var(--warn);border-color:rgba(250,204,21,.35)}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:800px){.grid2{grid-template-columns:1fr}}
+    .card{background:var(--surf2);border:1px solid var(--bd);border-radius:12px;padding:14px 16px}
+    .card .t{font-weight:800;margin-bottom:6px}
+    .card .d{font-size:12px;color:#d4d4d4}
+    .scroll{overflow-x:auto}
+    table{width:100%;border-collapse:collapse;font-size:12.5px}
+    th,td{padding:9px 8px;border-bottom:1px solid var(--bd);text-align:left;vertical-align:top}
+    th{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);font-weight:800}
+    tbody tr:hover{background:rgba(255,255,255,.025)}
+    .tag{display:inline-block;padding:2px 8px;border-radius:999px;font-size:10px;font-weight:800;border:1px solid var(--bd);white-space:nowrap}
+    .tag.ok{color:var(--ok);border-color:rgba(34,197,94,.35)}
+    .tag.warn{color:var(--warn);border-color:rgba(250,204,21,.35)}
+    .tag.hot{color:var(--hot);border-color:rgba(239,68,68,.4)}
+    .tag.info{color:var(--info);border-color:rgba(96,165,250,.35)}
+    .muted{color:var(--mut);font-size:12px}
+    .money{font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:800}
+    .name{font-weight:700}
+    footer{text-align:center;color:var(--mut);font-size:11px;margin-top:28px;padding-top:16px;border-top:1px solid var(--bd)}
+    .search{width:100%;max-width:360px;background:#0a0a0a;border:1px solid var(--bd);border-radius:10px;color:var(--txt);padding:9px 12px;font:inherit;margin:0 0 14px}
+    .pay-row{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 0;border-bottom:1px solid var(--bd)}
+    .pay-row:last-child{border-bottom:0;padding-bottom:0}
+    .pay-row .meta{font-size:12px;color:var(--mut)}
+    @media print{
+      body{background:#fff;color:#111}
+      .top,.nav,.search{display:none}
+      .section,.kpi,.card,.callout{break-inside:avoid;border-color:#ddd;background:#fff}
+      .muted,.lead,h2,.kpi .l,th{color:#555}
+      a{color:#111}
+    }
+  </style>
+</head>
+<body>
+<header class="top">
+  <div class="logo">V4 <span>COMPANY</span></div>
+  <div class="pill">Pitch setembro · Cockpit E.E · Farmer Sara</div>
+</header>
+
+<div class="wrap">
+  <h1>41 projetos para pitch em setembro</h1>
+  <p class="lead">
+    Farmer = <strong>Sara</strong> · fonte
+    <a href="https://docs.google.com/spreadsheets/d/1dSukhon9dIUABcbQIKGKUa-ku-_oLOn1Q5YWeWGfI6U/edit?usp=sharing" target="_blank" rel="noopener">Cockpit E.E</a>.
+    41 pitches no mês, separados por semana. 9 são estoque de agosto que ficou para <strong>07/set</strong>.
+    Work Bank já fechou em ago (CRM) — fora desta conta.
+  </p>
+
+  <div class="callout warn">
+    <strong>Obs:</strong> 9 pitches são do mês passado e ficaram para este mês (07 setembro):
+    ABC71 · Tamiya Brasil · Henri Soluções · Nosso boteco · RE/MAX PRO WORK · 600 Multimarcas · Castanheira · Freebong · Casa dos Pães.
+  </div>
+  <div class="callout hot">
+    <strong>Obs importante · mês 06 travado</strong> (agenda do cliente; General Car e RM Burguer trocaram de produto):
+    General Car (SMALL · Semana 0) · RM Burguer Itabira (SMALL · Semana 0) · Triboltec (SMALL · Semana 05) · Positive Safety (SMALL · Drop Timing, reativando EQV).
+    General Car e RM Burguer não entram nos 3 da 0º semana.
+  </div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="v">41</div><div class="l">Pitches set</div><div class="s">0º 3 · 2º 12 · 3º 14 · 4º 10 · 5º 2</div></div>
+    <div class="kpi"><div class="v warn">9</div><div class="l">Vieram de ago</div><div class="s">07 setembro</div></div>
+    <div class="kpi"><div class="v ok">4</div><div class="l">Follow agora</div><div class="s">MRR R$ 41.950</div></div>
+    <div class="kpi"><div class="v info">13</div><div class="l">Status em branco</div><div class="s">iniciar na 1ª semana</div></div>
+    <div class="kpi"><div class="v hot">4</div><div class="l">Mês 06 travado</div><div class="s">agenda / troca de produto</div></div>
+  </div>
+
+  <nav class="nav" aria-label="Semanas">
+    <a href="#s0">0º · 3</a>
+    <a href="#s2">2º · 12</a>
+    <a href="#s3">3º · 14</a>
+    <a href="#s4">4º · 10</a>
+    <a href="#s5">5º · 2</a>
+    <a href="#follow">Follow · 4</a>
+    <a href="#blank">Em branco · 13</a>
+    <a href="#travados">Mês 06</a>
+  </nav>
+
+  <input class="search" id="q" type="search" placeholder="Filtrar empresa…" aria-label="Filtrar empresa" />
+
+  <!-- 9 AGO -->
+  <div class="section" id="ago">
+    <h2>Estoque de agosto</h2>
+    <h3>Os 9 pitches que ficaram para 07/set</h3>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th>Empresa</th><th>Need scope</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="name">ABC71 (LM)</td><td><span class="tag info">MEDIUM</span></td><td>Follow · MRR R$ 8.500 · cartão · booking 12 meses</td></tr>
+          <tr><td class="name">Tamiya Brasil (LS)</td><td><span class="tag">SMALL</span></td><td>Follow · MRR R$ 8.500 · booking 12 meses</td></tr>
+          <tr><td class="name">Henri Soluções (LS)</td><td><span class="tag">SMALL</span></td><td>Semana 04 · tratativa de ops · pitch adiado</td></tr>
+          <tr><td class="name">Nosso boteco (BM)</td><td><span class="tag info">MEDIUM</span></td><td>Semana 04 · marcar data do pitch</td></tr>
+          <tr><td class="name">RE/MAX PRO WORK (BT)</td><td><span class="tag warn">TINY</span></td><td>Semana 04 · tratativa de ops · pitch adiado</td></tr>
+          <tr><td class="name">600 Multimarcas</td><td><span class="tag info">MEDIUM</span></td><td>Semana 04 · marcar data do pitch</td></tr>
+          <tr><td class="name">Castanheira (LM)</td><td><span class="tag info">MEDIUM</span></td><td>Semana 04 · férias · retorna em set</td></tr>
+          <tr><td class="name">Freebong (BS)</td><td><span class="tag">SMALL</span></td><td>Semana 04 · marcar data do pitch</td></tr>
+          <tr><td class="name">Supermercado Casa dos Pães (BS)</td><td><span class="tag">SMALL</span></td><td>Semana 05 · agenda · 4 no-shows</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SEMANA 0 -->
+  <div class="section" id="s0">
+    <div class="month-head">
+      <div><h2>Semana</h2><h3>0º semana · 3 projetos</h3></div>
+      <div class="month-kpis">
+        <span><b>2</b> SMALL</span>
+        <span class="warn"><b>1</b> sem scope</span>
+        <span>Kick-off: Podium</span>
+      </div>
+    </div>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th>Empresa</th><th>Need scope</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="name">Brasil Auto Placas</td><td><span class="tag">SMALL</span></td><td>Semana 0</td></tr>
+          <tr><td class="name">Emporio Inacio</td><td><span class="tag warn">—</span></td><td>Semana 0</td></tr>
+          <tr><td class="name">Podium Jeans</td><td><span class="tag">SMALL</span></td><td>Semana 0 · kick-off feito</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted" style="margin:10px 0 0">General Car e RM Burguer também estão Semana 0 no Cockpit, mas entram na fila do mês 06 travado — não nestes 3.</p>
+  </div>
+
+  <!-- SEMANA 2 -->
+  <div class="section" id="s2">
+    <div class="month-head">
+      <div><h2>Semana</h2><h3>2º semana · 12 projetos</h3></div>
+      <div class="month-kpis">
+        <span class="hot"><b>1</b> LARGE</span>
+        <span class="info"><b>5</b> MEDIUM</span>
+        <span><b>3</b> SMALL</span>
+        <span class="warn"><b>3</b> TINY</span>
+      </div>
+    </div>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th>Empresa</th><th>Need scope</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="name">AMBI TOPOGRAFIA (LT)</td><td><span class="tag warn">TINY</span></td><td>Semana 02 · kick-off feito</td></tr>
+          <tr><td class="name">Atlanta Consórcios (BM)</td><td><span class="tag info">MEDIUM</span></td><td>Semana 02</td></tr>
+          <tr><td class="name">Café Negrin</td><td><span class="tag info">MEDIUM</span></td><td>Semana 02</td></tr>
+          <tr><td class="name">Comercial Ultimix LTDA</td><td><span class="tag info">MEDIUM</span></td><td>Semana 02</td></tr>
+          <tr><td class="name">GRM Tecnologia e Serviços</td><td><span class="tag info">MEDIUM</span></td><td>Semana 02</td></tr>
+          <tr><td class="name">Golias Espetaria</td><td><span class="tag">SMALL</span></td><td>Semana 02</td></tr>
+          <tr><td class="name">Intelecto Serviços Ambientais</td><td><span class="tag">SMALL</span></td><td>Semana 02</td></tr>
+          <tr><td class="name">MB Comércio (RecT)</td><td><span class="tag warn">TINY</span></td><td>Semana 02 · kick-off feito</td></tr>
+          <tr><td class="name">MGE Comércio de máquinas LTDA</td><td><span class="tag warn">TINY</span></td><td>Semana 02</td></tr>
+          <tr><td class="name">V-tech Blindados</td><td><span class="tag info">MEDIUM</span></td><td>Semana 02</td></tr>
+          <tr><td class="name">Vitória Troféus</td><td><span class="tag hot">LARGE</span></td><td>Semana 02</td></tr>
+          <tr><td class="name">Wang (BS)</td><td><span class="tag">SMALL</span></td><td>Semana 02 · tratativa de ops</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SEMANA 3 -->
+  <div class="section" id="s3">
+    <div class="month-head">
+      <div><h2>Semana</h2><h3>3º semana · 14 projetos</h3></div>
+      <div class="month-kpis">
+        <span class="info"><b>10</b> MEDIUM</span>
+        <span><b>3</b> SMALL</span>
+        <span class="warn"><b>1</b> TINY</span>
+      </div>
+    </div>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th>Empresa</th><th>Need scope</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="name">Balão Mágico</td><td><span class="tag info">MEDIUM</span></td><td>Semana 03 · entrar em contato</td></tr>
+          <tr><td class="name">Biju Mania (RecS)</td><td><span class="tag">SMALL</span></td><td>Semana 03 · montar Account Planning</td></tr>
+          <tr><td class="name">Dental Muller (LM)</td><td><span class="tag info">MEDIUM</span></td><td>Semana 03 · entrar em contato</td></tr>
+          <tr><td class="name">Fertisul Fertilizantes</td><td><span class="tag info">MEDIUM</span></td><td>Semana 03 · entrar em contato</td></tr>
+          <tr><td class="name">LUCKSHOES (BS)</td><td><span class="tag">SMALL</span></td><td>Semana 03 · travado falta de pagamento</td></tr>
+          <tr><td class="name">Mixconect Telecom</td><td><span class="tag info">MEDIUM</span></td><td>Semana 03 · entrar em contato</td></tr>
+          <tr><td class="name">Neglape</td><td><span class="tag warn">TINY</span></td><td>Semana 03 · entrar em contato</td></tr>
+          <tr><td class="name">R. Chagas Ltda (BM)</td><td><span class="tag info">MEDIUM</span></td><td>Semana 03 · tratativa de ops</td></tr>
+          <tr><td class="name">Rhama Analysis (LM)</td><td><span class="tag info">MEDIUM</span></td><td>Semana 03 · kick-off feito (2x)</td></tr>
+          <tr><td class="name">Splendor Elétrica (BM)</td><td><span class="tag info">MEDIUM</span></td><td>Semana 03 · entrar em contato</td></tr>
+          <tr><td class="name">Xavier Realiza Imóveis</td><td><span class="tag info">MEDIUM</span></td><td>Semana 03</td></tr>
+          <tr><td class="name">[BOD] Bodega do Sertão</td><td><span class="tag info">MEDIUM</span></td><td>Semana 03 · entrar em contato</td></tr>
+          <tr><td class="name">[MAB] Maben</td><td><span class="tag info">MEDIUM</span></td><td>Semana 03 · entrar em contato</td></tr>
+          <tr><td class="name">Óticas Visamix (BS)</td><td><span class="tag">SMALL</span></td><td>Semana 03 · entrar em contato</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SEMANA 4 -->
+  <div class="section" id="s4">
+    <div class="month-head">
+      <div><h2>Semana</h2><h3>4º semana · 10 projetos</h3></div>
+      <div class="month-kpis">
+        <span class="info"><b>5</b> MEDIUM</span>
+        <span><b>3</b> SMALL</span>
+        <span class="warn"><b>1</b> TINY</span>
+        <span class="hot"><b>5</b> tag ago</span>
+      </div>
+    </div>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th>Empresa</th><th>Need scope</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="name">600 Multimarcas <span class="tag warn">ago</span></td><td><span class="tag info">MEDIUM</span></td><td>Semana 04 · marcar pitch</td></tr>
+          <tr><td class="name">CID — Clínica de Serviços Médicos</td><td><span class="tag info">MEDIUM</span></td><td>Semana 04 · entrar em contato</td></tr>
+          <tr><td class="name">Castanheira (LM) <span class="tag warn">ago</span></td><td><span class="tag info">MEDIUM</span></td><td>Semana 04 · férias, retorna em set</td></tr>
+          <tr><td class="name">Clínica Polivida (BS)</td><td><span class="tag">SMALL</span></td><td>Semana 04</td></tr>
+          <tr><td class="name">Freebong (BS) <span class="tag warn">ago</span></td><td><span class="tag">SMALL</span></td><td>Semana 04 · marcar pitch</td></tr>
+          <tr><td class="name">Frigorífico Rotta</td><td><span class="tag info">MEDIUM</span></td><td>Semana 04 · entrar em contato</td></tr>
+          <tr><td class="name">Henri Soluções (LS) <span class="tag warn">ago</span></td><td><span class="tag">SMALL</span></td><td>Semana 04 · ops, adiamos o pitch</td></tr>
+          <tr><td class="name">Legtrânsito (BS)</td><td><span class="tag warn">—</span></td><td>Semana 04 · marcar pitch</td></tr>
+          <tr><td class="name">Nosso boteco (BM) <span class="tag warn">ago</span></td><td><span class="tag info">MEDIUM</span></td><td>Semana 04 · marcar pitch</td></tr>
+          <tr><td class="name">RE/MAX PRO WORK (BT) <span class="tag warn">ago</span></td><td><span class="tag warn">TINY</span></td><td>Semana 04 · ops, adiamos o pitch</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SEMANA 5 -->
+  <div class="section" id="s5">
+    <div class="month-head">
+      <div><h2>Semana</h2><h3>5º semana · 2 projetos</h3></div>
+      <div class="month-kpis">
+        <span><b>2</b> SMALL</span>
+        <span class="hot"><b>1</b> mês 06</span>
+        <span class="warn"><b>1</b> ago</span>
+      </div>
+    </div>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th>Empresa</th><th>Need scope</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="name">Supermercado Casa dos Pães (BS) <span class="tag warn">ago</span></td><td><span class="tag">SMALL</span></td><td>Semana 05 · agenda difícil · 4 no-shows · proposta feita</td></tr>
+          <tr><td class="name">Triboltec <span class="tag hot">mês 06</span></td><td><span class="tag">SMALL</span></td><td>Semana 05 · travado agenda do cliente · 4 desmarques</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- TRAVADOS -->
+  <div class="section" id="travados">
+    <h2>Fora da conta de 41 · atenção</h2>
+    <h3>Mês 06 travado · 4 contas</h3>
+    <div class="callout hot">
+      Agenda do cliente. General Car e RM Burguer trocaram de produto. Triboltec continua na 5º semana da fila de pitch; Positive Safety está Drop Timing no Cockpit (reativando EQV).
+    </div>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th>Empresa</th><th>Need scope</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="name">General Car (BS)</td><td><span class="tag">SMALL</span></td><td>Semana 0 · travado mês 06 · trocou de produto</td></tr>
+          <tr><td class="name">RM Burguer Itabira (BS)</td><td><span class="tag">SMALL</span></td><td>Semana 0 · travado mês 06 · trocou de produto</td></tr>
+          <tr><td class="name">Triboltec</td><td><span class="tag">SMALL</span></td><td>Semana 05 · agenda do cliente (também na 5º semana)</td></tr>
+          <tr><td class="name">Positive Safety Sistemas (BS)</td><td><span class="tag">SMALL</span></td><td>Drop Timing · reativando EQV · aguardando agenda</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- FOLLOW -->
+  <div class="section" id="follow">
+    <h2>Pós-pitch</h2>
+    <h3>Estamos em Follow atualmente · 4</h3>
+    <div class="kpis" style="margin-bottom:8px">
+      <div class="kpi"><div class="v ok">R$ 41.950</div><div class="l">MRR em follow</div></div>
+      <div class="kpi"><div class="v">R$ 353.700</div><div class="l">TCV bookado</div></div>
+      <div class="kpi"><div class="v info">3 / 4</div><div class="l">Cartão de crédito</div></div>
+    </div>
+    <div class="card">
+      <div class="pay-row">
+        <div>
+          <div class="name">ABC71</div>
+          <div class="meta">MEDIUM · Executar Basic · booking 12 meses · cartão de crédito</div>
+        </div>
+        <div class="money">MRR R$ 8.500,00</div>
+      </div>
+      <div class="pay-row">
+        <div>
+          <div class="name">Davi Gás</div>
+          <div class="meta">MEDIUM · Zap First + social · booking 6 meses · cartão de crédito</div>
+        </div>
+        <div class="money">MRR R$ 4.950,00</div>
+      </div>
+      <div class="pay-row">
+        <div>
+          <div class="name">Ecco Salva</div>
+          <div class="meta">LARGE · EQV · booking 6 meses · cartão de crédito</div>
+        </div>
+        <div class="money">MRR R$ 20.000,00</div>
+      </div>
+      <div class="pay-row">
+        <div>
+          <div class="name">Tamiya Brasil</div>
+          <div class="meta">SMALL · booking 12 meses · forma de pagamento em branco no Cockpit</div>
+        </div>
+        <div class="money">MRR R$ 8.500,00</div>
+      </div>
+    </div>
+    <p class="muted" style="margin:10px 0 0">MBFlex segue Follow no Cockpit (Executar Basic · TCV R$ 84.240 · cartão 12x) — fora deste bloco, para bater com as 4 contas enviadas.</p>
+  </div>
+
+  <!-- BLANK -->
+  <div class="section" id="blank">
+    <div class="month-head">
+      <div>
+        <h2>Primeira semana de setembro</h2>
+        <h3>Projetos para iniciar agora · status em branco · 13</h3>
+      </div>
+      <div class="month-kpis">
+        <span class="ok"><b>4</b> com need / data</span>
+        <span class="warn"><b>9</b> sem scope nem início</span>
+      </div>
+    </div>
+    <div class="callout ok">Todos os que estão com status vazio no Cockpit. Prioridade: quem já tem data de início ou need scope.</div>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th>Empresa</th><th>Need scope</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="name">Brazil Group Eventos (LT)</td><td><span class="tag warn">TINY</span></td><td>em branco · início 03/08</td></tr>
+          <tr><td class="name">Naki Distribuidora Automotiva (BM)</td><td><span class="tag info">MEDIUM</span></td><td>em branco · início 23/07</td></tr>
+          <tr><td class="name">Mundi Sport (LS)</td><td><span class="tag">SMALL</span></td><td>em branco · início 21/08</td></tr>
+          <tr><td class="name">Studio Center Music (BM)</td><td><span class="tag info">MEDIUM</span></td><td>em branco</td></tr>
+          <tr><td class="name">Arqcompany</td><td><span class="tag warn">—</span></td><td>em branco</td></tr>
+          <tr><td class="name">Casa de Carnes M.P.</td><td><span class="tag warn">—</span></td><td>em branco</td></tr>
+          <tr><td class="name">Clínica Autista Osasco</td><td><span class="tag warn">—</span></td><td>em branco</td></tr>
+          <tr><td class="name">Engcosta Engenharia e Serviços</td><td><span class="tag warn">—</span></td><td>em branco</td></tr>
+          <tr><td class="name">Farma Vitae</td><td><span class="tag warn">—</span></td><td>em branco</td></tr>
+          <tr><td class="name">I9 Hoje</td><td><span class="tag warn">—</span></td><td>em branco</td></tr>
+          <tr><td class="name">Rodol LTDA</td><td><span class="tag warn">—</span></td><td>em branco</td></tr>
+          <tr><td class="name">Tecno2 Serviços</td><td><span class="tag warn">—</span></td><td>em branco</td></tr>
+          <tr><td class="name">Tutto Blu Intermediação</td><td><span class="tag warn">—</span></td><td>em branco</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Ordem da semana</h2>
+    <h3>O que atacar</h3>
+    <div class="grid2">
+      <div class="card">
+        <div class="t">P0</div>
+        <div class="d">
+          Fechar Follow (Ecco R$ 20k · ABC71 e Tamiya R$ 8,5k · Davi R$ 4,95k).<br>
+          Remarcar os 9 de ago — Henri, RE/MAX, Castanheira, Casa dos Pães primeiro.
+        </div>
+      </div>
+      <div class="card">
+        <div class="t">P1</div>
+        <div class="d">
+          Iniciar os 13 com status em branco (1ª semana).<br>
+          0º semana: Podium já fez kick-off · preencher need do Emporio Inacio.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="ext muted">
+    Kit:
+    <a href="index.html">Comando Estratégico</a> ·
+    <a href="farmer-sara.html">Hub Farmer Sara</a> ·
+    <a href="saber-agosto-2026.html">Saber agosto</a> ·
+    <a href="visao-sara-safra.html">Visão por safra</a>
+  </p>
+
+  <footer>
+    V4 · Pitch setembro 2026 · Cockpit E.E ·
+    <a href="https://docs.google.com/spreadsheets/d/1dSukhon9dIUABcbQIKGKUa-ku-_oLOn1Q5YWeWGfI6U/edit?usp=sharing" target="_blank" rel="noopener">Planilha</a>
+  </footer>
+</div>
+<script>
+(function(){
+  var q = document.getElementById('q');
+  if (!q) return;
+  q.addEventListener('input', function(){
+    var t = q.value.trim().toLowerCase();
+    document.querySelectorAll('tbody tr').forEach(function(tr){
+      tr.style.display = !t || tr.textContent.toLowerCase().indexOf(t) >= 0 ? '' : 'none';
+    });
+  });
+})();
+</script>
+</body>
+</html>
