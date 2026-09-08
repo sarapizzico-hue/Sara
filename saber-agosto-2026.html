@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Saber · Agosto/2026 · Volume × Conversão</title>
+  <title>Saber · Volume × Conversão · Ago/2026</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
@@ -83,6 +83,7 @@
     .tag.safe { background: #e8f5ee; color: var(--green); }
     .tag.care { background: #fff3e0; color: var(--amber); }
     .tag.danger { background: #fde8ea; color: var(--red); }
+    .tag.critical { background: #fde8ea; color: var(--red); }
     .tag.ativo { background: #e8f5ee; color: var(--green); }
     .tag.pendente { background: #fde8ea; color: var(--red); }
     .pay-list { display: flex; flex-direction: column; gap: 8px; margin: 0; padding: 0; list-style: none; }
@@ -112,12 +113,12 @@
 <body>
   <div class="wrap">
     <header>
-      <div class="brand">V4 · Saber · agosto/2026</div>
+      <div class="brand">V4 Saber · FCA volume × conversão</div>
       <nav>
         <a href="#resumo">Resumo</a>
-        <a href="#fechados">Fechados</a>
-        <a href="#caixa">Caixa</a>
-        <a href="#drops">Drops</a>
+        <a href="#ttc">Time to close</a>
+        <a href="#pagamento">Pagamento</a>
+        <a href="#qualidade">Qualidade</a>
         <a href="#graficos">Gráficos</a>
         <a href="#fca">FCA</a>
         <a href="#setembro">Setembro</a>
@@ -128,27 +129,29 @@
       <div class="eyebrow">Saber · corte 01/09/2026</div>
       <h1>43 projetos entraram no Saber. 13 pitch. 7 fecharam. Sendo 1 reativação do mês Março(03). 9 projetos foram adiados por que estão com a entrega atrasada na operação.</h1>
       <p class="lead">
-        Conversão pitch → monetizado: <strong>7/13 = 54%</strong>.
-        MRR Saber <strong>R$ 63.645,97</strong> · TCV Saber <strong>R$ 647.620,13</strong>.
-        Caixa que entrou em agosto: <strong>R$ 366.696,86</strong>.
-        2 drops (Timing). Hanaro PIX R$ 11.805,84 em 01/02/2026 não entra no caixa de ago.
+        Conversão pitch → fechou: <strong>7/13 = 54%</strong>.
+        1 dos 7 é Pachane (reativação mar/03). 2 drops (Timing).
+        Caixa que liquidou em ago: <strong>R$ 366.696,86</strong>
+        · TCV Saber <strong>R$ 647.620,13</strong>
+        · MRR Saber <strong>R$ 63.645,97</strong>.
+        Em set: <strong>41 pitches</strong> — 9 deles são o restante de ago.
       </p>
 
       <div class="kpis">
+        <div class="kpi ok">
+          <div class="l">Finalizado no mês</div>
+          <div class="v">7</div>
+          <div class="s">54% dos pitches · 1 reativação mar/03</div>
+        </div>
         <div class="kpi">
           <div class="l">Entraram Saber</div>
           <div class="v">43</div>
           <div class="s">projetos no mês</div>
         </div>
         <div class="kpi">
-          <div class="l">Pitches</div>
-          <div class="v">13</div>
-          <div class="s">apresentações no mês</div>
-        </div>
-        <div class="kpi ok">
-          <div class="l">Fecharam</div>
-          <div class="v">7</div>
-          <div class="s">54% dos pitches · 1 reativação mar/03</div>
+          <div class="l">Pitch → fecha</div>
+          <div class="v">54%</div>
+          <div class="s">7 de 13 pitches</div>
         </div>
         <div class="kpi warn">
           <div class="l">Adiados → set</div>
@@ -158,10 +161,13 @@
       </div>
     </section>
 
-    <section id="fechados">
-      <div class="eyebrow">Quem fechou</div>
-      <h2>7 projetos. Pachane é reativação de março (03).</h2>
-      <p>Produto e forma de pagamento do Cockpit. Caixa ago = o que liquidou no mês, não o TCV.</p>
+    <section id="ttc">
+      <div class="eyebrow">Time to close</div>
+      <h2>Quem fechou em ago: opp do mês ou do mês passado?</h2>
+      <p>
+        Abertura = início do card no Cockpit · fechamento = data de fechamento.
+        Competência 08/2026 · Saber. Pachane = reativação de março (03).
+      </p>
 
       <div class="card" style="padding:0; overflow:auto">
         <table>
@@ -169,161 +175,156 @@
             <tr>
               <th>Conta</th>
               <th>Produto</th>
-              <th>Forma</th>
-              <th>TCV</th>
-              <th>Caixa ago</th>
+              <th>Card aberto</th>
+              <th>Fechamento</th>
+              <th>TTC</th>
+              <th>Origem</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>AP Equipamentos (RecM)</td>
-              <td>EQV</td>
-              <td><span class="tag same">Cartão</span></td>
-              <td class="num">R$ 173.800,00</td>
-              <td class="num">R$ 173.800,00</td>
+              <td>Knowledge @ Business [RM]</td><td>EQV</td>
+              <td class="num">—</td><td class="num">04/08</td>
+              <td class="num">—</td>
+              <td><span class="tag same">mesmo mês</span></td>
             </tr>
             <tr>
-              <td>G6 INTERNET</td>
-              <td>Assessoria de Growth + Social</td>
-              <td><span class="tag same">Cartão</span></td>
-              <td class="num">R$ 134.167,44</td>
-              <td class="num">R$ 51.167,44<div style="color:var(--muted);font-size:11px">parte do booking</div></td>
+              <td>Work Bank (BT)</td><td>Implementação de CRM vendas</td>
+              <td class="num">01/08</td><td class="num">28/08</td>
+              <td class="num">27d</td>
+              <td><span class="tag same">mesmo mês</span></td>
             </tr>
             <tr>
-              <td>Pachane (BM)<br><span class="tag prev">reativação mar/03</span></td>
-              <td>Executar Basic</td>
-              <td><span class="tag same">Cartão</span></td>
-              <td class="num">R$ 95.273,76</td>
-              <td class="num">R$ 95.273,76</td>
+              <td>G6 INTERNET</td><td>Assessoria de Growth + Social</td>
+              <td class="num">06/07</td><td class="num">06/08</td>
+              <td class="num">31d</td>
+              <td><span class="tag prev">mês anterior</span></td>
             </tr>
             <tr>
-              <td>Work Bank (BT)</td>
-              <td>Implementação de CRM vendas</td>
-              <td><span class="tag same">Cartão</span></td>
-              <td class="num">R$ 5.035,63</td>
-              <td class="num">R$ 5.035,63</td>
+              <td>G6 INTERNET</td><td>E. Comercial</td>
+              <td class="num">06/07</td><td class="num">20/08</td>
+              <td class="num">45d</td>
+              <td><span class="tag prev">mês anterior</span></td>
             </tr>
             <tr>
-              <td>Global Cotton (BM)</td>
-              <td>Executar Basic</td>
-              <td><span class="tag prev">Boleto</span></td>
-              <td class="num">R$ 84.240,36</td>
-              <td class="num">R$ 7.020,03</td>
+              <td>Global Cotton (BM)</td><td>Executar Basic</td>
+              <td class="num">15/06</td><td class="num">03/08</td>
+              <td class="num">49d</td>
+              <td><span class="tag prev">mês anterior</span></td>
             </tr>
             <tr>
-              <td>G6 INTERNET</td>
-              <td>E. Comercial</td>
-              <td><span class="tag">PIX</span></td>
-              <td class="num">R$ 69.867,90</td>
-              <td class="num">R$ 20.000,00<div style="color:var(--muted);font-size:11px">entrada</div></td>
+              <td>Hanaro (BL)</td><td>Social + SEO</td>
+              <td class="num">02/06</td><td class="num">31/08</td>
+              <td class="num">90d</td>
+              <td><span class="tag prev">mês anterior+</span></td>
             </tr>
             <tr>
-              <td>Knowledge @ Business [RM]</td>
-              <td>EQV</td>
-              <td><span class="tag same">Cartão</span></td>
-              <td class="num">R$ 14.400,00</td>
-              <td class="num">R$ 14.400,00</td>
+              <td>AP Equipamentos (RecM)</td><td>EQV</td>
+              <td class="num">21/05</td><td class="num">28/08</td>
+              <td class="num">99d</td>
+              <td><span class="tag prev">mês anterior+</span></td>
             </tr>
             <tr>
-              <td>Hanaro (BL)</td>
-              <td>Social + SEO</td>
-              <td><span class="tag">PIX</span></td>
-              <td class="num">R$ 70.835,04</td>
-              <td><span class="tag pendente">fora do caixa ago</span></td>
+              <td>Pachane (BM)</td><td>Executar Basic</td>
+              <td class="num">11/02</td><td class="num">31/08</td>
+              <td class="num">201d</td>
+              <td><span class="tag prev">reativação mar/03</span></td>
             </tr>
           </tbody>
         </table>
       </div>
+
       <div class="note">
-        TCV Saber = <strong>R$ 647.620,13</strong> · MRR Saber = <strong>R$ 63.645,97</strong>.
-        Caixa agosto = <strong>R$ 366.696,86</strong> (sem Hanaro).
+        <strong>Regra:</strong> fechou no mês = conta no mês. Os 7 entram no placar de ago
+        (8 linhas no Cockpit: G6 tem 2 produtos). A coluna “origem” só explica de onde veio o card.
+        Hanaro fechou em ago, mas o PIX não cai nesta competência.
       </div>
     </section>
 
-    <section id="caixa">
-      <div class="eyebrow">Caixa</div>
-      <h2>Entrou de caixa em agosto? 7 sim · Hanaro não.</h2>
+    <section id="pagamento">
+      <div class="eyebrow">Ativação</div>
+      <h2>Pagou em ago? 7 sim · Hanaro não.</h2>
       <p>
-        Assinou = venda. <strong>Caixa</strong> = dinheiro que liquidou em ago.
+        Assinatura = venda no placar. <strong>Ativado</strong> = dinheiro entrou em ago.
         Receita que entrou: <strong>R$ 366.696,86</strong> · cartão 93% · PIX 5% · boleto 2%.
       </p>
 
       <div class="kpis" style="grid-template-columns: 1fr 1fr; margin-bottom: 16px">
         <div class="kpi ok">
-          <div class="l">Receita que entrou em ago</div>
-          <div class="v">R$ 366.696,86</div>
-          <div class="s">7 linhas · Hanaro fora</div>
+          <div class="l">Ativados (pago em ago)</div>
+          <div class="v">7</div>
+          <div class="s">AP · Pachane · G6 Exec · G6 EC · Knowledge · Global · Work Bank</div>
         </div>
-        <div class="kpi">
-          <div class="l">Hanaro (fora do caixa ago)</div>
-          <div class="v">R$ 11.805,84</div>
-          <div class="s">PIX · 01/02/2026</div>
+        <div class="kpi bad">
+          <div class="l">Assinou, sem pgto em ago</div>
+          <div class="v">1</div>
+          <div class="s">Hanaro · PIX 01/02/2026</div>
         </div>
       </div>
 
       <div class="grid-2">
         <div class="pay-block">
-          <h3><span class="tag ativo">caixa ago</span> <span class="count">7</span></h3>
+          <h3><span class="tag ativo">ativado</span> <span class="count">7</span></h3>
           <ul class="pay-list">
             <li class="pay-row">
               <div>
                 <div class="name">AP Equipamentos</div>
-                <div class="meta">EQV · TCV inteiro</div>
+                <div class="meta">EQV · cartão · TCV inteiro R$ 173.800,00</div>
               </div>
-              <div class="when"><strong>R$ 173.800,00</strong>Cartão</div>
+              <div class="when"><strong>R$ 173.800,00</strong>cartão</div>
             </li>
             <li class="pay-row">
               <div>
                 <div class="name">Pachane</div>
-                <div class="meta">Executar Basic · reativação mar/03</div>
+                <div class="meta">Executar Basic · cartão · reativação mar/03</div>
               </div>
-              <div class="when"><strong>R$ 95.273,76</strong>Cartão</div>
+              <div class="when"><strong>R$ 95.273,76</strong>cartão</div>
             </li>
             <li class="pay-row">
               <div>
-                <div class="name">G6 Internet (Executar)</div>
-                <div class="meta">Assessoria + Social · parte do booking</div>
+                <div class="name">G6 INTERNET</div>
+                <div class="meta">Assessoria de Growth + Social · cartão · parte do booking</div>
               </div>
-              <div class="when"><strong>R$ 51.167,44</strong>Cartão</div>
+              <div class="when"><strong>R$ 51.167,44</strong>cartão</div>
             </li>
             <li class="pay-row">
               <div>
-                <div class="name">G6 Internet (EC)</div>
-                <div class="meta">E. Comercial · só a entrada</div>
+                <div class="name">G6 INTERNET</div>
+                <div class="meta">E. Comercial · PIX entrada</div>
               </div>
-              <div class="when"><strong>R$ 20.000,00</strong>PIX</div>
+              <div class="when"><strong>R$ 20.000,00</strong>PIX entrada</div>
             </li>
             <li class="pay-row">
               <div>
                 <div class="name">Knowledge @ Business</div>
-                <div class="meta">EQV · TCV inteiro</div>
+                <div class="meta">EQV · cartão · TCV inteiro</div>
               </div>
-              <div class="when"><strong>R$ 14.400,00</strong>Cartão</div>
+              <div class="when"><strong>R$ 14.400,00</strong>cartão</div>
             </li>
             <li class="pay-row">
               <div>
                 <div class="name">Global Cotton</div>
-                <div class="meta">Executar Basic · 1ª parcela</div>
+                <div class="meta">Executar Basic · boleto · 1ª parcela</div>
               </div>
-              <div class="when"><strong>R$ 7.020,03</strong>Boleto</div>
+              <div class="when"><strong>R$ 7.020,03</strong>boleto</div>
             </li>
             <li class="pay-row">
               <div>
                 <div class="name">Work Bank</div>
-                <div class="meta">CRM vendas · one-time</div>
+                <div class="meta">Implementação de CRM vendas · cartão</div>
               </div>
-              <div class="when"><strong>R$ 5.035,63</strong>Cartão</div>
+              <div class="when"><strong>R$ 5.035,63</strong>cartão</div>
             </li>
           </ul>
         </div>
 
         <div class="pay-block">
-          <h3><span class="tag pendente">fora do caixa ago</span> <span class="count">1</span></h3>
+          <h3><span class="tag pendente">não ativado</span> <span class="count">1</span></h3>
           <ul class="pay-list">
             <li class="pay-row">
               <div>
                 <div class="name">Hanaro</div>
-                <div class="meta">Social + SEO · PIX R$ 11.805,84</div>
+                <div class="meta">Social + SEO · PIX R$ 11.805,84 · TCV R$ 70.835,04</div>
               </div>
               <div class="when"><strong>01/02/2026</strong>não entra em ago</div>
             </li>
@@ -332,73 +333,254 @@
       </div>
 
       <div class="note" style="margin-top:14px">
-        Vendas ago = <strong>7</strong> projetos. Caixa ago = <strong>R$ 366.696,86</strong>.
+        Vendas ago = <strong>7</strong>. Ativação ago = <strong>R$ 366.696,86</strong>
+        (cartão R$ 339.676,83 · PIX R$ 20.000,00 · boleto R$ 7.020,03).
+        TCV Saber = <strong>R$ 647.620,13</strong> · MRR Saber = <strong>R$ 63.645,97</strong>.
         Hanaro fechou em ago, mas o PIX não caiu nesta competência.
       </div>
     </section>
 
-    <section id="drops">
-      <div class="eyebrow">Drops e adiados</div>
-      <h2>2 drops por Timing. 9 adiados para setembro.</h2>
-      <p>Os 9 adiados: entrega atrasada na operação. Pitch previsto em agosto foi para setembro.</p>
+    <section id="qualidade">
+      <div class="eyebrow">Qualidade da monetização · ago/2026</div>
+      <h2>Os 13 que pitcharam: 7 fecharam, 2 drop. 9 nem pitcharam.</h2>
+      <p>
+        Fonte: Cockpit (produto, TCV, forma, motivo de drop) + adiados da operação.
+        Corte 01/09/2026.
+      </p>
 
-      <div class="kpis" style="grid-template-columns: 1fr 1fr">
+      <div class="kpis" style="grid-template-columns: repeat(4, 1fr)">
+        <div class="kpi ok">
+          <div class="l">Pitch → fecha</div>
+          <div class="v">7/13</div>
+          <div class="s">54%</div>
+        </div>
+        <div class="kpi">
+          <div class="l">Caixa / TCV</div>
+          <div class="v">57%</div>
+          <div class="s">R$ 366.696,86 / R$ 647.620,13</div>
+        </div>
         <div class="kpi bad">
           <div class="l">Drops</div>
-          <div class="v">2</div>
+          <div class="v">2/13</div>
           <div class="s">WMM · Almeida e Neves · Timing</div>
         </div>
         <div class="kpi warn">
-          <div class="l">Adiados → set</div>
+          <div class="l">Não pitcharam</div>
           <div class="v">9</div>
           <div class="s">entrega atrasada na operação</div>
         </div>
       </div>
 
-      <div class="grid-2">
+      <div class="card" style="padding:0; overflow:auto">
+        <table>
+          <thead>
+            <tr>
+              <th>Conta</th>
+              <th>Scope</th>
+              <th>Produto</th>
+              <th>Status</th>
+              <th>Data</th>
+              <th>Motivo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>WMM Soluções<br><span class="tag">TINY</span></td>
+              <td><span class="tag danger">Drop</span></td>
+              <td>EQV</td>
+              <td>Timing</td>
+              <td class="num">21/08</td>
+              <td>Timing</td>
+            </tr>
+            <tr>
+              <td>Almeida e Neves (RecM)<br><span class="tag">MEDIUM</span></td>
+              <td><span class="tag danger">Drop</span></td>
+              <td>EC R$ 25.500,00</td>
+              <td>Timing</td>
+              <td class="num">06/08</td>
+              <td>Timing</td>
+            </tr>
+            <tr>
+              <td>Tamiya Brasil (LS)</td>
+              <td><span class="tag care">SMALL</span></td>
+              <td>—</td>
+              <td>Semana 03 → Follow</td>
+              <td class="num">26/08</td>
+              <td>Adiado · agora em follow</td>
+            </tr>
+            <tr>
+              <td>Henri Soluções (LS)</td>
+              <td><span class="tag care">SMALL</span></td>
+              <td>Executar Basic</td>
+              <td>Semana 04</td>
+              <td class="num">26/08</td>
+              <td>Tratativa de ops · adiamos o pitch</td>
+            </tr>
+            <tr>
+              <td>ABC71 (LM)</td>
+              <td><span class="tag care">MEDIUM</span></td>
+              <td>Executar Basic</td>
+              <td>Semana 03 → Follow</td>
+              <td class="num">27/08</td>
+              <td>Adiado · agora em follow</td>
+            </tr>
+            <tr>
+              <td>Nosso boteco (BM)</td>
+              <td><span class="tag care">MEDIUM</span></td>
+              <td>—</td>
+              <td>Semana 04</td>
+              <td class="num">27/08</td>
+              <td>Marcar a data do pitch</td>
+            </tr>
+            <tr>
+              <td>RE/MAX PRO WORK (BT)</td>
+              <td><span class="tag">TINY</span></td>
+              <td>EQV</td>
+              <td>Semana 04</td>
+              <td class="num">27/08</td>
+              <td>Tratativa de ops · adiamos o pitch</td>
+            </tr>
+            <tr>
+              <td>600 Multimarcas</td>
+              <td><span class="tag care">MEDIUM</span></td>
+              <td>EQV</td>
+              <td>Semana 04</td>
+              <td class="num">27/08</td>
+              <td>Marcar a data do pitch</td>
+            </tr>
+            <tr>
+              <td>Supermercado Casa dos Pães (BS)</td>
+              <td><span class="tag care">SMALL</span></td>
+              <td>Zap First</td>
+              <td>Semana 05</td>
+              <td class="num">27/08</td>
+              <td>Agenda difícil · 4 no-shows</td>
+            </tr>
+            <tr>
+              <td>Castanheira (LM)</td>
+              <td><span class="tag care">MEDIUM</span></td>
+              <td>—</td>
+              <td>Semana 04</td>
+              <td class="num">28/08</td>
+              <td>Cliente de férias · retorna em set</td>
+            </tr>
+            <tr>
+              <td>Freebong (BS)</td>
+              <td><span class="tag care">SMALL</span></td>
+              <td>EQV</td>
+              <td>Semana 04</td>
+              <td class="num">31/08</td>
+              <td>Marcar a data do pitch</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid-2" style="margin-top:12px">
         <div class="card">
-          <h3>Drops</h3>
+          <h3>Padrão que fechou bem</h3>
           <ul style="margin:0;padding-left:18px;font-size:13px">
-            <li><strong>WMM Soluções</strong> (TINY). Proposta EQV. Motivo: Timing. Pitch 21/08.</li>
-            <li><strong>Almeida e Neves</strong> (MEDIUM). Proposta EC R$ 25.500,00. Motivo: Timing. Pitch 06/08.</li>
+            <li><strong>Cartão no mês:</strong> AP, Pachane, Knowledge, Work Bank (TCV caiu em ago).</li>
+            <li><strong>54% dos pitches</strong> monetizaram (7/13).</li>
+            <li><strong>Reativação:</strong> Pachane (mar/03) entrou no placar e no caixa.</li>
           </ul>
         </div>
         <div class="card">
           <h3>Atenção</h3>
           <ul style="margin:0;padding-left:18px;font-size:13px">
-            <li>Os 9 não pitcharam no prazo porque a operação atrasou a entrega.</li>
-            <li>Metade do atraso também foi agenda de cliente, não só ops.</li>
+            <li><strong>9 adiados:</strong> entrega atrasada na operação. Metade também foi agenda de cliente.</li>
+            <li><strong>Drops Timing:</strong> WMM (EQV, TINY, 21/08) e Almeida e Neves (EC R$ 25.500, MEDIUM, 06/08).</li>
+            <li><strong>Hanaro:</strong> fechou, PIX em 01/02/2026 — fora do caixa de ago.</li>
           </ul>
         </div>
+      </div>
+
+      <div class="note">
+        Caixa ≠ TCV. G6 Executar entrou só a parte do booking (R$ 51.167,44). Global Cotton só a 1ª parcela (R$ 7.020,03).
+        Fonte:
+        <a href="https://docs.google.com/spreadsheets/d/1dSukhon9dIUABcbQIKGKUa-ku-_oLOn1Q5YWeWGfI6U/edit?gid=759150030#gid=759150030" target="_blank" rel="noopener">Cockpit Monetização</a>.
       </div>
     </section>
 
     <section id="graficos">
       <div class="eyebrow">Comparativo</div>
-      <h2>Funil, caixa no mês e mix de pagamento.</h2>
-      <p>Caixa conta o que liquidou em agosto. Hanaro não entra nas barras de caixa.</p>
+      <h2>Funil de ago, caixa no mês e pitches de set.</h2>
+      <p>
+        Ago conta o que aconteceu no mês (entrada, pitch, fecha, drop). Set conta os 41 pitches do Cockpit, separados por semana.
+      </p>
 
       <div class="grid-2" style="margin-top:14px">
         <div class="card">
-          <h3>Funil do mês</h3>
+          <h3>Funil ago</h3>
           <p style="margin:0 0 8px;font-size:12px;color:var(--muted)">Entraram · pitch · fecharam · adiados · drop</p>
           <div class="chart-box"><canvas id="c1"></canvas></div>
         </div>
         <div class="card">
-          <h3>Caixa que entrou em agosto</h3>
-          <p style="margin:0 0 8px;font-size:12px;color:var(--muted)">R$ 366.696,86 · sem Hanaro</p>
+          <h3>Pitches set por semana</h3>
+          <p style="margin:0 0 8px;font-size:12px;color:var(--muted)">41 no total · 3 + 12 + 14 + 10 + 2</p>
           <div class="chart-box"><canvas id="c2"></canvas></div>
         </div>
         <div class="card">
-          <h3>Mix de pagamento (caixa)</h3>
-          <p style="margin:0 0 8px;font-size:12px;color:var(--muted)">Cartão 93% · PIX 5% · boleto 2%</p>
+          <h3>Caixa ago por forma</h3>
+          <p style="margin:0 0 8px;font-size:12px;color:var(--muted)">R$ 366.696,86 · sem Hanaro</p>
           <div class="chart-box"><canvas id="c3"></canvas></div>
         </div>
         <div class="card">
-          <h3>Pitch → monetizado</h3>
-          <p style="margin:0 0 8px;font-size:12px;color:var(--muted)">7 de 13 = 54%</p>
+          <h3>Follow agora (MRR)</h3>
+          <p style="margin:0 0 8px;font-size:12px;color:var(--muted)">ABC71 · Davi Gás · Ecco Salva · Tamiya</p>
           <div class="chart-box"><canvas id="c4"></canvas></div>
         </div>
+      </div>
+
+      <div class="card" style="margin-top:12px; padding:0; overflow:auto">
+        <table>
+          <thead>
+            <tr>
+              <th>Semana</th>
+              <th>Pitches</th>
+              <th>Need scope (mix)</th>
+              <th>Nota</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>0º</td><td class="num">3</td>
+              <td class="num">2 SMALL · 1 sem scope</td>
+              <td>Podium · Emporio Inacio · Brasil Auto Placas</td>
+            </tr>
+            <tr>
+              <td>2º</td><td class="num">12</td>
+              <td class="num">1 LARGE · 5 MEDIUM · 3 SMALL · 3 TINY</td>
+              <td>Work Bank já fechou em ago — fora da conta</td>
+            </tr>
+            <tr>
+              <td>3º</td><td class="num">14</td>
+              <td class="num">10 MEDIUM · 3 SMALL · 1 TINY</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>4º</td><td class="num">10</td>
+              <td class="num">5 MEDIUM · 3 SMALL · 1 TINY · 1 sem scope</td>
+              <td>Vários adiados de ago</td>
+            </tr>
+            <tr>
+              <td>5º</td><td class="num">2</td>
+              <td class="num">2 SMALL</td>
+              <td>Casa dos Pães (ago) · Triboltec (mês 06)</td>
+            </tr>
+            <tr>
+              <td>Total</td><td class="num"><strong>41</strong></td>
+              <td class="num"></td>
+              <td>9 são pitch de ago que ficou para 07/set</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note">
+        <strong>Fonte:</strong>
+        <a href="https://docs.google.com/spreadsheets/d/1dSukhon9dIUABcbQIKGKUa-ku-_oLOn1Q5YWeWGfI6U/edit?gid=759150030#gid=759150030" target="_blank" rel="noopener">Cockpit Monetização</a>
+        (status Semana 0 / 02 / 03 / 04 / 05).
+        Work Bank está Semana 02 no Cockpit, mas já monetizou em 28/08 — não entra nos 41.
       </div>
     </section>
 
@@ -414,7 +596,7 @@
             <li>Caixa ago R$ 366.696,86 · TCV R$ 647.620,13 · MRR R$ 63.645,97.</li>
             <li>Hanaro PIX R$ 11.805,84 em 01/02/2026 — fora do caixa de ago.</li>
             <li>2 drops Timing: WMM (EQV, TINY) e Almeida e Neves (EC R$ 25.500, MEDIUM).</li>
-            <li>9 adiados para setembro por atraso de entrega na operação.</li>
+            <li>9 adiados de ago viram pitch em set. Pipeline set: 41 pitches.</li>
           </ul>
         </div>
         <div class="card">
@@ -423,14 +605,16 @@
             <li>Atraso de entrega na operação travou o pitch — os 9 foram para setembro.</li>
             <li>Metade do atraso também foi agenda de cliente, não só ops.</li>
             <li>Drops: Timing (WMM EQV · Almeida EC R$ 25,5k).</li>
+            <li>Mês 06 ainda travado: General Car, RM Burguer, Triboltec, Positive Safety (agenda do cliente; General e RM trocaram de produto).</li>
           </ul>
         </div>
         <div class="card">
           <h3>Ação (set)</h3>
           <ul>
-            <li>Os 9 adiados: entrega pronta + data de pitch em setembro.</li>
-            <li>DRI duplo: operação (entrega) e farmer (agenda do cliente).</li>
-            <li>Não remarcar pitch sem entrega no prazo.</li>
+            <li>41 pitches no mês, separados por semana. 9 são estoque de ago.</li>
+            <li>Status em branco: iniciar na 1ª semana de set.</li>
+            <li>Follow: ABC71, Davi Gás, Ecco Salva, Tamiya — fechar.</li>
+            <li>Sem entrega no prazo = sem remarcar pitch.</li>
           </ul>
         </div>
       </div>
@@ -438,56 +622,238 @@
 
     <section id="setembro">
       <div class="eyebrow">Plano setembro</div>
-      <h2>Os 9 adiados — pitch previsto em ago, agora em set.</h2>
-      <div class="card" style="padding:0; overflow:auto">
+      <h2>41 projetos para pitch neste mês</h2>
+      <p>
+        9 pitches deles são do mês passado, que ficou para este mês (07 setembro).
+        Status e need scope do Cockpit. Work Bank já fechou em ago — fora desta lista.
+      </p>
+
+      <div class="kpis" style="grid-template-columns: repeat(4, 1fr)">
+        <div class="kpi">
+          <div class="l">Pitches set</div>
+          <div class="v">41</div>
+          <div class="s">0º=3 · 2º=12 · 3º=14 · 4º=10 · 5º=2</div>
+        </div>
+        <div class="kpi warn">
+          <div class="l">Vieram de ago</div>
+          <div class="v">9</div>
+          <div class="s">07 setembro</div>
+        </div>
+        <div class="kpi ok">
+          <div class="l">Follow agora</div>
+          <div class="v">4</div>
+          <div class="s">ABC71 · Davi Gás · Ecco · Tamiya</div>
+        </div>
+        <div class="kpi">
+          <div class="l">Status em branco</div>
+          <div class="v">13</div>
+          <div class="s">iniciar na 1ª semana</div>
+        </div>
+      </div>
+
+      <h3 style="margin-top:8px">0º semana · 3</h3>
+      <div class="card" style="padding:0; overflow:auto; margin-bottom:14px">
         <table>
           <thead>
-            <tr>
-              <th>Conta</th>
-              <th>Scope</th>
-              <th>Status</th>
-              <th>Pitch previsto</th>
-            </tr>
+            <tr><th>Conta</th><th>Need scope</th><th>Status</th></tr>
           </thead>
           <tbody>
-            <tr><td>Tamiya Brasil (LS)</td><td>SMALL</td><td>Semana 03</td><td class="num">26/08</td></tr>
-            <tr><td>Henri Soluções (LS)</td><td>SMALL</td><td>Semana 04</td><td class="num">26/08</td></tr>
-            <tr><td>ABC71 Soluções em Informática S.A. (LM)</td><td>MEDIUM</td><td>Semana 03</td><td class="num">27/08</td></tr>
-            <tr><td>Nosso boteco (BM)</td><td>MEDIUM</td><td>Semana 04</td><td class="num">27/08</td></tr>
-            <tr><td>RE/MAX PRO WORK (BT)</td><td>TINY</td><td>Semana 04</td><td class="num">27/08</td></tr>
-            <tr><td>600 Multimarcas</td><td>MEDIUM</td><td>Semana 04</td><td class="num">27/08</td></tr>
-            <tr><td>Supermercado Casa dos Pães (BS)</td><td>SMALL</td><td>Semana 05</td><td class="num">27/08</td></tr>
-            <tr><td>Castanheira (LM)</td><td>MEDIUM</td><td>Semana 04</td><td class="num">28/08</td></tr>
-            <tr><td>Freebong (BS)</td><td>SMALL</td><td>Semana 04</td><td class="num">31/08</td></tr>
+            <tr><td>Brasil Auto Placas</td><td>SMALL</td><td>Semana 0</td></tr>
+            <tr><td>Emporio Inacio</td><td>—</td><td>Semana 0</td></tr>
+            <tr><td>Podium Jeans</td><td>SMALL</td><td>Semana 0 · kick-off feito</td></tr>
           </tbody>
         </table>
       </div>
-      <div class="card actions" style="margin-top:12px">
+
+      <h3>2º semana · 12</h3>
+      <div class="card" style="padding:0; overflow:auto; margin-bottom:14px">
+        <table>
+          <thead>
+            <tr><th>Conta</th><th>Need scope</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>AMBI TOPOGRAFIA (LT)</td><td>TINY</td><td>Semana 02 · kick-off feito</td></tr>
+            <tr><td>Atlanta Consórcios (BM)</td><td>MEDIUM</td><td>Semana 02</td></tr>
+            <tr><td>Café Negrin</td><td>MEDIUM</td><td>Semana 02</td></tr>
+            <tr><td>Comercial Ultimix LTDA</td><td>MEDIUM</td><td>Semana 02</td></tr>
+            <tr><td>GRM Tecnologia e Serviços</td><td>MEDIUM</td><td>Semana 02</td></tr>
+            <tr><td>Golias Espetaria</td><td>SMALL</td><td>Semana 02</td></tr>
+            <tr><td>Intelecto Serviços Ambientais</td><td>SMALL</td><td>Semana 02</td></tr>
+            <tr><td>MB Comércio (RecT)</td><td>TINY</td><td>Semana 02 · kick-off feito</td></tr>
+            <tr><td>MGE Comércio de máquinas LTDA</td><td>TINY</td><td>Semana 02</td></tr>
+            <tr><td>V-tech Blindados</td><td>MEDIUM</td><td>Semana 02</td></tr>
+            <tr><td>Vitória Troféus</td><td>LARGE</td><td>Semana 02</td></tr>
+            <tr><td>Wang (BS)</td><td>SMALL</td><td>Semana 02 · tratativa de ops</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>3º semana · 14</h3>
+      <div class="card" style="padding:0; overflow:auto; margin-bottom:14px">
+        <table>
+          <thead>
+            <tr><th>Conta</th><th>Need scope</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Balão Mágico</td><td>MEDIUM</td><td>Semana 03 · entrar em contato</td></tr>
+            <tr><td>Biju Mania (RecS)</td><td>SMALL</td><td>Semana 03 · montar Account Planning</td></tr>
+            <tr><td>Dental Muller (LM)</td><td>MEDIUM</td><td>Semana 03 · entrar em contato</td></tr>
+            <tr><td>Fertisul Fertilizantes</td><td>MEDIUM</td><td>Semana 03 · entrar em contato</td></tr>
+            <tr><td>LUCKSHOES (BS)</td><td>SMALL</td><td>Semana 03 · travado falta de pagamento</td></tr>
+            <tr><td>Mixconect Telecom</td><td>MEDIUM</td><td>Semana 03 · entrar em contato</td></tr>
+            <tr><td>Neglape</td><td>TINY</td><td>Semana 03 · entrar em contato</td></tr>
+            <tr><td>R. Chagas Ltda (BM)</td><td>MEDIUM</td><td>Semana 03 · tratativa de ops</td></tr>
+            <tr><td>Rhama Analysis (LM)</td><td>MEDIUM</td><td>Semana 03 · kick-off feito (2x)</td></tr>
+            <tr><td>Splendor Elétrica (BM)</td><td>MEDIUM</td><td>Semana 03 · entrar em contato</td></tr>
+            <tr><td>Xavier Realiza Imóveis</td><td>MEDIUM</td><td>Semana 03</td></tr>
+            <tr><td>[BOD] Bodega do Sertão</td><td>MEDIUM</td><td>Semana 03 · entrar em contato</td></tr>
+            <tr><td>[MAB] Maben</td><td>MEDIUM</td><td>Semana 03 · entrar em contato</td></tr>
+            <tr><td>Óticas Visamix (BS)</td><td>SMALL</td><td>Semana 03 · entrar em contato</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>4º semana · 10</h3>
+      <div class="card" style="padding:0; overflow:auto; margin-bottom:14px">
+        <table>
+          <thead>
+            <tr><th>Conta</th><th>Need scope</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>600 Multimarcas <span class="tag prev">ago</span></td><td>MEDIUM</td><td>Semana 04 · marcar pitch</td></tr>
+            <tr><td>CID — Clínica de Serviços Médicos</td><td>MEDIUM</td><td>Semana 04 · entrar em contato</td></tr>
+            <tr><td>Castanheira (LM) <span class="tag prev">ago</span></td><td>MEDIUM</td><td>Semana 04 · férias, retorna em set</td></tr>
+            <tr><td>Clínica Polivida (BS)</td><td>SMALL</td><td>Semana 04</td></tr>
+            <tr><td>Freebong (BS) <span class="tag prev">ago</span></td><td>SMALL</td><td>Semana 04 · marcar pitch</td></tr>
+            <tr><td>Frigorífico Rotta</td><td>MEDIUM</td><td>Semana 04 · entrar em contato</td></tr>
+            <tr><td>Henri Soluções (LS) <span class="tag prev">ago</span></td><td>SMALL</td><td>Semana 04 · ops, adiamos o pitch</td></tr>
+            <tr><td>Legtrânsito (BS)</td><td>—</td><td>Semana 04 · marcar pitch</td></tr>
+            <tr><td>Nosso boteco (BM) <span class="tag prev">ago</span></td><td>MEDIUM</td><td>Semana 04 · marcar pitch</td></tr>
+            <tr><td>RE/MAX PRO WORK (BT) <span class="tag prev">ago</span></td><td>TINY</td><td>Semana 04 · ops, adiamos o pitch</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>5º semana · 2</h3>
+      <div class="card" style="padding:0; overflow:auto; margin-bottom:14px">
+        <table>
+          <thead>
+            <tr><th>Conta</th><th>Need scope</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Supermercado Casa dos Pães (BS) <span class="tag prev">ago</span></td><td>SMALL</td><td>Semana 05 · agenda / 4 no-shows</td></tr>
+            <tr><td>Triboltec <span class="tag prev">mês 06</span></td><td>SMALL</td><td>Semana 05 · travado agenda do cliente</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note" style="margin-bottom:18px">
+        <strong>Mês 06 travado</strong> (agenda do cliente; General Car e RM Burguer trocaram de produto):
+        General Car (SMALL, Semana 0) · RM Burguer Itabira (SMALL, Semana 0) · Triboltec (SMALL, Semana 05) · Positive Safety (SMALL, Drop — reativando para EQV).
+      </div>
+
+      <h3>Estamos em follow atualmente</h3>
+      <div class="grid-2" style="margin-bottom:14px">
+        <div class="pay-block">
+          <h3><span class="tag ativo">follow</span> <span class="count">4</span></h3>
+          <ul class="pay-list">
+            <li class="pay-row">
+              <div>
+                <div class="name">ABC71</div>
+                <div class="meta">Executar Basic · booking 12 meses · cartão</div>
+              </div>
+              <div class="when"><strong>MRR R$ 8.500,00</strong>12 meses</div>
+            </li>
+            <li class="pay-row">
+              <div>
+                <div class="name">Davi Gás</div>
+                <div class="meta">Zap First + social · booking 6 meses · cartão</div>
+              </div>
+              <div class="when"><strong>MRR R$ 4.950,00</strong>6 meses</div>
+            </li>
+            <li class="pay-row">
+              <div>
+                <div class="name">Ecco Salva</div>
+                <div class="meta">EQV · booking 6 meses · cartão</div>
+              </div>
+              <div class="when"><strong>MRR R$ 20.000,00</strong>6 meses</div>
+            </li>
+            <li class="pay-row">
+              <div>
+                <div class="name">Tamiya Brasil</div>
+                <div class="meta">booking 12 meses · pitch de ago · kick-off presencial</div>
+              </div>
+              <div class="when"><strong>MRR R$ 8.500,00</strong>12 meses</div>
+            </li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Cockpit também em follow</h3>
+          <p style="margin:0;font-size:13px;color:var(--text)">
+            <strong>MBFlex Express</strong> (MEDIUM) · Executar Basic · C. Crédito 12× · TCV R$ 84.240,00.
+            Temperatura fria. Pitch 21/08.
+          </p>
+        </div>
+      </div>
+
+      <h3>Projetos para iniciar agora na 1ª semana (status em branco)</h3>
+      <div class="card" style="padding:0; overflow:auto; margin-bottom:14px">
+        <table>
+          <thead>
+            <tr><th>Conta</th><th>Need scope</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Arqcompany</td><td>—</td><td>em branco</td></tr>
+            <tr><td>Brazil Group Eventos (LT)</td><td>TINY</td><td>em branco · ini 03/08</td></tr>
+            <tr><td>Casa de Carnes M.P.</td><td>—</td><td>em branco</td></tr>
+            <tr><td>Clínica Autista Osasco</td><td>—</td><td>em branco</td></tr>
+            <tr><td>Engcosta Engenharia e Serviços</td><td>—</td><td>em branco</td></tr>
+            <tr><td>Farma Vitae</td><td>—</td><td>em branco</td></tr>
+            <tr><td>I9 Hoje</td><td>—</td><td>em branco</td></tr>
+            <tr><td>Mundi Sport (LS)</td><td>SMALL</td><td>em branco · ini 21/08</td></tr>
+            <tr><td>Naki Distribuidora Automotiva (BM)</td><td>MEDIUM</td><td>em branco · ini 23/07</td></tr>
+            <tr><td>Rodol LTDA</td><td>—</td><td>em branco</td></tr>
+            <tr><td>Studio Center Music (BM)</td><td>MEDIUM</td><td>em branco</td></tr>
+            <tr><td>Tecno2 Serviços</td><td>—</td><td>em branco</td></tr>
+            <tr><td>Tutto Blu Intermediação</td><td>—</td><td>em branco</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card actions">
         <ol>
-          <li><strong>Entrega pronta</strong> antes de remarcar o pitch.</li>
-          <li><strong>DRI duplo:</strong> operação (entrega) + farmer (agenda do cliente).</li>
-          <li><strong>Sem entrega no prazo = sem pitch.</strong></li>
+          <li><strong>Os 41, por semana.</strong> Pitch na semana do Cockpit. Os 9 de ago (tag) têm data primeiro.</li>
+          <li><strong>Status em branco (13).</strong> Iniciar agora na primeira semana de setembro.</li>
+          <li><strong>Follow.</strong> ABC71 R$ 8.500 · Davi Gás R$ 4.950 · Ecco Salva R$ 20.000 · Tamiya R$ 8.500.</li>
+          <li><strong>Mês 06 travado.</strong> General Car, RM Burguer, Triboltec, Positive Safety — reengajar (troca de produto / agenda).</li>
+          <li><strong>Sem entrega no prazo = sem pitch.</strong> DRI duplo: operação (entrega) + farmer (agenda do cliente).</li>
         </ol>
       </div>
+      <p style="margin-top:14px;font-size:12px;color:var(--muted)">
+        Fonte: Cockpit Monetização · Saber competência 08/2026 · pipeline set 09/2026 ·
+        <a href="https://docs.google.com/spreadsheets/d/1dSukhon9dIUABcbQIKGKUa-ku-_oLOn1Q5YWeWGfI6U/edit?gid=759150030#gid=759150030" target="_blank" rel="noopener">planilha</a>
+      </p>
     </section>
   </div>
 
   <script>
     const ink = "#1a1a1a";
     const mute = "#8a8a8a";
+    const red = "#e50914";
     const green = "#1a7f4b";
     const amber = "#b86e00";
     Chart.defaults.color = mute;
     Chart.defaults.borderColor = "#e6e6e2";
     Chart.defaults.font.family = "'IBM Plex Sans', system-ui, sans-serif";
 
+    const crmGray = "#cfcfc9";
     new Chart(document.getElementById("c1"), {
       type: "bar",
       data: {
         labels: ["Entraram", "Pitch", "Fecharam", "Adiados", "Drop"],
         datasets: [{
           data: [43, 13, 7, 9, 2],
-          backgroundColor: ["#cfcfc9", amber, green, "#d9c4a3", "#e50914"],
+          backgroundColor: [crmGray, mute, green, amber, red],
           borderRadius: 4
         }]
       },
@@ -501,46 +867,57 @@
     new Chart(document.getElementById("c2"), {
       type: "bar",
       data: {
-        labels: ["AP", "Pachane", "G6 Exec", "G6 EC", "Knowledge", "Global", "Work Bank"],
+        labels: ["0º", "2º", "3º", "4º", "5º"],
         datasets: [{
-          data: [173800, 95273.76, 51167.44, 20000, 14400, 7020.03, 5035.63],
-          backgroundColor: [green, green, green, ink, green, amber, green],
+          data: [3, 12, 14, 10, 2],
+          backgroundColor: [crmGray, mute, green, amber, red],
           borderRadius: 4
         }]
       },
       options: {
-        indexAxis: "y",
         responsive: true, maintainAspectRatio: false,
         plugins: { legend: { display: false } },
-        scales: {
-          x: { beginAtZero: true, ticks: { callback: v => "R$ " + Math.round(v / 1000) + "k" } },
-          y: { grid: { display: false } }
-        }
+        scales: { y: { beginAtZero: true, ticks: { precision: 0 } }, x: { grid: { display: false } } }
       }
     });
 
     new Chart(document.getElementById("c3"), {
-      type: "doughnut",
+      type: "bar",
       data: {
         labels: ["Cartão", "PIX", "Boleto"],
-        datasets: [{ data: [339676.83, 20000, 7020.03], backgroundColor: [green, ink, amber] }]
+        datasets: [{
+          data: [339676.83, 20000, 7020.03],
+          backgroundColor: [green, ink, amber],
+          borderRadius: 4
+        }]
       },
       options: {
         responsive: true, maintainAspectRatio: false,
-        plugins: { legend: { position: "bottom", labels: { boxWidth: 10, font: { size: 11 } } } }
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { beginAtZero: true, ticks: { callback: v => "R$ " + Math.round(v / 1000) + "k" } },
+          x: { grid: { display: false } }
+        }
       }
     });
 
     new Chart(document.getElementById("c4"), {
       type: "bar",
       data: {
-        labels: ["Pitch", "Fecharam"],
-        datasets: [{ data: [13, 7], backgroundColor: [amber, green], borderRadius: 4 }]
+        labels: ["ABC71", "Davi Gás", "Ecco Salva", "Tamiya"],
+        datasets: [{
+          data: [8500, 4950, 20000, 8500],
+          backgroundColor: [green, mute, amber, ink],
+          borderRadius: 4
+        }]
       },
       options: {
         responsive: true, maintainAspectRatio: false,
         plugins: { legend: { display: false } },
-        scales: { y: { beginAtZero: true, ticks: { precision: 0 } }, x: { grid: { display: false } } }
+        scales: {
+          y: { beginAtZero: true, ticks: { callback: v => "R$ " + Math.round(v / 1000) + "k" } },
+          x: { grid: { display: false } }
+        }
       }
     });
   </script>
