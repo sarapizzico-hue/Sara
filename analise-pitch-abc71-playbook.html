@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <title>Análise · Pitch ABC71 × Playbook Farmer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #140608;
+      --surf: rgba(255,255,255,.06);
+      --bd: rgba(255,255,255,.14);
+      --txt: #fff;
+      --mut: rgba(255,255,255,.78);
+      --red: #e11d24;
+      --ok: #86efac;
+      --warn: #fde68a;
+      --bad: #fda4af;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font: 15px/1.55 "Plus Jakarta Sans", system-ui, sans-serif;
+      color: var(--txt);
+      background:
+        radial-gradient(ellipse 70% 40% at 10% 0%, rgba(225,29,36,.32), transparent 55%),
+        linear-gradient(180deg, #1a090b 0%, #0d0405 100%);
+      padding-bottom: 72px;
+    }
+    h1, h2, h3 { font-family: Outfit, sans-serif; letter-spacing: -.02em; line-height: 1.15; }
+    .top {
+      position: sticky; top: 0; z-index: 40;
+      backdrop-filter: blur(14px);
+      background: rgba(13,4,5,.92);
+      border-bottom: 1px solid var(--bd);
+      padding: 12px 18px;
+      display: flex; gap: 10px; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    }
+    .brand { font-weight: 800; font-size: 14px; }
+    .brand span { color: #fda4af; }
+    .pill {
+      font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+      border: 1px solid var(--bd); border-radius: 999px; padding: 6px 11px; color: var(--mut);
+      text-decoration: none;
+    }
+    .pill:hover { color: #fff; border-color: rgba(255,255,255,.35); }
+    .wrap { max-width: 960px; margin: 0 auto; padding: 26px 18px 0; }
+    .hero {
+      border: 1px solid var(--bd); border-radius: 20px; padding: 26px 22px;
+      background: linear-gradient(135deg, rgba(225,29,36,.2), rgba(255,255,255,.04));
+      margin-bottom: 16px;
+    }
+    .hero h1 { margin: 0 0 10px; font-size: clamp(24px, 4vw, 34px); }
+    .hero p { margin: 0; color: var(--mut); max-width: 820px; }
+    .nav {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 8px; margin: 14px 0 18px;
+    }
+    .nav a {
+      text-decoration: none; color: var(--mut); font-size: 12px; font-weight: 700;
+      border: 1px solid var(--bd); background: var(--surf); border-radius: 12px; padding: 10px 12px;
+    }
+    .nav a:hover { color: #fff; background: rgba(225,29,36,.18); }
+    .nav a small { display: block; color: #fda4af; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 3px; }
+    .section {
+      border: 1px solid var(--bd); border-radius: 18px; background: rgba(255,255,255,.04);
+      padding: 20px 18px; margin: 12px 0;
+    }
+    .section h2 { margin: 0 0 8px; font-size: clamp(18px, 3vw, 24px); }
+    .section .k {
+      font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
+      color: #fda4af; margin-bottom: 6px;
+    }
+    .lead { color: var(--mut); margin: 0 0 12px; font-size: 14px; }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    @media (max-width: 760px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+    .card {
+      border: 1px solid var(--bd); border-radius: 14px; background: var(--surf);
+      padding: 12px 14px;
+    }
+    .card h3 { margin: 0 0 6px; font-size: 14px; }
+    .card p, .card li { margin: 0; font-size: 13px; color: var(--mut); }
+    .card ul { margin: 6px 0 0; padding-left: 16px; }
+    .card li { margin: 4px 0; }
+    .tag {
+      display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: .08em;
+      text-transform: uppercase; padding: 3px 8px; border-radius: 999px; margin-bottom: 6px;
+    }
+    .tag.ok { background: rgba(134,239,172,.15); color: var(--ok); }
+    .tag.warn { background: rgba(253,230,138,.12); color: var(--warn); }
+    .tag.bad { background: rgba(253,164,175,.15); color: var(--bad); }
+    .tag.neutral { background: rgba(255,255,255,.08); color: var(--mut); }
+    .callout {
+      margin: 12px 0; padding: 12px 14px; border-radius: 12px; font-size: 14px;
+    }
+    .callout.warn { border: 1px solid rgba(253,230,138,.3); background: rgba(253,230,138,.08); color: var(--warn); }
+    .callout.ok { border: 1px solid rgba(134,239,172,.3); background: rgba(134,239,172,.08); color: var(--ok); }
+    .callout.bad { border: 1px solid rgba(253,164,175,.3); background: rgba(253,164,175,.08); color: var(--bad); }
+    .callout strong { color: inherit; filter: brightness(1.15); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 8px; }
+    th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--bd); vertical-align: top; }
+    th { color: #fda4af; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+    td { color: var(--mut); }
+    td strong { color: #fff; }
+    .flow {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 10px;
+    }
+    @media (max-width: 900px) { .flow { grid-template-columns: 1fr 1fr; } }
+    .flow-step {
+      border: 1px solid var(--bd); border-radius: 12px; background: var(--surf); padding: 10px;
+    }
+    .flow-step .n { font-size: 10px; font-weight: 800; color: #fda4af; letter-spacing: .08em; text-transform: uppercase; }
+    .flow-step .t { font-size: 13px; font-weight: 700; color: #fff; margin: 4px 0 2px; }
+    .flow-step .d { font-size: 12px; color: var(--mut); }
+    .ask {
+      margin-top: 10px; padding: 11px 13px; border-radius: 12px;
+      background: rgba(134,239,172,.1); border: 1px solid rgba(134,239,172,.28);
+      color: #bbf7d0; font-size: 13px;
+    }
+    .ban {
+      margin-top: 10px; padding: 11px 13px; border-radius: 12px;
+      background: rgba(253,164,175,.1); border: 1px solid rgba(253,164,175,.28);
+      color: #fecdd3; font-size: 13px;
+    }
+    ol.steps { margin: 8px 0 0; padding-left: 18px; color: var(--mut); font-size: 13px; }
+    ol.steps li { margin: 6px 0; }
+    ol.steps strong { color: #fff; }
+    .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 12px 0; }
+    .kpi { border: 1px solid var(--bd); border-radius: 14px; background: var(--surf); padding: 12px 14px; }
+    .kpi .v { font-size: 20px; font-weight: 800; }
+    .kpi .v.ok { color: var(--ok); }
+    .kpi .v.warn { color: var(--warn); }
+    .kpi .v.bad { color: var(--bad); }
+    .kpi .l { font-size: 11px; color: var(--mut); margin-top: 4px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+    footer { margin: 24px 0 0; text-align: center; font-size: 12px; color: var(--mut); }
+    footer a { color: #fda4af; }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <div class="brand">Análise · <span>Pitch ABC71 × Playbook</span></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <a class="pill" href="playbook-farmer-am.html">Playbook</a>
+      <a class="pill" href="fluxograma-farmer-ee.html">Fluxograma</a>
+      <a class="pill" href="analise-pitch-g6-playbook.html">Análise G6</a>
+      <a class="pill" href="farmer-sara.html">Hub Sara</a>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <header class="hero">
+      <h1>A EE entregou o mapa. O pitch virou aula + material para analisar.</h1>
+      <p>
+        Análise da 4ª semana ABC71 (03/09) cruzada com o fluxo Farmer (EE → Plano → Pitch).
+        Fonte: <a href="https://docs.google.com/document/d/1zZom7YPo3hw89D5hnWkZFD0eH5F2pvDvO9stEJ4rkqg/edit?usp=sharing" style="color:#fda4af" target="_blank" rel="noopener">notas + transcrição</a>.
+        Mesma lente da G6: padrão operacional, não culpa de uma call.
+      </p>
+    </header>
+
+    <div class="callout warn">
+      <strong>Leitura em uma frase:</strong>
+      a dor de mídia paga estava clara e a agência de orgânico foi tratada cedo (avanço vs G6);
+      na sala faltou abrir com perguntas, matar contrato/fidelidade <em>antes</em> do valor,
+      delimitar Aloi no mapa, e fechar sem falar pelo cliente.
+    </div>
+
+    <div class="kpis">
+      <div class="kpi"><div class="v warn">Não fechou</div><div class="l">Status real da sala</div></div>
+      <div class="kpi"><div class="v">12× R$ 7.407,44</div><div class="l">Condição 12 meses (cashback)</div></div>
+      <div class="kpi"><div class="v warn">6 meses sem número</div><div class="l">Pedido do Felipe · não precificado</div></div>
+      <div class="kpi"><div class="v bad">~4h</div><div class="l">Último encontro · monólogo + preço</div></div>
+    </div>
+
+    <nav class="nav">
+      <a href="#fluxo"><small>01</small>Fluxo × o que rolou</a>
+      <a href="#gemini"><small>02</small>Notas ≠ sala</a>
+      <a href="#obs"><small>03</small>Observações</a>
+      <a href="#ok"><small>04</small>O que avançou</a>
+      <a href="#contrato"><small>05</small>Contrato / fidelidade</a>
+      <a href="#aloi"><small>06</small>Aloi</a>
+      <a href="#fecho"><small>07</small>Fecho</a>
+      <a href="#acao"><small>08</small>Ações</a>
+    </nav>
+
+    <section class="section" id="fluxo">
+      <div class="k">01 · Onde o pitch senta no fluxo</div>
+      <h2>Playbook: S4 apresenta encaixe. Não é aula de 2h + preço no fim.</h2>
+      <p class="lead">
+        ABC71 já era cliente V4 (EE paga, cashback). Felipe é o campeão comercial.
+        Barbosa e Miriam precisam processar internamente. Gate de decisor+pago: ok.
+        O pitch era para amarrar Executar (mídia paga) com o que as semanas já tinham construído.
+      </p>
+      <div class="flow">
+        <div class="flow-step"><div class="n">01</div><div class="t">GC / KO</div><div class="d">Marketize no orgânico · 3ª tentativa de pago · Felipe contra fidelidade</div></div>
+        <div class="flow-step"><div class="n">02</div><div class="t">S1→S3</div><div class="d">Ômega · funil cego · ciclo 90–360d · 63 agendadas / 26 feitas</div></div>
+        <div class="flow-step"><div class="n">03</div><div class="t">Plano</div><div class="d">V4 no pago · orgânico fica · setup (GTM/GA4/CRM) antes de campanha</div></div>
+        <div class="flow-step"><div class="n">04</div><div class="t">Abertura do pitch</div><div class="d">3 perguntas — o cliente fala. Não SWOT, TOS, SEO, Instagram</div></div>
+        <div class="flow-step"><div class="n">05</div><div class="t">Valor + fecho</div><div class="d">Âncora · 6 vs 12 já na mesa · eles dizem o próximo passo</div></div>
+      </div>
+      <div class="callout bad" style="margin-top:14px">
+        <strong>Na ABC71:</strong> Éder abre com “último encontro” e linha do tempo/SWOT (~01:10) ·
+        aula até ~03:15 · Sara ancora R$ 134.688 → R$ 88.899 (~03:18) ·
+        só então entram fidelidade e Aloi · fecho = “vamos mandar o material, vocês analisam”.
+      </div>
+    </section>
+
+    <section class="section" id="gemini">
+      <div class="k">02 · O resumo do Gemini não é a decisão</div>
+      <h2>As notas marcaram “12 meses alinhado”. A sala não fechou.</h2>
+      <p class="lead">
+        O Gemini mistura o que foi <em>apresentado</em> com o que foi <em>combinado</em>.
+        Usar o resumo como briefing de follow-up distorce o deal.
+      </p>
+      <table>
+        <thead>
+          <tr><th>Notas Gemini</th><th>O que a transcrição mostra</th><th>Leitura</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Contrato de 12 meses alinhado</strong>, com cláusula de 30 dias</td>
+            <td>Felipe é contra fidelidade (já às 02:49). Pede 3 meses na cabeça, aceita olhar 6. Eder prefere 12 com flexibilidade. Ruan: “temos 6 ou 12”. Número de 6 meses não saiu na sala.</td>
+            <td><span class="tag bad">Não decidido</span></td>
+          </tr>
+          <tr>
+            <td>Alocação de mídia paga para a V4 <em>pendente</em> de orçamento interno</td>
+            <td>Isso está certo. Felipe + Barbosa + Miriam ainda sentam. Marketize fica no orgânico se estiverem satisfeitos.</td>
+            <td><span class="tag ok">Certo</span></td>
+          </tr>
+          <tr>
+            <td>Aloi em aberto</td>
+            <td>Certo. Felipe pede para “pensar o que cabe de Aloi” no mesmo número. Ruan: outra marca, outro escopo. Eder: orçamento separado.</td>
+            <td><span class="tag warn">Pedido, não escopo</span></td>
+          </tr>
+          <tr>
+            <td>Foco na marca Ômega (não ABC71)</td>
+            <td>Consenso real: Ruan, Felipe, Éder.</td>
+            <td><span class="tag ok">Alinhado</span></td>
+          </tr>
+          <tr>
+            <td>Teste de vídeo com IA em setembro</td>
+            <td>Felipe já tinha o projeto; Éder endossou. Não é entregável V4 deste pacote.</td>
+            <td><span class="tag ok">Deles</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="ban">
+        <strong>Não usar o Gemini como fonte de “eles fecharam 12 meses”.</strong>
+        O único combinado de saída é: mandar proposta + minuta + opção 6 meses + pensar Aloi à parte · devolutiva na semana seguinte.
+      </div>
+    </section>
+
+    <section class="section" id="obs">
+      <div class="k">03 · Observações da call</div>
+      <h2>O que rolou — e o que o playbook já pedia</h2>
+      <table>
+        <thead>
+          <tr><th>#</th><th>Observação</th><th>O que o fluxo/playbook pedia</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1</strong></td>
+            <td>~4h, “último encontro”. Barbosa/Miriam processando informação no fim, com fome.</td>
+            <td>Pré-pitch: timing, quem decide, o que esperam. Não empilhar deck. Pitch curto de encaixe.</td>
+            <td><span class="tag bad">Gap</span></td>
+          </tr>
+          <tr>
+            <td><strong>2</strong></td>
+            <td>Éder assumiu a sala (SWOT, TOS, método V4, SEO, Instagram, funil teórico).</td>
+            <td>Farmer conduz decisão; time traz prova. Papéis no KO.</td>
+            <td><span class="tag bad">Mesmo padrão G6</span></td>
+          </tr>
+          <tr>
+            <td><strong>3</strong></td>
+            <td>Abertura sem as 3 perguntas. Éder: “hoje é o último encontro, vou trazer a estratégia”.</td>
+            <td>Estratégia clara? O que esperam da continuidade? Quando iniciar?</td>
+            <td><span class="tag bad">Gap</span></td>
+          </tr>
+          <tr>
+            <td><strong>4</strong></td>
+            <td>Dor de pago estava na mesa (3ª tentativa, Marketize no orgânico, funil sem rastreio).</td>
+            <td>Espelhar em 4 linhas no início — não redistribuir teoria de comitê de compra.</td>
+            <td><span class="tag warn">Dor existia; não foi o gancho</span></td>
+          </tr>
+          <tr>
+            <td><strong>5</strong></td>
+            <td>Agência atual tratada <em>antes</em> do preço. Ruan: orgânico fica, V4 no pago.</td>
+            <td>G6: Social/agência depois do valor. Aqui o mapa de agência funcionou.</td>
+            <td><span class="tag ok">Acerto</span></td>
+          </tr>
+          <tr>
+            <td><strong>6</strong></td>
+            <td>Felipe avisa às 02:49: “não aceito contrato com fidelidade”. Preço só às 03:18, âncora 12 meses.</td>
+            <td>Objeção conhecida entra no mapa <em>antes</em> do slide de investimento. Duas condições (6 e 12) na mesa.</td>
+            <td><span class="tag bad">Gap</span></td>
+          </tr>
+          <tr>
+            <td><strong>7</strong></td>
+            <td>Sara ancora bem o cashback (R$ 134.688 → R$ 88.899 · 12× R$ 7.407,44, cartão). Pacote = pago + LPs + criativos + rotina.</td>
+            <td>Âncora + condição. Faltou a segunda condição (6 meses) no mesmo momento.</td>
+            <td><span class="tag warn">Âncora ok · oferta incompleta</span></td>
+          </tr>
+          <tr>
+            <td><strong>8</strong></td>
+            <td>Aloi entra depois do preço, como “o que vocês conseguem adicionar”. Ruan segura o escopo.</td>
+            <td>S2: marcas/filiais no mapa. Aloi era conhecida “lá atrás”. Ou entra com preço, ou sai com frase escrita.</td>
+            <td><span class="tag warn">Escopo seguro tarde</span></td>
+          </tr>
+          <tr>
+            <td><strong>9</strong></td>
+            <td>Mídia à parte: hoje R$ 3k (site), volta a R$ 6k, alvo R$ 8k. Sem mínimo engessado.</td>
+            <td>Combustível separado do fee. Correto. Não misturar com o fee de R$ 7.407.</td>
+            <td><span class="tag ok">Acerto</span></td>
+          </tr>
+          <tr>
+            <td><strong>10</strong></td>
+            <td>Ciclo 90–360d. Combinado olhar MQL / reunião agendada e realizada — não venda no mês 1.</td>
+            <td>Expectativa de resultado no tempo certo. Evita drop por “não vendeu em 30 dias”.</td>
+            <td><span class="tag ok">Acerto</span></td>
+          </tr>
+          <tr>
+            <td><strong>11</strong></td>
+            <td>Transparência da multa 30% + 30 dias se a V4 não entregar. Felipe: “tranquilo”.</td>
+            <td>Objeção de gato escaldado precisa de cláusula, não de “confia na gente”.</td>
+            <td><span class="tag ok">Acerto</span></td>
+          </tr>
+          <tr>
+            <td><strong>12</strong></td>
+            <td>Fecho: “mandar proposta, minuta, vocês processam, alinhamos devolutiva”.</td>
+            <td>Pergunta aberta: o que precisam alinhar internamente para avançar? Quem decide? Quando?</td>
+            <td><span class="tag bad">Mesmo padrão G6</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section" id="ok">
+      <div class="k">04 · O que avançou vs G6</div>
+      <h2>Não foi a mesma call. O mapa de agência entrou no lugar certo.</h2>
+      <div class="grid2">
+        <div class="card">
+          <span class="tag ok">Aplicou o playbook</span>
+          <h3>Agência / orgânico antes do valor</h3>
+          <p>Felipe perguntou: tiro a Marketize? Ruan: se o orgânico está ok, fica. V4 no pago. A objeção “e a agência?” não nasceu no slide de preço — nasceu no mapa. Na G6, Social veio depois de +R$ 1,8k.</p>
+        </div>
+        <div class="card">
+          <span class="tag ok">Produto certo</span>
+          <h3>Executar = mídia paga, não Social</h3>
+          <p>Dor = terceira tentativa de tráfego. Funil cego 3 meses. Setup (Pixel, GTM, GA4, CRM) antes de campanha. Criativos e LPs no fee. Combustível (R$ 6k) à parte.</p>
+        </div>
+        <div class="card">
+          <span class="tag ok">Expectativa de ciclo</span>
+          <h3>Não venderam venda no mês 1</h3>
+          <p>ERP industrial, 90–360 dias. Ruan: primeiro MQL e reunião. LTV, não implementação. Isso protege o NRR depois — se a devolutiva não virar “cadê a venda em 30 dias”.</p>
+        </div>
+        <div class="card">
+          <span class="tag ok">Cashback + âncora</span>
+          <h3>Sara fez o papel de condição</h3>
+          <p>Já são cliente → R$ 134.688 vira R$ 88.899. Pacote fechado (não “às vezes precisa mais”). Cartão 12×. Multa e cláusula de 30 dias ditas com clareza.</p>
+        </div>
+      </div>
+      <div class="callout ok">
+        <strong>Padrão que ficou:</strong> quando a Farmer/Ruan trata agência e combustível antes do fee, o preço não vira discussão de escopo de Social.
+        O que ainda quebra o fecho é o que veio <em>depois</em> do fee: fidelidade e Aloi.
+      </div>
+    </section>
+
+    <section class="section" id="contrato">
+      <div class="k">05 · Contrato · a objeção estava no KO</div>
+      <h2>Felipe avisou. A sala ainda vendeu 12 meses como default.</h2>
+      <p class="lead">
+        Às 02:49, <em>antes</em> do investimento: Marketize sem fidelidade porque “eu não aceito”.
+        Às 03:38: gato escaldado — fornecedor anterior mapeou só plástico, multa perto de 60–70%,
+        “praticamente pagamos o contrato inteiro”. Preferência declarada: 3 meses.
+        Ruan: só existem 6 ou 12; 12 tem desconto de fidelidade; 6 é mais caro.
+      </p>
+      <div class="grid2">
+        <div class="card">
+          <span class="tag bad">O que aconteceu</span>
+          <h3>Uma condição na tela, a outra de palavra</h3>
+          <p>Fee apresentado só em 12 meses. 6 meses prometido para o envio. Internamente, Eder puxa 12 com “multa pequena”. Sara explica 30% + 30 dias. Felipe diz “tranquilo” — isso não é sim no 12 meses. É “entendi a cláusula”.</p>
+        </div>
+        <div class="card">
+          <span class="tag ok">O que o pitch pedia</span>
+          <h3>Duas condições, uma pergunta</h3>
+          <p>Depois de espelhar o medo: “temos 6 (sem desconto de fidelidade) e 12 (com cashback). Qual vocês levam para o Barbosa?” Quem escolhe o prazo é o comitê, não o Gemini.</p>
+        </div>
+      </div>
+      <div class="ask">
+        <strong>Frase-guia:</strong>
+        “Vocês já disseram que fidelidade longa assusta. Por isso as duas vigências vão no papel. O 12 meses não é armadilha — é desconto. O 6 meses é a porta de entrada que o Felipe pediu.”
+      </div>
+      <div class="ban">
+        <strong>Não reancorar só o 12 meses na devolutiva.</strong>
+        Se o material chegar só com R$ 7.407,44 × 12, o Felipe lê exatamente o filme do fornecedor anterior.
+      </div>
+    </section>
+
+    <section class="section" id="aloi">
+      <div class="k">06 · Aloi · marca fora do mapa, pedido dentro da sala</div>
+      <h2>Não misturar Ômega e Aloi no mesmo fee. Também não ignorar o pedido.</h2>
+      <p class="lead">
+        Aloi é filial, MES/APS com marca própria para não assustar parceiro SAP/Oracle/Totvs.
+        Felipe quer uma gestão comercial. Ruan: outro público, outro PLG vs consultivo, hours cap —
+        “já vi duas marcas na mesma reunião virar duas reuniões”. Eder fecha: orçamento separado.
+      </p>
+      <div class="grid2">
+        <div class="card">
+          <span class="tag warn">Risco</span>
+          <h3>Aloi como moeda de “adicionar no número”</h3>
+          <p>Felipe: “jogando a favor de vocês, voltem para casa e pensem o que cabe de Aloi”. Se o envio não responder, a devolutiva vira “ainda não pensaram no que eu pedi”.</p>
+        </div>
+        <div class="card">
+          <span class="tag ok">Resposta correta</span>
+          <h3>Fora deste pacote, com frase escrita</h3>
+          <p>Este contrato = ERP Ômega (campanha genérica + MES/APS + calibração). Aloi = fase 2, depois do sit-down com os gestores deles. Não diluir horas do Ômega.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="fecho">
+      <div class="k">07 · Fecho · falar pelo cliente</div>
+      <h2>O próximo passo saiu da nossa boca. O playbook pede que saia da deles.</h2>
+      <div class="grid2">
+        <div class="card">
+          <span class="tag bad">Na sala</span>
+          <h3>“Vamos mandar, vocês processam”</h3>
+          <ul>
+            <li>Éder: minuta + detalhes + 6 meses “pra gente poder analisar”</li>
+            <li>Sara: envio + “vocês me falam a disponibilidade da próxima semana”</li>
+            <li>Ninguém pergunta: quem assina? Barbosa já viu o fee? O que trava?</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="tag ok">Padrão Rodrigo / G6</span>
+          <h3>Uma pergunta aberta</h3>
+          <ul>
+            <li>“Olhando 6 e 12 — o que vocês precisam alinhar internamente para avançar?”</li>
+            <li>“Além do Felipe, quem mais precisa dizer sim?”</li>
+            <li>Data de devolutiva com dono, não “quando vocês olharem com calma”</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ban">
+        <strong>Também proibido no follow-up:</strong>
+        “Agora vocês vão analisar a proposta, a minuta, o escopo…” —
+        quem define o que vão analisar são <em>eles</em>.
+      </div>
+    </section>
+
+    <section class="section" id="acao">
+      <div class="k">08 · Ações · só o que a análise pede</div>
+      <h2>Esta página não é proposta. É o mapa para a devolutiva não repetir a sala.</h2>
+      <div class="grid2">
+        <div class="card">
+          <span class="tag ok">O que o envio precisa carregar</span>
+          <ul>
+            <li>Duas vigências: 12 meses com cashback (R$ 88.899 · 12× R$ 7.407,44) <em>e</em> 6 meses com o número mais alto, como Ruan descreveu</li>
+            <li>Escopo escrito: mídia paga Ômega (genérica + MES/APS + calibração) · LPs e criativos no fee · combustível ~R$ 6k à parte</li>
+            <li>Fora: orgânico Marketize · Aloi (orçamento à parte, depois do alinhamento interno deles)</li>
+            <li>Setup primeiro: GTM, GA4, Pixel, CRM — campanha depois</li>
+            <li>KPI de entrada: MQL e reunião (agendada/realizada), não venda mensal</li>
+            <li>Cláusula 30% / 30 dias se a V4 não entregar — já dita, precisa estar na minuta</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="tag warn">Devolutiva (não repetir aula)</span>
+          <ul>
+            <li>Farmer abre: o que ficou marcado? 6 ou 12? Aloi entra agora ou depois?</li>
+            <li>Não reabrir SWOT / Instagram / SEO</li>
+            <li>Éder só se pedirem prova de setup/funil</li>
+            <li>Uma pergunta de decisão; silêncio; eles falam o próximo passo</li>
+            <li>Se Barbosa não estiver, a call não é close — é balizamento</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout warn" style="margin-top:14px">
+        <strong>Papéis:</strong> Sara na decisão e no prazo. Ruan no escopo (pago vs Aloi vs horas).
+        Éder no handoff e na prova de rastreio — não no monólogo de S4.
+        O mesmo gap da G6 (Éder assume o pitch) voltou; o mapa de agência mostrou que o time
+        <em>sabe</em> tratar objeção cedo. Falta aplicar isso em contrato e fecho.
+      </div>
+
+      <div class="callout ok">
+        <strong>Padrão de ouro (ABC71 + G6 + playbook):</strong>
+        balizar → perguntar → espelhar dor de pago → matar agência/fidelidade/Aloi <em>antes</em> do fee →
+        duas condições na mesa → eles dizem o próximo passo. Ritmo curto. Sem aula na S4.
+      </div>
+    </section>
+
+    <footer>
+      V4 · Farmer Sara · Análise Pitch ABC71 × Playbook · 03/09/2026 ·
+      <a href="farmer-sara.html">Hub</a> ·
+      <a href="playbook-farmer-am.html">Playbook</a> ·
+      <a href="analise-pitch-g6-playbook.html">G6</a> ·
+      <a href="https://docs.google.com/document/d/1zZom7YPo3hw89D5hnWkZFD0eH5F2pvDvO9stEJ4rkqg/edit?usp=sharing" target="_blank" rel="noopener">Notas da call</a>
+    </footer>
+  </div>
+</body>
+</html>
