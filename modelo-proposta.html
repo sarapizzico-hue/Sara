@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <title>Modelo de proposta · V4</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --v4-red-deep: #a10f14;
+      --v4-red-mid: #c4181e;
+      --cream: #fff;
+      --muted: rgba(255,255,255,.88);
+      --ease: cubic-bezier(.22, 1, .36, 1);
+      --brand: #e50915;
+      --bg: #050505;
+      --surf: rgba(20,20,20,.94);
+      --surf2: #141414;
+      --bd: rgba(255,255,255,.1);
+      --txt: #fafafa;
+      --mut: #a3a3a3;
+      --ok: #86efac;
+      --warn: #fde68a;
+      --info: #93c5fd;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { min-height: 100%; }
+    body {
+      font-family: Inter, system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--txt);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    body.mode-deck { overflow: hidden; background: var(--v4-red-deep); }
+
+    /* ===== EDITOR ===== */
+    .editor-top {
+      position: sticky; top: 0; z-index: 40;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+      padding: 12px 20px;
+      background: rgba(5,5,5,.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--bd);
+    }
+    .logo { font-weight: 900; letter-spacing: -.02em; }
+    .logo span { color: #ff1a27; }
+    .top-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+    .btn {
+      appearance: none; border: 1px solid rgba(229,9,21,.5);
+      background: linear-gradient(135deg, rgba(229,9,21,.35), #1a1a1a);
+      color: #fff; font: inherit; font-weight: 800; font-size: 12px;
+      padding: 9px 14px; border-radius: 10px; cursor: pointer;
+      text-decoration: none; display: inline-flex; align-items: center;
+    }
+    .btn.ghost { border-color: var(--bd); background: #111; }
+    .btn.ok { border-color: rgba(34,197,94,.4); background: rgba(34,197,94,.12); color: var(--ok); }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 24px 20px 80px; }
+    h1.ed { font-size: clamp(24px, 4vw, 34px); font-weight: 900; letter-spacing: -.03em; margin-bottom: 8px; }
+    .lead { color: var(--mut); font-size: 13px; max-width: 880px; margin-bottom: 16px; }
+    .lead a { color: var(--ok); }
+    .callout {
+      padding: 14px 16px; border-radius: 12px; margin-bottom: 14px; font-size: 13px;
+      border: 1px solid rgba(96,165,250,.3); background: rgba(96,165,250,.08); color: #bfdbfe;
+    }
+    .callout.warn { border-color: rgba(250,204,21,.28); background: rgba(250,204,21,.06); color: #fde68a; }
+    .callout.ok { border-color: rgba(34,197,94,.3); background: rgba(34,197,94,.08); color: #bbf7d0; }
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 18px; }
+    @media (max-width: 800px) { .steps { grid-template-columns: 1fr 1fr; } }
+    .step { background: var(--surf2); border: 1px solid var(--bd); border-radius: 12px; padding: 12px; }
+    .step .n { font-size: 10px; font-weight: 800; color: #ff1a27; letter-spacing: .08em; text-transform: uppercase; }
+    .step .t { font-weight: 800; font-size: 13px; margin: 4px 0 2px; }
+    .step .d { font-size: 11px; color: var(--mut); }
+    .section {
+      background: var(--surf); border: 1px solid var(--bd); border-radius: 16px;
+      padding: 18px 20px; margin-bottom: 12px;
+    }
+    .section h2 {
+      font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--mut); font-weight: 800; margin-bottom: 4px;
+    }
+    .section h3 { font-size: 17px; font-weight: 900; margin-bottom: 12px; }
+    .hint { font-size: 12px; color: var(--mut); margin: -6px 0 12px; }
+    label { display: block; font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--mut); margin: 0 0 6px; }
+    input, textarea, select {
+      width: 100%; background: #0a0a0a; border: 1px solid var(--bd); border-radius: 10px;
+      color: var(--txt); padding: 10px 12px; font: inherit; margin-bottom: 12px;
+    }
+    textarea { min-height: 92px; resize: vertical; }
+    textarea.tall { min-height: 128px; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    @media (max-width: 800px) { .row, .row3 { grid-template-columns: 1fr; } }
+    .check { display: flex; align-items: center; gap: 8px; margin: 0 0 12px; font-size: 13px; }
+    .check input { width: auto; margin: 0; }
+    .preset-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+    footer.ed {
+      text-align: center; color: var(--mut); font-size: 11px;
+      margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--bd);
+    }
+    footer.ed a { color: var(--ok); }
+    .wizard-rail {
+      display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin: 0 0 16px;
+    }
+    @media (max-width: 900px) { .wizard-rail { grid-template-columns: repeat(4, 1fr); } }
+    .wizard-rail button {
+      appearance: none; text-align: left; cursor: pointer; font: inherit;
+      background: var(--surf2); border: 1px solid var(--bd); border-radius: 10px; padding: 8px 10px; color: var(--mut);
+    }
+    .wizard-rail button .n { display: block; font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 2px; }
+    .wizard-rail button .t { display: block; font-size: 12px; font-weight: 800; color: #e5e5e5; }
+    .wizard-rail button.on { border-color: var(--brand); color: #fff; background: linear-gradient(135deg, rgba(229,9,21,.2), #141414); }
+    .wizard-rail button.done { border-color: rgba(34,197,94,.35); }
+    .coach {
+      padding: 14px 16px; border-radius: 12px; margin-bottom: 14px; font-size: 13px;
+      border: 1px solid rgba(229,9,21,.35); background: rgba(229,9,21,.08); color: #fecaca;
+    }
+    .coach strong { color: #fff; }
+    .coach .ask { color: #fde68a; margin-top: 8px; font-weight: 700; }
+    .wiz-nav {
+      position: sticky; bottom: 0; z-index: 30;
+      display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; align-items: center;
+      margin: 18px -20px 0; padding: 12px 20px;
+      background: rgba(5,5,5,.94); border-top: 1px solid var(--bd);
+    }
+    body.wizard .form-block { display: none; }
+    body.wizard .form-block.on { display: block; }
+    body.list-all .wizard-rail, body.list-all .coach, body.list-all .wiz-nav { display: none; }
+    body.list-all .form-block { display: block; }
+
+    /* ===== DECK · padrão G6 / Colli 1600×900 ===== */
+    #deck-root { display: none; }
+    body.mode-deck #editor { display: none; }
+    body.mode-deck #deck-root { display: block; }
+    html.baked #editor, html.baked .edit-fab { display: none !important; }
+    html.baked #deck-root { display: block; }
+    html.baked body, body.mode-deck { overflow: hidden; background: #171313; }
+
+    :root {
+      --v4-red: #e50914;
+      --v4-orange: #ff481f;
+      --v4-cream: #ffebc8;
+      --ink: #141414;
+      --ink-soft: #5a5a5a;
+      --line: rgba(20,20,20,.12);
+      --radius: 22px;
+      --hero: radial-gradient(120% 130% at 50% -10%, #ff5a2c 0%, #e50914 30%, #b00610 62%, #280001 100%);
+    }
+    .edit-fab {
+      position: fixed; top: 16px; right: 18px; z-index: 180;
+      font: 700 12px Inter, system-ui, sans-serif;
+      padding: 8px 12px; border-radius: 999px; cursor: pointer;
+      border: 1px solid rgba(255,255,255,.35); background: rgba(0,0,0,.45); color: #fff;
+    }
+    .nav-dots {
+      position: fixed; right: 14px; top: 50%; transform: translateY(-50%);
+      z-index: 100; display: flex; flex-direction: column; gap: 8px;
+    }
+    .nav-dots a {
+      width: 8px; height: 8px; border-radius: 50%;
+      border: 2px solid rgba(255,255,255,.4); background: transparent;
+    }
+    .nav-dots a.active, .nav-dots a:hover { background: #fff; border-color: #fff; }
+    .nav-arrow {
+      position: fixed; top: 50%; transform: translateY(-50%); z-index: 100;
+      width: 44px; height: 44px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.28); background: rgba(23,19,19,.7);
+      color: #fff; cursor: pointer; font-size: 1.4rem;
+    }
+    .nav-arrow:disabled { opacity: .25; cursor: default; }
+    .nav-arrow--prev { left: 12px; }
+    .nav-arrow--next { right: 36px; }
+    .slide-counter {
+      position: fixed; bottom: 18px; right: 22px; z-index: 160;
+      font: 500 13px "IBM Plex Mono", monospace; color: rgba(255,255,255,.55);
+    }
+    #viewport {
+      position: fixed; inset: 0; overflow: hidden;
+      background: radial-gradient(circle at 50% 10%, rgba(229,9,20,.18), transparent 38%), #171313;
+    }
+    #deck {
+      --deck-scale: 1;
+      position: absolute; left: 50%; top: 50%;
+      width: 1600px; height: 900px; overflow: hidden;
+      transform: translate(-50%,-50%) scale(var(--deck-scale));
+      transform-origin: center;
+      background: #f5f4f2;
+      box-shadow: 0 40px 120px rgba(0,0,0,.45);
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      color: var(--ink);
+    }
+    .slide {
+      position: absolute; inset: 0; width: 1600px; height: 900px;
+      padding: 76px 96px 108px;
+      opacity: 0; pointer-events: none; transform: translateX(24px);
+      transition: opacity .28s ease, transform .28s ease;
+      background: radial-gradient(circle at 92% 8%, rgba(229,9,20,.055), transparent 24%), #f5f4f2;
+      overflow: hidden;
+    }
+    .slide.active { opacity: 1; pointer-events: auto; transform: none; }
+    .slide.red { background: var(--hero); color: #fff; }
+    .slide.dark {
+      color: #fff;
+      background: radial-gradient(circle at 78% 15%, rgba(229,9,20,.5), transparent 32%), linear-gradient(145deg,#280001 0%,#130001 100%);
+    }
+    .slide.white { background: #fff; }
+    .topline {
+      position: absolute; top: 0; left: 0; width: 100%; height: 5px;
+      background: linear-gradient(90deg, var(--v4-red), var(--v4-orange), transparent 76%);
+    }
+    .slide h1, .slide h2, .slide h3, .slide p { margin-top: 0; }
+    .slide h1 { margin-bottom: 22px; font-size: 76px; line-height: .98; letter-spacing: -.055em; font-weight: 600; }
+    .slide h1 em { font-style: italic; font-weight: 400; }
+    .slide h2 { margin-bottom: 16px; font-size: 48px; line-height: 1.04; letter-spacing: -.045em; font-weight: 600; max-width: 1280px; }
+    .slide h3 { margin-bottom: 8px; font-size: 22px; line-height: 1.15; letter-spacing: -.02em; font-weight: 600; }
+    .lede { max-width: 1040px; font-size: 24px; line-height: 1.4; font-weight: 300; color: var(--ink-soft); }
+    .red .lede, .dark .lede { color: rgba(255,255,255,.72); }
+    .accent { color: var(--v4-red); }
+    .red .accent, .dark .accent { color: var(--v4-cream); }
+    .eyebrow {
+      display: inline-flex; align-items: center; min-height: 34px; padding: 7px 15px;
+      border-radius: 999px; border: 1px solid rgba(229,9,20,.18);
+      background: rgba(229,9,20,.07); color: var(--v4-red);
+      font-size: 12px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase;
+    }
+    .red .eyebrow, .dark .eyebrow {
+      color: rgba(255,255,255,.92); background: rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.35);
+    }
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+    .chip {
+      padding: 8px 14px; border-radius: 999px; font-size: 13px; font-weight: 600;
+      border: 1px solid rgba(255,255,255,.28); background: rgba(255,255,255,.08);
+    }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 22px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 22px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-top: 22px; }
+    .card {
+      background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 24px;
+    }
+    .red .card, .dark .card { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.2); }
+    .card-num { font-family: "IBM Plex Mono", monospace; font-size: 13px; font-weight: 700; color: var(--v4-red); margin-bottom: 8px; }
+    .red .card-num, .dark .card-num { color: var(--v4-cream); }
+    .card p, .card li { font-size: 16px; line-height: 1.4; color: var(--ink-soft); }
+    .red .card p, .red .card li, .dark .card p, .dark .card li { color: rgba(255,255,255,.78); }
+    .card ul { list-style: none; margin: 8px 0 0; }
+    .card ul li { padding-left: 14px; position: relative; margin-bottom: 6px; }
+    .card ul li::before { content: "·"; position: absolute; left: 0; font-weight: 700; color: var(--v4-red); }
+    .kpi {
+      padding: 20px 22px; border-radius: var(--radius); border: 1px solid var(--line); background: #fff;
+    }
+    .kpi .v { font-size: 40px; font-weight: 700; letter-spacing: -.04em; line-height: 1; color: var(--v4-red); }
+    .kpi .l { margin-top: 8px; font-size: 14px; color: var(--ink-soft); }
+    .red .kpi, .dark .kpi { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.2); }
+    .red .kpi .v, .dark .kpi .v { color: var(--v4-cream); }
+    .red .kpi .l, .dark .kpi .l { color: rgba(255,255,255,.7); }
+    .flow-row { display: flex; gap: 12px; margin-top: 24px; }
+    .flow-step {
+      flex: 1; text-align: left; padding: 18px 16px; border-radius: 18px;
+      background: #fff; border: 1px solid var(--line);
+    }
+    .flow-step .icon { font-family: "IBM Plex Mono", monospace; font-size: 13px; font-weight: 700; color: var(--v4-red); margin-bottom: 8px; }
+    .flow-step strong { display: block; font-size: 18px; margin-bottom: 6px; }
+    .flow-step span { font-size: 14px; color: var(--ink-soft); line-height: 1.35; }
+    .quote {
+      margin: 24px 0 0; padding-left: 18px; border-left: 4px solid var(--v4-red);
+      font-size: 22px; font-weight: 600; line-height: 1.3;
+    }
+    .quote span { display: block; margin-top: 8px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); }
+    .red .quote, .dark .quote { border-color: var(--v4-cream); }
+    .path-note, .cta-box, .bonus-box { margin-top: 18px; padding: 16px 18px; border-radius: 16px; font-size: 16px; }
+    .path-note { border: 1px dashed var(--line); background: rgba(229,9,20,.05); font-weight: 600; }
+    .cta-box { border: 1px solid var(--line); background: #fff; }
+    .bonus-box { border: 1px solid rgba(34,197,94,.28); background: rgba(34,197,94,.08); }
+    .bonus-box strong { display: block; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: #15803d; margin-bottom: 6px; }
+    .plan { border-radius: 22px; padding: 26px; border: 1px solid var(--line); background: #fff; }
+    .plan-label { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--v4-red); margin-bottom: 8px; }
+    .plan-price { font-size: 44px; font-weight: 700; letter-spacing: -.04em; line-height: 1; }
+    .plan-sub, .plan-discount { color: var(--ink-soft); margin-top: 6px; }
+    .plan ul { list-style: none; margin-top: 14px; }
+    .plan ul li { font-size: 16px; color: var(--ink-soft); padding: 4px 0 4px 14px; position: relative; }
+    .plan ul li::before { content: "·"; position: absolute; left: 0; color: var(--v4-red); font-weight: 700; }
+    .price-line { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 15px; color: var(--ink-soft); }
+    .price-line strong { color: var(--ink); }
+    .ok { color: #15803d; }
+    .strike { text-decoration: line-through; opacity: .55; }
+    .invest-hero { display: grid; grid-template-columns: 1.15fr .85fr; gap: 18px; margin-top: 22px; }
+    .slide-foot {
+      position: absolute; left: 96px; right: 96px; bottom: 36px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 13px; color: var(--ink-soft);
+    }
+    .red .slide-foot, .dark .slide-foot { color: rgba(255,255,255,.55); }
+    .v4-word { font-weight: 700; letter-spacing: .12em; color: var(--v4-red); }
+    .red .v4-word, .dark .v4-word { color: #fff; }
+  </style>
+</head>
+<body>
+<script type="application/json" id="proposta-json">
+{
+  "versao": 1,
+  "cliente": {
+    "nome": "G6 Internet",
+    "segmento": "Provedor de internet · ~150–200 vendas/mês · ticket ~R$ 100 · 25 cidades",
+    "footer": "G6 Internet × V4 Company"
+  },
+  "capa": {
+    "linha1": "Vocês já têm demanda.",
+    "linha2": "Falta máquina de receita.",
+    "lead": "Proposta de Combo Performance + CRM: rastrear, reter e converter com dono técnico — diagnóstico, case e um preço só.",
+    "badge": "Combo Performance · CRM 12 meses"
+  },
+  "produto": {
+    "tipo": "combo",
+    "nome": "Combo Performance + CRM",
+    "promessa": "Assumir a performance digital e fechar o vazamento do CRM — o essencial para o core funcionar 100%."
+  },
+  "contexto": {
+    "validado": "Já existe campanha e demanda no digital\nDecisor e stakeholders alinhados na GC\nCSAT em 100% — expectativa clara\nO gap não é gerar lead: é tracking, retenção e sistema",
+    "desafio": "Rastreamento quebrado — resultado subjetivo\nRetenção sem jornada / oferta na base\nTime de marketing multifunção, sem braço\nCRM/RD sem visão de jornada, tags e dono",
+    "quote": "Nada solto no pitch: dor específica, case, projeção e um preço.",
+    "quoteFonte": "G6 × V4 · Playbook Farmer"
+  },
+  "dores": "Rastreamento | UTM e conversão não fecham. Sem leitura clara, a verba não escala.\nRetenção | Sem jornada na base, o cliente cai no concorrente de preço.\nBraço do time | Marketing opera tudo e a agência externa não entrega o básico.\nCRM cego | Funil “não sei / não sei”. Sem dono técnico, a operação continua vazando.",
+  "tese": {
+    "ativo": true,
+    "antitese": "O problema da G6 não é o produto",
+    "leitura": "Entra cliente todo mês. E a base quase não cresce. A operação vende — não segura, e não mede por que perde.",
+    "kpis": "R$ 6,1 mi | faturamento / mês\n25 | cidades no Sul de Minas\n~1.000 | ativações / mês\n3.755 | cancelamentos jan–jun"
+  },
+  "case": {
+    "ativo": true,
+    "nome": "Fibranet",
+    "correlato": "Mesmas travas de provedor: performance, retenção e previsibilidade de receita.",
+    "resultado": "Referência interna para break-even e taxas. Usar como “pode vir antes” — não como promessa de copiar 100% o case maduro."
+  },
+  "solucao": {
+    "titulo": "Combo Performance assume a responsabilidade da mídia",
+    "lead": "O core resolve a ponta de aquisição com time padrão. O CRM entra como o que fecha o problema — não como opcional.",
+    "pilares": "Performance | Gestão de tráfego, criativo e leitura de conversão no canal que já vende.\nRetenção | Jornada e oferta na base para não competir só no preço.\nFora do escopo | Sem Social e sem SEO neste pacote — o produto certo, não o catálogo.",
+    "fora": "Sem Social · sem SEO · sem menu de add-ons soltos"
+  },
+  "essencial": {
+    "ativo": true,
+    "nome": "Profissional de CRM 12 meses",
+    "porque": "Mídia sozinha melhora a compra, mas não resolve 100%. Sem dono técnico no CRM, a operação continua vazando — e contratar isso daqui 3 meses custa o triplo.",
+    "inclui": "Pipes, tags e visão de jornada no RD/CRM\nCadência e higiene de base\nDono técnico na operação, não “se quiser a gente também faz”"
+  },
+  "jornada": "Diagnóstico | Tracking, funil, base e o que já roda hoje\nSetup | Campanhas, medição e CRM com dono\nOperação | Account + GT no ritmo semanal\nEssencial | CRM rodando junto — não depois\nRitual | Comitê de performance e próximos testes",
+  "step": {
+    "ativo": true,
+    "momento": "A G6 já vende. O gap está entre Ter (CRM/tracking) e Executar (retenção com dado).",
+    "saber": "Diagnóstico de 4 semanas: mercado, CRM, mídia e churn",
+    "ter": "RD, Voalle e pixels existem — mas não conversam",
+    "executar": "Mídia e comercial já rodam; falta dono e SLA",
+    "potencializar": "Escala de verba só depois de venda instalada rastreável"
+  },
+  "papeis": {
+    "ativo": true,
+    "v4": "Operar mídia, CRM e ritmo. Ligar mídia → CRM → ERP.",
+    "cliente": "Dados, Voalle, dono interno de CRM e decisão de verba.",
+    "fora": "Licenças, implementação técnica do ERP e serviços de terceiros ficam com a G6."
+  },
+  "pedidos": {
+    "ativo": true,
+    "itens": "Carteira ativa e série de cancelamento | Laura · Joaquim\nMatriz de cobertura por bairro | Joaquim\nAcesso e integração do Voalle | Esdras · Joaquim\nUm dono para o CRM | decisão da diretoria"
+  },
+  "projecao": {
+    "ativo": true,
+    "conservadora": "Break-even conservador na casa do mês 6–7 (fee + mídia), sem copiar taxa madura do case.",
+    "breakeven": "mês 6–7 · se taxas Fibranet 100%, pode antecipar (~mês 3)",
+    "disclaimer": "Não prometer o case maduro. Não projetar abaixo do que a G6 já vende sem olhar LTV."
+  },
+  "investimento": {
+    "ancora": "R$ 17.237,73 / mês",
+    "condicao": "R$ 9.480,75 / mês",
+    "forma": "mesmo pagamento da EE · um preço só",
+    "validade": "fechar nesta reunião",
+    "inclui": "Combo Performance (aquisição + leitura)\nProfissional CRM 12 meses no pacote\nDesconto e fee já embutidos — sem menu de condições",
+    "bonus": "Condição única com CRM incluso. Não abrir à vista vs cartão vs parcelas na mesma sala."
+  },
+  "proximos": "Alinhamento | Validar escopo e condição nesta call\nFormalização | Contrato no mesmo rito da EE\nOnboarding | Acessos, tracking e mapa do funil\nAtivação | Performance + CRM no ar, com dono",
+  "fechamento": {
+    "cta": "A G6 leva performance com dono e o CRM que impede o vazamento. Um produto. Um preço. Uma decisão.",
+    "quote": "Fechar o vazamento agora. Escalar verba com prova depois."
+  },
+  "gate": {
+    "decisor": "João na sala",
+    "csat": "100%",
+    "stakeholders": "Laura (não quer agência interna) · Esdras (mkt comprado, sem braço)",
+    "obs": "Uso interno — não entra no deck do cliente."
+  }
+}
+</script>
+
+<div id="editor">
+  <header class="editor-top">
+    <div class="logo">V4 <span>COMPANY</span> · modelo de proposta</div>
+    <div class="top-actions">
+      <button class="btn ok" type="button" id="btnVer">Ver proposta</button>
+      <button class="btn" type="button" id="btnBaixar">Baixar HTML do cliente</button>
+      <button class="btn ghost" type="button" id="btnJsonOut">Exportar JSON</button>
+      <button class="btn ghost" type="button" id="btnJsonIn">Importar JSON</button>
+      <button class="btn ghost" type="button" id="btnExemplo">Exemplo G6</button>
+      <a class="btn ghost" href="modelo-proposta-esqueleto.html">Ver só o modelo</a>
+      <button class="btn ghost" type="button" id="btnNova">Nova proposta</button>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <h1 class="ed">Vamos criar a proposta juntas</h1>
+    <p class="lead">
+      Mesma leitura dos modelos que funcionam na sala: Hanaro, Preço Popular e handover G6.
+      Tese → STEP → travas → papéis → um preço. Troca só os dados.
+      <a href="modelo-proposta-esqueleto.html">Ver só o modelo (sem cliente)</a> ·
+      Hub: <a href="farmer-sara.html">farmer-sara.html</a> ·
+      <a href="plano-acao-modelo-adaptavel.html">plano adaptável</a>.
+    </p>
+
+    <div class="steps">
+      <div class="step"><div class="n">01</div><div class="t">Passo a passo</div><div class="d">A gente preenche juntas, na ordem</div></div>
+      <div class="step"><div class="n">02</div><div class="t">Ver proposta</div><div class="d">Deck V4 monta sozinho</div></div>
+      <div class="step"><div class="n">03</div><div class="t">Baixar HTML</div><div class="d">Arquivo pronto para o cliente</div></div>
+      <div class="step"><div class="n">04</div><div class="t">Próxima conta</div><div class="d">Nova proposta · só troca os dados</div></div>
+    </div>
+
+    <div class="callout warn">
+      <strong>Como vamos usar:</strong> começa em branco. Avança com “Próximo”. Se quiser ver o formato preenchido, carrega o exemplo G6.
+      <button class="btn ghost" type="button" id="btnToggleView" style="margin-left:8px">Ver todos os blocos</button>
+    </div>
+
+    <div class="wizard-rail" id="wizardRail" aria-label="Passos"></div>
+    <div class="coach" id="coachBox"></div>
+
+    <div class="section form-block" data-group="0">
+      <h2>Produto</h2>
+      <h3>Qual oferta esta proposta carrega</h3>
+      <div class="row">
+        <div>
+          <label>Tipo</label>
+          <select id="tipo">
+            <option value="ec">Estruturação Comercial</option>
+            <option value="growth">Assessoria de Growth</option>
+            <option value="combo">Combo (core + essencial)</option>
+            <option value="eqv">Empresa Que Vende</option>
+            <option value="outro">Outro</option>
+          </select>
+        </div>
+        <div>
+          <label>Nome do produto</label>
+          <input id="produtoNome" placeholder="Combo Performance + CRM" />
+        </div>
+      </div>
+      <label>Promessa em 1 frase</label>
+      <input id="promessa" placeholder="O que esta oferta resolve, em uma linha" />
+      <div class="preset-row">
+        <button class="btn ghost" type="button" id="btnPreset">Aplicar texto padrão deste produto</button>
+        <span class="hint" style="margin:8px 0 0">Preenche jornada, pilares e includes genéricos da V4. Não apaga nome do cliente nem preço.</span>
+      </div>
+    </div>
+
+    <div class="section form-block" data-group="0">
+      <h2>Identidade</h2>
+      <h3>Capa</h3>
+      <div class="row">
+        <div><label>Cliente</label><input id="clienteNome" placeholder="Nome da conta" /></div>
+        <div><label>Segmento / operação</label><input id="segmento" placeholder="O que faz · porte · canal" /></div>
+      </div>
+      <div class="row">
+        <div><label>Headline linha 1</label><input id="linha1" placeholder="Vocês já têm demanda." /></div>
+        <div><label>Headline linha 2 (destaque)</label><input id="linha2" placeholder="Falta máquina de receita." /></div>
+      </div>
+      <label>Lead da capa</label>
+      <textarea id="capaLead" placeholder="Uma frase que amarra produto + momento do cliente"></textarea>
+      <div class="row">
+        <div><label>Badge</label><input id="badge" placeholder="Estruturação Comercial · Implementação" /></div>
+        <div><label>Rodapé do deck</label><input id="footerTxt" placeholder="Cliente × V4 Company" /></div>
+      </div>
+    </div>
+
+    <div class="section form-block" data-group="1">
+      <h2>Uso interno</h2>
+      <h3>Gate da sala — não aparece no deck do cliente</h3>
+      <div class="row3">
+        <div><label>Decisor</label><input id="gateDecisor" placeholder="Nome · está na call?" /></div>
+        <div><label>CSAT / NPS</label><input id="gateCsat" placeholder="100% · percepção" /></div>
+        <div><label>Stakeholders</label><input id="gateStake" placeholder="Quem influencia / quem está comprado" /></div>
+      </div>
+      <label>Nota interna</label>
+      <input id="gateObs" placeholder="O que precisa estar amarrado com ops antes do pitch" />
+    </div>
+
+    <div class="section form-block" data-group="2">
+      <h2>Contexto</h2>
+      <h3>O que já ficou claro</h3>
+      <p class="hint">Uma ideia por linha.</p>
+      <div class="row">
+        <div>
+          <label>O que já validaram</label>
+          <textarea id="validado" class="tall" placeholder="Já tem demanda&#10;GC alinhada&#10;Abertura para organizar o comercial"></textarea>
+        </div>
+        <div>
+          <label>O desafio de escala</label>
+          <textarea id="desafio" class="tall" placeholder="Funil no feeling&#10;Follow-up no WhatsApp&#10;Sem dono de processo"></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div><label>Frase-mestra</label><input id="quote" placeholder="A frase que amarra o slide" /></div>
+        <div><label>Fonte da frase</label><input id="quoteFonte" placeholder="Cliente × V4 · 2026" /></div>
+      </div>
+    </div>
+
+    <div class="section form-block" data-group="2">
+      <h2>Diagnóstico</h2>
+      <h3>Dores específicas — não genéricas</h3>
+      <p class="hint">Uma por linha, no formato <strong>Título | texto</strong>.</p>
+      <textarea id="dores" class="tall" placeholder="Lead sem dono | Entra no WhatsApp e some&#10;Funil no feeling | Sem etapa, SLA nem motivo de perda"></textarea>
+    </div>
+
+    <div class="section form-block" data-group="2">
+      <h2>Tese</h2>
+      <h3>O problema não é X — estilo G6 / Preço Popular</h3>
+      <label class="check"><input type="checkbox" id="teseAtivo" /> Incluir slide de tese</label>
+      <label>Antítese (o que NÃO é o problema)</label>
+      <input id="teseAntitese" placeholder="O problema não é o produto" />
+      <label>Leitura central</label>
+      <textarea id="teseLeitura" placeholder="Entra cliente todo mês. E a base quase não cresce."></textarea>
+      <p class="hint">KPIs da operação, uma por linha: <strong>número | rótulo</strong>.</p>
+      <textarea id="teseKpis" placeholder="R$ 6,1 mi | faturamento / mês&#10;25 | cidades"></textarea>
+    </div>
+
+    <div class="section form-block" data-group="3">
+      <h2>Case</h2>
+      <h3>Prova interna correlata</h3>
+      <label class="check"><input type="checkbox" id="caseAtivo" /> Incluir slide de case</label>
+      <div class="row">
+        <div><label>Nome do case</label><input id="caseNome" placeholder="Fibranet" /></div>
+        <div><label>Por que correlato</label><input id="caseCorrelato" placeholder="Mesmas travas · mesmo setor" /></div>
+      </div>
+      <label>O que pode compartilhar</label>
+      <textarea id="caseResultado" placeholder="Resultado / BE / o que usar como referência — sem prometer 100% do case maduro"></textarea>
+    </div>
+
+    <div class="section form-block" data-group="4">
+      <h2>Solução</h2>
+      <h3>Produto core</h3>
+      <label>Título do slide</label>
+      <input id="solucaoTitulo" placeholder="O que a V4 instala nesta operação" />
+      <label>Lead</label>
+      <textarea id="solucaoLead" placeholder="Como o core assume a responsabilidade da dor #1"></textarea>
+      <p class="hint">Pilares: uma por linha, <strong>Título | texto</strong>.</p>
+      <textarea id="pilares" class="tall" placeholder="Clareza de destino | ...&#10;Prioridade real | ...&#10;Sequência inteligente | ..."></textarea>
+      <label>O que NÃO oferecer</label>
+      <input id="fora" placeholder="Sem Social · sem SEO · sem add-on solto" />
+    </div>
+
+    <div class="section form-block" data-group="4">
+      <h2>Essencial</h2>
+      <h3>Upsell que fecha 100% — não “se quiser”</h3>
+      <label class="check"><input type="checkbox" id="essencialAtivo" /> Incluir slide do essencial</label>
+      <label>Nome</label>
+      <input id="essencialNome" placeholder="Profissional de CRM 12 meses" />
+      <label>Porquê técnico</label>
+      <textarea id="essencialPorque" placeholder="Sem isso o core não resolve 100%. Contratar depois custa mais."></textarea>
+      <label>O que inclui (uma por linha)</label>
+      <textarea id="essencialInclui" placeholder="Pipes e jornada&#10;Dono técnico&#10;Cadência"></textarea>
+    </div>
+
+    <div class="section form-block" data-group="4">
+      <h2>Jornada</h2>
+      <h3>Como a oferta roda</h3>
+      <p class="hint">Uma etapa por linha: <strong>Título | descrição</strong>.</p>
+      <textarea id="jornada" class="tall" placeholder="Diagnóstico | ...&#10;Arquitetura | ...&#10;Ativação | ..."></textarea>
+    </div>
+
+    <div class="section form-block" data-group="4">
+      <h2>STEP</h2>
+      <h3>Saber · Ter · Executar · Potencializar — Hanaro / Preço Popular</h3>
+      <label class="check"><input type="checkbox" id="stepAtivo" /> Incluir slide STEP</label>
+      <label>Momento atual da conta</label>
+      <input id="stepMomento" placeholder="Entre Saber e Ter. Contratar só mídia agora acelera uma jornada fragmentada." />
+      <div class="row">
+        <div><label>Saber</label><input id="stepSaber" placeholder="Diagnóstico, mercado, plano" /></div>
+        <div><label>Ter</label><input id="stepTer" placeholder="Site, CRM, tracking" /></div>
+      </div>
+      <div class="row">
+        <div><label>Executar</label><input id="stepExecutar" placeholder="Mídia, operação, cadência" /></div>
+        <div><label>Potencializar</label><input id="stepPotencializar" placeholder="Escala só com prova" /></div>
+      </div>
+    </div>
+
+    <div class="section form-block" data-group="4">
+      <h2>Papéis</h2>
+      <h3>A V4 conduz. O cliente executa e decide.</h3>
+      <label class="check"><input type="checkbox" id="papeisAtivo" /> Incluir slide de papéis</label>
+      <label>V4</label>
+      <input id="papelV4" placeholder="Orientar, operar, revisar evidências" />
+      <label>Cliente</label>
+      <input id="papelCliente" placeholder="Dados, decisões, donos internos" />
+      <label>Fornecedores / limite</label>
+      <input id="papelFora" placeholder="Licenças, ERP e implementação técnica ficam com o cliente" />
+    </div>
+
+    <div class="section form-block" data-group="5">
+      <h2>Projeção</h2>
+      <h3>Conservadora + break-even</h3>
+      <label class="check"><input type="checkbox" id="projecaoAtivo" /> Incluir slide de projeção</label>
+      <label>Leitura conservadora</label>
+      <textarea id="projConservadora" placeholder="BE em qual mês · premissa · validado com ops"></textarea>
+      <div class="row">
+        <div><label>Break-even / âncora numérica</label><input id="breakeven" placeholder="mês 6–7" /></div>
+        <div><label>Disclaimer</label><input id="disclaimer" placeholder="Não copiar taxa madura do case" /></div>
+      </div>
+    </div>
+
+    <div class="section form-block" data-group="6">
+      <h2>Investimento</h2>
+      <h3>Um preço · desconto já embutido</h3>
+      <div class="row3">
+        <div><label>Âncora (riscado)</label><input id="ancora" placeholder="R$ 20.000" /></div>
+        <div><label>Condição (o preço da sala)</label><input id="condicao" placeholder="12× de R$ 845,13" /></div>
+        <div><label>Forma</label><input id="forma" placeholder="mesmo pagamento da EE" /></div>
+      </div>
+      <label>Validade</label>
+      <input id="validade" placeholder="fechar nesta reunião / até DD/MM" />
+      <label>O que inclui (uma por linha)</label>
+      <textarea id="investInclui" placeholder="Diagnóstico e funil&#10;CRM operativo&#10;Treinamento"></textarea>
+      <label>Bônus / condição</label>
+      <textarea id="bonus" placeholder="CRM bonificado · validade da condição"></textarea>
+    </div>
+
+    <div class="section form-block" data-group="6">
+      <h2>Pedidos</h2>
+      <h3>O que precisamos de vocês nesta semana — handover G6</h3>
+      <label class="check"><input type="checkbox" id="pedidosAtivo" /> Incluir slide de pedidos</label>
+      <p class="hint">Uma por linha: <strong>Entrega | dono / porquê</strong>.</p>
+      <textarea id="pedidos" class="tall" placeholder="Carteira ativa | Laura · denominador do churn&#10;Acesso ao ERP | Joaquim · fecha o rastreio"></textarea>
+    </div>
+
+    <div class="section form-block" data-group="6">
+      <h2>Fechamento</h2>
+      <h3>Próximos passos + CTA</h3>
+      <p class="hint">Uma etapa por linha: <strong>Título | descrição</strong>.</p>
+      <textarea id="proximos" class="tall" placeholder="Alinhamento | Validar escopo nesta call&#10;Formalização | Contrato&#10;Onboarding | Acessos&#10;Ativação | Time no padrão"></textarea>
+      <label>CTA</label>
+      <textarea id="cta" placeholder="O que o cliente leva se fechar agora"></textarea>
+      <label>Frase final</label>
+      <input id="quoteFinal" placeholder="Arrumar a casa hoje. Acelerar com previsibilidade amanhã." />
+    </div>
+
+    <div class="wiz-nav">
+      <button class="btn ghost" type="button" id="btnPrevStep">← Anterior</button>
+      <span id="wizCount" class="hint" style="margin:0">1 / 7</span>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn ghost" type="button" id="btnVerMini">Ver proposta</button>
+        <button class="btn ok" type="button" id="btnNextStep">Próximo →</button>
+      </div>
+    </div>
+
+    <div class="callout ok">
+      <strong>Quando o último bloco estiver preenchido:</strong> Ver proposta → navega com setas → Baixar HTML do cliente.
+      O JSON fica salvo neste navegador. Exporta se quiser guardar por conta.
+    </div>
+
+    <footer class="ed">
+      V4 · Modelo de proposta · Farmer Sara ·
+      <a href="farmer-sara.html">Hub</a> ·
+      <a href="playbook-farmer-am.html">Playbook</a> ·
+      <a href="plano-acao-modelo-adaptavel.html">Plano adaptável</a>
+    </footer>
+  </div>
+</div>
+
+<div id="deck-root" aria-live="polite"></div>
+<input type="file" id="jsonFile" accept="application/json" hidden />
+
+<script>
+(function () {
+  const $ = (id) => document.getElementById(id);
+  const LOGO = '';
+  const STORE = "v4-modelo-proposta-v3";
+  const PRESETS = {
+    ec: {
+      produtoNome: "Estruturação Comercial",
+      promessa: "Instalar a máquina comercial: funil, CRM, playbooks e time no padrão — antes de acelerar volume.",
+      badge: "Estruturação Comercial · Implementação · Treinamento",
+      linha1: "Arrumar a casa",
+      linha2: "para receber demanda",
+      solucaoTitulo: "Tudo que o comercial leva para operar com padrão",
+      solucaoLead: "Não é consultoria de slides. É implementação + treinamento para o time rodar com método.",
+      pilares: "Fundação | Funil, ICP, metas, KPIs e SLAs no papel de cada um.\nAtivação | Playbooks, scripts, cadência pós-proposta e rituais.\nCRM operativo | Pipes, dono, prazo e próximo passo — não agenda.",
+      fora: "Sem mídia de performance neste pacote — a casa vem antes do volume",
+      jornada: "Diagnóstico | Equipes, metas, gargalos e ICP\nArquitetura | Funil, KPIs, SLAs e papéis\nCRM operativo | Pipes, automações e visão gerencial\nPlaybooks | Scripts, cadências e propostas\nTreinamento | Imersão na nova rotina diária",
+      investInclui: "Diagnóstico, ICP, funil, KPIs e SLAs\nPlaybooks, scripts e rituais de gestão\nCRM operativo com automações básicas\nTreinamento e implementação com o time",
+      proximos: "Alinhamento | Validar escopo e condição nesta call\nFormalização | Contrato e kick-off administrativo\nOnboarding | Acessos, diagnóstico e mapa do funil\nAtivação | CRM, playbooks e treinamento do time",
+      quoteFinal: "Arrumar a casa hoje. Acelerar com previsibilidade amanhã."
+    },
+    growth: {
+      produtoNome: "Assessoria de Growth",
+      promessa: "Operar o canal de aquisição com Account + GT, leitura de conversão e ritmo semanal.",
+      badge: "Assessoria de Growth · Operação contínua",
+      linha1: "Do esforço solto",
+      linha2: "à operação de canal",
+      solucaoTitulo: "O time que opera o canal toda semana",
+      solucaoLead: "Account + GT + copy + design. Fundação de medição antes de escalar verba.",
+      pilares: "Captura | Campanhas no canal certo para a oferta de vocês.\nLeitura | Tracking e conversão para decidir com dado, não feeling.\nRitmo | Comitê semanal: o que cortar, o que repetir, o que testar.",
+      fora: "Sem Social / criativos de marca fora do canal combinado — a menos que entre no essencial",
+      jornada: "Diagnóstico de canal | Oferta, ICP, tracking e baseline\nSetup | Campanhas, pixels, criativos e captura\nOperação | Account + GT no ritmo semanal\nOtimização | Corte de desperdício e escala com prova\nRitual | Comitê de performance e próximos testes",
+      investInclui: "Gestão de tráfego no canal combinado\nAccount e ritual semanal\nCopy e criativo da operação\nLeitura de conversão e próximos testes",
+      proximos: "Alinhamento | Validar canal, verba e condição\nFormalização | Contrato no rito da EE\nOnboarding | Acessos, pixels e oferta\nOperação | Primeira onda no ar",
+      quoteFinal: "Prova no canal. Escala com critério."
+    },
+    combo: {
+      produtoNome: "Core + essencial",
+      promessa: "O produto que resolve a dor #1 e o essencial que impede o vazamento — vendido junto, não como opcional.",
+      badge: "Core + essencial · um preço",
+      linha1: "Resolver a dor #1",
+      linha2: "e fechar o vazamento",
+      solucaoTitulo: "Core assume a responsabilidade. Essencial fecha 100%.",
+      solucaoLead: "Não é catálogo. É o par que a operação precisa agora — com um preço só.",
+      pilares: "Core | O STEP que ataca a dor principal.\nEssencial | O que sem isso o core não resolve 100%.\nFora | Tudo que solta a narrativa fica de fora desta proposta.",
+      fora: "Sem add-on solto · sem menu de condições",
+      jornada: "Diagnóstico | O que já roda vs o que vaza\nCore | Instalar o produto que assume a dor #1\nEssencial | Sistema / CRM / braço que fecha o problema\nRitual | Cadência conjunta e próximo teste",
+      investInclui: "Produto core no ar\nEssencial incluso na condição de fechar agora\nUm preço, desconto já embutido",
+      proximos: "Alinhamento | Validar o par core + essencial\nFormalização | Um contrato, um preço\nOnboarding | Acessos das duas frentes\nAtivação | As duas pontas juntas, não em 90 dias",
+      quoteFinal: "Fechar o vazamento agora. Escalar com prova depois."
+    },
+    eqv: {
+      produtoNome: "Empresa Que Vende",
+      promessa: "Transformar venda artesanal em processo repetível: playbook, CRM e time operando o mesmo padrão.",
+      badge: "Empresa Que Vende · Comercial",
+      linha1: "Venda com método",
+      linha2: "não no feeling",
+      solucaoTitulo: "O comercial deixa de depender de herói",
+      solucaoLead: "Playbook, pipeline e rituais para a empresa vender com previsibilidade.",
+      pilares: "Playbook | Abordagem, qualificação, objeção e fechamento no papel.\nCRM | Cada oportunidade com dono, prazo e próximo passo.\nTime | Treinamento e ritual para o padrão não morrer na primeira semana.",
+      fora: "Sem mídia neste pacote — primeiro o comercial converte o que já entra",
+      jornada: "Diagnóstico comercial | Funil, papéis e vazamentos\nPlaybook de venda | Scripts, objeções e cadência\nCRM | Pipeline com dono e próximo passo\nTreinamento | Time operando o padrão\nAcompanhamento | Ajustes nas primeiras semanas",
+      investInclui: "Diagnóstico e desenho do funil\nPlaybooks e scripts\nCRM operativo\nTreinamento do time",
+      proximos: "Alinhamento | Validar escopo nesta call\nFormalização | Contrato\nOnboarding | Mapa do funil e acessos\nAtivação | Playbook + CRM + treino",
+      quoteFinal: "Processo repetível. Receita previsível."
+    },
+    outro: {
+      produtoNome: "",
+      promessa: "",
+      badge: "Proposta comercial",
+      linha1: "",
+      linha2: "",
+      solucaoTitulo: "",
+      solucaoLead: "",
+      pilares: "",
+      fora: "",
+      jornada: "",
+      investInclui: "",
+      proximos: "Alinhamento | Validar escopo nesta call\nFormalização | Contrato\nOnboarding | Acessos\nAtivação | Primeira entrega",
+      quoteFinal: ""
+    }
+  };
+
+  const FIELDS = [
+    "tipo","produtoNome","promessa","clienteNome","segmento","linha1","linha2","capaLead","badge","footerTxt",
+    "gateDecisor","gateCsat","gateStake","gateObs","validado","desafio","quote","quoteFonte","dores",
+    "caseNome","caseCorrelato","caseResultado","solucaoTitulo","solucaoLead","pilares","fora",
+    "essencialNome","essencialPorque","essencialInclui","jornada","projConservadora","breakeven","disclaimer",
+    "ancora","condicao","forma","validade","investInclui","bonus","proximos","cta","quoteFinal",
+    "teseAntitese","teseLeitura","teseKpis","stepMomento","stepSaber","stepTer","stepExecutar","stepPotencializar",
+    "papelV4","papelCliente","papelFora","pedidos"
+  ];
+  const CHECKS = ["caseAtivo","essencialAtivo","projecaoAtivo","teseAtivo","stepAtivo","papeisAtivo","pedidosAtivo"];
+
+  function parsePageJson() {
+    try { return JSON.parse($("proposta-json").textContent); }
+    catch (e) { return null; }
+  }
+  function collect() {
+    const d = { versao: 1 };
+    const get = (id) => ($(id) && $(id).value) || "";
+    d.cliente = { nome: get("clienteNome"), segmento: get("segmento"), footer: get("footerTxt") };
+    d.capa = { linha1: get("linha1"), linha2: get("linha2"), lead: get("capaLead"), badge: get("badge") };
+    d.produto = { tipo: get("tipo"), nome: get("produtoNome"), promessa: get("promessa") };
+    d.contexto = { validado: get("validado"), desafio: get("desafio"), quote: get("quote"), quoteFonte: get("quoteFonte") };
+    d.dores = get("dores");
+    d.tese = { ativo: $("teseAtivo") && $("teseAtivo").checked, antitese: get("teseAntitese"), leitura: get("teseLeitura"), kpis: get("teseKpis") };
+    d.case = { ativo: $("caseAtivo").checked, nome: get("caseNome"), correlato: get("caseCorrelato"), resultado: get("caseResultado") };
+    d.solucao = { titulo: get("solucaoTitulo"), lead: get("solucaoLead"), pilares: get("pilares"), fora: get("fora") };
+    d.essencial = { ativo: $("essencialAtivo").checked, nome: get("essencialNome"), porque: get("essencialPorque"), inclui: get("essencialInclui") };
+    d.jornada = get("jornada");
+    d.step = { ativo: $("stepAtivo") && $("stepAtivo").checked, momento: get("stepMomento"), saber: get("stepSaber"), ter: get("stepTer"), executar: get("stepExecutar"), potencializar: get("stepPotencializar") };
+    d.papeis = { ativo: $("papeisAtivo") && $("papeisAtivo").checked, v4: get("papelV4"), cliente: get("papelCliente"), fora: get("papelFora") };
+    d.pedidos = { ativo: $("pedidosAtivo") && $("pedidosAtivo").checked, itens: get("pedidos") };
+    d.projecao = { ativo: $("projecaoAtivo").checked, conservadora: get("projConservadora"), breakeven: get("breakeven"), disclaimer: get("disclaimer") };
+    d.investimento = { ancora: get("ancora"), condicao: get("condicao"), forma: get("forma"), validade: get("validade"), inclui: get("investInclui"), bonus: get("bonus") };
+    d.proximos = get("proximos");
+    d.fechamento = { cta: get("cta"), quote: get("quoteFinal") };
+    d.gate = { decisor: get("gateDecisor"), csat: get("gateCsat"), stakeholders: get("gateStake"), obs: get("gateObs") };
+    return d;
+  }
+  function fill(d) {
+    if (!d) return;
+    const set = (id, v) => { if ($(id)) $(id).value = v == null ? "" : v; };
+    set("tipo", (d.produto && d.produto.tipo) || "ec");
+    set("produtoNome", d.produto && d.produto.nome);
+    set("promessa", d.produto && d.produto.promessa);
+    set("clienteNome", d.cliente && d.cliente.nome);
+    set("segmento", d.cliente && d.cliente.segmento);
+    set("linha1", d.capa && d.capa.linha1);
+    set("linha2", d.capa && d.capa.linha2);
+    set("capaLead", d.capa && d.capa.lead);
+    set("badge", d.capa && d.capa.badge);
+    set("footerTxt", d.cliente && d.cliente.footer);
+    set("gateDecisor", d.gate && d.gate.decisor);
+    set("gateCsat", d.gate && d.gate.csat);
+    set("gateStake", d.gate && d.gate.stakeholders);
+    set("gateObs", d.gate && d.gate.obs);
+    set("validado", d.contexto && d.contexto.validado);
+    set("desafio", d.contexto && d.contexto.desafio);
+    set("quote", d.contexto && d.contexto.quote);
+    set("quoteFonte", d.contexto && d.contexto.quoteFonte);
+    set("dores", d.dores);
+    if ($("teseAtivo")) $("teseAtivo").checked = !!(d.tese && d.tese.ativo);
+    set("teseAntitese", d.tese && d.tese.antitese);
+    set("teseLeitura", d.tese && d.tese.leitura);
+    set("teseKpis", d.tese && d.tese.kpis);
+    $("caseAtivo").checked = !!(d.case && d.case.ativo);
+    set("caseNome", d.case && d.case.nome);
+    set("caseCorrelato", d.case && d.case.correlato);
+    set("caseResultado", d.case && d.case.resultado);
+    set("solucaoTitulo", d.solucao && d.solucao.titulo);
+    set("solucaoLead", d.solucao && d.solucao.lead);
+    set("pilares", d.solucao && d.solucao.pilares);
+    set("fora", d.solucao && d.solucao.fora);
+    $("essencialAtivo").checked = !!(d.essencial && d.essencial.ativo);
+    set("essencialNome", d.essencial && d.essencial.nome);
+    set("essencialPorque", d.essencial && d.essencial.porque);
+    set("essencialInclui", d.essencial && d.essencial.inclui);
+    set("jornada", d.jornada);
+    if ($("stepAtivo")) $("stepAtivo").checked = !!(d.step && d.step.ativo);
+    set("stepMomento", d.step && d.step.momento);
+    set("stepSaber", d.step && d.step.saber);
+    set("stepTer", d.step && d.step.ter);
+    set("stepExecutar", d.step && d.step.executar);
+    set("stepPotencializar", d.step && d.step.potencializar);
+    if ($("papeisAtivo")) $("papeisAtivo").checked = !!(d.papeis && d.papeis.ativo);
+    set("papelV4", d.papeis && d.papeis.v4);
+    set("papelCliente", d.papeis && d.papeis.cliente);
+    set("papelFora", d.papeis && d.papeis.fora);
+    if ($("pedidosAtivo")) $("pedidosAtivo").checked = !!(d.pedidos && d.pedidos.ativo);
+    set("pedidos", d.pedidos && d.pedidos.itens);
+    $("projecaoAtivo").checked = !!(d.projecao && d.projecao.ativo);
+    set("projConservadora", d.projecao && d.projecao.conservadora);
+    set("breakeven", d.projecao && d.projecao.breakeven);
+    set("disclaimer", d.projecao && d.projecao.disclaimer);
+    set("ancora", d.investimento && d.investimento.ancora);
+    set("condicao", d.investimento && d.investimento.condicao);
+    set("forma", d.investimento && d.investimento.forma);
+    set("validade", d.investimento && d.investimento.validade);
+    set("investInclui", d.investimento && d.investimento.inclui);
+    set("bonus", d.investimento && d.investimento.bonus);
+    set("proximos", d.proximos);
+    set("cta", d.fechamento && d.fechamento.cta);
+    set("quoteFinal", d.fechamento && d.fechamento.quote);
+  }
+  function persist() {
+    try { localStorage.setItem(STORE, JSON.stringify(collect())); } catch (e) {}
+  }
+  function applyPreset() {
+    const tipo = $("tipo").value;
+    const p = PRESETS[tipo] || PRESETS.outro;
+    Object.keys(p).forEach((k) => { if ($(k)) $(k).value = p[k]; });
+    $("essencialAtivo").checked = tipo === "combo";
+    $("caseAtivo").checked = true;
+    if ($("teseAtivo")) $("teseAtivo").checked = true;
+    if ($("stepAtivo")) $("stepAtivo").checked = true;
+    if ($("papeisAtivo")) $("papeisAtivo").checked = true;
+    if ($("pedidosAtivo")) $("pedidosAtivo").checked = tipo !== "outro";
+    $("projecaoAtivo").checked = true;
+    persist();
+  }
+  function blank() {
+    FIELDS.forEach((id) => { if ($(id) && $(id).tagName !== "SELECT") $(id).value = ""; });
+    $("tipo").value = "ec";
+    CHECKS.forEach((id) => { $(id).checked = false; });
+    $("footerTxt").value = "Cliente × V4 Company";
+    applyPreset();
+    $("clienteNome").value = "";
+    $("segmento").value = "";
+    $("capaLead").value = "";
+    $("validado").value = "";
+    $("desafio").value = "";
+    $("quote").value = "";
+    $("quoteFonte").value = "";
+    $("dores").value = "";
+    $("caseNome").value = "";
+    $("caseCorrelato").value = "";
+    $("caseResultado").value = "";
+    $("ancora").value = "";
+    $("condicao").value = "";
+    $("forma").value = "";
+    $("validade").value = "";
+    $("bonus").value = "";
+    $("cta").value = "";
+    $("gateDecisor").value = "";
+    $("gateCsat").value = "";
+    $("gateStake").value = "";
+    $("gateObs").value = "";
+    persist();
+  }
+
+  function esc(s) {
+    return String(s == null ? "" : s)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+  function lines(text) {
+    return String(text || "").split(/\n+/).map((s) => s.trim()).filter(Boolean);
+  }
+  function pairs(text) {
+    return lines(text).map((line, i) => {
+      const idx = line.indexOf("|");
+      if (idx < 0) return { titulo: line, texto: "" };
+      return { titulo: line.slice(0, idx).trim() || ("0" + (i + 1)), texto: line.slice(idx + 1).trim() };
+    });
+  }
+  function ul(items) {
+    if (!items.length) return "";
+    return "<ul>" + items.map((t) => "<li>" + esc(t) + "</li>").join("") + "</ul>";
+  }
+  function cardsPairs(list, numbered) {
+    const n = list.length;
+    const g = n >= 4 ? "grid-4" : n === 3 ? "grid-3" : "grid-2";
+    return '<div class="' + g + '">' + list.map((p, i) =>
+      '<article class="card">' +
+        (numbered ? '<div class="card-num">' + String(i + 1).padStart(2, "0") + "</div>" : "") +
+        "<h3>" + esc(p.titulo) + "</h3>" +
+        (p.texto ? "<p>" + esc(p.texto) + "</p>" : "") +
+      "</article>"
+    ).join("") + "</div>";
+  }
+  function flow(list) {
+    return '<div class="flow-row">' + list.map((p, i) =>
+      (i ? '<span class="flow-arrow">→</span>' : "") +
+      '<div class="flow-step"><div class="icon">' + String(i + 1).padStart(2, "0") + "</div><strong>" +
+      esc(p.titulo) + "</strong><span>" + esc(p.texto) + "</span></div>"
+    ).join("") + "</div>";
+  }
+
+
+  function kpis(text) {
+    const list = pairs(text);
+    if (!list.length) return "";
+    const g = list.length >= 4 ? "grid-4" : list.length === 3 ? "grid-3" : "grid-2";
+    return '<div class="' + g + '">' + list.map(function (p) {
+      return '<div class="kpi"><div class="v">' + esc(p.titulo) + '</div><div class="l">' + esc(p.texto) + "</div></div>";
+    }).join("") + "</div>";
+  }
+  function foot(nome) {
+    return '<div class="slide-foot"><span class="v4-word">V4</span><span>' + esc(nome) + " × V4</span></div>";
+  }
+  function shell(html, nome) {
+    return '<div class="topline"></div>' + html + foot(nome);
+  }
+
+  function buildSlides(d) {
+    const nome = (d.cliente && d.cliente.nome) || "Cliente";
+    const slides = [];
+    slides.push({
+      id: "capa", title: "Capa", tone: "red",
+      html: shell(
+        '<span class="eyebrow">' + esc(nome) + " × V4 Company</span>" +
+        "<h1>" + esc((d.capa && d.capa.linha1) || "Proposta comercial") +
+        ((d.capa && d.capa.linha2) ? "<br /><em>" + esc(d.capa.linha2) + "</em>" : "") + "</h1>" +
+        ((d.capa && d.capa.lead) ? '<p class="lede">' + esc(d.capa.lead) + "</p>" : "") +
+        '<div class="chips">' +
+          ((d.capa && d.capa.badge) ? '<span class="chip">' + esc(d.capa.badge) + "</span>" : "") +
+          ((d.cliente && d.cliente.segmento) ? '<span class="chip">' + esc(d.cliente.segmento) + "</span>" : "") +
+        "</div>", nome)
+    });
+    if (d.tese && d.tese.ativo && (d.tese.antitese || d.tese.leitura)) {
+      slides.push({
+        id: "tese", title: "Tese", tone: "dark",
+        html: shell(
+          '<span class="eyebrow">Tese</span>' +
+          "<h2>" + esc(d.tese.antitese || "O problema não é o produto") + "</h2>" +
+          ((d.tese.leitura) ? '<p class="lede">' + esc(d.tese.leitura) + "</p>" : "") +
+          kpis(d.tese.kpis), nome)
+      });
+    }
+    slides.push({
+      id: "contexto", title: "Contexto", tone: "white",
+      html: shell(
+        '<span class="eyebrow">Contexto ' + esc(nome) + "</span>" +
+        "<h2>O que já ficou claro na jornada juntos</h2>" +
+        '<div class="grid-2"><article class="card"><h3>O que vocês já validaram</h3>' + ul(lines(d.contexto && d.contexto.validado)) +
+        '</article><article class="card"><h3>O desafio de escala</h3>' + ul(lines(d.contexto && d.contexto.desafio)) +
+        "</article></div>" +
+        ((d.contexto && d.contexto.quote) ? '<p class="quote">' + esc(d.contexto.quote) +
+          ((d.contexto.quoteFonte) ? "<span>" + esc(d.contexto.quoteFonte) + "</span>" : "") + "</p>" : ""), nome)
+    });
+    const dores = pairs(d.dores);
+    if (dores.length) {
+      slides.push({
+        id: "dores", title: "Travas", tone: "",
+        html: shell(
+          '<span class="eyebrow">Diagnóstico</span>' +
+          "<h2>Onde a operação perde previsibilidade</h2>" +
+          ((d.produto && d.produto.promessa) ? '<p class="lede">' + esc(d.produto.promessa) + "</p>" : "") +
+          cardsPairs(dores, true), nome)
+      });
+    }
+    if (d.step && d.step.ativo && (d.step.momento || d.step.saber)) {
+      slides.push({
+        id: "step", title: "STEP", tone: "white",
+        html: shell(
+          '<span class="eyebrow">Saber · Ter · Executar · Potencializar</span>' +
+          "<h2>A ordem importa</h2>" +
+          ((d.step.momento) ? '<p class="lede">' + esc(d.step.momento) + "</p>" : "") +
+          '<div class="grid-4">' +
+            '<article class="card"><div class="card-num">Saber</div><h3>Descobrir</h3><p>' + esc(d.step.saber || "") + "</p></article>" +
+            '<article class="card"><div class="card-num">Ter</div><h3>Construir</h3><p>' + esc(d.step.ter || "") + "</p></article>" +
+            '<article class="card"><div class="card-num">Executar</div><h3>Operar</h3><p>' + esc(d.step.executar || "") + "</p></article>" +
+            '<article class="card"><div class="card-num">Potencializar</div><h3>Escalar</h3><p>' + esc(d.step.potencializar || "") + "</p></article>" +
+          "</div>", nome)
+      });
+    }
+    if (d.case && d.case.ativo && d.case.nome) {
+      slides.push({
+        id: "case", title: "Case", tone: "dark",
+        html: shell(
+          '<span class="eyebrow">Prova interna</span>' +
+          "<h2>" + esc(d.case.nome) + "</h2>" +
+          '<div class="grid-2"><article class="card"><h3>Por que correlato</h3><p>' + esc(d.case.correlato || "") +
+          '</p></article><article class="card"><h3>O que usamos na mesa</h3><p>' + esc(d.case.resultado || "") +
+          "</p></article></div>" +
+          '<div class="path-note">Autoridade na narrativa — não um slide solto no final.</div>', nome)
+      });
+    }
+    slides.push({
+      id: "solucao", title: "Solução", tone: "white",
+      html: shell(
+        '<span class="eyebrow">' + esc((d.produto && d.produto.nome) || "Solução") + "</span>" +
+        "<h2>" + esc((d.solucao && d.solucao.titulo) || "O que a V4 instala") + "</h2>" +
+        ((d.solucao && d.solucao.lead) ? '<p class="lede">' + esc(d.solucao.lead) + "</p>" : "") +
+        cardsPairs(pairs(d.solucao && d.solucao.pilares), true) +
+        ((d.solucao && d.solucao.fora) ? '<div class="path-note">' + esc(d.solucao.fora) + "</div>" : ""), nome)
+    });
+    if (d.essencial && d.essencial.ativo && d.essencial.nome) {
+      slides.push({
+        id: "essencial", title: "Essencial", tone: "dark",
+        html: shell(
+          '<span class="eyebrow">Não é opcional</span>' +
+          "<h2>" + esc(d.essencial.nome) + "</h2>" +
+          '<p class="lede">' + esc(d.essencial.porque || "") + "</p>" +
+          '<article class="card" style="margin-top:22px"><h3>O que fecha o problema</h3>' + ul(lines(d.essencial.inclui)) + "</article>" +
+          '<div class="bonus-box"><strong>Posicionamento</strong><p>Contratar só o core agora e descobrir o essencial em 90 dias custa mais. Hoje está na mesa com condição.</p></div>', nome)
+      });
+    }
+    const jornada = pairs(d.jornada);
+    if (jornada.length) {
+      slides.push({
+        id: "jornada", title: "Ondas", tone: "",
+        html: shell(
+          '<span class="eyebrow">Como a oferta roda</span>' +
+          "<h2>Na ordem que funciona</h2>" +
+          flow(jornada), nome)
+      });
+    }
+    if (d.papeis && d.papeis.ativo && (d.papeis.v4 || d.papeis.cliente)) {
+      slides.push({
+        id: "papeis", title: "Papéis", tone: "white",
+        html: shell(
+          '<span class="eyebrow">Governança</span>' +
+          "<h2>A V4 conduz. " + esc(nome) + " executa e decide.</h2>" +
+          '<div class="grid-3">' +
+            '<article class="card"><div class="card-num">V4</div><h3>Orientar e operar</h3><p>' + esc(d.papeis.v4 || "") + "</p></article>" +
+            '<article class="card"><div class="card-num">' + esc(nome) + "</div><h3>Executar e decidir</h3><p>" + esc(d.papeis.cliente || "") + "</p></article>" +
+            '<article class="card"><div class="card-num">Limite</div><h3>O que não entra</h3><p>' + esc(d.papeis.fora || "") + "</p></article>" +
+          "</div>", nome)
+      });
+    }
+    if (d.projecao && d.projecao.ativo && (d.projecao.conservadora || d.projecao.breakeven)) {
+      slides.push({
+        id: "projecao", title: "Projeção", tone: "white",
+        html: shell(
+          '<span class="eyebrow">Projeção</span>' +
+          "<h2>Leitura conservadora. Sem copiar o case maduro.</h2>" +
+          '<div class="grid-2"><article class="card"><h3>Premissa</h3><p>' + esc(d.projecao.conservadora || "") +
+          '</p></article><article class="card"><h3>Break-even / âncora</h3><p>' + esc(d.projecao.breakeven || "") +
+          "</p></article></div>" +
+          ((d.projecao.disclaimer) ? '<div class="path-note">' + esc(d.projecao.disclaimer) + "</div>" : ""), nome)
+      });
+    }
+    const inv = d.investimento || {};
+    slides.push({
+      id: "investimento", title: "Investimento", tone: "white",
+      html: shell(
+        '<span class="eyebrow">Investimento · um preço</span>' +
+        "<h2>Condição para fechar agora</h2>" +
+        '<div class="invest-hero"><article class="plan"><div class="plan-label">' + esc((d.produto && d.produto.nome) || "Projeto") + "</div>" +
+        "<h3>" + esc(nome) + "</h3>" +
+        '<p class="plan-sub">' + esc(inv.forma || "") + "</p>" +
+        '<div class="price-lines">' +
+          (inv.ancora ? '<div class="price-line"><span>Valor de referência</span><strong class="strike">' + esc(inv.ancora) + "</strong></div>" : "") +
+          (inv.condicao ? '<div class="price-line"><span>Condição</span><strong class="ok">' + esc(inv.condicao) + "</strong></div>" : "") +
+          (inv.validade ? '<div class="price-line"><span>Validade</span><strong>' + esc(inv.validade) + "</strong></div>" : "") +
+        "</div>" +
+        (inv.condicao ? '<div class="plan-price">' + esc(inv.condicao) + "</div>" : "") +
+        ul(lines(inv.inclui)) + "</article>" +
+        "<div>" +
+          ((d.produto && d.produto.promessa) ? '<article class="card"><h3>O que vocês compram</h3><p>' + esc(d.produto.promessa) + "</p></article>" : "") +
+          (inv.bonus ? '<div class="bonus-box"><strong>Condição</strong><p>' + esc(inv.bonus) + "</p></div>" : "") +
+        "</div></div>", nome)
+    });
+    if (d.pedidos && d.pedidos.ativo && d.pedidos.itens) {
+      slides.push({
+        id: "pedidos", title: "Pedidos", tone: "dark",
+        html: shell(
+          '<span class="eyebrow">Para sair do papel nesta semana</span>' +
+          "<h2>O que precisamos de vocês</h2>" +
+          cardsPairs(pairs(d.pedidos.itens), true), nome)
+      });
+    }
+    const prox = pairs(d.proximos);
+    slides.push({
+      id: "proximos", title: "Próximos passos", tone: "red",
+      html: shell(
+        '<span class="eyebrow">Fechamento</span>' +
+        "<h2>Próximos passos</h2>" +
+        (prox.length ? flow(prox) : "") +
+        ((d.fechamento && d.fechamento.cta) ? '<div class="cta-box" style="margin-top:22px;"><h3>O que ' + esc(nome) + " leva com a V4</h3><p>" + esc(d.fechamento.cta) + "</p></div>" : "") +
+        ((d.fechamento && d.fechamento.quote) ? '<p class="quote">' + esc(d.fechamento.quote) +
+          "<span>" + esc(nome) + " × V4 Company</span></p>" : ""), nome)
+    });
+    return slides;
+  }
+
+  let nav = { current: 1, total: 1, slides: [] };
+
+  function fitDeck() {
+    const deck = document.getElementById("deck");
+    if (!deck) return;
+    const scale = Math.min(window.innerWidth / 1600, window.innerHeight / 900) * 0.92;
+    deck.style.setProperty("--deck-scale", String(scale));
+  }
+
+  function bindDeck() {
+    const root = $("deck-root");
+    const sections = Array.from(root.querySelectorAll("#deck .slide"));
+    const navLinks = root.querySelectorAll(".nav-dots a");
+    const prevBtn = root.querySelector("#prevBtn");
+    const nextBtn = root.querySelector("#nextBtn");
+    const slideCounter = root.querySelector("#slideCounter");
+    nav.total = sections.length;
+    nav.current = 1;
+    nav.slides = sections;
+    function updateUI() {
+      if (slideCounter) slideCounter.textContent = String(nav.current).padStart(2,"0") + " / " + String(nav.total).padStart(2,"0");
+      if (prevBtn) prevBtn.disabled = nav.current === 1;
+      if (nextBtn) nextBtn.disabled = nav.current === nav.total;
+      navLinks.forEach((a) => a.classList.toggle("active", Number(a.dataset.slide) === nav.current));
+    }
+    function goTo(n) {
+      if (n < 1 || n > nav.total || n === nav.current) return;
+      sections[nav.current - 1].classList.remove("active");
+      sections[n - 1].classList.add("active");
+      nav.current = n;
+      updateUI();
+    }
+    nav.goTo = function (n, dir) {
+      if (typeof n === "number" && n >= 1) goTo(n);
+    };
+    window.addEventListener("resize", fitDeck);
+    fitDeck();
+    if (prevBtn) prevBtn.onclick = () => goTo(nav.current - 1);
+    if (nextBtn) nextBtn.onclick = () => goTo(nav.current + 1);
+    navLinks.forEach((a) => a.addEventListener("click", (e) => { e.preventDefault(); goTo(Number(a.dataset.slide)); }));
+    const edit = root.querySelector(".edit-fab");
+    if (edit) edit.onclick = hideDeck;
+    updateUI();
+  }
+
+  function renderDeck(d) {
+    const slides = buildSlides(d);
+    const baked = document.documentElement.classList.contains("baked");
+    const dots = slides.map((s, i) =>
+      '<a href="#" data-slide="' + (i + 1) + '"' + (i === 0 ? ' class="active"' : "") + ' title="' + esc(s.title) + '"></a>'
+    ).join("");
+    const sections = slides.map((s, i) =>
+      '<section class="slide ' + (s.tone || "") + (i === 0 ? " active" : "") + '" id="' + s.id + '" data-slide="' + (i + 1) + '">' +
+      s.html + "</section>"
+    ).join("");
+    $("deck-root").innerHTML =
+      (baked ? "" : '<button type="button" class="edit-fab">✎ Editar dados</button>') +
+      '<nav class="nav-dots" aria-label="Slides">' + dots + "</nav>" +
+      '<button type="button" class="nav-arrow nav-arrow--prev" id="prevBtn" disabled aria-label="Anterior">‹</button>' +
+      '<button type="button" class="nav-arrow nav-arrow--next" id="nextBtn" aria-label="Próximo">›</button>' +
+      '<div id="viewport"><div id="deck">' + sections + "</div></div>" +
+      '<div class="slide-counter" id="slideCounter">01 / ' + String(slides.length).padStart(2,"0") + "</div>";
+    document.title = ((d.cliente && d.cliente.nome) || "Cliente") + " × V4 — Proposta";
+    bindDeck();
+  }
+
+  function showDeck() {
+    persist();
+    renderDeck(collect());
+    document.body.classList.add("mode-deck");
+  }
+  function hideDeck() {
+    document.body.classList.remove("mode-deck");
+    document.title = "Modelo de proposta · V4";
+  }
+
+  function slug(name) {
+    return String(name || "cliente").normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "cliente";
+  }
+  function download(filename, text, type) {
+    const blob = new Blob([text], { type: type || "text/plain" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = filename;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  }
+  function baixarHtml() {
+    persist();
+    const data = collect();
+    const json = JSON.stringify(data, null, 2);
+    $("proposta-json").textContent = "\n" + json + "\n";
+    const html = "<!DOCTYPE html>\n" + document.documentElement.outerHTML.replace(
+      /<html([^>]*)>/i,
+      (_, attrs) => /class\s*=/.test(attrs)
+        ? `<html${attrs.replace(/class\s*=\s*["']([^"']*)["']/, (m, c) => c.includes("baked") ? m : `class="${c} baked"`)}>`
+        : `<html${attrs} class="baked">`
+    );
+    download("proposta-" + slug(data.cliente.nome) + ".html", html, "text/html;charset=utf-8");
+  }
+  function exportJson() {
+    persist();
+    const data = collect();
+    download("proposta-" + slug(data.cliente.nome) + ".json", JSON.stringify(data, null, 2), "application/json");
+  }
+
+  document.addEventListener("wheel", (e) => {
+    if (!document.body.classList.contains("mode-deck") && !document.documentElement.classList.contains("baked")) return;
+    if (Math.abs(e.deltaY) < 20) return;
+    e.preventDefault();
+    nav.goTo && nav.goTo(nav.current + (e.deltaY > 0 ? 1 : -1), e.deltaY > 0 ? "forward" : "back");
+  }, { passive: false });
+  document.addEventListener("keydown", (e) => {
+    const deckOn = document.body.classList.contains("mode-deck") || document.documentElement.classList.contains("baked");
+    if (!deckOn) return;
+    if (["ArrowRight", " ", "PageDown"].includes(e.key)) { e.preventDefault(); nav.goTo(nav.current + 1, "forward"); }
+    if (["ArrowLeft", "PageUp"].includes(e.key)) { e.preventDefault(); nav.goTo(nav.current - 1, "back"); }
+    if (e.key === "Escape" && !document.documentElement.classList.contains("baked")) hideDeck();
+  });
+  let tx = 0;
+  document.addEventListener("touchstart", (e) => { tx = e.changedTouches[0].screenX; }, { passive: true });
+  document.addEventListener("touchend", (e) => {
+    if (!document.body.classList.contains("mode-deck") && !document.documentElement.classList.contains("baked")) return;
+    const dx = e.changedTouches[0].screenX - tx;
+    if (Math.abs(dx) > 50) nav.goTo(nav.current + (dx < 0 ? 1 : -1), dx < 0 ? "forward" : "back");
+  }, { passive: true });
+
+  const GROUPS = [
+    { title: "Conta", q: "Qual conta e qual produto entra nesta proposta?", ask: "Headline no idioma do cliente — não genérico. Tipo do produto define o texto padrão da jornada." },
+    { title: "Gate", q: "A sala está pronta?", ask: "Decisor na call? CSAT? Quem influencia? Isso não vai para o deck do cliente." },
+    { title: "Diagnóstico", q: "O que já validaram — e o que está vazando?", ask: "Tese no estilo G6: o problema não é X. Dores com nome. KPIs reais da operação, não de mercado." },
+    { title: "Case", q: "Qual prova interna correlata?", ask: "Mesmas travas, não o case mais bonito. Sem prometer o maduro." },
+    { title: "Solução", q: "Qual o core — e o que fecha 100%?", ask: "STEP (Saber/Ter/Executar). Core assume a dor #1. Papéis: V4 conduz, cliente decide." },
+    { title: "Projeção", q: "Qual a leitura conservadora?", ask: "BE em qual mês? Validado com ops? Disclaimer obrigatório." },
+    { title: "Preço", q: "Um preço, uma decisão.", ask: "Âncora riscada → condição da sala. Depois: o que precisamos de vocês nesta semana e os sprints se fechar agora." }
+  ];
+  let wiz = 0;
+  function setWizard(n) {
+    wiz = Math.max(0, Math.min(GROUPS.length - 1, n));
+    document.querySelectorAll(".form-block").forEach((el) => {
+      el.classList.toggle("on", Number(el.dataset.group) === wiz);
+    });
+    const rail = $("wizardRail");
+    if (rail) {
+      rail.innerHTML = GROUPS.map((g, i) =>
+        '<button type="button" data-g="' + i + '" class="' + (i === wiz ? "on" : (i < wiz ? "done" : "")) + '"><span class="n">0' + (i + 1) + '</span><span class="t">' + g.title + "</span></button>"
+      ).join("");
+      rail.querySelectorAll("button").forEach((b) => b.onclick = () => setWizard(Number(b.dataset.g)));
+    }
+    const box = $("coachBox");
+    if (box) box.innerHTML = "<strong>" + GROUPS[wiz].q + "</strong><div class=\"ask\">" + GROUPS[wiz].ask + "</div>";
+    if ($("wizCount")) $("wizCount").textContent = (wiz + 1) + " / " + GROUPS.length;
+    if ($("btnPrevStep")) $("btnPrevStep").disabled = wiz === 0;
+    if ($("btnNextStep")) $("btnNextStep").textContent = wiz === GROUPS.length - 1 ? "Ver proposta →" : "Próximo →";
+    const on = document.querySelector(".form-block.on");
+    if (on) on.scrollIntoView({ block: "start", behavior: "smooth" });
+  }
+  function toggleListAll() {
+    const all = document.body.classList.toggle("list-all");
+    document.body.classList.toggle("wizard", !all);
+    if ($("btnToggleView")) $("btnToggleView").textContent = all ? "Voltar ao passo a passo" : "Ver todos os blocos";
+  }
+
+  $("btnVer").onclick = showDeck;
+  $("btnBaixar").onclick = baixarHtml;
+  $("btnJsonOut").onclick = exportJson;
+  $("btnJsonIn").onclick = () => $("jsonFile").click();
+  $("jsonFile").onchange = (e) => {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      try { fill(JSON.parse(reader.result)); persist(); }
+      catch (err) { alert("JSON inválido."); }
+    };
+    reader.readAsText(file);
+    e.target.value = "";
+  };
+  $("btnExemplo").onclick = () => { fill(parsePageJson()); persist(); setWizard(0); };
+  $("btnNova").onclick = () => { if (confirm("Limpar e aplicar o padrão do produto selecionado?")) { blank(); setWizard(0); } };
+  $("btnPreset").onclick = () => {
+    if (confirm("Aplicar textos padrão deste produto? Não mexe em cliente, dores, case nem preço.")) applyPreset();
+  };
+  if ($("btnPrevStep")) $("btnPrevStep").onclick = () => setWizard(wiz - 1);
+  if ($("btnNextStep")) $("btnNextStep").onclick = () => {
+    if (wiz === GROUPS.length - 1) showDeck();
+    else setWizard(wiz + 1);
+  };
+  if ($("btnVerMini")) $("btnVerMini").onclick = showDeck;
+  if ($("btnToggleView")) $("btnToggleView").onclick = toggleListAll;
+  if ($("clienteNome")) {
+    $("clienteNome").addEventListener("input", () => {
+      const n = $("clienteNome").value.trim();
+      if (n && $("footerTxt") && (!$("footerTxt").value || /× V4/.test($("footerTxt").value))) {
+        $("footerTxt").value = n + " × V4 Company";
+      }
+    });
+  }
+  FIELDS.forEach((id) => { const el = $(id); if (el) el.addEventListener("change", persist); });
+  CHECKS.forEach((id) => { const el = $(id); if (el) el.addEventListener("change", persist); });
+
+  let baked = document.documentElement.classList.contains("baked");
+  const forceEdit = /[?&]edit=1/.test(location.search);
+  if (baked && forceEdit) {
+    document.documentElement.classList.remove("baked");
+    baked = false;
+  }
+  const pageData = parsePageJson();
+  let start = null;
+  let hadSave = false;
+  if (!baked) {
+    try {
+      const saved = localStorage.getItem(STORE);
+      if (saved) { start = JSON.parse(saved); hadSave = true; }
+    } catch (e) {}
+  } else {
+    start = pageData;
+  }
+  document.body.classList.add("wizard");
+  if (hadSave) fill(start);
+  else if (baked) fill(pageData);
+  else { fill(pageData); blank(); }
+  setWizard(0);
+  if (baked) {
+    document.body.classList.add("mode-deck");
+    renderDeck(start || collect());
+  }
+})();
+</script>
+</body>
+</html>

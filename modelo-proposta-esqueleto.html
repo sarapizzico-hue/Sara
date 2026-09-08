@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <title>Modelo de proposta · esqueleto · V4</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --v4-red: #e50914;
+      --v4-orange: #ff481f;
+      --v4-cream: #ffebc8;
+      --ink: #141414;
+      --ink-soft: #5a5a5a;
+      --line: rgba(20,20,20,.12);
+      --radius: 22px;
+      --hero: radial-gradient(120% 130% at 50% -10%, #ff5a2c 0%, #e50914 30%, #b00610 62%, #280001 100%);
+    }
+    * { box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #171313; font-family: "IBM Plex Sans", system-ui, sans-serif; color: var(--ink); }
+    button { font-family: inherit; }
+    .nav-dots { position: fixed; right: 14px; top: 50%; transform: translateY(-50%); z-index: 100; display: flex; flex-direction: column; gap: 8px; }
+    .nav-dots a { width: 8px; height: 8px; border-radius: 50%; border: 2px solid rgba(255,255,255,.4); background: transparent; }
+    .nav-dots a.active, .nav-dots a:hover { background: #fff; border-color: #fff; }
+    .nav-arrow {
+      position: fixed; top: 50%; transform: translateY(-50%); z-index: 100;
+      width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255,255,255,.28);
+      background: rgba(23,19,19,.7); color: #fff; cursor: pointer; font-size: 1.4rem;
+    }
+    .nav-arrow:disabled { opacity: .25; cursor: default; }
+    .nav-arrow--prev { left: 12px; }
+    .nav-arrow--next { right: 36px; }
+    .slide-counter { position: fixed; bottom: 18px; right: 22px; z-index: 160; font: 500 13px "IBM Plex Mono", monospace; color: rgba(255,255,255,.55); }
+    .hint-bar {
+      position: fixed; top: 14px; left: 50%; transform: translateX(-50%); z-index: 180;
+      font: 600 12px "IBM Plex Sans", system-ui, sans-serif;
+      padding: 8px 14px; border-radius: 999px;
+      background: rgba(0,0,0,.55); color: #fff; border: 1px solid rgba(255,255,255,.2);
+      white-space: nowrap;
+    }
+    .hint-bar a { color: #ffebc8; }
+    #viewport { position: fixed; inset: 0; overflow: hidden; background: radial-gradient(circle at 50% 10%, rgba(229,9,20,.18), transparent 38%), #171313; }
+    #deck {
+      --deck-scale: 1;
+      position: absolute; left: 50%; top: 50%; width: 1600px; height: 900px; overflow: hidden;
+      transform: translate(-50%,-50%) scale(var(--deck-scale)); transform-origin: center;
+      background: #f5f4f2; box-shadow: 0 40px 120px rgba(0,0,0,.45);
+    }
+    .slide {
+      position: absolute; inset: 0; width: 1600px; height: 900px; padding: 76px 96px 108px;
+      opacity: 0; pointer-events: none; transform: translateX(24px);
+      transition: opacity .28s ease, transform .28s ease;
+      background: radial-gradient(circle at 92% 8%, rgba(229,9,20,.055), transparent 24%), #f5f4f2;
+      overflow: hidden;
+    }
+    .slide.active { opacity: 1; pointer-events: auto; transform: none; }
+    .slide.red { background: var(--hero); color: #fff; }
+    .slide.dark { color: #fff; background: radial-gradient(circle at 78% 15%, rgba(229,9,20,.5), transparent 32%), linear-gradient(145deg,#280001 0%,#130001 100%); }
+    .slide.white { background: #fff; }
+    .topline { position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: linear-gradient(90deg, var(--v4-red), var(--v4-orange), transparent 76%); }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { margin-bottom: 22px; font-size: 76px; line-height: .98; letter-spacing: -.055em; font-weight: 600; }
+    h1 em { font-style: italic; font-weight: 400; }
+    h2 { margin-bottom: 16px; font-size: 46px; line-height: 1.04; letter-spacing: -.045em; font-weight: 600; max-width: 1280px; }
+    h3 { margin-bottom: 8px; font-size: 22px; line-height: 1.15; letter-spacing: -.02em; font-weight: 600; }
+    .lede { max-width: 1040px; font-size: 24px; line-height: 1.4; font-weight: 300; color: var(--ink-soft); }
+    .red .lede, .dark .lede { color: rgba(255,255,255,.72); }
+    .eyebrow {
+      display: inline-flex; min-height: 34px; padding: 7px 15px; margin-bottom: 18px;
+      border-radius: 999px; border: 1px solid rgba(229,9,20,.18);
+      background: rgba(229,9,20,.07); color: var(--v4-red);
+      font-size: 12px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase;
+    }
+    .red .eyebrow, .dark .eyebrow { color: rgba(255,255,255,.92); background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.35); }
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+    .chip { padding: 8px 14px; border-radius: 999px; font-size: 13px; font-weight: 600; border: 1px solid rgba(255,255,255,.28); background: rgba(255,255,255,.08); }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 22px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 22px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-top: 22px; }
+    .card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 24px; }
+    .red .card, .dark .card { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.2); }
+    .card-num { font-family: "IBM Plex Mono", monospace; font-size: 13px; font-weight: 700; color: var(--v4-red); margin-bottom: 8px; }
+    .red .card-num, .dark .card-num { color: var(--v4-cream); }
+    .card p, .card li { font-size: 16px; line-height: 1.4; color: var(--ink-soft); }
+    .red .card p, .red .card li, .dark .card p, .dark .card li { color: rgba(255,255,255,.78); }
+    .card ul { list-style: none; margin: 8px 0 0; }
+    .card ul li { padding-left: 14px; position: relative; margin-bottom: 6px; }
+    .card ul li::before { content: "·"; position: absolute; left: 0; font-weight: 700; color: var(--v4-red); }
+    .kpi { padding: 20px 22px; border-radius: var(--radius); border: 1px solid var(--line); background: #fff; }
+    .kpi .v { font-size: 36px; font-weight: 700; letter-spacing: -.04em; line-height: 1; color: var(--v4-red); }
+    .kpi .l { margin-top: 8px; font-size: 14px; color: var(--ink-soft); }
+    .red .kpi, .dark .kpi { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.2); }
+    .red .kpi .v, .dark .kpi .v { color: var(--v4-cream); }
+    .red .kpi .l, .dark .kpi .l { color: rgba(255,255,255,.7); }
+    .flow-row { display: flex; gap: 12px; margin-top: 24px; }
+    .flow-step { flex: 1; padding: 18px 16px; border-radius: 18px; background: #fff; border: 1px solid var(--line); }
+    .red .flow-step { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.22); }
+    .flow-step .icon { font-family: "IBM Plex Mono", monospace; font-size: 13px; font-weight: 700; color: var(--v4-red); margin-bottom: 8px; }
+    .red .flow-step .icon { color: var(--v4-cream); }
+    .flow-step strong { display: block; font-size: 18px; margin-bottom: 6px; }
+    .flow-step span { font-size: 14px; color: var(--ink-soft); line-height: 1.35; }
+    .red .flow-step span { color: rgba(255,255,255,.72); }
+    .quote { margin: 24px 0 0; padding-left: 18px; border-left: 4px solid var(--v4-red); font-size: 22px; font-weight: 600; line-height: 1.3; }
+    .quote span { display: block; margin-top: 8px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); }
+    .red .quote, .dark .quote { border-color: var(--v4-cream); }
+    .path-note, .cta-box, .bonus-box { margin-top: 18px; padding: 16px 18px; border-radius: 16px; font-size: 16px; }
+    .path-note { border: 1px dashed var(--line); background: rgba(229,9,20,.05); font-weight: 600; }
+    .cta-box { border: 1px solid var(--line); background: #fff; }
+    .red .cta-box { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.25); }
+    .bonus-box { border: 1px solid rgba(34,197,94,.28); background: rgba(34,197,94,.08); }
+    .bonus-box strong { display: block; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: #15803d; margin-bottom: 6px; }
+    .plan { border-radius: 22px; padding: 26px; border: 1px solid var(--line); background: #fff; }
+    .plan-label { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--v4-red); margin-bottom: 8px; }
+    .plan-price { font-size: 44px; font-weight: 700; letter-spacing: -.04em; line-height: 1; }
+    .plan-sub { color: var(--ink-soft); margin-top: 6px; }
+    .plan ul { list-style: none; margin-top: 14px; }
+    .plan ul li { font-size: 16px; color: var(--ink-soft); padding: 4px 0 4px 14px; position: relative; }
+    .plan ul li::before { content: "·"; position: absolute; left: 0; color: var(--v4-red); font-weight: 700; }
+    .price-line { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 15px; color: var(--ink-soft); }
+    .ok { color: #15803d; }
+    .strike { text-decoration: line-through; opacity: .55; }
+    .invest-hero { display: grid; grid-template-columns: 1.15fr .85fr; gap: 18px; margin-top: 22px; }
+    .slide-foot { position: absolute; left: 96px; right: 96px; bottom: 36px; display: flex; justify-content: space-between; font-size: 13px; color: var(--ink-soft); }
+    .red .slide-foot, .dark .slide-foot { color: rgba(255,255,255,.55); }
+    .v4-word { font-weight: 700; letter-spacing: .12em; color: var(--v4-red); }
+    .red .v4-word, .dark .v4-word { color: #fff; }
+    .ph { border-bottom: 2px dashed currentColor; font-style: italic; opacity: .72; }
+  </style>
+</head>
+<body>
+  <div class="hint-bar">Modelo vazio · sem conta · <a href="modelo-proposta.html">abrir o gerador para preencher</a></div>
+  <nav class="nav-dots" aria-label="Slides">
+    <a href="#" data-slide="1" class="active" title="Capa"></a>
+    <a href="#" data-slide="2" title="Tese"></a>
+    <a href="#" data-slide="3" title="Contexto"></a>
+    <a href="#" data-slide="4" title="Travas"></a>
+    <a href="#" data-slide="5" title="STEP"></a>
+    <a href="#" data-slide="6" title="Case"></a>
+    <a href="#" data-slide="7" title="Solução"></a>
+    <a href="#" data-slide="8" title="Essencial"></a>
+    <a href="#" data-slide="9" title="Ondas"></a>
+    <a href="#" data-slide="10" title="Papéis"></a>
+    <a href="#" data-slide="11" title="Projeção"></a>
+    <a href="#" data-slide="12" title="Investimento"></a>
+    <a href="#" data-slide="13" title="Pedidos"></a>
+    <a href="#" data-slide="14" title="Próximos passos"></a>
+  </nav>
+  <button type="button" class="nav-arrow nav-arrow--prev" id="prevBtn" disabled aria-label="Anterior">‹</button>
+  <button type="button" class="nav-arrow nav-arrow--next" id="nextBtn" aria-label="Próximo">›</button>
+
+  <div id="viewport">
+    <div id="deck">
+
+      <section class="slide red active" data-slide="1">
+        <div class="topline"></div>
+        <span class="eyebrow"><span class="ph">Cliente</span> × V4 Company</span>
+        <h1><span class="ph">Headline no idioma do cliente.</span><br /><em><span class="ph">Segunda linha — a virada.</span></em></h1>
+        <p class="lede"><span class="ph">Uma frase que amarra produto + momento. O que esta proposta resolve agora.</span></p>
+        <div class="chips">
+          <span class="chip"><span class="ph">Produto · core + essencial</span></span>
+          <span class="chip"><span class="ph">Segmento · porte · canal</span></span>
+        </div>
+        <div class="slide-foot"><span class="v4-word">V4</span><span>Modelo · sem conta</span></div>
+      </section>
+
+      <section class="slide dark" data-slide="2">
+        <div class="topline"></div>
+        <span class="eyebrow">Tese</span>
+        <h2>O problema não é <span class="ph">[o produto / a marca / a demanda]</span></h2>
+        <p class="lede"><span class="ph">A conta que explica a estagnação. O que a operação faz bem — e o que ela não mede, não segura ou não converte.</span></p>
+        <div class="grid-4">
+          <div class="kpi"><div class="v ph">000</div><div class="l ph">KPI 1 da operação</div></div>
+          <div class="kpi"><div class="v ph">000</div><div class="l ph">KPI 2 da operação</div></div>
+          <div class="kpi"><div class="v ph">000</div><div class="l ph">KPI 3 da operação</div></div>
+          <div class="kpi"><div class="v ph">000</div><div class="l ph">KPI 4 da operação</div></div>
+        </div>
+        <div class="slide-foot"><span class="v4-word">V4</span><span>Tese · número real, não de mercado</span></div>
+      </section>
+
+      <section class="slide white" data-slide="3">
+        <div class="topline"></div>
+        <span class="eyebrow">Contexto</span>
+        <h2>O que já ficou claro na jornada juntos</h2>
+        <div class="grid-2">
+          <article class="card">
+            <h3>O que vocês já validaram</h3>
+            <ul>
+              <li><span class="ph">O que a EE / GC já amarraram</span></li>
+              <li><span class="ph">O que o decisor já comprou</span></li>
+              <li><span class="ph">O que já roda hoje</span></li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>O desafio de escala</h3>
+            <ul>
+              <li><span class="ph">Onde a operação trava</span></li>
+              <li><span class="ph">O que falta (Ter / Saber / Executar)</span></li>
+              <li><span class="ph">O que piora se nada mudar</span></li>
+            </ul>
+          </article>
+        </div>
+        <p class="quote"><span class="ph">Frase-mestra da conta — a que amarra o pitch.</span><span>Playbook Farmer</span></p>
+        <div class="slide-foot"><span class="v4-word">V4</span><span>Contexto</span></div>
+      </section>
+
+      <section class="slide" data-slide="4">
+        <div class="topline"></div>
+        <span class="eyebrow">Diagnóstico</span>
+        <h2>Onde a operação perde previsibilidade</h2>
+        <p class="lede"><span class="ph">Promessa em uma linha: o que o core assume.</span></p>
+        <div class="grid-3">
+          <article class="card"><div class="card-num">01</div><h3><span class="ph">Trava 1</span></h3><p><span class="ph">Dor específica, com nome. Quem sofre no dia a dia.</span></p></article>
+          <article class="card"><div class="card-num">02</div><h3><span class="ph">Trava 2</span></h3><p><span class="ph">A segunda perda — empilhada, não isolada.</span></p></article>
+          <article class="card"><div class="card-num">03</div><h3><span class="ph">Trava 3</span></h3><p><span class="ph">A terceira. A ordem das travas importa.</span></p></article>
+        </div>
+        <div class="slide-foot"><span class="v4-word">V4</span><span>Travas</span></div>
+      </section>
+
+      <section class="slide white" data-slide="5">
+        <div class="topline"></div>
+        <span class="eyebrow">Saber · Ter · Executar · Potencializar</span>
+        <h2>A ordem importa</h2>
+        <p class="lede"><span class="ph">Momento atual da conta: entre quais etapas ela está — e o que não contratar agora.</span></p>
+        <div class="grid-4">
+          <article class="card"><div class="card-num">Saber</div><h3>Descobrir</h3><p><span class="ph">Diagnóstico, mercado, plano</span></p></article>
+          <article class="card"><div class="card-num">Ter</div><h3>Construir</h3><p><span class="ph">Site, CRM, tracking</span></p></article>
+          <article class="card"><div class="card-num">Executar</div><h3>Operar</h3><p><span class="ph">Mídia, cadência, time</span></p></article>
+          <article class="card"><div class="card-num">Potencializar</div><h3>Escalar</h3><p><span class="ph">Só com prova</span></p></article>
+        </div>
+        <div class="slide-foot"><span class="v4-word">V4</span><span>STEP · Hanaro / Preço Popular</span></div>
+      </section>
+
+      <section class="slide dark" data-slide="6">
+        <div class="topline"></div>
+        <span class="eyebrow">Prova interna</span>
+        <h2><span class="ph">Nome do case correlato</span></h2>
+        <div class="grid-2">
+          <article class="card"><h3>Por que correlato</h3><p><span class="ph">Mesmas travas, mesmo tipo de operação — não o case mais bonito da prateleira.</span></p></article>
+          <article class="card"><h3>O que usamos na mesa</h3><p><span class="ph">O que pode compartilhar. Sem prometer o case maduro.</span></p></article>
+        </div>
+        <div class="path-note">Autoridade na narrativa — não um slide solto no final.</div>
+        <div class="slide-foot"><span class="v4-word">V4</span><span>Case</span></div>
+      </section>
+
+      <section class="slide white" data-slide="7">
+        <div class="topline"></div>
+        <span class="eyebrow"><span class="ph">Nome do produto core</span></span>
+        <h2><span class="ph">O que a V4 instala nesta operação</span></h2>
+        <p class="lede"><span class="ph">Como o core assume a responsabilidade da dor #1.</span></p>
+        <div class="grid-3">
+          <article class="card"><div class="card-num">01</div><h3><span class="ph">Pilar 1</span></h3><p><span class="ph">O que entrega</span></p></article>
+          <article class="card"><div class="card-num">02</div><h3><span class="ph">Pilar 2</span></h3><p><span class="ph">O que entrega</span></p></article>
+          <article class="card"><div class="card-num">03</div><h3><span class="ph">Pilar 3 / fora</span></h3><p><span class="ph">O que NÃO oferecer</span></p></article>
+        </div>
+        <div class="path-note"><span class="ph">Sem add-on solto · sem menu de condições</span></div>
+        <div class="slide-foot"><span class="v4-word">V4</span><span>Solução core</span></div>
+      </section>
+
+      <section class="slide dark" data-slide="8">
+        <div class="topline"></div>
+        <span class="eyebrow">Não é opcional</span>
+        <h2><span class="ph">Essencial que fecha 100%</span></h2>
+        <p class="lede"><span class="ph">Porquê técnico. Sem isso o core não resolve. Contratar depois custa mais.</span></p>
+        <article class="card" style="margin-top:22px">
+          <h3>O que fecha o problema</h3>
+          <ul>
+            <li><span class="ph">Entrega 1 do essencial</span></li>
+            <li><span class="ph">Entrega 2 do essencial</span></li>
+            <li><span class="ph">Dono técnico na operação</span></li>
+          </ul>
+        </article>
+        <div class="bonus-box"><strong>Posicionamento</strong><p>Contratar só o core agora e descobrir o essencial em 90 dias custa mais. Hoje está na mesa com condição.</p></div>
+        <div class="slide-foot"><span class="v4-word">V4</span><span>Essencial</span></div>
+      </section>
+
+      <section class="slide" data-slide="9">
+        <div class="topline"></div>
+        <span class="eyebrow">Como a oferta roda</span>
+        <h2>Na ordem que funciona</h2>
+        <div class="flow-row">
+          <div class="flow-step"><div class="icon">01</div><strong><span class="ph">Onda 1</span></strong><span><span class="ph">O que fica pronto · dono</span></span></div>
+          <div class="flow-step"><div class="icon">02</div><strong><span class="ph">Onda 2</span></strong><span><span class="ph">O que fica pronto · dono</span></span></div>
+          <div class="flow-step"><div class="icon">03</div><strong><span class="ph">Onda 3</span></strong><span><span class="ph">O que fica pronto · dono</span></span></div>
+          <div class="flow-step"><div class="icon">04</div><strong><span class="ph">Ritual</span></strong><span><span class="ph">Cadência conjunta</span></span></div>
+        </div>
+        <div class="slide-foot"><span class="v4-word">V4</span><span>Ondas · handover G6</span></div>
+      </section>
+
+      <section class="slide white" data-slide="10">
+        <div class="topline"></div>
+        <span class="eyebrow">Governança</span>
+        <h2>A V4 conduz. <span class="ph">O cliente</span> executa e decide.</h2>
+        <div class="grid-3">
+          <article class="card"><div class="card-num">V4</div><h3>Orientar e operar</h3><p><span class="ph">O que a V4 assume nesta conta</span></p></article>
+          <article class="card"><div class="card-num"><span class="ph">Cliente</span></div><h3>Executar e decidir</h3><p><span class="ph">Dados, donos internos, decisão de verba</span></p></article>
+          <article class="card"><div class="card-num">Limite</div><h3>O que não entra</h3><p><span class="ph">Licença, ERP, implementação técnica de terceiro</span></p></article>
+        </div>
+        <div class="slide-foot"><span class="v4-word">V4</span><span>Papéis · Hanaro</span></div>
+      </section>
+
+      <section class="slide white" data-slide="11">
+        <div class="topline"></div>
+        <span class="eyebrow">Projeção</span>
+        <h2>Leitura conservadora. Sem copiar o case maduro.</h2>
+        <div class="grid-2">
+          <article class="card"><h3>Premissa</h3><p><span class="ph">Como calculamos. Validado com ops.</span></p></article>
+          <article class="card"><h3>Break-even / âncora</h3><p><span class="ph">Mês X · pode antecipar se o case 100% — sem prometer.</span></p></article>
+        </div>
+        <div class="path-note"><span class="ph">Disclaimer: não projetar abaixo do que a conta já vende sem LTV.</span></div>
+        <div class="slide-foot"><span class="v4-word">V4</span><span>Projeção</span></div>
+      </section>
+
+      <section class="slide white" data-slide="12">
+        <div class="topline"></div>
+        <span class="eyebrow">Investimento · um preço</span>
+        <h2>Condição para fechar agora</h2>
+        <div class="invest-hero">
+          <article class="plan">
+            <div class="plan-label"><span class="ph">Nome do produto</span></div>
+            <h3><span class="ph">Cliente</span></h3>
+            <p class="plan-sub"><span class="ph">Mesma forma de pagamento da EE</span></p>
+            <div class="price-line"><span>Valor de referência</span><strong class="strike ph">R$ 00.000</strong></div>
+            <div class="price-line"><span>Condição</span><strong class="ok ph">R$ 00.000</strong></div>
+            <div class="price-line"><span>Validade</span><strong><span class="ph">fechar nesta reunião</span></strong></div>
+            <div class="plan-price ph">R$ 00.000</div>
+            <ul>
+              <li><span class="ph">O que o core inclui</span></li>
+              <li><span class="ph">Essencial incluso na condição</span></li>
+              <li>Um preço · desconto já embutido</li>
+            </ul>
+          </article>
+          <div>
+            <article class="card"><h3>O que vocês compram</h3><p><span class="ph">Promessa em uma linha — não catálogo.</span></p></article>
+            <div class="bonus-box"><strong>Condição</strong><p><span class="ph">Bônus / validade. Sem menu à vista vs cartão na mesma sala.</span></p></div>
+          </div>
+        </div>
+        <div class="slide-foot"><span class="v4-word">V4</span><span>Um preço</span></div>
+      </section>
+
+      <section class="slide dark" data-slide="13">
+        <div class="topline"></div>
+        <span class="eyebrow">Para sair do papel nesta semana</span>
+        <h2>O que precisamos de vocês</h2>
+        <div class="grid-2">
+          <article class="card"><div class="card-num">01</div><h3><span class="ph">Pedido 1</span></h3><p><span class="ph">Dono interno · porquê desbloqueia o resto</span></p></article>
+          <article class="card"><div class="card-num">02</div><h3><span class="ph">Pedido 2</span></h3><p><span class="ph">Dono interno · porquê</span></p></article>
+          <article class="card"><div class="card-num">03</div><h3><span class="ph">Pedido 3</span></h3><p><span class="ph">Dono interno · porquê</span></p></article>
+          <article class="card"><div class="card-num">04</div><h3><span class="ph">Decisão</span></h3><p><span class="ph">O que a diretoria precisa liberar agora</span></p></article>
+        </div>
+        <div class="slide-foot"><span class="v4-word">V4</span><span>Pedidos · handover G6</span></div>
+      </section>
+
+      <section class="slide red" data-slide="14">
+        <div class="topline"></div>
+        <span class="eyebrow">Fechamento</span>
+        <h2>Próximos passos</h2>
+        <div class="flow-row">
+          <div class="flow-step"><div class="icon">01</div><strong>Alinhamento</strong><span>Validar escopo e condição nesta call</span></div>
+          <div class="flow-step"><div class="icon">02</div><strong>Formalização</strong><span>Contrato no rito da EE</span></div>
+          <div class="flow-step"><div class="icon">03</div><strong>Onboarding</strong><span>Acessos, diagnóstico, mapa</span></div>
+          <div class="flow-step"><div class="icon">04</div><strong>Ativação</strong><span>Primeira onda no ar</span></div>
+        </div>
+        <div class="cta-box" style="margin-top:22px;"><h3>O que <span class="ph">o cliente</span> leva com a V4</h3><p><span class="ph">CTA: o que fecha se decidir agora.</span></p></div>
+        <p class="quote"><span class="ph">Frase final da capa, ecoada no fechamento.</span><span><span class="ph">Cliente</span> × V4 Company</span></p>
+        <div class="slide-foot"><span class="v4-word">V4</span><span>Modelo · sem conta</span></div>
+      </section>
+
+    </div>
+  </div>
+  <div class="slide-counter" id="slideCounter">01 / 14</div>
+
+  <script>
+  (function () {
+    const slides = Array.from(document.querySelectorAll("#deck .slide"));
+    const dots = document.querySelectorAll(".nav-dots a");
+    const prev = document.getElementById("prevBtn");
+    const next = document.getElementById("nextBtn");
+    const counter = document.getElementById("slideCounter");
+    const deck = document.getElementById("deck");
+    const total = slides.length;
+    let current = 1;
+    function fit() {
+      deck.style.setProperty("--deck-scale", String(Math.min(innerWidth / 1600, innerHeight / 900) * 0.92));
+    }
+    function go(n) {
+      if (n < 1 || n > total || n === current) return;
+      slides[current - 1].classList.remove("active");
+      slides[n - 1].classList.add("active");
+      current = n;
+      prev.disabled = current === 1;
+      next.disabled = current === total;
+      counter.textContent = String(current).padStart(2, "0") + " / " + String(total).padStart(2, "0");
+      dots.forEach((a) => a.classList.toggle("active", Number(a.dataset.slide) === current));
+    }
+    fit();
+    addEventListener("resize", fit);
+    prev.onclick = () => go(current - 1);
+    next.onclick = () => go(current + 1);
+    dots.forEach((a) => a.addEventListener("click", (e) => { e.preventDefault(); go(Number(a.dataset.slide)); }));
+    addEventListener("keydown", (e) => {
+      if (["ArrowRight", " ", "PageDown"].includes(e.key)) { e.preventDefault(); go(current + 1); }
+      if (["ArrowLeft", "PageUp"].includes(e.key)) { e.preventDefault(); go(current - 1); }
+    });
+    addEventListener("wheel", (e) => {
+      if (Math.abs(e.deltaY) < 20) return;
+      e.preventDefault();
+      go(current + (e.deltaY > 0 ? 1 : -1));
+    }, { passive: false });
+  })();
+  </script>
+</body>
+</html>
