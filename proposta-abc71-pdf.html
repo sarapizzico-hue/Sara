@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ABC71 × Colli&amp;Co — Proposta Assessoria de Growth</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0c0c0e;
+      --panel: #161618;
+      --panel-2: #1c1c1f;
+      --red: #e50914;
+      --red-soft: #ff3b42;
+      --green: #b6ff4a;
+      --text: #f5f5f5;
+      --muted: #a8a8ae;
+      --dim: #6e6e74;
+      --line: rgba(255,255,255,.10);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      background: #050505;
+      color: var(--text);
+      font-family: Inter, system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
+    }
+    @page { size: 13.333in 7.5in; margin: 0; }
+
+    .toolbar {
+      position: sticky; top: 0; z-index: 20;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+      padding: 12px 20px;
+      background: #0c0c0e;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .toolbar .id { font-weight: 800; letter-spacing: -.03em; }
+    .toolbar .id span { color: var(--red-soft); }
+    .toolbar .hint { font-size: 13px; color: var(--muted); }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      height: 40px; padding: 0 18px; border-radius: 999px;
+      background: var(--red); color: #fff; text-decoration: none;
+      font-weight: 700; font-size: 14px; border: 0; cursor: pointer;
+    }
+    .btn:hover { background: #c40712; }
+    .btn.ghost {
+      background: transparent; border: 1px solid rgba(255,255,255,.2); color: #fff;
+    }
+
+    .sheet {
+      display: flex; flex-direction: column; align-items: center; gap: 28px;
+      padding: 28px 16px 48px;
+    }
+    .page {
+      position: relative;
+      width: 1280px; height: 720px;
+      padding: 36px 44px 46px;
+      overflow: hidden;
+      background:
+        linear-gradient(rgba(229,9,20,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(229,9,20,.05) 1px, transparent 1px),
+        radial-gradient(ellipse 70% 50% at 82% 0%, rgba(229,9,20,.2), transparent 55%),
+        var(--bg);
+      background-size: 40px 40px, 40px 40px, auto, auto;
+      border: 1px solid rgba(255,255,255,.06);
+      box-shadow: 0 24px 80px rgba(0,0,0,.45);
+      page-break-after: always;
+      break-after: page;
+    }
+    .page:last-child { page-break-after: auto; break-after: auto; }
+
+    .brand { position: absolute; top: 22px; left: 44px; font-weight: 800; letter-spacing: -.03em; font-size: 15px; }
+    .brand span { color: var(--red-soft); }
+    .foot {
+      position: absolute; left: 44px; right: 44px; bottom: 16px;
+      display: flex; justify-content: space-between;
+      font-size: 11px; color: var(--dim); letter-spacing: .04em;
+    }
+
+    .eyebrow {
+      margin: 28px 0 8px;
+      font-size: 11px; font-weight: 800; letter-spacing: .16em;
+      text-transform: uppercase; color: var(--red-soft);
+    }
+    h1 { font-size: 34px; font-weight: 800; letter-spacing: -.035em; line-height: 1.08; }
+    h1 em { font-style: normal; color: var(--red-soft); }
+    .lead { margin-top: 8px; max-width: 920px; color: var(--muted); font-size: 15px; line-height: 1.45; }
+
+    .roles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 22px; }
+    .role {
+      background: var(--panel); border: 1px solid var(--line); border-radius: 14px;
+      padding: 14px 14px 16px;
+    }
+    .role .n { font-size: 11px; font-weight: 800; letter-spacing: .12em; color: var(--red-soft); margin-bottom: 6px; }
+    .role h3 { font-size: 16px; margin-bottom: 6px; }
+    .role p { font-size: 12.5px; line-height: 1.4; color: var(--muted); }
+
+    .packs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
+    .pack {
+      background: var(--panel-2); border: 1px solid var(--line); border-radius: 14px;
+      padding: 14px 16px;
+    }
+    .pack h3 { font-size: 15px; margin-bottom: 4px; }
+    .pack p { font-size: 12.5px; color: var(--muted); line-height: 1.4; }
+    .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .pill {
+      font-size: 11px; font-weight: 600; padding: 4px 9px; border-radius: 999px;
+      border: 1px solid var(--line); background: rgba(255,255,255,.05); color: #e8e8ea;
+    }
+
+    .cad {
+      margin-top: 14px;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
+    }
+    .cad div {
+      border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px;
+      background: rgba(0,0,0,.25);
+    }
+    .cad strong { display: block; font-size: 12px; margin-bottom: 2px; }
+    .cad span { font-size: 11px; color: var(--muted); }
+
+    /* VALUES */
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+    .col {
+      background: #141416; border: 1px solid rgba(255,255,255,.1); border-radius: 18px;
+      padding: 18px 18px 16px; display: flex; flex-direction: column;
+    }
+    .col-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+    .col-head h2 { font-size: 22px; font-weight: 800; letter-spacing: -.03em; }
+    .col-head small { font-size: 11px; color: var(--dim); letter-spacing: .08em; text-transform: uppercase; font-weight: 700; }
+    .col .who { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+    .op {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
+      background: #101012; border: 1px solid rgba(182,255,74,.16);
+      border-left: 4px solid var(--green); border-radius: 12px;
+      padding: 9px 12px; margin-bottom: 12px;
+    }
+    .op .k { font-size: 10px; font-weight: 800; letter-spacing: .14em; color: var(--green); text-transform: uppercase; }
+    .durs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; flex: 1; }
+    .dur {
+      background: #101012; border: 1px solid var(--line); border-radius: 14px;
+      padding: 16px 14px 14px; display: flex; flex-direction: column; min-height: 210px;
+    }
+    .dur.feat { border-color: var(--red); background: rgba(229,9,20,.06); }
+    .dur .lbl { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--dim); }
+    .dur .was { margin-top: 10px; font-size: 13px; color: var(--muted); }
+    .dur .was b {
+      position: relative; color: #ececec; font-weight: 700; margin-left: 6px;
+    }
+    .dur .was b::after {
+      content: ""; position: absolute; left: -3px; right: -3px; top: 52%;
+      height: 2px; background: var(--red); transform: rotate(-8deg);
+    }
+    .dur .now { margin-top: 8px; font-size: 22px; font-weight: 800; color: var(--red-soft); letter-spacing: -.03em; }
+    .dur .tot { margin-top: auto; padding-top: 10px; font-size: 12px; color: var(--dim); }
+    .dur .off { margin-top: 4px; font-size: 12px; font-weight: 700; color: var(--green); }
+
+    @media screen and (max-width: 1340px) {
+      .sheet { overflow-x: auto; }
+    }
+    @media print {
+      .toolbar { display: none !important; }
+      html, body { background: #000; margin: 0; }
+      .sheet { padding: 0; gap: 0; }
+      .page {
+        width: 13.333in; height: 7.5in;
+        border: 0; box-shadow: none;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <div>
+      <div class="id">Colli<span>&amp;</span>Co · ABC71</div>
+      <div class="hint">2 páginas · recap do time + investimento</div>
+    </div>
+    <div style="display:flex;gap:8px">
+      <a class="btn" id="downloadPdf" href="ABC71-ColliCo-Proposta-Growth.pdf" download="ABC71-ColliCo-Proposta-Growth.pdf">Baixar PDF</a>
+      <button class="btn ghost" type="button" onclick="window.print()">Imprimir</button>
+    </div>
+  </div>
+
+  <div class="sheet">
+    <!-- SLIDE 1 · RECAP -->
+    <section class="page">
+      <div class="brand">Colli<span>&amp;</span>Co</div>
+      <p class="eyebrow">Recap da proposta · ABC71 × Colli&amp;Co</p>
+      <h1>Assessoria de Growth com o time<br>na conta: <em>Account + GT + copy + design.</em></h1>
+      <p class="lead">Motor de tração — mídia de alta intenção, tracking (PIXEL + CAPI, GTM, GA4) e CRM no mesmo circuito. Demanda rastreável para o ERP industrial, com opção de operar a Aloee (APS + MES) no mesmo funil.</p>
+
+      <div class="roles">
+        <article class="role">
+          <div class="n">01</div>
+          <h3>Account manager</h3>
+          <p>Dono da cadência com a diretoria. Prioridades, pendências, backlog e leitura do funil.</p>
+        </article>
+        <article class="role">
+          <div class="n">02</div>
+          <h3>Gestor de tráfego</h3>
+          <p>Google Search, Performance Max e Meta ABM. Escala só com prova. Verba amarrada a SQL.</p>
+        </article>
+        <article class="role">
+          <div class="n">03</div>
+          <h3>Copy</h3>
+          <p>Mensagem para indústria: ERP, chão de fábrica, custo e previsibilidade. Sem jargão.</p>
+        </article>
+        <article class="role">
+          <div class="n">04</div>
+          <h3>Design</h3>
+          <p>Criativos de performance para ERP e Aloee na mesma identidade. Peça, LP e anúncio juntos.</p>
+        </article>
+      </div>
+
+      <div class="packs">
+        <article class="pack">
+          <h3>ABC71</h3>
+          <p>Demanda rastreável para o ERP (Ômega e Pronto): Google de intenção e Meta ABM para dono, diretor e controller de indústria em expansão.</p>
+          <div class="pills"><span class="pill">Mídia paga</span><span class="pill">Criativos</span><span class="pill">Tracking</span><span class="pill">Gestão contínua</span></div>
+        </article>
+        <article class="pack">
+          <h3>ABC71 + Aloee</h3>
+          <p>O mesmo time, com frente extra para APS + MES. Dois produtos, um CRM, mídia e criativo no mesmo ritmo.</p>
+          <div class="pills"><span class="pill">ERP Ômega / Pronto</span><span class="pill">Aloee APS + MES</span><span class="pill">Funil único</span></div>
+        </article>
+      </div>
+
+      <div class="cad">
+        <div><strong>Atendimento diário</strong><span>Resumo de tarefas, pendências e resultados</span></div>
+        <div><strong>Check-in quinzenal · 1h</strong><span>Resultado da quinzena e plano de ação</span></div>
+        <div><strong>Check-in mensal · 1h</strong><span>Resultado do mês e próximo ciclo</span></div>
+        <div><strong>Planejamento quarter · 1h30</strong><span>Três meses com previsibilidade</span></div>
+      </div>
+      <div class="foot"><span>Assessoria de Growth · operação recorrente</span><span>01 / 02</span></div>
+    </section>
+
+    <!-- SLIDE 2 · VALORES -->
+    <section class="page">
+      <div class="brand">Colli<span>&amp;</span>Co</div>
+      <p class="eyebrow">Escopo de operação e valores</p>
+      <h1>Investimento: <em>dois recortes, 6 ou 12 meses.</em></h1>
+      <p class="lead">Mesmo time nas duas propostas. 12 meses reduz 34% da tabela. 6 meses reduz 25%.</p>
+
+      <div class="split">
+        <article class="col">
+          <div class="col-head"><h2>ABC71</h2><small>Assessoria padrão</small></div>
+          <p class="who">Account manager + Gestor de tráfego + copy + design</p>
+          <div class="op">
+            <div class="k">Operação recorrente</div>
+            <div class="pills"><span class="pill">Mídia paga</span><span class="pill">Criativos</span><span class="pill">Tracking</span></div>
+          </div>
+          <div class="durs">
+            <div class="dur feat">
+              <div class="lbl">12 meses</div>
+              <div class="was">Era <b>R$ 11.223,40</b></div>
+              <div class="now">12× R$ 7.407,44</div>
+              <div class="tot">Total anual: R$ 88.889,28</div>
+              <div class="off">−34%</div>
+            </div>
+            <div class="dur">
+              <div class="lbl">6 meses</div>
+              <div class="was">Era <b>R$ 11.223,40</b></div>
+              <div class="now">6× R$ 8.417,55</div>
+              <div class="tot">Total 6 meses: R$ 50.505,30</div>
+              <div class="off">−25%</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="col">
+          <div class="col-head"><h2>ABC71 + Aloee</h2><small>Assessoria padrão</small></div>
+          <p class="who">Account manager + Gestor de tráfego + copy + design</p>
+          <div class="op">
+            <div class="k">Operação recorrente · ERP + APS/MES</div>
+            <div class="pills"><span class="pill">Funil único</span><span class="pill">CRM</span><span class="pill">Dois ICPs</span></div>
+          </div>
+          <div class="durs">
+            <div class="dur feat">
+              <div class="lbl">12 meses</div>
+              <div class="was">Era <b>R$ 13.559,67</b></div>
+              <div class="now">12× R$ 8.949,38</div>
+              <div class="tot">Total anual: R$ 107.392,56</div>
+              <div class="off">−34%</div>
+            </div>
+            <div class="dur">
+              <div class="lbl">6 meses</div>
+              <div class="was">Era <b>R$ 13.559,67</b></div>
+              <div class="now">6× R$ 10.169,75</div>
+              <div class="tot">Total 6 meses: R$ 61.018,50</div>
+              <div class="off">−25%</div>
+            </div>
+          </div>
+        </article>
+      </div>
+      <div class="foot"><span>Colli&amp;Co · condição comercial</span><span>02 / 02</span></div>
+    </section>
+  </div>
+</body>
+</html>
