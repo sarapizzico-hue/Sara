@@ -73,8 +73,8 @@
 
     .brand { position: absolute; top: 4.2%; left: 5.2%; z-index: 6; font-weight: 800; letter-spacing: -.03em; font-size: .95rem; }
     .brand span { color: var(--red-soft); }
-    .slide.cover .brand { display: none; }
-    .slide.close .brand { color: #fff; }
+    .deck.is-cover .brand { opacity: 0; pointer-events: none; }
+    .deck.is-close .brand { color: #fff; }
     .footer {
       position: absolute; left: 5.2%; right: 5.2%; bottom: 2.4%;
       display: flex; justify-content: space-between; align-items: center;
@@ -198,7 +198,21 @@
       margin-bottom: .7rem;
     }
     .was-row span { font-size: .82rem; color: var(--muted); }
-    .was-row strong { font-size: 1.05rem; text-decoration: line-through; text-decoration-color: var(--red); text-decoration-thickness: 2px; color: #ececec; }
+    .was-row strong {
+      font-size: 1.05rem;
+      color: #ececec;
+      position: relative;
+    }
+    .was-row strong::after {
+      content: "";
+      position: absolute;
+      left: -4%;
+      right: -4%;
+      top: 52%;
+      height: 2px;
+      background: var(--red);
+      transform: rotate(-8deg);
+    }
     .now-row {
       flex: 1;
       border: 1.5px solid var(--red);
@@ -219,7 +233,7 @@
     .compare .ok { color: var(--green); font-weight: 700; }
     .compare .pkg { color: #fff; font-weight: 700; }
 
-    .nav-hint { position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); color: #666; font-size: .7rem; z-index: 20; }
+    .nav-hint { display: none; }
     .progress { position: absolute; top: 0; left: 0; height: 3px; width: 8%; background: var(--red); z-index: 8; transform-origin: left; }
 
     @media (max-width: 900px) {
@@ -654,6 +668,7 @@
     (function () {
       const slides = Array.from(document.querySelectorAll(".slide"));
       const progress = document.getElementById("progress");
+      const deck = document.getElementById("deck");
       let index = 0;
       let locked = false;
       function show(next) {
@@ -668,6 +683,8 @@
         target.classList.remove("exit-left", "exit-right");
         index = next;
         progress.style.width = ((index + 1) / slides.length * 100) + "%";
+        deck.classList.toggle("is-cover", index === 0);
+        deck.classList.toggle("is-close", target.classList.contains("close"));
         setTimeout(function () {
           current.classList.remove("exit-left", "exit-right");
           locked = false;
@@ -697,6 +714,7 @@
         show(index + (dx > 0 ? 1 : -1));
       }, { passive: true });
       progress.style.width = (1 / slides.length * 100) + "%";
+      deck.classList.add("is-cover");
     })();
   </script>
 </body>
