@@ -78,7 +78,7 @@ Decida pelo produto, não por gosto de layout.
 |---|---|---|
 | Combo de produtos (EQV+Growth, EC+e-com+Growth) | **Curto** 7–10 slides no layout `modelo-proposta-esqueleto.html` | Informação: `proposta-dental-muller.html`, `proposta-isoluz.html` |
 | EC de instalação (fases, dual-track, handover) | **EC profunda** 13–18 slides: capa → dor → vazamento → dores×produto → visão → formato → fases → pronto → recap → investimento | `ESTRUTURA-ENTREGA-G6.md`, `g6-modelo/`, `proposta-g6-estruturacao-comercial.html` |
-| Precisa de STEP / papéis / ondas / pedidos da semana | **14 slides** do esqueleto Colli | `modelo-proposta-esqueleto.html` (branch modelo) ou copiar Dental Muller e expandir |
+| Precisa de STEP / papéis / ondas / pedidos da semana | **Expandir o combo** (não o esqueleto de 8) | Brief pede STEP; copiar ciclo + papéis da Hanaro / Preço Popular |
 
 Slides vazios não entram. Gate da sala (objeções, “faz sentido?”) fica no **script**, não no deck do cliente.
 
