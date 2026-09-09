@@ -201,7 +201,7 @@
     .success-item h3 { margin: 0; font-size: 20px; }
     .offers { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 22px; }
     .offer {
-      padding: 26px 28px; border-radius: 24px; border: 1px solid var(--line); background: white; min-height: 390px;
+      padding: 26px 28px; border-radius: 24px; border: 1px solid var(--line); background: white; min-height: 320px;
     }
     .offer .tag { font: 700 12px/1 "IBM Plex Mono", monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--v4-red); }
     .offer h3 { margin: 12px 0 6px; font-size: 26px; }
@@ -213,7 +213,7 @@
     }
     .price-line strong { color: var(--ink); }
     .price-line.ok strong { color: #1a7a3a; }
-    .offer .now { font-size: 42px; font-weight: 700; letter-spacing: -.04em; line-height: 1; margin: 16px 0 8px; }
+    .offer .now { font-size: 42px; font-weight: 700; letter-spacing: -.04em; line-height: 1; margin: 18px 0 10px; }
     .offer .now small { font-size: 20px; font-weight: 600; color: var(--ink-soft); }
     .offer ul { margin: 8px 0 0; padding-left: 18px; color: var(--ink-soft); font-size: 15px; line-height: 1.4; }
     .combo {
@@ -225,6 +225,24 @@
     .combo p { margin: 0; color: rgba(255,255,255,.8); font-size: 16px; }
     .combo .fig { font-size: 40px; font-weight: 700; letter-spacing: -.04em; white-space: nowrap; }
     .combo .fig small { font-size: 18px; font-weight: 600; opacity: .8; }
+    .combo .was { display: block; font-size: 16px; font-weight: 600; text-decoration: line-through; opacity: .55; margin-bottom: 4px; }
+    .combo .cond { font: 700 11px/1 "IBM Plex Mono", monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--v4-cream); margin-bottom: 6px; }
+    .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 22px 0 8px; }
+    .kpi { padding: 16px 18px; border-radius: 16px; border: 1px solid var(--line); background: white; }
+    .kpi b { display: block; font-size: 22px; letter-spacing: -.03em; margin-bottom: 4px; }
+    .kpi span { color: var(--ink-soft); font-size: 13px; line-height: 1.3; }
+    .slide.white .map-item { background: white; border: 1px solid var(--line); }
+    .slide.white .map-item p { color: var(--ink-soft); }
+    .slide.white .map-item .dot { background: var(--v4-red); }
+    .slide.white .map-item .g6 { color: var(--v4-red); }
+    .ee-band {
+      margin-top: 16px; padding: 16px 24px; border-radius: 18px;
+      border: 1px solid rgba(229,9,20,.2); background: rgba(229,9,20,.06);
+      display: flex; justify-content: space-between; align-items: center; gap: 18px;
+    }
+    .ee-band .k { font: 700 12px/1 "IBM Plex Mono", monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--v4-red); margin-bottom: 6px; }
+    .ee-band p { margin: 0; color: var(--ink-soft); font-size: 16px; }
+    .ee-band .amt { font-size: 28px; font-weight: 700; letter-spacing: -.03em; white-space: nowrap; }
     .metric-wall { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 28px; }
     .metric-card { padding: 22px 20px; border-radius: 20px; min-height: 148px; }
     .metric-card .big { font-size: 34px; font-weight: 700; letter-spacing: -.04em; line-height: 1; margin: 8px 0; }
@@ -265,8 +283,8 @@
               <svg class="v4-mark" fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 77 20" aria-label="V4 Company"><path fill="#fff" d="M33.023 3.575c-2.001.003-3.093 1.21-3.09 3.32l.008 6.858c.003 2.11 1.098 3.315 3.1 3.312 2-.003 3.092-1.21 3.09-3.32l-.009-6.858c-.003-2.11-1.097-3.315-3.099-3.312zm.015 11.606c-.649.001-1.057-.356-1.058-1.298l-.009-7.122c-.001-.942.406-1.3 1.055-1.302.648 0 1.057.357 1.058 1.299l.009 7.122c.001.942-.407 1.3-1.055 1.301zm-6.1-3.176l.002 1.884c.001.942-.406 1.282-1.055 1.283-.648 0-1.056-.338-1.058-1.28l-.009-7.122c-.001-.942.406-1.3 1.055-1.302.648 0 1.057.357 1.058 1.299l.002 1.413 1.927-.002-.002-1.281c-.002-2.11-1.041-3.315-3.043-3.313-2 .003-3.037 1.21-3.034 3.32l.008 6.859c.003 2.11 1.042 3.314 3.043 3.312 2.002-.003 3.038-1.21 3.035-3.32l-.002-1.752-1.927.002zM13.055 6.352L8.68 10.813c-.06.062-.017.166.067.166l4.382-.006a.096.096 0 00.096-.097l-.006-4.456c0-.087-.103-.13-.163-.068zm5.862 7.88l-2.687.004a.035.035 0 00-.035.035l.004 2.879c0 .02-.015.035-.035.035l-3.01.004a.035.035 0 01-.034-.035l-.004-2.879a.035.035 0 00-.034-.035l-8.796.012a.141.141 0 01-.14-.142l-.003-2.624v-.004a.795.795 0 01.223-.588l8.758-8.928a.035.035 0 01.025-.01l2.846-.004c.005 0 .009.001.014.003a.367.367 0 01.216.348l.01 8.677c0 .019.017.035.036.035l2.641-.004a.035.035 0 00.035-.035l-.011-8.5c-.002-1.364-1.1-2.478-2.442-2.476L4.18.016a.035.035 0 00-.034.036l.008 6.856c0 .031.037.047.06.025l4.994-5.064a.034.034 0 01.024-.01l2.603-.003c.03 0 .046.037.025.06l-8.118 8.41a.034.034 0 01-.049 0l-1.529-1.55a.036.036 0 01-.01-.026L2.143.074A.035.035 0 002.104.04C.976.185.086 1.131 0 2.294v5.972l.011 8.9a2.48 2.48 0 001.937 2.424h14.974c1.15-.199 2.034-1.224 2.032-2.448l-.003-2.873a.035.035 0 00-.035-.036zM66.47 3.682l.01 7.895-2.104-7.892-2.557.003.017 13.19 1.834-.003-.012-9.553 2.55 9.55 2.094-.004-.016-13.188-1.816.002zm-23.33.031l-1.378 9.366-1.513-9.362-2.835.003.017 13.19 1.779-.003-.012-9.327 1.532 9.325 1.927-.003 1.396-9.46.012 9.458 1.928-.002-.017-13.19-2.835.005h-.001zm33.133-.043l-1.946.002-1.549 6.013-1.564-6.009-2.131.003 2.587 8.814.005 4.371 2.039-.003-.006-4.37 2.565-8.821zm-20.44.026l-2.058 13.192 1.871-.003.35-2.393 2.501-.003.355 2.392 2.057-.003-2.092-13.186-2.983.004zm.42 9.005l.974-6.67.99 6.668-1.964.002zm-5.793-8.998l-3.002.004.017 13.189 2.038-.003-.006-4.955.964-.002c2.038-.002 3.037-1.153 3.035-3.263l-.003-1.715c-.002-2.11-1.005-3.258-3.043-3.255zm.008 6.35h-.964L49.5 5.589l.964-.001c.648-.001 1.001.3 1.002 1.242l.003 1.978c.001.942-.35 1.245-1 1.245z"></path></svg>
             </div>
             <span class="eyebrow" style="margin-top:28px">Dental Muller × V4 Company · EQV + Assessoria de Growth</span>
-            <h1 class="cover-title">40 anos de indicação.<br>Zero canal digital.</h1>
-            <p class="lede" style="max-width:980px">A logística já entrega. O dentista que busca online não encontra vocês — encontra a Cremer. Primeiro o comercial aguenta o lead novo. Depois o Growth liga a segunda origem.</p>
+            <h1 class="cover-title">Da origem relacional<br>ao canal previsível.</h1>
+            <p class="lede" style="max-width:1020px">Quarenta anos de relacionamento, logística rápida e venda consultiva. O próximo ciclo é capturar a demanda técnica que já circula no mercado — no ritmo do estoque e da entrega.</p>
           </div>
           <div class="cover-client">Proposta personalizada · cliente EE · Account + GT + Copy + Design</div>
         </div>
@@ -275,70 +293,41 @@
       <!-- 2 DIAGNÓSTICO -->
       <section class="slide white" data-title="Diagnóstico estratégico">
         <div class="topline"></div>
-        <span class="eyebrow">Diagnóstico estratégico</span>
-        <h2 style="margin-top:18px;max-width:1240px">A operação existe. A origem além da indicação, não.</h2>
-        <p class="lede">Distribuidora odontológica na Bahia. Base recorrente, ticket ~R$ 2 mil, logística rápida. GTM 100% comercial e relacional — em 40 anos, nenhum investimento em marketing.</p>
-        <div class="leak-grid">
-          <article class="leak-card">
-            <div class="k">O que já funciona</div>
-            <div class="num">40</div>
-            <p class="cap">anos · R$ 450–700k/mês · recorrência real</p>
-            <ul>
-              <li>Venda consultiva B2B para clínicas e dentistas</li>
-              <li>Diferencial claro de logística rápida</li>
-              <li>EE paga (R$ 12.364): mapa e direção já comprados</li>
-            </ul>
-          </article>
-          <article class="leak-card">
-            <div class="k">O que é zero</div>
-            <div class="num">0%</div>
-            <p class="cap">da origem fora da indicação · sem site · sem mídia</p>
-            <ul>
-              <li>Lead chega 100% indicado — outro canal não existe</li>
-              <li>Comercial treinado para o conhecido, não para o lead novo</li>
-              <li>Demanda técnica na busca vai para player agressivo</li>
-            </ul>
-          </article>
+        <span class="eyebrow">Diagnóstico estratégico · leitura da EE</span>
+        <h2 style="margin-top:14px;font-size:38px;max-width:1280px">A Muller já tem operação. O crescimento previsível pede uma origem complementar.</h2>
+        <p class="lede" style="font-size:20px">Base recorrente na Bahia, ticket ~R$ 2 mil, GTM comercial e relacional. A meta de ~R$ 1M/mês se sustenta com uma segunda origem — filtrada por estoque, capacidade logística e prova de variedade, conhecimento e entrega.</p>
+        <div class="kpis">
+          <div class="kpi"><b>40 anos</b><span>Relacionamento e logística rápida</span></div>
+          <div class="kpi"><b>R$ 450–700k</b><span>Faturamento mensal de referência</span></div>
+          <div class="kpi"><b>Ticket ~R$ 2 mil</b><span>Venda consultiva B2B</span></div>
+          <div class="kpi"><b>Meta ~R$ 1M</b><span>~150 a 275 pedidos a mais / mês</span></div>
         </div>
-        <div class="leak-banner">
-          <div class="icon-box" style="background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.28);color:#fff"><svg class="icon"><use href="#i-target"/></svg></div>
-          <div>
-            <h3>Meta ~R$ 1M/mês pede ~150 a 275 pedidos a mais — no mesmo ticket.</h3>
-            <p>Indicação pagou 40 anos. Não entrega esse volume com previsibilidade. Gargalo duplo: canal de lead + comercial capaz de atender quem não veio indicado.</p>
-          </div>
+        <div class="map-grid" style="margin-top:18px">
+          <div class="map-item"><div class="dot"></div><div><div class="g6">01</div><h3>Ativo relacional</h3><p>A indicação construiu a empresa e continua sendo força. O próximo ciclo pede um canal que chegue em quem já busca material e ainda não está na base.</p></div></div>
+          <div class="map-item"><div class="dot"></div><div><div class="g6">02</div><h3>Demanda técnica sem caminho</h3><p>Quem pesquisa produto, disponibilidade e entrega precisa de um destino claro até a Muller. Esse caminho ainda não está estruturado.</p></div></div>
+          <div class="map-item"><div class="dot"></div><div><div class="g6">03</div><h3>Território de busca</h3><p>A decisão de compra técnica acontece online. Sem presença com prova de mix e entrega, essa demanda segue para quem já aparece.</p></div></div>
+          <div class="map-item"><div class="dot"></div><div><div class="g6">04</div><h3>Comercial forte no conhecido</h3><p>O time converte bem quem chega indicado. A segunda origem pede o mesmo método: dono, prazo e próximo passo para a demanda nova.</p></div></div>
+          <div class="map-item"><div class="dot"></div><div><div class="g6">05</div><h3>Capacidade como critério</h3><p>Estoque e logística rápida são o diferencial — e o ritmo inteligente de escala. Demanda entra no passo que a operação entrega.</p></div></div>
+          <div class="map-item"><div class="dot"></div><div><div class="g6">06</div><h3>Meta com previsibilidade</h3><p>No mesmo ticket, ~R$ 1M nasce de origem complementar + comercial preparado. Não de volume solto.</p></div></div>
         </div>
-      </section>
-
-      <!-- 3 ONDE QUEBRA -->
-      <section class="slide dark" data-title="Onde quebra">
-        <span class="eyebrow">Leitura da EE</span>
-        <h2 style="margin-top:20px;max-width:1220px">Onde a previsibilidade quebra — e por que comercial vem antes da demanda.</h2>
-        <div class="map-grid">
-          <div class="map-item"><div class="dot"></div><div><div class="g6">01</div><h3>Origem 100% indicação</h3><p>O teto da empresa é o teto da rede. Sem segunda origem, a meta não tem de onde nascer.</p></div></div>
-          <div class="map-item"><div class="dot"></div><div><div class="g6">02</div><h3>Canal digital inexistente</h3><p>Sem site, sem mídia, sem captura de quem já busca produto, estoque e entrega.</p></div></div>
-          <div class="map-item"><div class="dot"></div><div><div class="g6">03</div><h3>Cremer na busca</h3><p>O dentista técnico não encontra a Muller. Quem estrutura o canal fica com a demanda.</p></div></div>
-          <div class="map-item"><div class="dot"></div><div><div class="g6">04</div><h3>Comercial feito para o conhecido</h3><p>Lead novo sem dono, SLA e processo morre no Zap. Mídia antes disso queima verba.</p></div></div>
-          <div class="map-item"><div class="dot"></div><div><div class="g6">05</div><h3>Capacidade é o teto</h3><p>Estoque e logística liberam escala. Demanda sem filtro quebra a operação que vocês já construíram.</p></div></div>
-          <div class="map-item"><div class="dot"></div><div><div class="g6">06</div><h3>R$ 1M sem máquina</h3><p>Faltam pedidos, não milagre de ticket. Indicação sozinha não fecha o buraco com previsibilidade.</p></div></div>
-        </div>
-        <p class="quote">EQV prepara o comercial para o lead que não veio indicado. Growth só então liga o canal.</p>
+        <p class="quote" style="margin-top:18px;font-size:22px">Primeiro o método comercial. Depois a demanda. Capacidade libera o ritmo.</p>
       </section>
 
       <!-- 4 EQV -->
       <section class="slide white" data-title="EQV">
         <div class="topline"></div>
         <span class="eyebrow">Produto 01 · pontual · Diagnóstico Comercial 360</span>
-        <h2 style="margin-top:16px">EQV · o comercial aguenta o lead novo.</h2>
-        <p class="lede">Antes de gerar demanda, o time precisa de fluxo, SLA e treino para quem não chegou por indicação. Este é o chão.</p>
+        <h2 style="margin-top:16px">EQV · o comercial preparado para a demanda nova.</h2>
+        <p class="lede">O time que já converte no relacionamento ganha método para receber, qualificar e fechar a origem complementar — com o padrão da venda consultiva Muller.</p>
         <div class="check-grid">
-          <div class="check-card"><div class="icon-box"><svg class="icon"><use href="#i-search"/></svg></div><div><h3>Diagnóstico da Operação Comercial</h3><p>Onde a venda morre hoje — no conhecido e no que ainda não existe.</p></div></div>
-          <div class="check-card"><div class="icon-box"><svg class="icon"><use href="#i-route"/></svg></div><div><h3>Mapeamento do fluxo de vendas</h3><p>Jornada visível: da indicação e do lead digital até o pedido.</p></div></div>
-          <div class="check-card"><div class="icon-box"><svg class="icon"><use href="#i-layers"/></svg></div><div><h3>Acordo Marketing ↔ Vendas (SLA)</h3><p>Dono, prazo e próximo passo. Nenhuma entrada sem responsável.</p></div></div>
-          <div class="check-card"><div class="icon-box"><svg class="icon"><use href="#i-page"/></svg></div><div><h3>Manual do processo comercial (BPMN)</h3><p>O jeito Muller sai da cabeça das pessoas e vira operação.</p></div></div>
-          <div class="check-card"><div class="icon-box"><svg class="icon"><use href="#i-users"/></svg></div><div><h3>Perfil de Contratação por Cadeira</h3><p>Quem já está, quem falta, o que cada cadeira precisa entregar.</p></div></div>
-          <div class="check-card"><div class="icon-box"><svg class="icon"><use href="#i-megaphone"/></svg></div><div><h3>Imersão de Treinamento do Time</h3><p>O comercial treina o lead novo — não só o indicado.</p></div></div>
+          <div class="check-card"><div class="icon-box"><svg class="icon"><use href="#i-search"/></svg></div><div><h3>Diagnóstico da Operação Comercial</h3><p>Como a Muller vende hoje — e o que precisa existir para a demanda nova entrar no mesmo ritmo.</p></div></div>
+          <div class="check-card"><div class="icon-box"><svg class="icon"><use href="#i-route"/></svg></div><div><h3>Mapeamento do fluxo de vendas</h3><p>Jornada visível: da indicação e da origem digital até o pedido.</p></div></div>
+          <div class="check-card"><div class="icon-box"><svg class="icon"><use href="#i-layers"/></svg></div><div><h3>Acordo Marketing ↔ Vendas (SLA)</h3><p>Dono, prazo e próximo passo. Toda entrada com responsável e sequência clara.</p></div></div>
+          <div class="check-card"><div class="icon-box"><svg class="icon"><use href="#i-page"/></svg></div><div><h3>Manual do processo comercial (BPMN)</h3><p>O jeito Muller vira operação repetível — não depende só de quem está na ponta.</p></div></div>
+          <div class="check-card"><div class="icon-box"><svg class="icon"><use href="#i-users"/></svg></div><div><h3>Perfil de Contratação por Cadeira</h3><p>Quem já está, o que cada cadeira entrega e onde reforçar para a segunda origem.</p></div></div>
+          <div class="check-card"><div class="icon-box"><svg class="icon"><use href="#i-megaphone"/></svg></div><div><h3>Imersão de Treinamento do Time</h3><p>O comercial treina a demanda nova com a mesma qualidade da venda consultiva.</p></div></div>
         </div>
-        <p class="quote">Não é Estruturação Comercial completa. É o processo para a segunda origem não morrer no Zap.</p>
+        <p class="quote">Instala o método para a Muller converter a segunda origem com o mesmo padrão que construiu a base recorrente: clareza de fluxo, acordo entre áreas e time pronto para crescer com previsibilidade.</p>
       </section>
 
       <!-- 5 GROWTH -->
@@ -355,7 +344,7 @@
           <article class="card team-role glass" style="background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.16)">
             <div class="icon-box"><svg class="icon"><use href="#i-search"/></svg></div>
             <h3>Gestor de tráfego</h3>
-            <p>Google captura intenção técnica. Meta só com fundamento. Sem site, campanha não sobe.</p>
+            <p>Google captura intenção técnica. Meta com fundamento. Presença digital antes de escalar verba.</p>
           </article>
           <article class="card team-role glass" style="background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.16)">
             <div class="icon-box"><svg class="icon"><use href="#i-megaphone"/></svg></div>
@@ -390,7 +379,7 @@
         <div class="process">
           <div class="stage"><span class="n">01</span><h3>EE</h3><p>Já feita. Mapa, ICP e direção. Não reabre diagnóstico.</p></div>
           <div class="arrow">→</div>
-          <div class="stage"><span class="n">02</span><h3>EQV</h3><p>Fluxo, SLA, BPMN e treino para o lead que não veio indicado.</p></div>
+          <div class="stage"><span class="n">02</span><h3>EQV</h3><p>Fluxo, SLA, BPMN e treino para a demanda nova entrar no mesmo padrão da venda consultiva.</p></div>
           <div class="arrow">→</div>
           <div class="stage"><span class="n">03</span><h3>Fundação</h3><p>Presença digital mínima e provas de mix, estoque e entrega.</p></div>
           <div class="arrow">→</div>
@@ -408,7 +397,7 @@
         <h2 style="margin-top:16px">O que muda na operação.</h2>
         <div class="success-grid">
           <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-route"/></svg></div><h3>Segunda origem além da indicação — com dono e próximo passo</h3></div>
-          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-layers"/></svg></div><h3>SLA marketing ↔ vendas: o lead novo não morre no Zap</h3></div>
+          <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-layers"/></svg></div><h3>SLA marketing ↔ vendas: a demanda nova entra com dono, prazo e próximo passo</h3></div>
           <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-page"/></svg></div><h3>Processo comercial visível (BPMN) — sai da cabeça do time</h3></div>
           <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-pin"/></svg></div><h3>Presença digital mínima: prova de variedade, estoque e entrega</h3></div>
           <div class="success-item"><div class="icon-box"><svg class="icon"><use href="#i-search"/></svg></div><h3>Google de intenção técnica, no ritmo do estoque e da logística</h3></div>
@@ -421,41 +410,49 @@
       <!-- 8 INVESTIMENTO -->
       <section class="slide white" data-title="Investimento">
         <div class="topline"></div>
-        <span class="eyebrow">Investimento · condição comercial</span>
-        <h2 style="margin-top:14px;font-size:40px">EE reconhecida. Dois produtos. Um ciclo.</h2>
+        <span class="eyebrow">Investimento · condição especial</span>
+        <h2 style="margin-top:12px;font-size:38px">Dois produtos. Um ciclo. A EE trabalha a favor de vocês.</h2>
         <div class="offers">
           <article class="offer">
             <div class="tag">Produto 01 · pontual</div>
             <h3>EQV · Diagnóstico Comercial 360</h3>
             <p class="sub">Fluxo · SLA · BPMN · cadeiras · imersão do time</p>
-            <div class="price-line"><span>Tabela</span><strong>R$ 24.500,00</strong></div>
-            <div class="price-line ok"><span>Condição</span><strong>12× R$ 1.653,75</strong></div>
-            <div class="now">12× R$ 1.653<small>,75</small></div>
+            <div class="price-line"><span>Valor de referência</span><strong>R$ 34.900,00</strong></div>
+            <div class="now">R$ 34.900<small>,00</small></div>
             <ul>
-              <li>Os 6 entregáveis do comercial</li>
-              <li>Cartão · projeto pontual</li>
+              <li>Método comercial para a origem complementar</li>
+              <li>Projeto pontual · Diagnóstico Comercial 360</li>
             </ul>
           </article>
           <article class="offer">
             <div class="tag">Produto 02 · 12 meses</div>
             <h3>Assessoria de Growth</h3>
             <p class="sub">Account + GT + Copy + Design · rotina Colli</p>
-            <div class="price-line"><span>Tabela</span><strong>R$ 8.437,77 /mês</strong></div>
-            <div class="price-line"><span>EE já investida</span><strong>− R$ 12.364,00</strong></div>
-            <div class="price-line ok"><span>Condição</span><strong>12× R$ 7.407,44</strong></div>
-            <div class="now">12× R$ 7.407<small>,44</small></div>
+            <div class="price-line"><span>Fee de referência</span><strong>R$ 11.223,40 /mês</strong></div>
+            <div class="now">R$ 11.223<small>,40</small> <small>/mês</small></div>
             <ul>
-              <li>Equivalente EE: R$ 1.030,33/mês abatido na fee</li>
-              <li>Verba de mídia à parte · fundação antes de campanha</li>
+              <li>Time completo na conta · 12 meses</li>
+              <li>Verba de mídia à parte · fundação antes de escala</li>
             </ul>
           </article>
         </div>
+        <div class="ee-band">
+          <div>
+            <div class="k">Reconhecimento da EE</div>
+            <p>Investimento já realizado na Estruturação Estratégica, abatido neste desenho.</p>
+          </div>
+          <div class="amt">− R$ 12.364,00</div>
+        </div>
         <div class="combo">
           <div>
-            <h3>Desenho completo · EQV + Growth</h3>
-            <p>Comercial pronto para o lead novo + canal digital no ritmo da operação.</p>
+            <h3>Desenho completo · EQV + Assessoria de Growth</h3>
+            <p>Método comercial + canal digital no ritmo da operação. 12 meses.</p>
           </div>
-          <div class="fig">12× R$ 9.061<small>,19</small></div>
+          <div style="text-align:right">
+            <div class="cond">Condição especial</div>
+            <div class="was">De R$ 14.131,73 /mês</div>
+            <div class="fig">12× R$ 9.061<small>,19</small></div>
+          </div>
         </div>
       </section>
 
@@ -467,7 +464,7 @@
       <button class="nav-btn" id="nextBtn" type="button" aria-label="Próximo"><svg><use href="#i-arrow-right"/></svg></button>
     </div>
     <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-    <div class="slide-counter" id="slideCounter">01 / 08</div>
+    <div class="slide-counter" id="slideCounter">01 / 07</div>
   </div>
 
   <script>
