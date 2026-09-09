@@ -28,6 +28,7 @@ Preferir a coluna “puxar de”. Visual: ver `visual-e-kit.md` (Dental Muller /
 
 | Quando o brief é… | Arquivo |
 |---|---|
+| Layout + arco para duplicar | `modelo-proposta.html` |
 | EQV + Growth, ciclo comercial → demanda | `proposta-dental-muller.html` |
 | EC profunda, fases, Receita Previsível | `proposta-g6-estruturacao-comercial.html` · `g6/` · `ESTRUTURA-ENTREGA-G6.md` |
 | EC enxuta 13 slides | `proposta-g6-modelo-13-slides.html` · `g6-modelo/` |

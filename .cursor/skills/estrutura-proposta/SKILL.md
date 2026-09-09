@@ -30,7 +30,7 @@ Não pule etapas. Se o brief estiver incompleto, **pare e preencha a ficha com a
 2. Abrir `references/brief.md` e exigir o **brief mínimo**.
 3. Escolher o **formato** em `references/formatos.md` (curto combo · EC profunda · 14 slides STEP).
 4. Montar os **três atos + decisão** com `references/atos.md`.
-5. Copiar visual da âncora em `references/visual-e-kit.md` e a **dinâmica de sala** em `references/dinamica.md` (hash, pílula de ato, `window.goTo`). Não copiar o conteúdo da ABC71.
+5. Duplicar `modelo-proposta.html` (layout Colli + arco da proposta). Preencher os `.ph` com o brief. Não copiar conteúdo da ABC71.
 6. Nomear produtos só pelo catálogo em `references/catalogo.md`.
 7. Entregar o **kit**: `proposta-{cliente}-{oferta}.html` + `script-{cliente}-pitch.html` (salvo brief dizer não).
 8. Rodar o checklist do final desta skill **antes** de declarar pronto.
@@ -46,7 +46,7 @@ Obrigatório:
 | Cliente | Dental Muller |
 | Produto(s) do catálogo | EQV + Assessoria de Growth |
 | Preços finais | âncora → condição única (ou A/B se brief pedir) |
-| Referência visual | `proposta-dental-muller.html` |
+| Referência visual | `modelo-proposta.html` (layout) · conteúdo no padrão Muller/G6 |
 | Narrativa em 1 linha | Do [jeito atual] ao [estado instalado] |
 
 Se faltar campo → listar o que falta e esperar. Não “chutar” ticket, desconto, prazo ou headline.
@@ -76,7 +76,7 @@ Decida pelo produto, não por gosto de layout.
 
 | Situação | Formato | Âncora |
 |---|---|---|
-| Combo de produtos (EQV+Growth, EC+e-com+Growth) | **Curto** 7–10 slides: capa → diagnóstico → 1 slide por produto → ciclo/o que muda → investimento | `proposta-dental-muller.html`, `proposta-isoluz.html` |
+| Combo de produtos (EQV+Growth, EC+e-com+Growth) | **Curto** 7–10 slides no layout `modelo-proposta.html` | Informação: `proposta-dental-muller.html`, `proposta-isoluz.html` |
 | EC de instalação (fases, dual-track, handover) | **EC profunda** 13–18 slides: capa → dor → vazamento → dores×produto → visão → formato → fases → pronto → recap → investimento | `ESTRUTURA-ENTREGA-G6.md`, `g6-modelo/`, `proposta-g6-estruturacao-comercial.html` |
 | Precisa de STEP / papéis / ondas / pedidos da semana | **14 slides** do esqueleto Colli | `modelo-proposta-esqueleto.html` (branch modelo) ou copiar Dental Muller e expandir |
 
@@ -86,18 +86,19 @@ Mapa de cada slide: `references/formatos.md`. Dinâmica (hash, pílula, atos): `
 
 ## Visual travado
 
-Padrão atual (Dental Muller / G6 modelo / Colli):
+Híbrido travado nesta skill:
 
-- Deck **1600×900** com `fitDeck` / scale no viewport
-- **IBM Plex Sans** + **IBM Plex Mono**
-- Tokens: `#e50914` / `#280001` / `#ffebc8` · tipos de slide `red | dark | white`
-- Self-contained: **um** HTML na raiz (sem casco de iframes). Logos em `assets/`
-- Navegação de sala (Colli unificada, sem o conteúdo ABC71): setas / espaço / Home / End, hash `#slide-01`, pílula **ato + título**, nav que salta para o início de cada ato, `window.goTo`, tela cheia
-- HTML na **raiz** do repo (GitHub Pages). Não remover `.nojekyll`
+- **Layout / palco:** sistema Colli da ABC71 unificada (vinho, Montserrat, JetBrains Mono, slide-head, chip de seção, divisor, chrome de sala). Âncora: `modelo-proposta.html`
+- **Informação:** arco das últimas propostas (Muller / G6 / Isoluz) — tese Do X ao Y, reframe, KPIs desta conta, 1 slide por produto do catálogo, ciclo, critérios de pronto, um preço. **Não** SWOT, personas, SEO ou semanas de projeto da ABC71
 
-Não copiar: visual Sora da G6 internet; tema dark Inter do hub Farmer; Outfit/Modular **salvo o brief pedir essa âncora**; Montserrat/vinho/SWOT da ABC71.
+- Deck **1600×900** com `fitDeck`
+- Self-contained: **um** HTML na raiz (sem casco de iframes)
+- Navegação: setas / espaço / Home / End, hash `#slide-01`, pílula **ato + título**, nav de atos, `window.goTo`, tela cheia
+- HTML na **raiz** (GitHub Pages). Não remover `.nojekyll`
 
-Spec visual: `references/visual-e-kit.md`. Dinâmica: `references/dinamica.md`.
+Não copiar: visual Sora da G6 internet; tema dark Inter do hub Farmer; cream/IBM Plex da Muller **salvo o brief pedir essa âncora antiga**; conteúdo da ABC71.
+
+Spec: `references/visual-e-kit.md`. Dinâmica: `references/dinamica.md`.
 
 ## Produto e preço
 
@@ -171,7 +172,7 @@ Editar com IA: não mande o HTML inteiro com base64. Mande a ficha + “no slide
 - [ ] Recap ou ciclo fecha **antes** do slide de investimento
 - [ ] Um preço (ou A/B explícito no brief) · condição comercial, não desconto
 - [ ] Próximo passo concreto
-- [ ] Visual 1600×900 IBM Plex copiado da âncora, não reinventado
+- [ ] Visual 1600×900 Colli (`modelo-proposta.html`), não reinventado
 - [ ] Dinâmica: hash `#slide-01`, pílula de ato, `data-act` + `window.goTo`
 - [ ] `proposta-*.html` na raiz + script de pitch
 - [ ] Hub Farmer / pipe **não** alterados neste fluxo

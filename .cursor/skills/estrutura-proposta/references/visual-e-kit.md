@@ -2,73 +2,73 @@
 
 ## Deck cliente canônico (travado)
 
-Copiar CSS/JS da âncora do brief. Não inventar tema.
+**Layout** puxa o palco Colli da ABC71 unificada. **Informação** puxa o arco das últimas propostas (Muller / G6 / Isoluz).
 
-**Âncora viva no `main`:** `proposta-dental-muller.html` (mesmo sistema de `proposta-g6-modelo-13-slides.html` e `g6-modelo/`).
+Âncora para duplicar: `modelo-proposta.html`.
 
 | Token | Valor |
 |---|---|
-| Canvas | 1600×900, scale no viewport (`#deck` + `--deck-scale`) |
-| Título | IBM Plex Sans 600 · letter-spacing negativa |
-| Mono / counter | IBM Plex Mono |
-| Vermelho | `#e50914` |
-| Dark | `#280001` → `#130001` |
-| Cream | `#ffebc8` |
-| Hero capa | radial `#ff5a2c` → `#e50914` → `#b00610` → `#280001` |
-| Tipos de slide | `red` · `dark` · `white` (creme/`#f5f4f2` no default) |
-| Eyebrow | pill uppercase, letter-spacing ~0.09em |
-| Counter | `01 / N` canto |
+| Canvas | 1600×900, `fitDeck` (`translate(-50%,-50%) scale`) |
+| Display | Montserrat 700/800 (títulos). Corpo 400/500/600. *Não* usar 800 no texto de card |
+| Métricas / counter | JetBrains Mono 500/700, tabular-nums |
+| Capa | `#90191e` → `#7c191d` → `#65181c` |
+| Fundo slide | `#351010` → `#290c0c` → `#210909` + grid 80px |
+| Vermelho | `#ef3340` / `#ff6b73` |
+| Âmbar / verde | `#f4b942` / `#58d68d` (EE e condição) |
+| Tipos | `cover` · (conteúdo) · `divider` |
+| Chrome no slide | `topbar` 7px · `slide-head` + `section-chip` · `footer` 42px |
+| Chrome na sala | progresso topo, pílula, nav de atos, ← 01/N →, tela cheia |
 
-Interação: ver `dinamica.md`. Chrome **fora** do canvas 1600×900 (não tapa o conteúdo): progresso no topo, pílula de ato, nav de atos, ← 01/N →, tela cheia. Self-contained — **um arquivo**, sem iframes.
+Self-contained — **um arquivo**, sem iframes. Fontes via Google Fonts (não copiar os TTF da ABC71).
 
-HTML na **raiz** (GitHub Pages). Assets (logo, docx) em `assets/`. Não remover `.nojekyll`. Não mover arquivo publicado sem atualizar links.
+HTML na **raiz** (GitHub Pages). Assets em `assets/`. Não remover `.nojekyll`.
+
+## O que copiar de onde
+
+| Camada | Fonte | O quê |
+|---|---|---|
+| Palco, capa, divisor, cards, métricas, nav | `modelo-proposta.html` (sistema ABC71) | CSS + chrome |
+| Tese, reframe, KPIs, produtos, ciclo, preço | Brief + Muller / G6 / Isoluz | Texto desta conta |
+| Nomes de produto | catálogo da skill | EC · EQV · Growth · CRM · Social · SDR IA · E-com B2B |
 
 ## O que não copiar
 
 | Origem | Por quê |
 |---|---|
-| `proposta-g6-internet.html` (Sora) | Conteúdo/preço ok; visual **não** é o padrão novo |
+| Conteúdo da ABC71 (SWOT, personas, SEO, semanas) | Outro tipo de peça — não é proposta comercial |
+| Iframes / 44 slides da unificada | Overkill; um HTML só |
+| TTF hospedados na ABC71 | Usar Google Fonts |
+| `proposta-g6-internet.html` (Sora) | Visual antigo |
 | `index.html` / `farmer-sara.html` | Hub interno dark + Inter |
-| Modular / Martins / Motéis (Outfit + Plus Jakarta, full-bleed) | Só se o brief citar essa âncora |
-| Isoluz (Manrope, palco 16:9 próprio) | Deck próprio; puxar **conteúdo** de EC+e-com+Growth, não o tema, salvo brief |
-| ABC71 unificado (Montserrat / vinho / 4 iframes) | Pegar **só** a dinâmica de sala (`dinamica.md`). Não copiar visual nem conteúdo |
+| Cream / IBM Plex da Muller | Só se o brief pedir a âncora antiga |
+| Modular / Martins (Outfit, full-bleed) | Só se o brief citar |
 
 ## Como editar com pouco token
 
-1. Não manda o HTML inteiro com base64.
-2. Manda a ficha (`references/brief.md`) + o slide alvo (“no slide 6, trocar X por Y”).
-3. Preserve a ordem do arco.
+1. Duplicar `modelo-proposta.html` → `proposta-{cliente}-{oferta}.html`.
+2. Trocar só os `.ph` e os títulos. Não reabrir o CSS.
+3. Preserve o arco: capa → diagnóstico → (divisor) → produto(s) → ciclo → pronto → investimento.
 4. Preço = “condição comercial”, nunca “desconto”.
-5. Sucesso de EC G6 = título **Receita Previsível** se o brief for G6/EC profunda.
+5. Número sem fonte não entra.
 
 ## Kit de arquivos
 
 | Entrega | Nome | Quando |
 |---|---|---|
+| Esqueleto (layout + arco) | `modelo-proposta.html` | Duplicar sempre |
 | Proposta deck | `proposta-{slug-cliente}-{oferta}.html` | Sempre |
 | Script pitch | `script-{slug-cliente}-pitch.html` | Sempre, salvo brief não |
-| Word | `assets/{nome}.docx` | Se brief pedir |
-| PDF/PPTX | só com pedido | Ciclo separado |
-| Logo | `assets/` | Sempre que houver mídia |
+| Word / PDF / PPTX | `assets/` | Só se brief pedir |
 
-Slug: minúsculas, hífen (`proposta-dental-muller.html`).
+## Spec mínima
 
-Não criar `-v2` / `-novo` sem arquivar a anterior no brief. G6 Social foi exceção (dois preços).
-
-## Spec mínima de implementação
-
-Ao criar arquivo novo:
-
-1. Abrir a âncora visual do brief.
-2. Duplicar o arquivo (ou copiar `<style>` + JS de navegação + chrome: topline, footer, counter, dots).
-3. Trocar `<title>`, tese, slides. Manter classes `.slide.red|dark|white`, `.eyebrow`, `.lede`. Cada slide: `data-act`, `data-title`, `aria-label`.
-4. Cumprir o contrato JS de `dinamica.md` (`goTo`, hash, pílula, nav de atos). Não reinventar o palco 1600×900.
-5. Conferir `fitDeck`: o retângulo 1600×900 cabe no viewport sem scroll interno do slide.
-6. Abrir no browser: percorrer **todos** os slides com teclado, colar `#slide-03` na URL, saltar pelos atos, checar overflow de texto, preço visível, counter correto.
-
-Componentes úteis (G6 / modelo): eyebrow, leak-grid, map-grid, phase-rail, success-grid, price-layout, split-2. Reuse se a âncora já tiver; não inventar um terceiro grid.
+1. Duplicar `modelo-proposta.html`.
+2. Cada slide: `data-act`, `data-title`, `aria-label`.
+3. Cumprir `dinamica.md` (`goTo`, hash, pílula, nav de atos).
+4. `fitDeck` sem scroll interno.
+5. Browser: teclado, `#slide-03`, saltar pelos atos, overflow, preço visível.
 
 ## Hub interno vs. deck
 
-- Deck cliente: Colli 16:9, IBM Plex, vermelho V4
-- Ferramenta Sara (pipe, farmer, score, plano): dark + Inter — **não misturar** e **não alterar** no fluxo de proposta
+- Deck cliente: vinho Colli + Montserrat (`modelo-proposta.html`)
+- Ferramenta Sara: dark + Inter — não misturar e não alterar no fluxo de proposta
