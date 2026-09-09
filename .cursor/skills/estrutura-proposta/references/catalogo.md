@@ -24,7 +24,7 @@ Não calcular, não arredondar, não “fazer um desconto bonito”. Escrever a 
 
 ## Onde puxar (conteúdo)
 
-Preferir a coluna “puxar de”. Visual: ver `visual-e-kit.md` (Dental Muller / G6 modelo), **exceto** se o brief citar outra âncora.
+Preferir a coluna “puxar de”. Visual: duplicar `modelo-proposta.html`. Conteúdo: as âncoras abaixo.
 
 | Quando o brief é… | Arquivo |
 |---|---|
