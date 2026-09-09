@@ -26,6 +26,8 @@ Dental Muller (referência viva no `main`):
 
 Use este formato quando o brief tem **mais de um produto** e a sala não precisa ver fase a fase.
 
+`data-act`: Capa+Diagnóstico → `narrativa` (Diagnóstico também carrega dados) · cada produto + ciclo → `produto` · Investimento → `decisao`. Nav de atos: Dados salta para o Diagnóstico. Divisor entre atos só se o brief pedir — 7 slides já respiram com a pílula.
+
 ## B. EC profunda (13–18 slides) — instalação comercial
 
 Âncoras: `ESTRUTURA-ENTREGA-G6.md` · `g6/` · `g6-modelo/` (13) · `proposta-g6-estruturacao-comercial.html` (18)
@@ -55,6 +57,8 @@ Ordem na sala: narrativa (capa/contexto) → dados (vazamento + dores) → narra
 Capa → Dor → Vazando → Sangria → Dores×cliente → CRM/controle → Visão → Produto → Fases → Sucesso → Personalização → Recap → Investimento
 
 Use quando a sala não aguenta um detalhe por fase, mas a oferta ainda é **instalação** (não retainer de mídia).
+
+Divisores (subcapa de ato) **antes** de Dados, Produto e Decisão. Trilho no divisor de Produto = nomes das fases desta conta. Spec do divisor: `dinamica.md`.
 
 ## C. 14 slides STEP (esqueleto Colli)
 

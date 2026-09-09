@@ -1,6 +1,6 @@
 ---
 name: estrutura-proposta
-description: Monta e edita propostas comerciais V4 (deck HTML 16:9 Colli, script de pitch e documento). Use when the user pede proposta, deck, pitch, investimento, estruturação comercial, EQV, Growth, CRM, Social, SDR IA, e-commerce B2B, ou adaptação de um cliente novo.
+description: Monta e edita propostas comerciais V4 (deck HTML 16:9 Colli, dinâmica de sala, script de pitch). Use when the user pede proposta, deck, pitch, investimento, estruturação comercial, EQV, Growth, CRM, ou adaptação de um cliente novo; também ao estudar dinâmica Colli/ABC71 unificada para o palco (hash, atos, pílula) sem copiar conteúdo.
 icon: book-open
 color: red
 ---
@@ -30,7 +30,7 @@ Não pule etapas. Se o brief estiver incompleto, **pare e preencha a ficha com a
 2. Abrir `references/brief.md` e exigir o **brief mínimo**.
 3. Escolher o **formato** em `references/formatos.md` (curto combo · EC profunda · 14 slides STEP).
 4. Montar os **três atos + decisão** com `references/atos.md`.
-5. Copiar visual e JS da referência em `references/visual-e-kit.md` — não reinventar CSS.
+5. Copiar visual da âncora em `references/visual-e-kit.md` e a **dinâmica de sala** em `references/dinamica.md` (hash, pílula de ato, `window.goTo`). Não copiar o conteúdo da ABC71.
 6. Nomear produtos só pelo catálogo em `references/catalogo.md`.
 7. Entregar o **kit**: `proposta-{cliente}-{oferta}.html` + `script-{cliente}-pitch.html` (salvo brief dizer não).
 8. Rodar o checklist do final desta skill **antes** de declarar pronto.
@@ -82,7 +82,7 @@ Decida pelo produto, não por gosto de layout.
 
 Slides vazios não entram. Gate da sala (objeções, “faz sentido?”) fica no **script**, não no deck do cliente.
 
-Mapa de cada slide: `references/formatos.md`.
+Mapa de cada slide: `references/formatos.md`. Dinâmica (hash, pílula, atos): `references/dinamica.md`.
 
 ## Visual travado
 
@@ -91,13 +91,13 @@ Padrão atual (Dental Muller / G6 modelo / Colli):
 - Deck **1600×900** com `fitDeck` / scale no viewport
 - **IBM Plex Sans** + **IBM Plex Mono**
 - Tokens: `#e50914` / `#280001` / `#ffebc8` · tipos de slide `red | dark | white`
-- Self-contained: CSS + JS no arquivo. Logos em `assets/` (base64 só se já for o padrão da âncora)
-- Navegação: setas, espaço, swipe, counter `N / TOTAL`
+- Self-contained: **um** HTML na raiz (sem casco de iframes). Logos em `assets/`
+- Navegação de sala (Colli unificada, sem o conteúdo ABC71): setas / espaço / Home / End, hash `#slide-01`, pílula **ato + título**, nav que salta para o início de cada ato, `window.goTo`, tela cheia
 - HTML na **raiz** do repo (GitHub Pages). Não remover `.nojekyll`
 
-Não copiar: visual Sora da G6 internet; tema dark Inter do hub Farmer; Outfit/Modular **salvo o brief pedir essa âncora**.
+Não copiar: visual Sora da G6 internet; tema dark Inter do hub Farmer; Outfit/Modular **salvo o brief pedir essa âncora**; Montserrat/vinho/SWOT da ABC71.
 
-Spec e JS: `references/visual-e-kit.md`.
+Spec visual: `references/visual-e-kit.md`. Dinâmica: `references/dinamica.md`.
 
 ## Produto e preço
 
@@ -172,5 +172,6 @@ Editar com IA: não mande o HTML inteiro com base64. Mande a ficha + “no slide
 - [ ] Um preço (ou A/B explícito no brief) · condição comercial, não desconto
 - [ ] Próximo passo concreto
 - [ ] Visual 1600×900 IBM Plex copiado da âncora, não reinventado
+- [ ] Dinâmica: hash `#slide-01`, pílula de ato, `data-act` + `window.goTo`
 - [ ] `proposta-*.html` na raiz + script de pitch
 - [ ] Hub Farmer / pipe **não** alterados neste fluxo

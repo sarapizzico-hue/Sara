@@ -19,7 +19,7 @@ Copiar CSS/JS da âncora do brief. Não inventar tema.
 | Eyebrow | pill uppercase, letter-spacing ~0.09em |
 | Counter | `01 / N` canto |
 
-Interação: setas, espaço, swipe, dots. Footer com wordmark V4. Self-contained.
+Interação: ver `dinamica.md`. Chrome **fora** do canvas 1600×900 (não tapa o conteúdo): progresso no topo, pílula de ato, nav de atos, ← 01/N →, tela cheia. Self-contained — **um arquivo**, sem iframes.
 
 HTML na **raiz** (GitHub Pages). Assets (logo, docx) em `assets/`. Não remover `.nojekyll`. Não mover arquivo publicado sem atualizar links.
 
@@ -31,6 +31,7 @@ HTML na **raiz** (GitHub Pages). Assets (logo, docx) em `assets/`. Não remover 
 | `index.html` / `farmer-sara.html` | Hub interno dark + Inter |
 | Modular / Martins / Motéis (Outfit + Plus Jakarta, full-bleed) | Só se o brief citar essa âncora |
 | Isoluz (Manrope, palco 16:9 próprio) | Deck próprio; puxar **conteúdo** de EC+e-com+Growth, não o tema, salvo brief |
+| ABC71 unificado (Montserrat / vinho / 4 iframes) | Pegar **só** a dinâmica de sala (`dinamica.md`). Não copiar visual nem conteúdo |
 
 ## Como editar com pouco token
 
@@ -60,9 +61,10 @@ Ao criar arquivo novo:
 
 1. Abrir a âncora visual do brief.
 2. Duplicar o arquivo (ou copiar `<style>` + JS de navegação + chrome: topline, footer, counter, dots).
-3. Trocar `<title>`, tese, slides. Manter classes `.slide.red|dark|white`, `.eyebrow`, `.lede`.
-4. Conferir `fitDeck`: o retângulo 1600×900 cabe no viewport sem scroll interno do slide.
-5. Abrir no browser: percorrer **todos** os slides com teclado, checar overflow de texto, preço visível, counter correto.
+3. Trocar `<title>`, tese, slides. Manter classes `.slide.red|dark|white`, `.eyebrow`, `.lede`. Cada slide: `data-act`, `data-title`, `aria-label`.
+4. Cumprir o contrato JS de `dinamica.md` (`goTo`, hash, pílula, nav de atos). Não reinventar o palco 1600×900.
+5. Conferir `fitDeck`: o retângulo 1600×900 cabe no viewport sem scroll interno do slide.
+6. Abrir no browser: percorrer **todos** os slides com teclado, colar `#slide-03` na URL, saltar pelos atos, checar overflow de texto, preço visível, counter correto.
 
 Componentes úteis (G6 / modelo): eyebrow, leak-grid, map-grid, phase-rail, success-grid, price-layout, split-2. Reuse se a âncora já tiver; não inventar um terceiro grid.
 
