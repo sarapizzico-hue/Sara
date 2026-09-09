@@ -5,7 +5,7 @@ Escolha **um**. Não misture arco G6 de 18 slides com combo Isoluz no mesmo arqu
 ## A. Combo curto (7–10 slides) — padrão atual para mix de produtos
 
 Âncoras de **informação**: `proposta-dental-muller.html` (7) · `proposta-isoluz.html`.
-Âncora de **layout**: `modelo-proposta.html` (duplicar e preencher os `.ph`).
+Âncora de **layout**: `modelo-proposta-esqueleto.html` (duplicar e preencher os `.ph`).
 
 | # | Slide | Função | Ato |
 |---|---|---|---|
@@ -27,7 +27,7 @@ Dental Muller (referência viva no `main`):
 
 Use este formato quando o brief tem **mais de um produto** e a sala não precisa ver fase a fase.
 
-`data-act`: Capa → `narrativa` · Diagnóstico → `dados` · divisor + produtos + ciclo + pronto → `produto` · Investimento → `decisao`. O combo em `modelo-proposta.html` já traz **um divisor** antes de Produto.
+`data-act`: Capa → `narrativa` · Diagnóstico → `dados` · divisor + produtos + ciclo + pronto → `produto` · Investimento → `decisao`. O combo em `modelo-proposta-esqueleto.html` já traz **um divisor** antes de Produto.
 
 ## B. EC profunda (13–18 slides) — instalação comercial
 

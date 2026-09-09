@@ -4,7 +4,7 @@ Estudo do casco [ABC71 — deck unificado](https://relatorios.collieassociados.c
 
 **Pegar o palco e a dinâmica. Não pegar o conteúdo da conta** (SWOT, personas, SEO, Drawflow, semanas de projeto).
 
-Informação do deck continua o arco das últimas propostas — ver `atos.md` e `modelo-proposta.html`.
+Informação do deck continua o arco das últimas propostas — ver `atos.md` e `modelo-proposta-esqueleto.html`.
 
 Visual = vinho Colli + Montserrat + JetBrains Mono (`visual-e-kit.md`). Cream/IBM Plex da Muller fica como âncora antiga, só se o brief pedir.
 
@@ -25,7 +25,7 @@ Isso casa com os três atos da proposta. Na ABC71 os blocos são Momento / Aquis
 | **Barra de progresso** | Quanto da reunião já passou | Topo, 4px, gradiente vermelho. Dental Muller já tem na base — subir para o topo |
 | **Home / End / F** | Início, fim, tela cheia | Além de setas, espaço, PageUp/Down (Muller já tem as setas) |
 | **Chip de seção** | `01 Momento` no canto do slide | `02 Dados` — índice **local do ato**, não o número global |
-| **Divisor de ato** | Subcapa: número grande + kicker + título + trilho do que vem | No combo (`modelo-proposta.html`): um divisor antes de Produto. Em EC 13–18: divisores antes de Dados, Produto e Decisão |
+| **Divisor de ato** | Subcapa: número grande + kicker + título + trilho do que vem | No combo (`modelo-proposta-esqueleto.html`): um divisor antes de Produto. Em EC 13–18: divisores antes de Dados, Produto e Decisão |
 | **Profundidade sob demanda** | Card denso abre modal; Esc fecha; setas navegam **dentro** do modal, não o deck | Usar em 6 dores, detalhe de fase, ou “o que está incluso”. O slide da sala fica respirável |
 | **`aria-label` + print 1600×900** | Acessível e exportável | Manifest `__DECK_EXPORT_MANIFEST__` se o brief pedir PDF depois |
 
@@ -102,4 +102,4 @@ Dental Muller / G6 modelo já têm: `fitDeck` 1600×900, setas, espaço, Home/En
 
 Falta (passar a exigir): hash, pílula de ato, nav de atos, `data-act`, `window.goTo`, tela cheia, progresso no topo, divisor em decks longos, modal só se o conteúdo pedir.
 
-Âncora de **layout + dinâmica**: `modelo-proposta.html` (palco ABC71). Âncora de **informação**: Muller / G6 / Isoluz + brief.
+Âncora de **layout + dinâmica**: `modelo-proposta-esqueleto.html` (palco ABC71). Âncora de **informação**: Muller / G6 / Isoluz + brief.

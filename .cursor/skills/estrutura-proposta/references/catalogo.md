@@ -24,11 +24,11 @@ Não calcular, não arredondar, não “fazer um desconto bonito”. Escrever a 
 
 ## Onde puxar (conteúdo)
 
-Preferir a coluna “puxar de”. Visual: duplicar `modelo-proposta.html`. Conteúdo: as âncoras abaixo.
+Preferir a coluna “puxar de”. Visual: duplicar `modelo-proposta-esqueleto.html`. Conteúdo: as âncoras abaixo.
 
 | Quando o brief é… | Arquivo |
 |---|---|
-| Layout + arco para duplicar | `modelo-proposta.html` |
+| Layout + arco para duplicar | `modelo-proposta-esqueleto.html` |
 | EQV + Growth, ciclo comercial → demanda | `proposta-dental-muller.html` |
 | EC profunda, fases, Receita Previsível | `proposta-g6-estruturacao-comercial.html` · `g6/` · `ESTRUTURA-ENTREGA-G6.md` |
 | EC enxuta 13 slides | `proposta-g6-modelo-13-slides.html` · `g6-modelo/` |

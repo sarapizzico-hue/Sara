@@ -4,7 +4,7 @@
 
 **Layout** puxa o palco Colli da ABC71 unificada. **Informação** puxa o arco das últimas propostas (Muller / G6 / Isoluz).
 
-Âncora para duplicar: `modelo-proposta.html`.
+Âncora para duplicar: `modelo-proposta-esqueleto.html`.
 
 | Token | Valor |
 |---|---|
@@ -27,7 +27,7 @@ HTML na **raiz** (GitHub Pages). Assets em `assets/`. Não remover `.nojekyll`.
 
 | Camada | Fonte | O quê |
 |---|---|---|
-| Palco, capa, divisor, cards, métricas, nav | `modelo-proposta.html` (sistema ABC71) | CSS + chrome |
+| Palco, capa, divisor, cards, métricas, nav | `modelo-proposta-esqueleto.html` (sistema ABC71) | CSS + chrome |
 | Tese, reframe, KPIs, produtos, ciclo, preço | Brief + Muller / G6 / Isoluz | Texto desta conta |
 | Nomes de produto | catálogo da skill | EC · EQV · Growth · CRM · Social · SDR IA · E-com B2B |
 
@@ -45,7 +45,7 @@ HTML na **raiz** (GitHub Pages). Assets em `assets/`. Não remover `.nojekyll`.
 
 ## Como editar com pouco token
 
-1. Duplicar `modelo-proposta.html` → `proposta-{cliente}-{oferta}.html`.
+1. Duplicar `modelo-proposta-esqueleto.html` → `proposta-{cliente}-{oferta}.html`.
 2. Trocar só os `.ph` e os títulos. Não reabrir o CSS.
 3. Preserve o arco: capa → diagnóstico → (divisor) → produto(s) → ciclo → pronto → investimento.
 4. Preço = “condição comercial”, nunca “desconto”.
@@ -55,14 +55,14 @@ HTML na **raiz** (GitHub Pages). Assets em `assets/`. Não remover `.nojekyll`.
 
 | Entrega | Nome | Quando |
 |---|---|---|
-| Esqueleto (layout + arco) | `modelo-proposta.html` | Duplicar sempre |
+| Esqueleto (layout + arco) | `modelo-proposta-esqueleto.html` | Duplicar sempre |
 | Proposta deck | `proposta-{slug-cliente}-{oferta}.html` | Sempre |
 | Script pitch | `script-{slug-cliente}-pitch.html` | Sempre, salvo brief não |
 | Word / PDF / PPTX | `assets/` | Só se brief pedir |
 
 ## Spec mínima
 
-1. Duplicar `modelo-proposta.html`.
+1. Duplicar `modelo-proposta-esqueleto.html`.
 2. Cada slide: `data-act`, `data-title`, `aria-label`.
 3. Cumprir `dinamica.md` (`goTo`, hash, pílula, nav de atos).
 4. `fitDeck` sem scroll interno.
@@ -70,5 +70,5 @@ HTML na **raiz** (GitHub Pages). Assets em `assets/`. Não remover `.nojekyll`.
 
 ## Hub interno vs. deck
 
-- Deck cliente: vinho Colli + Montserrat (`modelo-proposta.html`)
+- Deck cliente: vinho Colli + Montserrat (`modelo-proposta-esqueleto.html`)
 - Ferramenta Sara: dark + Inter — não misturar e não alterar no fluxo de proposta
