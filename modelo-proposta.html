@@ -476,7 +476,7 @@
             <div class="head-copy">
               <div class="eyebrow">Investimento · condição comercial</div>
               <h2><span class="ph">Dois produtos. Um ciclo.</span> <em>A EE trabalha a favor</em>, se houver.</h2>
-              <p class="sub">Um preço. Desconto já embutido. Nunca escrever a palavra “desconto” neste slide.</p>
+              <p class="sub">Um preço. Condição comercial. O que está incluso neste desenho.</p>
             </div>
             <div class="section-chip"><b>01</b> Decisão</div>
           </header>
@@ -626,6 +626,10 @@
       }
     });
     window.addEventListener("resize", fitDeck);
+    window.addEventListener("hashchange", () => {
+      const n = Math.max(0, Math.min(total - 1, Number((location.hash.match(/slide-(\d+)/) || [])[1] || 1) - 1));
+      if (n !== current) goTo(n);
+    });
     fitDeck();
     goTo(current);
   </script>
