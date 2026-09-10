@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Cenários setembro 2026 · Pessimista · Realista · Otimista</title>
+  <title>Cenários setembro 2026 · STEP × tier</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -25,7 +25,7 @@
     .callout{padding:14px 16px;border-radius:12px;border:1px solid rgba(96,165,250,.3);background:rgba(96,165,250,.08);color:#bfdbfe;font-size:13px;margin-bottom:14px}
     .callout.warn{border-color:rgba(250,204,21,.28);background:rgba(250,204,21,.06);color:#fde68a}
     .callout.ok{border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.08);color:#bbf7d0}
-    .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:16px}
+    .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:16px}
     .kpi{background:var(--surf);border:1px solid var(--bd);border-radius:14px;padding:14px 16px}
     .kpi .v{font-size:22px;font-weight:900}.kpi .v.ok{color:var(--ok)}.kpi .v.warn{color:var(--warn)}.kpi .v.info{color:var(--info)}
     .kpi .l{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--mut);margin-top:6px;font-weight:700}
@@ -37,6 +37,7 @@
     .section h2{margin:0 0 4px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);font-weight:800}
     .section h3{margin:0 0 12px;font-size:17px;font-weight:900}
     .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}@media(max-width:900px){.grid3{grid-template-columns:1fr}}
+    .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}@media(max-width:900px){.grid4{grid-template-columns:1fr 1fr}}
     .card{background:var(--surf2);border:1px solid var(--bd);border-radius:12px;padding:14px 16px}
     .card .t{font-weight:800;margin-bottom:6px}
     .card .d{font-size:12px;color:#d4d4d4}
@@ -52,10 +53,11 @@
     .tag.large{color:var(--hot);border-color:rgba(239,68,68,.4)}
     .tag.warn{color:var(--warn);border-color:rgba(250,204,21,.35)}
     .tag.ok{color:var(--ok);border-color:rgba(34,197,94,.35)}
+    .tag.saber{color:#c4b5fd;border-color:rgba(167,139,250,.4)}
+    .tag.ter{color:var(--warn);border-color:rgba(250,204,21,.35)}
+    .tag.exec{color:var(--ok);border-color:rgba(34,197,94,.35)}
     .muted{color:var(--mut);font-size:12px}
     .name{font-weight:700}
-    .bar{display:flex;height:12px;border-radius:99px;overflow:hidden;background:rgba(255,255,255,.06);margin:8px 0 4px}
-    .bar i{display:block;height:100%}
     .search{width:100%;max-width:360px;background:#0a0a0a;border:1px solid var(--bd);border-radius:10px;color:var(--txt);padding:9px 12px;font:inherit;margin:0 0 14px}
     footer{text-align:center;color:var(--mut);font-size:11px;margin-top:28px;padding-top:16px;border-top:1px solid var(--bd)}
     @media print{
@@ -68,148 +70,191 @@
 <body>
 <header class="top">
   <div class="logo">V4 <span>COMPANY</span></div>
-  <div class="pill">Cenários set · 41 pitches · Farmer Sara</div>
+  <div class="pill">STEP × tier · set 2026 · Sara</div>
 </header>
 
 <div class="wrap">
-  <h1>Pessimista · Realista · Otimista</h1>
+  <h1>Saber · Ter · Executar × cada tier</h1>
   <p class="lead">
-    Em cima dos <strong>41 pitches de setembro</strong> + Follow.
-    Taxa e ticket médio por <strong>Need scope (tier)</strong> vêm do histórico Sara no
-    <a href="https://docs.google.com/spreadsheets/d/1dSukhon9dIUABcbQIKGKUa-ku-_oLOn1Q5YWeWGfI6U/edit?usp=sharing" target="_blank" rel="noopener">Cockpit E.E</a>
-    · Monetizado ÷ (Monetizado + Drop). Lista de contas:
-    <a href="pitch-setembro-2026.html">pitch-setembro-2026.html</a>.
+    Ticket é do <strong>STEP</strong>. Taxa é do <strong>tier</strong>.
+    As 41 contas do
+    <a href="pitch-setembro-2026.html">pipe de setembro</a>
+    herdam a tx do Need scope; o TCV depende se fecha Saber, Ter ou Executar.
+    <strong>Potencializar não entra.</strong>
   </p>
 
+  <div class="callout ok">
+    <strong>Tickets oficiais:</strong>
+    Saber = TCV <strong>R$ 25.000</strong> ·
+    Ter = TCV <strong>R$ 10.000</strong> ·
+    Executar = MRR <strong>R$ 6.500</strong>
+    (TCV 6 meses = R$ 39.000 · 12 meses = R$ 78.000).
+  </div>
   <div class="callout warn">
-    <strong>Regra:</strong> cada empresa herda a tx e o TM do próprio tier.
-    Valor esperado = tx × TM (não é compromisso de fechamento).
-    TINY (2 wins) e LARGE (3 wins) têm amostra curta — o número manda, mas o intervalo é largo.
+    Tx continua do Cockpit Sara: Monetizado ÷ (Monetizado + Drop) por tier.
+    Pess / Real / Otim mudam a <em>taxa</em> (e o booking do Executar: 6× no pess, 12× no real/otim).
+    Não mudam o preço-tabela do STEP.
   </div>
 
   <nav class="nav">
-    <a href="#premissas">Tx + TM</a>
+    <a href="#step">Tickets STEP</a>
+    <a href="#tx">Tx por tier</a>
+    <a href="#grade">Grade STEP × tier</a>
     <a href="#cenarios">P / R / O</a>
-    <a href="#produto">% produto</a>
-    <a href="#follow">Follow</a>
     <a href="#empresas">41 empresas</a>
   </nav>
 
   <div class="kpis">
-    <div class="kpi"><div class="v">41</div><div class="l">Pitches set</div><div class="s">20 MEDIUM · 13 SMALL · 5 TINY · 1 LARGE · 2 sem scope</div></div>
-    <div class="kpi"><div class="v warn">R$ 517k</div><div class="l">Pessimista · TCV</div><div class="s">11 wins esperados</div></div>
-    <div class="kpi"><div class="v">R$ 955k</div><div class="l">Realista · TCV</div><div class="s">16 wins esperados</div></div>
-    <div class="kpi"><div class="v ok">R$ 1,26M</div><div class="l">Otimista · TCV</div><div class="s">18 wins esperados</div></div>
-    <div class="kpi"><div class="v info">+ R$ 141–212k</div><div class="l">Follow por cima</div><div class="s">ABC71 · Davi · Ecco · Tamiya · TCV na mesa R$ 354k</div></div>
+    <div class="kpi"><div class="v">R$ 25k</div><div class="l">Saber · TCV</div><div class="s">EQV · E. Comercial · GTM</div></div>
+    <div class="kpi"><div class="v">R$ 10k</div><div class="l">Ter · TCV</div><div class="s">ZapFirst · site · CRM · setup</div></div>
+    <div class="kpi"><div class="v ok">R$ 6.500</div><div class="l">Executar · MRR</div><div class="s">6× R$ 39k · 12× R$ 78k</div></div>
+    <div class="kpi"><div class="v warn">—</div><div class="l">Potencializar</div><div class="s">não usamos</div></div>
   </div>
 
-  <div class="section" id="premissas">
-    <h2>Premissas</h2>
-    <h3>Tx de conversão e ticket médio por tier</h3>
-    <p class="muted" style="margin:0 0 12px">Histórico Sara: 34 Monetizado · 64 Drop. TM = TCV médio dos wins daquele tier (quando TCV &gt; 0).</p>
+  <div class="section" id="step">
+    <h2>STEP</h2>
+    <h3>O ticket não é do porte — é do que a conta compra</h3>
+    <div class="grid4">
+      <div class="card">
+        <div class="t"><span class="tag saber">Saber</span></div>
+        <div class="d">Clareza / tese / método. TM <strong>R$ 25.000</strong> TCV. Produto: EQV, E. Comercial.</div>
+      </div>
+      <div class="card">
+        <div class="t"><span class="tag ter">Ter</span></div>
+        <div class="d">Ativo que falta. TM <strong>R$ 10.000</strong> TCV. Produto: ZapFirst, site, CRM, setup.</div>
+      </div>
+      <div class="card">
+        <div class="t"><span class="tag exec">Executar</span></div>
+        <div class="d">Operação contínua. TM <strong>MRR R$ 6.500</strong>. Basic / Growth / Social / mídia.</div>
+      </div>
+      <div class="card">
+        <div class="t"><span class="tag warn">Potencializar</span></div>
+        <div class="d">Fora. Não entra em mix, nem em P/R/O, nem no dropdown.</div>
+      </div>
+    </div>
+    <p class="muted" style="margin:12px 0 0">
+      Mix histórico dos wins Sara já classificados (30/34): Executar 57% · Saber 30% · Ter 13%.
+      Booking Executar no Cockpit: 13 em 12×, 4 em 6× — por isso o realista usa 12 meses.
+    </p>
+  </div>
+
+  <div class="section" id="tx">
+    <h2>Tier</h2>
+    <h3>Quem fecha · a taxa continua por Need scope</h3>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Tier</th><th>Estoque set</th><th>Histórico</th>
+            <th>Tx pess.</th><th>Tx real</th><th>Tx otim.</th>
+            <th class="money">E(win) P</th><th class="money">E(win) R</th><th class="money">E(win) O</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="tag tiny">TINY</span></td><td>5</td><td>2 / 14</td><td>10%</td><td><strong>14%</strong></td><td>14%</td><td class="money">0,5</td><td class="money">0,7</td><td class="money">0,7</td></tr>
+          <tr><td><span class="tag small">SMALL</span></td><td>13</td><td>13 / 45</td><td>20%</td><td><strong>29%</strong></td><td>29%</td><td class="money">2,6</td><td class="money">3,8</td><td class="money">3,8</td></tr>
+          <tr><td><span class="tag medium">MEDIUM</span></td><td>20</td><td>16 / 31</td><td>35%</td><td><strong>52%</strong></td><td>61%</td><td class="money">7,0</td><td class="money">10,3</td><td class="money">12,1</td></tr>
+          <tr><td><span class="tag large">LARGE</span></td><td>1</td><td>3 / 4</td><td>50%</td><td><strong>75%</strong></td><td>86%</td><td class="money">0,5</td><td class="money">0,8</td><td class="money">0,9</td></tr>
+          <tr><td><span class="tag warn">sem scope</span></td><td>2</td><td>proxy 34/98</td><td>20%</td><td><strong>35%</strong></td><td>42%</td><td class="money">0,4</td><td class="money">0,7</td><td class="money">0,8</td></tr>
+          <tr><td><strong>Total</strong></td><td><strong>41</strong></td><td></td><td></td><td></td><td></td><td class="money"><strong>11,0</strong></td><td class="money"><strong>16,2</strong></td><td class="money"><strong>18,3</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section" id="grade">
+    <h2>Grade</h2>
+    <h3>Realista: se os wins do tier fecharem 100% naquele STEP</h3>
+    <p class="muted" style="margin:0 0 12px">E(win) realista × ticket do STEP. Executar aqui em 12 meses (R$ 78.000). Mostra a alavanca: o mesmo MEDIUM vale R$ 103k em Ter e R$ 803k em Executar.</p>
     <div class="scroll">
       <table>
         <thead>
           <tr>
             <th>Tier</th>
-            <th>Estoque set</th>
-            <th>Histórico (n)</th>
-            <th>Tx pess.</th>
-            <th>Tx real</th>
-            <th>Tx otim.</th>
-            <th class="money">TM pess.</th>
-            <th class="money">TM real</th>
-            <th class="money">TM otim.</th>
+            <th class="money">E(win) R</th>
+            <th class="money">Se Saber R$ 25k</th>
+            <th class="money">Se Ter R$ 10k</th>
+            <th class="money">Se Executar 12×</th>
+            <th class="money">Se Executar 6×</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td><span class="tag tiny">TINY</span></td>
-            <td>5</td>
-            <td>2 / 14 wins</td>
-            <td>10%</td><td><strong>14%</strong></td><td>14%</td>
-            <td class="money">R$ 8.164</td>
-            <td class="money">R$ 10.205</td>
-            <td class="money">R$ 11.736</td>
+            <td class="money">0,7</td>
+            <td class="money">R$ 17.500</td>
+            <td class="money">R$ 7.000</td>
+            <td class="money">R$ 54.600</td>
+            <td class="money">R$ 27.300</td>
           </tr>
           <tr>
             <td><span class="tag small">SMALL</span></td>
-            <td>13</td>
-            <td>13 / 45 wins</td>
-            <td>20%</td><td><strong>29%</strong></td><td>29%</td>
-            <td class="money">R$ 26.782</td>
-            <td class="money">R$ 33.477</td>
-            <td class="money">R$ 38.499</td>
+            <td class="money">3,8</td>
+            <td class="money">R$ 95.000</td>
+            <td class="money">R$ 38.000</td>
+            <td class="money">R$ 296.400</td>
+            <td class="money">R$ 148.200</td>
           </tr>
           <tr>
             <td><span class="tag medium">MEDIUM</span></td>
-            <td>20</td>
-            <td>16 / 31 wins</td>
-            <td>35%</td><td><strong>52%</strong></td><td>61%</td>
-            <td class="money">R$ 56.620</td>
-            <td class="money">R$ 70.775</td>
-            <td class="money">R$ 81.391</td>
+            <td class="money">10,3</td>
+            <td class="money">R$ 257.500</td>
+            <td class="money">R$ 103.000</td>
+            <td class="money">R$ 803.400</td>
+            <td class="money">R$ 401.700</td>
           </tr>
           <tr>
             <td><span class="tag large">LARGE</span></td>
-            <td>1</td>
-            <td>3 / 4 wins</td>
-            <td>50%</td><td><strong>75%</strong></td><td>86%</td>
-            <td class="money">R$ 73.298</td>
-            <td class="money">R$ 91.623</td>
-            <td class="money">R$ 105.366</td>
+            <td class="money">0,8</td>
+            <td class="money">R$ 20.000</td>
+            <td class="money">R$ 8.000</td>
+            <td class="money">R$ 62.400</td>
+            <td class="money">R$ 31.200</td>
           </tr>
           <tr>
             <td><span class="tag warn">sem scope</span></td>
-            <td>2</td>
-            <td>proxy geral 34/98</td>
-            <td>20%</td><td><strong>35%</strong></td><td>42%</td>
-            <td class="money">R$ 26.782</td>
-            <td class="money">R$ 33.477</td>
-            <td class="money">R$ 38.499</td>
+            <td class="money">0,7</td>
+            <td class="money">R$ 17.500</td>
+            <td class="money">R$ 7.000</td>
+            <td class="money">R$ 54.600</td>
+            <td class="money">R$ 27.300</td>
+          </tr>
+          <tr>
+            <td><strong>41 contas</strong></td>
+            <td class="money"><strong>16,2</strong></td>
+            <td class="money"><strong>R$ 405.000</strong></td>
+            <td class="money"><strong>R$ 162.000</strong></td>
+            <td class="money"><strong>R$ 1.264.000</strong></td>
+            <td class="money"><strong>R$ 632.000</strong></td>
           </tr>
         </tbody>
       </table>
     </div>
-    <div class="grid3" style="margin-top:14px">
-      <div class="card">
-        <div class="t">Pessimista</div>
-        <div class="d">Tx ~70% do histórico (chão de agosto 40% no pitch→monetizado). TM −20% (ticket comprime / mix mais Ter).</div>
-      </div>
-      <div class="card">
-        <div class="t">Realista</div>
-        <div class="d">Tx e TM cru do Cockpit. Referência operacional. Mix MEDIUM puxa o TCV (20 contas × 52% × R$ 71k).</div>
-      </div>
-      <div class="card">
-        <div class="t">Otimista</div>
-        <div class="d">MEDIUM/LARGE usam win rate com Já monetizado (61% / 86%). TM +15%. TINY/SMALL não inflamos a taxa — amostra e fit não aguentam.</div>
-      </div>
-    </div>
   </div>
 
   <div class="section" id="cenarios">
-    <h2>Resultado</h2>
-    <h3>Os 41 · wins e TCV esperado por cenário</h3>
+    <h2>Mix</h2>
+    <h3>P / R / O com mix histórico (57% Executar · 30% Saber · 13% Ter)</h3>
     <div class="grid3">
       <div class="card">
         <div class="t" style="color:var(--warn)">Pessimista</div>
         <div class="d">
-          <strong>11,0 wins</strong> · TCV <strong>R$ 517.416</strong><br>
-          MEDIUM 7,0 · SMALL 2,6 · LARGE 0,5 · TINY 0,5 · — 0,4
+          11 wins · Executar em <strong>6 meses</strong> (MRR × 6 = R$ 39k).<br>
+          TM blend ≈ R$ 31k/win · TCV <strong>R$ 341k</strong>
         </div>
       </div>
       <div class="card">
         <div class="t">Realista</div>
         <div class="d">
-          <strong>16,2 wins</strong> · TCV <strong>R$ 955.418</strong><br>
-          MEDIUM 10,3 · SMALL 3,8 · LARGE 0,8 · TINY 0,7 · — 0,7
+          16,2 wins · Executar em <strong>12 meses</strong> (R$ 78k).<br>
+          TM blend ≈ R$ 53k/win · TCV <strong>R$ 863k</strong>
         </div>
       </div>
       <div class="card">
         <div class="t" style="color:var(--ok)">Otimista</div>
         <div class="d">
-          <strong>18,3 wins</strong> · TCV <strong>R$ 1.260.579</strong><br>
-          MEDIUM 12,1 · SMALL 3,8 · LARGE 0,9 · TINY 0,7 · — 0,8
+          18,3 wins (MEDIUM/LARGE sobem a tx) · Executar 12 meses.<br>
+          Mesmo blend · TCV <strong>R$ 975k</strong>
         </div>
       </div>
     </div>
@@ -217,75 +262,9 @@
       <table>
         <thead>
           <tr>
-            <th>Tier</th><th>N</th>
-            <th class="money">E(win) P</th><th class="money">TCV P</th>
-            <th class="money">E(win) R</th><th class="money">TCV R</th>
-            <th class="money">E(win) O</th><th class="money">TCV O</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><span class="tag tiny">TINY</span></td><td>5</td>
-            <td class="money">0,5</td><td class="money">R$ 4.082</td>
-            <td class="money">0,7</td><td class="money">R$ 7.297</td>
-            <td class="money">0,7</td><td class="money">R$ 8.391</td>
-          </tr>
-          <tr>
-            <td><span class="tag small">SMALL</span></td><td>13</td>
-            <td class="money">2,6</td><td class="money">R$ 69.632</td>
-            <td class="money">3,8</td><td class="money">R$ 125.773</td>
-            <td class="money">3,8</td><td class="money">R$ 144.639</td>
-          </tr>
-          <tr>
-            <td><span class="tag medium">MEDIUM</span></td><td>20</td>
-            <td class="money">7,0</td><td class="money">R$ 396.340</td>
-            <td class="money">10,3</td><td class="money">R$ 730.398</td>
-            <td class="money">12,1</td><td class="money">R$ 984.834</td>
-          </tr>
-          <tr>
-            <td><span class="tag large">LARGE</span></td><td>1</td>
-            <td class="money">0,5</td><td class="money">R$ 36.649</td>
-            <td class="money">0,8</td><td class="money">R$ 68.717</td>
-            <td class="money">0,9</td><td class="money">R$ 90.299</td>
-          </tr>
-          <tr>
-            <td><span class="tag warn">sem scope</span></td><td>2</td>
-            <td class="money">0,4</td><td class="money">R$ 10.713</td>
-            <td class="money">0,7</td><td class="money">R$ 23.233</td>
-            <td class="money">0,8</td><td class="money">R$ 32.416</td>
-          </tr>
-          <tr>
-            <td><strong>Total 41</strong></td><td><strong>41</strong></td>
-            <td class="money"><strong>11,0</strong></td><td class="money"><strong>R$ 517.416</strong></td>
-            <td class="money"><strong>16,2</strong></td><td class="money"><strong>R$ 955.418</strong></td>
-            <td class="money"><strong>18,3</strong></td><td class="money"><strong>R$ 1.260.579</strong></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="muted" style="margin:12px 0 0">MEDIUM sozinho é 76% do TCV realista. Vitória Troféus (LARGE) vale ~R$ 69k no realista — uma conta. TINY quase não move o placar.</p>
-  </div>
-
-  <div class="section" id="produto">
-    <h2>Produto</h2>
-    <h3>% de produto nos fechamentos históricos · aplicado ao TCV de set</h3>
-    <p class="muted" style="margin:0 0 10px">34 Monetizado Sara. Mix de <em>n</em> e de TCV (Executar concentra ticket).</p>
-    <div class="bar" title="Executar 44 · EC 21 · EQV 6 · Ter 12 · Growth/Social 6 · Outros 12">
-      <i style="width:44%;background:#86efac"></i>
-      <i style="width:21%;background:#93c5fd"></i>
-      <i style="width:6%;background:#c4b5fd"></i>
-      <i style="width:12%;background:#fde68a"></i>
-      <i style="width:6%;background:#f9a8d4"></i>
-      <i style="width:11%;background:#525252"></i>
-    </div>
-    <div class="muted" style="margin-bottom:12px">n: Executar 44% · E. Comercial 21% · Ter (site/CRM/setup) 12% · EQV 6% · Growth/Social 6% · Outros 11%</div>
-    <div class="scroll">
-      <table>
-        <thead>
-          <tr>
-            <th>Produto</th>
-            <th>% wins</th>
-            <th>% TCV</th>
+            <th>STEP</th>
+            <th>% wins hist.</th>
+            <th>Ticket</th>
             <th class="money">E(win) P</th>
             <th class="money">TCV P</th>
             <th class="money">E(win) R</th>
@@ -296,195 +275,126 @@
         </thead>
         <tbody>
           <tr>
-            <td class="name">Executar</td>
-            <td>44%</td><td>62%</td>
-            <td class="money">4,9</td><td class="money">R$ 318.211</td>
-            <td class="money">7,2</td><td class="money">R$ 587.582</td>
-            <td class="money">8,1</td><td class="money">R$ 775.256</td>
+            <td><span class="tag saber">Saber</span></td>
+            <td>30%</td>
+            <td>TCV R$ 25.000</td>
+            <td class="money">3,3</td><td class="money">R$ 82.500</td>
+            <td class="money">4,9</td><td class="money">R$ 121.500</td>
+            <td class="money">5,5</td><td class="money">R$ 137.250</td>
           </tr>
           <tr>
-            <td class="name">E. Comercial</td>
-            <td>21%</td><td>12%</td>
-            <td class="money">2,3</td><td class="money">R$ 60.020</td>
-            <td class="money">3,3</td><td class="money">R$ 110.828</td>
-            <td class="money">3,8</td><td class="money">R$ 146.227</td>
+            <td><span class="tag ter">Ter</span></td>
+            <td>13%</td>
+            <td>TCV R$ 10.000</td>
+            <td class="money">1,4</td><td class="money">R$ 14.300</td>
+            <td class="money">2,1</td><td class="money">R$ 21.060</td>
+            <td class="money">2,4</td><td class="money">R$ 23.790</td>
           </tr>
           <tr>
-            <td class="name">Growth / Social</td>
-            <td>6%</td><td>11%</td>
-            <td class="money">0,6</td><td class="money">R$ 56.916</td>
-            <td class="money">1,0</td><td class="money">R$ 105.096</td>
-            <td class="money">1,1</td><td class="money">R$ 138.664</td>
+            <td><span class="tag exec">Executar</span></td>
+            <td>57%</td>
+            <td>MRR R$ 6.500</td>
+            <td class="money">6,3</td><td class="money">R$ 244.530 <span class="muted">6×</span></td>
+            <td class="money">9,2</td><td class="money">R$ 720.720 <span class="muted">12×</span></td>
+            <td class="money">10,4</td><td class="money">R$ 813.720 <span class="muted">12×</span></td>
           </tr>
           <tr>
-            <td class="name">EQV (Saber)</td>
-            <td>6%</td><td>2%</td>
-            <td class="money">0,6</td><td class="money">R$ 11.901</td>
-            <td class="money">1,0</td><td class="money">R$ 21.975</td>
-            <td class="money">1,1</td><td class="money">R$ 28.993</td>
+            <td><span class="tag warn">Potencializar</span></td>
+            <td>0%</td>
+            <td>—</td>
+            <td class="money">0</td><td class="money">—</td>
+            <td class="money">0</td><td class="money">—</td>
+            <td class="money">0</td><td class="money">—</td>
           </tr>
           <tr>
-            <td class="name">Ter (site / CRM / setup)</td>
-            <td>12%</td><td>3%</td>
-            <td class="money">1,3</td><td class="money">R$ 17.592</td>
-            <td class="money">1,9</td><td class="money">R$ 32.484</td>
-            <td class="money">2,2</td><td class="money">R$ 42.860</td>
-          </tr>
-          <tr>
-            <td class="name">Outros</td>
-            <td>12%</td><td>10%</td>
-            <td class="money">1,3</td><td class="money">R$ 52.776</td>
-            <td class="money">1,9</td><td class="money">R$ 97.453</td>
-            <td class="money">2,2</td><td class="money">R$ 128.579</td>
+            <td><strong>Total mix</strong></td>
+            <td>100%</td>
+            <td></td>
+            <td class="money"><strong>11,0</strong></td><td class="money"><strong>R$ 341k</strong></td>
+            <td class="money"><strong>16,2</strong></td><td class="money"><strong>R$ 863k</strong></td>
+            <td class="money"><strong>18,3</strong></td><td class="money"><strong>R$ 975k</strong></td>
           </tr>
         </tbody>
       </table>
     </div>
     <p class="muted" style="margin:12px 0 0">
-      Leitura: se o mês fechar no mix histórico, <strong>6 em cada 10 reais vêm de Executar</strong>.
-      EQV fecha mais conta do que TCV (ticket baixo). Já mapeados neste pipe: Henri e Castanheira → Executar · Freebong, RE/MAX, 600, Legtrânsito → EQV · Casa dos Pães → ZapFirst (Ter).
+      O salto P → R quase todo é Executar saindo de 6× para 12×, não é “fechar mais Saber”.
+      Saber e Ter mudam pouco o placar: 16 wins 100% Saber = R$ 405k; 100% Ter = R$ 162k; 100% Executar 12× = R$ 1,26M.
     </p>
   </div>
 
-  <div class="section" id="follow">
-    <h2>Chão · já teve pitch</h2>
-    <h3>Follow · TCV na mesa, não TM de tier</h3>
-    <p class="muted" style="margin:0 0 12px">Régua de agosto: pitch → monetizado 40% · pitch → fecha 54% · win (monetizado+aceito) 60%.</p>
-    <div class="scroll">
-      <table>
-        <thead>
-          <tr>
-            <th>Empresa</th><th>Tier</th><th>Produto</th>
-            <th class="money">TCV mesa</th>
-            <th class="money">P 40%</th>
-            <th class="money">R 54%</th>
-            <th class="money">O 60%</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="name">ABC71</td>
-            <td><span class="tag medium">MEDIUM</span></td>
-            <td>Executar Basic · 12m · cartão</td>
-            <td class="money">R$ 102.000</td>
-            <td class="money">R$ 40.800</td>
-            <td class="money">R$ 55.080</td>
-            <td class="money">R$ 61.200</td>
-          </tr>
-          <tr>
-            <td class="name">Davi Gás</td>
-            <td><span class="tag medium">MEDIUM</span></td>
-            <td>ZapFirst · 6m · cartão</td>
-            <td class="money">R$ 29.700</td>
-            <td class="money">R$ 11.880</td>
-            <td class="money">R$ 16.038</td>
-            <td class="money">R$ 17.820</td>
-          </tr>
-          <tr>
-            <td class="name">Ecco Salva</td>
-            <td><span class="tag large">LARGE</span></td>
-            <td>EQV · 6m · cartão</td>
-            <td class="money">R$ 120.000</td>
-            <td class="money">R$ 48.000</td>
-            <td class="money">R$ 64.800</td>
-            <td class="money">R$ 72.000</td>
-          </tr>
-          <tr>
-            <td class="name">Tamiya Brasil</td>
-            <td><span class="tag small">SMALL</span></td>
-            <td>booking 12m</td>
-            <td class="money">R$ 102.000</td>
-            <td class="money">R$ 40.800</td>
-            <td class="money">R$ 55.080</td>
-            <td class="money">R$ 61.200</td>
-          </tr>
-          <tr>
-            <td colspan="3"><strong>Follow 4</strong></td>
-            <td class="money"><strong>R$ 353.700</strong></td>
-            <td class="money"><strong>R$ 141.480</strong></td>
-            <td class="money"><strong>R$ 190.998</strong></td>
-            <td class="money"><strong>R$ 212.220</strong></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="kpis" style="margin-top:14px">
-      <div class="kpi"><div class="v warn">R$ 659k</div><div class="l">Pess · 41 + Follow</div></div>
-      <div class="kpi"><div class="v">R$ 1,15M</div><div class="l">Real · 41 + Follow</div></div>
-      <div class="kpi"><div class="v ok">R$ 1,47M</div><div class="l">Otim · 41 + Follow</div></div>
-    </div>
-  </div>
-
   <div class="section" id="empresas">
-    <h2>Empresa × tier</h2>
-    <h3>Valor esperado de cada conta (tx do tier × TM do cenário)</h3>
-    <input class="search" id="q" type="search" placeholder="Filtrar empresa…" aria-label="Filtrar empresa" />
+    <h2>Conta a conta</h2>
+    <h3>Tx do tier × ticket de cada STEP · realista</h3>
+    <p class="muted">Valor esperado se aquela conta fechar naquele STEP. Onde o Cockpit já mapeou produto, o STEP usado está marcado.</p>
+    <input class="search" id="q" type="search" placeholder="Filtrar empresa…" />
     <div class="scroll">
       <table>
         <thead>
           <tr>
-            <th>Empresa</th><th>Tier</th><th>Status</th><th>Produto mapeado</th>
-            <th class="money">Pess.</th>
-            <th class="money">Real.</th>
-            <th class="money">Otim.</th>
+            <th>Empresa</th><th>Tier</th><th>STEP mapeado</th>
+            <th class="money">Se Saber</th>
+            <th class="money">Se Ter</th>
+            <th class="money">Se Executar 12×</th>
           </tr>
         </thead>
         <tbody>
-          <tr><td class="name">Brasil Auto Placas</td><td><span class="tag small">SMALL</span></td><td>Semana 0</td><td>—</td><td class="money">R$ 5.356</td><td class="money">R$ 9.675</td><td class="money">R$ 11.126</td></tr>
-          <tr><td class="name">Emporio Inacio</td><td><span class="tag warn">—</span></td><td>Semana 0</td><td>—</td><td class="money">R$ 5.356</td><td class="money">R$ 11.617</td><td class="money">R$ 16.208</td></tr>
-          <tr><td class="name">Podium Jeans</td><td><span class="tag small">SMALL</span></td><td>Semana 0</td><td>—</td><td class="money">R$ 5.356</td><td class="money">R$ 9.675</td><td class="money">R$ 11.126</td></tr>
-          <tr><td class="name">AMBI TOPOGRAFIA (LT)</td><td><span class="tag tiny">TINY</span></td><td>Semana 02</td><td>—</td><td class="money">R$ 816</td><td class="money">R$ 1.459</td><td class="money">R$ 1.678</td></tr>
-          <tr><td class="name">Atlanta Consórcios (BM)</td><td><span class="tag medium">MEDIUM</span></td><td>Semana 02</td><td>—</td><td class="money">R$ 19.817</td><td class="money">R$ 36.520</td><td class="money">R$ 49.242</td></tr>
-          <tr><td class="name">Café Negrin</td><td><span class="tag medium">MEDIUM</span></td><td>Semana 02</td><td>—</td><td class="money">R$ 19.817</td><td class="money">R$ 36.520</td><td class="money">R$ 49.242</td></tr>
-          <tr><td class="name">Comercial Ultimix LTDA</td><td><span class="tag medium">MEDIUM</span></td><td>Semana 02</td><td>—</td><td class="money">R$ 19.817</td><td class="money">R$ 36.520</td><td class="money">R$ 49.242</td></tr>
-          <tr><td class="name">GRM Tecnologia e Serviços</td><td><span class="tag medium">MEDIUM</span></td><td>Semana 02</td><td>—</td><td class="money">R$ 19.817</td><td class="money">R$ 36.520</td><td class="money">R$ 49.242</td></tr>
-          <tr><td class="name">Golias Espetaria</td><td><span class="tag small">SMALL</span></td><td>Semana 02</td><td>—</td><td class="money">R$ 5.356</td><td class="money">R$ 9.675</td><td class="money">R$ 11.126</td></tr>
-          <tr><td class="name">Intelecto Serviços Ambientais</td><td><span class="tag small">SMALL</span></td><td>Semana 02</td><td>—</td><td class="money">R$ 5.356</td><td class="money">R$ 9.675</td><td class="money">R$ 11.126</td></tr>
-          <tr><td class="name">MB Comércio (RecT)</td><td><span class="tag tiny">TINY</span></td><td>Semana 02</td><td>—</td><td class="money">R$ 816</td><td class="money">R$ 1.459</td><td class="money">R$ 1.678</td></tr>
-          <tr><td class="name">MGE Comércio de máquinas</td><td><span class="tag tiny">TINY</span></td><td>Semana 02</td><td>—</td><td class="money">R$ 816</td><td class="money">R$ 1.459</td><td class="money">R$ 1.678</td></tr>
-          <tr><td class="name">V-tech Blindados</td><td><span class="tag medium">MEDIUM</span></td><td>Semana 02</td><td>—</td><td class="money">R$ 19.817</td><td class="money">R$ 36.520</td><td class="money">R$ 49.242</td></tr>
-          <tr><td class="name">Vitória Troféus</td><td><span class="tag large">LARGE</span></td><td>Semana 02</td><td>—</td><td class="money">R$ 36.649</td><td class="money">R$ 68.717</td><td class="money">R$ 90.299</td></tr>
-          <tr><td class="name">Wang (BS)</td><td><span class="tag small">SMALL</span></td><td>Semana 02</td><td>—</td><td class="money">R$ 5.356</td><td class="money">R$ 9.675</td><td class="money">R$ 11.126</td></tr>
-          <tr><td class="name">Balão Mágico</td><td><span class="tag medium">MEDIUM</span></td><td>Semana 03</td><td>—</td><td class="money">R$ 19.817</td><td class="money">R$ 36.520</td><td class="money">R$ 49.242</td></tr>
-          <tr><td class="name">Biju Mania (RecS)</td><td><span class="tag small">SMALL</span></td><td>Semana 03</td><td>—</td><td class="money">R$ 5.356</td><td class="money">R$ 9.675</td><td class="money">R$ 11.126</td></tr>
-          <tr><td class="name">Dental Muller (LM)</td><td><span class="tag medium">MEDIUM</span></td><td>Semana 03</td><td>—</td><td class="money">R$ 19.817</td><td class="money">R$ 36.520</td><td class="money">R$ 49.242</td></tr>
-          <tr><td class="name">Fertisul Fertilizantes</td><td><span class="tag medium">MEDIUM</span></td><td>Semana 03</td><td>—</td><td class="money">R$ 19.817</td><td class="money">R$ 36.520</td><td class="money">R$ 49.242</td></tr>
-          <tr><td class="name">LUCKSHOES (BS)</td><td><span class="tag small">SMALL</span></td><td>Semana 03</td><td>—</td><td class="money">R$ 5.356</td><td class="money">R$ 9.675</td><td class="money">R$ 11.126</td></tr>
-          <tr><td class="name">Mixconect Telecom</td><td><span class="tag medium">MEDIUM</span></td><td>Semana 03</td><td>—</td><td class="money">R$ 19.817</td><td class="money">R$ 36.520</td><td class="money">R$ 49.242</td></tr>
-          <tr><td class="name">Neglape</td><td><span class="tag tiny">TINY</span></td><td>Semana 03</td><td>—</td><td class="money">R$ 816</td><td class="money">R$ 1.459</td><td class="money">R$ 1.678</td></tr>
-          <tr><td class="name">R. Chagas Ltda (BM)</td><td><span class="tag medium">MEDIUM</span></td><td>Semana 03</td><td>—</td><td class="money">R$ 19.817</td><td class="money">R$ 36.520</td><td class="money">R$ 49.242</td></tr>
-          <tr><td class="name">Rhama Analysis (LM)</td><td><span class="tag medium">MEDIUM</span></td><td>Semana 03</td><td>—</td><td class="money">R$ 19.817</td><td class="money">R$ 36.520</td><td class="money">R$ 49.242</td></tr>
-          <tr><td class="name">Splendor Elétrica (BM)</td><td><span class="tag medium">MEDIUM</span></td><td>Semana 03</td><td>—</td><td class="money">R$ 19.817</td><td class="money">R$ 36.520</td><td class="money">R$ 49.242</td></tr>
-          <tr><td class="name">Xavier Realiza Imóveis</td><td><span class="tag medium">MEDIUM</span></td><td>Semana 03</td><td>—</td><td class="money">R$ 19.817</td><td class="money">R$ 36.520</td><td class="money">R$ 49.242</td></tr>
-          <tr><td class="name">Bodega do Sertão</td><td><span class="tag medium">MEDIUM</span></td><td>Semana 03</td><td>—</td><td class="money">R$ 19.817</td><td class="money">R$ 36.520</td><td class="money">R$ 49.242</td></tr>
-          <tr><td class="name">Maben</td><td><span class="tag medium">MEDIUM</span></td><td>Semana 03</td><td>—</td><td class="money">R$ 19.817</td><td class="money">R$ 36.520</td><td class="money">R$ 49.242</td></tr>
-          <tr><td class="name">Óticas Visamix (BS)</td><td><span class="tag small">SMALL</span></td><td>Semana 03</td><td>—</td><td class="money">R$ 5.356</td><td class="money">R$ 9.675</td><td class="money">R$ 11.126</td></tr>
-          <tr><td class="name">600 Multimarcas</td><td><span class="tag medium">MEDIUM</span></td><td>Semana 04</td><td>EQV</td><td class="money">R$ 19.817</td><td class="money">R$ 36.520</td><td class="money">R$ 49.242</td></tr>
-          <tr><td class="name">CID</td><td><span class="tag medium">MEDIUM</span></td><td>Semana 04</td><td>—</td><td class="money">R$ 19.817</td><td class="money">R$ 36.520</td><td class="money">R$ 49.242</td></tr>
-          <tr><td class="name">Castanheira (LM)</td><td><span class="tag medium">MEDIUM</span></td><td>Semana 04</td><td>Executar</td><td class="money">R$ 19.817</td><td class="money">R$ 36.520</td><td class="money">R$ 49.242</td></tr>
-          <tr><td class="name">Clínica Polivida (BS)</td><td><span class="tag small">SMALL</span></td><td>Semana 04</td><td>—</td><td class="money">R$ 5.356</td><td class="money">R$ 9.675</td><td class="money">R$ 11.126</td></tr>
-          <tr><td class="name">Freebong (BS)</td><td><span class="tag small">SMALL</span></td><td>Semana 04</td><td>EQV</td><td class="money">R$ 5.356</td><td class="money">R$ 9.675</td><td class="money">R$ 11.126</td></tr>
-          <tr><td class="name">Frigorífico Rotta</td><td><span class="tag medium">MEDIUM</span></td><td>Semana 04</td><td>—</td><td class="money">R$ 19.817</td><td class="money">R$ 36.520</td><td class="money">R$ 49.242</td></tr>
-          <tr><td class="name">Henri Soluções (LS)</td><td><span class="tag small">SMALL</span></td><td>Semana 04</td><td>Executar</td><td class="money">R$ 5.356</td><td class="money">R$ 9.675</td><td class="money">R$ 11.126</td></tr>
-          <tr><td class="name">Legtrânsito (BS)</td><td><span class="tag warn">—</span></td><td>Semana 04</td><td>EQV</td><td class="money">R$ 5.356</td><td class="money">R$ 11.617</td><td class="money">R$ 16.208</td></tr>
-          <tr><td class="name">Nosso boteco (BM)</td><td><span class="tag medium">MEDIUM</span></td><td>Semana 04</td><td>—</td><td class="money">R$ 19.817</td><td class="money">R$ 36.520</td><td class="money">R$ 49.242</td></tr>
-          <tr><td class="name">RE/MAX PRO WORK (BT)</td><td><span class="tag tiny">TINY</span></td><td>Semana 04</td><td>EQV</td><td class="money">R$ 816</td><td class="money">R$ 1.459</td><td class="money">R$ 1.678</td></tr>
-          <tr><td class="name">Casa dos Pães (BS)</td><td><span class="tag small">SMALL</span></td><td>Semana 05</td><td>ZapFirst</td><td class="money">R$ 5.356</td><td class="money">R$ 9.675</td><td class="money">R$ 11.126</td></tr>
-          <tr><td class="name">Triboltec</td><td><span class="tag small">SMALL</span></td><td>Semana 05</td><td>—</td><td class="money">R$ 5.356</td><td class="money">R$ 9.675</td><td class="money">R$ 11.126</td></tr>
+          <tr><td class="name">Brasil Auto Placas</td><td><span class="tag small">SMALL</span></td><td>—</td><td class="money">R$ 7.250</td><td class="money">R$ 2.900</td><td class="money">R$ 22.620</td></tr>
+          <tr><td class="name">Emporio Inacio</td><td><span class="tag warn">—</span></td><td>—</td><td class="money">R$ 8.750</td><td class="money">R$ 3.500</td><td class="money">R$ 27.300</td></tr>
+          <tr><td class="name">Podium Jeans</td><td><span class="tag small">SMALL</span></td><td>—</td><td class="money">R$ 7.250</td><td class="money">R$ 2.900</td><td class="money">R$ 22.620</td></tr>
+          <tr><td class="name">AMBI TOPOGRAFIA (LT)</td><td><span class="tag tiny">TINY</span></td><td>—</td><td class="money">R$ 3.500</td><td class="money">R$ 1.400</td><td class="money">R$ 10.920</td></tr>
+          <tr><td class="name">Atlanta Consórcios (BM)</td><td><span class="tag medium">MEDIUM</span></td><td>—</td><td class="money">R$ 13.000</td><td class="money">R$ 5.200</td><td class="money">R$ 40.560</td></tr>
+          <tr><td class="name">Café Negrin</td><td><span class="tag medium">MEDIUM</span></td><td>—</td><td class="money">R$ 13.000</td><td class="money">R$ 5.200</td><td class="money">R$ 40.560</td></tr>
+          <tr><td class="name">Comercial Ultimix LTDA</td><td><span class="tag medium">MEDIUM</span></td><td>—</td><td class="money">R$ 13.000</td><td class="money">R$ 5.200</td><td class="money">R$ 40.560</td></tr>
+          <tr><td class="name">GRM Tecnologia e Serviços</td><td><span class="tag medium">MEDIUM</span></td><td>—</td><td class="money">R$ 13.000</td><td class="money">R$ 5.200</td><td class="money">R$ 40.560</td></tr>
+          <tr><td class="name">Golias Espetaria</td><td><span class="tag small">SMALL</span></td><td>—</td><td class="money">R$ 7.250</td><td class="money">R$ 2.900</td><td class="money">R$ 22.620</td></tr>
+          <tr><td class="name">Intelecto Serviços Ambientais</td><td><span class="tag small">SMALL</span></td><td>—</td><td class="money">R$ 7.250</td><td class="money">R$ 2.900</td><td class="money">R$ 22.620</td></tr>
+          <tr><td class="name">MB Comércio (RecT)</td><td><span class="tag tiny">TINY</span></td><td>—</td><td class="money">R$ 3.500</td><td class="money">R$ 1.400</td><td class="money">R$ 10.920</td></tr>
+          <tr><td class="name">MGE Comércio de máquinas</td><td><span class="tag tiny">TINY</span></td><td>—</td><td class="money">R$ 3.500</td><td class="money">R$ 1.400</td><td class="money">R$ 10.920</td></tr>
+          <tr><td class="name">V-tech Blindados</td><td><span class="tag medium">MEDIUM</span></td><td>—</td><td class="money">R$ 13.000</td><td class="money">R$ 5.200</td><td class="money">R$ 40.560</td></tr>
+          <tr><td class="name">Vitória Troféus</td><td><span class="tag large">LARGE</span></td><td>—</td><td class="money">R$ 18.750</td><td class="money">R$ 7.500</td><td class="money">R$ 58.500</td></tr>
+          <tr><td class="name">Wang (BS)</td><td><span class="tag small">SMALL</span></td><td>—</td><td class="money">R$ 7.250</td><td class="money">R$ 2.900</td><td class="money">R$ 22.620</td></tr>
+          <tr><td class="name">Balão Mágico</td><td><span class="tag medium">MEDIUM</span></td><td>—</td><td class="money">R$ 13.000</td><td class="money">R$ 5.200</td><td class="money">R$ 40.560</td></tr>
+          <tr><td class="name">Biju Mania (RecS)</td><td><span class="tag small">SMALL</span></td><td>—</td><td class="money">R$ 7.250</td><td class="money">R$ 2.900</td><td class="money">R$ 22.620</td></tr>
+          <tr><td class="name">Dental Muller (LM)</td><td><span class="tag medium">MEDIUM</span></td><td>—</td><td class="money">R$ 13.000</td><td class="money">R$ 5.200</td><td class="money">R$ 40.560</td></tr>
+          <tr><td class="name">Fertisul Fertilizantes</td><td><span class="tag medium">MEDIUM</span></td><td>—</td><td class="money">R$ 13.000</td><td class="money">R$ 5.200</td><td class="money">R$ 40.560</td></tr>
+          <tr><td class="name">LUCKSHOES (BS)</td><td><span class="tag small">SMALL</span></td><td>—</td><td class="money">R$ 7.250</td><td class="money">R$ 2.900</td><td class="money">R$ 22.620</td></tr>
+          <tr><td class="name">Mixconect Telecom</td><td><span class="tag medium">MEDIUM</span></td><td>—</td><td class="money">R$ 13.000</td><td class="money">R$ 5.200</td><td class="money">R$ 40.560</td></tr>
+          <tr><td class="name">Neglape</td><td><span class="tag tiny">TINY</span></td><td>—</td><td class="money">R$ 3.500</td><td class="money">R$ 1.400</td><td class="money">R$ 10.920</td></tr>
+          <tr><td class="name">R. Chagas Ltda (BM)</td><td><span class="tag medium">MEDIUM</span></td><td>—</td><td class="money">R$ 13.000</td><td class="money">R$ 5.200</td><td class="money">R$ 40.560</td></tr>
+          <tr><td class="name">Rhama Analysis (LM)</td><td><span class="tag medium">MEDIUM</span></td><td>—</td><td class="money">R$ 13.000</td><td class="money">R$ 5.200</td><td class="money">R$ 40.560</td></tr>
+          <tr><td class="name">Splendor Elétrica (BM)</td><td><span class="tag medium">MEDIUM</span></td><td>—</td><td class="money">R$ 13.000</td><td class="money">R$ 5.200</td><td class="money">R$ 40.560</td></tr>
+          <tr><td class="name">Xavier Realiza Imóveis</td><td><span class="tag medium">MEDIUM</span></td><td>—</td><td class="money">R$ 13.000</td><td class="money">R$ 5.200</td><td class="money">R$ 40.560</td></tr>
+          <tr><td class="name">Bodega do Sertão</td><td><span class="tag medium">MEDIUM</span></td><td>—</td><td class="money">R$ 13.000</td><td class="money">R$ 5.200</td><td class="money">R$ 40.560</td></tr>
+          <tr><td class="name">Maben</td><td><span class="tag medium">MEDIUM</span></td><td>—</td><td class="money">R$ 13.000</td><td class="money">R$ 5.200</td><td class="money">R$ 40.560</td></tr>
+          <tr><td class="name">Óticas Visamix (BS)</td><td><span class="tag small">SMALL</span></td><td>—</td><td class="money">R$ 7.250</td><td class="money">R$ 2.900</td><td class="money">R$ 22.620</td></tr>
+          <tr><td class="name">600 Multimarcas</td><td><span class="tag medium">MEDIUM</span></td><td><span class="tag saber">Saber · EQV</span></td><td class="money"><strong>R$ 13.000</strong></td><td class="money">R$ 5.200</td><td class="money">R$ 40.560</td></tr>
+          <tr><td class="name">CID</td><td><span class="tag medium">MEDIUM</span></td><td>—</td><td class="money">R$ 13.000</td><td class="money">R$ 5.200</td><td class="money">R$ 40.560</td></tr>
+          <tr><td class="name">Castanheira (LM)</td><td><span class="tag medium">MEDIUM</span></td><td><span class="tag exec">Executar</span></td><td class="money">R$ 13.000</td><td class="money">R$ 5.200</td><td class="money"><strong>R$ 40.560</strong></td></tr>
+          <tr><td class="name">Clínica Polivida (BS)</td><td><span class="tag small">SMALL</span></td><td>—</td><td class="money">R$ 7.250</td><td class="money">R$ 2.900</td><td class="money">R$ 22.620</td></tr>
+          <tr><td class="name">Freebong (BS)</td><td><span class="tag small">SMALL</span></td><td><span class="tag saber">Saber · EQV</span></td><td class="money"><strong>R$ 7.250</strong></td><td class="money">R$ 2.900</td><td class="money">R$ 22.620</td></tr>
+          <tr><td class="name">Frigorífico Rotta</td><td><span class="tag medium">MEDIUM</span></td><td>—</td><td class="money">R$ 13.000</td><td class="money">R$ 5.200</td><td class="money">R$ 40.560</td></tr>
+          <tr><td class="name">Henri Soluções (LS)</td><td><span class="tag small">SMALL</span></td><td><span class="tag exec">Executar</span></td><td class="money">R$ 7.250</td><td class="money">R$ 2.900</td><td class="money"><strong>R$ 22.620</strong></td></tr>
+          <tr><td class="name">Legtrânsito (BS)</td><td><span class="tag warn">—</span></td><td><span class="tag saber">Saber · EQV</span></td><td class="money"><strong>R$ 8.750</strong></td><td class="money">R$ 3.500</td><td class="money">R$ 27.300</td></tr>
+          <tr><td class="name">Nosso boteco (BM)</td><td><span class="tag medium">MEDIUM</span></td><td>—</td><td class="money">R$ 13.000</td><td class="money">R$ 5.200</td><td class="money">R$ 40.560</td></tr>
+          <tr><td class="name">RE/MAX PRO WORK (BT)</td><td><span class="tag tiny">TINY</span></td><td><span class="tag saber">Saber · EQV</span></td><td class="money"><strong>R$ 3.500</strong></td><td class="money">R$ 1.400</td><td class="money">R$ 10.920</td></tr>
+          <tr><td class="name">Casa dos Pães (BS)</td><td><span class="tag small">SMALL</span></td><td><span class="tag ter">Ter · ZapFirst</span></td><td class="money">R$ 7.250</td><td class="money"><strong>R$ 2.900</strong></td><td class="money">R$ 22.620</td></tr>
+          <tr><td class="name">Triboltec</td><td><span class="tag small">SMALL</span></td><td>—</td><td class="money">R$ 7.250</td><td class="money">R$ 2.900</td><td class="money">R$ 22.620</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="muted" style="margin:10px 0 0">Conta MEDIUM “vale” ~R$ 36,5k no realista. SMALL ~R$ 9,7k. TINY ~R$ 1,5k. Por isso a fila da 3ª/4ª semana (quase toda MEDIUM) decide o mês.</p>
+    <p class="muted" style="margin:10px 0 0">
+      Conta MEDIUM no realista: Saber R$ 13k · Ter R$ 5,2k · Executar 12× R$ 40,6k.
+      EQV mapeado (600, Freebong, RE/MAX, Legtrânsito) usa a coluna Saber. Henri e Castanheira usam Executar. Casa dos Pães usa Ter.
+    </p>
   </div>
 
   <p class="ext muted">
     <a href="pitch-setembro-2026.html">Pitch setembro</a> ·
-    <a href="saber-agosto-2026.html">Saber agosto</a> ·
     <a href="farmer-sara.html">Hub Farmer Sara</a>
   </p>
   <footer>
-    V4 · Cenários setembro 2026 · Cockpit E.E · Farmer Sara ·
-    tx = Monetizado / (Monetizado + Drop) · TM = TCV médio do win no tier
+    V4 · Cenários set · ticket STEP oficial · tx Cockpit por tier · Potencializar fora
   </footer>
 </div>
 <script>
