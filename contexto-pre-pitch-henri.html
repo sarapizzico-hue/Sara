@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <title>Pré-pitch · Henri Soluções · Documento de contexto</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #140608; --surf: rgba(255,255,255,.06); --bd: rgba(255,255,255,.14);
+      --txt: #fff; --mut: rgba(255,255,255,.78); --red: #e11d24;
+      --ok: #86efac; --warn: #fde68a; --bad: #fda4af; --info: #93c5fd;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; font: 15px/1.55 "Plus Jakarta Sans", system-ui, sans-serif; color: var(--txt);
+      background:
+        radial-gradient(ellipse 70% 40% at 10% 0%, rgba(225,29,36,.32), transparent 55%),
+        linear-gradient(180deg, #1a090b 0%, #0d0405 100%);
+      padding-bottom: 72px;
+    }
+    h1, h2, h3 { font-family: Outfit, sans-serif; letter-spacing: -.02em; line-height: 1.15; }
+    .top {
+      position: sticky; top: 0; z-index: 40; backdrop-filter: blur(14px);
+      background: rgba(13,4,5,.92); border-bottom: 1px solid var(--bd);
+      padding: 12px 18px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    }
+    .brand { font-weight: 800; font-size: 14px; }
+    .brand span { color: #fda4af; }
+    .pill {
+      font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+      border: 1px solid var(--bd); border-radius: 999px; padding: 6px 11px; color: var(--mut); text-decoration: none;
+    }
+    .pill:hover { color: #fff; }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 26px 18px 0; }
+    .hero {
+      border: 1px solid var(--bd); border-radius: 20px; padding: 26px 22px;
+      background: linear-gradient(135deg, rgba(225,29,36,.2), rgba(255,255,255,.04)); margin-bottom: 16px;
+    }
+    .hero h1 { margin: 0 0 10px; font-size: clamp(24px, 4vw, 34px); }
+    .hero p { margin: 0; color: var(--mut); max-width: 840px; }
+    .nav { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; margin: 14px 0 18px; }
+    .nav a {
+      text-decoration: none; color: var(--mut); font-size: 12px; font-weight: 700;
+      border: 1px solid var(--bd); background: var(--surf); border-radius: 12px; padding: 10px 12px;
+    }
+    .nav a:hover { color: #fff; background: rgba(225,29,36,.18); }
+    .nav a small { display: block; color: #fda4af; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 3px; }
+    .section { border: 1px solid var(--bd); border-radius: 18px; background: rgba(255,255,255,.04); padding: 20px 18px; margin: 12px 0; }
+    .section h2 { margin: 0 0 8px; font-size: clamp(18px, 3vw, 24px); }
+    .k { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #fda4af; margin-bottom: 6px; }
+    .lead { color: var(--mut); margin: 0 0 12px; font-size: 14px; }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(132px, 1fr)); gap: 10px; margin: 12px 0; }
+    .kpi { border: 1px solid var(--bd); border-radius: 14px; background: var(--surf); padding: 12px 14px; }
+    .kpi .v { font-size: 18px; font-weight: 800; }
+    .kpi .v.ok { color: var(--ok); } .kpi .v.warn { color: var(--warn); } .kpi .v.hot { color: var(--bad); } .kpi .v.info { color: var(--info); }
+    .kpi .l { font-size: 10px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--mut); margin-top: 6px; }
+    .kpi .s { font-size: 11px; color: #d4d4d4; margin-top: 4px; }
+    .card { border: 1px solid var(--bd); border-radius: 14px; background: var(--surf); padding: 12px 14px; }
+    .card h3 { margin: 0 0 6px; font-size: 15px; }
+    .card p, .card li { margin: 0; font-size: 13px; color: var(--mut); }
+    .card ul { margin: 0; padding-left: 18px; } .card li { margin: 4px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td { padding: 9px 8px; text-align: left; border-bottom: 1px solid var(--bd); vertical-align: top; }
+    th { font-size: 10px; text-transform: uppercase; letter-spacing: .07em; color: var(--mut); font-weight: 800; }
+    .tag { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; border: 1px solid var(--bd); }
+    .tag.ok { color: var(--ok); border-color: rgba(134,239,172,.35); }
+    .tag.warn { color: var(--warn); border-color: rgba(253,230,138,.35); }
+    .tag.hot { color: var(--bad); border-color: rgba(253,164,175,.4); }
+    .tag.info { color: var(--info); border-color: rgba(147,197,253,.35); }
+    .callout { margin: 12px 0; padding: 13px 15px; border-radius: 14px; font-size: 14px; border: 1px solid rgba(253,230,138,.3); background: rgba(253,230,138,.08); color: var(--warn); }
+    .callout strong { color: #fef08a; }
+    .callout.ok { border-color: rgba(134,239,172,.3); background: rgba(134,239,172,.08); color: var(--ok); }
+    .callout.ok strong { color: #bbf7d0; }
+    .callout.hot { border-color: rgba(253,164,175,.35); background: rgba(253,164,175,.08); color: var(--bad); }
+    .callout.hot strong { color: #fecdd3; }
+    .callout.info { border-color: rgba(147,197,253,.3); background: rgba(147,197,253,.08); color: var(--info); }
+    .check { list-style: none; padding: 0; margin: 0; }
+    .check li { display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid var(--bd); font-size: 14px; color: var(--mut); }
+    .check li:last-child { border-bottom: 0; }
+    .box { flex: 0 0 16px; width: 16px; height: 16px; margin-top: 3px; border: 1.5px solid rgba(255,255,255,.45); border-radius: 4px; }
+    .muted { color: var(--mut); font-size: 13px; }
+    a { color: #fda4af; }
+    footer { margin: 28px 0 0; text-align: center; font-size: 12px; color: var(--mut); }
+    @media (max-width: 760px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <div class="brand">Pré-pitch Henri · <span>Sara × Farmer</span></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <a class="pill" href="script-henri-pitch.html">Script da call</a>
+      <a class="pill" href="farmer-sara.html">Hub Farmer</a>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <header class="hero">
+      <h1>O mapa existe. Agora é pôr a mão na massa.</h1>
+      <p>
+        Briefing interno no modelo de contexto pré-pitch. Fonte: Guia 1 da EE Henri Soluções.
+        Tese da sala: a Henri já entrega continuidade operacional. Falta origem e memória comercial fora da cabeça do Romildo.
+        O próximo passo não é mais diagnóstico — é executar o que a EE desenhou.
+      </p>
+    </header>
+
+    <div class="callout hot">
+      <strong>Frase que pesa na sala:</strong>
+      “Eu paguei R$ 12.000 por isso… estou me sentindo super enganado, não pelo material da Aline, mas pelo que me foi prometido.”
+      Eles queriam execução. O pitch é Executar — não mais PDF. Tratar expectativa <em>antes</em> do preço. Não reabrir Felipe. Não falar mal da venda.
+    </div>
+
+    <nav class="nav">
+      <a href="#check"><small>00</small>Checklist</a>
+      <a href="#sala"><small>01</small>Sala</a>
+      <a href="#negocio"><small>02</small>Resumo</a>
+      <a href="#dores"><small>03</small>Dores</a>
+      <a href="#contexto"><small>04</small>Contexto</a>
+      <a href="#midia"><small>05</small>Mídia</a>
+      <a href="#agencia"><small>06</small>Social</a>
+      <a href="#abertura"><small>07</small>Abertura</a>
+      <a href="#pacote"><small>08</small>Pacote</a>
+    </nav>
+
+    <section class="section" id="check">
+      <div class="k">00 · Checklist véspera</div>
+      <h2>Não abrir preço sem isso</h2>
+      <ul class="check">
+        <li><span class="box"></span>Romildo e Gabriel na sala. Os dois se sentiram enganados na contratação. Se um faltar, não força TCV.</li>
+        <li><span class="box"></span>Farmer conduz decisão. Aline/EE é prova do mapa — não do preço.</li>
+        <li><span class="box"></span>Social já foi bonificado (setup de mídia + redes). Não vender Social como surpresa.</li>
+        <li><span class="box"></span>Dores em 4 linhas decoradas.</li>
+        <li><span class="box"></span>Case externo: sem número pronto = não citar. Ancorar na EE da Henri.</li>
+        <li><span class="box"></span>Uma condição: Executar · R$ 6.500/mês. Conciliar TCV R$ 90k do cockpit vs 12× = R$ 78k <em>antes</em> da call.</li>
+        <li><span class="box"></span>3 perguntas de abertura. Cliente fala primeiro.</li>
+      </ul>
+      <div class="grid2" style="margin-top:12px">
+        <div class="card">
+          <h3>Dores em 4 linhas (espelho)</h3>
+          <ul>
+            <li>Comercial: 85–90% no WhatsApp e na cabeça do Romildo.</li>
+            <li>Origem: 100% indicação. Sem prospecção ativa nem mídia antes da EE.</li>
+            <li>Prova: 10 anos de case sem evidência digital (sigilo de marca).</li>
+            <li>Oferta: o mercado lê “técnico de geladeira”; eles vendem a loja não parar.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>O que a sala precisa sair sabendo</h3>
+          <ul>
+            <li>Não falta técnica. Falta arquitetura comercial rodando.</li>
+            <li>Se entrar volume agora, trava no Romildo.</li>
+            <li>A EE entregou o mapa. Executar é a mão na massa que eles pediram.</li>
+            <li>Social/setup já está em curso como bônus — o plano continua isso, não substitui.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="sala">
+      <div class="k">01 · Quem está na mesa</div>
+      <h2>Decisores e operação</h2>
+      <div class="grid3">
+        <div class="card">
+          <span class="tag hot">Decisor</span>
+          <h3 style="margin-top:8px">Romildo · fundador, comercial</h3>
+          <p>Ex-manutenção BK e McDonald’s. Fecha contrato e carrega o relacionamento. “Nunca tive férias.” Sem ele, não tem decisão.</p>
+        </div>
+        <div class="card">
+          <span class="tag hot">Decisor</span>
+          <h3 style="margin-top:8px">Gabriel · sócio, financeiro/ops</h3>
+          <p>Libera Pix, campo e margem. Também se sentiu enganado na venda. Precisa ver previsibilidade, não slide.</p>
+        </div>
+        <div class="card">
+          <span class="tag info">Operação CRM</span>
+          <h3 style="margin-top:8px">Maria Edenilda · SDR interno</h3>
+          <p>Orçamento, NF, cobrança. Na EE: CRM diário e qualificação. Não decide investimento.</p>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:12px">
+        <strong>Agência:</strong> não há agência terceira. Interno de marketing: não conciliado (não existe time). V4 (Aline + Sara) já executou setup de mídia e redes como bonificação.
+      </div>
+    </section>
+
+    <section class="section" id="negocio">
+      <div class="k">02 · Resumo do negócio</div>
+      <h2>Canônicos — e o que não inventar</h2>
+      <div class="kpis">
+        <div class="kpi"><div class="v">R$ 175–250 mil</div><div class="l">Faturamento / mês</div><div class="s">~ R$ 3 mi / ano · declarado</div></div>
+        <div class="kpi"><div class="v warn">não conciliado</div><div class="l">Budget mídia</div><div class="s">Não havia tráfego pago antes da EE</div></div>
+        <div class="kpi"><div class="v warn">não conciliado</div><div class="l">Margem bruta</div></div>
+        <div class="kpi"><div class="v">18–37%</div><div class="l">Margem líquida</div><div class="s">Após todos os custos · faixa larga</div></div>
+        <div class="kpi"><div class="v warn">não conciliado</div><div class="l">Ticket médio</div></div>
+        <div class="kpi"><div class="v warn">não conciliado</div><div class="l">LT médio</div></div>
+        <div class="kpi"><div class="v warn">não conciliado</div><div class="l">Base (unidades ativas)</div><div class="s">Meta pede ~715 unidades novas equivalentes</div></div>
+        <div class="kpi"><div class="v info">R$ 15–18 mi</div><div class="l">Meta / ano</div><div class="s">~ R$ 1,25 a 1,5 mi / mês</div></div>
+      </div>
+      <p class="muted">Praças: São Paulo capital / Mooca + Recife, Porto Alegre, Maranhão (próprios, representantes e parceiros). População: não aplicável (B2B nacional).</p>
+      <div class="grid2">
+        <div class="card">
+          <h3>Custo declarado / mês</h3>
+          <ul>
+            <li>Folha / gestão: R$ 35–50 mil</li>
+            <li>Insumos: mín. R$ 80 mil (pico R$ 500 mil em equipamento)</li>
+            <li>Terceiros: R$ 30–60 mil (obra R$ 120–150 mil)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Ponte de ROI (não breakeven)</h3>
+          <p>Da casa de R$ 200 mil/mês para R$ 1,25 mi não cabe no WhatsApp do Romildo. O plano instala origem (ABM + Google) e memória (CRM com dono). Não vender “R$ 6.500 se paga nos R$ 15 milhões”.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="dores">
+      <div class="k">03 · Principais dores</div>
+      <h2>Não falta técnica. Falta sistema comercial.</h2>
+
+      <h3 style="font-size:18px;margin:8px 0">1. Comercial</h3>
+      <p class="lead">Time enxuto. Funil ainda é a cabeça do fundador. CRM foi desenhado na EE — uso no dia a dia não conciliado nesta fonte.</p>
+      <div style="overflow-x:auto">
+        <table>
+          <thead><tr><th>Ferramenta</th><th>Função hoje</th><th>Papel no sistema</th></tr></thead>
+          <tbody>
+            <tr><td>WhatsApp + planilhas do Romildo</td><td>85–90% do histórico e da negociação</td><td>Sair do centro; virar conversa, não memória</td></tr>
+            <tr><td>CRM (Pipedrive / RD / Kommo — EE)</td><td>Desenhado como memória comercial</td><td>Dono, etapa, forecast; Maria opera o dia</td></tr>
+            <tr><td>Landing page (V4)</td><td>Captura B2B com triagem</td><td>Entrada de MQL com anti-residencial</td></tr>
+            <tr><td>LinkedIn / Sales Navigator</td><td>Motor ABM desenhado; cadência 30–90 dias</td><td>Prospecção ativa de decisores</td></tr>
+            <tr><td>Portais de fornecedor das redes</td><td>Homologação já tentada</td><td>Manter; não é origem previsível</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="grid2" style="margin-top:12px">
+        <div class="card">
+          <h3>Dores centrais</h3>
+          <ul>
+            <li>Qualificação e fechamento dependem do tempo do Romildo. 100 leads simultâneos travam a empresa.</li>
+            <li>Sem dono de oportunidade visível para Gabriel (financeiro) enxergar forecast.</li>
+            <li>Papéis da EE (Romildo fecha · Maria SDR · Gabriel campo) ainda precisam virar ritual, não slide.</li>
+            <li>Multi-threading do comitê (2–5 contatos/conta) desenhado, não comprovado em uso.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Conclusão para a fala</h3>
+          <p>A Henri já vende. O que não opera é um sistema: entrada, qualificação, proposta e ganho/perda fora de uma só cabeça. Pipedrive/RD não é o produto. O produto é a memória comercial com dono e o Romildo só no fechamento.</p>
+        </div>
+      </div>
+
+      <h3 style="font-size:18px;margin:18px 0 8px">2. Tráfego pago</h3>
+      <p class="lead">Série mensal de leads/vendas: <strong>não conciliado</strong> — não havia campanha paga ativa antes da consultoria. Setup de mídia foi bonificado; resultado de plataforma ainda não está nesta fonte.</p>
+      <div class="grid3">
+        <div class="card"><h3>Google Search</h3><p>Motor 2 da EE: demanda emergencial B2B em cozinha profissional. Formulário barra residencial. Status de veiculação / CPL: não conciliado.</p></div>
+        <div class="card"><h3>Meta</h3><p>Remarketing 60 dias na LP, desenhado. Instagram orgânico 3 posts/semana. Auditoria: ~30 posts, 157 seguidores, visual inconsistente.</p></div>
+        <div class="card"><h3>LinkedIn ABM</h3><p>Motor 1: ICP A via Sales Navigator. Não é mídia clássica — é cadência. Volume gerado: não conciliado.</p></div>
+      </div>
+      <div class="callout">
+        <strong>Não usar na boca:</strong> CPL, conversão ou “leads/mês” inventados. Fala canônica: “antes da EE não havia origem paga. O que existe agora é o mapa dos dois motores — o plano é operá-los com critério.”
+      </div>
+
+      <h3 style="font-size:18px;margin:18px 0 8px">3. Posicionamento / oferta</h3>
+      <div class="grid2">
+        <div class="card">
+          <h3>O que vendem</h3>
+          <ul>
+            <li>Continuidade operacional multitécnica — a loja não para</li>
+            <li>Refrigeração comercial (~70% dos chamados)</li>
+            <li>Climatização comercial/industrial</li>
+            <li>Elétrica, exaustão e cocção (~5–30%)</li>
+            <li>Corretiva (maior caixa), preventiva, instalação, retrofit, expansão</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>O que o mercado lê</h3>
+          <p>Prestador fragmentado de manutenção / “técnico de refrigeração”. Residencial de alto padrão existe por indicação e está <strong>fora</strong> da estratégia.</p>
+          <p style="margin-top:8px">Na sala: devolver a PUV da EE — responsável único, SLA, especialização em fast food. Não atacar a marca. Não expor Zamp/BK em criativo (sigilo).</p>
+        </div>
+      </div>
+
+      <div class="grid2" style="margin-top:12px">
+        <div class="card">
+          <span class="tag warn">CSAT</span>
+          <h3 style="margin-top:8px">não conciliado</h3>
+          <p>Não há nota semanal nesta fonte. Há percepção qualitativa forte sobre a venda inicial — tratar como risco de confiança, não como CSAT.</p>
+        </div>
+        <div class="card">
+          <span class="tag hot">NPS / percepção</span>
+          <h3 style="margin-top:8px">não conciliado em nota</h3>
+          <p>Material da Aline respeitado. Promessa do comercial da V4, não. Pitch = execução. Se ignorar isso, o preço reabre a ferida.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contexto">
+      <div class="k">04 · Contexto detalhado</div>
+      <h2>Henri Soluções Ltda</h2>
+      <div class="grid2">
+        <div class="card">
+          <h3>1.1 Empresa</h3>
+          <p>~10 anos. Engenharia de manutenção e continuidade operacional para food service corporativo/industrial. Sede SP. Cobertura nacional por equipe própria + representantes + parceiros. Não substitui o time interno do cliente — tira a fragmentação de vários prestadores.</p>
+        </div>
+        <div class="card">
+          <h3>1.2 O que vende</h3>
+          <p><strong>B2B/PJ:</strong> continuidade operacional (ABC: refrigeração, climatização, elétrica/exaustão/cocção).<br /><strong>B2C/PF:</strong> fora da estratégia. Residencial só pontual por indicação.</p>
+        </div>
+      </div>
+      <div class="grid2" style="margin-top:10px">
+        <div class="card">
+          <h3>1.3 Problemas que resolve</h3>
+          <p>Loja parada, câmara fora, SLA estourado, coordenar três técnicos. Valor percebido: um responsável, prazo, especialização de cozinha de alto volume.</p>
+        </div>
+        <div class="card">
+          <h3>1.4 Para quem</h3>
+          <p>ICP A: redes de fast food, grupos multifranqueados, cozinhas industriais. Carteira citada: Zamp (BK, Popeyes, Subway, Starbucks), McDonald’s, KFC, Spoleto, Vivenda, Coco Bambu, refeições corporativas. Comitê: diretor de manutenção, coordenador, supervisor regional (vetor de expansão), compras, gerência da loja. Ticket/ciclo/win rate B2B: não conciliado.</p>
+        </div>
+      </div>
+      <div class="card" style="margin-top:10px">
+        <h3>1.5 Como vende hoje</h3>
+        <p>100% indicação + boca a boca + Romildo com supervisores regionais. Tentou: 5.000 cartões, abordagem no almoço, portais das redes, Instagram sem mídia. Fluxo alvo da EE: ABM/Google/LP → CRM → Maria qualifica → Romildo fecha → Gabriel opera campo.</p>
+        <p style="margin-top:8px">Critérios ainda não comprovados em uso nesta fonte: MQL, SQL, diagnóstico, proposta, motivo de perda, SLA de 5 min, ritual daily/weekly/monthly.</p>
+      </div>
+    </section>
+
+    <section class="section" id="midia">
+      <div class="k">05 · Mídia paga</div>
+      <h2>Declarado vs auditado</h2>
+      <p class="lead">Antes da EE: sem campanha paga. Investimento mensal declarado: não conciliado. Recorte auditado de plataforma: não conciliado.</p>
+      <div class="scroll" style="overflow-x:auto">
+        <table>
+          <thead><tr><th>Métrica</th><th>Valor</th></tr></thead>
+          <tbody>
+            <tr><td>CPL / leads / conversão / participação da mídia</td><td>não conciliado — não havia série</td></tr>
+            <tr><td>Google Ads (planejado)</td><td>Search B2B emergência + form de triagem</td></tr>
+            <tr><td>Meta (planejado)</td><td>Remarketing 60d da LP</td></tr>
+            <tr><td>Setup</td><td>Bonificado por Aline/Sara após atrito da venda</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted" style="margin-top:10px">Entrega EE: mapa de GTM, LP, identidade (azul/amarelo, Montserrat, urso polar). Link de entrega final: não conciliado nesta fonte.</p>
+    </section>
+
+    <section class="section" id="agencia">
+      <div class="k">06 · Social — matar antes do preço</div>
+      <h2>Não há agência. Já tem bônus de execução.</h2>
+      <div class="grid2">
+        <div class="card">
+          <h3>Como posicionar</h3>
+          <ul>
+            <li>Redes e setup de campanha já entraram sem cobrança extra.</li>
+            <li>Executar = cadência contínua disso + ABM + Google + CRM vivo.</li>
+            <li>Não vender “Social da V4” como módulo novo na mesma call.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Pergunta (antes do TCV)</h3>
+          <p>“O que vocês mais sentiram falta até aqui — alguém executando as campanhas e as redes, ou o comercial do Romildo com funil de verdade?”</p>
+          <p style="margin-top:8px">Se pedirem só rede: o bônus já cobre o start; o plano é não voltar a depender de um setup solto.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="abertura">
+      <div class="k">07 · Abertura</div>
+      <h2>Três perguntas antes de qualquer slide</h2>
+      <div class="grid3">
+        <div class="card"><h3>1 · O que ficou</h3><p>“O que mais ficou marcado na estruturação — o mapa comercial ou a mão na massa que a gente já começou nas campanhas?”</p></div>
+        <div class="card"><h3>2 · O que dói</h3><p>“O que não pode continuar: o comercial na cabeça do Romildo, ou crescer só no boca a boca?”</p></div>
+        <div class="card"><h3>3 · Quando</h3><p>“Se o próximo passo for executar esse mapa, quando vocês precisam que isso esteja rodando de verdade?”</p></div>
+      </div>
+      <div class="callout info" style="margin-top:12px">
+        <strong>Antes do preço:</strong> “Vocês querem a V4 executando esse próximo passo — ou estão avaliando outro caminho?”
+        Se a ferida da contratação voltar: escuta, separa Aline (mapa) de execução (o plano), não discute Felipe.
+      </div>
+    </section>
+
+    <section class="section" id="pacote">
+      <div class="k">08 · Pacote na mesa</div>
+      <h2>Executar. Uma condição. Conciliar o TCV.</h2>
+      <div class="kpis">
+        <div class="kpi"><div class="v ok">R$ 6.500</div><div class="l">MRR · Executar</div><div class="s">Catálogo Farmer · cadência contínua</div></div>
+        <div class="kpi"><div class="v">R$ 78.000</div><div class="l">12 meses</div><div class="s">6 meses = R$ 39 mil · booking não fechado na fonte</div></div>
+        <div class="kpi"><div class="v warn">R$ 90.000</div><div class="l">TCV no relatório 27/08</div><div class="s">Não conciliado com 6.500 × 12 · resolver na véspera</div></div>
+      </div>
+      <div class="callout">
+        <strong>Exceção de porte:</strong> Henri é SMALL no cockpit. Executar neste faturamento é exceção — só cabe porque a EE mapeou operação (não mais Saber) e porque eles pediram mão na massa. Não empilhar combo. Não reabrir EQV como se o mapa não existisse.
+      </div>
+      <div class="grid2">
+        <div class="card">
+          <h3>O que entra (encaixe EE)</h3>
+          <ul>
+            <li>Operar os 2 motores: ABM/LinkedIn + Google Search com triagem</li>
+            <li>Cadência de conteúdo/autoridade (já iniciada no bônus)</li>
+            <li>CRM vivo: dono, etapa, daily/weekly, Maria no SDR, Romildo no close</li>
+            <li>Remarketing da LP com claims e marcas sob sigilo</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>O que não entra / não prometer</h3>
+          <ul>
+            <li>715 unidades ou R$ 15 mi como meta contratual da V4</li>
+            <li>Expor marca de cliente (Zamp, BK, etc.) em anúncio</li>
+            <li>V4 virar o comercial do Romildo</li>
+            <li>Residencial / B2C no tráfego</li>
+            <li>Mais diagnóstico no lugar de execução</li>
+          </ul>
+        </div>
+      </div>
+      <div class="grid2" style="margin-top:10px">
+        <div class="card">
+          <h3>Objeção — antes</h3>
+          <p><strong>Expectativa / “já paguei e não executou”:</strong> o mapa está feito; o plano é a execução contínua. Setup já foi bonificado. Agora é cadência, não slide.<br /><br /><strong>Timing / férias do Romildo:</strong> decisão agora; operação com Maria no CRM para ele conseguir sair.</p>
+        </div>
+        <div class="card">
+          <h3>Objeção — na hora</h3>
+          <p><strong>Preço / porte:</strong> ROI = origem previsível + Romildo só fechando. Não breakeven contra a meta de R$ 15 mi.<br /><br /><strong>Preciso pensar:</strong> valor, timing ou escopo? Remarcar com Romildo e Gabriel juntos.</p>
+        </div>
+      </div>
+      <div class="callout ok">
+        <strong>Avanço:</strong> “Olhando essa condição — o que vocês precisam alinhar para a gente executar esse mapa juntos?” Eles dizem o próximo passo.
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="k">Fontes</div>
+      <h2>O que usamos — e o que falta</h2>
+      <p class="muted">
+        <a href="https://docs.google.com/document/d/12RDBxqEj4wMZtNZPXHt4hXzwoxc0VzPUtZ-hWXl5fik/edit?usp=sharing" target="_blank" rel="noopener">Guia 1 · Henri Soluções</a>
+        · Cockpit / cenários: SMALL · Semana 04 · Executar mapeado · pitch adiado (ops)
+        · Relatório 27/08: TCV visível R$ 90k
+        · CSAT/NPS, budget mídia, ticket, LT, base de unidades, recorte auditado de ads, link de entrega final: <strong>não conciliado</strong>
+      </p>
+    </section>
+
+    <footer>V4 Company · Farmer Sara · Pré-pitch Henri Soluções · uso interno · set/2026</footer>
+  </div>
+</body>
+</html>
