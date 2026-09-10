@@ -59,7 +59,15 @@
     .fat-bar em{font-style:normal;font-weight:800;color:#fff}
     @media(max-width:700px){.fat-bar{width:100% !important}}
     .meta{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}@media(max-width:800px){.meta{grid-template-columns:1fr}}
-    .meta .card .big{font-size:32px;font-weight:900;letter-spacing:-.03em;margin:6px 0}
+    .meta .card .big{font-size:28px;font-weight:900;letter-spacing:-.03em;margin:4px 0 0}
+    .money-split{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0 6px}
+    .money-split .box{background:#0a0a0a;border:1px solid var(--bd);border-radius:10px;padding:8px 10px}
+    .money-split .k{font-size:10px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--mut)}
+    .money-split .v{font-size:20px;font-weight:900;margin-top:2px;font-variant-numeric:tabular-nums}
+    .money-split .v.ok{color:var(--ok)}
+    .money-split .s{font-size:11px;color:#d4d4d4;margin-top:2px}
+    .mrr-cmp{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0 4px}@media(max-width:800px){.mrr-cmp{grid-template-columns:1fr}}
+    .mrr-cmp .card .v{font-size:26px;font-weight:900;color:var(--ok);margin:6px 0 4px}
     .mixbar{display:flex;height:28px;border-radius:10px;overflow:hidden;margin:8px 0;border:1px solid var(--bd);font-size:11px;font-weight:800}
     .mixbar i{display:flex;align-items:center;justify-content:center;height:100%;color:#050505;min-width:0;padding:0 6px;white-space:nowrap}
     .mixbar .s{background:#8b5cf6;color:#fff}
@@ -80,7 +88,8 @@
     .mo .n{font-size:10px;color:var(--mut)}
     .mo .spark{height:4px;border-radius:99px;background:rgba(255,255,255,.08);margin-top:8px;overflow:hidden}
     .mo .spark i{display:block;height:100%;background:#86efac;border-radius:99px}
-    .ring-row{display:flex;align-items:center;gap:12px;margin:10px 0 6px}
+    .ring-row{display:flex;align-items:flex-start;gap:12px;margin:10px 0 6px}
+    .ring-row > div:last-child{flex:1;min-width:0}
     .ring{width:84px;height:84px;border-radius:50%;flex-shrink:0;display:grid;place-items:center}
     .ring span{width:58px;height:58px;border-radius:50%;background:var(--surf2);display:grid;place-items:center;font-weight:900;font-size:15px}
     .ring.pess{background:conic-gradient(#fde68a 0% 27%,rgba(255,255,255,.08) 27% 100%)}
@@ -254,6 +263,7 @@
   </div>
 
   <div class="section" id="cenarios">
+    <span id="meta"></span>
     <h2>P / R / O</h2>
     <h3>Quanto fecha, em que STEP, com o ticket que o EE já fez</h3>
     <p class="muted" style="margin:0 0 8px">
@@ -283,35 +293,134 @@
         <div class="ring-row">
           <div class="ring pess" aria-hidden="true"><span>27%</span></div>
           <div>
-            <div class="muted">das 41 fecham · 11 wins</div>
-            <div class="big" style="color:var(--warn);margin:4px 0">R$ 341 mil</div>
-            <div class="d">TM R$ 31k/win — faixa de jun/jul, quando o EE vendeu mais pontual. Executar em 6 meses.</div>
+            <div class="muted">das 41 fecham · 11 wins · 6,3 Executar</div>
+            <div class="d" style="margin-top:6px">TM R$ 31k/win — faixa de jun/jul. Executar em 6 meses.</div>
           </div>
         </div>
+        <div class="money-split">
+          <div class="box">
+            <div class="k">TCV</div>
+            <div class="v" style="color:var(--warn)">R$ 341 mil</div>
+            <div class="s">contrato · 6× no Executar</div>
+          </div>
+          <div class="box">
+            <div class="k">MRR</div>
+            <div class="v ok">R$ 41 mil</div>
+            <div class="s">6,3 × R$ 6.500</div>
+          </div>
+        </div>
+        <div class="d">Saber+Ter = R$ 97k pontual, sem MRR.</div>
       </div>
       <div class="card">
         <span class="tag">Realista · a meta</span>
         <div class="ring-row">
           <div class="ring real" aria-hidden="true"><span>39%</span></div>
           <div>
-            <div class="muted">das 41 fecham · 16 wins</div>
-            <div class="big" style="margin:4px 0">R$ 863 mil</div>
-            <div class="d">TM R$ 53k/win — cola nos R$ 56,5k do EE jan–ago. 1 STEP por conta. Executar 12× só em quem o faturamento aguenta.</div>
+            <div class="muted">das 41 fecham · 16 wins · 9,2 Executar</div>
+            <div class="d" style="margin-top:6px">TM R$ 53k/win — cola nos R$ 56,5k do EE. 1 STEP por conta.</div>
           </div>
         </div>
+        <div class="money-split">
+          <div class="box">
+            <div class="k">TCV</div>
+            <div class="v">R$ 863 mil</div>
+            <div class="s">contrato · 12× no Executar</div>
+          </div>
+          <div class="box">
+            <div class="k">MRR</div>
+            <div class="v ok">R$ 60 mil</div>
+            <div class="s">9,2 × R$ 6.500</div>
+          </div>
+        </div>
+        <div class="d">Saber+Ter = R$ 143k pontual. O MRR só nasce do Executar.</div>
       </div>
       <div class="card">
         <span class="tag ok">Otimista</span>
         <div class="ring-row">
           <div class="ring otim" aria-hidden="true"><span>45%</span></div>
           <div>
-            <div class="muted">das 41 fecham · 18 wins</div>
-            <div class="big" style="color:var(--ok);margin:4px 0">R$ 975 mil</div>
-            <div class="d">TM ainda ~R$ 53k. O que sobe é a <em>porcentagem que fecha</em> em MEDIUM/LARGE, não o ticket.</div>
+            <div class="muted">das 41 fecham · 18 wins · 10,4 Executar</div>
+            <div class="d" style="margin-top:6px">Mesmo ticket. O que sobe é a % que fecha em MEDIUM/LARGE.</div>
           </div>
         </div>
+        <div class="money-split">
+          <div class="box">
+            <div class="k">TCV</div>
+            <div class="v" style="color:var(--ok)">R$ 975 mil</div>
+            <div class="s">contrato · 12× no Executar</div>
+          </div>
+          <div class="box">
+            <div class="k">MRR</div>
+            <div class="v ok">R$ 68 mil</div>
+            <div class="s">10,4 × R$ 6.500</div>
+          </div>
+        </div>
+        <div class="d">Saber+Ter = R$ 161k pontual.</div>
       </div>
     </div>
+
+    <h3 style="margin:18px 0 8px">MRR nos três cenários</h3>
+    <p class="muted" style="margin:0 0 8px">
+      Saber e Ter não viram mensalidade. MRR = wins de Executar × <strong>R$ 6.500</strong>.
+      O TCV do Executar muda com 6 ou 12 meses; o MRR do mês, não.
+    </p>
+    <div class="mrr-cmp">
+      <div class="card">
+        <span class="tag warn">Pessimista</span>
+        <div class="v">R$ 41 mil/mês</div>
+        <div class="d">6,3 contratos Executar. TCV desse MRR em 6 meses = R$ 245k.</div>
+        <div class="tr" style="margin-top:8px"><span class="muted">vs otim</span><div class="bar"><i style="width:60%;background:#fde68a"></i></div><div class="pct">60%</div></div>
+      </div>
+      <div class="card">
+        <span class="tag">Realista</span>
+        <div class="v">R$ 60 mil/mês</div>
+        <div class="d">9,2 contratos Executar. TCV desse MRR em 12 meses = R$ 721k.</div>
+        <div class="tr" style="margin-top:8px"><span class="muted">vs otim</span><div class="bar"><i style="width:88%;background:#fafafa"></i></div><div class="pct">88%</div></div>
+      </div>
+      <div class="card">
+        <span class="tag ok">Otimista</span>
+        <div class="v">R$ 68 mil/mês</div>
+        <div class="d">10,4 contratos Executar. TCV desse MRR em 12 meses = R$ 814k.</div>
+        <div class="tr" style="margin-top:8px"><span class="muted">vs otim</span><div class="bar"><i style="width:100%;background:#86efac"></i></div><div class="pct">100%</div></div>
+      </div>
+    </div>
+    <div class="scroll" style="margin-top:12px">
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th class="money">Wins Executar</th>
+            <th class="money">MRR</th>
+            <th class="money">Pontual (Saber+Ter)</th>
+            <th class="money">TCV total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="tag warn">Pessimista</span></td>
+            <td class="money">6,3</td>
+            <td class="money"><strong>R$ 40.755</strong></td>
+            <td class="money">R$ 96,8 mil</td>
+            <td class="money">R$ 341 mil</td>
+          </tr>
+          <tr>
+            <td><span class="tag">Realista</span></td>
+            <td class="money">9,2</td>
+            <td class="money"><strong>R$ 60.021</strong></td>
+            <td class="money">R$ 142,6 mil</td>
+            <td class="money">R$ 863 mil</td>
+          </tr>
+          <tr>
+            <td><span class="tag ok">Otimista</span></td>
+            <td class="money">10,4</td>
+            <td class="money"><strong>R$ 67.802</strong></td>
+            <td class="money">R$ 161,0 mil</td>
+            <td class="money">R$ 975 mil</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted" style="margin:10px 0 0">Follow (ABC71, Tamiya, Ecco, Davi) tem MRR de mesa R$ 41.950 — não está somado aqui. Esta tabela é só das 41.</p>
 
     <h3 style="margin:18px 0 8px">Quanto cada faturamento fecha</h3>
     <p class="muted" style="margin:0 0 8px">A porcentagem é do Cockpit Sara (Monetizado ÷ Monetizado+Drop). Pess / Real / Otim mudam essa barra — não o preço do STEP.</p>
@@ -352,9 +461,9 @@
       <i class="t">13% Ter</i>
     </div>
     <div class="legend">
-      <span><b style="color:#86efac">9 wins</b> Executar · R$ 721k</span>
-      <span><b style="color:#c4b5fd">5 wins</b> Saber · R$ 122k</span>
-      <span><b style="color:#fde68a">2 wins</b> Ter · R$ 21k</span>
+      <span><b style="color:#86efac">9 wins</b> Executar · TCV R$ 721k · <b>MRR R$ 60 mil</b></span>
+      <span><b style="color:#c4b5fd">5 wins</b> Saber · R$ 122k pontual</span>
+      <span><b style="color:#fde68a">2 wins</b> Ter · R$ 21k pontual</span>
     </div>
 
     <h3 style="margin:12px 0 8px">Do dinheiro (TCV R$ 863 mil)</h3>
