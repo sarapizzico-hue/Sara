@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Henri Soluções × V4 — Proposta Assessoria de Growth</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --v4-red-deep: #a10f14;
+      --v4-red-mid: #c4181e;
+      --cream: #ffffff;
+      --muted: rgba(255,255,255,0.88);
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; overflow: hidden; }
+    body {
+      font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+      font-size: 1.05rem;
+      background: var(--v4-red-deep);
+      color: var(--cream);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    .slide-logo { position: absolute; top: 1.25rem; left: 1.5rem; z-index: 10; }
+    .slide-logo svg { height: clamp(22px, 3.5vh, 30px); width: auto; display: block; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.35)); }
+    .blend-progress {
+      position: fixed; top: 0; left: 0; right: 0; height: 5px; z-index: 200;
+      background: linear-gradient(90deg, #fff, #ffd0d0);
+      transform-origin: left; transform: scaleX(var(--slide-progress, 0.08));
+      transition: transform 0.4s var(--ease);
+    }
+    .nav-dots {
+      position: fixed; right: 1rem; top: 50%; transform: translateY(-50%);
+      z-index: 100; display: flex; flex-direction: column; gap: 0.38rem;
+    }
+    .nav-dots a {
+      width: 8px; height: 8px; border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.45); background: transparent;
+      transition: all 0.3s var(--ease);
+    }
+    .nav-dots a:hover, .nav-dots a.active { background: #fff; border-color: #fff; transform: scale(1.2); }
+    .nav-arrow {
+      position: fixed; top: 50%; transform: translateY(-50%); z-index: 100;
+      width: 46px; height: 46px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.35); background: rgba(161,15,20,0.55);
+      color: white; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; line-height: 1;
+    }
+    .nav-arrow:hover:not(:disabled) { background: rgba(255,255,255,0.2); border-color: #fff; }
+    .nav-arrow:disabled { opacity: 0.25; cursor: default; }
+    .nav-arrow--prev { left: 1rem; }
+    .nav-arrow--next { right: 3rem; }
+    .deck { position: relative; width: 100vw; height: 100vh; overflow: hidden; }
+    section {
+      position: absolute; inset: 0; width: 100%; height: 100vh;
+      padding: clamp(2.5rem, 5vh, 3.5rem) clamp(1.25rem, 4vw, 3rem) 4.5rem;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      overflow-y: auto; opacity: 0; visibility: hidden; transform: translateX(60px);
+      transition: opacity 0.4s var(--ease), transform 0.4s var(--ease), visibility 0.4s; z-index: 0;
+    }
+    section.slide-active { opacity: 1; visibility: visible; transform: translateX(0); z-index: 2; }
+    section.slide-exit-left { transform: translateX(-60px); opacity: 0; }
+    section.slide-exit-right { transform: translateX(60px); opacity: 0; }
+    section::before {
+      content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(255, 74, 74, 0.45) 0%, transparent 55%),
+        radial-gradient(ellipse 70% 55% at 85% 90%, rgba(255, 42, 26, 0.35) 0%, transparent 50%),
+        radial-gradient(ellipse 100% 100% at 50% 50%, var(--v4-red-mid) 0%, var(--v4-red-deep) 70%, #6b080c 100%);
+    }
+    .inner { position: relative; z-index: 2; width: 100%; max-width: 980px; max-height: calc(100vh - 5rem); }
+    .eyebrow {
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: #ffe0e0; margin-bottom: 0.5rem;
+    }
+    h1, h2, h3 { font-family: Outfit, sans-serif; font-weight: 700; line-height: 1.12; letter-spacing: -0.02em; color: #fff; }
+    h2 { font-size: clamp(1.55rem, 3.8vh, 2.35rem); margin-bottom: 0.5rem; }
+    .gold-line { width: 64px; height: 4px; background: linear-gradient(90deg, #fff, #ffd0d0); border-radius: 2px; margin: 0.5rem 0 0.9rem; }
+    .lead { font-size: clamp(0.95rem, 1.7vh, 1.1rem); color: var(--muted); max-width: 760px; line-height: 1.5; }
+    .glass {
+      background: rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.28); border-radius: 22px;
+      padding: clamp(1.1rem, 2.5vh, 1.75rem) clamp(1.2rem, 3vw, 1.85rem);
+      box-shadow: 0 12px 40px rgba(80, 0, 0, 0.25);
+    }
+    #capa .inner { text-align: center; }
+    .capa-partnership {
+      display: flex; align-items: center; justify-content: center; gap: 0.75rem;
+      margin: 1rem 0 0.65rem; font-size: 1rem; color: var(--muted);
+    }
+    .capa-partnership .x { opacity: 0.5; }
+    #capa h1 { font-size: clamp(2rem, 6vh, 3.3rem); margin-bottom: 0.75rem; }
+    #capa h1 em { font-style: normal; color: #ffe8e8; }
+    .capa-badge {
+      display: inline-block; padding: 0.45rem 1rem; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.45); font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase; background: rgba(255,255,255,0.12);
+    }
+    .slide-hint { margin-top: 1.75rem; font-size: 0.85rem; color: rgba(255,255,255,0.5); }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.65rem; margin-top: 0.85rem; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; margin-top: 0.85rem; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.55rem; margin-top: 0.85rem; }
+    .card {
+      background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 14px; padding: 0.85rem 1rem;
+    }
+    .card-num { font-family: Outfit; font-size: 0.8rem; font-weight: 800; color: #ffe0e0; margin-bottom: 0.3rem; }
+    .card h3 { font-size: 0.98rem; margin-bottom: 0.3rem; }
+    .card p, .card li { font-size: 0.86rem; color: var(--muted); line-height: 1.45; }
+    .card ul { list-style: none; margin-top: 0.35rem; }
+    .card ul li { padding-left: 0.9rem; position: relative; margin-bottom: 0.2rem; }
+    .card ul li::before { content: "·"; position: absolute; left: 0; color: #fff; font-weight: 700; }
+    .tag-16h {
+      display: inline-block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; padding: 0.2rem 0.5rem; border-radius: 6px;
+      background: rgba(255,255,255,0.2); color: #fff; margin-bottom: 0.35rem;
+    }
+    .flow-row { display: flex; align-items: stretch; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap; }
+    .flow-step {
+      flex: 1; min-width: 110px; text-align: center; padding: 0.7rem 0.45rem;
+      background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.22); border-radius: 12px;
+    }
+    .flow-step .icon { font-family: Outfit; font-size: 1.15rem; font-weight: 800; margin-bottom: 0.25rem; }
+    .flow-step strong { display: block; font-size: 0.86rem; margin-bottom: 0.2rem; }
+    .flow-step span { font-size: 0.76rem; color: var(--muted); }
+    .flow-arrow { align-self: center; color: rgba(255,255,255,0.45); }
+    .plans { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; margin-top: 0.85rem; max-width: 100%; }
+    .plan {
+      border-radius: 16px; padding: 1rem 1.1rem;
+      border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.34);
+    }
+    .plan.featured { border-color: #fff; background: rgba(0,0,0,0.48); box-shadow: 0 8px 32px rgba(0,0,0,0.35); }
+    .plan-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #ffe8e8; margin-bottom: 0.35rem; }
+    .plan h3 { font-size: 1.05rem; margin-bottom: 0.15rem; }
+    .plan-sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.5rem; }
+    .plan-price { font-family: Outfit; font-size: 1.85rem; font-weight: 800; line-height: 1; color: #fff; }
+    .plan-price small { font-size: 0.85rem; font-weight: 600; color: var(--muted); }
+    .plan-discount { font-size: 0.82rem; color: #ffe0e0; margin-top: 0.25rem; font-weight: 600; }
+    .plan-was {
+      display: block; font-size: 0.84rem; font-weight: 600; color: rgba(255,255,255,0.55);
+      text-decoration: line-through; margin-bottom: 0.2rem;
+    }
+    .plan ul { list-style: none; margin-top: 0.55rem; }
+    .plan ul li { font-size: 0.82rem; color: var(--muted); padding: 0.15rem 0 0.15rem 0.9rem; position: relative; }
+    .plan ul li::before { content: "·"; position: absolute; left: 0; color: #fff; font-weight: 700; }
+    .price-lines { margin: 0.4rem 0 0.55rem; }
+    .price-line {
+      display: flex; justify-content: space-between; gap: 0.75rem;
+      font-size: 0.8rem; color: var(--muted); padding: 0.2rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .price-line:last-child { border-bottom: none; }
+    .price-line strong { color: #fff; font-weight: 700; }
+    .price-line .ok { color: #b7f7d0; }
+    .cta-box {
+      margin-top: 0.75rem; padding: 0.9rem 1.1rem; border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.35); background: rgba(255,255,255,0.14);
+    }
+    .cta-box h3 { font-size: 1rem; margin-bottom: 0.35rem; }
+    .cta-box p { font-size: 0.86rem; color: var(--muted); }
+    .quote {
+      margin: 0.75rem 0 0;
+      padding-left: 0.9rem;
+      border-left: 3px solid rgba(255,255,255,0.55);
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.35;
+    }
+    .quote span {
+      display: block; margin-top: 0.35rem; font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.65);
+    }
+    .compare-table {
+      width: 100%; border-collapse: collapse; margin-top: 0.75rem; font-size: 0.84rem;
+    }
+    .compare-table th, .compare-table td {
+      padding: 0.45rem 0.55rem; border-bottom: 1px solid rgba(255,255,255,0.12);
+      text-align: left; color: var(--muted);
+    }
+    .compare-table th {
+      font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
+      color: #ffe0e0; font-weight: 700;
+    }
+    .compare-table td:last-child, .compare-table th:last-child { text-align: left; }
+    .compare-table tr.total td { color: #fff; font-weight: 700; border-bottom: none; padding-top: 0.65rem; }
+    .big-num {
+      font-family: Outfit; font-size: clamp(1.8rem, 4vh, 2.6rem); font-weight: 800; line-height: 1; color: #fff;
+    }
+    .deck-footer {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 150;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.65rem 1.25rem; background: rgba(107, 8, 12, 0.85);
+      border-top: 1px solid rgba(255,255,255,0.15); font-size: 0.8rem; color: rgba(255,255,255,0.75);
+    }
+    .progress-wrap { flex: 1; max-width: 220px; height: 4px; background: rgba(255,255,255,0.2); border-radius: 2px; margin: 0 1rem; }
+    .progress-fill { height: 100%; background: #fff; border-radius: 2px; width: 8%; transition: width 0.4s var(--ease); }
+    @media (max-width: 760px) {
+      .grid-3, .grid-2, .grid-4, .plans { grid-template-columns: 1fr; }
+      .nav-arrow--next { right: 1rem; }
+      .flow-arrow { display: none; }
+      .slide-logo { left: 1rem; top: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="blend-progress" aria-hidden="true"></div>
+
+  <nav class="nav-dots" aria-label="Slides">
+    <a href="#" data-slide="1" class="active" title="Capa"></a>
+    <a href="#" data-slide="2" title="Diagnóstico"></a>
+    <a href="#" data-slide="3" title="O que a EE já deixou"></a>
+    <a href="#" data-slide="4" title="Dois motores"></a>
+    <a href="#" data-slide="5" title="Time e operação"></a>
+    <a href="#" data-slide="6" title="O que muda"></a>
+    <a href="#" data-slide="7" title="Investimento"></a>
+  </nav>
+
+  <button type="button" class="nav-arrow nav-arrow--prev" id="prevBtn" disabled aria-label="Anterior">‹</button>
+  <button type="button" class="nav-arrow nav-arrow--next" id="nextBtn" aria-label="Próximo">›</button>
+
+  <template id="v4-logo-tpl">
+    <div class="slide-logo" aria-label="V4 Company">
+      <svg fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 77 20"><path fill="#fff" d="M33.023 3.575c-2.001.003-3.093 1.21-3.09 3.32l.008 6.858c.003 2.11 1.098 3.315 3.1 3.312 2-.003 3.092-1.21 3.09-3.32l-.009-6.858c-.003-2.11-1.097-3.315-3.099-3.312zm.015 11.606c-.649.001-1.057-.356-1.058-1.298l-.009-7.122c-.001-.942.406-1.3 1.055-1.302.648 0 1.057.357 1.058 1.299l.009 7.122c.001.942-.407 1.3-1.055 1.301zm-6.1-3.176l.002 1.884c.001.942-.406 1.282-1.055 1.283-.648 0-1.056-.338-1.058-1.28l-.009-7.122c-.001-.942.406-1.3 1.055-1.302.648 0 1.057.357 1.058 1.299l.002 1.413 1.927-.002-.002-1.281c-.002-2.11-1.041-3.315-3.043-3.313-2 .003-3.037 1.21-3.034 3.32l.008 6.859c.003 2.11 1.042 3.314 3.043 3.312 2.002-.003 3.038-1.21 3.035-3.32l-.002-1.752-1.927.002zM13.055 6.352L8.68 10.813c-.06.062-.017.166.067.166l4.382-.006a.096.096 0 00.096-.097l-.006-4.456c0-.087-.103-.13-.163-.068zm5.862 7.88l-2.687.004a.035.035 0 00-.035.035l.004 2.879c0 .02-.015.035-.035.035l-3.01.004a.035.035 0 01-.034-.035l-.004-2.879a.035.035 0 00-.034-.035l-8.796.012a.141.141 0 01-.14-.142l-.003-2.624v-.004a.795.795 0 01.223-.588l8.758-8.928a.035.035 0 01.025-.01l2.846-.004c.005 0 .009.001.014.003a.367.367 0 01.216.348l.01 8.677c0 .019.017.035.036.035l2.641-.004a.035.035 0 00.035-.035l-.011-8.5c-.002-1.364-1.1-2.478-2.442-2.476L4.18.016a.035.035 0 00-.034.036l.008 6.856c0 .031.037.047.06.025l4.994-5.064a.034.034 0 01.024-.01l2.603-.003c.03 0 .046.037.025.06l-8.118 8.41a.034.034 0 01-.049 0l-1.529-1.55a.036.036 0 01-.01-.026L2.143.074A.035.035 0 002.104.04C.976.185.086 1.131 0 2.294v5.972l.011 8.9a2.48 2.48 0 001.937 2.424h14.974c1.15-.199 2.034-1.224 2.032-2.448l-.003-2.873a.035.035 0 00-.035-.036zM66.47 3.682l.01 7.895-2.104-7.892-2.557.003.017 13.19 1.834-.003-.012-9.553 2.55 9.55 2.094-.004-.016-13.188-1.816.002zm-23.33.031l-1.378 9.366-1.513-9.362-2.835.003.017 13.19 1.779-.003-.012-9.327 1.532 9.325 1.927-.003 1.396-9.46.012 9.458 1.928-.002-.017-13.19-2.835.005h-.001zm33.133-.043l-1.946.002-1.549 6.013-1.564-6.009-2.131.003 2.587 8.814.005 4.371 2.039-.003-.006-4.37 2.565-8.821zm-20.44.026l-2.058 13.192 1.871-.003.35-2.393 2.501-.003.355 2.392 2.057-.003-2.092-13.186-2.983.004zm.42 9.005l.974-6.67.99 6.668-1.964.002zm-5.793-8.998l-3.002.004.017 13.189 2.038-.003-.006-4.955.964-.002c2.038-.002 3.037-1.153 3.035-3.263l-.003-1.715c-.002-2.11-1.005-3.258-3.043-3.255zm.008 6.35h-.964L49.5 5.589l.964-.001c.648-.001 1.001.3 1.002 1.242l.003 1.978c.001.942-.35 1.245-1 1.245z"></path></svg>
+    </div>
+  </template>
+
+  <div class="deck" id="deck">
+
+    <!-- 1 CAPA -->
+    <section id="capa" class="slide-active" data-slide="1">
+      <div class="inner">
+        <div class="capa-partnership">
+          <span>Henri Soluções</span>
+          <span class="x">×</span>
+          <span>V4 Company</span>
+        </div>
+        <h1>Da indicação à<br /><em>origem previsível</em></h1>
+        <p class="lead" style="margin:0.75rem auto 0;text-align:center;max-width:720px;">
+          Continuidade operacional para cozinhas profissionais. O próximo ciclo é uma segunda origem — filtrada, com dono, no ritmo do campo.
+        </p>
+        <span class="capa-badge" style="margin-top:1.25rem;">Assessoria de Growth · Account + GT + Copy + Design</span>
+        <p class="slide-hint">Setas, scroll ou swipe para avançar →</p>
+      </div>
+    </section>
+
+    <!-- 2 DIAGNÓSTICO -->
+    <section id="diagnostico" data-slide="2">
+      <div class="inner glass">
+        <p class="eyebrow">Diagnóstico da EE</p>
+        <h2>A operação é forte.<br />O comercial ainda é memória de uma pessoa.</h2>
+        <div class="gold-line"></div>
+        <p class="lead">
+          Dez anos em manutenção B2B de food service. A Henri não vende conserto avulso — vende a garantia de que a loja não para. Cresceu 100% por indicação. 85% a 90% do histórico comercial ainda está no WhatsApp e nas planilhas do Romildo.
+        </p>
+        <div class="grid-3">
+          <article class="card">
+            <div class="card-num">10 anos</div>
+            <h3>Prova técnica</h3>
+            <p>Refrigeração como carro-chefe (~70%). Climatização, elétrica, exaustão e cocção com um responsável só.</p>
+          </article>
+          <article class="card">
+            <div class="card-num">SP · nacional</div>
+            <h3>Cobertura</h3>
+            <p>Base em São Paulo. Campo próprio e parceiros em praças estratégicas. ICP: redes e grupos multiunidade.</p>
+          </article>
+          <article class="card">
+            <div class="card-num">100% indicação</div>
+            <h3>Origem atual</h3>
+            <p>Relacionamento do Romildo com coordenadores e supervisores. Sem motor digital ativo antes da EE.</p>
+          </article>
+        </div>
+        <p class="quote">
+          Se 100 leads entram amanhã, trava. Não falta técnica — falta dono no lead antes do fundador.
+          <span>A meta de escala é da empresa. Aqui operamos a origem</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- 3 EE -->
+    <section id="ee" data-slide="3">
+      <div class="inner glass">
+        <p class="eyebrow">O que a EE já deixou</p>
+        <h2>Não reabre mapa.<br />Executa o que já está desenhado.</h2>
+        <div class="gold-line"></div>
+        <p class="lead">A Estruturação Estratégica já comprou clareza. Esta proposta é a mão na massa desse plano.</p>
+        <div class="grid-2">
+          <article class="card">
+            <h3>Já instalado</h3>
+            <ul>
+              <li>PUV: continuidade operacional multitécnica — a loja não para</li>
+              <li>Papéis: Romildo fecha · Maria qualifica o CRM · Gabriel opera o campo</li>
+              <li>Landing page com filtro anti-B2C e identidade padronizada</li>
+              <li>Prova sem logo de cliente — NDA de grandes redes</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Ainda não opera sozinho</h3>
+            <ul>
+              <li>Memória comercial descentralizada no CRM, no dia a dia</li>
+              <li>Google de emergência B2B com teto de volume</li>
+              <li>ABM no comitê da rede — em especial o supervisor regional</li>
+              <li>Cadência de copy e design sem depender do tempo do Romildo</li>
+            </ul>
+          </article>
+        </div>
+        <div class="flow-row">
+          <div class="flow-step">
+            <div class="icon">01</div>
+            <strong>EE</strong>
+            <span>Já feita. Mapa, PUV e papéis. Não reabre diagnóstico.</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">
+            <div class="icon">02</div>
+            <strong>CRM</strong>
+            <span>Maria no lead. Dono em 5 minutos. Romildo só no SQL.</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">
+            <div class="icon">03</div>
+            <strong>Google</strong>
+            <span>Emergência B2B. Formulário barra residencial e one-off.</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">
+            <div class="icon">04</div>
+            <strong>ABM</strong>
+            <span>LinkedIn no comitê. Supervisor regional expande a rede.</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">
+            <div class="icon">05</div>
+            <strong>Gate</strong>
+            <span>Escala só se o SLA do campo aguentar.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 MOTORES -->
+    <section id="motores" data-slide="4">
+      <div class="inner glass">
+        <p class="eyebrow">Estratégia · um plano só</p>
+        <h2>Dois motores. Caixa no curto.<br />Contrato no médio.</h2>
+        <div class="gold-line"></div>
+        <p class="lead">Mesma estratégia nos dois horizontes. Muda só quem aperta o botão — no investimento.</p>
+        <div class="grid-2">
+          <article class="card">
+            <span class="tag-16h">Motor 1 · caixa</span>
+            <h3>Google Search</h3>
+            <p>Quem tem câmara, gelo ou exaustão parado busca agora. Anúncio de emergência B2B. Formulário pergunta unidades e tipo de operação. Maria vira MQL/SQL. Romildo entra no diagnóstico.</p>
+          </article>
+          <article class="card">
+            <span class="tag-16h">Motor 2 · contrato</span>
+            <h3>LinkedIn / ABM</h3>
+            <p>2 a 5 contatos por conta: diretor, coordenador, supervisor regional e compras. Cadência 30–90 dias. O supervisor é o vetor de expansão. Unidade vira rede aqui — não no anúncio de urgência.</p>
+          </article>
+        </div>
+        <div class="grid-3" style="margin-top:0.85rem;">
+          <article class="card">
+            <div class="card-num">Copy</div>
+            <h3>Uma mensagem por cadeira</h3>
+            <p>Diretor ouve governança. Coordenador ouve SLA. Compras ouve contrato. Sem “manutenção” genérica.</p>
+          </article>
+          <article class="card">
+            <div class="card-num">Design</div>
+            <h3>Prova sem marca de cliente</h3>
+            <p>SLA, um responsável, loja no ar. “Grande rede de fast food.” NDA respeitado.</p>
+          </article>
+          <article class="card">
+            <div class="card-num">Instagram</div>
+            <h3>Autoridade, não vitrine</h3>
+            <p>Bastidor técnico e prova real. Remarketing só em decisor que visitou a LP.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 TIME -->
+    <section id="time" data-slide="5">
+      <div class="inner">
+        <p class="eyebrow">Produto · Assessoria de Growth</p>
+        <h2>Account + GT + Copy + Design</h2>
+        <div class="gold-line"></div>
+        <p class="lead">A mesma estratégia. O time executa os dois motores no ritmo do campo.</p>
+        <div class="grid-4">
+          <article class="card">
+            <span class="tag-16h">Account</span>
+            <h3>Ritmo</h3>
+            <p>Prioridade, fila do CRM, gate com o Gabriel, cadência com Romildo e Maria.</p>
+          </article>
+          <article class="card">
+            <span class="tag-16h">GT</span>
+            <h3>Origem</h3>
+            <p>Google com teto. ABM no ICP A. Meta só remarketing de decisor.</p>
+          </article>
+          <article class="card">
+            <span class="tag-16h">Copy</span>
+            <h3>Discurso</h3>
+            <p>Continuidade operacional. Mensagem por papel do comitê — não anúncio de conserto.</p>
+          </article>
+          <article class="card">
+            <span class="tag-16h">Design</span>
+            <h3>Prova</h3>
+            <p>Peça técnica sem logo de rede. Identidade azul e amarelo, sem diluir.</p>
+          </article>
+        </div>
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Rotina Colli · Assessoria</th>
+              <th>Ritual</th>
+              <th>Foco</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Diária</td><td>Atendimento no grupo</td><td>Tarefas, pendências, backlog e resultado do dia</td></tr>
+            <tr><td>Periódica</td><td>Check-in de performance</td><td>Leads, SLA, o que rodou e o próximo passo</td></tr>
+            <tr><td>Trimestral</td><td>Planejamento</td><td>90 dias, os dois motores e o gate de campo</td></tr>
+            <tr><td>Contínua</td><td>Growths e retrospectivas</td><td>Dados, tráfego e funil — sem caixa-preta</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 6 O QUE MUDA -->
+    <section id="muda" data-slide="6">
+      <div class="inner glass">
+        <p class="eyebrow">Com o ciclo fechado</p>
+        <h2>O que muda na Henri.</h2>
+        <div class="gold-line"></div>
+        <div class="grid-2">
+          <article class="card">
+            <div class="card-num">Comercial</div>
+            <h3>Sai da cabeça do Romildo</h3>
+            <ul>
+              <li>Lead com dono em 5 minutos — CRM, não WhatsApp pessoal</li>
+              <li>Maria qualifica. Romildo fecha grande conta</li>
+              <li>2 a 5 contatos por rede. Supervisor regional na expansão</li>
+            </ul>
+          </article>
+          <article class="card">
+            <div class="card-num">Origem</div>
+            <h3>Além da indicação</h3>
+            <ul>
+              <li>Google só B2B, com teto para não inundar o campo</li>
+              <li>ABM no comitê — contrato, não só chamado avulso</li>
+              <li>Prova digital sem quebrar sigilo de cliente</li>
+            </ul>
+          </article>
+        </div>
+        <div class="grid-2">
+          <article class="card">
+            <div class="card-num">Operação</div>
+            <h3>Campo como gate</h3>
+            <ul>
+              <li>Unidade nova no ritmo do SLA, não da vaidade de mídia</li>
+              <li>Gabriel libera capacidade. Account segura a fila</li>
+            </ul>
+          </article>
+          <article class="card">
+            <div class="card-num">Marca</div>
+            <h3>Posicionamento no ar</h3>
+            <ul>
+              <li>Continuidade operacional, não prestador fragmentado</li>
+              <li>Copy e design na mesma tese da EE</li>
+            </ul>
+          </article>
+        </div>
+        <p class="quote">
+          Um plano. Dois jeitos de operar. A diferença aparece no investimento.
+        </p>
+      </div>
+    </section>
+
+    <!-- 7 INVESTIMENTO -->
+    <section id="investimento" data-slide="7">
+      <div class="inner glass">
+        <p class="eyebrow">Investimento · valores separados</p>
+        <h2>Dois horizontes. A mesma estratégia.</h2>
+        <div class="gold-line"></div>
+        <p class="lead">Mídia à parte. Sem combo. Cada horizonte fecha sozinho.</p>
+        <div class="plans">
+          <article class="plan featured">
+            <div class="plan-label">Horizonte A · V4 executa</div>
+            <h3>Assessoria de Growth</h3>
+            <p class="plan-sub">Account + GT + Copy + Design · 12 meses</p>
+            <div class="price-lines">
+              <div class="price-line"><span>Tabela Executar</span><strong>R$ 8.500,00 /mês</strong></div>
+              <div class="price-line"><span>Condição 12 meses</span><strong class="ok">12× R$ 4.789,52</strong></div>
+            </div>
+            <span class="plan-was">De R$ 8.500,00 /mês</span>
+            <div class="plan-price">12× R$ 4.789<small>,52</small></div>
+            <p class="plan-discount">V4 veicula, redige e arte final. Rotina Colli.</p>
+            <ul>
+              <li>Time completo na conta</li>
+              <li>Grupo no dia, check-in, trimestre e growths</li>
+              <li>Google com teto + ABM no comitê</li>
+              <li>Verba de mídia à parte</li>
+            </ul>
+          </article>
+          <article class="plan">
+            <div class="plan-label">Horizonte B · Henri executa</div>
+            <h3>Execução Assistida</h3>
+            <p class="plan-sub">A V4 dirige. O time interno aperta o botão · 12 meses</p>
+            <div class="price-lines">
+              <div class="price-line"><span>Tabela</span><strong>R$ 45.000,00</strong></div>
+              <div class="price-line"><span>Condição 12 meses</span><strong class="ok">12× R$ 2.300,00</strong></div>
+            </div>
+            <span class="plan-was">De R$ 45.000,00</span>
+            <div class="plan-price">12× R$ 2.300<small>,00</small></div>
+            <p class="plan-discount">Rotina do assistido — direção, não produção.</p>
+            <ul>
+              <li>Semanal · 60 min de direção (prioridade e fila)</li>
+              <li>Quinzenal · revisão do que a Henri produziu</li>
+              <li>Mensal · resultado, teto de verba e mensagem</li>
+              <li>Trimestral · plano de 90 dias e gate de campo</li>
+              <li>No dia a dia: playbook e rumo. A V4 não veicula</li>
+            </ul>
+          </article>
+        </div>
+        <div class="cta-box">
+          <h3>Condição do horizonte B</h3>
+          <p>
+            Execução Assistida só fecha se existir executor interno na Henri — Maria no CRM não opera Google nem peça sozinha.
+            Se quem aperta o botão for o Romildo, o horizonte A é o que cabe: Assessoria de Growth, mão na massa.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer class="deck-footer">
+    <span>Henri Soluções × V4 · Assessoria de Growth</span>
+    <div class="progress-wrap"><div class="progress-fill" id="progressFill"></div></div>
+    <span id="slideCounter">1 / 7</span>
+  </footer>
+
+  <script>
+  (function () {
+    const tpl = document.getElementById("v4-logo-tpl");
+    document.querySelectorAll("#deck section").forEach((slide) => {
+      slide.insertBefore(tpl.content.cloneNode(true), slide.firstChild);
+    });
+
+    const TOTAL = 7;
+    let current = 1;
+    const slides = Array.from(document.querySelectorAll("#deck section[id]"));
+    const navLinks = document.querySelectorAll(".nav-dots a");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const progressFill = document.getElementById("progressFill");
+    const slideCounter = document.getElementById("slideCounter");
+    const blendBar = document.querySelector(".blend-progress");
+
+    function updateUI() {
+      const p = current / TOTAL;
+      if (progressFill) progressFill.style.width = (p * 100) + "%";
+      if (slideCounter) slideCounter.textContent = current + " / " + TOTAL;
+      if (blendBar) blendBar.style.transform = "scaleX(" + Math.max(0.05, p) + ")";
+      document.documentElement.style.setProperty("--slide-progress", p);
+      if (prevBtn) prevBtn.disabled = current === 1;
+      if (nextBtn) nextBtn.disabled = current === TOTAL;
+      navLinks.forEach((a) => a.classList.toggle("active", Number(a.dataset.slide) === current));
+    }
+
+    function goTo(n, dir) {
+      if (n < 1 || n > TOTAL || n === current) return;
+      const prev = slides[current - 1];
+      const next = slides[n - 1];
+      const fwd = dir === "forward" || (dir !== "back" && n > current);
+      prev.classList.remove("slide-active");
+      prev.classList.add(fwd ? "slide-exit-left" : "slide-exit-right");
+      setTimeout(() => prev.classList.remove("slide-exit-left", "slide-exit-right"), 420);
+      next.classList.add("slide-active");
+      current = n;
+      updateUI();
+    }
+
+    if (prevBtn) prevBtn.addEventListener("click", () => goTo(current - 1, "back"));
+    if (nextBtn) nextBtn.addEventListener("click", () => goTo(current + 1, "forward"));
+    navLinks.forEach((a) => a.addEventListener("click", (e) => { e.preventDefault(); goTo(Number(a.dataset.slide)); }));
+
+    document.addEventListener("wheel", (e) => {
+      if (Math.abs(e.deltaY) < 20) return;
+      e.preventDefault();
+      goTo(current + (e.deltaY > 0 ? 1 : -1), e.deltaY > 0 ? "forward" : "back");
+    }, { passive: false });
+
+    document.addEventListener("keydown", (e) => {
+      if (["ArrowRight", " ", "PageDown"].includes(e.key)) { e.preventDefault(); goTo(current + 1, "forward"); }
+      if (["ArrowLeft", "PageUp"].includes(e.key)) { e.preventDefault(); goTo(current - 1, "back"); }
+    });
+
+    let tx = 0;
+    document.addEventListener("touchstart", (e) => { tx = e.changedTouches[0].screenX; }, { passive: true });
+    document.addEventListener("touchend", (e) => {
+      const dx = e.changedTouches[0].screenX - tx;
+      if (Math.abs(dx) > 50) goTo(current + (dx < 0 ? 1 : -1), dx < 0 ? "forward" : "back");
+    }, { passive: true });
+
+    updateUI();
+  })();
+  </script>
+</body>
+</html>
