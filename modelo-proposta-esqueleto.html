@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <title>Esqueleto de proposta · Colli × arco V4</title>
+  <!-- Standalone: abrir no Chrome. Depois do merge: https://sarapizzico-hue.github.io/Sara/modelo-proposta-esqueleto.html -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* Layout: sistema visual Colli (ABC71 unificado).
+       Informação: arco das últimas propostas (Muller / G6 / Isoluz).
+       Não copiar conteúdo da ABC71. */
+    :root {
+      --cover-a: #90191e; --cover-b: #7c191d; --cover-c: #65181c;
+      --wine: #290c0c; --wine-2: #210909; --wine-3: #351010;
+      --white: #fffaf8; --muted: #c9b8b5; --muted-2: #8f7774;
+      --line: rgba(255,255,255,.12);
+      --red: #ef3340; --red-soft: #ff6b73; --amber: #f4b942; --green: #58d68d;
+      --panel: rgba(14,14,16,.88);
+      --shadow: 0 20px 55px rgba(0,0,0,.26);
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 100%; height: 100%; overflow: hidden; background: #080808; color: var(--white);
+      font-family: Montserrat, Arial, sans-serif; -webkit-font-smoothing: antialiased;
+    }
+    button, a { font: inherit; color: inherit; }
+    .skip-link { position: fixed; left: 16px; top: -80px; z-index: 100; padding: 10px 14px; background: #fff; color: #111; border-radius: 8px; font-weight: 700; }
+    .skip-link:focus { top: 16px; }
+    .stage { position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, #2a1010 0, #0f0505 74%); }
+    .deck {
+      position: absolute; left: 50%; top: 50%; width: 1600px; height: 900px;
+      transform-origin: center center; overflow: hidden; background: var(--wine); box-shadow: var(--shadow);
+    }
+    .slide {
+      position: absolute; inset: 0; width: 1600px; height: 900px;
+      display: flex; flex-direction: column; visibility: hidden; opacity: 0; pointer-events: none;
+      background:
+        linear-gradient(rgba(255,255,255,.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.028) 1px, transparent 1px),
+        radial-gradient(circle at 86% 12%, rgba(150,30,36,.26), transparent 31%),
+        linear-gradient(135deg, var(--wine-3), var(--wine) 45%, var(--wine-2));
+      background-size: 80px 80px, 80px 80px, auto, auto;
+      transition: opacity .3s ease;
+    }
+    .slide.active { visibility: visible; opacity: 1; pointer-events: auto; }
+    .slide.cover {
+      background:
+        linear-gradient(rgba(255,255,255,.026) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.026) 1px, transparent 1px),
+        radial-gradient(circle at 78% 24%, rgba(255,255,255,.08), transparent 26%),
+        linear-gradient(122deg, var(--cover-a), var(--cover-b) 54%, var(--cover-c));
+      background-size: 100px 100px, 100px 100px, auto, auto;
+    }
+    .topbar { height: 7px; flex: 0 0 auto; background: linear-gradient(90deg, var(--red), rgba(239,51,64,.08) 72%); }
+    .slide.cover .topbar { background: linear-gradient(90deg, #fff, rgba(255,255,255,.08) 68%); }
+    .page { height: 851px; padding: 43px 66px 22px; display: flex; flex-direction: column; position: relative; overflow: hidden; }
+    .slide-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; margin-bottom: 22px; flex: 0 0 auto; }
+    .head-copy { max-width: 1260px; }
+    .eyebrow {
+      display: flex; align-items: center; gap: 12px; color: var(--red-soft);
+      font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .2em; margin-bottom: 11px;
+    }
+    .eyebrow::before { content: ""; width: 34px; height: 3px; border-radius: 2px; background: currentColor; }
+    h1, h2 { font-weight: 800; letter-spacing: -.035em; line-height: 1.06; }
+    h1 { font-size: 66px; max-width: 1040px; }
+    h2 { font-size: 40px; max-width: 1300px; }
+    h1 em, h2 em { color: var(--red-soft); font-style: normal; }
+    .sub { color: var(--muted); font-size: 17px; line-height: 1.5; margin-top: 12px; max-width: 1120px; }
+    .section-chip {
+      display: flex; align-items: center; gap: 9px; color: var(--muted); font-size: 12px; font-weight: 600;
+      letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; padding-top: 5px;
+    }
+    .section-chip b { font-family: "JetBrains Mono", monospace; font-size: 22px; color: var(--red-soft); }
+    .content { flex: 1; min-height: 0; position: relative; }
+    .footer {
+      height: 42px; flex: 0 0 auto; border-top: 1px solid rgba(255,255,255,.11);
+      display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 24px;
+      padding: 0 66px; color: var(--muted-2); font-size: 11px; background: rgba(20,5,5,.5);
+    }
+    .footer .count { font-family: "JetBrains Mono", monospace; color: var(--muted); min-width: 60px; text-align: right; }
+    .v4-mark {
+      width: 42px; height: 42px; border: 1.5px solid rgba(255,255,255,.85); display: grid; place-items: center;
+      font-weight: 800; font-size: 14px; letter-spacing: -.04em;
+    }
+    .ph {
+      display: inline; border-bottom: 1px dashed rgba(255,107,115,.45);
+      background: rgba(239,51,64,.07); padding: 0 .14em; color: #ffd8d4;
+    }
+    .card {
+      background: linear-gradient(160deg, rgba(255,255,255,.075), rgba(255,255,255,.035));
+      border: 1px solid var(--line); border-radius: var(--radius);
+    }
+    .callout {
+      border-left: 4px solid var(--red); background: rgba(239,51,64,.07);
+      padding: 13px 18px; border-radius: 0 12px 12px 0; color: #f9eae8; font-size: 15px; line-height: 1.45;
+    }
+
+    /* Capa */
+    .cover .page { padding: 70px 78px 30px; }
+    .cover-lockup { display: flex; align-items: center; gap: 18px; font-size: 17px; font-weight: 700; letter-spacing: .04em; color: rgba(255,255,255,.82); }
+    .cover-lockup .sep { width: 1px; height: 28px; background: rgba(255,255,255,.28); }
+    .hero-grid { display: grid; grid-template-columns: minmax(0,1fr) 430px; gap: 80px; align-items: center; flex: 1; }
+    .hero-kicker { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: .25em; color: rgba(255,255,255,.72); margin-bottom: 20px; }
+    .hero-title { font-size: 72px; max-width: 980px; }
+    .hero-title em { color: #ffd9d5; }
+    .hero-sub { font-size: 19px; color: rgba(255,255,255,.76); line-height: 1.55; max-width: 760px; margin-top: 22px; }
+    .cover-art { height: 470px; position: relative; display: grid; place-items: center; }
+    .cover-art svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .cover-mark {
+      position: relative; width: 230px; height: 230px; border: 1px solid rgba(255,255,255,.24); border-radius: 50%;
+      display: grid; place-items: center; background: rgba(255,255,255,.035);
+      box-shadow: 0 0 0 34px rgba(255,255,255,.025), 0 0 0 68px rgba(255,255,255,.018);
+    }
+    .cover-mark::before, .cover-mark::after { content: ""; position: absolute; background: rgba(255,255,255,.3); }
+    .cover-mark::before { width: 310px; height: 1px; }
+    .cover-mark::after { width: 1px; height: 310px; }
+    .cover-mark b { font-family: "JetBrains Mono", monospace; font-size: 42px; letter-spacing: -.08em; }
+    .cover-mark span { position: absolute; bottom: 48px; font-size: 11px; text-transform: uppercase; letter-spacing: .2em; color: rgba(255,255,255,.6); }
+    .cover-meta { display: flex; gap: 28px; margin-top: 42px; color: rgba(255,255,255,.67); font-size: 12px; text-transform: uppercase; letter-spacing: .12em; flex-wrap: wrap; }
+    .cover-meta span { display: flex; align-items: center; gap: 10px; }
+    .cover-meta span::before { content: ""; width: 22px; height: 2px; background: rgba(255,255,255,.48); }
+
+    /* Divisor de ato */
+    .slide.divider {
+      background:
+        linear-gradient(rgba(255,255,255,.024) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.024) 1px, transparent 1px),
+        radial-gradient(circle at 78% 50%, rgba(239,51,64,.25), transparent 30%),
+        linear-gradient(122deg, #7e171b, #541115 58%, #25090b);
+      background-size: 100px 100px, 100px 100px, auto, auto;
+    }
+    .divider .page { padding: 78px; justify-content: center; }
+    .divider-lockup { position: absolute; top: 54px; left: 78px; display: flex; align-items: center; gap: 16px; color: rgba(255,255,255,.7); font-size: 14px; font-weight: 700; }
+    .divider-num { font-family: "JetBrains Mono", monospace; font-size: 140px; line-height: 1; color: rgba(255,255,255,.12); position: absolute; right: 95px; top: 110px; }
+    .divider-kicker { font-size: 14px; text-transform: uppercase; letter-spacing: .28em; color: #ffc2bd; font-weight: 700; margin-bottom: 22px; }
+    .divider-title { font-size: 72px; max-width: 1080px; }
+    .divider-title em { color: #ffd8d4; }
+    .divider-sub { font-size: 20px; line-height: 1.55; color: rgba(255,255,255,.72); max-width: 820px; margin-top: 24px; }
+    .divider-path { display: flex; align-items: center; gap: 0; margin-top: 55px; width: 930px; }
+    .divider-path span { position: relative; flex: 1; padding-top: 24px; font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: rgba(255,255,255,.66); }
+    .divider-path span::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: rgba(255,255,255,.18); }
+    .divider-path span::after { content: ""; position: absolute; left: 0; top: -5px; width: 12px; height: 12px; border-radius: 50%; background: #ff6b73; box-shadow: 0 0 0 6px rgba(255,107,115,.12); }
+
+    /* Diagnóstico */
+    .kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
+    .kpi { padding: 16px 18px; border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.04); }
+    .kpi strong { display: block; font-family: "JetBrains Mono", monospace; font-size: 28px; color: var(--red-soft); font-variant-numeric: tabular-nums; }
+    .kpi span { display: block; margin-top: 6px; font-size: 12px; line-height: 1.35; color: var(--muted); }
+    .map-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .map-item { display: grid; grid-template-columns: 36px 1fr; gap: 12px; padding: 14px 16px; align-items: start; }
+    .map-item .n { font-family: "JetBrains Mono", monospace; font-size: 13px; font-weight: 700; color: var(--red-soft); padding-top: 2px; }
+    .map-item h3 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .map-item p { font-size: 13px; line-height: 1.4; color: var(--muted); }
+
+    /* Produto */
+    .check-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .check-card { display: grid; grid-template-columns: 28px 1fr; gap: 12px; padding: 14px 16px; align-items: start; }
+    .check-card .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--red-soft); box-shadow: 0 0 0 5px rgba(239,51,64,.12); margin-top: 6px; }
+    .check-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .check-card p { font-size: 13px; line-height: 1.4; color: var(--muted); }
+    .roles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+    .role { padding: 16px 16px 18px; }
+    .role .label { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--red-soft); margin-bottom: 8px; }
+    .role h3 { font-size: 16px; margin-bottom: 6px; }
+    .role p { font-size: 12.5px; line-height: 1.4; color: var(--muted); }
+    .ritual { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .ritual th, .ritual td { text-align: left; padding: 11px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    .ritual th { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted-2); }
+    .ritual td:first-child { font-family: "JetBrains Mono", monospace; color: var(--red-soft); width: 22%; }
+
+    /* Ciclo */
+    .process { display: flex; align-items: stretch; gap: 0; margin-top: 8px; }
+    .stage-card { flex: 1; padding: 16px 14px; border: 1px solid var(--line); background: rgba(255,255,255,.04); }
+    .stage-card .n { font-family: "JetBrains Mono", monospace; color: var(--red-soft); font-size: 13px; font-weight: 700; }
+    .stage-card h3 { font-size: 16px; margin: 8px 0 6px; }
+    .stage-card p { font-size: 12.5px; line-height: 1.4; color: var(--muted); }
+    .process .arrow { flex: 0 0 28px; display: grid; place-items: center; color: var(--red-soft); font-size: 22px; }
+
+    /* Pronto */
+    .success-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .success-item { padding: 16px 18px; display: grid; grid-template-columns: 28px 1fr; gap: 12px; align-items: start; }
+    .success-item .n { font-family: "JetBrains Mono", monospace; color: var(--green); font-size: 14px; font-weight: 700; }
+    .success-item h3 { font-size: 15px; font-weight: 650; line-height: 1.35; }
+
+    /* Investimento */
+    .offers { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .offer { padding: 20px 22px; }
+    .offer .tag { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--red-soft); margin-bottom: 8px; }
+    .offer h3 { font-size: 22px; margin-bottom: 6px; }
+    .offer .note { font-size: 13px; color: var(--muted); margin-bottom: 16px; }
+    .offer .was { font-family: "JetBrains Mono", monospace; font-size: 13px; color: var(--muted-2); text-decoration: line-through; }
+    .offer .now { font-family: "JetBrains Mono", monospace; font-size: 34px; font-weight: 700; margin: 6px 0 12px; }
+    .offer ul { margin: 0; padding-left: 16px; color: var(--muted); font-size: 13px; line-height: 1.45; }
+    .offer li { margin: 4px 0; }
+    .ee-band, .combo {
+      margin-top: 12px; padding: 14px 18px; border-radius: 12px;
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    }
+    .ee-band { border: 1px solid rgba(244,185,66,.34); background: rgba(244,185,66,.1); }
+    .ee-band .k { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--amber); }
+    .ee-band p { font-size: 13px; color: #f8e9df; margin-top: 4px; }
+    .ee-band .amt { font-family: "JetBrains Mono", monospace; font-size: 22px; color: var(--amber); }
+    .combo { border: 1px solid rgba(88,214,141,.28); background: rgba(88,214,141,.08); }
+    .combo h3 { font-size: 16px; }
+    .combo p { font-size: 13px; color: var(--muted); margin-top: 4px; }
+    .combo .cond { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--green); }
+    .combo .fig { font-family: "JetBrains Mono", monospace; font-size: 28px; font-weight: 700; color: var(--green); }
+
+    /* Chrome de sala — fora do canvas */
+    .top-progress { position: fixed; z-index: 30; top: 0; left: 0; width: 100%; height: 4px; background: rgba(255,255,255,.12); }
+    .top-progress > span { display: block; height: 100%; width: 12%; background: linear-gradient(90deg, #a90009, var(--red), #ff4a53); transition: width .22s ease; }
+    .context-pill {
+      position: fixed; z-index: 30; top: max(16px, env(safe-area-inset-top)); left: max(16px, env(safe-area-inset-left));
+      display: flex; align-items: center; gap: 10px; max-width: calc(100vw - 32px);
+      padding: 9px 12px; border: 1px solid rgba(255,255,255,.16); border-radius: 999px;
+      background: var(--panel); backdrop-filter: blur(12px); font-size: 11px; letter-spacing: .04em;
+    }
+    .context-pill strong { font-size: 12px; text-transform: uppercase; letter-spacing: .12em; }
+    .context-pill span { color: #b9b9be; }
+    .block-nav {
+      position: fixed; z-index: 31; left: max(16px, env(safe-area-inset-left)); bottom: max(16px, env(safe-area-inset-bottom));
+      display: flex; gap: 6px; padding: 6px; border: 1px solid rgba(255,255,255,.16); border-radius: 14px;
+      background: var(--panel); backdrop-filter: blur(12px);
+    }
+    .block-nav button {
+      min-width: 44px; height: 38px; border: 0; border-radius: 9px; background: transparent;
+      color: #c9c9ce; font: 700 11px/1 Montserrat, Arial, sans-serif; cursor: pointer;
+    }
+    .block-nav button:hover, .block-nav button:focus-visible { background: rgba(255,255,255,.1); color: #fff; }
+    .block-nav button.is-active { background: var(--red); color: #fff; }
+    .global-nav {
+      position: fixed; z-index: 31; left: 50%; bottom: max(16px, env(safe-area-inset-bottom)); transform: translateX(-50%);
+      display: flex; align-items: center; gap: 8px; padding: 6px; border: 1px solid rgba(255,255,255,.16);
+      border-radius: 999px; background: var(--panel); backdrop-filter: blur(12px);
+    }
+    .global-nav button {
+      width: 42px; height: 42px; border: 0; border-radius: 50%; background: rgba(255,255,255,.08); color: #fff;
+      font: 600 19px/1 Arial, sans-serif; cursor: pointer;
+    }
+    .global-nav button:hover, .global-nav button:focus-visible { background: var(--red); }
+    .global-nav button:disabled { opacity: .28; cursor: not-allowed; }
+    .global-count { min-width: 82px; text-align: center; font: 700 12px/1.2 "JetBrains Mono", Consolas, monospace; letter-spacing: .08em; }
+    .utility {
+      position: fixed; z-index: 31; right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom));
+    }
+    .utility button {
+      min-height: 44px; padding: 0 14px; border: 1px solid rgba(255,255,255,.16); border-radius: 12px;
+      background: var(--panel); color: #fff; font: 700 11px/1 Montserrat, Arial, sans-serif; cursor: pointer;
+    }
+    .slide-dots { position: fixed; right: 18px; top: 50%; transform: translateY(-50%); z-index: 30; display: grid; gap: 8px; }
+    .slide-dots button { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 999px; background: rgba(255,255,255,.24); cursor: pointer; }
+    .slide-dots button.active { height: 28px; background: var(--red); }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+    @media (max-width: 760px) {
+      .context-pill span { display: none; }
+      .utility { display: none; }
+      .global-nav { bottom: 72px; }
+      .block-nav { left: 50%; transform: translateX(-50%); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .slide, .top-progress > span { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#globalNav">Ir para a navegação</a>
+  <div class="top-progress" aria-hidden="true"><span id="globalProgress"></span></div>
+  <div class="context-pill" aria-live="polite"><strong id="blockLabel">Narrativa</strong><span id="slideTitle">Capa</span></div>
+
+  <div class="stage">
+    <main class="deck" id="deck" aria-label="Esqueleto de proposta V4">
+
+      <!-- 1 CAPA -->
+      <section class="slide cover active" data-act="narrativa" data-title="Capa" aria-label="Capa — tese da conta">
+        <div class="topbar"></div>
+        <div class="page">
+          <div class="cover-lockup"><span class="v4-mark">V4</span><span class="sep"></span><span><span class="ph">[Cliente]</span> × V4 Company</span></div>
+          <div class="hero-grid">
+            <div>
+              <div class="hero-kicker">Proposta comercial · <span class="ph">[EQV + Assessoria de Growth]</span></div>
+              <h1 class="hero-title">Do <em class="ph">[estado atual]</em><br>ao <em class="ph">[estado instalado]</em>.</h1>
+              <p class="hero-sub"><span class="ph">[O que instala · para quem opera · em quanto tempo]</span></p>
+              <div class="cover-meta">
+                <span><span class="ph">[Produto core]</span></span>
+                <span><span class="ph">[Produto essencial]</span></span>
+                <span>Um preço</span>
+              </div>
+            </div>
+            <div class="cover-art" aria-hidden="true">
+              <svg viewBox="0 0 430 470"><path d="M20 330 C92 150 161 388 232 212 S344 77 414 144" fill="none" stroke="rgba(255,255,255,.26)" stroke-width="2"/><path d="M20 346 C92 166 161 404 232 228 S344 93 414 160" fill="none" stroke="rgba(255,255,255,.10)" stroke-width="18"/><circle cx="20" cy="330" r="6" fill="#fff"/><circle cx="414" cy="144" r="6" fill="#ffd8d4"/></svg>
+              <div class="cover-mark"><b>V4</b><span>capacidade</span></div>
+            </div>
+          </div>
+        </div>
+        <footer class="footer"><span>V4 Company · esqueleto de proposta</span><span class="count">01 / 08</span></footer>
+      </section>
+
+      <!-- 2 DIAGNÓSTICO -->
+      <section class="slide" data-act="dados" data-title="Diagnóstico" aria-label="Diagnóstico — reframe e conta">
+        <div class="topbar"></div>
+        <div class="page">
+          <header class="slide-head">
+            <div class="head-copy">
+              <div class="eyebrow">Diagnóstico · leitura da EE / da conta</div>
+              <h2>Vocês não têm problema de <em class="ph">[sintoma]</em>. Têm <em class="ph">[causa raiz]</em>.</h2>
+              <p class="sub"><span class="ph">[Fato desta operação — volume, canal, time, o que já funciona]</span></p>
+            </div>
+            <div class="section-chip"><b>01</b> Dados</div>
+          </header>
+          <div class="content">
+            <div class="kpis">
+              <div class="kpi"><strong class="ph">—</strong><span class="ph">[Entrada · o que já funciona]</span></div>
+              <div class="kpi"><strong class="ph">—</strong><span class="ph">[Vazamento · o que sai]</span></div>
+              <div class="kpi"><strong class="ph">?</strong><span class="ph">[Pergunta que o CRM não responde]</span></div>
+            </div>
+            <div class="map-grid">
+              <article class="card map-item"><span class="n">01</span><div><h3 class="ph">[Dor 1]</h3><p class="ph">[Fato desta conta]</p></div></article>
+              <article class="card map-item"><span class="n">02</span><div><h3 class="ph">[Dor 2]</h3><p class="ph">[Fato desta conta]</p></div></article>
+              <article class="card map-item"><span class="n">03</span><div><h3 class="ph">[Dor 3]</h3><p class="ph">[Fato desta conta]</p></div></article>
+              <article class="card map-item"><span class="n">04</span><div><h3 class="ph">[Dor 4]</h3><p class="ph">[Fato desta conta]</p></div></article>
+              <article class="card map-item"><span class="n">05</span><div><h3 class="ph">[Dor 5]</h3><p class="ph">[Fato desta conta]</p></div></article>
+              <article class="card map-item"><span class="n">06</span><div><h3 class="ph">[Dor 6]</h3><p class="ph">[Fato desta conta]</p></div></article>
+            </div>
+            <p class="callout" style="margin-top:14px"><span class="ph">[Quote da visão — frase que o decisor possa repetir]</span></p>
+          </div>
+        </div>
+        <footer class="footer"><span>V4 Company · esqueleto de proposta</span><span class="count">02 / 08</span></footer>
+      </section>
+
+      <!-- 3 DIVISOR PRODUTO -->
+      <section class="slide divider" data-act="produto" data-title="Produto" aria-label="Divisor — o que instala">
+        <div class="topbar"></div>
+        <div class="page">
+          <div class="divider-lockup"><span class="v4-mark">V4</span><span><span class="ph">[Cliente]</span> · proposta</span></div>
+          <div class="divider-num">03</div>
+          <div class="divider-kicker">Ato 3 · Produto</div>
+          <h2 class="divider-title">O que fica <em>instalado</em> no time.</h2>
+          <p class="divider-sub">Capacidade instalada. Core resolve a dor #1. Essencial fecha o ciclo.</p>
+          <div class="divider-path">
+            <span class="ph">[EE / mapa]</span>
+            <span class="ph">[Produto core]</span>
+            <span class="ph">[Essencial]</span>
+            <span class="ph">[Instalação]</span>
+            <span>Handover</span>
+          </div>
+        </div>
+        <footer class="footer"><span>V4 Company · esqueleto de proposta</span><span class="count">03 / 08</span></footer>
+      </section>
+
+      <!-- 4 PRODUTO CORE -->
+      <section class="slide" data-act="produto" data-title="Produto core" aria-label="Produto core do catálogo">
+        <div class="topbar"></div>
+        <div class="page">
+          <header class="slide-head">
+            <div class="head-copy">
+              <div class="eyebrow">Produto 01 · <span class="ph">[pontual · EQV / EC]</span></div>
+              <h2><span class="ph">[Nome do catálogo]</span> · <em class="ph">[o que instala nesta conta]</em>.</h2>
+              <p class="sub"><span class="ph">[Encaixe: canal, gestor, ritual deste cliente]</span></p>
+            </div>
+            <div class="section-chip"><b>01</b> Produto</div>
+          </header>
+          <div class="content">
+            <div class="check-grid">
+              <article class="card check-card"><span class="dot"></span><div><h3 class="ph">[Entrega 1]</h3><p class="ph">[O que o time leva]</p></div></article>
+              <article class="card check-card"><span class="dot"></span><div><h3 class="ph">[Entrega 2]</h3><p class="ph">[Encaixe nesta conta]</p></div></article>
+              <article class="card check-card"><span class="dot"></span><div><h3 class="ph">[Entrega 3]</h3><p class="ph">[Critério visível]</p></div></article>
+              <article class="card check-card"><span class="dot"></span><div><h3 class="ph">[Entrega 4]</h3><p class="ph">[Encaixe nesta conta]</p></div></article>
+              <article class="card check-card"><span class="dot"></span><div><h3 class="ph">[Entrega 5]</h3><p class="ph">[Encaixe nesta conta]</p></div></article>
+              <article class="card check-card"><span class="dot"></span><div><h3 class="ph">[Entrega 6]</h3><p class="ph">[Encaixe nesta conta]</p></div></article>
+            </div>
+            <p class="callout" style="margin-top:14px"><span class="ph">[Promessa: o que fica rodando no time no final]</span></p>
+          </div>
+        </div>
+        <footer class="footer"><span>V4 Company · esqueleto de proposta</span><span class="count">04 / 08</span></footer>
+      </section>
+
+      <!-- 5 PRODUTO 02 -->
+      <section class="slide" data-act="produto" data-title="Produto essencial" aria-label="Segundo produto ou essencial">
+        <div class="topbar"></div>
+        <div class="page">
+          <header class="slide-head">
+            <div class="head-copy">
+              <div class="eyebrow">Produto 02 · <span class="ph">[recorrente · Assessoria de Growth]</span></div>
+              <h2><span class="ph">[Nome do catálogo]</span> · <em class="ph">[como opera com o core]</em>.</h2>
+              <p class="sub"><span class="ph">[Quem executa · ritmo · o que não é opcional]</span></p>
+            </div>
+            <div class="section-chip"><b>02</b> Produto</div>
+          </header>
+          <div class="content">
+            <div class="roles">
+              <article class="card role"><div class="label">Papel</div><h3 class="ph">[Account]</h3><p class="ph">[O que faz nesta conta]</p></article>
+              <article class="card role"><div class="label">Papel</div><h3 class="ph">[GT / Copy]</h3><p class="ph">[O que faz nesta conta]</p></article>
+              <article class="card role"><div class="label">Papel</div><h3 class="ph">[Design / CRM]</h3><p class="ph">[O que faz nesta conta]</p></article>
+              <article class="card role"><div class="label">Ritmo</div><h3 class="ph">[Semanal]</h3><p class="ph">[Sponsor · checkpoint]</p></article>
+            </div>
+            <table class="ritual">
+              <thead><tr><th>Rotina</th><th>Ritual</th><th>Foco nesta conta</th></tr></thead>
+              <tbody>
+                <tr><td>Diária</td><td class="ph">[Ritual]</td><td class="ph">[Foco]</td></tr>
+                <tr><td>Periódica</td><td class="ph">[Ritual]</td><td class="ph">[Foco]</td></tr>
+                <tr><td>Trimestral</td><td class="ph">[Ritual]</td><td class="ph">[Foco]</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <footer class="footer"><span>V4 Company · esqueleto de proposta</span><span class="count">05 / 08</span></footer>
+      </section>
+
+      <!-- 6 CICLO -->
+      <section class="slide" data-act="produto" data-title="Ciclo" aria-label="Como o ciclo casa">
+        <div class="topbar"></div>
+        <div class="page">
+          <header class="slide-head">
+            <div class="head-copy">
+              <div class="eyebrow">Como o ciclo casa</div>
+              <h2><span class="ph">[Ordem certa desta conta]</span>. <em class="ph">[Virada em uma linha]</em></h2>
+              <p class="sub"><span class="ph">[Como o core e o essencial se encadeiam]</span></p>
+            </div>
+            <div class="section-chip"><b>03</b> Produto</div>
+          </header>
+          <div class="content">
+            <div class="process">
+              <div class="stage-card"><span class="n">01</span><h3 class="ph">[EE / mapa]</h3><p class="ph">[O que já está feito]</p></div>
+              <span class="arrow" aria-hidden="true">→</span>
+              <div class="stage-card"><span class="n">02</span><h3 class="ph">[Core]</h3><p class="ph">[O que instala primeiro]</p></div>
+              <span class="arrow" aria-hidden="true">→</span>
+              <div class="stage-card"><span class="n">03</span><h3 class="ph">[Fundação]</h3><p class="ph">[Controle e prova]</p></div>
+              <span class="arrow" aria-hidden="true">→</span>
+              <div class="stage-card"><span class="n">04</span><h3 class="ph">[Piloto]</h3><p class="ph">[Ritmo da operação]</p></div>
+              <span class="arrow" aria-hidden="true">→</span>
+              <div class="stage-card"><span class="n">05</span><h3 class="ph">[Escala]</h3><p class="ph">[Gate, não volume cego]</p></div>
+            </div>
+            <p class="callout" style="margin-top:22px"><span class="ph">[Mês 1 é chão — não campanha]</span></p>
+          </div>
+        </div>
+        <footer class="footer"><span>V4 Company · esqueleto de proposta</span><span class="count">06 / 08</span></footer>
+      </section>
+
+      <!-- 7 PRONTO -->
+      <section class="slide" data-act="produto" data-title="Pronto" aria-label="O que muda na operação">
+        <div class="topbar"></div>
+        <div class="page">
+          <header class="slide-head">
+            <div class="head-copy">
+              <div class="eyebrow">Com o ciclo fechado</div>
+              <h2>O que o sponsor <em>vê funcionando</em>.</h2>
+              <p class="sub">Critérios observáveis. Não são garantia de ROI, churn ou receita específica.</p>
+            </div>
+            <div class="section-chip"><b>04</b> Produto</div>
+          </header>
+          <div class="content">
+            <div class="success-grid">
+              <article class="card success-item"><span class="n">01</span><h3 class="ph">[Critério observável 1]</h3></article>
+              <article class="card success-item"><span class="n">02</span><h3 class="ph">[Critério observável 2]</h3></article>
+              <article class="card success-item"><span class="n">03</span><h3 class="ph">[Critério observável 3]</h3></article>
+              <article class="card success-item"><span class="n">04</span><h3 class="ph">[Critério observável 4]</h3></article>
+              <article class="card success-item"><span class="n">05</span><h3 class="ph">[Critério observável 5]</h3></article>
+              <article class="card success-item"><span class="n">06</span><h3 class="ph">[Critério observável 6]</h3></article>
+              <article class="card success-item"><span class="n">07</span><h3 class="ph">[Critério observável 7]</h3></article>
+              <article class="card success-item"><span class="n">08</span><h3 class="ph">[Critério observável 8]</h3></article>
+            </div>
+          </div>
+        </div>
+        <footer class="footer"><span>V4 Company · esqueleto de proposta</span><span class="count">07 / 08</span></footer>
+      </section>
+
+      <!-- 8 INVESTIMENTO -->
+      <section class="slide" data-act="decisao" data-title="Investimento" aria-label="Investimento — um preço">
+        <div class="topbar"></div>
+        <div class="page">
+          <header class="slide-head">
+            <div class="head-copy">
+              <div class="eyebrow">Investimento · condição comercial</div>
+              <h2><span class="ph">[Dois produtos. Um ciclo.]</span> <em>Condição comercial</em>.</h2>
+              <p class="sub"><span class="ph">[O que está incluso neste desenho]</span></p>
+            </div>
+            <div class="section-chip"><b>01</b> Decisão</div>
+          </header>
+          <div class="content">
+            <div class="offers">
+              <article class="card offer">
+                <div class="tag">Produto 01 · <span class="ph">[pontual]</span></div>
+                <h3 class="ph">[EQV / EC]</h3>
+                <p class="note ph">[O que está incluso]</p>
+                <div class="was ph">[Âncora R$ —]</div>
+                <div class="now ph">R$ —</div>
+                <ul>
+                  <li class="ph">[Incluso 1]</li>
+                  <li class="ph">[Incluso 2]</li>
+                </ul>
+              </article>
+              <article class="card offer">
+                <div class="tag">Produto 02 · <span class="ph">[12 meses]</span></div>
+                <h3 class="ph">[Assessoria de Growth]</h3>
+                <p class="note ph">[Time · rotina]</p>
+                <div class="was ph">[Fee de referência R$ —/mês]</div>
+                <div class="now ph">R$ — <small>/mês</small></div>
+                <ul>
+                  <li class="ph">[Incluso 1]</li>
+                  <li class="ph">[Incluso 2]</li>
+                </ul>
+              </article>
+            </div>
+            <div class="ee-band">
+              <div>
+                <div class="k">Reconhecimento da EE</div>
+                <p class="ph">[Abatimento — ocultar a faixa se não houver EE]</p>
+              </div>
+              <div class="amt ph">− R$ —</div>
+            </div>
+            <div class="combo">
+              <div>
+                <h3 class="ph">[Desenho completo]</h3>
+                <p class="ph">[Por que fechar agora]</p>
+              </div>
+              <div style="text-align:right">
+                <div class="cond">Condição comercial</div>
+                <div class="fig ph">[12× R$ —]</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer class="footer"><span>V4 Company · esqueleto de proposta</span><span class="count">08 / 08</span></footer>
+      </section>
+    </main>
+  </div>
+
+  <nav class="block-nav" id="blockNav" aria-label="Ir para o início de um ato"></nav>
+  <nav class="global-nav" id="globalNav" aria-label="Navegação da apresentação">
+    <button id="prevGlobal" type="button" aria-label="Slide anterior">←</button>
+    <span class="global-count" id="globalCount">01 / 08</span>
+    <button id="nextGlobal" type="button" aria-label="Próximo slide">→</button>
+  </nav>
+  <div class="utility"><button id="fullscreenBtn" type="button">Tela cheia</button></div>
+  <div class="slide-dots" id="slideDots" aria-label="Ir para slide"></div>
+  <p class="sr-only">Setas e espaço navegam. Home e End vão ao início e ao fim. F abre tela cheia.</p>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll("#deck > .slide"));
+    const total = slides.length;
+    const acts = [
+      { id: "narrativa", label: "Narrativa", start: 0 },
+      { id: "dados", label: "Dados", start: 1 },
+      { id: "produto", label: "Produto", start: 2 },
+      { id: "decisao", label: "Decisão", start: 7 }
+    ];
+    const deck = document.getElementById("deck");
+    const dots = document.getElementById("slideDots");
+    const blockNav = document.getElementById("blockNav");
+    const blockLabel = document.getElementById("blockLabel");
+    const slideTitle = document.getElementById("slideTitle");
+    const globalCount = document.getElementById("globalCount");
+    const globalProgress = document.getElementById("globalProgress");
+    const prevGlobal = document.getElementById("prevGlobal");
+    const nextGlobal = document.getElementById("nextGlobal");
+    const actName = { narrativa: "Narrativa", dados: "Dados", produto: "Produto", decisao: "Decisão" };
+    let current = Math.max(0, Math.min(total - 1, Number((location.hash.match(/slide-(\d+)/) || [])[1] || 1) - 1));
+
+    acts.forEach((act) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.textContent = act.label;
+      button.dataset.act = act.id;
+      button.addEventListener("click", () => goTo(act.start));
+      blockNav.appendChild(button);
+    });
+    slides.forEach((_, index) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.setAttribute("aria-label", "Ir para o slide " + (index + 1));
+      button.addEventListener("click", () => goTo(index));
+      dots.appendChild(button);
+    });
+
+    function pad(n) { return String(n).padStart(2, "0"); }
+
+    function goTo(index) {
+      current = Math.max(0, Math.min(total - 1, index));
+      const slide = slides[current];
+      const act = slide.dataset.act;
+      slides.forEach((el, i) => {
+        el.classList.toggle("active", i === current);
+        el.setAttribute("aria-hidden", i === current ? "false" : "true");
+      });
+      Array.from(dots.children).forEach((dot, i) => {
+        dot.classList.toggle("active", i === current);
+        dot.setAttribute("aria-current", i === current ? "true" : "false");
+      });
+      Array.from(blockNav.children).forEach((button) => {
+        const on = button.dataset.act === act;
+        button.classList.toggle("is-active", on);
+        button.setAttribute("aria-current", on ? "true" : "false");
+      });
+      blockLabel.textContent = actName[act] || act;
+      slideTitle.textContent = slide.dataset.title || "";
+      globalCount.textContent = pad(current + 1) + " / " + pad(total);
+      globalProgress.style.width = ((current + 1) / total * 100) + "%";
+      prevGlobal.disabled = current === 0;
+      nextGlobal.disabled = current === total - 1;
+      history.replaceState(null, "", "#slide-" + pad(current + 1));
+      document.title = pad(current + 1) + " / " + pad(total) + " — Esqueleto de proposta V4";
+    }
+
+    function fitDeck() {
+      const scale = Math.min(window.innerWidth / 1600, window.innerHeight / 900);
+      deck.style.transform = "translate(-50%, -50%) scale(" + scale + ")";
+    }
+
+    window.goTo = goTo;
+    prevGlobal.addEventListener("click", () => goTo(current - 1));
+    nextGlobal.addEventListener("click", () => goTo(current + 1));
+    document.getElementById("fullscreenBtn").addEventListener("click", () => {
+      document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (["ArrowRight", "PageDown", " "].includes(event.key)) { event.preventDefault(); goTo(current + 1); }
+      if (["ArrowLeft", "PageUp"].includes(event.key)) { event.preventDefault(); goTo(current - 1); }
+      if (event.key === "Home") goTo(0);
+      if (event.key === "End") goTo(total - 1);
+      if (event.key.toLowerCase() === "f" && document.fullscreenEnabled) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      }
+    });
+    window.addEventListener("resize", fitDeck);
+    window.addEventListener("hashchange", () => {
+      const n = Math.max(0, Math.min(total - 1, Number((location.hash.match(/slide-(\d+)/) || [])[1] || 1) - 1));
+      if (n !== current) goTo(n);
+    });
+    fitDeck();
+    goTo(current);
+  </script>
+</body>
+</html>
