@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <title>Script de Pitch · Ecco Salva · EQV + CRM + Mídia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #140608;
+      --surf: rgba(255,255,255,.06);
+      --bd: rgba(255,255,255,.14);
+      --txt: #fff;
+      --mut: rgba(255,255,255,.78);
+      --red: #e11d24;
+      --soft: #ffd0d0;
+      --ok: #86efac;
+      --warn: #fde68a;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font: 15px/1.55 "Plus Jakarta Sans", system-ui, sans-serif;
+      color: var(--txt);
+      background:
+        radial-gradient(ellipse 70% 40% at 10% 0%, rgba(225,29,36,.35), transparent 55%),
+        radial-gradient(ellipse 50% 35% at 90% 10%, rgba(255,80,80,.18), transparent 50%),
+        linear-gradient(180deg, #1a090b 0%, #0d0405 100%);
+      padding-bottom: 72px;
+    }
+    h1, h2, h3 { font-family: Outfit, sans-serif; letter-spacing: -.02em; line-height: 1.15; }
+    .top {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(13,4,5,.9);
+      border-bottom: 1px solid var(--bd);
+      padding: 14px 20px;
+      display: flex; gap: 12px; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    }
+    .brand { font-weight: 800; font-size: 15px; }
+    .brand span { color: #fda4af; }
+    .pill {
+      font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      border: 1px solid var(--bd); border-radius: 999px; padding: 6px 12px; color: var(--mut);
+      text-decoration: none;
+    }
+    .pill:hover { color: #fff; border-color: rgba(255,255,255,.35); }
+    .wrap { max-width: 920px; margin: 0 auto; padding: 28px 20px 0; }
+    .hero {
+      border: 1px solid var(--bd); border-radius: 20px; padding: 28px 24px;
+      background: linear-gradient(135deg, rgba(225,29,36,.2), rgba(255,255,255,.04));
+      margin-bottom: 18px;
+    }
+    .hero h1 { margin: 0 0 10px; font-size: clamp(26px, 4vw, 36px); }
+    .hero p { margin: 0; color: var(--mut); max-width: 760px; }
+    .nav {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 8px; margin: 18px 0 8px;
+    }
+    .nav a {
+      text-decoration: none; color: var(--mut); font-size: 12px; font-weight: 700;
+      border: 1px solid var(--bd); background: var(--surf); border-radius: 12px;
+      padding: 10px 12px; transition: .2s;
+    }
+    .nav a:hover { color: #fff; border-color: rgba(255,255,255,.35); background: rgba(225,29,36,.18); }
+    .nav a small { display: block; color: #fda4af; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 3px; }
+    .callout {
+      margin: 16px 0 22px; padding: 14px 16px; border-radius: 14px;
+      border: 1px solid rgba(253,230,138,.3); background: rgba(253,230,138,.08);
+      color: var(--warn); font-size: 14px;
+    }
+    .callout strong { color: #fef08a; }
+    .callout.ok {
+      border-color: rgba(134,239,172,.3); background: rgba(134,239,172,.08); color: var(--ok);
+    }
+    .callout.ok strong { color: #bbf7d0; }
+    .perfil {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px; margin: 16px 0 8px;
+    }
+    .perfil .card, .obj-grid .card {
+      border: 1px solid var(--bd); border-radius: 14px; background: var(--surf);
+      padding: 12px 14px;
+    }
+    .perfil h3, .obj-grid h3 { margin: 0 0 6px; font-size: 14px; }
+    .perfil p, .obj-grid p { margin: 0; font-size: 13px; color: var(--mut); }
+    .slide {
+      border: 1px solid var(--bd); border-radius: 18px; background: rgba(255,255,255,.04);
+      padding: 22px 20px; margin: 14px 0;
+    }
+    .slide-head {
+      display: flex; justify-content: space-between; gap: 12px; align-items: flex-start;
+      margin-bottom: 10px; flex-wrap: wrap;
+    }
+    .slide-num { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #fda4af; margin-bottom: 4px; }
+    .slide-head h2 { margin: 0; font-size: clamp(18px, 3vw, 24px); }
+    .slide-ref { font-size: 12px; color: var(--mut); white-space: nowrap; }
+    .objetivo {
+      font-size: 13px; color: #fecdd3; background: rgba(225,29,36,.16);
+      border: 1px solid rgba(225,29,36,.35); border-radius: 10px; padding: 10px 12px; margin-bottom: 12px;
+    }
+    .fala {
+      font-size: 15px; line-height: 1.6; color: #fff;
+      border-left: 3px solid var(--red); padding: 4px 0 4px 14px; margin: 10px 0;
+    }
+    .fala em { color: #fda4af; font-style: normal; font-weight: 700; }
+    .bloco {
+      margin-top: 12px; padding: 12px 14px; border-radius: 12px;
+      background: var(--surf); border: 1px solid var(--bd);
+    }
+    .bloco h3 { margin: 0 0 8px; font-size: 13px; color: #fda4af; }
+    .bloco ul { margin: 0; padding-left: 18px; color: var(--mut); font-size: 13px; }
+    .bloco li { margin: 5px 0; }
+    .ask {
+      margin-top: 12px; padding: 12px 14px; border-radius: 12px;
+      background: rgba(134,239,172,.1); border: 1px solid rgba(134,239,172,.28);
+      color: #bbf7d0; font-size: 14px;
+    }
+    .ask strong { color: #86efac; }
+    .evitar {
+      margin-top: 10px; padding: 12px 14px; border-radius: 12px;
+      background: rgba(253,230,138,.08); border: 1px solid rgba(253,230,138,.25);
+      color: #fde68a; font-size: 13px;
+    }
+    .evitar strong { color: #fef08a; }
+    .roi-bridge {
+      margin-top: 10px; font-size: 13px; color: var(--soft);
+      padding: 10px 12px; border-radius: 10px; background: rgba(255,255,255,.04);
+    }
+    .obj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+    @media (max-width: 720px) { .obj-grid { grid-template-columns: 1fr; } }
+    .tag {
+      display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: .08em;
+      text-transform: uppercase; padding: 3px 8px; border-radius: 999px; margin-right: 6px;
+      background: rgba(225,29,36,.25); color: #fda4af;
+    }
+    footer { margin: 28px 20px 0; text-align: center; font-size: 12px; color: var(--mut); }
+    footer a { color: #fda4af; }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <div class="brand">Script Ecco · <span>Sara × Pitch</span></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <a class="pill" href="proposta-ecco-salva.html">Abrir deck</a>
+      <a class="pill" href="contexto-pre-pitch-ecco.html">Briefing</a>
+      <a class="pill" href="farmer-sara.html">Hub Farmer</a>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <header class="hero">
+      <h1>Narrativa leve para fechar o sistema</h1>
+      <p>
+        Script da proposta Ecco Salva (EQV + CRM + Mídia Paralela · 6 meses), no tom do playbook:
+        conversa, perguntas abertas, agência e Meta mortas <em>antes</em> do preço —
+        e quando o valor entrar, só discute valor.
+      </p>
+    </header>
+
+    <div class="callout">
+      <strong>Regra de ouro:</strong>
+      quando o preço aparecer, a única discussão que pode restar é o valor.
+      Timing, Flávia, Meta, “quem executa” e “outra opção” já foram alinhados antes.
+    </div>
+
+    <div class="perfil">
+      <div class="card">
+        <h3>Seu papel na call</h3>
+        <p>Você amarra o próximo passo. A EE entrega o mapa; você conduz a decisão com Lorenzo e Alan.</p>
+      </div>
+      <div class="card">
+        <h3>O cliente precisa saber</h3>
+        <p>Que a Sara está na linha de frente do próximo passo — solução, não “só comercial”.</p>
+      </div>
+      <div class="card">
+        <h3>Tom</h3>
+        <p>Sênior, sem falar mal da agência, sem humilhar o time de 55, sem claim clínico.</p>
+      </div>
+      <div class="card">
+        <h3>Pacote</h3>
+        <p>Um plano: EQV + CRM + Mídia Paralela · 6 meses · TCV R$ 234.000 (condição comercial).</p>
+      </div>
+    </div>
+
+    <nav class="nav" aria-label="Blocos">
+      <a href="#b0"><small>0</small>Antes de abrir</a>
+      <a href="#b1"><small>1</small>Capa</a>
+      <a href="#b2"><small>2</small>Bowtie</a>
+      <a href="#b3"><small>3</small>Diagnóstico</a>
+      <a href="#b4"><small>4</small>EQV + CRM</a>
+      <a href="#b5"><small>5</small>Mídia</a>
+      <a href="#b6"><small>6</small>Escopo</a>
+      <a href="#alinha"><small>6b</small>Alinhamento</a>
+      <a href="#b7"><small>7</small>Preço + fecho</a>
+      <a href="#obj"><small>Mapa</small>Objeções</a>
+    </nav>
+
+    <article class="slide" id="b0">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Bloco 0 · Antes da tela</div>
+          <h2>Entrar leve — não afoita</h2>
+        </div>
+        <div class="slide-ref">~ 1–2 min</div>
+      </div>
+      <div class="objetivo">Objetivo: criar clima de conversa. Cliente fala. Você escuta. Zero monólogo.</div>
+      <div class="fala">
+        “Lorenzo, Alan — antes de eu abrir a tela: como vocês estão saindo da Estruturação?
+        O que mais ficou marcado pra vocês até aqui?”
+      </div>
+      <div class="bloco">
+        <h3>Checklist na cabeça</h3>
+        <ul>
+          <li>Pergunta <strong>aberta</strong> — não “faz sentido?”</li>
+          <li>Deixa eles falarem; use a resposta no diagnóstico</li>
+          <li>Se ainda não se apresentou: “Eu sou a Sara, fico na linha de frente com vocês no próximo passo”</li>
+          <li>Não abrir com preço. Não abrir com “última semana / acabou”</li>
+        </ul>
+      </div>
+      <div class="ask">
+        <strong>Três perguntas (escolhe conforme a sala):</strong><br />
+        “O que mais ficou marcado na estruturação até aqui?”<br />
+        “O que não pode continuar do jeito que está — o funil do time ou a origem do lead?”<br />
+        “Se a gente desenhar o próximo passo, quando precisa estar rodando?”
+      </div>
+      <div class="evitar"><strong>Evitar:</strong> “Faz sentido?” em loop · entrar correndo · empilhar 5 minutos sem perguntar · jargão interno (FI, STEP).</div>
+    </article>
+
+    <article class="slide" id="b1">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Bloco 1 · Capa (slide 1)</div>
+          <h2>Demanda + comercial no mesmo sistema</h2>
+        </div>
+        <div class="slide-ref">~ 40–60s</div>
+      </div>
+      <div class="objetivo">Objetivo: posicionar a call como continuidade da EE — não venda fria.</div>
+      <div class="fala">
+        “O que a Estruturação entregou foi o mapa: a Ecco já tem volume, já tem canais, já tem time.
+        O que ainda não fecha é o sistema — mídia e comercial ligados pelo mesmo MQL.
+        Hoje a gente não vai reinventar isso. Vamos olhar o próximo passo:
+        <em>gerar oportunidade com origem e converter com previsibilidade</em>, em seis meses.”
+      </div>
+      <div class="ask">
+        <strong>Gancho leve:</strong>
+        “Só pra alinhar comigo: o que vocês mais querem desse próximo passo —
+        clareza do que a mídia gera, ou condução do time até a receita?”
+      </div>
+      <div class="evitar"><strong>Evitar:</strong> “máquina de receita” genérico · “vocês não têm processo” · abrir o bowtie técnico demais.</div>
+    </article>
+
+    <article class="slide" id="b2">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Bloco 2 · Bowtie (slide 2)</div>
+          <h2>O funil precisa fechar dos dois lados</h2>
+        </div>
+        <div class="slide-ref">~ 45–70s</div>
+      </div>
+      <div class="objetivo">Objetivo: uma imagem, uma frase. Não dar aula de data model.</div>
+      <div class="fala">
+        “Esse desenho é só para a gente olhar a mesma coisa:
+        de um lado, demanda — Google, site, WhatsApp, chat.
+        Do outro, conversão — o time de vocês, proposta, venda, vida ativa.
+        No meio precisa existir uma oportunidade com dono, origem e próximo passo.
+        <em>Hoje os dois lados existem. O meio não.</em>”
+      </div>
+      <div class="roi-bridge"><strong>Ponte:</strong> “Por isso o plano tem duas frentes no mesmo ciclo: comercial pronto para receber, e mídia gerando MQL que o comercial aceita.”</div>
+      <div class="evitar"><strong>Evitar:</strong> explicar cada métrica do gráfico · volume/conversion/time em inglês na boca do cliente.</div>
+    </article>
+
+    <article class="slide" id="b3">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Bloco 3 · Diagnóstico (slide 3)</div>
+          <h2>Duas travas. Um sistema.</h2>
+        </div>
+        <div class="slide-ref">~ 2–2,5 min</div>
+      </div>
+      <div class="objetivo">Objetivo: devolver a dor com respeito — sem vilão, com o que a EE já mostrou.</div>
+      <div class="fala">
+        “Três frases, do que a gente viu juntos.
+        <br /><br />
+        Comercial: cerca de 55 pessoas — call center e rua — sem CRM de vendas e sem funil para gerir.
+        O lead entra por RD, chat, WhatsApp, telefone. A jornada até a receita não é uma.
+        PF e PJ misturam processo.
+        <br /><br />
+        Digital: Google está no ar, na casa dos R$ 25 mil. Meta parada depois do incidente.
+        Entram cerca de mil contatos por mês — e hoje não dá para conciliar de que canal veio,
+        nem o que virou oportunidade de verdade.
+        <br /><br />
+        E a marca: vocês vendem APH completo — orientação, telemedicina, equipe no local.
+        O mercado ainda lê ambulância. Isso não é falta de história. É falta de uma porta de entrada clara.”
+      </div>
+      <div class="bloco">
+        <h3>Se pedirem prova de atribuição (usar uma vez, parar)</h3>
+        <ul>
+          <li>No mesmo recorte: Google Ads ~1.800 conversões · GA4 336 · RD 74 contatos com origem Google pago.</li>
+          <li>Fechar: “Não é que a campanha não funcione. É que os números não conversam até a oportunidade.”</li>
+        </ul>
+      </div>
+      <div class="ask">
+        <strong>Engajamento:</strong>
+        “Desses três — time sem funil, origem do lead, ou clareza da oferta — qual dói mais no dia a dia de vocês?”
+      </div>
+      <div class="evitar"><strong>Evitar:</strong> chamar a série jan–jun de resultado auditado · “conta de padaria” · 28% como KPI da V4 · atacar Flávia ou o call center.</div>
+    </article>
+
+    <article class="slide" id="b4">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Bloco 4 · EQV + CRM (slide 4)</div>
+          <h2>O time que já é de vocês, com ritmo</h2>
+        </div>
+        <div class="slide-ref">~ 1,5–2 min</div>
+      </div>
+      <div class="objetivo">Objetivo: vender EQV como controle do time da Ecco — não terceirização de vendas.</div>
+      <div class="fala">
+        “Primeira frente: Empresa Que Vende + CRM.
+        Não é a V4 virar o call center. É organizar <em>o time que já é de vocês</em>.
+        <br /><br />
+        Processo e papéis claros — quem qualifica, quem fecha, sem overlap.
+        Etapa só avança com evidência, não com achismo.
+        Playbook e cadência para o follow parar de ser genérico.
+        Forecast semanal que o Alan consiga comprometer.
+        <br /><br />
+        No Pipedrive: funil PF e funil PJ separados.
+        Origem, dono, valor, próximo passo.
+        tawk.to, RD e WhatsApp entram no mesmo lugar.
+        MQL, SQL, motivo de perda.
+        Lead → proposta → venda → receita no mesmo sistema.”
+      </div>
+      <div class="roi-bridge"><strong>Ponte:</strong> “Vocês já atendem cerca de 4 mil vidas no mês e cabem 8 mil. O gargalo não é capacidade clínica. É oportunidade com dono.”</div>
+      <div class="ask"><strong>Checagem:</strong> “Alan, se o time tivesse um funil PF e um PJ com próximo passo visível — o que muda na sua semana?”</div>
+      <div class="evitar"><strong>Evitar:</strong> prometer integração Nelfor no dia 1 · “vamos profissionalizar seus vendedores” em tom de aula.</div>
+    </article>
+
+    <article class="slide" id="b5">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Bloco 5 · Mídia Paralela (slide 5)</div>
+          <h2>Volume de MQL com origem — e Flávia no lugar</h2>
+        </div>
+        <div class="slide-ref">~ 2 min</div>
+      </div>
+      <div class="objetivo">Objetivo: vender mídia como alimento do funil + matar agência e Meta antes do preço.</div>
+      <div class="fala">
+        “Segunda frente: Mídia Paralela. Serviço e verba no mesmo pacote.
+        GP no ritmo de vocês. Google que já gira, agora com sinal de verdade.
+        Meta reentra — não no impulso, com gate: segurança da conta, tracking, consentimento, origem no CRM, teste controlado.
+        Criativo de APH e telemedicina, não só ambulância — alinhado com o que a entrega de comunicação já desenhou.
+        <br /><br />
+        O que volta para o comercial: MQL com origem e campanha, critério do que o time aceita,
+        lead no CRM com próximo passo. Sem sumir no WhatsApp.”
+      </div>
+      <div class="ask">
+        <strong>Agência (obrigatório, antes do valor):</strong><br />
+        “A operação de social e criativo com a Flávia cobre o que vocês precisam —
+        ou está faltando braço em outro lugar?”<br />
+        Se sim: “Perfeito. Este plano não substitui isso. Ele liga mídia paga e comercial no mesmo funil.”
+      </div>
+      <div class="bloco">
+        <h3>Se perguntarem “e a Meta?”</h3>
+        <ul>
+          <li>Reconhecer: nova conta existe, esperaram a direção da V4 — bom sinal.</li>
+          <li>Gate: propriedade dos ativos, tracking pós-sucesso, PF/PJ separado, claims aprovados, capacidade de atendimento, regra de parada.</li>
+          <li>Não prometer data de veiculação nesta call.</li>
+        </ul>
+      </div>
+      <div class="evitar"><strong>Evitar:</strong> “a gente assume o social” · “liga a Meta amanhã” · reativar campanha Canoas · CPL R$ 25 como meta.</div>
+    </article>
+
+    <article class="slide" id="b6">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Bloco 6 · Escopo (slide 6)</div>
+          <h2>Dois módulos. Um ciclo.</h2>
+        </div>
+        <div class="slide-ref">~ 40s</div>
+      </div>
+      <div class="objetivo">Objetivo: recap curto antes do alinhamento. Sem reabrir diagnóstico.</div>
+      <div class="fala">
+        “Resumo: seis meses, duas peças que se encostam.
+        Comercial + CRM — processo e Pipedrive para converter o MQL.
+        Mídia Paralela — GP, gestão, criativo e verba para gerar esse MQL com origem.
+        Um bowtie. Não dois projetos soltos.”
+      </div>
+      <div class="evitar"><strong>Evitar:</strong> listar entregáveis da EE de novo · abrir terceiro módulo (Social V4) neste slide.</div>
+    </article>
+
+    <article class="slide" id="alinha">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Bloco 6b · Alinhamento (antes do preço)</div>
+          <h2>Antecipar objeções — leve e direto</h2>
+        </div>
+        <div class="slide-ref">~ 1,5–2 min</div>
+      </div>
+      <div class="objetivo">Objetivo: quando o preço entrar, só sobra preço.</div>
+      <div class="fala">
+        “Antes de eu trazer a condição comercial, quero alinhar quatro coisas com vocês —
+        pra gente não chegar no valor com dúvida aberta.”
+      </div>
+      <div class="ask">
+        <strong>Sequência (abre, escuta, amarra):</strong><br /><br />
+        1. “O que vocês mais gostaram do plano até aqui?”<br />
+        2. “O que a gente não pode deixar de executar?”<br />
+        3. “Quando vocês querem que isso comece a rodar?”<br />
+        4. “Vocês querem a V4 executando esse próximo passo — ou estão avaliando outro caminho?”<br /><br />
+        Se disserem “V4 / para ontem”: “Perfeito. Então o que falta é a condição para a gente avançar.”
+      </div>
+      <div class="bloco">
+        <h3>Se aparecer “preciso pensar”</h3>
+        <ul>
+          <li>Não empurra contrato. “Claro — o que te faz precisar pensar: valor, timing ou escopo?”</li>
+          <li>Se faltar Lorenzo ou Alan: “Quem mais precisa estar na decisão? Conseguimos trazer nessa call ou marcar já com os dois?”</li>
+        </ul>
+      </div>
+      <div class="evitar"><strong>Evitar:</strong> “vou mandar e vocês pensam” · validade artificial · oferecer valor menor sem pedido.</div>
+    </article>
+
+    <article class="slide" id="b7">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Bloco 7 · Investimento (slide 7) + fecho</div>
+          <h2>Uma condição. Uma decisão.</h2>
+        </div>
+        <div class="slide-ref">~ 2–2,5 min</div>
+      </div>
+      <div class="objetivo">Objetivo: apresentar TCV com leveza. Condição em destaque. Sem menu. Pedir a venda.</div>
+      <div class="fala">
+        “O que estamos contratando: ciclo de seis meses, duas frentes, tudo em TCV — sem mensalidade.
+        <br /><br />
+        Estruturação comercial + Pipedrive: referência R$ 43.745. Condição: <em>R$ 34.000</em> no ciclo.
+        Mídia Paralela — GP, gestão, criativos, <em>verba inclusa</em>: referência R$ 257.378. Condição: <em>R$ 200.000</em>.
+        <br /><br />
+        Total de referência R$ 301.123. A condição para a gente avançar: <em>R$ 234.000</em> em seis meses.”
+      </div>
+      <div class="bloco">
+        <h3>Como falar o card</h3>
+        <ul>
+          <li>Primeiro o “de” (referência) — rápido</li>
+          <li>Depois a condição — para e respira</li>
+          <li>Dizer “condição comercial”, nunca “desconto”</li>
+          <li>Se perguntarem ROI: LTV ~R$ 560, margem bruta 50%, capacidade 4 mil → 8 mil. O plano instala o sistema que preenche isso com MQL rastreável — não “paga os R$ 7 milhões”.</li>
+        </ul>
+      </div>
+      <div class="ask">
+        <strong>Pedir a venda (leve, segura):</strong><br />
+        “Olhando essa condição — o que vocês precisam alinhar para a gente avançar nesse plano?”<br />
+        ou<br />
+        “Podemos avançar com essa condição e já agendar o kick-off?”<br />
+        Se hesitarem: “O que ainda está em aberto — valor, início ou alguma peça do plano?”
+      </div>
+      <div class="callout ok" style="margin-top:12px">
+        <strong>Se fechar:</strong> contrato · acessos (Google, Meta nova conta, RD, tawk.to) · kick-off com Alan no funil e com João/Fernando no tracking · Flávia no rito de criativo.
+      </div>
+      <div class="evitar"><strong>Evitar:</strong> “vocês vão analisar e me falam” · discutir escopo de novo · abrir boleto/parcelas sem pedido · falar pelo cliente.</div>
+    </article>
+
+    <article class="slide" id="obj">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Mapa de objeções</div>
+          <h2>Tratar antes — ou na hora, sem plantar</h2>
+        </div>
+      </div>
+      <div class="obj-grid">
+        <div class="card">
+          <h3><span class="tag">Antes</span> Agência</h3>
+          <p>Flávia fica no social. V4 liga mídia paga ao CRM. Não é troca de fornecedor.</p>
+        </div>
+        <div class="card">
+          <h3><span class="tag">Antes</span> Meta</h3>
+          <p>Nova conta + gate. Sem data de veiculação nesta call. Sem “liga amanhã”.</p>
+        </div>
+        <div class="card">
+          <h3><span class="tag">Antes</span> Quem executa</h3>
+          <p>“Vocês querem a V4 nesse próximo passo ou outro caminho?”</p>
+        </div>
+        <div class="card">
+          <h3><span class="tag">Antes</span> Timing</h3>
+          <p>Decisão agora. Início pode ser em X semanas.</p>
+        </div>
+        <div class="card">
+          <h3><span class="tag">Na hora</span> Preço</h3>
+          <p>ROI = sistema + capacidade ociosa + MQL com origem. Não breakeven contra R$ 7 mi.</p>
+        </div>
+        <div class="card">
+          <h3><span class="tag">Na hora</span> “Já convertemos 30%”</h3>
+          <p>Respeitar o número. Recolocar: ainda não está amarrado a campanha e oportunidade. Por isso o plano existe.</p>
+        </div>
+        <div class="card">
+          <h3><span class="tag">Na hora</span> Sócio / pensar</h3>
+          <p>Qual objeção: valor, timing ou escopo? Remarcar com Lorenzo e Alan juntos.</p>
+        </div>
+        <div class="card">
+          <h3><span class="tag">Ban</span> Saúde</h3>
+          <p>Sem tempo de chegada, sem carência, sem ilimitado, sem comparar com serviço público.</p>
+        </div>
+      </div>
+    </article>
+
+    <footer>
+      V4 · Farmer Sara ·
+      <a href="contexto-pre-pitch-ecco.html">Briefing pré-pitch</a> ·
+      <a href="proposta-ecco-salva.html">Deck</a> ·
+      <a href="playbook-farmer-am.html">Playbook</a>
+    </footer>
+  </div>
+</body>
+</html>
