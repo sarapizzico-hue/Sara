@@ -60,13 +60,39 @@
     @media(max-width:700px){.fat-bar{width:100% !important}}
     .meta{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}@media(max-width:800px){.meta{grid-template-columns:1fr}}
     .meta .card .big{font-size:32px;font-weight:900;letter-spacing:-.03em;margin:6px 0}
-    .mixbar{display:flex;height:16px;border-radius:999px;overflow:hidden;margin:10px 0 8px;border:1px solid var(--bd)}
-    .mixbar i{display:block;height:100%}
-    .mixbar .s{width:14%;background:#8b5cf6}
-    .mixbar .t{width:3%;background:#eab308}
-    .mixbar .e{width:83%;background:#22c55e}
-    .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--mut)}
+    .mixbar{display:flex;height:28px;border-radius:10px;overflow:hidden;margin:8px 0;border:1px solid var(--bd);font-size:11px;font-weight:800}
+    .mixbar i{display:flex;align-items:center;justify-content:center;height:100%;color:#050505;min-width:0;padding:0 6px;white-space:nowrap}
+    .mixbar .s{background:#8b5cf6;color:#fff}
+    .mixbar .t{background:#eab308}
+    .mixbar .e{background:#22c55e}
+    .mixbar.wins .s{width:30%}.mixbar.wins .t{width:13%}.mixbar.wins .e{width:57%}
+    .mixbar.tcv .s{width:14%}.mixbar.tcv .t{width:3%;font-size:9px}.mixbar.tcv .e{width:83%}
+    @media(max-width:700px){
+      .mixbar{flex-direction:column;height:auto}
+      .mixbar i{width:100% !important;min-height:28px;font-size:11px}
+    }
+    .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--mut);margin:0 0 12px}
     .legend b{color:#fff}
+    .months{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 10px}
+    .mo{flex:1;min-width:72px;background:var(--surf2);border:1px solid var(--bd);border-radius:12px;padding:10px 8px;text-align:center}
+    .mo .m{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+    .mo .tm{font-size:16px;font-weight:900;margin:4px 0 2px}
+    .mo .n{font-size:10px;color:var(--mut)}
+    .mo .spark{height:4px;border-radius:99px;background:rgba(255,255,255,.08);margin-top:8px;overflow:hidden}
+    .mo .spark i{display:block;height:100%;background:#86efac;border-radius:99px}
+    .ring-row{display:flex;align-items:center;gap:12px;margin:10px 0 6px}
+    .ring{width:84px;height:84px;border-radius:50%;flex-shrink:0;display:grid;place-items:center}
+    .ring span{width:58px;height:58px;border-radius:50%;background:var(--surf2);display:grid;place-items:center;font-weight:900;font-size:15px}
+    .ring.pess{background:conic-gradient(#fde68a 0% 27%,rgba(255,255,255,.08) 27% 100%)}
+    .ring.real{background:conic-gradient(#fafafa 0% 39%,rgba(255,255,255,.08) 39% 100%)}
+    .ring.otim{background:conic-gradient(#86efac 0% 45%,rgba(255,255,255,.08) 45% 100%)}
+    .tracks{display:flex;flex-direction:column;gap:8px;margin:4px 0 8px}
+    .tr{display:grid;grid-template-columns:88px 1fr 52px;gap:10px;align-items:center}
+    .tr .bar{height:12px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}
+    .tr .bar i{display:block;height:100%;border-radius:99px}
+    .tr .pct{font-weight:900;font-variant-numeric:tabular-nums;text-align:right}
+    .cmp{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}@media(max-width:700px){.cmp{grid-template-columns:1fr}}
+    .cmp .card .k{font-size:11px;color:var(--mut);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
     .scroll{overflow-x:auto}
     table{width:100%;border-collapse:collapse;font-size:13px}
     th,td{padding:9px 8px;border-bottom:1px solid var(--bd);text-align:left;vertical-align:top}
@@ -125,7 +151,7 @@
     <a href="#ler">Como ler</a>
     <a href="#fatura">Faturamento</a>
     <a href="#step">Os 3 STEPs</a>
-    <a href="#meta">Meta do mês</a>
+    <a href="#cenarios">P / R / O</a>
     <a href="#empresas">As 41</a>
   </nav>
 
@@ -227,39 +253,120 @@
     </p>
   </div>
 
-  <div class="section" id="meta">
-    <h2>Meta de setembro</h2>
-    <h3>Melhor cenário dentro do faturamento de cada uma — não o teto do catálogo</h3>
+  <div class="section" id="cenarios">
+    <h2>P / R / O</h2>
+    <h3>Quanto fecha, em que STEP, com o ticket que o EE já fez</h3>
+    <p class="muted" style="margin:0 0 8px">
+      Referência dos meses passados: <strong>ticket médio só de E.E.</strong> (sem Base Ativa).
+      Fonte:
+      <a href="https://report-diario-ee-ba.vercel.app/#2026-05" target="_blank" rel="noopener">report diário EE</a>.
+      57 vendas, jan–ago/2026 (fev zerou).
+    </p>
+    <div class="months">
+      <div class="mo"><div class="m">Jan</div><div class="tm">R$ 63k</div><div class="n">6 vendas</div><div class="spark"><i style="width:78%"></i></div></div>
+      <div class="mo"><div class="m">Mar</div><div class="tm">R$ 51k</div><div class="n">11 vendas</div><div class="spark"><i style="width:63%"></i></div></div>
+      <div class="mo"><div class="m">Abr</div><div class="tm">R$ 67k</div><div class="n">7 vendas</div><div class="spark"><i style="width:82%"></i></div></div>
+      <div class="mo"><div class="m">Mai</div><div class="tm">R$ 63k</div><div class="n">11 vendas</div><div class="spark"><i style="width:78%"></i></div></div>
+      <div class="mo"><div class="m">Jun</div><div class="tm">R$ 36k</div><div class="n">8 vendas</div><div class="spark"><i style="width:44%"></i></div></div>
+      <div class="mo"><div class="m">Jul</div><div class="tm">R$ 32k</div><div class="n">6 vendas</div><div class="spark"><i style="width:40%"></i></div></div>
+      <div class="mo"><div class="m">Ago</div><div class="tm">R$ 81k</div><div class="n">8 vendas</div><div class="spark"><i style="width:100%"></i></div></div>
+    </div>
+    <p class="muted" style="margin:0 0 14px">
+      Média ponderada: <strong>R$ 56,5 mil</strong> por venda de EE.
+      Jun/jul caíram para ~R$ 33k (mais pontual). Ago subiu a R$ 81k.
+      O realista de setembro usa TM ~R$ 53k — na mesma faixa do histórico, não um teto de catálogo.
+    </p>
+
     <div class="meta">
       <div class="card">
         <span class="tag warn">Pessimista</span>
-        <div class="muted" style="margin-top:8px">Fecha menos · Executar em 6 meses</div>
-        <div class="big" style="color:var(--warn)">R$ 341 mil</div>
-        <div class="d">~11 empresas fecham. TINY/SMALL continuam em Saber/Ter. MEDIUM que executar, booking curto.</div>
+        <div class="ring-row">
+          <div class="ring pess" aria-hidden="true"><span>27%</span></div>
+          <div>
+            <div class="muted">das 41 fecham · 11 wins</div>
+            <div class="big" style="color:var(--warn);margin:4px 0">R$ 341 mil</div>
+            <div class="d">TM R$ 31k/win — faixa de jun/jul, quando o EE vendeu mais pontual. Executar em 6 meses.</div>
+          </div>
+        </div>
       </div>
       <div class="card">
         <span class="tag">Realista · a meta</span>
-        <div class="muted" style="margin-top:8px">Chance do Cockpit · mix que a Sara já fecha</div>
-        <div class="big">R$ 863 mil</div>
-        <div class="d">~16 empresas fecham. Ainda 1 STEP por conta. Executar em 12 meses só em quem o faturamento aguenta.</div>
+        <div class="ring-row">
+          <div class="ring real" aria-hidden="true"><span>39%</span></div>
+          <div>
+            <div class="muted">das 41 fecham · 16 wins</div>
+            <div class="big" style="margin:4px 0">R$ 863 mil</div>
+            <div class="d">TM R$ 53k/win — cola nos R$ 56,5k do EE jan–ago. 1 STEP por conta. Executar 12× só em quem o faturamento aguenta.</div>
+          </div>
+        </div>
       </div>
       <div class="card">
         <span class="tag ok">Otimista</span>
-        <div class="muted" style="margin-top:8px">MEDIUM e LARGE fecham mais · mesmo 1 STEP</div>
-        <div class="big" style="color:var(--ok)">R$ 975 mil</div>
-        <div class="d">~18 empresas. Não é “todo mundo Executar”. É o melhor conversão do <em>mesmo</em> encaixe por faturamento.</div>
+        <div class="ring-row">
+          <div class="ring otim" aria-hidden="true"><span>45%</span></div>
+          <div>
+            <div class="muted">das 41 fecham · 18 wins</div>
+            <div class="big" style="color:var(--ok);margin:4px 0">R$ 975 mil</div>
+            <div class="d">TM ainda ~R$ 53k. O que sobe é a <em>porcentagem que fecha</em> em MEDIUM/LARGE, não o ticket.</div>
+          </div>
+        </div>
       </div>
     </div>
-    <p class="muted" style="margin:14px 0 6px">De onde vem o realista (R$ 863 mil), se cada win pega só um STEP:</p>
-    <div class="mixbar" aria-hidden="true"><i class="s"></i><i class="t"></i><i class="e"></i></div>
-    <div class="legend">
-      <span><b style="color:#c4b5fd">Saber</b> 5 wins · R$ 122k</span>
-      <span><b style="color:#fde68a">Ter</b> 2 wins · R$ 21k</span>
-      <span><b style="color:#86efac">Executar</b> 9 wins · R$ 721k</span>
+
+    <h3 style="margin:18px 0 8px">Quanto cada faturamento fecha</h3>
+    <p class="muted" style="margin:0 0 8px">A porcentagem é do Cockpit Sara (Monetizado ÷ Monetizado+Drop). Pess / Real / Otim mudam essa barra — não o preço do STEP.</p>
+    <div class="tracks">
+      <div class="tr"><span class="tag tiny">TINY</span><div class="bar"><i style="width:14%;background:#f9a8d4"></i></div><div class="pct">14%</div></div>
+      <div class="tr"><span class="tag small">SMALL</span><div class="bar"><i style="width:29%;background:#fde68a"></i></div><div class="pct">29%</div></div>
+      <div class="tr"><span class="tag medium">MEDIUM</span><div class="bar"><i style="width:52%;background:#93c5fd"></i></div><div class="pct">52%</div></div>
+      <div class="tr"><span class="tag large">LARGE</span><div class="bar"><i style="width:75%;background:#fca5a5"></i></div><div class="pct">75%</div></div>
     </div>
-    <p class="muted" style="margin:12px 0 0">
-      Quase todo o dinheiro está no Executar das MEDIUM — porque o faturamento delas aguenta MRR.
-      Se as 16 fossem só Saber: R$ 405k. Só Ter: R$ 162k. Só Executar: R$ 1,26M — esse último <strong>não é meta</strong>, porque TINY/SMALL não compram Executar.
+    <div class="cmp">
+      <div class="card">
+        <div class="k">Pessimista</div>
+        <div class="d">TINY 10% · SMALL 20% · MEDIUM 35% · LARGE 50%</div>
+        <div class="tracks" style="margin-top:8px">
+          <div class="tr"><span class="muted">TINY</span><div class="bar"><i style="width:10%;background:#fde68a"></i></div><div class="pct">10%</div></div>
+          <div class="tr"><span class="muted">SMALL</span><div class="bar"><i style="width:20%;background:#fde68a"></i></div><div class="pct">20%</div></div>
+          <div class="tr"><span class="muted">MEDIUM</span><div class="bar"><i style="width:35%;background:#fde68a"></i></div><div class="pct">35%</div></div>
+          <div class="tr"><span class="muted">LARGE</span><div class="bar"><i style="width:50%;background:#fde68a"></i></div><div class="pct">50%</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="k">Otimista</div>
+        <div class="d">TINY/SMALL iguais ao real. MEDIUM 61% · LARGE 86%.</div>
+        <div class="tracks" style="margin-top:8px">
+          <div class="tr"><span class="muted">TINY</span><div class="bar"><i style="width:14%;background:#86efac"></i></div><div class="pct">14%</div></div>
+          <div class="tr"><span class="muted">SMALL</span><div class="bar"><i style="width:29%;background:#86efac"></i></div><div class="pct">29%</div></div>
+          <div class="tr"><span class="muted">MEDIUM</span><div class="bar"><i style="width:61%;background:#86efac"></i></div><div class="pct">61%</div></div>
+          <div class="tr"><span class="muted">LARGE</span><div class="bar"><i style="width:86%;background:#86efac"></i></div><div class="pct">86%</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="margin:18px 0 8px">De cada 10 que fecham, em que STEP (realista)</h3>
+    <p class="muted" style="margin:0 0 6px">Porcentagem de <strong>contas</strong>, não de dinheiro. Mix histórico da Sara: 57% Executar · 30% Saber · 13% Ter. No report EE a meta de mix é 70% Executar MRR / 30% pontual — aqui o 57/43 (Executar vs Saber+Ter) é a leitura realista da Farmer.</p>
+    <div class="mixbar wins" aria-label="Mix de wins">
+      <i class="e">57% Executar</i>
+      <i class="s">30% Saber</i>
+      <i class="t">13% Ter</i>
+    </div>
+    <div class="legend">
+      <span><b style="color:#86efac">9 wins</b> Executar · R$ 721k</span>
+      <span><b style="color:#c4b5fd">5 wins</b> Saber · R$ 122k</span>
+      <span><b style="color:#fde68a">2 wins</b> Ter · R$ 21k</span>
+    </div>
+
+    <h3 style="margin:12px 0 8px">Do dinheiro (TCV R$ 863 mil)</h3>
+    <p class="muted" style="margin:0 0 6px">A barra de reais esconde o Ter (2%). Por isso a de cima é a que importa para escolher produto: quase 6 em 10 wins são Executar, mas TINY/SMALL não estão nesses 6.</p>
+    <div class="mixbar tcv" aria-label="Mix de TCV">
+      <i class="e">84% · R$ 721k</i>
+      <i class="s">14%</i>
+      <i class="t">2%</i>
+    </div>
+    <p class="muted" style="margin:10px 0 0">
+      Pessimista (TM R$ 31k) parece jun/jul. Realista (TM R$ 53k) parece a média do EE. Otimista não inventa ticket — só fecha uma fatia maior das MEDIUM.
+      100% Executar nas 16 seria R$ 1,26M e <strong>não é meta</strong>: o faturamento das TINY/SMALL não aguenta.
     </p>
   </div>
 
