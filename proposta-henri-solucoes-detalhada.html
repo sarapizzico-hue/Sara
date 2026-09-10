@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Henri Soluções × V4 Colli&amp;Co · Proposta detalhada</title>
+  <link rel="stylesheet" href="assets/fonts/ibm-plex.css">
+  <style>
+    :root {
+      --red: #e50914;
+      --orange: #ff481f;
+      --dark: #280001;
+      --cream: #ffebc8;
+      --ink: #141414;
+      --mut: #5a5a5a;
+      --line: rgba(20,20,20,.12);
+      --hero: radial-gradient(120% 130% at 50% -10%, #ff5a2c 0%, #e50914 30%, #b00610 62%, #280001 100%);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: #171313; }
+    body {
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
+    }
+    @page { size: A4; margin: 0; }
+    .page {
+      position: relative;
+      width: 210mm;
+      height: 297mm;
+      padding: 16mm 16mm 20mm;
+      overflow: hidden;
+      page-break-after: always;
+      break-after: page;
+      background: #f5f4f2;
+    }
+    .page:last-child { page-break-after: auto; break-after: auto; }
+    .page.red {
+      color: #fff;
+      background: var(--hero);
+    }
+    .page.dark {
+      color: #fff;
+      background:
+        radial-gradient(circle at 78% 8%, rgba(229,9,20,.46), transparent 34%),
+        linear-gradient(145deg, #280001 0%, #130001 100%);
+    }
+    .page.white { background: #fff; }
+    h1, h2, h3, p { margin: 0; }
+    h1 { font-size: 36px; line-height: 1.02; letter-spacing: -.04em; font-weight: 600; }
+    h2 { font-size: 24px; line-height: 1.12; letter-spacing: -.03em; font-weight: 600; }
+    h3 { font-size: 15px; line-height: 1.2; letter-spacing: -.02em; font-weight: 600; }
+    .lede { margin-top: 10px; font-size: 13.5px; line-height: 1.45; font-weight: 400; color: var(--mut); }
+    .red .lede, .dark .lede { color: rgba(255,255,255,.82); }
+    .eyebrow {
+      display: inline-flex; align-items: center; min-height: 22px;
+      padding: 4px 10px; border-radius: 999px;
+      border: 1px solid rgba(229,9,20,.18);
+      background: rgba(229,9,20,.07);
+      color: var(--red);
+      font: 700 9px/1 "IBM Plex Mono", monospace;
+      letter-spacing: .1em; text-transform: uppercase;
+    }
+    .red .eyebrow, .dark .eyebrow {
+      color: #fff; background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.32);
+    }
+    .topline {
+      position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+      background: linear-gradient(90deg, var(--red), var(--orange), transparent 76%);
+    }
+    .sphere {
+      position: absolute; border-radius: 50%; pointer-events: none;
+      border: 1px solid rgba(255,255,255,.24);
+      background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.38), rgba(255,255,255,.04) 48%, transparent 66%);
+    }
+    .logo-white { width: 168px; display: block; }
+    .logo-red { width: 118px; height: 36px; object-fit: contain; object-position: left center; }
+    .foot {
+      position: absolute; left: 16mm; right: 16mm; bottom: 8mm;
+      display: flex; justify-content: space-between; align-items: center;
+      font: 700 8px/1 "IBM Plex Mono", monospace;
+      letter-spacing: .08em; text-transform: uppercase;
+      color: rgba(20,20,20,.42);
+    }
+    .red .foot, .dark .foot { color: rgba(255,255,255,.45); }
+    .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+    .g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 12px; }
+    .g4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px; margin-top: 12px; }
+    .card {
+      padding: 12px 13px; border-radius: 14px;
+      background: #fff; border: 1px solid var(--line);
+    }
+    .card .k {
+      font: 700 9px/1 "IBM Plex Mono", monospace;
+      letter-spacing: .08em; text-transform: uppercase; color: var(--red); margin-bottom: 6px;
+    }
+    .card p, .card li { color: var(--mut); font-size: 12px; line-height: 1.4; }
+    .card p { margin-top: 6px; }
+    .card ul { margin: 6px 0 0; padding-left: 16px; }
+    .card li { margin: 3px 0; }
+    .dark .card, .red .card {
+      background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.16);
+    }
+    .dark .card p, .red .card p, .dark .card li, .red .card li { color: rgba(255,255,255,.78); }
+    .callout {
+      margin-top: 12px; padding: 11px 14px; border-radius: 12px;
+      background: rgba(229,9,20,.07); border: 1px solid rgba(229,9,20,.18);
+      font-size: 13px; line-height: 1.4; font-weight: 600;
+    }
+    .dark .callout {
+      background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.18); color: #fff;
+    }
+    .quote {
+      margin-top: 12px; padding-left: 12px; border-left: 4px solid var(--red);
+      font-size: 15px; line-height: 1.35; font-weight: 600;
+    }
+    .flow { display: flex; align-items: stretch; gap: 6px; margin-top: 12px; }
+    .fn {
+      flex: 1; padding: 10px 10px 12px; border-radius: 12px;
+      background: #fff; border: 1px solid var(--line);
+    }
+    .fn .k {
+      display: block; margin-bottom: 5px;
+      font: 700 8px/1 "IBM Plex Mono", monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--red);
+    }
+    .fn h3 { font-size: 13px; margin-bottom: 4px; }
+    .fn p { margin: 0; color: var(--mut); font-size: 11px; line-height: 1.35; }
+    .fn.choke {
+      background: linear-gradient(180deg, rgba(229,9,20,.12), #fff 58%);
+      border-color: var(--red);
+    }
+    .fn.ok {
+      background: linear-gradient(180deg, rgba(26,122,58,.08), #fff 62%);
+      border-color: rgba(26,122,58,.28);
+    }
+    .chev { display: grid; place-items: center; color: var(--red); font-size: 14px; font-weight: 700; width: 12px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    th {
+      padding: 8px 8px; text-align: left; border-bottom: 1px solid var(--line);
+      font: 700 8px/1 "IBM Plex Mono", monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--red);
+    }
+    td {
+      padding: 8px; border-bottom: 1px solid var(--line);
+      font-size: 12px; line-height: 1.35; color: var(--mut); vertical-align: top;
+    }
+    td:first-child { color: var(--ink); font-weight: 700; white-space: nowrap; }
+    .dark th { color: var(--cream); border-color: rgba(255,255,255,.18); }
+    .dark td { color: rgba(255,255,255,.78); border-color: rgba(255,255,255,.12); }
+    .dark td:first-child { color: #fff; }
+    .price {
+      padding: 14px 16px; border-radius: 16px; border: 1px solid var(--line); background: #fff;
+    }
+    .price.featured { border-color: var(--red); box-shadow: 0 8px 24px rgba(229,9,20,.1); }
+    .price .tag { font: 700 9px/1 "IBM Plex Mono", monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--red); }
+    .price h3 { margin: 8px 0 4px; font-size: 18px; }
+    .price .sub { color: var(--mut); font-size: 12px; margin-bottom: 8px; }
+    .row { display: flex; justify-content: space-between; gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--line); font-size: 12px; color: var(--mut); }
+    .row strong { color: var(--ink); }
+    .row.ok strong { color: #1a7a3a; }
+    .was { display: block; margin-top: 10px; font-size: 12px; font-weight: 600; text-decoration: line-through; color: var(--mut); }
+    .now { font-size: 26px; font-weight: 700; letter-spacing: -.03em; line-height: 1.05; margin: 2px 0 8px; }
+    .now small { font-size: 13px; font-weight: 600; color: var(--mut); }
+    .price ul { margin: 0; padding-left: 16px; color: var(--mut); font-size: 12px; line-height: 1.4; }
+    .cover-meta { margin-top: 18px; color: rgba(255,255,255,.85); font-size: 13px; }
+    .toc li { margin: 7px 0; color: var(--mut); font-size: 13.5px; }
+    .toc b { color: var(--ink); }
+    @media screen {
+      body { padding: 20px 0 48px; }
+      .page { margin: 0 auto 22px; box-shadow: 0 28px 70px rgba(0,0,0,.45); }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="page red">
+    <div class="sphere" style="width:280px;height:280px;right:-70px;top:-80px;opacity:.5"></div>
+    <div class="sphere" style="width:150px;height:150px;right:170px;top:90px;opacity:.28"></div>
+    <img class="logo-white" src="assets/v4-logo-white.png" alt="V4 Colli&amp;Co">
+    <span class="eyebrow" style="margin-top:22px">Proposta comercial detalhada · pós-apresentação</span>
+    <h1 style="margin-top:18px">Henri Soluções ×<br>V4 Colli&amp;Co</h1>
+    <p class="lede" style="max-width:155mm;font-size:16px">Da indicação à origem previsível. Continuidade operacional para cozinhas profissionais — com segunda origem filtrada, dono no lead e ritmo do campo.</p>
+    <div class="cover-meta">Assessoria de Growth · cliente EE · 12 meses · valores separados · mídia à parte</div>
+    <div class="g2" style="margin-top:28px">
+      <article class="card">
+        <div class="k">Horizonte A · V4 executa</div>
+        <h3>Assessoria de Growth</h3>
+        <p>Account + GT + Copy + Design. A V4 veicula, redige e arte-final.</p>
+      </article>
+      <article class="card">
+        <div class="k">Horizonte B · Henri executa</div>
+        <h3>Execução Assistida</h3>
+        <p>A V4 dirige. O time interno aperta o botão. Sem veicular.</p>
+      </article>
+    </div>
+    <p class="lede" style="margin-top:16px;font-size:12px">Documento confidencial. Uso interno da Henri Soluções Ltda após a apresentação. Não republicar.</p>
+    <div class="foot"><span>V4 Colli&amp;Co</span><span>Henri Soluções · Confidencial</span><span>01 / 10</span></div>
+  </section>
+
+  <section class="page white">
+    <div class="topline"></div>
+    <span class="eyebrow">Como ler depois da reunião</span>
+    <h2 style="margin-top:12px">Este PDF fecha o que a apresentação abriu.</h2>
+    <p class="lede">A reunião mostrou o mapa. Este documento é o leave-behind: processo, papéis, o que cada horizonte entrega e o investimento — para o Romildo, o Gabriel e a Maria alinharem internamente.</p>
+    <div class="toc" style="margin:16px 0 0">
+      <p style="margin:7px 0;font-size:13.5px;color:var(--mut)"><b>01.</b> Capa</p>
+      <p style="margin:7px 0;font-size:13.5px;color:var(--mut)"><b>02.</b> Como ler · o que já está decidido pela EE</p>
+      <p style="margin:7px 0;font-size:13.5px;color:var(--mut)"><b>03.</b> Contexto da Henri · operação, papéis, origem</p>
+      <p style="margin:7px 0;font-size:13.5px;color:var(--mut)"><b>04.</b> Dores que o próximo ciclo precisa resolver</p>
+      <p style="margin:7px 0;font-size:13.5px;color:var(--mut)"><b>05.</b> Processo hoje · gargalo no fundador</p>
+      <p style="margin:7px 0;font-size:13.5px;color:var(--mut)"><b>06.</b> Processo com a V4 · dois motores e o funil</p>
+      <p style="margin:7px 0;font-size:13.5px;color:var(--mut)"><b>07.</b> Horizonte A · Assessoria de Growth (V4 executa)</p>
+      <p style="margin:7px 0;font-size:13.5px;color:var(--mut)"><b>08.</b> Horizonte B · Execução Assistida (V4 direciona)</p>
+      <p style="margin:7px 0;font-size:13.5px;color:var(--mut)"><b>09.</b> Investimento · dois horizontes, sem combo</p>
+      <p style="margin:7px 0;font-size:13.5px;color:var(--mut)"><b>10.</b> O que muda · próximos passos</p>
+    </div>
+    <div class="g2" style="margin-top:18px">
+      <article class="card">
+        <div class="k">Já comprado</div>
+        <h3>Estruturação Estratégica</h3>
+        <p>PUV, papéis, LP e os dois motores já estão desenhados. Esta proposta não reabre diagnóstico. É execução do plano.</p>
+      </article>
+      <article class="card">
+        <div class="k">Fora deste PDF</div>
+        <h3>O que não está à venda aqui</h3>
+        <p>Não há combo. Verba de mídia é à parte. Cada horizonte fecha sozinho. Prova digital sem logo de cliente (NDA).</p>
+      </article>
+    </div>
+    <div class="callout">A mesma estratégia nos dois horizontes. O que muda é quem aperta o botão — a V4 (A) ou o time interno da Henri (B).</div>
+    <div class="foot"><img class="logo-red" src="assets/v4-logo-red.png" alt=""><span>Leave-behind · pós-apresentação</span><span>02 / 10</span></div>
+  </section>
+
+  <section class="page white">
+    <div class="topline"></div>
+    <span class="eyebrow">Contexto · Henri Soluções Ltda</span>
+    <h2 style="margin-top:12px">A operação é forte. O comercial ainda é memória de uma pessoa.</h2>
+    <p class="lede">Dez anos em manutenção B2B de food service. A Henri não vende conserto avulso — vende a garantia de que a loja não para. Um responsável por refrigeração, climatização, elétrica e exaustão. Refrigeração responde por cerca de 70% dos chamados. Base em São Paulo (Mooca) com cobertura nacional via campo próprio e parceiros em praça.</p>
+    <div class="g3">
+      <article class="card">
+        <div class="k">Origem</div>
+        <h3>100% indicação</h3>
+        <p>Coordenadores e supervisores de rede chegam pelo relacionamento do Romildo. Não havia motor digital ativo antes da EE.</p>
+      </article>
+      <article class="card">
+        <div class="k">ICP A</div>
+        <h3>Rede multiunidade</h3>
+        <p>Supervisor regional é o vetor de expansão. Unidade vira rede no relacionamento — não no anúncio de urgência.</p>
+      </article>
+      <article class="card">
+        <div class="k">Prova</div>
+        <h3>Sem logo de cliente</h3>
+        <p>NDA de grandes redes. A prova digital é SLA, um responsável e loja no ar. No copy: “grande rede de fast food.”</p>
+      </article>
+    </div>
+    <h3 style="margin-top:16px">Quem opera a casa</h3>
+    <table>
+      <thead><tr><th>Pessoa</th><th>Papel hoje</th><th>Papel no ciclo com a V4</th></tr></thead>
+      <tbody>
+        <tr><td>Romildo Gonçalves Júnior</td><td>Fundador e comercial. 85–90% da memória no WhatsApp e nas planilhas. Closer.</td><td>Fecha SQL e grande conta. Sai da fila do Zap.</td></tr>
+        <tr><td>Gabriel Dias Melo</td><td>Finanças e campo.</td><td>Gate de SLA. Libera unidade nova só se o campo aguentar. Teto de mídia acompanha.</td></tr>
+        <tr><td>Maria Edenilda Santos</td><td>Administrativo.</td><td>CRM / SDR. Dono do lead em 5 minutos. Qualifica MQL/SQL.</td></tr>
+      </tbody>
+    </table>
+    <div class="callout">A meta de escala é da empresa, não uma promessa de mídia. Aqui operamos a origem — no ritmo que o campo segura.</div>
+    <div class="foot"><img class="logo-red" src="assets/v4-logo-red.png" alt=""><span>Leitura da EE · sem reabrir mapa</span><span>03 / 10</span></div>
+  </section>
+
+  <section class="page white">
+    <div class="topline"></div>
+    <span class="eyebrow">Dores · o que trava o próximo ciclo</span>
+    <h2 style="margin-top:12px">O próximo volume não cabe no WhatsApp do fundador.</h2>
+    <p class="lede">Não falta técnica. Falta origem além da indicação, com dono antes do closer e teto para o campo não inundar.</p>
+    <div class="g2">
+      <article class="card">
+        <div class="k">01 · Origem</div>
+        <h3>100% indicação</h3>
+        <p>Se a agenda do Romildo esfria, a carteira esfria. Coordenador e supervisor conhecem a Henri pela relação — não por busca nem por ABM. Não existe um segundo motor rodando.</p>
+      </article>
+      <article class="card">
+        <div class="k">02 · Memória</div>
+        <h3>WhatsApp e planilha</h3>
+        <p>85% a 90% do histórico comercial está no Zap e na cabeça do fundador. Maria administra. Gabriel opera o campo. O lead ainda não tem dono no CRM no dia a dia.</p>
+      </article>
+      <article class="card">
+        <div class="k">03 · Prova</div>
+        <h3>NDA trava o site</h3>
+        <p>Grandes redes de fast food não podem aparecer. Sem logo, a prova precisa ser operação: SLA, um responsável, loja no ar. Isso muda copy, design e a LP — não é detalhe de marca.</p>
+      </article>
+      <article class="card">
+        <div class="k">04 · Capacidade</div>
+        <h3>100 leads quebram</h3>
+        <p>Se a demanda nova entra amanhã, trava. Falta fila, dono e teto. Sem isso, o fundador vira atendimento 24h e o campo perde o SLA que sustenta a reputação.</p>
+      </article>
+    </div>
+    <p class="quote">“Nunca tive férias.” O comercial não pode continuar sendo o Romildo o tempo inteiro.</p>
+    <div class="flow">
+      <div class="fn"><span class="k">Hoje</span><h3>Indicação</h3><p>Rede e supervisor conhecem o Romildo.</p></div>
+      <div class="chev">→</div>
+      <div class="fn choke"><span class="k">Gargalo</span><h3>WhatsApp do fundador</h3><p>Memória, fila e fechamento no mesmo nó.</p></div>
+      <div class="chev">→</div>
+      <div class="fn"><span class="k">Fecha</span><h3>Ele fecha · ele lembra</h3><p>Diagnóstico, proposta e follow-up.</p></div>
+      <div class="chev">→</div>
+      <div class="fn"><span class="k">Campo</span><h3>Gabriel na praça</h3><p>Campo próprio e parceiros.</p></div>
+    </div>
+    <div class="foot"><img class="logo-red" src="assets/v4-logo-red.png" alt=""><span>Dores operacionais · origem, memória, prova e capacidade</span><span>04 / 10</span></div>
+  </section>
+
+  <section class="page white">
+    <div class="topline"></div>
+    <span class="eyebrow">Processo atual</span>
+    <h2 style="margin-top:12px">Hoje todo o comercial passa por um único nó.</h2>
+    <p class="lede">Se o Romildo para, o comercial para. Maria já é o desenho de CRM/SDR da EE. O que falta é o fluxo operar no dia a dia.</p>
+    <div class="flow" style="margin-top:16px">
+      <article class="fn">
+        <span class="k">01 · Origem</span>
+        <h3>Só indicação</h3>
+        <p>Supervisor e coordenador de rede. Google e LinkedIn ainda não alimentam a fila.</p>
+      </article>
+      <div class="chev">→</div>
+      <article class="fn choke">
+        <span class="k">02 · Gargalo</span>
+        <h3>Romildo no WhatsApp</h3>
+        <p>85–90% da memória. Qualifica, lembra, agenda, fecha. Cada lead disputa a cabeça dele.</p>
+      </article>
+      <div class="chev">→</div>
+      <article class="fn">
+        <span class="k">03 · Fecha</span>
+        <h3>Diagnóstico cedo</h3>
+        <p>O closer entra cedo demais. SQL e ruído moram no mesmo Zap.</p>
+      </article>
+      <div class="chev">→</div>
+      <article class="fn">
+        <span class="k">04 · Campo</span>
+        <h3>Gabriel opera</h3>
+        <p>SLA é o que permite — ou barra — unidade nova.</p>
+      </article>
+    </div>
+    <div class="g2" style="margin-top:14px">
+      <article class="card">
+        <div class="k">O que isso custa</div>
+        <h3>Tempo de closer em follow-up</h3>
+        <p>Romildo gasta o dia em memória e ruído. O diagnóstico de grande conta compete com o Zap. Férias viram risco comercial, não só pessoal.</p>
+      </article>
+      <article class="card">
+        <div class="k">O que a EE já instalou</div>
+        <h3>Ainda não opera sozinho</h3>
+        <p>PUV de continuidade. LP com filtro anti-B2C. Papéis desenhados. Falta CRM vivo, Google com teto, ABM no supervisor e peça sem depender do tempo do fundador.</p>
+      </article>
+    </div>
+    <div class="callout">Se 100 leads entram, a fila não existe. O WhatsApp vira o CRM — e o fundador vira o gargalo.</div>
+    <h3 style="margin-top:16px">Regra inegociável do ciclo</h3>
+    <table>
+      <thead><tr><th>Regra</th><th>Por quê</th></tr></thead>
+      <tbody>
+        <tr><td>Lead com dono em 5 minutos</td><td>Sai do WhatsApp do Romildo. Maria registra, classifica e responde.</td></tr>
+        <tr><td>Romildo só no SQL</td><td>Closer na grande conta. Não na triagem.</td></tr>
+        <tr><td>Campo como gate</td><td>Unidade nova no ritmo do SLA. Mídia tem teto.</td></tr>
+        <tr><td>Prova sem marca de cliente</td><td>NDA. Copy e design falam SLA e loja no ar.</td></tr>
+      </tbody>
+    </table>
+    <div class="foot"><img class="logo-red" src="assets/v4-logo-red.png" alt=""><span>Gargalo mapeado · execução, não novo diagnóstico</span><span>05 / 10</span></div>
+  </section>
+
+  <section class="page white">
+    <div class="topline"></div>
+    <span class="eyebrow">Processo com a V4 · a EE já desenhou</span>
+    <h2 style="margin-top:12px">Dois motores entram. O Romildo só fecha SQL.</h2>
+    <p class="lede">Google no caixa curto. LinkedIn/ABM no contrato. Os dois alimentam a mesma LP, o mesmo CRM e o mesmo gate de campo.</p>
+    <div class="g2">
+      <article class="card">
+        <div class="k">Motor 1 · caixa</div>
+        <h3>Google Search</h3>
+        <p>Quem tem câmara, gelo ou exaustão parado busca agora. Anúncio de emergência B2B. Formulário pergunta unidades e tipo de operação — barra residencial e one-off. Maria vira MQL/SQL. Romildo entra no diagnóstico.</p>
+      </article>
+      <article class="card">
+        <div class="k">Motor 2 · contrato</div>
+        <h3>LinkedIn / ABM</h3>
+        <p>2 a 5 contatos por conta: diretor, coordenador, supervisor regional e compras. Cadência 30–90 dias. O supervisor é o vetor de expansão. Unidade vira rede aqui — não no anúncio de urgência.</p>
+      </article>
+    </div>
+    <div class="flow" style="margin-top:14px">
+      <article class="fn"><span class="k">03 · LP</span><h3>Filtro B2B</h3><p>Unidades, tipo de operação, emergência. Prova sem logo.</p></article>
+      <div class="chev">→</div>
+      <article class="fn ok"><span class="k">04 · CRM</span><h3>Maria no lead</h3><p>Dono em 5 min. MQL/SQL. Memória sai do Zap.</p></article>
+      <div class="chev">→</div>
+      <article class="fn"><span class="k">05 · Fecha</span><h3>Romildo no SQL</h3><p>Closer na grande conta. Não na fila.</p></article>
+      <div class="chev">→</div>
+      <article class="fn"><span class="k">06 · Gate</span><h3>Campo no SLA</h3><p>Gabriel libera escala. Teto de mídia segue o gate.</p></article>
+    </div>
+    <table>
+      <thead><tr><th>Frente</th><th>Como opera</th></tr></thead>
+      <tbody>
+        <tr><td>Copy</td><td>Uma mensagem por cadeira. Diretor ouve governança. Coordenador ouve SLA. Compras ouve contrato. Continuidade operacional — não anúncio de conserto.</td></tr>
+        <tr><td>Design</td><td>Peça técnica sem logo de rede. Identidade azul e amarelo da Henri, sem diluir. Prova = SLA, um responsável, loja no ar.</td></tr>
+        <tr><td>Instagram</td><td>Autoridade e bastidor técnico. Remarketing só em decisor que visitou a LP. Não é motor de origem.</td></tr>
+      </tbody>
+    </table>
+    <div class="foot"><img class="logo-red" src="assets/v4-logo-red.png" alt=""><span>Mesma estratégia nos dois horizontes</span><span>06 / 10</span></div>
+  </section>
+
+  <section class="page dark">
+    <span class="eyebrow">Horizonte A · a V4 executa</span>
+    <h2 style="margin-top:12px">Assessoria de Growth · Account + GT + Copy + Design</h2>
+    <p class="lede">A V4 veicula, redige e arte-final os dois motores, no ritmo do campo. Rotina Colli: grupo no dia, check-in, trimestre e growths.</p>
+    <div class="g4">
+      <article class="card">
+        <div class="k">Account</div>
+        <h3>Ritmo e fila</h3>
+        <p>Prioridade, CRM, gate com Gabriel, cadência com Romildo e Maria. Dono da conta na V4.</p>
+      </article>
+      <article class="card">
+        <div class="k">Tráfego</div>
+        <h3>Google com teto</h3>
+        <p>Search de emergência B2B. ABM no ICP A. Meta só remarketing de decisor que visitou a LP.</p>
+      </article>
+      <article class="card">
+        <div class="k">Copy</div>
+        <h3>Por cadeira</h3>
+        <p>Continuidade operacional. Mensagem para diretor, coordenador, supervisor e compras.</p>
+      </article>
+      <article class="card">
+        <div class="k">Design</div>
+        <h3>Prova sem logo</h3>
+        <p>Peça técnica. Identidade da Henri. NDA respeitado em toda arte.</p>
+      </article>
+    </div>
+    <table>
+      <thead><tr><th>Rotina Colli</th><th>Ritual</th><th>Foco</th></tr></thead>
+      <tbody>
+        <tr><td>Diária</td><td>Atendimento no grupo</td><td>Tarefas, pendências, backlog e resultado do dia</td></tr>
+        <tr><td>Periódica</td><td>Check-in de performance</td><td>Leads, SLA, o que rodou e o próximo passo</td></tr>
+        <tr><td>Trimestral</td><td>Planejamento</td><td>90 dias, os dois motores e o gate de campo</td></tr>
+        <tr><td>Contínua</td><td>Growths e retrospectivas</td><td>Dados, tráfego e funil — sem caixa-preta</td></tr>
+      </tbody>
+    </table>
+    <div class="g2" style="margin-top:12px">
+      <article class="card">
+        <div class="k">Entra no A</div>
+        <ul>
+          <li>Veiculação Google e ABM (verba à parte)</li>
+          <li>Redação e arte-final das peças</li>
+          <li>Ajuste de LP e mensagem por papel</li>
+          <li>Apoio à Maria no CRM (fila e cadência)</li>
+          <li>Gate mensal com Gabriel</li>
+        </ul>
+      </article>
+      <article class="card">
+        <div class="k">Não entra no A</div>
+        <ul>
+          <li>Verba de mídia (Google/Meta/LinkedIn)</li>
+          <li>Ferramentas de CRM da Henri</li>
+          <li>Execução de campo e SLA técnico</li>
+          <li>Fechamento comercial (Romildo)</li>
+          <li>Reabrir a EE</li>
+        </ul>
+      </article>
+    </div>
+    <div class="foot"><span>V4 Colli&amp;Co</span><span>Assessoria · 12 meses · recorrente</span><span>07 / 10</span></div>
+  </section>
+
+  <section class="page white">
+    <div class="topline"></div>
+    <span class="eyebrow">Horizonte B · a V4 somente direciona</span>
+    <h2 style="margin-top:12px">Execução Assistida · a Henri aperta o botão.</h2>
+    <p class="lede">Mesma estratégia. Sem veicular, sem redigir, sem arte-final. Direção, playbook e revisão do que o time interno produziu.</p>
+    <div class="g2">
+      <article class="card" style="background:#280001;color:#fff;border-color:#280001">
+        <div class="k" style="color:#ffebc8">V4 · direciona</div>
+        <h3 style="color:#fff">Rumo, não execução.</h3>
+        <ul style="color:rgba(255,255,255,.82)">
+          <li>Prioridade da semana e fila do CRM</li>
+          <li>Teto de Google e cadência de ABM</li>
+          <li>Mensagem por cadeira do comitê</li>
+          <li>Revisão do que a Henri já produziu</li>
+          <li>Gate de campo com o Gabriel</li>
+        </ul>
+      </article>
+      <article class="card">
+        <div class="k">Henri · executa</div>
+        <h3>O botão fica interno.</h3>
+        <ul>
+          <li>Maria opera o CRM e a qualificação</li>
+          <li>Time interno veicula, redige e arte-final</li>
+          <li>Romildo entra só no SQL / grande conta</li>
+          <li>Gabriel libera escala no SLA</li>
+          <li>Playbook da EE vira rotina da casa</li>
+        </ul>
+      </article>
+    </div>
+    <table>
+      <thead><tr><th>Ritual</th><th>O que acontece</th><th>Para que serve</th></tr></thead>
+      <tbody>
+        <tr><td>Semanal · 60 min</td><td>Direção de prioridade e fila</td><td>O closer não vira atendimento</td></tr>
+        <tr><td>Quinzenal</td><td>Revisão do que a Henri produziu</td><td>Corrige peça e cadência, não substitui</td></tr>
+        <tr><td>Mensal</td><td>Resultado, teto de verba e mensagem</td><td>Dois motores no ritmo do campo</td></tr>
+        <tr><td>Trimestral</td><td>Plano de 90 dias</td><td>Gate de SLA antes de subir volume</td></tr>
+      </tbody>
+    </table>
+    <div class="callout">A V4 não veicula, não redige e não arte-final neste horizonte. Playbook e rumo. Quem aperta o botão é a Henri.</div>
+    <div class="foot"><img class="logo-red" src="assets/v4-logo-red.png" alt=""><span>Antes do preço · modelo de operação</span><span>08 / 10</span></div>
+  </section>
+
+  <section class="page white">
+    <div class="topline"></div>
+    <span class="eyebrow">Investimento · valores separados</span>
+    <h2 style="margin-top:12px">Dois horizontes. A mesma estratégia.</h2>
+    <p class="lede">Mídia à parte. Sem combo. Cada horizonte fecha sozinho. Condição especial de 12 meses.</p>
+    <div class="g2" style="margin-top:14px">
+      <article class="price featured">
+        <div class="tag">Horizonte A · V4 executa</div>
+        <h3>Assessoria de Growth</h3>
+        <p class="sub">Account + GT + Copy + Design · 12 meses</p>
+        <div class="row"><span>Tabela Executar</span><strong>R$ 8.500,00 /mês</strong></div>
+        <div class="row ok"><span>Condição 12 meses</span><strong>12× R$ 4.789,52</strong></div>
+        <span class="was">De R$ 8.500,00 /mês</span>
+        <div class="now">12× R$ 4.789<small>,52</small></div>
+        <ul>
+          <li>V4 veicula, redige e arte-final · rotina Colli</li>
+          <li>Grupo no dia, check-in, trimestre e growths</li>
+          <li>Google com teto + ABM no comitê</li>
+          <li>Verba de mídia à parte</li>
+        </ul>
+      </article>
+      <article class="price">
+        <div class="tag">Horizonte B · Henri executa</div>
+        <h3>Execução Assistida</h3>
+        <p class="sub">A V4 dirige. O time interno aperta o botão · 12 meses</p>
+        <div class="row"><span>Tabela</span><strong>R$ 45.000,00</strong></div>
+        <div class="row ok"><span>Condição 12 meses</span><strong>12× R$ 2.300,00</strong></div>
+        <span class="was">De R$ 45.000,00</span>
+        <div class="now">12× R$ 2.300<small>,00</small></div>
+        <ul>
+          <li>Semanal · 60 min de direção (prioridade e fila)</li>
+          <li>Quinzenal · revisão do que a Henri produziu</li>
+          <li>Mensal · resultado, teto de verba e mensagem</li>
+          <li>Trimestral · 90 dias e gate de campo</li>
+          <li>Playbook e rumo. A V4 não veicula</li>
+        </ul>
+      </article>
+    </div>
+    <table>
+      <thead><tr><th></th><th>Horizonte A</th><th>Horizonte B</th></tr></thead>
+      <tbody>
+        <tr><td>Quem veicula / redige / arte-final</td><td>V4 Colli&amp;Co</td><td>Time interno Henri</td></tr>
+        <tr><td>Quem dirige prioridade e teto</td><td>V4 + Henri</td><td>V4 (rituais acima)</td></tr>
+        <tr><td>Closer</td><td>Romildo no SQL</td><td>Romildo no SQL</td></tr>
+        <tr><td>CRM / SDR</td><td>Maria, com Account</td><td>Maria, com direção semanal</td></tr>
+        <tr><td>Gate de campo</td><td>Gabriel</td><td>Gabriel</td></tr>
+        <tr><td>Mídia</td><td>À parte</td><td>À parte</td></tr>
+      </tbody>
+    </table>
+    <div class="foot"><img class="logo-red" src="assets/v4-logo-red.png" alt=""><span>Sem combo · cada horizonte fecha sozinho</span><span>09 / 10</span></div>
+  </section>
+
+  <section class="page white">
+    <div class="topline"></div>
+    <span class="eyebrow">Depois da apresentação</span>
+    <h2 style="margin-top:12px">O que muda na Henri — e o próximo passo.</h2>
+    <div class="g2">
+      <article class="card">
+        <div class="k">Com o ciclo no ar</div>
+        <ul>
+          <li>Lead com dono em 5 minutos — sai do WhatsApp do Romildo</li>
+          <li>Maria qualifica no CRM. Romildo fecha grande conta</li>
+          <li>Google só B2B, com teto para não inundar o campo</li>
+          <li>ABM no supervisor regional — unidade vira rede</li>
+          <li>Prova digital sem quebrar sigilo de cliente</li>
+          <li>Campo como gate: unidade nova no ritmo do SLA</li>
+        </ul>
+      </article>
+      <article class="card">
+        <div class="k">Para decidir internamente</div>
+        <ul>
+          <li>Qual horizonte cabe agora: A (V4 executa) ou B (Henri executa)</li>
+          <li>Quem, na Henri, opera CRM e peça no dia a dia</li>
+          <li>Teto inicial de mídia alinhado com o Gabriel</li>
+          <li>Canal oficial (grupo) e cadência com Romildo e Maria</li>
+        </ul>
+      </article>
+    </div>
+    <div class="callout">Próximo passo: escolher o horizonte e alinhar kick-off. A EE já comprou clareza. O ciclo pede mão na massa — no ritmo do campo.</div>
+    <div class="g2" style="margin-top:14px">
+      <article class="card">
+        <div class="k">Confidencialidade</div>
+        <h3>Uso deste PDF</h3>
+        <p>Documento preparado pela V4 Colli&amp;Co para a Henri Soluções Ltda após a apresentação. Não citar marcas de cliente. NDA permanece: prova sem logo.</p>
+      </article>
+      <article class="card">
+        <div class="k">Contato da conta</div>
+        <h3>V4 Colli&amp;Co · Farmer Sara</h3>
+        <p>Assessoria de Growth. Account + GT + Copy + Design. Valores desta proposta: A 12× R$ 4.789,52 · B 12× R$ 2.300,00. Mídia à parte.</p>
+      </article>
+    </div>
+    <p class="lede" style="margin-top:16px;font-size:12px">Henri Soluções Ltda · continuidade operacional multitécnica para food service · São Paulo e cobertura nacional. V4 Colli&amp;Co · proposta comercial · setembro 2026.</p>
+    <div class="foot"><img class="logo-red" src="assets/v4-logo-red.png" alt=""><span>Henri Soluções × V4 Colli&amp;Co · confidencial</span><span>10 / 10</span></div>
+  </section>
+
+</body>
+</html>
