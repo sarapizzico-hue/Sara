@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Cenários setembro 2026 · STEP × tier</title>
+  <title>Cenários setembro 2026 · um STEP por empresa</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     :root {
       --brand:#e50915; --brand-light:#ff1a27; --bg:#050505; --surf:rgba(20,20,20,.92);
       --surf2:#141414; --bd:rgba(255,255,255,.1); --txt:#fafafa; --mut:#a3a3a3;
-      --ok:#86efac; --warn:#fde68a; --hot:#fca5a5; --info:#93c5fd;
+      --ok:#86efac; --warn:#fde68a; --hot:#fca5a5; --info:#93c5fd; --saber:#c4b5fd;
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
@@ -18,31 +18,57 @@
     .top{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);background:rgba(5,5,5,.9);border-bottom:1px solid var(--bd);padding:12px 22px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
     .logo{font-weight:900}.logo span{color:var(--brand-light)}
     .pill{font-size:11px;font-weight:700;color:var(--mut);border:1px solid var(--bd);padding:5px 10px;border-radius:999px}
-    .wrap{max-width:1180px;margin:0 auto;padding:28px 20px 70px}
-    h1{margin:0 0 8px;font-size:clamp(26px,4vw,36px);font-weight:900;letter-spacing:-.03em}
-    .lead{color:var(--mut);max-width:940px;margin:0 0 18px;font-size:13px}
+    .wrap{max-width:1100px;margin:0 auto;padding:28px 20px 70px}
+    h1{margin:0 0 8px;font-size:clamp(26px,4.4vw,38px);font-weight:900;letter-spacing:-.03em}
+    .lead{color:var(--mut);max-width:720px;margin:0 0 20px;font-size:15px;line-height:1.5}
     .lead a,.ext a,footer a{color:var(--ok)}
     .callout{padding:14px 16px;border-radius:12px;border:1px solid rgba(96,165,250,.3);background:rgba(96,165,250,.08);color:#bfdbfe;font-size:13px;margin-bottom:14px}
     .callout.warn{border-color:rgba(250,204,21,.28);background:rgba(250,204,21,.06);color:#fde68a}
+    .callout.hot{border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.08);color:#fecaca}
     .callout.ok{border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.08);color:#bbf7d0}
-    .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:16px}
-    .kpi{background:var(--surf);border:1px solid var(--bd);border-radius:14px;padding:14px 16px}
-    .kpi .v{font-size:22px;font-weight:900}.kpi .v.ok{color:var(--ok)}.kpi .v.warn{color:var(--warn)}.kpi .v.info{color:var(--info)}
-    .kpi .l{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--mut);margin-top:6px;font-weight:700}
-    .kpi .s{font-size:11px;color:#d4d4d4;margin-top:4px}
     .nav{position:sticky;top:52px;z-index:15;margin:0 0 16px;padding:8px;background:rgba(8,8,8,.94);backdrop-filter:blur(14px);border:1px solid var(--bd);border-radius:16px;display:flex;flex-wrap:wrap;gap:8px}
     .nav a{font-size:11px;font-weight:800;text-decoration:none;color:var(--mut);border:1px solid var(--bd);padding:6px 10px;border-radius:999px}
     .nav a:hover{color:#fff;border-color:rgba(255,255,255,.28)}
     .section{background:var(--surf);border:1px solid var(--bd);border-radius:16px;padding:18px 20px;margin-bottom:12px}
     .section h2{margin:0 0 4px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);font-weight:800}
-    .section h3{margin:0 0 12px;font-size:17px;font-weight:900}
+    .section h3{margin:0 0 12px;font-size:18px;font-weight:900}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:800px){.grid2{grid-template-columns:1fr}}
     .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}@media(max-width:900px){.grid3{grid-template-columns:1fr}}
     .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}@media(max-width:900px){.grid4{grid-template-columns:1fr 1fr}}
     .card{background:var(--surf2);border:1px solid var(--bd);border-radius:12px;padding:14px 16px}
     .card .t{font-weight:800;margin-bottom:6px}
-    .card .d{font-size:12px;color:#d4d4d4}
+    .card .d{font-size:13px;color:#d4d4d4}
+    .card .price{font-size:22px;font-weight:900;margin:8px 0 4px}
+    .card .obj{font-size:15px;font-weight:800;margin:0 0 8px;color:#fff}
+    .vs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 16px}@media(max-width:700px){.vs{grid-template-columns:1fr}}
+    .vs .no{border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.07)}
+    .vs .yes{border-color:rgba(34,197,94,.35);background:rgba(34,197,94,.07)}
+    .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 8px}
+    .flow .box{background:var(--surf2);border:1px solid var(--bd);border-radius:12px;padding:10px 12px;min-width:140px;flex:1}
+    .flow .box b{display:block;font-size:12px}
+    .flow .box span{display:block;font-size:11px;color:var(--mut);margin-top:3px}
+    .flow .arrow{color:var(--mut);font-weight:900}
+    .fat{display:flex;flex-direction:column;gap:8px}
+    .fat-row{display:grid;grid-template-columns:92px 1fr;gap:10px;align-items:center}
+    .fat-bar{height:46px;border-radius:10px;display:flex;align-items:center;justify-content:space-between;padding:0 12px;font-size:12px;font-weight:700;gap:8px}
+    .fat-bar.tiny{width:28%;background:rgba(244,114,182,.16);border:1px solid rgba(244,114,182,.35);color:#f9a8d4}
+    .fat-bar.small{width:52%;background:rgba(250,204,21,.12);border:1px solid rgba(250,204,21,.35);color:#fde68a}
+    .fat-bar.medium{width:100%;background:rgba(96,165,250,.14);border:1px solid rgba(96,165,250,.4);color:#93c5fd}
+    .fat-bar.large{width:22%;background:rgba(239,68,68,.14);border:1px solid rgba(239,68,68,.4);color:#fca5a5}
+    .fat-bar.none{width:18%;background:rgba(250,204,21,.08);border:1px dashed rgba(250,204,21,.4);color:#fde68a}
+    .fat-bar em{font-style:normal;font-weight:800;color:#fff}
+    @media(max-width:700px){.fat-bar{width:100% !important}}
+    .meta{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}@media(max-width:800px){.meta{grid-template-columns:1fr}}
+    .meta .card .big{font-size:32px;font-weight:900;letter-spacing:-.03em;margin:6px 0}
+    .mixbar{display:flex;height:16px;border-radius:999px;overflow:hidden;margin:10px 0 8px;border:1px solid var(--bd)}
+    .mixbar i{display:block;height:100%}
+    .mixbar .s{width:14%;background:#8b5cf6}
+    .mixbar .t{width:3%;background:#eab308}
+    .mixbar .e{width:83%;background:#22c55e}
+    .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--mut)}
+    .legend b{color:#fff}
     .scroll{overflow-x:auto}
-    table{width:100%;border-collapse:collapse;font-size:12.5px}
+    table{width:100%;border-collapse:collapse;font-size:13px}
     th,td{padding:9px 8px;border-bottom:1px solid var(--bd);text-align:left;vertical-align:top}
     th{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);font-weight:800}
     td.money,th.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
@@ -53,340 +79,352 @@
     .tag.large{color:var(--hot);border-color:rgba(239,68,68,.4)}
     .tag.warn{color:var(--warn);border-color:rgba(250,204,21,.35)}
     .tag.ok{color:var(--ok);border-color:rgba(34,197,94,.35)}
-    .tag.saber{color:#c4b5fd;border-color:rgba(167,139,250,.4)}
+    .tag.saber{color:var(--saber);border-color:rgba(167,139,250,.4)}
     .tag.ter{color:var(--warn);border-color:rgba(250,204,21,.35)}
     .tag.exec{color:var(--ok);border-color:rgba(34,197,94,.35)}
     .muted{color:var(--mut);font-size:12px}
     .name{font-weight:700}
     .search{width:100%;max-width:360px;background:#0a0a0a;border:1px solid var(--bd);border-radius:10px;color:var(--txt);padding:9px 12px;font:inherit;margin:0 0 14px}
+    .tier-block{margin:0 0 18px}
+    .tier-block h4{margin:0 0 8px;font-size:13px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
     footer{text-align:center;color:var(--mut);font-size:11px;margin-top:28px;padding-top:16px;border-top:1px solid var(--bd)}
     @media print{
       body{background:#fff;color:#111}
       .top,.nav,.search{display:none}
-      .section,.kpi,.card,.callout{break-inside:avoid;border-color:#ddd;background:#fff}
+      .section,.card,.callout{break-inside:avoid;border-color:#ddd;background:#fff}
     }
   </style>
 </head>
 <body>
 <header class="top">
   <div class="logo">V4 <span>COMPANY</span></div>
-  <div class="pill">STEP × tier · set 2026 · Sara</div>
+  <div class="pill">41 empresas · 1 STEP cada · set 2026</div>
 </header>
 
 <div class="wrap">
-  <h1>Saber · Ter · Executar × cada tier</h1>
+  <h1>Um STEP por empresa.<br>O que o faturamento dela aguenta.</h1>
   <p class="lead">
-    Ticket é do <strong>STEP</strong>. Taxa é do <strong>tier</strong>.
-    As 41 contas do
-    <a href="pitch-setembro-2026.html">pipe de setembro</a>
-    herdam a tx do Need scope; o TCV depende se fecha Saber, Ter ou Executar.
-    <strong>Potencializar não entra.</strong>
+    Não se monetiza os três STEPs na mesma conta.
+    Primeiro olha <strong>quanto a empresa fatura</strong> (tier).
+    Depois escolhe <strong>um</strong> STEP — o melhor encaixe daquele porte.
+    A meta do mês é a soma desses encaixes, não a soma do catálogo.
   </p>
 
-  <div class="callout ok">
-    <strong>Tickets oficiais:</strong>
-    Saber = TCV <strong>R$ 25.000</strong> ·
-    Ter = TCV <strong>R$ 10.000</strong> ·
-    Executar = MRR <strong>R$ 6.500</strong>
-    (TCV 6 meses = R$ 39.000 · 12 meses = R$ 78.000).
-  </div>
-  <div class="callout warn">
-    Tx continua do Cockpit Sara: Monetizado ÷ (Monetizado + Drop) por tier.
-    Pess / Real / Otim mudam a <em>taxa</em> (e o booking do Executar: 6× no pess, 12× no real/otim).
-    Não mudam o preço-tabela do STEP.
+  <div class="vs">
+    <div class="card no">
+      <div class="t">Não é isso</div>
+      <div class="d">Vender Saber + Ter + Executar em todo mundo. Três tickets na mesma empresa.</div>
+    </div>
+    <div class="card yes">
+      <div class="t">É isso</div>
+      <div class="d">1 conta = 1 STEP. TINY não compra igual LARGE. O número abaixo é o <strong>melhor cenário dentro do faturamento</strong> de cada uma.</div>
+    </div>
   </div>
 
   <nav class="nav">
-    <a href="#step">Tickets STEP</a>
-    <a href="#tx">Tx por tier</a>
-    <a href="#grade">Grade STEP × tier</a>
-    <a href="#cenarios">P / R / O</a>
-    <a href="#empresas">41 empresas</a>
+    <a href="#ler">Como ler</a>
+    <a href="#fatura">Faturamento</a>
+    <a href="#step">Os 3 STEPs</a>
+    <a href="#meta">Meta do mês</a>
+    <a href="#empresas">As 41</a>
   </nav>
 
-  <div class="kpis">
-    <div class="kpi"><div class="v">R$ 25k</div><div class="l">Saber · TCV</div><div class="s">EQV · E. Comercial · GTM</div></div>
-    <div class="kpi"><div class="v">R$ 10k</div><div class="l">Ter · TCV</div><div class="s">ZapFirst · site · CRM · setup</div></div>
-    <div class="kpi"><div class="v ok">R$ 6.500</div><div class="l">Executar · MRR</div><div class="s">6× R$ 39k · 12× R$ 78k</div></div>
-    <div class="kpi"><div class="v warn">—</div><div class="l">Potencializar</div><div class="s">não usamos</div></div>
-  </div>
-
-  <div class="section" id="step">
-    <h2>STEP</h2>
-    <h3>O ticket não é do porte — é do que a conta compra</h3>
-    <div class="grid4">
-      <div class="card">
-        <div class="t"><span class="tag saber">Saber</span></div>
-        <div class="d">Clareza / tese / método. TM <strong>R$ 25.000</strong> TCV. Produto: EQV, E. Comercial.</div>
-      </div>
-      <div class="card">
-        <div class="t"><span class="tag ter">Ter</span></div>
-        <div class="d">Ativo que falta. TM <strong>R$ 10.000</strong> TCV. Produto: ZapFirst, site, CRM, setup.</div>
-      </div>
-      <div class="card">
-        <div class="t"><span class="tag exec">Executar</span></div>
-        <div class="d">Operação contínua. TM <strong>MRR R$ 6.500</strong>. Basic / Growth / Social / mídia.</div>
-      </div>
-      <div class="card">
-        <div class="t"><span class="tag warn">Potencializar</span></div>
-        <div class="d">Fora. Não entra em mix, nem em P/R/O, nem no dropdown.</div>
-      </div>
+  <div class="section" id="ler">
+    <h2>Como ler</h2>
+    <h3>Três perguntas. Nessa ordem.</h3>
+    <div class="flow">
+      <div class="box"><b>1. Quanto fatura?</b><span>Need scope = faixa de faturamento da empresa</span></div>
+      <div class="arrow">→</div>
+      <div class="box"><b>2. Qual o gap?</b><span>Saber, Ter ou Executar — um só</span></div>
+      <div class="arrow">→</div>
+      <div class="box"><b>3. Fecha?</b><span>Quanto maior o faturamento, mais fecha</span></div>
+      <div class="arrow">→</div>
+      <div class="box"><b>Meta</b><span>chance × ticket do STEP escolhido</span></div>
     </div>
     <p class="muted" style="margin:12px 0 0">
-      Mix histórico dos wins Sara já classificados (30/34): Executar 57% · Saber 30% · Ter 13%.
-      Booking Executar no Cockpit: 13 em 12×, 4 em 6× — por isso o realista usa 12 meses.
+      Fonte das 41: <a href="pitch-setembro-2026.html">pipe de setembro</a>.
+      Potencializar não entra.
     </p>
   </div>
 
-  <div class="section" id="tx">
-    <h2>Tier</h2>
-    <h3>Quem fecha · a taxa continua por Need scope</h3>
-    <div class="scroll">
-      <table>
-        <thead>
-          <tr>
-            <th>Tier</th><th>Estoque set</th><th>Histórico</th>
-            <th>Tx pess.</th><th>Tx real</th><th>Tx otim.</th>
-            <th class="money">E(win) P</th><th class="money">E(win) R</th><th class="money">E(win) O</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td><span class="tag tiny">TINY</span></td><td>5</td><td>2 / 14</td><td>10%</td><td><strong>14%</strong></td><td>14%</td><td class="money">0,5</td><td class="money">0,7</td><td class="money">0,7</td></tr>
-          <tr><td><span class="tag small">SMALL</span></td><td>13</td><td>13 / 45</td><td>20%</td><td><strong>29%</strong></td><td>29%</td><td class="money">2,6</td><td class="money">3,8</td><td class="money">3,8</td></tr>
-          <tr><td><span class="tag medium">MEDIUM</span></td><td>20</td><td>16 / 31</td><td>35%</td><td><strong>52%</strong></td><td>61%</td><td class="money">7,0</td><td class="money">10,3</td><td class="money">12,1</td></tr>
-          <tr><td><span class="tag large">LARGE</span></td><td>1</td><td>3 / 4</td><td>50%</td><td><strong>75%</strong></td><td>86%</td><td class="money">0,5</td><td class="money">0,8</td><td class="money">0,9</td></tr>
-          <tr><td><span class="tag warn">sem scope</span></td><td>2</td><td>proxy 34/98</td><td>20%</td><td><strong>35%</strong></td><td>42%</td><td class="money">0,4</td><td class="money">0,7</td><td class="money">0,8</td></tr>
-          <tr><td><strong>Total</strong></td><td><strong>41</strong></td><td></td><td></td><td></td><td></td><td class="money"><strong>11,0</strong></td><td class="money"><strong>16,2</strong></td><td class="money"><strong>18,3</strong></td></tr>
-        </tbody>
-      </table>
+  <div class="section" id="fatura">
+    <h2>Faturamento</h2>
+    <h3>Tier não é “tamanho de pack”. É quanto a empresa fatura por mês.</h3>
+    <p class="muted" style="margin:0 0 12px">
+      Need scope no Cockpit = classificação de faturamento. TINY fatura menos. LARGE fatura mais.
+      Isso define o que ela <em>consegue pagar</em> e a chance de fechar. Não se oferece Executar (MRR R$ 6.500) para quem não tem faturamento de Executar.
+    </p>
+    <div class="fat">
+      <div class="fat-row">
+        <span class="tag tiny">TINY</span>
+        <div class="fat-bar tiny">Fatura pouco · 5 contas · fecha 14%<em>melhor: Saber ou Ter</em></div>
+      </div>
+      <div class="fat-row">
+        <span class="tag small">SMALL</span>
+        <div class="fat-bar small">Fatura pouco/médio · 13 contas · fecha 29%<em>melhor: Saber ou Ter</em></div>
+      </div>
+      <div class="fat-row">
+        <span class="tag medium">MEDIUM</span>
+        <div class="fat-bar medium">Fatura o bastante · 20 contas · fecha 52%<em>melhor caso: Executar</em></div>
+      </div>
+      <div class="fat-row">
+        <span class="tag large">LARGE</span>
+        <div class="fat-bar large">Fatura alto · 1 conta · fecha 75%<em>melhor caso: Executar</em></div>
+      </div>
+      <div class="fat-row">
+        <span class="tag warn">sem</span>
+        <div class="fat-bar none">Faturamento em branco · 2 contas<em>mapear antes do pitch</em></div>
+      </div>
+    </div>
+    <div class="callout warn" style="margin-top:14px">
+      TINY e SMALL não são “Executar barato”. No melhor cenário <strong>desse faturamento</strong> o encaixe é Saber (clareza) ou Ter (ativo).
+      Empurrar MRR R$ 6.500 aí vira drop de Budget.
+      MEDIUM e LARGE é onde o Executar cabe — se a operação já estiver pronta. Se ainda faltar método, o melhor STEP daquela MEDIUM é Saber (EQV), não os três juntos.
     </div>
   </div>
 
-  <div class="section" id="grade">
-    <h2>Grade</h2>
-    <h3>Realista: se os wins do tier fecharem 100% naquele STEP</h3>
-    <p class="muted" style="margin:0 0 12px">E(win) realista × ticket do STEP. Executar aqui em 12 meses (R$ 78.000). Mostra a alavanca: o mesmo MEDIUM vale R$ 103k em Ter e R$ 803k em Executar.</p>
+  <div class="section" id="step">
+    <h2>Objetivo de cada STEP</h2>
+    <h3>O que a conta precisa agora — não o que tem no catálogo</h3>
+    <div class="grid3">
+      <div class="card">
+        <span class="tag saber">Saber</span>
+        <div class="obj">Sair da dúvida. Ter método.</div>
+        <div class="d">
+          <strong>Objetivo:</strong> a empresa entender o jogo — tese, processo, comercial, GTM.<br>
+          <strong>Quando:</strong> ela não sabe o que fazer, ou faz no feeling.<br>
+          <strong>Produto:</strong> EQV · Estruturação Comercial.
+        </div>
+        <div class="price">R$ 25.000</div>
+        <div class="muted">uma vez · TCV</div>
+      </div>
+      <div class="card">
+        <span class="tag ter">Ter</span>
+        <div class="obj">Ter o que ainda não tem.</div>
+        <div class="d">
+          <strong>Objetivo:</strong> instalar o ativo que está faltando para o próximo passo existir.<br>
+          <strong>Quando:</strong> não tem WhatsApp/CRM/site/base — e isso trava o resto.<br>
+          <strong>Produto:</strong> ZapFirst · site · CRM · setup.
+        </div>
+        <div class="price">R$ 10.000</div>
+        <div class="muted">uma vez · TCV</div>
+      </div>
+      <div class="card">
+        <span class="tag exec">Executar</span>
+        <div class="obj">Operar o que já está claro.</div>
+        <div class="d">
+          <strong>Objetivo:</strong> cadência contínua — growth, social, mídia, assessoria.<br>
+          <strong>Quando:</strong> já tem clareza + ativo + faturamento que aguenta mensalidade.<br>
+          <strong>Produto:</strong> Basic · Growth · Social · mídia.
+        </div>
+        <div class="price">R$ 6.500 <span class="muted" style="font-size:13px">/mês</span></div>
+        <div class="muted">6 meses = R$ 39k · 12 meses = R$ 78k</div>
+      </div>
+    </div>
+    <p class="muted" style="margin:12px 0 0">
+      <span class="tag warn">Potencializar</span> não usamos. Fora da meta.
+      Histórico dos wins da Sara (o que de fato fechou, já classificado): Executar 57% · Saber 30% · Ter 13% — isso é mix de <em>contas diferentes</em>, não combo na mesma.
+    </p>
+  </div>
+
+  <div class="section" id="meta">
+    <h2>Meta de setembro</h2>
+    <h3>Melhor cenário dentro do faturamento de cada uma — não o teto do catálogo</h3>
+    <div class="meta">
+      <div class="card">
+        <span class="tag warn">Pessimista</span>
+        <div class="muted" style="margin-top:8px">Fecha menos · Executar em 6 meses</div>
+        <div class="big" style="color:var(--warn)">R$ 341 mil</div>
+        <div class="d">~11 empresas fecham. TINY/SMALL continuam em Saber/Ter. MEDIUM que executar, booking curto.</div>
+      </div>
+      <div class="card">
+        <span class="tag">Realista · a meta</span>
+        <div class="muted" style="margin-top:8px">Chance do Cockpit · mix que a Sara já fecha</div>
+        <div class="big">R$ 863 mil</div>
+        <div class="d">~16 empresas fecham. Ainda 1 STEP por conta. Executar em 12 meses só em quem o faturamento aguenta.</div>
+      </div>
+      <div class="card">
+        <span class="tag ok">Otimista</span>
+        <div class="muted" style="margin-top:8px">MEDIUM e LARGE fecham mais · mesmo 1 STEP</div>
+        <div class="big" style="color:var(--ok)">R$ 975 mil</div>
+        <div class="d">~18 empresas. Não é “todo mundo Executar”. É o melhor conversão do <em>mesmo</em> encaixe por faturamento.</div>
+      </div>
+    </div>
+    <p class="muted" style="margin:14px 0 6px">De onde vem o realista (R$ 863 mil), se cada win pega só um STEP:</p>
+    <div class="mixbar" aria-hidden="true"><i class="s"></i><i class="t"></i><i class="e"></i></div>
+    <div class="legend">
+      <span><b style="color:#c4b5fd">Saber</b> 5 wins · R$ 122k</span>
+      <span><b style="color:#fde68a">Ter</b> 2 wins · R$ 21k</span>
+      <span><b style="color:#86efac">Executar</b> 9 wins · R$ 721k</span>
+    </div>
+    <p class="muted" style="margin:12px 0 0">
+      Quase todo o dinheiro está no Executar das MEDIUM — porque o faturamento delas aguenta MRR.
+      Se as 16 fossem só Saber: R$ 405k. Só Ter: R$ 162k. Só Executar: R$ 1,26M — esse último <strong>não é meta</strong>, porque TINY/SMALL não compram Executar.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>Por faturamento</h2>
+    <h3>Chance vem do porte. Ticket vem do STEP que cabe nesse porte.</h3>
     <div class="scroll">
       <table>
         <thead>
           <tr>
-            <th>Tier</th>
-            <th class="money">E(win) R</th>
-            <th class="money">Se Saber R$ 25k</th>
-            <th class="money">Se Ter R$ 10k</th>
-            <th class="money">Se Executar 12×</th>
-            <th class="money">Se Executar 6×</th>
+            <th>Faturamento</th>
+            <th>Contas</th>
+            <th>Fecha (realista)</th>
+            <th>Melhor STEP neste porte</th>
+            <th>Se fechar, entra</th>
+            <th class="money">Wins esperados</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td><span class="tag tiny">TINY</span></td>
+            <td>5</td>
+            <td>14%</td>
+            <td>Saber ou Ter — não Executar</td>
+            <td>R$ 25k ou R$ 10k</td>
             <td class="money">0,7</td>
-            <td class="money">R$ 17.500</td>
-            <td class="money">R$ 7.000</td>
-            <td class="money">R$ 54.600</td>
-            <td class="money">R$ 27.300</td>
           </tr>
           <tr>
             <td><span class="tag small">SMALL</span></td>
+            <td>13</td>
+            <td>29%</td>
+            <td>Saber ou Ter. Executar só se já mapeado</td>
+            <td>R$ 25k / R$ 10k / (Henri: MRR)</td>
             <td class="money">3,8</td>
-            <td class="money">R$ 95.000</td>
-            <td class="money">R$ 38.000</td>
-            <td class="money">R$ 296.400</td>
-            <td class="money">R$ 148.200</td>
           </tr>
           <tr>
             <td><span class="tag medium">MEDIUM</span></td>
+            <td>20</td>
+            <td>52%</td>
+            <td>Executar, se operação pronta. Senão Saber</td>
+            <td>MRR R$ 6.500 × 12 ou TCV R$ 25k</td>
             <td class="money">10,3</td>
-            <td class="money">R$ 257.500</td>
-            <td class="money">R$ 103.000</td>
-            <td class="money">R$ 803.400</td>
-            <td class="money">R$ 401.700</td>
           </tr>
           <tr>
             <td><span class="tag large">LARGE</span></td>
+            <td>1 · Vitória Troféus</td>
+            <td>75%</td>
+            <td>Executar</td>
+            <td>MRR R$ 6.500 × 12</td>
             <td class="money">0,8</td>
-            <td class="money">R$ 20.000</td>
-            <td class="money">R$ 8.000</td>
-            <td class="money">R$ 62.400</td>
-            <td class="money">R$ 31.200</td>
           </tr>
           <tr>
-            <td><span class="tag warn">sem scope</span></td>
-            <td class="money">0,7</td>
-            <td class="money">R$ 17.500</td>
-            <td class="money">R$ 7.000</td>
-            <td class="money">R$ 54.600</td>
-            <td class="money">R$ 27.300</td>
-          </tr>
-          <tr>
-            <td><strong>41 contas</strong></td>
-            <td class="money"><strong>16,2</strong></td>
-            <td class="money"><strong>R$ 405.000</strong></td>
-            <td class="money"><strong>R$ 162.000</strong></td>
-            <td class="money"><strong>R$ 1.264.000</strong></td>
-            <td class="money"><strong>R$ 632.000</strong></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <div class="section" id="cenarios">
-    <h2>Mix</h2>
-    <h3>P / R / O com mix histórico (57% Executar · 30% Saber · 13% Ter)</h3>
-    <div class="grid3">
-      <div class="card">
-        <div class="t" style="color:var(--warn)">Pessimista</div>
-        <div class="d">
-          11 wins · Executar em <strong>6 meses</strong> (MRR × 6 = R$ 39k).<br>
-          TM blend ≈ R$ 31k/win · TCV <strong>R$ 341k</strong>
-        </div>
-      </div>
-      <div class="card">
-        <div class="t">Realista</div>
-        <div class="d">
-          16,2 wins · Executar em <strong>12 meses</strong> (R$ 78k).<br>
-          TM blend ≈ R$ 53k/win · TCV <strong>R$ 863k</strong>
-        </div>
-      </div>
-      <div class="card">
-        <div class="t" style="color:var(--ok)">Otimista</div>
-        <div class="d">
-          18,3 wins (MEDIUM/LARGE sobem a tx) · Executar 12 meses.<br>
-          Mesmo blend · TCV <strong>R$ 975k</strong>
-        </div>
-      </div>
-    </div>
-    <div class="scroll" style="margin-top:14px">
-      <table>
-        <thead>
-          <tr>
-            <th>STEP</th>
-            <th>% wins hist.</th>
-            <th>Ticket</th>
-            <th class="money">E(win) P</th>
-            <th class="money">TCV P</th>
-            <th class="money">E(win) R</th>
-            <th class="money">TCV R</th>
-            <th class="money">E(win) O</th>
-            <th class="money">TCV O</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><span class="tag saber">Saber</span></td>
-            <td>30%</td>
-            <td>TCV R$ 25.000</td>
-            <td class="money">3,3</td><td class="money">R$ 82.500</td>
-            <td class="money">4,9</td><td class="money">R$ 121.500</td>
-            <td class="money">5,5</td><td class="money">R$ 137.250</td>
-          </tr>
-          <tr>
-            <td><span class="tag ter">Ter</span></td>
-            <td>13%</td>
-            <td>TCV R$ 10.000</td>
-            <td class="money">1,4</td><td class="money">R$ 14.300</td>
-            <td class="money">2,1</td><td class="money">R$ 21.060</td>
-            <td class="money">2,4</td><td class="money">R$ 23.790</td>
-          </tr>
-          <tr>
-            <td><span class="tag exec">Executar</span></td>
-            <td>57%</td>
-            <td>MRR R$ 6.500</td>
-            <td class="money">6,3</td><td class="money">R$ 244.530 <span class="muted">6×</span></td>
-            <td class="money">9,2</td><td class="money">R$ 720.720 <span class="muted">12×</span></td>
-            <td class="money">10,4</td><td class="money">R$ 813.720 <span class="muted">12×</span></td>
-          </tr>
-          <tr>
-            <td><span class="tag warn">Potencializar</span></td>
-            <td>0%</td>
+            <td><span class="tag warn">sem faturamento</span></td>
+            <td>2</td>
+            <td>mapear</td>
+            <td>Não pitcha STEP sem Need scope</td>
             <td>—</td>
-            <td class="money">0</td><td class="money">—</td>
-            <td class="money">0</td><td class="money">—</td>
-            <td class="money">0</td><td class="money">—</td>
-          </tr>
-          <tr>
-            <td><strong>Total mix</strong></td>
-            <td>100%</td>
-            <td></td>
-            <td class="money"><strong>11,0</strong></td><td class="money"><strong>R$ 341k</strong></td>
-            <td class="money"><strong>16,2</strong></td><td class="money"><strong>R$ 863k</strong></td>
-            <td class="money"><strong>18,3</strong></td><td class="money"><strong>R$ 975k</strong></td>
+            <td class="money">0,7</td>
           </tr>
         </tbody>
       </table>
     </div>
-    <p class="muted" style="margin:12px 0 0">
-      O salto P → R quase todo é Executar saindo de 6× para 12×, não é “fechar mais Saber”.
-      Saber e Ter mudam pouco o placar: 16 wins 100% Saber = R$ 405k; 100% Ter = R$ 162k; 100% Executar 12× = R$ 1,26M.
-    </p>
   </div>
 
   <div class="section" id="empresas">
-    <h2>Conta a conta</h2>
-    <h3>Tx do tier × ticket de cada STEP · realista</h3>
-    <p class="muted">Valor esperado se aquela conta fechar naquele STEP. Onde o Cockpit já mapeou produto, o STEP usado está marcado.</p>
-    <input class="search" id="q" type="search" placeholder="Filtrar empresa…" />
-    <div class="scroll">
-      <table>
-        <thead>
-          <tr>
-            <th>Empresa</th><th>Tier</th><th>STEP mapeado</th>
-            <th class="money">Se Saber</th>
-            <th class="money">Se Ter</th>
-            <th class="money">Se Executar 12×</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td class="name">Brasil Auto Placas</td><td><span class="tag small">SMALL</span></td><td>—</td><td class="money">R$ 7.250</td><td class="money">R$ 2.900</td><td class="money">R$ 22.620</td></tr>
-          <tr><td class="name">Emporio Inacio</td><td><span class="tag warn">—</span></td><td>—</td><td class="money">R$ 8.750</td><td class="money">R$ 3.500</td><td class="money">R$ 27.300</td></tr>
-          <tr><td class="name">Podium Jeans</td><td><span class="tag small">SMALL</span></td><td>—</td><td class="money">R$ 7.250</td><td class="money">R$ 2.900</td><td class="money">R$ 22.620</td></tr>
-          <tr><td class="name">AMBI TOPOGRAFIA (LT)</td><td><span class="tag tiny">TINY</span></td><td>—</td><td class="money">R$ 3.500</td><td class="money">R$ 1.400</td><td class="money">R$ 10.920</td></tr>
-          <tr><td class="name">Atlanta Consórcios (BM)</td><td><span class="tag medium">MEDIUM</span></td><td>—</td><td class="money">R$ 13.000</td><td class="money">R$ 5.200</td><td class="money">R$ 40.560</td></tr>
-          <tr><td class="name">Café Negrin</td><td><span class="tag medium">MEDIUM</span></td><td>—</td><td class="money">R$ 13.000</td><td class="money">R$ 5.200</td><td class="money">R$ 40.560</td></tr>
-          <tr><td class="name">Comercial Ultimix LTDA</td><td><span class="tag medium">MEDIUM</span></td><td>—</td><td class="money">R$ 13.000</td><td class="money">R$ 5.200</td><td class="money">R$ 40.560</td></tr>
-          <tr><td class="name">GRM Tecnologia e Serviços</td><td><span class="tag medium">MEDIUM</span></td><td>—</td><td class="money">R$ 13.000</td><td class="money">R$ 5.200</td><td class="money">R$ 40.560</td></tr>
-          <tr><td class="name">Golias Espetaria</td><td><span class="tag small">SMALL</span></td><td>—</td><td class="money">R$ 7.250</td><td class="money">R$ 2.900</td><td class="money">R$ 22.620</td></tr>
-          <tr><td class="name">Intelecto Serviços Ambientais</td><td><span class="tag small">SMALL</span></td><td>—</td><td class="money">R$ 7.250</td><td class="money">R$ 2.900</td><td class="money">R$ 22.620</td></tr>
-          <tr><td class="name">MB Comércio (RecT)</td><td><span class="tag tiny">TINY</span></td><td>—</td><td class="money">R$ 3.500</td><td class="money">R$ 1.400</td><td class="money">R$ 10.920</td></tr>
-          <tr><td class="name">MGE Comércio de máquinas</td><td><span class="tag tiny">TINY</span></td><td>—</td><td class="money">R$ 3.500</td><td class="money">R$ 1.400</td><td class="money">R$ 10.920</td></tr>
-          <tr><td class="name">V-tech Blindados</td><td><span class="tag medium">MEDIUM</span></td><td>—</td><td class="money">R$ 13.000</td><td class="money">R$ 5.200</td><td class="money">R$ 40.560</td></tr>
-          <tr><td class="name">Vitória Troféus</td><td><span class="tag large">LARGE</span></td><td>—</td><td class="money">R$ 18.750</td><td class="money">R$ 7.500</td><td class="money">R$ 58.500</td></tr>
-          <tr><td class="name">Wang (BS)</td><td><span class="tag small">SMALL</span></td><td>—</td><td class="money">R$ 7.250</td><td class="money">R$ 2.900</td><td class="money">R$ 22.620</td></tr>
-          <tr><td class="name">Balão Mágico</td><td><span class="tag medium">MEDIUM</span></td><td>—</td><td class="money">R$ 13.000</td><td class="money">R$ 5.200</td><td class="money">R$ 40.560</td></tr>
-          <tr><td class="name">Biju Mania (RecS)</td><td><span class="tag small">SMALL</span></td><td>—</td><td class="money">R$ 7.250</td><td class="money">R$ 2.900</td><td class="money">R$ 22.620</td></tr>
-          <tr><td class="name">Dental Muller (LM)</td><td><span class="tag medium">MEDIUM</span></td><td>—</td><td class="money">R$ 13.000</td><td class="money">R$ 5.200</td><td class="money">R$ 40.560</td></tr>
-          <tr><td class="name">Fertisul Fertilizantes</td><td><span class="tag medium">MEDIUM</span></td><td>—</td><td class="money">R$ 13.000</td><td class="money">R$ 5.200</td><td class="money">R$ 40.560</td></tr>
-          <tr><td class="name">LUCKSHOES (BS)</td><td><span class="tag small">SMALL</span></td><td>—</td><td class="money">R$ 7.250</td><td class="money">R$ 2.900</td><td class="money">R$ 22.620</td></tr>
-          <tr><td class="name">Mixconect Telecom</td><td><span class="tag medium">MEDIUM</span></td><td>—</td><td class="money">R$ 13.000</td><td class="money">R$ 5.200</td><td class="money">R$ 40.560</td></tr>
-          <tr><td class="name">Neglape</td><td><span class="tag tiny">TINY</span></td><td>—</td><td class="money">R$ 3.500</td><td class="money">R$ 1.400</td><td class="money">R$ 10.920</td></tr>
-          <tr><td class="name">R. Chagas Ltda (BM)</td><td><span class="tag medium">MEDIUM</span></td><td>—</td><td class="money">R$ 13.000</td><td class="money">R$ 5.200</td><td class="money">R$ 40.560</td></tr>
-          <tr><td class="name">Rhama Analysis (LM)</td><td><span class="tag medium">MEDIUM</span></td><td>—</td><td class="money">R$ 13.000</td><td class="money">R$ 5.200</td><td class="money">R$ 40.560</td></tr>
-          <tr><td class="name">Splendor Elétrica (BM)</td><td><span class="tag medium">MEDIUM</span></td><td>—</td><td class="money">R$ 13.000</td><td class="money">R$ 5.200</td><td class="money">R$ 40.560</td></tr>
-          <tr><td class="name">Xavier Realiza Imóveis</td><td><span class="tag medium">MEDIUM</span></td><td>—</td><td class="money">R$ 13.000</td><td class="money">R$ 5.200</td><td class="money">R$ 40.560</td></tr>
-          <tr><td class="name">Bodega do Sertão</td><td><span class="tag medium">MEDIUM</span></td><td>—</td><td class="money">R$ 13.000</td><td class="money">R$ 5.200</td><td class="money">R$ 40.560</td></tr>
-          <tr><td class="name">Maben</td><td><span class="tag medium">MEDIUM</span></td><td>—</td><td class="money">R$ 13.000</td><td class="money">R$ 5.200</td><td class="money">R$ 40.560</td></tr>
-          <tr><td class="name">Óticas Visamix (BS)</td><td><span class="tag small">SMALL</span></td><td>—</td><td class="money">R$ 7.250</td><td class="money">R$ 2.900</td><td class="money">R$ 22.620</td></tr>
-          <tr><td class="name">600 Multimarcas</td><td><span class="tag medium">MEDIUM</span></td><td><span class="tag saber">Saber · EQV</span></td><td class="money"><strong>R$ 13.000</strong></td><td class="money">R$ 5.200</td><td class="money">R$ 40.560</td></tr>
-          <tr><td class="name">CID</td><td><span class="tag medium">MEDIUM</span></td><td>—</td><td class="money">R$ 13.000</td><td class="money">R$ 5.200</td><td class="money">R$ 40.560</td></tr>
-          <tr><td class="name">Castanheira (LM)</td><td><span class="tag medium">MEDIUM</span></td><td><span class="tag exec">Executar</span></td><td class="money">R$ 13.000</td><td class="money">R$ 5.200</td><td class="money"><strong>R$ 40.560</strong></td></tr>
-          <tr><td class="name">Clínica Polivida (BS)</td><td><span class="tag small">SMALL</span></td><td>—</td><td class="money">R$ 7.250</td><td class="money">R$ 2.900</td><td class="money">R$ 22.620</td></tr>
-          <tr><td class="name">Freebong (BS)</td><td><span class="tag small">SMALL</span></td><td><span class="tag saber">Saber · EQV</span></td><td class="money"><strong>R$ 7.250</strong></td><td class="money">R$ 2.900</td><td class="money">R$ 22.620</td></tr>
-          <tr><td class="name">Frigorífico Rotta</td><td><span class="tag medium">MEDIUM</span></td><td>—</td><td class="money">R$ 13.000</td><td class="money">R$ 5.200</td><td class="money">R$ 40.560</td></tr>
-          <tr><td class="name">Henri Soluções (LS)</td><td><span class="tag small">SMALL</span></td><td><span class="tag exec">Executar</span></td><td class="money">R$ 7.250</td><td class="money">R$ 2.900</td><td class="money"><strong>R$ 22.620</strong></td></tr>
-          <tr><td class="name">Legtrânsito (BS)</td><td><span class="tag warn">—</span></td><td><span class="tag saber">Saber · EQV</span></td><td class="money"><strong>R$ 8.750</strong></td><td class="money">R$ 3.500</td><td class="money">R$ 27.300</td></tr>
-          <tr><td class="name">Nosso boteco (BM)</td><td><span class="tag medium">MEDIUM</span></td><td>—</td><td class="money">R$ 13.000</td><td class="money">R$ 5.200</td><td class="money">R$ 40.560</td></tr>
-          <tr><td class="name">RE/MAX PRO WORK (BT)</td><td><span class="tag tiny">TINY</span></td><td><span class="tag saber">Saber · EQV</span></td><td class="money"><strong>R$ 3.500</strong></td><td class="money">R$ 1.400</td><td class="money">R$ 10.920</td></tr>
-          <tr><td class="name">Casa dos Pães (BS)</td><td><span class="tag small">SMALL</span></td><td><span class="tag ter">Ter · ZapFirst</span></td><td class="money">R$ 7.250</td><td class="money"><strong>R$ 2.900</strong></td><td class="money">R$ 22.620</td></tr>
-          <tr><td class="name">Triboltec</td><td><span class="tag small">SMALL</span></td><td>—</td><td class="money">R$ 7.250</td><td class="money">R$ 2.900</td><td class="money">R$ 22.620</td></tr>
-        </tbody>
-      </table>
+    <h2>As 41</h2>
+    <h3>Agrupadas pelo faturamento. Um STEP — o que cabe nessa faixa.</h3>
+    <p class="muted">Onde o Cockpit já escolheu o produto, o STEP está marcado. Nas outras, o STEP é o melhor encaixe <em>desse porte</em>, não uma lista para vender junto.</p>
+    <input class="search" id="q" type="search" placeholder="Buscar empresa…" />
+
+    <div class="tier-block">
+      <h4><span class="tag tiny">TINY</span> fatura pouco · melhor STEP: Saber ou Ter · fecha 14%</h4>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Empresa</th><th>STEP deste porte</th><th>Se fechar, entra</th></tr></thead>
+          <tbody>
+            <tr><td class="name">AMBI TOPOGRAFIA (LT)</td><td>Saber ou Ter</td><td class="money">R$ 25.000 / R$ 10.000</td></tr>
+            <tr><td class="name">MB Comércio (RecT)</td><td>Saber ou Ter</td><td class="money">R$ 25.000 / R$ 10.000</td></tr>
+            <tr><td class="name">MGE Comércio de máquinas</td><td>Saber ou Ter</td><td class="money">R$ 25.000 / R$ 10.000</td></tr>
+            <tr><td class="name">Neglape</td><td>Saber ou Ter</td><td class="money">R$ 25.000 / R$ 10.000</td></tr>
+            <tr><td class="name">RE/MAX PRO WORK (BT)</td><td><span class="tag saber">Saber · EQV</span> já mapeado</td><td class="money">R$ 25.000</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-    <p class="muted" style="margin:10px 0 0">
-      Conta MEDIUM no realista: Saber R$ 13k · Ter R$ 5,2k · Executar 12× R$ 40,6k.
-      EQV mapeado (600, Freebong, RE/MAX, Legtrânsito) usa a coluna Saber. Henri e Castanheira usam Executar. Casa dos Pães usa Ter.
-    </p>
+
+    <div class="tier-block">
+      <h4><span class="tag small">SMALL</span> fatura pouco/médio · melhor STEP: Saber ou Ter · fecha 29%</h4>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Empresa</th><th>STEP deste porte</th><th>Se fechar, entra</th></tr></thead>
+          <tbody>
+            <tr><td class="name">Brasil Auto Placas</td><td>Saber ou Ter</td><td class="money">R$ 25.000 / R$ 10.000</td></tr>
+            <tr><td class="name">Podium Jeans</td><td>Saber ou Ter</td><td class="money">R$ 25.000 / R$ 10.000</td></tr>
+            <tr><td class="name">Golias Espetaria</td><td>Saber ou Ter</td><td class="money">R$ 25.000 / R$ 10.000</td></tr>
+            <tr><td class="name">Intelecto Serviços Ambientais</td><td>Saber ou Ter</td><td class="money">R$ 25.000 / R$ 10.000</td></tr>
+            <tr><td class="name">Wang (BS)</td><td>Saber ou Ter</td><td class="money">R$ 25.000 / R$ 10.000</td></tr>
+            <tr><td class="name">Biju Mania (RecS)</td><td>Saber ou Ter</td><td class="money">R$ 25.000 / R$ 10.000</td></tr>
+            <tr><td class="name">LUCKSHOES (BS)</td><td>Saber ou Ter</td><td class="money">R$ 25.000 / R$ 10.000</td></tr>
+            <tr><td class="name">Óticas Visamix (BS)</td><td>Saber ou Ter</td><td class="money">R$ 25.000 / R$ 10.000</td></tr>
+            <tr><td class="name">Clínica Polivida (BS)</td><td>Saber ou Ter</td><td class="money">R$ 25.000 / R$ 10.000</td></tr>
+            <tr><td class="name">Freebong (BS)</td><td><span class="tag saber">Saber · EQV</span> já mapeado</td><td class="money">R$ 25.000</td></tr>
+            <tr><td class="name">Henri Soluções (LS)</td><td><span class="tag exec">Executar</span> já mapeado — exceção neste porte</td><td class="money">R$ 6.500 /mês</td></tr>
+            <tr><td class="name">Casa dos Pães (BS)</td><td><span class="tag ter">Ter · ZapFirst</span> já mapeado</td><td class="money">R$ 10.000</td></tr>
+            <tr><td class="name">Triboltec</td><td>Saber ou Ter</td><td class="money">R$ 25.000 / R$ 10.000</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="tier-block">
+      <h4><span class="tag medium">MEDIUM</span> fatura o bastante · melhor caso: Executar · fecha 52%</h4>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Empresa</th><th>STEP deste porte</th><th>Se fechar, entra</th></tr></thead>
+          <tbody>
+            <tr><td class="name">Atlanta Consórcios (BM)</td><td>Executar, se operação pronta · senão Saber</td><td class="money">R$ 6.500 /mês ou R$ 25.000</td></tr>
+            <tr><td class="name">Café Negrin</td><td>Executar, se operação pronta · senão Saber</td><td class="money">R$ 6.500 /mês ou R$ 25.000</td></tr>
+            <tr><td class="name">Comercial Ultimix LTDA</td><td>Executar, se operação pronta · senão Saber</td><td class="money">R$ 6.500 /mês ou R$ 25.000</td></tr>
+            <tr><td class="name">GRM Tecnologia e Serviços</td><td>Executar, se operação pronta · senão Saber</td><td class="money">R$ 6.500 /mês ou R$ 25.000</td></tr>
+            <tr><td class="name">V-tech Blindados</td><td>Executar, se operação pronta · senão Saber</td><td class="money">R$ 6.500 /mês ou R$ 25.000</td></tr>
+            <tr><td class="name">Balão Mágico</td><td>Executar, se operação pronta · senão Saber</td><td class="money">R$ 6.500 /mês ou R$ 25.000</td></tr>
+            <tr><td class="name">Dental Muller (LM)</td><td>Executar, se operação pronta · senão Saber</td><td class="money">R$ 6.500 /mês ou R$ 25.000</td></tr>
+            <tr><td class="name">Fertisul Fertilizantes</td><td>Executar, se operação pronta · senão Saber</td><td class="money">R$ 6.500 /mês ou R$ 25.000</td></tr>
+            <tr><td class="name">Mixconect Telecom</td><td>Executar, se operação pronta · senão Saber</td><td class="money">R$ 6.500 /mês ou R$ 25.000</td></tr>
+            <tr><td class="name">R. Chagas Ltda (BM)</td><td>Executar, se operação pronta · senão Saber</td><td class="money">R$ 6.500 /mês ou R$ 25.000</td></tr>
+            <tr><td class="name">Rhama Analysis (LM)</td><td>Executar, se operação pronta · senão Saber</td><td class="money">R$ 6.500 /mês ou R$ 25.000</td></tr>
+            <tr><td class="name">Splendor Elétrica (BM)</td><td>Executar, se operação pronta · senão Saber</td><td class="money">R$ 6.500 /mês ou R$ 25.000</td></tr>
+            <tr><td class="name">Xavier Realiza Imóveis</td><td>Executar, se operação pronta · senão Saber</td><td class="money">R$ 6.500 /mês ou R$ 25.000</td></tr>
+            <tr><td class="name">Bodega do Sertão</td><td>Executar, se operação pronta · senão Saber</td><td class="money">R$ 6.500 /mês ou R$ 25.000</td></tr>
+            <tr><td class="name">Maben</td><td>Executar, se operação pronta · senão Saber</td><td class="money">R$ 6.500 /mês ou R$ 25.000</td></tr>
+            <tr><td class="name">CID</td><td>Executar, se operação pronta · senão Saber</td><td class="money">R$ 6.500 /mês ou R$ 25.000</td></tr>
+            <tr><td class="name">Frigorífico Rotta</td><td>Executar, se operação pronta · senão Saber</td><td class="money">R$ 6.500 /mês ou R$ 25.000</td></tr>
+            <tr><td class="name">Nosso boteco (BM)</td><td>Executar, se operação pronta · senão Saber</td><td class="money">R$ 6.500 /mês ou R$ 25.000</td></tr>
+            <tr><td class="name">600 Multimarcas</td><td><span class="tag saber">Saber · EQV</span> já mapeado — não Executar agora</td><td class="money">R$ 25.000</td></tr>
+            <tr><td class="name">Castanheira (LM)</td><td><span class="tag exec">Executar</span> já mapeado</td><td class="money">R$ 6.500 /mês</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="tier-block">
+      <h4><span class="tag large">LARGE</span> fatura alto · melhor caso: Executar · fecha 75%</h4>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Empresa</th><th>STEP deste porte</th><th>Se fechar, entra</th></tr></thead>
+          <tbody>
+            <tr><td class="name">Vitória Troféus</td><td>Executar</td><td class="money">R$ 6.500 /mês</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="tier-block">
+      <h4><span class="tag warn">Sem faturamento no Cockpit</span> · mapear Need scope antes do pitch</h4>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Empresa</th><th>STEP deste porte</th><th>Se fechar, entra</th></tr></thead>
+          <tbody>
+            <tr><td class="name">Emporio Inacio</td><td>Ainda sem faixa de faturamento</td><td class="money">—</td></tr>
+            <tr><td class="name">Legtrânsito (BS)</td><td><span class="tag saber">Saber · EQV</span> mapeado · Need scope em branco</td><td class="money">R$ 25.000</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 
   <p class="ext muted">
@@ -394,7 +432,7 @@
     <a href="farmer-sara.html">Hub Farmer Sara</a>
   </p>
   <footer>
-    V4 · Cenários set · ticket STEP oficial · tx Cockpit por tier · Potencializar fora
+    V4 · 1 STEP por conta · tier = faturamento · meta = melhor encaixe desse porte
   </footer>
 </div>
 <script>
@@ -405,6 +443,12 @@
     var t = q.value.trim().toLowerCase();
     document.querySelectorAll('#empresas tbody tr').forEach(function(tr){
       tr.style.display = !t || tr.textContent.toLowerCase().indexOf(t) >= 0 ? '' : 'none';
+    });
+    document.querySelectorAll('#empresas .tier-block').forEach(function(block){
+      var any = Array.prototype.some.call(block.querySelectorAll('tbody tr'), function(tr){
+        return tr.style.display !== 'none';
+      });
+      block.style.display = !t || any ? '' : 'none';
     });
   });
 })();
