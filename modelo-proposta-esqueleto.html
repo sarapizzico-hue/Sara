@@ -541,7 +541,7 @@
   <p class="sr-only">Setas e espaço navegam. Home e End vão ao início e ao fim. F abre tela cheia.</p>
 
   <script>
-    const slides = Array.from(document.querySelectorAll(".slide"));
+    const slides = Array.from(document.querySelectorAll("#deck > .slide"));
     const total = slides.length;
     const acts = [
       { id: "narrativa", label: "Narrativa", start: 0 },
