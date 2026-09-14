@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Restaurante e Hotel Léo × V4 — Empresa que Vende</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --v4-red-deep: #a10f14;
+      --v4-red-mid: #c4181e;
+      --cream: #ffffff;
+      --muted: rgba(255,255,255,0.88);
+      --gold: #f5d76e;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; overflow: hidden; }
+    body {
+      font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+      font-size: 1.05rem;
+      background: var(--v4-red-deep);
+      color: var(--cream);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    .slide-logo { position: absolute; top: 1.25rem; left: 1.5rem; z-index: 10; }
+    .slide-logo svg { height: clamp(22px, 3.5vh, 30px); width: auto; display: block; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.35)); }
+    .blend-progress {
+      position: fixed; top: 0; left: 0; right: 0; height: 5px; z-index: 200;
+      background: linear-gradient(90deg, #fff, #ffd0d0);
+      transform-origin: left; transform: scaleX(var(--slide-progress, 0.08));
+      transition: transform 0.4s var(--ease);
+    }
+    .nav-dots {
+      position: fixed; right: 1rem; top: 50%; transform: translateY(-50%);
+      z-index: 100; display: flex; flex-direction: column; gap: 0.38rem;
+    }
+    .nav-dots a {
+      width: 8px; height: 8px; border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.45); background: transparent;
+      transition: all 0.3s var(--ease);
+    }
+    .nav-dots a:hover, .nav-dots a.active { background: #fff; border-color: #fff; transform: scale(1.2); }
+    .nav-arrow {
+      position: fixed; top: 50%; transform: translateY(-50%); z-index: 100;
+      width: 46px; height: 46px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.35); background: rgba(161,15,20,0.55);
+      color: white; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; line-height: 1;
+    }
+    .nav-arrow:hover:not(:disabled) { background: rgba(255,255,255,0.2); border-color: #fff; }
+    .nav-arrow:disabled { opacity: 0.25; cursor: default; }
+    .nav-arrow--prev { left: 1rem; }
+    .nav-arrow--next { right: 3rem; }
+    .deck { position: relative; width: 100vw; height: 100vh; overflow: hidden; }
+    section {
+      position: absolute; inset: 0; width: 100%; height: 100vh;
+      padding: clamp(2.5rem, 5vh, 3.5rem) clamp(1.25rem, 4vw, 3rem) 4.5rem;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      overflow-y: auto; opacity: 0; visibility: hidden; transform: translateX(60px);
+      transition: opacity 0.4s var(--ease), transform 0.4s var(--ease), visibility 0.4s; z-index: 0;
+    }
+    section.slide-active { opacity: 1; visibility: visible; transform: translateX(0); z-index: 2; }
+    section.slide-exit-left { transform: translateX(-60px); opacity: 0; }
+    section.slide-exit-right { transform: translateX(60px); opacity: 0; }
+    section::before {
+      content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(255, 74, 74, 0.45) 0%, transparent 55%),
+        radial-gradient(ellipse 70% 55% at 85% 90%, rgba(255, 42, 26, 0.35) 0%, transparent 50%),
+        radial-gradient(ellipse 100% 100% at 50% 50%, var(--v4-red-mid) 0%, var(--v4-red-deep) 70%, #6b080c 100%);
+    }
+    section.theme-light::before {
+      background:
+        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255,255,255,0.85) 0%, #f3f1ef 45%, #ebe7e4 100%);
+    }
+    section.theme-light { color: #2a1816; }
+    section.theme-light h1,
+    section.theme-light h2,
+    section.theme-light h3 { color: #2a1816; }
+    section.theme-light .lead,
+    section.theme-light .card p,
+    section.theme-light .card li { color: rgba(42,24,22,0.78); }
+    section.theme-light .eyebrow { color: #a10f14; }
+    section.theme-light .gold-line { background: linear-gradient(90deg, #a10f14, #e85a4f); }
+    section.theme-light .card {
+      background: rgba(255,255,255,0.72);
+      border-color: rgba(161,15,20,0.12);
+      box-shadow: 0 10px 30px rgba(80,0,0,0.06);
+    }
+    section.theme-light .card-num { color: #a10f14; }
+    .inner { position: relative; z-index: 2; width: 100%; max-width: 980px; max-height: calc(100vh - 5rem); }
+    .eyebrow {
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: #ffe0e0; margin-bottom: 0.5rem;
+    }
+    h1, h2, h3 { font-family: Outfit, sans-serif; font-weight: 700; line-height: 1.12; letter-spacing: -0.02em; color: #fff; }
+    h2 { font-size: clamp(1.55rem, 3.8vh, 2.35rem); margin-bottom: 0.5rem; }
+    .gold-line { width: 64px; height: 4px; background: linear-gradient(90deg, #fff, #ffd0d0); border-radius: 2px; margin: 0.5rem 0 0.9rem; }
+    .lead { font-size: clamp(0.95rem, 1.7vh, 1.1rem); color: var(--muted); max-width: 760px; line-height: 1.5; }
+    .glass {
+      background: rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.28); border-radius: 22px;
+      padding: clamp(1.1rem, 2.5vh, 1.75rem) clamp(1.2rem, 3vw, 1.85rem);
+      box-shadow: 0 12px 40px rgba(80, 0, 0, 0.25);
+    }
+    #capa .inner { text-align: center; }
+    .capa-partnership {
+      display: flex; align-items: center; justify-content: center; gap: 0.75rem;
+      margin: 1rem 0 0.65rem; font-size: 1rem; color: var(--muted);
+    }
+    .capa-partnership .x { opacity: 0.5; }
+    #capa h1 { font-size: clamp(2rem, 6vh, 3.3rem); margin-bottom: 0.75rem; }
+    #capa h1 em { font-style: italic; color: #ffe8e8; }
+    .capa-badge {
+      display: inline-block; padding: 0.45rem 1rem; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.45); font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase; background: rgba(255,255,255,0.12);
+    }
+    .process-bar {
+      display: flex; justify-content: center; gap: clamp(0.8rem, 3vw, 2rem);
+      margin-top: 1.5rem; flex-wrap: wrap;
+    }
+    .process-bar span {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(255,255,255,0.85); position: relative; padding-top: 0.85rem;
+    }
+    .process-bar span::before {
+      content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 8px; height: 8px; border-radius: 50%; background: #fff;
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.25);
+    }
+    .slide-hint { margin-top: 1.75rem; font-size: 0.85rem; color: rgba(255,255,255,0.5); }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.65rem; margin-top: 0.85rem; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; margin-top: 0.85rem; }
+    .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.55rem; margin-top: 0.85rem; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.55rem; margin-top: 0.85rem; }
+    .card {
+      background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 14px; padding: 0.85rem 1rem;
+    }
+    .card-num { font-family: Outfit; font-size: 0.8rem; font-weight: 800; color: #ffe0e0; margin-bottom: 0.3rem; }
+    .card h3 { font-size: 0.98rem; margin-bottom: 0.3rem; }
+    .card p, .card li { font-size: 0.86rem; color: var(--muted); line-height: 1.45; }
+    .card ul { list-style: none; margin-top: 0.35rem; }
+    .card ul li { padding-left: 0.9rem; position: relative; margin-bottom: 0.2rem; }
+    .card ul li::before { content: "·"; position: absolute; left: 0; color: #fff; font-weight: 700; }
+    section.theme-light .card ul li::before { color: #a10f14; }
+    .pillars .card { min-height: 100%; }
+    .pillars .card h3 { font-size: 0.92rem; }
+    .pillars .card p { font-size: 0.8rem; }
+    .highlight { color: var(--gold); font-weight: 700; }
+    .vende-word {
+      font-family: Outfit; font-size: clamp(4.5rem, 16vh, 9rem); font-weight: 800;
+      letter-spacing: -0.04em; line-height: 0.9; text-align: center;
+      background: linear-gradient(180deg, #fff 40%, rgba(255,255,255,0.7));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .partners {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 0.55rem 1rem;
+      margin-top: 1.4rem; padding: 0.85rem 1rem; border-radius: 14px;
+      background: rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.18);
+    }
+    .partners span {
+      font-size: 0.82rem; font-weight: 700; letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.85); text-transform: uppercase;
+    }
+    .phase {
+      border-radius: 14px; padding: 0.85rem 1rem;
+      background: rgba(0,0,0,0.28); border: 1px solid rgba(255,255,255,0.2);
+    }
+    .phase.active {
+      background: linear-gradient(160deg, #e02424, #a10f14);
+      border-color: rgba(255,255,255,0.35);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    }
+    .phase-month {
+      display: inline-block; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem;
+    }
+    .phase h3 { font-size: 0.9rem; margin-bottom: 0.45rem; }
+    .phase ul { list-style: none; }
+    .phase li {
+      font-size: 0.78rem; color: var(--muted); padding: 0.12rem 0 0.12rem 0.85rem;
+      position: relative;
+    }
+    .phase li::before {
+      content: ""; position: absolute; left: 0; top: 0.55em;
+      width: 6px; height: 6px; border-radius: 50%; background: var(--gold);
+    }
+    .session-split {
+      display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 0.85rem; margin-top: 0.75rem;
+    }
+    .session-visual {
+      border-radius: 18px; min-height: 220px; padding: 1.2rem;
+      background: linear-gradient(160deg, rgba(255,255,255,0.18), rgba(0,0,0,0.25));
+      border: 1px solid rgba(255,255,255,0.25);
+      display: flex; flex-direction: column; justify-content: flex-end; gap: 0.45rem;
+    }
+    .session-visual strong { font-family: Outfit; font-size: 1.15rem; }
+    .session-visual span { font-size: 0.84rem; color: var(--muted); }
+    .artifact-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0.35rem 0.75rem; margin-top: 0.55rem;
+    }
+    .artifact-grid li {
+      font-size: 0.84rem; color: var(--muted); padding-left: 0.9rem; position: relative; list-style: none;
+    }
+    .artifact-grid li::before {
+      content: ""; position: absolute; left: 0; top: 0.5em;
+      width: 7px; height: 7px; border-radius: 50%; background: #ff5a5a;
+    }
+    .price-card {
+      text-align: center; max-width: 520px; margin: 0 auto;
+      padding: clamp(1.4rem, 3vh, 2rem) 1.5rem;
+    }
+    .price-old {
+      font-size: 1.05rem; color: rgba(255,255,255,0.7);
+      text-decoration: line-through; margin: 0.65rem 0 0.35rem;
+    }
+    .price-main {
+      font-family: Outfit; font-size: clamp(3rem, 9vh, 4.5rem); font-weight: 800;
+      line-height: 1; color: #fff;
+    }
+    .price-main small { font-size: 1rem; font-weight: 600; color: var(--muted); }
+    .price-cash { font-size: 1.05rem; color: var(--muted); margin-top: 0.45rem; }
+    .price-cash strong { color: #fff; }
+    .cashback {
+      margin-top: 1rem; display: inline-block; padding: 0.55rem 1rem; border-radius: 999px;
+      background: rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.25);
+      font-size: 0.82rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .guarantee-seal {
+      width: 140px; height: 140px; margin: 0 auto 1rem; border-radius: 50%;
+      background:
+        radial-gradient(circle at 35% 30%, #ffe9a0, #d4a017 55%, #8a6508 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      color: #2a1816; text-align: center; box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+      border: 6px double rgba(255,255,255,0.35);
+    }
+    .guarantee-seal strong { font-family: Outfit; font-size: 0.95rem; line-height: 1.15; }
+    .guarantee-seal span { font-size: 0.65rem; font-weight: 800; letter-spacing: 0.08em; }
+    .eq-diagram {
+      display: grid; place-items: center; min-height: 220px; position: relative;
+    }
+    .eq-bubble {
+      width: min(100%, 280px); aspect-ratio: 1; border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%, rgba(255,90,90,0.55), rgba(120,0,0,0.35));
+      border: 1px solid rgba(255,255,255,0.2);
+      display: grid; place-items: center; text-align: center; padding: 1rem;
+      box-shadow: 0 0 60px rgba(255,40,40,0.25);
+    }
+    .eq-bubble .label { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 0.5rem; }
+    .eq-bubble .eqv { font-family: Outfit; font-size: 2.4rem; font-weight: 800; }
+    .eq-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem; margin-top: 0.85rem; }
+    .eq-tags span {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 0.35rem 0.65rem; border-radius: 999px;
+      background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25);
+    }
+    .deck-footer {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 150;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.65rem 1.25rem; background: rgba(107, 8, 12, 0.85);
+      border-top: 1px solid rgba(255,255,255,0.15); font-size: 0.8rem; color: rgba(255,255,255,0.75);
+    }
+    .progress-wrap { flex: 1; max-width: 220px; height: 4px; background: rgba(255,255,255,0.2); border-radius: 2px; margin: 0 1rem; }
+    .progress-fill { height: 100%; background: #fff; border-radius: 2px; width: 8%; transition: width 0.4s var(--ease); }
+    @media (max-width: 900px) {
+      .grid-5, .grid-3, .grid-2, .grid-4, .session-split, .artifact-grid { grid-template-columns: 1fr; }
+      .phase.active { grid-column: auto; }
+      .nav-arrow--next { right: 1rem; }
+      .slide-logo { left: 1rem; top: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="blend-progress" aria-hidden="true"></div>
+
+  <nav class="nav-dots" aria-label="Slides">
+    <a href="#" data-slide="1" class="active" title="Capa"></a>
+    <a href="#" data-slide="2" title="Crescimento previsível"></a>
+    <a href="#" data-slide="3" title="O programa"></a>
+    <a href="#" data-slide="4" title="Parceiros"></a>
+    <a href="#" data-slide="5" title="Para quem é"></a>
+    <a href="#" data-slide="6" title="A jornada"></a>
+    <a href="#" data-slide="7" title="3 sessões"></a>
+    <a href="#" data-slide="8" title="Sessão 01"></a>
+    <a href="#" data-slide="9" title="Sessão 02"></a>
+    <a href="#" data-slide="10" title="Sessão 03"></a>
+    <a href="#" data-slide="11" title="Fábrica de Receita"></a>
+    <a href="#" data-slide="12" title="Comunidade"></a>
+    <a href="#" data-slide="13" title="Por que a V4"></a>
+    <a href="#" data-slide="14" title="Investimento"></a>
+    <a href="#" data-slide="15" title="Garantia"></a>
+  </nav>
+
+  <button type="button" class="nav-arrow nav-arrow--prev" id="prevBtn" disabled aria-label="Anterior">‹</button>
+  <button type="button" class="nav-arrow nav-arrow--next" id="nextBtn" aria-label="Próximo">›</button>
+
+  <template id="v4-logo-tpl">
+    <div class="slide-logo" aria-label="V4 Company">
+      <svg fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 77 20"><path fill="#fff" d="M33.023 3.575c-2.001.003-3.093 1.21-3.09 3.32l.008 6.858c.003 2.11 1.098 3.315 3.1 3.312 2-.003 3.092-1.21 3.09-3.32l-.009-6.858c-.003-2.11-1.097-3.315-3.099-3.312zm.015 11.606c-.649.001-1.057-.356-1.058-1.298l-.009-7.122c-.001-.942.406-1.3 1.055-1.302.648 0 1.057.357 1.058 1.299l.009 7.122c.001.942-.407 1.3-1.055 1.301zm-6.1-3.176l.002 1.884c.001.942-.406 1.282-1.055 1.283-.648 0-1.056-.338-1.058-1.28l-.009-7.122c-.001-.942.406-1.3 1.055-1.302.648 0 1.057.357 1.058 1.299l.002 1.413 1.927-.002-.002-1.281c-.002-2.11-1.041-3.315-3.043-3.313-2 .003-3.037 1.21-3.034 3.32l.008 6.859c.003 2.11 1.042 3.314 3.043 3.312 2.002-.003 3.038-1.21 3.035-3.32l-.002-1.752-1.927.002zM13.055 6.352L8.68 10.813c-.06.062-.017.166.067.166l4.382-.006a.096.096 0 00.096-.097l-.006-4.456c0-.087-.103-.13-.163-.068zm5.862 7.88l-2.687.004a.035.035 0 00-.035.035l.004 2.879c0 .02-.015.035-.035.035l-3.01.004a.035.035 0 01-.034-.035l-.004-2.879a.035.035 0 00-.034-.035l-8.796.012a.141.141 0 01-.14-.142l-.003-2.624v-.004a.795.795 0 01.223-.588l8.758-8.928a.035.035 0 01.025-.01l2.846-.004c.005 0 .009.001.014.003a.367.367 0 01.216.348l.01 8.677c0 .019.017.035.036.035l2.641-.004a.035.035 0 00.035-.035l-.011-8.5c-.002-1.364-1.1-2.478-2.442-2.476L4.18.016a.035.035 0 00-.034.036l.008 6.856c0 .031.037.047.06.025l4.994-5.064a.034.034 0 01.024-.01l2.603-.003c.03 0 .046.037.025.06l-8.118 8.41a.034.034 0 01-.049 0l-1.529-1.55a.036.036 0 01-.01-.026L2.143.074A.035.035 0 002.104.04C.976.185.086 1.131 0 2.294v5.972l.011 8.9a2.48 2.48 0 001.937 2.424h14.974c1.15-.199 2.034-1.224 2.032-2.448l-.003-2.873a.035.035 0 00-.035-.036zM66.47 3.682l.01 7.895-2.104-7.892-2.557.003.017 13.19 1.834-.003-.012-9.553 2.55 9.55 2.094-.004-.016-13.188-1.816.002zm-23.33.031l-1.378 9.366-1.513-9.362-2.835.003.017 13.19 1.779-.003-.012-9.327 1.532 9.325 1.927-.003 1.396-9.46.012 9.458 1.928-.002-.017-13.19-2.835.005h-.001zm33.133-.043l-1.946.002-1.549 6.013-1.564-6.009-2.131.003 2.587 8.814.005 4.371 2.039-.003-.006-4.37 2.565-8.821zm-20.44.026l-2.058 13.192 1.871-.003.35-2.393 2.501-.003.355 2.392 2.057-.003-2.092-13.186-2.983.004zm.42 9.005l.974-6.67.99 6.668-1.964.002zm-5.793-8.998l-3.002.004.017 13.189 2.038-.003-.006-4.955.964-.002c2.038-.002 3.037-1.153 3.035-3.263l-.003-1.715c-.002-2.11-1.005-3.258-3.043-3.255zm.008 6.35h-.964L49.5 5.589l.964-.001c.648-.001 1.001.3 1.002 1.242l.003 1.978c.001.942-.35 1.245-1 1.245z"></path></svg>
+    </div>
+  </template>
+
+  <div class="deck" id="deck">
+
+    <!-- 1 CAPA -->
+    <section id="capa" class="slide-active" data-slide="1">
+      <div class="inner">
+        <div class="capa-partnership">
+          <span>Restaurante e Hotel Léo</span>
+          <span class="x">×</span>
+          <span>V4 Company</span>
+        </div>
+        <h1>Empresa que <em>Vende</em></h1>
+        <p class="lead" style="margin:0.75rem auto 0;text-align:center;max-width:680px;">
+          Consultoria, acompanhamento e execução assistida para transformar marketing e comercial
+          em uma máquina de receita previsível.
+        </p>
+        <div class="process-bar">
+          <span>Consultoria</span>
+          <span>Acompanhamento</span>
+          <span>Execução assistida</span>
+        </div>
+        <span class="capa-badge" style="margin-top:1.25rem;">Programa · 6 meses</span>
+        <p class="slide-hint">Setas, scroll ou swipe para avançar →</p>
+      </div>
+    </section>
+
+    <!-- 2 CRESCIMENTO -->
+    <section id="crescimento" data-slide="2">
+      <div class="inner glass">
+        <p class="eyebrow">Consultoria, acompanhamento e execução assistida</p>
+        <h2>Crescimento<br /><span class="highlight">previsível</span></h2>
+        <div class="gold-line"></div>
+        <div class="grid-2" style="align-items:center;">
+          <div>
+            <p class="lead">
+              O EQV une estratégia, operação e acompanhamento lado a lado —
+              para o Hotel Léo vender com método, não com achismo.
+            </p>
+            <div class="eq-tags">
+              <span>Consultoria</span>
+              <span>Acompanhamento</span>
+              <span>Execução assistida</span>
+            </div>
+          </div>
+          <div class="eq-diagram">
+            <div class="eq-bubble">
+              <div class="label">Programa</div>
+              <div class="eqv">EQV</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 PROGRAMA -->
+    <section id="programa" data-slide="3">
+      <div class="inner">
+        <p class="eyebrow">Empresa que Vende</p>
+        <h2>O programa</h2>
+        <p class="lead">5 pilares que compõem o Empresa que Vende</p>
+        <div class="gold-line"></div>
+        <div class="grid-5 pillars">
+          <article class="card">
+            <div class="card-num">01</div>
+            <h3>Diagnóstico contínuo</h3>
+            <p>Maturidade GTM monitorada. Gargalos identificados a cada ciclo, sem achismo.</p>
+          </article>
+          <article class="card">
+            <div class="card-num">02</div>
+            <h3>Consultoria estratégica</h3>
+            <p><strong style="color:#fff;">1h/mês com consultor V4:</strong> define prioridades e aloca os créditos do squad.</p>
+          </article>
+          <article class="card">
+            <div class="card-num">03</div>
+            <h3>Execução assistida</h3>
+            <p><strong style="color:#fff;">Squad de 4 especialistas:</strong> Conteúdo, Mídia Paga, Comercial e CRM.</p>
+          </article>
+          <article class="card">
+            <div class="card-num">04</div>
+            <h3>Comunidade</h3>
+            <p>Peers do mesmo segmento, lives mensais temáticas alinhadas ao calendário.</p>
+          </article>
+          <article class="card">
+            <div class="card-num">05</div>
+            <h3>Fábrica de Receita</h3>
+            <p><strong style="color:#fff;">Imersão presencial:</strong> hot seats, cases reais e workshops práticos com a V4.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 PARCEIROS -->
+    <section id="parceiros" data-slide="4">
+      <div class="inner" style="text-align:center;">
+        <p class="eyebrow">Resultado de verdade</p>
+        <p style="font-size:clamp(0.95rem,2vh,1.15rem);letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.8);">
+          Nós ajudamos a sua empresa a
+        </p>
+        <div class="vende-word">VENDER</div>
+        <p style="margin-top:0.75rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.8);font-size:0.9rem;">
+          Como já fizemos com diversos parceiros
+        </p>
+        <div class="partners">
+          <span>Ortobom</span>
+          <span>Spotify</span>
+          <span>GioLaser</span>
+          <span>Lugano</span>
+          <span>XP Inc.</span>
+          <span>Smart Fit</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 PARA QUEM -->
+    <section id="para-quem" data-slide="5">
+      <div class="inner glass">
+        <p class="eyebrow">Fit do programa</p>
+        <h2>Para quem é o programa?</h2>
+        <div class="gold-line"></div>
+        <p class="lead">
+          Se você se identificou com qualquer uma dessas situações,
+          esse <span class="highlight">serviço foi desenhado pra você</span>.
+        </p>
+        <div class="grid-3">
+          <article class="card"><h3>Agências frustrantes</h3><p>Experiências frustrantes com outras agências</p></article>
+          <article class="card"><h3>Marketing inexperiente</h3><p>Setor de marketing pouco experiente</p></article>
+          <article class="card"><h3>Comercial amador</h3><p>Estrutura comercial amadora</p></article>
+          <article class="card"><h3>Sem plano</h3><p>Não ter um plano de marketing definido</p></article>
+          <article class="card"><h3>Achismo</h3><p>Decisões à base do achismo</p></article>
+          <article class="card"><h3>Sem posicionamento</h3><p>Não ter um posicionamento definido</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 JORNADA -->
+    <section id="jornada" data-slide="6">
+      <div class="inner">
+        <p class="eyebrow">A jornada</p>
+        <h2>5 fases em 6 meses</h2>
+        <div class="gold-line"></div>
+        <div class="grid-3">
+          <article class="phase">
+            <div class="phase-month">Mês 01</div>
+            <h3>Fase 01 · Onboarding</h3>
+            <ul>
+              <li>KickOff</li>
+              <li>Maturidade de GTM</li>
+              <li>Definição de prioridades</li>
+            </ul>
+          </article>
+          <article class="phase">
+            <div class="phase-month">Mês 02</div>
+            <h3>Fase 02 · E.E 3.0 completa</h3>
+            <ul>
+              <li>3P-IA</li>
+              <li>Posicionamento ativo</li>
+              <li>Canal de vendas ativo</li>
+            </ul>
+          </article>
+          <article class="phase">
+            <div class="phase-month">Mês 03</div>
+            <h3>Fase 03 · Consultoria conteúdo</h3>
+            <ul>
+              <li>Produção assistida</li>
+              <li>Consultoria mensal</li>
+            </ul>
+          </article>
+          <article class="phase">
+            <div class="phase-month">Mês 04</div>
+            <h3>Fase 04 · Consultoria tráfego</h3>
+            <ul>
+              <li>Campanhas</li>
+              <li>Pixel</li>
+              <li>Otimização de canais</li>
+            </ul>
+          </article>
+          <article class="phase active" style="grid-column: span 2;">
+            <div class="phase-month">Mês 05/06</div>
+            <h3>Fase 05 · Consultoria comercial</h3>
+            <ul>
+              <li>Scripts</li>
+              <li>Follow-up</li>
+              <li>Pipeline</li>
+              <li>Monetização do funil completo</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 3 SESSOES -->
+    <section id="sessoes" class="theme-light" data-slide="7">
+      <div class="inner glass" style="background:rgba(255,255,255,0.55);border-color:rgba(161,15,20,0.12);">
+        <p class="eyebrow">Consultoria, acompanhamento e execução assistida</p>
+        <h2>3 sessões com entregáveis concretos</h2>
+        <div class="gold-line"></div>
+        <div class="grid-3">
+          <article class="card">
+            <div class="card-num">01</div>
+            <h3>Produto, posicionamento, conteúdo</h3>
+          </article>
+          <article class="card">
+            <div class="card-num">02</div>
+            <h3>Mídia, performance</h3>
+          </article>
+          <article class="card">
+            <div class="card-num">03</div>
+            <h3>Comercial, CRM</h3>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8 SESSAO 01 -->
+    <section id="sessao-01" class="theme-light" data-slide="8">
+      <div class="inner">
+        <p class="eyebrow">Empresa que Vende</p>
+        <div class="session-split">
+          <div class="glass" style="background:rgba(255,255,255,0.7);border-color:rgba(161,15,20,0.12);">
+            <div class="card-num" style="font-size:2rem;color:#a10f14;">01</div>
+            <h2 style="font-size:clamp(1.3rem,3vh,1.8rem);">Produto, oferta, posicionamento, conteúdo</h2>
+            <div class="gold-line"></div>
+            <p class="lead">
+              Consultoria de conteúdo lado a lado: o especialista V4 orienta a estratégia,
+              calibra a mensagem para o seu ICP e acompanha a execução mês a mês —
+              para que a marca cresça com consistência e gere demanda de verdade.
+            </p>
+            <p class="eyebrow" style="margin-top:1rem;">Artefatos</p>
+            <ul class="artifact-grid">
+              <li>Roteiros de vídeo viral calibrados (prontos para gravar)</li>
+              <li>Brief de posts complementares para Instagram</li>
+              <li>Modelo de linha editorial</li>
+              <li>Funil de creator led growth</li>
+            </ul>
+          </div>
+          <div class="session-visual" style="background:linear-gradient(160deg,#e02424,#8a0c10);color:#fff;">
+            <strong>Conteúdo com método</strong>
+            <span>Linha editorial, roteiros e criadores alinhados ao negócio do Hotel Léo.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9 SESSAO 02 -->
+    <section id="sessao-02" class="theme-light" data-slide="9">
+      <div class="inner">
+        <p class="eyebrow">Empresa que Vende</p>
+        <div class="session-split">
+          <div class="session-visual" style="background:linear-gradient(160deg,#e02424,#8a0c10);color:#fff;order:0;">
+            <strong>Mídia com previsibilidade</strong>
+            <span>Pixel, plano de mídia, audiências e decisão por resultado.</span>
+          </div>
+          <div class="glass" style="background:rgba(255,255,255,0.7);border-color:rgba(161,15,20,0.12);">
+            <div class="card-num" style="font-size:2rem;color:#a10f14;">02</div>
+            <h2 style="font-size:clamp(1.3rem,3vh,1.8rem);">Mídia, performance</h2>
+            <div class="gold-line"></div>
+            <p class="lead">
+              Acompanhamento especializado para operar mídia paga com método:
+              um especialista V4 conduz junto com você a escolha de canais,
+              a leitura de dados e as decisões de investimento — para escalar
+              a operação com previsibilidade e resultado.
+            </p>
+            <p class="eyebrow" style="margin-top:1rem;">Artefatos</p>
+            <ul class="artifact-grid">
+              <li>Configuração e leitura de pixel</li>
+              <li>Plano de mídia estruturado</li>
+              <li>Segmentação de audiências definida</li>
+              <li>Interpretação de dados das campanhas</li>
+              <li>Capacitação para gestão de mídia paga</li>
+              <li>Tomada de decisão por resultado</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 SESSAO 03 -->
+    <section id="sessao-03" class="theme-light" data-slide="10">
+      <div class="inner">
+        <p class="eyebrow">Empresa que Vende</p>
+        <div class="session-split">
+          <div class="glass" style="background:rgba(255,255,255,0.7);border-color:rgba(161,15,20,0.12);">
+            <div class="card-num" style="font-size:2rem;color:#a10f14;">03</div>
+            <h2 style="font-size:clamp(1.3rem,3vh,1.8rem);">Comercial, CRM</h2>
+            <div class="gold-line"></div>
+            <p class="lead">
+              Acompanhamento comercial próximo: o especialista V4 revisa os scripts,
+              analisa as objeções reais do mês e ajusta o processo de vendas com você —
+              estruturando uma operação que converte mais e cresce com previsibilidade.
+            </p>
+            <p class="eyebrow" style="margin-top:1rem;">Artefatos</p>
+            <ul class="artifact-grid" style="grid-template-columns:1fr;">
+              <li>Revisão dos scripts de venda, cliente oculto</li>
+              <li>Análise de objeções reais do mês e treinamento comercial</li>
+              <li>Atualização das réguas de conversão e follow-up</li>
+            </ul>
+          </div>
+          <div class="session-visual" style="background:linear-gradient(160deg,#e02424,#8a0c10);color:#fff;">
+            <strong>Comercial que fecha</strong>
+            <span>Scripts, objeções e follow-up calibrados no que realmente converte.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 FABRICA -->
+    <section id="fabrica" data-slide="11">
+      <div class="inner glass" style="text-align:center;max-width:820px;">
+        <p class="eyebrow highlight">Evento exclusivo para clientes V4</p>
+        <h2>Fábrica de Receita</h2>
+        <div class="gold-line" style="margin-left:auto;margin-right:auto;"></div>
+        <div class="card" style="margin-top:0.85rem;background:rgba(224,36,36,0.55);">
+          <h3 style="font-size:1.15rem;">Tenha acesso a 2 dias de imersão presencial anual</h3>
+        </div>
+        <p class="lead" style="margin:1rem auto 0;text-align:center;">
+          Análise ao vivo do seu negócio com especialistas V4 e os melhores empresários do programa.
+          <strong style="color:#fff;">Hot seats, workshops e networking de alto nível.</strong>
+        </p>
+      </div>
+    </section>
+
+    <!-- 12 COMUNIDADE -->
+    <section id="comunidade" data-slide="12">
+      <div class="inner">
+        <p class="eyebrow">Empresa que Vende</p>
+        <h2>Comunidade</h2>
+        <div class="gold-line"></div>
+        <div class="grid-3">
+          <article class="card">
+            <div class="card-num">Ao vivo</div>
+            <h3>Monitoria coletiva mensal</h3>
+            <p>Encontros exclusivos com especialistas V4 e peers do programa para ajustar rota juntos.</p>
+          </article>
+          <article class="card">
+            <div class="card-num">WhatsApp</div>
+            <h3>Comunidade WPP exclusiva</h3>
+            <p>Grupo fechado para troca rápida, alinhamentos e suporte contínuo entre empresários EQV.</p>
+          </article>
+          <article class="card">
+            <div class="card-num">Framework</div>
+            <h3>Conteúdo semanal</h3>
+            <p>Conteúdo recorrente em aquisição, retenção e monetização para manter o time no método.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13 POR QUE V4 -->
+    <section id="por-que" data-slide="13">
+      <div class="inner">
+        <p class="eyebrow">Nosso negócio é vender o seu</p>
+        <h2>Por que a V4</h2>
+        <div class="gold-line"></div>
+        <div class="grid-2">
+          <article class="card">
+            <h3>Você para de apostar e começa a operar com método</h3>
+            <p>Menos tentativa e perda de investimento, mais decisão seguindo um método testado e comprovado.</p>
+          </article>
+          <article class="card">
+            <h3>Operamos com dados de mercado + experiência real</h3>
+            <p>Não são achismos. São aprendizados de milhares de operações e sistemas de receita analisados.</p>
+          </article>
+          <article class="card">
+            <h3>Não empurramos serviços. Prescrevemos o necessário</h3>
+            <p>Você não compra um “pacote”. Você recebe a solução exata para o que destrava sua receita.</p>
+          </article>
+          <article class="card">
+            <h3>Garantia incondicional de risco zero</h3>
+            <p>Se o método não fizer sentido para você, você não assume o risco. Nós assumimos.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14 INVESTIMENTO -->
+    <section id="investimento" data-slide="14">
+      <div class="inner">
+        <div class="glass price-card">
+          <p class="eyebrow highlight">Investimento</p>
+          <h2>Tudo isso por:</h2>
+          <p class="price-old">De R$ 30.000,00</p>
+          <p style="font-size:0.95rem;color:var(--muted);">Por: 6x de</p>
+          <div class="price-main">2.900 <small>/mês</small></div>
+          <p class="price-cash">Ou <strong>R$ 17.000</strong> à vista</p>
+          <div class="cashback">13K de cashback aplicado</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 15 GARANTIA -->
+    <section id="garantia" data-slide="15">
+      <div class="inner glass" style="text-align:center;max-width:720px;">
+        <div class="guarantee-seal">
+          <span>GARANTIA DE</span>
+          <strong>REEMBOLSO</strong>
+        </div>
+        <h2 style="font-size:clamp(1.25rem,3vh,1.8rem);">
+          E se após <span class="highlight">30 dias de serviço</span>, você não estiver
+          satisfeito com a entrega, <strong>devolvemos o</strong>
+          <span class="highlight"> investimento efetuado!</span>
+        </h2>
+      </div>
+    </section>
+
+  </div>
+
+  <footer class="deck-footer">
+    <span>Restaurante e Hotel Léo × V4 · Empresa que Vende</span>
+    <div class="progress-wrap"><div class="progress-fill" id="progressFill"></div></div>
+    <span id="slideCounter">1 / 15</span>
+  </footer>
+
+  <script>
+  (function () {
+    const tpl = document.getElementById("v4-logo-tpl");
+    document.querySelectorAll("#deck section").forEach((slide) => {
+      slide.insertBefore(tpl.content.cloneNode(true), slide.firstChild);
+    });
+
+    const TOTAL = 15;
+    let current = 1;
+    const slides = Array.from(document.querySelectorAll("#deck section[id]"));
+    const navLinks = document.querySelectorAll(".nav-dots a");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const progressFill = document.getElementById("progressFill");
+    const slideCounter = document.getElementById("slideCounter");
+    const blendBar = document.querySelector(".blend-progress");
+    let wheelLock = false;
+
+    function updateUI() {
+      const p = current / TOTAL;
+      if (progressFill) progressFill.style.width = (p * 100) + "%";
+      if (slideCounter) slideCounter.textContent = current + " / " + TOTAL;
+      if (blendBar) blendBar.style.transform = "scaleX(" + Math.max(0.05, p) + ")";
+      document.documentElement.style.setProperty("--slide-progress", p);
+      if (prevBtn) prevBtn.disabled = current === 1;
+      if (nextBtn) nextBtn.disabled = current === TOTAL;
+      navLinks.forEach((a) => a.classList.toggle("active", Number(a.dataset.slide) === current));
+    }
+
+    function goTo(n, dir) {
+      if (n < 1 || n > TOTAL || n === current) return;
+      const prev = slides[current - 1];
+      const next = slides[n - 1];
+      const fwd = dir === "forward" || (dir !== "back" && n > current);
+      prev.classList.remove("slide-active");
+      prev.classList.add(fwd ? "slide-exit-left" : "slide-exit-right");
+      setTimeout(() => prev.classList.remove("slide-exit-left", "slide-exit-right"), 420);
+      next.classList.add("slide-active");
+      current = n;
+      updateUI();
+    }
+
+    if (prevBtn) prevBtn.addEventListener("click", () => goTo(current - 1, "back"));
+    if (nextBtn) nextBtn.addEventListener("click", () => goTo(current + 1, "forward"));
+    navLinks.forEach((a) => a.addEventListener("click", (e) => { e.preventDefault(); goTo(Number(a.dataset.slide)); }));
+
+    document.addEventListener("wheel", (e) => {
+      if (Math.abs(e.deltaY) < 20 || wheelLock) return;
+      e.preventDefault();
+      wheelLock = true;
+      goTo(current + (e.deltaY > 0 ? 1 : -1), e.deltaY > 0 ? "forward" : "back");
+      setTimeout(() => { wheelLock = false; }, 450);
+    }, { passive: false });
+
+    document.addEventListener("keydown", (e) => {
+      if (["ArrowRight", " ", "PageDown"].includes(e.key)) { e.preventDefault(); goTo(current + 1, "forward"); }
+      if (["ArrowLeft", "PageUp"].includes(e.key)) { e.preventDefault(); goTo(current - 1, "back"); }
+    });
+
+    let tx = 0;
+    document.addEventListener("touchstart", (e) => { tx = e.changedTouches[0].screenX; }, { passive: true });
+    document.addEventListener("touchend", (e) => {
+      const dx = e.changedTouches[0].screenX - tx;
+      if (Math.abs(dx) > 50) goTo(current + (dx < 0 ? 1 : -1), dx < 0 ? "forward" : "back");
+    }, { passive: true });
+
+    updateUI();
+  })();
+  </script>
+</body>
+</html>
