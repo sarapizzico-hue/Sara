@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Padrão de proposta · Narrativa · Dados · Produto</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --brand:#e50915; --brand-light:#ff1a27; --bg:#050505; --surf:rgba(20,20,20,.92);
+      --surf2:#141414; --bd:rgba(255,255,255,.1); --txt:#fafafa; --mut:#a3a3a3;
+      --ok:#86efac; --warn:#fde68a; --hot:#fca5a5; --info:#93c5fd;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--txt);font:14px/1.55 Inter,system-ui,sans-serif;
+      background-image:radial-gradient(ellipse 80% 45% at 50% -15%,rgba(229,9,21,.18),transparent)}
+    .top{position:sticky;top:0;z-index:10;backdrop-filter:blur(14px);background:rgba(5,5,5,.88);border-bottom:1px solid var(--bd);padding:12px 22px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+    .logo{font-weight:900}.logo span{color:var(--brand-light)}
+    .pills{display:flex;flex-wrap:wrap;gap:8px}
+    .pill{font-size:11px;font-weight:700;color:var(--mut);border:1px solid var(--bd);padding:5px 10px;border-radius:999px;text-decoration:none}
+    .pill:hover{color:#fff;border-color:rgba(255,255,255,.28)}
+    .wrap{max-width:1120px;margin:0 auto;padding:28px 20px 80px}
+    h1{margin:0 0 8px;font-size:clamp(24px,4vw,36px);font-weight:900;letter-spacing:-.03em}
+    .lead{color:var(--mut);max-width:900px;margin:0 0 18px;font-size:14px}
+    .lead a{color:var(--ok)}
+    .callout{padding:14px 16px;border-radius:12px;border:1px solid rgba(96,165,250,.3);background:rgba(96,165,250,.08);color:#bfdbfe;font-size:13px;margin-bottom:14px}
+    .callout.warn{border-color:rgba(250,204,21,.28);background:rgba(250,204,21,.06);color:#fde68a}
+    .callout.ok{border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.08);color:#bbf7d0}
+    .callout.hot{border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.08);color:#fecaca}
+    .section{background:var(--surf);border:1px solid var(--bd);border-radius:16px;padding:20px 22px;margin-bottom:14px}
+    .section h2{margin:0 0 6px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);font-weight:800}
+    .section h3{margin:0 0 12px;font-size:18px;font-weight:900}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:800px){.grid2{grid-template-columns:1fr}}
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}@media(max-width:900px){.grid3{grid-template-columns:1fr}}
+    .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}@media(max-width:900px){.grid4{grid-template-columns:1fr 1fr}}
+    .card{background:var(--surf2);border:1px solid var(--bd);border-radius:12px;padding:14px 16px}
+    .card .t{font-weight:800;margin-bottom:6px}
+    .card .d{font-size:12px;color:#d4d4d4}
+    .tag{display:inline-block;padding:2px 8px;border-radius:999px;font-size:10px;font-weight:800;border:1px solid var(--bd);margin-bottom:8px}
+    .tag.ok{color:var(--ok);border-color:rgba(34,197,94,.35)}
+    .tag.warn{color:var(--warn);border-color:rgba(250,204,21,.35)}
+    .tag.hot{color:var(--hot);border-color:rgba(239,68,68,.4)}
+    .tag.info{color:var(--info);border-color:rgba(96,165,250,.35)}
+    ol.steps,ul{margin:0;padding-left:18px} li{margin:6px 0;color:#e5e5e5}
+    table{width:100%;border-collapse:collapse;font-size:12.5px}
+    th,td{padding:9px 8px;border-bottom:1px solid var(--bd);text-align:left;vertical-align:top}
+    th{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);font-weight:800}
+    .muted{color:var(--mut);font-size:12px}
+    .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}@media(max-width:900px){.flow{grid-template-columns:1fr 1fr}}
+    .flow-step{background:var(--surf2);border:1px solid var(--bd);border-radius:12px;padding:12px}
+    .flow-step .n{font-size:10px;font-weight:800;color:var(--mut);letter-spacing:.08em;text-transform:uppercase}
+    .flow-step .t{font-weight:800;margin:4px 0}
+    .flow-step .d{font-size:12px;color:#d4d4d4}
+    label{display:block;font-size:12px;font-weight:700;margin:0 0 6px;color:#e5e5e5}
+    input,textarea,select{width:100%;background:#0a0a0a;border:1px solid var(--bd);border-radius:10px;color:var(--txt);padding:10px 12px;font:inherit;margin-bottom:12px}
+    textarea{min-height:72px;resize:vertical}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:700px){.row{grid-template-columns:1fr}}
+    .btn{appearance:none;border:0;border-radius:12px;padding:12px 16px;font:inherit;font-weight:800;cursor:pointer;background:linear-gradient(135deg,#e50915,#ff1a27);color:#fff}
+    .btn.ghost{background:transparent;border:1px solid var(--bd);color:#fff}
+    .btn-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+    #fichaOut{white-space:pre-wrap;background:#0a0a0a;border:1px solid var(--bd);border-radius:12px;padding:14px;font-size:12px;line-height:1.5;display:none;max-height:420px;overflow:auto}
+    .slide-n{font:800 11px/1 Inter,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#fda4af}
+    footer{text-align:center;color:var(--mut);font-size:11px;margin-top:28px;padding-top:16px;border-top:1px solid var(--bd)}
+    footer a{color:var(--ok)}
+  </style>
+</head>
+<body>
+<header class="top">
+  <div class="logo">V4 <span>COMPANY</span></div>
+  <div class="pills">
+    <a class="pill" href="template-proposta-padrao.html">Abrir deck-padrão</a>
+    <a class="pill" href="proposta-g6-estruturacao-comercial.html">Caso âncora G6</a>
+    <a class="pill" href="farmer-sara.html">Hub Sara</a>
+  </div>
+</header>
+
+<div class="wrap">
+  <h1>Padrão de proposta para o cliente</h1>
+  <p class="lead">
+    Extraído da <strong>Estruturação Comercial da G6</strong> — o modelo que funciona.
+    A lógica se mantém; o que muda por conta é <strong>narrativa</strong>, <strong>dados</strong> e <strong>produto</strong>.
+    Deck para duplicar: <a href="template-proposta-padrao.html">template-proposta-padrao.html</a>
+    · caso original: <a href="proposta-g6-estruturacao-comercial.html">proposta G6 EC</a>.
+  </p>
+
+  <div class="callout warn">
+    <strong>Frase-mestra:</strong> nada solto no deck.
+    O cliente precisa se reconhecer (narrativa), ver a conta que dói (dados) e entender o que vai ficar instalado no time (produto) — antes de ver preço.
+  </div>
+
+  <div class="section">
+    <h2>Arquitetura</h2>
+    <h3>Três atos + uma decisão. Dezoito slides.</h3>
+    <div class="flow" style="margin-bottom:16px">
+      <div class="flow-step">
+        <div class="n">Ato 1</div>
+        <div class="t">Narrativa</div>
+        <div class="d">Capa · contexto · visão · promessa. O cliente se reconhece numa frase.</div>
+      </div>
+      <div class="flow-step">
+        <div class="n">Ato 2</div>
+        <div class="t">Dados</div>
+        <div class="d">A conta que explica a estagnação + o mapa de dores específicas.</div>
+      </div>
+      <div class="flow-step">
+        <div class="n">Ato 3</div>
+        <div class="t">Produto</div>
+        <div class="d">Formato · escopo · fases · o que “pronto” significa. Capacidade, não PDF.</div>
+      </div>
+      <div class="flow-step">
+        <div class="n">Fecho</div>
+        <div class="t">Decisão</div>
+        <div class="d">Recap dores + dados · um preço · por que agora.</div>
+      </div>
+    </div>
+    <p class="muted">No deck G6 a ordem na sala é: narrativa (capa/contexto) → dados (vazamento + dores) → narrativa de solução (visão/promessa) → produto → recap → investimento. Não abra preço antes da conta e do encaixe.</p>
+  </div>
+
+  <div class="section">
+    <h2>Mapa dos slides</h2>
+    <h3>O que cada tela precisa cumprir — adaptar texto, manter função</h3>
+    <div class="scroll" style="overflow-x:auto">
+      <table>
+        <thead>
+          <tr><th>Slide</th><th>Ato</th><th>Função na sala</th><th>Pergunta que responde</th><th>Exemplo G6</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="slide-n">01</span><br><strong>Capa</strong></td>
+            <td>Narrativa</td>
+            <td>Tese em uma linha. De estado atual → estado instalado.</td>
+            <td>O que esta reunião decide?</td>
+            <td>Do comercial artesanal à máquina de receita</td>
+          </tr>
+          <tr>
+            <td><span class="slide-n">02</span><br><strong>Contexto</strong></td>
+            <td>Narrativa</td>
+            <td>Reframe: não é o sintoma óbvio. É a causa raiz.</td>
+            <td>Vocês não têm problema de X. Têm Y.</td>
+            <td>Não é lead. É comercial reativo sem sistema.</td>
+          </tr>
+          <tr>
+            <td><span class="slide-n">03</span><br><strong>Vazamento</strong></td>
+            <td>Dados</td>
+            <td>A conta na mesa. Entrada vs. o que escapa. Uma pergunta que o CRM não responde.</td>
+            <td>Quanto dinheiro a operação está vazando?</td>
+            <td>~1.000 entra / 3.755 saídas em 6 meses / churn real inexistente</td>
+          </tr>
+          <tr>
+            <td><span class="slide-n">04</span><br><strong>Dores × produto</strong></td>
+            <td>Dados</td>
+            <td>Seis dores nomeadas do cliente. Cada uma é o que o produto fecha.</td>
+            <td>Onde perde previsibilidade — e o que a oferta fecha?</td>
+            <td>Processo, script, CRM, gestor, cadência, treino</td>
+          </tr>
+          <tr>
+            <td><span class="slide-n">05</span><br><strong>Visão</strong></td>
+            <td>Narrativa</td>
+            <td>A ordem certa. Três passos. Uma frase que vira âncora.</td>
+            <td>Por que não apertar meta agora?</td>
+            <td>Sistema → gestão → receita. Sem sistema, meta vira pressão.</td>
+          </tr>
+          <tr>
+            <td><span class="slide-n">06</span><br><strong>Promessa</strong></td>
+            <td>Narrativa</td>
+            <td>O que a V4 instala neste projeto. Não o catálogo.</td>
+            <td>O que fica rodando no time no final?</td>
+            <td>Fundação comercial instalada. Não é entregar PDF.</td>
+          </tr>
+          <tr>
+            <td><span class="slide-n">07</span><br><strong>Formato</strong></td>
+            <td>Produto</td>
+            <td>Como o projeto existe: tempo, carga, quem executa, ritmo, presencial, saída.</td>
+            <td>Isso é assessoria solta ou instalação?</td>
+            <td>12 semanas · 106,5h · V4 + cliente · F1+F5 presenciais</td>
+          </tr>
+          <tr>
+            <td><span class="slide-n">08</span><br><strong>Escopo</strong></td>
+            <td>Produto</td>
+            <td>O que instala. Duas colunas: fundação operacional + controle/adesão.</td>
+            <td>O que o time leva para o dia a dia?</td>
+            <td>Jornada, scripts, rituais, CRM como painel de receita</td>
+          </tr>
+          <tr>
+            <td><span class="slide-n">09</span><br><strong>Fases</strong></td>
+            <td>Produto</td>
+            <td>Trilho completo. Uma linha por fase, com horas.</td>
+            <td>Qual a sequência até handover?</td>
+            <td>Diagnóstico → arquitetura → CRM → estratégica → instalação → handover</td>
+          </tr>
+          <tr>
+            <td><span class="slide-n">10–15</span><br><strong>Detalhe de fase</strong></td>
+            <td>Produto</td>
+            <td>Entregas + “encaixe [cliente]”. Sem encaixe, a fase é genérica.</td>
+            <td>O que sai desta fase — neste cliente?</td>
+            <td>Dual-track loja × PAP · Mateus herda a rotina</td>
+          </tr>
+          <tr>
+            <td><span class="slide-n">16</span><br><strong>Pronto</strong></td>
+            <td>Produto</td>
+            <td>Critérios visíveis de sucesso. O que o sponsor vê funcionando.</td>
+            <td>Como sabemos que instalou?</td>
+            <td>Receita Previsível: pipeline usado, reunião acontecendo, follow-up, gestor nos indicadores</td>
+          </tr>
+          <tr>
+            <td><span class="slide-n">17</span><br><strong>Recap</strong></td>
+            <td>Decisão</td>
+            <td>Dores de um lado, dados do outro. Antes do preço.</td>
+            <td>O que está em jogo?</td>
+            <td>Reativo + 3.755 saídas + CRM cego vs. números da operação</td>
+          </tr>
+          <tr>
+            <td><span class="slide-n">18</span><br><strong>Investimento</strong></td>
+            <td>Decisão</td>
+            <td>Âncora → condição única. Incluso · por que agora · resultado. Um preço.</td>
+            <td>Quanto — e por que fechar agora?</td>
+            <td>R$ 89,6k → condição R$ 71,5k · um número, desconto embutido</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Ato 1 · Narrativa</h2>
+    <h3>O cliente precisa se reconhecer antes de ver produto</h3>
+    <div class="grid2">
+      <div class="card">
+        <span class="tag hot">Obrigatório</span>
+        <div class="t">Tese da capa</div>
+        <div class="d">Fórmula: <strong>Do [jeito atual] ao [estado instalado]</strong>. Não use slogan de agência. Use a transformação que este projeto entrega.</div>
+      </div>
+      <div class="card">
+        <span class="tag hot">Obrigatório</span>
+        <div class="t">Reframe do contexto</div>
+        <div class="d">Fórmula: <strong>Vocês não têm problema de [sintoma]. Têm [causa raiz].</strong> Quatro evidências do dia a dia + uma leitura em número/palavra.</div>
+      </div>
+      <div class="card">
+        <span class="tag warn">Âncora</span>
+        <div class="t">Ordem certa</div>
+        <div class="d">Três passos (sistema → gestão → receita, ou o equivalente desta conta). Uma quote que o decisor possa repetir depois.</div>
+      </div>
+      <div class="card">
+        <span class="tag warn">Promessa</span>
+        <div class="t">O que instala</div>
+        <div class="d">Projeto fechado, não retainer vago. “Não é entregar PDF. É deixar a operação rodando.” Adapte a frase, mantenha a tese.</div>
+      </div>
+    </div>
+    <div class="callout ok" style="margin-top:14px">
+      <strong>Teste da narrativa:</strong> se apagar o nome do cliente e ainda fizer sentido para qualquer empresa, está genérico demais. Cada card do contexto precisa ter um fato desta conta.
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Ato 2 · Dados</h2>
+    <h3>A conta que explica por que o comercial não escala</h3>
+    <div class="grid3">
+      <div class="card">
+        <span class="tag info">Entrada</span>
+        <div class="t">O que já funciona</div>
+        <div class="d">Volume, CPL, tempo de resposta, time, demanda. Serve para não parecer que você ignora o que eles já têm.</div>
+      </div>
+      <div class="card">
+        <span class="tag hot">Saída</span>
+        <div class="t">O que vaza</div>
+        <div class="d">Churn, cancelamento, proposta sem retorno, lead sem dono, CAC queimado. Um número grande + série mensal se existir.</div>
+      </div>
+      <div class="card">
+        <span class="tag warn">Pergunta</span>
+        <div class="t">O dado que não existe</div>
+        <div class="d">A pergunta que o CRM não responde hoje (churn real, conversão proposta→contrato, motivo de perda). Isso justifica o produto.</div>
+      </div>
+    </div>
+    <ul style="margin-top:14px">
+      <li>Número sem fonte não entra. “Citado pela operação”, “CRM”, “Meta Ads”, “call do dia X”.</li>
+      <li>Não prometa taxa de case maduro como se fosse desta conta.</li>
+      <li>Se o ticket é baixo, use LTV / vazamento acumulado — senão a conta parece menor que o preço.</li>
+      <li>Seis dores, não quinze. Cada dor do slide 04 precisa ter dono no produto (fase ou entrega).</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Ato 3 · Produto</h2>
+    <h3>Vende capacidade instalada. Não vende documento.</h3>
+    <div class="grid2">
+      <div class="card">
+        <div class="t">Formato (slide 07)</div>
+        <ul>
+          <li>Duração</li>
+          <li>Carga V4 (horas reais, não “acompanhamento”)</li>
+          <li>Quem executa (V4 + time do cliente)</li>
+          <li>Ritmo (semanal, sponsor, checkpoints)</li>
+          <li>Onde é presencial (adesão se decide na sala)</li>
+          <li>Saída (handover + plano de continuidade)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="t">Fases (slides 09–15)</div>
+        <ul>
+          <li>4 a 6 fases. Uma fundação, não um cardápio.</li>
+          <li>Cada fase: horas + entregas + <strong>encaixe neste cliente</strong>.</li>
+          <li>Sem a linha “Encaixe [cliente]”, a fase é catálogo.</li>
+          <li>Instalação e handover não são opcionais — são o que diferencia de PDF.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout hot" style="margin-top:14px">
+      <strong>Produto core vs. essencial:</strong> o core resolve a dor #1. O essencial (CRM, retenção, dual-track) entra como o que fecha 100% — não como “se quiser a gente também faz”.
+      Um preço. Desconto já embutido. Sem menu de condições.
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Caso âncora</h2>
+    <h3>G6 Internet · como os três atos se amarraram</h3>
+    <div class="grid3">
+      <div class="card">
+        <span class="tag hot">Narrativa</span>
+        <div class="t">Comercial reativo sem sistema</div>
+        <div class="d">Lead não é o problema. Loja + PAP sem padrão, CRM que não governa, meta que desce quando aperta. Promessa: fundação instalada em projeto fechado.</div>
+      </div>
+      <div class="card">
+        <span class="tag info">Dados</span>
+        <div class="t">A conta do vazamento</div>
+        <div class="d">~1.000 ativações/mês · 3.755 cancelamentos em 6 meses · CPL R$ 7,51 · WhatsApp ~1 min · churn real ainda não conciliado.</div>
+      </div>
+      <div class="card">
+        <span class="tag ok">Produto</span>
+        <div class="t">EC · 12 semanas · 106,5h</div>
+        <div class="d">Seis fases, dual-track loja × PAP, presenciais em diagnóstico e instalação, Mateus herda a rotina, handover 60 dias. Condição única R$ 71,5k.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Ficha do próximo cliente</h2>
+    <h3>Preencha antes de abrir o deck. Depois cole no objeto PROPOSTA.</h3>
+    <p class="muted" style="margin-top:-6px;margin-bottom:14px">Campos mínimos. Listas: uma linha por item. Barras de vazamento no formato <code>jan:415</code>.</p>
+
+    <div class="row">
+      <div>
+        <label>Cliente</label>
+        <input id="f_cliente" placeholder="Nome do cliente" />
+      </div>
+      <div>
+        <label>Produto (como vai na capa)</label>
+        <input id="f_produto" placeholder="Estruturação Comercial" />
+      </div>
+    </div>
+
+    <label>Narrativa · tese da capa (Do X ao Y)</label>
+    <input id="f_tese" placeholder="Do comercial artesanal à máquina de receita" />
+
+    <label>Narrativa · lede da capa</label>
+    <textarea id="f_lede" placeholder="O que instala, em quanto tempo, para quem opera."></textarea>
+
+    <label>Narrativa · reframe (Vocês não têm X. Têm Y.)</label>
+    <input id="f_reframe" placeholder="Vocês não têm problema de lead. Têm um comercial reativo sem sistema." />
+
+    <label>Narrativa · 4 evidências (título — texto)</label>
+    <textarea id="f_evidencias" placeholder="Entra ~1.000 / sai ~800 — Volume alto, retenção frágil.&#10;CRM existe, mas não governa — Sem motivo de perda nem próximo passo."></textarea>
+
+    <label>Narrativa · leitura (palavra-número + frase)</label>
+    <input id="f_leitura" placeholder="Comercial reativo — Demanda entra. Processo não segura." />
+
+    <label>Narrativa · quote da visão</label>
+    <input id="f_quote" placeholder="Sem sistema, meta vira pressão. Com sistema, meta vira consequência." />
+
+    <label>Narrativa · promessa (o que a V4 instala neste projeto)</label>
+    <textarea id="f_promessa" placeholder="Em um projeto fechado, a V4 constrói e instala a fundação comercial."></textarea>
+
+    <div class="row">
+      <div>
+        <label>Dados · entrada (número + o que é)</label>
+        <input id="f_entrada" placeholder="~1.000 — ativações / mês" />
+      </div>
+      <div>
+        <label>Dados · vazamento (número + o que é)</label>
+        <input id="f_saida" placeholder="3.755 — cancelamentos em 6 meses" />
+      </div>
+    </div>
+
+    <label>Dados · evidências da entrada (uma por linha)</label>
+    <textarea id="f_entrada_bullets" placeholder="Meta Forms 1.269 leads · CPL R$ 7,51"></textarea>
+
+    <label>Dados · série mensal (rótulo:valor)</label>
+    <input id="f_serie" placeholder="jan:415, fev:560, mar:614, abr:746, mai:715, jun:705" />
+
+    <label>Dados · a pergunta que o CRM não responde</label>
+    <textarea id="f_pergunta" placeholder="Qual é a taxa real de churn? Para calcular, falta carteira ativa por mês e cancelamento por coorte."></textarea>
+
+    <label>Dados · 6 dores que o produto fecha (título — texto)</label>
+    <textarea id="f_dores" placeholder="Processo comercial inconsistente — Loja e PAP vendem sem padrão."></textarea>
+
+    <div class="row">
+      <div>
+        <label>Produto · duração</label>
+        <input id="f_duracao" placeholder="12 semanas" />
+      </div>
+      <div>
+        <label>Produto · carga V4</label>
+        <input id="f_carga" placeholder="106,5h" />
+      </div>
+    </div>
+
+    <label>Produto · o que instala (fundação — uma linha cada)</label>
+    <textarea id="f_fundacao" placeholder="Arquitetura por canal com critérios de etapa"></textarea>
+
+    <label>Produto · o que instala (controle e adesão)</label>
+    <textarea id="f_controle" placeholder="CRM como painel de receita · instalação assistida"></textarea>
+
+    <label>Produto · fases (nome · horas — o que faz — encaixe neste cliente)</label>
+    <textarea id="f_fases" placeholder="Diagnóstico operacional · 18h — Operação real, não documento. — Presencial no onboarding."></textarea>
+
+    <label>Produto · critérios de “pronto” (uma linha cada)</label>
+    <textarea id="f_sucesso" placeholder="Pipeline configurado e usado&#10;Reunião semanal acontecendo"></textarea>
+
+    <div class="row">
+      <div>
+        <label>Decisão · âncora (valor de referência)</label>
+        <input id="f_ancora" placeholder="R$ 89.635,85" />
+      </div>
+      <div>
+        <label>Decisão · condição única (um preço)</label>
+        <input id="f_preco" placeholder="R$ 71.582,32" />
+      </div>
+    </div>
+
+    <label>Decisão · por que agora (uma frase com o dado que dói)</label>
+    <textarea id="f_agora" placeholder="Com 3.755 saídas em 6 meses e churn real ainda não conciliado, estruturar o comercial é a decisão que dá previsibilidade."></textarea>
+
+    <div class="btn-row">
+      <button class="btn" type="button" id="btnGerar">Gerar briefing para colar no deck</button>
+      <button class="btn ghost" type="button" id="btnCopiar">Copiar</button>
+      <a class="btn ghost" href="template-proposta-padrao.html" style="text-decoration:none;display:inline-flex;align-items:center">Abrir o deck-padrão</a>
+    </div>
+    <pre id="fichaOut"></pre>
+  </div>
+
+  <div class="section">
+    <h2>Como adaptar o deck</h2>
+    <h3>Duplicar o arquivo, trocar o bloco PROPOSTA, apresentar</h3>
+    <ol class="steps">
+      <li>Preencha a ficha acima (ou a tabela do mapa) com fatos desta conta — não com o texto da G6.</li>
+      <li>Abra <a href="template-proposta-padrao.html" style="color:#86efac">template-proposta-padrao.html</a>. O arquivo já vem com o caso G6 como exemplo.</li>
+      <li>No topo do arquivo, edite o objeto <code>PROPOSTA</code>: narrativa, dados, produto, decisão. O layout não muda.</li>
+      <li>Para treinar a ordem na sala, abra com <code>?mapa=1</code> — entra um slide extra com os três atos.</li>
+      <li>Na apresentação: setas, espaço ou swipe. <code>G</code> mostra o selo do ato (Narrativa / Dados / Produto) em cada slide.</li>
+      <li>Preço: um número só, desconto já embutido, mesma forma de pagamento da EE. Sem menu.</li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <h2>Regras da sala</h2>
+    <h3>Repetir em qualquer conta — saíram da G6 e do playbook</h3>
+    <div class="grid2">
+      <div class="card">
+        <div class="t">Fazer</div>
+        <ul>
+          <li>Nomear a dor com o vocabulário do cliente</li>
+          <li>Mostrar o que já funciona, depois o vazamento</li>
+          <li>Encaixar cada fase neste cliente (canal, gestor, ritual)</li>
+          <li>Critério de “pronto” visível para o sponsor</li>
+          <li>Recap dores + dados imediatamente antes do preço</li>
+          <li>Um preço · uma decisão</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="t">Evitar</div>
+        <ul>
+          <li>Deck que serve para qualquer empresa se apagar o logo</li>
+          <li>Abrir investimento antes da conta e do encaixe</li>
+          <li>Produto como lista de entregáveis sem instalação</li>
+          <li>Várias formas de pagamento na mesma tela</li>
+          <li>Upsell “se quiser a gente também faz”</li>
+          <li>Projeção ou case soltos, sem amarrar na tese</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    V4 · Padrão de proposta ·
+    <a href="template-proposta-padrao.html">Deck</a> ·
+    <a href="proposta-g6-estruturacao-comercial.html">G6 EC</a> ·
+    <a href="plano-acao-modelo-adaptavel.html">Plano de ação</a> ·
+    <a href="farmer-sara.html">Hub Sara</a>
+  </footer>
+</div>
+
+<script>
+(function(){
+  function val(id){ var el = document.getElementById(id); return (el && el.value || '').trim(); }
+  function block(title, body){ return body ? title + '\n' + body + '\n\n' : ''; }
+  document.getElementById('btnGerar').addEventListener('click', function(){
+    var out = '';
+    out += '# Briefing de proposta · ' + (val('f_cliente') || '[CLIENTE]') + '\n';
+    out += 'Produto: ' + (val('f_produto') || '[PRODUTO]') + '\n\n';
+    out += '## NARRATIVA\n';
+    out += block('Tese:', val('f_tese'));
+    out += block('Lede:', val('f_lede'));
+    out += block('Reframe:', val('f_reframe'));
+    out += block('Evidências:', val('f_evidencias'));
+    out += block('Leitura:', val('f_leitura'));
+    out += block('Quote:', val('f_quote'));
+    out += block('Promessa:', val('f_promessa'));
+    out += '## DADOS\n';
+    out += block('Entrada:', val('f_entrada'));
+    out += block('Evidências da entrada:', val('f_entrada_bullets'));
+    out += block('Vazamento:', val('f_saida'));
+    out += block('Série:', val('f_serie'));
+    out += block('Pergunta que o CRM não responde:', val('f_pergunta'));
+    out += block('Dores:', val('f_dores'));
+    out += '## PRODUTO\n';
+    out += block('Duração / carga:', [val('f_duracao'), val('f_carga')].filter(Boolean).join(' · '));
+    out += block('Fundação:', val('f_fundacao'));
+    out += block('Controle e adesão:', val('f_controle'));
+    out += block('Fases:', val('f_fases'));
+    out += block('Pronto:', val('f_sucesso'));
+    out += '## DECISÃO\n';
+    out += block('Âncora → condição:', [val('f_ancora'), val('f_preco')].filter(Boolean).join(' → '));
+    out += block('Por que agora:', val('f_agora'));
+    out += '---\nCole este briefing no objeto PROPOSTA de template-proposta-padrao.html.\n';
+    var pre = document.getElementById('fichaOut');
+    pre.style.display = 'block';
+    pre.textContent = out.trim();
+  });
+  document.getElementById('btnCopiar').addEventListener('click', function(){
+    var pre = document.getElementById('fichaOut');
+    if (!pre.textContent) document.getElementById('btnGerar').click();
+    navigator.clipboard.writeText(pre.textContent).then(function(){
+      document.getElementById('btnCopiar').textContent = 'Copiado';
+      setTimeout(function(){ document.getElementById('btnCopiar').textContent = 'Copiar'; }, 1600);
+    });
+  });
+})();
+</script>
+</body>
+</html>
