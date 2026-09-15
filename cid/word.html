@@ -41,15 +41,15 @@
       transition: transform .15s ease, box-shadow .15s ease;
     }
     a.btn:hover { transform: translateY(-1px); }
-    .btn-word {
+    .btn-google {
       background: var(--dark); color: #fff;
       box-shadow: 0 12px 28px rgba(40,0,1,.22);
     }
-    .btn-google {
+    .btn-google span { color: #ffd0d0; }
+    .btn-word {
       background: #fff; color: var(--dark);
       border: 2px solid var(--red);
     }
-    .btn-google span { color: var(--red); }
     .btn-docx {
       background: #f8efef; color: var(--ink); border: 1px solid #ead4d4;
       font-weight: 600;
@@ -87,15 +87,15 @@
   <div class="card">
     <p class="kicker">CID — Clínica de Serviços Médicos × V4 Company</p>
     <h1>Empresa que Vende + SEO Growth</h1>
-    <p class="lead">Proposta comercial. Baixe em Word ou suba no Google Docs. Pacote: 6× R$ 5.418,57 no cartão de crédito.</p>
+    <p class="lead">Proposta comercial. O botão vermelho abre no Google. Pacote: 6× R$ 5.418,57 no cartão de crédito.</p>
 
     <div class="btns">
+      <a class="btn btn-google" id="btn-google" target="_blank" rel="noopener"
+         href="google.html">
+        Abrir direto no <span>Google Docs</span>
+      </a>
       <a class="btn btn-word" id="btn-word" href="https://github.com/sarapizzico-hue/Sara/raw/cursor/cid-eqv-seo-geo-c256/cid/CID-Empresa-que-Vende.docx">
         Baixar Word
-      </a>
-      <a class="btn btn-google" id="btn-google" target="_blank" rel="noopener"
-         href="https://docs.google.com/gview?url=https%3A%2F%2Fraw.githubusercontent.com%2Fsarapizzico-hue%2FSara%2Fcursor%2Fcid-eqv-seo-geo-c256%2Fcid%2FCID-Empresa-que-Vende.docx&amp;embedded=false">
-        Subir no <span>Google Docs</span>
       </a>
       <a class="btn btn-docx" href="https://github.com/sarapizzico-hue/Sara/raw/cursor/cid-eqv-seo-geo-c256/cid/CID-Empresa-que-Vende.doc">
         Baixar .doc (abre direto no Word)
@@ -106,15 +106,15 @@
     <div class="share">
       <label>Link para enviar</label>
       <div class="share-row">
-        <input id="share-url" readonly value="https://cdn.jsdelivr.net/gh/sarapizzico-hue/Sara@cursor/cid-eqv-seo-geo-c256/cid/word.html" />
+        <input id="share-url" readonly value="https://cdn.jsdelivr.net/gh/sarapizzico-hue/Sara@cursor/cid-eqv-seo-geo-c256/cid/google.html" />
         <button type="button" id="copy">Copiar</button>
       </div>
       <p class="ok" id="copied">Link copiado.</p>
     </div>
 
     <ol>
+      <li><strong>Abrir direto no Google Docs</strong> — abre no visualizador. Clique em <em>Abrir com o Documentos Google</em> para gravar no Drive.</li>
       <li><strong>Baixar Word</strong> — baixa o arquivo e abre no Microsoft Word.</li>
-      <li><strong>Subir no Google Docs</strong> — abre no visualizador do Google. Clique em <em>Abrir com o Documentos Google</em> para gravar no Drive.</li>
       <li>No Google Docs: <em>Arquivo → Fazer download → Microsoft Word (.docx)</em>.</li>
     </ol>
   </div>
