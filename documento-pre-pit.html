@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Documento de Pré-pit · Sara Pizzico · Saber → Executar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --brand:#e50915; --brand-light:#ff1a27; --bg:#050505; --surf:#141414;
+      --bd:rgba(255,255,255,.1); --txt:#fafafa; --mut:#a3a3a3;
+      --ok:#86efac; --warn:#fde68a; --hot:#fca5a5; --info:#93c5fd;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--txt);font:14px/1.55 Inter,system-ui,sans-serif;
+      background-image:radial-gradient(ellipse 80% 40% at 50% -10%,rgba(229,9,21,.16),transparent)}
+    .top{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);background:rgba(5,5,5,.88);border-bottom:1px solid var(--bd);padding:12px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+    .logo{font-weight:900;letter-spacing:-.02em}.logo span{color:var(--brand-light)}
+    .pill{font-size:11px;font-weight:700;color:var(--mut);border:1px solid var(--bd);padding:5px 10px;border-radius:999px}
+    .wrap{max-width:920px;margin:0 auto;padding:28px 20px 80px}
+    h1{margin:0 0 6px;font-size:clamp(24px,4vw,32px);font-weight:900;letter-spacing:-.03em}
+    .sub{color:var(--mut);margin:0 0 20px;font-size:13px;max-width:760px}
+    .sub a{color:var(--ok)}
+    .card{background:var(--surf);border:1px solid var(--bd);border-radius:16px;padding:20px;margin-bottom:14px}
+    .card h2{margin:0 0 4px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);font-weight:800}
+    .card h3{margin:0 0 14px;font-size:17px;font-weight:900}
+    label{display:block;font-size:10px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--mut);margin:0 0 6px}
+    .hint{font-size:11px;color:var(--mut);margin:-4px 0 10px}
+    input,textarea,select{width:100%;background:#0a0a0a;border:1px solid var(--bd);border-radius:10px;color:var(--txt);padding:10px 12px;font:inherit;margin-bottom:12px}
+    textarea{min-height:72px;resize:vertical}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+    @media(max-width:740px){.row,.row3{grid-template-columns:1fr}}
+    .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+    button{appearance:none;border:1px solid rgba(229,9,21,.5);background:linear-gradient(135deg,rgba(229,9,21,.28),#1a1a1a);color:#fff;font:inherit;font-weight:800;padding:12px 18px;border-radius:12px;cursor:pointer}
+    button.secondary{border-color:var(--bd);background:#111}
+    .out{white-space:pre-wrap;font-size:13px;line-height:1.65;color:#e5e5e5;background:#0a0a0a;border:1px solid var(--bd);border-radius:12px;padding:16px;min-height:240px}
+    .callout{padding:12px 14px;border-radius:12px;border:1px solid rgba(250,204,21,.28);background:rgba(250,204,21,.06);color:#fde68a;font-size:13px;margin-bottom:16px}
+    .callout.ok{border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.08);color:#bbf7d0}
+    .preview{border:1px solid var(--bd);border-radius:14px;padding:18px;background:#0c0c0c;margin-top:12px}
+    .preview h4{margin:0 0 6px;font-size:20px;font-weight:900}
+    .preview .st{color:var(--mut);font-size:13px;margin-bottom:14px}
+    .preview h5{margin:16px 0 6px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+    .preview p{margin:0 0 8px;font-size:13px;color:#e5e5e5}
+    footer{text-align:center;color:var(--mut);font-size:11px;margin-top:28px;padding-top:18px;border-top:1px solid var(--bd)}
+    footer a{color:var(--ok)}
+    @media print {
+      .top, .btns, .callout, footer, form .card:not(.print-keep) { display:none !important; }
+      body { background:#fff; color:#111; }
+      .preview { border-color:#ddd; background:#fff; color:#111; }
+    }
+  </style>
+</head>
+<body>
+<header class="top">
+  <div class="logo">V4 <span>COMPANY</span></div>
+  <div class="pill">Pré-pit · Sara Pizzico · Saber → Executar</div>
+</header>
+
+<div class="wrap">
+  <h1>Documento de Pré-pit</h1>
+  <p class="sub">
+    Estrutura da Sara Pizzico: consolidar contexto, modelo de negócio, público e alinhamentos
+    <strong>antes</strong> da proposta final. Sem este doc em “Pronto”, o card não agenda pitch de preço no Flow.
+    Processo: <a href="saber-executar-processo.html">Saber → Executar</a> ·
+    <a href="playbook-farmer-am.html">Playbook</a> ·
+    <a href="plano-acao-farmer.html">Plano de Ação</a>
+  </p>
+  <div class="callout">Preencha → Gerar. Copie para o Flow (<em>prepit_url</em>) ou para o Doc da conta. Pitch só com decisor + pago/pagando + NBO validada.</div>
+
+  <form id="form">
+    <div class="card">
+      <h2>01 · Conta</h2>
+      <h3>Quem entra na sala</h3>
+      <div class="row3">
+        <div><label>Cliente</label><input id="cliente" placeholder="Ex.: Isoluz" /></div>
+        <div><label>Data</label><input id="data" placeholder="15/09/2026" /></div>
+        <div><label>Farmer / dono</label><input id="farmer" value="Sara Pizzico" /></div>
+      </div>
+      <div class="row3">
+        <div><label>Squad</label><input id="squad" placeholder="Exclusive · Billions · Invictus" /></div>
+        <div>
+          <label>Semana / fase</label>
+          <select id="fase">
+            <option>S1</option><option>S2</option><option selected>S3</option><option>S4+</option>
+            <option>Pós-EE / carteira</option>
+          </select>
+        </div>
+        <div>
+          <label>Foco do Account Planning</label>
+          <select id="foco">
+            <option>Novos produtos</option>
+            <option>Otimização de campanhas</option>
+            <option>Retenção</option>
+          </select>
+        </div>
+      </div>
+      <label>Status da relação (1 linha)</label>
+      <input id="status" placeholder="Ex.: S3 entregue · decisor na sala · NBO Executar mapeada · aguardando pré-pit" />
+    </div>
+
+    <div class="card">
+      <h2>02 · Contexto do cliente</h2>
+      <h3>O que já está contratado e como está a conta</h3>
+      <label>Contrato atual / produtos ativos</label>
+      <textarea id="contrato" placeholder="EE em curso · já tem mídia? CRM? Executar bookado?"></textarea>
+      <div class="row">
+        <div>
+          <label>Saúde da conta</label>
+          <select id="saude"><option>Verde</option><option selected>Amarela</option><option>Vermelha</option></select>
+        </div>
+        <div>
+          <label>CSAT / NPS (se houver)</label>
+          <input id="csat" placeholder="CSAT 4.2 · NPS ainda não" />
+        </div>
+      </div>
+      <label>Expectativa do cliente (o que quer resolver / o que não espera)</label>
+      <textarea id="expectativa" placeholder="30/60/90 · fora de escopo · frase na voz dele"></textarea>
+    </div>
+
+    <div class="card">
+      <h2>03 · Modelo de negócio</h2>
+      <h3>Como a empresa fatura de verdade</h3>
+      <label>Como fatura, canais e unidades</label>
+      <textarea id="modelo" placeholder="Ex.: 5 lojas + 2 PAP · ticket médio · sazonalidade · quem vende"></textarea>
+      <div class="row">
+        <div>
+          <label>Faturamento de referência + margem</label>
+          <input id="fat" placeholder="Ex.: R$ 350k/mês · frente X com melhor margem" />
+        </div>
+        <div>
+          <label>Tier (faturamento)</label>
+          <select id="tier">
+            <option>TINY</option><option>SMALL</option>
+            <option selected>MEDIUM</option><option>LARGE</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>04 · Público</h2>
+      <h3>ICP e por onde o lead entra hoje</h3>
+      <label>Público / ICP</label>
+      <textarea id="publico" placeholder="Quem compra · persona · canal real de entrada (não o desejado)"></textarea>
+      <label>Trilha de venda (Inside / E-com / PDV)</label>
+      <input id="trilha" placeholder="Inside Sales · E-commerce · PDV" />
+    </div>
+
+    <div class="card">
+      <h2>05 · Diagnóstico e NBO</h2>
+      <h3>Gargalo → próxima oferta</h3>
+      <label>Gargalo #1 (onde a venda/operação morre)</label>
+      <textarea id="gargalo" placeholder="Etapa do funil / operação / posicionamento"></textarea>
+      <label>Next Best Offer (1 frase) + o que NÃO oferecer</label>
+      <textarea id="nbo" placeholder="Oferecer: EC 12 sem. · Não oferecer: Meta Ads agora"></textarea>
+      <div class="row3">
+        <div>
+          <label>STEP</label>
+          <select id="step">
+            <option>Destrava Receita</option>
+            <option>Ter</option>
+            <option>Saber</option>
+            <option selected>Executar</option>
+            <option>Combos Performance</option>
+          </select>
+        </div>
+        <div>
+          <label>Valor estimado (TCV / MRR)</label>
+          <input id="valor" placeholder="Ex.: TCV R$ 72k · MRR R$ 6.5k" />
+        </div>
+        <div>
+          <label>Timing</label>
+          <select id="timing">
+            <option selected>Agora</option>
+            <option>30d</option><option>60d</option><option>90d</option>
+            <option>Bloqueado</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label>Break-even (leitura)</label>
+          <input id="be" placeholder="Ex.: 4–6 meses no cenário base" />
+        </div>
+        <div>
+          <label>Case (nome + por que serve)</label>
+          <input id="case" placeholder="Nome do case · ou ‘sem case ainda’" />
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>06 · Alinhamentos necessários</h2>
+      <h3>O que precisa estar resolvido antes da proposta final</h3>
+      <div class="row">
+        <div>
+          <label>Decisor na sala?</label>
+          <select id="decisor">
+            <option selected>Sim — participou da entrega crítica</option>
+            <option>Não — só influenciador / ausente</option>
+          </select>
+        </div>
+        <div>
+          <label>Pago / pagando?</label>
+          <select id="pago">
+            <option selected>Sim — pago ou parcelas em dia</option>
+            <option>Não — atraso crítico / inadimplente</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label>Consciência de budget</label>
+          <select id="budget">
+            <option>Não mapeada</option>
+            <option selected>Parcial</option>
+            <option>Mapeada</option>
+          </select>
+        </div>
+        <div>
+          <label>Interesse</label>
+          <select id="interesse">
+            <option>Baixo</option>
+            <option selected>Médio</option>
+            <option>Alto</option>
+          </select>
+        </div>
+      </div>
+      <label>Objeções já vistas</label>
+      <textarea id="objecoes" placeholder="Trauma de mídia · ROI · preço · time interno · timing"></textarea>
+      <label>Capacidade da operação / modo de entrega</label>
+      <div class="row">
+        <div>
+          <select id="modo">
+            <option selected>Padrão</option>
+            <option>Execução assistida</option>
+            <option>Canal específico</option>
+          </select>
+        </div>
+        <div>
+          <input id="canal" placeholder="Se canal específico: qual (PAP, loja, inbound…)" />
+        </div>
+      </div>
+      <label>Alinhamentos pendentes (ops, financeiro, sócios, agenda)</label>
+      <textarea id="alinhamentos" placeholder="O que precisa estar combinado ANTES de mandar preço"></textarea>
+    </div>
+
+    <div class="card">
+      <h2>07 · Roteiro do pitch</h2>
+      <h3>Como a conversa começa — e o ask</h3>
+      <label>Abertura / frase-mestra</label>
+      <textarea id="abertura" placeholder="Por onde a próxima conversa deve começar (dor, case, operação, ROI)"></textarea>
+      <label>Ask da reunião</label>
+      <input id="ask" placeholder="Ex.: Aceito na sala · ou data de assinatura · ou validar sócios" />
+      <label>Plano B se não fechar</label>
+      <input id="planob" placeholder="Ex.: reapresentar com case · não mandar PDF solto" />
+    </div>
+
+    <div class="card">
+      <h2>08 · Decisão de pipe</h2>
+      <h3>Cockpit ou Expansão?</h3>
+      <select id="destino">
+        <option selected>Migrar para pipe de Expansão (NBO comercial)</option>
+        <option>Permanecer no Cockpit Saber p/ Executar (retenção / otimização)</option>
+        <option>Ainda não — fechar gap do pré-pit</option>
+      </select>
+      <label>Próxima ação no Flow (dono + data)</label>
+      <input id="proxima" placeholder="Ex.: Sara · pitch 18/09 · copiar card para Expansão Executar" />
+    </div>
+  </form>
+
+  <div class="card print-keep">
+    <h2>Gerar</h2>
+    <h3>Texto para Flow / Doc</h3>
+    <div class="btns">
+      <button type="button" id="gerar">Gerar pré-pit</button>
+      <button type="button" class="secondary" id="copiar">Copiar texto</button>
+      <button type="button" class="secondary" id="limpar">Limpar</button>
+    </div>
+    <div class="preview" id="preview" hidden>
+      <h4 id="pTitulo">—</h4>
+      <div class="st" id="pSub">—</div>
+      <div id="pBody"></div>
+    </div>
+    <label style="margin-top:16px">Texto plano</label>
+    <div class="out" id="out">Preencha e clique em Gerar pré-pit.</div>
+  </div>
+</div>
+
+<footer>
+  V4 · Documento de Pré-pit · estrutura Sara Pizzico ·
+  <a href="saber-executar-processo.html">processo Saber → Executar</a>
+</footer>
+
+<script>
+  const $ = (id) => document.getElementById(id);
+  const val = (id) => ($(id).value || "").trim();
+
+  function build() {
+    const cliente = val("cliente") || "[Cliente]";
+    const data = val("data") || "DD/MM";
+    const linhas = [];
+    linhas.push("DOCUMENTO DE PRÉ-PIT · " + cliente);
+    linhas.push("Data: " + data + " · Farmer: " + (val("farmer") || "Sara Pizzico") + " · Squad: " + (val("squad") || "—"));
+    linhas.push("Fase: " + val("fase") + " · Foco AP: " + val("foco"));
+    linhas.push("Status: " + (val("status") || "—"));
+    linhas.push("");
+    linhas.push("1. CONTEXTO DO CLIENTE");
+    linhas.push("Contrato / produtos ativos: " + (val("contrato") || "—"));
+    linhas.push("Saúde: " + val("saude") + " · CSAT/NPS: " + (val("csat") || "—"));
+    linhas.push("Expectativa: " + (val("expectativa") || "—"));
+    linhas.push("");
+    linhas.push("2. MODELO DE NEGÓCIO");
+    linhas.push(val("modelo") || "—");
+    linhas.push("Faturamento e margem: " + (val("fat") || "—") + " · Tier: " + val("tier"));
+    linhas.push("");
+    linhas.push("3. PÚBLICO / ICP");
+    linhas.push(val("publico") || "—");
+    linhas.push("Trilha: " + (val("trilha") || "—"));
+    linhas.push("");
+    linhas.push("4. DIAGNÓSTICO E NBO");
+    linhas.push("Gargalo #1: " + (val("gargalo") || "—"));
+    linhas.push("NBO: " + (val("nbo") || "—"));
+    linhas.push("STEP: " + val("step") + " · Valor: " + (val("valor") || "—") + " · Timing: " + val("timing"));
+    linhas.push("Break-even: " + (val("be") || "—"));
+    linhas.push("Case: " + (val("case") || "sem case ainda"));
+    linhas.push("");
+    linhas.push("5. ALINHAMENTOS NECESSÁRIOS");
+    linhas.push("Decisor: " + val("decisor"));
+    linhas.push("Pago/pagando: " + val("pago"));
+    linhas.push("Budget: " + val("budget") + " · Interesse: " + val("interesse"));
+    linhas.push("Objeções: " + (val("objecoes") || "—"));
+    linhas.push("Modo de entrega: " + val("modo") + (val("canal") ? " · " + val("canal") : ""));
+    linhas.push("Pendências: " + (val("alinhamentos") || "—"));
+    linhas.push("");
+    linhas.push("6. ROTEIRO DO PITCH");
+    linhas.push("Abertura: " + (val("abertura") || "—"));
+    linhas.push("Ask: " + (val("ask") || "—"));
+    linhas.push("Plano B: " + (val("planob") || "—"));
+    linhas.push("");
+    linhas.push("7. DECISÃO DE PIPE");
+    linhas.push(val("destino"));
+    linhas.push("Próxima ação: " + (val("proxima") || "—"));
+    linhas.push("");
+    const gateOk = val("decisor").startsWith("Sim") && val("pago").startsWith("Sim");
+    linhas.push(gateOk
+      ? "GATE: ok (decisor + pago). Pode seguir para pitch se pré-pit = Pronto e NBO validada."
+      : "GATE: bloqueado. Diagnóstico segue; NÃO apresentar preço.");
+    return { cliente, data, text: linhas.join("\n"), gateOk };
+  }
+
+  function renderPreview(b) {
+    const blocks = [
+      ["Contexto", val("contrato") + "\n" + val("expectativa")],
+      ["Modelo de negócio", val("modelo") + (val("fat") ? "\n" + val("fat") + " · " + val("tier") : "")],
+      ["Público", val("publico") + (val("trilha") ? "\nTrilha: " + val("trilha") : "")],
+      ["NBO / STEP", val("nbo") + "\n" + val("step") + " · " + val("valor") + " · " + val("timing")],
+      ["Alinhamentos", val("alinhamentos") + "\nModo: " + val("modo")],
+      ["Pitch", "Abertura: " + val("abertura") + "\nAsk: " + val("ask")],
+      ["Pipe", val("destino") + "\n" + val("proxima")]
+    ];
+    $("pTitulo").textContent = b.cliente;
+    $("pSub").textContent = "Pré-pit · " + b.data + " · " + val("foco") + " · " + val("step");
+    $("pBody").innerHTML = blocks.map(([h, t]) => {
+      const body = (t || "—").replace(/</g, "&lt;").replace(/\n/g, "<br>");
+      return "<h5>" + h + "</h5><p>" + (body || "—") + "</p>";
+    }).join("");
+    $("preview").hidden = false;
+  }
+
+  $("gerar").addEventListener("click", () => {
+    const b = build();
+    $("out").textContent = b.text;
+    renderPreview(b);
+  });
+  $("copiar").addEventListener("click", async () => {
+    if ($("out").textContent.indexOf("Preencha") === 0) $("gerar").click();
+    try {
+      await navigator.clipboard.writeText($("out").textContent);
+      $("copiar").textContent = "Copiado";
+      setTimeout(() => { $("copiar").textContent = "Copiar texto"; }, 1600);
+    } catch (e) {
+      $("out").focus();
+    }
+  });
+  $("limpar").addEventListener("click", () => {
+    $("form").reset();
+    $("farmer").value = "Sara Pizzico";
+    $("out").textContent = "Preencha e clique em Gerar pré-pit.";
+    $("preview").hidden = true;
+  });
+</script>
+</body>
+</html>

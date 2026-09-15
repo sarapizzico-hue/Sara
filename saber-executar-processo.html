@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Saber → Executar · Processo · Miro + Flow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --brand:#e50915; --brand-light:#ff1a27; --brand-dim:rgba(229,9,21,.12);
+      --brand-glow:rgba(229,9,21,.35); --bg:#050505; --surf:rgba(20,20,20,.88);
+      --surf2:#141414; --glass:rgba(255,255,255,.04); --bd:rgba(255,255,255,.08);
+      --bd-strong:rgba(255,255,255,.14); --txt:#fafafa; --mut:#a3a3a3;
+      --ok:#22c55e; --warn:#facc15; --info:#60a5fa; --radius:16px;
+      --shadow:0 24px 80px rgba(0,0,0,.55);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--txt);font:14px/1.55 Inter,system-ui,sans-serif;padding-bottom:72px;
+      background-image:radial-gradient(ellipse 80% 50% at 50% -20%,rgba(229,9,21,.18),transparent),radial-gradient(circle at 100% 0%,rgba(229,9,21,.06),transparent 40%)}
+    .topbar{position:sticky;top:0;z-index:100;backdrop-filter:blur(16px);background:rgba(5,5,5,.84);border-bottom:1px solid var(--bd);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+    .v4-logo{font-weight:900;font-size:18px;letter-spacing:-.02em}.v4-logo span{color:var(--brand-light)}
+    .sync-pill{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:600;color:var(--mut);background:var(--glass);border:1px solid var(--bd);padding:6px 12px;border-radius:999px}
+    .sync-dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok)}
+    .wrap{max-width:1180px;margin:0 auto;padding:28px 24px 0}
+    .hero{position:relative;border-radius:var(--radius);padding:34px 32px;margin-bottom:20px;background:linear-gradient(135deg,rgba(229,9,21,.16) 0%,rgba(20,20,20,.92) 48%,var(--surf2) 100%);border:1px solid var(--bd-strong);box-shadow:var(--shadow);overflow:hidden}
+    .hero::after{content:'';position:absolute;top:-40%;right:-8%;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,var(--brand-glow),transparent 70%);pointer-events:none}
+    .hero-inner{position:relative;z-index:1}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#fca5a5;margin-bottom:10px}
+    .hero-eyebrow::before{content:'';width:24px;height:3px;background:var(--brand);border-radius:2px}
+    .hero h1{margin:0 0 10px;font-size:clamp(26px,4vw,38px);font-weight:900;letter-spacing:-.03em}
+    .hero .meta{color:var(--mut);font-size:13px;max-width:920px}.hero .meta strong{color:var(--txt)}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+    .chip{font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:5px 10px;border-radius:999px;border:1px solid var(--bd);background:var(--glass);color:var(--mut);text-decoration:none}
+    .chip.live{border-color:rgba(34,197,94,.35);color:#86efac}
+    .nav{position:sticky;top:56px;z-index:90;margin:0 0 20px;padding:8px;background:rgba(8,8,8,.93);backdrop-filter:blur(14px);border:1px solid var(--bd-strong);border-radius:16px}
+    .nav-label{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);padding:4px 10px 10px}
+    .tabs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+    @media(max-width:1100px){.tabs{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:700px){.tabs{grid-template-columns:repeat(2,1fr)}}
+    .tab{appearance:none;border:1px solid var(--bd);background:var(--surf2);color:var(--mut);border-radius:12px;padding:12px;cursor:pointer;text-align:left;font-family:inherit;transition:.2s}
+    .tab:hover{border-color:var(--bd-strong);color:#fff}
+    .tab.active{color:#fff;border-color:var(--brand);background:linear-gradient(135deg,rgba(229,9,21,.18),rgba(20,20,20,.95));box-shadow:0 0 24px var(--brand-dim)}
+    .tab .n{display:block;font-size:13px;font-weight:800;margin-bottom:3px}.tab .s{font-size:10px;font-weight:700;color:#d4d4d4}
+    .panel{display:none;animation:fade .25s ease;margin-bottom:8px}
+    .panel.is-active{display:block}
+    @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+    .section{background:var(--surf);border:1px solid var(--bd);border-radius:var(--radius);padding:22px 24px;margin-bottom:16px}
+    .section h2{margin:0 0 8px;font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--mut);font-weight:800}
+    .section h3{margin:0 0 8px;font-size:18px;font-weight:900;letter-spacing:-.02em}
+    .lead{color:var(--mut);font-size:13px;margin:0 0 16px;max-width:880px}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:800px){.grid2{grid-template-columns:1fr}}
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}@media(max-width:900px){.grid3{grid-template-columns:1fr}}
+    .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}@media(max-width:900px){.grid4{grid-template-columns:1fr 1fr}}
+    .card{background:var(--surf2);border:1px solid var(--bd);border-radius:14px;padding:16px 18px}
+    .card .t{font-size:14px;font-weight:800;margin-bottom:6px}
+    .card .d{font-size:12px;color:var(--mut);line-height:1.5}
+    .card .tag{display:inline-block;margin-bottom:8px;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:999px;border:1px solid var(--bd);color:#d4d4d4}
+    .card .tag.ok{border-color:rgba(34,197,94,.35);color:#86efac}
+    .card .tag.warn{border-color:rgba(250,204,21,.4);color:#fde68a}
+    .card .tag.hot{border-color:rgba(239,68,68,.4);color:#fca5a5}
+    .card .tag.info{border-color:rgba(96,165,250,.35);color:#93c5fd}
+    .callout{margin-bottom:14px;padding:14px 16px;border-radius:12px;border:1px solid rgba(96,165,250,.3);background:rgba(96,165,250,.08);color:#bfdbfe;font-size:13px}
+    .callout strong{color:#dbeafe}
+    .callout.warn{border-color:rgba(250,204,21,.28);background:rgba(250,204,21,.06);color:#fde68a}.callout.warn strong{color:#fef08a}
+    .callout.ok{border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.08);color:#bbf7d0}.callout.ok strong{color:#bbf7d0}
+    .callout.hot{border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.08);color:#fecaca}.callout.hot strong{color:#fecaca}
+    .steps{margin:0;padding-left:18px}.steps li{margin:8px 0;color:#e5e5e5}
+    .steps li strong{color:#fff}
+    table{width:100%;border-collapse:collapse;font-size:13px}
+    th,td{padding:11px 10px;text-align:left;border-bottom:1px solid var(--bd);vertical-align:top}
+    th{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--mut);font-weight:800;background:rgba(255,255,255,.02)}
+    tbody tr:hover{background:rgba(255,255,255,.02)}
+    .pill{display:inline-block;padding:3px 8px;border-radius:999px;font-size:10px;font-weight:800;border:1px solid var(--bd)}
+    .pill.ok{color:#86efac;border-color:rgba(34,197,94,.35)}
+    .pill.warn{color:#fde68a;border-color:rgba(250,204,21,.35)}
+    .pill.hot{color:#fca5a5;border-color:rgba(239,68,68,.4)}
+    .pill.info{color:#93c5fd;border-color:rgba(96,165,250,.35)}
+    .code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:#86efac}
+    .rail{display:grid;grid-template-columns:repeat(8,minmax(110px,1fr));gap:8px;overflow-x:auto;padding-bottom:6px}
+    @media(max-width:1100px){.rail{grid-template-columns:repeat(4,minmax(160px,1fr))}}
+    .rail-step{background:var(--surf2);border:1px solid var(--bd);border-radius:12px;padding:12px;min-height:132px;position:relative}
+    .rail-step .n{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--brand-light);margin-bottom:6px}
+    .rail-step .t{font-size:13px;font-weight:800;margin-bottom:4px}
+    .rail-step .d{font-size:11px;color:var(--mut)}
+    .rail-step.sys{border-color:rgba(96,165,250,.35)}
+    .rail-step.act{border-color:rgba(229,9,21,.45);background:linear-gradient(180deg,rgba(229,9,21,.12),var(--surf2))}
+    .rail-step.ok{border-color:rgba(34,197,94,.35)}
+    .frame{border:1px dashed rgba(255,255,255,.18);border-radius:14px;padding:14px 16px;margin:0 0 12px;background:rgba(255,255,255,.02)}
+    .frame .fn{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#fca5a5;margin-bottom:6px}
+    .check{list-style:none;margin:0;padding:0}
+    .check li{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--bd);font-size:13px;color:#e5e5e5}
+    .check li:last-child{border-bottom:0}
+    .check .box{flex:0 0 16px;width:16px;height:16px;margin-top:2px;border:1.5px solid var(--bd-strong);border-radius:4px;background:rgba(255,255,255,.02)}
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media(max-width:800px){.split{grid-template-columns:1fr}}
+    .node{background:var(--surf2);border:1px solid var(--bd);border-radius:14px;padding:16px}
+    .node.ok{border-color:rgba(34,197,94,.4);background:linear-gradient(180deg,rgba(34,197,94,.08),var(--surf2))}
+    .node.hot{border-color:rgba(239,68,68,.4);background:linear-gradient(180deg,rgba(239,68,68,.08),var(--surf2))}
+    .node.warn{border-color:rgba(250,204,21,.4);background:linear-gradient(180deg,rgba(250,204,21,.08),var(--surf2))}
+    .node .k{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-bottom:4px}
+    .node .t{font-size:16px;font-weight:900;margin-bottom:6px}
+    .copybox{font-size:12px;color:#d4d4d4;background:#0a0a0a;border:1px solid var(--bd);border-radius:10px;padding:12px 14px;white-space:pre-wrap;line-height:1.55}
+    footer{text-align:center;color:var(--mut);font-size:11px;margin-top:40px;padding:24px 0;border-top:1px solid var(--bd)}
+    footer a{color:#86efac}
+    .table-wrap{overflow-x:auto}
+    @media print {
+      .topbar, .nav, .chips, footer { position:static }
+      .panel{display:block !important}
+      .tab{display:none}
+      body{background:#fff;color:#111}
+    }
+  </style>
+</head>
+<body>
+<header class="topbar">
+  <div class="v4-logo">V4 <span>COMPANY</span></div>
+  <div class="sync-pill"><span class="sync-dot"></span> Saber → Executar · Erick × Sara · Flow</div>
+</header>
+
+<div class="wrap">
+  <section class="hero"><div class="hero-inner">
+    <div class="hero-eyebrow">Processo comercial · desenho para Miro</div>
+    <h1>Saber para Executar — do planejamento da conta até o pipe</h1>
+    <p class="meta">
+      Pedido do Erick: desenhar o processo <strong>Saber → Executar</strong>, definir <strong>colunas extras</strong> no comercial,
+      o que entra no <strong>documento de pré-pit</strong> e como o card do Cockpit SABER <strong>migra para o pipe de Expansão</strong>.
+      Sistema de registro: <strong>Flow</strong>. Coordenação: Account Planning gera a <strong>Next Best Offer (NBO)</strong>,
+      que alimenta o pipeline — não o contrário.
+    </p>
+    <div class="chips">
+      <span class="chip live">Account Planning → NBO</span>
+      <span class="chip live">Cockpit no Flow</span>
+      <span class="chip live">Pré-pit Sara</span>
+      <span class="chip live">Pipe Review</span>
+      <a class="chip" href="documento-pre-pit.html">Abrir template de pré-pit</a>
+      <a class="chip" href="playbook-farmer-am.html">Playbook Farmer</a>
+      <a class="chip" href="SABER-EXECUTAR-MIRO.md">Versão compacta (MD)</a>
+    </div>
+  </div></section>
+
+  <div class="callout ok">
+    <strong>Como usar:</strong> esta página é a fonte para o board no Miro.
+    Cada aba = um frame. Copie os blocos “Frame Miro” na ordem.
+    O Flow só entra em operação quando as colunas da aba <em>Colunas</em> existirem e o Pipe Review cobrir preenchimento 100%.
+  </div>
+
+  <nav class="nav">
+    <div class="nav-label">Frames do processo</div>
+    <div class="tabs">
+      <button class="tab active" data-view="mapa"><span class="n">Mapa</span><span class="s">8 etapas · Miro</span></button>
+      <button class="tab" data-view="ap"><span class="n">Account Planning</span><span class="s">NBO · 3 focos</span></button>
+      <button class="tab" data-view="colunas"><span class="n">Colunas Flow</span><span class="s">Pedido Erick #1</span></button>
+      <button class="tab" data-view="prepit"><span class="n">Pré-pit</span><span class="s">Pedido Erick #2</span></button>
+      <button class="tab" data-view="migracao"><span class="n">Migração</span><span class="s">Pedido Erick #3</span></button>
+      <button class="tab" data-view="review"><span class="n">Pipe Review</span><span class="s">Rituais · 100%</span></button>
+    </div>
+  </nav>
+
+  <!-- MAPA -->
+  <div class="panel is-active" data-view="mapa">
+    <div class="section">
+      <h2>Frame 0 · Tese</h2>
+      <h3>A base ativa não vira pitch por feeling</h3>
+      <p class="lead">
+        O time planeja a conta, escolhe a próxima oferta, registra no Flow e só então constrói o pré-pit.
+        Pitch sem NBO é catálogo. Card no Expansão sem pré-pit é improviso.
+      </p>
+      <div class="grid4">
+        <div class="card">
+          <span class="tag info">1</span>
+          <div class="t">Account Planning</div>
+          <div class="d">Coordenado pelo time. Foco em retenção, otimização de campanhas ou novos produtos.</div>
+        </div>
+        <div class="card">
+          <span class="tag ok">2</span>
+          <div class="t">Cockpit no Flow</div>
+          <div class="d">Saber para Executar: execução + base ativa + pipe. Métricas e projetos no mesmo card.</div>
+        </div>
+        <div class="card">
+          <span class="tag warn">3</span>
+          <div class="t">Documento de Pré-pit</div>
+          <div class="d">Estrutura da Sara: contexto, modelo, público e alinhamentos antes da proposta final.</div>
+        </div>
+        <div class="card">
+          <span class="tag hot">4</span>
+          <div class="t">Pipe Review</div>
+          <div class="d">Coordenação: Flow 100% preenchido, projeções, pitches da semana, diagnóstico e modo de entrega.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Frame 1 · Mapa-mestre</h2>
+      <h3>Saber → Executar em 8 etapas</h3>
+      <p class="lead">Copiar como trilho horizontal no Miro. A barra de cima é o processo; Pipe Review é a camada de governança, não uma etapa.</p>
+      <div class="rail">
+        <div class="rail-step">
+          <div class="n">01</div>
+          <div class="t">Base ativa</div>
+          <div class="d">Conta na carteira · EE ou pós-EE · saúde visível</div>
+        </div>
+        <div class="rail-step">
+          <div class="n">02</div>
+          <div class="t">Account Planning</div>
+          <div class="d">Time escolhe 1 foco: reter · otimizar · novo produto</div>
+        </div>
+        <div class="rail-step act">
+          <div class="n">03</div>
+          <div class="t">NBO</div>
+          <div class="d">Próxima oferta desta conta · STEP · o que não oferecer</div>
+        </div>
+        <div class="rail-step sys">
+          <div class="n">04</div>
+          <div class="t">Cockpit Flow</div>
+          <div class="d">Saber p/ Executar · métricas + projeto no card</div>
+        </div>
+        <div class="rail-step warn" style="border-color:rgba(250,204,21,.4)">
+          <div class="n">05</div>
+          <div class="t">Pré-pit</div>
+          <div class="d">Doc Sara · contexto · modelo · público · alinhamentos</div>
+        </div>
+        <div class="rail-step act">
+          <div class="n">06</div>
+          <div class="t">Pitch</div>
+          <div class="d">Só o que se encaixa · decisor na sala</div>
+        </div>
+        <div class="rail-step ok">
+          <div class="n">07</div>
+          <div class="t">Pipe Expansão</div>
+          <div class="d">Se NBO for comercial · senão permanece no Cockpit</div>
+        </div>
+        <div class="rail-step ok">
+          <div class="n">08</div>
+          <div class="t">Executar</div>
+          <div class="d">Win → kickoff do STEP · farming da entrega</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Frame 2 · Duas trilhas depois da NBO</h2>
+      <h3>Nem todo planejamento vira pipe comercial</h3>
+      <div class="split">
+        <div class="node ok">
+          <div class="k">NBO comercial</div>
+          <div class="t">Migra para Expansão</div>
+          <ul class="steps">
+            <li>Novo produto, upgrade ou Executar</li>
+            <li>Gates ok + pré-pit Pronto</li>
+            <li>Destino: Expansão Executar <em>ou</em> Expansão Ter/Saber</li>
+            <li>Cockpit origem fica “Migrado” com link</li>
+          </ul>
+        </div>
+        <div class="node warn">
+          <div class="k">NBO de conta</div>
+          <div class="t">Permanece no Cockpit</div>
+          <ul class="steps">
+            <li>Retenção / save</li>
+            <li>Otimização de campanha sem venda nova</li>
+            <li>Gate falhou ou score &lt; 70</li>
+            <li>Pré-pit incompleto — não inventa pitch</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Copiar no Miro · Frame 1</h2>
+      <div class="copybox">SABER → EXECUTAR
+Base ativa → Account Planning (1 foco) → NBO → Cockpit Flow “Saber para Executar” → Documento de Pré-pit (Sara) → Pitch da semana → Pipe de Expansão (só se NBO comercial) → Executar.
+Governança: Pipe Review (Flow 100% · projeções · pitches · diagnóstico de entrega).
+Sistema: Flow. Não planilha paralela.</div>
+    </div>
+  </div>
+
+  <!-- ACCOUNT PLANNING -->
+  <div class="panel" data-view="ap">
+    <div class="section">
+      <h2>Frame 3 · Account Planning</h2>
+      <h3>Coordenado pelo time — um foco por ciclo</h3>
+      <p class="lead">
+        Planejamento de contas não é QBR de slides. É a reunião em que o time decide
+        <strong>qual jogo esta conta joga agora</strong>. O output obrigatório é a NBO, não uma lista de ideias.
+      </p>
+      <div class="grid3">
+        <div class="card">
+          <span class="tag hot">Foco A</span>
+          <div class="t">Retenção</div>
+          <div class="d">Saúde amarela/vermelha, risco de churn, CSAT baixo, decisor sumiu. NBO = save / reengajar / execução assistida. <strong>Não migra</strong> para Expansão.</div>
+        </div>
+        <div class="card">
+          <span class="tag warn">Foco B</span>
+          <div class="t">Otimização de campanhas</div>
+          <div class="d">Entrega estável, mídia/CRM já rodando, gap de performance. NBO = ajuste. Só vira pipe se o ajuste for <em>produto ou upgrade</em>.</div>
+        </div>
+        <div class="card">
+          <span class="tag ok">Foco C</span>
+          <div class="t">Novos produtos</div>
+          <div class="d">Gates ok, tese da EE viva, WTP ou caminho de pagamento. NBO comercial → pré-pit → <strong>migra</strong> para o pipe de Expansão.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Frame 4 · Next Best Offer</h2>
+      <h3>A NBO define a próxima oferta e alimenta o pipe</h3>
+      <p class="lead">Uma frase. Um STEP. Um “não oferecer”. Sem isso o Cockpit vira mural de observações.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Campo</th><th>O que escrever</th><th>Exemplo</th></tr></thead>
+          <tbody>
+            <tr><td class="code">nbo</td><td>1 frase: a próxima oferta desta conta, agora</td><td>EC 12 semanas com CRM em uso — sem Meta Ads</td></tr>
+            <tr><td class="code">nbo_step</td><td>Destrava · Ter · Saber · Executar · Combo</td><td>Executar</td></tr>
+            <tr><td class="code">nbo_valor</td><td>TCV e/ou MRR estimado (não inventar se não mapeou)</td><td>TCV R$ 72k · MRR R$ 6,5k</td></tr>
+            <tr><td class="code">nbo_timing</td><td>Agora · 30d · 60d · 90d · Bloqueado</td><td>Agora</td></tr>
+            <tr><td class="code">nbo_nao_oferecer</td><td>O que fica de fora neste ciclo</td><td>Social/Meta · combo Performance</td></tr>
+            <tr><td class="code">nbo_status</td><td>Hipótese → Validada → Em pré-pit → Em pitch → No pipe → Ganhou / Drop</td><td>Validada</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout warn" style="margin-top:14px">
+        <strong>Regra:</strong> NBO em Hipótese não agenda pitch de preço.
+        NBO Validada abre o documento de pré-pit. NBO Em pitch já tem data na semana.
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Cockpit “Saber para Executar”</h2>
+      <h3>Flow como único sistema</h3>
+      <p class="lead">
+        O Cockpit acompanha a <strong>execução</strong> e integra ações da base ativa com o pipeline comercial.
+        Cada card registra métricas (saúde, score, preenchimento, projeção) e o projeto da conta (NBO, pré-pit, pitch, modo de entrega).
+      </p>
+      <div class="grid2">
+        <div class="card">
+          <span class="tag info">Métricas no card</span>
+          <div class="d">CSAT · NPS · lead score · gates · % Flow preenchido · cenário de projeção · ponto de atenção da semana.</div>
+        </div>
+        <div class="card">
+          <span class="tag ok">Projeto no card</span>
+          <div class="d">Foco AP · NBO · link do pré-pit · data do pitch · destino de pipe · modo de execução (padrão / assistida / canal).</div>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:14px">
+        <strong>Dois objetos, um sistema:</strong> o card do Cockpit não é o card do pipe de Expansão.
+        Eles se ligam por ID/URL no Flow. Histórico do Saber não se apaga na migração.
+      </div>
+    </div>
+  </div>
+
+  <!-- COLUNAS -->
+  <div class="panel" data-view="colunas">
+    <div class="section">
+      <h2>Pedido Erick · 1</h2>
+      <h3>Colunas adicionais para acompanhar o processo comercial</h3>
+      <p class="lead">
+        O Cockpit E.E já tem identidade (cliente, squad, coord), status, temperatura, data de pitch, TCV e observação.
+        Abaixo entram as colunas <strong>novas</strong> no Flow — as que o processo Saber → Executar exige e hoje não cabem numa célula de obs.
+      </p>
+      <div class="callout warn"><strong>Não duplicar.</strong> O que já existe no Cockpit migra para o Flow com o mesmo nome. Estas são as adicionais.</div>
+    </div>
+
+    <div class="section">
+      <h2>Bloco A · Account Planning / NBO</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Coluna</th><th>Tipo</th><th>Valores / regra</th></tr></thead>
+          <tbody>
+            <tr><td class="code">foco_ap</td><td>Select</td><td>Retenção · Otimização de campanhas · Novos produtos</td></tr>
+            <tr><td class="code">nbo</td><td>Texto curto</td><td>1 frase. Obrigatório depois do Account Planning</td></tr>
+            <tr><td class="code">nbo_step</td><td>Select</td><td>Destrava Receita · Ter · Saber · Executar · Combos Performance</td></tr>
+            <tr><td class="code">nbo_valor</td><td>Moeda / texto</td><td>TCV e MRR separados quando Executar</td></tr>
+            <tr><td class="code">nbo_timing</td><td>Select</td><td>Agora · 30d · 60d · 90d · Bloqueado</td></tr>
+            <tr><td class="code">nbo_nao_oferecer</td><td>Texto</td><td>Obrigatório. Protege o encaixe</td></tr>
+            <tr><td class="code">nbo_status</td><td>Select</td><td>Hipótese · Validada · Em pré-pit · Em pitch · No pipe · Ganhou · Drop</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Bloco B · Pré-pit</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Coluna</th><th>Tipo</th><th>Valores / regra</th></tr></thead>
+          <tbody>
+            <tr><td class="code">prepit_status</td><td>Select</td><td>Não iniciado · Em construção · Pronto · Usado no pitch</td></tr>
+            <tr><td class="code">prepit_url</td><td>URL</td><td>Link do doc gerado (ou Doc da conta)</td></tr>
+            <tr><td class="code">modelo_negocio</td><td>Texto</td><td>Como fatura · canais · unidades</td></tr>
+            <tr><td class="code">publico_icp</td><td>Texto</td><td>Quem compra · canal real de entrada</td></tr>
+            <tr><td class="code">alinhamentos_pendentes</td><td>Texto</td><td>O que falta antes da proposta final</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Bloco C · Comercial e migração</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Coluna</th><th>Tipo</th><th>Valores / regra</th></tr></thead>
+          <tbody>
+            <tr><td class="code">gates_ok</td><td>Checkbox</td><td>Decisor na sala + pago/pagando. Sem os dois = não apresenta</td></tr>
+            <tr><td class="code">lead_score</td><td>Número 0–100</td><td>70+ apresentar · 40–69 elevar · &lt;40 ainda não</td></tr>
+            <tr><td class="code">pitch_semana</td><td>Data + flag</td><td>Sim/Não + data. Sem data não entra em projeção</td></tr>
+            <tr><td class="code">projecao_cenario</td><td>Select</td><td>Fora · Chão · Pessimista · Realista · Otimista</td></tr>
+            <tr><td class="code">origem_card</td><td>Select</td><td>Cockpit Saber · Base ativa · Expansão</td></tr>
+            <tr><td class="code">destino_pipe</td><td>Select</td><td>Permanece Cockpit · Expansão Executar · Expansão Ter/Saber</td></tr>
+            <tr><td class="code">id_origem / url_par</td><td>Relação</td><td>Liga Cockpit ↔ Expansão. Obrigatório na migração</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Bloco D · Entrega e higiene do Flow</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Coluna</th><th>Tipo</th><th>Valores / regra</th></tr></thead>
+          <tbody>
+            <tr><td class="code">modo_execucao</td><td>Select</td><td>Padrão · Execução assistida · Canal específico</td></tr>
+            <tr><td class="code">canal_especifico</td><td>Texto</td><td>PAP, loja, inbound, regional — só se modo = canal</td></tr>
+            <tr><td class="code">diagnostico_antecipado</td><td>Texto</td><td>1–2 frases: o que a coordenação já vê de risco/entrega</td></tr>
+            <tr><td class="code">estrategia_entrega</td><td>Texto</td><td>Como a operação vai absorver o win</td></tr>
+            <tr><td class="code">flow_preenchimento</td><td>%</td><td>Campos obrigatórios do estágio. Meta do Pipe Review = 100%</td></tr>
+            <tr><td class="code">proxima_acao</td><td>Texto</td><td>O quê + quem + quando. Card sem isso = alerta</td></tr>
+            <tr><td class="code">dono</td><td>Pessoa</td><td>Farmer / coordenação responsável pelo próximo passo</td></tr>
+            <tr><td class="code">data_proxima</td><td>Data</td><td>Próximo contato ou ritual. Sem data = morto</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout ok" style="margin-top:14px">
+        <strong>Mínimo viável no Flow (semana 1):</strong>
+        <span class="code">foco_ap</span> ·
+        <span class="code">nbo</span> ·
+        <span class="code">nbo_status</span> ·
+        <span class="code">prepit_status</span> ·
+        <span class="code">gates_ok</span> ·
+        <span class="code">destino_pipe</span> ·
+        <span class="code">proxima_acao</span> ·
+        <span class="code">flow_preenchimento</span>.
+        O resto entra na semana 2 sem parar o ritual.
+      </div>
+    </div>
+  </div>
+
+  <!-- PRE-PIT -->
+  <div class="panel" data-view="prepit">
+    <div class="section">
+      <h2>Pedido Erick · 2</h2>
+      <h3>Informações necessárias para construir o documento de pré-pit</h3>
+      <p class="lead">
+        Estrutura da Sara Pizzico: consolidar contexto do cliente, modelo de negócio, público e alinhamentos
+        <strong>antes</strong> da proposta final. Não substitui o Plano de Ação S3 — o pré-pit é o briefing da reunião de pitch.
+        Template preenchível: <a href="documento-pre-pit.html" style="color:#86efac">documento-pre-pit.html</a>
+      </p>
+      <div class="callout hot"><strong>Sem pré-pit = Pronto, não agenda pitch de preço.</strong> Pode haver conversa de diagnóstico; preço não.</div>
+    </div>
+
+    <div class="section">
+      <h2>Os 8 blocos</h2>
+      <h3>O que o doc precisa ter, nesta ordem</h3>
+      <div class="grid2">
+        <div class="card">
+          <span class="tag info">01 · Conta</span>
+          <div class="t">Quem entra na sala</div>
+          <div class="d">Cliente · data · farmer · squad · fase EE · foco do Account Planning · status em 1 linha.</div>
+        </div>
+        <div class="card">
+          <span class="tag info">02 · Contexto</span>
+          <div class="t">Contrato e saúde</div>
+          <div class="d">Produtos ativos · EE paga? · saúde verde/amarela/vermelha · CSAT/NPS · expectativa 30/60/90 na voz do cliente.</div>
+        </div>
+        <div class="card">
+          <span class="tag info">03 · Modelo de negócio</span>
+          <div class="t">Como fatura de verdade</div>
+          <div class="d">Canais, unidades, ticket, sazonalidade, quem vende. Faturamento de referência + margem + tier (TINY→LARGE).</div>
+        </div>
+        <div class="card">
+          <span class="tag info">04 · Público</span>
+          <div class="t">ICP e entrada real</div>
+          <div class="d">Quem compra · persona · canal de entrada que existe hoje (não o desejado) · trilha Inside / E-com / PDV.</div>
+        </div>
+        <div class="card">
+          <span class="tag warn">05 · Diagnóstico + NBO</span>
+          <div class="t">Gargalo → oferta</div>
+          <div class="d">Gargalo #1 · NBO em 1 frase · o que não oferecer · STEP · TCV/MRR · timing · break-even · case (ou “sem case”).</div>
+        </div>
+        <div class="card">
+          <span class="tag hot">06 · Alinhamentos</span>
+          <div class="t">Antes de mandar preço</div>
+          <div class="d">Decisor na sala · pago/pagando · budget · interesse · objeções · capacidade da ops · modo de entrega · pendências (sócios, financeiro, agenda).</div>
+        </div>
+        <div class="card">
+          <span class="tag ok">07 · Roteiro do pitch</span>
+          <div class="t">Como a conversa começa</div>
+          <div class="d">Frase-mestra de abertura · ask da reunião · plano B se não fechar (não mandar PDF solto).</div>
+        </div>
+        <div class="card">
+          <span class="tag ok">08 · Decisão de pipe</span>
+          <div class="t">Cockpit ou Expansão</div>
+          <div class="d">Migrar / permanecer / ainda não. Próxima ação no Flow com dono e data.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Fontes — de onde tira cada bloco</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Bloco</th><th>Fonte primária</th><th>Se faltar</th></tr></thead>
+          <tbody>
+            <tr><td>Contexto / saúde</td><td>Cockpit Flow + CSAT/NPS</td><td>Não força pitch — marca gap no <span class="code">alinhamentos_pendentes</span></td></tr>
+            <tr><td>Modelo / público</td><td>Entregas EE S1 (ICP, arquitetura, V4 Marketing)</td><td>Volta na conta; não inventa persona</td></tr>
+            <tr><td>Diagnóstico</td><td>S2/S3 + Plano de Ação Farmer</td><td>Pré-pit fica “Em construção”</td></tr>
+            <tr><td>NBO / STEP</td><td>Account Planning + economia (tier, margem, BE)</td><td>NBO = Hipótese. Sem pitch de preço</td></tr>
+            <tr><td>Alinhamentos</td><td>Gates + ops + financeiro</td><td>Lista explícita. Coordenação decide se espera</td></tr>
+            <tr><td>Roteiro</td><td>Frase-mestra do Plano de Ação + case</td><td>Se decisor inseguro: começa por prova, não por preço</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Relação com o Plano de Ação S3</h2>
+      <div class="grid2">
+        <div class="card">
+          <span class="tag info">Plano de Ação</span>
+          <div class="t">Documento da conta na EE</div>
+          <div class="d">Critérios do playbook (faturamento, produtos, interesse, objeções, CSAT, passos). Vive com a Farmer durante S1–S3.</div>
+        </div>
+        <div class="card">
+          <span class="tag warn">Pré-pit</span>
+          <div class="t">Briefing da reunião de proposta</div>
+          <div class="d">Usa o Plano de Ação + NBO + alinhamentos de ops. É o que a coordenação lê 24h antes do pitch da semana.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MIGRACAO -->
+  <div class="panel" data-view="migracao">
+    <div class="section">
+      <h2>Pedido Erick · 3</h2>
+      <h3>Migração do card do Cockpit SABER para o pipeline de Expansão</h3>
+      <p class="lead">
+        O Cockpit “Saber para Executar” guarda a conta e o projeto. O pipe de Expansão guarda a <strong>oportunidade comercial</strong>.
+        Migrar é um ato explícito no Flow — não um arrastar sem critério.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>Quando migrar</h2>
+      <h3>Checklist — todos os P0</h3>
+      <ul class="check">
+        <li><span class="box"></span><div><strong>P0 · NBO comercial:</strong> novo produto, upgrade ou Executar — não é save nem otimização solta</div></li>
+        <li><span class="box"></span><div><strong>P0 · Gates ok:</strong> decisor na sala + pago/pagando</div></li>
+        <li><span class="box"></span><div><strong>P0 · Pré-pit Pronto:</strong> os 8 blocos preenchidos, link no card</div></li>
+        <li><span class="box"></span><div><strong>P0 · Prontidão:</strong> lead score ≥ 70 <em>ou</em> Plano de Ação S3 fechado com tese</div></li>
+        <li><span class="box"></span><div><strong>P1 · Timing:</strong> Agora ou 30d (60/90d espera no Cockpit)</div></li>
+        <li><span class="box"></span><div><strong>P1 · Destino claro:</strong> Expansão Executar <em>ou</em> Expansão Ter/Saber — um só</div></li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Quando NÃO migrar</h2>
+      <div class="grid2">
+        <div class="node hot">
+          <div class="k">Fica no Cockpit</div>
+          <div class="t">Não é oportunidade ainda</div>
+          <ul class="steps">
+            <li>Foco AP = Retenção</li>
+            <li>Otimização sem venda nova</li>
+            <li>Gate falhou</li>
+            <li>Score &lt; 70 e tese frágil</li>
+            <li>Pré-pit incompleto</li>
+            <li>Timing 60/90d ou Bloqueado</li>
+          </ul>
+        </div>
+        <div class="node ok">
+          <div class="k">Vai para Expansão</div>
+          <div class="t">Oportunidade com dono</div>
+          <ul class="steps">
+            <li>NBO Validada ou Em pré-pit/pitch</li>
+            <li>Valor estimado (mesmo que faixa)</li>
+            <li>Pitch com data ou pedido de proposta</li>
+            <li>Modo de execução já escolhido</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Como migrar no Flow</h2>
+      <h3>Não apagar o Saber — ligar os dois cards</h3>
+      <ol class="steps">
+        <li>No Cockpit, marcar <span class="code">nbo_status = No pipe</span> e <span class="code">destino_pipe</span>.</li>
+        <li>Criar (ou mover) o card no pipe de Expansão correspondente ao STEP: <strong>Executar</strong> ou <strong>Ter/Saber</strong>.</li>
+        <li>Copiar: cliente, NBO, STEP, valor, timing, <span class="code">prepit_url</span>, modo de execução, dono, próxima ação.</li>
+        <li>Preencher <span class="code">origem_card = Cockpit Saber</span> e <span class="code">id_origem / url_par</span> nos dois lados.</li>
+        <li>No Cockpit origem: status <strong>Migrado para Expansão</strong> — o card continua existindo para métricas da base ativa.</li>
+        <li>Se perder: motivo de Drop volta para o Cockpit (Budget / Timing / Ops) e a NBO reabre ou morre com data.</li>
+      </ol>
+      <div class="callout" style="margin-top:14px">
+        <strong>Dois pipes de Expansão, uma regra:</strong> meta “Expansão Carteira · Executar” só recebe NBO de Executar.
+        Saber/Ter pontual não infla MRR. O Playbook Farmer já separa essas duas metas — o Flow precisa espelhar.
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Mapa de campos na migração</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>No Cockpit SABER</th><th>No pipe de Expansão</th></tr></thead>
+          <tbody>
+            <tr><td>Cliente, squad, farmer</td><td>Idem</td></tr>
+            <tr><td>nbo + nbo_step + nbo_valor</td><td>Título da oportunidade + STEP + TCV/MRR</td></tr>
+            <tr><td>prepit_url</td><td>Anexo / campo de briefing</td></tr>
+            <tr><td>pitch_semana</td><td>Data do próximo estágio comercial</td></tr>
+            <tr><td>modo_execucao + canal</td><td>Instrução para ops no win</td></tr>
+            <tr><td>Status = Migrado</td><td>Estágio: Qualificação / Pitch / Proposta / Contrato / Ganhou</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- PIPE REVIEW -->
+  <div class="panel" data-view="review">
+    <div class="section">
+      <h2>Frame 8 · Pipe Review</h2>
+      <h3>Alinhamentos periódicos da coordenação</h3>
+      <p class="lead">
+        Reuniões da coordenação para garantir que o fluxo no Flow esteja <strong>100% preenchido</strong>,
+        revisar projeções, alinhar os pitches da semana e antecipar diagnósticos de clientes e estratégias de entrega
+        — migrando, quando necessário, para execução assistida ou canais específicos.
+      </p>
+      <div class="grid3">
+        <div class="card">
+          <span class="tag hot">Diário · 15 min</span>
+          <div class="t">Triage P0</div>
+          <div class="d">Contratos na rua, silêncio acima do SLA, pitches do dia, cards vermelhos. Zero inbox morto no Flow.</div>
+        </div>
+        <div class="card">
+          <span class="tag warn">Semanal · 45–60 min</span>
+          <div class="t">Pipe Review</div>
+          <div class="d">Preenchimento 100% · NBO · pré-pit · pitches da semana · chão vs P/R/O · modo de execução.</div>
+        </div>
+        <div class="card">
+          <span class="tag info">Mensal · 60–90 min</span>
+          <div class="t">Portfolio / QBR leve</div>
+          <div class="d">Retenção vs expansão por conta estratégica. Recalibra Account Planning do mês seguinte.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Pauta fixa do Pipe Review semanal</h2>
+      <ol class="steps">
+        <li><strong>Higiene Flow:</strong> % preenchimento por estágio. Card incompleto sai da projeção e da pauta de pitch.</li>
+        <li><strong>NBO da semana:</strong> o que validou, o que ainda é hipótese, o que morreu.</li>
+        <li><strong>Pré-pits:</strong> quais estão Pronto, quais bloqueiam pitch.</li>
+        <li><strong>Pitches da semana:</strong> conta · dono · ask · case sim/não · decisor confirmado.</li>
+        <li><strong>Projeção:</strong> chão (já teve pitch × taxa) separado de Pessimista / Realista / Otimista. Semana* sem data de pitch não multiplica.</li>
+        <li><strong>Diagnóstico de entrega:</strong> wins da semana cabem na ops? Precisa execução assistida ou canal específico?</li>
+        <li><strong>Migrações:</strong> Cockpit → Expansão só com checklist P0. Reversões com motivo de Drop.</li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <h2>Modo de execução</h2>
+      <h3>O Pipe Review antecipa o como, não só o quanto</h3>
+      <div class="grid3">
+        <div class="card">
+          <span class="tag ok">Padrão</span>
+          <div class="d">Ops absorve no modelo atual. Kickoff clássico do STEP.</div>
+        </div>
+        <div class="card">
+          <span class="tag warn">Execução assistida</span>
+          <div class="d">Cliente não segura sozinho (capacidade, time, maturidade). V4 acompanha mais perto no início.</div>
+        </div>
+        <div class="card">
+          <span class="tag info">Canal específico</span>
+          <div class="d">A tese só funciona em um canal (PAP vs loja, inbound, regional). Não misturar dual-track sem dono.</div>
+        </div>
+      </div>
+      <div class="callout warn" style="margin-top:14px">
+        <strong>Se a estratégia de entrega não estiver no card,</strong> o win comercial vira Tratativa Ops —
+        o mesmo buraco que o Cockpit E.E já mostrou nas safras (drops de Ops distorcendo o funil Farmer).
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Checklist da coordenação</h2>
+      <ul class="check">
+        <li><span class="box"></span><div>Nenhum card da semana com <span class="code">flow_preenchimento</span> &lt; 100% nos campos do estágio</div></li>
+        <li><span class="box"></span><div>Toda conta P0 tem <span class="code">proxima_acao</span> + <span class="code">data_proxima</span> + dono</div></li>
+        <li><span class="box"></span><div>Pitches da semana têm pré-pit Pronto e decisor confirmado</div></li>
+        <li><span class="box"></span><div>Projeção mostra chão separado da faixa P/R/O</div></li>
+        <li><span class="box"></span><div>Migrações da semana batem com o checklist P0</div></li>
+        <li><span class="box"></span><div>Wins com modo de execução preenchido (padrão / assistida / canal)</div></li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>RACI resumido</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Atividade</th><th>Farmer (Sara)</th><th>Coordenação</th><th>Entrega / ops</th></tr></thead>
+          <tbody>
+            <tr><td>Account Planning</td><td>Prepara NBO</td><td>Conduz e decide foco</td><td>Sinaliza capacidade</td></tr>
+            <tr><td>Cockpit Flow</td><td>Atualiza card</td><td>Cobra 100%</td><td>Atualiza métricas de entrega</td></tr>
+            <tr><td>Pré-pit</td><td>Escreve (estrutura Sara)</td><td>Valida 24h antes</td><td>Confirma modo de execução</td></tr>
+            <tr><td>Migração p/ Expansão</td><td>Propõe</td><td>Autoriza</td><td>Ciente do win possível</td></tr>
+            <tr><td>Pipe Review</td><td>Leva contas da semana</td><td>Dono do ritual</td><td>Diagnóstico de entrega</td></tr>
+            <tr><td>Pitch</td><td>Conduz</td><td>Alinha pauta</td><td>Não vende catálogo</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Implantação · o que copiar no Miro nesta ordem</h2>
+      <div class="frame"><div class="fn">Frame 0</div>Tese: base ativa não vira pitch por feeling. AP → NBO → Flow → pré-pit → pipe.</div>
+      <div class="frame"><div class="fn">Frame 1</div>Trilho de 8 etapas (mapa-mestre) + Pipe Review por cima.</div>
+      <div class="frame"><div class="fn">Frame 2</div>Duas trilhas: NBO comercial migra · NBO de conta permanece.</div>
+      <div class="frame"><div class="fn">Frame 3</div>Account Planning: retenção · otimização · novos produtos.</div>
+      <div class="frame"><div class="fn">Frame 4</div>Campos da NBO + status.</div>
+      <div class="frame"><div class="fn">Frame 5</div>Colunas adicionais do Flow (blocos A–D).</div>
+      <div class="frame"><div class="fn">Frame 6</div>8 blocos do pré-pit Sara + link do template.</div>
+      <div class="frame"><div class="fn">Frame 7</div>Checklist de migração Cockpit → Expansão.</div>
+      <div class="frame"><div class="fn">Frame 8</div>Pauta do Pipe Review + modo de execução + RACI.</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  V4 · Saber → Executar · Flow ·
+  <a href="documento-pre-pit.html">Pré-pit</a> ·
+  <a href="playbook-farmer-am.html">Playbook</a> ·
+  <a href="farmer-sara.html">Hub Farmer</a> ·
+  <a href="SABER-EXECUTAR-MIRO.md">MD compacto</a>
+</footer>
+
+<script>
+  document.querySelectorAll(".tab").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".tab").forEach((b) => b.classList.remove("active"));
+      document.querySelectorAll(".panel").forEach((p) => p.classList.remove("is-active"));
+      btn.classList.add("active");
+      const panel = document.querySelector('.panel[data-view="' + btn.dataset.view + '"]');
+      if (panel) panel.classList.add("is-active");
+    });
+  });
+</script>
+</body>
+</html>
