@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Script de pitch · 600 Multimarcas × V4</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #140608; --surf: rgba(255,255,255,.06); --bd: rgba(255,255,255,.14);
+      --txt: #fff; --mut: rgba(255,255,255,.78); --red: #e11d24; --warn: #fde68a; --ok: #86efac;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; font: 15px/1.55 "Plus Jakarta Sans", system-ui, sans-serif; color: var(--txt);
+      background:
+        radial-gradient(ellipse 70% 40% at 10% 0%, rgba(225,29,36,.35), transparent 55%),
+        linear-gradient(180deg, #1a090b 0%, #0d0405 100%);
+      padding-bottom: 64px;
+    }
+    h1, h2, h3 { font-family: Outfit, sans-serif; letter-spacing: -.02em; line-height: 1.15; }
+    .top {
+      position: sticky; top: 0; z-index: 50; backdrop-filter: blur(14px);
+      background: rgba(13,4,5,.88); border-bottom: 1px solid var(--bd);
+      padding: 14px 20px; display: flex; gap: 12px; flex-wrap: wrap;
+      align-items: center; justify-content: space-between;
+    }
+    .brand { font-weight: 800; font-size: 15px; }
+    .brand span { color: #fda4af; }
+    .pill {
+      font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      border: 1px solid var(--bd); border-radius: 999px; padding: 6px 12px; color: var(--mut);
+    }
+    .wrap { max-width: 920px; margin: 0 auto; padding: 28px 20px 0; }
+    .hero {
+      border: 1px solid var(--bd); border-radius: 20px; padding: 28px 24px;
+      background: linear-gradient(135deg, rgba(225,29,36,.2), rgba(255,255,255,.04));
+      margin-bottom: 18px;
+    }
+    .hero h1 { margin: 0 0 10px; font-size: clamp(26px, 4vw, 36px); }
+    .hero p { margin: 0; color: var(--mut); max-width: 740px; }
+    .nav { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; margin: 18px 0 8px; }
+    .nav a {
+      text-decoration: none; color: var(--mut); font-size: 12px; font-weight: 700;
+      border: 1px solid var(--bd); background: var(--surf); border-radius: 12px; padding: 10px 12px;
+    }
+    .nav a small { display: block; color: #fda4af; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 3px; }
+    .callout {
+      margin: 16px 0 22px; padding: 14px 16px; border-radius: 14px;
+      border: 1px solid rgba(253,230,138,.3); background: rgba(253,230,138,.08);
+      color: var(--warn); font-size: 14px;
+    }
+    .block {
+      border: 1px solid var(--bd); border-radius: 18px; background: var(--surf);
+      padding: 20px 18px; margin: 0 0 14px;
+    }
+    .block h2 { margin: 0 0 8px; font-size: 20px; }
+    .block .meta { font-size: 12px; color: #fda4af; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 8px; }
+    .fala { border-left: 3px solid var(--red); padding: 8px 0 8px 14px; color: #ffe4e4; margin: 10px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+    th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--bd); vertical-align: top; }
+    th { color: #fda4af; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+    .avoid { color: #fca5a5; }
+    a.deck { color: #fda4af; }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="brand">Script interno · <span>não enviar ao cliente</span></div>
+    <div class="pill">EQV · 8 slides · ~18 min</div>
+  </header>
+  <main class="wrap">
+    <section class="hero">
+      <h1>Da venda no pátio à máquina previsível.</h1>
+      <p>600 Multimarcas × V4 · Empresa que Vende. Continuidade da EE. Um produto. Um preço: 6× R$ 3.000,00. Deck: <a class="deck" href="proposta-600-multimarcas-eqv.html">proposta-600-multimarcas-eqv.html</a>.</p>
+    </section>
+
+    <div class="callout"><strong>Linha mestra.</strong> A 600 já vende. O mês ainda é esforço do consultor e do pátio. EQV instala conteúdo, mídia, comercial e CRM em 6 meses — o time herda o método. Não é agência.</div>
+
+    <nav class="nav">
+      <a href="#antes"><small>00</small>Antes de abrir</a>
+      <a href="#capa"><small>01</small>Capa</a>
+      <a href="#diag"><small>02</small>Diagnóstico</a>
+      <a href="#prod"><small>03–05</small>Produto</a>
+      <a href="#ciclo"><small>06–07</small>Ciclo e pronto</a>
+      <a href="#preco"><small>08</small>Investimento</a>
+    </nav>
+
+    <article class="block" id="antes">
+      <div class="meta">Uso interno</div>
+      <h2>Antes de abrir</h2>
+      <table>
+        <thead><tr><th>Falar</th><th>Não falar</th></tr></thead>
+        <tbody>
+          <tr><td>EE já entregou o mapa</td><td class="avoid">Reabrir diagnóstico · “vocês não têm processo nenhum”</td></tr>
+          <tr><td>Consultor forte · pátio · troca · financiamento</td><td class="avoid">Faturamento inventado · ticket · volume de carros</td></tr>
+          <tr><td>Condição comercial 6× R$ 3.000,00</td><td class="avoid">A palavra “desconto”</td></tr>
+          <tr><td>Era 6× R$ 7.500,00 · R$ 45.000,00</td><td class="avoid">Cashback EE com valor que o brief não deu</td></tr>
+          <tr><td>Mês 1 é chão</td><td class="avoid">Prometer volume de venda ou ROI</td></tr>
+        </tbody>
+      </table>
+      <p class="fala">Abertura: “O que mais pesa hoje: o mês depender do consultor que está na loja, ou a origem que chega por WhatsApp e portal sem dono?”</p>
+    </article>
+
+    <article class="block" id="capa">
+      <div class="meta">Slide 01 · narrativa · ~40s</div>
+      <h2>Capa</h2>
+      <p class="fala">“Esta proposta não nasce hoje. Nasce do mapa da EE. A 600 já vende seminovo, troca e financiamento em Brasília. O próximo ciclo não é postar mais carro. É o time operar com método — conteúdo, mídia, comercial e CRM — para o mês deixar de depender só do pátio e de quem pegou o cliente.”</p>
+    </article>
+
+    <article class="block" id="diag">
+      <div class="meta">Slide 02 · dados · ~3 min</div>
+      <h2>Diagnóstico</h2>
+      <p class="fala">“Vocês não têm problema de atendimento. O cliente elogia o consultor. O que a EE mostrou: origem além da loja sem dono, follow-up artesanal, marketing no feeling, posicionamento genérico. A pergunta que o CRM ainda não responde: qual origem fecha e qual visita morre?”</p>
+      <p>Pergunta aberta: “Se o melhor consultor falta uma semana, o que o restante do time consegue repetir sozinho?”</p>
+    </article>
+
+    <article class="block" id="prod">
+      <div class="meta">Slides 03–05 · produto · ~6 min</div>
+      <h2>EQV · squad</h2>
+      <p class="fala">“Mesmo produto da Remax Pro Work: Empresa que Vende. 6 meses. Consultor 1h/mês + squad em conteúdo, mídia, comercial e CRM. A V4 conduz. A 600 opera. Agência executa e some. Curso ensina e não aplica. Consultoria clássica entrega PDF. Aqui o time herda a máquina.”</p>
+      <p>Matar objeção de escopo aqui — antes do preço. “O que te faria precisar pensar: timing, quem opera no dia a dia, ou o formato de 6 meses?”</p>
+    </article>
+
+    <article class="block" id="ciclo">
+      <div class="meta">Slides 06–07 · produto · ~4 min</div>
+      <h2>Ciclo e pronto</h2>
+      <p class="fala">“Ordem: onboarding em cima da EE, posicionamento, conteúdo, tráfego, comercial + CRM. Mês 1 não é campanha. Sem método, anúncio só enche o WhatsApp. Pronto é observável: dono no CRM, régua da visita ao financiamento, linha editorial, mídia com leitura, ritual mensal. Não é garantia de quantos carros vocês vendem.”</p>
+    </article>
+
+    <article class="block" id="preco">
+      <div class="meta">Slide 08 · decisão · ~3 min</div>
+      <h2>Investimento</h2>
+      <p class="fala">“Valor de referência do EQV: 6× R$ 7.500,00 — total R$ 45.000,00. Condição comercial desta conta: 6× R$ 3.000,00 — total R$ 18.000,00. Um programa. Um preço. Garantia de 30 dias. Próximo passo: formalizar o start e kickoff do mês 01.”</p>
+      <p>Respira. Pede a venda. Não empilhar PIX, desconto ou segundo produto.</p>
+    </article>
+  </main>
+</body>
+</html>
