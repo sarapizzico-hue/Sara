@@ -78,8 +78,10 @@
     .pill.hot{color:#fca5a5;border-color:rgba(239,68,68,.4)}
     .pill.info{color:#93c5fd;border-color:rgba(96,165,250,.35)}
     .code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:#86efac}
-    .rail{display:grid;grid-template-columns:repeat(8,minmax(110px,1fr));gap:8px;overflow-x:auto;padding-bottom:6px}
-    @media(max-width:1100px){.rail{grid-template-columns:repeat(4,minmax(160px,1fr))}}
+    .rail{display:grid;grid-template-columns:repeat(5,minmax(140px,1fr));gap:8px;overflow-x:auto;padding-bottom:6px}
+    @media(max-width:900px){.rail{grid-template-columns:1fr 1fr}}
+    .weeks{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:14px}
+    @media(max-width:900px){.weeks{grid-template-columns:1fr}}
     .rail-step{background:var(--surf2);border:1px solid var(--bd);border-radius:12px;padding:12px;min-height:132px;position:relative}
     .rail-step .n{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--brand-light);margin-bottom:6px}
     .rail-step .t{font-size:13px;font-weight:800;margin-bottom:4px}
@@ -121,146 +123,201 @@
 
 <div class="wrap">
   <section class="hero"><div class="hero-inner">
-    <div class="hero-eyebrow">Processo comercial · desenho para Miro</div>
-    <h1>Saber para Executar — do planejamento da conta até o pipe</h1>
+    <div class="hero-eyebrow">Rotina Sara · 5 semanas EE · Flow</div>
+    <h1>Saber para Executar — a rotina da conta, semana a semana</h1>
     <p class="meta">
-      Pedido do Erick: desenhar o processo <strong>Saber → Executar</strong>, definir <strong>colunas extras</strong> no comercial,
-      o que entra no <strong>documento de pré-pit</strong> e como o card do Cockpit SABER <strong>migra para o pipe de Expansão</strong>.
-      Sistema de registro: <strong>Flow</strong>. Coordenação: Account Planning gera a <strong>Next Best Offer (NBO)</strong>,
-      que alimenta o pipeline — não o contrário.
+      Cliente entra → <strong>GC</strong> → no <strong>kick-off</strong> a Sara entra com o time para se apresentar →
+      nas <strong>5 semanas</strong> fala 1× por semana com o cliente → na <strong>S3</strong>, depois da apresentação comercial,
+      ela e o time montam o <strong>pré-pit</strong> com o contexto da EE puxado no <strong>Notebook LM</strong> →
+      depois o <strong>Account Planning</strong> valida o produto → reunião para fechar proposta com narrativa →
+      apresentam → <strong>fecha em call</strong> ou entra em <strong>follow</strong> (com data de devolutiva) →
+      ganho ou <strong>drop com motivo</strong> para reabrir no momento certo.
     </p>
     <div class="chips">
-      <span class="chip live">Account Planning → NBO</span>
-      <span class="chip live">Cockpit no Flow</span>
-      <span class="chip live">Pré-pit Sara</span>
-      <span class="chip live">Pipe Review</span>
+      <span class="chip live">GC → Kick-off</span>
+      <span class="chip live">5 semanas · 1×/semana</span>
+      <span class="chip live">Pré-pit S3 · Notebook LM</span>
+      <span class="chip live">AP valida produto</span>
+      <span class="chip live">Fecha em call ou follow</span>
       <a class="chip" href="documento-pre-pit.html">Abrir template de pré-pit</a>
       <a class="chip" href="playbook-farmer-am.html">Playbook Farmer</a>
-      <a class="chip" href="SABER-EXECUTAR-MIRO.md">Versão compacta (MD)</a>
     </div>
   </div></section>
 
   <div class="callout ok">
-    <strong>Como usar:</strong> esta página é a fonte para o board no Miro.
-    Cada aba = um frame. Copie os blocos “Frame Miro” na ordem.
-    O Flow só entra em operação quando as colunas da aba <em>Colunas</em> existirem e o Pipe Review cobrir preenchimento 100%.
+    <strong>Fonte:</strong> rotina da Sara. Cada aba = um frame no Miro.
+    Ordem inegociável: <em>pré-pit na S3 (Notebook LM) → Account Planning valida o produto → proposta com narrativa → apresenta → fecha ou follow</em>.
   </div>
 
   <nav class="nav">
     <div class="nav-label">Frames do processo</div>
     <div class="tabs">
-      <button class="tab active" data-view="mapa"><span class="n">Mapa</span><span class="s">8 etapas · Miro</span></button>
-      <button class="tab" data-view="ap"><span class="n">Account Planning</span><span class="s">NBO · 3 focos</span></button>
+      <button class="tab active" data-view="mapa"><span class="n">Rotina</span><span class="s">GC → 5 semanas → close</span></button>
+      <button class="tab" data-view="ap"><span class="n">Account Planning</span><span class="s">Valida o produto</span></button>
       <button class="tab" data-view="colunas"><span class="n">Colunas Flow</span><span class="s">Pedido Erick #1</span></button>
-      <button class="tab" data-view="prepit"><span class="n">Pré-pit</span><span class="s">Pedido Erick #2</span></button>
-      <button class="tab" data-view="migracao"><span class="n">Migração</span><span class="s">Pedido Erick #3</span></button>
+      <button class="tab" data-view="prepit"><span class="n">Pré-pit</span><span class="s">S3 · Notebook LM</span></button>
+      <button class="tab" data-view="migracao"><span class="n">Fechamento</span><span class="s">Pitch · follow · drop</span></button>
       <button class="tab" data-view="review"><span class="n">Pipe Review</span><span class="s">Rituais · 100%</span></button>
     </div>
   </nav>
 
-  <!-- MAPA -->
+  <!-- ROTINA -->
   <div class="panel is-active" data-view="mapa">
     <div class="section">
-      <h2>Frame 0 · Tese</h2>
-      <h3>A base ativa não vira pitch por feeling</h3>
+      <h2>Frame 0 · Rotina da Sara</h2>
+      <h3>O que ela faz de verdade na conta</h3>
       <p class="lead">
-        O time planeja a conta, escolhe a próxima oferta, registra no Flow e só então constrói o pré-pit.
-        Pitch sem NBO é catálogo. Card no Expansão sem pré-pit é improviso.
+        Esta é a cadência operacional — não um funil inventado. O Flow registra cada passo.
+        O pré-pit vem <strong>na terceira semana</strong>, depois da apresentação comercial. O Account Planning vem <strong>depois</strong> do pré-pit, para validar o produto.
       </p>
       <div class="grid4">
         <div class="card">
-          <span class="tag info">1</span>
-          <div class="t">Account Planning</div>
-          <div class="d">Coordenado pelo time. Foco em retenção, otimização de campanhas ou novos produtos.</div>
+          <span class="tag info">Entrada</span>
+          <div class="t">GC + kick-off</div>
+          <div class="d">Cliente entra e faz a GC. No kick-off a Sara entra com o time só para se apresentar — o cliente já sabe quem farming a conta.</div>
         </div>
         <div class="card">
-          <span class="tag ok">2</span>
-          <div class="t">Cockpit no Flow</div>
-          <div class="d">Saber para Executar: execução + base ativa + pipe. Métricas e projetos no mesmo card.</div>
+          <span class="tag ok">5 semanas</span>
+          <div class="t">1 contato por semana</div>
+          <div class="d">Conversa e tira dúvida. Não é pitch. É presença: o cliente não some e a Farmer não espera a S5 para aparecer.</div>
         </div>
         <div class="card">
-          <span class="tag warn">3</span>
-          <div class="t">Documento de Pré-pit</div>
-          <div class="d">Estrutura da Sara: contexto, modelo, público e alinhamentos antes da proposta final.</div>
+          <span class="tag warn">S3</span>
+          <div class="t">Pré-pit + Notebook LM</div>
+          <div class="d">Depois do time apresentar o comercial, Sara + time montam o pré-pit com o contexto da EE puxado no Notebook LM.</div>
         </div>
         <div class="card">
-          <span class="tag hot">4</span>
-          <div class="t">Pipe Review</div>
-          <div class="d">Coordenação: Flow 100% preenchido, projeções, pitches da semana, diagnóstico e modo de entrega.</div>
+          <span class="tag hot">Depois</span>
+          <div class="t">AP → proposta → close</div>
+          <div class="d">Account Planning valida o produto. Reunião de narrativa. Apresentam. Fecha em call ou follow com data de devolutiva.</div>
         </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>As 5 semanas</h2>
+      <h3>Um contato por semana — conversar e tirar dúvida</h3>
+      <div class="weeks">
+        <div class="rail-step">
+          <div class="n">Semana 1</div>
+          <div class="t">Kick-off + 1º contato</div>
+          <div class="d">Sara se apresenta com o time. Primeira conversa: expectativa, dúvidas, canal oficial.</div>
+        </div>
+        <div class="rail-step">
+          <div class="n">Semana 2</div>
+          <div class="t">Pulso</div>
+          <div class="d">Contato da semana. O que a EE mostrou. Dúvida do cliente. Nada de preço.</div>
+        </div>
+        <div class="rail-step act">
+          <div class="n">Semana 3</div>
+          <div class="t">Comercial + pré-pit</div>
+          <div class="d">Time apresenta o comercial. Sara + time puxam o Notebook LM e escrevem o pré-pit.</div>
+        </div>
+        <div class="rail-step sys">
+          <div class="n">Semana 4</div>
+          <div class="t">AP + narrativa</div>
+          <div class="d">Account Planning valida o produto. Reunião para fechar a proposta com narrativa.</div>
+        </div>
+        <div class="rail-step ok">
+          <div class="n">Semana 5</div>
+          <div class="t">Apresentar</div>
+          <div class="d">Pitch. Fecha em call ou follow. Se precisar, marca devolutiva. Win ou drop com motivo.</div>
+        </div>
+      </div>
+      <div class="callout">
+        <strong>S4/S5 podem escorregar</strong> se o pré-pit ou o AP ainda não validou o produto — a apresentação não entra na agenda só porque a semana virou.
+        O contato semanal continua mesmo assim.
       </div>
     </div>
 
     <div class="section">
       <h2>Frame 1 · Mapa-mestre</h2>
-      <h3>Saber → Executar em 8 etapas</h3>
-      <p class="lead">Copiar como trilho horizontal no Miro. A barra de cima é o processo; Pipe Review é a camada de governança, não uma etapa.</p>
-      <div class="rail">
+      <h3>Da entrada ao close (copiar no Miro)</h3>
+      <div class="rail" style="margin-bottom:10px">
         <div class="rail-step">
           <div class="n">01</div>
-          <div class="t">Base ativa</div>
-          <div class="d">Conta na carteira · EE ou pós-EE · saúde visível</div>
+          <div class="t">Cliente entra</div>
+          <div class="d">EE contratada · card no Cockpit Flow</div>
         </div>
         <div class="rail-step">
           <div class="n">02</div>
-          <div class="t">Account Planning</div>
-          <div class="d">Time escolhe 1 foco: reter · otimizar · novo produto</div>
+          <div class="t">GC</div>
+          <div class="d">Alinha expectativa · o que entra / o que não entra</div>
         </div>
         <div class="rail-step act">
           <div class="n">03</div>
-          <div class="t">NBO</div>
-          <div class="d">Próxima oferta desta conta · STEP · o que não oferecer</div>
+          <div class="t">Kick-off</div>
+          <div class="d">Sara entra com o time e se apresenta</div>
         </div>
-        <div class="rail-step sys">
+        <div class="rail-step">
           <div class="n">04</div>
-          <div class="t">Cockpit Flow</div>
-          <div class="d">Saber p/ Executar · métricas + projeto no card</div>
+          <div class="t">Cadência 5 sem.</div>
+          <div class="d">1 contato/semana · conversa e dúvida</div>
         </div>
-        <div class="rail-step warn" style="border-color:rgba(250,204,21,.4)">
+        <div class="rail-step" style="border-color:rgba(250,204,21,.4)">
           <div class="n">05</div>
-          <div class="t">Pré-pit</div>
-          <div class="d">Doc Sara · contexto · modelo · público · alinhamentos</div>
+          <div class="t">Pré-pit (S3)</div>
+          <div class="d">Após o comercial · Notebook LM · contexto da EE</div>
+        </div>
+      </div>
+      <div class="rail">
+        <div class="rail-step sys">
+          <div class="n">06</div>
+          <div class="t">Account Planning</div>
+          <div class="d">Valida o produto · gera a NBO</div>
         </div>
         <div class="rail-step act">
-          <div class="n">06</div>
-          <div class="t">Pitch</div>
-          <div class="d">Só o que se encaixa · decisor na sala</div>
-        </div>
-        <div class="rail-step ok">
           <div class="n">07</div>
-          <div class="t">Pipe Expansão</div>
-          <div class="d">Se NBO for comercial · senão permanece no Cockpit</div>
+          <div class="t">Proposta + narrativa</div>
+          <div class="d">Reunião do time para fechar o deck/script</div>
+        </div>
+        <div class="rail-step act">
+          <div class="n">08</div>
+          <div class="t">Apresentação</div>
+          <div class="d">Pitch com decisor · só o produto validado</div>
         </div>
         <div class="rail-step ok">
-          <div class="n">08</div>
-          <div class="t">Executar</div>
-          <div class="d">Win → kickoff do STEP · farming da entrega</div>
+          <div class="n">09a</div>
+          <div class="t">Fecha em call</div>
+          <div class="d">Win na sala · kickoff do STEP</div>
+        </div>
+        <div class="rail-step" style="border-color:rgba(250,204,21,.4)">
+          <div class="n">09b</div>
+          <div class="t">Follow</div>
+          <div class="d">Marca devolutiva se precisar · ou drop com motivo</div>
         </div>
       </div>
     </div>
 
     <div class="section">
-      <h2>Frame 2 · Duas trilhas depois da NBO</h2>
-      <h3>Nem todo planejamento vira pipe comercial</h3>
-      <div class="split">
+      <h2>Depois da apresentação</h2>
+      <h3>Três saídas — todas com dono no Flow</h3>
+      <div class="grid3">
         <div class="node ok">
-          <div class="k">NBO comercial</div>
-          <div class="t">Migra para Expansão</div>
+          <div class="k">Win</div>
+          <div class="t">Fecha em call</div>
           <ul class="steps">
-            <li>Novo produto, upgrade ou Executar</li>
-            <li>Gates ok + pré-pit Pronto</li>
-            <li>Destino: Expansão Executar <em>ou</em> Expansão Ter/Saber</li>
-            <li>Cockpit origem fica “Migrado” com link</li>
+            <li>Aceito / assinatura na reunião</li>
+            <li>Card vai para Expansão (se ainda não foi)</li>
+            <li>Kickoff do produto validado</li>
           </ul>
         </div>
         <div class="node warn">
-          <div class="k">NBO de conta</div>
-          <div class="t">Permanece no Cockpit</div>
+          <div class="k">Ainda aberto</div>
+          <div class="t">Follow + devolutiva</div>
           <ul class="steps">
-            <li>Retenção / save</li>
-            <li>Otimização de campanha sem venda nova</li>
-            <li>Gate falhou ou score &lt; 70</li>
-            <li>Pré-pit incompleto — não inventa pitch</li>
+            <li>Sara entra em follow no mesmo dia</li>
+            <li>Marca data de devolutiva se o cliente pedir tempo</li>
+            <li>Sem data = card morto — Pipe Review cobra</li>
+          </ul>
+        </div>
+        <div class="node hot">
+          <div class="k">Não fechou</div>
+          <div class="t">Drop com motivo</div>
+          <ul class="steps">
+            <li>Coleta o motivo (Budget / Timing / Ops / Interno…)</li>
+            <li>Registra gatilho de reabertura</li>
+            <li>Não apaga o contexto — serve para o próximo momento</li>
           </ul>
         </div>
       </div>
@@ -268,10 +325,12 @@
 
     <div class="section">
       <h2>Copiar no Miro · Frame 1</h2>
-      <div class="copybox">SABER → EXECUTAR
-Base ativa → Account Planning (1 foco) → NBO → Cockpit Flow “Saber para Executar” → Documento de Pré-pit (Sara) → Pitch da semana → Pipe de Expansão (só se NBO comercial) → Executar.
-Governança: Pipe Review (Flow 100% · projeções · pitches · diagnóstico de entrega).
-Sistema: Flow. Não planilha paralela.</div>
+      <div class="copybox">ROTINA SARA · SABER → EXECUTAR
+Cliente entra → GC → Kick-off (Sara se apresenta com o time) → 5 semanas (1 contato/semana para conversar e tirar dúvida).
+S3: time apresenta o comercial → Sara + time montam o PRÉ-PIT (contexto do cliente + o que houve na EE, puxado no Notebook LM).
+Depois: Account Planning valida o produto (NBO) → reunião de proposta com narrativa → apresentam.
+Saída: fecha em call  OU  follow (marca devolutiva se precisar)  OU  drop com motivo para reabrir no momento certo.
+Sistema: Flow. Cockpit “Saber para Executar”.</div>
     </div>
   </div>
 
@@ -279,10 +338,11 @@ Sistema: Flow. Não planilha paralela.</div>
   <div class="panel" data-view="ap">
     <div class="section">
       <h2>Frame 3 · Account Planning</h2>
-      <h3>Coordenado pelo time — um foco por ciclo</h3>
+      <h3>Vem depois do pré-pit — valida o produto</h3>
       <p class="lead">
-        Planejamento de contas não é QBR de slides. É a reunião em que o time decide
-        <strong>qual jogo esta conta joga agora</strong>. O output obrigatório é a NBO, não uma lista de ideias.
+        Na rotina da Sara o AP <strong>não começa o ciclo</strong>. Ele entra depois do pré-pit da S3:
+        o time já tem o contexto da EE (Notebook LM) e agora decide <strong>qual produto se encaixa</strong>.
+        Output obrigatório: NBO validada — não uma lista de ideias.
       </p>
       <div class="grid3">
         <div class="card">
@@ -298,7 +358,7 @@ Sistema: Flow. Não planilha paralela.</div>
         <div class="card">
           <span class="tag ok">Foco C</span>
           <div class="t">Novos produtos</div>
-          <div class="d">Gates ok, tese da EE viva, WTP ou caminho de pagamento. NBO comercial → pré-pit → <strong>migra</strong> para o pipe de Expansão.</div>
+          <div class="d">Gates ok, tese da EE viva, WTP ou caminho de pagamento. NBO comercial → proposta com narrativa → <strong>migra</strong> para o pipe de Expansão.</div>
         </div>
       </div>
     </div>
@@ -316,13 +376,14 @@ Sistema: Flow. Não planilha paralela.</div>
             <tr><td class="code">nbo_valor</td><td>TCV e/ou MRR estimado (não inventar se não mapeou)</td><td>TCV R$ 72k · MRR R$ 6,5k</td></tr>
             <tr><td class="code">nbo_timing</td><td>Agora · 30d · 60d · 90d · Bloqueado</td><td>Agora</td></tr>
             <tr><td class="code">nbo_nao_oferecer</td><td>O que fica de fora neste ciclo</td><td>Social/Meta · combo Performance</td></tr>
-            <tr><td class="code">nbo_status</td><td>Hipótese → Validada → Em pré-pit → Em pitch → No pipe → Ganhou / Drop</td><td>Validada</td></tr>
+            <tr><td class="code">nbo_status</td><td>Em contexto (pré-pit) → Validada (AP) → Em proposta → Em pitch → Follow → Ganhou / Drop</td><td>Validada</td></tr>
           </tbody>
         </table>
       </div>
       <div class="callout warn" style="margin-top:14px">
-        <strong>Regra:</strong> NBO em Hipótese não agenda pitch de preço.
-        NBO Validada abre o documento de pré-pit. NBO Em pitch já tem data na semana.
+        <strong>Regra:</strong> o pré-pit traz o contexto; o AP valida o produto.
+        Sem NBO Validada no Account Planning, não agenda apresentação de preço.
+        NBO Em pitch já tem data na semana.
       </div>
     </div>
 
@@ -359,7 +420,24 @@ Sistema: Flow. Não planilha paralela.</div>
         O Cockpit E.E já tem identidade (cliente, squad, coord), status, temperatura, data de pitch, TCV e observação.
         Abaixo entram as colunas <strong>novas</strong> no Flow — as que o processo Saber → Executar exige e hoje não cabem numa célula de obs.
       </p>
-      <div class="callout warn"><strong>Não duplicar.</strong> O que já existe no Cockpit migra para o Flow com o mesmo nome. Estas são as adicionais.</div>
+      <div class="callout warn"><strong>Não duplicar.</strong> O que já existe no Cockpit migra para o Flow com o mesmo nome. Estas são as adicionais — agora alinhadas à rotina da Sara (GC, kick-off, 5 semanas, Notebook LM, follow, drop).</div>
+    </div>
+
+    <div class="section">
+      <h2>Bloco 0 · Cadência da conta (rotina Sara)</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Coluna</th><th>Tipo</th><th>Valores / regra</th></tr></thead>
+          <tbody>
+            <tr><td class="code">data_gc</td><td>Data</td><td>GC realizada. Sem GC o kick-off fica frágil</td></tr>
+            <tr><td class="code">kickoff_sara</td><td>Checkbox</td><td>Sara se apresentou com o time no KO</td></tr>
+            <tr><td class="code">semana_ee</td><td>Select 1–5</td><td>Semana atual da EE</td></tr>
+            <tr><td class="code">contato_semanal</td><td>Data</td><td>Último contato 1×/semana. Sem data há &gt;7 dias = alerta</td></tr>
+            <tr><td class="code">notebook_lm_url</td><td>URL</td><td>Notebook LM da conta — fonte do pré-pit</td></tr>
+            <tr><td class="code">status_ciclo</td><td>Select</td><td>GC · Kick-off · Em EE · Pré-pit · AP · Proposta · Pitch · Follow · Devolutiva · Ganhou · Drop</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <div class="section">
@@ -374,7 +452,7 @@ Sistema: Flow. Não planilha paralela.</div>
             <tr><td class="code">nbo_valor</td><td>Moeda / texto</td><td>TCV e MRR separados quando Executar</td></tr>
             <tr><td class="code">nbo_timing</td><td>Select</td><td>Agora · 30d · 60d · 90d · Bloqueado</td></tr>
             <tr><td class="code">nbo_nao_oferecer</td><td>Texto</td><td>Obrigatório. Protege o encaixe</td></tr>
-            <tr><td class="code">nbo_status</td><td>Select</td><td>Hipótese · Validada · Em pré-pit · Em pitch · No pipe · Ganhou · Drop</td></tr>
+            <tr><td class="code">nbo_status</td><td>Select</td><td>Em contexto · Validada · Em proposta · Em pitch · Follow · Ganhou · Drop</td></tr>
           </tbody>
         </table>
       </div>
@@ -386,8 +464,9 @@ Sistema: Flow. Não planilha paralela.</div>
         <table>
           <thead><tr><th>Coluna</th><th>Tipo</th><th>Valores / regra</th></tr></thead>
           <tbody>
-            <tr><td class="code">prepit_status</td><td>Select</td><td>Não iniciado · Em construção · Pronto · Usado no pitch</td></tr>
+            <tr><td class="code">prepit_status</td><td>Select</td><td>Não iniciado · Em construção · Pronto (S3) · Usado na proposta</td></tr>
             <tr><td class="code">prepit_url</td><td>URL</td><td>Link do doc gerado (ou Doc da conta)</td></tr>
+            <tr><td class="code">o_que_houve_ee</td><td>Texto</td><td>Síntese da EE até a S3 — puxada do Notebook LM</td></tr>
             <tr><td class="code">modelo_negocio</td><td>Texto</td><td>Como fatura · canais · unidades</td></tr>
             <tr><td class="code">publico_icp</td><td>Texto</td><td>Quem compra · canal real de entrada</td></tr>
             <tr><td class="code">alinhamentos_pendentes</td><td>Texto</td><td>O que falta antes da proposta final</td></tr>
@@ -408,6 +487,10 @@ Sistema: Flow. Não planilha paralela.</div>
             <tr><td class="code">projecao_cenario</td><td>Select</td><td>Fora · Chão · Pessimista · Realista · Otimista</td></tr>
             <tr><td class="code">origem_card</td><td>Select</td><td>Cockpit Saber · Base ativa · Expansão</td></tr>
             <tr><td class="code">destino_pipe</td><td>Select</td><td>Permanece Cockpit · Expansão Executar · Expansão Ter/Saber</td></tr>
+            <tr><td class="code">resultado_pitch</td><td>Select</td><td>Fecha em call · Follow · Drop</td></tr>
+            <tr><td class="code">data_devolutiva</td><td>Data</td><td>Obrigatória se Follow. Sem data = card morto</td></tr>
+            <tr><td class="code">motivo_drop</td><td>Select + texto</td><td>Budget · Timing · Ops · Interno · Outro + frase</td></tr>
+            <tr><td class="code">abertura_futura</td><td>Texto</td><td>Quando/como reabrir (gatilho). Drop não é lixeira</td></tr>
             <tr><td class="code">id_origem / url_par</td><td>Relação</td><td>Liga Cockpit ↔ Expansão. Obrigatório na migração</td></tr>
           </tbody>
         </table>
@@ -432,16 +515,14 @@ Sistema: Flow. Não planilha paralela.</div>
         </table>
       </div>
       <div class="callout ok" style="margin-top:14px">
-        <strong>Mínimo viável no Flow (semana 1):</strong>
-        <span class="code">foco_ap</span> ·
-        <span class="code">nbo</span> ·
-        <span class="code">nbo_status</span> ·
-        <span class="code">prepit_status</span> ·
-        <span class="code">gates_ok</span> ·
-        <span class="code">destino_pipe</span> ·
-        <span class="code">proxima_acao</span> ·
-        <span class="code">flow_preenchimento</span>.
-        O resto entra na semana 2 sem parar o ritual.
+        <strong>Mínimo viável no Flow (semana 1 da conta):</strong>
+        <span class="code">data_gc</span> ·
+        <span class="code">kickoff_sara</span> ·
+        <span class="code">semana_ee</span> ·
+        <span class="code">contato_semanal</span> ·
+        <span class="code">proxima_acao</span>.
+        Na S3 entram <span class="code">notebook_lm_url</span> + <span class="code">prepit_status</span>.
+        Depois do AP: <span class="code">nbo</span> + <span class="code">nbo_status</span>.
       </div>
     </div>
   </div>
@@ -452,11 +533,12 @@ Sistema: Flow. Não planilha paralela.</div>
       <h2>Pedido Erick · 2</h2>
       <h3>Informações necessárias para construir o documento de pré-pit</h3>
       <p class="lead">
-        Estrutura da Sara Pizzico: consolidar contexto do cliente, modelo de negócio, público e alinhamentos
-        <strong>antes</strong> da proposta final. Não substitui o Plano de Ação S3 — o pré-pit é o briefing da reunião de pitch.
-        Template preenchível: <a href="documento-pre-pit.html" style="color:#86efac">documento-pre-pit.html</a>
+        Na rotina da Sara o pré-pit nasce na <strong>terceira semana</strong>, depois do time apresentar o comercial.
+        Sara + time puxam o <strong>Notebook LM</strong> e consolidam o contexto do cliente e o que houve na EE.
+        Ainda <strong>não valida produto</strong> — isso é o Account Planning, no passo seguinte.
+        Template: <a href="documento-pre-pit.html" style="color:#86efac">documento-pre-pit.html</a>
       </p>
-      <div class="callout hot"><strong>Sem pré-pit = Pronto, não agenda pitch de preço.</strong> Pode haver conversa de diagnóstico; preço não.</div>
+      <div class="callout hot"><strong>Sem pré-pit Pronto, o AP não valida produto e não agenda apresentação de preço.</strong> O doc é o briefing da conta, não a proposta.</div>
     </div>
 
     <div class="section">
@@ -466,7 +548,7 @@ Sistema: Flow. Não planilha paralela.</div>
         <div class="card">
           <span class="tag info">01 · Conta</span>
           <div class="t">Quem entra na sala</div>
-          <div class="d">Cliente · data · farmer · squad · fase EE · foco do Account Planning · status em 1 linha.</div>
+          <div class="d">Cliente · data · farmer · squad · semana EE (S3) · status em 1 linha. Foco do AP ainda não — isso vem depois.</div>
         </div>
         <div class="card">
           <span class="tag info">02 · Contexto</span>
@@ -484,9 +566,9 @@ Sistema: Flow. Não planilha paralela.</div>
           <div class="d">Quem compra · persona · canal de entrada que existe hoje (não o desejado) · trilha Inside / E-com / PDV.</div>
         </div>
         <div class="card">
-          <span class="tag warn">05 · Diagnóstico + NBO</span>
-          <div class="t">Gargalo → oferta</div>
-          <div class="d">Gargalo #1 · NBO em 1 frase · o que não oferecer · STEP · TCV/MRR · timing · break-even · case (ou “sem case”).</div>
+          <span class="tag warn">05 · O que houve na EE</span>
+          <div class="t">Notebook LM</div>
+          <div class="d">Síntese puxada do Notebook LM: entregas S1–S3, apresentação comercial, gargalo #1, o que o cliente comprou da narrativa. Hipótese de produto — ainda não NBO.</div>
         </div>
         <div class="card">
           <span class="tag hot">06 · Alinhamentos</span>
@@ -494,14 +576,14 @@ Sistema: Flow. Não planilha paralela.</div>
           <div class="d">Decisor na sala · pago/pagando · budget · interesse · objeções · capacidade da ops · modo de entrega · pendências (sócios, financeiro, agenda).</div>
         </div>
         <div class="card">
-          <span class="tag ok">07 · Roteiro do pitch</span>
-          <div class="t">Como a conversa começa</div>
-          <div class="d">Frase-mestra de abertura · ask da reunião · plano B se não fechar (não mandar PDF solto).</div>
+          <span class="tag ok">07 · Próximo passo</span>
+          <div class="t">Ir para o Account Planning</div>
+          <div class="d">Pré-pit Pronto libera a reunião de AP. Lá o time valida o produto e escreve a NBO.</div>
         </div>
         <div class="card">
-          <span class="tag ok">08 · Decisão de pipe</span>
-          <div class="t">Cockpit ou Expansão</div>
-          <div class="d">Migrar / permanecer / ainda não. Próxima ação no Flow com dono e data.</div>
+          <span class="tag ok">08 · Fonte</span>
+          <div class="t">Notebook LM da conta</div>
+          <div class="d">URL no Flow (<span class="code">notebook_lm_url</span>). Sem notebook, o pré-pit fica “Em construção”.</div>
         </div>
       </div>
     </div>
@@ -512,12 +594,12 @@ Sistema: Flow. Não planilha paralela.</div>
         <table>
           <thead><tr><th>Bloco</th><th>Fonte primária</th><th>Se faltar</th></tr></thead>
           <tbody>
-            <tr><td>Contexto / saúde</td><td>Cockpit Flow + CSAT/NPS</td><td>Não força pitch — marca gap no <span class="code">alinhamentos_pendentes</span></td></tr>
-            <tr><td>Modelo / público</td><td>Entregas EE S1 (ICP, arquitetura, V4 Marketing)</td><td>Volta na conta; não inventa persona</td></tr>
-            <tr><td>Diagnóstico</td><td>S2/S3 + Plano de Ação Farmer</td><td>Pré-pit fica “Em construção”</td></tr>
-            <tr><td>NBO / STEP</td><td>Account Planning + economia (tier, margem, BE)</td><td>NBO = Hipótese. Sem pitch de preço</td></tr>
-            <tr><td>Alinhamentos</td><td>Gates + ops + financeiro</td><td>Lista explícita. Coordenação decide se espera</td></tr>
-            <tr><td>Roteiro</td><td>Frase-mestra do Plano de Ação + case</td><td>Se decisor inseguro: começa por prova, não por preço</td></tr>
+            <tr><td>Contexto / saúde</td><td>GC + kick-off + contatos semanais + Cockpit</td><td>Marca gap; não inventa</td></tr>
+            <tr><td>Modelo / público</td><td>Entregas EE S1 (ICP, arquitetura) via Notebook LM</td><td>Volta na conta; não inventa persona</td></tr>
+            <tr><td>O que houve na EE</td><td><strong>Notebook LM</strong> + apresentação comercial da S3</td><td>Pré-pit fica “Em construção”</td></tr>
+            <tr><td>Hipótese de produto</td><td>Leitura da S3 — ainda não é NBO</td><td>AP valida no passo seguinte</td></tr>
+            <tr><td>Alinhamentos</td><td>Dúvidas das 3 primeiras semanas + gates</td><td>Lista explícita para o AP</td></tr>
+            <tr><td>Próximo passo</td><td>Agendar Account Planning</td><td>Sem data, Pipe Review cobra</td></tr>
           </tbody>
         </table>
       </div>
@@ -532,9 +614,9 @@ Sistema: Flow. Não planilha paralela.</div>
           <div class="d">Critérios do playbook (faturamento, produtos, interesse, objeções, CSAT, passos). Vive com a Farmer durante S1–S3.</div>
         </div>
         <div class="card">
-          <span class="tag warn">Pré-pit</span>
-          <div class="t">Briefing da reunião de proposta</div>
-          <div class="d">Usa o Plano de Ação + NBO + alinhamentos de ops. É o que a coordenação lê 24h antes do pitch da semana.</div>
+          <span class="tag warn">Pré-pit (S3)</span>
+          <div class="t">Contexto da conta + EE</div>
+          <div class="d">Sara + time. Fonte: Notebook LM. Ainda não é proposta. Libera o Account Planning.</div>
         </div>
       </div>
     </div>
@@ -543,11 +625,12 @@ Sistema: Flow. Não planilha paralela.</div>
   <!-- MIGRACAO -->
   <div class="panel" data-view="migracao">
     <div class="section">
-      <h2>Pedido Erick · 3</h2>
-      <h3>Migração do card do Cockpit SABER para o pipeline de Expansão</h3>
+      <h2>Pedido Erick · 3 + rotina Sara</h2>
+      <h3>Apresentação, follow, drop e migração para Expansão</h3>
       <p class="lead">
-        O Cockpit “Saber para Executar” guarda a conta e o projeto. O pipe de Expansão guarda a <strong>oportunidade comercial</strong>.
-        Migrar é um ato explícito no Flow — não um arrastar sem critério.
+        Depois da reunião de proposta com narrativa, apresentam. Na saída da call só existem três estados:
+        <strong>fechou</strong>, <strong>follow</strong> (com data de devolutiva se precisar) ou <strong>drop com motivo</strong>.
+        O card do Cockpit vira oportunidade de Expansão quando o produto já foi validado no AP.
       </p>
     </div>
 
@@ -556,9 +639,10 @@ Sistema: Flow. Não planilha paralela.</div>
       <h3>Checklist — todos os P0</h3>
       <ul class="check">
         <li><span class="box"></span><div><strong>P0 · NBO comercial:</strong> novo produto, upgrade ou Executar — não é save nem otimização solta</div></li>
+        <li><span class="box"></span><div><strong>P0 · Pré-pit Pronto:</strong> S3 feita, Notebook LM puxado, contexto da EE no doc</div></li>
+        <li><span class="box"></span><div><strong>P0 · AP validou o produto:</strong> NBO escrita — não é hipótese solta</div></li>
+        <li><span class="box"></span><div><strong>P0 · Proposta com narrativa:</strong> reunião do time fechou o deck/script</div></li>
         <li><span class="box"></span><div><strong>P0 · Gates ok:</strong> decisor na sala + pago/pagando</div></li>
-        <li><span class="box"></span><div><strong>P0 · Pré-pit Pronto:</strong> os 8 blocos preenchidos, link no card</div></li>
-        <li><span class="box"></span><div><strong>P0 · Prontidão:</strong> lead score ≥ 70 <em>ou</em> Plano de Ação S3 fechado com tese</div></li>
         <li><span class="box"></span><div><strong>P1 · Timing:</strong> Agora ou 30d (60/90d espera no Cockpit)</div></li>
         <li><span class="box"></span><div><strong>P1 · Destino claro:</strong> Expansão Executar <em>ou</em> Expansão Ter/Saber — um só</div></li>
       </ul>
@@ -574,8 +658,8 @@ Sistema: Flow. Não planilha paralela.</div>
             <li>Foco AP = Retenção</li>
             <li>Otimização sem venda nova</li>
             <li>Gate falhou</li>
-            <li>Score &lt; 70 e tese frágil</li>
-            <li>Pré-pit incompleto</li>
+            <li>Pré-pit incompleto (S3 ainda não puxou o Notebook LM)</li>
+            <li>AP ainda não validou o produto</li>
             <li>Timing 60/90d ou Bloqueado</li>
           </ul>
         </div>
@@ -583,11 +667,42 @@ Sistema: Flow. Não planilha paralela.</div>
           <div class="k">Vai para Expansão</div>
           <div class="t">Oportunidade com dono</div>
           <ul class="steps">
-            <li>NBO Validada ou Em pré-pit/pitch</li>
-            <li>Valor estimado (mesmo que faixa)</li>
-            <li>Pitch com data ou pedido de proposta</li>
+            <li>NBO Validada no Account Planning</li>
+            <li>Proposta com narrativa pronta</li>
+            <li>Data de apresentação marcada</li>
             <li>Modo de execução já escolhido</li>
           </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Follow e drop — a rotina depois da call</h2>
+      <h3>Não deixa o card sem data</h3>
+      <div class="grid2">
+        <div class="card">
+          <span class="tag warn">Follow</span>
+          <div class="t">Não fechou na sala</div>
+          <div class="d">
+            <ul class="steps">
+              <li>No mesmo dia: Sara entra em follow</li>
+              <li>Se o cliente pediu tempo: <strong>marca data de devolutiva</strong> no Flow</li>
+              <li>Status = Follow · <span class="code">data_devolutiva</span> preenchida</li>
+              <li>Pipe Review: follow sem data = P0</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <span class="tag hot">Drop</span>
+          <div class="t">Coleta o motivo para reabrir depois</div>
+          <div class="d">
+            <ul class="steps">
+              <li>Motivo obrigatório (Budget / Timing / Ops / Interno / Outro)</li>
+              <li>1 frase na voz do cliente, se der</li>
+              <li><span class="code">abertura_futura</span>: gatilho + horizonte (ex. “voltar quando a obra terminar · 90d”)</li>
+              <li>O card não some. Vira base de reativação</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -601,7 +716,7 @@ Sistema: Flow. Não planilha paralela.</div>
         <li>Copiar: cliente, NBO, STEP, valor, timing, <span class="code">prepit_url</span>, modo de execução, dono, próxima ação.</li>
         <li>Preencher <span class="code">origem_card = Cockpit Saber</span> e <span class="code">id_origem / url_par</span> nos dois lados.</li>
         <li>No Cockpit origem: status <strong>Migrado para Expansão</strong> — o card continua existindo para métricas da base ativa.</li>
-        <li>Se perder: motivo de Drop volta para o Cockpit (Budget / Timing / Ops) e a NBO reabre ou morre com data.</li>
+        <li>Se perder: preencher <span class="code">motivo_drop</span> + <span class="code">abertura_futura</span>. O contexto fica no Cockpit para reabrir quando o momento voltar.</li>
       </ol>
       <div class="callout" style="margin-top:14px">
         <strong>Dois pipes de Expansão, uma regra:</strong> meta “Expansão Carteira · Executar” só recebe NBO de Executar.
@@ -620,7 +735,7 @@ Sistema: Flow. Não planilha paralela.</div>
             <tr><td>prepit_url</td><td>Anexo / campo de briefing</td></tr>
             <tr><td>pitch_semana</td><td>Data do próximo estágio comercial</td></tr>
             <tr><td>modo_execucao + canal</td><td>Instrução para ops no win</td></tr>
-            <tr><td>Status = Migrado</td><td>Estágio: Qualificação / Pitch / Proposta / Contrato / Ganhou</td></tr>
+            <tr><td>Status = Migrado</td><td>Estágio: Pitch / Proposta / Follow / Contrato / Ganhou</td></tr>
           </tbody>
         </table>
       </div>
@@ -659,13 +774,14 @@ Sistema: Flow. Não planilha paralela.</div>
     <div class="section">
       <h2>Pauta fixa do Pipe Review semanal</h2>
       <ol class="steps">
-        <li><strong>Higiene Flow:</strong> % preenchimento por estágio. Card incompleto sai da projeção e da pauta de pitch.</li>
-        <li><strong>NBO da semana:</strong> o que validou, o que ainda é hipótese, o que morreu.</li>
-        <li><strong>Pré-pits:</strong> quais estão Pronto, quais bloqueiam pitch.</li>
-        <li><strong>Pitches da semana:</strong> conta · dono · ask · case sim/não · decisor confirmado.</li>
-        <li><strong>Projeção:</strong> chão (já teve pitch × taxa) separado de Pessimista / Realista / Otimista. Semana* sem data de pitch não multiplica.</li>
-        <li><strong>Diagnóstico de entrega:</strong> wins da semana cabem na ops? Precisa execução assistida ou canal específico?</li>
-        <li><strong>Migrações:</strong> Cockpit → Expansão só com checklist P0. Reversões com motivo de Drop.</li>
+        <li><strong>Cadência Sara:</strong> GC · kick-off · contato da semana em todas as contas em EE.</li>
+        <li><strong>Pré-pits S3:</strong> Notebook LM puxado? Doc Pronto? AP já agendado?</li>
+        <li><strong>NBO da semana:</strong> o que o AP validou, o que ainda é contexto.</li>
+        <li><strong>Pitches da semana:</strong> conta · dono · narrativa pronta · decisor confirmado.</li>
+        <li><strong>Follow:</strong> toda conta pós-pitch sem data de devolutiva é P0.</li>
+        <li><strong>Drop:</strong> motivo + abertura futura preenchidos — senão não fecha o card.</li>
+        <li><strong>Projeção:</strong> chão (já teve pitch × taxa) separado de P/R/O.</li>
+        <li><strong>Diagnóstico de entrega:</strong> wins cabem na ops? Assistida ou canal específico?</li>
       </ol>
     </div>
 
@@ -695,11 +811,11 @@ Sistema: Flow. Não planilha paralela.</div>
     <div class="section">
       <h2>Checklist da coordenação</h2>
       <ul class="check">
-        <li><span class="box"></span><div>Nenhum card da semana com <span class="code">flow_preenchimento</span> &lt; 100% nos campos do estágio</div></li>
-        <li><span class="box"></span><div>Toda conta P0 tem <span class="code">proxima_acao</span> + <span class="code">data_proxima</span> + dono</div></li>
-        <li><span class="box"></span><div>Pitches da semana têm pré-pit Pronto e decisor confirmado</div></li>
-        <li><span class="box"></span><div>Projeção mostra chão separado da faixa P/R/O</div></li>
-        <li><span class="box"></span><div>Migrações da semana batem com o checklist P0</div></li>
+        <li><span class="box"></span><div>Toda conta em EE teve contato nesta semana (<span class="code">contato_semanal</span>)</div></li>
+        <li><span class="box"></span><div>Pré-pits da S3 com Notebook LM e status Pronto (ou data para fechar)</div></li>
+        <li><span class="box"></span><div>Pitches da semana com produto validado no AP + narrativa pronta</div></li>
+        <li><span class="box"></span><div>Follows com <span class="code">data_devolutiva</span></div></li>
+        <li><span class="box"></span><div>Drops com <span class="code">motivo_drop</span> + <span class="code">abertura_futura</span></div></li>
         <li><span class="box"></span><div>Wins com modo de execução preenchido (padrão / assistida / canal)</div></li>
       </ul>
     </div>
@@ -710,12 +826,13 @@ Sistema: Flow. Não planilha paralela.</div>
         <table>
           <thead><tr><th>Atividade</th><th>Farmer (Sara)</th><th>Coordenação</th><th>Entrega / ops</th></tr></thead>
           <tbody>
-            <tr><td>Account Planning</td><td>Prepara NBO</td><td>Conduz e decide foco</td><td>Sinaliza capacidade</td></tr>
-            <tr><td>Cockpit Flow</td><td>Atualiza card</td><td>Cobra 100%</td><td>Atualiza métricas de entrega</td></tr>
-            <tr><td>Pré-pit</td><td>Escreve (estrutura Sara)</td><td>Valida 24h antes</td><td>Confirma modo de execução</td></tr>
-            <tr><td>Migração p/ Expansão</td><td>Propõe</td><td>Autoriza</td><td>Ciente do win possível</td></tr>
+            <tr><td>Kick-off (se apresentar)</td><td>Entra com o time</td><td>Garante agenda</td><td>—</td></tr>
+            <tr><td>Contato 1×/semana</td><td>Conduz</td><td>Cobra cadência</td><td>Avisa se a entrega travar</td></tr>
+            <tr><td>Pré-pit (S3)</td><td>Escreve com o time (Notebook LM)</td><td>Valida</td><td>Entrega insumo da EE</td></tr>
+            <tr><td>Account Planning</td><td>Leva o pré-pit</td><td>Conduz e valida produto</td><td>Sinaliza capacidade</td></tr>
+            <tr><td>Proposta + narrativa</td><td>Fecha o script</td><td>Alinha pauta</td><td>Confirma modo de entrega</td></tr>
+            <tr><td>Pitch / follow / drop</td><td>Conduz · marca devolutiva · coleta motivo</td><td>Cobra data no Flow</td><td>Ciente do win possível</td></tr>
             <tr><td>Pipe Review</td><td>Leva contas da semana</td><td>Dono do ritual</td><td>Diagnóstico de entrega</td></tr>
-            <tr><td>Pitch</td><td>Conduz</td><td>Alinha pauta</td><td>Não vende catálogo</td></tr>
           </tbody>
         </table>
       </div>
@@ -723,15 +840,15 @@ Sistema: Flow. Não planilha paralela.</div>
 
     <div class="section">
       <h2>Implantação · o que copiar no Miro nesta ordem</h2>
-      <div class="frame"><div class="fn">Frame 0</div>Tese: base ativa não vira pitch por feeling. AP → NBO → Flow → pré-pit → pipe.</div>
-      <div class="frame"><div class="fn">Frame 1</div>Trilho de 8 etapas (mapa-mestre) + Pipe Review por cima.</div>
-      <div class="frame"><div class="fn">Frame 2</div>Duas trilhas: NBO comercial migra · NBO de conta permanece.</div>
-      <div class="frame"><div class="fn">Frame 3</div>Account Planning: retenção · otimização · novos produtos.</div>
-      <div class="frame"><div class="fn">Frame 4</div>Campos da NBO + status.</div>
-      <div class="frame"><div class="fn">Frame 5</div>Colunas adicionais do Flow (blocos A–D).</div>
-      <div class="frame"><div class="fn">Frame 6</div>8 blocos do pré-pit Sara + link do template.</div>
-      <div class="frame"><div class="fn">Frame 7</div>Checklist de migração Cockpit → Expansão.</div>
-      <div class="frame"><div class="fn">Frame 8</div>Pauta do Pipe Review + modo de execução + RACI.</div>
+      <div class="frame"><div class="fn">Frame 0</div>Rotina Sara: entra → GC → KO (se apresenta) → 5 semanas 1× contato → S3 pré-pit (Notebook LM) → AP valida produto → proposta com narrativa → apresenta → fecha / follow / drop.</div>
+      <div class="frame"><div class="fn">Frame 1</div>Trilho de 5 semanas + trilho de close (09a fecha em call / 09b follow).</div>
+      <div class="frame"><div class="fn">Frame 2</div>Pré-pit = contexto da EE. Account Planning = valida produto (NBO).</div>
+      <div class="frame"><div class="fn">Frame 3</div>Account Planning: retenção · otimização · novos produtos — só depois do pré-pit.</div>
+      <div class="frame"><div class="fn">Frame 4</div>Colunas Flow: cadência (GC, KO, semana, contato, Notebook LM) + NBO + follow/drop.</div>
+      <div class="frame"><div class="fn">Frame 5</div>8 blocos do pré-pit + Notebook LM como fonte.</div>
+      <div class="frame"><div class="fn">Frame 6</div>Follow com data de devolutiva · drop com motivo e abertura futura.</div>
+      <div class="frame"><div class="fn">Frame 7</div>Migração Cockpit → Expansão depois do AP.</div>
+      <div class="frame"><div class="fn">Frame 8</div>Pipe Review + RACI da rotina Sara.</div>
     </div>
   </div>
 </div>
