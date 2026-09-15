@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <title>ABC71 × Colli&amp;Co — Proposta Assessoria de Growth</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0c0c0e;
+      --panel: #161618;
+      --panel-2: #1c1c1f;
+      --red: #e50914;
+      --red-soft: #ff3b42;
+      --green: #b6ff4a;
+      --green-dim: #8adf2a;
+      --text: #f5f5f5;
+      --muted: #a8a8ae;
+      --dim: #6e6e74;
+      --line: rgba(255,255,255,.10);
+      --ease: cubic-bezier(.22, 1, .36, 1);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; background: #000; color: var(--text); font-family: Inter, system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow: hidden; }
+    button { font-family: inherit; }
+
+    .stage { width: 100vw; height: 100vh; display: grid; place-items: center; background: #000; }
+    .deck {
+      position: relative;
+      width: min(100vw, calc(100vh * 16 / 9));
+      height: min(100vh, calc(100vw * 9 / 16));
+      overflow: hidden;
+      background:
+        linear-gradient(rgba(229,9,20,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(229,9,20,.045) 1px, transparent 1px),
+        radial-gradient(ellipse 70% 50% at 80% 0%, rgba(229,9,20,.18), transparent 55%),
+        var(--bg);
+      background-size: 48px 48px, 48px 48px, auto, auto;
+      box-shadow: 0 0 0 1px rgba(255,255,255,.04);
+    }
+
+    .slide {
+      position: absolute; inset: 0;
+      padding: 4.6% 5.2% 7.2%;
+      display: flex; flex-direction: column;
+      opacity: 0; visibility: hidden; transform: translateX(28px);
+      transition: opacity .34s var(--ease), transform .34s var(--ease), visibility .34s;
+    }
+    .slide.active { opacity: 1; visibility: visible; transform: none; z-index: 2; }
+    .slide.exit-left { transform: translateX(-28px); opacity: 0; }
+    .slide.exit-right { transform: translateX(28px); opacity: 0; }
+    .slide.cover {
+      padding: 0; background:
+        radial-gradient(ellipse 80% 70% at 70% 20%, rgba(255,70,70,.22), transparent 50%),
+        radial-gradient(circle at 8% 18%, rgba(255,255,255,.08), transparent 22%),
+        linear-gradient(145deg, #b31218 0%, #8a0c12 42%, #5c070c 100%);
+    }
+    .slide.close {
+      background:
+        radial-gradient(ellipse 70% 50% at 80% 10%, rgba(229,9,20,.28), transparent 50%),
+        #140204;
+    }
+
+    .eyebrow { font-size: .72rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--red-soft); margin-bottom: .55rem; }
+    h1, h2, h3 { font-weight: 800; letter-spacing: -.03em; line-height: 1.08; }
+    h1 { font-size: clamp(2.1rem, 5.2vh, 3.1rem); }
+    h2 { font-size: clamp(1.55rem, 4vh, 2.35rem); }
+    h2 .red { color: var(--red-soft); }
+    .lead { margin-top: .55rem; max-width: 46rem; color: var(--muted); font-size: clamp(.86rem, 1.7vh, 1.02rem); line-height: 1.45; }
+
+    .brand { position: absolute; top: 4.2%; left: 5.2%; z-index: 6; font-weight: 800; letter-spacing: -.03em; font-size: .95rem; }
+    .brand span { color: var(--red-soft); }
+    .deck.is-cover .brand { opacity: 0; pointer-events: none; }
+    .deck.is-close .brand { color: #fff; }
+    .footer {
+      position: absolute; left: 5.2%; right: 5.2%; bottom: 2.4%;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: .68rem; color: var(--dim); z-index: 6; pointer-events: none;
+    }
+
+    /* COVER */
+    .cover-frame {
+      position: absolute; inset: 7.5% 6.5%;
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 18px;
+      pointer-events: none;
+    }
+    .cover-rings {
+      position: absolute; left: -6%; top: -10%; width: 38%; height: 70%;
+      border: 1px solid rgba(255,255,255,.12); border-radius: 50%;
+    }
+    .cover-rings::after {
+      content: ""; position: absolute; inset: 12%;
+      border: 1px solid rgba(255,255,255,.10); border-radius: 50%;
+    }
+    .cover-center { flex: 1; display: grid; place-items: center; text-align: center; }
+    .cover-word { font-size: clamp(3.6rem, 10vh, 6.2rem); font-weight: 900; letter-spacing: .04em; color: #fff; }
+    .cover-rule { width: 72px; height: 2px; background: #fff; margin: 1.1rem auto 0; }
+    .cover-meta { margin-top: 1.4rem; color: rgba(255,255,255,.78); font-size: .92rem; font-weight: 500; }
+    .cover-meta strong { color: #fff; }
+
+    /* GRIDS */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: .9rem; min-height: 0; flex: 1; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: .8rem; margin-top: .85rem; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: .75rem; margin-top: .85rem; }
+    .card {
+      background: rgba(22,22,24,.92);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: .95rem 1.05rem;
+    }
+    .card h3 { font-size: 1.02rem; margin-bottom: .35rem; }
+    .card p, .card li { color: var(--muted); font-size: .82rem; line-height: 1.42; }
+    .num { font-size: .72rem; font-weight: 800; letter-spacing: .12em; color: var(--red-soft); margin-bottom: .3rem; }
+    .num.blue { color: #7eb6ff; }
+    .num.yellow { color: #f5d76e; }
+    .num.green { color: var(--green); }
+
+    .pills { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .75rem; }
+    .pill {
+      font-size: .68rem; font-weight: 700; letter-spacing: .04em;
+      padding: .32rem .7rem; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.05); color: #ececec;
+    }
+
+    /* MOTOR */
+    .layers { display: flex; flex-direction: column; gap: .7rem; }
+    .layer { display: grid; grid-template-columns: 52px 1fr; gap: .75rem; align-items: start; padding: .85rem .9rem; border-radius: 14px; background: var(--panel); border: 1px solid var(--line); }
+    .layer-ico { width: 42px; height: 42px; border-radius: 10px; display: grid; place-items: center; font-weight: 800; font-size: .78rem; }
+    .layer-ico.b { background: rgba(80,140,255,.18); color: #7eb6ff; }
+    .layer-ico.y { background: rgba(245,215,110,.16); color: #f5d76e; }
+    .layer-ico.g { background: rgba(182,255,74,.14); color: var(--green); }
+    .changes { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; }
+    .change { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: .75rem .8rem; }
+    .change h4 { font-size: .86rem; margin-bottom: .2rem; }
+    .change p { font-size: .74rem; color: var(--muted); line-height: 1.35; }
+    .effect {
+      grid-column: 1 / -1;
+      background: linear-gradient(90deg, rgba(229,9,20,.22), rgba(229,9,20,.06));
+      border: 1px solid rgba(229,9,20,.45);
+      border-radius: 12px; padding: .8rem .95rem;
+    }
+    .effect .k { font-size: .68rem; font-weight: 800; letter-spacing: .14em; color: var(--red-soft); }
+    .effect p { margin-top: .25rem; font-size: .88rem; font-weight: 600; color: #fff; }
+
+    /* CADENCE */
+    .cadence { display: grid; grid-template-columns: repeat(4, 1fr); gap: .7rem; margin-top: .8rem; }
+    .cad { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: .85rem .8rem; min-height: 0; }
+    .cad .dur { display: inline-block; font-size: .64rem; font-weight: 800; letter-spacing: .08em; color: var(--red-soft); border: 1px solid rgba(229,9,20,.4); padding: .18rem .45rem; border-radius: 999px; margin-bottom: .45rem; }
+    .cad h3 { font-size: .92rem; margin-bottom: .35rem; }
+    .cad p { font-size: .74rem; color: var(--muted); line-height: 1.38; margin-bottom: .45rem; }
+    .cad ul { list-style: none; }
+    .cad li { font-size: .7rem; color: #cfcfd4; padding: .12rem 0 .12rem .75rem; position: relative; }
+    .cad li::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--red); position: absolute; left: 0; top: .45em; }
+    .internal {
+      margin-top: .75rem;
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: .8rem 1rem;
+    }
+    .internal h4 { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--dim); margin-bottom: .35rem; }
+    .internal p { font-size: .78rem; color: var(--muted); margin-bottom: .5rem; }
+    .chips { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .chip { font-size: .68rem; font-weight: 600; padding: .28rem .6rem; border-radius: 999px; background: rgba(255,255,255,.06); border: 1px solid var(--line); color: #ddd; }
+
+    /* COMMERCIAL */
+    .comm { flex: 1; display: grid; grid-template-columns: 1.05fr .95fr; gap: 1.1rem; margin-top: .85rem; min-height: 0; }
+    .box {
+      background: #141416;
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 18px;
+      padding: 1.05rem 1.15rem;
+      display: flex; flex-direction: column; min-height: 0;
+    }
+    .box-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: .85rem; }
+    .box-head h3 { font-size: 1.2rem; }
+    .box-head span { font-size: .7rem; color: var(--dim); letter-spacing: .08em; text-transform: uppercase; font-weight: 700; }
+    .op-card {
+      flex: 1;
+      background: #101012;
+      border: 1px solid rgba(182,255,74,.18);
+      border-left: 4px solid var(--green);
+      border-radius: 14px;
+      padding: 1.1rem 1.15rem;
+      display: flex; flex-direction: column;
+    }
+    .op-card .k { font-size: .68rem; font-weight: 800; letter-spacing: .14em; color: var(--green); text-transform: uppercase; }
+    .op-card h4 { font-size: 1.55rem; margin: .35rem 0 .25rem; }
+    .op-card .sub { color: var(--muted); font-size: .86rem; }
+    .was-row {
+      background: #1a1a1d; border-radius: 10px; padding: .7rem .9rem;
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: .7rem;
+    }
+    .was-row span { font-size: .82rem; color: var(--muted); }
+    .was-row strong {
+      font-size: 1.05rem;
+      color: #ececec;
+      position: relative;
+    }
+    .was-row strong::after {
+      content: "";
+      position: absolute;
+      left: -4%;
+      right: -4%;
+      top: 52%;
+      height: 2px;
+      background: var(--red);
+      transform: rotate(-8deg);
+    }
+    .now-row {
+      flex: 1;
+      border: 1.5px solid var(--red);
+      border-radius: 12px;
+      padding: 1rem 1.05rem;
+      display: flex; justify-content: space-between; align-items: center; gap: .8rem;
+      background: rgba(229,9,20,.05);
+    }
+    .now-row .lbl { font-size: .92rem; font-weight: 700; }
+    .now-row .tot { margin-top: .25rem; font-size: .72rem; color: var(--dim); }
+    .now-row .price { font-size: clamp(1.45rem, 3.4vh, 2.05rem); font-weight: 800; color: var(--red-soft); letter-spacing: -.03em; white-space: nowrap; }
+
+    .compare { width: 100%; border-collapse: collapse; margin-top: .7rem; font-size: .82rem; }
+    .compare th, .compare td { padding: .55rem .5rem; text-align: left; border-bottom: 1px solid var(--line); color: var(--muted); }
+    .compare th { font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; color: var(--dim); }
+    .compare td:not(:first-child), .compare th:not(:first-child) { text-align: right; white-space: nowrap; }
+    .compare tr.feat td { color: #fff; font-weight: 700; background: rgba(229,9,20,.08); }
+    .compare .ok { color: var(--green); font-weight: 700; }
+    .compare .pkg { color: #fff; font-weight: 700; }
+
+    .nav-hint { display: none; }
+    .progress { position: absolute; top: 0; left: 0; height: 3px; width: 8%; background: var(--red); z-index: 8; transform-origin: left; }
+
+    @media (max-width: 900px) {
+      .grid-2, .grid-3, .grid-4, .cadence, .comm, .changes { grid-template-columns: 1fr; }
+      .slide { overflow: auto; }
+    }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <div class="deck" id="deck">
+      <div class="progress" id="progress"></div>
+      <div class="brand">Colli<span>&amp;</span>Co</div>
+
+      <!-- 1 CAPA -->
+      <section class="slide cover active" data-slide="1">
+        <div class="cover-frame"></div>
+        <div class="cover-rings"></div>
+        <div class="cover-center">
+          <div>
+            <div class="cover-word">PROPOSTA</div>
+            <div class="cover-rule"></div>
+            <p class="cover-meta">ABC71 · ABC71 + Aloee (Aloy) · Assessoria de Growth</p>
+          </div>
+        </div>
+        <div class="footer" style="color:rgba(255,255,255,.55)"><span>Colli&amp;Co</span><span>01 / 11</span></div>
+      </section>
+
+      <!-- 2 CONTEXTO -->
+      <section class="slide" data-slide="2">
+        <p class="eyebrow">ABC71 × Colli&amp;Co</p>
+        <h2>Assessoria de Growth para o ERP<br><span class="red">e, se fizer sentido, para a Aloee no mesmo circuito.</span></h2>
+        <p class="lead">A apresentação anterior cobria ABC71 em 12 meses. Esta versão adiciona 6 meses e a operação conjunta ABC71 + Aloee — mesmo time, duas marcas, uma cadência.</p>
+        <div class="grid-2">
+          <article class="card">
+            <div class="num">PACOTE 01</div>
+            <h3>ABC71</h3>
+            <p>Demanda rastreável para o ERP industrial: Google de intenção, Performance Max e Meta ABM para dono, diretor e controller de indústria em expansão.</p>
+            <div class="pills">
+              <span class="pill">Account manager</span>
+              <span class="pill">Gestor de tráfego</span>
+              <span class="pill">Copy</span>
+              <span class="pill">Design</span>
+            </div>
+          </article>
+          <article class="card" style="border-color:rgba(229,9,20,.45)">
+            <div class="num">PACOTE 02</div>
+            <h3>ABC71 + Aloee</h3>
+            <p>O mesmo motor, com frente extra para APS + MES: chão de fábrica, programação e monitoramento em tempo real. Dois ICPs, um CRM, mídia e criativo no mesmo ritmo.</p>
+            <div class="pills">
+              <span class="pill">ERP Ômega / Pronto</span>
+              <span class="pill">Aloee APS + MES</span>
+              <span class="pill">Funil único</span>
+            </div>
+          </article>
+        </div>
+        <div class="footer"><span>Duas condições comerciais · 6 e 12 meses</span><span>02 / 11</span></div>
+      </section>
+
+      <!-- 3 MOTOR -->
+      <section class="slide" data-slide="3">
+        <p class="eyebrow">Solução 02 · Setup de Performance Preditiva</p>
+        <h2>Motor de tração: mídia, inteligência<br><span class="red">e CRM no mesmo circuito.</span></h2>
+        <p class="lead">Sair da dependência de indicação e construir demanda rastreável, qualificável e legível no funil comercial.</p>
+        <div class="grid-2" style="align-items:stretch">
+          <div>
+            <div class="num" style="margin-bottom:.55rem">TRÊS CAMADAS CONECTADAS</div>
+            <div class="layers">
+              <div class="layer">
+                <div class="layer-ico b">01</div>
+                <div>
+                  <h3>Mídia de alta intenção</h3>
+                  <p>Google Search e Performance Max + Meta Ads ABM, com foco em tomadores de decisão.</p>
+                </div>
+              </div>
+              <div class="layer">
+                <div class="layer-ico y">02</div>
+                <div>
+                  <h3>Inteligência e rastreamento</h3>
+                  <p>PIXEL + CAPI, GTM e GA4 — origem, etapa e custo visíveis até a oportunidade.</p>
+                </div>
+              </div>
+              <div class="layer">
+                <div class="layer-ico g">03</div>
+                <div>
+                  <h3>Integração com funil e CRM</h3>
+                  <p>Qualificação automática MQL → SQL e retorno de dados para otimização contínua.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="num" style="margin-bottom:.55rem">COM O CICLO FECHADO · O QUE MUDA NA OPERAÇÃO</div>
+            <div class="changes">
+              <div class="change"><h4>Clareza</h4><p>Saber exatamente o que a mídia gera. Menos decisão no feeling.</p></div>
+              <div class="change"><h4>Escala com critério</h4><p>Aumentar investimento só quando houver prova de performance.</p></div>
+              <div class="change"><h4>Jornada visível</h4><p>Funil com etapas, origens e priorização claras.</p></div>
+              <div class="change"><h4>Base conduzida</h4><p>Menos perda na retenção. LTV no centro da estratégia.</p></div>
+              <div class="effect">
+                <div class="k">Efeito</div>
+                <p>Previsibilidade de pipeline, menos centralização e uma base comercial conduzida por dados.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer"><span>Assessoria de Growth</span><span>03 / 11</span></div>
+      </section>
+
+      <!-- 4 TIME -->
+      <section class="slide" data-slide="4">
+        <p class="eyebrow">Escopo da operação</p>
+        <h2>Assessoria de Growth com o time<br><span class="red">na conta: Account + GT + copy + design.</span></h2>
+        <p class="lead">Não é mídia solta. É orquestração contínua — da campanha ao criativo, do tracking ao CRM.</p>
+        <div class="grid-4">
+          <article class="card">
+            <div class="num">01</div>
+            <h3>Account manager</h3>
+            <p>Dono da cadência com a ABC71. Prioridades, pendências, backlog e leitura do funil com a diretoria.</p>
+          </article>
+          <article class="card">
+            <div class="num">02</div>
+            <h3>Gestor de tráfego</h3>
+            <p>Google Search, Performance Max e Meta ABM. Escala só com prova. Verba amarrada a SQL, não a clique.</p>
+          </article>
+          <article class="card">
+            <div class="num">03</div>
+            <h3>Copy</h3>
+            <p>Mensagem para indústria: ERP, chão de fábrica, custo e previsibilidade. Sem jargão de agência.</p>
+          </article>
+          <article class="card">
+            <div class="num">04</div>
+            <h3>Design</h3>
+            <p>Criativos de performance para ERP e Aloee na mesma identidade. Peça, LP e anúncio no mesmo circuito.</p>
+          </article>
+        </div>
+        <div class="card" style="margin-top:.85rem">
+          <p style="color:#fff;font-weight:600">Mídia paga · Criativos · Tracking · Gestão contínua — operação recorrente, não projeto pontual.</p>
+        </div>
+        <div class="footer"><span>Time na conta</span><span>04 / 11</span></div>
+      </section>
+
+      <!-- 5 CADÊNCIA -->
+      <section class="slide" data-slide="5">
+        <p class="eyebrow">Cadência de acompanhamento</p>
+        <h2>1 mês com a Colli&amp;Co</h2>
+        <p class="lead">Atendimento diário, check-ins e planejamento de quarter. O time interno faz a retrospectiva para o ciclo seguinte.</p>
+        <div class="cadence">
+          <article class="cad">
+            <div class="dur">Diário</div>
+            <h3>Atendimento diário</h3>
+            <p>Todo dia o Account envia o resumo: tarefas, pendências, alinhamentos ou resultados.</p>
+            <ul>
+              <li>Alinhamentos</li>
+              <li>Pendências V4</li>
+              <li>Pendências</li>
+              <li>Backlog</li>
+              <li>Resultados</li>
+            </ul>
+          </article>
+          <article class="cad">
+            <div class="dur">1H</div>
+            <h3>Check-in quinzenal</h3>
+            <p>V4 e cliente olham o resultado da quinzena e o plano de ação do mês em curso.</p>
+            <ul>
+              <li>Resultados da quinzena</li>
+              <li>Insights e plano de ação</li>
+              <li>Próximos passos</li>
+            </ul>
+          </article>
+          <article class="cad">
+            <div class="dur">1H</div>
+            <h3>Check-in mensal</h3>
+            <p>Resultado completo do mês e insights que guiam o próximo ciclo.</p>
+            <ul>
+              <li>Resultados do mês</li>
+              <li>Insights e plano de ação</li>
+              <li>O que foi feito</li>
+              <li>Próximos passos</li>
+            </ul>
+          </article>
+          <article class="cad">
+            <div class="dur">1H30</div>
+            <h3>Planejamento quarter</h3>
+            <p>Planejamento estratégico de três em três meses para dar previsibilidade.</p>
+            <ul>
+              <li>Resultados do quarter</li>
+              <li>Insights e plano de ação</li>
+              <li>O que foi feito</li>
+              <li>Próximos passos</li>
+            </ul>
+          </article>
+        </div>
+        <div class="internal">
+          <h4>Rotina interna · Growth e retrospectivas</h4>
+          <p>Nas retrospectivas, o time inteiro colabora nos pontos do mês e no planejamento do ciclo seguinte.</p>
+          <div class="chips">
+            <span class="chip">Análise de dados</span>
+            <span class="chip">Visão geral do projeto</span>
+            <span class="chip">Visão Gestão</span>
+            <span class="chip">Visão Social</span>
+            <span class="chip">Visão Copywriting</span>
+            <span class="chip">Visão Design</span>
+            <span class="chip">Visão CRM</span>
+            <span class="chip">Visão Tráfego</span>
+          </div>
+        </div>
+        <div class="footer"><span>Como a operação roda</span><span>05 / 11</span></div>
+      </section>
+
+      <!-- 6 ABC71 12 -->
+      <section class="slide" data-slide="6">
+        <p class="eyebrow">Escopo de operação e valores · ABC71</p>
+        <h2>Proposta <span class="red">comercial</span></h2>
+        <div class="comm">
+          <div class="box">
+            <div class="box-head"><h3>Assessoria</h3><span>12 meses</span></div>
+            <div class="op-card">
+              <div class="k">Operação recorrente</div>
+              <h4>Assessoria · 12 meses</h4>
+              <p class="sub">ABC71 · Account manager + Gestor de tráfego + copy + design.</p>
+              <div class="pills" style="margin-top:auto">
+                <span class="pill">Mídia paga</span>
+                <span class="pill">Criativos</span>
+                <span class="pill">Tracking</span>
+                <span class="pill">Gestão contínua</span>
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="box-head"><h3>Investimento</h3><span>12 parcelas</span></div>
+            <div class="was-row"><span>Subtotal anual</span><strong>R$ 134.680,80</strong></div>
+            <div class="now-row">
+              <div>
+                <div class="lbl">Valor da parcela mensal</div>
+                <div class="tot">Total anual recorrente: R$ 88.889,28</div>
+              </div>
+              <div class="price">12× R$ 7.407,44</div>
+            </div>
+          </div>
+        </div>
+        <p class="lead" style="margin-top:.7rem">Era R$ 11.223,40 /mês. Condição 12 meses: −34%.</p>
+        <div class="footer"><span>ABC71 · Assessoria padrão 12 meses</span><span>06 / 11</span></div>
+      </section>
+
+      <!-- 7 ABC71 6 -->
+      <section class="slide" data-slide="7">
+        <p class="eyebrow">Escopo de operação e valores · ABC71</p>
+        <h2>Proposta <span class="red">comercial</span></h2>
+        <div class="comm">
+          <div class="box">
+            <div class="box-head"><h3>Assessoria</h3><span>6 meses</span></div>
+            <div class="op-card">
+              <div class="k">Operação recorrente</div>
+              <h4>Assessoria · 6 meses</h4>
+              <p class="sub">ABC71 · Account manager + Gestor de tráfego + copy + design.</p>
+              <div class="pills" style="margin-top:auto">
+                <span class="pill">Mídia paga</span>
+                <span class="pill">Criativos</span>
+                <span class="pill">Tracking</span>
+                <span class="pill">Gestão contínua</span>
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="box-head"><h3>Investimento</h3><span>6 parcelas</span></div>
+            <div class="was-row"><span>Subtotal em 6 meses</span><strong>R$ 67.340,40</strong></div>
+            <div class="now-row">
+              <div>
+                <div class="lbl">Valor da parcela mensal</div>
+                <div class="tot">Total 6 meses: R$ 50.505,30</div>
+              </div>
+              <div class="price">6× R$ 8.417,55</div>
+            </div>
+          </div>
+        </div>
+        <p class="lead" style="margin-top:.7rem">Era R$ 11.223,40 /mês. Condição 6 meses: −25%.</p>
+        <div class="footer"><span>ABC71 · Assessoria padrão 6 meses</span><span>07 / 11</span></div>
+      </section>
+
+      <!-- 8 ALOY 12 -->
+      <section class="slide" data-slide="8">
+        <p class="eyebrow">Escopo de operação e valores · ABC71 + Aloee</p>
+        <h2>Proposta <span class="red">comercial</span></h2>
+        <div class="comm">
+          <div class="box">
+            <div class="box-head"><h3>Assessoria</h3><span>12 meses</span></div>
+            <div class="op-card">
+              <div class="k">Operação recorrente</div>
+              <h4>ABC71 + Aloee · 12 meses</h4>
+              <p class="sub">ERP + APS/MES · Account manager + Gestor de tráfego + copy + design.</p>
+              <div class="pills" style="margin-top:auto">
+                <span class="pill">Mídia paga</span>
+                <span class="pill">Criativos</span>
+                <span class="pill">Tracking</span>
+                <span class="pill">Gestão contínua</span>
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="box-head"><h3>Investimento</h3><span>12 parcelas</span></div>
+            <div class="was-row"><span>Subtotal anual</span><strong>R$ 162.716,04</strong></div>
+            <div class="now-row">
+              <div>
+                <div class="lbl">Valor da parcela mensal</div>
+                <div class="tot">Total anual recorrente: R$ 107.392,56</div>
+              </div>
+              <div class="price">12× R$ 8.949,38</div>
+            </div>
+          </div>
+        </div>
+        <p class="lead" style="margin-top:.7rem">Era R$ 13.559,67 /mês. Condição 12 meses: −34%.</p>
+        <div class="footer"><span>ABC71 + Aloee · Assessoria padrão 12 meses</span><span>08 / 11</span></div>
+      </section>
+
+      <!-- 9 ALOY 6 -->
+      <section class="slide" data-slide="9">
+        <p class="eyebrow">Escopo de operação e valores · ABC71 + Aloee</p>
+        <h2>Proposta <span class="red">comercial</span></h2>
+        <div class="comm">
+          <div class="box">
+            <div class="box-head"><h3>Assessoria</h3><span>6 meses</span></div>
+            <div class="op-card">
+              <div class="k">Operação recorrente</div>
+              <h4>ABC71 + Aloee · 6 meses</h4>
+              <p class="sub">ERP + APS/MES · Account manager + Gestor de tráfego + copy + design.</p>
+              <div class="pills" style="margin-top:auto">
+                <span class="pill">Mídia paga</span>
+                <span class="pill">Criativos</span>
+                <span class="pill">Tracking</span>
+                <span class="pill">Gestão contínua</span>
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="box-head"><h3>Investimento</h3><span>6 parcelas</span></div>
+            <div class="was-row"><span>Subtotal em 6 meses</span><strong>R$ 81.358,02</strong></div>
+            <div class="now-row">
+              <div>
+                <div class="lbl">Valor da parcela mensal</div>
+                <div class="tot">Total 6 meses: R$ 61.018,50</div>
+              </div>
+              <div class="price">6× R$ 10.169,75</div>
+            </div>
+          </div>
+        </div>
+        <p class="lead" style="margin-top:.7rem">Era R$ 13.559,67 /mês. Condição 6 meses: −25%.</p>
+        <div class="footer"><span>ABC71 + Aloee · Assessoria padrão 6 meses</span><span>09 / 11</span></div>
+      </section>
+
+      <!-- 10 COMPARATIVO -->
+      <section class="slide" data-slide="10">
+        <p class="eyebrow">Leitura comercial</p>
+        <h2>As quatro condições,<span class="red"> lado a lado.</span></h2>
+        <p class="lead">12 meses reduz 34% da tabela. 6 meses reduz 25%. O pacote conjunto opera ERP e Aloee no mesmo time.</p>
+        <table class="compare">
+          <thead>
+            <tr>
+              <th>Condição</th>
+              <th>Tabela /mês</th>
+              <th>Parcela</th>
+              <th>Total do ciclo</th>
+              <th>Condição</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="feat">
+              <td class="pkg">ABC71 · 12 meses</td>
+              <td>R$ 11.223,40</td>
+              <td class="ok">12× R$ 7.407,44</td>
+              <td>R$ 88.889,28</td>
+              <td class="ok">−34%</td>
+            </tr>
+            <tr>
+              <td class="pkg">ABC71 · 6 meses</td>
+              <td>R$ 11.223,40</td>
+              <td>6× R$ 8.417,55</td>
+              <td>R$ 50.505,30</td>
+              <td class="ok">−25%</td>
+            </tr>
+            <tr class="feat">
+              <td class="pkg">ABC71 + Aloee · 12 meses</td>
+              <td>R$ 13.559,67</td>
+              <td class="ok">12× R$ 8.949,38</td>
+              <td>R$ 107.392,56</td>
+              <td class="ok">−34%</td>
+            </tr>
+            <tr>
+              <td class="pkg">ABC71 + Aloee · 6 meses</td>
+              <td>R$ 13.559,67</td>
+              <td>6× R$ 10.169,75</td>
+              <td>R$ 61.018,50</td>
+              <td class="ok">−25%</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="grid-2" style="flex:0; margin-top:.9rem">
+          <article class="card">
+            <h3>ABC71 sozinha</h3>
+            <p>Motor de tração no ERP. Indicada quando a prioridade é previsibilidade de pipeline para Ômega e Pronto.</p>
+          </article>
+          <article class="card">
+            <h3>ABC71 + Aloee</h3>
+            <p>Dois produtos, um funil. Indicada quando a Aloee entra na mesma operação de mídia, criativo e CRM.</p>
+          </article>
+        </div>
+        <div class="footer"><span>Comparativo</span><span>10 / 11</span></div>
+      </section>
+
+      <!-- 11 CLOSE -->
+      <section class="slide close" data-slide="11">
+        <p class="eyebrow" style="color:#ffb4b4">Próximo passo</p>
+        <h2 style="max-width:52rem;font-size:clamp(1.8rem,4.6vh,2.7rem)">Escolher o recorte — ABC71 ou ABC71 + Aloee — e o ciclo de 6 ou 12 meses.</h2>
+        <p class="lead" style="color:rgba(255,255,255,.78);max-width:40rem">O time já está desenhado: Account manager, Gestor de tráfego, copy e design. A cadência começa no atendimento diário.</p>
+        <div class="grid-2" style="flex:0;margin-top:1.4rem;max-width:48rem">
+          <article class="card" style="background:rgba(0,0,0,.28)">
+            <div class="num">ABC71</div>
+            <h3>12× R$ 7.407,44</h3>
+            <p>ou 6× R$ 8.417,55</p>
+          </article>
+          <article class="card" style="background:rgba(0,0,0,.28)">
+            <div class="num">ABC71 + Aloee</div>
+            <h3>12× R$ 8.949,38</h3>
+            <p>ou 6× R$ 10.169,75</p>
+          </article>
+        </div>
+        <div class="footer" style="color:rgba(255,255,255,.5)"><span>Colli&amp;Co · Assessoria de Growth</span><span>11 / 11</span></div>
+      </section>
+    </div>
+  </div>
+  <p class="nav-hint">← → ou scroll para navegar</p>
+  <script>
+    (function () {
+      const slides = Array.from(document.querySelectorAll(".slide"));
+      const progress = document.getElementById("progress");
+      const deck = document.getElementById("deck");
+      let index = 0;
+      let locked = false;
+      function show(next) {
+        if (locked || next === index || next < 0 || next >= slides.length) return;
+        locked = true;
+        const dir = next > index ? 1 : -1;
+        const current = slides[index];
+        const target = slides[next];
+        current.classList.remove("active");
+        current.classList.add(dir > 0 ? "exit-left" : "exit-right");
+        target.classList.add("active");
+        target.classList.remove("exit-left", "exit-right");
+        index = next;
+        progress.style.width = ((index + 1) / slides.length * 100) + "%";
+        deck.classList.toggle("is-cover", index === 0);
+        deck.classList.toggle("is-close", target.classList.contains("close"));
+        setTimeout(function () {
+          current.classList.remove("exit-left", "exit-right");
+          locked = false;
+        }, 340);
+      }
+      document.addEventListener("keydown", function (e) {
+        if (["ArrowRight", "PageDown", " "].includes(e.key)) { e.preventDefault(); show(index + 1); }
+        if (["ArrowLeft", "PageUp"].includes(e.key)) { e.preventDefault(); show(index - 1); }
+        if (e.key === "Home") show(0);
+        if (e.key === "End") show(slides.length - 1);
+      });
+      let wheelLock = false;
+      document.addEventListener("wheel", function (e) {
+        if (window.matchMedia("(max-width: 900px)").matches) return;
+        if (wheelLock || Math.abs(e.deltaY) < 20) return;
+        wheelLock = true;
+        show(index + (e.deltaY > 0 ? 1 : -1));
+        setTimeout(function () { wheelLock = false; }, 420);
+      }, { passive: true });
+      let touchX = null;
+      document.addEventListener("touchstart", function (e) { touchX = e.changedTouches[0].clientX; }, { passive: true });
+      document.addEventListener("touchend", function (e) {
+        if (touchX == null) return;
+        const dx = touchX - e.changedTouches[0].clientX;
+        touchX = null;
+        if (Math.abs(dx) < 50) return;
+        show(index + (dx > 0 ? 1 : -1));
+      }, { passive: true });
+      progress.style.width = (1 / slides.length * 100) + "%";
+      deck.classList.add("is-cover");
+    })();
+  </script>
+</body>
+</html>
