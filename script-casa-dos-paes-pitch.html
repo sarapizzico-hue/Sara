@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <title>Script de Pitch · Casa dos Pães · Linguagem simples</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #140608;
+      --surf: rgba(255,255,255,.06);
+      --bd: rgba(255,255,255,.14);
+      --txt: #fff;
+      --mut: rgba(255,255,255,.78);
+      --red: #e11d24;
+      --soft: #ffd0d0;
+      --ok: #86efac;
+      --warn: #fde68a;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font: 15px/1.55 "Plus Jakarta Sans", system-ui, sans-serif;
+      color: var(--txt);
+      background:
+        radial-gradient(ellipse 70% 40% at 10% 0%, rgba(225,29,36,.35), transparent 55%),
+        radial-gradient(ellipse 50% 35% at 90% 10%, rgba(255,80,80,.18), transparent 50%),
+        linear-gradient(180deg, #1a090b 0%, #0d0405 100%);
+      padding-bottom: 72px;
+    }
+    h1, h2, h3 { font-family: Outfit, sans-serif; letter-spacing: -.02em; line-height: 1.15; }
+    .top {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(13,4,5,.9);
+      border-bottom: 1px solid var(--bd);
+      padding: 14px 20px;
+      display: flex; gap: 12px; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    }
+    .brand { font-weight: 800; font-size: 15px; }
+    .brand span { color: #fda4af; }
+    .pill {
+      font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      border: 1px solid var(--bd); border-radius: 999px; padding: 6px 12px; color: var(--mut);
+      text-decoration: none;
+    }
+    .pill:hover { color: #fff; border-color: rgba(255,255,255,.35); }
+    .wrap { max-width: 920px; margin: 0 auto; padding: 28px 20px 0; }
+    .hero {
+      border: 1px solid var(--bd); border-radius: 20px; padding: 28px 24px;
+      background: linear-gradient(135deg, rgba(225,29,36,.2), rgba(255,255,255,.04));
+      margin-bottom: 18px;
+    }
+    .hero h1 { margin: 0 0 10px; font-size: clamp(26px, 4vw, 36px); }
+    .hero p { margin: 0; color: var(--mut); max-width: 760px; }
+    .nav {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 8px; margin: 18px 0 8px;
+    }
+    .nav a {
+      text-decoration: none; color: var(--mut); font-size: 12px; font-weight: 700;
+      border: 1px solid var(--bd); background: var(--surf); border-radius: 12px;
+      padding: 10px 12px; transition: .2s;
+    }
+    .nav a:hover { color: #fff; border-color: rgba(255,255,255,.35); background: rgba(225,29,36,.18); }
+    .nav a small { display: block; color: #fda4af; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 3px; }
+    .callout {
+      margin: 16px 0 22px; padding: 14px 16px; border-radius: 14px;
+      border: 1px solid rgba(253,230,138,.3); background: rgba(253,230,138,.08);
+      color: var(--warn); font-size: 14px;
+    }
+    .callout strong { color: #fef08a; }
+    .callout.ok {
+      border-color: rgba(134,239,172,.3); background: rgba(134,239,172,.08); color: var(--ok);
+    }
+    .callout.ok strong { color: #bbf7d0; }
+    .perfil {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px; margin: 16px 0 8px;
+    }
+    .perfil .card, .obj-grid .card {
+      border: 1px solid var(--bd); border-radius: 14px; background: var(--surf);
+      padding: 12px 14px;
+    }
+    .perfil h3, .obj-grid h3 { margin: 0 0 6px; font-size: 14px; }
+    .perfil p, .obj-grid p { margin: 0; font-size: 13px; color: var(--mut); line-height: 1.45; }
+    .slide {
+      border: 1px solid var(--bd); border-radius: 18px; background: rgba(255,255,255,.04);
+      padding: 22px 20px; margin: 14px 0;
+    }
+    .slide-head {
+      display: flex; justify-content: space-between; gap: 12px; align-items: flex-start;
+      margin-bottom: 10px; flex-wrap: wrap;
+    }
+    .slide-num { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #fda4af; margin-bottom: 4px; }
+    .slide-head h2 { margin: 0; font-size: clamp(18px, 3vw, 24px); }
+    .slide-ref { font-size: 12px; color: var(--mut); white-space: nowrap; }
+    .objetivo {
+      font-size: 13px; color: #fecdd3; background: rgba(225,29,36,.16);
+      border: 1px solid rgba(225,29,36,.35); border-radius: 10px; padding: 10px 12px; margin-bottom: 12px;
+    }
+    .fala {
+      font-size: 15px; line-height: 1.6; color: #fff;
+      border-left: 3px solid var(--red); padding: 4px 0 4px 14px; margin: 10px 0;
+    }
+    .fala em { color: #fda4af; font-style: normal; font-weight: 700; }
+    .bloco {
+      margin-top: 12px; padding: 12px 14px; border-radius: 12px;
+      background: var(--surf); border: 1px solid var(--bd);
+    }
+    .bloco h3 { margin: 0 0 8px; font-size: 13px; color: #fda4af; }
+    .bloco ul { margin: 0; padding-left: 18px; color: var(--mut); font-size: 13px; }
+    .bloco li { margin: 5px 0; }
+    .bloco li strong { color: #fff; }
+    .ask {
+      margin-top: 12px; padding: 12px 14px; border-radius: 12px;
+      background: rgba(134,239,172,.1); border: 1px solid rgba(134,239,172,.28);
+      color: #bbf7d0; font-size: 14px;
+    }
+    .ask strong { color: #86efac; }
+    .evitar {
+      margin-top: 10px; padding: 12px 14px; border-radius: 12px;
+      background: rgba(253,230,138,.08); border: 1px solid rgba(253,230,138,.25);
+      color: #fde68a; font-size: 13px;
+    }
+    .evitar strong { color: #fef08a; }
+    .fonte {
+      margin-top: 10px; font-size: 13px; color: var(--soft);
+      padding: 10px 12px; border-radius: 10px; background: rgba(255,255,255,.04);
+    }
+    .obj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+    @media (max-width: 720px) { .obj-grid { grid-template-columns: 1fr; } }
+    .tag {
+      display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: .08em;
+      text-transform: uppercase; padding: 3px 8px; border-radius: 999px; margin-right: 6px;
+      background: rgba(225,29,36,.25); color: #fda4af;
+    }
+    footer {
+      margin: 28px 20px 0; text-align: center; font-size: 12px; color: var(--mut);
+    }
+    footer a { color: #fda4af; }
+    .quote-int {
+      margin-top: 10px; padding: 12px 14px; border-radius: 12px;
+      border-left: 3px solid #fda4af; background: rgba(255,255,255,.04);
+      color: rgba(255,255,255,.82); font-size: 13.5px; line-height: 1.5;
+    }
+    .quote-int small { display: block; margin-top: 6px; color: #fda4af; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; font-size: 10px; }
+  
+    .traduz {
+      margin-top: 10px; padding: 10px 12px; border-radius: 10px;
+      border: 1px dashed rgba(134,239,172,.35); background: rgba(134,239,172,.08);
+      color: #bbf7d0; font-size: 13px;
+    }
+    .traduz strong { color: #ecfdf5; }
+    .evitar {
+      margin-top: 12px; padding: 12px 14px; border-radius: 12px;
+      border: 1px solid rgba(252,165,165,.35); background: rgba(239,68,68,.1);
+      color: #fecaca; font-size: 13px;
+    }
+    .ask {
+      margin-top: 12px; padding: 12px 14px; border-radius: 12px;
+      border: 1px solid rgba(147,197,253,.35); background: rgba(59,130,246,.12);
+      color: #bfdbfe; font-size: 14px;
+    }
+    .fonte { margin-top: 10px; font-size: 12px; color: var(--mut); }
+    footer { text-align: center; color: var(--mut); font-size: 12px; margin: 28px 0 12px; }
+    footer a { color: #86efac; }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <div class="brand">Script Casa dos Pães · <span>Nilda · leiga</span></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <a class="pill" href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/sarapizzico-hue/Sara/cursor%2Faccount-planning-casa-dos-paes-zapfirst-3d7c/proposta-casa-dos-paes-zapfirst.html" target="_blank" rel="noopener">Abrir deck 10 slides</a>
+      <span class="pill">Uso interno · não enviar à cliente</span>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <header class="hero">
+      <h1>Narrativa + script · linguagem de padaria</h1>
+      <p>
+        A Nilda é prática, sobrecarregada e já se queimou com marketing.
+        Fale como conversa de balcão: curto, concreto, sem sigla.
+        O fio: <strong>cliente já chega → ninguém segura → a gente organiza o WhatsApp em 90 dias → ela sai do aperto</strong>.
+        Preço só no fim. Meta de R$ 500 mil é <em>dela</em>, não promessa deste projeto.
+      </p>
+    </header>
+
+    <div class="callout">
+      <strong>Cliente leiga:</strong> nunca diga CRM, SDR, 3P-IA, SLA, LP, Kommo, handoff sem traduzir.
+      Troque por: cadastro de clientes, ajudante automático, passo a passo, tempo de resposta, página, sistema organizado.
+    </div>
+    <div class="callout ok">
+      <strong>Fio em uma frase:</strong> “Nilda, o problema não é falta de cliente batendo. É o WhatsApp sem dono quando você está na rua — e a gente veio organizar isso.”
+    </div>
+
+    <div class="perfil">
+      <div class="card"><h3>Como ela pensa</h3><p>Medo de gastar de novo. Quer resultado rápido. Confunde agência com “coloca anúncio no ar”.</p></div>
+      <div class="card"><h3>O que ela sente</h3><p>Cansaço. Tudo depende dela. Culpa quando o cliente chama e não tem resposta.</p></div>
+      <div class="card"><h3>O que ela quer ouvir</h3><p>“Alguém vai atender no meu lugar”, “fica organizado”, “eu consigo acompanhar”, “não é só promessa”.</p></div>
+      <div class="card"><h3>O que NÃO falar</h3><p>Escalar mídia agora · “máquina de vendas” genérico · R$ 500 mil garantido · jargão de agência.</p></div>
+    </div>
+
+    <nav class="nav" aria-label="Slides">
+      <a href="#b0"><small>Antes</small>Abertura</a>
+      <a href="#s1"><small>01</small>Capa</a>
+      <a href="#s2"><small>02</small>Gargalo</a>
+      <a href="#s3"><small>03</small>Ordem certa</a>
+      <a href="#s4"><small>04</small>90 dias</a>
+      <a href="#s5"><small>05</small>Capacidades</a>
+      <a href="#s6"><small>06</small>Método</a>
+      <a href="#s7"><small>07</small>Calendário</a>
+      <a href="#s8"><small>08</small>O que olhamos</a>
+      <a href="#s9"><small>09</small>Encaixe</a>
+      <a href="#s10"><small>10</small>Investimento</a>
+    </nav>
+
+    <!-- B0 -->
+    <article class="slide" id="b0">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Bloco 0 · Antes da tela</div>
+          <h2>Abrir clima · escutar</h2>
+        </div>
+        <div class="slide-ref">~ 1 min</div>
+      </div>
+      <div class="objetivo">Objetivo: ela falar. Você escuta. Zero monólogo, zero preço.</div>
+      <div class="fala">
+        “Nilda, antes de eu abrir a tela: como está a rotina aí na loja essa semana?
+        Compra, atendimento, WhatsApp — o que mais tem te puxado?”
+      </div>
+      <div class="bloco">
+        <h3>Na cabeça, sem falar</h3>
+        <ul>
+          <li>Ela espera “anúncio e filmagem”. Você veio organizar a casa.</li>
+          <li>Validar dor: mensagem sem resposta quando ela está comprando.</li>
+          <li>Não corrigir ainda. Só espelhar.</li>
+        </ul>
+      </div>
+      <div class="ask"><strong>Pergunta:</strong> “Quando o cliente manda mensagem e você está na rua… o que acontece hoje?”</div>
+      <div class="evitar"><strong>Evitar:</strong> abrir valor · falar de IA · falar de R$ 500 mil · dizer “você precisa de processo”.</div>
+    </article>
+
+    <!-- S1 -->
+    <article class="slide" id="s1">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 01 · Capa</div>
+          <h2>A demanda já chega. Falta a operação segurar.</h2>
+        </div>
+        <div class="slide-ref">~ 30s</div>
+      </div>
+      <div class="objetivo">Objetivo: tese em português claro. Parece conversa, não pitch de produto.</div>
+      <div class="fala">
+        “Olha o título com calma: <em>o cliente já chega</em>. Preço bom, variedade, gente da rua e do bairro.
+        O que a gente veio resolver não é ‘como aparecer mais’.
+        É: <em>quando chega, não escapar</em>.”
+      </div>
+      <div class="ask"><strong>Check:</strong> “Faz sentido pra você essa leitura — que o aperto maior hoje é segurar o que já aparece?”</div>
+      <div class="evitar"><strong>Evitar:</strong> “máquina de vendas” · ZapFirst · plano base · mídia.</div>
+    </article>
+
+    <!-- S2 -->
+    <article class="slide" id="s2">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 02 · O gargalo</div>
+          <h2>Não é preço. É tudo passando por você.</h2>
+        </div>
+        <div class="slide-ref">~ 1–1,5 min</div>
+      </div>
+      <div class="objetivo">Objetivo: ela se reconhecer sem se sentir atacada.</div>
+      <div class="fala">
+        “Nilda, do jeito que a gente mapeou: o supermercado tem preço. Isso já atrai.
+        O aperto é outro — <em>compras, atendimento e divulgação batem em você</em>.
+        Aí o WhatsApp toca, você está na rua… e o cliente some.
+        Não é falta de esforço. É falta de alguém e de um jeito organizado de atender.”
+      </div>
+      <div class="fala">
+        “E tem o medo certo: já investiu antes e não viu volta.
+        Então a gente não começa jogando dinheiro em anúncio de novo.
+        A gente começa <em>organizando a casa</em>.”
+      </div>
+      <div class="ask"><strong>Pergunta:</strong> “Se amanhã o WhatsApp tocasse o dobro… quem responderia sem ser você?”</div>
+      <div class="evitar"><strong>Evitar:</strong> “você é o gargalo” · “Nilda-dependência” · tom de culpa.</div>
+    </article>
+
+    <!-- S3 -->
+    <article class="slide" id="s3">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 03 · Ordem certa</div>
+          <h2>Organizar → atender → anotar → fidelizar</h2>
+        </div>
+        <div class="slide-ref">~ 45s</div>
+      </div>
+      <div class="objetivo">Objetivo: alinhar expectativa — este projeto é o agora, não o “crescimento mágico”.</div>
+      <div class="fala">
+        “A ordem é simples, igual na loja:
+        primeiro <em>organizar</em> o WhatsApp,
+        depois <em>atender</em> com alguém responsável,
+        depois <em>anotar</em> quem é o cliente,
+        depois <em>chamar de novo</em> quem já compra.
+        Sem isso, qualquer divulgação é dinheiro andando em círculo.”
+      </div>
+      <div class="traduz"><strong>Tradução:</strong> não fale “funil” nem “retenção”. Fale “atender bem” e “fazer o cliente voltar”.</div>
+      <div class="ask"><strong>Check:</strong> “Você topa a gente focar nisso agora — organizar — antes de pensar em anúncio novo?”</div>
+    </article>
+
+    <!-- S4 -->
+    <article class="slide" id="s4">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 04 · Promessa</div>
+          <h2>Em 90 dias estrutura instalada na operação</h2>
+        </div>
+        <div class="slide-ref">~ 30s</div>
+      </div>
+      <div class="objetivo">Objetivo: promessa curta e crível. Sem “consultoria de slides”.</div>
+      <div class="fala">
+        “Em três meses a gente deixa isso <em>funcionando na prática</em>:
+        WhatsApp organizado, pessoa treinada, resposta mesmo quando você estiver comprando,
+        e um jeito de acompanhar quem chamou e quem comprou.
+        Não é papel bonito. É rotina na loja.”
+      </div>
+      <div class="ask"><strong>Silêncio de 2 segundos.</strong> Deixa ela reagir.</div>
+      <div class="evitar"><strong>Evitar:</strong> “IA 24/7” · “máquina” · “ROI” · “escala”.</div>
+    </article>
+
+    <!-- S5 -->
+    <article class="slide" id="s5">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 05 · Capacidades</div>
+          <h2>O que passa a existir na loja de vocês</h2>
+        </div>
+        <div class="slide-ref">~ 1,5 min</div>
+      </div>
+      <div class="objetivo">Objetivo: concretizar o que ela “leva” — em benefício, não em feature.</div>
+      <div class="fala">
+        “Vou traduzir o que fica na Casa dos Pães, no dia a dia:”
+      </div>
+      <div class="bloco">
+        <h3>Fale assim, um por um (aponte a tela)</h3>
+        <ul>
+          <li><strong>Google e Instagram:</strong> “quem te achar, cai no WhatsApp certo — com botão claro.”</li>
+          <li><strong>Catálogo + PIX:</strong> “o cliente vê produto e preço no zap e consegue pagar sem você inventar mensagem.”</li>
+          <li><strong>Roteiro de atendimento:</strong> “a pessoa que atender sabe o que falar — promoção, pedido, dúvida de preço.”</li>
+          <li><strong>Alguém no posto:</strong> “não é você no primeiro ‘oi’. Você entra só quando precisar.”</li>
+          <li><strong>Cadastro de clientes:</strong> “nome e WhatsApp organizados — para chamar de novo quem já compra.”</li>
+          <li><strong>Ajuda fora do horário:</strong> “uma resposta automática inteligente para não deixar a pessoa no vácuo — e passa pra gente humana quando for vender de verdade.”</li>
+        </ul>
+      </div>
+      <div class="traduz"><strong>Nunca diga:</strong> GMB, LP, Kommo, SDR, handoff. <strong>Diga:</strong> Google da loja, página, cadastro, ajudante no zap, passar pra atendente.</div>
+      <div class="ask"><strong>Pergunta:</strong> “Dessas coisas, qual aliviaria mais a sua semana?”</div>
+    </article>
+
+    <!-- S6 -->
+    <article class="slide" id="s6">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 06 · Método</div>
+          <h2>Passo a passo — sem pular etapa</h2>
+        </div>
+        <div class="slide-ref">~ 45s</div>
+      </div>
+      <div class="objetivo">Objetivo: explicar por que não começa com robô.</div>
+      <div class="fala">
+        “A gente faz em ordem, igual receita de bolo:
+        primeiro o <em>produto e o preço</em> no zap ficam claros,
+        depois o <em>jeito de atender</em>,
+        depois a <em>pessoa treinada</em>,
+        e só no fim o <em>ajudante automático</em>.
+        Se colocar robô em cima de bagunça, bagunça fica automática — e você se frustra de novo.”
+      </div>
+      <div class="ask"><strong>Check:</strong> “Prefere a gente ir com calma nessa ordem, certo?”</div>
+      <div class="evitar"><strong>Evitar:</strong> falar “3P-IA” · “framework” · “metodologia proprietária”.</div>
+    </article>
+
+    <!-- S7 -->
+    <article class="slide" id="s7">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 07 · 90 dias</div>
+          <h2>Mês 1, 2 e 3 — o que acontece</h2>
+        </div>
+        <div class="slide-ref">~ 1 min</div>
+      </div>
+      <div class="objetivo">Objetivo: calendário mental simples.</div>
+      <div class="fala">
+        “<em>Mês 1:</em> a gente arruma a porta de entrada — Google, Instagram, catálogo, PIX — e já começa a pegar nome e WhatsApp no caixa.
+        <em>Mês 2:</em> treina quem vai atender, deixa o roteiro pronto, organiza o cadastro. Você sai da frente do primeiro atendimento.
+        <em>Mês 3:</em> liga a ajuda automática fora do horário, as mensagens pra cliente voltar, e a gente te mostra o que melhorou.”
+      </div>
+      <div class="fala">
+        “Os R$ 500 mil continuam sendo a meta grande da Casa dos Pães.
+        Estes 90 dias são o <em>alicerce</em> — pra operação aguentar o caminho sem você carregar tudo nas costas.”
+      </div>
+      <div class="ask"><strong>Pergunta:</strong> “Tem alguém aí que poderia ser essa pessoa do WhatsApp — mesmo que seja meio período?”</div>
+    </article>
+
+    <!-- S8 -->
+    <article class="slide" id="s8">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 08 · Sucesso</div>
+          <h2>O que vamos olhar juntos</h2>
+        </div>
+        <div class="slide-ref">~ 45s</div>
+      </div>
+      <div class="objetivo">Objetivo: critérios honestos — ela entende “como saber se está funcionando”.</div>
+      <div class="fala">
+        “A gente não vai te encher de gráfico. Vamos olhar coisa de loja:
+        se a mensagem é respondida rápido,
+        se menos gente fica no vácuo,
+        se o cadastro de cliente está crescendo,
+        se dá pra chamar quem já comprou,
+        e se <em>suas horas no WhatsApp caem</em>.
+        Isso é sucesso deste projeto.”
+      </div>
+      <div class="ask"><strong>Check:</strong> “Se em 90 dias você estiver menos presa no zap e o cliente for melhor atendido — isso já valeria o esforço?”</div>
+      <div class="evitar"><strong>Evitar:</strong> CAC, LTV, taxa de conversão, KPI, “vaidade”.</div>
+    </article>
+
+    <!-- S9 -->
+    <article class="slide" id="s9">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 09 · Encaixe</div>
+          <h2>Do jeito da Casa dos Pães</h2>
+        </div>
+        <div class="slide-ref">~ 45s</div>
+      </div>
+      <div class="objetivo">Objetivo: personalizar + gate do atendente sem soar como ameaça.</div>
+      <div class="fala">
+        “Isso não é pacote genérico de internet.
+        No zap de vocês: um jeito pra <em>promoção</em> e outro pra <em>pedido</em> — pra não misturar.
+        No caixa: pedir nome e WhatsApp com naturalidade — ‘pra te avisar das ofertas’.
+        E tem um combinado importante: <em>precisa ter alguém pra atender</em>, mesmo que meio período.
+        Sem isso, qualquer solução — a nossa inclusive — trava. Porque alguém tem que fechar a venda com o cliente.”
+      </div>
+      <div class="ask"><strong>Pergunta de compromisso:</strong> “Quem você vê nessa função nas próximas semanas?”</div>
+      <div class="evitar"><strong>Evitar:</strong> “gate inegociável” · “sem isso não fechamos” em tom duro. Seja firme e cuidadoso.</div>
+    </article>
+
+    <!-- S10 -->
+    <article class="slide" id="s10">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 10 · Investimento</div>
+          <h2>Valor · só depois do desenho quieto</h2>
+        </div>
+        <div class="slide-ref">~ 1 min</div>
+      </div>
+      <div class="objetivo">Objetivo: preço com calma. Pedir o sim. Sem âncora de carro de som.</div>
+      <div class="fala">
+        “Investimento do projeto de três meses: <em>R$ 18 mil à vista</em>,
+        ou em até <em>12 vezes de R$ 1.666,67</em> no cartão.
+        Entra a organização completa do WhatsApp, treino, cadastro de clientes, resposta fora do horário e o relatório do que melhorou.
+        Não entra gestão de anúncio pago neste momento — de propósito. Primeiro a casa atender.”
+      </div>
+      <div class="fala">
+        “Nilda, o próximo passo é simples: a gente formaliza, marca o início,
+        e você indica quem vai ficar no atendimento com a gente.”
+      </div>
+      <div class="ask"><strong>CTA:</strong> “Podemos avançar com esse projeto e já marcar a data de começo?”</div>
+      <div class="bloco">
+        <h3>Se travar no valor</h3>
+        <ul>
+          <li>“Entendo. O que mais pesa: o valor total ou a organização do pagamento?”</li>
+          <li>“Quer que a gente olhe o parcelado pra caber no mês?”</li>
+          <li>Não invente desconto. Não compare com carro de som nesta sala (ela pediu pra tirar).</li>
+        </ul>
+      </div>
+      <div class="evitar"><strong>Evitar:</strong> “de R$ 30 mil” com tom de pechincha · pressão · prometer R$ 500 mil.</div>
+    </article>
+
+    <div class="callout ok" style="margin-top:22px">
+      <strong>Se perder o fio:</strong> volta no slide 02.
+      “Cliente já chama. Você está na rua. A venda esfria. A gente organiza o WhatsApp pra isso parar.”
+      Método e preço só existem porque essa frase é verdade.
+    </div>
+
+    <div class="slide" id="objecoes">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Bolso · Objeções</div>
+          <h2>Respostas curtas · linguagem dela</h2>
+        </div>
+      </div>
+      <div class="bloco">
+        <h3>“Quero anúncio / filmagem agora”</h3>
+        <ul><li>“Podemos. Mas se o zap não responde, você paga pra cliente ficar bravo. Primeiro a gente segura o atendimento.”</li></ul>
+      </div>
+      <div class="bloco">
+        <h3>“Já gastei e não deu certo”</h3>
+        <ul><li>“Antes faltou constância e organização. Aqui a entrega é rotina funcionando — não campanha solta.”</li></ul>
+      </div>
+      <div class="bloco">
+        <h3>“Não tenho gente”</h3>
+        <ul><li>“Precisa de pelo menos uma pessoa, mesmo meio período. O automático ajuda na porta; gente fecha a venda. Sem isso qualquer caminho falha.”</li></ul>
+      </div>
+      <div class="bloco">
+        <h3>“Está caro”</h3>
+        <ul><li>“É um projeto de três meses pra tirar o aperto do seu colo. Quer que a gente olhe o parcelado?”</li></ul>
+      </div>
+    </div>
+
+    <footer>
+      Uso interno V4 · Casa dos Pães × ZapFirst Plano Base ·
+      <a href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/sarapizzico-hue/Sara/cursor%2Faccount-planning-casa-dos-paes-zapfirst-3d7c/proposta-casa-dos-paes-zapfirst.html" target="_blank" rel="noopener">Abrir deck</a>
+    </footer>
+  </div>
+</body>
+</html>

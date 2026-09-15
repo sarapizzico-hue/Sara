@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Abrir · Casa dos Pães × V4</title>
+  <style>
+    body {
+      margin: 0; min-height: 100vh; display: grid; place-items: center;
+      font: 15px/1.5 system-ui, sans-serif; background: #171313; color: #fff;
+    }
+    .box {
+      width: min(520px, 92vw); padding: 28px 24px; border-radius: 18px;
+      background: #280001; border: 1px solid rgba(255,255,255,.18);
+    }
+    h1 { margin: 0 0 10px; font-size: 22px; }
+    p { margin: 0 0 14px; color: rgba(255,255,255,.75); }
+    a.btn {
+      display: block; text-align: center; text-decoration: none; font-weight: 700;
+      padding: 14px 16px; border-radius: 12px; margin: 8px 0;
+      background: #e50914; color: #fff;
+    }
+    a.secondary {
+      display: block; text-align: center; color: #ffebc8; font-size: 13px; margin-top: 12px;
+    }
+  </style>
+  <script>
+    (function () {
+      var raw = "https://raw.githubusercontent.com/sarapizzico-hue/Sara/cursor%2Faccount-planning-casa-dos-paes-zapfirst-3d7c/proposta-casa-dos-paes-zapfirst.html";
+      var preview = "https://htmlpreview.github.io/?" + raw;
+      window.__preview = preview;
+      window.__raw = raw;
+      // auto-open
+      setTimeout(function () { location.replace(preview); }, 400);
+    })();
+  </script>
+</head>
+<body>
+  <div class="box">
+    <h1>Casa dos Pães · proposta</h1>
+    <p>Abrindo o deck… Se não redirecionar, use o botão abaixo.</p>
+    <a class="btn" id="go" href="#">Abrir apresentação</a>
+    <a class="btn" id="script" href="#" style="background:#3f1014;border:1px solid rgba(255,255,255,.2)">Abrir script (Nilda leiga)</a>
+    <a class="secondary" id="dl" href="#" download>Baixar HTML</a>
+  </div>
+  <script>
+    document.getElementById("go").href = window.__preview;
+    document.getElementById("dl").href = window.__raw;
+    document.getElementById("script").href = "https://htmlpreview.github.io/?https://raw.githubusercontent.com/sarapizzico-hue/Sara/cursor%2Faccount-planning-casa-dos-paes-zapfirst-3d7c/script-casa-dos-paes-pitch.html";
+  </script>
+</body>
+</html>
