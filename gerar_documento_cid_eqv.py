@@ -295,7 +295,7 @@ def build_docx():
     p4 = c.add_paragraph()
     r = p4.add_run(
         "Consultoria, acompanhamento e execução assistida + origem orgânica. "
-        "Ciclo de 6 meses no cartão de crédito. Sem verba de mídia paga."
+        "Ciclo de 6 meses no cartão de crédito."
     )
     set_run_font(r, size=12, color="E8D0D0")
 
@@ -323,7 +323,7 @@ def build_docx():
         "Leitura central",
         "A V4 não executa no lugar da CID: estrutura o negócio, treina o time e acompanha a execução. "
         "Quem opera é a CID. A máquina fica na empresa quando o ciclo acaba. "
-        "A ordem é clareza → sistema → execução. SEO Growth entra como origem complementar, sem mídia paga.",
+        "A ordem é clareza → sistema → execução. SEO Growth entra como origem complementar.",
     )
 
     add_heading_styled(doc, "1. Objetivo")
@@ -331,7 +331,7 @@ def build_docx():
         doc,
         "Instalar, em 6 meses, o método para a CID vender com previsibilidade: diagnóstico contínuo "
         "de maturidade GTM, consultoria estratégica mensal, execução assistida (conteúdo, comercial e CRM) "
-        "e origem complementar em SEO Growth — sem verba de mídia paga. Comunidade de pares e imersão "
+        "e origem complementar em SEO Growth. Comunidade de pares e imersão "
         "presencial da Fábrica de Receita.",
         align="justify",
     )
@@ -358,8 +358,8 @@ def build_docx():
                 "O comercial é o sócio Leonardo. Sem sistema, não se repete.",
             ],
             [
-                "Marketing no achismo / nunca investiu em mídia",
-                "Canal, conteúdo e origem sem tese. Mídia paga não cabe na margem.",
+                "Marketing no achismo",
+                "Canal, conteúdo e origem sem tese. Sem cadência nem indicador.",
             ],
             [
                 "Agência executa — você não aprende",
@@ -530,7 +530,7 @@ def build_docx():
     )
     add_cell_run(
         right,
-        "Ciclo de 6 meses. A máquina fica no time. Não é aluguel de agência. Mídia paga não entra neste desenho.",
+        "Ciclo de 6 meses. A máquina fica no time. Não é aluguel de agência.",
         size=10,
         color=MUT,
     )
@@ -620,7 +620,7 @@ def build_html():
 <p class="cover-kicker">PROPOSTA COMERCIAL</p>
 <p class="cover-title">Empresa que Vende + SEO Growth</p>
 <p class="cover-sub">CID — Clínica de Serviços Médicos  ×  V4 Company</p>
-<p class="cover-lead">Consultoria, acompanhamento e execução assistida + origem orgânica. Ciclo de 6 meses no cartão de crédito. Sem verba de mídia paga.</p>
+<p class="cover-lead">Consultoria, acompanhamento e execução assistida + origem orgânica. Ciclo de 6 meses no cartão de crédito.</p>
 </td></tr></table>""",
         html_table(
             ["Campo", "Informação"],
@@ -641,13 +641,13 @@ def build_html():
             "Leitura central",
             "A V4 não executa no lugar da CID: estrutura o negócio, treina o time e acompanha a execução. "
             "Quem opera é a CID. A máquina fica na empresa quando o ciclo acaba. "
-            "A ordem é clareza → sistema → execução. SEO Growth entra como origem complementar, sem mídia paga.",
+            "A ordem é clareza → sistema → execução. SEO Growth entra como origem complementar.",
         ),
         h1("1. Objetivo"),
         p(
             "Instalar, em 6 meses, o método para a CID vender com previsibilidade: diagnóstico contínuo "
             "de maturidade GTM, consultoria estratégica mensal, execução assistida (conteúdo, comercial e CRM) "
-            "e origem complementar em SEO Growth — sem verba de mídia paga. Comunidade de pares e imersão "
+            "e origem complementar em SEO Growth. Comunidade de pares e imersão "
             "presencial da Fábrica de Receita."
         ),
         p(
@@ -662,7 +662,7 @@ def build_html():
             [
                 ["Receita imprevisível / concentração", "O mês é esforço, não método. 90% em um contrato não tem plano B privado."],
                 ["Processo na cabeça de uma pessoa", "O comercial é o sócio Leonardo. Sem sistema, não se repete."],
-                ["Marketing no achismo / nunca investiu em mídia", "Canal, conteúdo e origem sem tese. Mídia paga não cabe na margem."],
+                ["Marketing no achismo", "Canal, conteúdo e origem sem tese. Sem cadência nem indicador."],
                 ["Agência executa — você não aprende", "Quando o contrato acaba, o resultado vai junto."],
                 ["Comercial amador", "Script, follow-up e pipeline improvisados. A proposta não tem business case."],
                 ["Posicionamento frouxo", "O mercado vê mão de obra avulsa, não gestão e continuidade."],
@@ -775,7 +775,7 @@ def build_html():
 <p class="price-month">6× R$ 5.418,57 no cartão de crédito</p>
 <p>TCV do pacote: R$ 32.511,42.</p>
 <p>Se fossem separados: EQV R$ 35.000,00 + SEO Growth R$ 21.600,00 (6× R$ 3.600) = R$ 56.600,00.</p>
-<p>Ciclo de 6 meses. A máquina fica no time. Não é aluguel de agência. Mídia paga não entra neste desenho.</p>
+<p>Ciclo de 6 meses. A máquina fica no time. Não é aluguel de agência.</p>
 </td>
 </tr>
 </table>""",
