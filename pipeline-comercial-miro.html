@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pipeline comercial · desenho para copiar no Miro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #1a1a1a;
+      --mut: #5c5c5c;
+      --line: #222;
+      --board: #f2f1ee;
+      --box: #fff;
+      --red: #e50914;
+      --pink: #f4c4c4;
+      --drop: #fff3a3;
+      --ok: #c8ebd0;
+      --kill: #f8d0d0;
+      --info: #d6e8fb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font: 13px/1.4 Inter, system-ui, sans-serif;
+      color: var(--ink);
+      background: var(--board);
+    }
+    .top {
+      position: sticky; top: 0; z-index: 5;
+      display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+      align-items: center; padding: 12px 20px;
+      background: #fff; border-bottom: 1px solid #ddd;
+    }
+    .top strong { letter-spacing: .02em; }
+    .top a { color: var(--red); font-weight: 700; font-size: 12px; text-decoration: none; }
+    .canvas { padding: 28px 24px 80px; min-width: 1280px; }
+    .hint { max-width: 920px; color: var(--mut); margin: 0 0 22px; }
+    .hint strong { color: var(--ink); }
+    .legend { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+    .legend span {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 700; border: 1px solid #ccc;
+      background: #fff; padding: 5px 10px; border-radius: 999px;
+    }
+    .legend i { width: 12px; height: 12px; border: 1px solid #888; display: inline-block; }
+    .frame {
+      background: #fff;
+      border: 2px solid #d8d6d1;
+      border-radius: 8px;
+      padding: 22px 22px 28px;
+      margin-bottom: 28px;
+      overflow-x: auto;
+    }
+    .frame h1 {
+      margin: 0 0 6px;
+      font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--red);
+    }
+    .frame h2 { margin: 0 0 18px; font-size: 22px; }
+    .pipe-label {
+      font-size: 13px; font-weight: 800; color: var(--red);
+      letter-spacing: .04em; text-transform: uppercase; margin: 0 0 10px;
+    }
+    .pipe {
+      display: grid;
+      grid-template-columns: 148px 28px 148px 28px 148px 28px 148px 28px 148px 28px 148px 28px 148px 28px 148px 28px 148px;
+      align-items: stretch;
+      column-gap: 0;
+    }
+    .pipe.short {
+      grid-template-columns: 148px 28px 148px 28px 148px 28px 148px 28px 148px 28px 148px 28px 148px;
+    }
+    .row { display: flex; align-items: flex-start; gap: 0; }
+    .col { display: flex; flex-direction: column; align-items: center; width: 148px; flex: 0 0 148px; }
+    .arr {
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 700; color: var(--line);
+    }
+    .sticky {
+      width: 136px; min-height: 92px; padding: 8px 9px;
+      font-size: 11px; line-height: 1.35; border: 1px solid #c9c4a8;
+      background: var(--drop); margin-bottom: 10px;
+      box-shadow: 2px 2px 0 rgba(0,0,0,.06);
+    }
+    .sticky.ok { background: var(--ok); border-color: #8fbf99; }
+    .sticky.kill { background: var(--kill); border-color: #d9a0a0; }
+    .sticky.info { background: var(--info); border-color: #9bb8d9; }
+    .sticky .k { font-size: 9px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 4px; color: #555; }
+    .stage {
+      width: 136px; min-height: 48px; padding: 10px 8px;
+      border: 1.5px solid var(--line); background: var(--box);
+      font-weight: 700; font-size: 12px; text-align: center;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .stage.pink { background: var(--pink); }
+    .stage.kill { background: #f3b4b4; text-decoration: line-through; }
+    .stage.ok { background: #dff5e4; }
+    .stage.nbo { background: #111; color: #fff; border-color: #111; }
+    .arrow {
+      width: 22px; flex: 0 0 22px; align-self: center;
+      margin-top: 118px;
+      height: 2px; background: var(--line); position: relative;
+    }
+    .arrow::after {
+      content: ""; position: absolute; right: -1px; top: -4px;
+      border-top: 5px solid transparent; border-bottom: 5px solid transparent;
+      border-left: 7px solid var(--line);
+    }
+    .row.no-notes .arrow { margin-top: 22px; }
+    .under { width: 136px; margin-top: 10px; }
+    .lane {
+      border: 1.5px dashed #bbb; border-radius: 8px; padding: 14px 14px 18px;
+      margin-bottom: 16px; background: #faf9f6;
+    }
+    .lane .ln {
+      font-size: 10px; font-weight: 800; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--mut); margin-bottom: 10px;
+    }
+    .notes { margin-top: 18px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    @media (max-width: 900px) { .notes { grid-template-columns: 1fr; } }
+    .card {
+      border: 1px solid #ddd; background: #fff; padding: 12px 14px; border-radius: 6px;
+    }
+    .card h3 { margin: 0 0 6px; font-size: 13px; }
+    .card p { margin: 0; color: var(--mut); font-size: 12px; }
+    .card b { color: var(--ink); }
+    footer { text-align: center; color: var(--mut); font-size: 11px; padding: 8px 0 24px; }
+    footer a { color: var(--red); }
+    @media print {
+      .top { position: static; }
+      .canvas { min-width: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <strong>Desenho para o Miro · em cima do pipe comercial</strong>
+    <div>
+      <a href="saber-executar-processo.html">Rotina Sara</a>
+      &nbsp;·&nbsp;
+      <a href="documento-pre-pit.html">Pré-pit</a>
+    </div>
+  </div>
+
+  <div class="canvas">
+    <p class="hint">
+      Mesmo modelo do board: caixas em linha, notas em cima e embaixo.
+      <strong>Amarelo = pergunta que já estava no Miro.</strong>
+      <strong>Verde = decisão da rotina da Sara (Farmer EE / Saber → Executar).</strong>
+      Copie os dois frames. O de baixo é o pipe para replicar.
+    </p>
+    <div class="legend">
+      <span><i style="background:#fff"></i> Etapa que fica</span>
+      <span><i style="background:#f4c4c4"></i> Etapa questionada no board atual</span>
+      <span><i style="background:#f3b4b4"></i> Sai do pipe comercial</span>
+      <span><i style="background:#dff5e4"></i> Entra / permanece</span>
+      <span><i style="background:#fff3a3"></i> Pergunta original</span>
+      <span><i style="background:#c8ebd0"></i> Resposta Sara</span>
+    </div>
+
+    <!-- FRAME 1: ATUAL + RESPOSTAS -->
+    <section class="frame">
+      <h1>Frame 1 · copiar no Miro</h1>
+      <h2>Pipe atual + resposta em cima de cada caixa</h2>
+      <div class="pipe-label">Pipeline comercial (hoje)</div>
+
+      <div class="row">
+        <div class="col">
+          <div class="sticky ok"><div class="k">Fica · entrada</div>NBO só entra aqui quando o Account Planning validou o produto. Antes disso a conta vive no Cockpit.</div>
+          <div class="stage nbo">Next Best Offer</div>
+          <div class="under"></div>
+        </div>
+        <div class="arrow"></div>
+
+        <div class="col">
+          <div class="sticky kill"><div class="k">Sai do pipe</div>Diagnóstico não é oportunidade. Na EE isso já rolou nas 5 semanas + pré-pit S3 (Notebook LM), com o time de conta.</div>
+          <div class="stage kill">Diagnóstico</div>
+          <div class="sticky under"><div class="k">Pergunta do board</div>Entra quando o time inicia diagnóstico + construção da proposta. Time de conta faz 100%? SDR IA, Web, SEO direcionam para o time?</div>
+        </div>
+        <div class="arrow"></div>
+
+        <div class="col">
+          <div class="sticky kill"><div class="k">Sai · concordo</div>Esse pipe inteiro já é oportunidade. Coluna “Oportunidade” é redundante — não deveria ter nada aqui que ainda não seja oportunidade.</div>
+          <div class="stage kill">Oportunidade</div>
+          <div class="sticky under"><div class="k">Pergunta do board</div>Essa etapa ainda é necessária? Não deveria ter nada aqui dentro desse pipe que não é uma oportunidade.</div>
+        </div>
+        <div class="arrow"></div>
+
+        <div class="col">
+          <div class="sticky kill"><div class="k">Sai · Farmer EE</div>POC não é o modelo. O que a Farmer constrói é a proposta com narrativa — não um POC.</div>
+          <div class="stage kill pink">Construção POC</div>
+          <div class="sticky under"><div class="k">Pergunta do board</div>Por que essa etapa ainda é relevante?</div>
+        </div>
+        <div class="arrow"></div>
+
+        <div class="col">
+          <div class="sticky ok"><div class="k">Fica · Farmer</div>Aqui a Sara + time fecham a proposta com narrativa. É o “Farmer executa a proposta”.</div>
+          <div class="stage ok">Revisão da Proposta</div>
+          <div class="sticky ok under"><div class="k">Já estava no board</div>Farmer executa aqui a proposta.</div>
+        </div>
+        <div class="arrow"></div>
+
+        <div class="col">
+          <div class="sticky ok"><div class="k">Fica</div>Data na agenda. Sem data não é pitch da semana.</div>
+          <div class="stage">Reunião Agendada</div>
+          <div class="sticky under"><div class="k">Pergunta do board</div>Diagnóstico está no time de conta. SDR IA, Web, SEO estão mandando para o time de WEB executar?</div>
+        </div>
+        <div class="arrow"></div>
+
+        <div class="col">
+          <div class="sticky ok"><div class="k">Fica</div>Apresentação. Fecha em call ou cai em follow.</div>
+          <div class="stage">Reunião Realizada</div>
+          <div class="under"></div>
+        </div>
+        <div class="arrow"></div>
+
+        <div class="col">
+          <div class="sticky ok"><div class="k">Fica</div>Mesmo dia. Se pediu tempo: data de devolutiva obrigatória.</div>
+          <div class="stage">Follow</div>
+          <div class="under"></div>
+        </div>
+        <div class="arrow"></div>
+
+        <div class="col">
+          <div class="sticky ok"><div class="k">Fica</div>Ganho = kickoff do produto. Drop = motivo + abertura futura. Não apaga o contexto.</div>
+          <div class="stage">Ganho/Drop</div>
+          <div class="under"></div>
+        </div>
+      </div>
+
+      <div class="notes">
+        <div class="card">
+          <h3>Diagnóstico · resposta</h3>
+          <p>No caminho <b>Farmer EE</b>, o diagnóstico é do <b>time de conta</b>, nas 5 semanas, e vira pré-pit na S3. Não entra neste pipe. SDR IA / Web / SEO são outro funil — se caírem aqui sem EE, o diagnóstico precisa existir <b>antes</b> da NBO, no Cockpit, não como coluna comercial.</p>
+        </div>
+        <div class="card">
+          <h3>WEB executar?</h3>
+          <p>No Saber → Executar da Sara, quem apresenta e faz follow é a <b>Farmer</b>, não o time de WEB. WEB só entra se o produto validado no AP for de WEB — e isso é modo de entrega, não etapa do pipe.</p>
+        </div>
+        <div class="card">
+          <h3>POC</h3>
+          <p>Para esta carteira, <b>não</b>. Troca por <b>Construção da Proposta</b> (Farmer), depois Revisão. POC fica fora, salvo outro produto que realmente precise de prova técnica.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FRAME 2: PROPOSTO -->
+    <section class="frame">
+      <h1>Frame 2 · copiar no Miro</h1>
+      <h2>Pipe proposto · só o que é oportunidade</h2>
+
+      <div class="lane">
+        <div class="ln">Fora do pipe comercial · Cockpit “Saber para Executar”</div>
+        <div class="row no-notes">
+          <div class="col"><div class="stage">Cliente entra</div></div>
+          <div class="arrow"></div>
+          <div class="col"><div class="stage">GC</div></div>
+          <div class="arrow"></div>
+          <div class="col"><div class="stage">Kick-off<br><span style="font-weight:500;font-size:11px">Sara se apresenta</span></div></div>
+          <div class="arrow"></div>
+          <div class="col"><div class="stage">5 semanas<br><span style="font-weight:500;font-size:11px">1 contato / semana</span></div></div>
+          <div class="arrow"></div>
+          <div class="col"><div class="stage ok">Pré-pit S3<br><span style="font-weight:500;font-size:11px">Notebook LM</span></div></div>
+          <div class="arrow"></div>
+          <div class="col"><div class="stage ok">Account Planning<br><span style="font-weight:500;font-size:11px">valida o produto</span></div></div>
+        </div>
+        <p class="hint" style="margin:12px 0 0">Aqui ainda não é oportunidade de pipe. Diagnóstico mora aqui. Só atravessa a linha de baixo quando a NBO está validada.</p>
+      </div>
+
+      <div class="pipe-label">Pipeline comercial · só oportunidade</div>
+      <div class="row">
+        <div class="col">
+          <div class="sticky ok"><div class="k">Entra</div>NBO validada no AP. 1 frase + STEP + o que não oferecer.</div>
+          <div class="stage nbo">Next Best Offer</div>
+        </div>
+        <div class="arrow"></div>
+        <div class="col">
+          <div class="sticky ok"><div class="k">Farmer</div>Constrói a proposta com o contexto do pré-pit. Sem POC.</div>
+          <div class="stage ok">Construção da Proposta</div>
+        </div>
+        <div class="arrow"></div>
+        <div class="col">
+          <div class="sticky ok"><div class="k">Farmer + time</div>Reunião para fechar narrativa. O post-it original apontava para cá.</div>
+          <div class="stage ok">Revisão da Proposta</div>
+        </div>
+        <div class="arrow"></div>
+        <div class="col">
+          <div class="sticky ok"><div class="k">Agenda</div>Data com decisor. Sem data ≠ pitch da semana.</div>
+          <div class="stage">Reunião Agendada</div>
+        </div>
+        <div class="arrow"></div>
+        <div class="col">
+          <div class="sticky ok"><div class="k">Pitch</div>Apresenta. Fecha em call ou segue.</div>
+          <div class="stage">Reunião Realizada</div>
+        </div>
+        <div class="arrow"></div>
+        <div class="col">
+          <div class="sticky ok"><div class="k">Follow</div>Mesmo dia. Devolutiva com data se precisar.</div>
+          <div class="stage">Follow</div>
+        </div>
+        <div class="arrow"></div>
+        <div class="col">
+          <div class="sticky ok"><div class="k">Fecha</div>Ganho ou drop com motivo + abertura futura.</div>
+          <div class="stage">Ganho/Drop</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="frame">
+      <h1>Frame 3 · legenda rápida para o Miro</h1>
+      <h2>O que sai / o que fica</h2>
+      <table style="width:100%;border-collapse:collapse;font-size:13px">
+        <thead>
+          <tr>
+            <th style="text-align:left;padding:8px;border-bottom:1px solid #ddd">Etapa atual</th>
+            <th style="text-align:left;padding:8px;border-bottom:1px solid #ddd">Decisão</th>
+            <th style="text-align:left;padding:8px;border-bottom:1px solid #ddd">Por quê (rotina Sara)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="padding:8px;border-bottom:1px solid #eee">Next Best Offer</td><td style="padding:8px;border-bottom:1px solid #eee"><b>Fica · porta de entrada</b></td><td style="padding:8px;border-bottom:1px solid #eee">Sai do Account Planning, depois do pré-pit</td></tr>
+          <tr><td style="padding:8px;border-bottom:1px solid #eee">Diagnóstico</td><td style="padding:8px;border-bottom:1px solid #eee"><b>Sai do pipe</b> → Cockpit</td><td style="padding:8px;border-bottom:1px solid #eee">5 semanas + pré-pit S3 · time de conta · Notebook LM</td></tr>
+          <tr><td style="padding:8px;border-bottom:1px solid #eee">Oportunidade</td><td style="padding:8px;border-bottom:1px solid #eee"><b>Sai</b></td><td style="padding:8px;border-bottom:1px solid #eee">O pipe inteiro já é oportunidade</td></tr>
+          <tr><td style="padding:8px;border-bottom:1px solid #eee">Construção POC</td><td style="padding:8px;border-bottom:1px solid #eee"><b>Sai</b> → vira Construção da Proposta</td><td style="padding:8px;border-bottom:1px solid #eee">Farmer EE não faz POC</td></tr>
+          <tr><td style="padding:8px;border-bottom:1px solid #eee">Revisão da Proposta</td><td style="padding:8px;border-bottom:1px solid #eee"><b>Fica</b></td><td style="padding:8px;border-bottom:1px solid #eee">Farmer executa a proposta / narrativa</td></tr>
+          <tr><td style="padding:8px;border-bottom:1px solid #eee">Reunião Agendada</td><td style="padding:8px;border-bottom:1px solid #eee"><b>Fica</b></td><td style="padding:8px;border-bottom:1px solid #eee">Data com decisor</td></tr>
+          <tr><td style="padding:8px;border-bottom:1px solid #eee">Reunião Realizada</td><td style="padding:8px;border-bottom:1px solid #eee"><b>Fica</b></td><td style="padding:8px;border-bottom:1px solid #eee">Pitch · fecha em call ou follow</td></tr>
+          <tr><td style="padding:8px;border-bottom:1px solid #eee">Follow</td><td style="padding:8px;border-bottom:1px solid #eee"><b>Fica</b></td><td style="padding:8px;border-bottom:1px solid #eee">Devolutiva com data</td></tr>
+          <tr><td style="padding:8px;border-bottom:1px solid #eee">Ganho/Drop</td><td style="padding:8px;border-bottom:1px solid #eee"><b>Fica</b></td><td style="padding:8px;border-bottom:1px solid #eee">Drop com motivo para reabrir depois</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+  <footer>
+    V4 · desenho para replicar no Miro ·
+    <a href="saber-executar-processo.html">rotina completa</a>
+  </footer>
+</body>
+</html>

@@ -42,5 +42,13 @@ MVP na semana 1 da conta: GC, kick-off, semana EE, contato semanal, próxima aç
 Depois do AP validar o produto (NBO comercial). Pré-pit Pronto + narrativa pronta + gates ok.  
 Retenção / otimização sem venda permanece no Cockpit.
 
-## Pipe Review
-Cobra: contato da semana · pré-pit S3 · AP · pitches · follow **com data** · drop **com motivo**.
+## Pipe comercial (desenho para o Miro)
+Modelo atual: NBO → Diagnóstico → Oportunidade → POC → Revisão → Reunião agendada → Reunião realizada → Follow → Ganho/Drop.
+
+Proposto (só oportunidade):
+Cockpit (GC → KO → 5 sem → pré-pit S3 → AP)  
+↓ NBO validada  
+NBO → Construção da Proposta → Revisão da Proposta → Reunião Agendada → Reunião Realizada → Follow → Ganho/Drop
+
+Sai do pipe: Diagnóstico, Oportunidade (redundante), Construção POC.
+Página para copiar: `pipeline-comercial-miro.html`
