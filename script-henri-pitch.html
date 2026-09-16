@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <title>Script de Pitch · Henri Soluções · Executar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #140608; --surf: rgba(255,255,255,.06); --bd: rgba(255,255,255,.14);
+      --txt: #fff; --mut: rgba(255,255,255,.78); --red: #e11d24; --ok: #86efac; --warn: #fde68a;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; font: 15px/1.55 "Plus Jakarta Sans", system-ui, sans-serif; color: var(--txt);
+      background:
+        radial-gradient(ellipse 70% 40% at 10% 0%, rgba(225,29,36,.35), transparent 55%),
+        linear-gradient(180deg, #1a090b 0%, #0d0405 100%);
+      padding-bottom: 72px;
+    }
+    h1, h2, h3 { font-family: Outfit, sans-serif; letter-spacing: -.02em; line-height: 1.15; }
+    .top {
+      position: sticky; top: 0; z-index: 50; backdrop-filter: blur(14px);
+      background: rgba(13,4,5,.9); border-bottom: 1px solid var(--bd);
+      padding: 14px 20px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    }
+    .brand { font-weight: 800; font-size: 15px; }
+    .brand span { color: #fda4af; }
+    .pill {
+      font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      border: 1px solid var(--bd); border-radius: 999px; padding: 6px 12px; color: var(--mut); text-decoration: none;
+    }
+    .wrap { max-width: 920px; margin: 0 auto; padding: 28px 20px 0; }
+    .hero {
+      border: 1px solid var(--bd); border-radius: 20px; padding: 28px 24px;
+      background: linear-gradient(135deg, rgba(225,29,36,.2), rgba(255,255,255,.04)); margin-bottom: 18px;
+    }
+    .hero h1 { margin: 0 0 10px; font-size: clamp(26px, 4vw, 36px); }
+    .hero p { margin: 0; color: var(--mut); max-width: 760px; }
+    .nav { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; margin: 18px 0 8px; }
+    .nav a {
+      text-decoration: none; color: var(--mut); font-size: 12px; font-weight: 700;
+      border: 1px solid var(--bd); background: var(--surf); border-radius: 12px; padding: 10px 12px;
+    }
+    .nav a:hover { color: #fff; background: rgba(225,29,36,.18); }
+    .nav a small { display: block; color: #fda4af; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 3px; }
+    .callout {
+      margin: 16px 0 22px; padding: 14px 16px; border-radius: 14px;
+      border: 1px solid rgba(253,230,138,.3); background: rgba(253,230,138,.08); color: var(--warn); font-size: 14px;
+    }
+    .callout strong { color: #fef08a; }
+    .callout.ok { border-color: rgba(134,239,172,.3); background: rgba(134,239,172,.08); color: var(--ok); }
+    .callout.ok strong { color: #bbf7d0; }
+    .perfil { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin: 16px 0 8px; }
+    .perfil .card, .obj-grid .card {
+      border: 1px solid var(--bd); border-radius: 14px; background: var(--surf); padding: 12px 14px;
+    }
+    .perfil h3, .obj-grid h3 { margin: 0 0 6px; font-size: 14px; }
+    .perfil p, .obj-grid p { margin: 0; font-size: 13px; color: var(--mut); }
+    .slide { border: 1px solid var(--bd); border-radius: 18px; background: rgba(255,255,255,.04); padding: 22px 20px; margin: 14px 0; }
+    .slide-num { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #fda4af; margin-bottom: 4px; }
+    .slide-head { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; margin-bottom: 10px; flex-wrap: wrap; }
+    .slide-head h2 { margin: 0; font-size: clamp(18px, 3vw, 24px); }
+    .slide-ref { font-size: 12px; color: var(--mut); }
+    .objetivo {
+      font-size: 13px; color: #fecdd3; background: rgba(225,29,36,.16);
+      border: 1px solid rgba(225,29,36,.35); border-radius: 10px; padding: 10px 12px; margin-bottom: 12px;
+    }
+    .fala { font-size: 15px; line-height: 1.6; color: #fff; border-left: 3px solid var(--red); padding: 4px 0 4px 14px; margin: 10px 0; }
+    .fala em { color: #fda4af; font-style: normal; font-weight: 700; }
+    .bloco { margin-top: 12px; padding: 12px 14px; border-radius: 12px; background: var(--surf); border: 1px solid var(--bd); }
+    .bloco h3 { margin: 0 0 8px; font-size: 13px; color: #fda4af; }
+    .bloco ul { margin: 0; padding-left: 18px; color: var(--mut); font-size: 13px; }
+    .bloco li { margin: 5px 0; }
+    .ask {
+      margin-top: 12px; padding: 12px 14px; border-radius: 12px;
+      background: rgba(134,239,172,.1); border: 1px solid rgba(134,239,172,.28); color: #bbf7d0; font-size: 14px;
+    }
+    .ask strong { color: #86efac; }
+    .evitar {
+      margin-top: 10px; padding: 12px 14px; border-radius: 12px;
+      background: rgba(253,230,138,.08); border: 1px solid rgba(253,230,138,.25); color: #fde68a; font-size: 13px;
+    }
+    .evitar strong { color: #fef08a; }
+    .roi-bridge { margin-top: 10px; font-size: 13px; color: #ffd0d0; padding: 10px 12px; border-radius: 10px; background: rgba(255,255,255,.04); }
+    .obj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+    @media (max-width: 720px) { .obj-grid { grid-template-columns: 1fr; } }
+    .tag {
+      display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+      padding: 3px 8px; border-radius: 999px; margin-right: 6px; background: rgba(225,29,36,.25); color: #fda4af;
+    }
+    footer { margin: 28px 20px 0; text-align: center; font-size: 12px; color: var(--mut); }
+    footer a { color: #fda4af; }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <div class="brand">Script Henri · <span>Sara × Pitch</span></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <a class="pill" href="contexto-pre-pitch-henri.html">Briefing</a>
+      <a class="pill" href="farmer-sara.html">Hub Farmer</a>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <header class="hero">
+      <h1>Executar o mapa — não vender outro diagnóstico</h1>
+      <p>
+        Sem deck próprio nesta fonte. Script de conversa para o pitch de continuidade (Executar · R$ 6.500/mês).
+        Tom: respeito pela técnica deles, escuta na ferida da contratação, zero “faz sentido?”.
+      </p>
+    </header>
+
+    <div class="callout">
+      <strong>Regra desta conta:</strong>
+      quando o preço aparecer, a única discussão que pode restar é valor.
+      Expectativa (“mão na massa”), Social já bonificado, papéis (Maria/Romildo/Gabriel) e “quem executa” já foram alinhados.
+    </div>
+
+    <div class="perfil">
+      <div class="card">
+        <h3>Sala mínima</h3>
+        <p>Romildo + Gabriel. Sem os dois, não abre TCV.</p>
+      </div>
+      <div class="card">
+        <h3>O que eles compram</h3>
+        <p>Cadência: ABM + Google + CRM vivo. Não compram mais slide.</p>
+      </div>
+      <div class="card">
+        <h3>Tom</h3>
+        <p>Sênior. Não nomear Felipe. Não expor marca de cliente. Não usar “nunca tive férias” contra ele.</p>
+      </div>
+      <div class="card">
+        <h3>Pacote</h3>
+        <p>Executar · R$ 6.500/mês. Conciliar 12× R$ 78k vs TCV R$ 90k do cockpit <em>antes</em> da call.</p>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a href="#b0"><small>0</small>Antes de abrir</a>
+      <a href="#b1"><small>1</small>Espelho</a>
+      <a href="#b2"><small>2</small>Mapa EE</a>
+      <a href="#b3"><small>3</small>O plano</a>
+      <a href="#alinha"><small>4</small>Alinhamento</a>
+      <a href="#b5"><small>5</small>Preço + fecho</a>
+      <a href="#obj"><small>Mapa</small>Objeções</a>
+    </nav>
+
+    <article class="slide" id="b0">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Bloco 0 · Antes da tela</div>
+          <h2>Eles falam. Você escuta.</h2>
+        </div>
+        <div class="slide-ref">~ 1–2 min</div>
+      </div>
+      <div class="objetivo">Objetivo: clima de conversa. Se a ferida da contratação vier agora, acolhe — não defende, não ataca o comercial da V4.</div>
+      <div class="fala">
+        “Romildo, Gabriel — antes de qualquer tela: como vocês estão saindo da Estruturação?
+        O que mais ficou marcado pra vocês até aqui?”
+      </div>
+      <div class="ask">
+        <strong>Três perguntas (escolhe conforme a sala):</strong><br />
+        “O que mais ficou marcado — o mapa comercial ou a execução que a gente já começou nas campanhas e nas redes?”<br />
+        “O que não pode continuar: o comercial na cabeça do Romildo, ou crescer só no boca a boca?”<br />
+        “Se o próximo passo for executar esse mapa, quando precisa estar rodando de verdade?”
+      </div>
+      <div class="evitar"><strong>Evitar:</strong> “faz sentido?” · abrir com preço · “a EE acabou” · jargão (STEP, Executar, SMALL) na boca deles.</div>
+    </article>
+
+    <article class="slide" id="b1">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Bloco 1 · Espelho</div>
+          <h2>Vocês já entregam. O comercial ainda é uma pessoa.</h2>
+        </div>
+        <div class="slide-ref">~ 1,5 min</div>
+      </div>
+      <div class="objetivo">Objetivo: devolver a dor com respeito — técnica forte, origem frágil.</div>
+      <div class="fala">
+        “A Henri já faz o que o cliente de cozinha precisa: um responsável, a loja não para, refrigeração no centro, prazo.
+        Dez anos disso. Rede grande. Especialização de verdade.
+        <br /><br />
+        O que a gente viu juntos: quase todo o comercial ainda mora no WhatsApp e na cabeça do Romildo.
+        Cresce por indicação. Se entrar volume amanhã, trava — porque qualificar e fechar passam pela mesma pessoa.
+        E os dez anos de prova ainda não estão no digital — em parte porque a marca do cliente não pode ir para o anúncio.”
+      </div>
+      <div class="ask"><strong>Checagem:</strong> “Desses três — gargalo no Romildo, origem só no boca a boca, ou prova que não pode usar a marca — qual dói mais no dia a dia?”</div>
+      <div class="evitar"><strong>Evitar:</strong> “vocês não têm processo” · listar BK/Zamp em voz alta se tiver gente de fora · prometer 715 lojas.</div>
+    </article>
+
+    <article class="slide" id="b2">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Bloco 2 · O que a EE já deixou</div>
+          <h2>O mapa está pronto. Não vamos redesenhar.</h2>
+        </div>
+        <div class="slide-ref">~ 1,5 min</div>
+      </div>
+      <div class="objetivo">Objetivo: separar o que a Aline entregou do que ainda não roda todo dia.</div>
+      <div class="fala">
+        “O que já está no papel — e em parte no ar:
+        tese certa — continuidade operacional, não conserto solto.
+        Papéis — Romildo fecha, Maria qualifica e opera o CRM, Gabriel no campo e no caixa.
+        Dois motores — LinkedIn para o decisor da rede, Google para a emergência da cozinha, LP com filtro pra não entrar residencial.
+        Identidade e redes começaram com a gente, sem cobrança extra.
+        <br /><br />
+        O que ainda não é rotina é o meio: oportunidade com dono, forecast que o Gabriel vê, cadência que não depende do Romildo estar online.”
+      </div>
+      <div class="roi-bridge"><strong>Ponte:</strong> “Por isso o próximo passo não é outra estruturação. É operar isso toda semana.”</div>
+      <div class="evitar"><strong>Evitar:</strong> reler o Guia 1 inteiro · “Como, Pipedrive ou RD” como debate de ferramenta na call.</div>
+    </article>
+
+    <article class="slide" id="b3">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Bloco 3 · O plano</div>
+          <h2>Mão na massa: origem + memória + ritmo</h2>
+        </div>
+        <div class="slide-ref">~ 2 min</div>
+      </div>
+      <div class="objetivo">Objetivo: vender cadência. Social já está no jogo — não aparece como extra.</div>
+      <div class="fala">
+        “O plano é um: a V4 executa o mapa com vocês.
+        ABM no LinkedIn para o comitê — diretor, coordenador, supervisor regional, compras — sem apostar num único contato.
+        Google para quem está com a câmara parada agora, com pergunta de unidade pra filtrar.
+        CRM com dono, etapa e ritual curto: daily de lead e SLA, weekly de pipeline, monthly de margem.
+        Redes e criativo no mesmo ritmo — o start disso vocês já têm; o plano é não deixar morrer solto.
+        <br /><br />
+        Romildo continua sendo quem fecha a conta grande. A diferença é ele não ser também a fila inteira.”
+      </div>
+      <div class="ask">
+        <strong>Social / execução (antes do valor):</strong><br />
+        “O que vocês mais querem que continue no próximo passo — alguém no dia a dia das campanhas e das redes, ou o comercial com funil visível para o Gabriel?”
+      </div>
+      <div class="evitar"><strong>Evitar:</strong> “vamos explodir o Instagram” · remarketing com logo de cliente · V4 no lugar do técnico de campo.</div>
+    </article>
+
+    <article class="slide" id="alinha">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Bloco 4 · Alinhamento</div>
+          <h2>Quatro coisas antes do número</h2>
+        </div>
+        <div class="slide-ref">~ 1,5–2 min</div>
+      </div>
+      <div class="objetivo">Objetivo: quando o preço entrar, só sobra preço. Aqui morre expectativa, timing e outra opção.</div>
+      <div class="fala">
+        “Antes da condição comercial, quero alinhar quatro coisas — pra gente não chegar no valor com dúvida aberta.”
+      </div>
+      <div class="ask">
+        1. “O que vocês mais gostaram do que foi construído até aqui?”<br />
+        2. “O que a gente não pode deixar de executar?”<br />
+        3. “Quando vocês querem que isso esteja rodando de verdade?”<br />
+        4. “Vocês querem a V4 executando esse próximo passo — ou estão avaliando outro caminho?”<br /><br />
+        Se disserem V4: “Perfeito. Então o que falta é a condição para avançar.”
+      </div>
+      <div class="bloco">
+        <h3>Se voltar “eu paguei e esperava execução”</h3>
+        <ul>
+          <li>Escuta. Não discute o vendedor.</li>
+          <li>“O material da Aline é o mapa. O que vocês pediram na prática é exatamente este próximo passo — cadência, não diagnóstico.”</li>
+          <li>Lembrar o bônus já dado (setup + redes) só se eles pedirem prova de boa-fé. Não usar como chantagem.</li>
+        </ul>
+      </div>
+      <div class="evitar"><strong>Evitar:</strong> “vou mandar e vocês pensam” · desculpa longa · oferecer valor menor sem pedido.</div>
+    </article>
+
+    <article class="slide" id="b5">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Bloco 5 · Condição + fecho</div>
+          <h2>Um preço. Uma decisão.</h2>
+        </div>
+        <div class="slide-ref">~ 2 min</div>
+      </div>
+      <div class="objetivo">Objetivo: condição comercial. Sem menu. Pedir a venda. Conciliar 78k vs 90k na véspera e falar só o número fechado.</div>
+      <div class="fala">
+        “O que estamos contratando: o plano de execução contínua — origem, CRM e ritmo — com a gente no dia a dia.
+        <br /><br />
+        Condição: <em>R$ 6.500 por mês</em>.
+        <!-- Trocar o booking na véspera se o cockpit for 12× R$ 90k. -->
+        Sem mensalidade escondida. Sem segundo módulo nesta call.”
+      </div>
+      <div class="bloco">
+        <h3>ROI se pedirem conta</h3>
+        <ul>
+          <li>Não: “isso se paga nos R$ 15 milhões.”</li>
+          <li>Sim: margem 18–37% já existe; o que não existe é origem previsível nem o Romildo fora da fila. O plano ataca isso.</li>
+        </ul>
+      </div>
+      <div class="ask">
+        <strong>Pedir a venda:</strong><br />
+        “Olhando essa condição — o que vocês precisam alinhar para a gente avançar e executar esse mapa juntos?”<br />
+        Se hesitarem: “O que está em aberto — valor, início ou alguma peça do plano?”
+      </div>
+      <div class="callout ok" style="margin-top:12px">
+        <strong>Se fechar:</strong> contrato · kick-off com Maria no CRM · acessos LinkedIn/Google/Meta · ritual weekly com Romildo e Gabriel · regra de sigilo de marca no criativo.
+      </div>
+      <div class="evitar"><strong>Evitar:</strong> “vocês vão analisar” · falar pelo cliente · reabrir EQV · booking 6 vs 12 no improviso.</div>
+    </article>
+
+    <article class="slide" id="obj">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Mapa de objeções</div>
+          <h2>Tratar antes — ou na hora, sem plantar</h2>
+        </div>
+      </div>
+      <div class="obj-grid">
+        <div class="card">
+          <h3><span class="tag">Antes</span> Expectativa</h3>
+          <p>Mapa ≠ execução. Este plano é a execução. Setup já foi bonificado.</p>
+        </div>
+        <div class="card">
+          <h3><span class="tag">Antes</span> Social</h3>
+          <p>Já está em curso. Não é módulo extra nesta call.</p>
+        </div>
+        <div class="card">
+          <h3><span class="tag">Antes</span> Quem executa</h3>
+          <p>“V4 nesse próximo passo ou outro caminho?”</p>
+        </div>
+        <div class="card">
+          <h3><span class="tag">Antes</span> Timing</h3>
+          <p>Decisão agora. Início pode ser em X semanas. Maria segura o CRM se Romildo viajar.</p>
+        </div>
+        <div class="card">
+          <h3><span class="tag">Na hora</span> Preço / porte</h3>
+          <p>ROI = origem + fila fora do fundador. Não meta de R$ 15 mi como contrato.</p>
+        </div>
+        <div class="card">
+          <h3><span class="tag">Na hora</span> Sócio / pensar</h3>
+          <p>Valor, timing ou escopo? Remarcar com Romildo e Gabriel.</p>
+        </div>
+        <div class="card">
+          <h3><span class="tag">Ban</span> Marcas</h3>
+          <p>Sem logo de cliente. “Grande rede de fast food.”</p>
+        </div>
+        <div class="card">
+          <h3><span class="tag">Ban</span> Felipe / EE</h3>
+          <p>Não nomear o vendedor. Não dizer que a EE “não entregou”.</p>
+        </div>
+      </div>
+    </article>
+
+    <footer>
+      V4 · Farmer Sara ·
+      <a href="contexto-pre-pitch-henri.html">Briefing</a> ·
+      <a href="playbook-farmer-am.html">Playbook</a>
+    </footer>
+  </div>
+</body>
+</html>
