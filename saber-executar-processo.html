@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Saber → Executar · Processo · Miro + Flow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --brand:#e50915; --brand-light:#ff1a27; --brand-dim:rgba(229,9,21,.12);
+      --brand-glow:rgba(229,9,21,.35); --bg:#050505; --surf:rgba(20,20,20,.88);
+      --surf2:#141414; --glass:rgba(255,255,255,.04); --bd:rgba(255,255,255,.08);
+      --bd-strong:rgba(255,255,255,.14); --txt:#fafafa; --mut:#a3a3a3;
+      --ok:#22c55e; --warn:#facc15; --info:#60a5fa; --radius:16px;
+      --shadow:0 24px 80px rgba(0,0,0,.55);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--txt);font:14px/1.55 Inter,system-ui,sans-serif;padding-bottom:72px;
+      background-image:radial-gradient(ellipse 80% 50% at 50% -20%,rgba(229,9,21,.18),transparent),radial-gradient(circle at 100% 0%,rgba(229,9,21,.06),transparent 40%)}
+    .topbar{position:sticky;top:0;z-index:100;backdrop-filter:blur(16px);background:rgba(5,5,5,.84);border-bottom:1px solid var(--bd);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+    .v4-logo{font-weight:900;font-size:18px;letter-spacing:-.02em}.v4-logo span{color:var(--brand-light)}
+    .sync-pill{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:600;color:var(--mut);background:var(--glass);border:1px solid var(--bd);padding:6px 12px;border-radius:999px}
+    .sync-dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok)}
+    .wrap{max-width:1180px;margin:0 auto;padding:28px 24px 0}
+    .hero{position:relative;border-radius:var(--radius);padding:34px 32px;margin-bottom:20px;background:linear-gradient(135deg,rgba(229,9,21,.16) 0%,rgba(20,20,20,.92) 48%,var(--surf2) 100%);border:1px solid var(--bd-strong);box-shadow:var(--shadow);overflow:hidden}
+    .hero::after{content:'';position:absolute;top:-40%;right:-8%;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,var(--brand-glow),transparent 70%);pointer-events:none}
+    .hero-inner{position:relative;z-index:1}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#fca5a5;margin-bottom:10px}
+    .hero-eyebrow::before{content:'';width:24px;height:3px;background:var(--brand);border-radius:2px}
+    .hero h1{margin:0 0 10px;font-size:clamp(26px,4vw,38px);font-weight:900;letter-spacing:-.03em}
+    .hero .meta{color:var(--mut);font-size:13px;max-width:920px}.hero .meta strong{color:var(--txt)}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+    .chip{font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:5px 10px;border-radius:999px;border:1px solid var(--bd);background:var(--glass);color:var(--mut);text-decoration:none}
+    .chip.live{border-color:rgba(34,197,94,.35);color:#86efac}
+    .nav{position:sticky;top:56px;z-index:90;margin:0 0 20px;padding:8px;background:rgba(8,8,8,.93);backdrop-filter:blur(14px);border:1px solid var(--bd-strong);border-radius:16px}
+    .nav-label{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);padding:4px 10px 10px}
+    .tabs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+    @media(max-width:1100px){.tabs{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:700px){.tabs{grid-template-columns:repeat(2,1fr)}}
+    .tab{appearance:none;border:1px solid var(--bd);background:var(--surf2);color:var(--mut);border-radius:12px;padding:12px;cursor:pointer;text-align:left;font-family:inherit;transition:.2s}
+    .tab:hover{border-color:var(--bd-strong);color:#fff}
+    .tab.active{color:#fff;border-color:var(--brand);background:linear-gradient(135deg,rgba(229,9,21,.18),rgba(20,20,20,.95));box-shadow:0 0 24px var(--brand-dim)}
+    .tab .n{display:block;font-size:13px;font-weight:800;margin-bottom:3px}.tab .s{font-size:10px;font-weight:700;color:#d4d4d4}
+    .panel{display:none;animation:fade .25s ease;margin-bottom:8px}
+    .panel.is-active{display:block}
+    @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+    .section{background:var(--surf);border:1px solid var(--bd);border-radius:var(--radius);padding:22px 24px;margin-bottom:16px}
+    .section h2{margin:0 0 8px;font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--mut);font-weight:800}
+    .section h3{margin:0 0 8px;font-size:18px;font-weight:900;letter-spacing:-.02em}
+    .lead{color:var(--mut);font-size:13px;margin:0 0 16px;max-width:880px}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:800px){.grid2{grid-template-columns:1fr}}
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}@media(max-width:900px){.grid3{grid-template-columns:1fr}}
+    .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}@media(max-width:900px){.grid4{grid-template-columns:1fr 1fr}}
+    .card{background:var(--surf2);border:1px solid var(--bd);border-radius:14px;padding:16px 18px}
+    .card .t{font-size:14px;font-weight:800;margin-bottom:6px}
+    .card .d{font-size:12px;color:var(--mut);line-height:1.5}
+    .card .tag{display:inline-block;margin-bottom:8px;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:999px;border:1px solid var(--bd);color:#d4d4d4}
+    .card .tag.ok{border-color:rgba(34,197,94,.35);color:#86efac}
+    .card .tag.warn{border-color:rgba(250,204,21,.4);color:#fde68a}
+    .card .tag.hot{border-color:rgba(239,68,68,.4);color:#fca5a5}
+    .card .tag.info{border-color:rgba(96,165,250,.35);color:#93c5fd}
+    .callout{margin-bottom:14px;padding:14px 16px;border-radius:12px;border:1px solid rgba(96,165,250,.3);background:rgba(96,165,250,.08);color:#bfdbfe;font-size:13px}
+    .callout strong{color:#dbeafe}
+    .callout.warn{border-color:rgba(250,204,21,.28);background:rgba(250,204,21,.06);color:#fde68a}.callout.warn strong{color:#fef08a}
+    .callout.ok{border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.08);color:#bbf7d0}.callout.ok strong{color:#bbf7d0}
+    .callout.hot{border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.08);color:#fecaca}.callout.hot strong{color:#fecaca}
+    .steps{margin:0;padding-left:18px}.steps li{margin:8px 0;color:#e5e5e5}
+    .steps li strong{color:#fff}
+    table{width:100%;border-collapse:collapse;font-size:13px}
+    th,td{padding:11px 10px;text-align:left;border-bottom:1px solid var(--bd);vertical-align:top}
+    th{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--mut);font-weight:800;background:rgba(255,255,255,.02)}
+    tbody tr:hover{background:rgba(255,255,255,.02)}
+    .pill{display:inline-block;padding:3px 8px;border-radius:999px;font-size:10px;font-weight:800;border:1px solid var(--bd)}
+    .pill.ok{color:#86efac;border-color:rgba(34,197,94,.35)}
+    .pill.warn{color:#fde68a;border-color:rgba(250,204,21,.35)}
+    .pill.hot{color:#fca5a5;border-color:rgba(239,68,68,.4)}
+    .pill.info{color:#93c5fd;border-color:rgba(96,165,250,.35)}
+    .code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:#86efac}
+    .rail{display:grid;grid-template-columns:repeat(5,minmax(140px,1fr));gap:8px;overflow-x:auto;padding-bottom:6px}
+    @media(max-width:900px){.rail{grid-template-columns:1fr 1fr}}
+    .weeks{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:14px}
+    @media(max-width:900px){.weeks{grid-template-columns:1fr}}
+    .rail-step{background:var(--surf2);border:1px solid var(--bd);border-radius:12px;padding:12px;min-height:132px;position:relative}
+    .rail-step .n{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--brand-light);margin-bottom:6px}
+    .rail-step .t{font-size:13px;font-weight:800;margin-bottom:4px}
+    .rail-step .d{font-size:11px;color:var(--mut)}
+    .rail-step.sys{border-color:rgba(96,165,250,.35)}
+    .rail-step.act{border-color:rgba(229,9,21,.45);background:linear-gradient(180deg,rgba(229,9,21,.12),var(--surf2))}
+    .rail-step.ok{border-color:rgba(34,197,94,.35)}
+    .frame{border:1px dashed rgba(255,255,255,.18);border-radius:14px;padding:14px 16px;margin:0 0 12px;background:rgba(255,255,255,.02)}
+    .frame .fn{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#fca5a5;margin-bottom:6px}
+    .check{list-style:none;margin:0;padding:0}
+    .check li{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--bd);font-size:13px;color:#e5e5e5}
+    .check li:last-child{border-bottom:0}
+    .check .box{flex:0 0 16px;width:16px;height:16px;margin-top:2px;border:1.5px solid var(--bd-strong);border-radius:4px;background:rgba(255,255,255,.02)}
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media(max-width:800px){.split{grid-template-columns:1fr}}
+    .node{background:var(--surf2);border:1px solid var(--bd);border-radius:14px;padding:16px}
+    .node.ok{border-color:rgba(34,197,94,.4);background:linear-gradient(180deg,rgba(34,197,94,.08),var(--surf2))}
+    .node.hot{border-color:rgba(239,68,68,.4);background:linear-gradient(180deg,rgba(239,68,68,.08),var(--surf2))}
+    .node.warn{border-color:rgba(250,204,21,.4);background:linear-gradient(180deg,rgba(250,204,21,.08),var(--surf2))}
+    .node .k{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-bottom:4px}
+    .node .t{font-size:16px;font-weight:900;margin-bottom:6px}
+    .copybox{font-size:12px;color:#d4d4d4;background:#0a0a0a;border:1px solid var(--bd);border-radius:10px;padding:12px 14px;white-space:pre-wrap;line-height:1.55}
+    footer{text-align:center;color:var(--mut);font-size:11px;margin-top:40px;padding:24px 0;border-top:1px solid var(--bd)}
+    footer a{color:#86efac}
+    .table-wrap{overflow-x:auto}
+    @media print {
+      .topbar, .nav, .chips, footer { position:static }
+      .panel{display:block !important}
+      .tab{display:none}
+      body{background:#fff;color:#111}
+    }
+  </style>
+</head>
+<body>
+<header class="topbar">
+  <div class="v4-logo">V4 <span>COMPANY</span></div>
+  <div class="sync-pill"><span class="sync-dot"></span> Saber → Executar · Erick × Sara · Flow</div>
+</header>
+
+<div class="wrap">
+  <section class="hero"><div class="hero-inner">
+    <div class="hero-eyebrow">Rotina Sara · 5 semanas EE · Flow</div>
+    <h1>Saber para Executar — a rotina da conta, semana a semana</h1>
+    <p class="meta">
+      Cliente entra → <strong>GC</strong> → no <strong>kick-off</strong> a Sara entra com o time para se apresentar →
+      nas <strong>5 semanas</strong> fala 1× por semana com o cliente → na <strong>S3</strong>, depois da apresentação comercial,
+      ela e o time montam o <strong>pré-pit</strong> com o contexto da EE puxado no <strong>Notebook LM</strong> →
+      depois o <strong>Account Planning</strong> valida o produto → reunião para fechar proposta com narrativa →
+      apresentam → <strong>fecha em call</strong> ou entra em <strong>follow</strong> (com data de devolutiva) →
+      ganho ou <strong>drop com motivo</strong> para reabrir no momento certo.
+    </p>
+    <div class="chips">
+      <span class="chip live">GC → Kick-off</span>
+      <span class="chip live">5 semanas · 1×/semana</span>
+      <span class="chip live">Pré-pit S3 · Notebook LM</span>
+      <span class="chip live">AP valida produto</span>
+      <span class="chip live">Fecha em call ou follow</span>
+      <a class="chip" href="pipeline-comercial-miro.html">Desenho do pipe (copiar no Miro)</a>
+      <a class="chip" href="documento-pre-pit.html">Abrir template de pré-pit</a>
+      <a class="chip" href="playbook-farmer-am.html">Playbook Farmer</a>
+    </div>
+  </div></section>
+
+  <div class="callout ok">
+    <strong>Fonte:</strong> rotina da Sara. Cada aba = um frame no Miro.
+    Ordem inegociável: <em>pré-pit na S3 (Notebook LM) → Account Planning valida o produto → proposta com narrativa → apresenta → fecha ou follow</em>.
+  </div>
+
+  <nav class="nav">
+    <div class="nav-label">Frames do processo</div>
+    <div class="tabs">
+      <button class="tab active" data-view="mapa"><span class="n">Rotina</span><span class="s">GC → 5 semanas → close</span></button>
+      <button class="tab" data-view="ap"><span class="n">Account Planning</span><span class="s">Valida o produto</span></button>
+      <button class="tab" data-view="colunas"><span class="n">Colunas Flow</span><span class="s">Pedido Erick #1</span></button>
+      <button class="tab" data-view="prepit"><span class="n">Pré-pit</span><span class="s">S3 · Notebook LM</span></button>
+      <button class="tab" data-view="migracao"><span class="n">Fechamento</span><span class="s">Pitch · follow · drop</span></button>
+      <button class="tab" data-view="review"><span class="n">Pipe Review</span><span class="s">Rituais · 100%</span></button>
+    </div>
+  </nav>
+
+  <!-- ROTINA -->
+  <div class="panel is-active" data-view="mapa">
+    <div class="section">
+      <h2>Frame 0 · Rotina da Sara</h2>
+      <h3>O que ela faz de verdade na conta</h3>
+      <p class="lead">
+        Esta é a cadência operacional — não um funil inventado. O Flow registra cada passo.
+        O pré-pit vem <strong>na terceira semana</strong>, depois da apresentação comercial. O Account Planning vem <strong>depois</strong> do pré-pit, para validar o produto.
+      </p>
+      <div class="grid4">
+        <div class="card">
+          <span class="tag info">Entrada</span>
+          <div class="t">GC + kick-off</div>
+          <div class="d">Cliente entra e faz a GC. No kick-off a Sara entra com o time só para se apresentar — o cliente já sabe quem farming a conta.</div>
+        </div>
+        <div class="card">
+          <span class="tag ok">5 semanas</span>
+          <div class="t">1 contato por semana</div>
+          <div class="d">Conversa e tira dúvida. Não é pitch. É presença: o cliente não some e a Farmer não espera a S5 para aparecer.</div>
+        </div>
+        <div class="card">
+          <span class="tag warn">S3</span>
+          <div class="t">Pré-pit + Notebook LM</div>
+          <div class="d">Depois do time apresentar o comercial, Sara + time montam o pré-pit com o contexto da EE puxado no Notebook LM.</div>
+        </div>
+        <div class="card">
+          <span class="tag hot">Depois</span>
+          <div class="t">AP → proposta → close</div>
+          <div class="d">Account Planning valida o produto. Reunião de narrativa. Apresentam. Fecha em call ou follow com data de devolutiva.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>As 5 semanas</h2>
+      <h3>Um contato por semana — conversar e tirar dúvida</h3>
+      <div class="weeks">
+        <div class="rail-step">
+          <div class="n">Semana 1</div>
+          <div class="t">Kick-off + 1º contato</div>
+          <div class="d">Sara se apresenta com o time. Primeira conversa: expectativa, dúvidas, canal oficial. Flow: <span class="code">semana_1_data</span> + <span class="code">semana_1_obs</span>.</div>
+        </div>
+        <div class="rail-step">
+          <div class="n">Semana 2</div>
+          <div class="t">Pulso</div>
+          <div class="d">Contato da semana. O que a EE mostrou. Dúvida do cliente. Nada de preço. Flow: <span class="code">semana_2_data</span> + <span class="code">semana_2_obs</span>.</div>
+        </div>
+        <div class="rail-step act">
+          <div class="n">Semana 3</div>
+          <div class="t">Comercial + pré-pit</div>
+          <div class="d">Time apresenta o comercial. Sara + time puxam o Notebook LM e escrevem o pré-pit. Flow: <span class="code">semana_3_data</span> + <span class="code">semana_3_obs</span>.</div>
+        </div>
+        <div class="rail-step sys">
+          <div class="n">Semana 4</div>
+          <div class="t">AP + narrativa</div>
+          <div class="d">Account Planning valida o produto. Reunião para fechar a proposta com narrativa. Flow: <span class="code">semana_4_data</span> + <span class="code">semana_4_obs</span>.</div>
+        </div>
+        <div class="rail-step ok">
+          <div class="n">Semana 5</div>
+          <div class="t">Apresentar</div>
+          <div class="d">Pitch. Fecha em call ou follow. Flow: <span class="code">semana_5_data</span> + <span class="code">semana_5_obs</span>.</div>
+        </div>
+      </div>
+      <div class="callout">
+        <strong>S4/S5 podem escorregar</strong> se o pré-pit ou o AP ainda não validou o produto — a apresentação não entra na agenda só porque a semana virou.
+        O contato semanal continua mesmo assim.
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Frame 1 · Mapa-mestre</h2>
+      <h3>Da entrada ao close (copiar no Miro)</h3>
+      <div class="rail" style="margin-bottom:10px">
+        <div class="rail-step">
+          <div class="n">01</div>
+          <div class="t">Cliente entra</div>
+          <div class="d">EE contratada · card no Cockpit Flow</div>
+        </div>
+        <div class="rail-step">
+          <div class="n">02</div>
+          <div class="t">GC</div>
+          <div class="d">Alinha expectativa · o que entra / o que não entra</div>
+        </div>
+        <div class="rail-step act">
+          <div class="n">03</div>
+          <div class="t">Kick-off</div>
+          <div class="d">Sara entra com o time e se apresenta</div>
+        </div>
+        <div class="rail-step">
+          <div class="n">04</div>
+          <div class="t">Cadência 5 sem.</div>
+          <div class="d">1 contato/semana · conversa e dúvida</div>
+        </div>
+        <div class="rail-step" style="border-color:rgba(250,204,21,.4)">
+          <div class="n">05</div>
+          <div class="t">Pré-pit (S3)</div>
+          <div class="d">Após o comercial · Notebook LM · contexto da EE</div>
+        </div>
+      </div>
+      <div class="rail">
+        <div class="rail-step sys">
+          <div class="n">06</div>
+          <div class="t">Account Planning</div>
+          <div class="d">Valida o produto · gera a NBO</div>
+        </div>
+        <div class="rail-step act">
+          <div class="n">07</div>
+          <div class="t">Proposta + narrativa</div>
+          <div class="d">Reunião do time para fechar o deck/script</div>
+        </div>
+        <div class="rail-step act">
+          <div class="n">08</div>
+          <div class="t">Apresentação</div>
+          <div class="d">Pitch com decisor · só o produto validado</div>
+        </div>
+        <div class="rail-step ok">
+          <div class="n">09a</div>
+          <div class="t">Fecha em call</div>
+          <div class="d">Win na sala · kickoff do STEP</div>
+        </div>
+        <div class="rail-step" style="border-color:rgba(250,204,21,.4)">
+          <div class="n">09b</div>
+          <div class="t">Follow</div>
+          <div class="d">Marca devolutiva se precisar · ou drop com motivo</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Depois da apresentação</h2>
+      <h3>Três saídas — todas com dono no Flow</h3>
+      <div class="grid3">
+        <div class="node ok">
+          <div class="k">Win</div>
+          <div class="t">Fecha em call</div>
+          <ul class="steps">
+            <li>Aceito / assinatura na reunião</li>
+            <li>Card vai para Expansão (se ainda não foi)</li>
+            <li>Kickoff do produto validado</li>
+          </ul>
+        </div>
+        <div class="node warn">
+          <div class="k">Ainda aberto</div>
+          <div class="t">Follow + devolutiva</div>
+          <ul class="steps">
+            <li>Sara entra em follow no mesmo dia</li>
+            <li>Marca data de devolutiva se o cliente pedir tempo</li>
+            <li>Sem data = card morto — Pipe Review cobra</li>
+          </ul>
+        </div>
+        <div class="node hot">
+          <div class="k">Não fechou</div>
+          <div class="t">Drop com motivo</div>
+          <ul class="steps">
+            <li>Coleta o motivo (Budget / Timing / Ops / Interno…)</li>
+            <li>Registra gatilho de reabertura</li>
+            <li>Não apaga o contexto — serve para o próximo momento</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Copiar no Miro · Frame 1</h2>
+      <div class="copybox">ROTINA SARA · SABER → EXECUTAR
+Cliente entra → GC → Kick-off (Sara se apresenta com o time) → 5 semanas (1 contato/semana para conversar e tirar dúvida).
+S3: time apresenta o comercial → Sara + time montam o PRÉ-PIT (contexto do cliente + o que houve na EE, puxado no Notebook LM).
+Depois: Account Planning valida o produto (NBO) → reunião de proposta com narrativa → apresentam.
+Saída: fecha em call  OU  follow (marca devolutiva se precisar)  OU  drop com motivo para reabrir no momento certo.
+Sistema: Flow. Cockpit “Saber para Executar”.</div>
+    </div>
+  </div>
+
+  <!-- ACCOUNT PLANNING -->
+  <div class="panel" data-view="ap">
+    <div class="section">
+      <h2>Frame 3 · Account Planning</h2>
+      <h3>Vem depois do pré-pit — valida o produto</h3>
+      <p class="lead">
+        Na rotina da Sara o AP <strong>não começa o ciclo</strong>. Ele entra depois do pré-pit da S3:
+        o time já tem o contexto da EE (Notebook LM) e agora decide <strong>qual produto se encaixa</strong>.
+        Output obrigatório: NBO validada — não uma lista de ideias.
+      </p>
+      <div class="grid3">
+        <div class="card">
+          <span class="tag hot">Foco A</span>
+          <div class="t">Retenção</div>
+          <div class="d">Saúde amarela/vermelha, risco de churn, CSAT baixo, decisor sumiu. NBO = save / reengajar / execução assistida. <strong>Não migra</strong> para Expansão.</div>
+        </div>
+        <div class="card">
+          <span class="tag warn">Foco B</span>
+          <div class="t">Otimização de campanhas</div>
+          <div class="d">Entrega estável, mídia/CRM já rodando, gap de performance. NBO = ajuste. Só vira pipe se o ajuste for <em>produto ou upgrade</em>.</div>
+        </div>
+        <div class="card">
+          <span class="tag ok">Foco C</span>
+          <div class="t">Novos produtos</div>
+          <div class="d">Gates ok, tese da EE viva, WTP ou caminho de pagamento. NBO comercial → proposta com narrativa → <strong>migra</strong> para o pipe de Expansão.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Frame 4 · Next Best Offer</h2>
+      <h3>A NBO define a próxima oferta e alimenta o pipe</h3>
+      <p class="lead">Uma frase. Um STEP. Um “não oferecer”. Sem isso o Cockpit vira mural de observações.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Campo</th><th>O que escrever</th><th>Exemplo</th></tr></thead>
+          <tbody>
+            <tr><td class="code">nbo</td><td>1 frase: a próxima oferta desta conta, agora</td><td>EC 12 semanas com CRM em uso — sem Meta Ads</td></tr>
+            <tr><td class="code">nbo_step</td><td>Destrava · Ter · Saber · Executar · Combo</td><td>Executar</td></tr>
+            <tr><td class="code">valor_estimado_tcv / mrr</td><td>Estimativa do AP. Ainda não é a proposta. Não inventar se não mapeou</td><td>TCV R$ 72k · MRR R$ 6,5k</td></tr>
+            <tr><td class="code">nbo_timing</td><td>Agora · 30d · 60d · 90d · Bloqueado</td><td>Agora</td></tr>
+            <tr><td class="code">nbo_nao_oferecer</td><td>O que fica de fora neste ciclo</td><td>Social/Meta · combo Performance</td></tr>
+            <tr><td class="code">nbo_status</td><td>Em contexto (pré-pit) → Validada (AP) → Em proposta → Em pitch → Follow → Ganhou / Drop</td><td>Validada</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout warn" style="margin-top:14px">
+        <strong>Regra:</strong> o pré-pit traz o contexto; o AP valida o produto.
+        Sem NBO Validada no Account Planning, não agenda apresentação de preço.
+        NBO Em pitch já tem data na semana.
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Cockpit “Saber para Executar”</h2>
+      <h3>Flow como único sistema</h3>
+      <p class="lead">
+        O Cockpit acompanha a <strong>execução</strong> e integra ações da base ativa com o pipeline comercial.
+        Cada card registra métricas (saúde, score, preenchimento, projeção) e o projeto da conta (NBO, pré-pit, pitch, modo de entrega).
+      </p>
+      <div class="grid2">
+        <div class="card">
+          <span class="tag info">Métricas no card</span>
+          <div class="d">CSAT · NPS · lead score · gates · % Flow preenchido · cenário de projeção · ponto de atenção da semana.</div>
+        </div>
+        <div class="card">
+          <span class="tag ok">Projeto no card</span>
+          <div class="d">Foco AP · NBO · link do pré-pit · data do pitch · destino de pipe · modo de execução (padrão / assistida / canal).</div>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:14px">
+        <strong>Dois objetos, um sistema:</strong> o card do Cockpit não é o card do pipe de Expansão.
+        Eles se ligam por ID/URL no Flow. Histórico do Saber não se apaga na migração.
+      </div>
+    </div>
+  </div>
+
+  <!-- COLUNAS -->
+  <div class="panel" data-view="colunas">
+    <div class="section">
+      <h2>Pedido Erick · 1</h2>
+      <h3>Colunas adicionais para acompanhar o processo comercial</h3>
+      <p class="lead">
+        O Cockpit E.E já tem identidade (cliente, squad, coord), status, temperatura, data de pitch, TCV e observação.
+        Abaixo entram as colunas <strong>novas</strong> no Flow — as que o processo Saber → Executar exige e hoje não cabem numa célula de obs.
+      </p>
+      <div class="callout warn"><strong>Não duplicar.</strong> O que já existe no Cockpit migra para o Flow com o mesmo nome. Estas são as adicionais — agora alinhadas à rotina da Sara (GC, kick-off, 5 semanas, Notebook LM, follow, drop).</div>
+    </div>
+
+    <div class="section">
+      <h2>Bloco 0 · Cadência da conta (rotina Sara)</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Coluna</th><th>Tipo</th><th>Valores / regra</th></tr></thead>
+          <tbody>
+            <tr><td class="code">data_entrada</td><td>Data</td><td>Cliente entra no Cockpit</td></tr>
+            <tr><td class="code">data_gc</td><td>Data</td><td>GC realizada. Sem GC o kick-off fica frágil</td></tr>
+            <tr><td class="code">kickoff_sara</td><td>Checkbox</td><td>Sara se apresentou com o time no KO</td></tr>
+            <tr><td class="code">data_kickoff</td><td>Data</td><td>Dia do KO</td></tr>
+            <tr><td class="code">semana_ee</td><td>Select 1–5</td><td>Semana atual (filtro). O histórico vai nos pares manuais abaixo</td></tr>
+            <tr><td class="code">semana_1_data / semana_1_obs</td><td>Data + texto</td><td>Manual. 1º contato (KO). 1 linha do que rolou</td></tr>
+            <tr><td class="code">semana_2_data / semana_2_obs</td><td>Data + texto</td><td>Manual. Pulso · dúvida · sem preço</td></tr>
+            <tr><td class="code">semana_3_data / semana_3_obs</td><td>Data + texto</td><td>Manual. Comercial + pré-pit Notebook LM</td></tr>
+            <tr><td class="code">semana_4_data / semana_4_obs</td><td>Data + texto</td><td>Manual. AP validou produto?</td></tr>
+            <tr><td class="code">semana_5_data / semana_5_obs</td><td>Data + texto</td><td>Manual. Pitch / follow</td></tr>
+            <tr><td class="code">notebook_lm_url</td><td>URL</td><td>Notebook LM da conta — fonte do pré-pit</td></tr>
+            <tr><td class="code">status_ciclo</td><td>Select</td><td>GC · Kick-off · Em EE · Pré-pit · AP · Proposta · Pitch · Follow · Devolutiva · Ganhou · Drop</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Bloco A · Account Planning / NBO</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Coluna</th><th>Tipo</th><th>Valores / regra</th></tr></thead>
+          <tbody>
+            <tr><td class="code">foco_ap</td><td>Select</td><td>Retenção · Otimização de campanhas · Novos produtos</td></tr>
+            <tr><td class="code">nbo</td><td>Texto curto</td><td>1 frase. Obrigatório depois do Account Planning</td></tr>
+            <tr><td class="code">nbo_step</td><td>Select</td><td>Destrava Receita · Ter · Saber · Executar · Combos Performance</td></tr>
+            <tr><td class="code">valor_estimado_tcv</td><td>Moeda</td><td>Estimativa TCV no AP. Ainda não é proposta</td></tr>
+            <tr><td class="code">valor_estimado_mrr</td><td>Moeda</td><td>Estimativa MRR. Obrigatório se STEP = Executar</td></tr>
+            <tr><td class="code">nbo_timing</td><td>Select</td><td>Agora · 30d · 60d · 90d · Bloqueado</td></tr>
+            <tr><td class="code">nbo_nao_oferecer</td><td>Texto</td><td>Obrigatório. Protege o encaixe</td></tr>
+            <tr><td class="code">nbo_status</td><td>Select</td><td>Em contexto · Validada · Em proposta · Em pitch · Follow · Ganhou · Drop</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Bloco B · Pré-pit</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Coluna</th><th>Tipo</th><th>Valores / regra</th></tr></thead>
+          <tbody>
+            <tr><td class="code">prepit_status</td><td>Select</td><td>Não iniciado · Em construção · Pronto (S3) · Usado na proposta</td></tr>
+            <tr><td class="code">prepit_url</td><td>URL</td><td>Link do doc gerado (ou Doc da conta)</td></tr>
+            <tr><td class="code">o_que_houve_ee</td><td>Texto</td><td>Síntese da EE até a S3 — puxada do Notebook LM</td></tr>
+            <tr><td class="code">modelo_negocio</td><td>Texto</td><td>Como fatura · canais · unidades</td></tr>
+            <tr><td class="code">publico_icp</td><td>Texto</td><td>Quem compra · canal real de entrada</td></tr>
+            <tr><td class="code">alinhamentos_pendentes</td><td>Texto</td><td>O que falta antes da proposta final</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Bloco C · Comercial e migração</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Coluna</th><th>Tipo</th><th>Valores / regra</th></tr></thead>
+          <tbody>
+            <tr><td class="code">gates_ok</td><td>Checkbox</td><td>Decisor na sala + pago/pagando. Sem os dois = não apresenta</td></tr>
+            <tr><td class="code">lead_score</td><td>Número 0–100</td><td>70+ apresentar · 40–69 elevar · &lt;40 ainda não</td></tr>
+            <tr><td class="code">pitch_semana</td><td>Data + flag</td><td>Sim/Não + data. Sem data não entra em projeção</td></tr>
+            <tr><td class="code">projecao_cenario</td><td>Select</td><td>Fora · Chão · Pessimista · Realista · Otimista</td></tr>
+            <tr><td class="code">origem_card</td><td>Select</td><td>Cockpit Saber · Base ativa · Expansão</td></tr>
+            <tr><td class="code">destino_pipe</td><td>Select</td><td>Permanece Cockpit · Expansão Executar · Expansão Ter/Saber</td></tr>
+            <tr><td class="code">proposta_url</td><td>URL</td><td>Espaço da proposta. Deck/doc. Nasce em Construção, confirma na Revisão</td></tr>
+            <tr><td class="code">valor_tcv</td><td>Moeda</td><td>Valor da proposta (o que vai no deck)</td></tr>
+            <tr><td class="code">valor_mrr</td><td>Moeda</td><td>MRR da proposta</td></tr>
+            <tr><td class="code">forma_pgto</td><td>Texto / select</td><td>À vista · mensal · outro</td></tr>
+            <tr><td class="code">termometro</td><td>Select</td><td>Quente · Morno · Frio. Entra na Revisão e segue até o Follow</td></tr>
+            <tr><td class="code">data_reuniao</td><td>Data</td><td>Pitch com decisor. Sem data ≠ pitch da semana</td></tr>
+            <tr><td class="code">resultado_pitch</td><td>Select</td><td>Fecha em call · Follow · Drop</td></tr>
+            <tr><td class="code">follow_obs</td><td>Texto</td><td>Como está o follow: o que o cliente disse + próximo passo</td></tr>
+            <tr><td class="code">data_devolutiva</td><td>Data</td><td>Obrigatória se Follow. Sem data = card morto</td></tr>
+            <tr><td class="code">data_finalizacao</td><td>Data</td><td>Dia que ganhou ou dropou</td></tr>
+            <tr><td class="code">valor_fechado_tcv</td><td>Moeda</td><td>Só no ganho. O que entrou de verdade</td></tr>
+            <tr><td class="code">valor_fechado_mrr</td><td>Moeda</td><td>Só no ganho</td></tr>
+            <tr><td class="code">motivo_drop</td><td>Select + texto</td><td>Budget · Timing · Ops · Interno · Outro + frase</td></tr>
+            <tr><td class="code">abertura_futura</td><td>Texto</td><td>Quando/como reabrir (gatilho). Drop não é lixeira</td></tr>
+            <tr><td class="code">id_origem / url_par</td><td>Relação</td><td>Liga Cockpit ↔ Expansão. Obrigatório na migração</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Bloco D · Entrega e higiene do Flow</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Coluna</th><th>Tipo</th><th>Valores / regra</th></tr></thead>
+          <tbody>
+            <tr><td class="code">modo_execucao</td><td>Select</td><td>Padrão · Execução assistida · Canal específico</td></tr>
+            <tr><td class="code">canal_especifico</td><td>Texto</td><td>PAP, loja, inbound, regional — só se modo = canal</td></tr>
+            <tr><td class="code">diagnostico_antecipado</td><td>Texto</td><td>1–2 frases: o que a coordenação já vê de risco/entrega</td></tr>
+            <tr><td class="code">estrategia_entrega</td><td>Texto</td><td>Como a operação vai absorver o win</td></tr>
+            <tr><td class="code">flow_preenchimento</td><td>%</td><td>Campos obrigatórios do estágio. Meta do Pipe Review = 100%</td></tr>
+            <tr><td class="code">proxima_acao</td><td>Texto</td><td>O quê + quem + quando. Card sem isso = alerta</td></tr>
+            <tr><td class="code">dono</td><td>Pessoa</td><td>Farmer / coordenação responsável pelo próximo passo</td></tr>
+            <tr><td class="code">data_proxima</td><td>Data</td><td>Próximo contato ou ritual. Sem data = morto</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout ok" style="margin-top:14px">
+        <strong>Mínimo viável no Flow (semana 1 da conta):</strong>
+        <span class="code">data_gc</span> ·
+        <span class="code">kickoff_sara</span> ·
+        <span class="code">semana_ee</span> ·
+        <span class="code">semana_1_data</span> + <span class="code">semana_1_obs</span> ·
+        <span class="code">proxima_acao</span>.
+        Na S3 entram <span class="code">notebook_lm_url</span> + <span class="code">prepit_status</span>.
+        Depois do AP: <span class="code">nbo</span> + <span class="code">valor_estimado_tcv / mrr</span>.
+        Na proposta: <span class="code">proposta_url</span> + <span class="code">valor_tcv / mrr</span> + <span class="code">termometro</span>.
+      </div>
+    </div>
+  </div>
+
+  <!-- PRE-PIT -->
+  <div class="panel" data-view="prepit">
+    <div class="section">
+      <h2>Pedido Erick · 2</h2>
+      <h3>Informações necessárias para construir o documento de pré-pit</h3>
+      <p class="lead">
+        Na rotina da Sara o pré-pit nasce na <strong>terceira semana</strong>, depois do time apresentar o comercial.
+        Sara + time puxam o <strong>Notebook LM</strong> e consolidam o contexto do cliente e o que houve na EE.
+        Ainda <strong>não valida produto</strong> — isso é o Account Planning, no passo seguinte.
+        Template: <a href="documento-pre-pit.html" style="color:#86efac">documento-pre-pit.html</a>
+      </p>
+      <div class="callout hot"><strong>Sem pré-pit Pronto, o AP não valida produto e não agenda apresentação de preço.</strong> O doc é o briefing da conta, não a proposta.</div>
+    </div>
+
+    <div class="section">
+      <h2>Os 8 blocos</h2>
+      <h3>O que o doc precisa ter, nesta ordem</h3>
+      <div class="grid2">
+        <div class="card">
+          <span class="tag info">01 · Conta</span>
+          <div class="t">Quem entra na sala</div>
+          <div class="d">Cliente · data · farmer · squad · semana EE (S3) · status em 1 linha. Foco do AP ainda não — isso vem depois.</div>
+        </div>
+        <div class="card">
+          <span class="tag info">02 · Contexto</span>
+          <div class="t">Contrato e saúde</div>
+          <div class="d">Produtos ativos · EE paga? · saúde verde/amarela/vermelha · CSAT/NPS · expectativa 30/60/90 na voz do cliente.</div>
+        </div>
+        <div class="card">
+          <span class="tag info">03 · Modelo de negócio</span>
+          <div class="t">Como fatura de verdade</div>
+          <div class="d">Canais, unidades, ticket, sazonalidade, quem vende. Faturamento de referência + margem + tier (TINY→LARGE).</div>
+        </div>
+        <div class="card">
+          <span class="tag info">04 · Público</span>
+          <div class="t">ICP e entrada real</div>
+          <div class="d">Quem compra · persona · canal de entrada que existe hoje (não o desejado) · trilha Inside / E-com / PDV.</div>
+        </div>
+        <div class="card">
+          <span class="tag warn">05 · O que houve na EE</span>
+          <div class="t">Notebook LM</div>
+          <div class="d">Síntese puxada do Notebook LM: entregas S1–S3, apresentação comercial, gargalo #1, o que o cliente comprou da narrativa. Hipótese de produto — ainda não NBO.</div>
+        </div>
+        <div class="card">
+          <span class="tag hot">06 · Alinhamentos</span>
+          <div class="t">Antes de mandar preço</div>
+          <div class="d">Decisor na sala · pago/pagando · budget · interesse · objeções · capacidade da ops · modo de entrega · pendências (sócios, financeiro, agenda).</div>
+        </div>
+        <div class="card">
+          <span class="tag ok">07 · Próximo passo</span>
+          <div class="t">Ir para o Account Planning</div>
+          <div class="d">Pré-pit Pronto libera a reunião de AP. Lá o time valida o produto e escreve a NBO.</div>
+        </div>
+        <div class="card">
+          <span class="tag ok">08 · Fonte</span>
+          <div class="t">Notebook LM da conta</div>
+          <div class="d">URL no Flow (<span class="code">notebook_lm_url</span>). Sem notebook, o pré-pit fica “Em construção”.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Fontes — de onde tira cada bloco</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Bloco</th><th>Fonte primária</th><th>Se faltar</th></tr></thead>
+          <tbody>
+            <tr><td>Contexto / saúde</td><td>GC + kick-off + contatos semanais + Cockpit</td><td>Marca gap; não inventa</td></tr>
+            <tr><td>Modelo / público</td><td>Entregas EE S1 (ICP, arquitetura) via Notebook LM</td><td>Volta na conta; não inventa persona</td></tr>
+            <tr><td>O que houve na EE</td><td><strong>Notebook LM</strong> + apresentação comercial da S3</td><td>Pré-pit fica “Em construção”</td></tr>
+            <tr><td>Hipótese de produto</td><td>Leitura da S3 — ainda não é NBO</td><td>AP valida no passo seguinte</td></tr>
+            <tr><td>Alinhamentos</td><td>Dúvidas das 3 primeiras semanas + gates</td><td>Lista explícita para o AP</td></tr>
+            <tr><td>Próximo passo</td><td>Agendar Account Planning</td><td>Sem data, Pipe Review cobra</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Relação com o Plano de Ação S3</h2>
+      <div class="grid2">
+        <div class="card">
+          <span class="tag info">Plano de Ação</span>
+          <div class="t">Documento da conta na EE</div>
+          <div class="d">Critérios do playbook (faturamento, produtos, interesse, objeções, CSAT, passos). Vive com a Farmer durante S1–S3.</div>
+        </div>
+        <div class="card">
+          <span class="tag warn">Pré-pit (S3)</span>
+          <div class="t">Contexto da conta + EE</div>
+          <div class="d">Sara + time. Fonte: Notebook LM. Ainda não é proposta. Libera o Account Planning.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MIGRACAO -->
+  <div class="panel" data-view="migracao">
+    <div class="section">
+      <h2>Pedido Erick · 3 + rotina Sara</h2>
+      <h3>Apresentação, follow, drop e migração para Expansão</h3>
+      <p class="lead">
+        Depois da reunião de proposta com narrativa, apresentam. Na saída da call só existem três estados:
+        <strong>fechou</strong>, <strong>follow</strong> (com data de devolutiva se precisar) ou <strong>drop com motivo</strong>.
+        O card do Cockpit vira oportunidade de Expansão quando o produto já foi validado no AP.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>Quando migrar</h2>
+      <h3>Checklist — todos os P0</h3>
+      <ul class="check">
+        <li><span class="box"></span><div><strong>P0 · NBO comercial:</strong> novo produto, upgrade ou Executar — não é save nem otimização solta</div></li>
+        <li><span class="box"></span><div><strong>P0 · Pré-pit Pronto:</strong> S3 feita, Notebook LM puxado, contexto da EE no doc</div></li>
+        <li><span class="box"></span><div><strong>P0 · AP validou o produto:</strong> NBO escrita — não é hipótese solta</div></li>
+        <li><span class="box"></span><div><strong>P0 · Proposta com narrativa:</strong> reunião do time fechou o deck/script</div></li>
+        <li><span class="box"></span><div><strong>P0 · Gates ok:</strong> decisor na sala + pago/pagando</div></li>
+        <li><span class="box"></span><div><strong>P1 · Timing:</strong> Agora ou 30d (60/90d espera no Cockpit)</div></li>
+        <li><span class="box"></span><div><strong>P1 · Destino claro:</strong> Expansão Executar <em>ou</em> Expansão Ter/Saber — um só</div></li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Quando NÃO migrar</h2>
+      <div class="grid2">
+        <div class="node hot">
+          <div class="k">Fica no Cockpit</div>
+          <div class="t">Não é oportunidade ainda</div>
+          <ul class="steps">
+            <li>Foco AP = Retenção</li>
+            <li>Otimização sem venda nova</li>
+            <li>Gate falhou</li>
+            <li>Pré-pit incompleto (S3 ainda não puxou o Notebook LM)</li>
+            <li>AP ainda não validou o produto</li>
+            <li>Timing 60/90d ou Bloqueado</li>
+          </ul>
+        </div>
+        <div class="node ok">
+          <div class="k">Vai para Expansão</div>
+          <div class="t">Oportunidade com dono</div>
+          <ul class="steps">
+            <li>NBO Validada no Account Planning</li>
+            <li>Proposta com narrativa pronta</li>
+            <li>Data de apresentação marcada</li>
+            <li>Modo de execução já escolhido</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Follow e drop — a rotina depois da call</h2>
+      <h3>Não deixa o card sem data</h3>
+      <div class="grid2">
+        <div class="card">
+          <span class="tag warn">Follow</span>
+          <div class="t">Não fechou na sala</div>
+          <div class="d">
+            <ul class="steps">
+              <li>No mesmo dia: Sara entra em follow</li>
+              <li>Se o cliente pediu tempo: <strong>marca data de devolutiva</strong> no Flow</li>
+              <li>Status = Follow · <span class="code">follow_obs</span> + <span class="code">termometro</span> + <span class="code">data_devolutiva</span></li>
+              <li>Pipe Review: follow sem data = P0</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <span class="tag hot">Drop</span>
+          <div class="t">Coleta o motivo para reabrir depois</div>
+          <div class="d">
+            <ul class="steps">
+              <li>Motivo obrigatório (Budget / Timing / Ops / Interno / Outro)</li>
+              <li>1 frase na voz do cliente, se der</li>
+              <li><span class="code">abertura_futura</span>: gatilho + horizonte (ex. “voltar quando a obra terminar · 90d”)</li>
+              <li>O card não some. Vira base de reativação</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Como migrar no Flow</h2>
+      <h3>Não apagar o Saber — ligar os dois cards</h3>
+      <ol class="steps">
+        <li>No Cockpit, marcar <span class="code">nbo_status = No pipe</span> e <span class="code">destino_pipe</span>.</li>
+        <li>Criar (ou mover) o card no pipe de Expansão correspondente ao STEP: <strong>Executar</strong> ou <strong>Ter/Saber</strong>.</li>
+        <li>Copiar: cliente, NBO, STEP, valor, timing, <span class="code">prepit_url</span>, modo de execução, dono, próxima ação.</li>
+        <li>Preencher <span class="code">origem_card = Cockpit Saber</span> e <span class="code">id_origem / url_par</span> nos dois lados.</li>
+        <li>No Cockpit origem: status <strong>Migrado para Expansão</strong> — o card continua existindo para métricas da base ativa.</li>
+        <li>Se perder: preencher <span class="code">motivo_drop</span> + <span class="code">abertura_futura</span>. O contexto fica no Cockpit para reabrir quando o momento voltar.</li>
+      </ol>
+      <div class="callout" style="margin-top:14px">
+        <strong>Dois pipes de Expansão, uma regra:</strong> meta “Expansão Carteira · Executar” só recebe NBO de Executar.
+        Saber/Ter pontual não infla MRR. O Playbook Farmer já separa essas duas metas — o Flow precisa espelhar.
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Mapa de campos na migração</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>No Cockpit SABER</th><th>No pipe de Expansão</th></tr></thead>
+          <tbody>
+            <tr><td>Cliente, squad, farmer</td><td>Idem</td></tr>
+            <tr><td>nbo + nbo_step + valor_estimado_tcv / mrr</td><td>Título da oportunidade + STEP + vira valor_tcv / mrr na proposta</td></tr>
+            <tr><td>prepit_url</td><td>Anexo / campo de briefing</td></tr>
+            <tr><td>proposta_url · termometro · follow_obs</td><td>Mesmos campos no card da oportunidade</td></tr>
+            <tr><td>pitch_semana</td><td>data_reuniao</td></tr>
+            <tr><td>modo_execucao + canal</td><td>Instrução para ops no win</td></tr>
+            <tr><td>Status = Migrado</td><td>Estágio: Pitch / Proposta / Follow / Contrato / Ganhou</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- PIPE REVIEW -->
+  <div class="panel" data-view="review">
+    <div class="section">
+      <h2>Frame 8 · Pipe Review</h2>
+      <h3>Alinhamentos periódicos da coordenação</h3>
+      <p class="lead">
+        Reuniões da coordenação para garantir que o fluxo no Flow esteja <strong>100% preenchido</strong>,
+        revisar projeções, alinhar os pitches da semana e antecipar diagnósticos de clientes e estratégias de entrega
+        — migrando, quando necessário, para execução assistida ou canais específicos.
+      </p>
+      <div class="grid3">
+        <div class="card">
+          <span class="tag hot">Diário · 15 min</span>
+          <div class="t">Triage P0</div>
+          <div class="d">Contratos na rua, silêncio acima do SLA, pitches do dia, cards vermelhos. Zero inbox morto no Flow.</div>
+        </div>
+        <div class="card">
+          <span class="tag warn">Semanal · 45–60 min</span>
+          <div class="t">Pipe Review</div>
+          <div class="d">Preenchimento 100% · NBO · pré-pit · pitches da semana · chão vs P/R/O · modo de execução.</div>
+        </div>
+        <div class="card">
+          <span class="tag info">Mensal · 60–90 min</span>
+          <div class="t">Portfolio / QBR leve</div>
+          <div class="d">Retenção vs expansão por conta estratégica. Recalibra Account Planning do mês seguinte.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Pauta fixa do Pipe Review semanal</h2>
+      <ol class="steps">
+        <li><strong>Cadência Sara:</strong> GC · kick-off · <span class="code">semana_N_data</span> + obs em todas as contas em EE.</li>
+        <li><strong>Pré-pits S3:</strong> Notebook LM puxado? Doc Pronto? AP já agendado?</li>
+        <li><strong>NBO da semana:</strong> o que o AP validou, o que ainda é contexto · <span class="code">valor_estimado_tcv / mrr</span>.</li>
+        <li><strong>Propostas:</strong> <span class="code">proposta_url</span> + <span class="code">valor_tcv / mrr</span> + <span class="code">termometro</span>.</li>
+        <li><strong>Pitches da semana:</strong> conta · dono · narrativa pronta · decisor confirmado.</li>
+        <li><strong>Follow:</strong> toda conta pós-pitch sem data de devolutiva é P0.</li>
+        <li><strong>Drop:</strong> motivo + abertura futura preenchidos — senão não fecha o card.</li>
+        <li><strong>Projeção:</strong> chão (já teve pitch × taxa) separado de P/R/O.</li>
+        <li><strong>Diagnóstico de entrega:</strong> wins cabem na ops? Assistida ou canal específico?</li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <h2>Modo de execução</h2>
+      <h3>O Pipe Review antecipa o como, não só o quanto</h3>
+      <div class="grid3">
+        <div class="card">
+          <span class="tag ok">Padrão</span>
+          <div class="d">Ops absorve no modelo atual. Kickoff clássico do STEP.</div>
+        </div>
+        <div class="card">
+          <span class="tag warn">Execução assistida</span>
+          <div class="d">Cliente não segura sozinho (capacidade, time, maturidade). V4 acompanha mais perto no início.</div>
+        </div>
+        <div class="card">
+          <span class="tag info">Canal específico</span>
+          <div class="d">A tese só funciona em um canal (PAP vs loja, inbound, regional). Não misturar dual-track sem dono.</div>
+        </div>
+      </div>
+      <div class="callout warn" style="margin-top:14px">
+        <strong>Se a estratégia de entrega não estiver no card,</strong> o win comercial vira Tratativa Ops —
+        o mesmo buraco que o Cockpit E.E já mostrou nas safras (drops de Ops distorcendo o funil Farmer).
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Checklist da coordenação</h2>
+      <ul class="check">
+        <li><span class="box"></span><div>Toda conta em EE tem a semana atual preenchida (<span class="code">semana_N_data</span> + <span class="code">semana_N_obs</span>)</div></li>
+        <li><span class="box"></span><div>Pré-pits da S3 com Notebook LM e status Pronto (ou data para fechar)</div></li>
+        <li><span class="box"></span><div>Pitches da semana com produto validado no AP + narrativa pronta</div></li>
+        <li><span class="box"></span><div>Follows com <span class="code">data_devolutiva</span></div></li>
+        <li><span class="box"></span><div>Drops com <span class="code">motivo_drop</span> + <span class="code">abertura_futura</span></div></li>
+        <li><span class="box"></span><div>Wins com modo de execução preenchido (padrão / assistida / canal)</div></li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>RACI resumido</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Atividade</th><th>Farmer (Sara)</th><th>Coordenação</th><th>Entrega / ops</th></tr></thead>
+          <tbody>
+            <tr><td>Kick-off (se apresentar)</td><td>Entra com o time</td><td>Garante agenda</td><td>—</td></tr>
+            <tr><td>Contato 1×/semana</td><td>Conduz</td><td>Cobra cadência</td><td>Avisa se a entrega travar</td></tr>
+            <tr><td>Pré-pit (S3)</td><td>Escreve com o time (Notebook LM)</td><td>Valida</td><td>Entrega insumo da EE</td></tr>
+            <tr><td>Account Planning</td><td>Leva o pré-pit</td><td>Conduz e valida produto</td><td>Sinaliza capacidade</td></tr>
+            <tr><td>Proposta + narrativa</td><td>Fecha o script</td><td>Alinha pauta</td><td>Confirma modo de entrega</td></tr>
+            <tr><td>Pitch / follow / drop</td><td>Conduz · marca devolutiva · coleta motivo</td><td>Cobra data no Flow</td><td>Ciente do win possível</td></tr>
+            <tr><td>Pipe Review</td><td>Leva contas da semana</td><td>Dono do ritual</td><td>Diagnóstico de entrega</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Implantação · o que copiar no Miro nesta ordem</h2>
+      <div class="frame"><div class="fn">Frame 0</div>Rotina Sara: entra → GC → KO (se apresenta) → 5 semanas 1× contato → S3 pré-pit (Notebook LM) → AP valida produto → proposta com narrativa → apresenta → fecha / follow / drop.</div>
+      <div class="frame"><div class="fn">Frame 1</div>Trilho de 5 semanas + trilho de close (09a fecha em call / 09b follow).</div>
+      <div class="frame"><div class="fn">Frame 2</div>Pré-pit = contexto da EE. Account Planning = valida produto (NBO).</div>
+      <div class="frame"><div class="fn">Frame 3</div>Account Planning: retenção · otimização · novos produtos — só depois do pré-pit.</div>
+      <div class="frame"><div class="fn">Frame 4</div>Colunas Flow: cadência (GC, KO, semana, contato, Notebook LM) + NBO + follow/drop.</div>
+      <div class="frame"><div class="fn">Frame 5</div>8 blocos do pré-pit + Notebook LM como fonte.</div>
+      <div class="frame"><div class="fn">Frame 6</div>Follow com data de devolutiva · drop com motivo e abertura futura.</div>
+      <div class="frame"><div class="fn">Frame 7</div>Migração Cockpit → Expansão depois do AP.</div>
+      <div class="frame"><div class="fn">Frame 8</div>Pipe Review + RACI da rotina Sara.</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  V4 · Saber → Executar · Flow ·
+  <a href="documento-pre-pit.html">Pré-pit</a> ·
+  <a href="playbook-farmer-am.html">Playbook</a> ·
+  <a href="farmer-sara.html">Hub Farmer</a> ·
+  <a href="SABER-EXECUTAR-MIRO.md">MD compacto</a>
+</footer>
+
+<script>
+  document.querySelectorAll(".tab").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".tab").forEach((b) => b.classList.remove("active"));
+      document.querySelectorAll(".panel").forEach((p) => p.classList.remove("is-active"));
+      btn.classList.add("active");
+      const panel = document.querySelector('.panel[data-view="' + btn.dataset.view + '"]');
+      if (panel) panel.classList.add("is-active");
+    });
+  });
+</script>
+</body>
+</html>
