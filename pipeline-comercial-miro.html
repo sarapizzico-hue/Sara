@@ -97,6 +97,51 @@
     .stage.kill { background: #f3b4b4; text-decoration: line-through; }
     .stage.ok { background: #dff5e4; }
     .stage.nbo { background: #111; color: #fff; border-color: #111; }
+    .col.wide { width: 168px; flex: 0 0 168px; }
+    .col.wide .stage, .col.wide .sticky, .col.wide .fld, .col.wide .under { width: 156px; }
+    .fld {
+      width: 136px; margin-top: 8px; padding: 7px 8px;
+      border: 1px dashed #8a8a8a; background: #f7f6f2;
+      font-size: 10px; line-height: 1.35; text-align: left;
+    }
+    .fld .k {
+      font-size: 8px; font-weight: 800; letter-spacing: .08em;
+      text-transform: uppercase; color: #6b6b6b; margin-bottom: 4px;
+    }
+    .fld span { display: block; margin: 2px 0; color: #111; }
+    .fld em { color: #666; font-style: normal; font-size: 9px; }
+    .thermo {
+      display: inline-block; padding: 2px 8px; border-radius: 999px;
+      font-size: 10px; font-weight: 800; border: 1px solid #ccc;
+    }
+    .thermo.hot { background: #f8d0d0; border-color: #d9a0a0; }
+    .thermo.warm { background: #fff3a3; border-color: #c9c4a8; }
+    .thermo.cold { background: #d6e8fb; border-color: #9bb8d9; }
+    .money-map {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 16px;
+    }
+    @media (max-width: 900px) { .money-map { grid-template-columns: 1fr 1fr; } }
+    .money-map .card { border-style: dashed; }
+    .mock { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 900px) { .mock { grid-template-columns: 1fr; } }
+    .mock-card {
+      border: 1.5px solid var(--line); background: #fff; padding: 16px 16px 12px; border-radius: 8px;
+    }
+    .mock-card .mh {
+      font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--red); margin-bottom: 4px;
+    }
+    .mock-card h3 { margin: 0 0 12px; font-size: 16px; }
+    .mock-row {
+      display: grid; grid-template-columns: 148px 1fr; gap: 8px;
+      padding: 7px 0; border-bottom: 1px dashed #ddd; font-size: 12px; align-items: start;
+    }
+    .mock-row:last-child { border-bottom: 0; }
+    .mock-row .lab {
+      font-size: 10px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: #666;
+    }
+    .mock-row .val { color: #111; }
+    .mock-row .val b { font-weight: 800; }
     .arrow {
       width: 22px; flex: 0 0 22px; align-self: center;
       margin-top: 118px;
@@ -148,7 +193,7 @@
       Mesmo modelo do board: caixas em linha, notas em cima e embaixo.
       <strong>Amarelo = pergunta que já estava no Miro.</strong>
       <strong>Verde = decisão da rotina da Sara (Farmer EE / Saber → Executar).</strong>
-      Copie os dois frames. O de baixo é o pipe para replicar.
+      Copie os frames. Caixa tracejada embaixo de cada etapa = <strong>campo no Flow</strong> (nome técnico + o que preencher).
     </p>
     <div class="legend">
       <span><i style="background:#fff"></i> Etapa que fica</span>
@@ -157,6 +202,7 @@
       <span><i style="background:#dff5e4"></i> Entra / permanece</span>
       <span><i style="background:#fff3a3"></i> Pergunta original</span>
       <span><i style="background:#c8ebd0"></i> Resposta Sara</span>
+      <span><i style="background:#f7f6f2;border-style:dashed"></i> Campo Flow nesta etapa</span>
     </div>
 
     <!-- FRAME 1: ATUAL + RESPOSTAS -->
@@ -251,85 +297,211 @@
       <h2>Pipe proposto · só o que é oportunidade</h2>
 
       <div class="lane">
-        <div class="ln">Fora do pipe comercial · Cockpit “Saber para Executar”</div>
+        <div class="ln">Fora do pipe comercial · Cockpit “Saber para Executar” · semanas manuais no Flow</div>
         <div class="row no-notes">
-          <div class="col"><div class="stage">Cliente entra</div></div>
+          <div class="col">
+            <div class="stage">Cliente entra</div>
+            <div class="fld"><div class="k">Flow</div><span>data_entrada</span></div>
+          </div>
           <div class="arrow"></div>
-          <div class="col"><div class="stage">GC</div></div>
+          <div class="col">
+            <div class="stage">GC</div>
+            <div class="fld"><div class="k">Flow</div><span>data_gc</span></div>
+          </div>
           <div class="arrow"></div>
-          <div class="col"><div class="stage">Kick-off<br><span style="font-weight:500;font-size:11px">Sara se apresenta</span></div></div>
+          <div class="col">
+            <div class="stage">Kick-off<br><span style="font-weight:500;font-size:11px">Sara se apresenta</span></div>
+            <div class="fld"><div class="k">Flow</div><span>kickoff_sara</span><span>data_kickoff</span></div>
+          </div>
           <div class="arrow"></div>
-          <div class="col"><div class="stage">5 semanas<br><span style="font-weight:500;font-size:11px">1 contato / semana</span></div></div>
+          <div class="col wide">
+            <div class="stage ok">Pré-pit S3<br><span style="font-weight:500;font-size:11px">Notebook LM</span></div>
+            <div class="fld"><div class="k">Flow</div><span>prepit_url</span><span>notebook_lm_url</span></div>
+          </div>
           <div class="arrow"></div>
-          <div class="col"><div class="stage ok">Pré-pit S3<br><span style="font-weight:500;font-size:11px">Notebook LM</span></div></div>
-          <div class="arrow"></div>
-          <div class="col"><div class="stage ok">Account Planning<br><span style="font-weight:500;font-size:11px">valida o produto</span></div></div>
+          <div class="col wide">
+            <div class="stage ok">Account Planning<br><span style="font-weight:500;font-size:11px">valida o produto</span></div>
+            <div class="fld"><div class="k">Flow</div><span>foco_ap</span><span>nbo + nbo_step</span></div>
+          </div>
         </div>
-        <p class="hint" style="margin:12px 0 0">Aqui ainda não é oportunidade de pipe. Diagnóstico mora aqui. Só atravessa a linha de baixo quando a NBO está validada.</p>
+        <p class="hint" style="margin:14px 0 8px"><strong>Semanas — preencher na mão no card do Cockpit</strong> (data + 1 linha). Sem automação: você marca cada contato.</p>
+        <div class="row no-notes">
+          <div class="col">
+            <div class="stage">S1</div>
+            <div class="fld"><div class="k">Manual</div><span>semana_1_data <em>dd/mm do contato</em></span><span>semana_1_obs <em>1 linha: o que rolou</em></span></div>
+          </div>
+          <div class="arrow"></div>
+          <div class="col">
+            <div class="stage">S2</div>
+            <div class="fld"><div class="k">Manual</div><span>semana_2_data <em>dd/mm</em></span><span>semana_2_obs <em>1 linha</em></span></div>
+          </div>
+          <div class="arrow"></div>
+          <div class="col">
+            <div class="stage ok">S3</div>
+            <div class="fld"><div class="k">Manual + pré-pit</div><span>semana_3_data <em>dd/mm</em></span><span>semana_3_obs <em>comercial + Notebook LM</em></span></div>
+          </div>
+          <div class="arrow"></div>
+          <div class="col">
+            <div class="stage">S4</div>
+            <div class="fld"><div class="k">Manual + AP</div><span>semana_4_data <em>dd/mm</em></span><span>semana_4_obs <em>produto validado?</em></span></div>
+          </div>
+          <div class="arrow"></div>
+          <div class="col">
+            <div class="stage">S5</div>
+            <div class="fld"><div class="k">Manual + pitch</div><span>semana_5_data <em>dd/mm</em></span><span>semana_5_obs <em>apresentou / follow</em></span></div>
+          </div>
+        </div>
+        <p class="hint" style="margin:12px 0 0">Aqui ainda não é oportunidade. Só atravessa para o pipe de baixo quando a NBO está validada.</p>
       </div>
 
       <div class="pipe-label">Pipeline comercial · só oportunidade</div>
       <div class="row">
-        <div class="col">
+        <div class="col wide">
           <div class="sticky ok"><div class="k">Entra</div>NBO validada no AP. 1 frase + STEP + o que não oferecer.</div>
           <div class="stage nbo">Next Best Offer</div>
+          <div class="fld"><div class="k">Valores · estimativa</div><span>nbo <em>1 frase</em></span><span>nbo_step</span><span>valor_estimado_tcv <em>R$ · ainda não é proposta</em></span><span>valor_estimado_mrr <em>R$</em></span></div>
         </div>
         <div class="arrow"></div>
-        <div class="col">
+        <div class="col wide">
           <div class="sticky ok"><div class="k">Farmer</div>Constrói a proposta com o contexto do pré-pit. Sem POC.</div>
           <div class="stage ok">Construção da Proposta</div>
+          <div class="fld"><div class="k">Espaço da proposta</div><span>proposta_url <em>link do doc / deck</em></span><span>valor_tcv <em>R$ da proposta</em></span><span>valor_mrr <em>R$</em></span><span>forma_pgto</span></div>
         </div>
         <div class="arrow"></div>
-        <div class="col">
+        <div class="col wide">
           <div class="sticky ok"><div class="k">Farmer + time</div>Reunião para fechar narrativa. O post-it original apontava para cá.</div>
           <div class="stage ok">Revisão da Proposta</div>
+          <div class="fld"><div class="k">Proposta + termômetro</div><span>proposta_url <em>versão final</em></span><span>termometro <em>Quente / Morno / Frio</em></span><span>valor_tcv / valor_mrr <em>conferir</em></span></div>
         </div>
         <div class="arrow"></div>
-        <div class="col">
+        <div class="col wide">
           <div class="sticky ok"><div class="k">Agenda</div>Data com decisor. Sem data ≠ pitch da semana.</div>
           <div class="stage">Reunião Agendada</div>
+          <div class="fld"><div class="k">Agenda</div><span>data_reuniao <em>dd/mm com decisor</em></span><span>termometro</span></div>
         </div>
         <div class="arrow"></div>
-        <div class="col">
+        <div class="col wide">
           <div class="sticky ok"><div class="k">Pitch</div>Apresenta. Fecha em call ou segue.</div>
           <div class="stage">Reunião Realizada</div>
+          <div class="fld"><div class="k">Termômetro na hora</div><span>termometro <em>atualizar na call</em></span><span>resultado_pitch <em>Fecha / Follow / Drop</em></span><span>valores apresentados = valor_tcv / mrr</span></div>
         </div>
         <div class="arrow"></div>
-        <div class="col">
+        <div class="col wide">
           <div class="sticky ok"><div class="k">Follow</div>Mesmo dia. Devolutiva com data se precisar.</div>
           <div class="stage">Follow</div>
+          <div class="fld"><div class="k">Como está o follow</div><span>follow_obs <em>o que o cliente disse</em></span><span>termometro</span><span>data_devolutiva <em>obrigatória</em></span></div>
         </div>
         <div class="arrow"></div>
-        <div class="col">
+        <div class="col wide">
           <div class="sticky ok"><div class="k">Fecha</div>Ganho ou drop com motivo + abertura futura.</div>
           <div class="stage">Ganho/Drop</div>
+          <div class="fld"><div class="k">Data que finalizamos</div><span>data_finalizacao <em>dd/mm</em></span><span>valor_fechado_tcv <em>só no ganho</em></span><span>valor_fechado_mrr</span><span>motivo_drop <em>só no drop</em></span></div>
+        </div>
+      </div>
+
+      <div class="notes" style="margin-top:22px">
+        <div class="card">
+          <h3>Semanas · manual no Cockpit</h3>
+          <p>Cinco pares no mesmo card: <b>semana_N_data</b> + <b>semana_N_obs</b>. Você marca o contato na mão. Sem automação. Sem data há &gt;7 dias = alerta no Pipe Review.</p>
+        </div>
+        <div class="card">
+          <h3>Proposta + termômetro</h3>
+          <p><b>proposta_url</b> nasce em Construção e se confirma na Revisão. <b>termometro</b> (Quente / Morno / Frio) entra na Revisão e segue até o Follow. Atualiza na call, não deixa o da semana passada.</p>
+        </div>
+        <div class="card">
+          <h3>Follow · data · valores</h3>
+          <p><b>follow_obs</b> = como está o follow. <b>data_finalizacao</b> só em Ganho/Drop. Dinheiro: estimativa na NBO → proposta em Construção/Revisão → fechado só no ganho.</p>
+        </div>
+      </div>
+
+      <p class="pipe-label" style="margin-top:22px">Onde vai o R$</p>
+      <div class="money-map">
+        <div class="card">
+          <h3>1 · NBO</h3>
+          <p><b>valor_estimado_tcv</b> / <b>valor_estimado_mrr</b>. Hipótese do AP. Não inventar se ainda não mapeou.</p>
+        </div>
+        <div class="card">
+          <h3>2 · Proposta</h3>
+          <p><b>valor_tcv</b> / <b>valor_mrr</b> + <b>forma_pgto</b>. É o número que vai no deck. Mora em Construção e Revisão.</p>
+        </div>
+        <div class="card">
+          <h3>3 · Pitch</h3>
+          <p>Os mesmos <b>valor_tcv</b> / <b>valor_mrr</b> — o que foi apresentado. Não cria campo novo.</p>
+        </div>
+        <div class="card">
+          <h3>4 · Fecha</h3>
+          <p>Ganho: <b>valor_fechado_tcv</b> / <b>valor_fechado_mrr</b> + <b>data_finalizacao</b>. Drop: data + motivo, sem valor fechado.</p>
         </div>
       </div>
     </section>
 
     <section class="frame">
       <h1>Frame 3 · legenda rápida para o Miro</h1>
-      <h2>O que sai / o que fica</h2>
+      <h2>O que sai / o que fica · campos Flow na etapa</h2>
       <table style="width:100%;border-collapse:collapse;font-size:13px">
         <thead>
           <tr>
             <th style="text-align:left;padding:8px;border-bottom:1px solid #ddd">Etapa atual</th>
             <th style="text-align:left;padding:8px;border-bottom:1px solid #ddd">Decisão</th>
-            <th style="text-align:left;padding:8px;border-bottom:1px solid #ddd">Por quê (rotina Sara)</th>
+            <th style="text-align:left;padding:8px;border-bottom:1px solid #ddd">Campos Flow nesta etapa</th>
           </tr>
         </thead>
         <tbody>
-          <tr><td style="padding:8px;border-bottom:1px solid #eee">Next Best Offer</td><td style="padding:8px;border-bottom:1px solid #eee"><b>Fica · porta de entrada</b></td><td style="padding:8px;border-bottom:1px solid #eee">Sai do Account Planning, depois do pré-pit</td></tr>
-          <tr><td style="padding:8px;border-bottom:1px solid #eee">Diagnóstico</td><td style="padding:8px;border-bottom:1px solid #eee"><b>Sai do pipe</b> → Cockpit</td><td style="padding:8px;border-bottom:1px solid #eee">5 semanas + pré-pit S3 · time de conta · Notebook LM</td></tr>
-          <tr><td style="padding:8px;border-bottom:1px solid #eee">Oportunidade</td><td style="padding:8px;border-bottom:1px solid #eee"><b>Sai</b></td><td style="padding:8px;border-bottom:1px solid #eee">O pipe inteiro já é oportunidade</td></tr>
-          <tr><td style="padding:8px;border-bottom:1px solid #eee">Construção POC</td><td style="padding:8px;border-bottom:1px solid #eee"><b>Sai</b> → vira Construção da Proposta</td><td style="padding:8px;border-bottom:1px solid #eee">Farmer EE não faz POC</td></tr>
-          <tr><td style="padding:8px;border-bottom:1px solid #eee">Revisão da Proposta</td><td style="padding:8px;border-bottom:1px solid #eee"><b>Fica</b></td><td style="padding:8px;border-bottom:1px solid #eee">Farmer executa a proposta / narrativa</td></tr>
-          <tr><td style="padding:8px;border-bottom:1px solid #eee">Reunião Agendada</td><td style="padding:8px;border-bottom:1px solid #eee"><b>Fica</b></td><td style="padding:8px;border-bottom:1px solid #eee">Data com decisor</td></tr>
-          <tr><td style="padding:8px;border-bottom:1px solid #eee">Reunião Realizada</td><td style="padding:8px;border-bottom:1px solid #eee"><b>Fica</b></td><td style="padding:8px;border-bottom:1px solid #eee">Pitch · fecha em call ou follow</td></tr>
-          <tr><td style="padding:8px;border-bottom:1px solid #eee">Follow</td><td style="padding:8px;border-bottom:1px solid #eee"><b>Fica</b></td><td style="padding:8px;border-bottom:1px solid #eee">Devolutiva com data</td></tr>
-          <tr><td style="padding:8px;border-bottom:1px solid #eee">Ganho/Drop</td><td style="padding:8px;border-bottom:1px solid #eee"><b>Fica</b></td><td style="padding:8px;border-bottom:1px solid #eee">Drop com motivo para reabrir depois</td></tr>
+          <tr><td style="padding:8px;border-bottom:1px solid #eee">Cockpit · 5 semanas</td><td style="padding:8px;border-bottom:1px solid #eee"><b>Fora do pipe</b></td><td style="padding:8px;border-bottom:1px solid #eee">semana_1..5_data + _obs (manual)</td></tr>
+          <tr><td style="padding:8px;border-bottom:1px solid #eee">Next Best Offer</td><td style="padding:8px;border-bottom:1px solid #eee"><b>Fica · porta de entrada</b></td><td style="padding:8px;border-bottom:1px solid #eee">nbo · nbo_step · valor_estimado_tcv / mrr</td></tr>
+          <tr><td style="padding:8px;border-bottom:1px solid #eee">Diagnóstico</td><td style="padding:8px;border-bottom:1px solid #eee"><b>Sai do pipe</b> → Cockpit</td><td style="padding:8px;border-bottom:1px solid #eee">— (vira as 5 semanas + pré-pit)</td></tr>
+          <tr><td style="padding:8px;border-bottom:1px solid #eee">Oportunidade</td><td style="padding:8px;border-bottom:1px solid #eee"><b>Sai</b></td><td style="padding:8px;border-bottom:1px solid #eee">— (o pipe inteiro já é oportunidade)</td></tr>
+          <tr><td style="padding:8px;border-bottom:1px solid #eee">Construção POC</td><td style="padding:8px;border-bottom:1px solid #eee"><b>Sai</b> → Construção da Proposta</td><td style="padding:8px;border-bottom:1px solid #eee">proposta_url · valor_tcv / mrr · forma_pgto</td></tr>
+          <tr><td style="padding:8px;border-bottom:1px solid #eee">Revisão da Proposta</td><td style="padding:8px;border-bottom:1px solid #eee"><b>Fica</b></td><td style="padding:8px;border-bottom:1px solid #eee">proposta_url · termometro · valores</td></tr>
+          <tr><td style="padding:8px;border-bottom:1px solid #eee">Reunião Agendada</td><td style="padding:8px;border-bottom:1px solid #eee"><b>Fica</b></td><td style="padding:8px;border-bottom:1px solid #eee">data_reuniao · termometro</td></tr>
+          <tr><td style="padding:8px;border-bottom:1px solid #eee">Reunião Realizada</td><td style="padding:8px;border-bottom:1px solid #eee"><b>Fica</b></td><td style="padding:8px;border-bottom:1px solid #eee">termometro · resultado_pitch · valores apresentados</td></tr>
+          <tr><td style="padding:8px;border-bottom:1px solid #eee">Follow</td><td style="padding:8px;border-bottom:1px solid #eee"><b>Fica</b></td><td style="padding:8px;border-bottom:1px solid #eee">follow_obs · termometro · data_devolutiva</td></tr>
+          <tr><td style="padding:8px;border-bottom:1px solid #eee">Ganho/Drop</td><td style="padding:8px;border-bottom:1px solid #eee"><b>Fica</b></td><td style="padding:8px;border-bottom:1px solid #eee">data_finalizacao · valor_fechado_tcv / mrr · motivo_drop</td></tr>
         </tbody>
       </table>
+    </section>
+
+    <section class="frame">
+      <h1>Frame 4 · copiar no Miro</h1>
+      <h2>Como o card fica no Flow</h2>
+      <p class="hint">Dois objetos. Semanas e contexto ficam no Cockpit. Proposta, termômetro, follow e R$ fechado ficam no card da oportunidade.</p>
+      <p class="hint" style="margin-top:-8px">
+        Termômetro:
+        <span class="thermo hot">Quente · fecha esta semana</span>
+        &nbsp;
+        <span class="thermo warm">Morno · follow com data</span>
+        &nbsp;
+        <span class="thermo cold">Frio · risco de drop</span>
+      </p>
+      <div class="mock">
+        <div class="mock-card">
+          <div class="mh">Cockpit · Saber para Executar</div>
+          <h3>Cliente exemplo · EE</h3>
+          <div class="mock-row"><div class="lab">data_entrada</div><div class="val">04/08</div></div>
+          <div class="mock-row"><div class="lab">data_gc</div><div class="val">06/08</div></div>
+          <div class="mock-row"><div class="lab">kickoff_sara</div><div class="val">sim · data_kickoff 11/08</div></div>
+          <div class="mock-row"><div class="lab">semana_1</div><div class="val">11/08 · KO: se apresentou, alinhou canal</div></div>
+          <div class="mock-row"><div class="lab">semana_2</div><div class="val">18/08 · dúvida de CRM · sem preço</div></div>
+          <div class="mock-row"><div class="lab">semana_3</div><div class="val">25/08 · comercial + pré-pit Notebook LM</div></div>
+          <div class="mock-row"><div class="lab">semana_4</div><div class="val">01/09 · AP validou EC 12 sem.</div></div>
+          <div class="mock-row"><div class="lab">semana_5</div><div class="val">08/09 · pitch agendado</div></div>
+          <div class="mock-row"><div class="lab">prepit_url</div><div class="val">link do doc</div></div>
+          <div class="mock-row"><div class="lab">nbo</div><div class="val">EC 12 semanas com CRM em uso</div></div>
+        </div>
+        <div class="mock-card">
+          <div class="mh">Pipe comercial · oportunidade</div>
+          <h3>Mesmo cliente · NBO validada</h3>
+          <div class="mock-row"><div class="lab">proposta_url</div><div class="val">link do deck / doc da proposta</div></div>
+          <div class="mock-row"><div class="lab">valor_tcv / mrr</div><div class="val"><b>R$ 72k</b> · <b>R$ 6,5k</b> · forma_pgto mensal</div></div>
+          <div class="mock-row"><div class="lab">termometro</div><div class="val"><span class="thermo warm">Morno</span> — sócio não estava na sala</div></div>
+          <div class="mock-row"><div class="lab">data_reuniao</div><div class="val">08/09</div></div>
+          <div class="mock-row"><div class="lab">resultado_pitch</div><div class="val">Follow</div></div>
+          <div class="mock-row"><div class="lab">follow_obs</div><div class="val">Pediu 7 dias · sócio vê o deck · sem objeção de preço</div></div>
+          <div class="mock-row"><div class="lab">data_devolutiva</div><div class="val">15/09</div></div>
+          <div class="mock-row"><div class="lab">data_finalizacao</div><div class="val">15/09 · ganho</div></div>
+          <div class="mock-row"><div class="lab">valor_fechado</div><div class="val"><b>TCV R$ 72k</b> · <b>MRR R$ 6,5k</b></div></div>
+        </div>
+      </div>
     </section>
   </div>
 

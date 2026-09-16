@@ -202,27 +202,27 @@
         <div class="rail-step">
           <div class="n">Semana 1</div>
           <div class="t">Kick-off + 1º contato</div>
-          <div class="d">Sara se apresenta com o time. Primeira conversa: expectativa, dúvidas, canal oficial.</div>
+          <div class="d">Sara se apresenta com o time. Primeira conversa: expectativa, dúvidas, canal oficial. Flow: <span class="code">semana_1_data</span> + <span class="code">semana_1_obs</span>.</div>
         </div>
         <div class="rail-step">
           <div class="n">Semana 2</div>
           <div class="t">Pulso</div>
-          <div class="d">Contato da semana. O que a EE mostrou. Dúvida do cliente. Nada de preço.</div>
+          <div class="d">Contato da semana. O que a EE mostrou. Dúvida do cliente. Nada de preço. Flow: <span class="code">semana_2_data</span> + <span class="code">semana_2_obs</span>.</div>
         </div>
         <div class="rail-step act">
           <div class="n">Semana 3</div>
           <div class="t">Comercial + pré-pit</div>
-          <div class="d">Time apresenta o comercial. Sara + time puxam o Notebook LM e escrevem o pré-pit.</div>
+          <div class="d">Time apresenta o comercial. Sara + time puxam o Notebook LM e escrevem o pré-pit. Flow: <span class="code">semana_3_data</span> + <span class="code">semana_3_obs</span>.</div>
         </div>
         <div class="rail-step sys">
           <div class="n">Semana 4</div>
           <div class="t">AP + narrativa</div>
-          <div class="d">Account Planning valida o produto. Reunião para fechar a proposta com narrativa.</div>
+          <div class="d">Account Planning valida o produto. Reunião para fechar a proposta com narrativa. Flow: <span class="code">semana_4_data</span> + <span class="code">semana_4_obs</span>.</div>
         </div>
         <div class="rail-step ok">
           <div class="n">Semana 5</div>
           <div class="t">Apresentar</div>
-          <div class="d">Pitch. Fecha em call ou follow. Se precisar, marca devolutiva. Win ou drop com motivo.</div>
+          <div class="d">Pitch. Fecha em call ou follow. Flow: <span class="code">semana_5_data</span> + <span class="code">semana_5_obs</span>.</div>
         </div>
       </div>
       <div class="callout">
@@ -374,7 +374,7 @@ Sistema: Flow. Cockpit “Saber para Executar”.</div>
           <tbody>
             <tr><td class="code">nbo</td><td>1 frase: a próxima oferta desta conta, agora</td><td>EC 12 semanas com CRM em uso — sem Meta Ads</td></tr>
             <tr><td class="code">nbo_step</td><td>Destrava · Ter · Saber · Executar · Combo</td><td>Executar</td></tr>
-            <tr><td class="code">nbo_valor</td><td>TCV e/ou MRR estimado (não inventar se não mapeou)</td><td>TCV R$ 72k · MRR R$ 6,5k</td></tr>
+            <tr><td class="code">valor_estimado_tcv / mrr</td><td>Estimativa do AP. Ainda não é a proposta. Não inventar se não mapeou</td><td>TCV R$ 72k · MRR R$ 6,5k</td></tr>
             <tr><td class="code">nbo_timing</td><td>Agora · 30d · 60d · 90d · Bloqueado</td><td>Agora</td></tr>
             <tr><td class="code">nbo_nao_oferecer</td><td>O que fica de fora neste ciclo</td><td>Social/Meta · combo Performance</td></tr>
             <tr><td class="code">nbo_status</td><td>Em contexto (pré-pit) → Validada (AP) → Em proposta → Em pitch → Follow → Ganhou / Drop</td><td>Validada</td></tr>
@@ -430,10 +430,16 @@ Sistema: Flow. Cockpit “Saber para Executar”.</div>
         <table>
           <thead><tr><th>Coluna</th><th>Tipo</th><th>Valores / regra</th></tr></thead>
           <tbody>
+            <tr><td class="code">data_entrada</td><td>Data</td><td>Cliente entra no Cockpit</td></tr>
             <tr><td class="code">data_gc</td><td>Data</td><td>GC realizada. Sem GC o kick-off fica frágil</td></tr>
             <tr><td class="code">kickoff_sara</td><td>Checkbox</td><td>Sara se apresentou com o time no KO</td></tr>
-            <tr><td class="code">semana_ee</td><td>Select 1–5</td><td>Semana atual da EE</td></tr>
-            <tr><td class="code">contato_semanal</td><td>Data</td><td>Último contato 1×/semana. Sem data há &gt;7 dias = alerta</td></tr>
+            <tr><td class="code">data_kickoff</td><td>Data</td><td>Dia do KO</td></tr>
+            <tr><td class="code">semana_ee</td><td>Select 1–5</td><td>Semana atual (filtro). O histórico vai nos pares manuais abaixo</td></tr>
+            <tr><td class="code">semana_1_data / semana_1_obs</td><td>Data + texto</td><td>Manual. 1º contato (KO). 1 linha do que rolou</td></tr>
+            <tr><td class="code">semana_2_data / semana_2_obs</td><td>Data + texto</td><td>Manual. Pulso · dúvida · sem preço</td></tr>
+            <tr><td class="code">semana_3_data / semana_3_obs</td><td>Data + texto</td><td>Manual. Comercial + pré-pit Notebook LM</td></tr>
+            <tr><td class="code">semana_4_data / semana_4_obs</td><td>Data + texto</td><td>Manual. AP validou produto?</td></tr>
+            <tr><td class="code">semana_5_data / semana_5_obs</td><td>Data + texto</td><td>Manual. Pitch / follow</td></tr>
             <tr><td class="code">notebook_lm_url</td><td>URL</td><td>Notebook LM da conta — fonte do pré-pit</td></tr>
             <tr><td class="code">status_ciclo</td><td>Select</td><td>GC · Kick-off · Em EE · Pré-pit · AP · Proposta · Pitch · Follow · Devolutiva · Ganhou · Drop</td></tr>
           </tbody>
@@ -450,7 +456,8 @@ Sistema: Flow. Cockpit “Saber para Executar”.</div>
             <tr><td class="code">foco_ap</td><td>Select</td><td>Retenção · Otimização de campanhas · Novos produtos</td></tr>
             <tr><td class="code">nbo</td><td>Texto curto</td><td>1 frase. Obrigatório depois do Account Planning</td></tr>
             <tr><td class="code">nbo_step</td><td>Select</td><td>Destrava Receita · Ter · Saber · Executar · Combos Performance</td></tr>
-            <tr><td class="code">nbo_valor</td><td>Moeda / texto</td><td>TCV e MRR separados quando Executar</td></tr>
+            <tr><td class="code">valor_estimado_tcv</td><td>Moeda</td><td>Estimativa TCV no AP. Ainda não é proposta</td></tr>
+            <tr><td class="code">valor_estimado_mrr</td><td>Moeda</td><td>Estimativa MRR. Obrigatório se STEP = Executar</td></tr>
             <tr><td class="code">nbo_timing</td><td>Select</td><td>Agora · 30d · 60d · 90d · Bloqueado</td></tr>
             <tr><td class="code">nbo_nao_oferecer</td><td>Texto</td><td>Obrigatório. Protege o encaixe</td></tr>
             <tr><td class="code">nbo_status</td><td>Select</td><td>Em contexto · Validada · Em proposta · Em pitch · Follow · Ganhou · Drop</td></tr>
@@ -488,8 +495,18 @@ Sistema: Flow. Cockpit “Saber para Executar”.</div>
             <tr><td class="code">projecao_cenario</td><td>Select</td><td>Fora · Chão · Pessimista · Realista · Otimista</td></tr>
             <tr><td class="code">origem_card</td><td>Select</td><td>Cockpit Saber · Base ativa · Expansão</td></tr>
             <tr><td class="code">destino_pipe</td><td>Select</td><td>Permanece Cockpit · Expansão Executar · Expansão Ter/Saber</td></tr>
+            <tr><td class="code">proposta_url</td><td>URL</td><td>Espaço da proposta. Deck/doc. Nasce em Construção, confirma na Revisão</td></tr>
+            <tr><td class="code">valor_tcv</td><td>Moeda</td><td>Valor da proposta (o que vai no deck)</td></tr>
+            <tr><td class="code">valor_mrr</td><td>Moeda</td><td>MRR da proposta</td></tr>
+            <tr><td class="code">forma_pgto</td><td>Texto / select</td><td>À vista · mensal · outro</td></tr>
+            <tr><td class="code">termometro</td><td>Select</td><td>Quente · Morno · Frio. Entra na Revisão e segue até o Follow</td></tr>
+            <tr><td class="code">data_reuniao</td><td>Data</td><td>Pitch com decisor. Sem data ≠ pitch da semana</td></tr>
             <tr><td class="code">resultado_pitch</td><td>Select</td><td>Fecha em call · Follow · Drop</td></tr>
+            <tr><td class="code">follow_obs</td><td>Texto</td><td>Como está o follow: o que o cliente disse + próximo passo</td></tr>
             <tr><td class="code">data_devolutiva</td><td>Data</td><td>Obrigatória se Follow. Sem data = card morto</td></tr>
+            <tr><td class="code">data_finalizacao</td><td>Data</td><td>Dia que ganhou ou dropou</td></tr>
+            <tr><td class="code">valor_fechado_tcv</td><td>Moeda</td><td>Só no ganho. O que entrou de verdade</td></tr>
+            <tr><td class="code">valor_fechado_mrr</td><td>Moeda</td><td>Só no ganho</td></tr>
             <tr><td class="code">motivo_drop</td><td>Select + texto</td><td>Budget · Timing · Ops · Interno · Outro + frase</td></tr>
             <tr><td class="code">abertura_futura</td><td>Texto</td><td>Quando/como reabrir (gatilho). Drop não é lixeira</td></tr>
             <tr><td class="code">id_origem / url_par</td><td>Relação</td><td>Liga Cockpit ↔ Expansão. Obrigatório na migração</td></tr>
@@ -520,10 +537,11 @@ Sistema: Flow. Cockpit “Saber para Executar”.</div>
         <span class="code">data_gc</span> ·
         <span class="code">kickoff_sara</span> ·
         <span class="code">semana_ee</span> ·
-        <span class="code">contato_semanal</span> ·
+        <span class="code">semana_1_data</span> + <span class="code">semana_1_obs</span> ·
         <span class="code">proxima_acao</span>.
         Na S3 entram <span class="code">notebook_lm_url</span> + <span class="code">prepit_status</span>.
-        Depois do AP: <span class="code">nbo</span> + <span class="code">nbo_status</span>.
+        Depois do AP: <span class="code">nbo</span> + <span class="code">valor_estimado_tcv / mrr</span>.
+        Na proposta: <span class="code">proposta_url</span> + <span class="code">valor_tcv / mrr</span> + <span class="code">termometro</span>.
       </div>
     </div>
   </div>
@@ -688,7 +706,7 @@ Sistema: Flow. Cockpit “Saber para Executar”.</div>
             <ul class="steps">
               <li>No mesmo dia: Sara entra em follow</li>
               <li>Se o cliente pediu tempo: <strong>marca data de devolutiva</strong> no Flow</li>
-              <li>Status = Follow · <span class="code">data_devolutiva</span> preenchida</li>
+              <li>Status = Follow · <span class="code">follow_obs</span> + <span class="code">termometro</span> + <span class="code">data_devolutiva</span></li>
               <li>Pipe Review: follow sem data = P0</li>
             </ul>
           </div>
@@ -732,9 +750,10 @@ Sistema: Flow. Cockpit “Saber para Executar”.</div>
           <thead><tr><th>No Cockpit SABER</th><th>No pipe de Expansão</th></tr></thead>
           <tbody>
             <tr><td>Cliente, squad, farmer</td><td>Idem</td></tr>
-            <tr><td>nbo + nbo_step + nbo_valor</td><td>Título da oportunidade + STEP + TCV/MRR</td></tr>
+            <tr><td>nbo + nbo_step + valor_estimado_tcv / mrr</td><td>Título da oportunidade + STEP + vira valor_tcv / mrr na proposta</td></tr>
             <tr><td>prepit_url</td><td>Anexo / campo de briefing</td></tr>
-            <tr><td>pitch_semana</td><td>Data do próximo estágio comercial</td></tr>
+            <tr><td>proposta_url · termometro · follow_obs</td><td>Mesmos campos no card da oportunidade</td></tr>
+            <tr><td>pitch_semana</td><td>data_reuniao</td></tr>
             <tr><td>modo_execucao + canal</td><td>Instrução para ops no win</td></tr>
             <tr><td>Status = Migrado</td><td>Estágio: Pitch / Proposta / Follow / Contrato / Ganhou</td></tr>
           </tbody>
@@ -775,9 +794,10 @@ Sistema: Flow. Cockpit “Saber para Executar”.</div>
     <div class="section">
       <h2>Pauta fixa do Pipe Review semanal</h2>
       <ol class="steps">
-        <li><strong>Cadência Sara:</strong> GC · kick-off · contato da semana em todas as contas em EE.</li>
+        <li><strong>Cadência Sara:</strong> GC · kick-off · <span class="code">semana_N_data</span> + obs em todas as contas em EE.</li>
         <li><strong>Pré-pits S3:</strong> Notebook LM puxado? Doc Pronto? AP já agendado?</li>
-        <li><strong>NBO da semana:</strong> o que o AP validou, o que ainda é contexto.</li>
+        <li><strong>NBO da semana:</strong> o que o AP validou, o que ainda é contexto · <span class="code">valor_estimado_tcv / mrr</span>.</li>
+        <li><strong>Propostas:</strong> <span class="code">proposta_url</span> + <span class="code">valor_tcv / mrr</span> + <span class="code">termometro</span>.</li>
         <li><strong>Pitches da semana:</strong> conta · dono · narrativa pronta · decisor confirmado.</li>
         <li><strong>Follow:</strong> toda conta pós-pitch sem data de devolutiva é P0.</li>
         <li><strong>Drop:</strong> motivo + abertura futura preenchidos — senão não fecha o card.</li>
@@ -812,7 +832,7 @@ Sistema: Flow. Cockpit “Saber para Executar”.</div>
     <div class="section">
       <h2>Checklist da coordenação</h2>
       <ul class="check">
-        <li><span class="box"></span><div>Toda conta em EE teve contato nesta semana (<span class="code">contato_semanal</span>)</div></li>
+        <li><span class="box"></span><div>Toda conta em EE tem a semana atual preenchida (<span class="code">semana_N_data</span> + <span class="code">semana_N_obs</span>)</div></li>
         <li><span class="box"></span><div>Pré-pits da S3 com Notebook LM e status Pronto (ou data para fechar)</div></li>
         <li><span class="box"></span><div>Pitches da semana com produto validado no AP + narrativa pronta</div></li>
         <li><span class="box"></span><div>Follows com <span class="code">data_devolutiva</span></div></li>
