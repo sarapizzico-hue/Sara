@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Splendor Elétrica × V4 Company — ZapFirst · 3 meses</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --red:#e3040a;
+  --red2:#ff3b3b;
+  --dark:#0d0d0d;
+  --dark2:#1a1a1a;
+  --ink:#111;
+  --muted:#6b6b6b;
+  --line:#e8e4e1;
+  --soft:#f6f4f2;
+  --white:#fff;
+  --green:#16a34a;
+  --green-bg:#f0fdf4;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font:16px/1.6 Inter,system-ui,sans-serif;background:var(--white);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4{font-family:Sora,Inter,sans-serif;letter-spacing:-.02em;line-height:1.15}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+
+/* ── SCROLL NAV ── */
+.topnav{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  background:rgba(255,255,255,.92);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.7rem 2rem;gap:1rem;
+}
+.topnav .logo{font-family:Sora,sans-serif;font-weight:900;font-size:14px;white-space:nowrap}
+.topnav .logo span{color:var(--red)}
+.topnav nav{display:flex;gap:1.5rem;overflow-x:auto;scrollbar-width:none}
+.topnav nav a{font-size:12px;font-weight:600;color:var(--muted);white-space:nowrap;padding:.25rem 0;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+.topnav nav a:hover,.topnav nav a.active{color:var(--red);border-color:var(--red)}
+.topnav .cta-mini{background:var(--red);color:#fff;font-size:12px;font-weight:700;padding:.45rem 1rem;border-radius:20px;white-space:nowrap;transition:opacity .2s}
+.topnav .cta-mini:hover{opacity:.85}
+@media(max-width:700px){.topnav nav{display:none}.topnav{padding:.7rem 1.2rem}}
+
+/* ── PROGRESS BAR ── */
+#prog{position:fixed;top:0;left:0;height:3px;background:var(--red);z-index:1000;width:0%;transition:width .1s linear}
+
+/* ── SECTION WRAPPER ── */
+section{width:100%;padding:5rem 1.5rem}
+.inner{max-width:960px;margin:0 auto}
+.pt0{padding-top:0}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  background:linear-gradient(150deg,#0d0d0d 0%,#1c0404 55%,#2b0606 100%);
+  color:#fff;position:relative;overflow:hidden;padding:6rem 1.5rem 4rem;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 60% at 80% 40%,rgba(227,4,10,.18),transparent);
+  pointer-events:none;
+}
+.hero-grid{
+  max-width:960px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 400px;gap:3rem;align-items:center;
+  position:relative;z-index:1;
+}
+@media(max-width:860px){.hero-grid{grid-template-columns:1fr}}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(227,4,10,.18);border:1px solid rgba(227,4,10,.35);
+  border-radius:20px;padding:.35rem .9rem;
+  font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.85);
+  margin-bottom:1.5rem;
+}
+.hero-tag span{width:6px;height:6px;border-radius:50%;background:var(--red2);display:inline-block;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
+.hero h1{font-size:clamp(32px,5vw,52px);font-weight:900;color:#fff;margin-bottom:1.25rem}
+.hero h1 em{font-style:normal;color:var(--red2)}
+.hero-sub{font-size:17px;color:rgba(255,255,255,.72);max-width:520px;line-height:1.65;margin-bottom:2rem}
+.hero-cta{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:var(--red);color:#fff;font-weight:700;font-size:15px;
+  padding:.85rem 2rem;border-radius:30px;
+  box-shadow:0 8px 32px rgba(227,4,10,.4);
+  transition:transform .2s var(--ease),box-shadow .2s;
+}
+.hero-cta:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(227,4,10,.5)}
+.hero-cta svg{transition:transform .2s}
+.hero-cta:hover svg{transform:translateX(3px)}
+.hero-card{
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  border-radius:24px;padding:1.75rem;backdrop-filter:blur(8px);
+}
+.hero-card h3{font-size:13px;font-weight:700;color:rgba(255,255,255,.55);letter-spacing:.08em;text-transform:uppercase;margin-bottom:1rem}
+.kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.kpi{background:rgba(255,255,255,.08);border-radius:14px;padding:.9rem 1rem}
+.kpi .val{font-family:Sora,sans-serif;font-size:24px;font-weight:900;color:#fff}
+.kpi .lbl{font-size:11px;color:rgba(255,255,255,.55);margin-top:2px}
+.hero-award{
+  display:flex;align-items:center;gap:.6rem;margin-top:1rem;
+  padding:.65rem .9rem;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+}
+.hero-award .ico{font-size:18px}
+.hero-award p{font-size:12px;color:rgba(255,255,255,.65);line-height:1.35}
+.hero-award strong{color:#fff;font-size:13px;display:block}
+
+/* ── SECTION LABEL ── */
+.slabel{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:.5rem}
+.stitle{font-size:clamp(26px,4vw,36px);font-weight:800;color:var(--ink);margin-bottom:.75rem}
+.sdesc{font-size:16px;color:var(--muted);max-width:620px;line-height:1.65}
+
+/* ── DIVIDER ── */
+.divider{height:1px;background:var(--line);width:100%;max-width:960px;margin:0 auto}
+
+/* ── DIAGNÓSTICO ── */
+.diag-bg{background:var(--soft)}
+.gap-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:640px){.gap-grid{grid-template-columns:1fr}}
+.gap-card{
+  background:var(--white);border:1px solid var(--line);border-radius:18px;padding:1.4rem 1.6rem;
+  transition:box-shadow .25s,transform .25s;
+}
+.gap-card:hover{box-shadow:0 12px 40px rgba(0,0,0,.08);transform:translateY(-2px)}
+.gap-num{font-family:Sora,sans-serif;font-size:28px;font-weight:900;color:var(--line);margin-bottom:.5rem}
+.gap-card h3{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:.4rem}
+.gap-card p{font-size:13px;color:var(--muted);line-height:1.55}
+.gap-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:.2rem .6rem;border-radius:6px;margin-bottom:.6rem}
+.tag-red{background:#fdeaea;color:var(--red)}
+.tag-orange{background:#fff3e0;color:#c85a00}
+.highlight-box{
+  background:linear-gradient(135deg,#1a1a1a,#2b0606);
+  border-radius:20px;padding:1.75rem 2rem;margin-top:1.5rem;
+  display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;
+}
+.highlight-box .hb-text{color:rgba(255,255,255,.88);font-size:15px;line-height:1.6}
+.highlight-box strong{color:#fff;font-size:18px;font-family:Sora,sans-serif;display:block;margin-bottom:.25rem}
+
+/* ── METODOLOGIA ── */
+.method-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2rem}
+@media(max-width:760px){.method-steps{grid-template-columns:1fr 1fr}}
+@media(max-width:500px){.method-steps{grid-template-columns:1fr}}
+.ms{border-radius:18px;padding:1.4rem;border:1px solid var(--line);position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s}
+.ms:hover{transform:translateY(-3px);box-shadow:0 16px 48px rgba(0,0,0,.1)}
+.ms:nth-child(1){background:#fff3f3}
+.ms:nth-child(2){background:#fff8f0}
+.ms:nth-child(3){background:#f0f7ff}
+.ms:nth-child(4){background:#f0fff5}
+.ms .mn{font-family:Sora,sans-serif;font-size:36px;font-weight:900;color:rgba(0,0,0,.07);position:absolute;top:.5rem;right:.75rem;line-height:1}
+.ms h3{font-size:16px;font-weight:800;color:var(--ink);margin-bottom:.5rem}
+.ms p{font-size:13px;color:var(--muted);line-height:1.55}
+.ms .badge{display:inline-block;background:var(--red);color:#fff;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .65rem;border-radius:8px;margin-bottom:.6rem}
+.ms:nth-child(4) .badge{background:var(--green)}
+
+.timeline-strip{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+  border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:2rem;
+}
+@media(max-width:700px){.timeline-strip{grid-template-columns:1fr}}
+.tl-cell{padding:1.2rem 1.15rem;border-right:1px solid var(--line)}
+.tl-cell:last-child{border-right:none}
+@media(max-width:700px){.tl-cell{border-right:none;border-bottom:1px solid var(--line)}.tl-cell:last-child{border-bottom:none}}
+.tl-cell:first-child,.tl-cell:nth-child(2){background:#fff3f3}
+.tl-cell:nth-child(3){background:#f0fff5}
+.tl-mes{font-size:10px;font-weight:800;color:var(--red);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.35rem}
+.tl-fase{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:.4rem}
+.tl-items{font-size:11px;color:var(--muted);line-height:1.55}
+
+/* ── ENTREGAS ── */
+.del-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.75rem;margin-top:1.5rem}
+@media(max-width:900px){.del-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:560px){.del-grid{grid-template-columns:repeat(2,1fr)}}
+.del{
+  background:var(--soft);border:1px solid var(--line);border-radius:16px;
+  padding:1.1rem 1rem;cursor:default;
+  transition:background .2s,transform .2s,box-shadow .2s;
+}
+.del:hover{background:var(--white);transform:translateY(-3px);box-shadow:0 12px 36px rgba(0,0,0,.08)}
+.del .ico{font-size:22px;margin-bottom:.5rem}
+.del h4{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:.3rem}
+.del p{font-size:11px;color:var(--muted);line-height:1.45}
+
+/* ── INVESTIMENTO ── */
+.invest-bg{background:var(--soft)}
+.price-hero{
+  background:linear-gradient(135deg,#1a1a1a 0%,#2b0606 100%);
+  border-radius:24px;padding:2.5rem;margin-bottom:1.5rem;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;
+}
+.price-hero .ph-label{font-size:12px;font-weight:700;color:rgba(255,255,255,.55);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.4rem}
+.price-hero .ph-from{font-size:14px;color:rgba(255,255,255,.4);text-decoration:line-through;margin-bottom:.15rem}
+.price-hero .ph-val{font-family:Sora,sans-serif;font-size:clamp(36px,5vw,52px);font-weight:900;color:#fff;letter-spacing:-.03em}
+.price-hero .ph-sub{font-size:14px;color:rgba(255,255,255,.55);margin-top:.25rem}
+.price-hero .ph-badge{
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+  border-radius:14px;padding:1rem 1.25rem;text-align:center;
+}
+.price-hero .ph-badge .pbl{font-size:11px;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.25rem;font-weight:700}
+.price-hero .ph-badge .pbv{font-family:Sora,sans-serif;font-size:22px;font-weight:800;color:#fff}
+.price-hero .ph-badge .pbs{font-size:11px;color:rgba(255,255,255,.45)}
+
+.price-items{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+@media(max-width:580px){.price-items{grid-template-columns:1fr}}
+.pi{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:1.4rem 1.6rem}
+.pi .pil{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.35rem}
+.pi .piv{font-family:Sora,sans-serif;font-size:26px;font-weight:800;color:var(--ink)}
+.pi .pis{font-size:12px;color:var(--muted);margin-top:.2rem}
+.pi.vista{border-color:#86efac;background:var(--green-bg)}
+.pi.vista .piv{color:var(--green)}
+
+.includes-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+@media(max-width:560px){.includes-grid{grid-template-columns:1fr}}
+.inc{display:flex;align-items:center;gap:.6rem;font-size:14px;color:var(--ink);padding:.5rem 0;border-bottom:1px solid var(--soft)}
+.inc:last-child,.inc:nth-last-child(2){border-bottom:none}
+.inc::before{content:'✓';color:var(--red);font-weight:700;font-size:12px;flex-shrink:0;width:18px;height:18px;background:#fdeaea;border-radius:50%;display:flex;align-items:center;justify-content:center;line-height:1}
+.note{background:#fff8f0;border:1px solid #f5d5b0;border-radius:12px;padding:1rem 1.2rem;font-size:13px;color:#7d4b10;margin-top:1.25rem}
+.note strong{color:#a05a0a}
+
+/* ── ROI ── */
+.roi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:2rem 0 0}
+@media(max-width:700px){.roi-grid{grid-template-columns:1fr}}
+.roi-card{border-radius:18px;padding:1.4rem 1.6rem;border:1px solid var(--line);background:var(--white)}
+.roi-card:nth-child(3){background:var(--green-bg);border-color:#86efac}
+.roi-card h3{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:.75rem;display:flex;align-items:center;gap:.4rem}
+.roi-card:nth-child(3) h3{color:var(--green)}
+.roi-row{display:flex;justify-content:space-between;align-items:center;padding:.35rem 0;border-bottom:1px solid var(--line);font-size:13px;gap:.75rem}
+.roi-row:last-child{border-bottom:none}
+.roi-row .rv{font-weight:700;color:var(--ink);text-align:right;white-space:nowrap}
+.roi-card:nth-child(3) .roi-row{border-color:#bbf7d0;color:var(--green)}
+.roi-card:nth-child(3) .rv{color:var(--green)}
+.big-quote{
+  background:linear-gradient(135deg,#0d0d0d,#1c0404);
+  border-radius:20px;padding:2rem 2.25rem;margin-top:1.5rem;
+}
+.big-quote p{font-size:17px;font-weight:600;color:#fff;line-height:1.65;max-width:680px}
+.big-quote p em{font-style:normal;color:var(--red2)}
+
+/* ── PRÓXIMOS PASSOS ── */
+.steps-bg{background:var(--white)}
+.steps-list{display:flex;flex-direction:column;gap:0;margin-top:1.75rem;position:relative}
+.steps-list::before{
+  content:'';position:absolute;left:22px;top:0;bottom:0;width:2px;
+  background:linear-gradient(to bottom,var(--red),rgba(227,4,10,.1));
+}
+.step-item{display:flex;gap:1.25rem;padding:1.25rem 0;position:relative}
+.step-num{
+  width:44px;height:44px;border-radius:50%;background:var(--red);color:#fff;
+  font-family:Sora,sans-serif;font-weight:800;font-size:14px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;
+  box-shadow:0 4px 14px rgba(227,4,10,.4);
+}
+.step-body{padding-top:8px}
+.step-body strong{font-size:15px;font-weight:700;color:var(--ink);display:block;margin-bottom:.25rem}
+.step-body span{font-size:13px;color:var(--muted);line-height:1.55}
+
+/* ── FOOTER CTA ── */
+.footer-cta{
+  background:linear-gradient(150deg,#0d0d0d 0%,#1c0404 60%,#2b0606 100%);
+  text-align:center;padding:5rem 1.5rem;
+}
+.footer-cta h2{font-size:clamp(26px,4vw,40px);font-weight:900;color:#fff;margin-bottom:.75rem}
+.footer-cta p{font-size:16px;color:rgba(255,255,255,.65);max-width:480px;margin:0 auto 2rem;line-height:1.6}
+.footer-cta .btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:var(--red);color:#fff;font-weight:700;font-size:16px;
+  padding:1rem 2.5rem;border-radius:32px;
+  box-shadow:0 8px 32px rgba(227,4,10,.45);
+  transition:transform .2s,box-shadow .2s;
+}
+.footer-cta .btn:hover{transform:translateY(-2px);box-shadow:0 14px 44px rgba(227,4,10,.55)}
+.footer-note{font-size:12px;color:rgba(255,255,255,.35);margin-top:1.25rem}
+
+/* ── ANIMATIONS ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s var(--ease),transform .65s var(--ease)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+.reveal-delay-4{transition-delay:.4s}
+</style>
+</head>
+<body>
+
+<!-- PROGRESS BAR -->
+<div id="prog"></div>
+
+<!-- TOP NAV -->
+<header class="topnav">
+  <div class="logo">V4 <span>Company</span> × Splendor</div>
+  <nav>
+    <a href="#diagnostico">Diagnóstico</a>
+    <a href="#metodologia">Metodologia</a>
+    <a href="#zapfirst">ZapFirst</a>
+    <a href="#investimento">Investimento</a>
+    <a href="#proximos">Próximos Passos</a>
+  </nav>
+  <a href="#investimento" class="cta-mini">Ver proposta →</a>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="hero-tag"><span></span> Proposta estratégica · 3 meses · Confidencial</div>
+      <h1>Transformar o WhatsApp da Splendor em uma <em>máquina de vendas</em> previsível.</h1>
+      <p class="hero-sub">Vocês já trazem o lead — indicação, urgência e a base histórica. O que falta é processo no WhatsApp: catálogo, scripts, CRM e reativação. Sem depender do Cláudio em cada fechamento.</p>
+      <a href="#diagnostico" class="hero-cta">
+        Ver diagnóstico
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <div>
+      <div class="hero-card">
+        <h3>Splendor Elétrica e Iluminações</h3>
+        <div class="kpi-grid">
+          <div class="kpi"><div class="val count-up" data-target="41" data-prefix="R$ " data-suffix=" mil">R$ 0</div><div class="lbl">Faturamento mensal real</div></div>
+          <div class="kpi"><div class="val count-up" data-target="1000" data-suffix="+">0</div><div class="lbl">Contatos na base</div></div>
+          <div class="kpi"><div class="val">6–10</div><div class="lbl">Novos clientes / mês</div></div>
+          <div class="kpi"><div class="val">100%</div><div class="lbl">Aquisição por indicação</div></div>
+        </div>
+        <div class="hero-award">
+          <div class="ico">🎯</div>
+          <p><strong>Você traz o lead. A gente garante que o WhatsApp converte.</strong>Ideal para quem já vive de indicação — e precisa de processo, não de mais mídia.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIAGNÓSTICO -->
+<section class="diag-bg" id="diagnostico">
+  <div class="inner">
+    <div class="reveal">
+      <div class="slabel">Diagnóstico estratégico</div>
+      <h2 class="stitle">A operação entrega. O comercial ainda gira no Cláudio.</h2>
+      <p class="sdesc">A Splendor já resolve residencial, industrial e offshore com a mesma equipe. O gargalo não é serviço — é vender sem funil, sem CRM e com o fechamento centralizado no fundador.</p>
+    </div>
+    <div class="gap-grid" style="margin-top:1.75rem">
+      <div class="gap-card reveal reveal-delay-1">
+        <div class="gap-num">01</div>
+        <div class="gap-tag tag-red">Gargalo crítico</div>
+        <h3>100% dependente de indicação</h3>
+        <p>Toda a entrada passa pelo relacionamento pessoal do Cláudio. Site fora do ar, sem Google Meu Negócio, Instagram sem estratégia. Quem busca eletricista na Região dos Lagos não encontra a Splendor — encontra o concorrente.</p>
+      </div>
+      <div class="gap-card reveal reveal-delay-2">
+        <div class="gap-num">02</div>
+        <div class="gap-tag tag-red">Gargalo crítico</div>
+        <h3>Cláudio fecha tudo — e trava a escala</h3>
+        <p>“É ele que vai no cliente, é ele que fecha, é ele que dá desconto, é ele que faz tudo.” Stephanie já entrou no comercial, mas sem alçada, script nem funil. Cada venda ainda depende do dono.</p>
+      </div>
+      <div class="gap-card reveal reveal-delay-1">
+        <div class="gap-num">03</div>
+        <div class="gap-tag tag-orange">Gargalo operacional</div>
+        <h3>WhatsApp sem processo comercial</h3>
+        <p>Atendimento, orçamento e negociação no chat — sem pipeline, SLA ou motivo de perda. Agenda de papel. Orçamentos que não fecham desaparecem. Nenhuma conversão é medida hoje.</p>
+      </div>
+      <div class="gap-card reveal reveal-delay-2">
+        <div class="gap-num">04</div>
+        <div class="gap-tag tag-orange">Gargalo de receita</div>
+        <h3>Base de 1.000+ contatos parada</h3>
+        <p>Centenas a mais de mil contatos nunca foram reativados com ferramenta formal. Em agosto, Stephanie já reativou ~10 inativos pelo WhatsApp — inclusive um parado há 2 anos. O ouro está na base. Falta régua.</p>
+      </div>
+    </div>
+    <div class="highlight-box reveal">
+      <div style="font-size:32px">🎯</div>
+      <div class="hb-text">
+        <strong>A solução é direta: estruturar o canal que já vende.</strong>
+        Vocês já têm lead de indicação e uma base histórica. O WhatsApp só precisa de processo, catálogo, CRM e reativação. É isso que o ZapFirst entrega em 3 meses — sem social, sem mídia extra.
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- METODOLOGIA -->
+<section id="metodologia">
+  <div class="inner">
+    <div class="reveal">
+      <div class="slabel">Metodologia ZapFirst</div>
+      <h2 class="stitle">3P-IA: a sequência que garante resultado real.</h2>
+      <p class="sdesc">A ordem importa. Antes de qualquer automação, estruturamos produto, processo e pessoas. A IA entra somente depois que a base humana está sólida — colocar IA em cima de caos é garantia de fracasso.</p>
+    </div>
+    <div class="method-steps">
+      <div class="ms reveal reveal-delay-1">
+        <div class="mn">P1</div>
+        <div class="badge">Primeiro</div>
+        <h3>Produto</h3>
+        <p>Catálogo claro: residencial, industrial, offshore e materiais elétricos. Oferta, diagnóstico e precificação definidos. Sem produto bem descrito, nenhum processo funciona.</p>
+      </div>
+      <div class="ms reveal reveal-delay-2">
+        <div class="mn">P2</div>
+        <div class="badge">Segundo</div>
+        <h3>Processo</h3>
+        <p>Fluxo do primeiro WhatsApp ao fechamento. Scripts por etapa, SLA de resposta, motivo de perda registrado. Stephanie opera o funil — o Cláudio sai do meio.</p>
+      </div>
+      <div class="ms reveal reveal-delay-3">
+        <div class="mn">P3</div>
+        <div class="badge">Terceiro</div>
+        <h3>Pessoas</h3>
+        <p>Time comercial treinado com playbook editável. Cada atendimento sabe o que responder, quando escalar para o técnico e como fechar o orçamento.</p>
+      </div>
+      <div class="ms reveal reveal-delay-4">
+        <div class="mn">IA</div>
+        <div class="badge" style="background:var(--green)">Só depois</div>
+        <h3>Inteligência Artificial</h3>
+        <p>SDR de IA 24/7 faz o primeiro atendimento, qualifica urgência vs. obra e dispara réguas de reativação na base. Entra no mês 3 — quando a base está sólida.</p>
+      </div>
+    </div>
+    <div class="timeline-strip reveal" style="margin-top:2rem">
+      <div class="tl-cell">
+        <div class="tl-mes">Mês 1</div>
+        <div class="tl-fase">Setup Digital</div>
+        <div class="tl-items">Google Meu Negócio<br>Instagram com CTA<br>LP / site de conversão<br>WhatsApp Business</div>
+      </div>
+      <div class="tl-cell">
+        <div class="tl-mes">Mês 2</div>
+        <div class="tl-fase">Produto &amp; Processo</div>
+        <div class="tl-items">Catálogo + PIX<br>Scripts por etapa<br>Fluxo documentado<br>Treinamento do time</div>
+      </div>
+      <div class="tl-cell">
+        <div class="tl-mes" style="color:var(--green)">Mês 3</div>
+        <div class="tl-fase">Pessoas, CRM e IA</div>
+        <div class="tl-items">CRM Kommo live<br>Réguas de reativação<br>SDR IA ativado<br>Relatório + diagnóstico</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ZAPFIRST ENTREGAS -->
+<section id="zapfirst">
+  <div class="inner">
+    <div class="reveal">
+      <div class="slabel">ZapFirst — Plano Completo</div>
+      <h2 class="stitle">10 entregas concretas. Uma máquina funcionando.</h2>
+      <p class="sdesc">Cada entrega é pensada para converter o lead que vocês já têm — da indicação e da base histórica — até o orçamento fechado e pago no WhatsApp.</p>
+    </div>
+    <div class="del-grid reveal" style="margin-top:1.5rem">
+      <div class="del">
+        <div class="ico">📍</div>
+        <h4>Setup digital completo</h4>
+        <p>Google Meu Negócio, Instagram com CTA e LP/site de conversão. Quem busca serviço elétrico na Região dos Lagos passa a encontrar a Splendor.</p>
+      </div>
+      <div class="del">
+        <div class="ico">💬</div>
+        <h4>WhatsApp Business</h4>
+        <p>Canal estruturado: perfil profissional, etiquetas, respostas rápidas e jornada do orçamento sem agenda de papel.</p>
+      </div>
+      <div class="del">
+        <div class="ico">📦</div>
+        <h4>Catálogo + PIX</h4>
+        <p>Serviços e materiais fotografados, precificados e com link de cobrança no chat. Cliente vê, escolhe e paga sem sair do WhatsApp.</p>
+      </div>
+      <div class="del">
+        <div class="ico">📝</div>
+        <h4>Scripts de atendimento</h4>
+        <p>Roteiros para recepção, qualificação, proposta, objeções — inclusive o “conserto do conserto” — fechamento e pós-venda.</p>
+      </div>
+      <div class="del">
+        <div class="ico">🔄</div>
+        <h4>Fluxo comercial</h4>
+        <p>Processo do primeiro contato ao fechamento, com SLAs e motivo de perda. Stephanie opera. Cláudio sai do loop de cada venda.</p>
+      </div>
+      <div class="del">
+        <div class="ico">🎓</div>
+        <h4>Treinamento do time</h4>
+        <p>Capacitação comercial + playbook editável permanente. Cada atendimento opera com processo, não com improviso.</p>
+      </div>
+      <div class="del">
+        <div class="ico">📊</div>
+        <h4>CRM Kommo</h4>
+        <p>Pipeline integrado ao WhatsApp: etapas do funil, tags por tipo de serviço (residencial, industrial, offshore) e dono de cada card.</p>
+      </div>
+      <div class="del">
+        <div class="ico">🔁</div>
+        <h4>Réguas de reativação</h4>
+        <p>Recompra e reativação da base de 1.000+ contatos. O que Stephanie já fez na mão em agosto vira rotina automática.</p>
+      </div>
+      <div class="del">
+        <div class="ico">🤖</div>
+        <h4>SDR de IA 24/7</h4>
+        <p>Primeiro atendimento automático, qualificação de urgência vs. obra e encaminhamento para o comercial. Entra no mês 3.</p>
+      </div>
+      <div class="del">
+        <div class="ico">📋</div>
+        <h4>Relatório + diagnóstico</h4>
+        <p>Relatório final do projeto e diagnóstico de maturidade comercial — o mapa do que já roda e do próximo passo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INVESTIMENTO -->
+<section class="invest-bg" id="investimento">
+  <div class="inner">
+    <div class="reveal">
+      <div class="slabel">Investimento</div>
+      <h2 class="stitle">ZapFirst Completo · 3 meses.</h2>
+      <p class="sdesc">A máquina completa. Vocês trazem o lead — a gente garante que o WhatsApp converte. Sem social mídia neste plano.</p>
+    </div>
+
+    <div class="price-hero reveal" style="margin-top:1.75rem">
+      <div class="ph-left">
+        <div class="ph-label">Condição no cartão · projeto de 3 meses</div>
+        <div class="ph-from">de R$ 30.000</div>
+        <div class="ph-val">12× R$ 1.666,67</div>
+        <div class="ph-sub">no cartão · implementação + IA + CRM</div>
+      </div>
+      <div>
+        <div class="ph-badge">
+          <div class="pbl">À vista</div>
+          <div class="pbv">R$ 18.000</div>
+          <div class="pbs">economia de R$ 12.000</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="price-items reveal">
+      <div class="pi">
+        <div class="pil">No cartão</div>
+        <div class="piv">12× R$ 1.666,67</div>
+        <div class="pis">projeto de 3 meses · total R$ 20.000</div>
+      </div>
+      <div class="pi vista">
+        <div class="pil">À vista</div>
+        <div class="piv">R$ 18.000</div>
+        <div class="pis">pagamento único · de R$ 30.000</div>
+      </div>
+    </div>
+
+    <div class="includes-grid reveal">
+      <div class="inc">Setup completo — GMB, Instagram e LP/site</div>
+      <div class="inc">WhatsApp Business estruturado</div>
+      <div class="inc">Catálogo de produtos + PIX integrado</div>
+      <div class="inc">Scripts de atendimento (todas as etapas)</div>
+      <div class="inc">Fluxo comercial documentado</div>
+      <div class="inc">Treinamento do time</div>
+      <div class="inc">CRM Kommo configurado</div>
+      <div class="inc">Réguas de recompra e reativação</div>
+      <div class="inc">SDR de Inteligência Artificial</div>
+      <div class="inc">Relatório final + diagnóstico de maturidade</div>
+    </div>
+
+    <div class="roi-grid reveal">
+      <div class="roi-card">
+        <h3>Hoje</h3>
+        <div class="roi-row"><span>Faturamento</span><span class="rv">R$ 40–41 mil/mês</span></div>
+        <div class="roi-row"><span>Novos clientes</span><span class="rv">6–10 / mês</span></div>
+        <div class="roi-row"><span>Base ativa</span><span class="rv">15–20 clientes</span></div>
+        <div class="roi-row"><span>Canal de entrada</span><span class="rv">100% indicação</span></div>
+      </div>
+      <div class="roi-card">
+        <h3>O que o ZapFirst destrava</h3>
+        <div class="roi-row"><span>Orçamentos perdidos</span><span class="rv">passam a ter motivo</span></div>
+        <div class="roi-row"><span>Base 1.000+ contatos</span><span class="rv">entra em régua</span></div>
+        <div class="roi-row"><span>Stephanie no comercial</span><span class="rv">opera com processo</span></div>
+        <div class="roi-row"><span>Google / LP</span><span class="rv">passa a captar sozinho</span></div>
+      </div>
+      <div class="roi-card">
+        <h3>✓ O investimento se paga</h3>
+        <div class="roi-row"><span>1 obra / contrato</span><span class="rv">até R$ 55 mil</span></div>
+        <div class="roi-row"><span>Projeto ZapFirst à vista</span><span class="rv">R$ 18.000</span></div>
+        <div class="roi-row"><span>1 contrato extra</span><span class="rv">paga o projeto 3×</span></div>
+      </div>
+    </div>
+
+    <div class="big-quote reveal">
+      <p>Stephanie já reativou <em>~10 clientes inativos</em> em um mês — inclusive um parado há 2 anos. Com régua, CRM e script, isso deixa de ser exceção e vira operação.</p>
+    </div>
+
+    <div class="note reveal">
+      <strong>Fora deste plano:</strong> Social mídia e mídia paga não estão inclusos. O budget atual de até R$ 200/mês não justifica escala de ads agora — o ZapFirst prioriza orgânico, Google Meu Negócio e reativação da base. Se no futuro quiserem Google Ads ou Meta Ads, o investimento nas plataformas é pago diretamente pelo cliente.
+    </div>
+  </div>
+</section>
+
+<!-- PRÓXIMOS PASSOS -->
+<section class="steps-bg" id="proximos">
+  <div class="inner">
+    <div class="reveal">
+      <div class="slabel">Próximos passos</div>
+      <h2 class="stitle">Começamos na semana que vem.</h2>
+      <p class="sdesc">A Splendor já tem serviço, equipe e lead de indicação. O que falta é velocidade no comercial — cada orçamento sem follow-up é uma obra que fica no concorrente.</p>
+    </div>
+    <div class="steps-list reveal">
+      <div class="step-item">
+        <div class="step-num">01</div>
+        <div class="step-body">
+          <strong>Proposta aprovada + contrato assinado</strong>
+          <span>Confirmação da condição de pagamento (12× no cartão ou R$ 18.000 à vista) e assinatura do acordo de serviço de 3 meses.</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">02</div>
+        <div class="step-body">
+          <strong>Kick-off estratégico</strong>
+          <span>Reunião com o time V4 + Cláudio, Elenice e Stephanie: acessos, canais, catálogo de serviços e onboarding comercial. Alinhamento de cronograma e responsáveis.</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">03</div>
+        <div class="step-body">
+          <strong>Sprint 1 · Setup digital (semanas 1–2)</strong>
+          <span>Google Meu Negócio, Instagram com CTA, LP/site e WhatsApp Business configurados. A Splendor volta a aparecer para quem já está buscando.</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">04</div>
+        <div class="step-body">
+          <strong>Sprint 2 · Produto &amp; Processo (mês 1–2)</strong>
+          <span>Catálogo + PIX, scripts por etapa, fluxo comercial documentado e treinamento do time. Stephanie passa a operar com processo — não com improviso.</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">05</div>
+        <div class="step-body">
+          <strong>Sprint 3 · CRM, réguas e IA (mês 2–3)</strong>
+          <span>Kommo no ar, réguas de recompra e reativação da base, SDR de IA 24/7. Relatório final e diagnóstico de maturidade no encerramento dos 3 meses.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER CTA -->
+<section class="footer-cta">
+  <h2>Pronto para fechar?</h2>
+  <p>Cada orçamento sem follow-up é uma obra que vai para o concorrente. A Splendor já tem a operação — agora é só ligar a máquina no WhatsApp.</p>
+  <a href="https://wa.me/5551999999999?text=Quero+fechar+a+proposta+ZapFirst+Splendor" class="btn" target="_blank">
+    Falar com a V4 Company
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+  <div class="footer-note">Proposta válida por 7 dias · V4 Company × Splendor Elétrica · Confidencial</div>
+</section>
+
+<script>
+const prog = document.getElementById('prog');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  prog.style.width = (window.scrollY / h * 100) + '%';
+});
+
+const navLinks = document.querySelectorAll('.topnav nav a');
+const sections = Array.from(document.querySelectorAll('section[id]'));
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id);
+      });
+    }
+  });
+}, { rootMargin: '-40% 0px -55% 0px' });
+sections.forEach(s => obs.observe(s));
+
+const reveals = document.querySelectorAll('.reveal');
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
+}, { rootMargin: '0px 0px -80px 0px', threshold: 0.1 });
+reveals.forEach(r => ro.observe(r));
+
+function countUp(el) {
+  const target = +el.dataset.target;
+  const prefix = el.dataset.prefix || '';
+  const suffix = el.dataset.suffix || '';
+  const dur = 1800;
+  const start = performance.now();
+  function frame(now) {
+    const t = Math.min((now - start) / dur, 1);
+    const ease = 1 - Math.pow(1 - t, 3);
+    const val = Math.round(ease * target);
+    el.textContent = prefix + val.toLocaleString('pt-BR') + suffix;
+    if (t < 1) requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+}
+const counters = document.querySelectorAll('.count-up');
+const co = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { countUp(e.target); co.unobserve(e.target); } });
+}, { threshold: 0.5 });
+counters.forEach(c => co.observe(c));
+</script>
+</body>
+</html>
