@@ -1,0 +1,1066 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <title>Fertisul × V4 · EC + Growth + SEO/GEO</title>
+  <!-- Standalone: abrir no Chrome. Depois do merge: https://sarapizzico-hue.github.io/Sara/proposta-fertisul.html -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* Layout: sistema visual Colli (ABC71 unificado).
+       Informação: arco Bodega + EC (fluxo 5 semanas) + Growth padrão + SEO/GEO.
+       Conta: Fertisul Fertilizantes · EE já feita · EC + Growth + SEO/GEO. */
+    :root {
+      --cover-a: #90191e; --cover-b: #7c191d; --cover-c: #65181c;
+      --wine: #290c0c; --wine-2: #210909; --wine-3: #351010;
+      --white: #fffaf8; --muted: #c9b8b5; --muted-2: #8f7774;
+      --line: rgba(255,255,255,.12);
+      --red: #ef3340; --red-soft: #ff6b73; --amber: #f4b942; --green: #58d68d;
+      --panel: rgba(14,14,16,.88);
+      --shadow: 0 20px 55px rgba(0,0,0,.26);
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 100%; height: 100%; overflow: hidden; background: #080808; color: var(--white);
+      font-family: Montserrat, Arial, sans-serif; -webkit-font-smoothing: antialiased;
+    }
+    button, a { font: inherit; color: inherit; }
+    .skip-link { position: fixed; left: 16px; top: -80px; z-index: 100; padding: 10px 14px; background: #fff; color: #111; border-radius: 8px; font-weight: 700; }
+    .skip-link:focus { top: 16px; }
+    .stage { position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, #2a1010 0, #0f0505 74%); }
+    .deck {
+      position: absolute; left: 50%; top: 50%; width: 1600px; height: 900px;
+      transform-origin: center center; overflow: hidden; background: var(--wine); box-shadow: var(--shadow);
+    }
+    .slide {
+      position: absolute; inset: 0; width: 1600px; height: 900px;
+      display: flex; flex-direction: column; visibility: hidden; opacity: 0; pointer-events: none;
+      background:
+        linear-gradient(rgba(255,255,255,.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.028) 1px, transparent 1px),
+        radial-gradient(circle at 86% 12%, rgba(150,30,36,.26), transparent 31%),
+        linear-gradient(135deg, var(--wine-3), var(--wine) 45%, var(--wine-2));
+      background-size: 80px 80px, 80px 80px, auto, auto;
+      transition: opacity .3s ease;
+    }
+    .slide.active { visibility: visible; opacity: 1; pointer-events: auto; }
+    .slide.cover {
+      background:
+        linear-gradient(rgba(255,255,255,.026) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.026) 1px, transparent 1px),
+        radial-gradient(circle at 78% 24%, rgba(255,255,255,.08), transparent 26%),
+        linear-gradient(122deg, var(--cover-a), var(--cover-b) 54%, var(--cover-c));
+      background-size: 100px 100px, 100px 100px, auto, auto;
+    }
+    .topbar { height: 7px; flex: 0 0 auto; background: linear-gradient(90deg, var(--red), rgba(239,51,64,.08) 72%); }
+    .slide.cover .topbar { background: linear-gradient(90deg, #fff, rgba(255,255,255,.08) 68%); }
+    .page { height: 851px; padding: 43px 66px 22px; display: flex; flex-direction: column; position: relative; overflow: hidden; }
+    .slide-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; margin-bottom: 22px; flex: 0 0 auto; }
+    .head-copy { max-width: 1260px; }
+    .eyebrow {
+      display: flex; align-items: center; gap: 12px; color: var(--red-soft);
+      font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .2em; margin-bottom: 11px;
+    }
+    .eyebrow::before { content: ""; width: 34px; height: 3px; border-radius: 2px; background: currentColor; }
+    h1, h2 { font-weight: 800; letter-spacing: -.035em; line-height: 1.06; }
+    h1 { font-size: 66px; max-width: 1040px; }
+    h2 { font-size: 40px; max-width: 1300px; }
+    h1 em, h2 em { color: var(--red-soft); font-style: normal; }
+    .sub { color: var(--muted); font-size: 17px; line-height: 1.5; margin-top: 12px; max-width: 1120px; }
+    .section-chip {
+      display: flex; align-items: center; gap: 9px; color: var(--muted); font-size: 12px; font-weight: 600;
+      letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; padding-top: 5px;
+    }
+    .section-chip b { font-family: "JetBrains Mono", monospace; font-size: 22px; color: var(--red-soft); }
+    .content { flex: 1; min-height: 0; position: relative; }
+    .footer {
+      height: 42px; flex: 0 0 auto; border-top: 1px solid rgba(255,255,255,.11);
+      display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 24px;
+      padding: 0 66px; color: var(--muted-2); font-size: 11px; background: rgba(20,5,5,.5);
+    }
+    .footer .count { font-family: "JetBrains Mono", monospace; color: var(--muted); min-width: 60px; text-align: right; }
+    .v4-mark {
+      width: 42px; height: 42px; border: 1.5px solid rgba(255,255,255,.85); display: grid; place-items: center;
+      font-weight: 800; font-size: 14px; letter-spacing: -.04em;
+    }
+    .card {
+      background: linear-gradient(160deg, rgba(255,255,255,.075), rgba(255,255,255,.035));
+      border: 1px solid var(--line); border-radius: var(--radius);
+    }
+    .callout {
+      border-left: 4px solid var(--red); background: rgba(239,51,64,.07);
+      padding: 13px 18px; border-radius: 0 12px 12px 0; color: #f9eae8; font-size: 15px; line-height: 1.45;
+    }
+    .ph { color: #ffc2bd; font-style: italic; font-weight: 600; }
+
+    /* Capa */
+    .cover .page { padding: 70px 78px 30px; }
+    .cover-lockup { display: flex; align-items: center; gap: 18px; font-size: 17px; font-weight: 700; letter-spacing: .04em; color: rgba(255,255,255,.82); }
+    .cover-lockup .sep { width: 1px; height: 28px; background: rgba(255,255,255,.28); }
+    .hero-grid { display: grid; grid-template-columns: minmax(0,1fr) 430px; gap: 80px; align-items: center; flex: 1; }
+    .hero-kicker { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: .25em; color: rgba(255,255,255,.72); margin-bottom: 20px; }
+    .hero-title { font-size: 64px; max-width: 980px; }
+    .hero-title em { color: #ffd9d5; }
+    .hero-sub { font-size: 19px; color: rgba(255,255,255,.76); line-height: 1.55; max-width: 760px; margin-top: 22px; }
+    .cover-art { height: 470px; position: relative; display: grid; place-items: center; }
+    .cover-art svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .cover-mark {
+      position: relative; width: 230px; height: 230px; border: 1px solid rgba(255,255,255,.24); border-radius: 50%;
+      display: grid; place-items: center; background: rgba(255,255,255,.035);
+      box-shadow: 0 0 0 34px rgba(255,255,255,.025), 0 0 0 68px rgba(255,255,255,.018);
+    }
+    .cover-mark::before, .cover-mark::after { content: ""; position: absolute; background: rgba(255,255,255,.3); }
+    .cover-mark::before { width: 310px; height: 1px; }
+    .cover-mark::after { width: 1px; height: 310px; }
+    .cover-mark b { font-family: "JetBrains Mono", monospace; font-size: 42px; letter-spacing: -.08em; }
+    .cover-mark span { position: absolute; bottom: 48px; font-size: 11px; text-transform: uppercase; letter-spacing: .2em; color: rgba(255,255,255,.6); }
+    .cover-meta { display: flex; gap: 28px; margin-top: 42px; color: rgba(255,255,255,.67); font-size: 12px; text-transform: uppercase; letter-spacing: .12em; flex-wrap: wrap; }
+    .cover-meta span { display: flex; align-items: center; gap: 10px; }
+    .cover-meta span::before { content: ""; width: 22px; height: 2px; background: rgba(255,255,255,.48); }
+
+    /* Divisor de ato */
+    .slide.divider {
+      background:
+        linear-gradient(rgba(255,255,255,.024) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.024) 1px, transparent 1px),
+        radial-gradient(circle at 78% 50%, rgba(239,51,64,.25), transparent 30%),
+        linear-gradient(122deg, #7e171b, #541115 58%, #25090b);
+      background-size: 100px 100px, 100px 100px, auto, auto;
+    }
+    .divider .page { padding: 78px; justify-content: center; }
+    .divider-lockup { position: absolute; top: 54px; left: 78px; display: flex; align-items: center; gap: 16px; color: rgba(255,255,255,.7); font-size: 14px; font-weight: 700; }
+    .divider-num { font-family: "JetBrains Mono", monospace; font-size: 140px; line-height: 1; color: rgba(255,255,255,.12); position: absolute; right: 95px; top: 110px; }
+    .divider-kicker { font-size: 14px; text-transform: uppercase; letter-spacing: .28em; color: #ffc2bd; font-weight: 700; margin-bottom: 22px; }
+    .divider-title { font-size: 68px; max-width: 1080px; }
+    .divider-title em { color: #ffd8d4; }
+    .divider-sub { font-size: 20px; line-height: 1.55; color: rgba(255,255,255,.72); max-width: 860px; margin-top: 24px; }
+    .divider-path { display: flex; align-items: center; gap: 0; margin-top: 55px; width: 1080px; }
+    .divider-path span { position: relative; flex: 1; padding-top: 24px; font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: rgba(255,255,255,.66); }
+    .divider-path span::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: rgba(255,255,255,.18); }
+    .divider-path span::after { content: ""; position: absolute; left: 0; top: -5px; width: 12px; height: 12px; border-radius: 50%; background: #ff6b73; box-shadow: 0 0 0 6px rgba(255,107,115,.12); }
+
+    /* Diagnóstico */
+    .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+    .kpi { padding: 16px 18px; border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.04); }
+    .kpi strong { display: block; font-family: "JetBrains Mono", monospace; font-size: 22px; color: var(--red-soft); font-variant-numeric: tabular-nums; }
+    .kpi span { display: block; margin-top: 6px; font-size: 12px; line-height: 1.35; color: var(--muted); }
+    .map-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .map-item { display: grid; grid-template-columns: 48px 1fr; gap: 12px; padding: 14px 16px; align-items: start; }
+    .map-item .n { font-family: "JetBrains Mono", monospace; font-size: 13px; font-weight: 700; color: var(--red-soft); padding-top: 2px; }
+    .map-item h3 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .map-item p { font-size: 13px; line-height: 1.4; color: var(--muted); }
+
+    /* Produto */
+    .roles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+    .role { padding: 16px 16px 18px; }
+    .role .label { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--red-soft); margin-bottom: 8px; }
+    .role h3 { font-size: 16px; margin-bottom: 6px; }
+    .role p { font-size: 12.5px; line-height: 1.4; color: var(--muted); }
+
+    /* Rotina Colli */
+    .cadence { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .cad { padding: 16px 16px 18px; min-height: 268px; }
+    .cad .dur { font-family: "JetBrains Mono", monospace; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--red-soft); margin-bottom: 10px; }
+    .cad h3 { font-size: 16px; margin-bottom: 8px; }
+    .cad p { font-size: 12.5px; line-height: 1.4; color: var(--muted); margin-bottom: 12px; }
+    .cad ul { list-style: none; }
+    .cad li { font-size: 12px; color: #e8d8d5; padding: 3px 0 3px 12px; position: relative; }
+    .cad li::before { content: "·"; position: absolute; left: 0; color: #fff; font-weight: 700; }
+    .internal {
+      margin-top: 14px; padding: 14px 18px; border: 1px solid var(--line); border-radius: 14px;
+      background: rgba(255,255,255,.04);
+    }
+    .internal h4 { font-size: 14px; margin-bottom: 6px; }
+    .internal p { font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      padding: 6px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted);
+    }
+
+    /* Ciclo */
+    .process { display: flex; align-items: stretch; gap: 0; margin-top: 8px; }
+    .stage-card { flex: 1; padding: 16px 14px; border: 1px solid var(--line); background: rgba(255,255,255,.04); }
+    .stage-card .n { font-family: "JetBrains Mono", monospace; color: var(--red-soft); font-size: 13px; font-weight: 700; }
+    .stage-card h3 { font-size: 16px; margin: 8px 0 6px; }
+    .stage-card p { font-size: 12.5px; line-height: 1.4; color: var(--muted); }
+    .process .arrow { flex: 0 0 28px; display: grid; place-items: center; color: var(--red-soft); font-size: 22px; }
+    .weeks { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+    .week { padding: 16px 14px 18px; min-height: 248px; }
+    .week .n { font-family: "JetBrains Mono", monospace; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--red-soft); margin-bottom: 8px; }
+    .week h3 { font-size: 16px; margin-bottom: 8px; }
+    .week ul { list-style: none; }
+    .week li { font-size: 12px; color: var(--muted); line-height: 1.4; padding: 2px 0 2px 12px; position: relative; }
+    .week li::before { content: "·"; position: absolute; left: 0; color: #fff; }
+
+    /* Entregáveis EC */
+    .deliver { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    .deliver article { padding: 16px 18px; }
+    .deliver h3 { font-size: 16px; margin-bottom: 10px; }
+    .deliver ul { list-style: none; }
+    .deliver li { font-size: 12.5px; color: var(--muted); line-height: 1.4; padding: 3px 0 3px 14px; position: relative; }
+    .deliver li::before { content: "·"; position: absolute; left: 0; color: #fff; font-weight: 700; }
+    .bonus-crm {
+      margin-top: 14px; padding: 16px 18px; border-radius: 14px;
+      border: 1px solid rgba(88,214,141,.38);
+      background: linear-gradient(160deg, rgba(88,214,141,.16), rgba(255,255,255,.04));
+      display: grid; grid-template-columns: 1fr auto; gap: 18px; align-items: center;
+    }
+    .bonus-crm .k { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--green); margin-bottom: 6px; }
+    .bonus-crm h3 { font-size: 18px; margin-bottom: 4px; }
+    .bonus-crm p { font-size: 13.5px; color: #e8f8ee; line-height: 1.45; }
+    .bonus-crm .stamp {
+      font-family: "JetBrains Mono", monospace; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--green); border: 1px solid rgba(88,214,141,.4); border-radius: 999px; padding: 10px 14px; white-space: nowrap;
+    }
+
+    /* SEO */
+    .seo-grid { display: grid; grid-template-columns: 1.4fr .6fr; gap: 14px; }
+    .inc, .exc { list-style: none; }
+    .inc li, .exc li { font-size: 13px; line-height: 1.4; color: var(--muted); padding: 5px 0 5px 22px; position: relative; }
+    .inc li strong, .exc li strong { color: #fff; font-weight: 650; }
+    .inc li::before { content: "✓"; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+    .exc li::before { content: "×"; position: absolute; left: 0; color: var(--red-soft); font-weight: 700; }
+    .exc-card {
+      border-color: rgba(239,51,64,.38);
+      background: linear-gradient(160deg, rgba(239,51,64,.12), rgba(255,255,255,.03));
+      padding: 18px 20px;
+    }
+    .exc-card h3 { font-size: 15px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+    .inc-card { padding: 18px 20px; }
+    .inc-card h3 { font-size: 16px; margin-bottom: 12px; }
+    .audience {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      padding: 7px 12px; border-radius: 8px; border-left: 3px solid var(--red); background: rgba(255,255,255,.05); color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    /* Fluxograma TO-BE */
+    .tobe { display: flex; flex-direction: column; align-items: stretch; gap: 0; }
+    .tobe-row { display: grid; gap: 12px; }
+    .tobe-row.two { grid-template-columns: 1fr 1fr; max-width: 920px; margin: 0 auto; width: 100%; }
+    .tobe-row.four { grid-template-columns: repeat(4, 1fr); }
+    .tobe-box { padding: 14px 16px; text-align: center; }
+    .tobe-box .who { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--red-soft); margin-bottom: 6px; }
+    .tobe-box h3 { font-size: 16px; margin-bottom: 4px; }
+    .tobe-box p { font-size: 12.5px; line-height: 1.4; color: var(--muted); }
+    .tobe-box.core {
+      max-width: 920px; margin: 0 auto; width: 100%;
+      border-color: rgba(88,214,141,.32);
+      background: linear-gradient(160deg, rgba(88,214,141,.12), rgba(255,255,255,.04));
+    }
+    .tobe-box.end {
+      max-width: 100%;
+      border-color: rgba(244,185,66,.34);
+      background: rgba(244,185,66,.08);
+    }
+    .tobe-join {
+      width: 2px; height: 18px; margin: 4px auto;
+      background: linear-gradient(rgba(255,107,115,.15), rgba(255,107,115,.7), rgba(255,107,115,.15));
+    }
+    .tobe-hbar { position: relative; height: 18px; margin: 0 12.5%; }
+    .tobe-hbar::before {
+      content: ""; position: absolute; left: 0; right: 0; top: 8px; height: 2px;
+      background: rgba(255,107,115,.35);
+    }
+    .lane { padding: 14px 14px 16px; min-height: 168px; }
+    .lane .who { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--red-soft); margin-bottom: 8px; }
+    .lane h3 { font-size: 15px; margin-bottom: 8px; }
+    .lane ul { list-style: none; }
+    .lane li { font-size: 12px; color: var(--muted); line-height: 1.4; padding: 2px 0 2px 12px; position: relative; }
+    .lane li::before { content: "·"; position: absolute; left: 0; color: #fff; }
+
+    /* Pronto */
+    .success-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .success-item { padding: 16px 18px; display: grid; grid-template-columns: 28px 1fr; gap: 12px; align-items: start; }
+    .success-item .n { font-family: "JetBrains Mono", monospace; color: var(--green); font-size: 14px; font-weight: 700; }
+    .success-item h3 { font-size: 15px; font-weight: 650; line-height: 1.35; }
+
+    /* Investimento */
+    .offers { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .offer { padding: 18px 20px; }
+    .offer.featured { border-color: rgba(88,214,141,.32); background: linear-gradient(160deg, rgba(88,214,141,.12), rgba(255,255,255,.04)); }
+    .offer .tag { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--red-soft); margin-bottom: 8px; }
+    .offer.featured .tag { color: var(--green); }
+    .offer h3 { font-size: 20px; margin-bottom: 6px; }
+    .offer .note { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+    .offer .was { font-family: "JetBrains Mono", monospace; font-size: 13px; color: var(--muted-2); text-decoration: line-through; }
+    .offer .now { font-family: "JetBrains Mono", monospace; font-size: 32px; font-weight: 700; margin: 6px 0 10px; }
+    .math { margin-top: 4px; }
+    .math-row {
+      display: flex; justify-content: space-between; gap: 12px;
+      font-size: 13px; color: var(--muted); padding: 6px 0;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    .math-row:last-child { border-bottom: none; }
+    .math-row strong { color: #fff; font-family: "JetBrains Mono", monospace; }
+    .math-row .ok { color: var(--green); }
+    .ee-band, .combo, .bands {
+      margin-top: 10px; padding: 12px 16px; border-radius: 12px;
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    }
+    .ee-band { border: 1px solid rgba(244,185,66,.34); background: rgba(244,185,66,.1); }
+    .ee-band .k { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--amber); }
+    .ee-band p { font-size: 13px; color: #f8e9df; margin-top: 4px; }
+    .ee-band .amt { font-family: "JetBrains Mono", monospace; font-size: 20px; color: var(--amber); white-space: nowrap; }
+    .combo { border: 1px solid rgba(88,214,141,.28); background: rgba(88,214,141,.08); }
+    .combo h3 { font-size: 16px; }
+    .combo p { font-size: 13px; color: var(--muted); margin-top: 4px; }
+    .combo .cond { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--green); }
+    .combo .fig { font-family: "JetBrains Mono", monospace; font-size: 26px; font-weight: 700; color: var(--green); }
+    .pay { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+    .pay span {
+      font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      padding: 6px 10px; border-radius: 999px; border: 1px solid rgba(88,214,141,.28); color: var(--green);
+    }
+
+    /* Chrome de sala */
+    .top-progress { position: fixed; z-index: 30; top: 0; left: 0; width: 100%; height: 4px; background: rgba(255,255,255,.12); }
+    .top-progress > span { display: block; height: 100%; width: 12%; background: linear-gradient(90deg, #a90009, var(--red), #ff4a53); transition: width .22s ease; }
+    .context-pill {
+      position: fixed; z-index: 30; top: max(16px, env(safe-area-inset-top)); left: max(16px, env(safe-area-inset-left));
+      display: flex; align-items: center; gap: 10px; max-width: calc(100vw - 32px);
+      padding: 9px 12px; border: 1px solid rgba(255,255,255,.16); border-radius: 999px;
+      background: var(--panel); backdrop-filter: blur(12px); font-size: 11px; letter-spacing: .04em;
+    }
+    .context-pill strong { font-size: 12px; text-transform: uppercase; letter-spacing: .12em; }
+    .context-pill span { color: #b9b9be; }
+    .block-nav {
+      position: fixed; z-index: 31; left: max(16px, env(safe-area-inset-left)); bottom: max(16px, env(safe-area-inset-bottom));
+      display: flex; gap: 6px; padding: 6px; border: 1px solid rgba(255,255,255,.16); border-radius: 14px;
+      background: var(--panel); backdrop-filter: blur(12px);
+    }
+    .block-nav button {
+      min-width: 44px; height: 38px; border: 0; border-radius: 9px; background: transparent;
+      color: #c9c9ce; font: 700 11px/1 Montserrat, Arial, sans-serif; cursor: pointer;
+    }
+    .block-nav button:hover, .block-nav button:focus-visible { background: rgba(255,255,255,.1); color: #fff; }
+    .block-nav button.is-active { background: var(--red); color: #fff; }
+    .global-nav {
+      position: fixed; z-index: 31; left: 50%; bottom: max(16px, env(safe-area-inset-bottom)); transform: translateX(-50%);
+      display: flex; align-items: center; gap: 8px; padding: 6px; border: 1px solid rgba(255,255,255,.16);
+      border-radius: 999px; background: var(--panel); backdrop-filter: blur(12px);
+    }
+    .global-nav button {
+      width: 42px; height: 42px; border: 0; border-radius: 50%; background: rgba(255,255,255,.08); color: #fff;
+      font: 600 19px/1 Arial, sans-serif; cursor: pointer;
+    }
+    .global-nav button:hover, .global-nav button:focus-visible { background: var(--red); }
+    .global-nav button:disabled { opacity: .28; cursor: not-allowed; }
+    .global-count { min-width: 82px; text-align: center; font: 700 12px/1.2 "JetBrains Mono", Consolas, monospace; letter-spacing: .08em; }
+    .utility {
+      position: fixed; z-index: 31; right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom));
+    }
+    .utility button {
+      min-height: 44px; padding: 0 14px; border: 1px solid rgba(255,255,255,.16); border-radius: 12px;
+      background: var(--panel); color: #fff; font: 700 11px/1 Montserrat, Arial, sans-serif; cursor: pointer;
+    }
+    .slide-dots { position: fixed; right: 18px; top: 50%; transform: translateY(-50%); z-index: 30; display: grid; gap: 8px; }
+    .slide-dots button { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 999px; background: rgba(255,255,255,.24); cursor: pointer; }
+    .slide-dots button.active { height: 28px; background: var(--red); }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+    @media (max-width: 760px) {
+      .context-pill span { display: none; }
+      .utility { display: none; }
+      .global-nav { bottom: 72px; }
+      .block-nav { left: 50%; transform: translateX(-50%); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .slide, .top-progress > span { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#globalNav">Ir para a navegação</a>
+  <div class="top-progress" aria-hidden="true"><span id="globalProgress"></span></div>
+  <div class="context-pill" aria-live="polite"><strong id="blockLabel">Narrativa</strong><span id="slideTitle">Capa</span></div>
+
+  <div class="stage">
+    <main class="deck" id="deck" aria-label="Proposta Fertisul × V4 · EC + Growth + SEO/GEO">
+
+      <!-- 1 CAPA -->
+      <section class="slide cover active" data-act="narrativa" data-title="Capa" aria-label="Capa — tese da conta">
+        <div class="topbar"></div>
+        <div class="page">
+          <div class="cover-lockup"><span class="v4-mark">V4</span><span class="sep"></span><span>Fertisul × V4 Company</span></div>
+          <div class="hero-grid">
+            <div>
+              <div class="hero-kicker">Proposta comercial · EC + Growth + SEO/GEO</div>
+              <h1 class="hero-title">Do mapa da EE<br>à <em>máquina previsível</em>.</h1>
+              <p class="hero-sub">A EE já mostrou o próximo ciclo: comercial com método, origem com dono, busca com presença. Estruturação Comercial. Growth no ritmo Colli. SEO/GEO com primeiros ganhos em até 90 dias. Tudo em 12x.</p>
+              <div class="cover-meta">
+                <span>EC · 5 semanas</span>
+                <span>Growth · AM + GT + Copy + Design</span>
+                <span>SEO/GEO · base on-page</span>
+                <span class="ph">[inserir nomes dos decisores]</span>
+              </div>
+            </div>
+            <div class="cover-art" aria-hidden="true">
+              <svg viewBox="0 0 430 470"><path d="M20 330 C92 150 161 388 232 212 S344 77 414 144" fill="none" stroke="rgba(255,255,255,.26)" stroke-width="2"/><path d="M20 346 C92 166 161 404 232 228 S344 93 414 160" fill="none" stroke="rgba(255,255,255,.10)" stroke-width="18"/><circle cx="20" cy="330" r="6" fill="#fff"/><circle cx="414" cy="144" r="6" fill="#ffd8d4"/></svg>
+              <div class="cover-mark"><b>V4</b><span>combo</span></div>
+            </div>
+          </div>
+        </div>
+        <footer class="footer"><span>Fertisul × V4 Company · confidencial</span><span class="count">01 / 12</span></footer>
+      </section>
+
+      <!-- 2 DIAGNÓSTICO -->
+      <section class="slide" data-act="dados" data-title="Diagnóstico" aria-label="Diagnóstico — leitura da EE">
+        <div class="topbar"></div>
+        <div class="page">
+          <header class="slide-head">
+            <div class="head-copy">
+              <div class="eyebrow">Diagnóstico · leitura da EE</div>
+              <h2>Vocês não têm problema de <em>produto</em>. Têm operação sem sistema.</h2>
+              <p class="sub">O que a EE mostrou é que o mês ainda é esforço: comercial artesanal, origem sem dono e busca sem estrutura. <span class="ph">[inserir leitura-chave da EE]</span></p>
+            </div>
+            <div class="section-chip"><b>01</b> Dados</div>
+          </header>
+          <div class="content">
+            <div class="kpis">
+              <div class="kpi"><strong>Comercial</strong><span>Processo no feeling. Qualificação e follow-up sem padrão. <span class="ph">[inserir CRM atual]</span></span></div>
+              <div class="kpi"><strong>Origem</strong><span>Demanda ainda depende de <span class="ph">[indicação / rota / relacionamento]</span>.</span></div>
+              <div class="kpi"><strong>Busca</strong><span>Quem pesquisa fertilizante, adubo ou defensivo não encontra a Fertisul com clareza.</span></div>
+              <div class="kpi"><strong>Dono</strong><span><span class="ph">[inserir decisor]</span> ainda carrega o comercial. <span class="ph">[inserir quem valida]</span> no ritmo.</span></div>
+            </div>
+            <div class="map-grid">
+              <article class="card map-item"><span class="n">01</span><div><h3>Venda artesanal</h3><p>Time atua sem qualificação clara nem cadência de follow-up. Conversão sobe e desce sem justificativa. <span class="ph">[inserir gargalo da EE]</span></p></div></article>
+              <article class="card map-item"><span class="n">02</span><div><h3>Liderança no operacional</h3><p>Sócio/gestor define meta no feeling porque faltam dados de desempenho. Rotina gerencial informal — ou inexistente.</p></div></article>
+              <article class="card map-item"><span class="n">03</span><div><h3>CRM sem governança</h3><p>Ferramenta sozinha não escala. Sem pipes, SLA e motivo de perda, o sistema vira arquivo — não operação. <span class="ph">[inserir stack atual]</span></p></div></article>
+              <article class="card map-item"><span class="n">04</span><div><h3>Marketing e vendas desalinhados</h3><p>Lead entra e vira discussão de qualidade. Sem SLA, o tempo do time vaza entre “lead frio” e “ninguém respondeu”.</p></div></article>
+              <article class="card map-item"><span class="n">05</span><div><h3>Presença digital fraca</h3><p>Site institucional sem estrutura on-page. Quem busca <span class="ph">[inserir termos / região / cultura]</span> não chega na Fertisul.</p></div></article>
+              <article class="card map-item"><span class="n">06</span><div><h3>Escala no cano furado</h3><p>Trazer mais demanda agora multiplica esforço. Primeiro veda o comercial. Depois abre origem com dono.</p></div></article>
+            </div>
+            <p class="callout" style="margin-top:14px">A Fertisul já vende. Falta sistema para repetir o mês — com <span class="ph">[decisor]</span> na decisão, o time no padrão, e a origem fora da cabeça de uma pessoa.</p>
+          </div>
+        </div>
+        <footer class="footer"><span>Fertisul × V4 Company · confidencial</span><span class="count">02 / 12</span></footer>
+      </section>
+
+      <!-- 3 DIVISOR PRODUTO -->
+      <section class="slide divider" data-act="produto" data-title="Produto" aria-label="Divisor — o que opera">
+        <div class="topbar"></div>
+        <div class="page">
+          <div class="divider-lockup"><span class="v4-mark">V4</span><span>Fertisul · proposta</span></div>
+          <div class="divider-num">03</div>
+          <div class="divider-kicker">Ato 3 · Produto</div>
+          <h2 class="divider-title">Três frentes. <em>Um ciclo.</em></h2>
+          <p class="divider-sub">Estruturação Comercial em 5 semanas. Assessoria de Growth com Account Manager + Gestor de tráfego + Copy + Design. SEO/GEO com base técnica e on-page. Rotina Colli no dia a dia — sem caixa-preta.</p>
+          <div class="divider-path">
+            <span>EE / mapa</span>
+            <span>EC</span>
+            <span>CRM bonificado</span>
+            <span>Growth</span>
+            <span>SEO/GEO</span>
+            <span>Origem + gate</span>
+          </div>
+        </div>
+        <footer class="footer"><span>Fertisul × V4 Company · confidencial</span><span class="count">03 / 12</span></footer>
+      </section>
+
+      <!-- 4 EC FLUXO -->
+      <section class="slide" data-act="produto" data-title="EC · fluxo" aria-label="Estruturação Comercial — como funciona">
+        <div class="topbar"></div>
+        <div class="page">
+          <header class="slide-head">
+            <div class="head-copy">
+              <div class="eyebrow">Produto 01 · Estruturação Comercial · 5 semanas</div>
+              <h2>Do diagnóstico ao time <em>operando no padrão</em>.</h2>
+              <p class="sub">Não é PDF na gaveta. É auditoria neutra + blueprint + capacitação. Cobrimos estrutura, processo, incentivo e discurso — e apontamos o gargalo prioritário.</p>
+            </div>
+            <div class="section-chip"><b>01</b> Produto</div>
+          </header>
+          <div class="content">
+            <div class="weeks">
+              <article class="card week">
+                <div class="n">Semana 01</div>
+                <h3>Onboarding</h3>
+                <ul>
+                  <li>Acessos, contexto e objetivos de negócio</li>
+                  <li>Stakeholders e mapa da operação</li>
+                  <li>Kickoff com a liderança</li>
+                </ul>
+              </article>
+              <article class="card week">
+                <div class="n">Semana 02</div>
+                <h3>Diagnóstico 360°</h3>
+                <ul>
+                  <li>Estrutura do time e papéis</li>
+                  <li>Entrevistas (pré-vendas e closer)</li>
+                  <li>Fluxo As-Is e gargalos</li>
+                  <li>Metas, incentivos e rituais</li>
+                  <li>Cliente oculto no discurso real</li>
+                </ul>
+              </article>
+              <article class="card week">
+                <div class="n">Semana 03</div>
+                <h3>CRM e ferramentas</h3>
+                <ul>
+                  <li>Trilha A: CRM ativo — aderência, dados, pipes e diagnóstico técnico</li>
+                  <li>Trilha B: sem CRM — requisitos, fit e stack recomendado</li>
+                  <li>Automações, ciclo e SLA</li>
+                </ul>
+              </article>
+              <article class="card week">
+                <div class="n">Semana 04</div>
+                <h3>Definições</h3>
+                <ul>
+                  <li>Estrutura ideal e papéis (CHA)</li>
+                  <li>KPIs e hierarquia de dados</li>
+                  <li>SLA marketing ↔ vendas</li>
+                  <li>BPMN comercial priorizado</li>
+                  <li>Scripts, cadências e comissão</li>
+                </ul>
+              </article>
+              <article class="card week">
+                <div class="n">Semana 05</div>
+                <h3>Treinamento</h3>
+                <ul>
+                  <li>Imersão de CRM no novo fluxo</li>
+                  <li>Treinamento comercial com o time</li>
+                  <li>Entrega do blueprint</li>
+                  <li>O conhecimento fica na Fertisul</li>
+                </ul>
+              </article>
+            </div>
+            <p class="callout" style="margin-top:16px">O que a liderança leva: clareza da causa-raiz (processo, pessoa ou tecnologia) e um roteiro para construir operação previsível — sem improvisar planilha, treino genérico ou módulo novo de CRM sem plano.</p>
+          </div>
+        </div>
+        <footer class="footer"><span>Fertisul × V4 Company · confidencial</span><span class="count">04 / 12</span></footer>
+      </section>
+
+      <!-- 5 EC ENTREGÁVEIS + CRM -->
+      <section class="slide" data-act="produto" data-title="EC · entregáveis" aria-label="Entregáveis da Estruturação Comercial">
+        <div class="topbar"></div>
+        <div class="page">
+          <header class="slide-head">
+            <div class="head-copy">
+              <div class="eyebrow">Incluído na Estruturação Comercial</div>
+              <h2>O blueprint que a Fertisul <em>passa a operar</em>.</h2>
+              <p class="sub">Entregáveis técnicos, não slides de opinião. Cada peça ataca vazamento: oportunidade sem dono, ciclo longo, win rate estagnada, comissão sem regra.</p>
+            </div>
+            <div class="section-chip"><b>02</b> Produto</div>
+          </header>
+          <div class="content">
+            <div class="deliver">
+              <article class="card">
+                <h3>Fundação comercial</h3>
+                <ul>
+                  <li>Mapeamento da estrutura do time</li>
+                  <li>Entrevistas diagnósticas (pré-vendas e closer)</li>
+                  <li>Fluxograma As-Is com gargalo documentado</li>
+                  <li>Análise de metas, incentivos e comissionamento</li>
+                  <li>Rotinas gerenciais e rituais de acompanhamento</li>
+                  <li>Cliente oculto: discurso real, não o do playbook</li>
+                </ul>
+              </article>
+              <article class="card">
+                <h3>Definições operacionais</h3>
+                <ul>
+                  <li>Estrutura organizacional ideal e papéis (CHA)</li>
+                  <li>KPIs e hierarquia de dados para forecast</li>
+                  <li>SLA entre marketing e vendas</li>
+                  <li>BPMN comercial com melhorias priorizadas</li>
+                  <li>Scripts e cadências de abordagem e follow-up</li>
+                  <li>Recomendação de política de comissão</li>
+                </ul>
+              </article>
+              <article class="card">
+                <h3>O que muda no dia a dia</h3>
+                <ul>
+                  <li>Qualificação com critério — lead para de “entrar e sumir”</li>
+                  <li>Follow-up com dono, prazo e próximo passo</li>
+                  <li>Liderança vê pipeline, não feeling</li>
+                  <li>Time alinhado em linguagem e abordagem</li>
+                  <li>Menos retrabalho entre marketing e vendas</li>
+                  <li>Base pronta para receber origem nova com controle</li>
+                </ul>
+              </article>
+            </div>
+            <div class="bonus-crm">
+              <div>
+                <div class="k">Bônus exclusivo · parceiro V4</div>
+                <h3>Implementação do CRM inclusa — sem custo adicional de setup</h3>
+                <p>Não é só auditar a ferramenta. Pipes, fases, canais de captura, automações de follow-up e visão gerencial entram como bonificação nesta conta. O CRM vira sistema de operação: cada oportunidade com dono, prazo e próximo passo.</p>
+              </div>
+              <div class="stamp">CRM bonificado</div>
+            </div>
+          </div>
+        </div>
+        <footer class="footer"><span>Fertisul × V4 Company · confidencial</span><span class="count">05 / 12</span></footer>
+      </section>
+
+      <!-- 6 GROWTH SQUAD -->
+      <section class="slide" data-act="produto" data-title="Time" aria-label="Time de Growth na conta">
+        <div class="topbar"></div>
+        <div class="page">
+          <header class="slide-head">
+            <div class="head-copy">
+              <div class="eyebrow">Produto 02 · Assessoria de Growth Padrão · recorrente</div>
+              <h2>Account orquestra. <em>Copy e Design provam.</em></h2>
+              <p class="sub">Squad completa na conta da Fertisul: Account Manager + Gestor de tráfego + Copy + Design. Núcleo no ritmo Colli — prioridade com <span class="ph">[decisor]</span>, demanda no ritmo do comercial e da operação.</p>
+            </div>
+            <div class="section-chip"><b>03</b> Produto</div>
+          </header>
+          <div class="content">
+            <div class="roles">
+              <article class="card role"><div class="label">Account Manager</div><h3>Ritmo com a diretoria</h3><p>Dono da cadência. Prioridade do mês, pendência, backlog e o gate de operação com a liderança. Sem caixa-preta.</p></article>
+              <article class="card role"><div class="label">Gestor de tráfego</div><h3>Intenção, depois escala</h3><p>Presença e tracking com fundamento. Volume só entra com comercial e SLA no ar — no ritmo da Fertisul, não no ritmo do anúncio.</p></article>
+              <article class="card role"><div class="label">Copy</div><h3>Narrativa B2B do agro</h3><p>Mensagem de venda para quem compra insumo: mix, entrega, assistência e prova técnica — não campanha genérica de “fertilizante barato”.</p></article>
+              <article class="card role"><div class="label">Design</div><h3>Prova visual</h3><p>Peça, anúncio e página na mesma identidade. A Fertisul ganha presença que conversa com o campo e com o comprador B2B.</p></article>
+            </div>
+            <p class="callout">Growth opera criativos, tracking e origem. Verba de mídia à parte. Escala só com EC no ar e gate aberto — o Account segura isso com a diretoria, não o tráfego sozinho.</p>
+            <div class="map-grid" style="margin-top:14px">
+              <article class="card map-item"><span class="n">AM</span><div><h3><span class="ph">[Decisor]</span> decide. Account executa o ritmo.</h3><p>Prioridade, pendência e gate da operação. O digital sai da cabeça de uma pessoa.</p></div></article>
+              <article class="card map-item"><span class="n">GT</span><div><h3>Intenção de compra, no ritmo da casa.</h3><p>Google e Meta com fundamento. Volume não entra se o comercial não aguenta.</p></div></article>
+              <article class="card map-item"><span class="n">CP</span><div><h3>Relacionamento vira conversão.</h3><p>Copy para o ICP da Fertisul: <span class="ph">[produtor / revenda / cooperativa / região]</span>.</p></div></article>
+              <article class="card map-item"><span class="n">DS</span><div><h3>Peça, LP e anúncio na mesma casa.</h3><p>Identidade própria no ar. Prova de mix, estoque e entrega — sem diluir a marca.</p></div></article>
+            </div>
+          </div>
+        </div>
+        <footer class="footer"><span>Fertisul × V4 Company · confidencial</span><span class="count">06 / 12</span></footer>
+      </section>
+
+      <!-- 7 ROTINA COLLI -->
+      <section class="slide" data-act="produto" data-title="Rotina Colli" aria-label="Rotina Colli — como a operação roda">
+        <div class="topbar"></div>
+        <div class="page">
+          <header class="slide-head">
+            <div class="head-copy">
+              <div class="eyebrow">Rotina Colli · cadência na conta</div>
+              <h2>Um mês com a Colli. <em>Vocês veem o que rodou.</em></h2>
+              <p class="sub">Grupo no dia a dia, check-in de performance, planejamento de 90 dias, growths internos. Sem surpresa no fim do mês.</p>
+            </div>
+            <div class="section-chip"><b>04</b> Produto</div>
+          </header>
+          <div class="content">
+            <div class="cadence">
+              <article class="card cad">
+                <div class="dur">Diário</div>
+                <h3>Atendimento no grupo</h3>
+                <p>Todo dia o Account envia o resumo da Fertisul.</p>
+                <ul>
+                  <li>Alinhamentos do dia</li>
+                  <li>Pendências V4 e da casa</li>
+                  <li>Backlog</li>
+                  <li>Resultado visível</li>
+                </ul>
+              </article>
+              <article class="card cad">
+                <div class="dur">1h · quinzenal</div>
+                <h3>Check-in de performance</h3>
+                <p>V4 + liderança olham a quinzena e o plano do mês em curso.</p>
+                <ul>
+                  <li>Resultados da quinzena</li>
+                  <li>Insights e plano de ação</li>
+                  <li>Próximos passos</li>
+                </ul>
+              </article>
+              <article class="card cad">
+                <div class="dur">1h · mensal</div>
+                <h3>Check-in do mês</h3>
+                <p>Resultado completo e o que guia o ciclo seguinte.</p>
+                <ul>
+                  <li>O que foi feito</li>
+                  <li>O que converteu</li>
+                  <li>O que ajusta</li>
+                </ul>
+              </article>
+              <article class="card cad">
+                <div class="dur">1h30 · trimestre</div>
+                <h3>Planejamento 90 dias</h3>
+                <p>Budget, prioridade e aprendizado. A diretoria decide no trimestre.</p>
+                <ul>
+                  <li>Resultados do quarter</li>
+                  <li>Prioridades dos 90 dias</li>
+                  <li>Gate de mídia e operação</li>
+                </ul>
+              </article>
+            </div>
+            <div class="internal">
+              <h4>Rotina interna · Growths e retrospectivas</h4>
+              <p>O time inteiro colabora nos pontos do mês e no planejamento do ciclo seguinte — dados, tráfego, funil e comercial, sem caixa-preta.</p>
+              <div class="chips">
+                <span class="chip">Análise de dados</span>
+                <span class="chip">Visão do projeto</span>
+                <span class="chip">Visão gestão</span>
+                <span class="chip">Visão copy</span>
+                <span class="chip">Visão design</span>
+                <span class="chip">Visão CRM</span>
+                <span class="chip">Visão tráfego</span>
+                <span class="chip">Visão comercial</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer class="footer"><span>Fertisul × V4 Company · confidencial</span><span class="count">07 / 12</span></footer>
+      </section>
+
+      <!-- 8 SEO/GEO -->
+      <section class="slide" data-act="produto" data-title="SEO/GEO" aria-label="SEO/GEO — base técnica e on-page">
+        <div class="topbar"></div>
+        <div class="page">
+          <header class="slide-head">
+            <div class="head-copy">
+              <div class="eyebrow">Produto 03 · SEO/GEO · base em até 90 dias</div>
+              <h2>Quem busca insumo <em>precisa achar a Fertisul</em>.</h2>
+              <p class="sub">Base técnica + estrutura on-page + primeiros ganhos em até 90 dias. Presença orgânica e prontidão para busca assistida por IA — sem prometer ranking de palavra genérica.</p>
+            </div>
+            <div class="section-chip"><b>05</b> Produto</div>
+          </header>
+          <div class="content">
+            <div class="audience">Público · site institucional B2B · <span class="ph">[inserir URL / status atual do site]</span></div>
+            <div class="seo-grid">
+              <article class="card inc-card">
+                <h3>O que está incluso no plano</h3>
+                <ul class="inc">
+                  <li><strong>Auditoria técnica inicial:</strong> indexação, mobile, velocidade e dados estruturados.</li>
+                  <li><strong>Pesquisa de palavras-chave:</strong> até 20 termos prioritários (foco em baixa concorrência) — <span class="ph">[ex.: fertilizante + região / cultura]</span>.</li>
+                  <li><strong>Otimização on-page:</strong> melhorias em até 10 páginas estratégicas do site.</li>
+                  <li><strong>Ajustes estruturais:</strong> títulos, meta descrições, headings (H1–H6) e URLs amigáveis.</li>
+                  <li><strong>Schema Markup:</strong> implementação de dados estruturados básicos — base também para GEO (busca e respostas assistidas por IA).</li>
+                  <li><strong>Ferramentas e setup:</strong> Google Search Console + Google Meu Negócio.</li>
+                  <li><strong>Acompanhamento:</strong> relatório mensal de performance + reunião de alinhamento.</li>
+                </ul>
+              </article>
+              <article class="card exc-card">
+                <h3>Não inclui neste plano</h3>
+                <ul class="exc">
+                  <li>Link building ativo</li>
+                  <li>Produção recorrente de blog</li>
+                  <li>Estratégia de cluster</li>
+                  <li>Core Web Vitals avançado</li>
+                </ul>
+              </article>
+            </div>
+            <p class="callout" style="margin-top:14px">SEO/GEO aqui é fundação: o site da Fertisul passa a ser encontrado, lido e compreendido. Conteúdo em escala e autoridade de links ficam para um ciclo seguinte — quando a base já estiver no ar.</p>
+          </div>
+        </div>
+        <footer class="footer"><span>Fertisul × V4 Company · confidencial</span><span class="count">08 / 12</span></footer>
+      </section>
+
+      <!-- 9 CICLO -->
+      <section class="slide" data-act="produto" data-title="Ciclo" aria-label="Jornada — EC, Growth e SEO no mesmo ciclo">
+        <div class="topbar"></div>
+        <div class="page">
+          <header class="slide-head">
+            <div class="head-copy">
+              <div class="eyebrow">Jornada · um ciclo, três frentes</div>
+              <h2>EC primeiro. Origem depois. <em>Gate libera mídia.</em></h2>
+              <p class="sub">A EE já entregou o mapa. A Estruturação Comercial instala o comercial em 5 semanas. Growth e SEO/GEO entram no ritmo Colli. Mês 1 não é campanha — o time ainda não aguenta volume cego.</p>
+            </div>
+            <div class="section-chip"><b>06</b> Produto</div>
+          </header>
+          <div class="content">
+            <div class="process">
+              <div class="stage-card"><span class="n">01</span><h3>EE</h3><p>Já feita. Mapa, ICP e direção. Não se paga o diagnóstico de novo — ele trabalha a favor de vocês.</p></div>
+              <span class="arrow" aria-hidden="true">→</span>
+              <div class="stage-card"><span class="n">02</span><h3>EC · 5 semanas</h3><p>Diagnóstico 360°, BPMN, SLA, scripts e treino. CRM operativo entra bonificado.</p></div>
+              <span class="arrow" aria-hidden="true">→</span>
+              <div class="stage-card"><span class="n">03</span><h3>SEO/GEO</h3><p>Base técnica e on-page em até 90 dias. Quem busca insumo começa a achar a Fertisul.</p></div>
+              <span class="arrow" aria-hidden="true">→</span>
+              <div class="stage-card"><span class="n">04</span><h3>Origem</h3><p>Google e Meta com fundamento. Copy e design na narrativa B2B — volume no ritmo do atendimento.</p></div>
+              <span class="arrow" aria-hidden="true">→</span>
+              <div class="stage-card"><span class="n">05</span><h3>Gate + base</h3><p>SLA no ar. Pipeline visível. Carteira atual vira canal — não só a vitrine nova.</p></div>
+            </div>
+            <p class="callout" style="margin-top:22px">Mídia à parte. Escala só com comercial no padrão e retaguarda no ritmo. O Account segura o gate com a diretoria — não o tráfego sozinho. <span class="ph">[inserir restrição operacional da EE: safra, logística, estoque]</span></p>
+          </div>
+        </div>
+        <footer class="footer"><span>Fertisul × V4 Company · confidencial</span><span class="count">09 / 12</span></footer>
+      </section>
+
+      <!-- 10 TO-BE -->
+      <section class="slide" data-act="produto" data-title="Empresa no final" aria-label="Fluxograma — como a Fertisul opera no final do ciclo">
+        <div class="topbar"></div>
+        <div class="page">
+          <header class="slide-head">
+            <div class="head-copy">
+              <div class="eyebrow">Fluxograma · Fertisul no final do ciclo</div>
+              <h2>Assim a empresa <em>opera</em> daqui a 12 meses.</h2>
+              <p class="sub"><span class="ph">[Decisor]</span> decide no trimestre. <span class="ph">[Quem valida]</span> acompanha estratégia e operação. Cada origem entra no mesmo sistema, com CRM e gate comercial.</p>
+            </div>
+            <div class="section-chip"><b>07</b> Produto</div>
+          </header>
+          <div class="content">
+            <div class="tobe">
+              <div class="tobe-row two">
+                <article class="card tobe-box">
+                  <div class="who">Direção · decisor</div>
+                  <h3 class="ph">[inserir nome do decisor]</h3>
+                  <p>Vê o trimestre, o budget e a prioridade — não o WhatsApp do dia nem cada cotação.</p>
+                </article>
+                <article class="card tobe-box">
+                  <div class="who">Validação · influência</div>
+                  <h3 class="ph">[inserir nome de quem valida]</h3>
+                  <p>Valida estratégia e operação. Participa do ritmo. A máquina não depende só de uma pessoa no grupo.</p>
+                </article>
+              </div>
+              <div class="tobe-join"></div>
+              <article class="card tobe-box core">
+                <div class="who">Sistema Colli + EC + CRM</div>
+                <h3>Account V4 orquestra o time: GT + Copy + Design</h3>
+                <p>Grupo diário · check-in · 90 dias. Comercial no padrão. CRM com dono. SEO/GEO na base. Prioridade e gate com a diretoria. Sem caixa-preta.</p>
+              </article>
+              <div class="tobe-join"></div>
+              <div class="tobe-hbar" aria-hidden="true"></div>
+              <div class="tobe-row four">
+                <article class="card lane">
+                  <div class="who">01 · Atração</div>
+                  <h3>Origem com dono</h3>
+                  <ul>
+                    <li>Site encontrado (SEO/GEO)</li>
+                    <li>Intenção de busca no ar</li>
+                    <li>Mídia só com gate aberto</li>
+                    <li>Narrativa B2B do agro</li>
+                  </ul>
+                </article>
+                <article class="card lane">
+                  <div class="who">02 · Conversão</div>
+                  <h3>EC + CRM operativo</h3>
+                  <ul>
+                    <li>Qualificação e script</li>
+                    <li>Cadência de follow-up</li>
+                    <li>Histórico único no CRM</li>
+                    <li>SLA marketing ↔ vendas</li>
+                  </ul>
+                </article>
+                <article class="card lane">
+                  <div class="who">03 · Gate</div>
+                  <h3>Operação no ritmo</h3>
+                  <ul>
+                    <li>Volume que o time aguenta</li>
+                    <li>Pipeline e forecast visíveis</li>
+                    <li>Motivo de perda documentado</li>
+                    <li><span class="ph">[safra / logística / estoque]</span></li>
+                  </ul>
+                </article>
+                <article class="card lane">
+                  <div class="who">04 · Base</div>
+                  <h3>Quem já compra</h3>
+                  <ul>
+                    <li>Follow-up com dono</li>
+                    <li>Pós-venda padronizado</li>
+                    <li>Reativação da carteira</li>
+                    <li>Relacionamento como ativo</li>
+                  </ul>
+                </article>
+              </div>
+              <div class="tobe-join"></div>
+              <article class="card tobe-box end">
+                <div class="who">Cliente da Fertisul</div>
+                <h3>Cotação com dono, prazo e resposta — do campo ao CRM, sem oportunidade sumindo no WhatsApp</h3>
+              </article>
+            </div>
+          </div>
+        </div>
+        <footer class="footer"><span>Fertisul × V4 Company · confidencial</span><span class="count">10 / 12</span></footer>
+      </section>
+
+      <!-- 11 PRONTO -->
+      <section class="slide" data-act="produto" data-title="Pronto" aria-label="O que muda na operação">
+        <div class="topbar"></div>
+        <div class="page">
+          <header class="slide-head">
+            <div class="head-copy">
+              <div class="eyebrow">Com o ciclo fechado</div>
+              <h2>O que a diretoria <em>vê funcionando</em>.</h2>
+              <p class="sub">Critérios observáveis na Fertisul. Não são garantia de volume de venda, ROI ou receita específica.</p>
+            </div>
+            <div class="section-chip"><b>08</b> Produto</div>
+          </header>
+          <div class="content">
+            <div class="success-grid">
+              <article class="card success-item"><span class="n">01</span><h3>EC entregue em 5 semanas: fluxo, SLA, BPMN, scripts e time treinado no padrão</h3></article>
+              <article class="card success-item"><span class="n">02</span><h3>CRM operativo no ar — bonificado: pipes, dono, prazo e próximo passo em cada oportunidade</h3></article>
+              <article class="card success-item"><span class="n">03</span><h3>Qualificação e follow-up com cadência. Mensagem não some. Motivo de perda fica visível</h3></article>
+              <article class="card success-item"><span class="n">04</span><h3>SLA marketing ↔ vendas: menos discussão de “lead frio”, mais passagem com critério</h3></article>
+              <article class="card success-item"><span class="n">05</span><h3>SEO/GEO: auditoria, até 20 termos, até 10 páginas, schema, GSC e Google Meu Negócio</h3></article>
+              <article class="card success-item"><span class="n">06</span><h3>Origem com fundamento; volume só com comercial no padrão. Verba de mídia à parte</h3></article>
+              <article class="card success-item"><span class="n">07</span><h3>Copy e design na narrativa B2B da Fertisul — não campanha genérica de agro</h3></article>
+              <article class="card success-item"><span class="n">08</span><h3>Account no ritmo Colli com a diretoria: diário, check-in, trimestre. Comercial fora da cabeça de uma pessoa</h3></article>
+            </div>
+          </div>
+        </div>
+        <footer class="footer"><span>Fertisul × V4 Company · confidencial</span><span class="count">11 / 12</span></footer>
+      </section>
+
+      <!-- 12 INVESTIMENTO -->
+      <section class="slide" data-act="decisao" data-title="Investimento" aria-label="Investimento — condição exclusiva">
+        <div class="topbar"></div>
+        <div class="page">
+          <header class="slide-head">
+            <div class="head-copy">
+              <div class="eyebrow">Investimento · condição exclusiva · parceiro V4</div>
+              <h2>Um combo. <em>A EE trabalha a favor de vocês.</em></h2>
+              <p class="sub">EC + Assessoria de Growth + SEO/GEO. Squad AM + GT + Copy + Design. CRM bonificado. Pagamento recorrente no cartão de crédito.</p>
+            </div>
+            <div class="section-chip"><b>01</b> Decisão</div>
+          </header>
+          <div class="content">
+            <div class="offers">
+              <article class="card offer">
+                <div class="tag">Valor de referência</div>
+                <h3>EC + Growth + SEO/GEO</h3>
+                <p class="note">Tabela padrão, sem o reconhecimento da EE</p>
+                <div class="was">12× R$ 17.569,22</div>
+                <div class="now" style="font-size:26px;color:var(--muted-2);text-decoration:line-through;font-weight:600">R$ 210.830,65</div>
+                <div class="math">
+                  <div class="math-row"><span>Estruturação Comercial</span><strong>R$ 20.283,13</strong></div>
+                  <div class="math-row"><span>Growth + SEO/GEO</span><strong>12× R$ 15.878,96</strong></div>
+                  <div class="math-row"><span>Total de referência</span><strong>R$ 210.830,65</strong></div>
+                </div>
+              </article>
+              <article class="card offer featured">
+                <div class="tag">Condição exclusiva · 12x recorrente</div>
+                <h3>Tudo no mesmo ciclo</h3>
+                <p class="note">Parceiro V4 · EE reconhecida · CRM bonificado</p>
+                <div class="was">era 12× R$ 17.569,22</div>
+                <div class="now">12× R$ 10.176,81</div>
+                <div class="math">
+                  <div class="math-row"><span>Abatimento da EE</span><strong class="ok">− R$ 12.364,00</strong></div>
+                  <div class="math-row"><span>Condições exclusivas</span><strong class="ok">aplicadas</strong></div>
+                  <div class="math-row"><span>CRM — implementação</span><strong class="ok">bonificado</strong></div>
+                  <div class="math-row"><span>Total no ciclo</span><strong class="ok">R$ 122.121,72</strong></div>
+                </div>
+                <div class="pay">
+                  <span>Cartão de crédito</span>
+                  <span>12x recorrente</span>
+                  <span>EC + Growth + SEO/GEO</span>
+                </div>
+              </article>
+            </div>
+            <div class="ee-band">
+              <div>
+                <div class="k">Reconhecimento da EE · parceiro V4</div>
+                <p>Vocês já investiram na Estruturação Estratégica. Esse valor entra neste desenho — mais as condições exclusivas desta conta. Não se paga o mapa de novo.</p>
+              </div>
+              <div class="amt">− R$ 12.364,00</div>
+            </div>
+            <div class="combo">
+              <div>
+                <h3>Fechar agora · kickoff do mês 01</h3>
+                <p>EC em 5 semanas. Growth no ritmo Colli. SEO/GEO na base. Implementação de CRM bonificada. Tudo no cartão, em 12x.</p>
+              </div>
+              <div style="text-align:right">
+                <div class="cond">Condição exclusiva · cartão</div>
+                <div class="fig">12× R$ 10.176,81</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer class="footer"><span>Fertisul × V4 Company · confidencial</span><span class="count">12 / 12</span></footer>
+      </section>
+    </main>
+  </div>
+
+  <nav class="block-nav" id="blockNav" aria-label="Ir para o início de um ato"></nav>
+  <nav class="global-nav" id="globalNav" aria-label="Navegação da apresentação">
+    <button id="prevGlobal" type="button" aria-label="Slide anterior">←</button>
+    <span class="global-count" id="globalCount">01 / 12</span>
+    <button id="nextGlobal" type="button" aria-label="Próximo slide">→</button>
+  </nav>
+  <div class="utility"><button id="fullscreenBtn" type="button">Tela cheia</button></div>
+  <div class="slide-dots" id="slideDots" aria-label="Ir para slide"></div>
+  <p class="sr-only">Setas e espaço navegam. Home e End vão ao início e ao fim. F abre tela cheia.</p>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll("#deck > .slide"));
+    const total = slides.length;
+    const acts = [
+      { id: "narrativa", label: "Narrativa", start: 0 },
+      { id: "dados", label: "Dados", start: 1 },
+      { id: "produto", label: "Produto", start: 2 },
+      { id: "decisao", label: "Decisão", start: 11 }
+    ];
+    const deck = document.getElementById("deck");
+    const dots = document.getElementById("slideDots");
+    const blockNav = document.getElementById("blockNav");
+    const blockLabel = document.getElementById("blockLabel");
+    const slideTitle = document.getElementById("slideTitle");
+    const globalCount = document.getElementById("globalCount");
+    const globalProgress = document.getElementById("globalProgress");
+    const prevGlobal = document.getElementById("prevGlobal");
+    const nextGlobal = document.getElementById("nextGlobal");
+    const actName = { narrativa: "Narrativa", dados: "Dados", produto: "Produto", decisao: "Decisão" };
+    let current = Math.max(0, Math.min(total - 1, Number((location.hash.match(/slide-(\d+)/) || [])[1] || 1) - 1));
+
+    acts.forEach((act) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.textContent = act.label;
+      button.dataset.act = act.id;
+      button.addEventListener("click", () => goTo(act.start));
+      blockNav.appendChild(button);
+    });
+    slides.forEach((_, index) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.setAttribute("aria-label", "Ir para o slide " + (index + 1));
+      button.addEventListener("click", () => goTo(index));
+      dots.appendChild(button);
+    });
+
+    function pad(n) { return String(n).padStart(2, "0"); }
+
+    function goTo(index) {
+      current = Math.max(0, Math.min(total - 1, index));
+      const slide = slides[current];
+      const act = slide.dataset.act;
+      slides.forEach((el, i) => {
+        el.classList.toggle("active", i === current);
+        el.setAttribute("aria-hidden", i === current ? "false" : "true");
+      });
+      Array.from(dots.children).forEach((dot, i) => {
+        dot.classList.toggle("active", i === current);
+        dot.setAttribute("aria-current", i === current ? "true" : "false");
+      });
+      Array.from(blockNav.children).forEach((button) => {
+        const on = button.dataset.act === act;
+        button.classList.toggle("is-active", on);
+        button.setAttribute("aria-current", on ? "true" : "false");
+      });
+      blockLabel.textContent = actName[act] || act;
+      slideTitle.textContent = slide.dataset.title || "";
+      globalCount.textContent = pad(current + 1) + " / " + pad(total);
+      globalProgress.style.width = ((current + 1) / total * 100) + "%";
+      prevGlobal.disabled = current === 0;
+      nextGlobal.disabled = current === total - 1;
+      history.replaceState(null, "", "#slide-" + pad(current + 1));
+      document.title = pad(current + 1) + " / " + pad(total) + " — Fertisul × V4";
+    }
+
+    function fitDeck() {
+      const scale = Math.min(window.innerWidth / 1600, window.innerHeight / 900);
+      deck.style.transform = "translate(-50%, -50%) scale(" + scale + ")";
+    }
+
+    window.goTo = goTo;
+    prevGlobal.addEventListener("click", () => goTo(current - 1));
+    nextGlobal.addEventListener("click", () => goTo(current + 1));
+    document.getElementById("fullscreenBtn").addEventListener("click", () => {
+      document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (["ArrowRight", "PageDown", " "].includes(event.key)) { event.preventDefault(); goTo(current + 1); }
+      if (["ArrowLeft", "PageUp"].includes(event.key)) { event.preventDefault(); goTo(current - 1); }
+      if (event.key === "Home") goTo(0);
+      if (event.key === "End") goTo(total - 1);
+      if (event.key.toLowerCase() === "f" && document.fullscreenEnabled) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      }
+    });
+    window.addEventListener("resize", fitDeck);
+    window.addEventListener("hashchange", () => {
+      const n = Math.max(0, Math.min(total - 1, Number((location.hash.match(/slide-(\d+)/) || [])[1] || 1) - 1));
+      if (n !== current) goTo(n);
+    });
+    fitDeck();
+    goTo(current);
+  </script>
+</body>
+</html>
