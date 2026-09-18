@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word">
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Bodega do Sertão × V4 Company — Proposta comercial detalhada</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="ProgId" content="Word.Document"/>
+<title>Bodega do Sertão × V4 Company — Entregáveis · duas visões</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800;900&display=swap" rel="stylesheet"/>
 <style>
 :root{
-  --red:#e3040a; --red2:#ff3b3b; --dark:#0d0d0d; --dark2:#1a1a1a;
+  --red:#e3040a; --red2:#ff3b3b; --dark:#0d0d0d;
   --ink:#111; --muted:#6b6b6b; --line:#e8e4e1; --soft:#f6f4f2;
-  --white:#fff; --green:#16a34a; --green-bg:#f0fdf4;
+  --white:#fff; --green:#16a34a;
   --ease:cubic-bezier(.22,1,.36,1);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -21,482 +23,331 @@ h1,h2,h3,h4{font-family:Sora,Inter,sans-serif;letter-spacing:-.02em;line-height:
 a{color:inherit;text-decoration:none}
 @page{size:A4;margin:14mm}
 @media print{
-  .topnav,#prog,.hero-cta,.cta-mini,.footer-cta .btn{display:none!important}
+  .dlbar,.topnav,#prog,.hero-cta{display:none!important}
   .reveal{opacity:1!important;transform:none!important}
-  .hero{min-height:auto;padding:3rem 1.5rem}
-  section{padding:2.2rem 0;break-inside:avoid}
-  .scenario-grid,.flow-row,.del-grid,.method-steps,.timeline-strip{break-inside:avoid}
+  .hero{min-height:auto;padding:2.4rem 1.5rem}
+  section{padding:1.8rem 0;break-inside:avoid}
+  .vision-grid,.del-grid,.compare{break-inside:avoid}
   body{background:#fff}
 }
-.topnav{position:fixed;top:0;left:0;right:0;z-index:900;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:.7rem 2rem;gap:1rem}
+.dlbar{
+  position:sticky;top:0;z-index:1000;
+  display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;
+  padding:12px 18px;background:#280001;color:#fff;
+  font-family:Inter,system-ui,sans-serif;
+}
+.dlbar p{margin:0;font-size:13px;color:#ffd0d0}
+.dlbar .btns{display:flex;gap:8px;flex-wrap:wrap}
+.dlbar button{
+  cursor:pointer;border:0;background:#A10F14;color:#fff;
+  font:700 13px Inter,system-ui,sans-serif;padding:10px 16px;border-radius:8px;
+}
+.dlbar button:hover{background:#c3141a}
+.topnav{position:sticky;top:54px;z-index:900;background:rgba(255,255,255,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:.7rem 2rem;gap:1rem}
 .topnav .logo{font-family:Sora,sans-serif;font-weight:900;font-size:14px;white-space:nowrap}
 .topnav .logo span{color:var(--red)}
-.topnav nav{display:flex;gap:1.35rem;overflow-x:auto;scrollbar-width:none}
+.topnav nav{display:flex;gap:1.35rem}
 .topnav nav a{font-size:12px;font-weight:600;color:var(--muted);white-space:nowrap;padding:.25rem 0;border-bottom:2px solid transparent}
 .topnav nav a:hover,.topnav nav a.active{color:var(--red);border-color:var(--red)}
-.topnav .cta-mini{background:var(--red);color:#fff;font-size:12px;font-weight:700;padding:.45rem 1rem;border-radius:20px;white-space:nowrap}
-@media(max-width:860px){.topnav nav{display:none}.topnav{padding:.7rem 1.2rem}}
-#prog{position:fixed;top:0;left:0;height:3px;background:var(--red);z-index:1000;width:0%}
-section{width:100%;padding:5rem 1.5rem}
-.inner{max-width:960px;margin:0 auto}
-.hero{min-height:100vh;display:flex;align-items:center;background:linear-gradient(150deg,#0d0d0d 0%,#1c0404 55%,#2b0606 100%);color:#fff;position:relative;overflow:hidden;padding:6rem 1.5rem 4rem}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 80% 40%,rgba(227,4,10,.18),transparent);pointer-events:none}
-.hero-grid{max-width:960px;margin:0 auto;display:grid;grid-template-columns:1fr 380px;gap:3rem;align-items:center;position:relative;z-index:1}
-@media(max-width:860px){.hero-grid{grid-template-columns:1fr}}
-.hero-tag{display:inline-flex;align-items:center;gap:.5rem;background:rgba(227,4,10,.18);border:1px solid rgba(227,4,10,.35);border-radius:20px;padding:.35rem .9rem;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.85);margin-bottom:1.5rem}
-.hero-tag span{width:6px;height:6px;border-radius:50%;background:var(--red2);display:inline-block}
-.hero h1{font-size:clamp(32px,5vw,50px);font-weight:900;color:#fff;margin-bottom:1.25rem}
+@media(max-width:800px){.topnav nav{display:none}.topnav{padding:.7rem 1.2rem}.topnav{top:96px}}
+#prog{position:fixed;top:0;left:0;height:3px;background:var(--red);z-index:1100;width:0%}
+section{width:100%;padding:4.5rem 1.5rem}
+.inner{max-width:980px;margin:0 auto}
+.hero{background:linear-gradient(150deg,#0d0d0d 0%,#1c0404 55%,#2b0606 100%);color:#fff;padding:4.5rem 1.5rem 3.5rem}
+.hero-tag{display:inline-flex;align-items:center;gap:.5rem;background:rgba(227,4,10,.18);border:1px solid rgba(227,4,10,.35);border-radius:20px;padding:.35rem .9rem;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.85);margin-bottom:1.25rem}
+.hero h1{font-size:clamp(30px,5vw,48px);font-weight:900;max-width:820px;margin-bottom:1rem}
 .hero h1 em{font-style:normal;color:var(--red2)}
-.hero-sub{font-size:17px;color:rgba(255,255,255,.72);max-width:540px;line-height:1.65;margin-bottom:2rem}
-.hero-cta{display:inline-flex;align-items:center;gap:.5rem;background:var(--red);color:#fff;font-weight:700;font-size:15px;padding:.85rem 2rem;border-radius:30px;box-shadow:0 8px 32px rgba(227,4,10,.4)}
-.hero-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:1.75rem;backdrop-filter:blur(8px)}
-.hero-card h3{font-size:13px;font-weight:700;color:rgba(255,255,255,.55);letter-spacing:.08em;text-transform:uppercase;margin-bottom:1rem}
-.kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
-.kpi{background:rgba(255,255,255,.08);border-radius:14px;padding:.9rem 1rem}
-.kpi .val{font-family:Sora,sans-serif;font-size:20px;font-weight:900;color:#fff}
-.kpi .lbl{font-size:11px;color:rgba(255,255,255,.55);margin-top:2px}
-.hero-award{display:flex;align-items:flex-start;gap:.6rem;margin-top:1rem;padding:.65rem .9rem;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)}
-.hero-award p{font-size:12px;color:rgba(255,255,255,.65);line-height:1.4}
-.hero-award strong{color:#fff;font-size:13px;display:block}
+.hero-sub{font-size:17px;color:rgba(255,255,255,.72);max-width:640px;line-height:1.65}
+.hero-cta{display:inline-flex;margin-top:1.6rem;background:var(--red);color:#fff;font-weight:700;font-size:14px;padding:.8rem 1.5rem;border-radius:28px}
 .slabel{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:.5rem}
-.stitle{font-size:clamp(26px,4vw,36px);font-weight:800;color:var(--ink);margin-bottom:.75rem}
+.stitle{font-size:clamp(26px,4vw,36px);font-weight:800;margin-bottom:.75rem}
 .stitle em{font-style:normal;color:var(--red)}
 .sdesc{font-size:16px;color:var(--muted);max-width:680px;line-height:1.65}
-.divider{height:1px;background:var(--line);width:100%;max-width:960px;margin:0 auto}
-.diag-bg,.invest-bg,.steps-bg,.flow-bg{background:var(--soft)}
-.gap-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-@media(max-width:640px){.gap-grid{grid-template-columns:1fr}}
-.gap-card{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:1.4rem 1.6rem}
-.gap-num{font-family:Sora,sans-serif;font-size:28px;font-weight:900;color:var(--line);margin-bottom:.5rem}
-.gap-card h3{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:.4rem}
-.gap-card p{font-size:13px;color:var(--muted);line-height:1.55}
-.gap-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:.2rem .6rem;border-radius:6px;margin-bottom:.6rem}
-.tag-red{background:#fdeaea;color:var(--red)}
-.tag-orange{background:#fff3e0;color:#c85a00}
-.highlight-box{background:linear-gradient(135deg,#1a1a1a,#2b0606);border-radius:20px;padding:1.75rem 2rem;margin-top:1.5rem;display:flex;align-items:flex-start;gap:1.5rem}
-.highlight-box .hb-text{color:rgba(255,255,255,.88);font-size:15px;line-height:1.6}
-.highlight-box strong{color:#fff;font-size:18px;font-family:Sora,sans-serif;display:block;margin-bottom:.25rem}
-.method-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:.75rem;margin-top:2rem}
-@media(max-width:900px){.method-steps{grid-template-columns:1fr 1fr}}
-.ms{border-radius:18px;padding:1.2rem 1rem;border:1px solid var(--line);position:relative;overflow:hidden;background:#fff}
-.ms:nth-child(1){background:#fff3f3}.ms:nth-child(2){background:#fff8f0}.ms:nth-child(3){background:#f0f7ff}.ms:nth-child(4){background:#f0fff5}.ms:nth-child(5){background:#f7f0ff}
-.ms .mn{font-family:Sora,sans-serif;font-size:28px;font-weight:900;color:rgba(0,0,0,.07);position:absolute;top:.4rem;right:.6rem;line-height:1}
-.ms h3{font-size:15px;font-weight:800;margin-bottom:.4rem}
-.ms p{font-size:12.5px;color:var(--muted);line-height:1.5}
-.ms .badge{display:inline-block;background:var(--red);color:#fff;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .55rem;border-radius:8px;margin-bottom:.5rem}
-.timeline-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:2rem}
-@media(max-width:700px){.timeline-strip{grid-template-columns:1fr}}
-.tl-cell{padding:1rem;border-right:1px solid var(--line);background:#fff}
-.tl-cell:last-child{border-right:none}
-.tl-cell:nth-child(1),.tl-cell:nth-child(2),.tl-cell:nth-child(3){background:#fff3f3}
-.tl-mes{font-size:10px;font-weight:800;color:var(--red);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.35rem}
-.tl-fase{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:.4rem}
-.tl-items{font-size:11px;color:var(--muted);line-height:1.55}
-.del-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;margin-top:1.5rem}
+.vision-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem;margin-top:1.75rem}
+@media(max-width:800px){.vision-grid{grid-template-columns:1fr}}
+.vcard{border:1px solid var(--line);border-radius:22px;padding:1.5rem 1.4rem;background:#fff;display:flex;flex-direction:column}
+.vcard.full{border:2px solid var(--red);background:linear-gradient(180deg,#fff8f8,#fff)}
+.vcard .tag{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:.25rem .6rem;border-radius:8px;margin-bottom:.7rem}
+.vcard .tag.base{background:#eef6ee;color:#166534}
+.vcard .tag.plus{background:#fdeaea;color:var(--red)}
+.vcard h3{font-size:22px;margin-bottom:.4rem}
+.vcard .lead{font-size:14px;color:var(--muted);line-height:1.55;margin-bottom:1rem}
+.vcard .price{font-family:Sora,sans-serif;font-size:30px;font-weight:900;letter-spacing:-.03em;margin-top:auto;padding-top:1rem}
+.vcard .price small{font-size:15px}
+.vcard .subp{font-size:12px;color:var(--muted);margin-top:.3rem}
+.del-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;margin-top:1.35rem}
 @media(max-width:700px){.del-grid{grid-template-columns:1fr}}
 .del{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:1.15rem 1.2rem}
-.del h4{font-size:14px;font-weight:700;margin-bottom:.3rem}
-.del p{font-size:13px;color:var(--muted);line-height:1.5}
+.del.green{background:#f7fbf7;border-color:#cde8d3}
 .del .k{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:.35rem}
-.flow{margin-top:1.75rem}
-.flow-row{display:flex;align-items:stretch;gap:.5rem;flex-wrap:wrap;margin-bottom:.5rem}
-.flow-box{flex:1;min-width:140px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:.9rem .95rem;text-align:center}
-.flow-box .who{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:.3rem}
-.flow-box h4{font-size:13px;margin-bottom:.25rem}
-.flow-box p{font-size:11px;color:var(--muted);line-height:1.4}
-.flow-arrow{display:flex;align-items:center;color:var(--red);font-weight:800;font-size:18px}
-.flow-core{background:#1a1a1a;color:#fff;border:0}
-.flow-core .who{color:#ff6b6f}
-.flow-core h4,.flow-core p{color:#fff}
-.flow-core p{color:rgba(255,255,255,.7)}
-.persona{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.5rem}
-@media(max-width:640px){.persona{grid-template-columns:1fr}}
-.pcard{background:#fff;border:1px solid var(--line);border-radius:18px;padding:1.35rem 1.5rem}
-.pcard h3{font-size:16px;margin-bottom:.4rem}
-.pcard p{font-size:13px;color:var(--muted);line-height:1.55}
-.channel{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin-top:1.25rem}
-@media(max-width:800px){.channel{grid-template-columns:1fr 1fr}}
-.ch{background:#fff;border:1px solid var(--line);border-radius:14px;padding:1rem}
-.ch b{display:block;font-size:13px;margin-bottom:.25rem}
-.ch span{font-size:12px;color:var(--muted);line-height:1.45}
-.scenario-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.75rem;align-items:stretch}
-@media(max-width:800px){.scenario-grid{grid-template-columns:1fr}}
-.sc{background:#fff;border:1px solid var(--line);border-radius:22px;padding:1.6rem 1.5rem;display:flex;flex-direction:column}
-.sc.featured{border:2px solid var(--red);background:linear-gradient(180deg,#fff8f8,#fff);box-shadow:0 16px 40px rgba(227,4,10,.08)}
-.sc .tag{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:.25rem .6rem;border-radius:8px;margin-bottom:.7rem}
-.sc .tag.base{background:#eef6ee;color:#166534}
-.sc .tag.full{background:#fdeaea;color:var(--red)}
-.sc h3{font-size:20px;margin-bottom:.35rem}
-.sc .lead{font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:1rem}
-.sc ul{list-style:none;margin:0 0 1.1rem;flex:1}
-.sc li{font-size:13px;color:#333;padding:.32rem 0 .32rem 1.15rem;position:relative;line-height:1.45}
-.sc li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:800}
-.sc .from{font-size:13px;color:#9a9a9a;text-decoration:line-through;margin-bottom:.15rem}
-.sc .price{font-family:Sora,sans-serif;font-size:32px;font-weight:900;letter-spacing:-.03em;line-height:1.05}
-.sc .price small{font-size:16px;font-weight:700}
-.sc .subp{font-size:12px;color:var(--muted);margin:.35rem 0 0}
-.sc .ee{margin-top:.8rem;font-size:12px;background:#f8f4f0;border-radius:10px;padding:.7rem .8rem;color:#5c4a3a}
-.note{background:#fff8f0;border:1px solid #f5d5b0;border-radius:12px;padding:1rem 1.2rem;font-size:13px;color:#7d4b10;margin-top:1.25rem}
-.note strong{color:#a05a0a}
-.anchor{display:flex;justify-content:space-between;gap:1rem;align-items:center;background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.1rem 1.3rem;margin:1.25rem 0}
-.anchor .k{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
-.anchor .amt{font-family:Sora,sans-serif;font-size:26px;font-weight:900}
+.del.green .k{color:#166534}
+.del h4{font-size:14px;font-weight:700;margin-bottom:.3rem;display:flex;align-items:flex-start;gap:.45rem}
+.del h4 .ico{flex:0 0 auto}
+.del p{font-size:13px;color:var(--muted);line-height:1.5}
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;flex-wrap:wrap}
+.chip{font-size:12px;font-weight:700;padding:.4rem .75rem;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.invest-bg,.alt-bg{background:var(--soft)}
 .compare{width:100%;border-collapse:collapse;margin-top:1.5rem;font-size:13px}
-.compare th{text-align:left;background:#1a1a1a;color:#fff;padding:.7rem .8rem;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
-.compare td{border-bottom:1px solid var(--line);padding:.7rem .8rem;vertical-align:top}
+.compare th{text-align:left;background:#1a1a1a;color:#fff;padding:.75rem .85rem;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+.compare td{border-bottom:1px solid var(--line);padding:.7rem .85rem;vertical-align:top;background:#fff}
 .compare tr:nth-child(even) td{background:#faf8f7}
 .yes{color:var(--green);font-weight:800}
-.no{color:#bbb}
-.steps-list{display:flex;flex-direction:column;margin-top:1.75rem;position:relative}
-.steps-list::before{content:'';position:absolute;left:22px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--red),rgba(227,4,10,.1))}
-.step-item{display:flex;gap:1.25rem;padding:1.15rem 0;position:relative}
-.step-num{width:44px;height:44px;border-radius:50%;background:var(--red);color:#fff;font-family:Sora,sans-serif;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1}
-.step-body{padding-top:8px}
-.step-body strong{font-size:15px;font-weight:700;display:block;margin-bottom:.25rem}
-.step-body span{font-size:13px;color:var(--muted);line-height:1.55}
-.footer-cta{background:linear-gradient(150deg,#0d0d0d 0%,#1c0404 60%,#2b0606 100%);text-align:center;padding:5rem 1.5rem}
-.footer-cta h2{font-size:clamp(26px,4vw,40px);font-weight:900;color:#fff;margin-bottom:.75rem}
-.footer-cta p{font-size:16px;color:rgba(255,255,255,.65);max-width:520px;margin:0 auto 2rem;line-height:1.6}
-.footer-cta .btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--red);color:#fff;font-weight:700;font-size:16px;padding:1rem 2.5rem;border-radius:32px}
+.no{color:#bbb;font-weight:600}
+.note{background:#fff;border:1px solid var(--line);border-radius:12px;padding:1rem 1.2rem;font-size:13px;color:var(--muted);margin-top:1.25rem}
+.footer-cta{background:linear-gradient(150deg,#0d0d0d 0%,#1c0404 60%,#2b0606 100%);text-align:center;padding:4rem 1.5rem}
+.footer-cta h2{font-size:clamp(24px,4vw,36px);font-weight:900;color:#fff;margin-bottom:.7rem}
+.footer-cta p{font-size:16px;color:rgba(255,255,255,.65);max-width:520px;margin:0 auto;line-height:1.6}
 .footer-note{font-size:12px;color:rgba(255,255,255,.35);margin-top:1.25rem}
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
 .reveal.visible{opacity:1;transform:none}
-.prose p{margin:0 0 .85rem;font-size:15px;color:#333;line-height:1.65}
-.prose p strong{color:var(--ink)}
+.list-check{list-style:none;margin:0}
+.list-check li{position:relative;padding:.28rem 0 .28rem 1.2rem;font-size:13.5px;color:#333;line-height:1.45}
+.list-check li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:800}
 </style>
 </head>
 <body>
 <div id="prog"></div>
+<div class="dlbar" id="wordBar">
+  <p><b style="color:#fff">Proposta Bodega do Sertão</b> · entregáveis em duas visões · baixar para enviar</p>
+  <div class="btns">
+    <button type="button" id="btnPdf">Baixar PDF</button>
+    <button type="button" id="btnWord">Baixar Word</button>
+  </div>
+</div>
 <header class="topnav">
   <div class="logo">V4 <span>Company</span> × Bodega do Sertão</div>
   <nav>
-    <a href="#contexto">Contexto</a>
-    <a href="#processos">Processos</a>
-    <a href="#fluxo">Fluxograma</a>
-    <a href="#entregaveis">Entregáveis</a>
+    <a href="#visao-1">Visão 1 · ZapFirst</a>
+    <a href="#visao-2">Visão 2 · Execução total</a>
+    <a href="#comparativo">Comparativo</a>
     <a href="#investimento">Investimento</a>
-    <a href="#proximos">Próximos passos</a>
   </nav>
-  <a href="#investimento" class="cta-mini">Ver os dois cenários →</a>
 </header>
 
 <section class="hero" id="hero">
-  <div class="hero-grid">
-    <div>
-      <div class="hero-tag"><span></span> Proposta comercial detalhada · confidencial</div>
-      <h1>Levar Porto de Galinhas na mala — com <em>processo</em>, não com improviso.</h1>
-      <p class="hero-sub">A Bodega já vende para quem entra na loja. Esta proposta descreve, item a item, como o digital passa a atrair, responder, orientar, converter e aprender — nas duas formas de execução que Paulo e Cristiano pediram para analisar.</p>
-      <a href="#investimento" class="hero-cta">Ir para os dois cenários →</a>
-    </div>
-    <div>
-      <div class="hero-card">
-        <h3>Bodega do Sertão · Porto de Galinhas</h3>
-        <div class="kpi-grid">
-          <div class="kpi"><div class="val">3</div><div class="lbl">Unidades físicas</div></div>
-          <div class="kpi"><div class="val">2</div><div class="lbl">Personas (rua e resort)</div></div>
-          <div class="kpi"><div class="val">5</div><div class="lbl">Etapas da jornada</div></div>
-          <div class="kpi"><div class="val">2</div><div class="lbl">Cenários de investimento</div></div>
-        </div>
-        <div class="hero-award">
-          <p><strong>Paulo decide. Cristiano valida.</strong>Documento escrito para a análise combinada na reunião de 17/09 — e para a devolutiva de quarta-feira, 16h.</p>
-        </div>
-      </div>
-    </div>
+  <div class="inner">
+    <div class="hero-tag">Proposta comercial · entregáveis · confidencial</div>
+    <h1>Dois escopos. Uma máquina comercial. <em>Vocês escolhem o quanto a V4 executa.</em></h1>
+    <p class="hero-sub">Documento focado no que entra em cada visão: implementação ZapFirst ou execução total das pontas da operação — presença, WhatsApp, CRM, demanda e criativos.</p>
+    <a class="hero-cta" href="#visao-1">Ver os entregáveis →</a>
   </div>
 </section>
 
-<section id="contexto">
+<section id="visoes">
   <div class="inner">
     <div class="reveal">
-      <div class="slabel">Visão geral</div>
-      <h2 class="stitle">O físico já funciona. O digital ainda não tem o mesmo processo.</h2>
-      <p class="sdesc">Na última reunião da Estruturação Estratégica, o plano foi validado: identidade, LP, campanhas, WhatsApp e CRM. Faltava o documento discriminando o que entra em cada cenário — para vocês manterem, ajustarem ou iniciarem com clareza.</p>
+      <div class="slabel">Duas visões de escopo</div>
+      <h2 class="stitle">Escolha como o trabalho é feito.</h2>
+      <p class="sdesc">A Visão 1 instala a estrutura ZapFirst. A Visão 2 inclui essa estrutura e assume a execução direta de mídia, criativos e gestão.</p>
     </div>
-    <div class="prose reveal" style="margin-top:1.4rem">
-      <p>A Bodega do Sertão já construiu o que a maioria das marcas de souvenir ainda procura: loja cheia para quem passa na porta, produto com origem, três unidades em Porto de Galinhas e um time que conhece o turista. O diagnóstico da EE não apontou um negócio parado. Apontou um negócio que <strong>some quando o cliente não entra</strong>.</p>
-      <p>Se o visitante não atravessa a porta, não há processo de venda no digital. Não há atração rastreável. Não há dono da conversa no WhatsApp. Não há como saber por que o pedido fechou — ou por que se perdeu. E ainda existe o risco de a marca parecer o restaurante homônimo, ou de o turista sentir “preço de turista”.</p>
-      <p>O combinado na reunião foi espelhar no digital o que a loja já faz no físico: acolher, orientar a escolha e converter — com catálogo, Pix, script, SLA e um sistema que registra origem, etapa e próximo passo. A verba de mídia nas plataformas fica <strong>separada do honorário da V4</strong>. O orgânico das redes continua com o responsável que vocês já têm, no ritmo de <strong>três publicações por semana</strong>.</p>
-    </div>
-    <div class="gap-grid" style="margin-top:1.5rem">
-      <article class="gap-card reveal">
-        <div class="gap-num">01</div>
-        <div class="gap-tag tag-red">Dor principal</div>
-        <h3>Atendimento sem sistema</h3>
-        <p>WhatsApp ainda é conversa solta: sem responsável, SLA, catálogo organizado nem histórico único. Mensagem some. Follow-up depende de memória. Pós-venda não vira recompra nem indicação.</p>
-      </article>
-      <article class="gap-card reveal">
-        <div class="gap-num">02</div>
-        <div class="gap-tag tag-red">Dor principal</div>
-        <h3>Atração digital sem dono</h3>
-        <p>Quem busca bolo de rolo, cachaça, lembrança ou “perto de mim” precisa encontrar a Bodega — não o restaurante. Google, Maps, LP e Instagram precisam apontar para o mesmo WhatsApp.</p>
-      </article>
-      <article class="gap-card reveal">
-        <div class="gap-num">03</div>
-        <div class="gap-tag tag-orange">Risco de marca</div>
-        <h3>Homônimo e tom genérico</h3>
-        <p>Manual de identidade já aprovado. Campanhas bloqueiam restaurante, cardápio, almoço, buffet, vaga e fabricante. Comunicação acolhedora, simples, calorosa — sem “melhor preço” e sem cara de golpe de turista.</p>
-      </article>
-      <article class="gap-card reveal">
-        <div class="gap-num">04</div>
-        <div class="gap-tag tag-orange">Operação</div>
-        <h3>Estoque e loja no mesmo ritmo</h3>
-        <p>Venda online e presencial compartilham disponibilidade. Quando o item acabar, o script oferece alternativa ou prazo — sem prometer estoque infinito. Paulo não precisa carregar o digital sozinho.</p>
-      </article>
-    </div>
-    <div class="highlight-box reveal">
-      <div class="hb-text">
-        <strong>O que já está aprovado e não se discute de novo.</strong>
-        Manual de identidade visual. LP “Porto de Galinhas na mala”. Criativos de topo, meio e fundo de funil. Quatro campanhas no Google com negativos de restaurante. Investimento inicial de mídia em R$ 3.000/mês (70% Google · 30% Meta), pago direto nas plataformas. Parcerias com hotéis e guias ficam para a fase 2.
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<section id="processos">
-  <div class="inner">
-    <div class="reveal">
-      <div class="slabel">Processos do projeto</div>
-      <h2 class="stitle">Cinco etapas. Um único processo de venda: o WhatsApp.</h2>
-      <p class="sdesc">Atrair sem responder é desperdício. Responder sem orientar é conversa. Converter sem aprender é sorte. A Bodega passa a operar as cinco etapas no mesmo sistema.</p>
-    </div>
-    <div class="method-steps">
-      <article class="ms reveal"><div class="mn">01</div><div class="badge">Atrair</div><h3>Aparecer na intenção</h3><p>Google Search, Maps, Meta e orgânico encontram o turista na rua e o hóspede no resort — antes, durante e no último dia da viagem.</p></article>
-      <article class="ms reveal"><div class="mn">02</div><div class="badge">Responder</div><h3>Dono e SLA</h3><p>Toda conversa tem responsável e tempo máximo de resposta. Nada chega num WhatsApp vazio.</p></article>
-      <article class="ms reveal"><div class="mn">03</div><div class="badge">Orientar</div><h3>Escolha fácil</h3><p>Catálogo por ocasião: lembranças até R$ 25, presentes até R$ 50, sabores, artesanato. Acolhe, sugere, não empurra.</p></article>
-      <article class="ms reveal"><div class="mn">04</div><div class="badge">Converter</div><h3>Loja ou entrega</h3><p>Pix no chat, rota da unidade ou recebimento no resort. O pedido fecha sem sair do WhatsApp.</p></article>
-      <article class="ms reveal"><div class="mn">05</div><div class="badge">Aprender</div><h3>Origem e perda</h3><p>CRM registra canal, unidade, motivo de fechamento e motivo de perda. O mês seguinte se planeja com dado — não com feeling.</p></article>
-    </div>
-
-    <div class="persona">
-      <article class="pcard reveal">
-        <div class="slabel" style="margin-bottom:.4rem">Persona 1</div>
-        <h3>Turista em circulação</h3>
-        <p>Bate perna, quer experimentar cachaça e bolo de rolo, leva chaveiro para a família. Encontra a Bodega no Maps e na busca “perto de mim”. Quer entrar na loja — ou comprar no WhatsApp e retirar no mesmo dia.</p>
-      </article>
-      <article class="pcard reveal">
-        <div class="slabel" style="margin-bottom:.4rem">Persona 2</div>
-        <h3>Hóspede de resort</h3>
-        <p>Não sai. Compra pelo Search, pelo guia ou pela recepção. Quer receber na porta. A jornada é mais curta: encontra, escolhe no catálogo, paga no Pix, recebe.</p>
-      </article>
-    </div>
-
-    <div class="channel">
-      <div class="ch reveal"><b>1 · Google Search</b><span>Intenção declarada. Bolo de rolo, cachaça, artesanato, lembrança. Primeira prioridade de lançamento.</span></div>
-      <div class="ch reveal"><b>2 · Google Maps</b><span>Rota, horário, avaliações e as três unidades. Quem já está em Porto de Galinhas.</span></div>
-      <div class="ch reveal"><b>3 · Meta Ads</b><span>Desejo visual. Descoberta, meio de funil e último dia de viagem.</span></div>
-      <div class="ch reveal"><b>4 · Orgânico</b><span>Três posts/semana. Desejo, seleção, origem e confiança/bastidores. Execução com o responsável de vocês.</span></div>
-    </div>
-
-    <div class="reveal" style="margin-top:2rem">
-      <div class="slabel">Como o projeto anda no tempo</div>
-      <h2 class="stitle" style="font-size:28px">ZapFirst instala a máquina em 3 meses. A geração de demanda começa no mês 1.</h2>
-    </div>
-    <div class="timeline-strip reveal">
-      <div class="tl-cell"><div class="tl-mes">Semanas 1–2</div><div class="tl-fase">Setup digital</div><div class="tl-items">GMB das 3 unidades<br>Instagram + CTA<br>LP no ar<br>WhatsApp Business</div></div>
-      <div class="tl-cell"><div class="tl-mes">Mês 1–2</div><div class="tl-fase">Produto e processo</div><div class="tl-items">Catálogo por ocasião<br>Pix no chat<br>Scripts e SLA<br>Fluxo documentado</div></div>
-      <div class="tl-cell"><div class="tl-mes">Mês 2–3</div><div class="tl-fase">Pessoas, CRM e IA</div><div class="tl-items">Treinamento do time<br>Kommo live<br>Réguas de recompra<br>SDR de IA</div></div>
-      <div class="tl-cell"><div class="tl-mes">Mês 1 em diante</div><div class="tl-fase">Demanda (cenário 2)</div><div class="tl-items">Google 70% / Meta 30%<br>Criativos do funil<br>Relatório mensal<br>Gate de estoque</div></div>
-      <div class="tl-cell"><div class="tl-mes">Fase 2</div><div class="tl-fase">Parcerias</div><div class="tl-items">Hotéis e guias<br>Código de indicação<br>Só com a casa estável<br>Teste mensal</div></div>
-    </div>
-    <p class="note reveal"><strong>Pessoas:</strong> não contratam time extra antes da demanda existir. O setup dos primeiros 15 dias estrutura canal e CRM. A campanha não roda o mês 1 inteiro. Uma pessoa no WhatsApp dá conta do início — a próxima contratação entra quando a trava for pessoa, não antes.</p>
-  </div>
-</section>
-
-<section class="flow-bg" id="fluxo">
-  <div class="inner">
-    <div class="reveal">
-      <div class="slabel">Fluxograma · como fica pronto</div>
-      <h2 class="stitle">Do Google à recompra, tudo desemboca no mesmo WhatsApp.</h2>
-      <p class="sdesc">Este é o TO-BE da operação. Paulo vê trimestre e prioridade. Cristiano valida estratégia e operação. O Account orquestra. A loja atende com script.</p>
-    </div>
-    <div class="flow reveal">
-      <div class="flow-row">
-        <div class="flow-box"><div class="who">Direção</div><h4>Paulo Gouveia</h4><p>Decisor final. Budget, prioridade e trimestre — não o WhatsApp do dia.</p></div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-box"><div class="who">Validação</div><h4>Cristiano Gomes</h4><p>Valida estratégia e operação. Aprova arte e ritmo com o time da casa.</p></div>
-      </div>
-      <div class="flow-row">
-        <div class="flow-box flow-core" style="flex:1 1 100%"><div class="who">Sistema</div><h4>ZapFirst + CRM Kommo + Account V4</h4><p>Grupo diário · check-in quinzenal · recap mensal · 90 dias. Sem caixa-preta. Marketing e comercial na mesma página — inclusive estoque.</p></div>
-      </div>
-      <div class="flow-row">
-        <div class="flow-box"><div class="who">01 · Atração</div><h4>Origem com dono</h4><p>Search, Maps, Meta, LP e orgânico. Negativos de restaurante. CTA único: WhatsApp.</p></div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-box"><div class="who">02 · Conversa</div><h4>Atendimento com SLA</h4><p>Catálogo, script, Pix, responsável. Turista na loja ou entrega no resort.</p></div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-box"><div class="who">03 · Sistema</div><h4>Funil visível</h4><p>Etapa, unidade, origem e motivo de perda. Régua de recompra e indicação.</p></div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-box"><div class="who">04 · Cliente</div><h4>Pedido com dono</h4><p>Retira, recebe ou volta. A Bodega não se confunde com o homônimo.</p></div>
-      </div>
-    </div>
-    <pre class="reveal" style="display:none" aria-hidden="true">
-flowchart LR
-  A[Google / Maps / Meta / Orgânico] --> B[LP + GMB]
-  B --> C[WhatsApp com catálogo Pix script SLA]
-  C --> D[CRM Kommo]
-  D --> E[Conversão loja ou entrega]
-  E --> F[Pós-venda e recompra]
-  F --> G[Aprender origem e perda]
-    </pre>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<section id="entregaveis">
-  <div class="inner">
-    <div class="reveal">
-      <div class="slabel">Entregáveis</div>
-      <h2 class="stitle">Tudo o que entra — discriminado, como combinado.</h2>
-      <p class="sdesc">Cristiano pediu o arquivo bem dividido para vocês verem o que manter e o que ajustar. Abaixo está a lista exaustiva. O Cenário 2 inclui o Cenário 1 por completo.</p>
-    </div>
-
-    <h3 class="reveal" style="margin:1.6rem 0 .4rem;font-size:20px">Cenário 1 · Implementação ZapFirst</h3>
-    <p class="sdesc reveal">Projeto de <strong>3 meses</strong>. A V4 instala a máquina comercial. O time da casa opera o dia a dia do WhatsApp e o orgânico, com playbook e treino.</p>
-    <div class="del-grid">
-      <article class="del reveal"><div class="k">01 · Presença</div><h4>Setup completo (GMB, Instagram, LP/Site)</h4><p>Google Meu Negócio das três unidades com WhatsApp como ação principal. Instagram com CTA. LP “Porto de Galinhas na mala” no ar, com rota e botão de conversa acima da dobra.</p></article>
-      <article class="del reveal"><div class="k">02 · Canal</div><h4>WhatsApp Business estruturado</h4><p>Número comercial, janela de atendimento, responsáveis, etiquetas por unidade e ocasião. A conversa deixa de ser caixa de mensagem.</p></article>
-      <article class="del reveal"><div class="k">03 · Oferta</div><h4>Catálogo de produtos + Pix integrado</h4><p>Lembranças, presentes, sabores e artesanato organizados por tipo, preço e motivo de compra. QR e link de Pix no próprio chat.</p></article>
-      <article class="del reveal"><div class="k">04 · Roteiro</div><h4>Scripts de atendimento (todas as etapas)</h4><p>Recepção, qualificação, sugestão, objeção, estoque indisponível, fechamento e pós-venda. Tom acolhedor — nunca “preço de turista”.</p></article>
-      <article class="del reveal"><div class="k">05 · Método</div><h4>Fluxo comercial documentado</h4><p>Do primeiro contato ao pedido pago. SLA de resposta. Caminho loja vs. entrega no resort. Paulo sai do loop operacional do chat.</p></article>
-      <article class="del reveal"><div class="k">06 · Pessoas</div><h4>Treinamento do time</h4><p>Capacitação de quem atende hoje + playbook editável. Não é preciso contratar gente nova para começar.</p></article>
-      <article class="del reveal"><div class="k">07 · Sistema</div><h4>CRM Kommo configurado</h4><p>O painel que vocês viram na reunião: etapas do funil, origem, unidade, motivo de perda. Treinamento incluso.</p></article>
-      <article class="del reveal"><div class="k">08 · Base</div><h4>Réguas de recompra e reativação</h4><p>Quem já comprou e quem abandonou o chat entram em sequência. Pós-venda vira indicação — não só agradecimento.</p></article>
-      <article class="del reveal"><div class="k">09 · Escala</div><h4>SDR de Inteligência Artificial</h4><p>Primeiro atendimento automático depois que produto, processo e pessoas estão no ar. IA em cima de caos não entra.</p></article>
-      <article class="del reveal"><div class="k">10 · Encerramento</div><h4>Relatório final + diagnóstico de maturidade</h4><p>O que foi instalado, o que o time já opera sozinho e o próximo passo — com números da operação, não com feeling.</p></article>
-    </div>
-
-    <h3 class="reveal" style="margin:2.2rem 0 .4rem;font-size:20px">Cenário 2 · Execução total (tudo do ZapFirst, mais)</h3>
-    <p class="sdesc reveal">A mesma estratégia. A diferença: a V4 <strong>executa na prática</strong> a geração de demanda, os criativos e a gestão das campanhas. Vocês aprovam. O time opera.</p>
-    <div class="del-grid">
-      <article class="del reveal"><div class="k">Tudo do plano base</div><h4>ZapFirst Completo incluso</h4><p>Os 10 entregáveis do Cenário 1 entram inteiros. A máquina comercial é a mesma. O que muda é quem puxa a demanda e quem gera a peça.</p></article>
-      <article class="del reveal"><div class="k">Aquisição</div><h4>Estratégia de mídia paga (Google + Meta)</h4><p>Quatro campanhas no Google (~70% da verba): proteção de marca, lembranças, produtos regionais e “perto de mim”. Meta no desejo visual. Negativos de restaurante travados.</p></article>
-      <article class="del reveal"><div class="k">Criação</div><h4>Criativos (artes + copies)</h4><p>Account + gestor de tráfego + copy + design. Peças de descoberta, consideração e último dia de viagem — na identidade já aprovada.</p></article>
-      <article class="del reveal"><div class="k">Operação</div><h4>Gestão das campanhas no ciclo</h4><p>Lead gen começa no mês 1, junto com o setup. Otimização contínua. Gate de estoque e Black Friday entram no planejamento — não como surpresa de novembro.</p></article>
-      <article class="del reveal"><div class="k">Ritmo</div><h4>Relatório mensal de performance da mídia</h4><p>Grupo diário, check-in quinzenal, recap do mês e reunião de 90 dias. A projeção de 17/09 se recorre aos 30 dias com dado real.</p></article>
-      <article class="del reveal"><div class="k">Transparência</div><h4>Orçamento de mídia separado</h4><p>R$ 3.000/mês nas plataformas (70/30), pagos por vocês direto ao Google e à Meta. Não passam pelo honorário da V4.</p></article>
-    </div>
-  </div>
-</section>
-
-<section class="invest-bg" id="investimento">
-  <div class="inner">
-    <div class="reveal">
-      <div class="slabel">Opções de investimento</div>
-      <h2 class="stitle">Duas visões. Vocês escolhem o quanto a V4 executa.</h2>
-      <p class="sdesc">O honorário da V4 é uma coisa. A verba de mídia nas plataformas é outra. Os dois números não se misturam — como Paulo confirmou na reunião.</p>
-    </div>
-
-    <div class="anchor reveal">
-      <div>
-        <div class="k">Valor de referência do time completo</div>
-        <p style="font-size:13px;color:var(--muted);margin-top:.25rem">Account, tráfego, copy, design e estruturação comercial — o que foi apresentado em 17/09.</p>
-      </div>
-      <div class="amt">R$ 12.000<span style="font-size:14px;font-weight:700;color:var(--muted)">/mês</span></div>
-    </div>
-
-    <div class="scenario-grid">
-      <article class="sc reveal">
-        <span class="tag base">Cenário 1 · implementação</span>
-        <h3>ZapFirst Completo</h3>
-        <p class="lead">A V4 instala a estrutura inteira em <strong>3 meses</strong>. Vocês operam o WhatsApp e o orgânico com o time que já existe. Pago em 12x no cartão.</p>
-        <ul>
-          <li>Os 10 entregáveis do Plano Base</li>
-          <li>GMB, Instagram, LP, WhatsApp, catálogo e Pix</li>
-          <li>Scripts, fluxo, treino, Kommo, réguas e SDR de IA</li>
-          <li>Relatório final + diagnóstico de maturidade</li>
+    <div class="vision-grid">
+      <article class="vcard reveal">
+        <span class="tag base">Visão 1</span>
+        <h3>Somente ZapFirst</h3>
+        <p class="lead">Implementação da máquina comercial no WhatsApp, presença digital, catálogo, CRM e treinamento. O time da casa opera o dia a dia depois da instalação.</p>
+        <ul class="list-check">
+          <li>10 entregáveis de implementação</li>
+          <li>Projeto de 3 meses</li>
           <li>Mídia paga e criativos contínuos ficam fora</li>
         </ul>
         <div class="price">12× R$ 4.950<small>,00</small></div>
-        <p class="subp">Total do ciclo · R$ 59.400,00 · projeto de 3 meses · pago em 12x</p>
-        <div class="ee">Indicado se a prioridade agora é ter o comercial no ar e gerar demanda com a casa, no ritmo do responsável de redes que vocês já têm.</div>
+        <p class="subp">Total R$ 59.400,00 · pago em 12x no cartão</p>
       </article>
-      <article class="sc featured reveal">
-        <span class="tag full">Cenário 2 · execução total · recomendado</span>
-        <h3>ZapFirst + Done-for-you</h3>
-        <p class="lead">A mesma estratégia, com a V4 executando <strong>absolutamente tudo na prática</strong>: máquina comercial + origem + criativo + gestão. Vocês aprovam. Cinco especialistas no ciclo.</p>
-        <ul>
-          <li>Tudo do Cenário 1 incluso</li>
-          <li>Estratégia e gestão de Google + Meta</li>
-          <li>Artes e copies no manual já aprovado</li>
-          <li>Lead gen no mês 1, junto com o setup</li>
-          <li>Relatório mensal e rotina Colli (diário, 15 dias, mês, 90 dias)</li>
+      <article class="vcard full reveal">
+        <span class="tag plus">Visão 2</span>
+        <h3>Execução total</h3>
+        <p class="lead">Tudo do ZapFirst, com a V4 executando as pontas na prática: estratégia de mídia, artes, copies, gestão de campanha e relatório de performance.</p>
+        <ul class="list-check">
+          <li>Todos os entregáveis da Visão 1</li>
+          <li>Google + Meta, criativos e gestão no ciclo</li>
+          <li>Lead gen começa no mês 1, junto com o setup</li>
         </ul>
-        <div class="from">era R$ 12.000,00 / mês</div>
         <div class="price">12× R$ 8.500<small>,00</small></div>
-        <p class="subp">Total do ciclo · R$ 102.000,00 · cartão · ZapFirst em 3 meses + squad no ciclo</p>
-        <div class="ee"><strong>Reconhecimento da EE − R$ 14.050,00</strong> + condição exclusiva desta conta. O mapa já pago não se paga de novo. A verba de mídia (R$ 3.000/mês) continua à parte.</div>
+        <p class="subp">Total R$ 102.000,00 · pago em 12x no cartão</p>
       </article>
     </div>
-
-    <table class="compare reveal">
-      <thead>
-        <tr><th>O que entra</th><th>Cenário 1 · ZapFirst</th><th>Cenário 2 · Execução total</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Setup GMB, Instagram e LP</td><td class="yes">Sim</td><td class="yes">Sim</td></tr>
-        <tr><td>WhatsApp, catálogo, Pix, scripts e fluxo</td><td class="yes">Sim</td><td class="yes">Sim</td></tr>
-        <tr><td>Treinamento + CRM Kommo + réguas + SDR de IA</td><td class="yes">Sim</td><td class="yes">Sim</td></tr>
-        <tr><td>Diagnóstico de maturidade ao final da implementação</td><td class="yes">Sim</td><td class="yes">Sim</td></tr>
-        <tr><td>Estratégia e gestão de mídia paga (Google + Meta)</td><td class="no">Não</td><td class="yes">Sim · começa no mês 1</td></tr>
-        <tr><td>Criação contínua de artes e copies</td><td class="no">Não</td><td class="yes">Sim</td></tr>
-        <tr><td>Account + tráfego + copy + design no ritmo Colli</td><td class="no">Não</td><td class="yes">Sim · 12 meses</td></tr>
-        <tr><td>Relatório mensal de performance da mídia</td><td class="no">Não</td><td class="yes">Sim</td></tr>
-        <tr><td>Honorário V4</td><td>12× R$ 4.950,00</td><td>12× R$ 8.500,00</td></tr>
-        <tr><td>Verba nas plataformas (Google/Meta)</td><td>À parte, se quiserem ligar depois</td><td>R$ 3.000/mês · 70/30 · pago direto</td></tr>
-      </tbody>
-    </table>
-
-    <p class="note reveal"><strong>Por que o Cenário 2 existe:</strong> instalar o WhatsApp e não gerar demanda deixa a máquina ociosa. Gerar demanda sem ZapFirst deixa o turista falando sozinho. A execução total junta as duas pontas no mesmo ciclo — e é o desenho que a sala validou em 17/09, com a condição exclusiva de 12× R$ 8.500,00.</p>
-    <p class="note reveal" style="background:#f3f8f4;border-color:#bbf7d0;color:#166534"><strong>Piso conservador da reunião (não é meta nem garantia):</strong> com R$ 3.000 de mídia, a simulação apresentada estimou cerca de 65 leads e 12 vendas no primeiro mês, com ticket de referência de R$ 89. Cristiano classificou esse número como “o mínimo do mínimo”. Aos 30 dias a planilha se refaz com dado real da Bodega.</p>
   </div>
 </section>
 
-<section class="steps-bg" id="proximos">
+<section class="alt-bg" id="visao-1">
+  <div class="inner">
+    <div class="section-head reveal">
+      <div>
+        <div class="slabel">Visão 1 · somente ZapFirst</div>
+        <h2 class="stitle">Os 10 entregáveis da implementação.</h2>
+        <p class="sdesc">Foco único: deixar o canal, o catálogo, o processo e o sistema no ar — prontos para o time da Bodega operar.</p>
+      </div>
+      <span class="chip">Projeto de 3 meses</span>
+    </div>
+    <div class="del-grid">
+      <article class="del reveal"><div class="k">01 · Presença</div><h4><span class="ico">📍</span> Setup completo (GMB, Instagram, LP/Site)</h4><p>Google Meu Negócio das três unidades com WhatsApp como ação principal. Instagram com CTA. Landing page no ar, com rota das lojas e botão de conversa acima da dobra.</p></article>
+      <article class="del reveal"><div class="k">02 · Canal</div><h4><span class="ico">💬</span> WhatsApp Business estruturado</h4><p>Número comercial, janela de atendimento, responsáveis, etiquetas por unidade e ocasião de compra. Cada conversa tem dono e histórico.</p></article>
+      <article class="del reveal"><div class="k">03 · Oferta</div><h4><span class="ico">📦</span> Catálogo de produtos + Pix integrado</h4><p>Lembranças, presentes, sabores e artesanato organizados por tipo, preço e motivo de compra. QR e link de Pix no próprio chat.</p></article>
+      <article class="del reveal"><div class="k">04 · Roteiro</div><h4><span class="ico">📝</span> Scripts de atendimento (todas as etapas)</h4><p>Recepção, qualificação, sugestão, objeção, item indisponível, fechamento e pós-venda. Tom acolhedor, claro e padronizado.</p></article>
+      <article class="del reveal"><div class="k">05 · Método</div><h4><span class="ico">🔄</span> Fluxo comercial documentado</h4><p>Do primeiro contato ao pedido pago. SLA de resposta. Caminho para retirada na loja ou entrega. Playbook permanente.</p></article>
+      <article class="del reveal"><div class="k">06 · Pessoas</div><h4><span class="ico">🎓</span> Treinamento do time</h4><p>Capacitação de quem atende + material editável. O time opera com processo, não com improviso.</p></article>
+      <article class="del reveal"><div class="k">07 · Sistema</div><h4><span class="ico">📊</span> CRM Kommo configurado</h4><p>Pipeline no WhatsApp: etapas do funil, origem, unidade e motivo de perda. Treinamento de uso incluso.</p></article>
+      <article class="del reveal"><div class="k">08 · Base</div><h4><span class="ico">🔁</span> Réguas de recompra e reativação</h4><p>Quem já comprou e quem abandonou o chat entram em sequência. Pós-venda vira rotina, não exceção.</p></article>
+      <article class="del reveal"><div class="k">09 · Escala</div><h4><span class="ico">🤖</span> SDR de Inteligência Artificial</h4><p>Primeiro atendimento automático depois que produto, processo e pessoas estão no ar.</p></article>
+      <article class="del reveal"><div class="k">10 · Encerramento</div><h4><span class="ico">✅</span> Relatório final + diagnóstico de maturidade</h4><p>O que foi instalado, o que o time já opera sozinho e o próximo passo da operação.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="visao-2">
+  <div class="inner">
+    <div class="section-head reveal">
+      <div>
+        <div class="slabel">Visão 2 · execução total</div>
+        <h2 class="stitle">Tudo do ZapFirst, <em>mais a execução direta</em> das pontas.</h2>
+        <p class="sdesc">A V4 assume implementação e operação: demanda, criativos, gestão de campanha e relatório. A Bodega aprova. O time executa.</p>
+      </div>
+      <span class="chip">ZapFirst + operação contínua</span>
+    </div>
+    <div class="del-grid">
+      <article class="del green reveal"><div class="k">Incluso</div><h4><span class="ico">✓</span> Todos os 10 entregáveis da Visão 1</h4><p>Setup, WhatsApp, catálogo, Pix, scripts, fluxo, treinamento, Kommo, réguas, SDR de IA e diagnóstico de maturidade entram por completo.</p></article>
+      <article class="del green reveal"><div class="k">Aquisição</div><h4><span class="ico">🎯</span> Estratégia de mídia paga (Google + Meta)</h4><p>Campanhas de busca, Maps e Instagram com tese por intenção: marca, lembranças, produtos regionais e proximidade. Negativos de restaurante no Google.</p></article>
+      <article class="del green reveal"><div class="k">Criação</div><h4><span class="ico">🎨</span> Criativos (artes + copies)</h4><p>Peças de descoberta, consideração e conversão na identidade da Bodega. Account, tráfego, copy e design no mesmo ciclo.</p></article>
+      <article class="del green reveal"><div class="k">Operação</div><h4><span class="ico">⚙️</span> Gestão das campanhas no ciclo</h4><p>Lead gen começa no mês 1, junto com o setup. Otimização contínua, alinhada a estoque e calendário da casa.</p></article>
+      <article class="del green reveal"><div class="k">Ritmo</div><h4><span class="ico">📈</span> Relatório mensal de performance da mídia</h4><p>Origem, conversa, conversão e próximo ajuste. Grupo de operação, check-in e recap do mês — sem caixa-preta.</p></article>
+      <article class="del green reveal"><div class="k">Transparência</div><h4><span class="ico">💳</span> Orçamento de mídia separado</h4><p>Investimento nas plataformas (Google Ads e Meta Ads) é pago diretamente pela Bodega. Honorário da V4 não se mistura com a verba de mídia.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="invest-bg" id="comparativo">
   <div class="inner">
     <div class="reveal">
-      <div class="slabel">Próximos passos</div>
-      <h2 class="stitle">Devolutiva na quarta, 16h. Vocês trazem o cenário.</h2>
-      <p class="sdesc">Não precisamos de um sim ou não seco. Precisamos da transparência que a Rafaela pediu: o que vocês mantêm, o que ajustam e em qual cenário a Bodega começa.</p>
+      <div class="slabel">Leitura rápida</div>
+      <h2 class="stitle">O que entra em cada visão.</h2>
+      <p class="sdesc">A Visão 2 contém 100% da Visão 1. A diferença é a execução contínua da demanda e dos criativos.</p>
     </div>
-    <div class="steps-list">
-      <div class="step-item reveal"><div class="step-num">01</div><div class="step-body"><strong>Paulo e Cristiano analisam este documento</strong><span>Marcar o que é inegociável e o que pode sair. O Cenário 1 e o Cenário 2 já vêm separados para essa conversa.</span></div></div>
-      <div class="step-item reveal"><div class="step-num">02</div><div class="step-body"><strong>Devolutiva · quarta-feira, 16h</strong><span>Alinhamos o cenário escolhido, a forma de pagamento no cartão e o kick-off. Aline envia o convite.</span></div></div>
-      <div class="step-item reveal"><div class="step-num">03</div><div class="step-body"><strong>Contrato + kick-off</strong><span>Acessos, catálogo, unidades, responsável de redes e o grupo de operação. Setup das duas primeiras semanas.</span></div></div>
-      <div class="step-item reveal"><div class="step-num">04</div><div class="step-body"><strong>Play na máquina</strong><span>LP e WhatsApp no ar. No Cenário 2, campanhas ligam após o setup — sem esperar a casa perfeita nem contratar folha extra.</span></div></div>
+    <table class="compare reveal">
+      <thead>
+        <tr>
+          <th>Entregável</th>
+          <th>Visão 1 · ZapFirst</th>
+          <th>Visão 2 · Execução total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Setup GMB, Instagram e LP/site</td><td class="yes">Incluso</td><td class="yes">Incluso</td></tr>
+        <tr><td>WhatsApp Business estruturado</td><td class="yes">Incluso</td><td class="yes">Incluso</td></tr>
+        <tr><td>Catálogo de produtos + Pix</td><td class="yes">Incluso</td><td class="yes">Incluso</td></tr>
+        <tr><td>Scripts de atendimento (todas as etapas)</td><td class="yes">Incluso</td><td class="yes">Incluso</td></tr>
+        <tr><td>Fluxo comercial documentado</td><td class="yes">Incluso</td><td class="yes">Incluso</td></tr>
+        <tr><td>Treinamento do time</td><td class="yes">Incluso</td><td class="yes">Incluso</td></tr>
+        <tr><td>CRM Kommo configurado</td><td class="yes">Incluso</td><td class="yes">Incluso</td></tr>
+        <tr><td>Réguas de recompra e reativação</td><td class="yes">Incluso</td><td class="yes">Incluso</td></tr>
+        <tr><td>SDR de Inteligência Artificial</td><td class="yes">Incluso</td><td class="yes">Incluso</td></tr>
+        <tr><td>Relatório final + diagnóstico de maturidade</td><td class="yes">Incluso</td><td class="yes">Incluso</td></tr>
+        <tr><td>Estratégia de mídia paga (Google + Meta)</td><td class="no">Fora</td><td class="yes">Incluso</td></tr>
+        <tr><td>Criação de criativos (artes + copies)</td><td class="no">Fora</td><td class="yes">Incluso</td></tr>
+        <tr><td>Gestão das campanhas no ciclo</td><td class="no">Fora</td><td class="yes">Incluso · mês 1</td></tr>
+        <tr><td>Relatório mensal de performance da mídia</td><td class="no">Fora</td><td class="yes">Incluso</td></tr>
+        <tr><td>Orçamento de mídia nas plataformas</td><td class="no">Fora</td><td>Separado e transparente</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="investimento">
+  <div class="inner">
+    <div class="reveal">
+      <div class="slabel">Investimento</div>
+      <h2 class="stitle">Honorário da V4 em cada visão.</h2>
+      <p class="sdesc">Pagamento no cartão, em 12x. A verba de mídia nas plataformas, quando houver, é paga direto ao Google e à Meta.</p>
     </div>
+    <div class="vision-grid">
+      <article class="vcard reveal">
+        <span class="tag base">Visão 1 · ZapFirst</span>
+        <h3>Implementação</h3>
+        <p class="lead">Os 10 entregáveis do ZapFirst. Projeto de 3 meses, pago em 12x.</p>
+        <div class="price">12× R$ 4.950<small>,00</small></div>
+        <p class="subp">Total do ciclo · R$ 59.400,00</p>
+      </article>
+      <article class="vcard full reveal">
+        <span class="tag plus">Visão 2 · Execução total</span>
+        <h3>Implementação + operação</h3>
+        <p class="lead">ZapFirst + execução direta de mídia, criativos e gestão no ciclo.</p>
+        <div class="price">12× R$ 8.500<small>,00</small></div>
+        <p class="subp">Total do ciclo · R$ 102.000,00</p>
+      </article>
+    </div>
+    <p class="note reveal">Honorário da V4 e investimento nas plataformas de anúncio são linhas distintas. Na Visão 2, a V4 desenha, cria, gere e reporta; a Bodega paga a mídia direto nas contas de anúncio.</p>
   </div>
 </section>
 
 <section class="footer-cta">
-  <h2>A loja já converte quem entra.</h2>
-  <p>Este documento existe para o digital converter quem ainda não entrou — com o mesmo acolhimento da Bodega, e com um processo que Paulo e Cristiano conseguem ver.</p>
-  <a class="btn" href="#investimento">Rever os dois cenários</a>
-  <div class="footer-note">Proposta válida por 7 dias · V4 Company × Bodega do Sertão · confidencial · EE reconhecida · mídia à parte</div>
+  <h2>Duas visões. O mesmo padrão de entrega.</h2>
+  <p>ZapFirst instala a máquina. Execução total opera a máquina — presença, conversa, demanda e criativo no mesmo sistema.</p>
+  <div class="footer-note">Proposta comercial · V4 Company × Bodega do Sertão · confidencial</div>
 </section>
 
 <script>
-const prog = document.getElementById('prog');
-window.addEventListener('scroll', () => {
-  const h = document.documentElement.scrollHeight - window.innerHeight;
-  prog.style.width = (h ? window.scrollY / h * 100 : 0) + '%';
-});
-const navLinks = document.querySelectorAll('.topnav nav a');
-const sections = Array.from(document.querySelectorAll('section[id]'));
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
-    }
+(function () {
+  var prog = document.getElementById('prog');
+  window.addEventListener('scroll', function () {
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    prog.style.width = (h ? window.scrollY / h * 100 : 0) + '%';
   });
-}, { rootMargin: '-40% 0px -55% 0px' });
-sections.forEach(s => obs.observe(s));
-const reveals = document.querySelectorAll('.reveal');
-const ro = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
-}, { rootMargin: '0px 0px -60px 0px', threshold: 0.08 });
-reveals.forEach(r => ro.observe(r));
+  var navLinks = document.querySelectorAll('.topnav nav a');
+  var sections = Array.from(document.querySelectorAll('section[id]'));
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        navLinks.forEach(function (a) {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id);
+        });
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(function (s) { obs.observe(s); });
+  var reveals = document.querySelectorAll('.reveal');
+  var ro = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); }
+    });
+  }, { rootMargin: '0px 0px -60px 0px', threshold: 0.08 });
+  reveals.forEach(function (r) { ro.observe(r); });
+
+  function cloneForExport() {
+    var clone = document.documentElement.cloneNode(true);
+    var bar = clone.querySelector('#wordBar');
+    if (bar) bar.remove();
+    var scripts = clone.querySelectorAll('script');
+    for (var i = 0; i < scripts.length; i++) scripts[i].remove();
+    clone.querySelectorAll('.reveal').forEach(function (el) {
+      el.classList.add('visible');
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    });
+    return clone;
+  }
+  function downloadBlob(blob, filename) {
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1500);
+  }
+  var btnWord = document.getElementById('btnWord');
+  if (btnWord) {
+    btnWord.addEventListener('click', function () {
+      var html = '<!DOCTYPE html>\n' + cloneForExport().outerHTML;
+      downloadBlob(new Blob(['\ufeff', html], { type: 'application/msword' }), 'Proposta-Bodega-do-Sertao-entregaveis.doc');
+    });
+  }
+  var btnPdf = document.getElementById('btnPdf');
+  if (btnPdf) {
+    btnPdf.addEventListener('click', function () {
+      window.print();
+    });
+  }
+})();
 </script>
 </body>
 </html>
