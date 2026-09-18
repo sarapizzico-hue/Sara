@@ -171,6 +171,35 @@ section{width:100%;padding:5rem 1.5rem}
 .footer-note{font-size:12px;color:rgba(255,255,255,.35);margin-top:1.25rem}
 .quote-fabio{border-left:4px solid var(--red);padding:.2rem 0 .2rem 1.1rem;margin:1.25rem 0;font-size:16px;font-weight:600;line-height:1.5}
 .quote-fabio span{display:block;margin-top:.35rem;font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.vs-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.75rem}
+@media(max-width:700px){.vs-grid{grid-template-columns:1fr}}
+.vs-card{border-radius:20px;padding:1.6rem 1.7rem;border:1px solid var(--line)}
+.vs-card.before{background:#fff;border-color:var(--line)}
+.vs-card.after{background:linear-gradient(160deg,#0d0d0d,#1c0404);color:#fff;border:none}
+.vs-kicker{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.5rem}
+.vs-card.before .vs-kicker{color:var(--muted)}
+.vs-card.after .vs-kicker{color:rgba(255,180,180,.85)}
+.vs-card h3{font-size:20px;margin-bottom:1rem}
+.vs-card.after h3{color:#fff}
+.vs-card ul{padding-left:1.1rem}
+.vs-card li{font-size:13px;margin:.45rem 0;line-height:1.5;color:var(--muted)}
+.vs-card.after li{color:rgba(255,255,255,.78)}
+.vs-card li strong{color:var(--ink)}
+.vs-card.after li strong{color:#fff}
+.path-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:1.75rem}
+@media(max-width:760px){.path-grid{grid-template-columns:1fr}}
+.path-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:1.6rem 1.7rem}
+.path-card.full{border-color:#f5bfbf;background:#fff8f8}
+.path-card .tag{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--red);margin-bottom:.5rem}
+.path-card h3{font-size:18px;margin-bottom:.4rem}
+.path-card .lead{font-size:13px;color:var(--muted);line-height:1.55;margin-bottom:1rem}
+.path-card ol{padding-left:1.2rem}
+.path-card li{font-size:13px;color:var(--muted);margin:.45rem 0;line-height:1.5}
+.path-card li strong{color:var(--ink)}
+.team-row{display:flex;flex-wrap:wrap;gap:.4rem;margin:0.85rem 0 1rem}
+.chip{font-size:11px;font-weight:700;background:#fdeaea;color:var(--red);padding:.28rem .65rem;border-radius:20px}
+.price-hero.alt{background:linear-gradient(135deg,#111,#1a1a1a)}
+.ph-badge .pbs{font-size:12px;color:rgba(255,255,255,.55);margin-top:.25rem}
 @media print{
   .topnav,#prog,.hero-cta,.footer-cta .btn{display:none!important}
   body{overflow:visible}
@@ -185,12 +214,9 @@ section{width:100%;padding:5rem 1.5rem}
 <header class="topnav">
   <div class="logo">V4 <span>Company</span> × Nosso Boteco</div>
   <nav>
-    <a href="#visao">Visão</a>
-    <a href="#oportunidades">Oportunidades</a>
-    <a href="#solucao">Solução</a>
-    <a href="#escopo">Escopo</a>
-    <a href="#futuro">Visão de futuro</a>
-    <a href="#resultados">Impacto</a>
+    <a href="#diagnostico">Diagnóstico</a>
+    <a href="#estrategia">Estratégia</a>
+    <a href="#transformacao">Antes × Depois</a>
     <a href="#investimento">Investimento</a>
   </nav>
   <a href="#investimento" class="cta-mini">Ver valores →</a>
@@ -200,18 +226,18 @@ section{width:100%;padding:5rem 1.5rem}
   <div class="hero-grid">
     <div>
       <div class="hero-tag"><span></span> Proposta comercial · pós-EE · confidencial</div>
-      <h1>Posicionar a marca. Proteger a margem. Atrair <em>o cliente que volta</em>.</h1>
-      <p class="hero-sub">A Estruturação Estratégica fechou o mapa. Esta proposta liga a execução à tese do Fábio: qualidade no lugar de desconto, comunicação regionalizada e o cliente ideal sentado na mesa — não volume genérico.</p>
-      <a href="#visao" class="hero-cta">Ver visão estratégica →</a>
+      <h1>Duas formas de contratar. Um só retorno: <em>mesa com margem</em>.</h1>
+      <p class="hero-sub">Assessoria de Growth full service ou direcionamento hands-off do time da casa. As duas rotas aplicam a mesma tese: qualidade no lugar de desconto, comunicação no raio certo e o cliente que volta.</p>
+      <a href="#diagnostico" class="hero-cta">Ver diagnóstico e modelos →</a>
     </div>
     <div>
       <div class="hero-card">
         <h3>Nosso Boteco · Fábio Sebastião Ferreira</h3>
         <div class="kpi-grid">
-          <div class="kpi"><div class="val">Marca</div><div class="lbl">Posicionamento de qualidade, não de promoção</div></div>
-          <div class="kpi"><div class="val">Margem</div><div class="lbl">Proteção ativa em cada peça e campanha</div></div>
-          <div class="kpi"><div class="val">ICP local</div><div class="lbl">Comunicação regionalizada e assertiva</div></div>
-          <div class="kpi"><div class="val">R$ 6.700</div><div class="lbl">Execução estratégica completa · mensal</div></div>
+          <div class="kpi"><div class="val">R$ 8.500</div><div class="lbl">Modelo 1 · Assessoria full service / mês</div></div>
+          <div class="kpi"><div class="val">6× 2.500</div><div class="lbl">Modelo 2 · Direcionamento do time interno</div></div>
+          <div class="kpi"><div class="val">4 pessoas</div><div class="lbl">AM · Growth · Copy · Design na execução</div></div>
+          <div class="kpi"><div class="val">ROI</div><div class="lbl">Tração e conversão até a mesa conciliada</div></div>
         </div>
         <div class="hero-award">
           <div>🎯</div>
@@ -222,11 +248,11 @@ section{width:100%;padding:5rem 1.5rem}
   </div>
 </section>
 
-<section class="diag-bg" id="visao">
+<section class="diag-bg" id="diagnostico">
   <div class="inner">
-    <div class="slabel">1. Visão estratégica do negócio</div>
-    <h2 class="stitle">A casa já tem tese. A execução precisa honrá-la.</h2>
-    <p class="sdesc">A EE entregou o mapa: origem, intenção, reserva e caixa no mesmo funil. O Nosso Boteco já opera, já anuncia, já recebe. O próximo salto é transformar isso em método — com posicionamento de marca, margem protegida e o cliente ideal na mesa.</p>
+    <div class="slabel">1. Visão geral e diagnóstico</div>
+    <h2 class="stitle">A casa já tem tese. O crescimento ainda não tem dono ponta a ponta.</h2>
+    <p class="sdesc">A Estruturação Estratégica fechou o mapa: origem, intenção, reserva e caixa no mesmo funil. O Nosso Boteco já opera, já anuncia, já recebe. O que falta é um sistema de growth — planejamento, criação e conversão — que honre a margem e atraia o cliente ideal no raio da casa.</p>
     <p class="quote-fabio">“Eu prefiro trabalhar menos, ter uma receita menor, mas vender com margem maior e fidelizar o cliente que vai vir direto.”<span>Fábio · reunião 17/09</span></p>
     <div class="highlight-box" style="margin-top:1.5rem">
       <div style="font-size:28px">🎯</div>
@@ -237,168 +263,102 @@ section{width:100%;padding:5rem 1.5rem}
     </div>
     <div class="focus-grid">
       <article class="focus-card">
-        <div class="gap-tag tag-green">Foco 01</div>
-        <h3>Posicionamento de marca</h3>
-        <p>Qualidade, conforto e hospitalidade na ponta. Toda peça, post e campanha reforça o que a casa é — nunca o que ela desconta.</p>
+        <div class="gap-tag tag-green">Momento 01</div>
+        <h3>Mapa pronto</h3>
+        <p>Identidade, GTM, LP e arquitetura de canais já desenhados. O investimento agora é transformar tese em tração — não redescobrir o óbvio.</p>
       </article>
       <article class="focus-card">
-        <div class="gap-tag tag-green">Foco 02</div>
-        <h3>Proteção da margem</h3>
-        <p>Promoção só com regra e validade. Ticket e rentabilidade por cliente entram no critério de aprovação — não depois do anúncio no ar.</p>
+        <div class="gap-tag tag-green">Momento 02</div>
+        <h3>Operação em movimento</h3>
+        <p>Há time, há mídia, há reserva. Sem frameworks de growth, cada frente decide sozinha — e o ROI some entre curtida e mesa.</p>
       </article>
       <article class="focus-card">
-        <div class="gap-tag tag-green">Foco 03</div>
-        <h3>Cliente ideal, no raio certo</h3>
-        <p>Comunicação regionalizada e assertiva. Quem já decide ir à mesa na cidade da casa. Sem volume fora da praça.</p>
+        <div class="gap-tag tag-green">Momento 03</div>
+        <h3>Escolha de modelo</h3>
+        <p>Ou a V4 executa ponta a ponta (full service), ou lidera o time interno em 6 meses de direcionamento. As duas protegem marca e margem.</p>
       </article>
     </div>
   </div>
 </section>
 
-<section id="oportunidades">
+<section id="estrategia">
   <div class="inner">
-    <div class="slabel">2. Impacto e mapeamento de oportunidades</div>
-    <h2 class="stitle">Seis alavancas para a nova estrutura entregar resultado.</h2>
-    <p class="sdesc">Os pontos abaixo não são um dossiê de problemas. São oportunidades de otimização: processos, canais e rotina que, alinhados à tese do Fábio, transformam investimento em mesa conciliada — e mesa em cliente que volta.</p>
-    <div class="gap-grid" style="margin-top:1.75rem">
-      <article class="gap-card">
-        <div class="gap-num">01</div>
-        <div class="gap-tag tag-green">Oportunidade · visibilidade</div>
-        <h3>Funil único até o caixa</h3>
-        <p>Instalar origem, intenção, reserva, visita e faturamento no mesmo relatório. Cada real de mídia ganha leitura — e a verba sobe só com prova.</p>
-        <p class="opp-unlock">Ganho: decisão com dado, não com feeling.</p>
-      </article>
-      <article class="gap-card">
-        <div class="gap-num">02</div>
-        <div class="gap-tag tag-green">Oportunidade · governança</div>
-        <h3>Uma estratégia, todas as frentes</h3>
-        <p>Marketing e vendas sob a mesma tese: qualidade, persona regional, margem. Peça, mídia e atendimento deixam de competir entre si.</p>
-        <p class="opp-unlock">Ganho: marca coerente e proteção ativa do posicionamento.</p>
-      </article>
-      <article class="gap-card">
-        <div class="gap-num">03</div>
-        <div class="gap-tag tag-green">Oportunidade · aquisição</div>
-        <h3>Campanha no lugar de volume</h3>
-        <p>Trocar o botão de impulsionar por campanha estruturada: Google para quem já busca mesa, Meta para desejo no ICP certo, no raio da casa.</p>
-        <p class="opp-unlock">Ganho: conversa qualificada, não pergunta mecânica.</p>
-      </article>
-      <article class="gap-card">
-        <div class="gap-num">04</div>
-        <div class="gap-tag tag-green">Oportunidade · mensagem</div>
-        <h3>Uma promessa por ocasião</h3>
-        <p>Almoço, happy hour, família e grupos com tese própria. Instagram gera desejo. Google captura intenção local. A persona da região reconhece a casa.</p>
-        <p class="opp-unlock">Ganho: comunicação assertiva e regionalizada.</p>
-      </article>
-      <article class="gap-card">
-        <div class="gap-num">05</div>
-        <div class="gap-tag tag-green">Oportunidade · operação</div>
-        <h3>Reserva e WhatsApp com cadência</h3>
-        <p>Véspera, dia, check-in e pós-visita no roteiro. A mídia boa chega em um atendimento que confirma a mesa e abre a próxima visita.</p>
-        <p class="opp-unlock">Ganho: eficiência operacional e fidelização do público direto.</p>
-      </article>
-      <article class="gap-card">
-        <div class="gap-num">06</div>
-        <div class="gap-tag tag-green">Oportunidade · prova</div>
-        <h3>Parceria e criador com retorno</h3>
-        <p>Influenciador com código. Hotel com voucher. Foto real do salão virando story. Cada parceria concilia origem com receita.</p>
-        <p class="opp-unlock">Ganho: rentabilidade por cliente e prova que escala.</p>
-      </article>
-    </div>
-    <div class="highlight-box">
-      <div style="font-size:28px">⚙️</div>
-      <div class="hb-text">
-        <strong>Prioridade da transformação: aquisição com tese.</strong>
-        Aparecer para a pessoa certa, no raio certo, com a promessa certa. O atendimento segura a mesa. A nova estrutura existe para o marketing e a operação trabalharem no mesmo sentido — qualidade, margem, cliente que volta.
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<section id="solucao">
-  <div class="inner">
-    <div class="slabel">3. A solução estratégica</div>
-    <h2 class="stitle">Cada oportunidade tem dono, canal e próximo passo.</h2>
-    <p class="sdesc">A metodologia não começa em anúncio. Começa em tese: para quem falamos, em qual ocasião, por qual canal, com qual prova — e o que isso vira em margem e fidelização.</p>
-    <div class="solve-row">
-      <div class="solve-pain">Alavanca 01 · Visibilidade</div>
-      <div class="solve-fix">
-        <h4>Funil visível: viu → interagiu → conversou → reservou → visitou → faturou</h4>
-        <p>Pixel, UTM, origem no WhatsApp e conciliação com a mesa. Fábio passa a ver o que pagou a conta — e o que só encheu recado.</p>
-      </div>
-    </div>
-    <div class="solve-row">
-      <div class="solve-pain">Alavanca 02 · Governança</div>
-      <div class="solve-fix">
-        <h4>Uma estratégia no comando de marketing e vendas</h4>
-        <p>Duas rotas: (A) Direcionamento Estratégico Integrado — a V4 lidera e alinha todas as frentes; (B) Execução e Geração de Valor — a V4 opera Account, GT, Copy, Design e Social. As duas protegem marca, persona regional e margem.</p>
-      </div>
-    </div>
-    <div class="solve-row">
-      <div class="solve-pain">Alavanca 03 · Aquisição</div>
-      <div class="solve-fix">
-        <h4>Campanha estruturada, comunicação no raio da casa</h4>
-        <p>Google Search para quem já busca mesa na região. Meta para desejo no ICP certo. Verba sobe só com prova de mesa. Pessoa certa, praça certa, promessa certa.</p>
-      </div>
-    </div>
-    <div class="solve-row">
-      <div class="solve-pain">Alavanca 04 · Mensagem</div>
-      <div class="solve-fix">
-        <h4>Uma promessa por ocasião — almoço, happy hour, família, grupos</h4>
-        <p>Identidade visual (Montserrat, paleta oficial, logo sem distorção). Foto real de cliente. Tom de hospitalidade que muda com o momento: praticidade no almoço, animação no happy hour, segurança para a família.</p>
-      </div>
-    </div>
-    <div class="solve-row">
-      <div class="solve-pain">Alavanca 05 · Operação</div>
-      <div class="solve-fix">
-        <h4>Cadência no WhatsApp: véspera, dia, check-in, pós-visita</h4>
-        <p>Roteiro de reserva. Confirmação no dia anterior. Checagem no dia. Satisfação no dia seguinte. Aniversário e data comemorativa para quem é da cidade — o público que fideliza.</p>
-      </div>
-    </div>
-    <div class="solve-row">
-      <div class="solve-pain">Alavanca 06 · Prova</div>
-      <div class="solve-fix">
-        <h4>Influenciador com código. Parceria local com voucher. Foto do salão que vira story.</h4>
-        <p>Criador entra com retorno conciliado. Hotel e rede próxima com voucher rastreável. A ideia do Fábio — rodada de chope em troca de marcação — vira rotina e prova social da casa.</p>
-      </div>
-    </div>
-
+    <div class="slabel">2. Detalhamento da estratégia</div>
+    <h2 class="stitle">A mesma metodologia de Growth. Dois graus de implementação.</h2>
+    <p class="sdesc">O método não começa no anúncio. Começa na tese, desce para o funil (viu → interagiu → conversou → reservou → visitou → faturou) e só então vira campanha, criativo e cadência. A diferença entre os modelos é quem aperta o botão: a V4 ou o time da casa.</p>
     <div class="method-steps">
-      <article class="ms"><div class="mn">01</div><div class="badge">Local</div><h3>Estratégia</h3><p>Posicionamento, ICP, canais e tom. Quem é a mesa: grupo de amigos/casal ou família/empresa. Sem isso, anúncio fala com todo mundo e não convence ninguém.</p></article>
-      <article class="ms"><div class="mn">02</div><div class="badge">Comunicação</div><h3>Desejo</h3><p>Identidade, calendário, criativo e Social. Toda postagem conduz à casa — ocasião, produto, prova e próximo passo. Não postar por postar.</p></article>
-      <article class="ms"><div class="mn">03</div><div class="badge">Aquisição</div><h3>Intenção</h3><p>Google captura quem já decidiu. Meta gera desejo no raio certo. Landing page (cardápio + como chegar) e WhatsApp fecham a rota até a mesa.</p></article>
-      <article class="ms"><div class="mn">04</div><div class="badge">Caixa</div><h3>Conciliação</h3><p>Reserva, visita e faturamento no mesmo relatório. Influenciador, cupom e voucher com origem. Sem isso, escala é feeling — e feeling não aumenta verba.</p></article>
+      <article class="ms"><div class="mn">01</div><div class="badge">Tese</div><h3>Posicionar</h3><p>ICP, ocasião e tom. Qualidade, margem e persona regional no critério de aprovação — antes de qualquer peça ir ao ar.</p></article>
+      <article class="ms"><div class="mn">02</div><div class="badge">Funil</div><h3>Medir</h3><p>Pixel, UTM, origem no WhatsApp e conciliação com a mesa. Sem isso, escala é feeling — e feeling não aumenta verba.</p></article>
+      <article class="ms"><div class="mn">03</div><div class="badge">Tração</div><h3>Atrair</h3><p>Google captura quem já decidiu. Meta gera desejo no raio certo. LP (cardápio + como chegar) e WhatsApp fecham a rota.</p></article>
+      <article class="ms"><div class="mn">04</div><div class="badge">Conversão</div><h3>Fidelizar</h3><p>Cadência de reserva, pós-visita e prova rastreável. O ROI não é curtida: é cliente que volta com margem.</p></article>
+    </div>
+
+    <div class="path-grid">
+      <article class="path-card full">
+        <div class="tag">Modelo 1 · Assessoria de Growth</div>
+        <h3>Full service. A V4 executa ponta a ponta.</h3>
+        <p class="lead">Planejamento, criação e execução das estratégias de tração e conversão. Fábio valida a tese. O time dedicado entrega o ar.</p>
+        <div class="team-row">
+          <span class="chip">Account Manager</span>
+          <span class="chip">Estrategista / Gestor de Growth</span>
+          <span class="chip">Copywriter</span>
+          <span class="chip">Designer</span>
+        </div>
+        <ol>
+          <li><strong>Kick-off e plano de 90 dias.</strong> Account alinha prioridade com Fábio, acessos e ritmo do salão. Onda 1: LP, rastreio e identidade na ponta.</li>
+          <li><strong>Arquitetura de tração.</strong> O Gestor de Growth instala Google (intenção, 60% da verba) e Meta (desejo no ICP), pixel, UTM e grupos de anúncio por ocasião.</li>
+          <li><strong>Criação que converte.</strong> Copy escreve uma promessa por ocasião (almoço, happy hour, família, grupos). Design aplica a identidade oficial — foto real, logo intacto, nada de liquidação.</li>
+          <li><strong>Execução no ar.</strong> Campanha estruturada no lugar de impulsionar post. WhatsApp com cadência (véspera, dia, pós-visita). Criador e hotel só entram com código.</li>
+          <li><strong>Leitura de ROI.</strong> Check-in de performance. Verba sobe só com origem no caixa. Account reporta mesa conciliada — não volume de recado.</li>
+        </ol>
+      </article>
+      <article class="path-card">
+        <div class="tag">Modelo 2 · Direcionamento Estratégico</div>
+        <h3>Hands-off. A V4 lidera o time interno.</h3>
+        <p class="lead">Mentoria e governança em todas as frentes. Validamos processos, criamos os frameworks de growth e acompanhamos o time da casa na execução tática.</p>
+        <div class="team-row">
+          <span class="chip">Liderança V4</span>
+          <span class="chip">Time interno do cliente</span>
+          <span class="chip">6 meses</span>
+        </div>
+        <ol>
+          <li><strong>Diagnóstico do time.</strong> Mapeamos quem faz mídia, copy, design e reserva. Onde o processo trava, instalamos o framework — não um recado solto.</li>
+          <li><strong>Frameworks de growth.</strong> Funil único, critério de aprovação (marca + margem + persona regional), calendário por ocasião, roteiro de WhatsApp, UTM/código para parceria.</li>
+          <li><strong>Direção semanal.</strong> O que postar, o que anunciar, o que está aprovado. A V4 lidera; o time interno executa. Fábio recebe o relato de cumprimento.</li>
+          <li><strong>Acompanhamento tático.</strong> Validação de peça, campanha e cadência. Proteção ativa da margem: desconto só com regra e validade.</li>
+          <li><strong>Transferência do método.</strong> Ao fim do ciclo de 6 meses, o time opera com playbook, não com feeling. O dado justifica o próximo passo — inclusive evoluir para full service.</li>
+        </ol>
+      </article>
     </div>
   </div>
 </section>
 
 <section class="social-bg" id="escopo">
   <div class="inner">
-    <div class="slabel" style="color:rgba(255,255,255,.5)">4. Escopo e opções de entregáveis</div>
-    <h2 class="stitle">Duas formas de gerar valor. A mesma tese no comando.</h2>
-    <p class="sdesc">As duas rotas lideram marketing e vendas sob o direcionamento central: posicionamento, persona regional e margem. A diferença é o grau de implementação — governança ou execução completa.</p>
+    <div class="slabel" style="color:rgba(255,255,255,.5)">2.1 O que cada modelo entrega na prática</div>
+    <h2 class="stitle">Tração e conversão. Quem opera muda. A tese não.</h2>
+    <p class="sdesc">No full service, a V4 planeja, cria e publica. No direcionamento, o time da casa publica sob frameworks e validação semanal.</p>
     <div class="scope-split">
-      <article class="scope-card">
-        <div class="tag">Opção A · Direcionamento Estratégico Integrado</div>
-        <h3>A V4 lidera. As frentes se alinham.</h3>
+      <article class="scope-card rec">
+        <div class="tag">Modelo 1 · Full service · R$ 8.500/mês</div>
+        <h3>Planejar. Criar. Executar.</h3>
         <ul>
-          <li>Governança da marca: o que entra no ar precisa honrar qualidade, tom e identidade.</li>
-          <li>Orientação contínua de mídia, copy, design e comercial (reserva / WhatsApp).</li>
-          <li>Garantia de alinhamento com a persona regional — comunicação no raio da casa.</li>
-          <li>Proteção ativa das margens: nada de desconto sem regra, validade e tese.</li>
-          <li>Encontros semanais de direção. Relato a Fábio. Prazo de 6 ou 12 meses.</li>
+          <li>Account Manager no ritmo com Fábio e o salão.</li>
+          <li>Estrategista/Gestor de Growth: Google + Meta, pixel, UTM, campanha por ocasião.</li>
+          <li>Copywriter: tese de qualidade, uma promessa por ocasião, cadência de WhatsApp.</li>
+          <li>Designer: identidade oficial, criativo que vende mesa — não desconto.</li>
+          <li>LP no ar, funil visível, criadores e parcerias com rastreio, plano de 90 dias.</li>
         </ul>
       </article>
-      <article class="scope-card rec">
-        <div class="tag">Opção B · Execução e Geração de Valor</div>
-        <h3>A V4 implementa. A casa recebe a mesa.</h3>
+      <article class="scope-card">
+        <div class="tag">Modelo 2 · Hands-off · 6× R$ 2.500</div>
+        <h3>Validar. Enquadrar. Acompanhar.</h3>
         <ul>
-          <li>Serviço especializado no ar: Account, GT, Copy, Design e Social Media.</li>
-          <li>Eficiência operacional: pixel, UTM, campanha por ocasião, funil até o caixa.</li>
-          <li>Fidelização do público direto: cadência de WhatsApp, pós-visita, datas de quem é da cidade.</li>
-          <li>Rentabilidade por cliente: criativo de qualidade, parceria com código, oferta sem liquidação.</li>
-          <li>Rotina Colli: grupo no dia, check-in de performance, plano de 90 dias.</li>
+          <li>Liderança estratégica de todas as frentes do time interno.</li>
+          <li>Validação de processos de mídia, conteúdo, design e reserva.</li>
+          <li>Criação dos frameworks de growth (funil, aprovação, ocasião, rastreio).</li>
+          <li>Acompanhamento tático semanal — o que entra no ar precisa honrar a tese.</li>
+          <li>Playbook ao fim do ciclo para o time continuar sem a V4 no botão.</li>
         </ul>
       </article>
     </div>
@@ -407,65 +367,70 @@ section{width:100%;padding:5rem 1.5rem}
 
 <section>
   <div class="inner">
-    <div class="slabel">4.1 Entregáveis da execução — o que vai para o ar</div>
+    <div class="slabel">2.2 Entregáveis da execução — o que vai para o ar no Modelo 1</div>
     <h2 class="stitle">Tudo o que a EE já desenhou, instalado na operação.</h2>
-    <p class="sdesc">Não é um diagnóstico novo. É tirar do papel o que Aline entregou: LP, identidade, calendário, arquitetura de canais e cadência de WhatsApp.</p>
+    <p class="sdesc">No full service, a V4 tira do papel o que já foi mapeado. No Modelo 2, os mesmos blocos viram framework para o time interno executar com validação semanal.</p>
     <div class="del-grid">
-      <article class="del"><div class="ico">🌐</div><h4>Landing page no ar</h4><p>Cardápio + como chegar. Sem formulário inútil: o objetivo é a pessoa sentar na mesa, não deixar telefone.</p><span class="when">Onda 1 · Fundação</span></article>
-      <article class="del"><div class="ico">📍</div><h4>Google Search + GBP</h4><p>Intenção local. Palavras, grupos de anúncio e títulos já briefados. 60% da verba de mídia nesta frente.</p><span class="when">Onda 2 · Campanhas</span></article>
-      <article class="del"><div class="ico">📱</div><h4>Meta com ICP e raio</h4><p>Desejo no público certo, na cidade da casa. Remarketing em quem já sentou. Comunicação regionalizada, não volume genérico.</p><span class="when">Onda 2 · Campanhas</span></article>
-      <article class="del"><div class="ico">🎨</div><h4>Identidade e criativos</h4><p>Montserrat, paleta oficial, logo intacto. Foto real no lugar de imagem falsa. Fábio aprova fonte e peça.</p><span class="when">Onda 1 · Fundação</span></article>
-      <article class="del"><div class="ico">📅</div><h4>Calendário + Social</h4><p>Legenda, copy e ocasião prontas para executar. Toda postagem conduz ao restaurante — orgânico sem gastar verba.</p><span class="when">Contínuo</span></article>
-      <article class="del"><div class="ico">💬</div><h4>WhatsApp com cadência</h4><p>Confirmação na véspera, check-in no dia, satisfação no dia seguinte. Roteiro para o Gabriel.</p><span class="when">Onda 1–2</span></article>
-      <article class="del"><div class="ico">🤝</div><h4>Criadores com código</h4><p>Parceria com cupom/UTM para conciliar retorno. Cada criador entra com origem visível no caixa.</p><span class="when">Onda 3 · Amplificação</span></article>
-      <article class="del"><div class="ico">🏨</div><h4>Parcerias locais</h4><p>Hotéis e redes próximas. Voucher rastreável (almoço executivo ou caipirinha no happy hour).</p><span class="when">Onda 4 · Offline</span></article>
-      <article class="del"><div class="ico">🍺</div><h4>Prova no salão</h4><p>A dinâmica do Fábio vira processo: foto da mesa + marcação no Instagram = rodada de chope. Story repostado.</p><span class="when">Onda 4 · Salão</span></article>
-    </div>
-    <div class="timeline-strip">
-      <div class="tl-cell"><div class="tl-mes">Onda 1</div><div class="tl-fase">Fundação</div><div class="tl-items">LP no ar · eventos de rastreio · WhatsApp ajustado · identidade na ponta · kick-off com Fábio</div></div>
-      <div class="tl-cell"><div class="tl-mes">Onda 2</div><div class="tl-fase">Campanhas</div><div class="tl-items">Google 60% · Meta no ICP · criativos aprovados · comunicação no raio da casa · leitura de origem</div></div>
-      <div class="tl-cell"><div class="tl-mes">Onda 3</div><div class="tl-fase">Amplificação</div><div class="tl-items">Verba sobe com prova · mais criadores com código · expansão de ocasião</div></div>
-      <div class="tl-cell"><div class="tl-mes">Onda 4</div><div class="tl-fase">Parcerias e salão</div><div class="tl-items">Hotéis · voucher · foto+chope · pós-visita · aniversário e datas para quem é da cidade</div></div>
+      <article class="del"><div class="ico">🌐</div><h4>Landing page no ar</h4><p>Cardápio + como chegar. O objetivo é a pessoa sentar na mesa, não deixar telefone.</p><span class="when">Onda 1 · Fundação</span></article>
+      <article class="del"><div class="ico">📍</div><h4>Google Search + GBP</h4><p>Intenção local. 60% da verba de mídia nesta frente — quem já decidiu ir.</p><span class="when">Onda 2 · Tração</span></article>
+      <article class="del"><div class="ico">📱</div><h4>Meta com ICP e raio</h4><p>Desejo no público certo, na cidade da casa. Remarketing em quem já sentou.</p><span class="when">Onda 2 · Tração</span></article>
+      <article class="del"><div class="ico">🎨</div><h4>Copy + Design</h4><p>Uma promessa por ocasião. Identidade oficial. Foto real. Margem no critério de aprovação.</p><span class="when">Contínuo</span></article>
+      <article class="del"><div class="ico">💬</div><h4>WhatsApp com cadência</h4><p>Véspera, dia, pós-visita. Framework de reserva para o time interno ou para a V4 operar.</p><span class="when">Onda 1–2</span></article>
+      <article class="del"><div class="ico">📊</div><h4>Funil até o caixa</h4><p>Pixel, UTM, origem e conciliação. O relatório que Fábio abre mostra mesa — não curtida.</p><span class="when">Onda 1 · Fundação</span></article>
     </div>
   </div>
 </section>
 
-<section class="future-bg" id="futuro">
+<section class="future-bg" id="transformacao">
   <div class="inner">
-    <div class="slabel">5. Visão de futuro — como ficará o dia a dia</div>
-    <h2 class="stitle">Uma terça-feira do Nosso Boteco, com o sistema no ar.</h2>
-    <p class="sdesc">Não é um deck novo. É o Fábio abrindo o celular e sabendo, com clareza, o que ontem virou mesa — e qual cliente volta.</p>
-    <div class="future-grid">
+    <div class="slabel">3. Transformação do negócio — antes × depois</div>
+    <h2 class="stitle">Do movimento sem método para a operação que concilia mesa e margem.</h2>
+    <p class="sdesc">O quadro abaixo é o estado atual versus a casa ao fim do ciclo — 90 dias no full service, 6 meses no direcionamento. Não é um deck novo: é Fábio sabendo, com clareza, o que ontem virou receita.</p>
+    <div class="vs-grid">
+      <article class="vs-card before">
+        <div class="vs-kicker">Antes · estado atual</div>
+        <h3>A casa vende. O mês ainda é aposta.</h3>
+        <ul>
+          <li><strong>Leitura:</strong> feeling. Não se vê o que a campanha pagou no caixa.</li>
+          <li><strong>Aquisição:</strong> impulsionar post e recado mecânico no lugar de campanha.</li>
+          <li><strong>Mensagem:</strong> almoço, happy hour, família e grupos no mesmo recado.</li>
+          <li><strong>Praça:</strong> comunicação que vaza do raio da casa — volume sem mesa.</li>
+          <li><strong>Oferta:</strong> pressão de desconto (15%) contra a tese de qualidade.</li>
+          <li><strong>Reserva:</strong> WhatsApp sem cadência. Mídia boa morre no atendimento.</li>
+          <li><strong>Prova:</strong> criador e foto sem código. Parceria não concilia retorno.</li>
+          <li><strong>Dono:</strong> Fábio pergunta o que rodou. Ninguém responde com origem.</li>
+        </ul>
+      </article>
+      <article class="vs-card after">
+        <div class="vs-kicker">Depois · operação estruturada</div>
+        <h3>A casa vende com tese, funil e margem.</h3>
+        <ul>
+          <li><strong>Leitura:</strong> viu → conversou → reservou → visitou → faturou.</li>
+          <li><strong>Aquisição:</strong> Google de intenção + Meta de desejo no ICP local.</li>
+          <li><strong>Mensagem:</strong> uma promessa por ocasião. Persona reconhece a casa.</li>
+          <li><strong>Praça:</strong> comunicação regionalizada. Quem já decide sentar na mesa.</li>
+          <li><strong>Oferta:</strong> qualidade na ponta. Promoção só com regra e validade.</li>
+          <li><strong>Reserva:</strong> véspera, dia, pós-visita. Cliente da cidade volta.</li>
+          <li><strong>Prova:</strong> influenciador com cupom. Hotel com voucher. Foto vira story.</li>
+          <li><strong>Dono:</strong> Fábio abre o celular e vê o que pagou a conta.</li>
+        </ul>
+      </article>
+    </div>
+    <div class="future-grid" style="margin-top:1.5rem">
       <article class="future-card">
         <h3>De manhã</h3>
         <ul>
-          <li>Account no grupo: o que rodou, o que ajustar, o que o WhatsApp recebeu.</li>
-          <li>Reserva opera o roteiro — cadência de véspera, dia e pós-visita.</li>
+          <li>Account (ou a direção semanal) reporta o que rodou e o que o WhatsApp recebeu.</li>
+          <li>Reserva opera o roteiro — não recado aleatório.</li>
           <li>Google captura quem buscou boteco / almoço / happy hour na região.</li>
         </ul>
       </article>
       <article class="future-card">
-        <h3>No salão</h3>
+        <h3>No salão e no fechamento</h3>
         <ul>
-          <li>Mesa de quatro por R$ 150 aparece como oferta de turma — não como liquidação.</li>
-          <li>Família vê estrutura, espaço e tom seguro. Grupo de amigos vê ocasião e rota.</li>
+          <li>Mesa de turma aparece como qualidade — não como liquidação.</li>
           <li>Cliente tira foto, marca a casa, ganha a rodada. O story trabalha de graça.</li>
-        </ul>
-      </article>
-      <article class="future-card">
-        <h3>Na comunicação</h3>
-        <ul>
-          <li>Nenhuma arte sai fora do manual. Nenhuma promoção sem validade. Nenhum “o melhor” sem prova.</li>
-          <li>Foto real de quem sentou — com consentimento. Instagram deixa de ser vitrine morta.</li>
-          <li>Influenciador só entra com código. Hotel só entra com voucher.</li>
-        </ul>
-      </article>
-      <article class="future-card">
-        <h3>No fechamento do dia</h3>
-        <ul>
-          <li>Fábio vê origem → reserva → visita → caixa. Não vê 1.000 curtidas.</li>
-          <li>Pós-visita dispara. Quem é da cidade volta no aniversário e nas datas.</li>
-          <li>Marca, persona e margem no mesmo critério de aprovação.</li>
+          <li>Origem → reserva → visita → caixa no mesmo relatório. Verba só sobe com prova.</li>
         </ul>
       </article>
     </div>
@@ -474,17 +439,17 @@ section{width:100%;padding:5rem 1.5rem}
 
 <section id="resultados">
   <div class="inner">
-    <div class="slabel">6. Impacto — o que a nova estrutura entrega</div>
+    <div class="slabel">3.1 Valor percebido e ROI</div>
     <h2 class="stitle">O retorno não é curtida. É mesa conciliada e cliente que volta.</h2>
-    <p class="sdesc">Foco exclusivo na transformação: posicionamento, margem, persona regional e rentabilidade por cliente. A conta conservadora de mídia da EE é direção — não meta contratual. O marketing abre a porta. O salão fecha a mesa.</p>
+    <p class="sdesc">O full service coloca quatro especialistas no ar todo mês. O direcionamento instala o método no time interno em 6 parcelas. Os dois existem para o real de mídia virar receita com margem — direção da EE, não garantia contratual.</p>
     <div class="roi-grid">
       <article class="roi-card">
-        <h3>O que se instala</h3>
-        <div class="roi-row"><span>Posicionamento</span><span class="rv">Qualidade na ponta</span></div>
-        <div class="roi-row"><span>Margem</span><span class="rv">Protegida na aprovação</span></div>
-        <div class="roi-row"><span>Comunicação</span><span class="rv">Regional e assertiva</span></div>
+        <h3>O que o fee compra</h3>
+        <div class="roi-row"><span>Modelo 1</span><span class="rv">Time dedicado executando</span></div>
+        <div class="roi-row"><span>Modelo 2</span><span class="rv">Método no time interno</span></div>
         <div class="roi-row"><span>Funil</span><span class="rv">Origem até o caixa</span></div>
-        <div class="roi-row"><span>Operação</span><span class="rv">Cadência de reserva</span></div>
+        <div class="roi-row"><span>Marca</span><span class="rv">Governada</span></div>
+        <div class="roi-row"><span>Margem</span><span class="rv">No critério de aprovação</span></div>
       </article>
       <article class="roi-card">
         <h3>Direção de mídia (EE)</h3>
@@ -499,76 +464,76 @@ section{width:100%;padding:5rem 1.5rem}
         <div class="roi-row"><span>Cliente</span><span class="rv">Ideal, não genérico</span></div>
         <div class="roi-row"><span>Fidelização</span><span class="rv">Público direto</span></div>
         <div class="roi-row"><span>Rentabilidade</span><span class="rv">Por mesa, não por like</span></div>
-        <div class="roi-row"><span>Marca</span><span class="rv">Governada</span></div>
+        <div class="roi-row"><span>Time</span><span class="rv">Executa ou é dirigido</span></div>
         <div class="roi-row"><span>Dono</span><span class="rv">Visão do que converte</span></div>
       </article>
     </div>
-    <p class="sdesc">* Verba de mídia é da casa, na plataforma — não está no fee da V4. Se Fábio quiser manter R$ 2–3 mil no início, o plano reajusta o split. ** Projeção conservadora da EE, não garantia. No mês 1 o intervalo depende da operação: o marketing abre a porta; a reserva e o salão fecham a mesa.</p>
+    <p class="sdesc">* Verba de mídia é da casa, na plataforma — não está no fee da V4. Se Fábio quiser manter R$ 2–3 mil no início, o plano reajusta o split. ** Projeção conservadora da EE, não garantia. O marketing abre a porta; a reserva e o salão fecham a mesa.</p>
     <div class="big-quote">
-      <p>Quem paga o salário, a propaganda e o boleto <em>é o cliente na mesa</em>. Esta proposta existe para a nova estrutura encher a casa com gente que volta — e proteger a margem que a casa já escolheu.</p>
+      <p>Quem paga o salário, a propaganda e o boleto <em>é o cliente na mesa</em>. Esta proposta existe para o growth parar de competir com a operação — e passar a encher a casa com gente que volta.</p>
     </div>
   </div>
 </section>
 
 <section class="invest-bg" id="investimento">
   <div class="inner">
-    <div class="slabel">7. Investimento</div>
-    <h2 class="stitle">Execução estratégica completa. Tese, time e rotina no mesmo fee.</h2>
-    <p class="sdesc">A Opção B implementa o serviço especializado — Account, GT, Copy, Design e Social Media — para maximizar eficiência operacional, fidelização do público direto e rentabilidade por cliente. A Opção A permanece disponível como governança, sem operação plena.</p>
+    <div class="slabel">4. Investimento</div>
+    <h2 class="stitle">Duas modalidades. Fábio escolhe o grau de implementação.</h2>
+    <p class="sdesc">O Modelo 1 coloca a equipe dedicada no ar — planejamento, criação e execução. O Modelo 2 lidera o time interno em 6 meses de frameworks e acompanhamento tático. Verba de mídia permanece à parte, na plataforma da casa.</p>
+
+    <div class="price-items">
+      <article class="pi">
+        <div class="pil">Modelo 1 · Assessoria de Growth · Full service</div>
+        <div class="piv">R$ 8.500,00 / mês</div>
+        <div class="pis">Equipe dedicada: Account Manager, Estrategista/Gestor de Growth, Copywriter e Designer.</div>
+        <ul>
+          <li>Planejamento, criação e execução ponta a ponta</li>
+          <li>Tração (Google + Meta) e conversão até a mesa</li>
+          <li>Funil visível, LP, cadência de WhatsApp, plano de 90 dias</li>
+          <li>Recorrente mensal · mídia na plataforma, à parte</li>
+        </ul>
+      </article>
+      <article class="pi alt">
+        <div class="pil">Modelo 2 · Direcionamento Estratégico · Hands-off</div>
+        <div class="piv">6× R$ 2.500,00</div>
+        <div class="pis">Liderança e direcionamento do time interno em todas as frentes. Ciclo de 6 meses.</div>
+        <ul>
+          <li>Validação de processos de mídia, conteúdo e reserva</li>
+          <li>Criação dos frameworks de growth</li>
+          <li>Acompanhamento tático semanal do time da casa</li>
+          <li>Playbook ao fim do ciclo · total R$ 15.000</li>
+        </ul>
+      </article>
+    </div>
 
     <div class="price-hero">
       <div>
-        <div class="ph-label">Opção B · Execução estratégica completa</div>
-        <div class="ph-val">R$ 6.700,00</div>
-        <div class="ph-sub">Fee mensal · time de 5 · tese da casa no comando</div>
+        <div class="ph-label">Modelo 1 · Assessoria de Growth · execução completa</div>
+        <div class="ph-val">R$ 8.500,00</div>
+        <div class="ph-sub">Fee mensal · AM + Growth + Copy + Design · tração e conversão no ar</div>
       </div>
       <div class="ph-badge">
-        <div class="pbl">Inclui</div>
-        <div class="pbv">Growth + Social</div>
+        <div class="pbl">Time dedicado</div>
+        <div class="pbv">4 especialistas</div>
         <div class="pbs">Mídia na plataforma, à parte</div>
       </div>
     </div>
 
-    <div class="price-items">
-      <article class="pi alt">
-        <div class="pil">Opção A · Direcionamento Estratégico Integrado</div>
-        <div class="piv">R$ 2.500 / mês</div>
-        <div class="pis">6 ou 12 meses. A V4 lidera marketing e vendas; as frentes executam sob a tese.</div>
-        <ul>
-          <li>Governança da marca e da persona regional</li>
-          <li>Proteção ativa das margens</li>
-          <li>Encontros semanais de direção</li>
-          <li>Caminho de quem quer orientação contínua</li>
-        </ul>
-      </article>
-      <article class="pi">
-        <div class="pil">Opção B · Execução e Geração de Valor</div>
-        <div class="piv">R$ 6.700,00 / mês</div>
-        <div class="pis">Implementação completa do serviço especializado.</div>
-        <ul>
-          <li>Account, GT, Copy, Design e Social Media</li>
-          <li>Eficiência operacional e funil até o caixa</li>
-          <li>Fidelização do público direto</li>
-          <li>Rentabilidade por cliente, não por volume</li>
-        </ul>
-      </article>
-    </div>
-
     <div class="includes-grid">
       <div class="inc">Account Manager no ritmo com Fábio</div>
-      <div class="inc">Gestor de tráfego · Google + Meta</div>
-      <div class="inc">Copy de performance por ocasião</div>
-      <div class="inc">Design na identidade oficial</div>
-      <div class="inc">Social Media · calendário, feed, Reels, Stories</div>
+      <div class="inc">Estrategista / Gestor de Growth · Google + Meta</div>
+      <div class="inc">Copywriter de performance por ocasião</div>
+      <div class="inc">Designer na identidade oficial</div>
       <div class="inc">Landing page, pixel, UTM e funil visível</div>
       <div class="inc">Cadência de WhatsApp e roteiro de reserva</div>
       <div class="inc">Criadores e parcerias com rastreio</div>
       <div class="inc">Check-in de performance e plano de 90 dias</div>
+      <div class="inc">Ou: frameworks + direção semanal do time interno (Modelo 2)</div>
       <div class="inc">Garantia de 30 dias — se o método não colar, o risco é nosso</div>
     </div>
 
     <div class="note">
-      <strong>Verba de mídia é à parte.</strong> Os R$ 4.500 (ou os R$ 2–3 mil atuais) vão direto para Google/Meta, na conta da casa. O fee da V4 é o time e a tese. Mês 1 é fundação: LP, rastreio e WhatsApp. Campanha sobe com chão.
+      <strong>Verba de mídia é à parte.</strong> Os R$ 4.500 (ou os R$ 2–3 mil atuais) vão direto para Google/Meta, na conta da casa. O fee da V4 é o time (Modelo 1) ou a liderança do time interno (Modelo 2). Mês 1 é fundação: LP, rastreio e WhatsApp. Campanha sobe com chão.
     </div>
   </div>
 </section>
@@ -576,20 +541,20 @@ section{width:100%;padding:5rem 1.5rem}
 <section class="steps-bg" id="proximos">
   <div class="inner">
     <div class="slabel">Próximos passos</div>
-    <h2 class="stitle">Terça-feira, 11:30. Fábio escolhe a rota.</h2>
-    <p class="sdesc">Combinado na reunião: estudar o material e voltar com sim, não ou ajuste. Cada semana com comunicação genérica é semana em que a tese da casa não chega na mesa.</p>
+    <h2 class="stitle">Fábio escolhe o modelo. O growth começa no kick-off.</h2>
+    <p class="sdesc">Full service para quem quer a V4 no ar. Direcionamento para quem quer o time interno operando com método em 6 meses. As duas rotas protegem qualidade, margem e o cliente que volta.</p>
     <div class="steps-list">
-      <div class="step-item"><div class="step-num">01</div><div class="step-body"><strong>Escolher A ou B</strong><span>Direcionamento Estratégico Integrado (R$ 2.500/mês) ou Execução Estratégica Completa (R$ 6.700,00/mês).</span></div></div>
-      <div class="step-item"><div class="step-num">02</div><div class="step-body"><strong>Contrato e kick-off</strong><span>Acessos de Instagram, anúncios, WhatsApp e Google. Prioridade da Onda 1: LP no ar e comunicação no raio da casa.</span></div></div>
-      <div class="step-item"><div class="step-num">03</div><div class="step-body"><strong>Identidade na ponta</strong><span>Manual, foto real, margem protegida. Influenciadores recebem o link de avaliação e as diretrizes da marca.</span></div></div>
-      <div class="step-item"><div class="step-num">04</div><div class="step-body"><strong>Campanha com tese</strong><span>Google e Meta no raio certo. Cadência no Zap. Verba só sobe com origem no caixa.</span></div></div>
+      <div class="step-item"><div class="step-num">01</div><div class="step-body"><strong>Escolher o modelo</strong><span>Assessoria de Growth full service (R$ 8.500/mês) ou Direcionamento Estratégico hands-off (6× R$ 2.500).</span></div></div>
+      <div class="step-item"><div class="step-num">02</div><div class="step-body"><strong>Contrato e kick-off</strong><span>Acessos de Instagram, anúncios, WhatsApp e Google. No Modelo 1, o time dedicado entra. No Modelo 2, o time interno recebe os frameworks.</span></div></div>
+      <div class="step-item"><div class="step-num">03</div><div class="step-body"><strong>Fundação</strong><span>LP, rastreio, identidade e cadência de reserva. Nada entra no ar sem tese de qualidade e persona regional.</span></div></div>
+      <div class="step-item"><div class="step-num">04</div><div class="step-body"><strong>Tração com leitura de ROI</strong><span>Google e Meta no raio certo. Verba só sobe com origem no caixa. Fábio vê mesa conciliada, não volume de recado.</span></div></div>
     </div>
   </div>
 </section>
 
 <section class="footer-cta">
-  <h2>A EE já pagou o mapa.<br>Esta proposta liga a execução.</h2>
-  <p>Posicionamento, margem e o cliente que volta. Qualidade na mesa, qualidade no anúncio — e alguém que conheça o negócio antes de publicar.</p>
+  <h2>Dois modelos.<br>Um retorno: mesa com margem.</h2>
+  <p>Full service ou hands-off. Qualidade na mesa, qualidade no anúncio — e um sistema de growth que o Fábio consegue ler no caixa.</p>
   <a class="btn" href="#investimento">Voltar ao investimento</a>
   <div class="footer-note">Proposta elaborada após a 4ª semana da EE · 17/09/2026 · V4 Company × Nosso Boteco · Confidencial · Retorno terça 11:30</div>
 </section>
