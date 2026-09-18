@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Nosso Boteco × V4 Company — Proposta comercial · pós-EE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --red:#e3040a; --red2:#ff3b3b; --dark:#0d0d0d; --dark2:#1a1a1a;
+  --ink:#111; --muted:#6b6b6b; --line:#e8e4e1; --soft:#f6f4f2;
+  --white:#fff; --green:#16a34a; --green-bg:#f0fdf4;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font:16px/1.6 Inter,system-ui,sans-serif;background:var(--white);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4{font-family:Sora,Inter,sans-serif;letter-spacing:-.02em;line-height:1.15}
+a{color:inherit;text-decoration:none}
+.topnav{position:fixed;top:0;left:0;right:0;z-index:900;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:.7rem 2rem;gap:1rem}
+.topnav .logo{font-family:Sora,sans-serif;font-weight:900;font-size:14px;white-space:nowrap}
+.topnav .logo span{color:var(--red)}
+.topnav nav{display:flex;gap:1.35rem;overflow-x:auto;scrollbar-width:none}
+.topnav nav a{font-size:12px;font-weight:600;color:var(--muted);white-space:nowrap;padding:.25rem 0;border-bottom:2px solid transparent}
+.topnav nav a:hover,.topnav nav a.active{color:var(--red);border-color:var(--red)}
+.topnav .cta-mini{background:var(--red);color:#fff;font-size:12px;font-weight:700;padding:.45rem 1rem;border-radius:20px;white-space:nowrap}
+@media(max-width:780px){.topnav nav{display:none}.topnav{padding:.7rem 1.2rem}}
+#prog{position:fixed;top:0;left:0;height:3px;background:var(--red);z-index:1000;width:0%}
+section{width:100%;padding:5rem 1.5rem}
+.inner{max-width:960px;margin:0 auto}
+.hero{min-height:100vh;display:flex;align-items:center;background:linear-gradient(150deg,#0d0d0d 0%,#1c0404 55%,#2b0606 100%);color:#fff;position:relative;overflow:hidden;padding:6rem 1.5rem 4rem}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 80% 40%,rgba(227,4,10,.18),transparent);pointer-events:none}
+.hero-grid{max-width:960px;margin:0 auto;display:grid;grid-template-columns:1fr 400px;gap:3rem;align-items:center;position:relative;z-index:1}
+@media(max-width:860px){.hero-grid{grid-template-columns:1fr}}
+.hero-tag{display:inline-flex;align-items:center;gap:.5rem;background:rgba(227,4,10,.18);border:1px solid rgba(227,4,10,.35);border-radius:20px;padding:.35rem .9rem;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.85);margin-bottom:1.5rem}
+.hero-tag span{width:6px;height:6px;border-radius:50%;background:var(--red2);display:inline-block}
+.hero h1{font-size:clamp(32px,5vw,50px);font-weight:900;color:#fff;margin-bottom:1.25rem}
+.hero h1 em{font-style:normal;color:var(--red2)}
+.hero-sub{font-size:17px;color:rgba(255,255,255,.72);max-width:540px;line-height:1.65;margin-bottom:2rem}
+.hero-cta{display:inline-flex;align-items:center;gap:.5rem;background:var(--red);color:#fff;font-weight:700;font-size:15px;padding:.85rem 2rem;border-radius:30px;box-shadow:0 8px 32px rgba(227,4,10,.4)}
+.hero-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:1.75rem;backdrop-filter:blur(8px)}
+.hero-card h3{font-size:13px;font-weight:700;color:rgba(255,255,255,.55);letter-spacing:.08em;text-transform:uppercase;margin-bottom:1rem}
+.kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.kpi{background:rgba(255,255,255,.08);border-radius:14px;padding:.9rem 1rem}
+.kpi .val{font-family:Sora,sans-serif;font-size:20px;font-weight:900;color:#fff}
+.kpi .lbl{font-size:11px;color:rgba(255,255,255,.55);margin-top:2px}
+.hero-award{display:flex;align-items:flex-start;gap:.6rem;margin-top:1rem;padding:.65rem .9rem;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)}
+.hero-award p{font-size:12px;color:rgba(255,255,255,.65);line-height:1.4}
+.hero-award strong{color:#fff;font-size:13px;display:block}
+.slabel{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:.5rem}
+.stitle{font-size:clamp(26px,4vw,36px);font-weight:800;color:var(--ink);margin-bottom:.75rem}
+.sdesc{font-size:16px;color:var(--muted);max-width:680px;line-height:1.65}
+.divider{height:1px;background:var(--line);width:100%;max-width:960px;margin:0 auto}
+.diag-bg,.invest-bg,.steps-bg,.future-bg{background:var(--soft)}
+.gap-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:640px){.gap-grid{grid-template-columns:1fr}}
+.gap-card{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:1.4rem 1.6rem}
+.gap-num{font-family:Sora,sans-serif;font-size:28px;font-weight:900;color:var(--line);margin-bottom:.5rem}
+.gap-card h3{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:.4rem}
+.gap-card p{font-size:13px;color:var(--muted);line-height:1.55}
+.gap-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:.2rem .6rem;border-radius:6px;margin-bottom:.6rem}
+.tag-red{background:#fdeaea;color:var(--red)}
+.tag-orange{background:#fff3e0;color:#c85a00}
+.highlight-box{background:linear-gradient(135deg,#1a1a1a,#2b0606);border-radius:20px;padding:1.75rem 2rem;margin-top:1.5rem;display:flex;align-items:flex-start;gap:1.5rem}
+.highlight-box .hb-text{color:rgba(255,255,255,.88);font-size:15px;line-height:1.6}
+.highlight-box strong{color:#fff;font-size:18px;font-family:Sora,sans-serif;display:block;margin-bottom:.25rem}
+.solve-row{display:grid;grid-template-columns:160px 1fr;gap:1rem;padding:1.1rem 0;border-bottom:1px solid var(--line)}
+@media(max-width:640px){.solve-row{grid-template-columns:1fr}}
+.solve-row:last-child{border-bottom:none}
+.solve-pain{font-size:13px;font-weight:800;color:var(--red)}
+.solve-fix h4{font-size:15px;margin-bottom:.25rem}
+.solve-fix p{font-size:13px;color:var(--muted);line-height:1.55}
+.method-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2rem}
+@media(max-width:760px){.method-steps{grid-template-columns:1fr 1fr}}
+.ms{border-radius:18px;padding:1.4rem;border:1px solid var(--line);position:relative;overflow:hidden}
+.ms:nth-child(1){background:#fff3f3}.ms:nth-child(2){background:#fff8f0}.ms:nth-child(3){background:#f0f7ff}.ms:nth-child(4){background:#f0fff5}
+.ms .mn{font-family:Sora,sans-serif;font-size:32px;font-weight:900;color:rgba(0,0,0,.07);position:absolute;top:.5rem;right:.75rem;line-height:1}
+.ms h3{font-size:16px;font-weight:800;margin-bottom:.5rem}
+.ms p{font-size:13px;color:var(--muted);line-height:1.55}
+.ms .badge{display:inline-block;background:var(--red);color:#fff;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .65rem;border-radius:8px;margin-bottom:.6rem}
+.timeline-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:2rem}
+@media(max-width:700px){.timeline-strip{grid-template-columns:1fr}}
+.tl-cell{padding:1rem;border-right:1px solid var(--line);background:#fff3f3}
+.tl-cell:last-child{border-right:none;background:#f6f4f2}
+.tl-mes{font-size:10px;font-weight:800;color:var(--red);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.35rem}
+.tl-fase{font-size:14px;font-weight:700;margin-bottom:.4rem}
+.tl-items{font-size:12px;color:var(--muted);line-height:1.55}
+.del-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem;margin-top:1.5rem}
+@media(max-width:760px){.del-grid{grid-template-columns:1fr 1fr}}
+.del{background:var(--soft);border:1px solid var(--line);border-radius:16px;padding:1.15rem 1.1rem}
+.del .ico{font-size:20px;margin-bottom:.45rem}
+.del h4{font-size:14px;font-weight:700;margin-bottom:.3rem}
+.del p{font-size:12px;color:var(--muted);line-height:1.5}
+.del .when{display:inline-block;margin-top:.45rem;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--red)}
+.scope-split{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.5rem}
+@media(max-width:740px){.scope-split{grid-template-columns:1fr}}
+.scope-card{border:1px solid var(--line);border-radius:20px;padding:1.5rem 1.6rem;background:#fff}
+.scope-card.rec{border-color:#f5bfbf;background:#fff8f8}
+.scope-card h3{font-size:18px;margin-bottom:.4rem}
+.scope-card .tag{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--red);margin-bottom:.6rem}
+.scope-card ul{padding-left:1.1rem;margin:.6rem 0 0}
+.scope-card li{font-size:13px;color:var(--muted);margin:.35rem 0;line-height:1.5}
+.social-bg{background:var(--dark);color:#fff}
+.social-bg .stitle{color:#fff}
+.social-bg .sdesc{color:rgba(255,255,255,.65)}
+.social-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.5rem}
+@media(max-width:680px){.social-grid{grid-template-columns:1fr}}
+.soc-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:1.4rem 1.6rem}
+.soc-card h3{font-size:15px;font-weight:700;color:#fff;margin-bottom:.6rem}
+.soc-card ul{padding-left:1rem}
+.soc-card li{font-size:13px;color:rgba(255,255,255,.72);margin:.35rem 0;line-height:1.5}
+.future-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.5rem}
+@media(max-width:640px){.future-grid{grid-template-columns:1fr}}
+.future-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:1.4rem 1.5rem}
+.future-card h3{font-size:15px;margin-bottom:.5rem}
+.future-card p,.future-card li{font-size:13px;color:var(--muted);line-height:1.55}
+.future-card ul{padding-left:1.1rem}
+.roi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:2rem 0}
+@media(max-width:700px){.roi-grid{grid-template-columns:1fr}}
+.roi-card{border-radius:18px;padding:1.4rem 1.6rem;border:1px solid var(--line);background:#fff}
+.roi-card:nth-child(3){background:var(--green-bg);border-color:#86efac}
+.roi-card h3{font-size:14px;font-weight:700;margin-bottom:.75rem}
+.roi-row{display:flex;justify-content:space-between;gap:.75rem;padding:.4rem 0;border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}
+.roi-row:last-child{border-bottom:none}
+.roi-row .rv{font-weight:700;color:var(--ink);text-align:right}
+.big-quote{background:linear-gradient(135deg,#0d0d0d,#1c0404);border-radius:20px;padding:2rem 2.25rem;margin-top:1.5rem}
+.big-quote p{font-size:17px;font-weight:600;color:#fff;line-height:1.65;max-width:720px}
+.big-quote em{font-style:normal;color:var(--red2)}
+.price-hero{background:linear-gradient(135deg,#1a1a1a 0%,#2b0606 100%);border-radius:24px;padding:2.2rem;margin:1.25rem 0 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem}
+.ph-label{font-size:12px;font-weight:700;color:rgba(255,255,255,.55);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.4rem}
+.ph-val{font-family:Sora,sans-serif;font-size:clamp(32px,5vw,48px);font-weight:900;color:#fff}
+.ph-sub{font-size:14px;color:rgba(255,255,255,.55);margin-top:.25rem}
+.ph-was{font-size:15px;color:rgba(255,255,255,.4);text-decoration:line-through;margin-bottom:.35rem}
+.ph-badge{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:1rem 1.25rem;text-align:center}
+.ph-badge .pbl{font-size:11px;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.25rem;font-weight:700}
+.ph-badge .pbv{font-family:Sora,sans-serif;font-size:22px;font-weight:800;color:#fff}
+.price-items{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.25rem}
+@media(max-width:640px){.price-items{grid-template-columns:1fr}}
+.pi{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:1.4rem 1.6rem}
+.pi.alt{opacity:.95}
+.pi .pil{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.35rem}
+.pi .piv{font-family:Sora,sans-serif;font-size:26px;font-weight:800}
+.pi .pis{font-size:12px;color:var(--muted);margin-top:.25rem}
+.pi ul{margin-top:.7rem;padding-left:1.05rem}
+.pi li{font-size:12px;color:var(--muted);margin:.25rem 0}
+.includes-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+@media(max-width:560px){.includes-grid{grid-template-columns:1fr}}
+.inc{display:flex;align-items:center;gap:.6rem;font-size:14px;padding:.5rem 0;border-bottom:1px solid var(--soft)}
+.inc::before{content:'✓';color:var(--red);font-weight:700;font-size:12px;flex-shrink:0;width:18px;height:18px;background:#fdeaea;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.note{background:#fff8f0;border:1px solid #f5d5b0;border-radius:12px;padding:1rem 1.2rem;font-size:13px;color:#7d4b10;margin-top:1.25rem}
+.note strong{color:#a05a0a}
+.steps-list{display:flex;flex-direction:column;margin-top:1.75rem;position:relative}
+.steps-list::before{content:'';position:absolute;left:22px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--red),rgba(227,4,10,.1))}
+.step-item{display:flex;gap:1.25rem;padding:1.15rem 0;position:relative}
+.step-num{width:44px;height:44px;border-radius:50%;background:var(--red);color:#fff;font-family:Sora,sans-serif;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1}
+.step-body strong{font-size:15px;display:block;margin-bottom:.25rem}
+.step-body span{font-size:13px;color:var(--muted);line-height:1.55}
+.footer-cta{background:linear-gradient(150deg,#0d0d0d 0%,#1c0404 60%,#2b0606 100%);text-align:center;padding:5rem 1.5rem}
+.footer-cta h2{font-size:clamp(26px,4vw,40px);font-weight:900;color:#fff;margin-bottom:.75rem}
+.footer-cta p{font-size:16px;color:rgba(255,255,255,.65);max-width:520px;margin:0 auto 2rem;line-height:1.6}
+.footer-cta .btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--red);color:#fff;font-weight:700;font-size:16px;padding:1rem 2.5rem;border-radius:32px}
+.footer-note{font-size:12px;color:rgba(255,255,255,.35);margin-top:1.25rem}
+.quote-fabio{border-left:4px solid var(--red);padding:.2rem 0 .2rem 1.1rem;margin:1.25rem 0;font-size:16px;font-weight:600;line-height:1.5}
+.quote-fabio span{display:block;margin-top:.35rem;font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+@media print{
+  .topnav,#prog,.hero-cta,.footer-cta .btn{display:none!important}
+  body{overflow:visible}
+  .hero{min-height:auto;padding:3rem 1.5rem}
+  section{padding:2.2rem 0;break-inside:avoid}
+}
+@page{size:A4;margin:14mm}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<header class="topnav">
+  <div class="logo">V4 <span>Company</span> × Nosso Boteco</div>
+  <nav>
+    <a href="#contexto">Contexto</a>
+    <a href="#diagnostico">Diagnóstico</a>
+    <a href="#solucao">Solução</a>
+    <a href="#escopo">Escopo</a>
+    <a href="#futuro">Visão de futuro</a>
+    <a href="#resultados">Resultados</a>
+    <a href="#investimento">Investimento</a>
+  </nav>
+  <a href="#investimento" class="cta-mini">Ver valores →</a>
+</header>
+
+<section class="hero" id="contexto">
+  <div class="hero-grid">
+    <div>
+      <div class="hero-tag"><span></span> Proposta comercial · pós-EE · confidencial</div>
+      <h1>O plano já existe. Agora o Nosso Boteco precisa de <em>quem execute com qualidade</em> — não com desconto.</h1>
+      <p class="hero-sub">Fábio, a Estruturação Estratégica fechou o mapa: origem, intenção, reserva e caixa no mesmo funil. O que trava o faturamento não é “não saber o que fazer”. É investir sem ver resultado — e ter uma agência que insiste em preço quando a casa vende qualidade.</p>
+      <a href="#diagnostico" class="hero-cta">Ver diagnóstico →</a>
+    </div>
+    <div>
+      <div class="hero-card">
+        <h3>Nosso Boteco · Fábio Sebastião Ferreira</h3>
+        <div class="kpi-grid">
+          <div class="kpi"><div class="val">EE feita</div><div class="lbl">Mapa, GTM, identidade e LP prontos</div></div>
+          <div class="kpi"><div class="val">R$ 3.000</div><div class="lbl">Fee atual da agência · sem estratégia orgânica</div></div>
+          <div class="kpi"><div class="val">2–3 mil</div><div class="lbl">Verba de mídia hoje · sem prova de mesa</div></div>
+          <div class="kpi"><div class="val">Terça 11:30</div><div class="lbl">Retorno combinado nesta proposta</div></div>
+        </div>
+        <div class="hero-award">
+          <div>🎯</div>
+          <p><strong>Norte da casa</strong>Trazer cliente por qualidade e margem — não por promoção. Quem vem por preço some no dia seguinte.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="diag-bg" id="diagnostico">
+  <div class="inner">
+    <div class="slabel">1. Contexto e visão estratégica</div>
+    <h2 class="stitle">A casa já vende. O mês ainda não é método.</h2>
+    <p class="sdesc">Na última semana da EE, o diagnóstico foi direto: vocês já operam, já anunciam, já recebem reserva no celular. O que falta é visibilidade. Curtida não paga boleto. Origem, intenção, confirmação e faturamento precisam estar no mesmo funil — senão cada real de mídia continua sendo aposta.</p>
+    <p class="quote-fabio">“Eu prefiro trabalhar menos, ter uma receita menor, mas vender com margem maior e fidelizar o cliente que vai vir direto.”<span>Fábio · reunião 17/09</span></p>
+    <p class="sdesc" style="margin-top:1rem">Essa frase é a estratégia. Qualquer execução que empurre 15% de desconto, impulsione post genérico ou fale com Campinas quando o salão está na cidade da casa <strong>trabalha contra o negócio</strong> — não a favor.</p>
+  </div>
+</section>
+
+<section id="diagnostico-dores">
+  <div class="inner">
+    <div class="slabel">2. Diagnóstico — dores e travas</div>
+    <h2 class="stitle">Seis travas que a reunião deixou explícitas.</h2>
+    <p class="sdesc">Não é falta de movimento. É falta de sistema entre anúncio, WhatsApp, reserva e mesa — e de um time que entenda a operação antes de postar.</p>
+    <div class="gap-grid" style="margin-top:1.75rem">
+      <article class="gap-card">
+        <div class="gap-num">01</div>
+        <div class="gap-tag tag-red">Gargalo crítico</div>
+        <h3>Medição interrompida</h3>
+        <p>Não se sabe o que dá certo, o que dá errado, quantas pessoas chegam pelas campanhas nem a taxa de conversão. Vocês estão investindo dinheiro sem ver o resultado no caixa.</p>
+      </article>
+      <article class="gap-card">
+        <div class="gap-num">02</div>
+        <div class="gap-tag tag-red">Gargalo crítico</div>
+        <h3>Agência que não entende o negócio</h3>
+        <p>R$ 3.000/mês. Anúncio no ar sem autorização. Sugestão de 15% na conta. Zero estratégia orgânica. Insiste em preço quando a casa vende qualidade, conforto e fidelização.</p>
+      </article>
+      <article class="gap-card">
+        <div class="gap-num">03</div>
+        <div class="gap-tag tag-red">Gargalo de aquisição</div>
+        <h3>Impulsionar post no lugar de campanha</h3>
+        <p>Botão de impulsionar + mensagem automática gerou pergunta mecânica em série (“qual o cardápio?”, “onde fica?”). Anúncio aparecendo fora da praça. Volume falso, mesa vazia.</p>
+      </article>
+      <article class="gap-card">
+        <div class="gap-num">04</div>
+        <div class="gap-tag tag-orange">Gargalo de canal</div>
+        <h3>Ocasião misturada e Google frouxo</h3>
+        <p>Almoço, happy hour, família e grupos no mesmo recado. Instagram gera desejo pela metade. Google — onde já existe intenção de ir — ainda não captura a busca local com tese.</p>
+      </article>
+      <article class="gap-card">
+        <div class="gap-num">05</div>
+        <div class="gap-tag tag-orange">Gargalo operacional</div>
+        <h3>Reserva no celular do Gabriel</h3>
+        <p>Pedido antecipado, resposta aleatória, dois problemas de ontem para hoje. Cliente oculto mostrou que não é a prioridade nº 1 — mas sem confirmação, a mídia boa morre no Zap.</p>
+      </article>
+      <article class="gap-card">
+        <div class="gap-num">06</div>
+        <div class="gap-tag tag-orange">Gargalo de prova</div>
+        <h3>Influenciador e foto sem retorno</h3>
+        <p>Criador de conteúdo ainda entra por volume, não por código rastreável. Foto artificial compete com a mesa real. Sem UTM, cupom ou voucher, parceria não se concilia com receita.</p>
+      </article>
+    </div>
+    <div class="highlight-box">
+      <div style="font-size:28px">⚙️</div>
+      <div class="hb-text">
+        <strong>Prioridade nº 1: consertar a aquisição.</strong>
+        Na EE ficou claro: destravar receita começa por aparecer para a pessoa certa, no raio certo, com a promessa certa. Treinar o Gabriel é necessário. Não é o primeiro botão. Primeiro a origem. Depois o atendimento segura a mesa.
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="solucao">
+  <div class="inner">
+    <div class="slabel">3. A solução estratégica</div>
+    <h2 class="stitle">Cada trava tem dono, canal e próximo passo.</h2>
+    <p class="sdesc">A metodologia não começa em anúncio. Começa em tese: para quem falamos, em qual ocasião, por qual canal, com qual prova — e o que isso vira no caixa.</p>
+    <div class="solve-row">
+      <div class="solve-pain">Trava 01 · Medição</div>
+      <div class="solve-fix">
+        <h4>Funil visível: viu → interagiu → conversou → reservou → visitou → faturou</h4>
+        <p>Pixel, UTM, origem no WhatsApp e conciliação com a mesa. Curtida sai do relatório. Fábio passa a ver o que pagou a conta — e o que só encheu recado.</p>
+      </div>
+    </div>
+    <div class="solve-row">
+      <div class="solve-pain">Trava 02 · Agência</div>
+      <div class="solve-fix">
+        <h4>Quem opera precisa conhecer o salão — ou a V4 assume a execução</h4>
+        <p>Duas rotas honestas: (A) a V4 vira a cabeça e fiscaliza a agência, semana a semana; (B) a V4 opera Account, GT, Copy, Design e Social. As duas matam o “posta sem autorizar” e o desconto de 15%.</p>
+      </div>
+    </div>
+    <div class="solve-row">
+      <div class="solve-pain">Trava 03 · Campanha</div>
+      <div class="solve-fix">
+        <h4>Campanha estruturada no lugar do botão impulsionar</h4>
+        <p>Google Search para quem já busca mesa na região. Meta para desejo no ICP certo. Sem mensagem automática genérica. Sem anúncio em Campinas. Verba sobe só com prova de mesa.</p>
+      </div>
+    </div>
+    <div class="solve-row">
+      <div class="solve-pain">Trava 04 · Ocasião</div>
+      <div class="solve-fix">
+        <h4>Uma promessa por ocasião — almoço, happy hour, família, grupos</h4>
+        <p>Identidade visual (Montserrat, paleta oficial, logo sem distorção). Foto real de cliente. Tom de hospitalidade que muda com o momento: praticidade no almoço, animação no happy hour, segurança para a família.</p>
+      </div>
+    </div>
+    <div class="solve-row">
+      <div class="solve-pain">Trava 05 · Reserva</div>
+      <div class="solve-fix">
+        <h4>Cadência no WhatsApp: véspera, dia, check-in, pós-visita</h4>
+        <p>Roteiro para o Gabriel. Confirmação no dia anterior. Checagem no dia. Satisfação no dia seguinte. Aniversário e data comemorativa para quem é da cidade — não turista de passagem.</p>
+      </div>
+    </div>
+    <div class="solve-row">
+      <div class="solve-pain">Trava 06 · Prova</div>
+      <div class="solve-fix">
+        <h4>Influenciador com código. Parceria local com voucher. Foto do salão que vira story.</h4>
+        <p>Criador só entra com retorno conciliado. Hotel e rede próxima com voucher rastreável (almoço ou caipirinha no happy hour). A ideia do Fábio — rodada de chope em troca de marcação — vira rotina, não improviso.</p>
+      </div>
+    </div>
+
+    <div class="method-steps">
+      <article class="ms"><div class="mn">01</div><div class="badge">Local</div><h3>Estratégia</h3><p>Posicionamento, ICP, canais e tom. Quem é a mesa: grupo de amigos/casal ou família/empresa. Sem isso, anúncio fala com todo mundo e não convence ninguém.</p></article>
+      <article class="ms"><div class="mn">02</div><div class="badge">Comunicação</div><h3>Desejo</h3><p>Identidade, calendário, criativo e Social. Toda postagem conduz à casa — ocasião, produto, prova e próximo passo. Não postar por postar.</p></article>
+      <article class="ms"><div class="mn">03</div><div class="badge">Aquisição</div><h3>Intenção</h3><p>Google captura quem já decidiu. Meta gera desejo no raio certo. Landing page (cardápio + como chegar) e WhatsApp fecham a rota até a mesa.</p></article>
+      <article class="ms"><div class="mn">04</div><div class="badge">Caixa</div><h3>Conciliação</h3><p>Reserva, visita e faturamento no mesmo relatório. Influenciador, cupom e voucher com origem. Sem isso, escala é feeling — e feeling não aumenta verba.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="social-bg" id="escopo">
+  <div class="inner">
+    <div class="slabel" style="color:rgba(255,255,255,.5)">4. Escopo e entregáveis</div>
+    <h2 class="stitle">O quê. Como. Quando. Duas formas de contratar — uma decisão.</h2>
+    <p class="sdesc">Na reunião combinamos enviar as duas rotas. A Opção A reduz custo e dirige a agência atual. A Opção B tira a agência do meio: a V4 opera o canal com time de cinco.</p>
+    <div class="scope-split">
+      <article class="scope-card">
+        <div class="tag">Opção A · Direcionamento</div>
+        <h3>A V4 é a cabeça. A agência aperta o botão.</h3>
+        <ul>
+          <li>Encontros semanais com o time da agência: o que postar, o que anunciar, o que está aprovado.</li>
+          <li>Direção de mídia, copy, design e um recorte comercial (reserva / WhatsApp).</li>
+          <li>A V4 reporta a Fábio se eles estão executando o que foi mandado.</li>
+          <li>Se em 90 dias a agência não cumprir, o dado justifica a troca — não o feeling.</li>
+          <li>Prazo: 6 ou 12 meses. A casa continua pagando a agência à parte.</li>
+        </ul>
+      </article>
+      <article class="scope-card rec">
+        <div class="tag">Opção B · Executar · recomendada se a agência não cola</div>
+        <h3>A V4 opera. A casa recebe a mesa.</h3>
+        <ul>
+          <li>Account Manager orquestra prioridade com Fábio e o ritmo do salão.</li>
+          <li>Gestor de tráfego: Google + Meta, pixel, UTM, campanha por ocasião.</li>
+          <li>Copy e Design: tese de qualidade, identidade oficial, criativo que vende mesa.</li>
+          <li>Social Media: calendário, feed, Reels, Stories — a agência atual não entrega orgânico.</li>
+          <li>Rotina Colli: grupo no dia, check-in de performance, plano de 90 dias. Sem caixa-preta.</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="inner">
+    <div class="slabel">4.1 Entregáveis da execução — o que vai para o ar</div>
+    <h2 class="stitle">Tudo o que a EE já desenhou, instalado na operação.</h2>
+    <p class="sdesc">Não é um diagnóstico novo. É tirar do papel o que Aline entregou: LP, identidade, calendário, arquitetura de canais e cadência de WhatsApp.</p>
+    <div class="del-grid">
+      <article class="del"><div class="ico">🌐</div><h4>Landing page no ar</h4><p>Cardápio + como chegar. Sem formulário inútil: o objetivo é a pessoa sentar na mesa, não deixar telefone.</p><span class="when">Onda 1 · Fundação</span></article>
+      <article class="del"><div class="ico">📍</div><h4>Google Search + GBP</h4><p>Intenção local. Palavras, grupos de anúncio e títulos já briefados. 60% da verba de mídia nesta frente.</p><span class="when">Onda 2 · Campanhas</span></article>
+      <article class="del"><div class="ico">📱</div><h4>Meta com ICP e raio</h4><p>Desejo no público certo. Sem impulsionar post. Sem Campinas. Remarketing em quem já foi à casa.</p><span class="when">Onda 2 · Campanhas</span></article>
+      <article class="del"><div class="ico">🎨</div><h4>Identidade e criativos</h4><p>Montserrat, paleta oficial, logo intacto. Foto real no lugar de imagem falsa. Fábio aprova fonte e peça.</p><span class="when">Onda 1 · Fundação</span></article>
+      <article class="del"><div class="ico">📅</div><h4>Calendário + Social</h4><p>Legenda, copy e ocasião prontas para executar. Toda postagem conduz ao restaurante — orgânico sem gastar verba.</p><span class="when">Contínuo</span></article>
+      <article class="del"><div class="ico">💬</div><h4>WhatsApp com cadência</h4><p>Confirmação na véspera, check-in no dia, satisfação no dia seguinte. Roteiro para o Gabriel.</p><span class="when">Onda 1–2</span></article>
+      <article class="del"><div class="ico">🤝</div><h4>Criadores com código</h4><p>Não pagar R$ 1.000 ou R$ 2.000 no escuro. Cupom/UTM para conciliar retorno — a dor original do Fábio.</p><span class="when">Onda 3 · Amplificação</span></article>
+      <article class="del"><div class="ico">🏨</div><h4>Parcerias locais</h4><p>Hotéis e redes próximas. Voucher rastreável (almoço executivo ou caipirinha no happy hour).</p><span class="when">Onda 4 · Offline</span></article>
+      <article class="del"><div class="ico">🍺</div><h4>Prova no salão</h4><p>A dinâmica do Fábio vira processo: foto da mesa + marcação no Instagram = rodada de chope. Story repostado.</p><span class="when">Onda 4 · Salão</span></article>
+    </div>
+    <div class="timeline-strip">
+      <div class="tl-cell"><div class="tl-mes">Onda 1</div><div class="tl-fase">Fundação</div><div class="tl-items">LP no ar · eventos de rastreio · WhatsApp ajustado · identidade na ponta · kick-off com Fábio</div></div>
+      <div class="tl-cell"><div class="tl-mes">Onda 2</div><div class="tl-fase">Campanhas</div><div class="tl-items">Google 60% · Meta no ICP · criativos aprovados · fim do impulsionar post · leitura de origem</div></div>
+      <div class="tl-cell"><div class="tl-mes">Onda 3</div><div class="tl-fase">Amplificação</div><div class="tl-items">Verba sobe com prova · mais criadores com código · expansão de ocasião</div></div>
+      <div class="tl-cell"><div class="tl-mes">Onda 4</div><div class="tl-fase">Parcerias e salão</div><div class="tl-items">Hotéis · voucher · foto+chope · pós-visita · aniversário e datas para quem é da cidade</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="future-bg" id="futuro">
+  <div class="inner">
+    <div class="slabel">5. Visão de futuro — como ficará o dia a dia</div>
+    <h2 class="stitle">Uma terça-feira do Nosso Boteco, com o sistema no ar.</h2>
+    <p class="sdesc">Não é um deck novo. É o Fábio abrindo o celular e sabendo, sem perguntar para a agência, o que ontem virou mesa.</p>
+    <div class="future-grid">
+      <article class="future-card">
+        <h3>De manhã</h3>
+        <ul>
+          <li>Account no grupo: o que rodou, o que ajustar, o que o WhatsApp recebeu.</li>
+          <li>Gabriel opera o roteiro — não “coisas aleatórias” no celular da reserva.</li>
+          <li>Google captura quem buscou boteco / almoço / happy hour na região.</li>
+        </ul>
+      </article>
+      <article class="future-card">
+        <h3>No salão</h3>
+        <ul>
+          <li>Mesa de quatro por R$ 150 aparece como oferta de turma — não como liquidação.</li>
+          <li>Família vê estrutura, espaço e tom seguro. Grupo de amigos vê ocasião e rota.</li>
+          <li>Cliente tira foto, marca a casa, ganha a rodada. O story trabalha de graça.</li>
+        </ul>
+      </article>
+      <article class="future-card">
+        <h3>Na comunicação</h3>
+        <ul>
+          <li>Nenhuma arte sai fora do manual. Nenhuma promoção sem validade. Nenhum “o melhor” sem prova.</li>
+          <li>Foto real de quem sentou — com consentimento. Instagram deixa de ser vitrine morta.</li>
+          <li>Influenciador só entra com código. Hotel só entra com voucher.</li>
+        </ul>
+      </article>
+      <article class="future-card">
+        <h3>No fechamento do dia</h3>
+        <ul>
+          <li>Fábio vê origem → reserva → visita → caixa. Não vê 1.000 curtidas.</li>
+          <li>Pós-visita dispara. Quem é da cidade volta no aniversário e nas datas.</li>
+          <li>A agência deixa de soltar peça sem autorizar — ou deixa de existir na conta.</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="resultados">
+  <div class="inner">
+    <div class="slabel">6. Resultados esperados</div>
+    <h2 class="stitle">O retorno não é curtida. É mesa conciliada.</h2>
+    <p class="sdesc">Na EE, a conta conservadora de mídia foi colocada na mesa com transparência: não é meta contratual, é direção. O marketing abre a porta. O salão — e o Gabriel — fecham a mesa.</p>
+    <div class="roi-grid">
+      <article class="roi-card">
+        <h3>Hoje</h3>
+        <div class="roi-row"><span>Fee da agência</span><span class="rv">R$ 3.000/mês</span></div>
+        <div class="roi-row"><span>Verba de mídia</span><span class="rv">R$ 2–3 mil</span></div>
+        <div class="roi-row"><span>Leitura</span><span class="rv">Feeling</span></div>
+        <div class="roi-row"><span>Orgânico</span><span class="rv">Sem estratégia</span></div>
+        <div class="roi-row"><span>Promessa da agência</span><span class="rv">Desconto / 15%</span></div>
+      </article>
+      <article class="roi-card">
+        <h3>Com o sistema (direção da EE)</h3>
+        <div class="roi-row"><span>Verba de plataforma sugerida</span><span class="rv">R$ 4.500*</span></div>
+        <div class="roi-row"><span>Google (intenção)</span><span class="rv">60% · R$ 2.700</span></div>
+        <div class="roi-row"><span>Meta (desejo)</span><span class="rv">40% · R$ 1.800</span></div>
+        <div class="roi-row"><span>Pessoas qualificadas / mês</span><span class="rv">~98 (conservador)</span></div>
+        <div class="roi-row"><span>Acréscimo mês 1</span><span class="rv">~18 vendas**</span></div>
+      </article>
+      <article class="roi-card">
+        <h3>O que isso muda no negócio</h3>
+        <div class="roi-row"><span>Cliente</span><span class="rv">Qualidade, não preço</span></div>
+        <div class="roi-row"><span>Margem</span><span class="rv">Protegida</span></div>
+        <div class="roi-row"><span>Origem</span><span class="rv">Visível no caixa</span></div>
+        <div class="roi-row"><span>Agência</span><span class="rv">Dirigida ou substituída</span></div>
+        <div class="roi-row"><span>Dono</span><span class="rv">Sai do recado aleatório</span></div>
+      </article>
+    </div>
+    <p class="sdesc">* Verba de mídia é da casa, na plataforma — não está no fee da V4. Se Fábio quiser manter R$ 2–3 mil no início, o plano reajusta o split. ** Projeção conservadora da EE, não garantia. Aline foi explícita: no mês 1 pode ser 18 ou 100 — o trabalho não é só de marketing. Reserva mal respondida quebra a conta.</p>
+    <div class="big-quote">
+      <p>Quem paga o salário, a propaganda e o boleto <em>é o cliente na mesa</em>. Esta proposta existe para a mídia parar de brigar com a operação — e passar a encher a casa com gente que volta.</p>
+    </div>
+  </div>
+</section>
+
+<section class="invest-bg" id="investimento">
+  <div class="inner">
+    <div class="slabel">7. Investimento</div>
+    <h2 class="stitle">Duas condições. O mesmo norte: qualidade no lugar de desconto.</h2>
+    <p class="sdesc">Valores apresentados na reunião de 17/09, com a execução detalhada no time completo (Account + GT + Copy + Design + Social Media) e 12 meses no cartão.</p>
+
+    <div class="price-items">
+      <article class="pi alt">
+        <div class="pil">Opção A · Direcionamento da agência</div>
+        <div class="piv">6× ou 12× R$ 2.500</div>
+        <div class="pis">De R$ 48.231,00 por esta condição. A V4 dirige; a agência executa. Encontros semanais.</div>
+        <ul>
+          <li>Cabeça estratégica: mídia, copy, design e recorte comercial</li>
+          <li>Relato a Fábio: estão cumprindo ou não</li>
+          <li>A casa continua pagando os R$ 3.000 da agência</li>
+          <li>Caminho de quem precisa controlar custo agora</li>
+        </ul>
+      </article>
+      <article class="pi">
+        <div class="pil">Opção B · Executar · time de 5</div>
+        <div class="piv">12× R$ 8.176,15</div>
+        <div class="pis">Cartão de crédito · 12 meses. Account, GT, Copy, Design e Social Media.</div>
+        <ul>
+          <li>A V4 opera o canal. A casa confirma a reserva e atende a mesa</li>
+          <li>Rotina Colli inclusa · sem caixa-preta</li>
+          <li>Substitui a lógica da agência de R$ 3.000 sem orgânico</li>
+          <li>Verba de mídia permanece à parte, na plataforma</li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="price-hero">
+      <div>
+        <div class="ph-label">Opção B · condição exclusiva · 12 meses no cartão</div>
+        <div class="ph-was">de 12× R$ 11.731,00</div>
+        <div class="ph-val">12× R$ 8.176,15</div>
+        <div class="ph-sub">Assessoria de Growth com Social Media · recorrente no cartão de crédito</div>
+      </div>
+      <div class="ph-badge">
+        <div class="pbl">Economia mensal</div>
+        <div class="pbv">R$ 3.554,85</div>
+        <div class="pbs">R$ 42.658,20 no ano sobre a tabela</div>
+      </div>
+    </div>
+
+    <div class="includes-grid">
+      <div class="inc">Account Manager no ritmo com Fábio</div>
+      <div class="inc">Gestor de tráfego · Google + Meta</div>
+      <div class="inc">Copy de performance por ocasião</div>
+      <div class="inc">Design na identidade oficial</div>
+      <div class="inc">Social Media · calendário, feed, Reels, Stories</div>
+      <div class="inc">Landing page, pixel, UTM e funil visível</div>
+      <div class="inc">Cadência de WhatsApp e roteiro de reserva</div>
+      <div class="inc">Criadores e parcerias com rastreio</div>
+      <div class="inc">Check-in de performance e plano de 90 dias</div>
+      <div class="inc">Garantia de 30 dias — se o método não colar, o risco é nosso</div>
+    </div>
+
+    <div class="note">
+      <strong>Verba de mídia é à parte.</strong> Os R$ 4.500 (ou os R$ 2–3 mil atuais) vão direto para Google/Meta, na conta da casa. O fee da V4 é o time. Anúncio sem tese continua sendo o problema — não a solução. Mês 1 é fundação: LP, rastreio e WhatsApp. Campanha sobe com chão.
+    </div>
+  </div>
+</section>
+
+<section class="steps-bg" id="proximos">
+  <div class="inner">
+    <div class="slabel">Próximos passos</div>
+    <h2 class="stitle">Terça-feira, 11:30. Fábio escolhe a rota.</h2>
+    <p class="sdesc">Combinado na reunião: estudar o material impresso da EE e voltar com sim, não ou ajuste. Cada semana com impulsionar post e peça sem autorização é semana que o boleto cobra — e a mesa não.</p>
+    <div class="steps-list">
+      <div class="step-item"><div class="step-num">01</div><div class="step-body"><strong>Escolher A ou B</strong><span>Direcionar a agência (6× ou 12× R$ 2.500) ou deixar a V4 executar (12× R$ 8.176,15 no cartão).</span></div></div>
+      <div class="step-item"><div class="step-num">02</div><div class="step-body"><strong>Contrato e kick-off</strong><span>Acessos de Instagram, anúncios, WhatsApp e Google. Prioridade da Onda 1: LP no ar e fim do anúncio genérico.</span></div></div>
+      <div class="step-item"><div class="step-num">03</div><div class="step-body"><strong>Identidade na ponta</strong><span>Manual, foto real, nada de desconto sem regra. Influenciadores recebem o link de avaliação e as diretrizes da marca.</span></div></div>
+      <div class="step-item"><div class="step-num">04</div><div class="step-body"><strong>Campanha com tese</strong><span>Google e Meta no raio certo. Cadência no Zap. Gabriel no roteiro. Verba só sobe com origem no caixa.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="footer-cta">
+  <h2>A EE já pagou o mapa.<br>Esta proposta liga a execução.</h2>
+  <p>Fábio pediu a proposta para pensar. O pensamento que destrava a casa é um só: qualidade na mesa, qualidade no anúncio — e alguém que conheça o negócio antes de apertar publicar.</p>
+  <a class="btn" href="#investimento">Voltar ao investimento</a>
+  <div class="footer-note">Proposta elaborada após a 4ª semana da EE · 17/09/2026 · V4 Company × Nosso Boteco · Confidencial · Retorno terça 11:30</div>
+</section>
+
+<script>
+const prog = document.getElementById('prog');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  prog.style.width = (h ? window.scrollY / h * 100 : 0) + '%';
+});
+const navLinks = document.querySelectorAll('.topnav nav a');
+const sections = Array.from(document.querySelectorAll('section[id]'));
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
+    }
+  });
+}, { rootMargin: '-40% 0px -55% 0px' });
+sections.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>
