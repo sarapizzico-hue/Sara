@@ -1,0 +1,1005 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <title>MixConnect × V4 · EC + Assessoria de Growth</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cover-a: #90191e; --cover-b: #7c191d; --cover-c: #65181c;
+      --wine: #290c0c; --wine-2: #210909; --wine-3: #351010;
+      --white: #fffaf8; --muted: #c9b8b5; --muted-2: #8f7774;
+      --line: rgba(255,255,255,.12);
+      --red: #ef3340; --red-soft: #ff6b73; --amber: #f4b942; --green: #58d68d;
+      --panel: rgba(14,14,16,.88);
+      --shadow: 0 20px 55px rgba(0,0,0,.26);
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 100%; height: 100%; overflow: hidden; background: #080808; color: var(--white);
+      font-family: Montserrat, Arial, sans-serif; -webkit-font-smoothing: antialiased;
+    }
+    button, a { font: inherit; color: inherit; }
+    .skip-link { position: fixed; left: 16px; top: -80px; z-index: 100; padding: 10px 14px; background: #fff; color: #111; border-radius: 8px; font-weight: 700; }
+    .skip-link:focus { top: 16px; }
+    .stage { position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, #2a1010 0, #0f0505 74%); }
+    .deck {
+      position: absolute; left: 50%; top: 50%; width: 1600px; height: 900px;
+      transform-origin: center center; overflow: hidden; background: var(--wine); box-shadow: var(--shadow);
+    }
+    .slide {
+      position: absolute; inset: 0; width: 1600px; height: 900px;
+      display: flex; flex-direction: column; visibility: hidden; opacity: 0; pointer-events: none;
+      background:
+        linear-gradient(rgba(255,255,255,.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.028) 1px, transparent 1px),
+        radial-gradient(circle at 86% 12%, rgba(150,30,36,.26), transparent 31%),
+        linear-gradient(135deg, var(--wine-3), var(--wine) 45%, var(--wine-2));
+      background-size: 80px 80px, 80px 80px, auto, auto;
+      transition: opacity .3s ease;
+    }
+    .slide.active { visibility: visible; opacity: 1; pointer-events: auto; }
+    .slide.cover {
+      background:
+        linear-gradient(rgba(255,255,255,.026) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.026) 1px, transparent 1px),
+        radial-gradient(circle at 78% 24%, rgba(255,255,255,.08), transparent 26%),
+        linear-gradient(122deg, var(--cover-a), var(--cover-b) 54%, var(--cover-c));
+      background-size: 100px 100px, 100px 100px, auto, auto;
+    }
+    .topbar { height: 7px; flex: 0 0 auto; background: linear-gradient(90deg, var(--red), rgba(239,51,64,.08) 72%); }
+    .slide.cover .topbar { background: linear-gradient(90deg, #fff, rgba(255,255,255,.08) 68%); }
+    .page { height: 851px; padding: 43px 66px 22px; display: flex; flex-direction: column; position: relative; overflow: hidden; }
+    .slide-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; margin-bottom: 22px; flex: 0 0 auto; }
+    .head-copy { max-width: 1260px; }
+    .eyebrow {
+      display: flex; align-items: center; gap: 12px; color: var(--red-soft);
+      font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .2em; margin-bottom: 11px;
+    }
+    .eyebrow::before { content: ""; width: 34px; height: 3px; border-radius: 2px; background: currentColor; }
+    h1, h2 { font-weight: 800; letter-spacing: -.035em; line-height: 1.06; }
+    h1 { font-size: 66px; max-width: 1040px; }
+    h2 { font-size: 40px; max-width: 1300px; }
+    h1 em, h2 em { color: var(--red-soft); font-style: normal; }
+    .sub { color: var(--muted); font-size: 17px; line-height: 1.5; margin-top: 12px; max-width: 1120px; }
+    .section-chip {
+      display: flex; align-items: center; gap: 9px; color: var(--muted); font-size: 12px; font-weight: 600;
+      letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; padding-top: 5px;
+    }
+    .section-chip b { font-family: "JetBrains Mono", monospace; font-size: 22px; color: var(--red-soft); }
+    .content { flex: 1; min-height: 0; position: relative; }
+    .footer {
+      height: 42px; flex: 0 0 auto; border-top: 1px solid rgba(255,255,255,.11);
+      display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 24px;
+      padding: 0 66px; color: var(--muted-2); font-size: 11px; background: rgba(20,5,5,.5);
+    }
+    .footer .count { font-family: "JetBrains Mono", monospace; color: var(--muted); min-width: 60px; text-align: right; }
+    .v4-mark {
+      width: 42px; height: 42px; border: 1.5px solid rgba(255,255,255,.85); display: grid; place-items: center;
+      font-weight: 800; font-size: 14px; letter-spacing: -.04em;
+    }
+    .card {
+      background: linear-gradient(160deg, rgba(255,255,255,.075), rgba(255,255,255,.035));
+      border: 1px solid var(--line); border-radius: var(--radius);
+    }
+    .callout {
+      border-left: 4px solid var(--red); background: rgba(239,51,64,.07);
+      padding: 13px 18px; border-radius: 0 12px 12px 0; color: #f9eae8; font-size: 15px; line-height: 1.45;
+    }
+    .cover .page { padding: 70px 78px 30px; }
+    .cover-lockup { display: flex; align-items: center; gap: 18px; font-size: 17px; font-weight: 700; letter-spacing: .04em; color: rgba(255,255,255,.82); }
+    .cover-lockup .sep { width: 1px; height: 28px; background: rgba(255,255,255,.28); }
+    .hero-grid { display: grid; grid-template-columns: minmax(0,1fr) 430px; gap: 80px; align-items: center; flex: 1; }
+    .hero-kicker { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: .25em; color: rgba(255,255,255,.72); margin-bottom: 20px; }
+    .hero-title { font-size: 64px; max-width: 980px; }
+    .hero-title em { color: #ffd9d5; }
+    .hero-sub { font-size: 19px; color: rgba(255,255,255,.76); line-height: 1.55; max-width: 760px; margin-top: 22px; }
+    .cover-art { height: 470px; position: relative; display: grid; place-items: center; }
+    .cover-art svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .cover-mark {
+      position: relative; width: 230px; height: 230px; border: 1px solid rgba(255,255,255,.24); border-radius: 50%;
+      display: grid; place-items: center; background: rgba(255,255,255,.035);
+      box-shadow: 0 0 0 34px rgba(255,255,255,.025), 0 0 0 68px rgba(255,255,255,.018);
+    }
+    .cover-mark::before, .cover-mark::after { content: ""; position: absolute; background: rgba(255,255,255,.3); }
+    .cover-mark::before { width: 310px; height: 1px; }
+    .cover-mark::after { width: 1px; height: 310px; }
+    .cover-mark b { font-family: "JetBrains Mono", monospace; font-size: 42px; letter-spacing: -.08em; }
+    .cover-mark span { position: absolute; bottom: 48px; font-size: 11px; text-transform: uppercase; letter-spacing: .2em; color: rgba(255,255,255,.6); }
+    .cover-meta { display: flex; gap: 28px; margin-top: 42px; color: rgba(255,255,255,.67); font-size: 12px; text-transform: uppercase; letter-spacing: .12em; flex-wrap: wrap; }
+    .cover-meta span { display: flex; align-items: center; gap: 10px; }
+    .cover-meta span::before { content: ""; width: 22px; height: 2px; background: rgba(255,255,255,.48); }
+    .slide.divider {
+      background:
+        linear-gradient(rgba(255,255,255,.024) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.024) 1px, transparent 1px),
+        radial-gradient(circle at 78% 50%, rgba(239,51,64,.25), transparent 30%),
+        linear-gradient(122deg, #7e171b, #541115 58%, #25090b);
+      background-size: 100px 100px, 100px 100px, auto, auto;
+    }
+    .divider .page { padding: 78px; justify-content: center; }
+    .divider-lockup { position: absolute; top: 54px; left: 78px; display: flex; align-items: center; gap: 16px; color: rgba(255,255,255,.7); font-size: 14px; font-weight: 700; }
+    .divider-num { font-family: "JetBrains Mono", monospace; font-size: 140px; line-height: 1; color: rgba(255,255,255,.12); position: absolute; right: 95px; top: 110px; }
+    .divider-kicker { font-size: 14px; text-transform: uppercase; letter-spacing: .28em; color: #ffc2bd; font-weight: 700; margin-bottom: 22px; }
+    .divider-title { font-size: 68px; max-width: 1080px; }
+    .divider-title em { color: #ffd8d4; }
+    .divider-sub { font-size: 20px; line-height: 1.55; color: rgba(255,255,255,.72); max-width: 860px; margin-top: 24px; }
+    .divider-path { display: flex; align-items: center; gap: 0; margin-top: 55px; width: 1080px; }
+    .divider-path span { position: relative; flex: 1; padding-top: 24px; font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: rgba(255,255,255,.66); }
+    .divider-path span::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: rgba(255,255,255,.18); }
+    .divider-path span::after { content: ""; position: absolute; left: 0; top: -5px; width: 12px; height: 12px; border-radius: 50%; background: #ff6b73; box-shadow: 0 0 0 6px rgba(255,107,115,.12); }
+    .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+    .kpi { padding: 16px 18px; border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.04); }
+    .kpi strong { display: block; font-family: "JetBrains Mono", monospace; font-size: 22px; color: var(--red-soft); font-variant-numeric: tabular-nums; }
+    .kpi span { display: block; margin-top: 6px; font-size: 12px; line-height: 1.35; color: var(--muted); }
+    .map-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .map-item { display: grid; grid-template-columns: 48px 1fr; gap: 12px; padding: 14px 16px; align-items: start; }
+    .map-item .n { font-family: "JetBrains Mono", monospace; font-size: 13px; font-weight: 700; color: var(--red-soft); padding-top: 2px; }
+    .map-item h3 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .map-item p { font-size: 13px; line-height: 1.4; color: var(--muted); }
+    .roles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+    .role { padding: 16px 16px 18px; }
+    .role .label { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--red-soft); margin-bottom: 8px; }
+    .role h3 { font-size: 16px; margin-bottom: 6px; }
+    .role p { font-size: 12.5px; line-height: 1.4; color: var(--muted); }
+    .cadence { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .cad { padding: 16px 16px 18px; min-height: 268px; }
+    .cad .dur { font-family: "JetBrains Mono", monospace; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--red-soft); margin-bottom: 10px; }
+    .cad h3 { font-size: 16px; margin-bottom: 8px; }
+    .cad p { font-size: 12.5px; line-height: 1.4; color: var(--muted); margin-bottom: 12px; }
+    .cad ul { list-style: none; }
+    .cad li { font-size: 12px; color: #e8d8d5; padding: 3px 0 3px 12px; position: relative; }
+    .cad li::before { content: "·"; position: absolute; left: 0; color: #fff; font-weight: 700; }
+    .internal {
+      margin-top: 14px; padding: 14px 18px; border: 1px solid var(--line); border-radius: 14px;
+      background: rgba(255,255,255,.04);
+    }
+    .internal h4 { font-size: 14px; margin-bottom: 6px; }
+    .internal p { font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      padding: 6px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted);
+    }
+    .process { display: flex; align-items: stretch; gap: 0; margin-top: 8px; }
+    .stage-card { flex: 1; padding: 16px 14px; border: 1px solid var(--line); background: rgba(255,255,255,.04); }
+    .stage-card .n { font-family: "JetBrains Mono", monospace; color: var(--red-soft); font-size: 13px; font-weight: 700; }
+    .stage-card h3 { font-size: 16px; margin: 8px 0 6px; }
+    .stage-card p { font-size: 12.5px; line-height: 1.4; color: var(--muted); }
+    .process .arrow { flex: 0 0 28px; display: grid; place-items: center; color: var(--red-soft); font-size: 22px; }
+    .weeks { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+    .week { padding: 16px 14px 18px; min-height: 248px; }
+    .week .n { font-family: "JetBrains Mono", monospace; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--red-soft); margin-bottom: 8px; }
+    .week h3 { font-size: 16px; margin-bottom: 8px; }
+    .week ul { list-style: none; }
+    .week li { font-size: 12px; color: var(--muted); line-height: 1.4; padding: 2px 0 2px 12px; position: relative; }
+    .week li::before { content: "·"; position: absolute; left: 0; color: #fff; }
+    .deliver { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    .deliver article { padding: 16px 18px; }
+    .deliver h3 { font-size: 16px; margin-bottom: 10px; }
+    .deliver ul { list-style: none; }
+    .deliver li { font-size: 12.5px; color: var(--muted); line-height: 1.4; padding: 3px 0 3px 14px; position: relative; }
+    .deliver li::before { content: "·"; position: absolute; left: 0; color: #fff; font-weight: 700; }
+    .seo-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+    .inc-card .inc { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 28px; }
+    .inc { list-style: none; }
+    .inc li { font-size: 13px; line-height: 1.4; color: var(--muted); padding: 5px 0 5px 22px; position: relative; }
+    .inc li strong { color: #fff; font-weight: 650; }
+    .inc li::before { content: "✓"; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+    .inc-card { padding: 18px 20px; }
+    .inc-card h3 { font-size: 16px; margin-bottom: 12px; }
+    .audience {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      padding: 7px 12px; border-radius: 8px; border-left: 3px solid var(--red); background: rgba(255,255,255,.05); color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .tobe { display: flex; flex-direction: column; align-items: stretch; gap: 0; }
+    .tobe-row { display: grid; gap: 12px; }
+    .tobe-row.two { grid-template-columns: 1fr 1fr; max-width: 920px; margin: 0 auto; width: 100%; }
+    .tobe-row.four { grid-template-columns: repeat(4, 1fr); }
+    .tobe-box { padding: 14px 16px; text-align: center; }
+    .tobe-box .who { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--red-soft); margin-bottom: 6px; }
+    .tobe-box h3 { font-size: 16px; margin-bottom: 4px; }
+    .tobe-box p { font-size: 12.5px; line-height: 1.4; color: var(--muted); }
+    .tobe-box.core {
+      max-width: 920px; margin: 0 auto; width: 100%;
+      border-color: rgba(88,214,141,.32);
+      background: linear-gradient(160deg, rgba(88,214,141,.12), rgba(255,255,255,.04));
+    }
+    .tobe-box.end {
+      max-width: 100%;
+      border-color: rgba(244,185,66,.34);
+      background: rgba(244,185,66,.08);
+    }
+    .tobe-join {
+      width: 2px; height: 18px; margin: 4px auto;
+      background: linear-gradient(rgba(255,107,115,.15), rgba(255,107,115,.7), rgba(255,107,115,.15));
+    }
+    .tobe-hbar { position: relative; height: 18px; margin: 0 12.5%; }
+    .tobe-hbar::before {
+      content: ""; position: absolute; left: 0; right: 0; top: 8px; height: 2px;
+      background: rgba(255,107,115,.35);
+    }
+    .lane { padding: 14px 14px 16px; min-height: 168px; }
+    .lane .who { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--red-soft); margin-bottom: 8px; }
+    .lane h3 { font-size: 15px; margin-bottom: 8px; }
+    .lane ul { list-style: none; }
+    .lane li { font-size: 12px; color: var(--muted); line-height: 1.4; padding: 2px 0 2px 12px; position: relative; }
+    .lane li::before { content: "·"; position: absolute; left: 0; color: #fff; }
+    .success-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .success-item { padding: 16px 18px; display: grid; grid-template-columns: 28px 1fr; gap: 12px; align-items: start; }
+    .success-item .n { font-family: "JetBrains Mono", monospace; color: var(--green); font-size: 14px; font-weight: 700; }
+    .success-item h3 { font-size: 15px; font-weight: 650; line-height: 1.35; }
+    .offers { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .offer { padding: 14px 18px; }
+    .offer.featured { border-color: rgba(88,214,141,.32); background: linear-gradient(160deg, rgba(88,214,141,.12), rgba(255,255,255,.04)); }
+    .offer .tag { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--red-soft); margin-bottom: 8px; }
+    .offer.featured .tag { color: var(--green); }
+    .offer h3 { font-size: 20px; margin-bottom: 6px; }
+    .offer .note { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+    .offer .was { font-family: "JetBrains Mono", monospace; font-size: 13px; color: var(--muted-2); text-decoration: line-through; }
+    .offer .now { font-family: "JetBrains Mono", monospace; font-size: 32px; font-weight: 700; margin: 6px 0 10px; }
+    .math { margin-top: 4px; }
+    .math-row {
+      display: flex; justify-content: space-between; gap: 12px;
+      font-size: 13px; color: var(--muted); padding: 6px 0;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    .math-row:last-child { border-bottom: none; }
+    .math-row strong { color: #fff; font-family: "JetBrains Mono", monospace; }
+    .math-row .ok { color: var(--green); }
+    .ee-band, .combo {
+      margin-top: 10px; padding: 12px 16px; border-radius: 12px;
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    }
+    .ee-band { border: 1px solid rgba(244,185,66,.34); background: rgba(244,185,66,.1); }
+    .ee-band .k { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--amber); }
+    .ee-band p { font-size: 13px; color: #f8e9df; margin-top: 4px; }
+    .ee-band .amt { font-family: "JetBrains Mono", monospace; font-size: 20px; color: var(--amber); white-space: nowrap; }
+    .combo { border: 1px solid rgba(88,214,141,.28); background: rgba(88,214,141,.08); }
+    .combo h3 { font-size: 16px; }
+    .combo p { font-size: 13px; color: var(--muted); margin-top: 4px; }
+    .combo .cond { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--green); }
+    .combo .fig { font-family: "JetBrains Mono", monospace; font-size: 26px; font-weight: 700; color: var(--green); }
+    .pay { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+    .pay span {
+      font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      padding: 6px 10px; border-radius: 999px; border: 1px solid rgba(88,214,141,.28); color: var(--green);
+    }
+    .top-progress { position: fixed; z-index: 30; top: 0; left: 0; width: 100%; height: 4px; background: rgba(255,255,255,.12); }
+    .top-progress > span { display: block; height: 100%; width: 12%; background: linear-gradient(90deg, #a90009, var(--red), #ff4a53); transition: width .22s ease; }
+    .context-pill {
+      position: fixed; z-index: 30; top: max(16px, env(safe-area-inset-top)); left: max(16px, env(safe-area-inset-left));
+      display: flex; align-items: center; gap: 10px; max-width: calc(100vw - 32px);
+      padding: 9px 12px; border: 1px solid rgba(255,255,255,.16); border-radius: 999px;
+      background: var(--panel); backdrop-filter: blur(12px); font-size: 11px; letter-spacing: .04em;
+    }
+    .context-pill strong { font-size: 12px; text-transform: uppercase; letter-spacing: .12em; }
+    .context-pill span { color: #b9b9be; }
+    .block-nav {
+      position: fixed; z-index: 31; left: max(16px, env(safe-area-inset-left)); bottom: max(16px, env(safe-area-inset-bottom));
+      display: flex; gap: 6px; padding: 6px; border: 1px solid rgba(255,255,255,.16); border-radius: 14px;
+      background: var(--panel); backdrop-filter: blur(12px);
+    }
+    .block-nav button {
+      min-width: 44px; height: 38px; border: 0; border-radius: 9px; background: transparent;
+      color: #c9c9ce; font: 700 11px/1 Montserrat, Arial, sans-serif; cursor: pointer;
+    }
+    .block-nav button:hover, .block-nav button:focus-visible { background: rgba(255,255,255,.1); color: #fff; }
+    .block-nav button.is-active { background: var(--red); color: #fff; }
+    .global-nav {
+      position: fixed; z-index: 31; left: 50%; bottom: max(16px, env(safe-area-inset-bottom)); transform: translateX(-50%);
+      display: flex; align-items: center; gap: 8px; padding: 6px; border: 1px solid rgba(255,255,255,.16);
+      border-radius: 999px; background: var(--panel); backdrop-filter: blur(12px);
+    }
+    .global-nav button {
+      width: 42px; height: 42px; border: 0; border-radius: 50%; background: rgba(255,255,255,.08); color: #fff;
+      font: 600 19px/1 Arial, sans-serif; cursor: pointer;
+    }
+    .global-nav button:hover, .global-nav button:focus-visible { background: var(--red); }
+    .global-nav button:disabled { opacity: .28; cursor: not-allowed; }
+    .global-count { min-width: 82px; text-align: center; font: 700 12px/1.2 "JetBrains Mono", Consolas, monospace; letter-spacing: .08em; }
+    .utility {
+      position: fixed; z-index: 31; right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom));
+    }
+    .utility button {
+      min-height: 44px; padding: 0 14px; border: 1px solid rgba(255,255,255,.16); border-radius: 12px;
+      background: var(--panel); color: #fff; font: 700 11px/1 Montserrat, Arial, sans-serif; cursor: pointer;
+    }
+    .slide-dots { position: fixed; right: 18px; top: 50%; transform: translateY(-50%); z-index: 30; display: grid; gap: 8px; }
+    .slide-dots button { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 999px; background: rgba(255,255,255,.24); cursor: pointer; }
+    .slide-dots button.active { height: 28px; background: var(--red); }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+    @media (max-width: 760px) {
+      .context-pill span { display: none; }
+      .utility { display: none; }
+      .global-nav { bottom: 72px; }
+      .block-nav { left: 50%; transform: translateX(-50%); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .slide, .top-progress > span { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#globalNav">Ir para a navegação</a>
+  <div class="top-progress" aria-hidden="true"><span id="globalProgress"></span></div>
+  <div class="context-pill" aria-live="polite"><strong id="blockLabel">Narrativa</strong><span id="slideTitle">Capa</span></div>
+
+  <div class="stage">
+    <main class="deck" id="deck" aria-label="Proposta MixConnect × V4 · EC + Assessoria de Growth">
+
+      <section class="slide cover active" data-act="narrativa" data-title="Capa" aria-label="Capa — tese da conta">
+        <div class="topbar"></div>
+        <div class="page">
+          <div class="cover-lockup"><span class="v4-mark">V4</span><span class="sep"></span><span>MixConnect × V4 Company</span></div>
+          <div class="hero-grid">
+            <div>
+              <div class="hero-kicker">Proposta comercial · EC + Assessoria de Growth</div>
+              <h1 class="hero-title">Da venda por instinto<br>à <em>máquina</em>.</h1>
+              <p class="hero-sub">21 anos, 8.330 clientes e cinco praças. O comercial opera no Opa Suit; a mídia não tem origem; a retenção só age no cancelamento. Estruturação Comercial em 5 semanas. Growth no ritmo Colli — Account, GT, Copy e Design. Tudo em 12x.</p>
+              <div class="cover-meta">
+                <span>EC · 5 semanas</span>
+                <span>Growth · AM + GT + Copy + Design</span>
+                <span>Graziela · decisão</span>
+                <span>Julia · comercial e mkt</span>
+              </div>
+            </div>
+            <div class="cover-art" aria-hidden="true">
+              <svg viewBox="0 0 430 470"><path d="M20 330 C92 150 161 388 232 212 S344 77 414 144" fill="none" stroke="rgba(255,255,255,.26)" stroke-width="2"/><path d="M20 346 C92 166 161 404 232 228 S344 93 414 160" fill="none" stroke="rgba(255,255,255,.10)" stroke-width="18"/><circle cx="20" cy="330" r="6" fill="#fff"/><circle cx="414" cy="144" r="6" fill="#ffd8d4"/></svg>
+              <div class="cover-mark"><b>V4</b><span>combo</span></div>
+            </div>
+          </div>
+        </div>
+        <footer class="footer"><span>MixConnect × V4 Company · confidencial</span><span class="count">01 / 12</span></footer>
+      </section>
+
+      <section class="slide" data-act="dados" data-title="Diagnóstico" aria-label="Diagnóstico — travas da conta">
+        <div class="topbar"></div>
+        <div class="page">
+          <header class="slide-head">
+            <div class="head-copy">
+              <div class="eyebrow">Diagnóstico · leitura da conta</div>
+              <h2>Vocês não têm problema de <em>marca</em>. Têm o crescimento no sistema.</h2>
+              <p class="sub">Indicação construiu a base. O que trava agora: funil informal, 7 vendedores sem playbook, mídia sem UTM, retenção reativa e 12 mil inativos parados. Vender 110–130 e cancelar na mesma ordem.</p>
+            </div>
+            <div class="section-chip"><b>01</b> Dados</div>
+          </header>
+          <div class="content">
+            <div class="kpis">
+              <div class="kpi"><strong>110–130</strong><span>Vendas/mês. Média histórica ~200. Pico 240 em set/24.</span></div>
+              <div class="kpi"><strong>~130–140</strong><span>Cancelamentos/mês. ~70 voluntários + ~60–70 inadimplência.</span></div>
+              <div class="kpi"><strong>R$ 16 mil</strong><span>Receita nova vs. meta de ~R$ 24 mil. Gap de R$ 8 mil/mês.</span></div>
+              <div class="kpi"><strong>12.000</strong><span>Inativos elegíveis a reativação. Sem régua por motivo ou data.</span></div>
+            </div>
+            <div class="map-grid">
+              <article class="card map-item"><span class="n">01</span><div><h3>Funil no feeling</h3><p>Opa Suit junta venda, suporte e financeiro no mesmo WhatsApp. Sem MQL/SQL, sem pipeline por vendedor × praça, sem origem do lead.</p></div></article>
+              <article class="card map-item"><span class="n">02</span><div><h3>7 cadeiras, método na cabeça</h3><p>Alta rotatividade. Dependência da Julia. Sem script, trilha ou perfil de cadeira. O jeito MixConnect sai quando a pessoa sai.</p></div></article>
+              <article class="card map-item"><span class="n">03</span><div><h3>Verba no escuro</h3><p>~R$ 3.700/mês de mídia, ~50 leads, 15–20 vendas. Sem UTM. Campanha pausada no feeling. Sete vendedores ociosos de demanda.</p></div></article>
+              <article class="card map-item"><span class="n">04</span><div><h3>Retenção só no cancelamento</h3><p>Churn 1,66%. Contraproposta quando o cliente já pediu para sair. LTV cai de ~24 para ~10 meses.</p></div></article>
+              <article class="card map-item"><span class="n">05</span><div><h3>Ativo real, cartaz de oferta</h3><p>21 anos e 5 lojas viram combo repetido. Brusque some do Instagram. Quase R$ 10 mil/mês em mídia + agência sem narrativa única.</p></div></article>
+              <article class="card map-item"><span class="n">06</span><div><h3>12 mil inativos parados</h3><p>21 mil cadastros históricos. Reativação sem recorte. Crescimento novo compete com quem já foi MixConnect e saiu.</p></div></article>
+            </div>
+            <p class="callout" style="margin-top:14px">A MixConnect já vende. Falta sistema: origem rastreável, funil com dono e retenção antes do pedido de cancelamento — senão escalar mídia só acelera o vazamento.</p>
+          </div>
+        </div>
+        <footer class="footer"><span>MixConnect × V4 Company · confidencial</span><span class="count">02 / 12</span></footer>
+      </section>
+
+      <section class="slide divider" data-act="produto" data-title="Produto" aria-label="Divisor — o que opera">
+        <div class="topbar"></div>
+        <div class="page">
+          <div class="divider-lockup"><span class="v4-mark">V4</span><span>MixConnect · proposta</span></div>
+          <div class="divider-num">03</div>
+          <div class="divider-kicker">Ato 3 · Produto</div>
+          <h2 class="divider-title">Duas frentes. <em>Um ciclo.</em></h2>
+          <p class="divider-sub">Estruturação Comercial tira o feeling do Opa Suit. Growth com Account + GT + Copy + Design. Rotina Colli com Graziela e Julia. Sem caixa-preta.</p>
+          <div class="divider-path">
+            <span>Diagnóstico</span>
+            <span>EC</span>
+            <span>Funil + SLA</span>
+            <span>Growth</span>
+            <span>Origem + UTM</span>
+            <span>Gate + LTV</span>
+          </div>
+        </div>
+        <footer class="footer"><span>MixConnect × V4 Company · confidencial</span><span class="count">03 / 12</span></footer>
+      </section>
+
+      <section class="slide" data-act="produto" data-title="EC · fluxo" aria-label="Estruturação Comercial — como funciona">
+        <div class="topbar"></div>
+        <div class="page">
+          <header class="slide-head">
+            <div class="head-copy">
+              <div class="eyebrow">Produto 01 · Estruturação Comercial · 5 semanas</div>
+              <h2>Do diagnóstico ao time <em>operando no padrão</em>.</h2>
+              <p class="sub">Não é PDF na gaveta. É auditoria + blueprint + capacitação. Cobrimos estrutura, processo, incentivo e discurso — e apontamos o gargalo prioritário.</p>
+            </div>
+            <div class="section-chip"><b>01</b> Produto</div>
+          </header>
+          <div class="content">
+            <div class="weeks">
+              <article class="card week">
+                <div class="n">Semana 01</div>
+                <h3>Onboarding</h3>
+                <ul>
+                  <li>Acessos, Opa Suit e objetivos</li>
+                  <li>Graziela, Julia e o time das 7 cadeiras</li>
+                  <li>Kickoff com a liderança</li>
+                </ul>
+              </article>
+              <article class="card week">
+                <div class="n">Semana 02</div>
+                <h3>Diagnóstico 360°</h3>
+                <ul>
+                  <li>Estrutura do time e papéis</li>
+                  <li>Entrevistas com a ponta</li>
+                  <li>Fluxo As-Is e gargalos</li>
+                  <li>Metas, comissão e rituais</li>
+                  <li>Cliente oculto no discurso real</li>
+                </ul>
+              </article>
+              <article class="card week">
+                <div class="n">Semana 03</div>
+                <h3>CRM e ferramentas</h3>
+                <ul>
+                  <li>Nesta conta: Opa Suit informal</li>
+                  <li>Venda, suporte e financeiro no mesmo número</li>
+                  <li>Etapas, origem, ciclo e SLA</li>
+                </ul>
+              </article>
+              <article class="card week">
+                <div class="n">Semana 04</div>
+                <h3>Definições</h3>
+                <ul>
+                  <li>Perfil de cadeira (CHA)</li>
+                  <li>KPIs e pipeline por praça</li>
+                  <li>SLA marketing ↔ vendas</li>
+                  <li>BPMN comercial priorizado</li>
+                  <li>Scripts, cadências e comissão</li>
+                </ul>
+              </article>
+              <article class="card week">
+                <div class="n">Semana 05</div>
+                <h3>Treinamento</h3>
+                <ul>
+                  <li>Imersão no novo fluxo</li>
+                  <li>Treinamento das 7 cadeiras</li>
+                  <li>Entrega do blueprint</li>
+                  <li>O conhecimento fica na MixConnect</li>
+                </ul>
+              </article>
+            </div>
+            <p class="callout" style="margin-top:16px">O que Graziela e Julia levam: a operação sai do feeling. Causa-raiz visível e roteiro para vender sem depender só de quem está na ponta.</p>
+          </div>
+        </div>
+        <footer class="footer"><span>MixConnect × V4 Company · confidencial</span><span class="count">04 / 12</span></footer>
+      </section>
+
+      <section class="slide" data-act="produto" data-title="EC · entregáveis" aria-label="Entregáveis da Estruturação Comercial">
+        <div class="topbar"></div>
+        <div class="page">
+          <header class="slide-head">
+            <div class="head-copy">
+              <div class="eyebrow">Incluído na Estruturação Comercial</div>
+              <h2>O blueprint que a MixConnect <em>passa a operar</em>.</h2>
+              <p class="sub">Entregáveis técnicos, não slides de opinião. Cada peça ataca o que a conta nomeou: Opa Suit no lugar de funil, origem invisível, time sem playbook.</p>
+            </div>
+            <div class="section-chip"><b>02</b> Produto</div>
+          </header>
+          <div class="content">
+            <div class="deliver">
+              <article class="card">
+                <h3>Fundação comercial</h3>
+                <ul>
+                  <li>Diagnóstico da operação comercial</li>
+                  <li>Mapeamento do fluxo de vendas</li>
+                  <li>Fluxograma As-Is com gargalo documentado</li>
+                  <li>Análise de metas, incentivos e comissão</li>
+                  <li>Rotinas gerenciais e rituais</li>
+                  <li>Cliente oculto: discurso real da ponta</li>
+                </ul>
+              </article>
+              <article class="card">
+                <h3>Definições operacionais</h3>
+                <ul>
+                  <li>Perfil de contratação por cadeira</li>
+                  <li>KPIs e pipeline por vendedor × praça</li>
+                  <li>SLA entre marketing e vendas</li>
+                  <li>Manual do processo comercial (BPMN)</li>
+                  <li>Scripts e cadências de abordagem</li>
+                  <li>Imersão de treinamento do time</li>
+                </ul>
+              </article>
+              <article class="card">
+                <h3>O que muda no dia a dia</h3>
+                <ul>
+                  <li>Lead com origem — não “como nos conheceu?”</li>
+                  <li>Etapas MQL / SQL / proposta / ganho / perda</li>
+                  <li>Resposta com SLA. Campanha não pausa no feeling</li>
+                  <li>Julia vê o pipeline. Não carrega cada caso</li>
+                  <li>O método fica quando o vendedor sai</li>
+                  <li>Demanda nova entra no mesmo padrão da loja</li>
+                </ul>
+              </article>
+            </div>
+            <p class="callout" style="margin-top:14px">Hoje o arquivo da MixConnect é etiqueta no Opa Suit. A EC instala funil, SLA e playbook: cada oportunidade com dono, prazo e próximo passo.</p>
+          </div>
+        </div>
+        <footer class="footer"><span>MixConnect × V4 Company · confidencial</span><span class="count">05 / 12</span></footer>
+      </section>
+
+      <section class="slide" data-act="produto" data-title="Time" aria-label="Time de Growth na conta">
+        <div class="topbar"></div>
+        <div class="page">
+          <header class="slide-head">
+            <div class="head-copy">
+              <div class="eyebrow">Produto 02 · Assessoria de Growth Padrão · recorrente</div>
+              <h2>Account orquestra. <em>Copy e Design provam.</em></h2>
+              <p class="sub">Squad completa na conta da MixConnect: Account Manager + Gestor de tráfego + Copy + Design. Núcleo no ritmo Colli — prioridade com Graziela e Julia. Primeiro origem e fundamento; volume só com o comercial no padrão.</p>
+            </div>
+            <div class="section-chip"><b>03</b> Produto</div>
+          </header>
+          <div class="content">
+            <div class="roles">
+              <article class="card role"><div class="label">Account Manager</div><h3>Ritmo com a diretoria</h3><p>Dono da cadência. Prioridade do mês, pendência, backlog e o gate entre os 7 vendedores e a retenção. Sem caixa-preta.</p></article>
+              <article class="card role"><div class="label">Gestor de tráfego</div><h3>Intenção, depois escala</h3><p>UTM, auditoria Google/Meta. Volume só entra com SLA no ar — no ritmo da MixConnect, não no ritmo do anúncio.</p></article>
+              <article class="card role"><div class="label">Copy</div><h3>Prova local, não cartaz</h3><p>21 anos, loja, atendimento humano, indicação e praça. Reativação dos 12 mil com argumento, não disparo solto.</p></article>
+              <article class="card role"><div class="label">Design</div><h3>Oferta clara, praça visível</h3><p>Peça, anúncio e presença na mesma marca. Brusque deixa de sumir. Plano deixa de ter três nomes para a mesma coisa.</p></article>
+            </div>
+            <p class="callout">Growth opera criativos, tracking e origem. Verba de mídia à parte. Primeiro ciclo é fundamento — não escala cega. O Account segura o gate com Julia.</p>
+            <div class="map-grid" style="margin-top:14px">
+              <article class="card map-item"><span class="n">AM</span><div><h3>Graziela decide no trimestre. Account executa o ritmo.</h3><p>Prioridade, pendência e gate. A operação deixa de viver no grupo da Julia.</p></div></article>
+              <article class="card map-item"><span class="n">GT</span><div><h3>Intenção de compra, no ritmo da casa.</h3><p>Google e Meta com origem. Volume não entra se o funil ainda é feeling.</p></div></article>
+              <article class="card map-item"><span class="n">CP</span><div><h3>Indicação ganha argumento.</h3><p>Copy para quem troca de provedor por suporte e Wi-Fi — não só combo de mega.</p></div></article>
+              <article class="card map-item"><span class="n">DS</span><div><h3>Peça, LP e anúncio na mesma casa.</h3><p>Identidade MixConnect reconhecível nas cinco praças.</p></div></article>
+            </div>
+          </div>
+        </div>
+        <footer class="footer"><span>MixConnect × V4 Company · confidencial</span><span class="count">06 / 12</span></footer>
+      </section>
+
+      <section class="slide" data-act="produto" data-title="Rotina Colli" aria-label="Rotina Colli — como a operação roda">
+        <div class="topbar"></div>
+        <div class="page">
+          <header class="slide-head">
+            <div class="head-copy">
+              <div class="eyebrow">Rotina Colli · cadência na conta</div>
+              <h2>Um mês com a Colli. <em>Vocês veem o que rodou.</em></h2>
+              <p class="sub">Grupo no dia a dia, check-in de performance, planejamento de 90 dias, growths internos. Sem surpresa no fim do mês.</p>
+            </div>
+            <div class="section-chip"><b>04</b> Produto</div>
+          </header>
+          <div class="content">
+            <div class="cadence">
+              <article class="card cad">
+                <div class="dur">Diário</div>
+                <h3>Atendimento no grupo</h3>
+                <p>Todo dia o Account envia o resumo da MixConnect.</p>
+                <ul>
+                  <li>Alinhamentos do dia</li>
+                  <li>Pendências V4 e da casa</li>
+                  <li>Backlog</li>
+                  <li>Resultado visível</li>
+                </ul>
+              </article>
+              <article class="card cad">
+                <div class="dur">1h · quinzenal</div>
+                <h3>Check-in de performance</h3>
+                <p>V4 + Julia olham a quinzena e o plano do mês em curso.</p>
+                <ul>
+                  <li>Resultados da quinzena</li>
+                  <li>Insights e plano de ação</li>
+                  <li>Próximos passos</li>
+                </ul>
+              </article>
+              <article class="card cad">
+                <div class="dur">1h · mensal</div>
+                <h3>Check-in do mês</h3>
+                <p>Resultado completo e o que guia o ciclo seguinte.</p>
+                <ul>
+                  <li>O que foi feito</li>
+                  <li>O que converteu</li>
+                  <li>O que ajusta</li>
+                </ul>
+              </article>
+              <article class="card cad">
+                <div class="dur">1h30 · trimestre</div>
+                <h3>Planejamento 90 dias</h3>
+                <p>Prioridade, aprendizado e o que guia o trimestre. Graziela decide no trimestre — não no WhatsApp do dia.</p>
+                <ul>
+                  <li>Resultados do quarter</li>
+                  <li>Prioridades dos 90 dias</li>
+                  <li>Gate de mídia e retenção</li>
+                </ul>
+              </article>
+            </div>
+            <div class="internal">
+              <h4>Rotina interna · Growths e retrospectivas</h4>
+              <p>O time inteiro colabora nos pontos do mês e no planejamento do ciclo seguinte — dados, tráfego, funil e comercial, sem caixa-preta.</p>
+              <div class="chips">
+                <span class="chip">Análise de dados</span>
+                <span class="chip">Visão do projeto</span>
+                <span class="chip">Visão gestão</span>
+                <span class="chip">Visão copy</span>
+                <span class="chip">Visão design</span>
+                <span class="chip">Visão tráfego</span>
+                <span class="chip">Visão comercial</span>
+                <span class="chip">Visão retenção</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer class="footer"><span>MixConnect × V4 Company · confidencial</span><span class="count">07 / 12</span></footer>
+      </section>
+
+      <section class="slide" data-act="produto" data-title="Origem e LTV" aria-label="Origem, retenção e reativação">
+        <div class="topbar"></div>
+        <div class="page">
+          <header class="slide-head">
+            <div class="head-copy">
+              <div class="eyebrow">No Growth · origem rastreável + proteção de base</div>
+              <h2>Quem entra precisa ter origem. <em>Quem já é cliente não espera o cancelamento.</em></h2>
+              <p class="sub">UTM, leitura por canal e régua antes do pedido de saída. Os 12 mil inativos entram em recorte — motivo, data e praça. Sem prometer volume de venda.</p>
+            </div>
+            <div class="section-chip"><b>05</b> Produto</div>
+          </header>
+          <div class="content">
+            <div class="audience">ISP · ticket ~R$ 110 · o jogo se paga no LTV · 5 praças</div>
+            <div class="seo-grid">
+              <article class="card inc-card">
+                <h3>O que entra neste ciclo</h3>
+                <ul class="inc">
+                  <li><strong>Tracking e UTM:</strong> acaba a divergência de 60% vs. 90% de indicação.</li>
+                  <li><strong>Auditoria Google + Meta:</strong> estrutura, nomenclatura e o que de fato vira assinante.</li>
+                  <li><strong>SLA de mídia:</strong> campanha não pausa no feeling no fim do mês.</li>
+                  <li><strong>Volume no ritmo dos 7:</strong> lead com dono. Escala só com o comercial absorvendo.</li>
+                  <li><strong>Régua de retenção:</strong> atuação antes do pedido de cancelamento — não só contraproposta.</li>
+                  <li><strong>Reativação dos 12 mil:</strong> recorte por motivo × data × praça, com copy.</li>
+                  <li><strong>Report:</strong> CPL, conversão, vendas por canal e churn no mesmo tabuleiro.</li>
+                </ul>
+              </article>
+            </div>
+            <p class="callout" style="margin-top:14px">Em telecom, aquisição sem retenção é custo. Retenção sem origem é feeling. O Growth fecha as duas pontas no ritmo do comercial.</p>
+          </div>
+        </div>
+        <footer class="footer"><span>MixConnect × V4 Company · confidencial</span><span class="count">08 / 12</span></footer>
+      </section>
+
+      <section class="slide" data-act="produto" data-title="Ciclo" aria-label="Jornada — EC e Growth no mesmo ciclo">
+        <div class="topbar"></div>
+        <div class="page">
+          <header class="slide-head">
+            <div class="head-copy">
+              <div class="eyebrow">Jornada · um ciclo, duas frentes</div>
+              <h2>EC primeiro. Origem depois. <em>Gate libera mídia.</em></h2>
+              <p class="sub">A Estruturação Comercial tira o comercial do feeling em 5 semanas. Growth entra no ritmo Colli. Mês 1 não é campanha — o funil ainda é o WhatsApp único.</p>
+            </div>
+            <div class="section-chip"><b>06</b> Produto</div>
+          </header>
+          <div class="content">
+            <div class="process">
+              <div class="stage-card"><span class="n">01</span><h3>Mapa</h3><p>Diagnóstico já na mesa: Opa Suit, churn, mídia sem UTM, 12 mil parados. Não se paga o mapa de novo.</p></div>
+              <span class="arrow" aria-hidden="true">→</span>
+              <div class="stage-card"><span class="n">02</span><h3>EC · 5 semanas</h3><p>Funil, SLA, BPMN, cadeiras e treino. O playbook sai da cabeça da Julia.</p></div>
+              <span class="arrow" aria-hidden="true">→</span>
+              <div class="stage-card"><span class="n">03</span><h3>Origem</h3><p>UTM e leitura por canal. Google e Meta no ritmo dos 7 vendedores.</p></div>
+              <span class="arrow" aria-hidden="true">→</span>
+              <div class="stage-card"><span class="n">04</span><h3>Demanda</h3><p>Copy e design na prova local. Volume só com SLA no ar.</p></div>
+              <span class="arrow" aria-hidden="true">→</span>
+              <div class="stage-card"><span class="n">05</span><h3>Gate + LTV</h3><p>Régua antes do cancelamento. Recorte dos 12 mil. Graziela vê o trimestre.</p></div>
+            </div>
+            <p class="callout" style="margin-top:22px">Mídia à parte. Escala só com funil no ar. O Account segura o gate com Julia — não o tráfego sozinho. Os ~R$ 24 mil de receita nova são meta da MixConnect, não promessa de mídia.</p>
+          </div>
+        </div>
+        <footer class="footer"><span>MixConnect × V4 Company · confidencial</span><span class="count">09 / 12</span></footer>
+      </section>
+
+      <section class="slide" data-act="produto" data-title="Empresa no final" aria-label="Fluxograma — como a MixConnect opera no final do ciclo">
+        <div class="topbar"></div>
+        <div class="page">
+          <header class="slide-head">
+            <div class="head-copy">
+              <div class="eyebrow">Fluxograma · MixConnect no final do ciclo</div>
+              <h2>Assim a empresa <em>opera</em> daqui a 12 meses.</h2>
+              <p class="sub">Graziela decide no trimestre. Julia orquestra o comercial no padrão. Cada origem entra no mesmo sistema — funil, UTM e retenção ativa.</p>
+            </div>
+            <div class="section-chip"><b>07</b> Produto</div>
+          </header>
+          <div class="content">
+            <div class="tobe">
+              <div class="tobe-row two">
+                <article class="card tobe-box">
+                  <div class="who">Direção · decisor</div>
+                  <h3>Graziela</h3>
+                  <p>Dona. Vê o trimestre e a prioridade — não cada lead no WhatsApp nem cada pausa de campanha.</p>
+                </article>
+                <article class="card tobe-box">
+                  <div class="who">Operação · o que hoje está nela</div>
+                  <h3>Julia + 7 cadeiras</h3>
+                  <p>Comercial no playbook. A confiança do cliente deixa de depender só de quem está na ponta.</p>
+                </article>
+              </div>
+              <div class="tobe-join"></div>
+              <article class="card tobe-box core">
+                <div class="who">Sistema Colli + EC</div>
+                <h3>Account V4 orquestra o time: GT + Copy + Design</h3>
+                <p>Grupo diário · check-in · 90 dias. Funil com dono. Origem visível. Prioridade e gate com a diretoria. Sem caixa-preta.</p>
+              </article>
+              <div class="tobe-join"></div>
+              <div class="tobe-hbar" aria-hidden="true"></div>
+              <div class="tobe-row four">
+                <article class="card lane">
+                  <div class="who">01 · Atração</div>
+                  <h3>Origem com dono</h3>
+                  <ul>
+                    <li>UTM no ar</li>
+                    <li>Indicação medida</li>
+                    <li>Google e Meta com prova</li>
+                    <li>Mídia só com gate aberto</li>
+                  </ul>
+                </article>
+                <article class="card lane">
+                  <div class="who">02 · Conversão</div>
+                  <h3>EC + funil operativo</h3>
+                  <ul>
+                    <li>Sai do feeling para o BPMN</li>
+                    <li>Qualificação e script</li>
+                    <li>Cadência de follow-up</li>
+                    <li>SLA de resposta no ar</li>
+                  </ul>
+                </article>
+                <article class="card lane">
+                  <div class="who">03 · Gate</div>
+                  <h3>Time no ritmo</h3>
+                  <ul>
+                    <li>7 cadeiras com perfil</li>
+                    <li>Pipeline por praça</li>
+                    <li>Sem pausa unilateral</li>
+                    <li>Volume que o time aguenta</li>
+                  </ul>
+                </article>
+                <article class="card lane">
+                  <div class="who">04 · Base</div>
+                  <h3>Quem já é cliente</h3>
+                  <ul>
+                    <li>Régua antes do churn</li>
+                    <li>Motivo com dono</li>
+                    <li>Reativação dos 12 mil</li>
+                    <li>LTV no centro do jogo</li>
+                  </ul>
+                </article>
+              </div>
+              <div class="tobe-join"></div>
+              <article class="card tobe-box end">
+                <div class="who">Cliente da MixConnect</div>
+                <h3>Da indicação ou do anúncio até a instalação — com origem, prazo e resposta. Sem sumir entre venda, suporte e financeiro.</h3>
+              </article>
+            </div>
+          </div>
+        </div>
+        <footer class="footer"><span>MixConnect × V4 Company · confidencial</span><span class="count">10 / 12</span></footer>
+      </section>
+
+      <section class="slide" data-act="produto" data-title="Pronto" aria-label="O que muda na operação">
+        <div class="topbar"></div>
+        <div class="page">
+          <header class="slide-head">
+            <div class="head-copy">
+              <div class="eyebrow">Com o ciclo fechado</div>
+              <h2>O que Graziela e Julia <em>veem funcionando</em>.</h2>
+              <p class="sub">Critérios observáveis na MixConnect. Não são garantia de volume de venda, ROI ou receita específica.</p>
+            </div>
+            <div class="section-chip"><b>08</b> Produto</div>
+          </header>
+          <div class="content">
+            <div class="success-grid">
+              <article class="card success-item"><span class="n">01</span><h3>EC em 5 semanas: funil, SLA, BPMN, scripts e time treinado — comercial fora do feeling</h3></article>
+              <article class="card success-item"><span class="n">02</span><h3>Origem no ar: UTM. Acaba a divergência de 60% vs. 90% de indicação</h3></article>
+              <article class="card success-item"><span class="n">03</span><h3>Qualificação, follow-up e resposta com SLA. Campanha não pausa no feeling</h3></article>
+              <article class="card success-item"><span class="n">04</span><h3>7 cadeiras com perfil. O método fica quando o vendedor sai</h3></article>
+              <article class="card success-item"><span class="n">05</span><h3>Prova local no ar: praça visível, oferta clara, sai do cartaz de combo</h3></article>
+              <article class="card success-item"><span class="n">06</span><h3>Régua de retenção antes do cancelamento. Recorte dos 12 mil inativos</h3></article>
+              <article class="card success-item"><span class="n">07</span><h3>Origem com fundamento; primeira escala só com funil no ar. Verba de mídia à parte</h3></article>
+              <article class="card success-item"><span class="n">08</span><h3>Account no ritmo Colli: diário, check-in, trimestre. Graziela vê o quarter, não o WhatsApp do dia</h3></article>
+            </div>
+          </div>
+        </div>
+        <footer class="footer"><span>MixConnect × V4 Company · confidencial</span><span class="count">11 / 12</span></footer>
+      </section>
+
+      <section class="slide" data-act="decisao" data-title="Investimento" aria-label="Investimento — condição especial">
+        <div class="topbar"></div>
+        <div class="page">
+          <header class="slide-head">
+            <div class="head-copy">
+              <div class="eyebrow">Investimento · condição especial · pacote combinado</div>
+              <h2>Um combo. <em>Método e execução no mesmo ciclo.</em></h2>
+              <p class="sub">EC + Assessoria de Growth. Squad AM + GT + Copy + Design. Pagamento em 12x. Verba de mídia à parte.</p>
+            </div>
+            <div class="section-chip"><b>01</b> Decisão</div>
+          </header>
+          <div class="content">
+            <div class="offers">
+              <article class="card offer">
+                <div class="tag">Contratação avulsa</div>
+                <h3>Cada serviço separado</h3>
+                <p class="note">Tabela de referência, sem condição combinada</p>
+                <div class="was">12× R$ 13.265,06</div>
+                <div class="now" style="font-size:26px;color:var(--muted-2);text-decoration:line-through;font-weight:600">R$ 159.180,80</div>
+                <div class="math">
+                  <div class="math-row"><span>Estruturação Comercial</span><strong>R$ 24.500,00</strong></div>
+                  <div class="math-row"><span>EC parcelada</span><strong>12× R$ 2.041,66</strong></div>
+                  <div class="math-row"><span>Assessoria de Growth</span><strong>12× R$ 11.223,40</strong></div>
+                  <div class="math-row"><span>Total de referência</span><strong>R$ 159.180,80</strong></div>
+                </div>
+              </article>
+              <article class="card offer featured">
+                <div class="tag">Condição especial · 12x</div>
+                <h3>Tudo no mesmo ciclo</h3>
+                <p class="note">EC + Growth juntos · squad na conta</p>
+                <div class="was">era 12× R$ 13.265,06</div>
+                <div class="now">12× R$ 7.938,85</div>
+                <div class="math">
+                  <div class="math-row"><span>Assessoria de Growth</span><strong class="ok">12× R$ 6.285,10</strong></div>
+                  <div class="math-row"><span>Estruturação Comercial</span><strong class="ok">12× R$ 1.653,75</strong></div>
+                  <div class="math-row"><span>Economia no ciclo</span><strong class="ok">R$ 63.914,60</strong></div>
+                  <div class="math-row"><span>Total no ciclo</span><strong class="ok">R$ 95.266,20</strong></div>
+                </div>
+                <div class="pay">
+                  <span>12x</span>
+                  <span>~40% abaixo da avulsa</span>
+                  <span>EC + Growth</span>
+                </div>
+              </article>
+            </div>
+            <div class="ee-band">
+              <div>
+                <div class="k">A vantagem de fechar os dois juntos</div>
+                <p>Growth sai de R$ 11.223,40 para R$ 6.285,10. EC cai quase R$ 5 mil no ciclo. O equivalente a mais de 5 meses de Growth avulso.</p>
+              </div>
+              <div class="amt">− R$ 63.914,60</div>
+            </div>
+            <div class="combo">
+              <div>
+                <h3>Fechar agora · kickoff do mês 01</h3>
+                <p>EC + Growth no mesmo pulso. Chão comercial em 5 semanas. Squad Colli nos 12 meses. Verba de anúncio permanece da MixConnect.</p>
+              </div>
+              <div style="text-align:right">
+                <div class="cond">Condição especial</div>
+                <div class="fig">12× R$ 7.938,85</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer class="footer"><span>MixConnect × V4 Company · confidencial</span><span class="count">12 / 12</span></footer>
+      </section>
+    </main>
+  </div>
+
+  <nav class="block-nav" id="blockNav" aria-label="Ir para o início de um ato"></nav>
+  <nav class="global-nav" id="globalNav" aria-label="Navegação da apresentação">
+    <button id="prevGlobal" type="button" aria-label="Slide anterior">‹</button>
+    <span class="global-count" id="globalCount">01 / 12</span>
+    <button id="nextGlobal" type="button" aria-label="Próximo slide">›</button>
+  </nav>
+  <div class="utility"><button id="fullscreenBtn" type="button">Tela cheia</button></div>
+  <div class="slide-dots" id="slideDots" aria-label="Ir para slide"></div>
+  <p class="sr-only">Setas e espaço navegam. Home e End vão ao início e ao fim. F abre tela cheia.</p>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll("#deck > .slide"));
+    const total = slides.length;
+    const acts = [
+      { id: "narrativa", label: "Narrativa", start: 0 },
+      { id: "dados", label: "Dados", start: 1 },
+      { id: "produto", label: "Produto", start: 2 },
+      { id: "decisao", label: "Decisão", start: 11 }
+    ];
+    const deck = document.getElementById("deck");
+    const dots = document.getElementById("slideDots");
+    const blockNav = document.getElementById("blockNav");
+    const blockLabel = document.getElementById("blockLabel");
+    const slideTitle = document.getElementById("slideTitle");
+    const globalCount = document.getElementById("globalCount");
+    const globalProgress = document.getElementById("globalProgress");
+    const prevGlobal = document.getElementById("prevGlobal");
+    const nextGlobal = document.getElementById("nextGlobal");
+    const actName = { narrativa: "Narrativa", dados: "Dados", produto: "Produto", decisao: "Decisão" };
+    let current = Math.max(0, Math.min(total - 1, Number((location.hash.match(/slide-(\d+)/) || [])[1] || 1) - 1));
+
+    acts.forEach((act) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.textContent = act.label;
+      button.dataset.act = act.id;
+      button.addEventListener("click", () => goTo(act.start));
+      blockNav.appendChild(button);
+    });
+    slides.forEach((_, index) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.setAttribute("aria-label", "Ir para o slide " + (index + 1));
+      button.addEventListener("click", () => goTo(index));
+      dots.appendChild(button);
+    });
+
+    function pad(n) { return String(n).padStart(2, "0"); }
+
+    function goTo(index) {
+      current = Math.max(0, Math.min(total - 1, index));
+      const slide = slides[current];
+      const act = slide.dataset.act;
+      slides.forEach((el, i) => {
+        el.classList.toggle("active", i === current);
+        el.setAttribute("aria-hidden", i === current ? "false" : "true");
+      });
+      Array.from(dots.children).forEach((dot, i) => {
+        dot.classList.toggle("active", i === current);
+        dot.setAttribute("aria-current", i === current ? "true" : "false");
+      });
+      Array.from(blockNav.children).forEach((button) => {
+        const on = button.dataset.act === act;
+        button.classList.toggle("is-active", on);
+        button.setAttribute("aria-current", on ? "true" : "false");
+      });
+      blockLabel.textContent = actName[act] || act;
+      slideTitle.textContent = slide.dataset.title || "";
+      globalCount.textContent = pad(current + 1) + " / " + pad(total);
+      globalProgress.style.width = ((current + 1) / total * 100) + "%";
+      prevGlobal.disabled = current === 0;
+      nextGlobal.disabled = current === total - 1;
+      history.replaceState(null, "", "#slide-" + pad(current + 1));
+      document.title = pad(current + 1) + " / " + pad(total) + " — MixConnect × V4";
+    }
+
+    function fitDeck() {
+      const scale = Math.min(window.innerWidth / 1600, window.innerHeight / 900);
+      deck.style.transform = "translate(-50%, -50%) scale(" + scale + ")";
+    }
+
+    window.goTo = goTo;
+    prevGlobal.addEventListener("click", () => goTo(current - 1));
+    nextGlobal.addEventListener("click", () => goTo(current + 1));
+    document.getElementById("fullscreenBtn").addEventListener("click", () => {
+      document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (["ArrowRight", "PageDown", " "].includes(event.key)) { event.preventDefault(); goTo(current + 1); }
+      if (["ArrowLeft", "PageUp"].includes(event.key)) { event.preventDefault(); goTo(current - 1); }
+      if (event.key === "Home") goTo(0);
+      if (event.key === "End") goTo(total - 1);
+      if (event.key.toLowerCase() === "f" && document.fullscreenEnabled) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      }
+    });
+    window.addEventListener("resize", fitDeck);
+    window.addEventListener("hashchange", () => {
+      const n = Math.max(0, Math.min(total - 1, Number((location.hash.match(/slide-(\d+)/) || [])[1] || 1) - 1));
+      if (n !== current) goTo(n);
+    });
+    let tx = null;
+    deck.addEventListener("touchstart", e => { tx = e.changedTouches[0].clientX; }, { passive: true });
+    deck.addEventListener("touchend", e => {
+      if (tx == null) return;
+      const d = e.changedTouches[0].clientX - tx;
+      if (Math.abs(d) > 70) goTo(current + (d < 0 ? 1 : -1));
+      tx = null;
+    }, { passive: true });
+    document.addEventListener("wheel", e => {
+      if (Math.abs(e.deltaY) < 20) return;
+      e.preventDefault();
+      goTo(current + (e.deltaY > 0 ? 1 : -1));
+    }, { passive: false });
+    fitDeck();
+    goTo(current);
+  </script>
+</body>
+</html>
