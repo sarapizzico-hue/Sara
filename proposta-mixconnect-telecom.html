@@ -97,7 +97,7 @@
     .cover-lockup .sep { width: 1px; height: 28px; background: rgba(255,255,255,.28); }
     .hero-grid { display: grid; grid-template-columns: minmax(0,1fr) 430px; gap: 80px; align-items: center; flex: 1; }
     .hero-kicker { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: .25em; color: rgba(255,255,255,.72); margin-bottom: 20px; }
-    .hero-title { font-size: 64px; max-width: 980px; }
+    .hero-title { font-size: 64px; max-width: 920px; }
     .hero-title em { color: #ffd9d5; }
     .hero-sub { font-size: 19px; color: rgba(255,255,255,.76); line-height: 1.55; max-width: 760px; margin-top: 22px; }
     .cover-art { height: 470px; position: relative; display: grid; place-items: center; }
@@ -173,6 +173,19 @@
     .stage-card h3 { font-size: 16px; margin: 8px 0 6px; }
     .stage-card p { font-size: 12.5px; line-height: 1.4; color: var(--muted); }
     .process .arrow { flex: 0 0 28px; display: grid; place-items: center; color: var(--red-soft); font-size: 22px; }
+    .flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 6px; }
+    .flow-step { padding: 18px 16px 20px; min-height: 390px; position: relative; }
+    .flow-step::after {
+      content: "→"; position: absolute; right: -14px; top: 46px; z-index: 1;
+      color: var(--red-soft); font-size: 20px; font-weight: 700;
+    }
+    .flow-step:last-child::after { content: none; }
+    .flow-step .n { font-family: "JetBrains Mono", monospace; color: var(--red-soft); font-size: 13px; font-weight: 700; letter-spacing: .12em; }
+    .flow-step h3 { font-size: 18px; margin: 10px 0 10px; letter-spacing: -.03em; }
+    .flow-step p { font-size: 13px; line-height: 1.45; color: var(--muted); margin-bottom: 12px; }
+    .flow-step ul { list-style: none; }
+    .flow-step li { font-size: 12.5px; color: #e8d8d5; line-height: 1.4; padding: 3px 0 3px 14px; position: relative; }
+    .flow-step li::before { content: "·"; position: absolute; left: 0; color: #fff; font-weight: 700; }
     .weeks { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
     .week { padding: 16px 14px 18px; min-height: 248px; }
     .week .n { font-family: "JetBrains Mono", monospace; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--red-soft); margin-bottom: 8px; }
@@ -343,14 +356,8 @@
           <div class="hero-grid">
             <div>
               <div class="hero-kicker">Proposta comercial · EC + Assessoria de Growth</div>
-              <h1 class="hero-title">Da venda por instinto<br>à <em>máquina</em>.</h1>
-              <p class="hero-sub">21 anos, 8.330 clientes e cinco praças. O comercial opera no Opa Suit; a mídia não tem origem; a retenção só age no cancelamento. Estruturação Comercial em 5 semanas. Growth no ritmo Colli — Account, GT, Copy e Design. Tudo em 12x.</p>
-              <div class="cover-meta">
-                <span>EC · 5 semanas</span>
-                <span>Growth · AM + GT + Copy + Design</span>
-                <span>Graziela · decisão</span>
-                <span>Julia · comercial e mkt</span>
-              </div>
+              <h1 class="hero-title">A casa já está feita.<br>O <em>sistema</em> começa.</h1>
+              <p class="hero-sub">21 anos, cinco praças e uma base que já prova o produto. O próximo ciclo organiza o comercial, dá origem a cada lead e protege quem já é cliente — no mesmo pulso.</p>
             </div>
             <div class="cover-art" aria-hidden="true">
               <svg viewBox="0 0 430 470"><path d="M20 330 C92 150 161 388 232 212 S344 77 414 144" fill="none" stroke="rgba(255,255,255,.26)" stroke-width="2"/><path d="M20 346 C92 166 161 404 232 228 S344 93 414 160" fill="none" stroke="rgba(255,255,255,.10)" stroke-width="18"/><circle cx="20" cy="330" r="6" fill="#fff"/><circle cx="414" cy="144" r="6" fill="#ffd8d4"/></svg>
@@ -358,7 +365,7 @@
             </div>
           </div>
         </div>
-        <footer class="footer"><span>MixConnect × V4 Company · confidencial</span><span class="count">01 / 12</span></footer>
+        <footer class="footer"><span>MixConnect × V4 Company · confidencial</span><span class="count">01 / 11</span></footer>
       </section>
 
       <section class="slide" data-act="dados" data-title="Diagnóstico" aria-label="Diagnóstico — travas da conta">
@@ -366,9 +373,9 @@
         <div class="page">
           <header class="slide-head">
             <div class="head-copy">
-              <div class="eyebrow">Diagnóstico · leitura da conta</div>
-              <h2>Vocês não têm problema de <em>marca</em>. Têm o crescimento no sistema.</h2>
-              <p class="sub">Indicação construiu a base. O que trava agora: funil informal, 7 vendedores sem playbook, mídia sem UTM, retenção reativa e 12 mil inativos parados. Vender 110–130 e cancelar na mesma ordem.</p>
+              <div class="eyebrow">Diagnóstico · o que trava o crescimento</div>
+              <h2>O produto já convence. O <em>sistema</em> ainda não acompanha.</h2>
+              <p class="sub">A indicação fez a base. O próximo salto esbarra em funil informal, time sem playbook, mídia sem origem, retenção só no cancelamento e 12 mil inativos parados. Vender 110–130 e cancelar na mesma ordem.</p>
             </div>
             <div class="section-chip"><b>01</b> Dados</div>
           </header>
@@ -387,10 +394,10 @@
               <article class="card map-item"><span class="n">05</span><div><h3>Ativo real, cartaz de oferta</h3><p>21 anos e 5 lojas viram combo repetido. Brusque some do Instagram. Quase R$ 10 mil/mês em mídia + agência sem narrativa única.</p></div></article>
               <article class="card map-item"><span class="n">06</span><div><h3>12 mil inativos parados</h3><p>21 mil cadastros históricos. Reativação sem recorte. Crescimento novo compete com quem já foi MixConnect e saiu.</p></div></article>
             </div>
-            <p class="callout" style="margin-top:14px">A MixConnect já vende. Falta sistema: origem rastreável, funil com dono e retenção antes do pedido de cancelamento — senão escalar mídia só acelera o vazamento.</p>
+            <p class="callout" style="margin-top:14px">Crescer agora é fechar o sistema: origem visível, funil com dono e retenção antes do pedido de saída. Sem isso, mais mídia só acelera o vazamento.</p>
           </div>
         </div>
-        <footer class="footer"><span>MixConnect × V4 Company · confidencial</span><span class="count">02 / 12</span></footer>
+        <footer class="footer"><span>MixConnect × V4 Company · confidencial</span><span class="count">02 / 11</span></footer>
       </section>
 
       <section class="slide divider" data-act="produto" data-title="Produto" aria-label="Divisor — o que opera">
@@ -400,7 +407,7 @@
           <div class="divider-num">03</div>
           <div class="divider-kicker">Ato 3 · Produto</div>
           <h2 class="divider-title">Duas frentes. <em>Um ciclo.</em></h2>
-          <p class="divider-sub">Estruturação Comercial tira o feeling do Opa Suit. Growth com Account + GT + Copy + Design. Rotina Colli com Graziela e Julia. Sem caixa-preta.</p>
+          <p class="divider-sub">Estruturação Comercial organiza o funil e o time. Growth entra com Account, tráfego, copy e design. Uma rotina só — prioridade, pendência e resultado visível. Sem caixa-preta.</p>
           <div class="divider-path">
             <span>Diagnóstico</span>
             <span>EC</span>
@@ -410,7 +417,7 @@
             <span>Gate + LTV</span>
           </div>
         </div>
-        <footer class="footer"><span>MixConnect × V4 Company · confidencial</span><span class="count">03 / 12</span></footer>
+        <footer class="footer"><span>MixConnect × V4 Company · confidencial</span><span class="count">03 / 11</span></footer>
       </section>
 
       <section class="slide" data-act="produto" data-title="EC · fluxo" aria-label="Estruturação Comercial — como funciona">
@@ -480,7 +487,7 @@
             <p class="callout" style="margin-top:16px">O que Graziela e Julia levam: a operação sai do feeling. Causa-raiz visível e roteiro para vender sem depender só de quem está na ponta.</p>
           </div>
         </div>
-        <footer class="footer"><span>MixConnect × V4 Company · confidencial</span><span class="count">04 / 12</span></footer>
+        <footer class="footer"><span>MixConnect × V4 Company · confidencial</span><span class="count">04 / 11</span></footer>
       </section>
 
       <section class="slide" data-act="produto" data-title="EC · entregáveis" aria-label="Entregáveis da Estruturação Comercial">
@@ -533,7 +540,7 @@
             <p class="callout" style="margin-top:14px">Hoje o arquivo da MixConnect é etiqueta no Opa Suit. A EC instala funil, SLA e playbook: cada oportunidade com dono, prazo e próximo passo.</p>
           </div>
         </div>
-        <footer class="footer"><span>MixConnect × V4 Company · confidencial</span><span class="count">05 / 12</span></footer>
+        <footer class="footer"><span>MixConnect × V4 Company · confidencial</span><span class="count">05 / 11</span></footer>
       </section>
 
       <section class="slide" data-act="produto" data-title="Time" aria-label="Time de Growth na conta">
@@ -563,7 +570,7 @@
             </div>
           </div>
         </div>
-        <footer class="footer"><span>MixConnect × V4 Company · confidencial</span><span class="count">06 / 12</span></footer>
+        <footer class="footer"><span>MixConnect × V4 Company · confidencial</span><span class="count">06 / 11</span></footer>
       </section>
 
       <section class="slide" data-act="produto" data-title="Rotina Colli" aria-label="Rotina Colli — como a operação roda">
@@ -637,69 +644,77 @@
             </div>
           </div>
         </div>
-        <footer class="footer"><span>MixConnect × V4 Company · confidencial</span><span class="count">07 / 12</span></footer>
+        <footer class="footer"><span>MixConnect × V4 Company · confidencial</span><span class="count">07 / 11</span></footer>
       </section>
 
-      <section class="slide" data-act="produto" data-title="Origem e LTV" aria-label="Origem, retenção e reativação">
+      <section class="slide" data-act="produto" data-title="Ciclo" aria-label="Passo a passo — EC, origem, demanda, retenção e gate">
         <div class="topbar"></div>
         <div class="page">
           <header class="slide-head">
             <div class="head-copy">
-              <div class="eyebrow">No Growth · origem rastreável + proteção de base</div>
-              <h2>Quem entra precisa ter origem. <em>Quem já é cliente não espera o cancelamento.</em></h2>
-              <p class="sub">UTM, leitura por canal e régua antes do pedido de saída. Os 12 mil inativos entram em recorte — motivo, data e praça. Sem prometer volume de venda.</p>
+              <div class="eyebrow">Jornada · passo a passo do ciclo</div>
+              <h2>Do funil ao LTV. <em>Um fluxo só.</em></h2>
+              <p class="sub">Primeiro o comercial no padrão. Depois origem visível. Só então a mídia escala — com a base protegida. Sem prometer volume de venda.</p>
             </div>
             <div class="section-chip"><b>05</b> Produto</div>
           </header>
           <div class="content">
-            <div class="audience">ISP · ticket ~R$ 110 · o jogo se paga no LTV · 5 praças</div>
-            <div class="seo-grid">
-              <article class="card inc-card">
-                <h3>O que entra neste ciclo</h3>
-                <ul class="inc">
-                  <li><strong>Tracking e UTM:</strong> acaba a divergência de 60% vs. 90% de indicação.</li>
-                  <li><strong>Auditoria Google + Meta:</strong> estrutura, nomenclatura e o que de fato vira assinante.</li>
-                  <li><strong>SLA de mídia:</strong> campanha não pausa no feeling no fim do mês.</li>
-                  <li><strong>Volume no ritmo dos 7:</strong> lead com dono. Escala só com o comercial absorvendo.</li>
-                  <li><strong>Régua de retenção:</strong> atuação antes do pedido de cancelamento — não só contraproposta.</li>
-                  <li><strong>Reativação dos 12 mil:</strong> recorte por motivo × data × praça, com copy.</li>
-                  <li><strong>Report:</strong> CPL, conversão, vendas por canal e churn no mesmo tabuleiro.</li>
+            <div class="flow">
+              <article class="card flow-step">
+                <span class="n">01</span>
+                <h3>Organizar</h3>
+                <p>A Estruturação Comercial tira o funil do WhatsApp único em 5 semanas.</p>
+                <ul>
+                  <li>Funil, SLA, BPMN e treino</li>
+                  <li>Playbook nas 7 cadeiras</li>
+                  <li>Cada oportunidade com dono</li>
+                </ul>
+              </article>
+              <article class="card flow-step">
+                <span class="n">02</span>
+                <h3>Rastrear</h3>
+                <p>Quem entra precisa ter origem. Acaba a divergência de 60% vs. 90% de indicação.</p>
+                <ul>
+                  <li>UTM em cada canal</li>
+                  <li>Auditoria Google + Meta</li>
+                  <li>Lead entra com dono</li>
+                </ul>
+              </article>
+              <article class="card flow-step">
+                <span class="n">03</span>
+                <h3>Demandar</h3>
+                <p>Copy e design na prova local. Volume só no ritmo que o comercial absorve.</p>
+                <ul>
+                  <li>Peça, LP e anúncio na mesma casa</li>
+                  <li>SLA de mídia no ar</li>
+                  <li>Campanha não pausa no feeling</li>
+                </ul>
+              </article>
+              <article class="card flow-step">
+                <span class="n">04</span>
+                <h3>Proteger</h3>
+                <p>Quem já é cliente não espera o pedido de cancelamento. LTV no centro do jogo.</p>
+                <ul>
+                  <li>Régua antes da saída</li>
+                  <li>Recorte dos 12 mil inativos</li>
+                  <li>Motivo × data × praça</li>
+                </ul>
+              </article>
+              <article class="card flow-step">
+                <span class="n">05</span>
+                <h3>Liberar</h3>
+                <p>O gate abre a escala. Report único no mesmo tabuleiro. Verba de mídia à parte.</p>
+                <ul>
+                  <li>Funil no ar libera volume</li>
+                  <li>CPL, conversão e churn juntos</li>
+                  <li>Meta de receita nova da casa</li>
                 </ul>
               </article>
             </div>
-            <p class="callout" style="margin-top:14px">Em telecom, aquisição sem retenção é custo. Retenção sem origem é feeling. O Growth fecha as duas pontas no ritmo do comercial.</p>
+            <p class="callout" style="margin-top:16px">Aquisição sem retenção é custo. Retenção sem origem é feeling. Escala só com funil no ar — e os ~R$ 24 mil de receita nova continuam meta da MixConnect, não da mídia.</p>
           </div>
         </div>
-        <footer class="footer"><span>MixConnect × V4 Company · confidencial</span><span class="count">08 / 12</span></footer>
-      </section>
-
-      <section class="slide" data-act="produto" data-title="Ciclo" aria-label="Jornada — EC e Growth no mesmo ciclo">
-        <div class="topbar"></div>
-        <div class="page">
-          <header class="slide-head">
-            <div class="head-copy">
-              <div class="eyebrow">Jornada · um ciclo, duas frentes</div>
-              <h2>EC primeiro. Origem depois. <em>Gate libera mídia.</em></h2>
-              <p class="sub">A Estruturação Comercial tira o comercial do feeling em 5 semanas. Growth entra no ritmo Colli. Mês 1 não é campanha — o funil ainda é o WhatsApp único.</p>
-            </div>
-            <div class="section-chip"><b>06</b> Produto</div>
-          </header>
-          <div class="content">
-            <div class="process">
-              <div class="stage-card"><span class="n">01</span><h3>Mapa</h3><p>Diagnóstico já na mesa: Opa Suit, churn, mídia sem UTM, 12 mil parados. Não se paga o mapa de novo.</p></div>
-              <span class="arrow" aria-hidden="true">→</span>
-              <div class="stage-card"><span class="n">02</span><h3>EC · 5 semanas</h3><p>Funil, SLA, BPMN, cadeiras e treino. O playbook sai da cabeça da Julia.</p></div>
-              <span class="arrow" aria-hidden="true">→</span>
-              <div class="stage-card"><span class="n">03</span><h3>Origem</h3><p>UTM e leitura por canal. Google e Meta no ritmo dos 7 vendedores.</p></div>
-              <span class="arrow" aria-hidden="true">→</span>
-              <div class="stage-card"><span class="n">04</span><h3>Demanda</h3><p>Copy e design na prova local. Volume só com SLA no ar.</p></div>
-              <span class="arrow" aria-hidden="true">→</span>
-              <div class="stage-card"><span class="n">05</span><h3>Gate + LTV</h3><p>Régua antes do cancelamento. Recorte dos 12 mil. Graziela vê o trimestre.</p></div>
-            </div>
-            <p class="callout" style="margin-top:22px">Mídia à parte. Escala só com funil no ar. O Account segura o gate com Julia — não o tráfego sozinho. Os ~R$ 24 mil de receita nova são meta da MixConnect, não promessa de mídia.</p>
-          </div>
-        </div>
-        <footer class="footer"><span>MixConnect × V4 Company · confidencial</span><span class="count">09 / 12</span></footer>
+        <footer class="footer"><span>MixConnect × V4 Company · confidencial</span><span class="count">08 / 11</span></footer>
       </section>
 
       <section class="slide" data-act="produto" data-title="Empresa no final" aria-label="Fluxograma — como a MixConnect opera no final do ciclo">
@@ -711,7 +726,7 @@
               <h2>Assim a empresa <em>opera</em> daqui a 12 meses.</h2>
               <p class="sub">Graziela decide no trimestre. Julia orquestra o comercial no padrão. Cada origem entra no mesmo sistema — funil, UTM e retenção ativa.</p>
             </div>
-            <div class="section-chip"><b>07</b> Produto</div>
+            <div class="section-chip"><b>06</b> Produto</div>
           </header>
           <div class="content">
             <div class="tobe">
@@ -785,7 +800,7 @@
             </div>
           </div>
         </div>
-        <footer class="footer"><span>MixConnect × V4 Company · confidencial</span><span class="count">10 / 12</span></footer>
+        <footer class="footer"><span>MixConnect × V4 Company · confidencial</span><span class="count">09 / 11</span></footer>
       </section>
 
       <section class="slide" data-act="produto" data-title="Pronto" aria-label="O que muda na operação">
@@ -797,7 +812,7 @@
               <h2>O que Graziela e Julia <em>veem funcionando</em>.</h2>
               <p class="sub">Critérios observáveis na MixConnect. Não são garantia de volume de venda, ROI ou receita específica.</p>
             </div>
-            <div class="section-chip"><b>08</b> Produto</div>
+            <div class="section-chip"><b>07</b> Produto</div>
           </header>
           <div class="content">
             <div class="success-grid">
@@ -812,7 +827,7 @@
             </div>
           </div>
         </div>
-        <footer class="footer"><span>MixConnect × V4 Company · confidencial</span><span class="count">11 / 12</span></footer>
+        <footer class="footer"><span>MixConnect × V4 Company · confidencial</span><span class="count">10 / 11</span></footer>
       </section>
 
       <section class="slide" data-act="decisao" data-title="Investimento" aria-label="Investimento — condição especial">
@@ -879,7 +894,7 @@
             </div>
           </div>
         </div>
-        <footer class="footer"><span>MixConnect × V4 Company · confidencial</span><span class="count">12 / 12</span></footer>
+        <footer class="footer"><span>MixConnect × V4 Company · confidencial</span><span class="count">11 / 11</span></footer>
       </section>
     </main>
   </div>
@@ -887,7 +902,7 @@
   <nav class="block-nav" id="blockNav" aria-label="Ir para o início de um ato"></nav>
   <nav class="global-nav" id="globalNav" aria-label="Navegação da apresentação">
     <button id="prevGlobal" type="button" aria-label="Slide anterior">‹</button>
-    <span class="global-count" id="globalCount">01 / 12</span>
+    <span class="global-count" id="globalCount">01 / 11</span>
     <button id="nextGlobal" type="button" aria-label="Próximo slide">›</button>
   </nav>
   <div class="utility"><button id="fullscreenBtn" type="button">Tela cheia</button></div>
@@ -901,7 +916,7 @@
       { id: "narrativa", label: "Narrativa", start: 0 },
       { id: "dados", label: "Dados", start: 1 },
       { id: "produto", label: "Produto", start: 2 },
-      { id: "decisao", label: "Decisão", start: 11 }
+      { id: "decisao", label: "Decisão", start: 10 }
     ];
     const deck = document.getElementById("deck");
     const dots = document.getElementById("slideDots");
