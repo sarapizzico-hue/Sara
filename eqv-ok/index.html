@@ -22,18 +22,32 @@
     .slide { position:absolute; inset:0; width:1600px; height:900px; margin:0; padding:0; overflow:hidden; opacity:0; pointer-events:none; }
     .slide.active { opacity:1; pointer-events:auto; }
     .slide img { width:1600px; height:900px; object-fit:fill; display:block; user-select:none; -webkit-user-drag:none; }
-    .cover-scrub {
-      position:absolute; z-index:5; left:818px; top:548px; width:248px; height:32px;
-      background: linear-gradient(90deg, rgba(42,6,8,.2), #3a0709 18%, #2b0507 82%, rgba(42,6,8,.15));
+    .price-slide {
+      background: radial-gradient(ellipse at 50% 100%, #ff7a3a 0%, #d31820 28%, #a10b12 62%, #7a070c 100%);
     }
-    .price-patch {
-      position:absolute; z-index:5; left:90px; right:90px; top:268px; height:430px;
-      display:flex; flex-direction:column; align-items:center; justify-content:center;
-      background: radial-gradient(ellipse at 50% 42%, #d3121c 0%, #b40e16 46%, #9a0b12 100%);
-      font-family: Montserrat, Arial, sans-serif; color:#fff; text-align:center;
+    .price-card {
+      position:absolute; inset:48px 56px 48px 56px; border-radius:36px;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(255,80,80,.18), transparent 42%),
+        linear-gradient(180deg, #b10e16 0%, #c2141c 38%, #c2141c 68%, #d42a2a 100%);
+      box-shadow: inset 0 0 0 2px rgba(255,180,180,.18), 0 0 80px rgba(255,60,40,.18);
+      display:flex; flex-direction:column; align-items:center;
+      font-family: Montserrat, Arial, sans-serif; color:#fff;
+      overflow:hidden;
+    }
+    .price-card .kicker {
+      margin-top:78px; font-size:22px; font-weight:700; letter-spacing:.28em;
+      text-transform:uppercase; color:#f5c84b;
+    }
+    .price-card h2 {
+      margin:10px 0 0; font-size:48px; font-weight:700; letter-spacing:-.03em;
+    }
+    .price-card .was {
+      margin-top:78px; font-size:42px; font-weight:700; letter-spacing:-.03em;
+      text-decoration:line-through; text-decoration-thickness:4px;
     }
     .price-row {
-      display:flex; align-items:center; justify-content:center; gap:22px;
+      margin-top:28px; display:flex; align-items:center; justify-content:center; gap:22px;
     }
     .price-side {
       display:flex; flex-direction:column; align-items:flex-end; line-height:1.05;
@@ -45,14 +59,9 @@
     .price-month {
       font-weight:700; font-size:42px; margin-top:48px; letter-spacing:-.03em;
     }
-    .cashback-scrub {
-      position:absolute; z-index:6; left:70px; right:70px; bottom:58px; height:118px;
-      border-radius:0 0 28px 28px;
-      background: linear-gradient(180deg, #c2141c 0%, #e0393a 55%, #f07a4a 100%);
-    }
-    .price-was {
-      margin-bottom:28px; font-size:42px; font-weight:700; letter-spacing:-.03em;
-      text-decoration:line-through; text-decoration-thickness:4px; opacity:.92;
+    .price-card .glow {
+      margin-top:auto; height:122px; width:100%;
+      background: linear-gradient(180deg, rgba(194,20,28,0) 0%, #e14a42 45%, #f08a4c 100%);
     }
     .navigation { position:absolute; z-index:20; right:52px; bottom:25px; display:flex; gap:10px; }
     .nav-btn { width:48px; height:48px; display:grid; place-items:center; border:1px solid rgba(255,255,255,.28);
@@ -68,10 +77,7 @@
 <body>
   <div id="viewport">
     <main id="deck">
-      <section class="slide active" data-title="Capa">
-        <img alt="Capa" src="pages/p01.jpg" width="1600" height="900">
-        <div class="cover-scrub" aria-hidden="true"></div>
-      </section>
+      <section class="slide active" data-title="Capa"><img alt="Capa" src="pages/p01.jpg" width="1600" height="900"></section>
       <section class="slide" data-title="Crescimento previsível"><img alt="Crescimento previsível" src="pages/p02.jpg" width="1600" height="900"></section>
       <section class="slide" data-title="O programa"><img alt="O programa" src="pages/p03.jpg" width="1600" height="900"></section>
       <section class="slide" data-title="Vender"><img alt="Vender" src="pages/p04.jpg" width="1600" height="900"></section>
@@ -89,17 +95,18 @@
       <section class="slide" data-title="Comunidade"><img alt="Comunidade" src="pages/p16.jpg" width="1600" height="900"></section>
       <section class="slide" data-title="Por que a V4"><img alt="Por que a V4" src="pages/p17.jpg" width="1600" height="900"></section>
       <section class="slide" data-title="Por que a V4"><img alt="Por que a V4" src="pages/p18.jpg" width="1600" height="900"></section>
-      <section class="slide" data-title="Investimento">
-        <img alt="Investimento" src="pages/p19.jpg" width="1600" height="900">
-        <div class="price-patch" aria-label="6 vezes de R$ 2.500,00">
-          <div class="price-was">De R$ 50.632,85</div>
+      <section class="slide price-slide" data-title="Investimento">
+        <div class="price-card">
+          <div class="kicker">Investimento</div>
+          <h2>Tudo isso por:</h2>
+          <div class="was">De R$ 50.632,85</div>
           <div class="price-row">
             <div class="price-side"><span>Por:</span><span>6x de</span></div>
             <div class="price-num">2.500,00</div>
             <div class="price-month">/mês</div>
           </div>
+          <div class="glow" aria-hidden="true"></div>
         </div>
-        <div class="cashback-scrub" aria-hidden="true"></div>
       </section>
       <section class="slide" data-title="Garantia"><img alt="Garantia" src="pages/p20.jpg" width="1600" height="900"></section>
       <div class="slide-counter" id="slideCounter">01 / 20</div>
