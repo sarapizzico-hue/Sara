@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Relatório gerencial · Saber · Pitches · Follow · Set/2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --red: #e50914;
+      --red-dark: #b80710;
+      --ink: #1a1a1a;
+      --muted: #5c5c5c;
+      --line: #e8e8e8;
+      --bg: #ffffff;
+      --soft: #f7f7f7;
+      --hot: #b42318;
+      --warm: #b45309;
+      --cold: #1d4ed8;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 14px/1.5 Inter, system-ui, sans-serif;
+    }
+    header.top {
+      position: sticky; top: 0; z-index: 20;
+      background: #fff;
+      border-bottom: 3px solid var(--red);
+      padding: 14px 24px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    }
+    .logo svg { height: 22px; width: auto; display: block; }
+    .meta { font-size: 12px; color: var(--muted); font-weight: 600; }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 28px 20px 72px; }
+    h1 { margin: 0 0 8px; font-size: clamp(24px, 4vw, 34px); font-weight: 800; letter-spacing: -.03em; }
+    .lead { color: var(--muted); max-width: 820px; margin: 0 0 20px; font-size: 14px; }
+    .lead a { color: var(--red); font-weight: 700; }
+    .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 0 0 22px; }
+    .kpi { border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; background: #fff; }
+    .kpi .v { font-size: 26px; font-weight: 800; letter-spacing: -.03em; }
+    .kpi .l { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-weight: 700; margin-top: 4px; }
+    nav.jump { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 22px; }
+    nav.jump a {
+      text-decoration: none; color: var(--red); border: 1px solid var(--red);
+      padding: 7px 12px; border-radius: 999px; font-size: 12px; font-weight: 700;
+    }
+    nav.jump a:hover { background: var(--red); color: #fff; }
+    .search {
+      width: 100%; max-width: 360px; margin: 0 0 16px;
+      border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font: inherit;
+    }
+    section.block { margin: 0 0 36px; }
+    section.block h2 {
+      margin: 0 0 6px; font-size: 13px; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--red); font-weight: 800;
+    }
+    section.block h3 { margin: 0 0 12px; font-size: 20px; font-weight: 800; }
+    .note {
+      background: var(--soft); border-left: 4px solid var(--red);
+      padding: 12px 14px; margin: 0 0 14px; font-size: 13px; color: #333;
+    }
+    .note.warn { border-left-color: #b45309; }
+    .scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: #fff; }
+    th, td { padding: 10px 12px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+    th {
+      background: var(--red); color: #fff; font-size: 11px; letter-spacing: .06em;
+      text-transform: uppercase; font-weight: 800; white-space: nowrap;
+    }
+    tbody tr:hover { background: #fff5f5; }
+    .name { font-weight: 700; }
+    .money { font-variant-numeric: tabular-nums; white-space: nowrap; font-weight: 700; }
+    .muted { color: var(--muted); }
+    .tag {
+      display: inline-block; padding: 2px 8px; border-radius: 999px;
+      font-size: 11px; font-weight: 800; background: var(--soft); color: var(--muted);
+    }
+    .tag.quente { background: #fee4e2; color: var(--hot); }
+    .tag.morno { background: #ffedd5; color: var(--warm); }
+    .tag.frio { background: #dbeafe; color: var(--cold); }
+    .tag.drop { background: #fee4e2; color: var(--hot); }
+    .btn {
+      display: inline-block; background: var(--red); color: #fff; text-decoration: none;
+      font-size: 11px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase;
+      padding: 7px 12px; border-radius: 6px; white-space: nowrap;
+    }
+    .btn:hover { background: var(--red-dark); }
+    .btns { display: flex; flex-wrap: wrap; gap: 6px; }
+    tfoot td { font-weight: 800; background: var(--soft); }
+    footer {
+      margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--line);
+      text-align: center; color: var(--muted); font-size: 12px;
+    }
+    @media print {
+      header.top { position: static; }
+      nav.jump, .search { display: none; }
+      .btn { border: 1px solid var(--red); }
+    }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="logo" aria-label="Logo V4">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 77 20" role="img" aria-label="V4 Company">
+        <path fill="#e50914" d="M33.023 3.575c-2.001.003-3.093 1.21-3.09 3.32l.008 6.858c.003 2.11 1.098 3.315 3.1 3.312 2-.003 3.092-1.21 3.09-3.32l-.009-6.858c-.003-2.11-1.097-3.315-3.099-3.312zm.015 11.606c-.649.001-1.057-.356-1.058-1.298l-.009-7.122c-.001-.942.406-1.3 1.055-1.302.648 0 1.057.357 1.058 1.299l.009 7.122c.001.942-.407 1.3-1.055 1.301zm-6.1-3.176l.002 1.884c.001.942-.406 1.282-1.055 1.283-.648 0-1.056-.338-1.058-1.28l-.009-7.122c-.001-.942.406-1.3 1.055-1.302.648 0 1.057.357 1.058 1.299l.002 1.413 1.927-.002-.002-1.281c-.002-2.11-1.041-3.315-3.043-3.313-2 .003-3.037 1.21-3.034 3.32l.008 6.859c.003 2.11 1.042 3.314 3.043 3.312 2.002-.003 3.038-1.21 3.035-3.32l-.002-1.752-1.927.002zM13.055 6.352L8.68 10.813c-.06.062-.017.166.067.166l4.382-.006a.096.096 0 00.096-.097l-.006-4.456c0-.087-.103-.13-.163-.068zm5.862 7.88l-2.687.004a.035.035 0 00-.035.035l.004 2.879c0 .02-.015.035-.035.035l-3.01.004a.035.035 0 01-.034-.035l-.004-2.879a.035.035 0 00-.034-.035l-8.796.012a.141.141 0 01-.14-.142l-.003-2.624v-.004a.795.795 0 01.223-.588l8.758-8.928a.035.035 0 01.025-.01l2.846-.004c.005 0 .009.001.014.003a.367.367 0 01.216.348l.01 8.677c0 .019.017.035.036.035l2.641-.004a.035.035 0 00.035-.035l-.011-8.5c-.002-1.364-1.1-2.478-2.442-2.476L4.18.016a.035.035 0 00-.034.036l.008 6.856c0 .031.037.047.06.025l4.994-5.064a.034.034 0 01.024-.01l2.603-.003c.03 0 .046.037.025.06l-8.118 8.41a.034.034 0 01-.049 0l-1.529-1.55a.036.036 0 01-.01-.026L2.143.074A.035.035 0 002.104.04C.976.185.086 1.131 0 2.294v5.972l.011 8.9a2.48 2.48 0 001.937 2.424h14.974c1.15-.199 2.034-1.224 2.032-2.448l-.003-2.873a.035.035 0 00-.035-.036zM66.47 3.682l.01 7.895-2.104-7.892-2.557.003.017 13.19 1.834-.003-.012-9.553 2.55 9.55 2.094-.004-.016-13.188-1.816.002zm-23.33.031l-1.378 9.366-1.513-9.362-2.835.003.017 13.19 1.779-.003-.012-9.327 1.532 9.325 1.927-.003 1.396-9.46.012 9.458 1.928-.002-.017-13.19-2.835.005h-.001zm33.133-.043l-1.946.002-1.549 6.013-1.564-6.009-2.131.003 2.587 8.814.005 4.371 2.039-.003-.006-4.37 2.565-8.821zm-20.44.026l-2.058 13.192 1.871-.003.35-2.393 2.501-.003.355 2.392 2.057-.003-2.092-13.186-2.983.004zm.42 9.005l.974-6.67.99 6.668-1.964.002zm-5.793-8.998l-3.002.004.017 13.189 2.038-.003-.006-4.955.964-.002c2.038-.002 3.037-1.153 3.035-3.263l-.003-1.715c-.002-2.11-1.005-3.258-3.043-3.255zm.008 6.35h-.964L49.5 5.589l.964-.001c.648-.001 1.001.3 1.002 1.242l.003 1.978c.001.942-.35 1.245-1 1.245z"/>
+      </svg>
+    </div>
+    <div class="meta">Relatório gerencial · Farmer Sara · corte 21/09/2026</div>
+  </header>
+
+  <div class="wrap">
+    <h1>Saber, pitches e follow — setembro</h1>
+    <p class="lead">
+      Cockpit E.E + <strong>report.docx</strong> para Saber e follow.
+      Pitches marcados vêm da aba <a href="https://docs.google.com/spreadsheets/d/1MPMzBvnZZPHyo8aUyMOJhHfBb36eFAyFiyloOsnoFCQ/edit?gid=1251785616#gid=1251785616" target="_blank" rel="noopener">Propostas · Gestão de projetos</a>
+      (Account = Sara, status = Apresentação): cliente, TCV, produto e link.
+    </p>
+
+    <div class="kpis">
+      <div class="kpi"><div class="v">38</div><div class="l">Projetos rodando</div></div>
+      <div class="kpi"><div class="v">17</div><div class="l">Pitches marcados</div></div>
+      <div class="kpi"><div class="v">6</div><div class="l">Em follow-up</div></div>
+      <div class="kpi"><div class="v">R$ 366.018</div><div class="l">TCV em follow</div></div>
+    </div>
+
+    <nav class="jump">
+      <a href="#rodando">1. Projetos rodando</a>
+      <a href="#pitches">2. Pitches marcados</a>
+      <a href="#follow">3. Follow-up</a>
+    </nav>
+    <input class="search" id="q" type="search" placeholder="Filtrar empresa…" aria-label="Filtrar empresa" />
+
+    <!-- 1. RODANDO -->
+    <section class="block" id="rodando">
+      <h2>01 · Saber</h2>
+      <h3>Projetos rodando agora — 38</h3>
+      <p class="note">
+        35 com semana preenchida no Cockpit + 3 já iniciados com status em branco (Brazil Group, Naki, Mundi Sport).
+        Bate com os <strong>38 do report.docx</strong>. Work Bank segue na semana 02, mas já monetizou CRM.
+      </p>
+      <div class="scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Empresa</th>
+              <th>Semana</th>
+              <th>Need</th>
+              <th>Início</th>
+              <th>Produto EE</th>
+              <th>Obs</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td class="name">Podium Jeans</td><td>Semana 0</td><td>SMALL</td><td>30/07/2026</td><td>Estruturação</td><td>Kick-off feito</td></tr>
+            <tr><td>2</td><td class="name">Emporio Inacio</td><td>Semana 0</td><td>—</td><td>25/08/2026</td><td>Estruturação</td><td></td></tr>
+            <tr><td>3</td><td class="name">General Car (BS)</td><td>Semana 0</td><td>SMALL</td><td>11/06/2026</td><td>TER</td><td>Travado por pagamento · retoma</td></tr>
+            <tr><td>4</td><td class="name">RM Burguer Itabira (BS)</td><td>Semana 0</td><td>SMALL</td><td>11/06/2026</td><td>TER</td><td>Travado por pagamento · retoma</td></tr>
+            <tr><td>5</td><td class="name">Brasil Auto Placas</td><td>Semana 0</td><td>SMALL</td><td>01/09/2026</td><td>Estruturação</td><td></td></tr>
+            <tr><td>6</td><td class="name">Tecno2 Serviços</td><td>Semana 0</td><td>—</td><td>01/09/2026</td><td>Estruturação</td><td></td></tr>
+            <tr><td>7</td><td class="name">Work Bank (BT)</td><td>Semana 02</td><td>TINY</td><td>01/08/2026</td><td>Estruturação</td><td>CRM já monetizado (1x R$ 5.035,63)</td></tr>
+            <tr><td>8</td><td class="name">AMBI Topografia (LT)</td><td>Semana 02</td><td>TINY</td><td>01/08/2026</td><td>Estruturação</td><td>Pré-pitch no Drive</td></tr>
+            <tr><td>9</td><td class="name">MB Comércio (RecT)</td><td>Semana 02</td><td>TINY</td><td>27/07/2026</td><td>Estruturação</td><td>Pré-pitch no Drive</td></tr>
+            <tr><td>10</td><td class="name">Comercial Ultimix LTDA</td><td>Semana 02</td><td>MEDIUM</td><td>19/08/2026</td><td>Estruturação</td><td></td></tr>
+            <tr><td>11</td><td class="name">Atlanta Consórcios (BM)</td><td>Semana 02</td><td>MEDIUM</td><td>24/08/2026</td><td>Estruturação</td><td></td></tr>
+            <tr><td>12</td><td class="name">V-tech Blindados</td><td>Semana 02</td><td>MEDIUM</td><td>25/08/2026</td><td>Estruturação</td><td></td></tr>
+            <tr><td>13</td><td class="name">MGE Comércio de máquinas LTDA</td><td>Semana 02</td><td>TINY</td><td>26/08/2026</td><td>Estruturação</td><td></td></tr>
+            <tr><td>14</td><td class="name">Golias Espetaria</td><td>Semana 02</td><td>SMALL</td><td>02/09/2026</td><td>Estruturação</td><td></td></tr>
+            <tr><td>15</td><td class="name">Intelecto Serviços Ambientais</td><td>Semana 02</td><td>SMALL</td><td>10/08/2026</td><td>Estruturação</td><td></td></tr>
+            <tr><td>16</td><td class="name">Café Negrin</td><td>Semana 02</td><td>MEDIUM</td><td>27/08/2026</td><td>Estruturação</td><td></td></tr>
+            <tr><td>17</td><td class="name">GRM Tecnologia e Serviços</td><td>Semana 02</td><td>MEDIUM</td><td>24/07/2026</td><td>E.C</td><td></td></tr>
+            <tr><td>18</td><td class="name">Vitória Troféus</td><td>Semana 02</td><td>LARGE</td><td>20/08/2026</td><td>Estruturação</td><td></td></tr>
+            <tr><td>19</td><td class="name">Fertisul Fertilizantes</td><td>Semana 03</td><td>MEDIUM</td><td>17/08/2026</td><td>Estruturação</td><td>EC + Assessoria + SEO/GEO</td></tr>
+            <tr><td>20</td><td class="name">Splendor Elétrica (BM)</td><td>Semana 03</td><td>TINY</td><td>22/08/2026</td><td>Estruturação</td><td></td></tr>
+            <tr><td>21</td><td class="name">Balão Mágico</td><td>Semana 03</td><td>MEDIUM</td><td>18/08/2026</td><td>Estruturação</td><td></td></tr>
+            <tr><td>22</td><td class="name">[MAB] Maben</td><td>Semana 03</td><td>MEDIUM</td><td>04/08/2026</td><td>Estruturação</td><td>Entrar em contato</td></tr>
+            <tr><td>23</td><td class="name">Rhama Analysis (LM)</td><td>Semana 03</td><td>MEDIUM</td><td>30/07/2026</td><td>Estruturação</td><td>Kick-off feito (2x)</td></tr>
+            <tr><td>24</td><td class="name">Neglape</td><td>Semana 03</td><td>TINY</td><td>10/08/2026</td><td>Estruturação</td><td>Entrar em contato</td></tr>
+            <tr><td>25</td><td class="name">Xavier Realiza Imóveis</td><td>Semana 03</td><td>MEDIUM</td><td>14/08/2026</td><td>Estruturação</td><td></td></tr>
+            <tr><td>26</td><td class="name">Castanheira (LM)</td><td>Semana 04</td><td>MEDIUM</td><td>05/08/2026</td><td>Estruturação</td><td>Pitch 21/09</td></tr>
+            <tr><td>27</td><td class="name">Legtrânsito (BS)</td><td>Semana 04</td><td>—</td><td>05/08/2026</td><td>Estruturação</td><td>Marcar data do pitch</td></tr>
+            <tr><td>28</td><td class="name">Frigorífico Rotta</td><td>Semana 04</td><td>MEDIUM</td><td>20/08/2026</td><td>Estruturação</td><td>Entrar em contato</td></tr>
+            <tr><td>29</td><td class="name">Mixconect Telecom</td><td>Semana 04</td><td>MEDIUM</td><td>11/08/2026</td><td>Estruturação</td><td>Pitch 21/09</td></tr>
+            <tr><td>30</td><td class="name">600 Multimarcas</td><td>Semana 04</td><td>MEDIUM</td><td>06/07/2026</td><td>Estruturação</td><td>Data 18/09 · checkbox pitch = FALSE</td></tr>
+            <tr><td>31</td><td class="name">CID — Clínica de Serviços Médicos</td><td>Semana 04</td><td>MEDIUM</td><td>03/08/2026</td><td>Estruturação</td><td>Pitch 22/09</td></tr>
+            <tr><td>32</td><td class="name">Freebong (BS)</td><td>Semana 04</td><td>SMALL</td><td>06/07/2026</td><td>Estruturação</td><td>Marcar data do pitch</td></tr>
+            <tr><td>33</td><td class="name">Clínica Polivida (BS)</td><td>Semana 04</td><td>SMALL</td><td>04/08/2026</td><td>Estruturação</td><td></td></tr>
+            <tr><td>34</td><td class="name">Triboltec</td><td>Semana 05</td><td>SMALL</td><td>20/05/2026</td><td>Estruturação</td><td>Agenda do cliente · 4 desmarques</td></tr>
+            <tr><td>35</td><td class="name">Supermercado Casa dos Pães (BS)</td><td>Semana 05</td><td>SMALL</td><td>17/06/2026</td><td>Estruturação</td><td>4 no-shows</td></tr>
+            <tr><td>36</td><td class="name">Brazil Group Eventos (LT)</td><td>Sem status</td><td>TINY</td><td>03/08/2026</td><td>Estruturação</td><td>Iniciado · status em branco</td></tr>
+            <tr><td>37</td><td class="name">Naki Distribuidora Automotiva (BM)</td><td>Sem status</td><td>MEDIUM</td><td>23/07/2026</td><td>Estruturação</td><td>Iniciado · status em branco</td></tr>
+            <tr><td>38</td><td class="name">Mundi Sport (LS)</td><td>Sem status</td><td>SMALL</td><td>21/08/2026</td><td>Estruturação</td><td>Iniciado · status em branco</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="margin-top:28px">Atenção · reembolso / churn (report.docx)</h3>
+      <p class="note warn">
+        Texto do Word: <strong>3 em fase de pegar o dinheiro de volta</strong> (3ª semana) e <strong>1 churn M0</strong>.
+        Prints do mesmo arquivo: 5 linhas Drop · Tratativa Ops no Cockpit.
+      </p>
+      <div class="scroll">
+        <table>
+          <thead>
+            <tr><th>Empresa</th><th>Status</th><th>Motivo</th><th>Início</th><th>Pitch</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="name">Henri Soluções (LS)</td><td><span class="tag drop">Drop</span></td><td>Tratativa Ops</td><td>09/07/2026</td><td>11/09/2026</td></tr>
+            <tr><td class="name">R. Chagas Ltda (BM)</td><td><span class="tag drop">Drop</span></td><td>Tratativa Ops</td><td>28/07/2026</td><td>—</td></tr>
+            <tr><td class="name">Biju Mania (RecS)</td><td><span class="tag drop">Drop</span></td><td>Tratativa Ops</td><td>03/08/2026</td><td>—</td></tr>
+            <tr><td class="name">RE/MAX PRO WORK (BT)</td><td><span class="tag drop">Drop</span></td><td>Tratativa Ops</td><td>08/07/2026</td><td>18/09/2026</td></tr>
+            <tr><td class="name">LUCKSHOES (BS)</td><td><span class="tag drop">Drop</span></td><td>Tratativa Ops · falta de pagamento / churn M0</td><td>07/08/2026</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="margin-top:28px">Atribuídos e ainda não iniciados — 15 (report.docx)</h3>
+      <p class="note">
+        Print do Word: fila de atribuição Saber (Diagnóstico / Estruturação). Texto cita <strong>15</strong>; o print mostra 18 linhas.
+        Não estão no pipe da Sara no Cockpit — gerentes Rafaela Tolomeu / Guilherme Duarte / a atribuir.
+      </p>
+      <div class="scroll">
+        <table>
+          <thead>
+            <tr><th>Empresa</th><th>Fee</th><th>Produto</th><th>Tier</th><th>Data ganho</th><th>Squad</th><th>Gerente</th><th>Atribuição</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="name">Tend Tudo Variedades</td><td class="money">R$ 29.846,27</td><td>Saber · Estruturação</td><td>Small</td><td>01/09/2026</td><td>Billions</td><td>guilherme.duarte</td><td>Realizada</td></tr>
+            <tr><td class="name">Xis Picanha</td><td class="money">R$ 12.011,31</td><td>Saber · Estruturação</td><td>Medium</td><td>02/09/2026</td><td>Exclusive</td><td>rafaela.tolomeu</td><td>Realizada</td></tr>
+            <tr><td class="name">DUEE Reserve Estates</td><td class="money">R$ 12.928,00</td><td>Saber · Diagnóstico</td><td>Small</td><td>09/09/2026</td><td>Exclusive</td><td>rafaela.tolomeu</td><td>Realizada</td></tr>
+            <tr><td class="name">CHS Coberturas</td><td class="money">R$ 15.174,01</td><td>Saber · Diagnóstico</td><td>Small</td><td>09/09/2026</td><td>Exclusive</td><td>rafaela.tolomeu</td><td>Não realizada</td></tr>
+            <tr><td class="name">JM Industrial</td><td class="money">R$ 12.364,00</td><td>Saber · Diagnóstico</td><td>Small</td><td>09/09/2026</td><td>Exclusive</td><td>rafaela.tolomeu</td><td>Realizada</td></tr>
+            <tr><td class="name">Interpharma Medicamentos</td><td class="money">R$ 15.736,00</td><td>Saber · Diagnóstico</td><td>Medium</td><td>10/09/2026</td><td>Invictus</td><td>rafaela.tolomeu</td><td>Realizada</td></tr>
+            <tr><td class="name">Samurai Materiais Elétricos</td><td class="money">R$ 14.612,00</td><td>Saber · Diagnóstico</td><td>Medium</td><td>11/09/2026</td><td>Exclusive</td><td>rafaela.tolomeu</td><td>Realizada</td></tr>
+            <tr><td class="name">Gomarine Corp</td><td class="money">R$ 18.546,00</td><td>Saber · Diagnóstico</td><td>Medium</td><td>11/09/2026</td><td>Billions</td><td>guilherme.duarte</td><td>Realizada</td></tr>
+            <tr><td class="name">Amparado Supermercado</td><td class="money">R$ 13.488,01</td><td>Saber · Diagnóstico</td><td>Small</td><td>11/09/2026</td><td>Exclusive</td><td>rafaela.tolomeu</td><td>Realizada</td></tr>
+            <tr><td class="name">AG Produtos Naturais</td><td class="money">R$ 12.364,00</td><td>Saber · Diagnóstico</td><td>Small</td><td>16/09/2026</td><td>Exclusive</td><td>rafaela.tolomeu</td><td>Realizada</td></tr>
+            <tr><td class="name">Do is fit academia</td><td class="money">R$ 14.612,00</td><td>Saber · Diagnóstico</td><td>Medium</td><td>16/09/2026</td><td>Exclusive</td><td>rafaela.tolomeu</td><td>Realizada</td></tr>
+            <tr><td class="name">Conveniência Bela Vista</td><td class="money">R$ 17.422,00</td><td>Saber · Diagnóstico</td><td>Medium</td><td>16/09/2026</td><td>Billions</td><td>guilherme.duarte</td><td>Realizada</td></tr>
+            <tr><td class="name">Princess Presentes LTDA</td><td class="money">R$ 24.728,00</td><td>Saber · Diagnóstico</td><td>Medium</td><td>16/09/2026</td><td>Exclusive</td><td>rafaela.tolomeu</td><td>Não realizada</td></tr>
+            <tr><td class="name">Berkan Assessoria e Co.</td><td class="money">R$ 20.232,00</td><td>Saber · Diagnóstico</td><td>Medium</td><td>17/09/2026</td><td>—</td><td>A atribuir</td><td>Não realizada</td></tr>
+            <tr><td class="name">Tukka's Restaurante, Pizzaria</td><td class="money">R$ 18.000,30</td><td>Saber · Estruturação</td><td>Small</td><td>17/09/2026</td><td>Exclusive</td><td>rafaela.tolomeu</td><td>Realizada</td></tr>
+            <tr><td class="name">Atlantic BC Gastrobar</td><td class="money">R$ 13.488,01</td><td>Saber · Diagnóstico</td><td>Small</td><td>18/09/2026</td><td>—</td><td>A atribuir</td><td>Não realizada</td></tr>
+            <tr><td class="name">Coimbra Tecnologia e Inovação</td><td class="money">R$ 12.364,00</td><td>Saber · Diagnóstico</td><td>Medium</td><td>18/09/2026</td><td>—</td><td>A atribuir</td><td>Não realizada</td></tr>
+            <tr><td class="name">Conectalook</td><td class="money">R$ 12.364,01</td><td>Saber · Diagnóstico</td><td>Medium</td><td>19/09/2026</td><td>—</td><td>A atribuir</td><td>Não realizada</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 2. PITCHES -->
+    <section class="block" id="pitches">
+      <h2>02 · Comercial</h2>
+      <h3>Pitches marcados — 17</h3>
+      <p class="note">
+        Fonte: aba <strong>Propostas</strong> da
+        <a href="https://docs.google.com/spreadsheets/d/1MPMzBvnZZPHyo8aUyMOJhHfBb36eFAyFiyloOsnoFCQ/edit?gid=1251785616#gid=1251785616" target="_blank" rel="noopener">Gestão de projetos · Coord. Rafaela</a>.
+        Filtro: Account = Sara Pizzico · Status = <strong>Apresentação</strong>.
+        Valor = TCV da proposta. Tipo (MRR / Onetime) vem da mesma aba.
+      </p>
+      <div class="scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Nome da empresa</th>
+              <th>Data do pitch</th>
+              <th>Valor da proposta</th>
+              <th>Produto</th>
+              <th>Link da proposta</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="name">[CAS] Castanheira</td>
+              <td>14/09/2026</td>
+              <td class="money">R$ 79.224,12</td>
+              <td>Executar · MRR</td>
+              <td>
+                <div class="btns">
+                  <a class="btn" href="https://htmlpreview.github.io/?https://github.com/sarapizzico-hue/Sara/blob/cursor/eqv-6x-2500/eqv-ok/index.html" target="_blank" rel="noopener">Abrir proposta</a>
+                  <a class="btn" href="https://html-preview.github.io/?url=https://raw.githubusercontent.com/sarapizzico-hue/Sara/cursor/castanheira-proposta-growth-f52c/proposta-castanheira-growth.html" target="_blank" rel="noopener">Growth</a>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="name">Davi Gás</td>
+              <td>15/09/2026</td>
+              <td class="money">R$ 33.792,06</td>
+              <td>Zap First · Onetime</td>
+              <td><a class="btn" href="https://sarapizzico-hue.github.io/Sara/proposta-davi-gas-zapfirst.html" target="_blank" rel="noopener">Abrir proposta</a></td>
+            </tr>
+            <tr>
+              <td class="name">[600] 600 Multi Marcas</td>
+              <td>15/09/2026</td>
+              <td class="money">R$ 21.000,00</td>
+              <td>EQV · Onetime</td>
+              <td><a class="btn" href="https://sarapizzico-hue.github.io/Sara/proposta-600-multimarcas-eqv.html" target="_blank" rel="noopener">Abrir proposta</a></td>
+            </tr>
+            <tr>
+              <td class="name">CID</td>
+              <td>15/09/2026</td>
+              <td class="money">R$ 21.000,00</td>
+              <td>Execução Assistida · Onetime</td>
+              <td><a class="btn" href="https://htmlpreview.github.io/?https://github.com/sarapizzico-hue/Sara/blob/cursor/cid-eqv-seo-geo-c256/cid/index.html" target="_blank" rel="noopener">Abrir proposta</a></td>
+            </tr>
+            <tr>
+              <td class="name">CID</td>
+              <td>15/09/2026</td>
+              <td class="money">R$ 21.000,00</td>
+              <td>SEO/GEO · Onetime</td>
+              <td><a class="btn" href="https://htmlpreview.github.io/?https://github.com/sarapizzico-hue/Sara/blob/cursor/cid-eqv-seo-geo-c256/cid/index.html" target="_blank" rel="noopener">Abrir proposta</a></td>
+            </tr>
+            <tr>
+              <td class="name">Bodega do Sertão</td>
+              <td>16/09/2026</td>
+              <td class="money">R$ 79.224,12</td>
+              <td>Executar · MRR</td>
+              <td><a class="btn" href="https://html-preview.github.io/?url=https://raw.githubusercontent.com/sarapizzico-hue/Sara/cursor/bodega-do-sertao-proposta/proposta-bodega-do-sertao.html" target="_blank" rel="noopener">Abrir proposta</a></td>
+            </tr>
+            <tr>
+              <td class="name">Fertisul</td>
+              <td>17/09/2026</td>
+              <td class="money">R$ 122.121,72</td>
+              <td>Executar · MRR</td>
+              <td>
+                <div class="btns">
+                  <a class="btn" href="https://sarapizzico-hue.github.io/Sara/fertisul.html?cb=20260917f#slide-06" target="_blank" rel="noopener">Abrir proposta</a>
+                  <a class="btn" href="https://fertsul-cases-agro.vercel.app/" target="_blank" rel="noopener">Cases</a>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="name">Nosso Boteco</td>
+              <td>17/09/2026</td>
+              <td class="money">R$ 21.000,00</td>
+              <td>Execução Assistida · Onetime</td>
+              <td><a class="btn" href="https://sarapizzico-hue.github.io/Sara/nosso-boteco-ok/#slide-19" target="_blank" rel="noopener">Abrir proposta</a></td>
+            </tr>
+            <tr>
+              <td class="name">LegTransito</td>
+              <td>17/09/2026</td>
+              <td class="money">R$ 21.000,00</td>
+              <td>Execução Assistida · Onetime</td>
+              <td class="muted">—</td>
+            </tr>
+            <tr>
+              <td class="name">MixConect</td>
+              <td>17/09/2026</td>
+              <td class="money">R$ 95.266,20</td>
+              <td>Executar · MRR</td>
+              <td><a class="btn" href="https://sarapizzico-hue.github.io/Sara/proposta-mixconnect-telecom.html#slide-11" target="_blank" rel="noopener">Abrir proposta</a></td>
+            </tr>
+            <tr>
+              <td class="name">Frigorífico Rotta</td>
+              <td>17/09/2026</td>
+              <td class="money muted">A definir</td>
+              <td class="muted">—</td>
+              <td class="muted">—</td>
+            </tr>
+            <tr>
+              <td class="name">RE/Max</td>
+              <td>18/09/2026</td>
+              <td class="money">R$ 21.000,00</td>
+              <td>Execução Assistida · Onetime</td>
+              <td><a class="btn" href="https://htmlpreview.github.io/?https://github.com/sarapizzico-hue/Sara/blob/cursor/remax-pro-work-eqv-061f/remax-ok/index.html" target="_blank" rel="noopener">Abrir proposta</a></td>
+            </tr>
+            <tr>
+              <td class="name">Work Bank</td>
+              <td>18/09/2026</td>
+              <td class="money">R$ 72.000,00</td>
+              <td>Executar · MRR</td>
+              <td class="muted">—</td>
+            </tr>
+            <tr>
+              <td class="name">Splendor</td>
+              <td>18/09/2026</td>
+              <td class="money">R$ 20.000,28</td>
+              <td>Zap First · Onetime</td>
+              <td><a class="btn" href="https://sarapizzico-hue.github.io/Sara/proposta-splendor-zapfirst.html" target="_blank" rel="noopener">Abrir proposta</a></td>
+            </tr>
+            <tr>
+              <td class="name">Balão Mágico</td>
+              <td>18/09/2026</td>
+              <td class="money">R$ 107.320,56</td>
+              <td>Executar · MRR</td>
+              <td class="muted">—</td>
+            </tr>
+            <tr>
+              <td class="name">Freebong</td>
+              <td>18/09/2026</td>
+              <td class="money">R$ 21.000,00</td>
+              <td>Execução Assistida</td>
+              <td class="muted">—</td>
+            </tr>
+            <tr>
+              <td class="name">Freebong</td>
+              <td>—</td>
+              <td class="money">R$ 21.000,00</td>
+              <td>EQV · Onetime</td>
+              <td class="muted">—</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="2">TCV das 17 linhas em Apresentação</td>
+              <td class="money">R$ 776.949,06</td>
+              <td colspan="2">Frigorífico Rotta sem TCV</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </section>
+
+    <!-- 3. FOLLOW -->
+    <section class="block" id="follow">
+      <h2>03 · Negociação</h2>
+      <h3>Projetos em follow-up — 6</h3>
+      <p class="note">
+        Bate 1 a 1 com o print “Follow” do report.docx e com Status = Follow no Cockpit.
+        Temperatura e TCV lidos da planilha. Devolutivas no obs: Dental Muller 22/09 · Bodega 23/09 · Nosso Boteco 22/09.
+      </p>
+      <div class="scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Nome da empresa</th>
+              <th>Temperatura</th>
+              <th>Valor da proposta</th>
+              <th>Produto</th>
+              <th>Link da proposta</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="name">A D N Distribuidora (Davi Gás)</td>
+              <td><span class="tag quente">Quente</span></td>
+              <td class="money">R$ 21.617,76</td>
+              <td>Zap First</td>
+              <td><a class="btn" href="https://sarapizzico-hue.github.io/Sara/proposta-davi-gas-zapfirst.html" target="_blank" rel="noopener">Abrir proposta</a></td>
+            </tr>
+            <tr>
+              <td class="name">ABC71 Soluções em Informática S.A. (LM)</td>
+              <td><span class="tag morno">Morno</span></td>
+              <td class="money">R$ 102.000,00</td>
+              <td>Executar Basic</td>
+              <td><a class="btn" href="https://relatorios.collieassociados.com/abc71-semana-4-deck-unificado/#slide-01" target="_blank" rel="noopener">Abrir proposta</a></td>
+            </tr>
+            <tr>
+              <td class="name">Dental Muller (LM)</td>
+              <td><span class="tag morno">Morno</span></td>
+              <td class="money">R$ 102.000,00</td>
+              <td>Executar Basic</td>
+              <td><a class="btn" href="https://sarapizzico-hue.github.io/Sara/proposta-dental-muller.html" target="_blank" rel="noopener">Abrir proposta</a></td>
+            </tr>
+            <tr>
+              <td class="name">[BOD] Bodega do Sertão</td>
+              <td><span class="tag morno">Morno</span></td>
+              <td class="money">R$ 110.399,88</td>
+              <td>Executar Basic</td>
+              <td><a class="btn" href="https://html-preview.github.io/?url=https://raw.githubusercontent.com/sarapizzico-hue/Sara/cursor/bodega-do-sertao-proposta/proposta-bodega-do-sertao.html" target="_blank" rel="noopener">Abrir proposta</a></td>
+            </tr>
+            <tr>
+              <td class="name">Nosso Boteco (BM)</td>
+              <td><span class="tag morno">Morno</span></td>
+              <td class="money">R$ 15.000,00</td>
+              <td>Execução Assistida</td>
+              <td><a class="btn" href="https://sarapizzico-hue.github.io/Sara/nosso-boteco-ok/#slide-01" target="_blank" rel="noopener">Abrir proposta</a></td>
+            </tr>
+            <tr>
+              <td class="name">Óticas Visamix (BS)</td>
+              <td><span class="tag frio">Frio</span></td>
+              <td class="money">R$ 15.000,00</td>
+              <td>Execução Assistida</td>
+              <td><a class="btn" href="proposta-visamix-eqv.html" target="_blank" rel="noopener">Abrir proposta</a></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="2">Total TCV em follow</td>
+              <td class="money">R$ 366.017,64</td>
+              <td colspan="2">1 quente · 4 mornos · 1 frio</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </section>
+
+    <footer>
+      V4 Company · Relatório gerencial Farmer Sara · 21/09/2026<br />
+      Fontes: Cockpit Monetização (E.E) · report.docx ·
+      <a href="https://docs.google.com/spreadsheets/d/1MPMzBvnZZPHyo8aUyMOJhHfBb36eFAyFiyloOsnoFCQ/edit?gid=1251785616#gid=1251785616">Propostas · Gestão de projetos</a>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      var q = document.getElementById('q');
+      if (!q) return;
+      q.addEventListener('input', function () {
+        var t = q.value.trim().toLowerCase();
+        document.querySelectorAll('tbody tr').forEach(function (tr) {
+          tr.style.display = !t || tr.textContent.toLowerCase().indexOf(t) >= 0 ? '' : 'none';
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
