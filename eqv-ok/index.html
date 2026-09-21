@@ -2,766 +2,106 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta name="color-scheme" content="dark">
-  <meta name="eqv-deck-version" content="eqv-6x-2500-anon">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta name="eqv-deck-version" content="eqv-6x-2500-remax-layout">
   <title>Empresa que Vende | V4 Company</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;700&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --cover-a: #90191e; --cover-b: #7c191d; --cover-c: #65181c;
-      --wine: #290c0c; --wine-2: #210909; --wine-3: #351010;
-      --white: #fffaf8; --muted: #c9b8b5; --muted-2: #8f7774;
-      --line: rgba(255,255,255,.12);
-      --red: #e50914; --red-soft: #ff6b73; --amber: #f4b942; --green: #58d68d;
-      --v4-orange: #ff481f;
-      --shadow: 0 20px 55px rgba(0,0,0,.26);
-      --radius: 18px;
+    :root { --v4-red: #e50914; --v4-orange: #ff481f; }
+    * { box-sizing: border-box; }
+    html, body { width:100%; height:100%; margin:0; overflow:hidden; background:#171313; }
+    button { font-family: inherit; }
+    #viewport { position:fixed; inset:0; overflow:hidden; background:radial-gradient(circle at 50% 10%, rgba(229,9,20,.18), transparent 38%), #171313; }
+    #deck { --deck-scale:1; position:absolute; left:50%; top:50%; width:1600px; height:900px; overflow:hidden;
+      transform:translate(-50%,-50%) scale(var(--deck-scale)); transform-origin:center; background:#0b0000;
+      box-shadow:0 40px 120px rgba(0,0,0,.45); }
+    .slide { position:absolute; inset:0; width:1600px; height:900px; margin:0; padding:0; overflow:hidden; opacity:0; pointer-events:none; }
+    .slide.active { opacity:1; pointer-events:auto; }
+    .slide img { width:1600px; height:900px; object-fit:fill; display:block; user-select:none; -webkit-user-drag:none; }
+    .cover-scrub {
+      position:absolute; z-index:5; left:818px; top:548px; width:248px; height:32px;
+      background: linear-gradient(90deg, rgba(42,6,8,.2), #3a0709 18%, #2b0507 82%, rgba(42,6,8,.15));
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body {
-      width: 100%; height: 100%; overflow: hidden; background: #171313; color: var(--white);
-      font-family: Montserrat, Arial, sans-serif; -webkit-font-smoothing: antialiased;
+    .price-patch {
+      position:absolute; z-index:5; left:90px; right:90px; top:268px; height:430px;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      background: radial-gradient(ellipse at 50% 42%, #d3121c 0%, #b40e16 46%, #9a0b12 100%);
+      font-family: Montserrat, Arial, sans-serif; color:#fff; text-align:center;
     }
-    button, a { font: inherit; color: inherit; }
-    #viewport {
-      position: fixed; inset: 0; overflow: hidden;
-      background: radial-gradient(circle at 50% 10%, rgba(229,9,20,.18), transparent 38%), #171313;
+    .price-row {
+      display:flex; align-items:center; justify-content:center; gap:22px;
     }
-    #deck {
-      --deck-scale: 1;
-      position: absolute; left: 50%; top: 50%; width: 1600px; height: 900px;
-      transform: translate(-50%,-50%) scale(var(--deck-scale)); transform-origin: center;
-      overflow: hidden; background: var(--wine); box-shadow: 0 40px 120px rgba(0,0,0,.45);
+    .price-side {
+      display:flex; flex-direction:column; align-items:flex-end; line-height:1.05;
+      font-weight:700; font-size:42px; letter-spacing:-.03em;
     }
-    .slide {
-      position: absolute; inset: 0; width: 1600px; height: 900px;
-      display: flex; flex-direction: column; visibility: hidden; opacity: 0; pointer-events: none;
-      background:
-        linear-gradient(rgba(255,255,255,.028) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.028) 1px, transparent 1px),
-        radial-gradient(circle at 86% 12%, rgba(150,30,36,.26), transparent 31%),
-        linear-gradient(135deg, var(--wine-3), var(--wine) 45%, var(--wine-2));
-      background-size: 80px 80px, 80px 80px, auto, auto;
-      transition: opacity .3s ease;
+    .price-num {
+      font-weight:800; font-size:148px; letter-spacing:-.05em; line-height:.9;
     }
-    .slide.active { visibility: visible; opacity: 1; pointer-events: auto; }
-    .slide.cover {
-      background:
-        linear-gradient(rgba(255,255,255,.026) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.026) 1px, transparent 1px),
-        radial-gradient(circle at 78% 24%, rgba(255,255,255,.08), transparent 26%),
-        linear-gradient(122deg, var(--cover-a), var(--cover-b) 54%, var(--cover-c));
-      background-size: 100px 100px, 100px 100px, auto, auto;
+    .price-month {
+      font-weight:700; font-size:42px; margin-top:48px; letter-spacing:-.03em;
     }
-    .topbar { height: 7px; flex: 0 0 auto; background: linear-gradient(90deg, var(--red), rgba(239,51,64,.08) 72%); }
-    .slide.cover .topbar { background: linear-gradient(90deg, #fff, rgba(255,255,255,.08) 68%); }
-    .page { height: 851px; padding: 43px 66px 22px; display: flex; flex-direction: column; position: relative; overflow: hidden; }
-    .slide-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; margin-bottom: 22px; flex: 0 0 auto; }
-    .head-copy { max-width: 1260px; }
-    .eyebrow {
-      display: flex; align-items: center; gap: 12px; color: var(--red-soft);
-      font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .2em; margin-bottom: 11px;
+    .cashback-scrub {
+      position:absolute; z-index:6; left:70px; right:70px; bottom:58px; height:118px;
+      border-radius:0 0 28px 28px;
+      background: linear-gradient(180deg, #c2141c 0%, #e0393a 55%, #f07a4a 100%);
     }
-    .eyebrow::before { content: ""; width: 34px; height: 3px; border-radius: 2px; background: currentColor; }
-    h1, h2 { font-weight: 800; letter-spacing: -.035em; line-height: 1.06; }
-    h1 { font-size: 64px; max-width: 1100px; }
-    h2 { font-size: 38px; max-width: 1300px; }
-    h1 em, h2 em { color: var(--red-soft); font-style: normal; }
-    .sub { color: var(--muted); font-size: 17px; line-height: 1.5; margin-top: 12px; max-width: 1120px; }
-    .section-chip {
-      display: flex; align-items: center; gap: 9px; color: var(--muted); font-size: 12px; font-weight: 600;
-      letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; padding-top: 5px;
+    .price-was {
+      margin-bottom:28px; font-size:42px; font-weight:700; letter-spacing:-.03em;
+      text-decoration:line-through; text-decoration-thickness:4px; opacity:.92;
     }
-    .section-chip b { font-family: "IBM Plex Mono", monospace; font-size: 22px; color: var(--red-soft); }
-    .content { flex: 1; min-height: 0; position: relative; }
-    .footer {
-      height: 42px; flex: 0 0 auto; border-top: 1px solid rgba(255,255,255,.11);
-      display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 24px;
-      padding: 0 66px; color: var(--muted-2); font-size: 11px; background: rgba(20,5,5,.5);
-    }
-    .footer .count { font-family: "IBM Plex Mono", monospace; color: var(--muted); min-width: 60px; text-align: right; }
-    .v4-mark {
-      width: 42px; height: 42px; border: 1.5px solid rgba(255,255,255,.85); display: grid; place-items: center;
-      font-weight: 800; font-size: 14px; letter-spacing: -.04em;
-    }
-    .card {
-      background: linear-gradient(160deg, rgba(255,255,255,.075), rgba(255,255,255,.035));
-      border: 1px solid var(--line); border-radius: var(--radius);
-    }
-    .callout {
-      border-left: 4px solid var(--red); background: rgba(239,51,64,.07);
-      padding: 13px 18px; border-radius: 0 12px 12px 0; color: #f9eae8; font-size: 15px; line-height: 1.45;
-    }
-    .cover .page { padding: 70px 78px 30px; }
-    .cover-lockup { display: flex; align-items: center; gap: 18px; font-size: 17px; font-weight: 700; letter-spacing: .04em; color: rgba(255,255,255,.82); }
-    .cover-lockup .sep { width: 1px; height: 28px; background: rgba(255,255,255,.28); }
-    .hero-grid { display: grid; grid-template-columns: minmax(0,1fr) 430px; gap: 80px; align-items: center; flex: 1; }
-    .hero-kicker { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: .25em; color: rgba(255,255,255,.72); margin-bottom: 20px; }
-    .hero-title { font-size: 62px; max-width: 980px; }
-    .hero-title em { color: #ffd9d5; }
-    .hero-sub { font-size: 19px; color: rgba(255,255,255,.76); line-height: 1.55; max-width: 760px; margin-top: 22px; }
-    .cover-art { height: 470px; position: relative; display: grid; place-items: center; }
-    .cover-art svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-    .cover-mark {
-      position: relative; width: 230px; height: 230px; border: 1px solid rgba(255,255,255,.24); border-radius: 50%;
-      display: grid; place-items: center; background: rgba(255,255,255,.035);
-      box-shadow: 0 0 0 34px rgba(255,255,255,.025), 0 0 0 68px rgba(255,255,255,.018);
-    }
-    .cover-mark::before, .cover-mark::after { content: ""; position: absolute; background: rgba(255,255,255,.3); }
-    .cover-mark::before { width: 310px; height: 1px; }
-    .cover-mark::after { width: 1px; height: 310px; }
-    .cover-mark b { font-family: "IBM Plex Mono", monospace; font-size: 42px; letter-spacing: -.08em; }
-    .cover-mark span { position: absolute; bottom: 48px; font-size: 11px; text-transform: uppercase; letter-spacing: .2em; color: rgba(255,255,255,.6); }
-    .cover-meta { display: flex; gap: 28px; margin-top: 42px; color: rgba(255,255,255,.67); font-size: 12px; text-transform: uppercase; letter-spacing: .12em; flex-wrap: wrap; }
-    .cover-meta span { display: flex; align-items: center; gap: 10px; }
-    .cover-meta span::before { content: ""; width: 22px; height: 2px; background: rgba(255,255,255,.48); }
-    .map-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .map-item { display: grid; grid-template-columns: 36px 1fr; gap: 12px; padding: 20px 22px; align-items: start; }
-    .map-item .n { font-family: "IBM Plex Mono", monospace; font-size: 13px; font-weight: 700; color: var(--red-soft); padding-top: 2px; }
-    .map-item h3 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
-    .map-item p { font-size: 13px; line-height: 1.4; color: var(--muted); }
-    .check-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .check-card { display: grid; grid-template-columns: 28px 1fr; gap: 12px; padding: 14px 16px; align-items: start; }
-    .check-card .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--red-soft); box-shadow: 0 0 0 5px rgba(239,51,64,.12); margin-top: 6px; }
-    .check-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
-    .check-card p { font-size: 13px; line-height: 1.4; color: var(--muted); }
-    .roles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
-    .role { padding: 16px 16px 18px; }
-    .role .label { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--red-soft); margin-bottom: 8px; }
-    .role h3 { font-size: 16px; margin-bottom: 6px; }
-    .role p { font-size: 12.5px; line-height: 1.4; color: var(--muted); }
-    .cols-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
-    .cols-3 h3 { font-size: 16px; margin-bottom: 10px; }
-    .cols-3 ul { margin: 0; padding-left: 16px; color: var(--muted); font-size: 13.5px; line-height: 1.45; }
-    .cols-3 li { margin: 5px 0; }
-    .pillars { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
-    .pillar { padding: 16px 14px; }
-    .pillar .n { font-family: "IBM Plex Mono", monospace; color: var(--red-soft); font-size: 13px; font-weight: 700; }
-    .pillar h3 { font-size: 15px; margin: 8px 0 6px; }
-    .pillar p { font-size: 12.5px; line-height: 1.4; color: var(--muted); }
-    .process { display: flex; align-items: stretch; gap: 0; margin-top: 8px; }
-    .stage-card { flex: 1; padding: 16px 14px; border: 1px solid var(--line); background: rgba(255,255,255,.04); }
-    .stage-card .n { font-family: "IBM Plex Mono", monospace; color: var(--red-soft); font-size: 13px; font-weight: 700; }
-    .stage-card h3 { font-size: 16px; margin: 8px 0 6px; }
-    .stage-card p { font-size: 12.5px; line-height: 1.4; color: var(--muted); }
-    .process .arrow { flex: 0 0 28px; display: grid; place-items: center; color: var(--red-soft); font-size: 22px; }
-    .art-list { margin: 8px 0 0; padding-left: 18px; color: var(--muted); font-size: 16px; line-height: 1.55; }
-    .art-list li { margin: 8px 0; }
-    .big-phase { display: grid; grid-template-columns: 180px 1fr; gap: 28px; align-items: start; margin-top: 8px; }
-    .big-phase .when { font-family: "IBM Plex Mono", monospace; font-size: 42px; color: var(--red-soft); line-height: 1; }
-    .big-phase h3 { font-size: 28px; margin-bottom: 12px; }
-    .big-phase p { font-size: 18px; line-height: 1.5; color: var(--muted); max-width: 920px; }
-    .success-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .success-item { padding: 16px 18px; display: grid; grid-template-columns: 28px 1fr; gap: 12px; align-items: start; }
-    .success-item .n { font-family: "IBM Plex Mono", monospace; color: var(--green); font-size: 14px; font-weight: 700; }
-    .success-item h3 { font-size: 15px; font-weight: 650; line-height: 1.35; }
-    .price-hero {
-      display: grid; grid-template-columns: 1.15fr .85fr; gap: 18px; height: 100%;
-    }
-    .price-main {
-      padding: 36px 40px; border: 1px solid rgba(88,214,141,.32);
-      background: linear-gradient(160deg, rgba(88,214,141,.14), rgba(255,255,255,.04));
-      display: flex; flex-direction: column; justify-content: center;
-    }
-    .price-main .tag { font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--green); margin-bottom: 14px; }
-    .price-main .now { font-family: "IBM Plex Mono", monospace; font-size: 56px; font-weight: 700; letter-spacing: -.04em; line-height: 1.05; }
-    .price-main .total { margin-top: 14px; font-size: 18px; color: var(--muted); }
-    .price-main .total b { color: #fff; }
-    .price-side { padding: 28px 30px; }
-    .price-side h3 { font-size: 18px; margin-bottom: 14px; }
-    .price-side ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 15px; line-height: 1.55; }
-    .price-side li { margin: 7px 0; }
-    .filters { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .filter { padding: 18px 20px; }
-    .filter .k { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--red-soft); margin-bottom: 6px; }
-    .filter h3 { font-size: 16px; margin-bottom: 4px; }
-    .filter p { font-size: 13px; line-height: 1.4; color: var(--muted); }
-    .navigation { position: absolute; z-index: 20; right: 52px; bottom: 25px; display: flex; gap: 10px; }
-    .nav-btn {
-      width: 48px; height: 48px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.28);
-      border-radius: 50%; color: #141414; background: rgba(255,255,255,.92);
-      box-shadow: 0 10px 30px rgba(0,0,0,.28); cursor: pointer;
-    }
-    .nav-btn:disabled { opacity: .3; cursor: default; }
-    .nav-btn svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.3; stroke-linecap: round; stroke-linejoin: round; }
-    .progress-track { position: absolute; z-index: 21; left: 0; right: 0; bottom: 0; height: 6px; background: rgba(255,255,255,.18); }
-    .progress-fill { height: 100%; width: 5%; background: linear-gradient(90deg, var(--red), var(--v4-orange)); transition: width .3s ease; }
-    .slide-counter {
-      position: absolute; z-index: 22; right: 176px; bottom: 39px; color: rgba(255,255,255,.7);
-      font: 500 12px/1 "IBM Plex Mono", monospace; letter-spacing: .04em; text-shadow: 0 1px 8px rgba(0,0,0,.7);
-    }
+    .navigation { position:absolute; z-index:20; right:52px; bottom:25px; display:flex; gap:10px; }
+    .nav-btn { width:48px; height:48px; display:grid; place-items:center; border:1px solid rgba(255,255,255,.28);
+      border-radius:50%; color:#141414; background:rgba(255,255,255,.92); box-shadow:0 10px 30px rgba(0,0,0,.28); cursor:pointer; }
+    .nav-btn:disabled { opacity:.3; cursor:default; }
+    .nav-btn svg { width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:2.3; stroke-linecap:round; stroke-linejoin:round; }
+    .progress-track { position:absolute; z-index:21; left:0; right:0; bottom:0; height:6px; background:rgba(255,255,255,.18); }
+    .progress-fill { height:100%; width:5%; background:linear-gradient(90deg, var(--v4-red), var(--v4-orange)); transition:width .3s ease; }
+    .slide-counter { position:absolute; z-index:22; right:176px; bottom:39px; color:rgba(255,255,255,.7);
+      font:500 12px/1 "IBM Plex Mono", monospace; letter-spacing:.04em; text-shadow:0 1px 8px rgba(0,0,0,.7); }
   </style>
 </head>
 <body>
   <div id="viewport">
-    <main id="deck" aria-label="Empresa que Vende · V4 Company">
-
-      <section class="slide cover active" data-title="Capa">
-        <div class="topbar"></div>
-        <div class="page">
-          <div class="cover-lockup"><span class="v4-mark">V4</span><span class="sep"></span><span>V4 Company · Empresa que Vende</span></div>
-          <div class="hero-grid">
-            <div>
-              <div class="hero-kicker">Proposta comercial · Empresa que Vende</div>
-              <h1 class="hero-title">Você trabalha muito.<br>A receita ainda não é <em>previsível</em>.</h1>
-              <p class="hero-sub">Consultoria, acompanhamento e execução assistida para transformar marketing e comercial em uma máquina de receita — em 6 meses. Quem opera é você. A máquina fica.</p>
-              <div class="cover-meta">
-                <span>EQV · 6 meses</span>
-                <span>Squad de 4 especialistas</span>
-                <span>Comunidade + Fábrica de Receita</span>
-              </div>
-            </div>
-            <div class="cover-art" aria-hidden="true">
-              <svg viewBox="0 0 430 470"><path d="M20 330 C92 150 161 388 232 212 S344 77 414 144" fill="none" stroke="rgba(255,255,255,.26)" stroke-width="2"/><path d="M20 346 C92 166 161 404 232 228 S344 93 414 160" fill="none" stroke="rgba(255,255,255,.10)" stroke-width="18"/><circle cx="20" cy="330" r="6" fill="#fff"/><circle cx="414" cy="144" r="6" fill="#ffd8d4"/></svg>
-              <div class="cover-mark"><b>EQV</b><span>máquina</span></div>
-            </div>
-          </div>
-        </div>
-        <footer class="footer"><span>V4 Company · Empresa que Vende · confidencial</span><span class="count">01 / 20</span></footer>
+    <main id="deck">
+      <section class="slide active" data-title="Capa">
+        <img alt="Capa" src="pages/p01.jpg" width="1600" height="900">
+        <div class="cover-scrub" aria-hidden="true"></div>
       </section>
-
-      <section class="slide" data-title="Crescimento previsível">
-        <div class="topbar"></div>
-        <div class="page">
-          <header class="slide-head">
-            <div class="head-copy">
-              <div class="eyebrow">Leitura central</div>
-              <h2>Você já vende. O que falta é <em>sistema</em> para repetir o mês.</h2>
-              <p class="sub">O Empresa que Vende não executa no seu lugar: estrutura o negócio, treina o time e acompanha a execução. Quem opera é você. É exatamente por isso que a máquina fica na empresa quando o ciclo acaba.</p>
-            </div>
-            <div class="section-chip"><b>02</b> Conta</div>
-          </header>
-          <div class="content">
-            <div class="map-grid">
-              <article class="card map-item"><span class="n">01</span><div><h3>Receita imprevisível</h3><p>O mês é esforço, não método. Sem processo, o resultado não se repete.</p></div></article>
-              <article class="card map-item"><span class="n">02</span><div><h3>Processo na cabeça de uma pessoa</h3><p>Quando o melhor vendedor sai, o comercial sai junto.</p></div></article>
-              <article class="card map-item"><span class="n">03</span><div><h3>Marketing no achismo</h3><p>Canal, conteúdo e mídia sem tese. Investe, testa, para.</p></div></article>
-              <article class="card map-item"><span class="n">04</span><div><h3>Agência executa — você não aprende</h3><p>Quando o contrato acaba, o resultado vai junto. A operação nunca herdou a máquina.</p></div></article>
-              <article class="card map-item"><span class="n">05</span><div><h3>Comercial amador</h3><p>Script, follow-up e pipeline improvisados. O funil vaza depois do lead.</p></div></article>
-              <article class="card map-item"><span class="n">06</span><div><h3>Posicionamento frouxo</h3><p>A marca não escolheu ICP. O mercado escolhe preço.</p></div></article>
-            </div>
-          </div>
-        </div>
-        <footer class="footer"><span>V4 Company · Empresa que Vende · confidencial</span><span class="count">02 / 20</span></footer>
-      </section>
-
-      <section class="slide" data-title="O programa">
-        <div class="topbar"></div>
-        <div class="page">
-          <header class="slide-head">
-            <div class="head-copy">
-              <div class="eyebrow">Empresa que Vende · 6 meses</div>
-              <h2>Cinco pilares. <em>Um ciclo contínuo.</em></h2>
-              <p class="sub">Diagnóstico, consultoria 1h/mês, squad nas quatro frentes, comunidade e Fábrica de Receita. A V4 prescreve e conduz. O time opera.</p>
-            </div>
-            <div class="section-chip"><b>03</b> Programa</div>
-          </header>
-          <div class="content">
-            <div class="pillars">
-              <article class="card pillar"><span class="n">01</span><h3>Diagnóstico contínuo</h3><p>Maturidade GTM monitorada. Gargalos a cada ciclo — sem achismo.</p></article>
-              <article class="card pillar"><span class="n">02</span><h3>Consultoria estratégica</h3><p>1h/mês com consultor V4: prioridade e alocação dos créditos do squad.</p></article>
-              <article class="card pillar"><span class="n">03</span><h3>Execução assistida</h3><p>Squad de 4: Conteúdo, Mídia Paga, Comercial e CRM.</p></article>
-              <article class="card pillar"><span class="n">04</span><h3>Comunidade</h3><p>Peers, lives mensais temáticas e grupo fechado no WhatsApp.</p></article>
-              <article class="card pillar"><span class="n">05</span><h3>Fábrica de Receita</h3><p>Imersão presencial anual: hot seats, cases e workshops.</p></article>
-            </div>
-            <p class="callout" style="margin-top:18px">Agência executa — o resultado some com o contrato. Curso ensina teoria sem aplicar. Consultoria clássica entrega relatório; ninguém implementa. O consultor aloca as horas do squad no que destrava a receita naquele ciclo — não empurra pacote.</p>
-          </div>
-        </div>
-        <footer class="footer"><span>V4 Company · Empresa que Vende · confidencial</span><span class="count">03 / 20</span></footer>
-      </section>
-
-      <section class="slide" data-title="Vender">
-        <div class="topbar"></div>
-        <div class="page">
-          <header class="slide-head">
-            <div class="head-copy">
-              <div class="eyebrow">Promessa do ciclo</div>
-              <h2>Instalar o método para <em>vender com previsibilidade</em>.</h2>
-              <p class="sub">O resultado esperado não é PDF para a gaveta nem agência que some. É o time operando com tese, artefato e cadência.</p>
-            </div>
-            <div class="section-chip"><b>04</b> Promessa</div>
-          </header>
-          <div class="content">
-            <div class="check-grid">
-              <article class="card check-card"><span class="dot"></span><div><h3>Conteúdo que gera demanda</h3><p>Linha editorial no método — não post no feeling. Mensagem calibrada para o ICP.</p></div></article>
-              <article class="card check-card"><span class="dot"></span><div><h3>Mídia decidida por dado</h3><p>Pixel, audiência, ROAS e CPL. Canal deixa de ser aposta.</p></div></article>
-              <article class="card check-card"><span class="dot"></span><div><h3>Comercial que fecha</h3><p>Script, follow-up e pipeline. O funil para de vazar depois do lead.</p></div></article>
-              <article class="card check-card"><span class="dot"></span><div><h3>CRM que governa o pipeline</h3><p>Cadência, dono, próximo passo e conversão. Não é agenda.</p></div></article>
-            </div>
-            <p class="callout" style="margin-top:16px">A ordem é clareza → sistema → execução. Sem método, mídia vira aposta e comercial vira pressão. Com método, receita vira consequência.</p>
-          </div>
-        </div>
-        <footer class="footer"><span>V4 Company · Empresa que Vende · confidencial</span><span class="count">04 / 20</span></footer>
-      </section>
-
-      <section class="slide" data-title="Para quem é">
-        <div class="topbar"></div>
-        <div class="page">
-          <header class="slide-head">
-            <div class="head-copy">
-              <div class="eyebrow">Fit do programa</div>
-              <h2>Não é começar a vender. É <em>estruturar o que já existe</em>.</h2>
-              <p class="sub">O EQV foi desenhado para operação Tiny/Small que já tem venda ativa e ainda não tem sistema — antes de um fee de execução cheio.</p>
-            </div>
-            <div class="section-chip"><b>05</b> Fit</div>
-          </header>
-          <div class="content">
-            <div class="filters">
-              <article class="card filter"><div class="k">Porte</div><h3>Tiny e Small</h3><p>Até 50 pessoas. Operação que já vende e ainda não herdou máquina.</p></article>
-              <article class="card filter"><div class="k">Faturamento</div><h3>R$ 600 mil a R$ 2,4 milhões ao ano</h3><p>Volume existe. Falta repetir o mês com método.</p></article>
-              <article class="card filter"><div class="k">Mercado</div><h3>B2B / serviços com venda ativa</h3><p>Inside sales, WhatsApp, Meta Ads e CRM no jogo — ainda soltos.</p></article>
-              <article class="card filter"><div class="k">Maturidade GTM</div><h3>Baixo a médio · N1 ou N2</h3><p>Diagnóstico já mostrou o gargalo. Falta instalar o ciclo.</p></article>
-            </div>
-            <p class="callout" style="margin-top:16px">Sinais de encaixe: agência que não transfere método · marketing sem tese · comercial amador · prioridade no feeling · posicionamento que compete por preço.</p>
-          </div>
-        </div>
-        <footer class="footer"><span>V4 Company · Empresa que Vende · confidencial</span><span class="count">05 / 20</span></footer>
-      </section>
-
-      <section class="slide" data-title="A jornada · mês 01">
-        <div class="topbar"></div>
-        <div class="page">
-          <header class="slide-head">
-            <div class="head-copy">
-              <div class="eyebrow">Jornada de 6 meses · fase 01</div>
-              <h2>Mês 1 · <em>Onboarding</em>.</h2>
-              <p class="sub">Kickoff, maturidade GTM e definição de prioridades do ciclo.</p>
-            </div>
-            <div class="section-chip"><b>06</b> Jornada</div>
-          </header>
-          <div class="content">
-            <div class="big-phase">
-              <div class="when">M01</div>
-              <div>
-                <h3>Chão antes de campanha</h3>
-                <p>A máquina começa pelo diagnóstico contínuo. Sem prioridade, o squad se espalha. Sem baseline, mídia só enche o canal — e o processo continua na cabeça de quem atendeu.</p>
-                <ul class="art-list">
-                  <li>Kickoff com o decisor e o time que opera a ponta.</li>
-                  <li>Leitura de maturidade GTM e mapa de gargalo do ciclo.</li>
-                  <li>Prioridade única e alocação dos créditos do squad.</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-        <footer class="footer"><span>V4 Company · Empresa que Vende · confidencial</span><span class="count">06 / 20</span></footer>
-      </section>
-
-      <section class="slide" data-title="A jornada · mês 02">
-        <div class="topbar"></div>
-        <div class="page">
-          <header class="slide-head">
-            <div class="head-copy">
-              <div class="eyebrow">Jornada de 6 meses · fase 02</div>
-              <h2>Mês 2 · <em>EE 3.0 completa</em>.</h2>
-              <p class="sub">3P-IA, posicionamento ativo e canal de vendas no ar.</p>
-            </div>
-            <div class="section-chip"><b>07</b> Jornada</div>
-          </header>
-          <div class="content">
-            <div class="big-phase">
-              <div class="when">M02</div>
-              <div>
-                <h3>Promessa central no ar</h3>
-                <p>A marca escolhe ICP. Produto, oferta e canal deixam de competir na mesma mensagem. O mercado para de definir preço no seu lugar.</p>
-                <ul class="art-list">
-                  <li>Posicionamento ativo: quem é o cliente e o que não se atende.</li>
-                  <li>Canal de vendas desenhado para fechar — não só para informar.</li>
-                  <li>3P-IA aplicado à operação real do negócio.</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-        <footer class="footer"><span>V4 Company · Empresa que Vende · confidencial</span><span class="count">07 / 20</span></footer>
-      </section>
-
-      <section class="slide" data-title="A jornada · mês 03">
-        <div class="topbar"></div>
-        <div class="page">
-          <header class="slide-head">
-            <div class="head-copy">
-              <div class="eyebrow">Jornada de 6 meses · fase 03</div>
-              <h2>Mês 3 · <em>Consultoria de conteúdo</em>.</h2>
-              <p class="sub">Produção assistida + linha editorial no método.</p>
-            </div>
-            <div class="section-chip"><b>08</b> Jornada</div>
-          </header>
-          <div class="content">
-            <div class="big-phase">
-              <div class="when">M03</div>
-              <div>
-                <h3>Parar de postar no feeling</h3>
-                <p>O especialista V4 orienta a estratégia, calibra a mensagem para o ICP e acompanha a execução. A marca passa a gerar demanda com tese.</p>
-                <ul class="art-list">
-                  <li>Roteiros de vídeo calibrados — prontos para gravar.</li>
-                  <li>Brief de posts para Instagram.</li>
-                  <li>Modelo de linha editorial visível para o dono.</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-        <footer class="footer"><span>V4 Company · Empresa que Vende · confidencial</span><span class="count">08 / 20</span></footer>
-      </section>
-
-      <section class="slide" data-title="A jornada · mês 04">
-        <div class="topbar"></div>
-        <div class="page">
-          <header class="slide-head">
-            <div class="head-copy">
-              <div class="eyebrow">Jornada de 6 meses · fase 04</div>
-              <h2>Mês 4 · <em>Consultoria de tráfego</em>.</h2>
-              <p class="sub">Campanhas, pixel, audiência e otimização por resultado.</p>
-            </div>
-            <div class="section-chip"><b>09</b> Jornada</div>
-          </header>
-          <div class="content">
-            <div class="big-phase">
-              <div class="when">M04</div>
-              <div>
-                <h3>Decidir por ROAS e CPL — não por feeling</h3>
-                <p>Escolha de canais, leitura de dados e decisão de investimento. Você para de apostar em canal e passa a operar mídia com método.</p>
-                <ul class="art-list">
-                  <li>Pixel, plano de mídia e segmentação de audiências.</li>
-                  <li>Interpretação de dados das campanhas.</li>
-                  <li>Capacitação para gestão de mídia paga.</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-        <footer class="footer"><span>V4 Company · Empresa que Vende · confidencial</span><span class="count">09 / 20</span></footer>
-      </section>
-
-      <section class="slide" data-title="A jornada · mês 05/06">
-        <div class="topbar"></div>
-        <div class="page">
-          <header class="slide-head">
-            <div class="head-copy">
-              <div class="eyebrow">Jornada de 6 meses · fase 05</div>
-              <h2>Meses 5 e 6 · <em>Comercial + CRM</em>.</h2>
-              <p class="sub">Scripts, follow-up, pipeline e monetização do funil completo.</p>
-            </div>
-            <div class="section-chip"><b>10</b> Jornada</div>
-          </header>
-          <div class="content">
-            <div class="big-phase">
-              <div class="when">M05–06</div>
-              <div>
-                <h3>O comercial deixa de ser artesanal</h3>
-                <p>O especialista revisa scripts, analisa as objeções reais do mês e ajusta o processo com o time. Fecha com cadência. O CRM governa o pipeline — não a agenda.</p>
-                <ul class="art-list">
-                  <li>Revisão de scripts e cliente oculto.</li>
-                  <li>Réguas de conversão e follow-up.</li>
-                  <li>CRM ativo: cadência, pipeline e conversão.</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-        <footer class="footer"><span>V4 Company · Empresa que Vende · confidencial</span><span class="count">10 / 20</span></footer>
-      </section>
-
-      <section class="slide" data-title="3 sessões">
-        <div class="topbar"></div>
-        <div class="page">
-          <header class="slide-head">
-            <div class="head-copy">
-              <div class="eyebrow">Execução assistida</div>
-              <h2>Três sessões. <em>O squad instala. O time opera.</em></h2>
-              <p class="sub">Conteúdo, mídia e comercial/CRM no mesmo programa. Comunidade, monitoria mensal e Fábrica de Receita inclusos — não é retainer de agência.</p>
-            </div>
-            <div class="section-chip"><b>11</b> Sessões</div>
-          </header>
-          <div class="content">
-            <div class="roles">
-              <article class="card role"><div class="label">Sessão 01</div><h3>Conteúdo</h3><p>Produto, oferta, posicionamento e linha editorial. Roteiro pronto para o time gravar e publicar.</p></article>
-              <article class="card role"><div class="label">Sessão 02</div><h3>Mídia</h3><p>Pixel, plano, audiência e leitura de ROAS/CPL. O decisor para de apostar em canal.</p></article>
-              <article class="card role"><div class="label">Sessão 03</div><h3>Comercial + CRM</h3><p>Script, objeção do mês, role play e pipeline. O funil fecha com cadência.</p></article>
-              <article class="card role"><div class="label">Rito</div><h3>Consultoria 1h</h3><p>Todo mês: prioridade do ciclo e alocação dos créditos do squad no gargalo.</p></article>
-            </div>
-            <div class="process" style="margin-top:18px">
-              <div class="stage-card"><span class="n">Mensal</span><h3>Consultoria 1h</h3><p>Prioridade e alocação.</p></div>
-              <span class="arrow">→</span>
-              <div class="stage-card"><span class="n">Mensal</span><h3>Monitoria coletiva</h3><p>Especialistas V4 e peers.</p></div>
-              <span class="arrow">→</span>
-              <div class="stage-card"><span class="n">Contínua</span><h3>Comunidade</h3><p>WhatsApp + conteúdo semanal.</p></div>
-              <span class="arrow">→</span>
-              <div class="stage-card"><span class="n">Anual</span><h3>Fábrica de Receita</h3><p>2 dias presenciais.</p></div>
-            </div>
-          </div>
-        </div>
-        <footer class="footer"><span>V4 Company · Empresa que Vende · confidencial</span><span class="count">11 / 20</span></footer>
-      </section>
-
-      <section class="slide" data-title="Sessão 01">
-        <div class="topbar"></div>
-        <div class="page">
-          <header class="slide-head">
-            <div class="head-copy">
-              <div class="eyebrow">Sessão 01 · Conteúdo</div>
-              <h2>Produto, oferta, posicionamento e <em>conteúdo</em>.</h2>
-              <p class="sub">O especialista V4 orienta a estratégia, calibra a mensagem para o ICP e acompanha a execução mês a mês.</p>
-            </div>
-            <div class="section-chip"><b>12</b> Sessões</div>
-          </header>
-          <div class="content">
-            <div class="cols-3">
-              <article class="card" style="padding:22px"><h3>Artefatos</h3><ul>
-                <li>Roteiros de vídeo viral calibrados (prontos para gravar).</li>
-                <li>Brief de posts complementares para Instagram.</li>
-                <li>Modelo de linha editorial.</li>
-                <li>Funil de creator-led growth.</li>
-              </ul></article>
-              <article class="card" style="padding:22px"><h3>Na operação</h3><ul>
-                <li>Promessa central para o ICP escolhido.</li>
-                <li>Time grava e publica — não a agência no lugar da casa.</li>
-                <li>Linha editorial visível para o dono.</li>
-              </ul></article>
-              <article class="card" style="padding:22px"><h3>O que muda</h3><ul>
-                <li>A marca para de postar no feeling.</li>
-                <li>Conteúdo gera demanda com tese.</li>
-                <li>Mensagem deixa de competir por preço.</li>
-              </ul></article>
-            </div>
-          </div>
-        </div>
-        <footer class="footer"><span>V4 Company · Empresa que Vende · confidencial</span><span class="count">12 / 20</span></footer>
-      </section>
-
-      <section class="slide" data-title="Sessão 02">
-        <div class="topbar"></div>
-        <div class="page">
-          <header class="slide-head">
-            <div class="head-copy">
-              <div class="eyebrow">Sessão 02 · Mídia e performance</div>
-              <h2>Operar mídia paga com <em>método</em>.</h2>
-              <p class="sub">Escolha de canais, leitura de dados e decisão de investimento. Você para de apostar em canal e passa a decidir por ROAS e CPL.</p>
-            </div>
-            <div class="section-chip"><b>13</b> Sessões</div>
-          </header>
-          <div class="content">
-            <div class="cols-3">
-              <article class="card" style="padding:22px"><h3>Artefatos</h3><ul>
-                <li>Configuração e leitura de pixel.</li>
-                <li>Plano de mídia estruturado e segmentação de audiências.</li>
-                <li>Interpretação de dados das campanhas.</li>
-                <li>Capacitação para gestão de mídia paga.</li>
-              </ul></article>
-              <article class="card" style="padding:22px"><h3>Na operação</h3><ul>
-                <li>Canal escolhido por resultado, não por hábito.</li>
-                <li>Origem rastreada até a conversão.</li>
-                <li>Decisão mensal por ROAS e CPL.</li>
-              </ul></article>
-              <article class="card" style="padding:22px"><h3>Fora do fee</h3><ul>
-                <li>Verba de mídia permanece do cliente.</li>
-                <li>O programa desenha, rastreia e decide.</li>
-                <li>Não é gastar de novo sem prova de venda.</li>
-              </ul></article>
-            </div>
-          </div>
-        </div>
-        <footer class="footer"><span>V4 Company · Empresa que Vende · confidencial</span><span class="count">13 / 20</span></footer>
-      </section>
-
-      <section class="slide" data-title="Sessão 03">
-        <div class="topbar"></div>
-        <div class="page">
-          <header class="slide-head">
-            <div class="head-copy">
-              <div class="eyebrow">Sessão 03 · Comercial e CRM</div>
-              <h2>O comercial deixa de ser <em>artesanal</em>.</h2>
-              <p class="sub">O especialista revisa scripts, analisa as objeções reais do mês e ajusta o processo de vendas com o time. Fecha com cadência.</p>
-            </div>
-            <div class="section-chip"><b>14</b> Sessões</div>
-          </header>
-          <div class="content">
-            <div class="cols-3">
-              <article class="card" style="padding:22px"><h3>Artefatos</h3><ul>
-                <li>Revisão dos scripts de venda e cliente oculto.</li>
-                <li>Análise de objeções reais do mês e treinamento comercial.</li>
-                <li>Atualização das réguas de conversão e follow-up.</li>
-                <li>CRM ativo: cadência, pipeline e conversão — não agenda.</li>
-              </ul></article>
-              <article class="card" style="padding:22px"><h3>Na operação</h3><ul>
-                <li>Dono, próximo passo e motivo de perda no funil.</li>
-                <li>Follow-up padronizado — não no feeling de quem atendeu.</li>
-                <li>Role play com o time que fecha.</li>
-              </ul></article>
-              <article class="card" style="padding:22px"><h3>Squad no dia a dia</h3><ul>
-                <li><strong style="color:#fff">Conteúdo:</strong> roteiro, brief, publicação assistida.</li>
-                <li><strong style="color:#fff">Mídia:</strong> Meta/Google, pixel, ROAS/CPL.</li>
-                <li><strong style="color:#fff">Comercial:</strong> script, role play, follow-up.</li>
-                <li><strong style="color:#fff">CRM:</strong> fluxos, pipeline, conversão.</li>
-              </ul></article>
-            </div>
-          </div>
-        </div>
-        <footer class="footer"><span>V4 Company · Empresa que Vende · confidencial</span><span class="count">14 / 20</span></footer>
-      </section>
-
-      <section class="slide" data-title="Fábrica de Receita">
-        <div class="topbar"></div>
-        <div class="page">
-          <header class="slide-head">
-            <div class="head-copy">
-              <div class="eyebrow">Incluso no ciclo</div>
-              <h2>Fábrica de Receita. <em>2 dias presenciais por ano.</em></h2>
-              <p class="sub">Imersão anual: hot seats, workshops e networking de alto nível. Não é evento solto — faz parte do programa.</p>
-            </div>
-            <div class="section-chip"><b>15</b> Incluso</div>
-          </header>
-          <div class="content">
-            <div class="check-grid">
-              <article class="card check-card"><span class="dot"></span><div><h3>Hot seats</h3><p>A operação entra na mesa com especialistas V4 e pares do mesmo estágio.</p></div></article>
-              <article class="card check-card"><span class="dot"></span><div><h3>Workshops</h3><p>Método aplicado: aquisição, retenção e monetização — não palestra genérica.</p></div></article>
-              <article class="card check-card"><span class="dot"></span><div><h3>Cases reais</h3><p>O que já funcionou em milhares de operações. Menos tentativa, mais decisão testada.</p></div></article>
-              <article class="card check-card"><span class="dot"></span><div><h3>Networking</h3><p>Empresários no mesmo jogo: já vendem, ainda estão instalando máquina.</p></div></article>
-            </div>
-            <p class="callout" style="margin-top:16px">Incluso no fee. Sem custo extra de inscrição. O calendário abre a partir da assinatura.</p>
-          </div>
-        </div>
-        <footer class="footer"><span>V4 Company · Empresa que Vende · confidencial</span><span class="count">15 / 20</span></footer>
-      </section>
-
-      <section class="slide" data-title="Comunidade">
-        <div class="topbar"></div>
-        <div class="page">
-          <header class="slide-head">
-            <div class="head-copy">
-              <div class="eyebrow">Incluso no ciclo</div>
-              <h2>Comunidade. <em>O time não fica sozinho entre as sessões.</em></h2>
-              <p class="sub">Além da execução assistida, o programa inclui acesso permanente a monitoria, grupo e conteúdo semanal.</p>
-            </div>
-            <div class="section-chip"><b>16</b> Incluso</div>
-          </header>
-          <div class="content">
-            <div class="roles">
-              <article class="card role"><div class="label">Mensal</div><h3>Monitoria coletiva</h3><p>Encontros com especialistas V4 e peers para ajustar rota juntos.</p></article>
-              <article class="card role"><div class="label">Contínua</div><h3>WhatsApp fechado</h3><p>Grupo para troca rápida, alinhamentos e suporte contínuo.</p></article>
-              <article class="card role"><div class="label">Semanal</div><h3>Conteúdo do método</h3><p>Aquisição, retenção e monetização para manter o time no ritmo.</p></article>
-              <article class="card role"><div class="label">Anual</div><h3>Fábrica de Receita</h3><p>2 dias presenciais: hot seats, workshops e networking.</p></article>
-            </div>
-            <p class="callout" style="margin-top:18px">Quando o ciclo acaba, o método ficou no time — não na agência. Comunidade e Fábrica existem para isso não regressar ao feeling.</p>
-          </div>
-        </div>
-        <footer class="footer"><span>V4 Company · Empresa que Vende · confidencial</span><span class="count">16 / 20</span></footer>
-      </section>
-
-      <section class="slide" data-title="Por que a V4">
-        <div class="topbar"></div>
-        <div class="page">
-          <header class="slide-head">
-            <div class="head-copy">
-              <div class="eyebrow">Por que a V4</div>
-              <h2>Menos tentativa. <em>Mais decisão testada.</em></h2>
-              <p class="sub">Não empurramos serviços. Prescrevemos o necessário para destravar a receita agora.</p>
-            </div>
-            <div class="section-chip"><b>17</b> Decisão</div>
-          </header>
-          <div class="content">
-            <div class="success-grid">
-              <article class="card success-item"><span class="n">01</span><h3>Você para de apostar e começa a operar com método.</h3></article>
-              <article class="card success-item"><span class="n">02</span><h3>Dados de mercado + experiência real: milhares de operações e sistemas de receita — não achismo.</h3></article>
-              <article class="card success-item"><span class="n">03</span><h3>Não empurramos pacote. O consultor aloca o squad no gargalo do mês.</h3></article>
-              <article class="card success-item"><span class="n">04</span><h3>Garantia incondicional de 30 dias: se o método não fizer sentido, o risco é nosso.</h3></article>
-            </div>
-          </div>
-        </div>
-        <footer class="footer"><span>V4 Company · Empresa que Vende · confidencial</span><span class="count">17 / 20</span></footer>
-      </section>
-
-      <section class="slide" data-title="Por que a V4">
-        <div class="topbar"></div>
-        <div class="page">
-          <header class="slide-head">
-            <div class="head-copy">
-              <div class="eyebrow">Por que a V4</div>
-              <h2>O mesmo método. <em>Calibrado para a sua operação.</em></h2>
-              <p class="sub">Como já fizemos com Ortobom, Spotify, GioLaser, Lugano, XP Inc. e Smart Fit — entre outros.</p>
-            </div>
-            <div class="section-chip"><b>18</b> Decisão</div>
-          </header>
-          <div class="content">
-            <div class="cols-3">
-              <article class="card" style="padding:22px"><h3>Agência</h3><p style="color:var(--muted);font-size:15px;line-height:1.5">Executa por você. Quando o contrato acaba, o resultado vai junto. A operação nunca herda a máquina.</p></article>
-              <article class="card" style="padding:22px"><h3>Curso</h3><p style="color:var(--muted);font-size:15px;line-height:1.5">Ensina teoria sem aplicar no negócio real. O empresário volta para o feeling na segunda-feira.</p></article>
-              <article class="card" style="padding:22px"><h3>EQV</h3><p style="color:var(--muted);font-size:15px;line-height:1.5">Prescreve, conduz e instala. Quem opera é o time. A máquina fica quando o ciclo acaba.</p></article>
-            </div>
-            <p class="callout" style="margin-top:18px">Papéis claros: a V4 prescreve e conduz; o cliente opera no dia a dia. O consultor aloca as horas do squad no que destrava a receita naquele ciclo.</p>
-          </div>
-        </div>
-        <footer class="footer"><span>V4 Company · Empresa que Vende · confidencial</span><span class="count">18 / 20</span></footer>
-      </section>
-
+      <section class="slide" data-title="Crescimento previsível"><img alt="Crescimento previsível" src="pages/p02.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="O programa"><img alt="O programa" src="pages/p03.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="Vender"><img alt="Vender" src="pages/p04.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="Para quem é"><img alt="Para quem é" src="pages/p05.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="A jornada · mês 01"><img alt="A jornada · mês 01" src="pages/p06.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="A jornada · mês 02"><img alt="A jornada · mês 02" src="pages/p07.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="A jornada · mês 03"><img alt="A jornada · mês 03" src="pages/p08.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="A jornada · mês 04"><img alt="A jornada · mês 04" src="pages/p09.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="A jornada · mês 05/06"><img alt="A jornada · mês 05/06" src="pages/p10.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="3 sessões"><img alt="3 sessões" src="pages/p11.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="Sessão 01"><img alt="Sessão 01" src="pages/p12.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="Sessão 02"><img alt="Sessão 02" src="pages/p13.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="Sessão 03"><img alt="Sessão 03" src="pages/p14.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="Fábrica de Receita"><img alt="Fábrica de Receita" src="pages/p15.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="Comunidade"><img alt="Comunidade" src="pages/p16.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="Por que a V4"><img alt="Por que a V4" src="pages/p17.jpg" width="1600" height="900"></section>
+      <section class="slide" data-title="Por que a V4"><img alt="Por que a V4" src="pages/p18.jpg" width="1600" height="900"></section>
       <section class="slide" data-title="Investimento">
-        <div class="topbar"></div>
-        <div class="page">
-          <header class="slide-head">
-            <div class="head-copy">
-              <div class="eyebrow">Investimento</div>
-              <h2>Condição comercial. <em>Um valor. Seis meses.</em></h2>
-              <p class="sub">Consultoria + squad + comunidade + Fábrica de Receita. A máquina fica no time. Não é aluguel de agência.</p>
-            </div>
-            <div class="section-chip"><b>19</b> Decisão</div>
-          </header>
-          <div class="content">
-            <div class="price-hero">
-              <article class="card price-main">
-                <div class="tag">Condição exclusiva · 6 meses</div>
-                <div class="now">6× de R$ 2.500,00</div>
-                <p class="total">Ciclo completo · <b>R$ 15.000,00</b></p>
-              </article>
-              <article class="card price-side">
-                <h3>O que entra nesta condição</h3>
-                <ul>
-                  <li>Consultoria estratégica 1h/mês</li>
-                  <li>Squad de 4 frentes (conteúdo, mídia, comercial, CRM)</li>
-                  <li>Comunidade + monitoria coletiva mensal</li>
-                  <li>Fábrica de Receita (imersão presencial anual)</li>
-                  <li>Garantia incondicional de 30 dias</li>
-                </ul>
-              </article>
-            </div>
+        <img alt="Investimento" src="pages/p19.jpg" width="1600" height="900">
+        <div class="price-patch" aria-label="6 vezes de R$ 2.500,00">
+          <div class="price-was">De R$ 50.632,85</div>
+          <div class="price-row">
+            <div class="price-side"><span>Por:</span><span>6x de</span></div>
+            <div class="price-num">2.500,00</div>
+            <div class="price-month">/mês</div>
           </div>
         </div>
-        <footer class="footer"><span>V4 Company · Empresa que Vende · confidencial</span><span class="count">19 / 20</span></footer>
+        <div class="cashback-scrub" aria-hidden="true"></div>
       </section>
-
-      <section class="slide" data-title="Garantia">
-        <div class="topbar"></div>
-        <div class="page">
-          <header class="slide-head">
-            <div class="head-copy">
-              <div class="eyebrow">Garantia · 30 dias</div>
-              <h2>Se o método não fizer sentido, <em>o risco é nosso</em>.</h2>
-              <p class="sub">Reembolso incondicional nos primeiros 30 dias de serviço. O método precisa colar na operação — não só no papel.</p>
-            </div>
-            <div class="section-chip"><b>20</b> Decisão</div>
-          </header>
-          <div class="content">
-            <div class="cols-3">
-              <article class="card" style="padding:22px"><h3>Você</h3>
-                <p style="color:var(--muted);font-size:15px;line-height:1.5">Validar a condição <strong style="color:#fff">6× de R$ 2.500,00</strong> e formalizar o start.</p>
-              </article>
-              <article class="card" style="padding:22px"><h3>V4</h3>
-                <p style="color:var(--muted);font-size:15px;line-height:1.5">Gerar contrato. Kickoff do mês 01: maturidade GTM, prioridades e alocação do squad.</p>
-              </article>
-              <article class="card" style="padding:22px"><h3>Time + V4</h3>
-                <p style="color:var(--muted);font-size:15px;line-height:1.5">Liberar acessos. Entrar na comunidade, na monitoria mensal e no calendário da Fábrica de Receita a partir da assinatura.</p>
-              </article>
-            </div>
-            <p class="callout" style="margin-top:18px">Adiar o EQV mantém o achismo: mídia continua tentando, comercial continua artesanal, o dono continua sendo o processo. Fechar agora liga o mês 01.</p>
-          </div>
-        </div>
-        <footer class="footer"><span>V4 Company · Empresa que Vende · confidencial</span><span class="count">20 / 20</span></footer>
-      </section>
-
+      <section class="slide" data-title="Garantia"><img alt="Garantia" src="pages/p20.jpg" width="1600" height="900"></section>
       <div class="slide-counter" id="slideCounter">01 / 20</div>
       <nav class="navigation" aria-label="Navegação">
         <button class="nav-btn" id="prevBtn" type="button" aria-label="Anterior"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
@@ -771,50 +111,46 @@
     </main>
   </div>
   <script>
+    const REMOTE = "https://raw.githubusercontent.com/sarapizzico-hue/Sara/cursor/eqv-6x-2500/eqv-ok/";
+    if (location.hostname.indexOf("htmlpreview") !== -1) {
+      document.querySelectorAll("#deck img").forEach((img) => {
+        img.src = REMOTE + img.getAttribute("src");
+      });
+    }
     const deck = document.getElementById("deck");
     const slidesEls = Array.from(document.querySelectorAll(".slide"));
     const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
     const slideCounter = document.getElementById("slideCounter");
     const progressFill = document.getElementById("progressFill");
-    let current = Math.max(0, Math.min(slidesEls.length - 1, Number((location.hash.match(/slide-(\d+)/) || [])[1] || 1) - 1));
-    function pad(n) { return String(n).padStart(2, "0"); }
+    let current = 0;
     function fitDeck() {
       const w = window.visualViewport?.width || window.innerWidth;
       const h = window.visualViewport?.height || window.innerHeight;
-      deck.style.setProperty("--deck-scale", Math.max(.1, Math.min((w - 16) / 1600, (h - 16) / 900)));
+      deck.style.setProperty("--deck-scale", Math.max(.1, Math.min((w-16)/1600,(h-16)/900,1)));
     }
     function goTo(index) {
-      current = Math.max(0, Math.min(slidesEls.length - 1, index));
-      slidesEls.forEach((s, i) => s.classList.toggle("active", i === current));
-      slideCounter.textContent = pad(current + 1) + " / " + pad(slidesEls.length);
-      progressFill.style.width = ((current + 1) / slidesEls.length) * 100 + "%";
-      prevBtn.disabled = current === 0;
-      nextBtn.disabled = current === slidesEls.length - 1;
-      history.replaceState(null, "", "#slide-" + pad(current + 1));
-      document.title = pad(current + 1) + " | " + (slidesEls[current].dataset.title || "EQV") + " · Empresa que Vende";
+      current = Math.max(0, Math.min(slidesEls.length-1, index));
+      slidesEls.forEach((s,i)=>s.classList.toggle("active", i===current));
+      slideCounter.textContent = String(current+1).padStart(2,"0")+" / "+String(slidesEls.length).padStart(2,"0");
+      progressFill.style.width = ((current+1)/slidesEls.length)*100+"%";
+      prevBtn.disabled = current===0; nextBtn.disabled = current===slidesEls.length-1;
+      document.title = String(current+1).padStart(2,"0")+" | "+(slidesEls[current].dataset.title||"EQV")+" · Empresa que Vende";
     }
-    prevBtn.onclick = (e) => { e.stopPropagation(); goTo(current - 1); };
-    nextBtn.onclick = (e) => { e.stopPropagation(); goTo(current + 1); };
-    deck.addEventListener("click", (e) => { if (e.target.closest(".nav-btn")) return; goTo(current + 1); });
+    prevBtn.onclick = (e)=>{ e.stopPropagation(); goTo(current-1); };
+    nextBtn.onclick = (e)=>{ e.stopPropagation(); goTo(current+1); };
+    deck.addEventListener("click", (e)=>{ if(e.target.closest(".nav-btn")) return; goTo(current+1); });
     window.addEventListener("resize", fitDeck);
     window.visualViewport?.addEventListener("resize", fitDeck);
-    window.addEventListener("keydown", (e) => {
-      if (["ArrowRight", "PageDown", " "].includes(e.key)) { e.preventDefault(); goTo(current + 1); }
-      if (["ArrowLeft", "PageUp"].includes(e.key)) { e.preventDefault(); goTo(current - 1); }
-      if (e.key === "Home") goTo(0);
-      if (e.key === "End") goTo(slidesEls.length - 1);
+    window.addEventListener("keydown", (e)=>{
+      if(["ArrowRight","PageDown"," "].includes(e.key)){ e.preventDefault(); goTo(current+1); }
+      if(["ArrowLeft","PageUp"].includes(e.key)){ e.preventDefault(); goTo(current-1); }
+      if(e.key==="Home") goTo(0); if(e.key==="End") goTo(slidesEls.length-1);
     });
-    let tx = null;
-    deck.addEventListener("touchstart", e => { tx = e.changedTouches[0].clientX; }, { passive: true });
-    deck.addEventListener("touchend", e => {
-      if (tx == null) return;
-      const d = e.changedTouches[0].clientX - tx;
-      if (Math.abs(d) > 70) goTo(current + (d < 0 ? 1 : -1));
-      tx = null;
-    }, { passive: true });
-    fitDeck();
-    goTo(current);
+    let tx=null;
+    deck.addEventListener("touchstart", e=>tx=e.changedTouches[0].clientX, {passive:true});
+    deck.addEventListener("touchend", e=>{ if(tx==null) return; const d=e.changedTouches[0].clientX-tx; if(Math.abs(d)>70) goTo(current+(d<0?1:-1)); tx=null; }, {passive:true});
+    fitDeck(); goTo(0);
   </script>
 </body>
 </html>
