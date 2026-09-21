@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
-  <meta name="eqv-deck-version" content="eqv-6x-2500-remax-layout">
-  <title>Empresa que Vende | V4 Company</title>
+  <meta name="eqv-deck-version" content="castanheira-eqv-6x-2500">
+  <title>Castanheira · Empresa que Vende | V4 Company</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
@@ -22,6 +22,14 @@
     .slide { position:absolute; inset:0; width:1600px; height:900px; margin:0; padding:0; overflow:hidden; opacity:0; pointer-events:none; }
     .slide.active { opacity:1; pointer-events:auto; }
     .slide img { width:1600px; height:900px; object-fit:fill; display:block; user-select:none; -webkit-user-drag:none; }
+    .cover-name {
+      position:absolute; z-index:5; left:628px; top:568px; height:34px; min-width:268px;
+      display:flex; align-items:center; padding:0 10px 0 6px;
+      background: linear-gradient(90deg, rgba(72,14,16,.08), #4e1012 10%, #3d0b0d 90%, rgba(40,8,10,.12));
+      font:700 17px/1 Montserrat, Arial, sans-serif; letter-spacing:.22em;
+      color:rgba(255,255,255,.9); text-transform:uppercase; white-space:nowrap;
+      text-shadow:0 1px 8px rgba(0,0,0,.35);
+    }
     .price-slide {
       background: radial-gradient(ellipse at 50% 100%, #ff7a3a 0%, #d31820 28%, #a10b12 62%, #7a070c 100%);
     }
@@ -77,7 +85,10 @@
 <body>
   <div id="viewport">
     <main id="deck">
-      <section class="slide active" data-title="Capa"><img alt="Capa" src="pages/p01.jpg" width="1600" height="900"></section>
+      <section class="slide active" data-title="Capa">
+        <img alt="Capa" src="pages/p01.jpg" width="1600" height="900">
+        <div class="cover-name">Castanheira</div>
+      </section>
       <section class="slide" data-title="Crescimento previsível"><img alt="Crescimento previsível" src="pages/p02.jpg" width="1600" height="900"></section>
       <section class="slide" data-title="O programa"><img alt="O programa" src="pages/p03.jpg" width="1600" height="900"></section>
       <section class="slide" data-title="Vender"><img alt="Vender" src="pages/p04.jpg" width="1600" height="900"></section>
@@ -142,7 +153,7 @@
       slideCounter.textContent = String(current+1).padStart(2,"0")+" / "+String(slidesEls.length).padStart(2,"0");
       progressFill.style.width = ((current+1)/slidesEls.length)*100+"%";
       prevBtn.disabled = current===0; nextBtn.disabled = current===slidesEls.length-1;
-      document.title = String(current+1).padStart(2,"0")+" | "+(slidesEls[current].dataset.title||"EQV")+" · Empresa que Vende";
+      document.title = String(current+1).padStart(2,"0")+" | "+(slidesEls[current].dataset.title||"EQV")+" · Castanheira";
     }
     prevBtn.onclick = (e)=>{ e.stopPropagation(); goTo(current-1); };
     nextBtn.onclick = (e)=>{ e.stopPropagation(); goTo(current+1); };
