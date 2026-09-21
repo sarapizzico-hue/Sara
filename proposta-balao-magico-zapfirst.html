@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Balão Mágico × V4 Company — Zap First Completo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --red:#e3040a;
+  --red2:#ff3b3b;
+  --dark:#0d0d0d;
+  --dark2:#1a1a1a;
+  --ink:#111;
+  --muted:#6b6b6b;
+  --line:#e8e4e1;
+  --soft:#f6f4f2;
+  --white:#fff;
+  --green:#16a34a;
+  --green-bg:#f0fdf4;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font:16px/1.6 Inter,system-ui,sans-serif;background:var(--white);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4{font-family:Sora,Inter,sans-serif;letter-spacing:-.02em;line-height:1.15}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+
+.topnav{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  background:rgba(255,255,255,.92);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.7rem 2rem;gap:1rem;
+}
+.brand{display:flex;align-items:center;gap:14px}
+.wordmark{display:flex;align-items:center;gap:8px}
+.wordmark svg{width:28px;height:28px;flex-shrink:0}
+.wordmark b{font-family:Sora,sans-serif;font-size:13px;font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.wordmark b small{display:block;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.brand .sep{width:1px;height:28px;background:var(--line)}
+.brand .v4{font-family:Sora,sans-serif;font-weight:800;font-size:13px;white-space:nowrap}
+.brand .v4 span{color:var(--red)}
+.topnav nav{display:flex;gap:1.5rem;overflow-x:auto;scrollbar-width:none}
+.topnav nav a{font-size:12px;font-weight:600;color:var(--muted);white-space:nowrap;padding:.25rem 0;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+.topnav nav a:hover,.topnav nav a.active{color:var(--red);border-color:var(--red)}
+.cta-mini{background:var(--red);color:#fff;font-size:12px;font-weight:700;padding:.45rem 1rem;border-radius:20px;white-space:nowrap}
+.cta-mini:hover{opacity:.85}
+@media(max-width:860px){.topnav nav{display:none}.topnav{padding:.7rem 1.2rem}}
+
+#prog{position:fixed;top:0;left:0;height:3px;background:var(--red);z-index:1000;width:0}
+
+section{width:100%;padding:5rem 1.5rem;scroll-margin-top:76px}
+.hero{scroll-margin-top:0}
+.inner{max-width:960px;margin:0 auto}
+.slabel{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:.5rem}
+.stitle{font-size:clamp(26px,4vw,36px);font-weight:800;color:var(--ink);margin-bottom:.75rem}
+.stitle em{font-style:normal;color:var(--red)}
+.sdesc{font-size:16px;color:var(--muted);max-width:680px;line-height:1.65}
+.divider{height:1px;background:var(--line);width:100%;max-width:960px;margin:0 auto}
+
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  background:linear-gradient(150deg,#0d0d0d 0%,#1c0404 55%,#2b0606 100%);
+  color:#fff;position:relative;overflow:hidden;padding:6rem 1.5rem 4rem;
+}
+.hero::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 60% at 80% 40%,rgba(227,4,10,.18),transparent);
+  pointer-events:none;
+}
+.hero-grid{
+  max-width:960px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 400px;gap:3rem;align-items:center;
+  position:relative;z-index:1;
+}
+@media(max-width:860px){.hero-grid{grid-template-columns:1fr}}
+.logo-plate{
+  display:inline-flex;align-items:center;gap:10px;
+  background:#fff;border-radius:14px;padding:10px 16px;margin-bottom:1.4rem;color:var(--ink);
+}
+.logo-plate svg{width:32px;height:32px}
+.logo-plate strong{font-family:Sora,sans-serif;font-size:15px;font-weight:800}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(227,4,10,.18);border:1px solid rgba(227,4,10,.35);
+  border-radius:20px;padding:.35rem .9rem;
+  font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.85);
+  margin-bottom:1.5rem;
+}
+.hero-tag i{width:6px;height:6px;border-radius:50%;background:var(--red2);display:inline-block;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.hero h1{font-size:clamp(32px,5vw,52px);font-weight:900;color:#fff;margin-bottom:1.25rem}
+.hero h1 em{font-style:normal;color:var(--red2)}
+.hero-sub{font-size:17px;color:rgba(255,255,255,.72);max-width:540px;line-height:1.65;margin-bottom:2rem}
+.hero-cta{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:var(--red);color:#fff;font-weight:700;font-size:15px;
+  padding:.85rem 2rem;border-radius:30px;
+  box-shadow:0 8px 32px rgba(227,4,10,.4);
+}
+.hero-cta:hover{transform:translateY(-2px)}
+.hero-card{
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  border-radius:24px;padding:1.75rem;backdrop-filter:blur(8px);
+}
+.hero-card h3{font-size:13px;font-weight:700;color:rgba(255,255,255,.55);letter-spacing:.08em;text-transform:uppercase;margin-bottom:1rem}
+.ops-list{display:flex;flex-direction:column;gap:.7rem}
+.ops-item{background:rgba(255,255,255,.08);border-radius:14px;padding:.9rem 1rem}
+.ops-item strong{display:block;font-family:Sora,sans-serif;font-size:15px;color:#fff;margin-bottom:.15rem}
+.ops-item span{font-size:12px;color:rgba(255,255,255,.55);line-height:1.4}
+
+.diag-bg{background:var(--soft)}
+.gap-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.75rem}
+@media(max-width:640px){.gap-grid{grid-template-columns:1fr}}
+.gap-card{
+  background:var(--white);border:1px solid var(--line);border-radius:18px;padding:1.4rem 1.6rem;
+  box-shadow:0 12px 40px rgba(0,0,0,.05);
+}
+.gap-num{font-family:Sora,sans-serif;font-size:28px;font-weight:900;color:var(--line);margin-bottom:.5rem}
+.gap-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:.2rem .6rem;border-radius:6px;margin-bottom:.6rem}
+.tag-red{background:#fdeaea;color:var(--red)}
+.tag-green{background:#dcfce7;color:#15803d}
+.gap-card h3{font-size:15px;font-weight:700;margin-bottom:.4rem}
+.gap-card p{font-size:13px;color:var(--muted);line-height:1.55}
+.highlight-box{
+  background:linear-gradient(135deg,#1a1a1a,#2b0606);
+  border-radius:20px;padding:1.75rem 2rem;margin-top:1.5rem;
+}
+.highlight-box strong{color:#fff;font-size:18px;font-family:Sora,sans-serif;display:block;margin-bottom:.25rem}
+.highlight-box p{color:rgba(255,255,255,.88);font-size:15px;line-height:1.6}
+
+.pledge{
+  display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.75rem;
+}
+@media(max-width:700px){.pledge{grid-template-columns:1fr}}
+.pledge-card{border-radius:18px;padding:1.45rem 1.5rem}
+.pledge-card.no{background:#fff;border:1px solid #fecaca}
+.pledge-card.yes{background:var(--green-bg);border:1px solid #86efac}
+.pledge-card .k{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.55rem}
+.pledge-card.no .k{color:var(--red)}
+.pledge-card.yes .k{color:#15803d}
+.pledge-card h3{font-size:16px;font-weight:800;margin-bottom:.5rem}
+.pledge-card li{list-style:none;font-size:13.5px;color:var(--muted);padding:.28rem 0;padding-left:1.1rem;position:relative;line-height:1.45}
+.pledge-card.no li::before{content:"✕";position:absolute;left:0;color:var(--red);font-weight:800;font-size:11px}
+.pledge-card.yes li::before{content:"✓";position:absolute;left:0;color:#15803d;font-weight:800;font-size:11px}
+
+.method-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2rem}
+@media(max-width:760px){.method-steps{grid-template-columns:1fr 1fr}}
+@media(max-width:500px){.method-steps{grid-template-columns:1fr}}
+.ms{border-radius:18px;padding:1.4rem;border:1px solid var(--line);position:relative;overflow:hidden}
+.ms:nth-child(1){background:#fff3f3}
+.ms:nth-child(2){background:#fff8f0}
+.ms:nth-child(3){background:#f7f4f2}
+.ms:nth-child(4){background:#f0fff5}
+.ms .mn{font-family:Sora,sans-serif;font-size:36px;font-weight:900;color:rgba(0,0,0,.07);position:absolute;top:.5rem;right:.75rem;line-height:1}
+.ms h3{font-size:16px;font-weight:800;margin-bottom:.5rem}
+.ms p{font-size:13px;color:var(--muted);line-height:1.55}
+.ms .badge{display:inline-block;background:var(--red);color:#fff;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .65rem;border-radius:8px;margin-bottom:.6rem}
+
+.timeline-strip{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:0;
+  border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:2rem;
+}
+@media(max-width:700px){.timeline-strip{grid-template-columns:1fr}}
+.tl-cell{padding:1rem;border-right:1px solid var(--line);background:#fff3f3}
+.tl-cell:nth-child(4),.tl-cell:nth-child(5){background:var(--soft)}
+.tl-cell:last-child{border-right:none}
+@media(max-width:700px){.tl-cell{border-right:none;border-bottom:1px solid var(--line)}}
+.tl-mes{font-size:10px;font-weight:800;color:var(--red);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.35rem}
+.tl-fase{font-size:13px;font-weight:700;margin-bottom:.4rem}
+.tl-items{font-size:11px;color:var(--muted);line-height:1.55}
+
+.del-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.75rem}
+@media(max-width:760px){.del-grid{grid-template-columns:1fr}}
+.del-card{
+  background:#fff;border:1px solid var(--line);border-radius:20px;padding:1.45rem 1.5rem;
+  box-shadow:0 12px 40px rgba(0,0,0,.05);
+}
+.del-card .n{
+  font-family:Sora,sans-serif;font-size:12px;font-weight:800;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--red);margin-bottom:.55rem;
+}
+.del-card h3{font-size:18px;font-weight:800;margin-bottom:.85rem}
+.inc{display:flex;align-items:flex-start;gap:.65rem;font-size:14px;color:var(--ink);padding:.4rem 0;line-height:1.45}
+.inc::before{
+  content:"✓";color:var(--green);font-weight:800;font-size:12px;flex-shrink:0;
+  width:20px;height:20px;border-radius:50%;background:#dcfce7;
+  display:flex;align-items:center;justify-content:center;line-height:1;margin-top:1px;
+}
+
+.future-bg{background:linear-gradient(150deg,#0d0d0d 0%,#1c0404 58%,#2b0606 100%);color:#fff}
+.future-bg .stitle{color:#fff}
+.future-bg .sdesc{color:rgba(255,255,255,.68)}
+.future-compare{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.75rem}
+@media(max-width:720px){.future-compare{grid-template-columns:1fr}}
+.future-col{border-radius:20px;padding:1.5rem 1.55rem}
+.future-col.now{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1)}
+.future-col.next{background:rgba(227,4,10,.12);border:1px solid rgba(227,4,10,.35)}
+.future-col .k{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.85rem}
+.future-col.now .k{color:rgba(255,255,255,.45)}
+.future-col.next .k{color:#ff6b6f}
+.future-col li{list-style:none;font-size:14px;line-height:1.5;padding:.55rem 0;border-bottom:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.78)}
+.future-col li:last-child{border-bottom:0}
+.future-col.next li{color:#fff}
+.future-outcomes{display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem;margin-top:1.25rem}
+@media(max-width:760px){.future-outcomes{grid-template-columns:1fr}}
+.outcome{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:1.15rem 1.2rem}
+.outcome .n{font-family:Sora,sans-serif;font-size:13px;font-weight:800;color:#ff6b6f;margin-bottom:.4rem}
+.outcome h3{font-size:15px;color:#fff;margin-bottom:.35rem}
+.outcome p{font-size:13px;color:rgba(255,255,255,.62);line-height:1.5}
+
+.invest-bg{background:var(--soft)}
+.unit-math{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem;margin-top:1.75rem;
+}
+@media(max-width:760px){.unit-math{grid-template-columns:1fr}}
+.um{
+  background:#fff;border:1px solid var(--line);border-radius:18px;padding:1.25rem 1.35rem;
+}
+.um .k{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.35rem}
+.um .v{font-family:Sora,sans-serif;font-size:22px;font-weight:800}
+.um .s{font-size:12px;color:var(--muted);margin-top:.2rem;line-height:1.45}
+.um.featured{border-color:var(--red);box-shadow:0 10px 28px rgba(227,4,10,.12)}
+.um.featured .v{color:var(--red)}
+
+.price-table{width:100%;border-collapse:separate;border-spacing:0;margin-top:1.25rem;background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.price-table th{
+  text-align:left;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);padding:.9rem 1.15rem;background:#faf8f6;border-bottom:1px solid var(--line);
+}
+.price-table td{padding:.95rem 1.15rem;font-size:14px;border-bottom:1px solid var(--line);vertical-align:middle}
+.price-table tr:last-child td{border-bottom:0}
+.price-table .strike{color:var(--muted);text-decoration:line-through}
+.price-table .now{font-family:Sora,sans-serif;font-weight:800;font-size:16px}
+.price-table tr.ref td{color:var(--muted);background:#fcfcfb}
+.price-table tr.deal td{background:#fff5f5}
+.price-table tr.deal td:first-child{font-weight:800;color:var(--ink)}
+.price-table .tag-deal{
+  display:inline-block;background:var(--red);color:#fff;font-size:9px;font-weight:800;
+  letter-spacing:.08em;text-transform:uppercase;padding:.15rem .45rem;border-radius:6px;margin-left:.4rem;
+}
+@media(max-width:640px){
+  .price-table{display:block;overflow-x:auto}
+  .price-table th,.price-table td{white-space:nowrap}
+}
+
+.price-hero{
+  background:linear-gradient(135deg,#1a1a1a 0%,#2b0606 100%);
+  border-radius:24px;padding:2.5rem;margin-top:1.25rem;
+}
+.price-hero .ph-label{font-size:12px;font-weight:700;color:rgba(255,255,255,.55);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.35rem}
+.price-hero .ph-from{font-size:18px;color:rgba(255,255,255,.4);text-decoration:line-through;margin-bottom:.2rem}
+.price-hero .ph-val{font-family:Sora,sans-serif;font-size:clamp(36px,6vw,58px);font-weight:900;color:#fff;letter-spacing:-.04em;line-height:1}
+.price-hero .ph-val small{font-size:.42em;font-weight:800;letter-spacing:0}
+.price-hero .ph-sub{font-size:14px;color:rgba(255,255,255,.55);margin-top:.55rem}
+
+.cover-pills{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.1rem}
+.cover-pills span{
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);
+  color:#fff;font-size:12px;font-weight:600;padding:.35rem .7rem;border-radius:999px;
+}
+
+.steps-list{display:flex;flex-direction:column;margin-top:1.75rem;position:relative}
+.steps-list::before{
+  content:"";position:absolute;left:22px;top:0;bottom:0;width:2px;
+  background:linear-gradient(to bottom,var(--red),rgba(227,4,10,.1));
+}
+.step-item{display:flex;gap:1.25rem;padding:1.25rem 0;position:relative}
+.step-num{
+  width:44px;height:44px;border-radius:50%;background:var(--red);color:#fff;
+  font-family:Sora,sans-serif;font-weight:800;font-size:14px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;
+  box-shadow:0 4px 14px rgba(227,4,10,.4);
+}
+.step-body{padding-top:8px}
+.step-body strong{font-size:15px;font-weight:700;display:block;margin-bottom:.25rem}
+.step-body span{font-size:13px;color:var(--muted);line-height:1.55}
+
+.footer-cta{
+  background:linear-gradient(150deg,#0d0d0d 0%,#1c0404 60%,#2b0606 100%);
+  text-align:center;padding:5rem 1.5rem;
+}
+.footer-cta .logo-plate{margin:0 auto 1.4rem}
+.footer-cta h2{font-size:clamp(26px,4vw,40px);font-weight:900;color:#fff;margin-bottom:.75rem}
+.footer-cta p{font-size:16px;color:rgba(255,255,255,.65);max-width:540px;margin:0 auto 2rem;line-height:1.6}
+.btn-row{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:.5rem;border:0;cursor:pointer;
+  background:var(--red);color:#fff;font-weight:700;font-size:16px;
+  padding:1rem 2.5rem;border-radius:32px;
+  box-shadow:0 8px 32px rgba(227,4,10,.45);
+}
+.btn:hover{transform:translateY(-2px)}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,.28);box-shadow:none}
+.footer-note{font-size:12px;color:rgba(255,255,255,.35);margin-top:1.25rem}
+.toast{
+  display:none;margin:1rem auto 0;max-width:460px;padding:.85rem 1rem;border-radius:12px;
+  background:rgba(22,163,74,.18);border:1px solid rgba(134,239,172,.45);color:#bbf7d0;font-size:13.5px;
+}
+.toast.show{display:block}
+.note{background:#fff8f0;border:1px solid #f5d5b0;border-radius:12px;padding:1rem 1.2rem;font-size:13px;color:#7d4b10;margin-top:1.25rem}
+.note strong{color:#a05a0a}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s var(--ease),transform .65s var(--ease)}
+.reveal.visible{opacity:1;transform:none}
+@media print{
+  .topnav,#prog{display:none!important}
+  .hero,section{padding:1.5rem 0}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div id="prog"></div>
+
+<header class="topnav">
+  <div class="brand">
+    <div class="wordmark">
+      <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <path d="M16 3c5.2 0 9 3.8 9 8.6 0 5.4-6.2 11.2-9 13.4-2.8-2.2-9-8-9-13.4C7 6.8 10.8 3 16 3z" fill="#e3040a"/>
+        <circle cx="13.2" cy="10" r="2.2" fill="#fff" opacity=".35"/>
+        <path d="M16 25.2l-2.4 4.3h4.8L16 25.2z" fill="#111"/>
+      </svg>
+      <b>Balão Mágico<small>Brinquedos</small></b>
+    </div>
+    <span class="sep"></span>
+    <span class="v4">V4 <span>Company</span></span>
+  </div>
+  <nav>
+    <a href="#diagnostico">Cenário</a>
+    <a href="#solucao">Solução</a>
+    <a href="#escopo">Escopo</a>
+    <a href="#futuro">Depois</a>
+    <a href="#investimento">Investimento</a>
+    <a href="#proximos">Próximos Passos</a>
+  </nav>
+  <a href="#investimento" class="cta-mini">Ver investimento →</a>
+</header>
+
+<section class="hero" id="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="logo-plate">
+        <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path d="M16 3c5.2 0 9 3.8 9 8.6 0 5.4-6.2 11.2-9 13.4-2.8-2.2-9-8-9-13.4C7 6.8 10.8 3 16 3z" fill="#e3040a"/>
+          <circle cx="13.2" cy="10" r="2.2" fill="#fff" opacity=".35"/>
+          <path d="M16 25.2l-2.4 4.3h4.8L16 25.2z" fill="#111"/>
+        </svg>
+        <strong>Balão Mágico</strong>
+      </div>
+      <div class="hero-tag"><i></i> Proposta estratégica · Zap First Completo · 6 meses</div>
+      <h1>O atendimento consultivo da loja, organizado no WhatsApp — <em>sem robô</em>.</h1>
+      <p class="hero-sub">Cinco lojas, 25+ anos de curadoria humana e um time que já fecha presente no balcão. O que falta não é automação. É sistema: um funil visível, um processo por loja e escala para o vendedor — não no lugar dele.</p>
+      <a href="#diagnostico" class="hero-cta">
+        Ver o cenário
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <div>
+      <article class="hero-card">
+        <h3>Balão Mágico · leitura operacional</h3>
+        <div class="ops-list">
+          <div class="ops-item"><strong>5 lojas físicas</strong><span>3 em Sorocaba, 1 em Itu e 1 em Salto — 95% do faturamento no presencial</span></div>
+          <div class="ops-item"><strong>WhatsApp por loja</strong><span>1 aparelho e 1 número em cada unidade. Sem central, sem CRM, sem funil</span></div>
+          <div class="ops-item"><strong>150 a 250 vendas/mês no Zap</strong><span>Entrega no mesmo dia — o canal já vende. Falta registrar e escalar</span></div>
+          <div class="ops-item"><strong>André + Manu</strong><span>Decisão e operação no mesmo núcleo. O comercial ainda vive na cabeça de dois</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="diag-bg" id="diagnostico">
+  <div class="inner">
+    <div class="reveal">
+      <div class="slabel">Cenário atual e oportunidade</div>
+      <h2 class="stitle">A loja já sabe vender. O digital ainda improvisa.</h2>
+      <p class="sdesc">A Balão Mágico fatura R$ 1 milhão/mês com atendimento consultivo de seis etapas no físico. No WhatsApp, a mesma curadoria existe — só que descentralizada, sem dado e sem dono de funil. O potencial não é inventar um novo jeito de vender. É levar o jeito que já funciona para o canal que já atende.</p>
+    </div>
+    <div class="gap-grid">
+      <article class="gap-card reveal">
+        <div class="gap-num">01</div>
+        <span class="gap-tag tag-red">Gargalo comercial</span>
+        <h3>Cinco WhatsApps. Zero visão de rede.</h3>
+        <p>Cada loja opera o próprio número, no próprio aparelho. André e a Manu não veem etapa, origem nem motivo de perda. A venda acontece. O aprendizado some no chat.</p>
+      </article>
+      <article class="gap-card reveal">
+        <div class="gap-num">02</div>
+        <span class="gap-tag tag-red">Gargalo de gestão</span>
+        <h3>Sem CRM, sem funil, sem métrica.</h3>
+        <p>O ERP registra estoque e venda. Não registra MQL, SQL, proposta, ganho ou perda. Qualificação no WhatsApp é feeling da equipe — o mesmo conhecimento tácito que não escala quando o volume sobe.</p>
+      </article>
+      <article class="gap-card reveal">
+        <div class="gap-num">03</div>
+        <span class="gap-tag tag-red">Gargalo de conversão</span>
+        <h3>O cliente acha o perfil e foge para o marketplace.</h3>
+        <p>Linktree com WhatsApps dispersos, sem catálogo na frente. Quem quer presente agora compara na Amazon e no Mercado Livre antes do primeiro “oi”. A curadoria — o maior ativo da marca — não aparece a tempo.</p>
+      </article>
+      <article class="gap-card reveal">
+        <div class="gap-num">04</div>
+        <span class="gap-tag tag-red">Sinal do próprio André</span>
+        <h3>Ticket subiu. Número de clientes caiu.</h3>
+        <p>Em cinco anos a leitura interna é clara: vende-se mais por pessoa e atende-se menos gente. Sem origem e sem conversão por canal, não dá para reverter o volume com método — só com feeling.</p>
+      </article>
+    </div>
+    <div class="highlight-box reveal">
+      <strong>A oportunidade cabe em uma frase.</strong>
+      <p>Vocês já vendem 150 a 250 pedidos/mês no WhatsApp com entrega no mesmo dia — o diferencial que o marketplace não copia. Falta organizar esse canal para o time humano atender mais, melhor e com a mesma calidez da loja. Sem robô. Com gestão.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="solucao">
+  <div class="inner">
+    <div class="reveal">
+      <div class="slabel">A solução · Zap First Completo</div>
+      <h2 class="stitle">Organização, gestão e escala para o <em>vendedor humano</em>.</h2>
+      <p class="sdesc">André e a Manu já testaram automação de atendimento com IA e recusaram — com razão. Presente de criança pede curadoria por idade, interesse e orçamento. Isso não se terceiriza para um robô. O Zap First Completo entra como o sistema atrás do time, não como a voz da marca.</p>
+    </div>
+
+    <div class="pledge reveal">
+      <article class="pledge-card no">
+        <div class="k">O que isto não é</div>
+        <h3>Não é robô de atendimento.</h3>
+        <ul>
+          <li>Não substitui o vendedor no “oi” consultivo</li>
+          <li>Não escolhe o brinquedo no lugar da equipe</li>
+          <li>Não padroniza a marca com resposta fria e genérica</li>
+          <li>Não repete a experiência de automação que vocês já odiaram</li>
+        </ul>
+      </article>
+      <article class="pledge-card yes">
+        <div class="k">O que isto é</div>
+        <h3>Ferramenta para o time da loja.</h3>
+        <ul>
+          <li>Scripts das 6 etapas do balcão, no WhatsApp</li>
+          <li>CRM para André e a Manu verem o funil das 5 lojas</li>
+          <li>Fila organizada e roteamento para o vendedor certo</li>
+          <li>Catálogo + PIX para o cliente decidir sem sair do chat</li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="method-steps">
+      <article class="ms reveal">
+        <div class="mn">P1</div>
+        <span class="badge">Primeiro</span>
+        <h3>Produto</h3>
+        <p>Catálogo, PIX e oferta clara no WhatsApp. A curadoria da loja ganha vitrine — o cliente para de ir ao marketplace só para “ver o preço”.</p>
+      </article>
+      <article class="ms reveal">
+        <div class="mn">P2</div>
+        <span class="badge">Segundo</span>
+        <h3>Processo</h3>
+        <p>As 6 etapas do atendimento presencial viram fluxo: abordagem, categoria, detalhe, negociação, complementar e fidelização — com SLA e motivo de perda.</p>
+      </article>
+      <article class="ms reveal">
+        <div class="mn">P3</div>
+        <span class="badge">Terceiro</span>
+        <h3>Pessoas</h3>
+        <p>O time treina o playbook. Quem atende continua humano e caloroso. André e a Manu saem do celular de cada loja e passam a ver o mês no funil.</p>
+      </article>
+      <article class="ms reveal">
+        <div class="mn">G</div>
+        <span class="badge" style="background:var(--green)">Gestão</span>
+        <h3>Sistema</h3>
+        <p>CRM, réguas para o time reativar e organização da fila. Qualquer apoio de IA fica nos bastidores — nunca na conversa consultiva com o cliente.</p>
+      </article>
+    </div>
+    <div class="timeline-strip reveal">
+      <div class="tl-cell">
+        <div class="tl-mes">Mês 1</div>
+        <div class="tl-fase">Setup + Lead Gen</div>
+        <div class="tl-items">GMB, Instagram e LP/Site<br>WhatsApp Business das 5 lojas<br>Lead Gen começa no mês 1</div>
+      </div>
+      <div class="tl-cell">
+        <div class="tl-mes">Mês 2</div>
+        <div class="tl-fase">Produto &amp; Processo</div>
+        <div class="tl-items">Catálogo + PIX<br>Scripts das 6 etapas<br>Fluxo documentado</div>
+      </div>
+      <div class="tl-cell">
+        <div class="tl-mes">Mês 3</div>
+        <div class="tl-fase">Pessoas e gestão</div>
+        <div class="tl-items">Treinamento do time<br>Playbook no WhatsApp<br>CRM + réguas para o vendedor</div>
+      </div>
+      <div class="tl-cell">
+        <div class="tl-mes">Meses 4–5</div>
+        <div class="tl-fase">Mídia em cadência</div>
+        <div class="tl-items">Gestão Google + Meta<br>Criativos e copies<br>Otimização contínua</div>
+      </div>
+      <div class="tl-cell">
+        <div class="tl-mes">Mês 6</div>
+        <div class="tl-fase">Consolidação</div>
+        <div class="tl-items">Relatório de mídia<br>Diagnóstico de maturidade<br>Próximo passo da rede</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="escopo">
+  <div class="inner">
+    <div class="reveal">
+      <div class="slabel">Escopo · Plano Completo</div>
+      <h2 class="stitle">O que o Completo <em>instala</em> nas 5 lojas.</h2>
+      <p class="sdesc">Tudo do setup comercial no WhatsApp, mais mídia rodando desde o mês 1. Um único projeto de 6 meses — feito para o vendedor humano operar com método, e para André e a Manu enxergarem a rede.</p>
+    </div>
+    <div class="del-grid">
+      <article class="del-card reveal">
+        <div class="n">01 · Canal</div>
+        <h3>Quem busca presente encontra a loja — e cai no WhatsApp certo.</h3>
+        <div class="inc">Setup completo (GMB, Instagram, LP/Site)</div>
+        <div class="inc">WhatsApp Business estruturado nas 5 lojas</div>
+        <div class="inc">Catálogo de produtos + PIX integrado</div>
+      </article>
+      <article class="del-card reveal">
+        <div class="n">02 · Comercial</div>
+        <h3>O mesmo atendimento de 6 etapas, agora no chat.</h3>
+        <div class="inc">Scripts de atendimento (todas as etapas)</div>
+        <div class="inc">Fluxo comercial documentado</div>
+        <div class="inc">Treinamento do time</div>
+      </article>
+      <article class="del-card reveal">
+        <div class="n">03 · Gestão</div>
+        <h3>Toda conversa tem dono, etapa e próximo passo.</h3>
+        <div class="inc">CRM Kommo configurado</div>
+        <div class="inc">Réguas de recompra e reativação para o time</div>
+        <div class="inc">Organização de fila e roteamento ao vendedor humano</div>
+        <div class="inc">Relatório final + diagnóstico de maturidade</div>
+      </article>
+      <article class="del-card reveal">
+        <div class="n">04 · Aquisição</div>
+        <h3>Demanda entra com tese — o time já sabe o que fazer com ela.</h3>
+        <div class="inc">Estratégia de mídia paga (Google + Meta)</div>
+        <div class="inc">Criação de criativos (artes + copies)</div>
+        <div class="inc">Gestão das campanhas por 6 meses</div>
+        <div class="inc">Lead Gen começa no mês 1 — junto com o setup</div>
+        <div class="inc">Relatório mensal de performance da mídia</div>
+        <div class="inc">Orçamento de mídia separado e transparente</div>
+      </article>
+    </div>
+    <div class="note reveal">
+      <strong>Compromisso de atendimento:</strong> o cliente continua falando com gente da Balão Mágico. Scripts, CRM e organização de fila existem para o time atender mais — com a mesma calidez do balcão. Nenhuma venda consultiva é feita por robô.
+    </div>
+  </div>
+</section>
+
+<section class="future-bg" id="futuro">
+  <div class="inner">
+    <div class="reveal">
+      <div class="slabel" style="color:#ff6b6f">Cenário futuro</div>
+      <h2 class="stitle">Como a rede <em>opera</em> quando o ciclo fecha.</h2>
+      <p class="sdesc">Não é um robô no lugar do vendedor. É a curadoria da loja com visibilidade de rede — e demanda chegando no canal que já entrega no mesmo dia.</p>
+    </div>
+    <div class="future-compare reveal">
+      <article class="future-col now">
+        <div class="k">Hoje</div>
+        <ul>
+          <li>1 WhatsApp por loja, no aparelho da unidade</li>
+          <li>Sem CRM, sem etapa, sem motivo de perda</li>
+          <li>Linktree disperso — fuga para Amazon e Mercado Livre</li>
+          <li>Ticket sobe, número de clientes cai, sem série para agir</li>
+          <li>André e a Manu são marketing, financeiro e comercial</li>
+          <li>Mídia = impulsionar post em outubro e dezembro</li>
+        </ul>
+      </article>
+      <article class="future-col next">
+        <div class="k">Depois deste trabalho</div>
+        <ul>
+          <li>5 lojas no mesmo padrão, com dono de cada conversa</li>
+          <li>Funil visível: origem, etapa, conversão e perda</li>
+          <li>Catálogo + PIX no chat — a curadoria chega antes do marketplace</li>
+          <li>Régua de recompra na mão do time, não no feeling</li>
+          <li>André e a Manu veem o mês no CRM — não em 5 celulares</li>
+          <li>Google + Meta com tese, relatório e budget separado</li>
+        </ul>
+      </article>
+    </div>
+    <div class="future-outcomes">
+      <article class="outcome reveal">
+        <div class="n">01</div>
+        <h3>A loja captura, não disputa depois</h3>
+        <p>Quem busca presente em Sorocaba, Itu e Salto encontra GMB, Instagram e LP apontando para o WhatsApp da loja certa — com gente do outro lado.</p>
+      </article>
+      <article class="outcome reveal">
+        <div class="n">02</div>
+        <h3>O vendedor ganha método, não concorrente</h3>
+        <p>O mesmo roteiro de 6 etapas do balcão no chat. Mais atendimento, mesma calidez. A escala é do time — não de um bot.</p>
+      </article>
+      <article class="outcome reveal">
+        <div class="n">03</div>
+        <h3>A gestão sai da cabeça de dois</h3>
+        <p>As 5 lojas operam o mesmo padrão. André decide prioridade. A Manu acompanha o funil. O comercial deixa de ser artesanal.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="invest-bg" id="investimento">
+  <div class="inner">
+    <div class="reveal">
+      <div class="slabel">Investimento</div>
+      <h2 class="stitle">Cobrança por unidade. Cobertura das 5 lojas.</h2>
+      <p class="sdesc">O Zap First Completo tem preço por unidade. A Balão Mágico tem 5 lojas. Nesta proposta, as 5 unidades operacionais entram cobertas com cobrança de 2 unidades — para o investimento ficar explícito, sem inflar a rede.</p>
+    </div>
+
+    <div class="unit-math">
+      <article class="um reveal">
+        <div class="k">Preço por unidade</div>
+        <div class="v">12× R$ 3.916,00</div>
+        <div class="s">Zap First Completo · de R$ 57.000 · projeto de 6 meses no cartão</div>
+      </article>
+      <article class="um reveal">
+        <div class="k">Cobertura operacional</div>
+        <div class="v">5 lojas</div>
+        <div class="s">Sorocaba (3) · Itu (1) · Salto (1) — WhatsApp, time e visibilidade de rede</div>
+      </article>
+      <article class="um featured reveal">
+        <div class="k">Cobrança desta proposta</div>
+        <div class="v">2 unidades</div>
+        <div class="s">As 5 lojas entram. O investimento é o de 2 unidades — não o de 5.</div>
+      </article>
+    </div>
+
+    <table class="price-table reveal">
+      <thead>
+        <tr>
+          <th>Composição</th>
+          <th>Unidades cobradas</th>
+          <th>Tabela</th>
+          <th>Condição no cartão</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Zap First Completo · 1 unidade</td>
+          <td>1</td>
+          <td class="strike">de R$ 57.000</td>
+          <td class="now">12× R$ 3.916,00</td>
+        </tr>
+        <tr class="ref">
+          <td>Referência se cobrado 1:1 nas 5 lojas</td>
+          <td>5</td>
+          <td class="strike">de R$ 285.000</td>
+          <td class="strike">12× R$ 19.580,00</td>
+        </tr>
+        <tr class="deal">
+          <td>Esta proposta · 5 lojas cobertas <span class="tag-deal">condição</span></td>
+          <td>2</td>
+          <td class="strike">de R$ 114.000</td>
+          <td class="now">12× R$ 7.832,00</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="price-hero reveal">
+      <div class="ph-label">Investimento desta proposta · 2 unidades · 5 lojas cobertas</div>
+      <div class="ph-from">de R$ 114.000</div>
+      <div class="ph-val">12x de R$ 7.832<small>,00</small></div>
+      <div class="ph-sub">no cartão · Zap First Completo · projeto de 6 meses · cobrança de 2 unidades</div>
+      <div class="cover-pills">
+        <span>3 lojas em Sorocaba</span>
+        <span>1 loja em Itu</span>
+        <span>1 loja em Salto</span>
+        <span>Setup + CRM + mídia 6 meses</span>
+      </div>
+    </div>
+
+    <div class="note reveal">
+      <strong>Orçamento de mídia:</strong> o investimento nas plataformas (Google Ads e Meta Ads) é pago diretamente pela Balão Mágico, separado e transparente. A V4 desenha, cria, gere e reporta as campanhas ao longo dos 6 meses. Fora disto, o Completo já inclui estratégia, criativos, gestão e relatório mensal.
+    </div>
+  </div>
+</section>
+
+<section id="proximos">
+  <div class="inner">
+    <div class="reveal">
+      <div class="slabel">Próximos passos</div>
+      <h2 class="stitle">Começamos na semana que vem.</h2>
+      <p class="sdesc">Cada semana com 5 WhatsApps soltos é presente que o cliente fecha no marketplace. Cada conversa sem etapa é aprendizado que a rede não acumula. O time já sabe atender. Falta ligar o sistema.</p>
+    </div>
+    <div class="steps-list reveal">
+      <div class="step-item">
+        <div class="step-num">01</div>
+        <div class="step-body">
+          <strong>Proposta aprovada + contrato assinado</strong>
+          <span>Confirmação da condição de 2 unidades — 12× R$ 7.832,00 no cartão — cobrindo as 5 lojas, e assinatura do acordo de 6 meses.</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">02</div>
+        <div class="step-body">
+          <strong>Kick-off com André e a Manu</strong>
+          <span>Acessos, números de WhatsApp das 5 lojas, catálogo, time por unidade e regra de ouro: atendimento humano, consultivo e caloroso. Nenhum robô na ponta.</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">03</div>
+        <div class="step-body">
+          <strong>Sprint 1 · Setup + Lead Gen (mês 1)</strong>
+          <span>GMB, Instagram, LP/Site e WhatsApp Business. A geração de demanda começa junto com o setup — e cai no vendedor, não em um bot.</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">04</div>
+        <div class="step-body">
+          <strong>Sprint 2 · Processo e time (meses 2–3)</strong>
+          <span>Catálogo + PIX, scripts das 6 etapas, treinamento e CRM. O funil das 5 lojas fica visível para André e a Manu.</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">05</div>
+        <div class="step-body">
+          <strong>Cadência de mídia e consolidação (meses 4–6)</strong>
+          <span>Gestão Google + Meta, criativos, relatório mensal e diagnóstico de maturidade no encerramento do ciclo.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="footer-cta" id="aprovar">
+  <div class="logo-plate">
+    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <path d="M16 3c5.2 0 9 3.8 9 8.6 0 5.4-6.2 11.2-9 13.4-2.8-2.2-9-8-9-13.4C7 6.8 10.8 3 16 3z" fill="#e3040a"/>
+      <circle cx="13.2" cy="10" r="2.2" fill="#fff" opacity=".35"/>
+      <path d="M16 25.2l-2.4 4.3h4.8L16 25.2z" fill="#111"/>
+    </svg>
+    <strong>Balão Mágico</strong>
+  </div>
+  <h2>Pronto para organizar o comercial — sem perder o calor da loja?</h2>
+  <p>Cinco lojas cobertas. Cobrança de 2 unidades. O time continua humano. O sistema passa a existir.</p>
+  <div class="btn-row">
+    <button class="btn" type="button" id="btnAprovar">Aprovar Proposta</button>
+    <a class="btn ghost" href="mailto:?subject=Assinar%20contrato%20%E2%80%94%20Bal%C3%A3o%20M%C3%A1gico&body=Aprovo%20a%20proposta%20Zap%20First%20Completo%20na%20condi%C3%A7%C3%A3o%20de%202%20unidades%20(12x%20de%20R%24%207.832%2C00)%2C%20cobrindo%20as%205%20lojas%2C%20e%20quero%20seguir%20para%20assinatura%20do%20contrato.">Assinar Contrato</a>
+  </div>
+  <div class="toast" id="toast">Proposta marcada como aprovada neste dispositivo. Siga para a assinatura do contrato.</div>
+  <div class="footer-note">Proposta válida por 7 dias · V4 Company × Balão Mágico · confidencial · Zap First Completo · 5 lojas · cobrança de 2 unidades · 6 meses</div>
+</section>
+
+<script>
+const prog = document.getElementById('prog');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  prog.style.width = (h ? window.scrollY / h * 100 : 0) + '%';
+});
+const navLinks = document.querySelectorAll('.topnav nav a');
+const sections = Array.from(document.querySelectorAll('section[id]'));
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
+    }
+  });
+}, { rootMargin: '-40% 0px -55% 0px' });
+sections.forEach(s => obs.observe(s));
+const reveals = document.querySelectorAll('.reveal');
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: .12 });
+reveals.forEach(el => ro.observe(el));
+document.getElementById('btnAprovar').addEventListener('click', () => {
+  document.getElementById('toast').classList.add('show');
+});
+</script>
+</body>
+</html>
