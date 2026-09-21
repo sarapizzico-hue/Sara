@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Script de Pitch · PW4 Performance · Assessoria de Growth</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #140608;
+      --surf: rgba(255,255,255,.06);
+      --bd: rgba(255,255,255,.14);
+      --txt: #fff;
+      --mut: rgba(255,255,255,.78);
+      --red: #e11d24;
+      --soft: #ffd0d0;
+      --ok: #86efac;
+      --warn: #fde68a;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font: 15px/1.55 "Plus Jakarta Sans", system-ui, sans-serif;
+      color: var(--txt);
+      background:
+        radial-gradient(ellipse 70% 40% at 10% 0%, rgba(225,29,36,.35), transparent 55%),
+        radial-gradient(ellipse 50% 35% at 90% 10%, rgba(255,80,80,.18), transparent 50%),
+        linear-gradient(180deg, #1a090b 0%, #0d0405 100%);
+      padding-bottom: 64px;
+    }
+    h1, h2, h3 { font-family: Outfit, sans-serif; letter-spacing: -.02em; line-height: 1.15; }
+    .top {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(13,4,5,.88);
+      border-bottom: 1px solid var(--bd);
+      padding: 14px 20px;
+      display: flex; gap: 12px; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    }
+    .brand { font-weight: 800; font-size: 15px; }
+    .brand span { color: #fda4af; }
+    .pill {
+      font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      border: 1px solid var(--bd); border-radius: 999px; padding: 6px 12px; color: var(--mut);
+    }
+    .wrap { max-width: 920px; margin: 0 auto; padding: 28px 20px 0; }
+    .hero {
+      border: 1px solid var(--bd); border-radius: 20px; padding: 28px 24px;
+      background: linear-gradient(135deg, rgba(225,29,36,.2), rgba(255,255,255,.04));
+      margin-bottom: 18px;
+    }
+    .hero h1 { margin: 0 0 10px; font-size: clamp(26px, 4vw, 36px); }
+    .hero p { margin: 0; color: var(--mut); max-width: 760px; }
+    .nav {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 8px; margin: 18px 0 8px;
+    }
+    .nav a {
+      text-decoration: none; color: var(--mut); font-size: 12px; font-weight: 700;
+      border: 1px solid var(--bd); background: var(--surf); border-radius: 12px;
+      padding: 10px 12px; transition: .2s;
+    }
+    .nav a:hover { color: #fff; border-color: rgba(255,255,255,.35); background: rgba(225,29,36,.18); }
+    .nav a small { display: block; color: #fda4af; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 3px; }
+    .callout {
+      margin: 16px 0 22px; padding: 14px 16px; border-radius: 14px;
+      border: 1px solid rgba(253,230,138,.3); background: rgba(253,230,138,.08);
+      color: var(--warn); font-size: 14px;
+    }
+    .callout strong { color: #fef08a; }
+    .slide {
+      border: 1px solid var(--bd); border-radius: 18px; background: rgba(20,8,10,.72);
+      padding: 22px 20px; margin-bottom: 16px;
+    }
+    .slide-head {
+      display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+      align-items: flex-start; margin-bottom: 14px;
+      padding-bottom: 12px; border-bottom: 1px solid var(--bd);
+    }
+    .slide-num {
+      font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #fda4af;
+    }
+    .slide h2 { margin: 4px 0 0; font-size: clamp(20px, 3vw, 26px); }
+    .slide-ref {
+      font-size: 12px; color: var(--mut); border: 1px solid var(--bd);
+      border-radius: 999px; padding: 6px 10px; white-space: nowrap;
+    }
+    .objetivo {
+      display: inline-block; margin-bottom: 12px; font-size: 12px; font-weight: 700;
+      color: var(--ok); background: rgba(134,239,172,.1); border: 1px solid rgba(134,239,172,.25);
+      border-radius: 999px; padding: 5px 10px;
+    }
+    .fala {
+      background: rgba(255,255,255,.05); border-left: 3px solid var(--red);
+      border-radius: 0 12px 12px 0; padding: 14px 16px; margin: 0 0 14px;
+      color: #fff; font-size: 15px; line-height: 1.6;
+    }
+    .fala em { color: #ffe4e6; font-style: normal; font-weight: 700; }
+    .bloco { margin-bottom: 14px; }
+    .bloco h3 {
+      margin: 0 0 8px; font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: #fda4af;
+    }
+    .bloco ul { margin: 0; padding-left: 18px; color: var(--mut); }
+    .bloco li { margin-bottom: 6px; }
+    .bloco li strong { color: #fff; }
+    .roi-bridge {
+      margin-top: 12px; padding: 12px 14px; border-radius: 12px;
+      background: rgba(134,239,172,.08); border: 1px solid rgba(134,239,172,.22);
+      color: #bbf7d0; font-size: 14px;
+    }
+    .roi-bridge strong { color: var(--ok); }
+    .ask {
+      margin-top: 12px; padding: 12px 14px; border-radius: 12px;
+      background: rgba(255,255,255,.05); border: 1px dashed rgba(255,255,255,.25);
+      color: #ffe4e6; font-size: 14px;
+    }
+    .ask strong { color: #fff; }
+    .evitar {
+      margin-top: 12px; padding: 12px 14px; border-radius: 12px;
+      background: rgba(239,68,68,.08); border: 1px solid rgba(239,68,68,.25);
+      color: #fecaca; font-size: 14px;
+    }
+    .evitar strong { color: #fda4af; }
+    .footer-note {
+      margin-top: 8px; color: rgba(255,255,255,.55); font-size: 13px; text-align: center;
+    }
+    .links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .links a {
+      color: #fff; text-decoration: none; font-size: 12px; font-weight: 700;
+      background: rgba(225,29,36,.85); border-radius: 999px; padding: 8px 14px;
+    }
+    .links a.sec { background: transparent; border: 1px solid var(--bd); color: var(--mut); }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <div class="brand">Script de Pitch · <span>PW4 Performance × V4</span></div>
+    <div class="pill">Uso interno · Invictus · Growth</div>
+  </div>
+
+  <div class="wrap">
+    <header class="hero">
+      <h1>Roteiro de apresentação · Assessoria de Growth</h1>
+      <p>
+        Script por slide para conduzir o pitch com Thiago e Joeval. A linha mestra:
+        <strong>eles já fecham — falta topo de funil próprio</strong>. O custo da estrutura
+        é irrisório frente ao potencial de sair dos intermediários e construir canal direto.
+      </p>
+      <div class="links">
+        <a href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/sarapizzico-hue/Sara/cursor/mistermind-proposta-growth-64d9/proposta-mistermind-knowledge-growth.html" target="_blank" rel="noopener">Abrir deck do cliente</a>
+        <a class="sec" href="#s1">Ir para o roteiro ↓</a>
+      </div>
+    </header>
+
+    <div class="callout">
+      <strong>Linha mestra da call:</strong> “Vocês já convertem quando o lead chega. O jogo agora é construir o motor que coloca o decisor na mesa — sem depender de terceiro.”
+      Nunca vender “mais curso” ou “mais post”. Sempre vender <strong>aquisição própria + autoridade da marca PW4</strong>.
+      Social é ritmo de presença — <strong>não redefine o ROI</strong>.
+    </div>
+
+    <nav class="nav" aria-label="Slides">
+      <a href="#s1"><small>Slide 01</small>Capa</a>
+      <a href="#s2"><small>Slide 02</small>Diagnóstico</a>
+      <a href="#s3"><small>Slide 03</small>Tese</a>
+      <a href="#s4"><small>Slide 04</small>Growth</a>
+      <a href="#s5"><small>Slide 05</small>Plano de ação</a>
+      <a href="#s6"><small>Slide 06</small>Investimento</a>
+      <a href="#s7"><small>Slide 07</small>ROI + fechamento</a>
+    </nav>
+
+    <!-- 01 -->
+    <article class="slide" id="s1">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 01 · Capa</div>
+          <h2>Aquisição própria. Sem depender de terceiros.</h2>
+        </div>
+        <div class="slide-ref">~ 45–60s</div>
+      </div>
+      <div class="objetivo">Objetivo: abrir com respeito à autoridade deles e ancorar a tese</div>
+      <div class="fala">
+        “Thiago, Joeval — antes de qualquer número, quero alinhar o ponto central.
+        Vocês já têm o que a maioria das empresas de educação corporativa sonha ter:
+        <em>autoridade real, entrega premium e conversão altíssima quando o lead chega</em>.
+        O que trouxemos hoje não é ‘mais marketing’. É o motor para a PW4 Performance
+        falar direto com HRBP e decisor — sem depender de intermediário, com método,
+        no ritmo de uma operação de dois founders.”
+      </div>
+      <div class="bloco">
+        <h3>Enriquecimento / ancoragem</h3>
+        <ul>
+          <li><strong>Reconhecer:</strong> “O mercado já conhece o Thiago. O movimento agora é a marca PW4 virar ativo.”</li>
+          <li><strong>Nomear o produto:</strong> Assessoria de Growth — Account + GT + Copy + Design (e Social como horizonte).</li>
+          <li><strong>Promessa da call:</strong> sair com clareza do caminho, dos horizontes e da conta de retorno.</li>
+          <li><strong>Escopo em 3 tempos:</strong> Growth · dois horizontes · brand rebuild (LP, prova, CRM, tracking).</li>
+        </ul>
+      </div>
+      <div class="roi-bridge"><strong>Ponte ROI:</strong> “Toda projeção de crescimento assume um canal próprio. Hoje vamos mostrar como montar esse canal.”</div>
+      <div class="ask"><strong>Pergunta de abertura:</strong> “Só para calibrar: o que mais incomoda hoje — a dependência dos parceiros ou a sensação de não conseguir falar com o mercado sozinhos?”</div>
+    </article>
+
+    <!-- 02 -->
+    <article class="slide" id="s2">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 02 · Diagnóstico</div>
+          <h2>Vocês já fecham. Falta topo de funil.</h2>
+        </div>
+        <div class="slide-ref">~ 1,5–2 min</div>
+      </div>
+      <div class="objetivo">Objetivo: espelhar o SPICED e criar “foi vocês que disseram”</div>
+      <div class="fala">
+        “Quero espelhar o que a EE mostrou — sem drama, com precisão.
+        Faturamento na casa de R$ 85 mil/mês, cerca de R$ 1,2 milhão no ano.
+        Margem estimada alta porque a estrutura é enxuta. Conversão forte quando chega oportunidade.
+        E o número que muda o jogo: <em>95% da demanda ainda vem de intermediários</em>.
+        Ou seja: o problema não é produto. Não é reputação. Não é fechamento.
+        É topo de funil próprio. Autoridade offline que ainda não virou máquina de aquisição.”
+      </div>
+      <div class="bloco">
+        <h3>Como conduzir os dois lados</h3>
+        <ul>
+          <li><strong>O que já funciona:</strong> autoridade C-level, ICP claro (HRBP / T&amp;D), portfólio completo — “isso é o ativo.”</li>
+          <li><strong>O que ainda vaza:</strong> sem canal direto com decisor; presença só pessoal; sem CRM/tracking; prova social dispersa; trauma com SDR.</li>
+          <li><strong>Tom:</strong> validar, não acusar. “Vocês reconheceram isso com clareza — por isso a EE fez sentido.”</li>
+          <li><strong>Não falar:</strong> site pessoal do Thiago como “problema”. Falar em <em>canal e previsibilidade</em>.</li>
+        </ul>
+      </div>
+      <div class="roi-bridge"><strong>Ponte ROI:</strong> “Com conversão alta e margem alta, cada oportunidade direta vale muito. O gargalo é gerar a oportunidade — não fechar.”</div>
+      <div class="ask"><strong>Validação:</strong> “Se eu resumir em uma frase — vocês fecham quase tudo que chega, mas quase nada chega por canal próprio — isso está justo?”</div>
+      <div class="evitar"><strong>Evitar:</strong> prometer volume imediato ou falar em contratar SDR agora. Ainda não há base.</div>
+    </article>
+
+    <!-- 03 -->
+    <article class="slide" id="s3">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 03 · Tese</div>
+          <h2>Não é “mais curso”. É canal direto com decisor.</h2>
+        </div>
+        <div class="slide-ref">~ 2 min</div>
+      </div>
+      <div class="objetivo">Objetivo: vender a tese estratégica e o frame de ROI</div>
+      <div class="fala">
+        “Aqui está a tese. A Assessoria não existe para empurrar mais workshop no mercado.
+        Existe para consolidar a <em>PW4 Performance</em> como autoridade em educação corporativa
+        e gerar demanda própria — com margem e previsibilidade.
+        O problema central é estrutural: 95% via intermediários corta margem, controle do cliente
+        e previsibilidade. Entrar ‘solo’ nas empresas é o movimento do segundo semestre.
+        E o frame de retorno é simples: com margem alta e conversão forte, o ROI
+        <em>não depende de viralizar</em> — depende de poucas oportunidades diretas, sem comissão de terceiro.”
+      </div>
+      <div class="bloco">
+        <h3>Os 4 blocos do “o que resolve” (falar com leveza)</h3>
+        <ul>
+          <li><strong>Demanda própria:</strong> Google de intenção + awareness + LinkedIn founder-led como sistema.</li>
+          <li><strong>Autoridade da marca:</strong> LP, prova social e narrativa PW4 — autoridade vira ativo da empresa (não só do founder).</li>
+          <li><strong>Operação de dois soldados:</strong> priorização didática; Kommo e tracking sem sobrecarregar vocês.</li>
+          <li><strong>SDR no momento certo:</strong> “Já esbarraram em SDR que prometeu e não entregou. Aqui SDR só depois da base.”</li>
+        </ul>
+      </div>
+      <div class="roi-bridge"><strong>Ponte ROI:</strong> “O custo da estrutura é irrisório comparado ao potencial de internalizar aquisição. Não é despesa — é o preço de controlar o crescimento.”</div>
+      <div class="ask"><strong>Check:</strong> “Faz sentido pra vocês essa leitura — canal direto primeiro, SDR depois, marca como ativo?”</div>
+    </article>
+
+    <!-- 04 -->
+    <article class="slide" id="s4">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 04 · Assessoria de Growth</div>
+          <h2>Account + GT + Copy + Design</h2>
+        </div>
+        <div class="slide-ref">~ 2–2,5 min</div>
+      </div>
+      <div class="objetivo">Objetivo: maximizar valor percebido do núcleo operacional</div>
+      <div class="fala">
+        “Na prática, o que vocês contratam é um núcleo completo para atrair o ICP certo,
+        transformar autoridade em demanda e alimentar o comercial com oportunidades rastreáveis.
+        <em>Account</em> orquestra: GTM, ICP, oferta, ritmo — alinhado à capacidade real de dois founders.
+        <em>Gestor de tráfego</em> opera mídia com intenção B2B: Google Search na frente, awareness complementar, Meta no remarketing — rampa controlada porque CPL nesse segmento é alto.
+        <em>Copy + Design</em> traduzem a mensagem premium para HRBP e C-level em peças e LPs que convertem interesse em conversa.
+        E os fundamentos do plano de ação já entram: LP e identidade PW4, Kommo, tracking e prova social autorizada.”
+      </div>
+      <div class="bloco">
+        <h3>Como vender as rotinas (confiança operacional)</h3>
+        <ul>
+          <li><strong>Atendimento diário:</strong> “Vocês não ficam no escuro. Dias úteis com ritmo.”</li>
+          <li><strong>Check-in:</strong> “Olhamos o funil de verdade: lead → MQL → SQL → reunião → proposta → venda · CAC e motivo de perda.”</li>
+          <li><strong>Trimestral:</strong> “Budget, canais e — só quando fizer sentido — SDR.”</li>
+          <li><strong>Didática:</strong> “Sabemos que a maturidade de marketing ainda é baixa. A gente traduz, não jargona.”</li>
+        </ul>
+      </div>
+      <div class="roi-bridge"><strong>Ponte ROI:</strong> “Cada peça do núcleo existe para defender uma premissa do forecasting: lead certo, conversão crescente, CAC sob controle.”</div>
+      <div class="ask"><strong>Engajamento:</strong> “Entre esses fundamentos — LP, CRM, tracking, prova social — qual vocês sentem que está mais urgente destravar primeiro?”</div>
+    </article>
+
+    <!-- 05 -->
+    <article class="slide" id="s5">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 05 · Plano de ação</div>
+          <h2>Fundamentos primeiro. Mídia em seguida.</h2>
+        </div>
+        <div class="slide-ref">~ 2 min</div>
+      </div>
+      <div class="objetivo">Objetivo: proteger expectativa e vender disciplina (não pressa)</div>
+      <div class="fala">
+        “Empresa com zero base instalada não escala pulando etapa.
+        <em>LP, CRM e tracking entram antes de acelerar verba</em>, respeitando a rampa do forecasting.
+        Fase 1 — presença PW4: domínio, LP, identidade, e-mail, prova social autorizada.
+        Fase 2 — operação: Kommo com etapas e WhatsApp; GA4, GTM, pixels e UTMs <em>antes</em> da mídia.
+        Fase 3 — aquisição: Google Search + awareness; LinkedIn founder-led; Instagram como apoio.
+        Fase 4 — previsibilidade: monitorar o funil até a venda, CAC, tempo de resposta, motivo de perda.
+        SDR só com base pronta.”
+      </div>
+      <div class="bloco">
+        <h3>Dois reforços importantes</h3>
+        <ul>
+          <li><strong>Unidade econômica em paralelo:</strong> padronizar ticket, margem, horas e capacidade — senão a aquisição escala o caos.</li>
+          <li><strong>O que não fazemos no começo:</strong> SDR sem processo · mídia sem tracking · prometer volume antes de fundamento.</li>
+          <li><strong>Frase âncora:</strong> “Isso não é freio. É o que impede vocês de repetir a frustração anterior.”</li>
+        </ul>
+      </div>
+      <div class="roi-bridge"><strong>Ponte ROI:</strong> “O forecasting assume rampa. Se pulamos fundamento, a planilha fica bonita e a operação quebra. Disciplina protege o ROI.”</div>
+      <div class="ask"><strong>Micro-fechamento:</strong> “Entre acelerar mídia agora ou instalar LP + CRM + tracking primeiro, onde vocês preferem começar — sabendo que a segunda opção é a que faz a primeira funcionar?”</div>
+      <div class="evitar"><strong>Evitar:</strong> soar como “vai demorar para ter resultado”. Soar como “vamos construir o chão para o resultado aparecer de verdade”.</div>
+    </article>
+
+    <!-- 06 -->
+    <article class="slide" id="s6">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 06 · Investimento</div>
+          <h2>Escolha o ritmo. Não o resultado.</h2>
+        </div>
+        <div class="slide-ref">~ 2–2,5 min</div>
+      </div>
+      <div class="objetivo">Objetivo: apresentar preço sem medo e separar Social da tese de ROI</div>
+      <div class="fala">
+        “Agora a condição comercial — clara e sem enrolação.
+        Condição especial no cartão. Contrato em 12 meses ou 6 meses.
+        E o ponto mais importante desta tela: <em>Social muda a presença, não a lógica de retorno da aquisição</em>.
+        Horizonte A — Growth sem Social: motor de aquisição, Account + GT + Copy + Design.
+        De 12× R$ 11.223,40 para <em>12× R$ 6.172,87</em>. Em 6 meses: 6× R$ 8.856,38.
+        Horizonte B — Growth com Social: tudo do A + operação contínua de LinkedIn e Instagram da marca.
+        De R$ 17.774,24 para <em>12× R$ 8.563,23</em>. Em 6 meses: 6× R$ 8.996,98.
+        O B é o que recomendamos para o brand rebuild da PW4 — mas o A também entrega o motor.”
+      </div>
+      <div class="bloco">
+        <h3>Como conduzir a escolha (sem desvalorizar o A)</h3>
+        <ul>
+          <li><strong>Narrativa:</strong> “São dois ritmos de presença — não dois resultados.”</li>
+          <li><strong>Com Social:</strong> acelera autoridade, prova social viva, menos atrito no remarketing.</li>
+          <li><strong>Sem Social:</strong> founders operam a presença; o motor de aquisição continua intacto.</li>
+          <li><strong>Ancoragem:</strong> sempre mostrar o “De” antes da condição — depois o parcelamento no cartão.</li>
+          <li><strong>12 vs 6:</strong> “12 meses é a melhor condição e casa com o horizonte do forecasting.”</li>
+        </ul>
+      </div>
+      <div class="roi-bridge"><strong>Ponte ROI:</strong> “No próximo slide eu mostro a conta. Aqui só quero que fique claro: escolher A ou B não é escolher se haverá retorno — é escolher o ritmo de construção da marca.”</div>
+      <div class="ask"><strong>Pergunta:</strong> “Olhando só operação — vocês preferem a V4 operando a presença da PW4, ou querem autonomia nas redes e o foco 100% no motor de aquisição?”</div>
+      <div class="evitar"><strong>Evitar:</strong> dizer que sem Social “não tem resultado”. Isso quebra a tese da própria proposta.</div>
+    </article>
+
+    <!-- 07 -->
+    <article class="slide" id="s7">
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide 07 · ROI + fechamento</div>
+          <h2>Equilíbrio no 6º–7º mês. ROI do projeto ~4,06.</h2>
+        </div>
+        <div class="slide-ref">~ 2,5–3 min</div>
+      </div>
+      <div class="objetivo">Objetivo: fechar com projeção + CTA de decisão (não deixar em “vamos pensar”)</div>
+      <div class="fala">
+        “Fecha a lógica. Cenário de referência alinhado ao horizonte com Social — 12× R$ 8.563,23 —
+        ticket médio R$ 15 mil, margem estimada ~70%.
+        Fee mais mídia de cruzeiro fica na casa de ~R$ 13.500/mês de custo fixo típico.
+        O funil sobe: de 17 leads no mês 1 para 74 no horizonte; de zero cliente novo no primeiro mês
+        para até 6 por mês no final da rampa.
+        Mês líquido positivo em janeiro — mês 6. Acumulado positivo em fevereiro.
+        ROI do projeto na casa de <em>4,06</em>, com cerca de R$ 219 mil líquidos no horizonte do forecasting.
+        Isso não é garantia. É o mapa. E o mapa só funciona se a base for instalada.”
+      </div>
+      <div class="bloco">
+        <h3>Narrativa de fechamento (Account Planning)</h3>
+        <ul>
+          <li><strong>Frame:</strong> “O custo da estruturação é irrisório vs o potencial de retorno.”</li>
+          <li><strong>Anti-gaveta:</strong> “Vocês passaram semanas com o time, validaram a narrativa, estão trocando de nome para PW4. Não faz sentido guardar isso na gaveta.”</li>
+          <li><strong>Objeção preço:</strong> “Não é se cabe como despesa — é se compensa frente a continuar 95% dependente de terceiro.”</li>
+          <li><strong>Objeção SDR:</strong> “Não estamos pedindo SDR agora. Estamos pedindo a base que faz SDR funcionar depois.”</li>
+          <li><strong>CTA:</strong> escolher A ou B · 12 meses no cartão · formalizar.</li>
+        </ul>
+      </div>
+      <div class="roi-bridge"><strong>Ponte final:</strong> “Sem Social a fee cai para 12× R$ 6.172,87 — a tese de aquisição permanece. Com Social vocês aceleram a marca. Em ambos, o jogo é o mesmo: canal próprio.”</div>
+      <div class="ask"><strong>Fechamento:</strong> “Para a gente avançar: horizonte A ou B? E preferem trancar em 12 meses no cartão hoje, ou precisam alinhar só a forma de pagamento até quando — me digam a data.”</div>
+      <div class="evitar"><strong>Evitar:</strong> “ficam à vontade para pensar”. Trocar por: “qual informação falta para decidirem até [data]?” Meta do playbook: Aceito no pitch ou devolutiva ≤ 72h.</div>
+    </article>
+
+    <div class="callout">
+      <strong>Cheat sheet de objeções</strong><br>
+      • <em>“Está caro”</em> → “Frente a 95% via terceiro e margem alta, o custo da máquina é pequeno. Quer olhar o A (12× 6.172) ou o B (12× 8.563)?”<br>
+      • <em>“Não temos tempo”</em> → “Por isso a operação é didática e externa. Vocês decidem e validam — a V4 opera.”<br>
+      • <em>“SDR já nos frustrou”</em> → “Concordo. SDR sem base é risco. Aqui a sequência protege vocês.”<br>
+      • <em>“Preciso do Social?”</em> → “Não para a tese de ROI. Sim se quiserem a marca PW4 rodando com cadência.”
+    </div>
+
+    <p class="footer-note">
+      Script interno · PW4 Performance / Knowledge @ Business × V4 · Assessoria de Growth · Pitch 29/07
+    </p>
+  </div>
+</body>
+</html>
