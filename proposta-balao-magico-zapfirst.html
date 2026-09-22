@@ -59,7 +59,7 @@ section{width:100%;padding:5rem 1.5rem;scroll-margin-top:76px}
 .slabel{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:.5rem}
 .stitle{font-size:clamp(26px,4vw,36px);font-weight:800;color:var(--ink);margin-bottom:.75rem}
 .stitle em{font-style:normal;color:var(--red)}
-.sdesc{font-size:16px;color:var(--muted);max-width:680px;line-height:1.65}
+.sdesc{font-size:16px;color:var(--muted);max-width:720px;line-height:1.65}
 .divider{height:1px;background:var(--line);width:100%;max-width:960px;margin:0 auto}
 
 .hero{
@@ -123,7 +123,6 @@ section{width:100%;padding:5rem 1.5rem;scroll-margin-top:76px}
 .gap-num{font-family:Sora,sans-serif;font-size:28px;font-weight:900;color:var(--line);margin-bottom:.5rem}
 .gap-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:.2rem .6rem;border-radius:6px;margin-bottom:.6rem}
 .tag-red{background:#fdeaea;color:var(--red)}
-.tag-green{background:#dcfce7;color:#15803d}
 .gap-card h3{font-size:15px;font-weight:700;margin-bottom:.4rem}
 .gap-card p{font-size:13px;color:var(--muted);line-height:1.55}
 .highlight-box{
@@ -133,20 +132,15 @@ section{width:100%;padding:5rem 1.5rem;scroll-margin-top:76px}
 .highlight-box strong{color:#fff;font-size:18px;font-family:Sora,sans-serif;display:block;margin-bottom:.25rem}
 .highlight-box p{color:rgba(255,255,255,.88);font-size:15px;line-height:1.6}
 
-.pledge{
-  display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.75rem;
+.benefit-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.75rem}
+@media(max-width:700px){.benefit-grid{grid-template-columns:1fr}}
+.benefit{
+  background:#fff;border:1px solid var(--line);border-radius:18px;padding:1.4rem 1.5rem;
+  box-shadow:0 12px 40px rgba(0,0,0,.04);
 }
-@media(max-width:700px){.pledge{grid-template-columns:1fr}}
-.pledge-card{border-radius:18px;padding:1.45rem 1.5rem}
-.pledge-card.no{background:#fff;border:1px solid #fecaca}
-.pledge-card.yes{background:var(--green-bg);border:1px solid #86efac}
-.pledge-card .k{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.55rem}
-.pledge-card.no .k{color:var(--red)}
-.pledge-card.yes .k{color:#15803d}
-.pledge-card h3{font-size:16px;font-weight:800;margin-bottom:.5rem}
-.pledge-card li{list-style:none;font-size:13.5px;color:var(--muted);padding:.28rem 0;padding-left:1.1rem;position:relative;line-height:1.45}
-.pledge-card.no li::before{content:"✕";position:absolute;left:0;color:var(--red);font-weight:800;font-size:11px}
-.pledge-card.yes li::before{content:"✓";position:absolute;left:0;color:#15803d;font-weight:800;font-size:11px}
+.benefit .n{font-family:Sora,sans-serif;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:.45rem}
+.benefit h3{font-size:16px;font-weight:800;margin-bottom:.4rem}
+.benefit p{font-size:13.5px;color:var(--muted);line-height:1.55}
 
 .method-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2rem}
 @media(max-width:760px){.method-steps{grid-template-columns:1fr 1fr}}
@@ -180,6 +174,7 @@ section{width:100%;padding:5rem 1.5rem;scroll-margin-top:76px}
   background:#fff;border:1px solid var(--line);border-radius:20px;padding:1.45rem 1.5rem;
   box-shadow:0 12px 40px rgba(0,0,0,.05);
 }
+.del-card.wide{grid-column:1 / -1}
 .del-card .n{
   font-family:Sora,sans-serif;font-size:12px;font-weight:800;letter-spacing:.14em;
   text-transform:uppercase;color:var(--red);margin-bottom:.55rem;
@@ -214,18 +209,20 @@ section{width:100%;padding:5rem 1.5rem;scroll-margin-top:76px}
 .outcome p{font-size:13px;color:rgba(255,255,255,.62);line-height:1.5}
 
 .invest-bg{background:var(--soft)}
-.unit-math{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem;margin-top:1.75rem;
+.price-options{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.75rem}
+@media(max-width:700px){.price-options{grid-template-columns:1fr}}
+.po{
+  background:#fff;border:1px solid var(--line);border-radius:22px;padding:1.6rem 1.7rem;
 }
-@media(max-width:760px){.unit-math{grid-template-columns:1fr}}
-.um{
-  background:#fff;border:1px solid var(--line);border-radius:18px;padding:1.25rem 1.35rem;
+.po.featured{border-color:var(--red);box-shadow:0 12px 36px rgba(227,4,10,.12);background:#fff8f8}
+.po .k{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.45rem}
+.po .tag{
+  display:inline-block;background:var(--red);color:#fff;font-size:9px;font-weight:800;
+  letter-spacing:.08em;text-transform:uppercase;padding:.18rem .5rem;border-radius:6px;margin-left:.4rem;
 }
-.um .k{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.35rem}
-.um .v{font-family:Sora,sans-serif;font-size:22px;font-weight:800}
-.um .s{font-size:12px;color:var(--muted);margin-top:.2rem;line-height:1.45}
-.um.featured{border-color:var(--red);box-shadow:0 10px 28px rgba(227,4,10,.12)}
-.um.featured .v{color:var(--red)}
+.po .v{font-family:Sora,sans-serif;font-size:clamp(28px,4vw,40px);font-weight:900;letter-spacing:-.03em;line-height:1;margin:.35rem 0 .45rem}
+.po.featured .v{color:var(--red)}
+.po .s{font-size:13px;color:var(--muted);line-height:1.5}
 
 .price-table{width:100%;border-collapse:separate;border-spacing:0;margin-top:1.25rem;background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden}
 .price-table th{
@@ -234,35 +231,9 @@ section{width:100%;padding:5rem 1.5rem;scroll-margin-top:76px}
 }
 .price-table td{padding:.95rem 1.15rem;font-size:14px;border-bottom:1px solid var(--line);vertical-align:middle}
 .price-table tr:last-child td{border-bottom:0}
-.price-table .strike{color:var(--muted);text-decoration:line-through}
 .price-table .now{font-family:Sora,sans-serif;font-weight:800;font-size:16px}
-.price-table tr.ref td{color:var(--muted);background:#fcfcfb}
 .price-table tr.deal td{background:#fff5f5}
-.price-table tr.deal td:first-child{font-weight:800;color:var(--ink)}
-.price-table .tag-deal{
-  display:inline-block;background:var(--red);color:#fff;font-size:9px;font-weight:800;
-  letter-spacing:.08em;text-transform:uppercase;padding:.15rem .45rem;border-radius:6px;margin-left:.4rem;
-}
-@media(max-width:640px){
-  .price-table{display:block;overflow-x:auto}
-  .price-table th,.price-table td{white-space:nowrap}
-}
-
-.price-hero{
-  background:linear-gradient(135deg,#1a1a1a 0%,#2b0606 100%);
-  border-radius:24px;padding:2.5rem;margin-top:1.25rem;
-}
-.price-hero .ph-label{font-size:12px;font-weight:700;color:rgba(255,255,255,.55);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.35rem}
-.price-hero .ph-from{font-size:18px;color:rgba(255,255,255,.4);text-decoration:line-through;margin-bottom:.2rem}
-.price-hero .ph-val{font-family:Sora,sans-serif;font-size:clamp(36px,6vw,58px);font-weight:900;color:#fff;letter-spacing:-.04em;line-height:1}
-.price-hero .ph-val small{font-size:.42em;font-weight:800;letter-spacing:0}
-.price-hero .ph-sub{font-size:14px;color:rgba(255,255,255,.55);margin-top:.55rem}
-
-.cover-pills{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.1rem}
-.cover-pills span{
-  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);
-  color:#fff;font-size:12px;font-weight:600;padding:.35rem .7rem;border-radius:999px;
-}
+.price-table tr.deal td:first-child{font-weight:800}
 
 .steps-list{display:flex;flex-direction:column;margin-top:1.75rem;position:relative}
 .steps-list::before{
@@ -354,8 +325,8 @@ section{width:100%;padding:5rem 1.5rem;scroll-margin-top:76px}
         <strong>Balão Mágico</strong>
       </div>
       <div class="hero-tag"><i></i> Proposta estratégica · Zap First Completo · 6 meses</div>
-      <h1>O atendimento consultivo da loja, organizado no WhatsApp — <em>sem robô</em>.</h1>
-      <p class="hero-sub">Cinco lojas, 25+ anos de curadoria humana e um time que já fecha presente no balcão. O que falta não é automação. É sistema: um funil visível, um processo por loja e escala para o vendedor — não no lugar dele.</p>
+      <h1>Infraestrutura comercial para o WhatsApp da <em>Balão Mágico</em>.</h1>
+      <p class="hero-sub">Reputação consolidada no varejo físico. O próximo passo é unificar o digital: CRM, funil e processo para o time atender, mensurar e converter com previsibilidade.</p>
       <a href="#diagnostico" class="hero-cta">
         Ver o cenário
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -365,10 +336,10 @@ section{width:100%;padding:5rem 1.5rem;scroll-margin-top:76px}
       <article class="hero-card">
         <h3>Balão Mágico · leitura operacional</h3>
         <div class="ops-list">
-          <div class="ops-item"><strong>5 lojas físicas</strong><span>3 em Sorocaba, 1 em Itu e 1 em Salto — 95% do faturamento no presencial</span></div>
-          <div class="ops-item"><strong>WhatsApp por loja</strong><span>1 aparelho e 1 número em cada unidade. Sem central, sem CRM, sem funil</span></div>
-          <div class="ops-item"><strong>150 a 250 vendas/mês no Zap</strong><span>Entrega no mesmo dia — o canal já vende. Falta registrar e escalar</span></div>
-          <div class="ops-item"><strong>André + Manu</strong><span>Decisão e operação no mesmo núcleo. O comercial ainda vive na cabeça de dois</span></div>
+          <div class="ops-item"><strong>Reputação no varejo físico</strong><span>Tráfego de clientes consolidado ao longo de décadas</span></div>
+          <div class="ops-item"><strong>WhatsApp descentralizado</strong><span>Um número por loja, operação baseada no conhecimento tácito da equipe</span></div>
+          <div class="ops-item"><strong>Sem CRM unificado</strong><span>Não há funil de vendas para mensurar conversões e organizar o relacionamento</span></div>
+          <div class="ops-item"><strong>Rede de 5 lojas</strong><span>Sorocaba, Itu e Salto — o escopo tecnológico se aplica à rede</span></div>
         </div>
       </article>
     </div>
@@ -378,39 +349,39 @@ section{width:100%;padding:5rem 1.5rem;scroll-margin-top:76px}
 <section class="diag-bg" id="diagnostico">
   <div class="inner">
     <div class="reveal">
-      <div class="slabel">Cenário atual e oportunidade</div>
-      <h2 class="stitle">A loja já sabe vender. O digital ainda improvisa.</h2>
-      <p class="sdesc">A Balão Mágico fatura R$ 1 milhão/mês com atendimento consultivo de seis etapas no físico. No WhatsApp, a mesma curadoria existe — só que descentralizada, sem dado e sem dono de funil. O potencial não é inventar um novo jeito de vender. É levar o jeito que já funciona para o canal que já atende.</p>
+      <div class="slabel">Cenário atual</div>
+      <h2 class="stitle">A marca já construiu reputação. O digital ainda não tem sistema.</h2>
+      <p class="sdesc">A marca construiu uma forte reputação no varejo físico e possui um tráfego de clientes consolidado ao longo de décadas. Contudo, a operação digital via WhatsApp ainda atua de forma descentralizada, baseada no conhecimento tácito da equipe e sem um CRM ou funil de vendas unificado para mensurar conversões e organizar o relacionamento com o cliente.</p>
     </div>
     <div class="gap-grid">
       <article class="gap-card reveal">
         <div class="gap-num">01</div>
-        <span class="gap-tag tag-red">Gargalo comercial</span>
-        <h3>Cinco WhatsApps. Zero visão de rede.</h3>
-        <p>Cada loja opera o próprio número, no próprio aparelho. André e a Manu não veem etapa, origem nem motivo de perda. A venda acontece. O aprendizado some no chat.</p>
+        <span class="gap-tag tag-red">Operação</span>
+        <h3>WhatsApp descentralizado</h3>
+        <p>Cada loja opera o próprio número. O atendimento acontece, mas o relacionamento não fica registrado em um sistema único.</p>
       </article>
       <article class="gap-card reveal">
         <div class="gap-num">02</div>
-        <span class="gap-tag tag-red">Gargalo de gestão</span>
-        <h3>Sem CRM, sem funil, sem métrica.</h3>
-        <p>O ERP registra estoque e venda. Não registra MQL, SQL, proposta, ganho ou perda. Qualificação no WhatsApp é feeling da equipe — o mesmo conhecimento tácito que não escala quando o volume sobe.</p>
+        <span class="gap-tag tag-red">Gestão</span>
+        <h3>Sem CRM e sem funil</h3>
+        <p>Não há etapas claras da captação ao fechamento. Conversão, follow-up e histórico do cliente dependem da memória da equipe.</p>
       </article>
       <article class="gap-card reveal">
         <div class="gap-num">03</div>
-        <span class="gap-tag tag-red">Gargalo de conversão</span>
-        <h3>O cliente acha o perfil e foge para o marketplace.</h3>
-        <p>Linktree com WhatsApps dispersos, sem catálogo na frente. Quem quer presente agora compara na Amazon e no Mercado Livre antes do primeiro “oi”. A curadoria — o maior ativo da marca — não aparece a tempo.</p>
+        <span class="gap-tag tag-red">Mensuração</span>
+        <h3>Conhecimento tácito, sem dado</h3>
+        <p>A operação funciona. Falta visibilidade: origem do lead, etapa da negociação e motivo de perda não entram em relatório.</p>
       </article>
       <article class="gap-card reveal">
         <div class="gap-num">04</div>
-        <span class="gap-tag tag-red">Sinal do próprio André</span>
-        <h3>Ticket subiu. Número de clientes caiu.</h3>
-        <p>Em cinco anos a leitura interna é clara: vende-se mais por pessoa e atende-se menos gente. Sem origem e sem conversão por canal, não dá para reverter o volume com método — só com feeling.</p>
+        <span class="gap-tag tag-red">Relacionamento</span>
+        <h3>Jornada sem dono único</h3>
+        <p>Sem padronização, cada conversa segue um ritmo diferente. O time perde velocidade para categorizar, responder e avançar a venda.</p>
       </article>
     </div>
     <div class="highlight-box reveal">
-      <strong>A oportunidade cabe em uma frase.</strong>
-      <p>Vocês já vendem 150 a 250 pedidos/mês no WhatsApp com entrega no mesmo dia — o diferencial que o marketplace não copia. Falta organizar esse canal para o time humano atender mais, melhor e com a mesma calidez da loja. Sem robô. Com gestão.</p>
+      <strong>Oportunidade</strong>
+      <p>Estruturar um processo de vendas digital unificado que potencialize o atendimento do time, garantindo controle, mensuração de resultados e uma experiência de compra consultiva e de alto valor.</p>
     </div>
   </div>
 </section>
@@ -421,74 +392,72 @@ section{width:100%;padding:5rem 1.5rem;scroll-margin-top:76px}
   <div class="inner">
     <div class="reveal">
       <div class="slabel">A solução · Zap First Completo</div>
-      <h2 class="stitle">Organização, gestão e escala para o <em>vendedor humano</em>.</h2>
-      <p class="sdesc">André e a Manu já testaram automação de atendimento com IA e recusaram — com razão. Presente de criança pede curadoria por idade, interesse e orçamento. Isso não se terceiriza para um robô. O Zap First Completo entra como o sistema atrás do time, não como a voz da marca.</p>
+      <h2 class="stitle">Infraestrutura comercial para o <em>ambiente digital</em>.</h2>
+      <p class="sdesc">Nossa solução implementa uma infraestrutura comercial robusta para o ambiente digital. Através da implementação de um sistema de CRM e estruturação de funis de vendas, capacitamos a operação para atender, categorizar e converter leads com máxima eficiência.</p>
     </div>
-
-    <div class="pledge reveal">
-      <article class="pledge-card no">
-        <div class="k">O que isto não é</div>
-        <h3>Não é robô de atendimento.</h3>
-        <ul>
-          <li>Não substitui o vendedor no “oi” consultivo</li>
-          <li>Não escolhe o brinquedo no lugar da equipe</li>
-          <li>Não padroniza a marca com resposta fria e genérica</li>
-          <li>Não repete a experiência de automação que vocês já odiaram</li>
-        </ul>
+    <div class="benefit-grid">
+      <article class="benefit reveal">
+        <div class="n">01 · CRM</div>
+        <h3>Histórico completo do cliente</h3>
+        <p>A equipe de vendas tem total clareza do relacionamento: conversas, etapas e próximo passo em um único sistema.</p>
       </article>
-      <article class="pledge-card yes">
-        <div class="k">O que isto é</div>
-        <h3>Ferramenta para o time da loja.</h3>
-        <ul>
-          <li>Scripts das 6 etapas do balcão, no WhatsApp</li>
-          <li>CRM para André e a Manu verem o funil das 5 lojas</li>
-          <li>Fila organizada e roteamento para o vendedor certo</li>
-          <li>Catálogo + PIX para o cliente decidir sem sair do chat</li>
-        </ul>
+      <article class="benefit reveal">
+        <div class="n">02 · Funil</div>
+        <h3>Controle exato de follow-ups</h3>
+        <p>Cada oportunidade tem dono, prazo e rotina. Negociações deixam de depender de lembrete informal.</p>
+      </article>
+      <article class="benefit reveal">
+        <div class="n">03 · Gestão</div>
+        <h3>Gestão ativa das negociações</h3>
+        <p>Ferramentas de gestão de relacionamento para categorizar leads, avançar etapas e não perder oportunidade no caminho.</p>
+      </article>
+      <article class="benefit reveal">
+        <div class="n">04 · Resultado</div>
+        <h3>Ticket médio e previsibilidade</h3>
+        <p>Jornada fluida, mensuração de conversão e base organizada — a operação passa a prever, não só a reagir.</p>
       </article>
     </div>
-
     <div class="method-steps">
       <article class="ms reveal">
-        <div class="mn">P1</div>
-        <span class="badge">Primeiro</span>
-        <h3>Produto</h3>
-        <p>Catálogo, PIX e oferta clara no WhatsApp. A curadoria da loja ganha vitrine — o cliente para de ir ao marketplace só para “ver o preço”.</p>
+        <div class="mn">01</div>
+        <span class="badge">Sistema</span>
+        <h3>CRM</h3>
+        <p>Leads, clientes e oportunidades no mesmo lugar. A operação deixa o chat solto e passa a ter registro.</p>
       </article>
       <article class="ms reveal">
-        <div class="mn">P2</div>
-        <span class="badge">Segundo</span>
-        <h3>Processo</h3>
-        <p>As 6 etapas do atendimento presencial viram fluxo: abordagem, categoria, detalhe, negociação, complementar e fidelização — com SLA e motivo de perda.</p>
+        <div class="mn">02</div>
+        <span class="badge">Processo</span>
+        <h3>Funil</h3>
+        <p>Etapas claras da captação ao fechamento. Cada conversa entra, avança e se encerra com motivo registrado.</p>
       </article>
       <article class="ms reveal">
-        <div class="mn">P3</div>
-        <span class="badge">Terceiro</span>
-        <h3>Pessoas</h3>
-        <p>O time treina o playbook. Quem atende continua humano e caloroso. André e a Manu saem do celular de cada loja e passam a ver o mês no funil.</p>
+        <div class="mn">03</div>
+        <span class="badge">Rotina</span>
+        <h3>Scripts e CVBA</h3>
+        <p>Padronização comercial: argumentação, rotinas integradas e fluxo de informação para agilizar a resposta do time.</p>
       </article>
       <article class="ms reveal">
-        <div class="mn">G</div>
-        <span class="badge" style="background:var(--green)">Gestão</span>
-        <h3>Sistema</h3>
-        <p>CRM, réguas para o time reativar e organização da fila. Qualquer apoio de IA fica nos bastidores — nunca na conversa consultiva com o cliente.</p>
+        <div class="mn">04</div>
+        <span class="badge">Time</span>
+        <h3>Capacitação</h3>
+        <p>Treinamento nas novas ferramentas e nas práticas de vendas — a equipe opera o sistema com clareza.</p>
       </article>
     </div>
     <div class="timeline-strip reveal">
       <div class="tl-cell">
         <div class="tl-mes">Mês 1</div>
         <div class="tl-fase">Setup + Lead Gen</div>
-        <div class="tl-items">GMB, Instagram e LP/Site<br>WhatsApp Business das 5 lojas<br>Lead Gen começa no mês 1</div>
+        <div class="tl-items">GMB, Instagram e LP/Site<br>WhatsApp Business<br>Lead Gen começa no mês 1</div>
       </div>
       <div class="tl-cell">
         <div class="tl-mes">Mês 2</div>
         <div class="tl-fase">Produto &amp; Processo</div>
-        <div class="tl-items">Catálogo + PIX<br>Scripts das 6 etapas<br>Fluxo documentado</div>
+        <div class="tl-items">Catálogo + PIX<br>Scripts e CVBA<br>Funil documentado</div>
       </div>
       <div class="tl-cell">
         <div class="tl-mes">Mês 3</div>
-        <div class="tl-fase">Pessoas e gestão</div>
-        <div class="tl-items">Treinamento do time<br>Playbook no WhatsApp<br>CRM + réguas para o vendedor</div>
+        <div class="tl-fase">CRM e capacitação</div>
+        <div class="tl-items">CRM centralizado<br>Treinamento do time<br>Rotinas de follow-up</div>
       </div>
       <div class="tl-cell">
         <div class="tl-mes">Meses 4–5</div>
@@ -498,7 +467,7 @@ section{width:100%;padding:5rem 1.5rem;scroll-margin-top:76px}
       <div class="tl-cell">
         <div class="tl-mes">Mês 6</div>
         <div class="tl-fase">Consolidação</div>
-        <div class="tl-items">Relatório de mídia<br>Diagnóstico de maturidade<br>Próximo passo da rede</div>
+        <div class="tl-items">Relatório de mídia<br>Diagnóstico de maturidade<br>Próximo passo da operação</div>
       </div>
     </div>
   </div>
@@ -510,45 +479,47 @@ section{width:100%;padding:5rem 1.5rem;scroll-margin-top:76px}
   <div class="inner">
     <div class="reveal">
       <div class="slabel">Escopo · Plano Completo</div>
-      <h2 class="stitle">O que o Completo <em>instala</em> nas 5 lojas.</h2>
-      <p class="sdesc">Tudo do setup comercial no WhatsApp, mais mídia rodando desde o mês 1. Um único projeto de 6 meses — feito para o vendedor humano operar com método, e para André e a Manu enxergarem a rede.</p>
+      <h2 class="stitle">Integração e padronização de vendas: conectando a operação para <em>máxima performance</em>.</h2>
+      <p class="sdesc">O projeto contempla a estruturação tecnológica e processual para a rede, aplicável nas 5 lojas.</p>
     </div>
     <div class="del-grid">
       <article class="del-card reveal">
-        <div class="n">01 · Canal</div>
-        <h3>Quem busca presente encontra a loja — e cai no WhatsApp certo.</h3>
-        <div class="inc">Setup completo (GMB, Instagram, LP/Site)</div>
-        <div class="inc">WhatsApp Business estruturado nas 5 lojas</div>
+        <div class="n">01 · CRM</div>
+        <h3>Implantação de CRM centralizado</h3>
+        <div class="inc">Configuração do sistema para gestão de leads, clientes e oportunidades</div>
+        <div class="inc">Histórico do cliente visível para a equipe de vendas</div>
+        <div class="inc">CRM Kommo integrado ao WhatsApp</div>
+      </article>
+      <article class="del-card reveal">
+        <div class="n">02 · Funil</div>
+        <h3>Mapeamento e estruturação de funil</h3>
+        <div class="inc">Etapas claras da captação ao fechamento</div>
+        <div class="inc">Controle de follow-up e dono de cada oportunidade</div>
+        <div class="inc">Mensuração de conversão por etapa</div>
+      </article>
+      <article class="del-card reveal">
+        <div class="n">03 · Processo</div>
+        <h3>Padronização do processo comercial</h3>
+        <div class="inc">Desenvolvimento de scripts de atendimento</div>
+        <div class="inc">Matriz de argumentação (CVBA)</div>
+        <div class="inc">Rotinas integradas entre as lojas</div>
+      </article>
+      <article class="del-card reveal">
+        <div class="n">04 · Time</div>
+        <h3>Treinamento e capacitação</h3>
+        <div class="inc">Preparação para uso das novas ferramentas</div>
+        <div class="inc">Melhores práticas de vendas no canal digital</div>
+        <div class="inc">Playbook operacional da equipe</div>
+      </article>
+      <article class="del-card wide reveal">
+        <div class="n">05 · Informação + canal</div>
+        <h3>Organização do fluxo e o que fica instalado na rede</h3>
+        <div class="inc">Alinhamento de dados para agilizar respostas sobre disponibilidade e opções de produtos</div>
+        <div class="inc">Setup completo (GMB, Instagram, LP/Site) e WhatsApp Business estruturado</div>
         <div class="inc">Catálogo de produtos + PIX integrado</div>
+        <div class="inc">Estratégia de mídia paga (Google + Meta), criativos e gestão por 6 meses</div>
+        <div class="inc">Lead Gen no mês 1, relatório mensal e orçamento de mídia separado</div>
       </article>
-      <article class="del-card reveal">
-        <div class="n">02 · Comercial</div>
-        <h3>O mesmo atendimento de 6 etapas, agora no chat.</h3>
-        <div class="inc">Scripts de atendimento (todas as etapas)</div>
-        <div class="inc">Fluxo comercial documentado</div>
-        <div class="inc">Treinamento do time</div>
-      </article>
-      <article class="del-card reveal">
-        <div class="n">03 · Gestão</div>
-        <h3>Toda conversa tem dono, etapa e próximo passo.</h3>
-        <div class="inc">CRM Kommo configurado</div>
-        <div class="inc">Réguas de recompra e reativação para o time</div>
-        <div class="inc">Organização de fila e roteamento ao vendedor humano</div>
-        <div class="inc">Relatório final + diagnóstico de maturidade</div>
-      </article>
-      <article class="del-card reveal">
-        <div class="n">04 · Aquisição</div>
-        <h3>Demanda entra com tese — o time já sabe o que fazer com ela.</h3>
-        <div class="inc">Estratégia de mídia paga (Google + Meta)</div>
-        <div class="inc">Criação de criativos (artes + copies)</div>
-        <div class="inc">Gestão das campanhas por 6 meses</div>
-        <div class="inc">Lead Gen começa no mês 1 — junto com o setup</div>
-        <div class="inc">Relatório mensal de performance da mídia</div>
-        <div class="inc">Orçamento de mídia separado e transparente</div>
-      </article>
-    </div>
-    <div class="note reveal">
-      <strong>Compromisso de atendimento:</strong> o cliente continua falando com gente da Balão Mágico. Scripts, CRM e organização de fila existem para o time atender mais — com a mesma calidez do balcão. Nenhuma venda consultiva é feita por robô.
     </div>
   </div>
 </section>
@@ -556,49 +527,47 @@ section{width:100%;padding:5rem 1.5rem;scroll-margin-top:76px}
 <section class="future-bg" id="futuro">
   <div class="inner">
     <div class="reveal">
-      <div class="slabel" style="color:#ff6b6f">Cenário futuro</div>
-      <h2 class="stitle">Como a rede <em>opera</em> quando o ciclo fecha.</h2>
-      <p class="sdesc">Não é um robô no lugar do vendedor. É a curadoria da loja com visibilidade de rede — e demanda chegando no canal que já entrega no mesmo dia.</p>
+      <div class="slabel" style="color:#ff6b6f">Depois deste trabalho</div>
+      <h2 class="stitle">A loja no mesmo padrão. Cada conversa com <em>dono</em>.</h2>
+      <p class="sdesc">Com a conclusão da implementação, a loja operará em um novo patamar de eficiência comercial. O atendimento digital estará 100% no mesmo padrão de excelência em todas as interações, garantindo processos centralizados e com um dono claro para cada conversa. Todo contato será registrado e qualificado, permitindo acompanhamento contínuo, eliminação de gargalos no tempo de resposta e a construção de uma base de dados rica para não perder nenhuma oportunidade de negócio.</p>
     </div>
     <div class="future-compare reveal">
       <article class="future-col now">
         <div class="k">Hoje</div>
         <ul>
-          <li>1 WhatsApp por loja, no aparelho da unidade</li>
+          <li>WhatsApp descentralizado, no aparelho de cada unidade</li>
           <li>Sem CRM, sem etapa, sem motivo de perda</li>
-          <li>Linktree disperso — fuga para Amazon e Mercado Livre</li>
-          <li>Ticket sobe, número de clientes cai, sem série para agir</li>
-          <li>André e a Manu são marketing, financeiro e comercial</li>
-          <li>Mídia = impulsionar post em outubro e dezembro</li>
+          <li>Relacionamento na memória da equipe</li>
+          <li>Follow-up sem dono nem prazo</li>
+          <li>Conversão sem mensuração unificada</li>
         </ul>
       </article>
       <article class="future-col next">
         <div class="k">Depois deste trabalho</div>
         <ul>
-          <li>5 lojas no mesmo padrão, com dono de cada conversa</li>
-          <li>Funil visível: origem, etapa, conversão e perda</li>
-          <li>Catálogo + PIX no chat — a curadoria chega antes do marketplace</li>
-          <li>Régua de recompra na mão do time, não no feeling</li>
-          <li>André e a Manu veem o mês no CRM — não em 5 celulares</li>
-          <li>Google + Meta com tese, relatório e budget separado</li>
+          <li>Atendimento digital no mesmo padrão em todas as interações</li>
+          <li>Processos centralizados, com dono de cada conversa</li>
+          <li>Todo contato registrado e qualificado</li>
+          <li>Acompanhamento contínuo e resposta sem gargalo</li>
+          <li>Base de dados rica — nenhuma oportunidade se perde</li>
         </ul>
       </article>
     </div>
     <div class="future-outcomes">
       <article class="outcome reveal">
         <div class="n">01</div>
-        <h3>A loja captura, não disputa depois</h3>
-        <p>Quem busca presente em Sorocaba, Itu e Salto encontra GMB, Instagram e LP apontando para o WhatsApp da loja certa — com gente do outro lado.</p>
+        <h3>Padrão único</h3>
+        <p>A loja opera com o mesmo processo em todas as interações digitais — clareza, cadência e excelência.</p>
       </article>
       <article class="outcome reveal">
         <div class="n">02</div>
-        <h3>O vendedor ganha método, não concorrente</h3>
-        <p>O mesmo roteiro de 6 etapas do balcão no chat. Mais atendimento, mesma calidez. A escala é do time — não de um bot.</p>
+        <h3>Dono de cada conversa</h3>
+        <p>Cada contato tem responsável, etapa e próximo passo. O comercial deixa de ser informal.</p>
       </article>
       <article class="outcome reveal">
         <div class="n">03</div>
-        <h3>A gestão sai da cabeça de dois</h3>
-        <p>As 5 lojas operam o mesmo padrão. André decide prioridade. A Manu acompanha o funil. O comercial deixa de ser artesanal.</p>
+        <h3>Base que gera venda</h3>
+        <p>Histórico, follow-up e dados no CRM. A operação acompanha, mensura e converte com previsibilidade.</p>
       </article>
     </div>
   </div>
@@ -608,68 +577,47 @@ section{width:100%;padding:5rem 1.5rem;scroll-margin-top:76px}
   <div class="inner">
     <div class="reveal">
       <div class="slabel">Investimento</div>
-      <h2 class="stitle">O investimento é <em>por unidade</em>.</h2>
-      <p class="sdesc">O Zap First Completo é cobrado por unidade — cada unidade corresponde a uma loja. O valor abaixo é de 1 unidade. As 5 lojas da rede não estão inclusas neste investimento; cada loja adicional segue o mesmo preço unitário.</p>
+      <h2 class="stitle">Duas opções. Cobrança <em>por loja</em>.</h2>
+      <p class="sdesc">Zap First Completo · projeto de 6 meses. Escolha 1 loja ou 2 lojas. Lojas adicionais não estão inclusas nesses valores.</p>
     </div>
 
-    <div class="unit-math">
-      <article class="um featured reveal">
-        <div class="k">1 unidade</div>
-        <div class="v">12× R$ 3.916,00</div>
-        <div class="s">Zap First Completo · de R$ 57.000 · projeto de 6 meses no cartão</div>
+    <div class="price-options">
+      <article class="po featured reveal">
+        <div class="k">2 lojas <span class="tag">desta proposta</span></div>
+        <div class="v">R$ 4.958,32</div>
+        <div class="s">Zap First Completo · duas lojas · projeto de 6 meses</div>
       </article>
-      <article class="um reveal">
-        <div class="k">O que 1 unidade cobre</div>
-        <div class="v">1 loja</div>
-        <div class="s">Setup, WhatsApp, CRM, treino e mídia de 6 meses daquela unidade</div>
-      </article>
-      <article class="um reveal">
-        <div class="k">Loja adicional</div>
-        <div class="v">+ 1 unidade</div>
-        <div class="s">Mesmo investimento unitário. As 5 lojas não entram neste valor.</div>
+      <article class="po reveal">
+        <div class="k">1 loja</div>
+        <div class="v">R$ 3.916,00</div>
+        <div class="s">Zap First Completo · uma loja · projeto de 6 meses</div>
       </article>
     </div>
 
     <table class="price-table reveal">
       <thead>
         <tr>
-          <th>Composição</th>
-          <th>Unidades</th>
-          <th>Tabela</th>
-          <th>Condição no cartão</th>
+          <th>Opção</th>
+          <th>Lojas</th>
+          <th>Investimento</th>
         </tr>
       </thead>
       <tbody>
         <tr class="deal">
-          <td>Zap First Completo · por unidade</td>
-          <td>1</td>
-          <td class="strike">de R$ 57.000</td>
-          <td class="now">12× R$ 3.916,00</td>
+          <td>Zap First Completo</td>
+          <td>2 lojas</td>
+          <td class="now">R$ 4.958,32</td>
         </tr>
         <tr>
-          <td>Esta proposta</td>
-          <td>2</td>
-          <td class="strike">de R$ 114.000</td>
-          <td class="now">12× R$ 7.832,00</td>
+          <td>Zap First Completo</td>
+          <td>1 loja</td>
+          <td class="now">R$ 3.916,00</td>
         </tr>
       </tbody>
     </table>
 
-    <div class="price-hero reveal">
-      <div class="ph-label">Investimento · Zap First Completo · por unidade</div>
-      <div class="ph-from">de R$ 57.000</div>
-      <div class="ph-val">12x de R$ 3.916<small>,00</small></div>
-      <div class="ph-sub">no cartão · 1 unidade · projeto de 6 meses</div>
-      <div class="cover-pills">
-        <span>Cobrança por unidade</span>
-        <span>Esta proposta: 2 unidades</span>
-        <span>Setup + CRM + mídia 6 meses</span>
-      </div>
-    </div>
-
     <div class="note reveal">
-      <strong>Como se cobra:</strong> o valor desta proposta é por unidade. As 5 lojas da Balão Mágico não estão inclusas neste investimento. Loja adicional = +1 unidade, no mesmo 12× R$ 3.916,00.<br><br>
-      <strong>Orçamento de mídia:</strong> o investimento nas plataformas (Google Ads e Meta Ads) é pago diretamente pela Balão Mágico, separado e transparente. A V4 desenha, cria, gere e reporta as campanhas ao longo dos 6 meses. Fora disto, o Completo já inclui estratégia, criativos, gestão e relatório mensal.
+      <strong>Orçamento de mídia:</strong> o investimento nas plataformas (Google Ads e Meta Ads) é pago diretamente pela Balão Mágico, separado e transparente. A V4 desenha, cria, gere e reporta as campanhas ao longo dos 6 meses.
     </div>
   </div>
 </section>
@@ -679,35 +627,35 @@ section{width:100%;padding:5rem 1.5rem;scroll-margin-top:76px}
     <div class="reveal">
       <div class="slabel">Próximos passos</div>
       <h2 class="stitle">Começamos na semana que vem.</h2>
-      <p class="sdesc">Cada semana com 5 WhatsApps soltos é presente que o cliente fecha no marketplace. Cada conversa sem etapa é aprendizado que a rede não acumula. O time já sabe atender. Falta ligar o sistema.</p>
+      <p class="sdesc">A reputação já existe. O que falta é sistema: CRM, funil e processo para o time atender com controle e previsibilidade.</p>
     </div>
     <div class="steps-list reveal">
       <div class="step-item">
         <div class="step-num">01</div>
         <div class="step-body">
           <strong>Proposta aprovada + contrato assinado</strong>
-          <span>Confirmação do investimento por unidade (12× R$ 3.916,00) — esta proposta em 2 unidades, 12× R$ 7.832,00 no cartão — e assinatura do acordo de 6 meses. As 5 lojas da rede não estão inclusas neste valor.</span>
+          <span>Escolha da opção — 2 lojas (R$ 4.958,32) ou 1 loja (R$ 3.916,00) — e assinatura do acordo de 6 meses.</span>
         </div>
       </div>
       <div class="step-item">
         <div class="step-num">02</div>
         <div class="step-body">
-          <strong>Kick-off com André e a Manu</strong>
-          <span>Acessos, números de WhatsApp das 5 lojas, catálogo, time por unidade e regra de ouro: atendimento humano, consultivo e caloroso. Nenhum robô na ponta.</span>
+          <strong>Kick-off estratégico</strong>
+          <span>Acessos, números de WhatsApp, catálogo, time e onboarding das unidades contratadas.</span>
         </div>
       </div>
       <div class="step-item">
         <div class="step-num">03</div>
         <div class="step-body">
           <strong>Sprint 1 · Setup + Lead Gen (mês 1)</strong>
-          <span>GMB, Instagram, LP/Site e WhatsApp Business. A geração de demanda começa junto com o setup — e cai no vendedor, não em um bot.</span>
+          <span>GMB, Instagram, LP/Site e WhatsApp Business. A geração de demanda começa junto com o setup.</span>
         </div>
       </div>
       <div class="step-item">
         <div class="step-num">04</div>
         <div class="step-body">
-          <strong>Sprint 2 · Processo e time (meses 2–3)</strong>
-          <span>Catálogo + PIX, scripts das 6 etapas, treinamento e CRM. O funil das 5 lojas fica visível para André e a Manu.</span>
+          <strong>Sprint 2 · Funil, CRM e capacitação (meses 2–3)</strong>
+          <span>Scripts, CVBA, treinamento e CRM. Cada conversa passa a ter dono, etapa e próximo passo.</span>
         </div>
       </div>
       <div class="step-item">
@@ -730,14 +678,14 @@ section{width:100%;padding:5rem 1.5rem;scroll-margin-top:76px}
     </svg>
     <strong>Balão Mágico</strong>
   </div>
-  <h2>Pronto para organizar o comercial — sem perder o calor da loja?</h2>
-  <p>Investimento por unidade. O time continua humano. O sistema passa a existir.</p>
+  <h2>Pronto para unificar o comercial digital?</h2>
+  <p>CRM, funil e processo para o time atender com controle, mensuração e previsibilidade.</p>
   <div class="btn-row">
     <button class="btn" type="button" id="btnAprovar">Aprovar Proposta</button>
-    <a class="btn ghost" href="mailto:?subject=Assinar%20contrato%20%E2%80%94%20Bal%C3%A3o%20M%C3%A1gico&body=Aprovo%20a%20proposta%20Zap%20First%20Completo%20por%20unidade%20(12x%20de%20R%24%203.916%2C00).%20Esta%20proposta%20em%202%20unidades%3A%2012x%20de%20R%24%207.832%2C00.%20As%205%20lojas%20n%C3%A3o%20est%C3%A3o%20inclusas%20neste%20valor.%20Quero%20seguir%20para%20assinatura%20do%20contrato.">Assinar Contrato</a>
+    <a class="btn ghost" href="mailto:?subject=Assinar%20contrato%20%E2%80%94%20Bal%C3%A3o%20M%C3%A1gico&body=Aprovo%20a%20proposta%20Zap%20First%20Completo.%20Op%C3%A7%C3%A3o%20escolhida%3A%202%20lojas%20(R%24%204.958%2C32)%20ou%201%20loja%20(R%24%203.916%2C00).%20Quero%20seguir%20para%20assinatura%20do%20contrato.">Assinar Contrato</a>
   </div>
   <div class="toast" id="toast">Proposta marcada como aprovada neste dispositivo. Siga para a assinatura do contrato.</div>
-  <div class="footer-note">Proposta válida por 7 dias · V4 Company × Balão Mágico · confidencial · Zap First Completo · cobrança por unidade · 6 meses</div>
+  <div class="footer-note">Proposta válida por 7 dias · V4 Company × Balão Mágico · confidencial · Zap First Completo · 6 meses</div>
 </section>
 
 <script>
