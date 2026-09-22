@@ -3,326 +3,848 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Proposta Comercial — Central das Bebidas × V4 Company</title>
+<title>Central das Bebidas × V4 Company — Zap First + EQV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800;900&display=swap" rel="stylesheet"/>
 <style>
-  :root { --ink:#1a1a1a; --muted:#4a4a4a; --line:#e4e0dc; --red:#e3040a; --soft:#f7f5f3; --paper:#fff; }
-  * { box-sizing: border-box; }
-  body { margin:0; background:#efeceb; color:var(--ink); font:16px/1.6 "Segoe UI", Calibri, Arial, sans-serif; }
-  article { max-width:820px; margin:32px auto; background:var(--paper); padding:56px 64px 72px; box-shadow:0 8px 40px rgba(0,0,0,.06); }
-  header.doc { border-bottom:3px solid var(--red); padding-bottom:28px; margin-bottom:36px; }
-  .kicker { font-size:12px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--red); margin:0 0 10px; }
-  h1 { font-size:32px; line-height:1.15; margin:0 0 8px; letter-spacing:-.02em; }
-  .sub { font-size:18px; color:var(--muted); margin:0 0 18px; }
-  .meta { font-size:14px; color:var(--muted); margin:0; }
-  h2 { font-size:22px; line-height:1.25; margin:42px 0 12px; padding-top:8px; letter-spacing:-.02em; }
-  h3 { font-size:17px; margin:26px 0 8px; }
-  p { margin:0 0 14px; }
-  ul, ol { margin:0 0 16px; padding-left:22px; }
-  li { margin:0 0 6px; }
-  strong { font-weight:700; }
-  table { width:100%; border-collapse:collapse; margin:8px 0 18px; font-size:15px; }
-  th, td { text-align:left; padding:10px 12px; border-bottom:1px solid var(--line); vertical-align:top; }
-  th { background:var(--soft); font-size:12px; letter-spacing:.04em; text-transform:uppercase; color:#333; }
-  td.num, th.num { text-align:right; white-space:nowrap; }
-  .anchor { color:#888; text-decoration:line-through; }
-  .now { color:var(--red); font-weight:700; }
-  blockquote { margin:18px 0; padding:14px 18px; background:var(--soft); border-left:3px solid var(--red); }
-  blockquote p:last-child { margin:0; }
-  footer { margin-top:36px; padding-top:16px; border-top:1px solid var(--line); font-size:13px; color:var(--muted); }
-  @media print {
-    body { background:#fff; }
-    article { margin:0; box-shadow:none; padding:0; max-width:none; }
-  }
-  @media (max-width:720px) {
-    article { margin:0; padding:28px 20px 48px; }
-    h1 { font-size:26px; }
-  }
+:root{
+  --red:#e3040a;
+  --red2:#ff3b3b;
+  --dark:#0d0d0d;
+  --ink:#111;
+  --muted:#6b6b6b;
+  --line:#e8e4e1;
+  --soft:#f6f4f2;
+  --white:#fff;
+  --green:#16a34a;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font:16px/1.6 Inter,system-ui,sans-serif;background:var(--white);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4{font-family:Sora,Inter,sans-serif;letter-spacing:-.02em;line-height:1.15}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+
+.topnav{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  background:rgba(255,255,255,.92);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.7rem 2rem;gap:1rem;
+}
+.brand{display:flex;align-items:center;gap:14px}
+.wordmark{display:flex;align-items:center;gap:8px}
+.wordmark svg{width:28px;height:28px;flex-shrink:0}
+.wordmark b{font-family:Sora,sans-serif;font-size:13px;font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.wordmark b small{display:block;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.brand .sep{width:1px;height:28px;background:var(--line)}
+.brand .v4{font-family:Sora,sans-serif;font-weight:800;font-size:13px;white-space:nowrap}
+.brand .v4 span{color:var(--red)}
+.topnav nav{display:flex;gap:1.5rem;overflow-x:auto;scrollbar-width:none}
+.topnav nav a{font-size:12px;font-weight:600;color:var(--muted);white-space:nowrap;padding:.25rem 0;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+.topnav nav a:hover,.topnav nav a.active{color:var(--red);border-color:var(--red)}
+.cta-mini{background:var(--red);color:#fff;font-size:12px;font-weight:700;padding:.45rem 1rem;border-radius:20px;white-space:nowrap}
+.cta-mini:hover{opacity:.85}
+@media(max-width:980px){.topnav nav{display:none}.topnav{padding:.7rem 1.2rem}}
+
+#prog{position:fixed;top:0;left:0;height:3px;background:var(--red);z-index:1000;width:0}
+
+section{width:100%;padding:5rem 1.5rem;scroll-margin-top:76px}
+.hero{scroll-margin-top:0}
+.inner{max-width:960px;margin:0 auto}
+.slabel{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:.5rem}
+.stitle{font-size:clamp(26px,4vw,36px);font-weight:800;color:var(--ink);margin-bottom:.75rem}
+.stitle em{font-style:normal;color:var(--red)}
+.sdesc{font-size:16px;color:var(--muted);max-width:720px;line-height:1.65}
+.divider{height:1px;background:var(--line);width:100%;max-width:960px;margin:0 auto}
+
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  background:linear-gradient(150deg,#0d0d0d 0%,#1c0404 55%,#2b0606 100%);
+  color:#fff;position:relative;overflow:hidden;padding:6rem 1.5rem 4rem;
+}
+.hero::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 60% at 80% 40%,rgba(227,4,10,.18),transparent);
+  pointer-events:none;
+}
+.hero-grid{
+  max-width:960px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 400px;gap:3rem;align-items:center;
+  position:relative;z-index:1;
+}
+@media(max-width:860px){.hero-grid{grid-template-columns:1fr}}
+.logo-plate{
+  display:inline-flex;align-items:center;gap:10px;
+  background:#fff;border-radius:14px;padding:10px 16px;margin-bottom:1.4rem;color:var(--ink);
+}
+.logo-plate svg{width:32px;height:32px}
+.logo-plate strong{font-family:Sora,sans-serif;font-size:15px;font-weight:800}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(227,4,10,.18);border:1px solid rgba(227,4,10,.35);
+  border-radius:20px;padding:.35rem .9rem;
+  font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.85);
+  margin-bottom:1.5rem;
+}
+.hero-tag i{width:6px;height:6px;border-radius:50%;background:var(--red2);display:inline-block;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.hero h1{font-size:clamp(32px,5vw,48px);font-weight:900;color:#fff;margin-bottom:1.25rem}
+.hero h1 em{font-style:normal;color:var(--red2)}
+.hero-sub{font-size:17px;color:rgba(255,255,255,.72);max-width:540px;line-height:1.65;margin-bottom:2rem}
+.hero-cta{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:var(--red);color:#fff;font-weight:700;font-size:15px;
+  padding:.85rem 2rem;border-radius:30px;
+  box-shadow:0 8px 32px rgba(227,4,10,.4);
+}
+.hero-cta:hover{transform:translateY(-2px)}
+.hero-card{
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  border-radius:24px;padding:1.75rem;backdrop-filter:blur(8px);
+}
+.hero-card h3{font-size:13px;font-weight:700;color:rgba(255,255,255,.55);letter-spacing:.08em;text-transform:uppercase;margin-bottom:1rem}
+.ops-list{display:flex;flex-direction:column;gap:.7rem}
+.ops-item{background:rgba(255,255,255,.08);border-radius:14px;padding:.9rem 1rem}
+.ops-item strong{display:block;font-family:Sora,sans-serif;font-size:15px;color:#fff;margin-bottom:.15rem}
+.ops-item span{font-size:12px;color:rgba(255,255,255,.55);line-height:1.4}
+
+.diag-bg{background:var(--soft)}
+.gap-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.75rem}
+@media(max-width:640px){.gap-grid{grid-template-columns:1fr}}
+.gap-card{
+  background:var(--white);border:1px solid var(--line);border-radius:18px;padding:1.4rem 1.6rem;
+  box-shadow:0 12px 40px rgba(0,0,0,.05);
+}
+.gap-num{font-family:Sora,sans-serif;font-size:28px;font-weight:900;color:var(--line);margin-bottom:.5rem}
+.gap-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:.2rem .6rem;border-radius:6px;margin-bottom:.6rem}
+.tag-red{background:#fdeaea;color:var(--red)}
+.tag-orange{background:#fff3e0;color:#c85a00}
+.gap-card h3{font-size:15px;font-weight:700;margin-bottom:.4rem}
+.gap-card p{font-size:13px;color:var(--muted);line-height:1.55}
+.highlight-box{
+  background:linear-gradient(135deg,#1a1a1a,#2b0606);
+  border-radius:20px;padding:1.75rem 2rem;margin-top:1.5rem;
+}
+.highlight-box strong{color:#fff;font-size:18px;font-family:Sora,sans-serif;display:block;margin-bottom:.25rem}
+.highlight-box p{color:rgba(255,255,255,.88);font-size:15px;line-height:1.6}
+
+.benefit-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.75rem}
+@media(max-width:700px){.benefit-grid{grid-template-columns:1fr}}
+.benefit{
+  background:#fff;border:1px solid var(--line);border-radius:18px;padding:1.4rem 1.5rem;
+  box-shadow:0 12px 40px rgba(0,0,0,.04);
+}
+.benefit .n{font-family:Sora,sans-serif;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:.45rem}
+.benefit h3{font-size:16px;font-weight:800;margin-bottom:.4rem}
+.benefit p{font-size:13.5px;color:var(--muted);line-height:1.55}
+
+.method-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2rem}
+@media(max-width:760px){.method-steps{grid-template-columns:1fr 1fr}}
+@media(max-width:500px){.method-steps{grid-template-columns:1fr}}
+.ms{border-radius:18px;padding:1.4rem;border:1px solid var(--line);position:relative;overflow:hidden}
+.ms:nth-child(1){background:#fff3f3}
+.ms:nth-child(2){background:#fff8f0}
+.ms:nth-child(3){background:#f7f4f2}
+.ms:nth-child(4){background:#f0fff5}
+.ms .mn{font-family:Sora,sans-serif;font-size:36px;font-weight:900;color:rgba(0,0,0,.07);position:absolute;top:.5rem;right:.75rem;line-height:1}
+.ms h3{font-size:16px;font-weight:800;margin-bottom:.5rem}
+.ms p{font-size:13px;color:var(--muted);line-height:1.55}
+.ms .badge{display:inline-block;background:var(--red);color:#fff;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .65rem;border-radius:8px;margin-bottom:.6rem}
+
+.phase-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.75rem}
+@media(max-width:720px){.phase-grid{grid-template-columns:1fr}}
+.phase{background:#fff;border:1px solid var(--line);border-radius:20px;padding:1.45rem 1.5rem;box-shadow:0 12px 40px rgba(0,0,0,.04)}
+.phase .n{font-family:Sora,sans-serif;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:.4rem}
+.phase h3{font-size:20px;font-weight:800;margin-bottom:.45rem}
+.phase p{font-size:14px;color:var(--muted);line-height:1.55}
+
+.flow{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:.7rem;margin-top:1.75rem}
+@media(max-width:800px){.flow{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.flow{grid-template-columns:1fr}}
+.flow-step{
+  background:#fff;border:1px solid var(--line);border-radius:16px;padding:1rem 1rem .95rem;
+  min-height:132px;position:relative;
+}
+.flow-step .fn{font-family:Sora,sans-serif;font-size:11px;font-weight:800;letter-spacing:.1em;color:var(--red)}
+.flow-step strong{display:block;font-size:15px;margin:.3rem 0 .25rem}
+.flow-step p{font-size:12.5px;color:var(--muted);line-height:1.45}
+.flow-step.span2{grid-column:span 2}
+@media(max-width:520px){.flow-step.span2{grid-column:auto}}
+
+.swim{margin-top:1.25rem;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff}
+.swim-row{display:grid;grid-template-columns:128px repeat(4,1fr)}
+.swim-row + .swim-row{border-top:1px solid var(--line)}
+.swim-row > div{padding:.85rem .9rem;font-size:13px;line-height:1.45;border-right:1px solid var(--line)}
+.swim-row > div:last-child{border-right:0}
+.swim-head{background:#faf8f6}
+.swim-head div{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.lane{font-family:Sora,sans-serif;font-size:12px;font-weight:800;background:var(--soft);display:flex;align-items:center}
+.swim-row.machine .lane{background:#fff3f3;color:var(--red)}
+.swim-row.people .lane{background:#f0fff5;color:#166534}
+@media(max-width:800px){
+  .swim{overflow-x:auto}
+  .swim-row{min-width:760px}
+}
+
+.timeline-strip{
+  display:grid;grid-template-columns:repeat(6,1fr);gap:0;
+  border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:1.25rem;
+}
+@media(max-width:800px){.timeline-strip{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.timeline-strip{grid-template-columns:1fr}}
+.tl-cell{padding:1rem;border-right:1px solid var(--line);background:#fff3f3}
+.tl-cell:nth-child(4),.tl-cell:nth-child(5),.tl-cell:nth-child(6){background:var(--soft)}
+.tl-cell:last-child{border-right:none}
+@media(max-width:800px){.tl-cell{border-bottom:1px solid var(--line)}}
+.tl-mes{font-size:10px;font-weight:800;color:var(--red);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.35rem}
+.tl-fase{font-size:13px;font-weight:700;margin-bottom:.4rem}
+.tl-items{font-size:11px;color:var(--muted);line-height:1.55}
+
+.del-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.75rem}
+@media(max-width:760px){.del-grid{grid-template-columns:1fr}}
+.del-card{
+  background:#fff;border:1px solid var(--line);border-radius:20px;padding:1.45rem 1.5rem;
+  box-shadow:0 12px 40px rgba(0,0,0,.05);
+}
+.del-card.wide{grid-column:1 / -1}
+.del-card .n{
+  font-family:Sora,sans-serif;font-size:12px;font-weight:800;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--red);margin-bottom:.55rem;
+}
+.del-card h3{font-size:18px;font-weight:800;margin-bottom:.85rem}
+.inc{display:flex;align-items:flex-start;gap:.65rem;font-size:14px;color:var(--ink);padding:.4rem 0;line-height:1.45}
+.inc::before{
+  content:"✓";color:var(--green);font-weight:800;font-size:12px;flex-shrink:0;
+  width:20px;height:20px;border-radius:50%;background:#dcfce7;
+  display:flex;align-items:center;justify-content:center;line-height:1;margin-top:1px;
+}
+
+.future-bg{background:linear-gradient(150deg,#0d0d0d 0%,#1c0404 58%,#2b0606 100%);color:#fff}
+.future-bg .stitle{color:#fff}
+.future-bg .sdesc{color:rgba(255,255,255,.68)}
+.future-compare{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.75rem}
+@media(max-width:720px){.future-compare{grid-template-columns:1fr}}
+.future-col{border-radius:20px;padding:1.5rem 1.55rem}
+.future-col.now{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1)}
+.future-col.next{background:rgba(227,4,10,.12);border:1px solid rgba(227,4,10,.35)}
+.future-col .k{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.85rem}
+.future-col.now .k{color:rgba(255,255,255,.45)}
+.future-col.next .k{color:#ff6b6f}
+.future-col li{list-style:none;font-size:14px;line-height:1.5;padding:.55rem 0;border-bottom:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.78)}
+.future-col li:last-child{border-bottom:0}
+.future-col.next li{color:#fff}
+.future-outcomes{display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem;margin-top:1.25rem}
+@media(max-width:760px){.future-outcomes{grid-template-columns:1fr}}
+.outcome{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:1.15rem 1.2rem}
+.outcome .n{font-family:Sora,sans-serif;font-size:13px;font-weight:800;color:#ff6b6f;margin-bottom:.4rem}
+.outcome h3{font-size:15px;color:#fff;margin-bottom:.35rem}
+.outcome p{font-size:13px;color:rgba(255,255,255,.62);line-height:1.5}
+
+.invest-bg{background:var(--soft)}
+.price-options{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.75rem}
+@media(max-width:700px){.price-options{grid-template-columns:1fr}}
+.po{
+  background:#fff;border:1px solid var(--line);border-radius:22px;padding:1.6rem 1.7rem;
+}
+.po.featured{border-color:var(--red);box-shadow:0 12px 36px rgba(227,4,10,.12);background:#fff8f8}
+.po .k{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.45rem}
+.po .tag{
+  display:inline-block;background:var(--red);color:#fff;font-size:9px;font-weight:800;
+  letter-spacing:.08em;text-transform:uppercase;padding:.18rem .5rem;border-radius:6px;margin-left:.4rem;vertical-align:middle;
+}
+.po .was{font-size:14px;color:#9a9a9a;text-decoration:line-through;margin-top:.35rem}
+.po .v{font-family:Sora,sans-serif;font-size:clamp(28px,4vw,38px);font-weight:900;letter-spacing:-.03em;line-height:1.05;margin:.35rem 0 .35rem}
+.po.featured .v{color:var(--red)}
+.po .s{font-size:13px;color:var(--muted);line-height:1.5}
+.po .cash{margin-top:.9rem;background:#f6f4f2;border-radius:12px;padding:.75rem .9rem;font-size:14px;font-weight:700}
+
+.price-table{width:100%;border-collapse:separate;border-spacing:0;margin-top:1.25rem;background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.price-table th{
+  text-align:left;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);padding:.9rem 1.15rem;background:#faf8f6;border-bottom:1px solid var(--line);
+}
+.price-table td{padding:.95rem 1.15rem;font-size:14px;border-bottom:1px solid var(--line);vertical-align:middle}
+.price-table tr:last-child td{border-bottom:0}
+.price-table .now{font-family:Sora,sans-serif;font-weight:800;font-size:16px}
+.price-table .anchor{color:#9a9a9a;text-decoration:line-through}
+.price-table tr.deal td{background:#fff5f5}
+.price-table tr.deal td:first-child{font-weight:800}
+
+.steps-list{display:flex;flex-direction:column;margin-top:1.75rem;position:relative}
+.steps-list::before{
+  content:"";position:absolute;left:22px;top:0;bottom:0;width:2px;
+  background:linear-gradient(to bottom,var(--red),rgba(227,4,10,.1));
+}
+.step-item{display:flex;gap:1.25rem;padding:1.25rem 0;position:relative}
+.step-num{
+  width:44px;height:44px;border-radius:50%;background:var(--red);color:#fff;
+  font-family:Sora,sans-serif;font-weight:800;font-size:14px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;
+  box-shadow:0 4px 14px rgba(227,4,10,.4);
+}
+.step-body{padding-top:8px}
+.step-body strong{font-size:15px;font-weight:700;display:block;margin-bottom:.25rem}
+.step-body span{font-size:13px;color:var(--muted);line-height:1.55}
+
+.footer-cta{
+  background:linear-gradient(150deg,#0d0d0d 0%,#1c0404 60%,#2b0606 100%);
+  text-align:center;padding:5rem 1.5rem;
+}
+.footer-cta .logo-plate{margin:0 auto 1.4rem}
+.footer-cta h2{font-size:clamp(26px,4vw,40px);font-weight:900;color:#fff;margin-bottom:.75rem}
+.footer-cta p{font-size:16px;color:rgba(255,255,255,.65);max-width:560px;margin:0 auto 2rem;line-height:1.6}
+.btn-row{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:.5rem;border:0;cursor:pointer;
+  background:var(--red);color:#fff;font-weight:700;font-size:16px;
+  padding:1rem 2.5rem;border-radius:32px;
+  box-shadow:0 8px 32px rgba(227,4,10,.45);
+}
+.btn:hover{transform:translateY(-2px)}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,.28);box-shadow:none;color:#fff}
+.footer-note{font-size:12px;color:rgba(255,255,255,.35);margin-top:1.25rem}
+.toast{
+  display:none;margin:1rem auto 0;max-width:460px;padding:.85rem 1rem;border-radius:12px;
+  background:rgba(22,163,74,.18);border:1px solid rgba(134,239,172,.45);color:#bbf7d0;font-size:13.5px;
+}
+.toast.show{display:block}
+.note{background:#fff8f0;border:1px solid #f5d5b0;border-radius:12px;padding:1rem 1.2rem;font-size:13px;color:#7d4b10;margin-top:1.25rem}
+.note strong{color:#a05a0a}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s var(--ease),transform .65s var(--ease)}
+.reveal.visible{opacity:1;transform:none}
+@media print{
+  .topnav,#prog{display:none!important}
+  .hero,section{padding:1.5rem 0}
+  .reveal{opacity:1;transform:none}
+}
 </style>
 </head>
 <body>
-<article>
 
-<header class="doc">
-  <p class="kicker">V4 Company · Proposta comercial</p>
-  <h1>Central das Bebidas</h1>
-  <p class="sub">Atendimento que não espera o balcão. Previsibilidade na baixa temporada.</p>
-  <p class="meta">Preparada para Nádia Pires e Jersimar Freire · Cocalinho/MT · 22 de setembro de 2026</p>
+<div id="prog"></div>
+
+<header class="topnav">
+  <div class="brand">
+    <div class="wordmark">
+      <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <path d="M12 2.5h8v3.2l1.6 2.2v15.2a5.6 5.6 0 01-5.6 5.6h0a5.6 5.6 0 01-5.6-5.6V7.9L12 5.7V2.5z" fill="#e3040a"/>
+        <path d="M12 2.5h8v2.2h-8V2.5z" fill="#111"/>
+        <path d="M13.2 14.5h5.6v2.1h-5.6v-2.1z" fill="#fff" opacity=".45"/>
+      </svg>
+      <b>Central das Bebidas<small>Cocalinho · MT</small></b>
+    </div>
+    <span class="sep"></span>
+    <span class="v4">V4 <span>Company</span></span>
+  </div>
+  <nav>
+    <a href="#diagnostico">Cenário</a>
+    <a href="#solucao">Solução</a>
+    <a href="#fluxo">Fluxo</a>
+    <a href="#beneficios">Benefícios</a>
+    <a href="#escopo">Escopo</a>
+    <a href="#investimento">Investimento</a>
+  </nav>
+  <a href="#investimento" class="cta-mini">Ver investimento →</a>
 </header>
 
-<p>Nádia, Jersimar,</p>
+<section class="hero" id="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="logo-plate">
+        <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path d="M12 2.5h8v3.2l1.6 2.2v15.2a5.6 5.6 0 01-5.6 5.6h0a5.6 5.6 0 01-5.6-5.6V7.9L12 5.7V2.5z" fill="#e3040a"/>
+          <path d="M12 2.5h8v2.2h-8V2.5z" fill="#111"/>
+          <path d="M13.2 14.5h5.6v2.1h-5.6v-2.1z" fill="#fff" opacity=".45"/>
+        </svg>
+        <strong>Central das Bebidas</strong>
+      </div>
+      <div class="hero-tag"><i></i> Proposta para Nádia Pires e Jersimar Freire · Zap First + EQV</div>
+      <h1>O WhatsApp vende. A baixa temporada passa a ter <em>método</em>.</h1>
+      <p class="hero-sub">R$ 2 milhões no primeiro semestre, em Cocalinho. O próximo passo é responder no ato, recomprar quem já é cliente e deixar a operação digital na mão da casa — com a Nádia fora do dia a dia.</p>
+      <a href="#fluxo" class="hero-cta">
+        Ver como a empresa fica
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <div>
+      <article class="hero-card">
+        <h3>Central das Bebidas · leitura operacional</h3>
+        <div class="ops-list">
+          <div class="ops-item"><strong>R$ 2 milhões no 1º semestre</strong><span>Ticket médio de R$ 50 · praça de cerca de 6 mil habitantes</span></div>
+          <div class="ops-item"><strong>Baixa de outubro a março</strong><span>O desafio é sustentar faturamento quando o turismo esfria</span></div>
+          <div class="ops-item"><strong>WhatsApp manual</strong><span>Equipe jovem no balcão e no estoque. A resposta espera a loja</span></div>
+          <div class="ops-item"><strong>Marketing na Nádia</strong><span>Ela centraliza redes e precisa reduzir a operação</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
 
-<p>A Central das Bebidas já provou que vende. R$ 2 milhões no primeiro semestre, em uma cidade de cerca de 6 mil habitantes, é operação, sortimento e presença. O ponto em aberto é outro: sustentar faturamento quando o movimento cai, e manter a venda andando quando a Nádia precisa reduzir o que hoje passa por ela.</p>
+<section class="diag-bg" id="diagnostico">
+  <div class="inner">
+    <div class="reveal">
+      <div class="slabel">Cenário atual</div>
+      <h2 class="stitle">A casa já vende. O atendimento e a baixa ainda dependem de gente ocupada.</h2>
+      <p class="sdesc">Cocalinho tem calendário partido. O visitante puxa o movimento em parte do ano. De outubro a março a cidade esfria e o faturamento perde folga. No meio disso, o pedido chega no WhatsApp e espera quem está no balcão.</p>
+    </div>
+    <div class="gap-grid">
+      <article class="gap-card reveal">
+        <div class="gap-num">01</div>
+        <span class="gap-tag tag-red">Atendimento</span>
+        <h3>WhatsApp parado no horário de pico</h3>
+        <p>A equipe responde quando consegue. No pico, balcão e estoque ocupam as mesmas pessoas que deveriam estar no chat. Quem espera compra de quem atendeu primeiro.</p>
+      </article>
+      <article class="gap-card reveal">
+        <div class="gap-num">02</div>
+        <span class="gap-tag tag-red">Sazonalidade</span>
+        <h3>Baixa sem régua de recompra</h3>
+        <p>Bar, mercado, chácara e casa continuam comprando de outubro a março. Hoje a recompra depende de memória — a do cliente e a da equipe.</p>
+      </article>
+      <article class="gap-card reveal">
+        <div class="gap-num">03</div>
+        <span class="gap-tag tag-orange">Turista</span>
+        <h3>Quem chega não encontra a casa</h3>
+        <p>O visitante pesquisa no Google, olha o Instagram e chama no WhatsApp. A janela é a estadia. Sem ficha, sem oferta e sem resposta, o pedido vai para outro lugar.</p>
+      </article>
+      <article class="gap-card reveal">
+        <div class="gap-num">04</div>
+        <span class="gap-tag tag-orange">Pessoas</span>
+        <h3>O digital mora na Nádia</h3>
+        <p>Marketing e redes passam por ela. Ela está gestante e precisa delegar. Uma operação que só anda quando uma sócia posta e decide não atravessa esse período com segurança.</p>
+      </article>
+    </div>
+    <div class="highlight-box reveal">
+      <strong>A conta do retorno, no ticket de R$ 50.</strong>
+      <p>Quatro pedidos recuperados por dia no WhatsApp são cerca de R$ 6.000 no mês e R$ 18.000 em 90 dias — a ordem de grandeza do Zap First à vista. Cinquenta pedidos no mês são R$ 2.500, a parcela do EQV. Faturamento bruto, para decidir. A meta fecha no kickoff, com os números da casa.</p>
+    </div>
+  </div>
+</section>
 
-<p>Esta proposta trata dos dois assuntos, em duas fases. A primeira estanca a venda que se perde no WhatsApp. A segunda instala, em seis meses, o método para a casa vender com previsibilidade — com a equipe, ou com um talento que vocês contratem, no comando da operação digital.</p>
+<div class="divider"></div>
 
-<h2>1. Diagnóstico do cenário atual</h2>
+<section id="solucao">
+  <div class="inner">
+    <div class="reveal">
+      <div class="slabel">A solução · duas fases</div>
+      <h2 class="stitle">Primeiro a máquina de atendimento. Depois a casa no <em>comando</em>.</h2>
+      <p class="sdesc">O Zap First entra agora e estanca a venda que se perde no WhatsApp. O Projeto EQV, no formato Empresa que Vende, dura seis meses e deixa o método com a equipe — ou com um talento que vocês contratem.</p>
+    </div>
+    <div class="phase-grid">
+      <article class="phase reveal">
+        <div class="n">Fase 1 · imediata · 3 meses</div>
+        <h3>Zap First</h3>
+        <p>Chat centralizado e inteligência artificial no primeiro contato. A equipe permanece no WhatsApp que já usa. Entram catálogo, Pix, fluxo comercial e réguas de recompra e reativação. O balcão deixa de ser a única fila entre a mensagem e o pedido.</p>
+      </article>
+      <article class="phase reveal">
+        <div class="n">Fase 2 · 6 meses</div>
+        <h3>Projeto EQV</h3>
+        <p>Consultoria com execução assistida. Conteúdo, Google, Instagram, comercial e CRM feitos junto com quem vai ficar. No fim do ciclo, a Central das Bebidas opera o digital. A Nádia decide a marca. A execução diária sai da mão dela.</p>
+      </article>
+    </div>
+    <div class="method-steps">
+      <article class="ms reveal">
+        <div class="mn">P1</div>
+        <span class="badge">Primeiro</span>
+        <h3>Produto</h3>
+        <p>Catálogo no WhatsApp, oferta clara e Pix no chat. O cliente vê, escolhe e paga sem a mensagem ir e voltar.</p>
+      </article>
+      <article class="ms reveal">
+        <div class="mn">P2</div>
+        <span class="badge">Segundo</span>
+        <h3>Processo</h3>
+        <p>Fluxo do primeiro “oi” ao pedido, com script em cada etapa. A conversa tem dono, prazo e próximo passo.</p>
+      </article>
+      <article class="ms reveal">
+        <div class="mn">P3</div>
+        <span class="badge">Terceiro</span>
+        <h3>Pessoas</h3>
+        <p>Time treinado — ou a pessoa que vocês contratarem. A Nádia valida a voz. A escala não volta para ela.</p>
+      </article>
+      <article class="ms reveal">
+        <div class="mn">IA</div>
+        <span class="badge" style="background:var(--green)">Em seguida</span>
+        <h3>Inteligência artificial</h3>
+        <p>O SDR faz o primeiro contato e qualifica. A equipe entra para fechar, entregar e cuidar de quem já é cliente.</p>
+      </article>
+    </div>
+  </div>
+</section>
 
-<p>Cocalinho tem praça pequena e calendário partido. O fluxo turístico puxa o movimento em parte do ano. De outubro a março a cidade esfria, o visitante rareia e o faturamento deixa de ter a mesma folga. O primeiro semestre fechou em R$ 2 milhões, com ticket médio de R$ 50. A média simples desses seis meses fica em torno de R$ 333 mil por mês. Proteger uma fatia disso na baixa já muda o ano.</p>
+<div class="divider"></div>
 
-<table>
-  <thead>
-    <tr><th>Indicador</th><th>Leitura de hoje</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>Faturamento do 1º semestre</td><td>R$ 2.000.000</td></tr>
-    <tr><td>Ticket médio</td><td>R$ 50</td></tr>
-    <tr><td>Praça</td><td>Cocalinho/MT, cerca de 6 mil habitantes, perfil turístico</td></tr>
-    <tr><td>Baixa temporada</td><td>Outubro a março</td></tr>
-    <tr><td>Canal comercial</td><td>WhatsApp, operado manualmente</td></tr>
-    <tr><td>Marketing e redes</td><td>Centralizados na Nádia</td></tr>
-  </tbody>
-</table>
+<section id="fluxo">
+  <div class="inner">
+    <div class="reveal">
+      <div class="slabel">Como a empresa fica</div>
+      <h2 class="stitle">Um fluxo só, do turista ao pedido que <em>volta</em>.</h2>
+      <p class="sdesc">A Central das Bebidas continua no WhatsApp. O que muda é o caminho: quem chega é encontrado, quem chama é respondido, quem compra entra na base e quem sumiu é chamado de volta na baixa.</p>
+    </div>
+    <ol class="flow">
+      <li class="flow-step reveal">
+        <span class="fn">01</span>
+        <strong>Encontra</strong>
+        <p>Turista no Google e no Instagram. Cliente de Cocalinho que já compra na casa.</p>
+      </li>
+      <li class="flow-step reveal">
+        <span class="fn">02</span>
+        <strong>Chama</strong>
+        <p>O mesmo WhatsApp de sempre, agora num chat centralizado. O cliente não muda de aplicativo.</p>
+      </li>
+      <li class="flow-step reveal">
+        <span class="fn">03</span>
+        <strong>IA qualifica</strong>
+        <p>Primeiro contato em minutos. A IA entende o pedido enquanto o time está no balcão ou no estoque.</p>
+      </li>
+      <li class="flow-step reveal">
+        <span class="fn">04</span>
+        <strong>Escolhe e paga</strong>
+        <p>Catálogo no chat e Pix integrado. Menos ida e volta até o pedido fechado.</p>
+      </li>
+      <li class="flow-step reveal">
+        <span class="fn">05</span>
+        <strong>Time fecha</strong>
+        <p>A equipe assume exceção, entrega e relacionamento. O “oi” já foi qualificado.</p>
+      </li>
+      <li class="flow-step reveal">
+        <span class="fn">06</span>
+        <strong>Base gira</strong>
+        <p>Kommo registra. Régua de recompra e de reativação chama quem sumiu na baixa.</p>
+      </li>
+      <li class="flow-step span2 reveal">
+        <span class="fn">07 · a casa no comando</span>
+        <strong>Nádia decide. A equipe opera.</strong>
+        <p>Ao fim dos seis meses do EQV, o digital tem dono interno — o time atual ou um talento novo. A Nádia fica na decisão de marca, fora da pauta diária de post e de mensagem.</p>
+      </li>
+    </ol>
 
-<p>O atendimento comercial mora no WhatsApp e na mão de uma equipe jovem. No horário em que o cliente chama, essa mesma equipe está no balcão ou no estoque. A resposta atrasa porque o celular compete com a loja física. Quem espera no WhatsApp não insiste: resolve em outro lugar ou desiste. Cada conversa parada é um pedido de R$ 50 que não entra.</p>
+    <div class="swim reveal" aria-label="Fluxograma da operação futura">
+      <div class="swim-row swim-head">
+        <div>Quem</div>
+        <div>Chegada</div>
+        <div>Primeiro contato</div>
+        <div>Pedido</div>
+        <div>Depois da venda</div>
+      </div>
+      <div class="swim-row">
+        <div class="lane">Demanda</div>
+        <div>Turista busca a cidade. Cliente local precisa repor.</div>
+        <div>Mensagem no WhatsApp da Central.</div>
+        <div>Escolhe no catálogo e paga no Pix.</div>
+        <div>Recebe recompra no ritmo dele. Quem sumiu volta na baixa.</div>
+      </div>
+      <div class="swim-row machine">
+        <div class="lane">Máquina</div>
+        <div>Google Meu Negócio, Instagram e página no ar.</div>
+        <div>SDR de IA qualifica e encaminha o pedido.</div>
+        <div>Fluxo documentado. Kommo registra etapa e valor.</div>
+        <div>Réguas automáticas de recompra e reativação.</div>
+      </div>
+      <div class="swim-row people">
+        <div class="lane">Pessoas</div>
+        <div>Nádia não precisa postar no susto para existir.</div>
+        <div>O time não larga o balcão para responder o primeiro “oi”.</div>
+        <div>A equipe fecha, separa e entrega.</div>
+        <div>Dono interno conduz. A Nádia aprova a direção.</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<p>Em paralelo, marketing e redes sociais estão na Nádia. Ela conhece o cliente, o sortimento e o tom da casa. Também está gestante e precisa delegar a operação. Uma empresa em que a mensagem, o post e a decisão diária dependem de uma sócia não atravessa esse período com segurança — nem para ela, nem para o faturamento.</p>
+<section class="future-bg" id="beneficios">
+  <div class="inner">
+    <div class="reveal">
+      <div class="slabel" style="color:#ff6b6f">Benefícios</div>
+      <h2 class="stitle">O que a Central das Bebidas ganha com as duas fases.</h2>
+      <p class="sdesc">Cada benefício abaixo está ligado a um vazamento de hoje: resposta lenta, base sem régua, turista que não encontra a casa, ou operação que só anda com a Nádia.</p>
+    </div>
+    <div class="future-compare reveal">
+      <article class="future-col now">
+        <div class="k">Hoje</div>
+        <ul>
+          <li>WhatsApp no celular de quem está no estoque</li>
+          <li>Pedido de R$ 50 perdido por demora</li>
+          <li>Recompra na memória do cliente</li>
+          <li>Turista sem Google, sem Instagram e sem resposta</li>
+          <li>Redes e marketing concentrados na Nádia</li>
+        </ul>
+      </article>
+      <article class="future-col next">
+        <div class="k">Como fica</div>
+        <ul>
+          <li>Chat centralizado, no WhatsApp que o time já usa</li>
+          <li>Primeiro contato em minutos, com a IA</li>
+          <li>Régua de recompra e de reativação na baixa</li>
+          <li>Turista encontra a casa e chama com oferta pronta</li>
+          <li>Nádia na decisão. Equipe, ou um talento novo, na execução</li>
+        </ul>
+      </article>
+    </div>
+    <div class="future-outcomes">
+      <article class="outcome reveal">
+        <div class="n">01</div>
+        <h3>Atendimento que não espera o balcão</h3>
+        <p>A IA segura o primeiro contato. A equipe entra para fechar. O pico da loja deixa de silenciar o WhatsApp.</p>
+      </article>
+      <article class="outcome reveal">
+        <div class="n">02</div>
+        <h3>Baixa com pedido previsível</h3>
+        <p>Quem compra o ano inteiro em Cocalinho entra em régua. Quem veio na alta e sumiu é reativado entre outubro e março.</p>
+      </article>
+      <article class="outcome reveal">
+        <div class="n">03</div>
+        <h3>Turista com caminho curto</h3>
+        <p>Google e Instagram levam para o WhatsApp. Catálogo e Pix encurtam o caminho até o pagamento.</p>
+      </article>
+      <article class="outcome reveal">
+        <div class="n">04</div>
+        <h3>Base fora do celular</h3>
+        <p>Kommo guarda histórico, etapa e próximo passo. A venda deixa de morar na memória de uma pessoa.</p>
+      </article>
+      <article class="outcome reveal">
+        <div class="n">05</div>
+        <h3>Time com padrão</h3>
+        <p>Scripts em todas as etapas e fluxo documentado. A equipe jovem atende com processo, com treinamento e playbook.</p>
+      </article>
+      <article class="outcome reveal">
+        <div class="n">06</div>
+        <h3>Nádia com espaço</h3>
+        <p>Ela segue como referência da marca. Post, mensagem e follow-up deixam de depender da agenda dela.</p>
+      </article>
+    </div>
+  </div>
+</section>
 
-<p>O gargalo não é falta de demanda. É demanda que chega e não vira pedido no tempo do cliente, somada a uma presença digital que ainda não tem outro dono além da Nádia.</p>
+<section id="escopo">
+  <div class="inner">
+    <div class="reveal">
+      <div class="slabel">Escopo</div>
+      <h2 class="stitle">O que entra no Zap First e o que o EQV instala em <em>6 meses</em>.</h2>
+      <p class="sdesc">O Zap First é o projeto de 3 meses. O EQV começa com a máquina já no ar e percorre a baixa até a casa assumir o ciclo.</p>
+    </div>
+    <div class="del-grid">
+      <article class="del-card reveal">
+        <div class="n">Zap First · presença</div>
+        <h3>Setup para o turista encontrar</h3>
+        <div class="inc">Setup completo (Google Meu Negócio, Instagram, página ou site)</div>
+        <div class="inc">WhatsApp Business estruturado, sem tirar a equipe do WhatsApp</div>
+      </article>
+      <article class="del-card reveal">
+        <div class="n">Zap First · venda</div>
+        <h3>Do catálogo ao Pix</h3>
+        <div class="inc">Catálogo de produtos + PIX integrado</div>
+        <div class="inc">Scripts de atendimento em todas as etapas</div>
+        <div class="inc">Fluxo comercial documentado</div>
+      </article>
+      <article class="del-card reveal">
+        <div class="n">Zap First · time e base</div>
+        <h3>Quem opera e o que fica registrado</h3>
+        <div class="inc">Treinamento do time</div>
+        <div class="inc">CRM Kommo configurado</div>
+        <div class="inc">Réguas de recompra e reativação</div>
+      </article>
+      <article class="del-card reveal">
+        <div class="n">Zap First · inteligência</div>
+        <h3>Primeiro contato e leitura</h3>
+        <div class="inc">SDR de Inteligência Artificial para qualificar a demanda</div>
+        <div class="inc">Relatório final + diagnóstico de maturidade</div>
+      </article>
+      <article class="del-card wide reveal">
+        <div class="n">EQV · Empresa que Vende · 6 meses</div>
+        <h3>A casa conduz conteúdo, tráfego, comercial e CRM</h3>
+        <div class="inc">Consultoria de 1 hora por mês e execução assistida em quatro frentes: conteúdo, mídia, comercial e CRM</div>
+        <div class="inc">Linha editorial do Instagram para o time publicar, com a voz validada pela Nádia</div>
+        <div class="inc">Google e Instagram para quem busca Cocalinho e para quem já está na cidade</div>
+        <div class="inc">Scripts, objeções, pipeline e réguas nas mãos de quem fica — equipe atual ou talento contratado</div>
+        <div class="inc">Comunidade de pares e Fábrica de Receita, no padrão do programa EQV</div>
+      </article>
+    </div>
+    <div class="timeline-strip reveal">
+      <div class="tl-cell">
+        <div class="tl-mes">Mês 1 · out</div>
+        <div class="tl-fase">Zap First no ar</div>
+        <div class="tl-items">Chat, IA, catálogo, Pix, Kommo e fluxo</div>
+      </div>
+      <div class="tl-cell">
+        <div class="tl-mes">Mês 2 · nov</div>
+        <div class="tl-fase">EQV começa</div>
+        <div class="tl-items">Onboarding, prioridades da baixa e dono interno</div>
+      </div>
+      <div class="tl-cell">
+        <div class="tl-mes">Mês 3 · dez</div>
+        <div class="tl-fase">Canal pronto</div>
+        <div class="tl-items">Relatório do Zap First. Oferta para local e visitante</div>
+      </div>
+      <div class="tl-cell">
+        <div class="tl-mes">Mês 4 · jan</div>
+        <div class="tl-fase">Conteúdo</div>
+        <div class="tl-items">Instagram com linha editorial. A Nádia sai da publicação diária</div>
+      </div>
+      <div class="tl-cell">
+        <div class="tl-mes">Mês 5 · fev</div>
+        <div class="tl-fase">Tráfego</div>
+        <div class="tl-items">Google e Instagram. Leitura por conversa e por pedido</div>
+      </div>
+      <div class="tl-cell">
+        <div class="tl-mes">Mês 6–7</div>
+        <div class="tl-fase">Casa no comando</div>
+        <div class="tl-items">Comercial, CRM e consolidação na entrada da temporada</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<h2>2. O desafio e a oportunidade</h2>
+<section class="invest-bg" id="investimento">
+  <div class="inner">
+    <div class="reveal">
+      <div class="slabel">Investimento</div>
+      <h2 class="stitle">Duas fases. Condição direta, com a referência ao lado.</h2>
+      <p class="sdesc">Zap First em 3 meses. EQV em 6 parcelas alinhadas ao ciclo. A soma, com o Zap First à vista, fica em R$ 33.000 diante de R$ 78.000 de referência.</p>
+    </div>
 
-<p>O desafio da baixa, de outubro a março, é manter faturamento quando o turismo esfria. Esses meses não são espera. São meses de base. Bar, mercado, chácara e casa em Cocalinho continuam comprando bebida, gelo e reposição. Hoje essa recompra depende de memória: a do cliente, que chama quando lembra, e a da equipe, que responde quando o balcão permite.</p>
+    <div class="price-options">
+      <article class="po featured reveal">
+        <div class="k">Zap First <span class="tag">3 meses</span></div>
+        <div class="was">de R$ 30.000</div>
+        <div class="v">12x R$ 1.666,67</div>
+        <div class="s">no cartão · projeto de 3 meses</div>
+        <div class="cash">ou R$ 18.000 à vista</div>
+      </article>
+      <article class="po reveal">
+        <div class="k">Projeto EQV <span class="tag">6 meses</span></div>
+        <div class="was">de R$ 48.000</div>
+        <div class="v">6x R$ 2.500</div>
+        <div class="s">ciclo de 6 meses · total de R$ 15.000</div>
+        <div class="cash">parcela alinhada a cada mês de acompanhamento</div>
+      </article>
+    </div>
 
-<p>A oportunidade está em dois públicos que os 6 mil habitantes não resumem.</p>
+    <table class="price-table reveal">
+      <thead>
+        <tr>
+          <th>Fase</th>
+          <th>Referência</th>
+          <th>Nesta proposta</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="deal">
+          <td>Zap First · 3 meses</td>
+          <td class="anchor">R$ 30.000</td>
+          <td class="now">R$ 18.000 à vista ou 12x de R$ 1.666,67</td>
+        </tr>
+        <tr>
+          <td>Projeto EQV · 6 meses</td>
+          <td class="anchor">R$ 48.000</td>
+          <td class="now">6x de R$ 2.500</td>
+        </tr>
+        <tr class="deal">
+          <td>Soma, com Zap First à vista</td>
+          <td class="anchor">R$ 78.000</td>
+          <td class="now">R$ 33.000</td>
+        </tr>
+      </tbody>
+    </table>
 
-<ul>
-  <li><strong>O cliente local recorrente.</strong> Compra com ritmo. Um contato no momento certo — antes de o estoque dele acabar, ou quando ele sumiu depois da alta — vale mais do que um post solto. Régua de recompra e de reativação transforma base parada em pedido.</li>
-  <li><strong>O turista e o visitante.</strong> Não conhece a Central das Bebidas. Pesquisa no Google, olha o Instagram e chama no WhatsApp. Se a ficha está incompleta, se o perfil não mostra o que a casa vende e se a mensagem fica sem resposta, ele compra de quem atendeu primeiro. A janela é a estadia. Não há segunda chance no mês seguinte.</li>
-</ul>
+    <div class="note reveal">
+      <strong>Leitura em pedidos, ticket de R$ 50:</strong> o Zap First à vista equivale a 360 pedidos — 4 por dia em 90 dias. A parcela do EQV equivale a 50 pedidos no mês. É faturamento bruto, antes do custo da mercadoria, e serve de régua para a decisão.
+    </div>
+  </div>
+</section>
 
-<p>Tracionar a baixa é fazer as três coisas ao mesmo tempo: responder no ato, recomprar quem já comprou e ser encontrado por quem está chegando. Google e Instagram cumprem o papel de atrair. O WhatsApp cumpre o papel de converter. Um sem o outro deixa dinheiro na mesa.</p>
+<section id="proximos">
+  <div class="inner">
+    <div class="reveal">
+      <div class="slabel">Próximos passos</div>
+      <h2 class="stitle">O Zap First entra em outubro, na largada da baixa.</h2>
+      <p class="sdesc">Cada semana de WhatsApp manual nesse período é pedido de R$ 50 esperando alguém sair do estoque.</p>
+    </div>
+    <div class="steps-list reveal">
+      <div class="step-item">
+        <div class="step-num">01</div>
+        <div class="step-body">
+          <strong>Proposta aprovada + contrato assinado</strong>
+          <span>Zap First (12x de R$ 1.666,67 ou R$ 18.000 à vista) e EQV em 6x de R$ 2.500.</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">02</div>
+        <div class="step-body">
+          <strong>Kick-off com Nádia e Jersimar</strong>
+          <span>Ponto focal, acessos de WhatsApp, Instagram e Google, tabela e regras de entrega. A Nádia entra na decisão de marca.</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">03</div>
+        <div class="step-body">
+          <strong>Sprint 1 · Zap First no ar</strong>
+          <span>Chat centralizado, IA, catálogo, Pix, Kommo, scripts e as primeiras réguas. A equipe segue no WhatsApp.</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">04</div>
+        <div class="step-body">
+          <strong>Sprint 2 · EQV em cima da máquina</strong>
+          <span>Conteúdo, Google, Instagram, comercial e CRM com quem vai operar — o time ou o talento que vocês contratarem.</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">05</div>
+        <div class="step-body">
+          <strong>Casa no comando</strong>
+          <span>Diagnóstico de maturidade, base organizada e a operação digital repetindo o ciclo sem a Nádia no meio.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<blockquote>
-  <p><strong>Régua de retorno, em faturamento, no ticket de R$ 50.</strong> Quatro pedidos recuperados por dia no WhatsApp são cerca de R$ 6.000 no mês e R$ 18.000 em 90 dias — a ordem de grandeza do Zap First à vista. Cinquenta pedidos no mês são R$ 2.500 — a parcela do Projeto EQV nesta proposta. A conta é de faturamento bruto, antes do custo da mercadoria, e serve para decidir. A meta comercial será fechada no kickoff, com os números de vocês.</p>
-</blockquote>
+<section class="footer-cta" id="aprovar">
+  <div class="logo-plate">
+    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <path d="M12 2.5h8v3.2l1.6 2.2v15.2a5.6 5.6 0 01-5.6 5.6h0a5.6 5.6 0 01-5.6-5.6V7.9L12 5.7V2.5z" fill="#e3040a"/>
+      <path d="M12 2.5h8v2.2h-8V2.5z" fill="#111"/>
+      <path d="M13.2 14.5h5.6v2.1h-5.6v-2.1z" fill="#fff" opacity=".45"/>
+    </svg>
+    <strong>Central das Bebidas</strong>
+  </div>
+  <h2>Pronto para ligar a máquina antes da baixa?</h2>
+  <p>WhatsApp com resposta, base com régua e um digital que a casa opera. Nádia na decisão. Time no comando.</p>
+  <div class="btn-row">
+    <button class="btn" type="button" id="btnAprovar">Aprovar Proposta</button>
+    <a class="btn ghost" href="mailto:?subject=Assinar%20contrato%20%E2%80%94%20Central%20das%20Bebidas&body=Aprovo%20a%20proposta%20Zap%20First%20%2B%20EQV%20da%20Central%20das%20Bebidas.%20Zap%20First%3A%2012x%20de%20R%24%201.666%2C67%20ou%20R%24%2018.000%20%C3%A0%20vista.%20EQV%3A%206x%20de%20R%24%202.500.">Assinar Contrato</a>
+  </div>
+  <div class="toast" id="toast">Proposta marcada como aprovada neste dispositivo. Siga para a assinatura do contrato.</div>
+  <div class="footer-note">V4 Company × Central das Bebidas · Nádia Pires e Jersimar Freire · Cocalinho/MT · confidencial</div>
+</section>
 
-<h2>3. A solução V4</h2>
-
-<p>Duas fases, com papéis diferentes. O Zap First entra agora e resolve o vazamento de venda. O Projeto EQV, no formato Empresa que Vende, dura seis meses e deixa o método na casa. A V4 prescreve e executa junto. No fim do ciclo, quem opera é a Central das Bebidas.</p>
-
-<h3>Fase 1 — Zap First</h3>
-
-<p>Implementação imediata, em um projeto de três meses, de uma ferramenta de chat centralizada com inteligência artificial. A IA faz o primeiro contato e qualifica a demanda. A equipe permanece no WhatsApp que já usa: muda o lugar onde a conversa é organizada, não o hábito do cliente nem o aplicativo do time.</p>
-
-<p>Entram no mesmo ciclo o catálogo de produtos, a integração com Pix, o fluxo comercial de ponta a ponta e as réguas de recompra e reativação. O visitante encontra a casa. O cliente antigo é chamado de volta. Quem está no balcão deixa de ser a única fila entre a mensagem e o pedido.</p>
-
-<p>O desenho recomendado é começar em outubro, na entrada da baixa. Os três meses do Zap First cobrem o primeiro trecho do período mais sensível do ano, que é exatamente quando uma resposta lenta custa mais.</p>
-
-<h3>Fase 2 — Projeto EQV, Empresa que Vende</h3>
-
-<p>Ciclo de seis meses, no mesmo padrão de programa usado em projetos EQV da V4: diagnóstico contínuo, consultoria, execução assistida, comunidade e imersão. O objetivo não é produzir conteúdo no lugar de vocês e encerrar o contrato levando o aprendizado embora. O objetivo é capacitar a Nádia, o Jersimar, a equipe atual ou um talento novo que vocês contratem, até o domínio da operação digital.</p>
-
-<p>O foco comercial do ciclo é tracionar venda, organizar a base e atrair demanda ativa — em especial o turista — pelo Google e pelo Instagram. A Nádia permanece como referência de marca e de decisão. A execução diária sai da mão dela. O EQV parte do que o Zap First já deixou instalado: catálogo, Pix, fluxo, CRM e réguas. Não se começa do zero.</p>
-
-<p>O programa se apoia em cinco pilares:</p>
-
-<ul>
-  <li><strong>Diagnóstico contínuo</strong> de maturidade comercial e digital, com o gargalo do mês visível: tempo de resposta, base parada, busca no Google ou conversão do WhatsApp.</li>
-  <li><strong>Consultoria estratégica,</strong> uma hora por mês com consultor V4, para priorizar o ciclo e alocar o squad no que trava a receita.</li>
-  <li><strong>Execução assistida</strong> com quatro frentes: conteúdo, mídia paga, comercial e CRM. O especialista faz junto com quem vai ficar na operação.</li>
-  <li><strong>Comunidade</strong> de pares, com monitoria coletiva, grupo fechado e conteúdo de aquisição, retenção e monetização.</li>
-  <li><strong>Fábrica de Receita,</strong> imersão presencial para trocar prática com outros operadores e levar método de volta para Cocalinho.</li>
-</ul>
-
-<p>Recomendação de entrada: o Zap First começa em outubro. O EQV começa no mês seguinte, com a máquina de atendimento já no ar, e percorre a baixa até a virada da temporada. Em abril, a casa entra no movimento mais forte com dono interno no digital — e a Nádia fora da execução do dia a dia.</p>
-
-<h2>4. Entregáveis e cronograma de 6 meses</h2>
-
-<h3>Zap First — o que está incluído nos 3 meses</h3>
-
-<ul>
-  <li>Setup completo (Google Meu Negócio, Instagram, página ou site)</li>
-  <li>WhatsApp Business estruturado, sem tirar a equipe do WhatsApp</li>
-  <li>Catálogo de produtos + PIX integrado</li>
-  <li>Scripts de atendimento em todas as etapas</li>
-  <li>Fluxo comercial documentado</li>
-  <li>Treinamento do time</li>
-  <li>CRM Kommo configurado</li>
-  <li>Réguas de recompra e reativação</li>
-  <li>SDR de Inteligência Artificial para o primeiro contato e a qualificação</li>
-  <li>Relatório final + diagnóstico de maturidade</li>
-</ul>
-
-<p>Na prática, a IA segura o primeiro “oi”, entende o que a pessoa quer e encaminha o pedido qualificado. A equipe entra para fechar, resolver exceção e cuidar de quem já é cliente. Catálogo e Pix encurtam o caminho entre a pergunta e o pagamento.</p>
-
-<h3>EQV — jornada de 6 meses</h3>
-
-<p>Calendário recomendado com início do Zap First em outubro de 2026 e início do EQV em novembro de 2026. Se a data de assinatura mudar, as fases se deslocam juntas. A ordem permanece.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Quando</th>
-      <th>Zap First</th>
-      <th>EQV</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Outubro 2026</td>
-      <td>Implantação: chat, IA, catálogo, Pix, Kommo e fluxo</td>
-      <td>—</td>
-    </tr>
-    <tr>
-      <td>Novembro 2026</td>
-      <td>Operação assistida e primeiras réguas</td>
-      <td><strong>Mês 1 — Onboarding.</strong> Kickoff, maturidade e prioridades da baixa: tempo de resposta, papel da Nádia e dono interno</td>
-    </tr>
-    <tr>
-      <td>Dezembro 2026</td>
-      <td>Consolidação, treinamento e relatório de maturidade</td>
-      <td><strong>Mês 2 — Posicionamento e canal.</strong> Oferta para o cliente local e para o visitante, em cima do canal que já está vendendo</td>
-    </tr>
-    <tr>
-      <td>Janeiro 2027</td>
-      <td>Máquina em operação pela casa</td>
-      <td><strong>Mês 3 — Conteúdo.</strong> Linha editorial e produção assistida. O Instagram deixa de depender da Nádia para sair</td>
-    </tr>
-    <tr>
-      <td>Fevereiro 2027</td>
-      <td>—</td>
-      <td><strong>Mês 4 — Tráfego.</strong> Google e Instagram para quem busca a cidade e para quem já está nela. Leitura por conversa e por pedido</td>
-    </tr>
-    <tr>
-      <td>Março 2027</td>
-      <td>—</td>
-      <td><strong>Mês 5 — Comercial e CRM.</strong> Scripts, objeções, follow-up e pipeline nas mãos de quem opera</td>
-    </tr>
-    <tr>
-      <td>Abril 2027</td>
-      <td>—</td>
-      <td><strong>Mês 6 — Consolidação.</strong> A casa conduz o ciclo sozinha na entrada da temporada mais forte</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3>Três sessões de execução assistida</h3>
-
-<p>Além da consultoria mensal, o EQV concentra três sessões em que o squad produz com vocês os artefatos que a operação passa a repetir.</p>
-
-<ul>
-  <li><strong>Sessão 1 — Conteúdo.</strong> Voz da marca, linha editorial do Instagram, modelos de oferta, combo e aviso de horário, e um fluxo de publicação que o time — ou a pessoa contratada — executa. A Nádia valida a voz no começo. A escala não volta para ela.</li>
-  <li><strong>Sessão 2 — Mídia.</strong> Presença no Google (busca de quem chega: adega, bebidas, delivery, Cocalinho), plano de mídia em Google e Instagram, pixel, segmentação de quem está na cidade e de quem já comprou, e leitura de resultado por conversa no WhatsApp.</li>
-  <li><strong>Sessão 3 — Comercial e CRM.</strong> Revisão dos scripts do Zap First, objeções reais (preço, prazo, entrega, horário), réguas de recompra e de reativação da baixa, e o Kommo com cadência, pipeline e dono. A IA qualifica. O humano fecha e relaciona.</li>
-</ul>
-
-<h3>O que cada frente entrega ao longo do ciclo</h3>
-
-<table>
-  <thead>
-    <tr><th>Frente</th><th>Entrega na Central das Bebidas</th></tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Conteúdo</td>
-      <td>Linha editorial, peças e roteiros curtos para o Instagram, com suporte de produção até o time publicar sozinho</td>
-    </tr>
-    <tr>
-      <td>Mídia paga</td>
-      <td>Campanhas em Google e Meta, segmentação do visitante e da base, otimização por conversa e por pedido</td>
-    </tr>
-    <tr>
-      <td>Comercial</td>
-      <td>Scripts por etapa, tratamento de objeção, treino da equipe e critério claro entre o que a IA responde e o que a pessoa assume</td>
-    </tr>
-    <tr>
-      <td>CRM</td>
-      <td>Pipeline no Kommo, automações, régua de quem compra toda semana e sumiu, reativação de quem veio na alta e não voltou na baixa</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3>O que a casa tem nas mãos ao fim dos 6 meses</h3>
-
-<ul>
-  <li>Primeiro contato no WhatsApp em minutos, com qualificação por IA e fechamento pela equipe</li>
-  <li>Catálogo, Pix e fluxo documentado, sem a Nádia montar pedido na mão</li>
-  <li>Base organizada no Kommo, com recompra e reativação rodando</li>
-  <li>Google e Instagram atraindo quem visita a cidade, operados pelo time ou pelo novo talento</li>
-  <li>Nádia em pauta de decisão, fora da operação diária de rede e de atendimento</li>
-  <li>Critério para repetir o ciclo na próxima baixa, sem reabrir o diagnóstico do zero</li>
-</ul>
-
-<h3>O que precisamos de vocês</h3>
-
-<ul>
-  <li>Um ponto focal com horas na semana: Jersimar, alguém da equipe ou a pessoa que contratarem para assumir o digital</li>
-  <li>Acesso a WhatsApp Business, Instagram, Google Meu Negócio, tabela de preços e regras de entrega</li>
-  <li>A Nádia no kickoff e nas decisões de marca, sem a pauta diária de post e de mensagem</li>
-  <li>Disposição para registrar pedido e cliente no fluxo novo, para a base deixar de morar só no celular de quem está no estoque</li>
-</ul>
-
-<h2>5. Investimento</h2>
-
-<p>Os valores abaixo já estão na condição desta proposta, com a referência de tabela ao lado para deixar a decisão visível. Não há pacote oculto: o que entra em cada fase está na seção anterior.</p>
-
-<h3>Zap First — projeto de 3 meses</h3>
-
-<table>
-  <thead>
-    <tr><th>Condição</th><th class="num">Valor</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>Referência</td><td class="num"><span class="anchor">R$ 30.000</span></td></tr>
-    <tr><td>12x no cartão</td><td class="num"><span class="now">R$ 1.666,67</span></td></tr>
-    <tr><td>Ou à vista</td><td class="num"><span class="now">R$ 18.000</span></td></tr>
-  </tbody>
-</table>
-
-<p>À vista, a diferença para a referência é de R$ 12.000. No cartão, doze parcelas de R$ 1.666,67 somam R$ 20.000, dez mil abaixo da referência. O projeto em si dura três meses; o parcelamento no cartão é condição de pagamento, não prazo de entrega.</p>
-
-<h3>Projeto EQV — ciclo de 6 meses</h3>
-
-<table>
-  <thead>
-    <tr><th>Condição</th><th class="num">Valor</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>Referência</td><td class="num"><span class="anchor">R$ 48.000</span></td></tr>
-    <tr><td>6x de R$ 2.500</td><td class="num"><span class="now">R$ 15.000</span></td></tr>
-    <tr><td>Parcela mensal, alinhada aos 6 meses</td><td class="num"><span class="now">R$ 2.500</span></td></tr>
-  </tbody>
-</table>
-
-<p>A ancoragem de R$ 48.000 fica, nesta proposta, em seis parcelas de R$ 2.500. O ciclo custa R$ 15.000. A diferença para a referência é de R$ 33.000.</p>
-
-<h3>Leitura conjunta das duas fases</h3>
-
-<table>
-  <thead>
-    <tr><th>Fase</th><th class="num">Referência</th><th class="num">Nesta proposta</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>Zap First</td><td class="num"><span class="anchor">R$ 30.000</span></td><td class="num">R$ 18.000 à vista, ou 12x de R$ 1.666,67</td></tr>
-    <tr><td>Projeto EQV</td><td class="num"><span class="anchor">R$ 48.000</span></td><td class="num">6x de R$ 2.500</td></tr>
-    <tr><td><strong>Soma, com Zap First à vista</strong></td><td class="num"><strong>R$ 78.000</strong></td><td class="num"><strong class="now">R$ 33.000</strong></td></tr>
-  </tbody>
-</table>
-
-<h3>O que o investimento representa em pedidos</h3>
-
-<table>
-  <thead>
-    <tr><th>Leitura</th><th>Conta no ticket de R$ 50</th><th>Equivalente</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>Zap First à vista</td><td>R$ 18.000 ÷ R$ 50</td><td>360 pedidos</td></tr>
-    <tr><td>Para acompanhar esses 360 em 90 dias</td><td>360 ÷ 90 dias</td><td>4 pedidos por dia</td></tr>
-    <tr><td>Parcela mensal do EQV</td><td>R$ 2.500 ÷ R$ 50</td><td>50 pedidos no mês</td></tr>
-    <tr><td>Ciclo completo do EQV</td><td>R$ 15.000 ÷ R$ 50</td><td>300 pedidos</td></tr>
-  </tbody>
-</table>
-
-<p>Quatro pedidos por dia é volume compatível com o que uma operação de WhatsApp já perde quando o balcão atrasa a resposta — ainda mais na entrada de outubro. Cinquenta pedidos no mês, para sustentar a parcela do EQV, é menos de dois por dia. Sobre uma base que faturou R$ 2 milhões no semestre, o retorno está em faturamento preservado na baixa e em uma operação que continua quando a Nádia der um passo atrás.</p>
-
-<blockquote>
-  <p>O próximo passo é alinharmos o kickoff de outubro: ponto focal, acessos e a data em que o Zap First assume o primeiro contato. A baixa começa em dias. Cada semana de WhatsApp manual nesse período é venda no ritmo de R$ 50 que a casa já sabe fazer — e que hoje espera alguém sair do estoque para responder.</p>
-</blockquote>
-
-<footer>
-  <p>V4 Company · Proposta comercial para Central das Bebidas · Nádia Pires e Jersimar Freire · Cocalinho/MT · 22 de setembro de 2026. Documento confidencial, preparado para os sócios.</p>
-</footer>
-
-</article>
+<script>
+const prog = document.getElementById('prog');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  prog.style.width = (h ? window.scrollY / h * 100 : 0) + '%';
+});
+const navLinks = document.querySelectorAll('.topnav nav a');
+const sections = Array.from(document.querySelectorAll('section[id]'));
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
+    }
+  });
+}, { rootMargin: '-40% 0px -55% 0px' });
+sections.forEach(s => obs.observe(s));
+const reveals = document.querySelectorAll('.reveal');
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: .12 });
+reveals.forEach(el => ro.observe(el));
+document.getElementById('btnAprovar').addEventListener('click', () => {
+  document.getElementById('toast').classList.add('show');
+});
+</script>
 </body>
 </html>
