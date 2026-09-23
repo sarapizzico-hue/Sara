@@ -263,6 +263,17 @@
     .success-item .n { font-family: "JetBrains Mono", monospace; color: var(--green); font-size: 14px; font-weight: 700; }
     .success-item h3 { font-size: 15px; font-weight: 650; line-height: 1.35; }
     .offers { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .offers.three { grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+    .offers.three .offer { padding: 12px 12px; }
+    .offers.three .offer h3 { font-size: 16px; }
+    .offers.three .offer .now { font-size: 22px; }
+    .offers.three .math-row { font-size: 12px; padding: 4px 0; }
+    .scope-split { display: grid; grid-template-columns: 1.08fr 0.92fr; gap: 12px; align-items: start; }
+    .scope-split .inc-card { padding: 14px 14px; }
+    .scope-split .inc-card h3 { font-size: 15px; margin-bottom: 8px; }
+    .scope-split .inc li { font-size: 12px; line-height: 1.35; padding: 3px 0 3px 18px; }
+    .scope-note { font-size: 12.5px; line-height: 1.4; color: var(--muted); margin: 0 0 8px; }
+    .scope-note strong { color: #fff; }
     .offer { padding: 14px 18px; }
     .offer.featured { border-color: rgba(88,214,141,.32); background: linear-gradient(160deg, rgba(88,214,141,.12), rgba(255,255,255,.04)); }
     .offer .tag { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--red-soft); margin-bottom: 8px; }
@@ -455,24 +466,37 @@
             <div class="head-copy">
               <div class="eyebrow">02 · Como solucionar · domínio orgânico</div>
               <h2>O site vira a vitrine. <em>O Google trabalha a favor.</em></h2>
-              <p class="sub">SEO Growth + GEO para a CCPVC dominar buscas técnicas e locais de compostos e distribuidores de polímeros.</p>
+              <p class="sub">SEO + GEO para a CCPVC ser encontrada, e a implementação do site para essa busca virar página que explica e pede contato.</p>
             </div>
             <div class="section-chip"><b>01</b> Produto</div>
           </header>
           <div class="content">
-            <p class="thesis">SEO aqui é <em>autoridade orgânica</em>: quem pesquisa solução industrial encontra a CCPVC no momento da cotação — com conteúdo técnico e presença local.</p>
-            <article class="card inc-card">
-              <h3>Escopo · SEO Growth + GEO</h3>
-              <ul class="inc">
-                <li><strong>Tudo do Starter.</strong> Base técnica, Google Search Console, GMB e otimização inicial da estrutura.</li>
-                <li><strong>Auditoria técnica contínua.</strong> Correção recorrente de carregamento e formulários.</li>
-                <li><strong>Pesquisa avançada.</strong> Sem limite fixo. Mapa profundo de intenção no segmento industrial.</li>
-                <li><strong>Conteúdo e blog.</strong> 4 blogposts técnicos por mês, briefings e otimização para snippets.</li>
-                <li><strong>Link building leve.</strong> 1 a 2 backlinks por mês e recuperação de links quebrados.</li>
-                <li><strong>SEO local básico.</strong> Mapas e diretórios, inclusive “distribuidor de PVC perto de mim”.</li>
-                <li><strong>Gestão estratégica.</strong> Monitoramento quinzenal e reunião mensal de resultados.</li>
-              </ul>
-            </article>
+            <div class="scope-split">
+              <article class="card inc-card">
+                <h3>Escopo · SEO Growth + GEO</h3>
+                <ul class="inc">
+                  <li><strong>Tudo do Starter.</strong> Base técnica, Search Console, perfil local e estrutura inicial.</li>
+                  <li><strong>Auditoria técnica contínua.</strong> Correção de carregamento e formulários.</li>
+                  <li><strong>Pesquisa avançada.</strong> Mapa de intenção no segmento industrial.</li>
+                  <li><strong>Conteúdo e blog.</strong> 4 posts técnicos por mês, briefing e snippet.</li>
+                  <li><strong>Link building leve.</strong> 1 a 2 backlinks por mês e links quebrados.</li>
+                  <li><strong>SEO local.</strong> Mapas, diretórios e “distribuidor de PVC perto de mim”.</li>
+                  <li><strong>Gestão estratégica.</strong> Quinzenal e reunião mensal de resultados.</li>
+                </ul>
+              </article>
+              <article class="card inc-card">
+                <h3>Implementação do site</h3>
+                <p class="scope-note"><strong>Importância.</strong> O SEO leva o comprador até a CCPVC. Sem uma página clara, a busca não vira cotação.</p>
+                <p class="scope-note"><strong>Benefício.</strong> Site institucional de até 3 páginas, com copy e design responsivo, para o comprador industrial entender a oferta e pedir contato.</p>
+                <ul class="inc">
+                  <li><strong>Website institucional.</strong> A casa digital da CCPVC, no ar.</li>
+                  <li><strong>Copywriting persuasivo.</strong> Texto que explica a solução e chama para a cotação.</li>
+                  <li><strong>Até 3 páginas.</strong> O essencial para apresentar, detalhar e converter.</li>
+                  <li><strong>Páginas de alta performance.</strong> Abrem rápido e não travam o formulário.</li>
+                  <li><strong>Design atrativo e responsivo.</strong> Funciona no computador e no celular do comprador.</li>
+                </ul>
+              </article>
+            </div>
           </div>
         </div>
         <footer class="footer"><span>CCPVC × V4 Company · confidencial</span><span class="count">04 / 11</span></footer>
@@ -755,14 +779,14 @@
         <div class="page">
           <header class="slide-head">
             <div class="head-copy">
-              <div class="eyebrow">05 · Investimento · as duas frentes</div>
-              <h2>Duas condições. <em>Uma esteira de vendas.</em></h2>
-              <p class="sub">SEO recorrente por 6 meses. CRM de implementação, viabilizado pelo cashback da Estruturação Estratégica.</p>
+              <div class="eyebrow">05 · Investimento · as três frentes</div>
+              <h2>Três condições. <em>Uma esteira de vendas.</em></h2>
+              <p class="sub">SEO por 6 meses, CRM com o cashback da EE e a implementação do site em 12x.</p>
             </div>
             <div class="section-chip"><b>01</b> Decisão</div>
           </header>
           <div class="content">
-            <div class="offers">
+            <div class="offers three">
               <article class="card offer">
                 <div class="tag">Recorrente · contrato de 6 meses</div>
                 <h3>SEO Growth + GEO</h3>
@@ -799,6 +823,24 @@
                   <span>Total R$ 5.618,97</span>
                 </div>
               </article>
+              <article class="card offer featured">
+                <div class="tag">Implementação · 12x</div>
+                <h3>Site</h3>
+                <p class="note">Até 3 páginas · institucional</p>
+                <div class="was">de R$ 18.262,50</div>
+                <div class="now">R$ 12.966,37</div>
+                <div class="math">
+                  <div class="math-row"><span>Valor de tabela</span><strong>R$ 18.262,50</strong></div>
+                  <div class="math-row"><span>Valor negociado</span><strong class="ok">R$ 12.966,37</strong></div>
+                  <div class="math-row"><span>Parcelamento</span><strong class="ok">12x de R$ 1.080,53</strong></div>
+                  <div class="math-row"><span>Copy, design e performance</span><strong class="ok">incluso</strong></div>
+                </div>
+                <div class="pay">
+                  <span>R$ 1.080,53/mês</span>
+                  <span>12 parcelas</span>
+                  <span>Total R$ 12.966,37</span>
+                </div>
+              </article>
             </div>
             <div class="ee-band">
               <div>
@@ -809,12 +851,12 @@
             </div>
             <div class="combo">
               <div>
-                <h3>Máquina completa · soma mensal</h3>
-                <p>R$ 3.600 de SEO + parcela do CRM de R$ 936,50. Nos 6 meses: SEO R$ 21.600 + CRM R$ 5.618,97 = R$ 27.218,97.</p>
+                <h3>Máquina completa</h3>
+                <p>SEO R$ 3.600/mês + CRM 6x R$ 936,50 + site de R$ 18.262,50 por R$ 12.966,37 em 12x de R$ 1.080,53.</p>
               </div>
               <div style="text-align:right">
-                <div class="cond">SEO + parcela do CRM</div>
-                <div class="fig">R$ 4.536,50<small style="font-size:14px;font-weight:600">/mês</small></div>
+                <div class="cond">Site · 12x</div>
+                <div class="fig" style="font-size:22px">R$ 12.966,37</div>
               </div>
             </div>
           </div>
