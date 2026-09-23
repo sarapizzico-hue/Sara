@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Work Bank · Assessoria de Growth | V4 Company</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --v4-red: #e50914;
+      --v4-orange: #ff481f;
+      --v4-dark: #280001;
+      --ink: #141414;
+      --ink-soft: #5c5856;
+      --line: rgba(20, 20, 20, .12);
+      --hero: radial-gradient(120% 130% at 50% -10%, #ff5a2c 0%, #e50914 30%, #b00610 62%, #280001 100%);
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      width: 100%; height: 100%; margin: 0; overflow: hidden;
+      background: #171313; color: var(--ink);
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    button { font-family: inherit; }
+    #viewport {
+      position: fixed; inset: 0; overflow: hidden;
+      background: radial-gradient(circle at 50% 10%, rgba(229, 9, 20, .18), transparent 38%), #171313;
+    }
+    #deck {
+      --deck-scale: 1;
+      position: absolute; left: 50%; top: 50%;
+      width: 1600px; height: 900px; overflow: hidden;
+      transform: translate(-50%, -50%) scale(var(--deck-scale));
+      transform-origin: center;
+      background: #f5f4f2;
+      box-shadow: 0 40px 120px rgba(0, 0, 0, .45);
+    }
+    .slide {
+      position: absolute; inset: 0; width: 1600px; height: 900px;
+      padding: 64px 108px 88px; overflow: hidden;
+      opacity: 0; visibility: hidden; pointer-events: none;
+      background: radial-gradient(circle at 92% 8%, rgba(229, 9, 20, .055), transparent 24%), #f5f4f2;
+    }
+    .slide.active { opacity: 1; visibility: visible; pointer-events: auto; }
+    .slide.red { color: #fff; background: var(--hero); }
+    .slide.dark {
+      color: #fff;
+      background: radial-gradient(circle at 78% 15%, rgba(229, 9, 20, .45), transparent 32%), linear-gradient(145deg, #280001, #130001);
+    }
+    .topline {
+      position: absolute; top: 0; left: 0; width: 100%; height: 5px;
+      background: linear-gradient(90deg, var(--v4-red), var(--v4-orange), transparent 76%);
+    }
+    h1, h2, h3, p { margin: 0; }
+    h1 { font-size: 78px; line-height: .98; letter-spacing: -.05em; font-weight: 600; }
+    h2 { font-size: 46px; line-height: 1.04; letter-spacing: -.04em; font-weight: 600; max-width: 1280px; }
+    h3 { font-size: 22px; line-height: 1.15; letter-spacing: -.02em; font-weight: 600; }
+    .lede { max-width: 1080px; margin-top: 18px; color: var(--ink-soft); font-size: 22px; line-height: 1.4; font-weight: 400; }
+    .red .lede, .dark .lede { color: rgba(255,255,255,.78); }
+    .accent { color: var(--v4-red); }
+    .red .accent, .dark .accent { color: #ffebc8; }
+    .mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+    .eyebrow {
+      display: inline-flex; align-items: center; min-height: 32px; padding: 6px 14px;
+      border: 1px solid rgba(229, 9, 20, .22); border-radius: 999px;
+      color: var(--v4-red); font-size: 13px; font-weight: 600; letter-spacing: .12em;
+      text-transform: uppercase; margin-bottom: 18px;
+    }
+    .red .eyebrow, .dark .eyebrow { color: #fff; border-color: rgba(255,255,255,.35); }
+    .logo {
+      position: absolute; top: 28px; right: 36px; height: 22px; width: auto;
+    }
+    .red .logo path, .dark .logo path { fill: #fff; }
+    .foot {
+      position: absolute; left: 108px; right: 108px; bottom: 26px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 13px; letter-spacing: .04em; color: #8a8480; text-transform: uppercase;
+    }
+    .red .foot, .dark .foot { color: rgba(255,255,255,.55); }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 28px; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 26px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 26px; }
+    .card {
+      background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 20px 22px 18px;
+    }
+    .dark .card, .red .card { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.16); }
+    .num { font-family: "IBM Plex Mono", monospace; font-size: 12px; font-weight: 700; letter-spacing: .14em; color: var(--v4-red); margin-bottom: 8px; }
+    .red .num, .dark .num { color: #ffebc8; }
+    .card p, .card li { font-size: 16px; line-height: 1.4; color: var(--ink-soft); }
+    .red .card p, .red .card li, .dark .card p, .dark .card li { color: rgba(255,255,255,.82); }
+    .card ul { margin: 10px 0 0; padding: 0; list-style: none; }
+    .card li { position: relative; padding-left: 14px; margin-bottom: 6px; }
+    .card li::before { content: ""; position: absolute; left: 0; top: .55em; width: 6px; height: 6px; border-radius: 50%; background: var(--v4-red); }
+    .quote {
+      margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--line);
+      font-size: 20px; line-height: 1.35; max-width: 1100px;
+    }
+    .quote span { display: block; margin-top: 6px; color: var(--ink-soft); font-size: 14px; letter-spacing: .04em; text-transform: uppercase; }
+    .flow { display: flex; gap: 10px; align-items: stretch; margin-top: 26px; }
+    .step {
+      flex: 1; background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 16px 14px;
+    }
+    .step strong { display: block; font-size: 18px; margin: 6px 0 4px; }
+    .step span { display: block; font-size: 14px; line-height: 1.35; color: var(--ink-soft); }
+    .arrow { align-self: center; color: #c4b8b4; font-size: 22px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 18px; background: #fff; border-radius: 16px; overflow: hidden; }
+    th, td { text-align: left; padding: 12px 16px; font-size: 16px; border-bottom: 1px solid var(--line); }
+    th { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #8a8480; font-weight: 600; }
+    td.r, th.r { text-align: right; }
+    tr.total td { font-weight: 600; background: #fff6f5; color: var(--v4-dark); }
+    .price-row { display: grid; grid-template-columns: 1.1fr .9fr; gap: 22px; margin-top: 22px; align-items: stretch; }
+    .was {
+      background: #fff; border: 1px solid var(--line); border-radius: 22px; padding: 26px 28px;
+    }
+    .was .old { font-size: 34px; font-weight: 600; letter-spacing: -.03em; color: #9a908c; text-decoration: line-through; }
+    .now {
+      background: var(--v4-dark); color: #fff; border-radius: 22px; padding: 26px 28px;
+      box-shadow: 0 18px 50px rgba(40, 0, 1, .25);
+    }
+    .now .big { font-size: 58px; font-weight: 600; letter-spacing: -.045em; line-height: 1; }
+    .now .big small { font-size: 22px; font-weight: 500; letter-spacing: 0; opacity: .75; }
+    .tag {
+      display: inline-block; margin-top: 12px; padding: 6px 10px; border-radius: 999px;
+      background: rgba(255, 235, 200, .16); color: #ffebc8; font-size: 13px; font-weight: 600; letter-spacing: .04em;
+    }
+    .cta {
+      margin-top: 16px; display: inline-flex; align-items: center; justify-content: center;
+      min-height: 52px; padding: 0 22px; border: 0; border-radius: 999px; cursor: pointer;
+      background: var(--v4-red); color: #fff; font-size: 16px; font-weight: 600; letter-spacing: -.01em;
+    }
+    .cta:hover { background: #c40712; }
+    .cta.done { background: #1d7a3a; cursor: default; }
+    .note { margin-top: 10px; font-size: 14px; color: rgba(255,255,255,.72); min-height: 20px; }
+    .kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 22px; }
+    .kpi { background: #fff; border-radius: 18px; padding: 18px 18px 16px; border: 1px solid var(--line); }
+    .kpi b { display: block; font-size: 28px; letter-spacing: -.03em; margin-bottom: 4px; }
+    .kpi span { font-size: 14px; line-height: 1.35; color: var(--ink-soft); }
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 20px; }
+    .col h3 { margin-bottom: 8px; }
+    .col.in h3 { color: #0f7a32; }
+    .col.out h3 { color: var(--v4-red); }
+    .nav {
+      position: fixed; right: 22px; top: 50%; transform: translateY(-50%);
+      display: flex; flex-direction: column; gap: 8px; z-index: 5;
+    }
+    .nav a {
+      width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,.55);
+      background: transparent;
+    }
+    .nav a.on { background: #fff; border-color: #fff; }
+    .arrows { position: absolute; left: 18px; right: 18px; top: 50%; transform: translateY(-50%); display: flex; justify-content: space-between; pointer-events: none; z-index: 5; }
+    .arrows button {
+      pointer-events: auto; width: 44px; height: 44px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.35); background: rgba(23,19,19,.45); color: #fff;
+      font-size: 26px; cursor: pointer;
+    }
+    .arrows button:disabled { opacity: .25; cursor: default; }
+  </style>
+</head>
+<body>
+  <div id="viewport">
+    <div id="deck">
+
+      <section class="slide red active" id="s1" data-slide="1">
+        <svg class="logo" viewBox="0 0 77 20" aria-label="V4"><path fill="#fff" d="M33.023 3.575c-2.001.003-3.093 1.21-3.09 3.32l.008 6.858c.003 2.11 1.098 3.315 3.1 3.312 2-.003 3.092-1.21 3.09-3.32l-.009-6.858c-.003-2.11-1.097-3.315-3.099-3.312zm.015 11.606c-.649.001-1.057-.356-1.058-1.298l-.009-7.122c-.001-.942.406-1.3 1.055-1.302.648 0 1.057.357 1.058 1.299l.009 7.122c.001.942-.407 1.3-1.055 1.301zm-6.1-3.176l.002 1.884c.001.942-.406 1.282-1.055 1.283-.648 0-1.056-.338-1.058-1.28l-.009-7.122c-.001-.942.406-1.3 1.055-1.302.648 0 1.057.357 1.058 1.299l.002 1.413 1.927-.002-.002-1.281c-.002-2.11-1.041-3.315-3.043-3.313-2 .003-3.037 1.21-3.034 3.32l.008 6.859c.003 2.11 1.042 3.314 3.043 3.312 2.002-.003 3.038-1.21 3.035-3.32l-.002-1.752-1.927.002zM13.055 6.352L8.68 10.813c-.06.062-.017.166.067.166l4.382-.006a.096.096 0 00.096-.097l-.006-4.456c0-.087-.103-.13-.163-.068zm5.862 7.88l-2.687.004a.035.035 0 00-.035.035l.004 2.879c0 .02-.015.035-.035.035l-3.01.004a.035.035 0 01-.034-.035l-.004-2.879a.035.035 0 00-.034-.035l-8.796.012a.141.141 0 01-.14-.142l-.003-2.624v-.004a.795.795 0 01.223-.588l8.758-8.928a.035.035 0 01.025-.01l2.846-.004c.005 0 .009.001.014.003a.367.367 0 01.216.348l.01 8.677c0 .019.017.035.036.035l2.641-.004a.035.035 0 00.035-.035l-.011-8.5c-.002-1.364-1.1-2.478-2.442-2.476L4.18.016a.035.035 0 00-.034.036l.008 6.856c0 .031.037.047.06.025l4.994-5.064a.034.034 0 01.024-.01l2.603-.003c.03 0 .046.037.025.06l-8.118 8.41a.034.034 0 01-.049 0l-1.529-1.55a.036.036 0 01-.01-.026L2.143.074A.035.035 0 002.104.04C.976.185.086 1.131 0 2.294v5.972l.011 8.9a2.48 2.48 0 001.937 2.424h14.974c1.15-.199 2.034-1.224 2.032-2.448l-.003-2.873a.035.035 0 00-.035-.036zM66.47 3.682l.01 7.895-2.104-7.892-2.557.003.017 13.19 1.834-.003-.012-9.553 2.55 9.55 2.094-.004-.016-13.188-1.816.002zm-23.33.031l-1.378 9.366-1.513-9.362-2.835.003.017 13.19 1.779-.003-.012-9.327 1.532 9.325 1.927-.003 1.396-9.46.012 9.458 1.928-.002-.017-13.19-2.835.005h-.001zm33.133-.043l-1.946.002-1.549 6.013-1.564-6.009-2.131.003 2.587 8.814.005 4.371 2.039-.003-.006-4.37 2.565-8.821zm-20.44.026l-2.058 13.192 1.871-.003.35-2.393 2.501-.003.355 2.392 2.057-.003-2.092-13.186-2.983.004zm.42 9.005l.974-6.67.99 6.668-1.964.002zm-5.793-8.998l-3.002.004.017 13.189 2.038-.003-.006-4.955.964-.002c2.038-.002 3.037-1.153 3.035-3.263l-.003-1.715c-.002-2.11-1.005-3.258-3.043-3.255zm.008 6.35h-.964L49.5 5.589l.964-.001c.648-.001 1.001.3 1.002 1.242l.003 1.978c.001.942-.35 1.245-1 1.245z"/></svg>
+        <p class="eyebrow">Work Bank × V4 Company</p>
+        <h1>Assessoria de<br>Growth</h1>
+        <p class="lede" style="max-width:820px;font-size:26px;">Account, gestão de tráfego, design e copy para tirar a Work Bank da indicação e colocar demanda qualificada no funil que o time já tem.</p>
+        <p class="lede" style="margin-top:28px;font-size:16px;letter-spacing:.08em;text-transform:uppercase;">12 meses · cartão recorrente · Renato e Daniel</p>
+        <div class="foot"><span>workbank.net.br</span><span>01 / 11</span></div>
+      </section>
+
+      <section class="slide" id="s2" data-slide="2">
+        <div class="topline"></div>
+        <p class="eyebrow">01 · Direcionamento e cenário</p>
+        <h2>O time já entrou. A demanda ainda nasce no telefone de vocês.</h2>
+        <p class="lede">A Work Bank intermedia crédito — home equity, financiamento, capital de giro e consórcio — em mais de 80 instituições. O faturamento está em torno de R$ 80 mil por mês, quase todo vindo de indicação, em Minas e no entorno. SDR, closer e operacional começaram em setembro. O Pipedrive está em implementação. O que ainda não existe é aquisição previsível de empresário que o banco aprova.</p>
+        <div class="grid-3">
+          <article class="card">
+            <div class="num">01</div>
+            <h3>Indicação como teto</h3>
+            <p>Cerca de 90% da demanda é networking. Isso valida o modelo. Também impede sair do regional e formar caixa.</p>
+          </article>
+          <article class="card">
+            <div class="num">02</div>
+            <h3>Lead que o banco recusa</h3>
+            <p>As campanhas anteriores — inclusive com cerca de R$ 1 mil — trouxeram volume e pouca venda. Restrição e MEI sem apetite não são “lead ruim de copy”. São público errado.</p>
+          </article>
+          <article class="card">
+            <div class="num">03</div>
+            <h3>Time novo sem fila</h3>
+            <p>SDR, closer e backoffice já estão na cadeira. Sem critério de qualificação e sem canal com intenção, eles herdam o artesanal.</p>
+          </article>
+        </div>
+        <p class="quote">“Queremos começar da forma certa para depois escalar. Não queremos tentativa e erro.”<span>Renato · diagnóstico V4</span></p>
+        <div class="foot"><span>Cenário atual</span><span>02 / 11</span></div>
+      </section>
+
+      <section class="slide" id="s3" data-slide="3">
+        <div class="topline"></div>
+        <p class="eyebrow">01 · A direção</p>
+        <h2>Não é “fazer mais marketing”. É parar de pagar para atrair quem não fecha.</h2>
+        <p class="lede">A meta de vocês é desembolso — R$ 20 milhões — com comissão na faixa de 2,2% a 2,5%. Home equity, com ticket em torno de R$ 300 mil, é a oferta que paga a máquina. O restante do portfólio entra depois que o lead passa no filtro.</p>
+        <div class="flow">
+          <div class="step"><div class="num">01</div><strong>ICP mínimo</strong><span>Empresário com imóvel, faturamento que o banco aceita e crédito para investir. Fora: restrição grave e MEI sem apetite.</span></div>
+          <div class="arrow">→</div>
+          <div class="step"><div class="num">02</div><strong>Intenção primeiro</strong><span>Google captura quem já busca home equity e crédito com garantia. Meta só no recorte, com criativo que afasta o curioso.</span></div>
+          <div class="arrow">→</div>
+          <div class="step"><div class="num">03</div><strong>Funil com dono</strong><span>SDR qualifica, closer conduz, operacional corre documento. Tudo no Pipedrive que já está sendo implantado.</span></div>
+          <div class="arrow">→</div>
+          <div class="step"><div class="num">04</div><strong>Verba em degrau</strong><span>R$ 3 mil, depois 5, depois 10 mil ou mais. Sobe só quando a taxa de qualificado segura. A fee não é a verba.</span></div>
+        </div>
+        <div class="foot"><span>Direção estratégica</span><span>03 / 11</span></div>
+      </section>
+
+      <section class="slide" id="s4" data-slide="4">
+        <div class="topline"></div>
+        <p class="eyebrow">02 · Como vamos solucionar</p>
+        <h2>Um squad. Quatro ofícios. Um critério de lead.</h2>
+        <p class="lede">Account orquestra com Renato e Daniel. Tráfego compra a intenção certa. Copy e design fazem o anúncio recusar, na primeira linha, quem a Work Bank não consegue aprovar.</p>
+        <div class="grid-4">
+          <article class="card">
+            <div class="num">Account</div>
+            <h3>Prioridade</h3>
+            <p>Ritual com a sociedade, fila do mês, leitura de qualificado versus curioso e o que o comercial devolveu.</p>
+          </article>
+          <article class="card">
+            <div class="num">GT</div>
+            <h3>Mídia</h3>
+            <p>Google e Meta nas contas de vocês. Estrutura, lance, negativo, remarketing e CPL por campanha de home equity.</p>
+          </article>
+          <article class="card">
+            <div class="num">Copy</div>
+            <h3>Filtro</h3>
+            <p>Texto que fala de garantia, investimento e taxa — e deixa explícito quem não é cliente. Menos curioso, mais intenção.</p>
+          </article>
+          <article class="card">
+            <div class="num">Design</div>
+            <h3>Peça</h3>
+            <p>Criativo estático de performance, no mesmo discurso da copy, para anúncio e para a página de captura.</p>
+          </article>
+        </div>
+        <p class="quote">O CRM de vendas já contratado não se repete aqui. Esta assessoria coloca demanda dentro desse funil.<span>Pipedrive · implementação à parte</span></p>
+        <div class="foot"><span>Squad · Account, GT, Design, Copy</span><span>04 / 11</span></div>
+      </section>
+
+      <section class="slide" id="s5" data-slide="5">
+        <div class="topline"></div>
+        <p class="eyebrow">02 · Os 12 meses</p>
+        <h2>Quatro movimentos. A verba só cresce com prova.</h2>
+        <div class="grid-2">
+          <article class="card">
+            <div class="num">Meses 1–3 · Fundação</div>
+            <h3>ICP, contas e baseline</h3>
+            <ul>
+              <li>Fechar com Renato o perfil que o banco aprova de verdade</li>
+              <li>Subir Google e Meta com negativo e criativo de home equity</li>
+              <li>Medir CPL e percentual de lead qualificado, não vaidade</li>
+              <li>UTM e passagem para o Pipedrive, sem reimplementar o CRM</li>
+            </ul>
+          </article>
+          <article class="card">
+            <div class="num">Meses 4–6 · Prova</div>
+            <h3>O criativo que segura qualidade</h3>
+            <ul>
+              <li>Matar anúncio que atrai restrição e MEI</li>
+              <li>Abrir praça fora de Minas só no recorte que converte</li>
+              <li>Remarketing de quem teve imóvel e não fechou</li>
+              <li>Devolutiva quinzenal do closer: o que chegou prestou</li>
+            </ul>
+          </article>
+          <article class="card">
+            <div class="num">Meses 7–9 · Escala contida</div>
+            <h3>Mais verba onde o comercial fecha</h3>
+            <ul>
+              <li>Degrau de mídia (rumo a R$ 10 mil+) só com qualificado estável</li>
+              <li>Teste de mensagem para o lead que não passa no crédito</li>
+              <li>Sem construir infoproduto: a hipótese fica no anúncio e no CRM</li>
+              <li>Capacidade do operacional limita o volume. A mídia obedece</li>
+            </ul>
+          </article>
+          <article class="card">
+            <div class="num">Meses 10–12 · Máquina</div>
+            <h3>Previsibilidade, não palpite</h3>
+            <ul>
+              <li>Canal pago com custo e taxa conhecidos</li>
+              <li>Indicação deixa de ser o único oxigênio do mês</li>
+              <li>Régua mínima na base de cerca de 500 clientes, via CRM já contratado</li>
+              <li>Plano do ano 2: onde dobrar verba e onde não dobrar</li>
+            </ul>
+          </article>
+        </div>
+        <div class="foot"><span>Plano de 12 meses</span><span>05 / 11</span></div>
+      </section>
+
+      <section class="slide" id="s6" data-slide="6">
+        <div class="topline"></div>
+        <p class="eyebrow">02 · O dia a dia</p>
+        <h2>Cadência curta. Account não dedicado. Comercial de vocês na linha de frente.</h2>
+        <table>
+          <thead>
+            <tr><th>Quando</th><th>Quem</th><th>O que acontece</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Dias úteis</td><td>GT</td><td>Olha lance, gasto, lead e anomalia. Pausa o que está comprando curioso.</td></tr>
+            <tr><td>Até 1 dia útil</td><td>Squad</td><td>Resposta a pedido operacional já combinado no ritual. Não é plantão de crédito.</td></tr>
+            <tr><td>Quinzenal · 45 min</td><td>Account + Renato ou Daniel</td><td>CPL, % qualificado, o que o closer descartou e o backlog das próximas peças.</td></tr>
+            <tr><td>No mês</td><td>Copy + Design</td><td>Até 8 peças estáticas de campanha. Duas rodadas de ajuste por peça.</td></tr>
+            <tr><td>Trimestral</td><td>Account</td><td>QBR: verba, praça, oferta e se o time aguenta o volume que a mídia pode gerar.</td></tr>
+          </tbody>
+        </table>
+        <p class="quote">Daniel conduz o time. A V4 conduz a demanda que esse time merece atender.<span>Gestão de pessoas continua com a sociedade</span></p>
+        <div class="foot"><span>Operação</span><span>06 / 11</span></div>
+      </section>
+
+      <section class="slide dark" id="s7" data-slide="7">
+        <p class="eyebrow">03 · Visão de futuro · mês 12</p>
+        <h2>A Work Bank deixa de depender do mês em que o telefone toca.</h2>
+        <div class="kpis">
+          <article class="kpi">
+            <b style="color:#141414">1 canal pago</b>
+            <span>Com CPL e taxa de lead qualificado na mesa, todo mês. Sem “achismo de agência”.</span>
+          </article>
+          <article class="kpi">
+            <b style="color:#141414">Home equity na frente</b>
+            <span>Anúncio fala de imóvel e investimento. Giro, consórcio e financiamento entram depois do filtro.</span>
+          </article>
+          <article class="kpi">
+            <b style="color:#141414">Indicação vira complemento</b>
+            <span>Os cerca de 90% deixam de ser o oxigênio. O boca a boca continua. Só não carrega o mês sozinho.</span>
+          </article>
+        </div>
+        <div class="grid-3">
+          <article class="card">
+            <h3>Comercial</h3>
+            <p>SDR descarta antes de gastar hora de closer. Operacional corre documento de quem tem chance real de desembolso.</p>
+          </article>
+          <article class="card">
+            <h3>Caixa</h3>
+            <p>A comissão de uma operação boa paga a máquina. O objetivo deixa de ser girar para sobreviver e passa a ser repetir o que já fechou.</p>
+          </article>
+          <article class="card">
+            <h3>Sociedade</h3>
+            <p>Renato na estratégia de crédito e praça. Daniel na gestão do time. Os dois saem do apagar incêndio de lead curioso.</p>
+          </article>
+        </div>
+        <div class="foot"><span>Como fica no final</span><span>07 / 11</span></div>
+      </section>
+
+      <section class="slide" id="s8" data-slide="8">
+        <div class="topline"></div>
+        <p class="eyebrow">03 · Retorno</p>
+        <h2>A mensalidade cabe dentro de um home equity a mais.</h2>
+        <p class="lede">Ticket de referência: R$ 300 mil. Comissão de 2,2% a 2,5% do desembolso. Uma operação qualificada devolve entre R$ 6,6 mil e R$ 7,5 mil. A condição desta proposta é R$ 6.602,01 por mês.</p>
+        <div class="kpis">
+          <article class="kpi">
+            <b>R$ 6,6–7,5 mil</b>
+            <span>Comissão de um home equity de R$ 300 mil. Uma operação extra no mês cobre a fee.</span>
+          </article>
+          <article class="kpi">
+            <b>R$ 79.224</b>
+            <span>Fee dos 12 meses nesta condição. A verba de mídia é outra conta, paga direto ao Google e à Meta.</span>
+          </article>
+          <article class="kpi">
+            <b>R$ 20 milhões</b>
+            <span>Meta de desembolso de vocês. Esta assessoria não promete o número. Instala o canal que deixa o time persegui-lo sem tentativa e erro.</span>
+          </article>
+        </div>
+        <p class="quote">Resultado de mídia depende da verba, do apetite dos bancos e da capacidade do SDR, do closer e do operacional. O que a V4 garante é método, cadência e leitura. Não garantia de desembolso.<span>ROI com número de vocês, sem promessa vazia</span></p>
+        <div class="foot"><span>ROI</span><span>08 / 11</span></div>
+      </section>
+
+      <section class="slide" id="s9" data-slide="9">
+        <div class="topline"></div>
+        <p class="eyebrow">04 · Travas de escopo</p>
+        <h2>O que esta fee compra. E o que continua com a Work Bank.</h2>
+        <div class="split">
+          <div class="col in">
+            <h3>Entra</h3>
+            <article class="card">
+              <ul>
+                <li>Account não dedicado, check-in quinzenal e QBR trimestral</li>
+                <li>Gestão de Google Ads e Meta Ads nas contas de vocês</li>
+                <li>Até 8 peças estáticas por mês, copy e design juntos</li>
+                <li>2 rodadas de ajuste por peça, dentro do mês</li>
+                <li>Até 2 páginas simples de captura no ano, no discurso da campanha</li>
+                <li>Critério de qualificação e leitura com o comercial</li>
+                <li>UTM e eventos para o Pipedrive já contratado</li>
+              </ul>
+            </article>
+          </div>
+          <div class="col out">
+            <h3>Fica de fora</h3>
+            <article class="card">
+              <ul>
+                <li>Verba de anúncio. Ramp sugerida: R$ 3 mil → 5 mil → 10 mil+</li>
+                <li>Implementação de CRM, já fechada em agosto</li>
+                <li>Contratar, treinar ou gerir SDR, closer e operacional</li>
+                <li>Análise de crédito, banco, compliance e esteira de documento</li>
+                <li>Site institucional, vídeo, foto de estúdio e SEO técnico</li>
+                <li>Outbound feito pela V4. A cadência pode ser orientada; quem liga é o time de vocês</li>
+                <li>Construção de produto de diagnóstico ou clube recorrente</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+        <div class="foot"><span>Escopo</span><span>09 / 11</span></div>
+      </section>
+
+      <section class="slide" id="s10" data-slide="10">
+        <div class="topline"></div>
+        <p class="eyebrow">04 · Alinhamentos</p>
+        <h2>Cada lado segura o que é seu. Sem isso a mídia vira tentativa e erro de novo.</h2>
+        <div class="grid-2">
+          <article class="card">
+            <div class="num">Work Bank</div>
+            <h3>Renato e Daniel</h3>
+            <ul>
+              <li>Acessos de Ads, site, Analytics e Pipedrive em até 5 dias úteis do kick-off</li>
+              <li>Validar o ICP por escrito antes de ligar a verba</li>
+              <li>Aprovar peça em até 2 dias úteis. Silêncio não é aprovação</li>
+              <li>Verba nas plataformas, no cartão de vocês, separada desta fee</li>
+              <li>Comercial devolve, no ritual, o que chegou qualificado e o que foi descarte</li>
+              <li>Capacidade do operacional manda no volume. Se a esteira encher, a mídia desacelera</li>
+            </ul>
+          </article>
+          <article class="card">
+            <div class="num">V4</div>
+            <h3>Squad de Growth</h3>
+            <ul>
+              <li>Não sobe campanha genérica de “crédito para todos”</li>
+              <li>Pausa anúncio que estiver comprando restrição ou MEI sem apetite</li>
+              <li>Entrega o relato quinzenal com CPL e taxa de qualificado</li>
+              <li>Peça fora das 8 do mês entra no ciclo seguinte, sem hora extra escondida</li>
+              <li>Terceira rodada de ajuste na mesma peça conta como peça nova</li>
+              <li>Não fecha crédito, não fala com banco e não substitui o closer</li>
+            </ul>
+          </article>
+        </div>
+        <div class="foot"><span>SLA e responsabilidades</span><span>10 / 11</span></div>
+      </section>
+
+      <section class="slide" id="s11" data-slide="11">
+        <div class="topline"></div>
+        <p class="eyebrow">05 · Investimento e próximos passos</p>
+        <h2>A tabela era R$ 10.698,23. A condição para a Work Bank é outra.</h2>
+        <div class="price-row">
+          <div class="was">
+            <div class="num">Tabela · Assessoria de Growth</div>
+            <div class="old">R$ 10.698,23</div>
+            <p class="lede" style="font-size:16px;margin-top:12px;">Por mês, no squad Account + GT + Design + Copy. Em 12 meses, R$ 128.378,76.</p>
+            <p class="lede" style="font-size:16px;margin-top:10px;">A diferença desta condição é R$ 4.096,22 por mês. No ano, R$ 49.154,64 — cerca de 38% abaixo da tabela.</p>
+          </div>
+          <div class="now">
+            <div class="num" style="color:#ffebc8;">Condição fechada · 12 meses</div>
+            <div class="big">R$ 6.602,01 <small>/mês</small></div>
+            <span class="tag">Cartão de crédito · recorrência · 12 parcelas</span>
+            <p style="margin-top:14px;font-size:16px;line-height:1.4;color:rgba(255,255,255,.8);">Fee do squad. Verba de mídia não está aqui. Total do contrato: R$ 79.224,12.</p>
+            <button class="cta" id="cta" type="button">Formalizar a recorrência no cartão</button>
+            <p class="note" id="ctaNote">Botão de intenção nesta proposta. O contrato e a cobrança seguem com a V4.</p>
+          </div>
+        </div>
+        <div class="foot"><span>Work Bank × V4 · setembro 2026</span><span>11 / 11</span></div>
+      </section>
+
+      <div class="arrows">
+        <button type="button" id="prev" aria-label="Anterior">‹</button>
+        <button type="button" id="next" aria-label="Próximo">›</button>
+      </div>
+    </div>
+  </div>
+
+  <nav class="nav" id="dots" aria-label="Slides"></nav>
+
+  <script>
+    (function () {
+      const slides = Array.from(document.querySelectorAll(".slide"));
+      const total = slides.length;
+      const dots = document.getElementById("dots");
+      const prev = document.getElementById("prev");
+      const next = document.getElementById("next");
+      let current = 1;
+      const params = new URLSearchParams(location.search);
+      const start = Number(params.get("s"));
+      if (start >= 1 && start <= total) current = start;
+
+      slides.forEach((_, i) => {
+        const a = document.createElement("a");
+        a.href = "#s" + (i + 1);
+        a.dataset.n = String(i + 1);
+        dots.appendChild(a);
+      });
+
+      function fit() {
+        const s = Math.min(window.innerWidth / 1600, window.innerHeight / 900);
+        document.getElementById("deck").style.setProperty("--deck-scale", String(s));
+      }
+
+      function go(n) {
+        if (n < 1 || n > total) return;
+        current = n;
+        slides.forEach((sl, i) => sl.classList.toggle("active", i === n - 1));
+        dots.querySelectorAll("a").forEach((a) => a.classList.toggle("on", Number(a.dataset.n) === n));
+        prev.disabled = n === 1;
+        next.disabled = n === total;
+        history.replaceState(null, "", "?s=" + n);
+      }
+
+      prev.addEventListener("click", () => go(current - 1));
+      next.addEventListener("click", () => go(current + 1));
+      dots.addEventListener("click", (e) => {
+        const a = e.target.closest("a");
+        if (!a) return;
+        e.preventDefault();
+        go(Number(a.dataset.n));
+      });
+      document.addEventListener("keydown", (e) => {
+        if (["ArrowRight", "PageDown", " "].includes(e.key)) { e.preventDefault(); go(current + 1); }
+        if (["ArrowLeft", "PageUp"].includes(e.key)) { e.preventDefault(); go(current - 1); }
+      });
+      window.addEventListener("resize", fit);
+
+      const cta = document.getElementById("cta");
+      cta.addEventListener("click", () => {
+        cta.classList.add("done");
+        cta.textContent = "Intenção registrada nesta proposta";
+        document.getElementById("ctaNote").textContent = "Próximo passo: contrato de 12 meses e recorrência de R$ 6.602,01 no cartão, com Renato e Daniel.";
+      });
+
+      fit();
+      go(current);
+    })();
+  </script>
+</body>
+</html>
