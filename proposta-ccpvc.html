@@ -1,0 +1,946 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <title>CCPVC × V4 · Máquina de Previsibilidade e Vendas B2B</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cover-a: #90191e; --cover-b: #7c191d; --cover-c: #65181c;
+      --wine: #290c0c; --wine-2: #210909; --wine-3: #351010;
+      --white: #fffaf8; --muted: #c9b8b5; --muted-2: #8f7774;
+      --line: rgba(255,255,255,.12);
+      --red: #ef3340; --red-soft: #ff6b73; --amber: #f4b942; --green: #58d68d;
+      --panel: rgba(14,14,16,.88);
+      --shadow: 0 20px 55px rgba(0,0,0,.26);
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 100%; height: 100%; overflow: hidden; background: #080808; color: var(--white);
+      font-family: Montserrat, Arial, sans-serif; -webkit-font-smoothing: antialiased;
+    }
+    button, a { font: inherit; color: inherit; }
+    .skip-link { position: fixed; left: 16px; top: -80px; z-index: 100; padding: 10px 14px; background: #fff; color: #111; border-radius: 8px; font-weight: 700; }
+    .skip-link:focus { top: 16px; }
+    .stage { position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, #2a1010 0, #0f0505 74%); }
+    .deck {
+      position: absolute; left: 50%; top: 50%; width: 1600px; height: 900px;
+      transform-origin: center center; overflow: hidden; background: var(--wine); box-shadow: var(--shadow);
+    }
+    .slide {
+      position: absolute; inset: 0; width: 1600px; height: 900px;
+      display: flex; flex-direction: column; visibility: hidden; opacity: 0; pointer-events: none;
+      background:
+        linear-gradient(rgba(255,255,255,.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.028) 1px, transparent 1px),
+        radial-gradient(circle at 86% 12%, rgba(150,30,36,.26), transparent 31%),
+        linear-gradient(135deg, var(--wine-3), var(--wine) 45%, var(--wine-2));
+      background-size: 80px 80px, 80px 80px, auto, auto;
+      transition: opacity .3s ease;
+    }
+    .slide.active { visibility: visible; opacity: 1; pointer-events: auto; }
+    .slide.cover {
+      background:
+        linear-gradient(rgba(255,255,255,.026) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.026) 1px, transparent 1px),
+        radial-gradient(circle at 78% 24%, rgba(255,255,255,.08), transparent 26%),
+        linear-gradient(122deg, var(--cover-a), var(--cover-b) 54%, var(--cover-c));
+      background-size: 100px 100px, 100px 100px, auto, auto;
+    }
+    .topbar { height: 7px; flex: 0 0 auto; background: linear-gradient(90deg, var(--red), rgba(239,51,64,.08) 72%); }
+    .slide.cover .topbar { background: linear-gradient(90deg, #fff, rgba(255,255,255,.08) 68%); }
+    .page { height: 851px; padding: 43px 66px 22px; display: flex; flex-direction: column; position: relative; overflow: hidden; }
+    .slide-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; margin-bottom: 22px; flex: 0 0 auto; }
+    .head-copy { max-width: 1260px; }
+    .eyebrow {
+      display: flex; align-items: center; gap: 12px; color: var(--red-soft);
+      font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .2em; margin-bottom: 11px;
+    }
+    .eyebrow::before { content: ""; width: 34px; height: 3px; border-radius: 2px; background: currentColor; }
+    h1, h2 { font-weight: 800; letter-spacing: -.035em; line-height: 1.06; }
+    h1 { font-size: 66px; max-width: 1040px; }
+    h2 { font-size: 40px; max-width: 1300px; }
+    h1 em, h2 em { color: var(--red-soft); font-style: normal; }
+    .sub { color: var(--muted); font-size: 17px; line-height: 1.5; margin-top: 12px; max-width: 1120px; }
+    .section-chip {
+      display: flex; align-items: center; gap: 9px; color: var(--muted); font-size: 12px; font-weight: 600;
+      letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; padding-top: 5px;
+    }
+    .section-chip b { font-family: "JetBrains Mono", monospace; font-size: 22px; color: var(--red-soft); }
+    .content { flex: 1; min-height: 0; position: relative; }
+    .footer {
+      height: 42px; flex: 0 0 auto; border-top: 1px solid rgba(255,255,255,.11);
+      display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 24px;
+      padding: 0 66px; color: var(--muted-2); font-size: 11px; background: rgba(20,5,5,.5);
+    }
+    .footer .count { font-family: "JetBrains Mono", monospace; color: var(--muted); min-width: 60px; text-align: right; }
+    .v4-mark {
+      width: 42px; height: 42px; border: 1.5px solid rgba(255,255,255,.85); display: grid; place-items: center;
+      font-weight: 800; font-size: 14px; letter-spacing: -.04em;
+    }
+    .card {
+      background: linear-gradient(160deg, rgba(255,255,255,.075), rgba(255,255,255,.035));
+      border: 1px solid var(--line); border-radius: var(--radius);
+    }
+    .callout {
+      border-left: 4px solid var(--red); background: rgba(239,51,64,.07);
+      padding: 13px 18px; border-radius: 0 12px 12px 0; color: #f9eae8; font-size: 15px; line-height: 1.45;
+    }
+    .cover .page { padding: 70px 78px 30px; }
+    .cover-lockup { display: flex; align-items: center; gap: 18px; font-size: 17px; font-weight: 700; letter-spacing: .04em; color: rgba(255,255,255,.82); }
+    .cover-lockup .sep { width: 1px; height: 28px; background: rgba(255,255,255,.28); }
+    .hero-grid { display: grid; grid-template-columns: minmax(0,1fr) 430px; gap: 80px; align-items: center; flex: 1; }
+    .hero-kicker { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: .25em; color: rgba(255,255,255,.72); margin-bottom: 20px; }
+    .hero-title { font-size: 64px; max-width: 980px; }
+    .hero-title em { color: #ffd9d5; }
+    .hero-sub { font-size: 19px; color: rgba(255,255,255,.76); line-height: 1.55; max-width: 760px; margin-top: 22px; }
+    .cover-art { height: 470px; position: relative; display: grid; place-items: center; }
+    .cover-art svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .cover-mark {
+      position: relative; width: 230px; height: 230px; border: 1px solid rgba(255,255,255,.24); border-radius: 50%;
+      display: grid; place-items: center; background: rgba(255,255,255,.035);
+      box-shadow: 0 0 0 34px rgba(255,255,255,.025), 0 0 0 68px rgba(255,255,255,.018);
+    }
+    .cover-mark::before, .cover-mark::after { content: ""; position: absolute; background: rgba(255,255,255,.3); }
+    .cover-mark::before { width: 310px; height: 1px; }
+    .cover-mark::after { width: 1px; height: 310px; }
+    .cover-mark b { font-family: "JetBrains Mono", monospace; font-size: 42px; letter-spacing: -.08em; }
+    .cover-mark span { position: absolute; bottom: 48px; font-size: 11px; text-transform: uppercase; letter-spacing: .2em; color: rgba(255,255,255,.6); }
+    .cover-meta { display: flex; gap: 28px; margin-top: 42px; color: rgba(255,255,255,.67); font-size: 12px; text-transform: uppercase; letter-spacing: .12em; flex-wrap: wrap; }
+    .cover-meta span { display: flex; align-items: center; gap: 10px; }
+    .cover-meta span::before { content: ""; width: 22px; height: 2px; background: rgba(255,255,255,.48); }
+    .slide.divider {
+      background:
+        linear-gradient(rgba(255,255,255,.024) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.024) 1px, transparent 1px),
+        radial-gradient(circle at 78% 50%, rgba(239,51,64,.25), transparent 30%),
+        linear-gradient(122deg, #7e171b, #541115 58%, #25090b);
+      background-size: 100px 100px, 100px 100px, auto, auto;
+    }
+    .divider .page { padding: 78px; justify-content: center; }
+    .divider-lockup { position: absolute; top: 54px; left: 78px; display: flex; align-items: center; gap: 16px; color: rgba(255,255,255,.7); font-size: 14px; font-weight: 700; }
+    .divider-num { font-family: "JetBrains Mono", monospace; font-size: 140px; line-height: 1; color: rgba(255,255,255,.12); position: absolute; right: 95px; top: 110px; }
+    .divider-kicker { font-size: 14px; text-transform: uppercase; letter-spacing: .28em; color: #ffc2bd; font-weight: 700; margin-bottom: 22px; }
+    .divider-title { font-size: 68px; max-width: 1080px; }
+    .divider-title em { color: #ffd8d4; }
+    .divider-sub { font-size: 20px; line-height: 1.55; color: rgba(255,255,255,.72); max-width: 860px; margin-top: 24px; }
+    .divider-path { display: flex; align-items: center; gap: 0; margin-top: 55px; width: 1080px; }
+    .divider-path span { position: relative; flex: 1; padding-top: 24px; font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: rgba(255,255,255,.66); }
+    .divider-path span::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: rgba(255,255,255,.18); }
+    .divider-path span::after { content: ""; position: absolute; left: 0; top: -5px; width: 12px; height: 12px; border-radius: 50%; background: #ff6b73; box-shadow: 0 0 0 6px rgba(255,107,115,.12); }
+    .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+    .kpi { padding: 16px 18px; border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.04); }
+    .kpi strong { display: block; font-family: "JetBrains Mono", monospace; font-size: 22px; color: var(--red-soft); font-variant-numeric: tabular-nums; }
+    .kpi span { display: block; margin-top: 6px; font-size: 12px; line-height: 1.35; color: var(--muted); }
+    .map-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .map-item { display: grid; grid-template-columns: 48px 1fr; gap: 12px; padding: 14px 16px; align-items: start; }
+    .map-item .n { font-family: "JetBrains Mono", monospace; font-size: 13px; font-weight: 700; color: var(--red-soft); padding-top: 2px; }
+    .map-item h3 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .map-item p { font-size: 13px; line-height: 1.4; color: var(--muted); }
+    .roles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+    .role { padding: 16px 16px 18px; }
+    .role .label { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--red-soft); margin-bottom: 8px; }
+    .role h3 { font-size: 16px; margin-bottom: 6px; }
+    .role p { font-size: 12.5px; line-height: 1.4; color: var(--muted); }
+    .cadence { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .cad { padding: 16px 16px 18px; min-height: 268px; }
+    .cad .dur { font-family: "JetBrains Mono", monospace; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--red-soft); margin-bottom: 10px; }
+    .cad h3 { font-size: 16px; margin-bottom: 8px; }
+    .cad p { font-size: 12.5px; line-height: 1.4; color: var(--muted); margin-bottom: 12px; }
+    .cad ul { list-style: none; }
+    .cad li { font-size: 12px; color: #e8d8d5; padding: 3px 0 3px 12px; position: relative; }
+    .cad li::before { content: "·"; position: absolute; left: 0; color: #fff; font-weight: 700; }
+    .internal {
+      margin-top: 14px; padding: 14px 18px; border: 1px solid var(--line); border-radius: 14px;
+      background: rgba(255,255,255,.04);
+    }
+    .internal h4 { font-size: 14px; margin-bottom: 6px; }
+    .internal p { font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      padding: 6px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted);
+    }
+    .process { display: flex; align-items: stretch; gap: 0; margin-top: 8px; }
+    .stage-card { flex: 1; padding: 16px 14px; border: 1px solid var(--line); background: rgba(255,255,255,.04); }
+    .stage-card .n { font-family: "JetBrains Mono", monospace; color: var(--red-soft); font-size: 13px; font-weight: 700; }
+    .stage-card h3 { font-size: 16px; margin: 8px 0 6px; }
+    .stage-card p { font-size: 12.5px; line-height: 1.4; color: var(--muted); }
+    .process .arrow { flex: 0 0 28px; display: grid; place-items: center; color: var(--red-soft); font-size: 22px; }
+    .process.compact { margin-top: 4px; }
+    .process.compact .stage-card { padding: 12px 12px; }
+    .process.compact .stage-card h3 { font-size: 15px; margin: 4px 0 4px; }
+    .process.compact .stage-card p { font-size: 12px; }
+    .geo-band {
+      margin-top: 14px; padding: 14px 16px; border-radius: 12px;
+      border: 1px solid rgba(244,185,66,.34); background: rgba(244,185,66,.08);
+    }
+    .geo-band h3 { font-size: 15px; margin-bottom: 10px; }
+    .geo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .geo-grid .label {
+      font-family: "JetBrains Mono", monospace; font-size: 11px; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase; color: var(--amber); margin-bottom: 4px;
+    }
+    .geo-grid p { font-size: 13px; line-height: 1.4; color: #f8e9df; }
+    .unlock-key {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 18px;
+    }
+    .unlock-key.four { grid-template-columns: repeat(4, 1fr); }
+    .unlock-key div {
+      display: flex; align-items: center; gap: 10px; padding: 12px 14px;
+      border: 1px solid var(--line); background: rgba(255,255,255,.035); border-radius: 10px;
+      font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--white);
+    }
+    .unlock-key b { font-family: "JetBrains Mono", monospace; color: var(--red-soft); font-size: 12px; }
+    .weeks { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+    .week { padding: 16px 14px 18px; min-height: 248px; }
+    .week .n { font-family: "JetBrains Mono", monospace; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--red-soft); margin-bottom: 8px; }
+    .week h3 { font-size: 16px; margin-bottom: 8px; }
+    .week ul { list-style: none; }
+    .week li { font-size: 12px; color: var(--muted); line-height: 1.4; padding: 2px 0 2px 12px; position: relative; }
+    .week li::before { content: "·"; position: absolute; left: 0; color: #fff; }
+    .deliver { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    .deliver article { padding: 16px 18px; }
+    .deliver h3 { font-size: 16px; margin-bottom: 10px; }
+    .deliver ul { list-style: none; }
+    .deliver li { font-size: 12.5px; color: var(--muted); line-height: 1.4; padding: 3px 0 3px 14px; position: relative; }
+    .deliver li::before { content: "·"; position: absolute; left: 0; color: #fff; font-weight: 700; }
+    .seo-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+    .inc-card .inc { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 28px; }
+    .inc { list-style: none; }
+    .inc li { font-size: 13px; line-height: 1.4; color: var(--muted); padding: 5px 0 5px 22px; position: relative; }
+    .inc li strong { color: #fff; font-weight: 650; }
+    .inc li::before { content: "✓"; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+    .inc-card { padding: 18px 20px; }
+    .inc-card h3 { font-size: 16px; margin-bottom: 12px; }
+    .audience {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      padding: 7px 12px; border-radius: 8px; border-left: 3px solid var(--red); background: rgba(255,255,255,.05); color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .tobe { display: flex; flex-direction: column; align-items: stretch; gap: 0; }
+    .tobe-row { display: grid; gap: 12px; }
+    .tobe-row.two { grid-template-columns: 1fr 1fr; max-width: 920px; margin: 0 auto; width: 100%; }
+    .tobe-row.four { grid-template-columns: repeat(4, 1fr); }
+    .tobe-box { padding: 14px 16px; text-align: center; }
+    .tobe-box .who { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--red-soft); margin-bottom: 6px; }
+    .tobe-box h3 { font-size: 16px; margin-bottom: 4px; }
+    .tobe-box p { font-size: 12.5px; line-height: 1.4; color: var(--muted); }
+    .tobe-box.core {
+      max-width: 920px; margin: 0 auto; width: 100%;
+      border-color: rgba(88,214,141,.32);
+      background: linear-gradient(160deg, rgba(88,214,141,.12), rgba(255,255,255,.04));
+    }
+    .tobe-box.end {
+      max-width: 100%;
+      border-color: rgba(244,185,66,.34);
+      background: rgba(244,185,66,.08);
+    }
+    .tobe-join {
+      width: 2px; height: 18px; margin: 4px auto;
+      background: linear-gradient(rgba(255,107,115,.15), rgba(255,107,115,.7), rgba(255,107,115,.15));
+    }
+    .tobe-hbar { position: relative; height: 18px; margin: 0 12.5%; }
+    .tobe-hbar::before {
+      content: ""; position: absolute; left: 0; right: 0; top: 8px; height: 2px;
+      background: rgba(255,107,115,.35);
+    }
+    .lane { padding: 14px 14px 16px; min-height: 168px; }
+    .lane .who { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--red-soft); margin-bottom: 8px; }
+    .lane h3 { font-size: 15px; margin-bottom: 8px; }
+    .lane ul { list-style: none; }
+    .lane li { font-size: 12px; color: var(--muted); line-height: 1.4; padding: 2px 0 2px 12px; position: relative; }
+    .lane li::before { content: "·"; position: absolute; left: 0; color: #fff; }
+    .success-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .success-item { padding: 16px 18px; display: grid; grid-template-columns: 28px 1fr; gap: 12px; align-items: start; }
+    .success-item .n { font-family: "JetBrains Mono", monospace; color: var(--green); font-size: 14px; font-weight: 700; }
+    .success-item h3 { font-size: 15px; font-weight: 650; line-height: 1.35; }
+    .offers { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .offer { padding: 14px 18px; }
+    .offer.featured { border-color: rgba(88,214,141,.32); background: linear-gradient(160deg, rgba(88,214,141,.12), rgba(255,255,255,.04)); }
+    .offer .tag { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--red-soft); margin-bottom: 8px; }
+    .offer.featured .tag { color: var(--green); }
+    .offer h3 { font-size: 20px; margin-bottom: 6px; }
+    .offer .note { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+    .offer .was { font-family: "JetBrains Mono", monospace; font-size: 13px; color: var(--muted-2); text-decoration: line-through; }
+    .offer .now { font-family: "JetBrains Mono", monospace; font-size: 32px; font-weight: 700; margin: 6px 0 10px; }
+    .math { margin-top: 4px; }
+    .math-row {
+      display: flex; justify-content: space-between; gap: 12px;
+      font-size: 13px; color: var(--muted); padding: 6px 0;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    .math-row:last-child { border-bottom: none; }
+    .math-row strong { color: #fff; font-family: "JetBrains Mono", monospace; }
+    .math-row .ok { color: var(--green); }
+    .ee-band, .combo {
+      margin-top: 10px; padding: 12px 16px; border-radius: 12px;
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    }
+    .ee-band { border: 1px solid rgba(244,185,66,.34); background: rgba(244,185,66,.1); }
+    .ee-band .k { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--amber); }
+    .ee-band p { font-size: 13px; color: #f8e9df; margin-top: 4px; }
+    .ee-band .amt { font-family: "JetBrains Mono", monospace; font-size: 20px; color: var(--amber); white-space: nowrap; }
+    .combo { border: 1px solid rgba(88,214,141,.28); background: rgba(88,214,141,.08); }
+    .combo h3 { font-size: 16px; }
+    .combo p { font-size: 13px; color: var(--muted); margin-top: 4px; }
+    .combo .cond { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--green); }
+    .combo .fig { font-family: "JetBrains Mono", monospace; font-size: 26px; font-weight: 700; color: var(--green); }
+    .pay { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+    .pay span {
+      font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      padding: 6px 10px; border-radius: 999px; border: 1px solid rgba(88,214,141,.28); color: var(--green);
+    }
+    .top-progress { position: fixed; z-index: 30; top: 0; left: 0; width: 100%; height: 4px; background: rgba(255,255,255,.12); }
+    .top-progress > span { display: block; height: 100%; width: 12%; background: linear-gradient(90deg, #a90009, var(--red), #ff4a53); transition: width .22s ease; }
+    .context-pill {
+      position: fixed; z-index: 30; top: max(16px, env(safe-area-inset-top)); left: max(16px, env(safe-area-inset-left));
+      display: flex; align-items: center; gap: 10px; max-width: calc(100vw - 32px);
+      padding: 9px 12px; border: 1px solid rgba(255,255,255,.16); border-radius: 999px;
+      background: var(--panel); backdrop-filter: blur(12px); font-size: 11px; letter-spacing: .04em;
+    }
+    .context-pill strong { font-size: 12px; text-transform: uppercase; letter-spacing: .12em; }
+    .context-pill span { color: #b9b9be; }
+    .block-nav {
+      position: fixed; z-index: 31; left: max(16px, env(safe-area-inset-left)); bottom: max(16px, env(safe-area-inset-bottom));
+      display: flex; gap: 6px; padding: 6px; border: 1px solid rgba(255,255,255,.16); border-radius: 14px;
+      background: var(--panel); backdrop-filter: blur(12px);
+    }
+    .block-nav button {
+      min-width: 44px; height: 38px; border: 0; border-radius: 9px; background: transparent;
+      color: #c9c9ce; font: 700 11px/1 Montserrat, Arial, sans-serif; cursor: pointer;
+    }
+    .block-nav button:hover, .block-nav button:focus-visible { background: rgba(255,255,255,.1); color: #fff; }
+    .block-nav button.is-active { background: var(--red); color: #fff; }
+    .global-nav {
+      position: fixed; z-index: 31; left: 50%; bottom: max(16px, env(safe-area-inset-bottom)); transform: translateX(-50%);
+      display: flex; align-items: center; gap: 8px; padding: 6px; border: 1px solid rgba(255,255,255,.16);
+      border-radius: 999px; background: var(--panel); backdrop-filter: blur(12px);
+    }
+    .global-nav button {
+      width: 42px; height: 42px; border: 0; border-radius: 50%; background: rgba(255,255,255,.08); color: #fff;
+      font: 600 19px/1 Arial, sans-serif; cursor: pointer;
+    }
+    .global-nav button:hover, .global-nav button:focus-visible { background: var(--red); }
+    .global-nav button:disabled { opacity: .28; cursor: not-allowed; }
+    .global-count { min-width: 82px; text-align: center; font: 700 12px/1.2 "JetBrains Mono", Consolas, monospace; letter-spacing: .08em; }
+    .utility {
+      position: fixed; z-index: 31; right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom));
+    }
+    .utility button {
+      min-height: 44px; padding: 0 14px; border: 1px solid rgba(255,255,255,.16); border-radius: 12px;
+      background: var(--panel); color: #fff; font: 700 11px/1 Montserrat, Arial, sans-serif; cursor: pointer;
+    }
+    .slide-dots { position: fixed; right: 18px; top: 50%; transform: translateY(-50%); z-index: 30; display: grid; gap: 8px; }
+    .slide-dots button { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 999px; background: rgba(255,255,255,.24); cursor: pointer; }
+    .slide-dots button.active { height: 28px; background: var(--red); }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+    @media (max-width: 760px) {
+      .context-pill span { display: none; }
+      .utility { display: none; }
+      .global-nav { bottom: 72px; }
+      .block-nav { left: 50%; transform: translateX(-50%); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .slide, .top-progress > span { transition: none; }
+    }
+    .split-plan { display: grid; grid-template-columns: 1.45fr 0.75fr; gap: 14px; }
+    .exc-card { padding: 18px 20px; border-color: rgba(239,51,64,.4); background: rgba(239,51,64,.08); }
+    .exc-card h3 { font-size: 16px; margin-bottom: 12px; color: var(--red-soft); }
+    .exc { list-style: none; }
+    .exc li { font-size: 13px; line-height: 1.4; color: var(--muted); padding: 6px 0 6px 22px; position: relative; }
+    .exc li strong { color: #fff; font-weight: 650; }
+    .exc li::before { content: "×"; position: absolute; left: 0; color: var(--red-soft); font-weight: 700; }
+    .deny {
+      border: 1px solid rgba(239,51,64,.45);
+      background: rgba(239,51,64,.08);
+      border-radius: 12px;
+      padding: 14px 18px;
+      font-size: 16px;
+      margin-bottom: 16px;
+      color: #f9eae8;
+    }
+    .thesis { font-size: 22px; font-weight: 800; line-height: 1.35; max-width: 1180px; margin-bottom: 18px; }
+    .thesis em { color: var(--red-soft); font-style: normal; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#globalNav">Ir para a navegação</a>
+  <div class="top-progress" aria-hidden="true"><span id="globalProgress"></span></div>
+  <div class="context-pill" aria-live="polite"><strong id="blockLabel">Narrativa</strong><span id="slideTitle">Capa</span></div>
+
+  <div class="stage">
+    <main class="deck" id="deck" aria-label="Proposta CCPVC × V4 · Máquina de Previsibilidade e Vendas B2B">
+
+      <section class="slide cover active" data-act="narrativa" data-title="Capa" aria-label="Capa — tese da conta">
+        <div class="topbar"></div>
+        <div class="page">
+          <div class="cover-lockup"><span class="v4-mark">V4</span><span class="sep"></span><span>CCPVC × V4 Company</span></div>
+          <div class="hero-grid">
+            <div>
+              <div class="hero-kicker">Proposta comercial · SEO + GEO + CRM</div>
+              <h1 class="hero-title">Ser a primeira opção quando o comprador <em>já está cotando</em>.</h1>
+              <p class="hero-sub">Máquina de previsibilidade e vendas B2B. Autoridade no Google para quem busca solução industrial, e um comercial que não perde oportunidade por falha de follow-up.</p>
+            </div>
+            <div class="cover-art" aria-hidden="true">
+              <svg viewBox="0 0 430 470"><path d="M20 330 C92 150 161 388 232 212 S344 77 414 144" fill="none" stroke="rgba(255,255,255,.26)" stroke-width="2"/><path d="M20 346 C92 166 161 404 232 228 S344 93 414 160" fill="none" stroke="rgba(255,255,255,.10)" stroke-width="18"/><circle cx="20" cy="330" r="6" fill="#fff"/><circle cx="414" cy="144" r="6" fill="#ffd8d4"/></svg>
+              <div class="cover-mark"><b>B2B</b><span>vendas</span></div>
+            </div>
+          </div>
+        </div>
+        <footer class="footer"><span>CCPVC × V4 Company · confidencial</span><span class="count">01 / 11</span></footer>
+      </section>
+
+      <section class="slide" data-act="dados" data-title="Caminho" aria-label="Desafio e oportunidade">
+        <div class="topbar"></div>
+        <div class="page">
+          <header class="slide-head">
+            <div class="head-copy">
+              <div class="eyebrow">01 · Caminho · o próximo passo do crescimento</div>
+              <h2>O mercado disputa preço. <em>A venda se perde no caminho.</em></h2>
+              <p class="sub">Para crescer fora da sazonalidade agressiva do início do ano, a CCPVC precisa ser a primeira opção no Google — e não perder oportunidade por falha de acompanhamento.</p>
+            </div>
+            <div class="section-chip"><b>01</b> Caminho</div>
+          </header>
+          <div class="content">
+            <div class="kpis">
+              <div class="kpi"><strong>Preço</strong><span>Polímeros ainda se negociam por preço. Quem chega primeiro muda a conversa.</span></div>
+              <div class="kpi"><strong>Sazonalidade</strong><span>O início do ano não pode ser o único motor da demanda.</span></div>
+              <div class="kpi"><strong>Google</strong><span>Quem busca composto ou distribuidor precisa achar a CCPVC primeiro.</span></div>
+              <div class="kpi"><strong>Follow-up</strong><span>Cotação que esfria sem tarefa é venda que não volta.</span></div>
+            </div>
+            <div class="map-grid">
+              <article class="card map-item"><span class="n">01</span><div><h3>Autoridade orgânica</h3><p>SEO e site como vitrine técnica e local. A CCPVC aparece nas buscas industriais, não só na disputa de preço.</p></div></article>
+              <article class="card map-item"><span class="n">02</span><div><h3>Primeiro contato</h3><p>O lead entra num site rápido. O Bot de Boas-Vindas no WhatsApp responde na hora e segura o comprador.</p></div></article>
+              <article class="card map-item"><span class="n">03</span><div><h3>Pipe visível</h3><p>O contato entra no CRM em qualificação. O vendedor vê onde cada negociação está.</p></div></article>
+              <article class="card map-item"><span class="n">04</span><div><h3>Recuperação</h3><p>Automações geram tarefa de follow-up. Se a cotação esfria, o fluxo tenta reativar a venda.</p></div></article>
+            </div>
+            <p class="callout" style="margin-top:14px">A estratégia une Autoridade Orgânica (SEO e site) com Inteligência e Organização de Vendas (CRM).</p>
+          </div>
+        </div>
+        <footer class="footer"><span>CCPVC × V4 Company · confidencial</span><span class="count">02 / 11</span></footer>
+      </section>
+
+      <section class="slide divider" data-act="produto" data-title="Solução" aria-label="Divisor — a máquina">
+        <div class="topbar"></div>
+        <div class="page">
+          <div class="divider-lockup"><span class="v4-mark">V4</span><span>CCPVC · proposta</span></div>
+          <div class="divider-num">03</div>
+          <div class="divider-kicker">Ato 2 · A máquina</div>
+          <h2 class="divider-title">Primeiro ser encontrado. <em>Depois não perder a venda.</em></h2>
+          <p class="divider-sub">SEO + GEO na atração. CRM Sales na ponta da venda. Dois serviços, um ecossistema: da busca no Google até a cotação que seria esquecida.</p>
+          <div class="divider-path">
+            <span>Busca</span>
+            <span>Site</span>
+            <span>Bot WhatsApp</span>
+            <span>Pipe de vendas</span>
+            <span>Follow-up</span>
+            <span>Recuperação</span>
+          </div>
+        </div>
+        <footer class="footer"><span>CCPVC × V4 Company · confidencial</span><span class="count">03 / 11</span></footer>
+      </section>
+
+      <section class="slide" data-act="produto" data-title="SEO + GEO" aria-label="Domínio orgânico">
+        <div class="topbar"></div>
+        <div class="page">
+          <header class="slide-head">
+            <div class="head-copy">
+              <div class="eyebrow">02 · Como solucionar · domínio orgânico</div>
+              <h2>O site vira a vitrine. <em>O Google trabalha a favor.</em></h2>
+              <p class="sub">SEO Growth + GEO para a CCPVC dominar buscas técnicas e locais de compostos e distribuidores de polímeros.</p>
+            </div>
+            <div class="section-chip"><b>01</b> Produto</div>
+          </header>
+          <div class="content">
+            <p class="thesis">SEO aqui é <em>autoridade orgânica</em>: quem pesquisa solução industrial encontra a CCPVC no momento da cotação — com conteúdo técnico e presença local.</p>
+            <article class="card inc-card">
+              <h3>Escopo · SEO Growth + GEO</h3>
+              <ul class="inc">
+                <li><strong>Tudo do Starter.</strong> Base técnica, Google Search Console, GMB e otimização inicial da estrutura.</li>
+                <li><strong>Auditoria técnica contínua.</strong> Correção recorrente de carregamento e formulários.</li>
+                <li><strong>Pesquisa avançada.</strong> Sem limite fixo. Mapa profundo de intenção no segmento industrial.</li>
+                <li><strong>Conteúdo e blog.</strong> 4 blogposts técnicos por mês, briefings e otimização para snippets.</li>
+                <li><strong>Link building leve.</strong> 1 a 2 backlinks por mês e recuperação de links quebrados.</li>
+                <li><strong>SEO local básico.</strong> Mapas e diretórios, inclusive “distribuidor de PVC perto de mim”.</li>
+                <li><strong>Gestão estratégica.</strong> Monitoramento quinzenal e reunião mensal de resultados.</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+        <footer class="footer"><span>CCPVC × V4 Company · confidencial</span><span class="count">04 / 11</span></footer>
+      </section>
+
+      <section class="slide" data-act="produto" data-title="Fluxo SEO" aria-label="Como o SEO + GEO fica">
+        <div class="topbar"></div>
+        <div class="page">
+          <header class="slide-head">
+            <div class="head-copy">
+              <div class="eyebrow">02 · SEO + GEO · como fica</div>
+              <h2>Da busca ao contato. <em>O caminho do comprador.</em></h2>
+              <p class="sub">Como a CCPVC passa a ser encontrada quando alguém pesquisa composto, distribuidor ou PVC na região.</p>
+            </div>
+            <div class="section-chip"><b>02</b> Produto</div>
+          </header>
+          <div class="content">
+            <div class="audience">Fluxo orgânico · SEO Growth + GEO</div>
+            <div class="process compact">
+              <div class="stage-card"><span class="n">01</span><h3>Pesquisa</h3><p>O comprador industrial busca composto, distribuidor de polímeros ou “PVC perto de mim”.</p></div>
+              <span class="arrow" aria-hidden="true">→</span>
+              <div class="stage-card"><span class="n">02</span><h3>Aparece</h3><p>A CCPVC entra no resultado técnico e no mapa. Search Console e o perfil local já estão lendo a marca.</p></div>
+              <span class="arrow" aria-hidden="true">→</span>
+              <div class="stage-card"><span class="n">03</span><h3>Explica</h3><p>Blog técnico e snippet respondem a intenção. A página diz o que a CCPVC entrega antes do contato.</p></div>
+              <span class="arrow" aria-hidden="true">→</span>
+              <div class="stage-card"><span class="n">04</span><h3>Recebe</h3><p>O site abre rápido e o formulário funciona. Auditoria contínua tira o que trava a cotação.</p></div>
+              <span class="arrow" aria-hidden="true">→</span>
+              <div class="stage-card"><span class="n">05</span><h3>Encaminha</h3><p>O lead sai do Google e entra no comercial. A busca vira conversa, não só visita.</p></div>
+            </div>
+            <div class="geo-band">
+              <h3>GEO · presença local, no mesmo ciclo</h3>
+              <div class="geo-grid">
+                <article>
+                  <div class="label">Importância</div>
+                  <p>Quem compra polímero também busca no mapa e em “perto de mim”, não só no resultado nacional. Sem GEO, a CCPVC fica fora da decisão local — mapas, diretórios e Google Meu Negócio.</p>
+                </article>
+                <article>
+                  <div class="label">Benefício</div>
+                  <p>A CCPVC aparece quando a busca é da região: “distribuidor de PVC perto de mim”, mapas e diretórios. O comprador encontra a empresa no momento da cotação, não só quem já conhece a marca.</p>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer class="footer"><span>CCPVC × V4 Company · confidencial</span><span class="count">05 / 11</span></footer>
+      </section>
+
+      <section class="slide" data-act="produto" data-title="CRM" aria-label="Inteligência comercial">
+        <div class="topbar"></div>
+        <div class="page">
+          <header class="slide-head">
+            <div class="head-copy">
+              <div class="eyebrow">02 · CRM Sales · por que isso importa</div>
+              <h2>A venda deixa de viver <em>na memória do vendedor.</em></h2>
+              <p class="sub">Sem CRM, a cotação fica no WhatsApp, na planilha e na cabeça de quem atendeu. O CRM Sales coloca o ciclo real da CCPVC num único pipe — com dono, fase e próximo passo.</p>
+            </div>
+            <div class="section-chip"><b>02</b> Produto</div>
+          </header>
+          <div class="content">
+            <p class="thesis">O CRM Sales importa porque a CCPVC já gera oportunidade. O que falta é <em>não deixar a negociação esfriar</em> entre o primeiro contato e o fechamento.</p>
+            <div class="roles">
+              <article class="card role"><div class="label">Visão</div><h3>Um funil só</h3><p>O gestor enxerga quantas cotações estão em qualificação, proposta e negociação. Acaba o controle paralelo.</p></article>
+              <article class="card role"><div class="label">Velocidade</div><h3>Resposta na hora</h3><p>O Bot de Boas-Vindas segura o comprador no WhatsApp enquanto o vendedor abre o lead e decide o próximo passo.</p></article>
+              <article class="card role"><div class="label">Disciplina</div><h3>Follow-up com tarefa</h3><p>A automação cria a tarefa, aplica a tag e move a negociação. O acompanhamento deixa de depender de lembrar.</p></article>
+              <article class="card role"><div class="label">Retomada</div><h3>Cotação que esfriou</h3><p>O Fluxo de Recuperação nutre quem não comprou no primeiro momento e devolve a oportunidade para o pipe.</p></article>
+            </div>
+            <p class="callout">Escopo da implementação: pipe e fases do ciclo real, setup do CRM, canais centralizados, bot, automações de tag e tarefa, e fluxo de recuperação.</p>
+          </div>
+        </div>
+        <footer class="footer"><span>CCPVC × V4 Company · confidencial</span><span class="count">06 / 11</span></footer>
+      </section>
+
+      <section class="slide" data-act="produto" data-title="Escopo CRM" aria-label="Como a implementação do CRM Sales funciona">
+        <div class="topbar"></div>
+        <div class="page">
+          <header class="slide-head">
+            <div class="head-copy">
+              <div class="eyebrow">02 · CRM Sales · escopo da implementação</div>
+              <h2>Seis entregas. <em>Uma venda que não esquece.</em></h2>
+              <p class="sub">Como a implementação funciona e o que cada peça agrega para a CCPVC no dia em que o CRM entra no ar.</p>
+            </div>
+            <div class="section-chip"><b>03</b> Produto</div>
+          </header>
+          <div class="content">
+            <article class="card inc-card">
+              <h3>O que a implementação instala</h3>
+              <ul class="inc">
+                <li><strong>Pipe de vendas e fases.</strong> Funil no ciclo real da CCPVC — qualificação, cotação, negociação e fechamento. O vendedor para de improvisar a etapa.</li>
+                <li><strong>CRM no ar.</strong> Setup da plataforma para as automações existirem. Sem essa base, bot, tarefa e recuperação não rodam.</li>
+                <li><strong>Canais centralizados.</strong> Site e WhatsApp caem no mesmo pipe. A cotação deixa de ficar espalhada em conversa e planilha.</li>
+                <li><strong>Bot de Boas-Vindas.</strong> Responde no primeiro contato enquanto o vendedor lê o lead. O comprador industrial não fica sem retorno.</li>
+                <li><strong>Automações inteligentes.</strong> A negociação muda de fase, recebe tag e ganha tarefa sozinha. O follow-up vira regra, não memória.</li>
+                <li><strong>Fluxo de Recuperação.</strong> Quem não comprou na hora entra em nutrição e volta para a conversa. A cotação fria deixa de morrer.</li>
+              </ul>
+            </article>
+            <p class="callout" style="margin-top:14px">O que agrega: o lead que o Google trouxe chega num comercial que já tem dono, fase e próximo passo. A CCPVC conduz a negociação em vez de esperar o orçamento voltar sozinho.</p>
+          </div>
+        </div>
+        <footer class="footer"><span>CCPVC × V4 Company · confidencial</span><span class="count">07 / 11</span></footer>
+      </section>
+
+      <section class="slide" data-act="produto" data-title="Rotinas" aria-label="Rotinas da máquina">
+        <div class="topbar"></div>
+        <div class="page">
+          <header class="slide-head">
+            <div class="head-copy">
+              <div class="eyebrow">03 · Rotinas · o que acontece na prática</div>
+              <h2>Ritos da máquina. <em>Nada fica no achismo.</em></h2>
+              <p class="sub">SEO com cadência de gestão. CRM com rotina automática. Os dois lados da esteira no mesmo ciclo.</p>
+            </div>
+            <div class="section-chip"><b>03</b> Produto</div>
+          </header>
+          <div class="content">
+            <div class="cadence">
+              <article class="card cad">
+                <div class="dur">Quinzenal</div>
+                <h3>Monitoramento SEO</h3>
+                <p>A operação orgânica não espera o mês fechar.</p>
+                <ul>
+                  <li>Search Console e carregamento</li>
+                  <li>Formulários e falhas técnicas</li>
+                  <li>Prioridade da quinzena</li>
+                </ul>
+              </article>
+              <article class="card cad">
+                <div class="dur">Mensal · call</div>
+                <h3>Gestão estratégica</h3>
+                <p>Leitura de resultado e o próximo ciclo.</p>
+                <ul>
+                  <li>O que rankeou</li>
+                  <li>O que virou conversa</li>
+                  <li>Reunião detalhada de resultados</li>
+                </ul>
+              </article>
+              <article class="card cad">
+                <div class="dur">Todo mês</div>
+                <h3>Conteúdo + autoridade</h3>
+                <p>A vitrine técnica se atualiza com método.</p>
+                <ul>
+                  <li>4 blogposts + briefing</li>
+                  <li>Otimização para snippet</li>
+                  <li>1–2 backlinks e links quebrados</li>
+                </ul>
+              </article>
+              <article class="card cad">
+                <div class="dur">Contínuo</div>
+                <h3>CRM no comercial</h3>
+                <p>O follow-up deixa de depender de memória.</p>
+                <ul>
+                  <li>Bot no primeiro contato</li>
+                  <li>Tags, fase e tarefa</li>
+                  <li>Fluxo de recuperação</li>
+                </ul>
+              </article>
+            </div>
+            <div class="internal">
+              <h4>Como a esteira roda</h4>
+              <p>O comprador pesquisa, o site recebe, o bot responde, o CRM qualifica e a recuperação reabre a cotação que esfriou. Contrato de SEO: 6 meses. CRM: implementação em até 6x.</p>
+              <div class="chips">
+                <span class="chip">Search Console</span>
+                <span class="chip">GMB</span>
+                <span class="chip">4 posts/mês</span>
+                <span class="chip">SEO local</span>
+                <span class="chip">Bot WhatsApp</span>
+                <span class="chip">CRM</span>
+                <span class="chip">Call mensal</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer class="footer"><span>CCPVC × V4 Company · confidencial</span><span class="count">08 / 11</span></footer>
+      </section>
+
+      <section class="slide" data-act="produto" data-title="Futuro" aria-label="Visão de futuro">
+        <div class="topbar"></div>
+        <div class="page">
+          <header class="slide-head">
+            <div class="head-copy">
+              <div class="eyebrow">04 · Como o CRM Sales fica no dia a dia</div>
+              <h2>O comercial abre o dia <em>e já sabe o que fazer.</em></h2>
+              <p class="sub">O lead que o Google trouxe não fica solto. Entra no CRM, ganha fase e gera tarefa. A CCPVC deixa de esperar orçamento chegar — e passa a conduzir a negociação.</p>
+            </div>
+            <div class="section-chip"><b>04</b> Produto</div>
+          </header>
+          <div class="content">
+            <div class="tobe">
+              <div class="tobe-row two">
+                <article class="card tobe-box">
+                  <div class="who">Demanda</div>
+                  <h3>Google industrial</h3>
+                  <p>Quem pesquisa composto ou distribuidor de polímeros encontra a CCPVC primeiro.</p>
+                </article>
+                <article class="card tobe-box">
+                  <div class="who">Comercial</div>
+                  <h3>Pipe no CRM</h3>
+                  <p>Cada negociação tem fase, dono e próximo passo. Nada depende de lembrar quem ficou sem retorno.</p>
+                </article>
+              </div>
+              <div class="tobe-join"></div>
+              <article class="card tobe-box core">
+                <div class="who">Como a operação fica</div>
+                <h3>Um card por negociação. Uma tarefa por próximo passo.</h3>
+                <p>Manhã: o pipe mostra o que está parado. Lead novo: o bot responde e o card nasce em qualificação. Cotação fria: o fluxo de recuperação devolve a conversa.</p>
+              </article>
+              <div class="tobe-join"></div>
+              <div class="tobe-hbar" aria-hidden="true"></div>
+              <div class="tobe-row four">
+                <article class="card lane">
+                  <div class="who">01 · Busca</div>
+                  <h3>Primeira opção</h3>
+                  <ul>
+                    <li>Resultado técnico</li>
+                    <li>Resultado local</li>
+                    <li>Snippets e blog</li>
+                  </ul>
+                </article>
+                <article class="card lane">
+                  <div class="who">02 · Captura</div>
+                  <h3>Resposta na hora</h3>
+                  <ul>
+                    <li>Site rápido</li>
+                    <li>Bot no WhatsApp</li>
+                    <li>Lead não esfria na porta</li>
+                  </ul>
+                </article>
+                <article class="card lane">
+                  <div class="who">03 · Follow-up</div>
+                  <h3>Tarefa no dia certo</h3>
+                  <ul>
+                    <li>Fase visível</li>
+                    <li>Tag e automação</li>
+                    <li>Cotação reativada</li>
+                  </ul>
+                </article>
+                <article class="card lane">
+                  <div class="who">04 · Operação</div>
+                  <h3>Menos sazonalidade</h3>
+                  <ul>
+                    <li>Demanda ao longo do ano</li>
+                    <li>Menos disputa só de preço</li>
+                    <li>Receita rastreável</li>
+                  </ul>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer class="footer"><span>CCPVC × V4 Company · confidencial</span><span class="count">09 / 11</span></footer>
+      </section>
+
+      <section class="slide" data-act="produto" data-title="Pronto" aria-label="O que muda na operação">
+        <div class="topbar"></div>
+        <div class="page">
+          <header class="slide-head">
+            <div class="head-copy">
+              <div class="eyebrow">Com o ciclo fechado</div>
+              <h2>O que a operação <em>vê funcionando</em>.</h2>
+              <p class="sub">Critérios observáveis na CCPVC. A esteira fica rastreável. A venda deixa de se perder por falha técnica no site ou demora no atendimento.</p>
+            </div>
+            <div class="section-chip"><b>05</b> Produto</div>
+          </header>
+          <div class="content">
+            <div class="success-grid">
+              <article class="card success-item"><span class="n">01</span><h3>Base técnica no ar: Search Console, GMB e estrutura inicial otimizada</h3></article>
+              <article class="card success-item"><span class="n">02</span><h3>Auditoria contínua de carregamento e formulários, sem site travando a cotação</h3></article>
+              <article class="card success-item"><span class="n">03</span><h3>Mapa de intenção industrial e 4 blogposts técnicos por mês, com snippet</h3></article>
+              <article class="card success-item"><span class="n">04</span><h3>1 a 2 backlinks por mês, links quebrados recuperados e SEO local básico</h3></article>
+              <article class="card success-item"><span class="n">05</span><h3>Pipe da CCPVC no CRM, com canais centralizados e fase de qualificação</h3></article>
+              <article class="card success-item"><span class="n">06</span><h3>Bot de Boas-Vindas no primeiro contato, enquanto o vendedor analisa o lead</h3></article>
+              <article class="card success-item"><span class="n">07</span><h3>Automações de fase, tag e tarefa. Fluxo de recuperação quando a cotação esfria</h3></article>
+              <article class="card success-item"><span class="n">08</span><h3>Quinzenal de SEO e reunião mensal. O comercial enxerga o funil inteiro</h3></article>
+            </div>
+          </div>
+        </div>
+        <footer class="footer"><span>CCPVC × V4 Company · confidencial</span><span class="count">10 / 11</span></footer>
+      </section>
+
+      <section class="slide" data-act="decisao" data-title="Investimento" aria-label="Investimento das duas frentes">
+        <div class="topbar"></div>
+        <div class="page">
+          <header class="slide-head">
+            <div class="head-copy">
+              <div class="eyebrow">05 · Investimento · as duas frentes</div>
+              <h2>Duas condições. <em>Uma esteira de vendas.</em></h2>
+              <p class="sub">SEO recorrente por 6 meses. CRM de implementação, viabilizado pelo cashback da Estruturação Estratégica.</p>
+            </div>
+            <div class="section-chip"><b>01</b> Decisão</div>
+          </header>
+          <div class="content">
+            <div class="offers">
+              <article class="card offer">
+                <div class="tag">Recorrente · contrato de 6 meses</div>
+                <h3>SEO Growth + GEO</h3>
+                <p class="note">Domínio orgânico no Google</p>
+                <div class="was">de R$ 5.623,01/mês</div>
+                <div class="now">R$ 3.600/mês</div>
+                <div class="math">
+                  <div class="math-row"><span>Valor de tabela</span><strong>R$ 5.623,01</strong></div>
+                  <div class="math-row"><span>Valor negociado exclusivo</span><strong class="ok">R$ 3.600/mês</strong></div>
+                  <div class="math-row"><span>4 posts + SEO local + quinzenal</span><strong class="ok">incluso</strong></div>
+                  <div class="math-row"><span>Reunião mensal de resultados</span><strong class="ok">incluso</strong></div>
+                </div>
+                <div class="pay">
+                  <span>R$ 3.600/mês</span>
+                  <span>6 meses</span>
+                  <span>Recorrente</span>
+                </div>
+              </article>
+              <article class="card offer featured">
+                <div class="tag">Implementação · em até 6x</div>
+                <h3>CRM Sales</h3>
+                <p class="note">Pipe, canais, bot, automações e recuperação</p>
+                <div class="was">tabela R$ 7.491,96</div>
+                <div class="now">6x R$ 936,50</div>
+                <div class="math">
+                  <div class="math-row"><span>Valor de tabela do escopo</span><strong>R$ 7.491,96</strong></div>
+                  <div class="math-row"><span>Total com benefício de cliente</span><strong class="ok">R$ 5.618,97</strong></div>
+                  <div class="math-row"><span>Parcela do CRM</span><strong class="ok">6x de R$ 936,50</strong></div>
+                  <div class="math-row"><span>Cashback da EE que viabiliza</span><strong class="ok">R$ 12.011,32</strong></div>
+                </div>
+                <div class="pay">
+                  <span>R$ 936,50/mês</span>
+                  <span>6 parcelas</span>
+                  <span>Total R$ 5.618,97</span>
+                </div>
+              </article>
+            </div>
+            <div class="ee-band">
+              <div>
+                <div class="k">Cashback da Estruturação Estratégica</div>
+                <p>O benefício de cliente usa o cashback de R$ 12.011,32 do investimento anterior na EE. É o que viabiliza a implementação do CRM por R$ 5.618,97, em até 6x.</p>
+              </div>
+              <div class="amt">R$ 12.011,32</div>
+            </div>
+            <div class="combo">
+              <div>
+                <h3>Máquina completa · soma mensal</h3>
+                <p>R$ 3.600 de SEO + parcela do CRM de R$ 936,50. Nos 6 meses: SEO R$ 21.600 + CRM R$ 5.618,97 = R$ 27.218,97.</p>
+              </div>
+              <div style="text-align:right">
+                <div class="cond">SEO + parcela do CRM</div>
+                <div class="fig">R$ 4.536,50<small style="font-size:14px;font-weight:600">/mês</small></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer class="footer"><span>CCPVC × V4 Company · confidencial</span><span class="count">11 / 11</span></footer>
+      </section>
+    </main>
+  </div>
+
+  <nav class="block-nav" id="blockNav" aria-label="Ir para o início de um ato"></nav>
+  <nav class="global-nav" id="globalNav" aria-label="Navegação da apresentação">
+    <button id="prevGlobal" type="button" aria-label="Slide anterior">‹</button>
+    <span class="global-count" id="globalCount">01 / 11</span>
+    <button id="nextGlobal" type="button" aria-label="Próximo slide">›</button>
+  </nav>
+  <div class="utility"><button id="fullscreenBtn" type="button">Tela cheia</button></div>
+  <div class="slide-dots" id="slideDots" aria-label="Ir para slide"></div>
+  <p class="sr-only">Setas e espaço navegam. Home e End vão ao início e ao fim. F abre tela cheia.</p>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll("#deck > .slide"));
+    const total = slides.length;
+    const acts = [
+      { id: "narrativa", label: "Capa", start: 0 },
+      { id: "dados", label: "Caminho", start: 1 },
+      { id: "produto", label: "Solução", start: 2 },
+      { id: "decisao", label: "Decisão", start: 10 }
+    ];
+    const deck = document.getElementById("deck");
+    const dots = document.getElementById("slideDots");
+    const blockNav = document.getElementById("blockNav");
+    const blockLabel = document.getElementById("blockLabel");
+    const slideTitle = document.getElementById("slideTitle");
+    const globalCount = document.getElementById("globalCount");
+    const globalProgress = document.getElementById("globalProgress");
+    const prevGlobal = document.getElementById("prevGlobal");
+    const nextGlobal = document.getElementById("nextGlobal");
+    const actName = { narrativa: "Narrativa", dados: "Caminho", produto: "Solução", decisao: "Decisão" };
+    let current = Math.max(0, Math.min(total - 1, Number((location.hash.match(/slide-(\d+)/) || [])[1] || 1) - 1));
+
+    acts.forEach((act) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.textContent = act.label;
+      button.dataset.act = act.id;
+      button.addEventListener("click", () => goTo(act.start));
+      blockNav.appendChild(button);
+    });
+    slides.forEach((_, index) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.setAttribute("aria-label", "Ir para o slide " + (index + 1));
+      button.addEventListener("click", () => goTo(index));
+      dots.appendChild(button);
+    });
+
+    function pad(n) { return String(n).padStart(2, "0"); }
+
+    function goTo(index) {
+      current = Math.max(0, Math.min(total - 1, index));
+      const slide = slides[current];
+      const act = slide.dataset.act;
+      slides.forEach((el, i) => {
+        el.classList.toggle("active", i === current);
+        el.setAttribute("aria-hidden", i === current ? "false" : "true");
+      });
+      Array.from(dots.children).forEach((dot, i) => {
+        dot.classList.toggle("active", i === current);
+        dot.setAttribute("aria-current", i === current ? "true" : "false");
+      });
+      Array.from(blockNav.children).forEach((button) => {
+        const on = button.dataset.act === act;
+        button.classList.toggle("is-active", on);
+        button.setAttribute("aria-current", on ? "true" : "false");
+      });
+      blockLabel.textContent = actName[act] || act;
+      slideTitle.textContent = slide.dataset.title || "";
+      globalCount.textContent = pad(current + 1) + " / " + pad(total);
+      globalProgress.style.width = ((current + 1) / total * 100) + "%";
+      prevGlobal.disabled = current === 0;
+      nextGlobal.disabled = current === total - 1;
+      history.replaceState(null, "", "#slide-" + pad(current + 1));
+      document.title = pad(current + 1) + " / " + pad(total) + " — CCPVC × V4";
+    }
+
+    function fitDeck() {
+      const scale = Math.min(window.innerWidth / 1600, window.innerHeight / 900);
+      deck.style.transform = "translate(-50%, -50%) scale(" + scale + ")";
+    }
+
+    window.goTo = goTo;
+    prevGlobal.addEventListener("click", () => goTo(current - 1));
+    nextGlobal.addEventListener("click", () => goTo(current + 1));
+    document.getElementById("fullscreenBtn").addEventListener("click", () => {
+      document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (["ArrowRight", "PageDown", " "].includes(event.key)) { event.preventDefault(); goTo(current + 1); }
+      if (["ArrowLeft", "PageUp"].includes(event.key)) { event.preventDefault(); goTo(current - 1); }
+      if (event.key === "Home") goTo(0);
+      if (event.key === "End") goTo(total - 1);
+      if (event.key.toLowerCase() === "f" && document.fullscreenEnabled) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      }
+    });
+    window.addEventListener("resize", fitDeck);
+    window.addEventListener("hashchange", () => {
+      const n = Math.max(0, Math.min(total - 1, Number((location.hash.match(/slide-(\d+)/) || [])[1] || 1) - 1));
+      if (n !== current) goTo(n);
+    });
+    let tx = null;
+    deck.addEventListener("touchstart", e => { tx = e.changedTouches[0].clientX; }, { passive: true });
+    deck.addEventListener("touchend", e => {
+      if (tx == null) return;
+      const d = e.changedTouches[0].clientX - tx;
+      if (Math.abs(d) > 70) goTo(current + (d < 0 ? 1 : -1));
+      tx = null;
+    }, { passive: true });
+    document.addEventListener("wheel", e => {
+      if (Math.abs(e.deltaY) < 20) return;
+      e.preventDefault();
+      goTo(current + (e.deltaY > 0 ? 1 : -1));
+    }, { passive: false });
+    fitDeck();
+    goTo(current);
+  </script>
+</body>
+</html>
+
