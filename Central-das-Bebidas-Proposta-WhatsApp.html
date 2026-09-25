@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<title>Central das Bebidas · Proposta V4 Company</title>
+<style>
+  @page { size: A4; margin: 14mm 14mm 16mm; }
+  @page:first { margin: 0; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font: 15px/1.55 "Segoe UI", Calibri, Arial, sans-serif;
+    color: #1a1a1a;
+    background: #fff;
+  }
+  h1, h2, h3 { font-family: "Segoe UI", Calibri, Arial, sans-serif; letter-spacing: -0.02em; line-height: 1.2; margin: 0; }
+  p { margin: 0 0 10px; }
+  .cover {
+    height: 297mm;
+    background: linear-gradient(165deg, #0d0d0d 0%, #1c0404 55%, #2b0606 100%);
+    color: #fff;
+    padding: 22mm 18mm 18mm;
+    page-break-after: always;
+    position: relative;
+  }
+  .kicker { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #ff6b6f; margin-bottom: 14px; }
+  .cover h1 { font-size: 40px; font-weight: 800; max-width: 150mm; margin: 18px 0 16px; }
+  .cover h1 em { font-style: normal; color: #ff3b3b; }
+  .lede { font-size: 17px; color: rgba(255,255,255,.82); max-width: 155mm; }
+  .who { margin-top: 28px; font-size: 14px; color: rgba(255,255,255,.7); }
+  .who strong { color: #fff; display: block; font-size: 16px; margin-bottom: 2px; }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 36px; }
+  .pair article { border: 1px solid rgba(255,255,255,.16); border-radius: 16px; padding: 16px 16px 14px; background: rgba(255,255,255,.05); }
+  .pair .n { font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #ff6b6f; margin-bottom: 6px; }
+  .pair h2 { font-size: 18px; margin-bottom: 6px; }
+  .pair p { font-size: 13.5px; color: rgba(255,255,255,.75); margin: 0; }
+  .footc { position: absolute; left: 18mm; right: 18mm; bottom: 16mm; font-size: 12px; color: rgba(255,255,255,.45); display: flex; justify-content: space-between; }
+  h2.sec { font-size: 26px; font-weight: 800; margin: 0 0 8px; }
+  .label { font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #e3040a; margin-bottom: 6px; }
+  .intro { font-size: 15.5px; color: #333; margin-bottom: 14px; }
+  .block { page-break-inside: avoid; margin-bottom: 14px; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .card { border: 1px solid #e8e4e1; border-radius: 14px; padding: 12px 14px; background: #fff; page-break-inside: avoid; }
+  .card .n { font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #e3040a; margin-bottom: 4px; }
+  .card h3 { font-size: 15px; margin-bottom: 4px; }
+  .card p, .card li { font-size: 13px; color: #444; }
+  .card ul { margin: 6px 0 0; padding-left: 16px; }
+  .card li { margin-bottom: 3px; }
+  .band { background: #1a1a1a; color: #fff; border-radius: 14px; padding: 14px 16px; page-break-inside: avoid; }
+  .band strong { display: block; font-size: 16px; margin-bottom: 4px; }
+  .band p { margin: 0; color: rgba(255,255,255,.82); font-size: 13.5px; }
+  .soft { background: #f6f4f2; border-radius: 14px; padding: 12px 14px; page-break-inside: avoid; }
+  h3.sub { font-size: 18px; margin: 16px 0 8px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; page-break-inside: avoid; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #e8e4e1; vertical-align: top; }
+  th { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: #555; background: #faf8f6; }
+  .was { color: #999; text-decoration: line-through; }
+  .now { font-weight: 800; color: #e3040a; }
+  .price { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 10px 0; }
+  .price article { border: 1px solid #e8e4e1; border-radius: 16px; padding: 14px; page-break-inside: avoid; }
+  .price article.hot { border-color: #e3040a; background: #fff8f8; }
+  .price .k { font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #666; }
+  .price .v { font-size: 28px; font-weight: 800; letter-spacing: -.03em; margin: 4px 0; }
+  .price article.hot .v { color: #e3040a; }
+  .price .s { font-size: 13px; color: #555; }
+  .cash { margin-top: 8px; background: #f6f4f2; border-radius: 10px; padding: 8px 10px; font-weight: 700; font-size: 14px; }
+  .flow { margin: 8px 0 4px; }
+  .flow li { list-style: none; position: relative; margin: 0 0 0 8px; padding: 0 0 12px 28px; border-left: 2px solid #e3040a; page-break-inside: avoid; }
+  .flow li:last-child { border-left-color: transparent; padding-bottom: 0; }
+  .flow .dot { position: absolute; left: -11px; top: 0; width: 20px; height: 20px; border-radius: 50%; background: #e3040a; color: #fff; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+  .flow strong { display: block; font-size: 15px; }
+  .flow span { display: block; font-size: 13px; color: #444; }
+  ol.steps { margin: 0; padding-left: 18px; }
+  ol.steps li { margin-bottom: 8px; page-break-inside: avoid; }
+  .note { background: #fff8f0; border: 1px solid #f5d5b0; border-radius: 12px; padding: 12px 14px; font-size: 13.5px; color: #5c3b12; page-break-inside: avoid; }
+  .note strong { color: #8a4b08; }
+  .keep { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 14px; margin: 8px 0 0; }
+  .keep div { font-size: 13.5px; padding: 6px 0 6px 22px; position: relative; page-break-inside: avoid; }
+  .keep div:before { content: "✓"; position: absolute; left: 0; color: #16a34a; font-weight: 800; }
+  .page { page-break-before: always; }
+  .month { display: grid; grid-template-columns: 72px 1fr; gap: 8px; padding: 8px 0; border-bottom: 1px solid #eee; page-break-inside: avoid; }
+  .month b { color: #e3040a; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; }
+  .month strong { display: block; }
+  .month span { font-size: 13px; color: #444; }
+</style>
+</head>
+<body>
+
+<section class="cover">
+  <div class="kicker">V4 Company · Proposta comercial</div>
+  <div style="font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.55)">Central das Bebidas · Cocalinho/MT</div>
+  <h1>Atendimento no ato e a operação digital na mão da <em>equipe</em>.</h1>
+  <p class="lede">Um WhatsApp organizado, com catálogo, Pix e um primeiro atendimento automático. Depois, seis meses para a equipe da casa conduzir Google, Instagram e o relacionamento com quem já compra.</p>
+  <div class="who">
+    <strong>Para Nádia Pires e Jersimar Freire</strong>
+    Distribuidora e adega · setembro de 2026
+  </div>
+  <div class="pair">
+    <article>
+      <div class="n">Fase 1 · 3 meses</div>
+      <h2>Zap First</h2>
+      <p>Monta o atendimento: vitrine, prateleira, caixa e caderno de clientes, no WhatsApp que vocês já usam.</p>
+    </article>
+    <article>
+      <div class="n">Fase 2 · 6 meses</div>
+      <h2>EQV</h2>
+      <p>Ensina a equipe a conduzir isso. Encontros mensais, três oficinas e um dono interno na operação.</p>
+    </article>
+  </div>
+  <div class="footc"><span>Documento para leitura no celular</span><span>Confidencial</span></div>
+</section>
+
+<h2 class="sec">O que esta proposta faz</h2>
+<p class="intro">A Central das Bebidas já atende Cocalinho e quem visita a região. O cliente já chama no WhatsApp. O balcão e o estoque continuam com a equipe. Esta proposta organiza esse caminho e deixa alguém da casa capaz de tocar o digital no dia a dia.</p>
+<p class="intro">A Nádia segue na direção da marca. A execução — publicar, responder o acompanhamento e olhar a base — fica com o time, ou com uma pessoa que vocês contratem para isso.</p>
+
+<div class="band block">
+  <strong>Por que isso fica na empresa</strong>
+  <p>Há pagamento que acaba e não deixa nada: um anúncio de um dia, ou alguém que posta e leva o arquivo embora. Aqui o prazo acaba e a Central das Bebidas continua com ficha no Google, Instagram com rotina, página, WhatsApp organizado, catálogo, Pix, frases de atendimento, caminho do pedido, caderno dos clientes, lembrete de recompra e gente treinada.</p>
+</div>
+
+<h3 class="sub">O que já está a favor de vocês</h3>
+<div class="grid2">
+  <article class="card"><div class="n">01 · Canal</div><h3>WhatsApp como porta de entrada</h3><p>O cliente já chama por ali. O Zap First centraliza a conversa, com a equipe no mesmo aplicativo, e um primeiro atendimento automático no oi.</p></article>
+  <article class="card"><div class="n">02 · Base</div><h3>Cliente da casa com rotina</h3><p>Bar, mercado, chácara e casa compram de novo ao longo do ano. O lembrete de recompra organiza esse relacionamento no caderno.</p></article>
+  <article class="card"><div class="n">03 · Visita</div><h3>Quem chega encontra a casa</h3><p>Google, Instagram e uma página mostram a Central das Bebidas para quem visita Cocalinho e levam a pessoa ao WhatsApp.</p></article>
+  <article class="card"><div class="n">04 · Pessoas</div><h3>Nádia na direção, time na execução</h3><p>A Nádia segue como referência da marca. O EQV capacita a equipe atual, ou um talento novo, para conduzir o digital.</p></article>
+</div>
+
+<div class="page"></div>
+<h2 class="sec">As palavras, em linguagem de loja</h2>
+<p class="intro">Cada nome técnico desta proposta tem um equivalente simples. O cliente de vocês não precisa aprender nenhum deles. Quem precisa entender é a equipe.</p>
+<table>
+  <thead><tr><th>Nome</th><th>O que é na prática</th></tr></thead>
+  <tbody>
+    <tr><td>WhatsApp Business</td><td>O mesmo WhatsApp, organizado para empresa: catálogo, mensagem padrão e mais de uma pessoa atendendo.</td></tr>
+    <tr><td>Chat centralizado</td><td>As conversas ficam num lugar só, não apenas no celular de quem está no estoque.</td></tr>
+    <tr><td>Inteligência artificial</td><td>O primeiro atendente. Responde o oi, entende se a pessoa quer preço, entrega ou produto, e deixa a conversa pronta. Quem fecha continua sendo gente.</td></tr>
+    <tr><td>Catálogo</td><td>A prateleira dentro da conversa. A pessoa vê o produto e escolhe.</td></tr>
+    <tr><td>Pix integrado</td><td>O pagamento nasce na mesma conversa.</td></tr>
+    <tr><td>Script</td><td>A frase certa de cada momento: primeiro contato, preço, entrega, horário e depois da venda.</td></tr>
+    <tr><td>Fluxo</td><td>O caminho do pedido escrito: quem responde, quem separa, quem cobra, quem entrega.</td></tr>
+    <tr><td>Kommo</td><td>O caderno digital dos clientes. Nome, o que pediu, em que pé está e qual é o próximo contato.</td></tr>
+    <tr><td>Régua de recompra</td><td>O lembrete combinado para quem já compra: bar, mercado, chácara e casa.</td></tr>
+    <tr><td>Google Meu Negócio</td><td>A ficha da loja no Google e no mapa, quando alguém busca bebida em Cocalinho.</td></tr>
+    <tr><td>Página</td><td>Um endereço simples, com o que a casa vende e o botão do WhatsApp.</td></tr>
+    <tr><td>EQV</td><td>Empresa que Vende. Os seis meses em que a equipe aprende a conduzir o que foi montado.</td></tr>
+    <tr><td>Sessão</td><td>Uma oficina marcada, com começo, meio e um material que o time passa a usar.</td></tr>
+    <tr><td>Consultoria mensal</td><td>Uma hora por mês para ver o que aconteceu e escolher a prioridade do mês seguinte.</td></tr>
+  </tbody>
+</table>
+
+<div class="page"></div>
+<div class="label">Fase 1 · Zap First · 3 meses</div>
+<h2 class="sec">Do primeiro oi ao Pix</h2>
+<p class="intro">O Zap First monta o atendimento. A equipe permanece no WhatsApp que já usa. Entram catálogo, Pix, caminho do pedido, caderno e lembrete de recompra. A inteligência artificial entra por último, quando a prateleira e as frases já existem. Assim ela responde certo.</p>
+
+<div class="grid2">
+  <article class="card"><div class="n">1 · Produto</div><h3>A prateleira</h3><p>Catálogo no WhatsApp, oferta clara e Pix na conversa. A pessoa vê, escolhe e paga.</p></article>
+  <article class="card"><div class="n">2 · Processo</div><h3>O caminho</h3><p>Do primeiro oi ao pedido, com frase em cada etapa. A conversa tem dono, prazo e próximo passo.</p></article>
+  <article class="card"><div class="n">3 · Pessoas</div><h3>O treino</h3><p>O time, ou a pessoa que vocês contratarem, aprende a usar. A Nádia valida a voz. A publicação do dia a dia fica com o time.</p></article>
+  <article class="card"><div class="n">4 · Inteligência artificial</div><h3>O primeiro oi</h3><p>Ela qualifica a demanda. A equipe entra para fechar, entregar e cuidar de quem já é cliente.</p></article>
+</div>
+
+<h3 class="sub">O que entra nos três meses</h3>
+<div class="grid2">
+  <article class="card"><div class="n">Presença</div><h3>Quem visita encontra a casa</h3><ul><li>Ficha no Google, Instagram e página</li><li>WhatsApp Business estruturado</li></ul></article>
+  <article class="card"><div class="n">Venda</div><h3>Da prateleira ao Pix</h3><ul><li>Catálogo de produtos com Pix</li><li>Frases de atendimento em todas as etapas</li><li>Caminho do pedido escrito</li></ul></article>
+  <article class="card"><div class="n">Time e base</div><h3>Quem opera e o que fica registrado</h3><ul><li>Treinamento do time</li><li>Caderno Kommo configurado</li><li>Lembretes de recompra e de reativação</li></ul></article>
+  <article class="card"><div class="n">Inteligência</div><h3>Primeiro contato e leitura</h3><ul><li>Atendente automático no oi e na qualificação</li><li>Relatório final e diagnóstico de maturidade</li></ul></article>
+</div>
+
+<h3 class="sub">Como correm os três meses</h3>
+<div class="month"><b>Mês 1</b><div><strong>Setup</strong><span>Google, Instagram, página, WhatsApp e chat centralizado. A vitrine e o balcão.</span></div></div>
+<div class="month"><b>Mês 2</b><div><strong>Produto e processo</strong><span>Catálogo, Pix, frases, caminho do pedido e lembretes desenhados. A prateleira e o caixa.</span></div></div>
+<div class="month"><b>Mês 3</b><div><strong>Pessoas, caderno e atendimento automático</strong><span>Treinamento, Kommo no ar, primeiro contato automático e relatório. A equipe sabendo usar.</span></div></div>
+<p class="intro" style="margin-top:12px">No fim do terceiro mês o pedido tem dono, os clientes estão no caderno e a equipe foi treinada. A segunda fase começa em cima disso.</p>
+
+<div class="page"></div>
+<div class="label">Como um pedido passa a acontecer</div>
+<h2 class="sec">Do encontro com a casa até o cliente voltar</h2>
+<p class="intro">O cliente não muda de aplicativo. A Central das Bebidas continua no WhatsApp. O que muda é o caminho, do primeiro contato até o próximo pedido.</p>
+<ol class="flow">
+  <li><span class="dot">1</span><strong>Encontra</strong><span>Quem visita acha a casa no Google ou no Instagram. Quem já compra em Cocalinho chama direto.</span></li>
+  <li><span class="dot">2</span><strong>Chama</strong><span>É o mesmo WhatsApp de sempre, com as conversas reunidas num lugar só.</span></li>
+  <li><span class="dot">3</span><strong>O automático entende</strong><span>O primeiro contato sai em minutos, enquanto o time está no balcão ou no estoque. A conversa chega qualificada.</span></li>
+  <li><span class="dot">4</span><strong>Escolhe e paga</strong><span>Catálogo na conversa e Pix integrado. Menos ida e volta até o pedido.</span></li>
+  <li><span class="dot">5</span><strong>O time fecha</strong><span>A equipe assume exceção, separação, entrega e relacionamento.</span></li>
+  <li><span class="dot">6</span><strong>A base continua</strong><span>O Kommo registra. O lembrete de recompra mantém o relacionamento com quem já comprou.</span></li>
+  <li><span class="dot">7</span><strong>A casa conduz</strong><span>No fim dos seis meses do EQV, o digital tem dono interno. A Nádia decide a marca. O time conduz publicação e mensagem.</span></li>
+</ol>
+
+<h3 class="sub">Quem faz o quê</h3>
+<table>
+  <thead><tr><th></th><th>Chegada</th><th>Primeiro contato</th><th>Pedido</th><th>Depois da venda</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Cliente</strong></td><td>Visita a cidade ou já compra na casa</td><td>Manda mensagem no WhatsApp</td><td>Escolhe no catálogo e paga no Pix</td><td>Recebe o lembrete de recompra</td></tr>
+    <tr><td><strong>Sistema</strong></td><td>Google, Instagram e página no ar</td><td>O automático qualifica e encaminha</td><td>O caminho do pedido registra no Kommo</td><td>Lembretes de recompra e reativação</td></tr>
+    <tr><td><strong>Pessoas</strong></td><td>A Nádia conduz a marca</td><td>A equipe segue na loja</td><td>A equipe fecha, separa e entrega</td><td>O dono interno conduz. A Nádia aprova a direção</td></tr>
+  </tbody>
+</table>
+
+<div class="page"></div>
+<div class="label">Fase 2 · EQV · Empresa que Vende · 6 meses</div>
+<h2 class="sec">A equipe aprende a conduzir</h2>
+<p class="intro">O EQV começa com o Zap First já no ar. Durante seis meses a V4 explica e faz junto com a equipe, ou com um talento que vocês contratem. No fim, a Central das Bebidas repete o método. A Nádia permanece na direção da marca.</p>
+<div class="grid2">
+  <article class="card"><div class="n">Todo mês · 1 hora</div><h3>Consultoria</h3><p>Um encontro para ver atendimento, base, conteúdo e presença. Sai uma prioridade e o combinado do que a casa executa até o mês seguinte.</p></article>
+  <article class="card"><div class="n">Feito junto</div><h3>Quatro frentes</h3><p>Conteúdo, presença no Google e no Instagram, comercial e caderno de clientes. O especialista faz com quem fica na operação.</p></article>
+  <article class="card"><div class="n">Três oficinas</div><h3>Sessões com entrega</h3><p>Cada oficina termina com material que o time passa a repetir: o que publicar, onde aparecer e como vender.</p></article>
+  <article class="card"><div class="n">Rede</div><h3>Comunidade</h3><p>Monitoria mensal, grupo fechado e um conteúdo por semana. A Fábrica de Receita é o encontro presencial do programa.</p></article>
+</div>
+
+<h3 class="sub">Os seis meses, um assunto por vez</h3>
+<div class="month"><b>Mês 1</b><div><strong>Início</strong><span>Kickoff, leitura do que já está maduro e o nome de quem será o dono interno.</span></div></div>
+<div class="month"><b>Mês 2</b><div><strong>Canal e oferta</strong><span>Como a casa se apresenta para o cliente de Cocalinho e para quem visita, em cima do WhatsApp já montado.</span></div></div>
+<div class="month"><b>Mês 3</b><div><strong>Conteúdo</strong><span>Linha do Instagram. A Nádia valida a voz. O time publica.</span></div></div>
+<div class="month"><b>Mês 4</b><div><strong>Presença</strong><span>Google e Instagram. A leitura é por conversa no WhatsApp e por pedido.</span></div></div>
+<div class="month"><b>Mês 5</b><div><strong>Comercial</strong><span>Frases, respostas de preço, prazo, entrega e horário. O que o automático responde e o que a pessoa assume.</span></div></div>
+<div class="month"><b>Mês 6</b><div><strong>Casa no comando</strong><span>Caderno, lembretes e o ciclo com o dono interno. A equipe repete o mês seguinte no mesmo padrão.</span></div></div>
+
+<div class="page"></div>
+<h3 class="sub" style="margin-top:0">O calendário dos encontros</h3>
+<p class="intro">Cada encontro tem pauta, uma entrega e alguém da casa presente. A Nádia entra na direção. O ponto focal entra na execução: o Jersimar, alguém do time ou a pessoa que vocês contratarem.</p>
+<div class="grid2">
+  <article class="card"><div class="n">Encontro mensal · 1 hora</div><h3>A decisão do mês</h3><ul><li>Leitura de atendimento, base, conteúdo e presença</li><li>Uma prioridade para o ciclo</li><li>O que a casa executa até o próximo encontro</li></ul></article>
+  <article class="card"><div class="n">Oficina 1 · Conteúdo</div><h3>Voz e publicação</h3><ul><li>Voz da marca e linha do Instagram</li><li>Modelos de oferta, combo e aviso de horário</li><li>Passo a passo de quem publica</li></ul></article>
+  <article class="card"><div class="n">Oficina 2 · Google e Instagram</div><h3>Quem chega encontra a casa</h3><ul><li>Presença na busca de quem chega em Cocalinho</li><li>Plano de onde aparecer e para quem</li><li>Leitura por conversa e por pedido</li></ul></article>
+  <article class="card"><div class="n">Oficina 3 · Venda e caderno</div><h3>Frase, objeção e responsável</h3><ul><li>Revisão das frases do Zap First com o time</li><li>Preço, prazo, entrega e horário</li><li>Kommo com etapa, lembrete e dono de cada conversa</li></ul></article>
+  <article class="card"><div class="n">Todo mês</div><h3>Comunidade</h3><ul><li>Monitoria coletiva com especialistas V4</li><li>Grupo fechado</li><li>Conteúdo semanal de conquista, retorno e venda</li></ul></article>
+  <article class="card"><div class="n">Presencial</div><h3>Fábrica de Receita</h3><ul><li>Encontro do calendário do EQV</li><li>Troca prática com outros operadores</li><li>Método de volta para a rotina de Cocalinho</li></ul></article>
+</div>
+
+<div class="soft block" style="margin-top:14px">
+  <strong>O que a casa precisa colocar</strong>
+  <p style="margin:6px 0 0">Um ponto focal com horas na semana. Acesso ao WhatsApp, Instagram, Google, tabela e regras de entrega. A Nádia no início e nas decisões de marca. O registro do pedido no fluxo novo, para a base ficar na empresa e não só num celular.</p>
+</div>
+
+<div class="page"></div>
+<div class="label">O que permanece na Central das Bebidas</div>
+<h2 class="sec">O que vocês levam</h2>
+<p class="intro">Estes são os resultados que dá para ver funcionando. Eles continuam na casa quando o ciclo de encontros termina.</p>
+<div class="keep">
+  <div>Primeiro contato no ato: o automático abre e entende, a equipe fecha e entrega.</div>
+  <div>Base com recompra: quem compra ao longo do ano entra no lembrete.</div>
+  <div>Quem visita tem caminho curto: Google e Instagram levam ao WhatsApp.</div>
+  <div>Catálogo e Pix encurtam o pedido dentro da conversa.</div>
+  <div>Histórico, etapa e próximo passo ficam no caderno, para o time inteiro.</div>
+  <div>Frases, caminho escrito e treinamento, inclusive para gente nova.</div>
+  <div>A Nádia segue como referência da marca.</div>
+  <div>Publicação, mensagem e acompanhamento têm dono na equipe.</div>
+</div>
+
+<h2 class="sec" style="margin-top:22px">Investimento</h2>
+<p class="intro">Duas fases, com a referência de tabela ao lado da condição desta proposta. O Zap First é a montagem, em três meses. O EQV é o acompanhamento, em seis parcelas alinhadas aos seis meses.</p>
+<div class="price">
+  <article class="hot">
+    <div class="k">Zap First · 3 meses</div>
+    <div class="was">de R$ 30.000</div>
+    <div class="v">12x R$ 1.666,67</div>
+    <div class="s">no cartão · projeto de 3 meses</div>
+    <div class="cash">ou R$ 18.000 à vista</div>
+  </article>
+  <article>
+    <div class="k">EQV · 6 meses</div>
+    <div class="was">de R$ 48.000</div>
+    <div class="v">6x R$ 2.500</div>
+    <div class="s">uma parcela por mês de acompanhamento · total R$ 15.000</div>
+    <div class="cash">ciclo completo de encontros</div>
+  </article>
+</div>
+<table>
+  <thead><tr><th>Fase</th><th>Referência</th><th>Nesta proposta</th></tr></thead>
+  <tbody>
+    <tr><td>Zap First · 3 meses</td><td class="was">R$ 30.000</td><td class="now">R$ 18.000 à vista ou 12x de R$ 1.666,67</td></tr>
+    <tr><td>EQV · 6 meses</td><td class="was">R$ 48.000</td><td class="now">6x de R$ 2.500</td></tr>
+    <tr><td>As duas, com Zap First à vista</td><td class="was">R$ 78.000</td><td class="now">R$ 33.000</td></tr>
+  </tbody>
+</table>
+<div class="note" style="margin-top:12px">
+  <strong>Três meses de trabalho, doze vezes no cartão.</strong> O Zap First dura três meses: nesse prazo a montagem está entregue. As doze parcelas são só a forma de pagamento no cartão, não doze meses de serviço. O EQV acompanha o calendário: seis encontros mensais, seis parcelas de R$ 2.500.
+</div>
+<p class="intro" style="margin-top:12px">O Zap First cobre a implantação do atendimento: presença, catálogo, Pix, frases, caminho, treino, caderno, lembretes, primeiro atendimento automático e relatório. O EQV cobre a jornada de seis meses: a hora mensal, as três oficinas, as quatro frentes feitas junto, a comunidade e a Fábrica de Receita.</p>
+
+<div class="page"></div>
+<div class="label">Próximo passo</div>
+<h2 class="sec">Começamos pelo Zap First. O EQV entra na sequência.</h2>
+<ol class="steps">
+  <li><strong>Proposta aprovada e contrato.</strong> Zap First em 12 vezes de R$ 1.666,67 ou R$ 18.000 à vista. EQV em 6 vezes de R$ 2.500.</li>
+  <li><strong>Kick-off com Nádia e Jersimar.</strong> Nome do ponto focal, acessos de WhatsApp, Instagram e Google, tabela e regras de entrega. A Nádia entra na decisão de marca.</li>
+  <li><strong>Zap First no ar.</strong> Chat, primeiro atendimento automático, catálogo, Pix, Kommo, frases e os primeiros lembretes. A equipe segue no WhatsApp.</li>
+  <li><strong>EQV em cima dessa base.</strong> Conteúdo, Google, Instagram, comercial e caderno, com quem vai operar.</li>
+  <li><strong>Casa no comando.</strong> Diagnóstico de maturidade, base organizada e a equipe conduzindo o ciclo.</li>
+</ol>
+<div class="band block" style="margin-top:18px">
+  <strong>A ordem protege o resultado</strong>
+  <p>Primeiro se monta o atendimento. Depois a equipe pratica em cima de algo que já funciona. Se o caixa pedir um passo de cada vez, o primeiro passo é o Zap First. O EQV entra quando já existe o que conduzir.</p>
+</div>
+<p style="margin-top:28px;font-size:13px;color:#777">V4 Company · Proposta para Central das Bebidas · Nádia Pires e Jersimar Freire · Cocalinho/MT · setembro de 2026. Documento preparado para envio direto aos sócios.</p>
+</body>
+</html>
