@@ -46,6 +46,11 @@
   </header>
 
   <main class="max-w-7xl mx-auto px-4 py-6 space-y-6">
+    <section class="card p-4 flex flex-wrap items-center gap-3">
+      <p class="text-[11px] font-bold uppercase tracking-wide text-slate-500">Data do pitch</p>
+      <div class="flex flex-wrap gap-2" id="chipsPeriodo"></div>
+      <p id="periodoResumo" class="text-xs text-slate-500 md:ml-auto"></p>
+    </section>
     <section id="kpis" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3"></section>
 
     <section class="card p-5">
@@ -55,7 +60,7 @@
           <p class="text-xs text-slate-500">Somente clientes com data de pitch confirmada na planilha E.E</p>
         </div>
       </div>
-      <div id="funnel" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3"></div>
+      <div id="funnel" class="grid grid-cols-2 md:grid-cols-4 gap-3"></div>
     </section>
 
     <section class="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -112,6 +117,11 @@
           <input id="busca" type="search" placeholder="Buscar cliente, produto, obs..." class="w-52 rounded-lg border border-slate-200 px-3 py-2 text-sm" />
           <select id="filtroEtapa" class="rounded-lg border border-slate-200 px-3 py-2 text-sm bg-white"></select>
           <select id="filtroResp" class="rounded-lg border border-slate-200 px-3 py-2 text-sm bg-white"></select>
+          <select id="filtroPeriodo" class="rounded-lg border border-slate-200 px-3 py-2 text-sm bg-white">
+            <option value="">Todas as datas</option>
+            <option value="passado">O que aconteceu</option>
+            <option value="futuro">O que tem para acontecer</option>
+          </select>
         </div>
       </div>
       <div class="px-4 py-2 flex flex-wrap gap-2" id="chips"></div>
@@ -159,9 +169,23 @@
 
     const charts = {};
     let chipEtapa = '';
+    let chipPeriodo = '';
+    const HOJE = (() => { const d = new Date(); d.setHours(0,0,0,0); return d; })();
 
     const soma = (rows, key) => rows.reduce((a, r) => a + (Number(r[key]) || 0), 0);
     const byEtapa = (rows, etapa) => rows.filter(r => r.etapa === etapa);
+
+    function parsePitch(s) {
+      const m = String(s || '').match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+      if (!m) return null;
+      return new Date(+m[3], +m[2] - 1, +m[1]);
+    }
+    function periodoDe(d) {
+      const p = parsePitch(d.pitch);
+      if (!p) return '';
+      p.setHours(0,0,0,0);
+      return p < HOJE ? 'passado' : 'futuro';
+    }
 
     function fillSelect(id, values, label) {
       document.getElementById(id).innerHTML =
@@ -170,33 +194,51 @@
     fillSelect('filtroEtapa', ETAPAS, 'Todas as etapas');
     fillSelect('filtroResp', [...new Set(DEALS.map(d => d.resp))].sort(), 'Todos os responsáveis');
 
+    const nPassado = DEALS.filter(d => periodoDe(d) === 'passado').length;
+    const nFuturo = DEALS.filter(d => periodoDe(d) === 'futuro').length;
+    document.getElementById('chipsPeriodo').innerHTML = [
+      { v: '', l: `Todas (${DEALS.length})` },
+      { v: 'passado', l: `O que aconteceu (${nPassado})` },
+      { v: 'futuro', l: `O que tem para acontecer (${nFuturo})` }
+    ].map((x, i) =>
+      `<button type="button" data-periodo="${x.v}" class="chip-periodo ${i ? '' : 'active'} chip text-xs font-bold border border-slate-200 rounded-full px-3 py-1.5">${x.l}</button>`
+    ).join('');
+    document.getElementById('periodoResumo').textContent =
+      nPassado + ' pitches já aconteceram · ' + nFuturo + ' ainda vão acontecer (a partir de hoje)';
+
     document.getElementById('chips').innerHTML = ['Todas', ...ETAPAS].map((e, i) =>
-      `<button type="button" data-etapa="${i ? e : ''}" class="chip ${i ? '' : 'active'} text-xs font-bold border border-slate-200 rounded-full px-3 py-1.5">${e}</button>`
+      `<button type="button" data-etapa="${i ? e : ''}" class="chip-etapa chip ${i ? '' : 'active'} text-xs font-bold border border-slate-200 rounded-full px-3 py-1.5">${e}</button>`
     ).join('');
 
     function filtrados() {
       const q = document.getElementById('busca').value.toLowerCase();
       const e = document.getElementById('filtroEtapa').value || chipEtapa;
       const r = document.getElementById('filtroResp').value;
+      const p = document.getElementById('filtroPeriodo').value || chipPeriodo;
       return DEALS.filter(d =>
         (!e || d.etapa === e) &&
         (!r || d.resp === r) &&
+        (!p || periodoDe(d) === p) &&
         (!q || [d.cliente, d.pitch, d.produto, d.obs, d.resp, d.status].join(' ').toLowerCase().includes(q))
-      );
+      ).sort((a, b) => {
+        const da = parsePitch(a.pitch) || 0;
+        const db = parsePitch(b.pitch) || 0;
+        return p === 'passado' ? db - da : da - db;
+      });
     }
 
-    function renderKpis() {
-      const live = DEALS.filter(d => d.etapa !== 'Perdido');
-      const won = byEtapa(DEALS, 'Fechado');
-      const lost = byEtapa(DEALS, 'Perdido');
-      const neg = byEtapa(DEALS, 'Negociação');
+    function renderKpis(rows) {
+      const live = rows.filter(d => d.etapa !== 'Perdido');
+      const won = byEtapa(rows, 'Fechado');
+      const lost = byEtapa(rows, 'Perdido');
+      const neg = byEtapa(rows, 'Negociação');
       const conv = (won.length + lost.length) ? won.length / (won.length + lost.length) : 0;
       const mrr = soma(live, 'mrr');
       const tcv = soma(live, 'tcv');
       const cards = [
         { label: 'MRR total', value: BRL.format(mrr), sub: 'Recorrente no recorte (est. TCV/12)', delta: BRL.format(soma(won, 'mrr')) + ' em ganhos', up: true },
         { label: 'TCV total', value: BRL.format(tcv), sub: 'Aberto + fechado · só com data de pitch', delta: BRL.format(soma(won, 'tcv')) + ' ganhos no recorte', up: true },
-        { label: 'Deals no funil', value: String(live.length), sub: `${DEALS.length} com data de pitch · ${lost.length} perdas`, delta: `${neg.length} em negociação`, up: true },
+        { label: 'Deals no funil', value: String(live.length), sub: `${rows.length} no filtro de data · ${lost.length} perdas`, delta: `${neg.length} em negociação`, up: true },
         { label: 'Conversão geral', value: (conv * 100).toFixed(1).replace('.', ',') + '%', sub: 'Ganhos / (ganhos + drops) com pitch confirmado', delta: `${won.length} ganhos · ${lost.length} drops`, up: conv >= 0.3 }
       ];
       document.getElementById('kpis').innerHTML = cards.map(c => `
@@ -209,10 +251,10 @@
       `).join('');
     }
 
-    function renderFunnel() {
-      const max = Math.max(...ETAPAS.map(e => byEtapa(DEALS, e).length), 1);
+    function renderFunnel(base) {
+      const max = Math.max(...ETAPAS.map(e => byEtapa(base, e).length), 1);
       document.getElementById('funnel').innerHTML = ETAPAS.map(e => {
-        const rows = byEtapa(DEALS, e);
+        const rows = byEtapa(base, e);
         const n = rows.length;
         const tcv = soma(rows, 'tcv');
         const mrr = soma(rows, 'mrr');
@@ -231,8 +273,8 @@
         btn.addEventListener('click', () => {
           chipEtapa = btn.dataset.etapa;
           document.getElementById('filtroEtapa').value = chipEtapa;
-          document.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c.dataset.etapa === chipEtapa));
-          renderTable();
+          document.querySelectorAll('.chip-etapa').forEach(c => c.classList.toggle('active', c.dataset.etapa === chipEtapa));
+          renderAll();
         });
       });
     }
@@ -277,8 +319,11 @@
       });
     }
 
-    function renderTable() {
+    function renderAll() {
       const rows = filtrados();
+      const p = document.getElementById('filtroPeriodo').value || chipPeriodo;
+      renderKpis(rows);
+      renderFunnel(DEALS.filter(d => !p || periodoDe(d) === p));
       document.getElementById('contador').textContent = rows.length + ' deals · TCV ' + BRL.format(soma(rows, 'tcv')) + ' · MRR ' + BRL.format(soma(rows, 'mrr'));
       document.getElementById('tabela').innerHTML = rows.map(r => `
         <tr class="hover:bg-rose-50/40">
@@ -294,29 +339,40 @@
       renderCharts(rows);
     }
 
-    ['busca', 'filtroEtapa', 'filtroResp'].forEach(id => {
-      document.getElementById(id).addEventListener('input', renderTable);
+    ['busca', 'filtroEtapa', 'filtroResp', 'filtroPeriodo'].forEach(id => {
+      document.getElementById(id).addEventListener('input', renderAll);
       document.getElementById(id).addEventListener('change', () => {
         if (id === 'filtroEtapa') {
           chipEtapa = document.getElementById('filtroEtapa').value;
-          document.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c.dataset.etapa === chipEtapa));
+          document.querySelectorAll('.chip-etapa').forEach(c => c.classList.toggle('active', c.dataset.etapa === chipEtapa));
         }
-        renderTable();
+        if (id === 'filtroPeriodo') {
+          chipPeriodo = document.getElementById('filtroPeriodo').value;
+          document.querySelectorAll('.chip-periodo').forEach(c => c.classList.toggle('active', c.dataset.periodo === chipPeriodo));
+        }
+        renderAll();
       });
     });
-    document.querySelectorAll('.chip').forEach(btn => {
+    document.querySelectorAll('.chip-etapa').forEach(btn => {
       btn.addEventListener('click', () => {
         chipEtapa = btn.dataset.etapa;
         document.getElementById('filtroEtapa').value = chipEtapa;
-        document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+        document.querySelectorAll('.chip-etapa').forEach(c => c.classList.remove('active'));
         btn.classList.add('active');
-        renderTable();
+        renderAll();
+      });
+    });
+    document.querySelectorAll('.chip-periodo').forEach(btn => {
+      btn.addEventListener('click', () => {
+        chipPeriodo = btn.dataset.periodo;
+        document.getElementById('filtroPeriodo').value = chipPeriodo;
+        document.querySelectorAll('.chip-periodo').forEach(c => c.classList.remove('active'));
+        btn.classList.add('active');
+        renderAll();
       });
     });
 
-    renderKpis();
-    renderFunnel();
-    renderTable();
+    renderAll();
   </script>
 </body>
 </html>
