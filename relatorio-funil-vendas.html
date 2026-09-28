@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Funil de Vendas · E.E Saber → Executar · Setembro 2026</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { brand: '#e50914', ink: '#0f172a' },
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
+        }
+      }
+    };
+  </script>
+  <style>
+    html { scroll-padding-top: 88px; }
+    body { font-family: Inter, system-ui, sans-serif; }
+    .card { background: #fff; border: 1px solid #ececec; border-radius: 16px; }
+    .funnel-step { transition: transform .15s ease; }
+    .funnel-step:hover { transform: translateY(-2px); }
+    .chip.active { background: #e50914; color: #fff; border-color: #e50914; }
+    .chart-box { position: relative; height: 260px; }
+  </style>
+</head>
+<body class="bg-slate-50 text-ink min-h-screen">
+  <header class="sticky top-0 z-20 bg-white/95 backdrop-blur border-b-4 border-brand">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-brand text-white font-extrabold grid place-items-center">V4</div>
+        <div>
+          <p class="text-[11px] font-bold uppercase tracking-widest text-brand">Relatório de funil · Growth</p>
+          <h1 class="text-lg sm:text-xl font-extrabold leading-tight">E.E Saber → Executar · Setembro 2026</h1>
+        </div>
+      </div>
+      <div class="text-right">
+        <p class="text-xs font-semibold text-slate-500">Atualizado em 28/09/2026</p>
+        <p class="text-[11px] text-slate-400">Fonte: aba E.E + Meta x Realizado 2026</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 py-6 space-y-6">
+    <section id="kpis" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3"></section>
+
+    <section class="card p-5">
+      <div class="flex items-end justify-between gap-3 mb-4">
+        <div>
+          <h2 class="text-sm font-extrabold">Pipeline visual</h2>
+          <p class="text-xs text-slate-500">Volume e TCV por etapa · recorte aberto + ganhos/perdas de setembro</p>
+        </div>
+      </div>
+      <div id="funnel" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3"></div>
+    </section>
+
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div class="card p-4">
+        <h2 class="text-sm font-extrabold mb-3">TCV por etapa</h2>
+        <div class="chart-box"><canvas id="chartEtapa"></canvas></div>
+      </div>
+      <div class="card p-4">
+        <h2 class="text-sm font-extrabold mb-3">TCV por responsável (top)</h2>
+        <div class="chart-box"><canvas id="chartResp"></canvas></div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-sm font-extrabold mb-3">O que a gente fez</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
+        <article class="card p-4 border-l-4 border-emerald-500">
+          <p class="text-[11px] font-bold uppercase tracking-wide text-emerald-700">Fechamento</p>
+          <h3 class="font-extrabold mt-1">Fertisul · R$ 97.179</h3>
+          <p class="text-sm text-slate-600 mt-1">Monetizado em 25/09 com Executar Basic + SEO/GEO. Maior TCV do mês no E.E.</p>
+        </article>
+        <article class="card p-4 border-l-4 border-emerald-500">
+          <p class="text-[11px] font-bold uppercase tracking-wide text-emerald-700">Fechamento</p>
+          <h3 class="font-extrabold mt-1">CID + Bodega · R$ 95.728</h3>
+          <p class="text-sm text-slate-600 mt-1">CID monetizado (EA R$ 29.600). Bodega Aceito (Zap First R$ 66.128) com assinatura em 28/09.</p>
+        </article>
+        <article class="card p-4 border-l-4 border-brand">
+          <p class="text-[11px] font-bold uppercase tracking-wide text-brand">Follow</p>
+          <h3 class="font-extrabold mt-1">11 deals em negociação</h3>
+          <p class="text-sm text-slate-600 mt-1">R$ 436.972 em TCV. Devolutivas 28–29/09: Ultimix, AMBI, Castanheira, Boteco, Central e CCPVC.</p>
+        </article>
+        <article class="card p-4 border-l-4 border-amber-500">
+          <p class="text-[11px] font-bold uppercase tracking-wide text-amber-700">Pitches</p>
+          <h3 class="font-extrabold mt-1">Agenda da última semana</h3>
+          <p class="text-sm text-slate-600 mt-1">Atlanta, Maben, Empório, Xavier, MB, Golias, Café Negrin, Polivida, Naki, MGE e V-Tech no radar 28–30/09.</p>
+        </article>
+        <article class="card p-4 border-l-4 border-slate-400">
+          <p class="text-[11px] font-bold uppercase tracking-wide text-slate-500">Perdas</p>
+          <h3 class="font-extrabold mt-1">4 drops em setembro</h3>
+          <p class="text-sm text-slate-600 mt-1">Henri e RE/MAX em tratativa Ops. Visamix budget. Tamiya após kick-off. TCV em risco: R$ 64.737.</p>
+        </article>
+        <article class="card p-4 border-l-4 border-sky-500">
+          <p class="text-[11px] font-bold uppercase tracking-wide text-sky-700">Meta x Realizado</p>
+          <h3 class="font-extrabold mt-1">Jul/26 · E.E 134% da meta</h3>
+          <p class="text-sm text-slate-600 mt-1">E.E (Saber → Executar) R$ 94.253 / R$ 70.000. Total da casa R$ 304.250 (190% da meta).</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="card overflow-hidden">
+      <div class="px-4 py-3 border-b border-slate-100 flex flex-wrap items-center gap-3 justify-between">
+        <h2 class="text-sm font-extrabold">Deals detalhados</h2>
+        <div class="flex flex-wrap gap-2 items-center">
+          <input id="busca" type="search" placeholder="Buscar cliente, produto, obs..." class="w-52 rounded-lg border border-slate-200 px-3 py-2 text-sm" />
+          <select id="filtroEtapa" class="rounded-lg border border-slate-200 px-3 py-2 text-sm bg-white"></select>
+          <select id="filtroResp" class="rounded-lg border border-slate-200 px-3 py-2 text-sm bg-white"></select>
+        </div>
+      </div>
+      <div class="px-4 py-2 flex flex-wrap gap-2" id="chips"></div>
+      <div class="overflow-x-auto">
+        <table class="min-w-full text-sm">
+          <thead class="bg-brand text-white text-[11px] uppercase tracking-wide">
+            <tr>
+              <th class="text-left font-bold px-4 py-3">Cliente</th>
+              <th class="text-left font-bold px-4 py-3">Etapa</th>
+              <th class="text-right font-bold px-4 py-3">MRR</th>
+              <th class="text-right font-bold px-4 py-3">TCV</th>
+              <th class="text-left font-bold px-4 py-3">Responsável</th>
+              <th class="text-left font-bold px-4 py-3">Status</th>
+              <th class="text-left font-bold px-4 py-3">Observações</th>
+            </tr>
+          </thead>
+          <tbody id="tabela" class="divide-y divide-slate-100 bg-white"></tbody>
+        </table>
+      </div>
+      <p id="contador" class="px-4 py-3 text-xs font-semibold text-slate-500"></p>
+    </section>
+
+    <p class="text-center text-xs text-slate-400 pb-8">
+      MRR de produtos recorrentes (Executar Basic, SEO/GEO, EQV, Assessoria) estimado como TCV/12 quando a coluna MRR da planilha veio vazia.
+      Zap First e Execução Assistida entram só no TCV (one-time).
+    </p>
+  </main>
+
+  <script>
+    const DEALS = [{"cliente": "Triboltec","etapa": "Qualificação","status": "Semana 05","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "Ruan Silva","temp": "—","obs": "Projeto travado por conta da ageda do cliente. Marcamos 4 vezes para realizar os entregaveis + pith, porém cliente sempre desmarca. Reeng...","pitch": "29/07/2026"},{"cliente": "ABC71 SOLUÇÕES EM INFORMÁTIVCA S.A. (LM)","etapa": "Negociação","status": "Follow","mrr": 8500,"tcv": 102000,"produto": "Executar Basic","resp": "Eder Vasconcelos","temp": "Morno","obs": "Devolutiva 25/09","pitch": "21/08/2026"},{"cliente": "[BOD] Bodega do Sertão","etapa": "Fechado","status": "Aceito","mrr": 0,"tcv": 66127.9,"produto": "Zap First","resp": "Aline Pereira Silva","temp": "Quente","obs": "Assinatura agendada para 28/09. Esclarecidas as dúvidas do cliente sobre o contrato.","pitch": "16/09/2026"},{"cliente": "Supermercado casa dos pães (BS)","etapa": "Qualificação","status": "Semana 05","mrr": 0,"tcv": 20000,"produto": "Zap First","resp": "Thiago Almeida","temp": "—","obs": "Cliente com agenda bem dificil. 04 vezes em seguida No - Show","pitch": "27/08/2026"},{"cliente": "Work Bank (BT)","etapa": "Proposta","status": "Semana 02","mrr": 0,"tcv": 5035.63,"produto": "Implementaçaõ de CRM vendas","resp": "Rafaela Tolomeu Messias","temp": "Quente","obs": "Cliente está na primeira semana e monetizamos com a implementação de crm","pitch": "28/08/2026"},{"cliente": "Henri Soluções (LS)","etapa": "Perdido","status": "Drop","mrr": 2394.76,"tcv": 28737.12,"produto": "Executar Basic","resp": "Aline Pereira Silva","temp": "Frio","obs": "Tratativa de OPS E ADIAMOS O PITCH","pitch": "11/09/2026"},{"cliente": "Óticas Visamix (BS)","etapa": "Perdido","status": "Drop","mrr": 0,"tcv": 15000,"produto": "Execução Assistida","resp": "Eder Vasconcelos","temp": "Frio","obs": "Entrar em contato","pitch": "18/09/2026"},{"cliente": "RE/MAX PRO WORK (BT)","etapa": "Perdido","status": "Drop","mrr": 1750,"tcv": 21000,"produto": "EQV","resp": "Eder Vasconcelos","temp": "—","obs": "TRATATIVA DE OPS E ADIAMOS O PITCH","pitch": "18/09/2026"},{"cliente": "A D N Distribuidora (Davi Gas)","etapa": "Negociação","status": "Follow","mrr": 0,"tcv": 21617.76,"produto": "Zap First","resp": "Aline Pereira Silva","temp": "Frio","obs": "Ghost","pitch": "07/09/2026"},{"cliente": "Dental Muller (LM)","etapa": "Negociação","status": "Follow","mrr": 0,"tcv": 15000,"produto": "Execução Assistida","resp": "Rafaela Tolomeu Messias","temp": "Morno","obs": "Devolutiva 23/09. Por conta do cenario politico o cliente não vai conseguir investir e por isso usamos o EA como o melhor custo e benefic...","pitch": "10/09/2026"},{"cliente": "Nosso boteco (BM)","etapa": "Negociação","status": "Follow","mrr": 0,"tcv": 15000,"produto": "Execução Assistida","resp": "Aline Pereira Silva","temp": "Quente","obs": "Devolutiva 28/09","pitch": "17/09/2026"},{"cliente": "AMBI TOPOGRAFIA (LT)","etapa": "Negociação","status": "Follow","mrr": 1800,"tcv": 21600,"produto": "SEO/GEO","resp": "Eder Vasconcelos","temp": "Morno","obs": "Devolutiva 28/09","pitch": "18/09/2026"},{"cliente": "Castanheira (LM)","etapa": "Negociação","status": "Follow","mrr": 0,"tcv": 15000,"produto": "Execução Assistida","resp": "Aline Pereira Silva","temp": "Quente","obs": "Devolutiva 28/09","pitch": "21/09/2026"},{"cliente": "Mixconect Telecom","etapa": "Negociação","status": "Follow","mrr": 0,"tcv": 15000,"produto": "Execução Assistida","resp": "Eder Vasconcelos","temp": "Frio","obs": "Documento de Contexto Pré Pitch - MixConnect Telecom","pitch": "21/09/2026"},{"cliente": "CID - Clinica de Serviços Médicos","etapa": "Fechado","status": "Monetizado","mrr": 0,"tcv": 29600.04,"produto": "Execução Assistida","resp": "Aline Pereira Silva","temp": "Quente","obs": "Devolutiva 25/09","pitch": "22/09/2026"},{"cliente": "CCPVC REPRESENTACAO COMERCIAL LTDA","etapa": "Negociação","status": "Follow","mrr": 4068.25,"tcv": 48818.97,"produto": "SEO/GEO","resp": "Melissa Pessoa","temp": "Morno","obs": "Devolutiva 29/09","pitch": "23/09/2026"},{"cliente": "Samurai Materiais Eletricos e Hidraulicos","etapa": "Prospecção","status": "Atribuído","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "Aline Pereira Silva","temp": "—","obs": "","pitch": ""},{"cliente": "Splendor Elétrica e iluminações (BM)","etapa": "Qualificação","status": "Semana 03","mrr": 0,"tcv": 20000.04,"produto": "Zap First","resp": "Eder Vasconcelos","temp": "—","obs": "Documento de Contexto Pré Pitch - Splendor Elétrica","pitch": "18/09/2026"},{"cliente": "Comercial Ultimix LTDA","etapa": "Negociação","status": "Follow","mrr": 11186.29,"tcv": 134235.46,"produto": "Assessoria de growth com social","resp": "Ruan Silva","temp": "Quente","obs": "Devolutiva 28/09","pitch": "24/09/2026"},{"cliente": "Atlanta Consórcios (BM)","etapa": "Proposta","status": "Semana 03","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "Erick Feliciano","temp": "—","obs": "","pitch": "28/09/2026"},{"cliente": "[MAB] Maben","etapa": "Qualificação","status": "Semana 03","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "Aline Pereira Silva","temp": "—","obs": "Entrar em contato","pitch": "28/09/2026"},{"cliente": "Emporio Inacio","etapa": "Qualificação","status": "Semana 03","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "Erick Feliciano","temp": "—","obs": "","pitch": "29/09/2026"},{"cliente": "Xavier Realiza Imoveis","etapa": "Qualificação","status": "Semana 03","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "Jhonatan Mayer","temp": "—","obs": "","pitch": "30/09/2026"},{"cliente": "MB Comercio (RecT)","etapa": "Proposta","status": "Semana 03","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "Eder Vasconcelos","temp": "—","obs": "Documento de Contexto Pré Pitch - MB Comércio","pitch": "30/09/2026"},{"cliente": "Golias Espetaria","etapa": "Proposta","status": "Semana 03","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "Erick Feliciano","temp": "—","obs": "","pitch": "30/09/2026"},{"cliente": "Café Negrin","etapa": "Proposta","status": "Semana 03","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "Erick Feliciano","temp": "—","obs": "","pitch": "30/09/2026"},{"cliente": "Brasil Auto Placas","etapa": "Proposta","status": "Semana 03","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "Alice Costa Santini","temp": "—","obs": "Entrar em contato com cliente","pitch": "29/09/2026"},{"cliente": "Rhama Analysis (LM)","etapa": "Qualificação","status": "Semana 03","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "Rafaela Tolomeu Messias","temp": "—","obs": "Kick - Off Feito (Dividido em 2x)","pitch": "30/09/2026"},{"cliente": "Xis Picanha","etapa": "Prospecção","status": "Atribuído","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "Aline Pereira Silva","temp": "—","obs": "","pitch": ""},{"cliente": "Do is fit academia","etapa": "Prospecção","status": "Semana 0","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "Aline Pereira Silva","temp": "—","obs": "","pitch": ""},{"cliente": "DUEE RESERVE ESTATES","etapa": "Prospecção","status": "Atribuído","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "Aline Pereira Silva","temp": "—","obs": "","pitch": ""},{"cliente": "Farma Vitae","etapa": "Qualificação","status": "Semana 03","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "Jhonatan Mayer","temp": "—","obs": "","pitch": "30/09/2026"},{"cliente": "Legtransito (BS)","etapa": "Qualificação","status": "Semana 04","mrr": 0,"tcv": 0,"produto": "Execução Assistida","resp": "Eder Vasconcelos","temp": "—","obs": "Marcar a data do pitch","pitch": "17/09/2026"},{"cliente": "Frigorifico Rotta","etapa": "Proposta","status": "Semana 04","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "Erick Feliciano","temp": "—","obs": "Entrar em contato com o cliente","pitch": "17/09/2026"},{"cliente": "600 MULTIMARCAS","etapa": "Qualificação","status": "Semana 04","mrr": 0,"tcv": 52758.13,"produto": "Execução Assistida","resp": "Aline Pereira Silva","temp": "—","obs": "[600] Documento de Contexto Pré Pitch","pitch": "18/09/2026"},{"cliente": "Freebong (BS)","etapa": "Qualificação","status": "Semana 04","mrr": 1750,"tcv": 21000,"produto": "EQV","resp": "Eder Vasconcelos","temp": "—","obs": "Marcar a data do pitch","pitch": "18/09/2026"},{"cliente": "Clínica polivida (BS)","etapa": "Qualificação","status": "Semana 04","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "Jhonatan Mayer","temp": "—","obs": "","pitch": "23/09/2026"},{"cliente": "Naki Distribuidora Automotiva (BM)","etapa": "Proposta","status": "Semana 04","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "Jefferson Vieira","temp": "—","obs": "em desenvolvimento","pitch": "23/09/2026"},{"cliente": "Balao Magico","etapa": "Proposta","status": "Semana 04","mrr": 0,"tcv": 0,"produto": "EQV","resp": "Eder Vasconcelos","temp": "—","obs": "Documento de Contexto Pré Pitch - Balão Mágico","pitch": "24/09/2026"},{"cliente": "Loteria Caimbá (BS)","etapa": "Negociação","status": "Follow","mrr": 0,"tcv": 24000,"produto": "Em definição","resp": "Aline Pereira Silva","temp": "Morno","obs": "17/07 PITCH","pitch": "17/07/2026"},{"cliente": "V-tech Blindados","etapa": "Proposta","status": "Semana 04","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "Ruan Silva","temp": "—","obs": "Ruan precisa acelerar o GTM","pitch": "25/09/2026"},{"cliente": "General car (BS)","etapa": "Prospecção","status": "Semana 0","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "Jhonatan Mayer","temp": "—","obs": "projeto estava travado por falta de pagamento. Será iniciado agora nesse mês de Julho","pitch": ""},{"cliente": "RM Burguer Itabira (BS)","etapa": "Prospecção","status": "Semana 0","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "Jhonatan Mayer","temp": "—","obs": "projeto estava travado por falta de pagamento. Será iniciado agora nesse mês de Julho","pitch": ""},{"cliente": "Tecno2 Servicos Sociedade Empresaria Ltda.","etapa": "Qualificação","status": "Semana 02","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "Alice Costa Santini","temp": "—","obs": "","pitch": ""},{"cliente": "Tamiya Brasil (LS)","etapa": "Perdido","status": "Drop","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "Eder Vasconcelos","temp": "Frio","obs": "Kick-off feito (presencial)","pitch": "01/09/2026"},{"cliente": "GRM Tecnologia e Servicos","etapa": "Qualificação","status": "Semana 03","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "Denis Orosco","temp": "—","obs": "","pitch": ""},{"cliente": "Interpharma Medicamentos Especiais","etapa": "Prospecção","status": "Atribuído","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "Aline Pereira Silva","temp": "—","obs": "","pitch": ""},{"cliente": "ALTERVIA SECURITIZADORA DE CREDITOS FINANCEIROS S.A","etapa": "Qualificação","status": "Semana 02","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "Aline Pereira Silva","temp": "—","obs": "","pitch": ""},{"cliente": "MGE Comercio de maquinas LTDA","etapa": "Proposta","status": "Semana 04","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "Erick Feliciano","temp": "—","obs": "em desenvolvimento","pitch": "25/09/2026"},{"cliente": "Vitoria Troféus","etapa": "Qualificação","status": "Semana 03","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "Ruan Silva","temp": "—","obs": "","pitch": ""},{"cliente": "Central das bebidas","etapa": "Negociação","status": "Follow","mrr": 0,"tcv": 24700.02,"produto": "Zap First","resp": "Fabio José Aiello Junior","temp": "Frio","obs": "Devolutiva 28/09 - Ligar","pitch": "25/09/2026"},{"cliente": "PRINCESS PRESENTES LTDA","etapa": "Prospecção","status": "Atribuído","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "Ruan Silva","temp": "—","obs": "","pitch": ""},{"cliente": "Amparado Supermercado","etapa": "Prospecção","status": "Atribuído","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "Rafaela Tolomeu Messias","temp": "—","obs": "","pitch": ""},{"cliente": "Arqcompany","etapa": "Qualificação","status": "Semana 04","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "Melissa Pessoa","temp": "—","obs": "","pitch": ""},{"cliente": "Podium Jeans","etapa": "Qualificação","status": "Semana 03","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "Aline Pereira Silva","temp": "—","obs": "Kick-off feito","pitch": ""},{"cliente": "Intelecto Servicos Ambientais e Solucoes Sustentaveis","etapa": "Qualificação","status": "Semana 03","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "Aline Pereira Silva","temp": "—","obs": "","pitch": ""},{"cliente": "Clube do Sonho","etapa": "Prospecção","status": "Atribuído","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "—","temp": "—","obs": "","pitch": ""},{"cliente": "Rodol LTDA","etapa": "Prospecção","status": "Atribuído","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "Jhonatan Mayer","temp": "—","obs": "","pitch": ""},{"cliente": "Fertisul Fertilizantes","etapa": "Fechado","status": "Monetizado","mrr": 8098.27,"tcv": 97179.24,"produto": "Executar Basic","resp": "Aline Pereira Silva","temp": "Quente","obs": "EC + Assessoria basic + SEO/GEO","pitch": "29/09/2026"},{"cliente": "Clinica Autista Osasco","etapa": "Qualificação","status": "Semana 02","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "Erick Feliciano","temp": "—","obs": "","pitch": ""},{"cliente": "Brazil Group Eventos (LT)","etapa": "Prospecção","status": "Atribuído","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "—","temp": "—","obs": "","pitch": ""},{"cliente": "Casa de Carnes M.P.","etapa": "Qualificação","status": "Semana 02","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "Alice Costa Santini","temp": "—","obs": "","pitch": ""},{"cliente": "TUTTO BLU INTERMEDIACAO DE NEGOCIOS E PARTICIPACOES LTDA","etapa": "Prospecção","status": "Atribuído","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "Aline Pereira Silva","temp": "—","obs": "","pitch": ""},{"cliente": "I9 Hoje","etapa": "Qualificação","status": "Semana 02","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "Alice Costa Santini","temp": "—","obs": "","pitch": ""},{"cliente": "Mundi Sport (LS)","etapa": "Prospecção","status": "Atribuído","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "—","temp": "—","obs": "","pitch": ""},{"cliente": "Studio Center Music (BM)","etapa": "Prospecção","status": "Atribuído","mrr": 0,"tcv": 0,"produto": "Em definição","resp": "—","temp": "—","obs": "","pitch": ""}];
+    const BRL = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+    const ETAPAS = ['Prospecção', 'Qualificação', 'Proposta', 'Negociação', 'Fechado', 'Perdido'];
+    const COLORS = {
+      'Prospecção': '#94a3b8',
+      'Qualificação': '#64748b',
+      'Proposta': '#0f172a',
+      'Negociação': '#e50914',
+      'Fechado': '#059669',
+      'Perdido': '#d97706'
+    };
+    const TAG = {
+      'Prospecção': 'bg-slate-100 text-slate-700',
+      'Qualificação': 'bg-slate-200 text-slate-800',
+      'Proposta': 'bg-zinc-900 text-white',
+      'Negociação': 'bg-rose-50 text-brand',
+      'Fechado': 'bg-emerald-50 text-emerald-700',
+      'Perdido': 'bg-amber-50 text-amber-800'
+    };
+
+    const charts = {};
+    let chipEtapa = '';
+
+    const soma = (rows, key) => rows.reduce((a, r) => a + (Number(r[key]) || 0), 0);
+    const byEtapa = (rows, etapa) => rows.filter(r => r.etapa === etapa);
+
+    function fillSelect(id, values, label) {
+      document.getElementById(id).innerHTML =
+        `<option value="">${label}</option>` + values.map(v => `<option value="${v}">${v}</option>`).join('');
+    }
+    fillSelect('filtroEtapa', ETAPAS, 'Todas as etapas');
+    fillSelect('filtroResp', [...new Set(DEALS.map(d => d.resp))].sort(), 'Todos os responsáveis');
+
+    document.getElementById('chips').innerHTML = ['Todas', ...ETAPAS].map((e, i) =>
+      `<button type="button" data-etapa="${i ? e : ''}" class="chip ${i ? '' : 'active'} text-xs font-bold border border-slate-200 rounded-full px-3 py-1.5">${e}</button>`
+    ).join('');
+
+    function filtrados() {
+      const q = document.getElementById('busca').value.toLowerCase();
+      const e = document.getElementById('filtroEtapa').value || chipEtapa;
+      const r = document.getElementById('filtroResp').value;
+      return DEALS.filter(d =>
+        (!e || d.etapa === e) &&
+        (!r || d.resp === r) &&
+        (!q || [d.cliente, d.produto, d.obs, d.resp, d.status].join(' ').toLowerCase().includes(q))
+      );
+    }
+
+    function renderKpis() {
+      const live = DEALS.filter(d => d.etapa !== 'Perdido');
+      const won = byEtapa(DEALS, 'Fechado');
+      const lost = byEtapa(DEALS, 'Perdido');
+      const conv = won.length / (won.length + lost.length);
+      const mrr = soma(live, 'mrr');
+      const tcv = soma(live, 'tcv');
+      const cards = [
+        { label: 'MRR total', value: BRL.format(mrr), sub: 'Recorrente no recorte (est. TCV/12)', delta: '+8,1k ganhos no mês', up: true },
+        { label: 'TCV total', value: BRL.format(tcv), sub: 'Aberto + fechado em setembro', delta: 'R$ 192,9k ganhos no mês', up: true },
+        { label: 'Deals no funil', value: String(live.length), sub: `${DEALS.length} linhas com 4 perdas do mês`, delta: '11 em negociação', up: true },
+        { label: 'Conversão geral', value: (conv * 100).toFixed(1).replace('.', ',') + '%', sub: 'Ganhos / (ganhos + drops) em set/26', delta: '+21,1 p.p. vs histórico E.E 21,8%', up: true }
+      ];
+      document.getElementById('kpis').innerHTML = cards.map(c => `
+        <article class="card p-4">
+          <p class="text-[11px] font-bold uppercase tracking-wide text-slate-500">${c.label}</p>
+          <p class="text-2xl font-extrabold mt-1">${c.value}</p>
+          <p class="text-xs mt-2 font-semibold ${c.up ? 'text-emerald-700' : 'text-brand'}">${c.delta}</p>
+          <p class="text-xs text-slate-500 mt-1">${c.sub}</p>
+        </article>
+      `).join('');
+    }
+
+    function renderFunnel() {
+      const max = Math.max(...ETAPAS.map(e => byEtapa(DEALS, e).length), 1);
+      document.getElementById('funnel').innerHTML = ETAPAS.map(e => {
+        const rows = byEtapa(DEALS, e);
+        const n = rows.length;
+        const tcv = soma(rows, 'tcv');
+        const mrr = soma(rows, 'mrr');
+        const w = 55 + Math.round((n / max) * 45);
+        return `
+          <button type="button" data-etapa="${e}" class="funnel-step card p-3 text-left">
+            <span class="inline-block h-1.5 rounded-full mb-2" style="width:${w}%;background:${COLORS[e]}"></span>
+            <p class="text-[11px] font-bold uppercase tracking-wide text-slate-500">${e}</p>
+            <p class="text-xl font-extrabold">${n}</p>
+            <p class="text-xs font-semibold mt-1">${BRL.format(tcv)}</p>
+            <p class="text-[11px] text-slate-500">MRR ${BRL.format(mrr)}</p>
+          </button>
+        `;
+      }).join('');
+      document.querySelectorAll('#funnel [data-etapa]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          chipEtapa = btn.dataset.etapa;
+          document.getElementById('filtroEtapa').value = chipEtapa;
+          document.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c.dataset.etapa === chipEtapa));
+          renderTable();
+        });
+      });
+    }
+
+    function upsert(id, cfg) {
+      if (charts[id]) charts[id].destroy();
+      charts[id] = new Chart(document.getElementById(id), cfg);
+    }
+
+    function renderCharts(rows) {
+      upsert('chartEtapa', {
+        type: 'bar',
+        data: {
+          labels: ETAPAS,
+          datasets: [{
+            label: 'TCV',
+            data: ETAPAS.map(e => soma(byEtapa(rows, e), 'tcv')),
+            backgroundColor: ETAPAS.map(e => COLORS[e]),
+            borderRadius: 8
+          }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: { y: { ticks: { callback: v => 'R$ ' + Number(v).toLocaleString('pt-BR') } } }
+        }
+      });
+      const byR = {};
+      rows.forEach(r => { byR[r.resp] = (byR[r.resp] || 0) + r.tcv; });
+      const top = Object.entries(byR).sort((a, b) => b[1] - a[1]).slice(0, 8);
+      upsert('chartResp', {
+        type: 'bar',
+        data: {
+          labels: top.map(x => x[0].split(' ')[0]),
+          datasets: [{ label: 'TCV', data: top.map(x => x[1]), backgroundColor: '#e50914', borderRadius: 8 }]
+        },
+        options: {
+          indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: { x: { ticks: { callback: v => 'R$ ' + Number(v).toLocaleString('pt-BR') } } }
+        }
+      });
+    }
+
+    function renderTable() {
+      const rows = filtrados();
+      document.getElementById('contador').textContent = rows.length + ' deals · TCV ' + BRL.format(soma(rows, 'tcv')) + ' · MRR ' + BRL.format(soma(rows, 'mrr'));
+      document.getElementById('tabela').innerHTML = rows.map(r => `
+        <tr class="hover:bg-rose-50/40">
+          <td class="px-4 py-3 font-semibold">${r.cliente}</td>
+          <td class="px-4 py-3"><span class="text-[11px] font-bold px-2 py-1 rounded-full ${TAG[r.etapa]}">${r.etapa}</span></td>
+          <td class="px-4 py-3 text-right font-bold">${r.mrr ? BRL.format(r.mrr) : '—'}</td>
+          <td class="px-4 py-3 text-right">${r.tcv ? BRL.format(r.tcv) : '—'}</td>
+          <td class="px-4 py-3">${r.resp}</td>
+          <td class="px-4 py-3">${r.status}${r.temp !== '—' ? ' · ' + r.temp : ''}</td>
+          <td class="px-4 py-3 text-slate-600">${r.obs || '—'}</td>
+        </tr>
+      `).join('') || `<tr><td colspan="7" class="px-4 py-8 text-center text-slate-500">Nenhum deal neste filtro.</td></tr>`;
+      renderCharts(rows);
+    }
+
+    ['busca', 'filtroEtapa', 'filtroResp'].forEach(id => {
+      document.getElementById(id).addEventListener('input', renderTable);
+      document.getElementById(id).addEventListener('change', () => {
+        if (id === 'filtroEtapa') {
+          chipEtapa = document.getElementById('filtroEtapa').value;
+          document.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c.dataset.etapa === chipEtapa));
+        }
+        renderTable();
+      });
+    });
+    document.querySelectorAll('.chip').forEach(btn => {
+      btn.addEventListener('click', () => {
+        chipEtapa = btn.dataset.etapa;
+        document.getElementById('filtroEtapa').value = chipEtapa;
+        document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+        btn.classList.add('active');
+        renderTable();
+      });
+    });
+
+    renderKpis();
+    renderFunnel();
+    renderTable();
+  </script>
+</body>
+</html>
