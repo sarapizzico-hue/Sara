@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>01 | Capa · Xavier Realiza</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --v4-red: #e50914;
+      --v4-orange: #ff481f;
+      --v4-dark: #280001;
+      --v4-cream: #ffebc8;
+      --ink: #141414;
+      --ink-soft: #5a5a5a;
+      --line: rgba(20, 20, 20, .12);
+      --radius: 22px;
+      --radius-pill: 999px;
+      --hero: radial-gradient(120% 130% at 50% -10%, #ff5a2c 0%, #e50914 30%, #b00610 62%, #280001 100%);
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      width: 100%; height: 100%; margin: 0; overflow: hidden;
+      background: #171313; color: var(--ink);
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    button { font-family: inherit; }
+    #viewport {
+      position: fixed; inset: 0; overflow: hidden;
+      background: radial-gradient(circle at 50% 10%, rgba(229, 9, 20, .18), transparent 38%), #171313;
+    }
+    #deck {
+      --deck-scale: 1;
+      position: absolute; left: 50%; top: 50%;
+      width: 1600px; height: 900px; overflow: hidden;
+      transform: translate(-50%, -50%) scale(var(--deck-scale));
+      transform-origin: center;
+      background: #f5f4f2;
+      box-shadow: 0 40px 120px rgba(0, 0, 0, .45);
+    }
+    .slide {
+      position: absolute; inset: 0; width: 1600px; height: 900px;
+      padding: 72px 88px 100px; overflow: hidden;
+      opacity: 0; pointer-events: none; transform: translateX(24px);
+      transition: opacity .28s ease, transform .28s ease;
+      background: radial-gradient(circle at 92% 8%, rgba(229, 9, 20, .055), transparent 24%), #f5f4f2;
+    }
+    .slide.active { opacity: 1; pointer-events: auto; transform: translateX(0); }
+    .slide.red { color: white; background: var(--hero); }
+    .slide.dark {
+      color: white;
+      background: radial-gradient(circle at 78% 15%, rgba(229, 9, 20, .5), transparent 32%), linear-gradient(145deg, #280001 0%, #130001 100%);
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h2 { margin: 0; font-size: 52px; line-height: 1.02; letter-spacing: -.045em; font-weight: 600; }
+    h3 { margin: 0 0 8px; font-size: 24px; line-height: 1.12; letter-spacing: -.03em; font-weight: 600; }
+    .lede { max-width: 1080px; margin: 0 0 22px; color: var(--ink-soft); font-size: 22px; line-height: 1.35; font-weight: 300; }
+    .red .lede, .dark .lede { color: rgba(255,255,255,.74); }
+    .accent { color: var(--v4-cream); }
+    .eyebrow {
+      display: inline-flex; align-items: center; min-height: 32px; padding: 6px 14px;
+      border-radius: var(--radius-pill); border: 1px solid rgba(229, 9, 20, .18);
+      background: rgba(229, 9, 20, .07); color: var(--v4-red);
+      font-size: 12px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase;
+    }
+    .red .eyebrow, .dark .eyebrow {
+      color: rgba(255,255,255,.92); background: rgba(255,255,255,.08);
+      border-color: rgba(255,255,255,.35);
+    }
+    .section-title { display: flex; align-items: center; gap: 14px; margin: 18px 0 16px; }
+    .section-title::before { content: ""; width: 4px; height: 34px; border-radius: 4px; background: var(--v4-red); flex: none; }
+    .card { background: white; border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 24px; }
+    .red .card, .dark .card { color: var(--ink); }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .mini-label { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); }
+    .big { font-size: 54px; line-height: .95; letter-spacing: -.05em; font-weight: 700; color: var(--v4-red); }
+    .metric-label { margin-top: 8px; font-size: 16px; line-height: 1.25; color: var(--ink-soft); }
+    table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 18px; }
+    th { padding: 12px 16px; text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-soft); background: #f5f4f2; border-bottom: 1px solid var(--line); }
+    td { padding: 13px 16px; border-bottom: 1px solid rgba(20,20,20,.07); vertical-align: middle; }
+    tbody tr:last-child td { border-bottom: 0; }
+    .right { text-align: right; font-variant-numeric: tabular-nums; }
+    .strike { color: #8d8d8d; text-decoration: line-through; }
+    .save { color: var(--v4-red); font-weight: 700; }
+    .badge {
+      display: inline-flex; min-height: 26px; padding: 4px 10px; border-radius: var(--radius-pill);
+      background: rgba(229, 9, 20, .08); color: var(--v4-red); border: 1px solid rgba(229, 9, 20, .2);
+      font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    }
+    .note { margin-top: 14px; color: var(--ink-soft); font-size: 15px; line-height: 1.4; }
+    .sphere { position: absolute; border-radius: 50%; pointer-events: none; background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.38), rgba(255,255,255,.04) 48%, transparent 66%); border: 1px solid rgba(255,255,255,.24); }
+    .arrow-orbit { position: absolute; width: 380px; height: 380px; border: 1.5px solid rgba(255,255,255,.28); border-radius: 50%; right: 90px; top: 210px; }
+    .arrow-orbit::before, .arrow-orbit::after { content: ""; position: absolute; border-radius: 50%; border: 1px solid rgba(255,255,255,.18); }
+    .arrow-orbit::before { inset: 52px; }
+    .arrow-orbit::after { inset: 108px; }
+    .brand-lockup { display: flex; align-items: center; gap: 18px; }
+    .mark { width: 64px; height: 64px; display: block; }
+    .brand-name { font-size: 32px; font-weight: 600; letter-spacing: -.04em; }
+    .divider { width: 1px; height: 46px; background: rgba(255,255,255,.35); }
+    .client-name { font-size: 28px; font-weight: 600; letter-spacing: -.03em; }
+    .cover-content { position: relative; z-index: 3; height: 100%; display: flex; flex-direction: column; justify-content: space-between; }
+    .cover-title { max-width: 1100px; margin: 18px 0 0; font-size: 86px; line-height: .94; letter-spacing: -.055em; font-weight: 600; }
+    .cover-sub { max-width: 760px; margin: 22px 0 0; font-size: 26px; line-height: 1.35; font-weight: 300; color: rgba(255,255,255,.78); }
+    .pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+    .pill {
+      padding: 8px 14px; border-radius: var(--radius-pill);
+      border: 1px solid rgba(255,255,255,.28); background: rgba(255,255,255,.08);
+      font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    }
+    .statement { height: 100%; display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 3; }
+    .statement h1 { max-width: 1280px; margin: 18px 0 0; font-size: 78px; line-height: .98; letter-spacing: -.05em; font-weight: 600; }
+    .funnel { display: flex; align-items: stretch; gap: 12px; }
+    .funnel-step {
+      flex: 1; min-height: 210px; display: flex; flex-direction: column; justify-content: space-between;
+      padding: 22px; border-radius: 22px; background: white; border: 1px solid var(--line); position: relative;
+    }
+    .funnel-step .n { font-family: "IBM Plex Mono", monospace; color: var(--v4-red); font-size: 13px; font-weight: 500; }
+    .funnel-step strong { display: block; margin: 12px 0 8px; font-size: 26px; letter-spacing: -.03em; }
+    .funnel-step p { margin: 0; color: var(--ink-soft); font-size: 16px; line-height: 1.35; }
+    .funnel-step.last { background: var(--hero); color: white; border: 0; }
+    .funnel-step.last .n, .funnel-step.last p { color: rgba(255,255,255,.8); }
+    .who-role { display: block; margin-bottom: 10px; color: var(--v4-red); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .who-card p { margin: 0; color: var(--ink-soft); font-size: 16px; line-height: 1.35; }
+    .phase .when { color: var(--v4-red); font-family: "IBM Plex Mono", monospace; font-size: 12px; }
+    .phase p { margin: 8px 0 0; color: var(--ink-soft); font-size: 16px; line-height: 1.35; }
+    .callout {
+      margin-top: 16px; padding: 16px 18px; border-radius: 16px;
+      background: #f5f4f2; border-left: 5px solid var(--v4-red);
+      font-size: 18px; line-height: 1.4;
+    }
+    .price { margin: 10px 0 4px; font-size: 48px; line-height: 1; letter-spacing: -.05em; font-weight: 700; color: var(--v4-red); }
+    .price small { font-size: 22px; }
+    .option ul { margin: 12px 0 0; padding-left: 18px; }
+    .option li { margin: 6px 0; font-size: 16px; line-height: 1.35; }
+    .option.featured { background: var(--v4-dark); color: white; border-color: var(--v4-dark); }
+    .option.featured .price { color: var(--v4-cream); }
+    .option.featured li, .option.featured .was { color: rgba(255,255,255,.78); }
+    .was { margin: 8px 0 0; color: var(--ink-soft); font-size: 16px; }
+    .slide-footer {
+      position: absolute; left: 88px; bottom: 28px; z-index: 8;
+      display: flex; align-items: center; gap: 10px; pointer-events: none;
+      font-weight: 700; letter-spacing: -.04em; font-size: 20px;
+    }
+    .slide-footer .sq { width: 28px; height: 28px; border-radius: 7px; display: grid; place-items: center; background: var(--v4-red); color: white; font-size: 14px; }
+    .slide.red ~ .slide-footer .sq, .on-dark .sq { background: white; color: var(--v4-red); }
+    .navigation { position: absolute; z-index: 20; right: 36px; bottom: 22px; display: flex; gap: 10px; }
+    .nav-btn {
+      width: 48px; height: 48px; display: grid; place-items: center;
+      border: 1px solid rgba(20,20,20,.12); border-radius: 50%;
+      background: rgba(255,255,255,.92); color: var(--ink); cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0,0,0,.12);
+    }
+    .nav-btn:disabled { opacity: .3; cursor: default; }
+    .progress-track { position: absolute; z-index: 21; left: 0; right: 0; bottom: 0; height: 7px; background: rgba(20,20,20,.1); }
+    .progress-fill { height: 100%; width: 0; background: linear-gradient(90deg, var(--v4-red), var(--v4-orange)); }
+    .slide-counter {
+      position: absolute; z-index: 22; right: 158px; bottom: 36px;
+      font: 500 12px/1 "IBM Plex Mono", monospace; letter-spacing: .04em; color: rgba(20,20,20,.52);
+    }
+  </style>
+</head>
+<body>
+  <div id="viewport">
+    <main id="deck">
+      <section class="slide red active" data-title="Capa">
+        <div class="sphere" style="width:430px;height:430px;right:-90px;top:-110px;opacity:.42"></div>
+        <div class="sphere" style="width:210px;height:210px;right:280px;bottom:90px;opacity:.3"></div>
+        <div class="arrow-orbit"></div>
+        <div class="cover-content">
+          <div>
+            <div class="brand-lockup">
+              <svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#fff"/><rect x="14" y="12" width="9" height="22" fill="#e50914"/><rect x="14" y="28" width="36" height="9" fill="#e50914"/><rect x="41" y="12" width="9" height="40" fill="#e50914"/></svg>
+              <span class="brand-name">V4 Company</span>
+              <span class="divider"></span>
+              <span class="client-name">Xavier Realiza</span>
+            </div>
+            <div style="margin-top:34px"><span class="eyebrow">Proposta comercial · pós-entrevista executiva</span></div>
+            <h1 class="cover-title">Vocês já geram volume. Agora vão <span class="accent">converter.</span></h1>
+            <p class="cover-sub">Cinco semanas de diagnóstico mostraram onde o faturamento da Xavier vaza. A Assessoria de Growth estanca esse vazamento pela mídia, pela mensagem e pelo criativo.</p>
+          </div>
+          <div class="pills">
+            <span class="pill">Betim · setembro 2026</span>
+            <span class="pill">Assessoria de Growth</span>
+            <span class="pill">Contrato de 12 meses</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide dark" data-title="Leitura central">
+        <div class="sphere" style="width:360px;height:360px;right:-40px;bottom:-80px;opacity:.35"></div>
+        <div class="statement">
+          <span class="eyebrow">Leitura central</span>
+          <h1>A Xavier gera volume. O balde está <span class="accent">furado.</span></h1>
+          <p class="lede" style="margin-top:28px;max-width:980px">Cerca de 90% dos leads chegam desqualificados. A conversão informada é de 1,6%. A mídia compra volume e a Xavier não enxerga qual anúncio vira contrato. O CAC se queima antes da venda existir.</p>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Três dores">
+        <span class="eyebrow">02 · Diagnóstico</span>
+        <div class="section-title"><h2>Três dores que travam a meta.</h2></div>
+        <div class="grid-3" style="margin-top:8px">
+          <article class="card">
+            <span class="who-role">Dor 01</span>
+            <h3>Mídia sem origem</h3>
+            <p class="metric-label" style="font-size:18px">A aquisição depende quase só de Meta Ads. O Google foi abandonado. Campanha e criativo não chegam até a venda.</p>
+          </article>
+          <article class="card">
+            <span class="who-role">Dor 02</span>
+            <h3>Mensagem que não converte</h3>
+            <p class="metric-label" style="font-size:18px">O anúncio não fala com quem busca imóvel econômico. No celular, o site trava e o fluxo desvia o lead.</p>
+          </article>
+          <article class="card">
+            <span class="who-role">Dor 03</span>
+            <h3>CAC queimado no escuro</h3>
+            <p class="metric-label" style="font-size:18px">Google Ads abandonado. Meta sem rastreio até o contrato. A margem paga uma equipe grande que converte pouco do volume que já entra.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Solução">
+        <span class="eyebrow">Como resolvemos</span>
+        <div class="section-title"><h2>Mídia. Mensagem. Receita.</h2></div>
+        <p class="lede">A Assessoria de Growth ataca o vazamento por três frentes. Mais anúncio sem origem só aumenta o volume que se perde.</p>
+        <div class="funnel">
+          <div class="funnel-step"><span class="n">01</span><div><strong>Mídia</strong><p>Meta com campanha e criativo rastreáveis. Teste de Google Ads para quem já busca imóvel.</p></div></div>
+          <div class="funnel-step"><span class="n">02</span><div><strong>Mensagem</strong><p>Copy e design alinhados à objeção real. O site deixa de travar a visita no celular.</p></div></div>
+          <div class="funnel-step last"><span class="n">03</span><div><strong>Receita</strong><p>ROI por canal na mesa. A verba passa a responder ao que vira contrato.</p></div></div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Horizontes">
+        <span class="eyebrow">03 · Escopo</span>
+        <div class="section-title"><h2>A fundação, e a marca em cima dela.</h2></div>
+        <div class="grid-2">
+          <article class="card">
+            <span class="badge">Horizonte 1 · a proposta</span>
+            <h3 style="margin-top:14px">Assessoria de Growth</h3>
+            <p class="metric-label" style="font-size:18px">Account no plano e na leitura de resultado. Tráfego em Meta e teste de Google. Copy na objeção de quem busca imóvel. Design a serviço da visita. Correção do que trava a conversão no site. Esta frente resolve a dor sozinha.</p>
+          </article>
+          <article class="card">
+            <span class="badge">Horizonte 2 · complementar</span>
+            <h3 style="margin-top:14px">Social e comunicação de marca</h3>
+            <p class="metric-label" style="font-size:18px">Presença local em Betim e conteúdo de Minha Casa Minha Vida, em cima da mídia. Sem a Assessoria de Growth, mais conteúdo só aumenta o volume que entra no balde furado.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Squad">
+        <span class="eyebrow">03 · Quem executa o Horizonte 1</span>
+        <div class="section-title"><h2>Quatro frentes, uma conta.</h2></div>
+        <p class="lede">É este time que executa a Assessoria de Growth. Cada frente tem um dono.</p>
+        <div class="grid-4">
+          <article class="card who-card"><span class="who-role">Account</span><h3>Dono da conta</h3><p>Prioridades, rituais com a gestão e a relação com o Fernando.</p></article>
+          <article class="card who-card"><span class="who-role">Tráfego</span><h3>Mídia com origem</h3><p>Meta, UTMs e teste de Google Ads por intenção de busca.</p></article>
+          <article class="card who-card"><span class="who-role">Copy</span><h3>Mensagem da objeção</h3><p>Anúncio e roteiro alinhados ao que trava a visita e a proposta.</p></article>
+          <article class="card who-card"><span class="who-role">Design</span><h3>Peça que gera visita</h3><p>Criativo a serviço da conversão, no anúncio e no site.</p></article>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Como a Growth resolve">
+        <span class="eyebrow">A solução na prática</span>
+        <div class="section-title"><h2>Da verba ao anúncio que vende.</h2></div>
+        <div class="funnel">
+          <div class="funnel-step"><span class="n">01</span><div><strong>Plano</strong><p>O Account define prioridade, verba e a leitura de resultado com o Fernando.</p></div></div>
+          <div class="funnel-step"><span class="n">02</span><div><strong>Mídia</strong><p>Meta estruturado por campanha. Google testado em quem já busca imóvel.</p></div></div>
+          <div class="funnel-step"><span class="n">03</span><div><strong>Mensagem</strong><p>Copy na objeção real. Design que leva à visita, não à peça genérica.</p></div></div>
+          <div class="funnel-step"><span class="n">04</span><div><strong>Site</strong><p>O fluxo no celular deixa de desviar quem quer falar com a imobiliária.</p></div></div>
+          <div class="funnel-step last"><span class="n">05</span><div><strong>Retorno</strong><p>Cada real de mídia volta com origem: canal, campanha e criativo.</p></div></div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Antes e depois">
+        <span class="eyebrow">Com a Assessoria de Growth</span>
+        <div class="section-title"><h2>O que muda. E só isso.</h2></div>
+        <div class="card" style="padding:8px 8px 4px">
+          <table>
+            <thead><tr><th>Antes</th><th>Com a Assessoria de Growth</th></tr></thead>
+            <tbody>
+              <tr><td>Meta como única fonte, no escuro</td><td><strong>Campanha e criativo com origem até a venda</strong></td></tr>
+              <tr><td>Google Ads abandonado</td><td><strong>Teste de busca por intenção, com leitura de resultado</strong></td></tr>
+              <tr><td>Anúncio genérico</td><td><strong>Copy alinhado a quem busca imóvel econômico</strong></td></tr>
+              <tr><td>Peça que não gera visita</td><td><strong>Design a serviço da conversão</strong></td></tr>
+              <tr><td>Site lento no celular e fluxo torto</td><td><strong>Pontos de conversão do site corrigidos</strong></td></tr>
+              <tr><td>Verba sem retorno visível</td><td><strong>Account com ROI por canal na mesa</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Tabela">
+        <span class="eyebrow">06 · Ancoragem</span>
+        <div class="section-title"><h2>O valor de tabela, sem condição.</h2></div>
+        <p class="lede">O cashback da EE — R$ 13.488 — volta dentro da condição de fechamento. A economia total é maior do que esse valor: o restante é a condição especial desta janela.</p>
+        <div class="card" style="padding:8px 8px 4px">
+          <table>
+            <thead><tr><th>Frente</th><th class="right">Por mês</th><th class="right">Em 12 meses</th></tr></thead>
+            <tbody>
+              <tr><td>Assessoria de Growth</td><td class="right">R$ 11.223,40</td><td class="right">R$ 134.680,80</td></tr>
+              <tr><td>Social Media</td><td class="right">R$ 3.800,00</td><td class="right">R$ 45.600,00</td></tr>
+              <tr><td><strong>Combo sem condição</strong></td><td class="right"><strong>R$ 15.023,40</strong></td><td class="right"><strong>R$ 180.280,80</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Opções">
+        <span class="eyebrow">06 · Contratação</span>
+        <div class="section-title"><h2>Duas formas de entrar.</h2></div>
+        <div class="grid-2">
+          <article class="card option featured">
+            <span class="badge" style="background:#e50914;color:#fff;border-color:#e50914">Opção 1 · Combo</span>
+            <h3 style="margin-top:12px;color:#fff">Assessoria de Growth e Social</h3>
+            <p class="was"><span class="strike">12× R$ 15.023,40</span></p>
+            <p class="price"><small>12× </small>R$ 8.176,15</p>
+            <p class="was">Contrato R$ 98.113,80 · economia R$ 82.167,00</p>
+            <ul>
+              <li>Assessoria de Growth por 12 meses, com Social em cima.</li>
+              <li>Marca local a serviço da visita.</li>
+              <li>Oito unidades no ano cobrem o contrato.</li>
+            </ul>
+          </article>
+          <article class="card option">
+            <span class="badge">Opção 2 · Fundação</span>
+            <h3 style="margin-top:12px">Assessoria de Growth</h3>
+            <p class="was"><span class="strike">12× R$ 11.223,40</span></p>
+            <p class="price"><small>12× </small>R$ 6.985,51</p>
+            <p class="was">Contrato R$ 83.826,12 · economia R$ 50.854,68</p>
+            <ul>
+              <li>Mídia, mensagem, criativo e leitura de retorno.</li>
+              <li>Funciona sozinha. O Social pode entrar depois.</li>
+              <li>Sete unidades no ano cobrem o contrato.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="slide red" data-title="Próximo passo">
+        <div class="sphere" style="width:420px;height:420px;right:-80px;top:-80px;opacity:.4"></div>
+        <div class="arrow-orbit"></div>
+        <div class="statement">
+          <span class="eyebrow">Próximo passo</span>
+          <h1>A fundação já pode <span class="accent">começar.</span></h1>
+          <p class="lede" style="margin-top:24px">A Opção 2 é a Assessoria de Growth. A Opção 1 acrescenta o Social em cima dela. As duas atacam o vazamento pela mídia, pela mensagem e pelo criativo.</p>
+          <div class="pills">
+            <span class="pill">Fernando valida a opção</span>
+            <span class="pill">Contrato de 12 meses</span>
+            <span class="pill">Kickoff em Betim</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="slide-footer" id="footerBrand"><span class="sq">V4</span> V4 Company</div>
+      <div class="slide-counter" id="slideCounter">01 / 17</div>
+      <nav class="navigation" aria-label="Navegação da apresentação">
+        <button class="nav-btn" id="prevBtn" aria-label="Slide anterior">‹</button>
+        <button class="nav-btn" id="nextBtn" aria-label="Próximo slide">›</button>
+      </nav>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    </main>
+  </div>
+  <script>
+    const deck = document.getElementById("deck");
+    const slides = [...document.querySelectorAll(".slide")];
+    const counter = document.getElementById("slideCounter");
+    const fill = document.getElementById("progressFill");
+    const prev = document.getElementById("prevBtn");
+    const next = document.getElementById("nextBtn");
+    const footer = document.getElementById("footerBrand");
+    let current = 0;
+    function fit() {
+      const w = window.visualViewport?.width || window.innerWidth;
+      const h = window.visualViewport?.height || window.innerHeight;
+      deck.style.setProperty("--deck-scale", Math.max(.1, Math.min((w - 16) / 1600, (h - 16) / 900, 1)));
+    }
+    function go(index) {
+      current = Math.max(0, Math.min(slides.length - 1, index));
+      slides.forEach((s, i) => s.classList.toggle("active", i === current));
+      const active = slides[current];
+      const dark = active.classList.contains("red") || active.classList.contains("dark");
+      counter.textContent = String(current + 1).padStart(2, "0") + " / " + String(slides.length).padStart(2, "0");
+      counter.style.color = dark ? "rgba(255,255,255,.62)" : "rgba(20,20,20,.52)";
+      fill.style.width = ((current + 1) / slides.length * 100) + "%";
+      prev.disabled = current === 0;
+      next.disabled = current === slides.length - 1;
+      footer.style.opacity = (current === 0 || current === slides.length - 1) ? "0" : "1";
+      footer.style.color = dark ? "#fff" : "#141414";
+      footer.classList.toggle("on-dark", dark);
+      document.title = String(current + 1).padStart(2, "0") + " | " + (active.dataset.title || "Xavier Realiza");
+    }
+    prev.onclick = () => go(current - 1);
+    next.onclick = () => go(current + 1);
+    window.addEventListener("resize", fit);
+    window.visualViewport?.addEventListener("resize", fit);
+    window.addEventListener("keydown", (e) => {
+      if (["ArrowRight", "PageDown", " "].includes(e.key)) { e.preventDefault(); go(current + 1); }
+      if (["ArrowLeft", "PageUp"].includes(e.key)) { e.preventDefault(); go(current - 1); }
+      if (e.key === "Home") go(0);
+      if (e.key === "End") go(slides.length - 1);
+    });
+    fit();
+    go(0);
+  </script>
+</body>
+</html>
