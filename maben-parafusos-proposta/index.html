@@ -1,337 +1,752 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Maben Parafusos × V4 Colli &amp; Co — Proposta de Growth</title>
-  <meta name="description" content="Proposta comercial de Assessoria de Growth para a Maben Parafusos. V4 Company Colli &amp; Co." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>01 | Proposta · Assessoria de Growth · Maben Parafusos</title>
+  <meta name="description" content="Proposta comercial de Assessoria de Growth para a Maben Parafusos. Colli&amp;Co.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0c0d10;
-      --card: #171a21;
-      --card-2: #1e222b;
-      --line: rgba(255,255,255,.1);
-      --line-strong: rgba(255,255,255,.18);
-      --text: #f4f0ea;
-      --muted: #aaa49c;
-      --soft: #d9d3cb;
-      --red: #e10613;
-      --red-2: #ff4d57;
-      --ok: #b7f0cf;
-      --warn: #ffd7a8;
-      --max: 1120px;
-      --ease: cubic-bezier(.22,1,.36,1);
+      --v4-red: #e50914;
+      --v4-orange: #ff481f;
+      --v4-dark: #280001;
+      --v4-cream: #ffebc8;
+      --ink: #141414;
+      --ink-soft: #5a5a5a;
+      --line: rgba(20, 20, 20, .12);
+      --radius: 22px;
+      --radius-pill: 999px;
+      --hero: radial-gradient(120% 130% at 50% -10%, #ff5a2c 0%, #e50914 30%, #b00610 62%, #280001 100%);
     }
-    *, *::before, *::after { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      background:
-        radial-gradient(900px 480px at 90% -10%, rgba(225,6,19,.22), transparent 55%),
-        radial-gradient(700px 420px at -10% 18%, rgba(18,92,64,.18), transparent 50%),
-        var(--bg);
-      color: var(--text);
-      font: 16px/1.6 "Plus Jakarta Sans", system-ui, sans-serif;
+    * { box-sizing: border-box; }
+    html, body {
+      width: 100%; height: 100%; margin: 0; overflow: hidden;
+      background: #171313; color: var(--ink);
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
       -webkit-font-smoothing: antialiased;
     }
-    img { max-width: 100%; display: block; }
-    h1, h2, h3 { font-family: "Space Grotesk", sans-serif; letter-spacing: -.03em; line-height: 1.12; margin: 0; }
-    p { margin: 0; }
-    button, summary { font: inherit; }
-    .progress { position: fixed; inset: 0 0 auto 0; height: 3px; z-index: 80; background: rgba(255,255,255,.06); }
-    .progress span { display: block; height: 100%; width: 0; background: var(--red); }
-    header.top {
-      position: sticky; top: 0; z-index: 40;
-      display: flex; align-items: center; justify-content: space-between; gap: 12px 18px; flex-wrap: wrap;
-      padding: 10px 22px 8px;
-      background: rgba(12,13,16,.88);
-      border-bottom: 1px solid var(--line);
-      backdrop-filter: blur(16px);
+    button { font-family: inherit; }
+    #viewport {
+      position: fixed; inset: 0; overflow: hidden;
+      background: radial-gradient(circle at 50% 10%, rgba(229, 9, 20, .18), transparent 38%), #171313;
     }
-    .brand-row { display: flex; align-items: center; gap: 10px; }
-    .chip {
-      display: inline-flex; align-items: center; gap: 8px;
-      border: 1px solid var(--line-strong); background: rgba(255,255,255,.04);
-      border-radius: 999px; padding: 4px 10px 4px 4px; min-height: 40px;
+    #deck {
+      --deck-scale: 1;
+      position: absolute; left: 50%; top: 50%;
+      width: 1600px; height: 900px; overflow: hidden;
+      transform: translate(-50%, -50%) scale(var(--deck-scale));
+      transform-origin: center;
+      background: #f5f4f2;
+      box-shadow: 0 40px 120px rgba(0, 0, 0, .45);
     }
-    .chip img { height: 34px; width: auto; border-radius: 8px; object-fit: cover; }
-    .chip b { font-family: "Space Grotesk", sans-serif; font-size: 13px; font-weight: 600; }
-    .chip small { display: block; color: var(--muted); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; font-weight: 700; }
-    .x { color: var(--muted); font-weight: 600; }
-    nav.sections { display: flex; gap: 4px; flex: 1 0 100%; overflow: auto; scrollbar-width: none; }
-    nav.sections::-webkit-scrollbar { display: none; }
-    nav.sections a {
-      text-decoration: none; color: var(--muted); font-size: 12px; font-weight: 650;
-      padding: 8px 10px; border-radius: 999px; white-space: nowrap;
+    .slide {
+      position: absolute; inset: 0; width: 1600px; height: 900px;
+      padding: 72px 96px 108px; overflow: hidden;
+      opacity: 0; pointer-events: none; transform: translateX(24px);
+      transition: opacity .28s ease, transform .28s ease;
+      background: radial-gradient(circle at 92% 8%, rgba(229, 9, 20, .055), transparent 24%), #f5f4f2;
     }
-    nav.sections a.active, nav.sections a:hover { color: var(--text); background: rgba(255,255,255,.06); }
-    main { max-width: var(--max); margin: 0 auto; padding: 0 22px 80px; }
-    section { padding: 78px 0 8px; scroll-margin-top: 92px; }
-    .kicker { color: var(--red-2); font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 12px; }
-    .lede { color: var(--soft); font-size: 18px; max-width: 680px; }
-    .sub { color: var(--muted); margin-top: 10px; max-width: 720px; }
-    .hero { min-height: calc(100vh - 92px); display: grid; align-items: end; padding-top: 28px; }
-    .hero-grid { display: grid; grid-template-columns: 1.35fr .8fr; gap: 28px; align-items: end; }
-    .hero h1 { font-size: clamp(40px, 5.4vw, 64px); max-width: 14ch; }
-    .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
-    .badge { border: 1px solid var(--line-strong); border-radius: 999px; padding: 7px 12px; font-size: 13px; color: var(--soft); background: rgba(255,255,255,.03); }
-    .meta {
-      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-      border: 1px solid var(--line); border-radius: 22px; padding: 18px;
+    .slide.active { opacity: 1; pointer-events: auto; transform: translateX(0); }
+    .slide.red { color: white; background: var(--hero); }
+    .slide.dark {
+      color: white;
+      background: radial-gradient(circle at 78% 15%, rgba(229, 9, 20, .5), transparent 32%), linear-gradient(145deg, #280001 0%, #130001 100%);
     }
-    .meta h2 { font-size: 18px; margin-bottom: 12px; }
-    .meta dl { margin: 0; display: grid; gap: 12px; }
-    .meta dt { color: var(--muted); font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
-    .meta dd { margin: 3px 0 0; font-size: 14px; color: var(--soft); }
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 22px; }
-    .card, .column, .offer {
-      background: var(--card); border: 1px solid var(--line); border-radius: 18px;
-      transition: border-color .25s var(--ease), transform .25s var(--ease), background .25s var(--ease);
+    .topline {
+      position: absolute; top: 0; left: 0; width: 100%; height: 5px;
+      background: linear-gradient(90deg, var(--v4-red), var(--v4-orange), transparent 76%);
     }
-    .card { padding: 18px; }
-    .card:hover { border-color: rgba(225,6,19,.55); transform: translateY(-3px); background: var(--card-2); }
-    .card h3 { font-size: 20px; margin: 8px 0; }
-    .num { font-family: "Space Grotesk", sans-serif; color: var(--red-2); font-weight: 700; font-size: 13px; letter-spacing: .08em; }
-    .impact { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); color: var(--warn); font-size: 14px; }
-    .impact b { color: #ffe7c8; }
-    .funnel { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 18px; }
-    .funnel label { cursor: pointer; padding: 16px 14px; border-radius: 16px; border: 1px solid var(--line); background: #12141a; min-height: 118px; }
-    .funnel label:hover { border-color: rgba(225,6,19,.45); }
-    .funnel input { position: absolute; opacity: 0; pointer-events: none; }
-    .funnel input:checked + label { background: linear-gradient(180deg, rgba(225,6,19,.22), rgba(225,6,19,.05)); border-color: var(--red); }
-    .funnel-panel { display: none; grid-column: 1 / -1; padding: 18px 20px; border-radius: 16px; border: 1px solid var(--line); background: var(--card); }
-    #f1:checked ~ .p1, #f2:checked ~ .p2, #f3:checked ~ .p3, #f4:checked ~ .p4 { display: block; }
-    .solution { margin-top: 14px; padding: 14px 16px; border-left: 3px solid var(--red); background: rgba(225,6,19,.08); border-radius: 0 14px 14px 0; color: var(--soft); }
-    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 22px; }
-    .column { padding: 18px; }
-    .column.next { background: linear-gradient(180deg, rgba(225,6,19,.14), #171a21 42%); border-color: rgba(225,6,19,.35); }
-    .column h3 { font-size: 26px; margin: 6px 0 8px; }
-    .column ul { margin: 12px 0 0; padding-left: 18px; color: var(--soft); }
-    .column li { margin: 7px 0; }
-    .timeline { margin-top: 18px; }
-    .tl { display: grid; grid-template-columns: 170px 1fr; gap: 18px; padding: 18px 0; border-top: 1px solid var(--line); }
-    .when { font-family: "Space Grotesk", sans-serif; color: var(--red-2); font-weight: 700; }
-    .offer {
-      margin-top: 22px; padding: 28px 26px; border-color: rgba(225,6,19,.55);
-      background: radial-gradient(600px 200px at 100% 0%, rgba(225,6,19,.28), transparent 55%), var(--card);
-      box-shadow: 0 30px 80px rgba(225,6,19,.12);
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { margin-bottom: 0; font-size: 88px; line-height: .98; letter-spacing: -.055em; font-weight: 600; }
+    h2 { margin-bottom: 14px; font-size: 52px; line-height: 1.02; letter-spacing: -.045em; font-weight: 600; }
+    h3 { margin-bottom: 8px; font-size: 24px; line-height: 1.12; letter-spacing: -.025em; font-weight: 600; }
+    .lede { max-width: 1100px; color: var(--ink-soft); font-size: 24px; line-height: 1.38; font-weight: 300; }
+    .red .lede, .dark .lede { color: rgba(255, 255, 255, .74); }
+    .accent { color: var(--v4-red); }
+    .red .accent, .dark .accent { color: var(--v4-cream); }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px; min-height: 34px;
+      padding: 7px 15px; border-radius: var(--radius-pill);
+      border: 1px solid rgba(229, 9, 20, .18); background: rgba(229, 9, 20, .07);
+      color: var(--v4-red); font-size: 12px; line-height: 1; font-weight: 700;
+      letter-spacing: .09em; text-transform: uppercase;
     }
-    .strike { color: var(--muted); text-decoration: line-through; font-size: 16px; margin-top: 10px; }
-    .benefit { margin-top: 12px; display: inline-block; background: rgba(183,240,207,.12); color: var(--ok); border-radius: 12px; padding: 8px 12px; font-weight: 700; font-size: 14px; }
-    .price { font-family: "Space Grotesk", sans-serif; font-size: clamp(36px, 5vw, 56px); letter-spacing: -.04em; margin-top: 14px; }
-    .price small { font-family: "Plus Jakarta Sans", sans-serif; font-size: 16px; color: var(--muted); font-weight: 500; letter-spacing: 0; }
-    .total { margin-top: 8px; color: var(--muted); font-size: 14px; }
-    .fine { margin-top: 16px; color: var(--muted); font-size: 13px; }
-    footer { max-width: var(--max); margin: 0 auto; padding: 10px 22px 40px; color: var(--muted); font-size: 13px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
-    @media (max-width: 900px) {
-      .hero-grid, .grid-2, .split, .funnel, .tl { grid-template-columns: 1fr; }
-      .hero h1 { max-width: none; }
-      header.top { align-items: flex-start; }
+    .red .eyebrow, .dark .eyebrow {
+      color: rgba(255, 255, 255, .92); background: rgba(255, 255, 255, .06);
+      border-color: rgba(255, 255, 255, .35);
+      box-shadow: inset 0 0 80px rgba(255, 255, 255, .12), inset 0 1px 8px rgba(255, 255, 255, .35), -5px 5px 20px rgba(0, 0, 0, .10);
+      backdrop-filter: blur(14px) saturate(140%);
+    }
+    .card {
+      position: relative; background: white; border: 1px solid var(--line);
+      border-radius: var(--radius); padding: 26px; overflow: hidden;
+    }
+    .glass {
+      position: relative; overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .35); border-radius: var(--radius);
+      background: rgba(255, 255, 255, .06);
+      box-shadow: inset 0 0 150px rgba(255, 255, 255, .13), inset 0 1px 10px rgba(255, 255, 255, .38), inset 0 -2px 10px rgba(255, 255, 255, .22), -5px 5px 20px rgba(0, 0, 0, .10);
+      backdrop-filter: blur(14px) saturate(140%);
+    }
+    .sphere {
+      position: absolute; border-radius: 50%; pointer-events: none;
+      background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, .38), rgba(255, 255, 255, .045) 48%, transparent 66%);
+      border: 1px solid rgba(255, 255, 255, .24);
+      box-shadow: inset 0 0 120px rgba(255, 255, 255, .13), inset 25px 18px 70px rgba(255, 160, 70, .28);
+    }
+    .icon { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+    .icon-box {
+      width: 52px; height: 52px; display: grid; place-items: center; flex: 0 0 auto;
+      border: 1px solid rgba(229, 9, 20, .18); border-radius: 16px;
+      color: var(--v4-red); background: rgba(229, 9, 20, .07);
+    }
+    .red .icon-box, .dark .icon-box { color: white; border-color: rgba(255, 255, 255, .28); background: rgba(255, 255, 255, .08); }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+    .cover-content { position: relative; z-index: 3; height: 100%; display: flex; flex-direction: column; justify-content: space-between; }
+    .brand-lockup { display: flex; align-items: center; gap: 26px; }
+    .brand-lockup .colli { width: 330px; height: auto; display: block; object-fit: contain; }
+    .brand-lockup .divider { width: 1px; height: 62px; background: rgba(255, 255, 255, .35); }
+    .client-panel {
+      display: grid; place-items: center; gap: 2px;
+      min-width: 188px; padding: 16px 22px 14px; border-radius: 18px; background: #fff;
+      box-shadow: 0 16px 40px rgba(40, 0, 1, .14); color: #141414; text-align: center; line-height: 1;
+    }
+    .client-panel strong { font-size: 20px; letter-spacing: .14em; font-weight: 700; }
+    .client-panel b { color: var(--v4-red); font-size: 34px; letter-spacing: -.04em; font-weight: 700; }
+    .client-panel small {
+      margin-top: 6px; font: 700 10px/1 "IBM Plex Mono", monospace;
+      letter-spacing: .16em; color: #5a5a5a;
+    }
+    .cover-title { max-width: 1100px; margin: 0; font-size: 92px; line-height: .93; letter-spacing: -.06em; }
+    .cover-sub { max-width: 760px; margin: 22px 0 0; font-size: 26px; line-height: 1.35; color: rgba(255, 255, 255, .74); font-weight: 300; }
+    .arrow-orbit {
+      position: absolute; width: 400px; height: 400px;
+      border: 1.5px solid rgba(255, 255, 255, .28); border-radius: 50%;
+      right: 90px; top: 175px; pointer-events: none;
+    }
+    .arrow-orbit::before, .arrow-orbit::after {
+      content: ""; position: absolute; border-radius: 50%; border: 1px solid rgba(255, 255, 255, .18);
+    }
+    .arrow-orbit::before { inset: 54px; }
+    .arrow-orbit::after { inset: 112px; }
+    .pills { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .who-card { padding: 24px; display: flex; flex-direction: column; gap: 10px; min-height: 250px; text-align: left; }
+    .who-role { font: 700 11px/1 "IBM Plex Mono", monospace; letter-spacing: .11em; text-transform: uppercase; color: var(--v4-red); }
+    .who-card p, .fact p, .wave p { margin: 0; color: var(--ink-soft); font-size: 16px; line-height: 1.35; }
+    .dark .who-card p, .dark .wave p, .glass p { color: rgba(255, 255, 255, .74); }
+    .fact { min-height: 196px; }
+    .fact .k { font: 700 11px/1 "IBM Plex Mono", monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--v4-red); }
+    .trava { min-height: 348px; display: flex; flex-direction: column; gap: 12px; padding: 24px 22px; text-align: left; color: white; cursor: pointer; width: 100%; }
+    .trava-index { font: 700 12px/1 "IBM Plex Mono", monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--v4-cream); }
+    .trava h3 { color: white; font-size: 28px; margin: 0; }
+    .trava .swap { margin-top: auto; padding-top: 14px; border-top: 1px solid rgba(255, 255, 255, .2); min-height: 92px; }
+    .trava .swap b { display: block; color: var(--v4-cream); font-size: 13px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 6px; }
+    .trava.is-on { border-color: var(--v4-cream); box-shadow: 0 0 0 2px rgba(255, 235, 200, .35); }
+    .dark-note {
+      display: flex; align-items: center; gap: 16px; margin-top: 18px;
+      padding: 16px 22px; border-radius: var(--radius);
+      background: rgba(255, 255, 255, .06); border: 1px solid rgba(255, 255, 255, .18);
+      color: rgba(255, 255, 255, .86); font-size: 18px; line-height: 1.35;
+    }
+    .funnel-row { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; margin-top: 22px; }
+    .funnel-step {
+      position: relative; min-height: 168px; min-width: 0; padding: 18px 16px 16px; text-align: left;
+      border-radius: 20px; border: 1px solid var(--line); background: white; cursor: pointer; color: var(--ink);
+    }
+    .funnel-step::after {
+      content: ""; position: absolute; right: -9px; top: 50%; width: 10px; height: 10px;
+      border-right: 2px solid var(--v4-red); border-top: 2px solid var(--v4-red);
+      transform: translateY(-50%) rotate(45deg); z-index: 2;
+    }
+    .funnel-step:last-child::after { display: none; }
+    .funnel-step .n { font: 700 12px/1 "IBM Plex Mono", monospace; letter-spacing: .1em; color: var(--v4-red); }
+    .funnel-step h3 { margin: 12px 0 8px; font-size: 22px; }
+    .funnel-step p { margin: 0; color: var(--ink-soft); font-size: 14px; line-height: 1.3; }
+    .funnel-step.is-on {
+      background: var(--hero); color: white; border-color: transparent;
+    }
+    .funnel-step.is-on p { color: rgba(255, 255, 255, .78); }
+    .funnel-step.is-on .n { color: var(--v4-cream); }
+    .detail {
+      margin-top: 16px; display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, .65fr); gap: 18px;
+      padding: 22px 26px; border-radius: 20px; background: white; border: 1px solid var(--line); min-height: 148px;
+    }
+    .detail h3 { font-size: 28px; margin-bottom: 8px; }
+    .detail p { margin: 0; color: var(--ink-soft); font-size: 18px; line-height: 1.4; }
+    .detail .own { border-left: 1px solid var(--line); padding-left: 22px; }
+    .detail .own span { display: block; font: 700 11px/1 "IBM Plex Mono", monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--v4-red); margin-bottom: 8px; }
+    .flow {
+      margin-top: 22px; display: grid; grid-template-columns: minmax(0, 1.15fr) 40px minmax(0, 1fr) 40px minmax(0, 1fr); align-items: stretch; gap: 8px; min-height: 340px;
+    }
+    .flow-col { display: grid; gap: 10px; }
+    .node {
+      text-align: left; cursor: pointer; border-radius: 18px; border: 1px solid var(--line);
+      background: white; padding: 16px 16px 14px; color: var(--ink);
+    }
+    .node b { display: block; font-size: 18px; letter-spacing: -.02em; }
+    .node span { display: block; margin-top: 4px; color: var(--ink-soft); font-size: 14px; line-height: 1.3; }
+    .node.is-on { background: var(--hero); color: white; border-color: transparent; }
+    .node.is-on span { color: rgba(255, 255, 255, .78); }
+    .flow-arrow { display: grid; place-items: center; color: var(--v4-red); font-size: 28px; font-weight: 600; }
+    .hub-node {
+      display: grid; place-items: center; text-align: center; border-radius: 22px; color: white;
+      background: var(--hero); min-height: 100%; padding: 18px;
+    }
+    .hub-node strong { font-size: 28px; letter-spacing: -.03em; display: block; }
+    .hub-node span { display: block; margin-top: 8px; color: rgba(255, 255, 255, .78); font-size: 15px; line-height: 1.35; }
+    .flow-read {
+      margin-top: 16px; padding: 18px 22px; border-radius: 18px; background: white; border: 1px solid var(--line);
+      display: grid; grid-template-columns: 180px 1fr; gap: 18px; align-items: center; min-height: 108px;
+    }
+    .flow-read .tag { font: 700 12px/1 "IBM Plex Mono", monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--v4-red); }
+    .flow-read p { margin: 6px 0 0; color: var(--ink-soft); font-size: 18px; line-height: 1.35; }
+    .promise { min-height: 470px; padding: 32px; display: flex; flex-direction: column; }
+    .promise h3 { font-size: 32px; max-width: 16ch; }
+    .promise ul { margin: 8px 0 0; padding: 0; list-style: none; display: grid; gap: 12px; }
+    .promise li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; font-size: 18px; line-height: 1.35; color: var(--ink-soft); }
+    .promise li i { color: var(--v4-red); font-style: normal; font-weight: 700; }
+    .wave { min-height: 360px; padding: 28px 26px; display: flex; flex-direction: column; gap: 12px; color: white; }
+    .wave h3 { color: white; font-size: 30px; margin: 0; }
+    .wave .when { margin-top: auto; padding-top: 14px; border-top: 1px solid rgba(255, 255, 255, .2); color: var(--v4-cream); font: 700 13px/1.3 "IBM Plex Mono", monospace; letter-spacing: .04em; }
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 8px; }
+    .col { padding: 26px 28px; border-radius: 24px; border: 1px solid var(--line); background: white; }
+    .col.next { background: linear-gradient(180deg, rgba(229, 9, 20, .08), white 42%); border-color: rgba(229, 9, 20, .22); }
+    .col h3 { font-size: 28px; margin-bottom: 16px; }
+    .col ol { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; }
+    .col li { display: grid; grid-template-columns: 28px 1fr; gap: 10px; font-size: 18px; line-height: 1.3; color: var(--ink-soft); }
+    .col li b { color: var(--v4-red); font: 700 14px/1.2 "IBM Plex Mono", monospace; }
+    .price-layout { display: grid; grid-template-columns: .82fr 1.18fr; gap: 22px; margin-top: 18px; align-items: stretch; }
+    .anchor, .deal { border-radius: 28px; padding: 36px 40px; min-height: 340px; display: flex; flex-direction: column; justify-content: center; }
+    .anchor { background: white; border: 1px solid var(--line); }
+    .anchor .tag, .perk b { font: 700 12px/1 "IBM Plex Mono", monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--v4-red); }
+    .old { margin: 14px 0 8px; font-size: 54px; font-weight: 600; letter-spacing: -.04em; line-height: 1; color: #9a9393; text-decoration: line-through; text-decoration-thickness: 3px; }
+    .anchor p, .deal p { margin: 0; color: var(--ink-soft); font-size: 20px; }
+    .deal {
+      color: white; background: var(--hero); position: relative; overflow: hidden;
+      box-shadow: 0 30px 80px rgba(229, 9, 20, .28);
+    }
+    .deal .tag { color: var(--v4-cream); font: 700 12px/1 "IBM Plex Mono", monospace; letter-spacing: .12em; text-transform: uppercase; }
+    .deal .times { margin-top: 18px; font-size: 22px; font-weight: 600; letter-spacing: .08em; color: rgba(255, 255, 255, .8); }
+    .deal .now { font-size: 84px; font-weight: 650; letter-spacing: -.05em; line-height: .95; margin: 4px 0 10px; }
+    .deal p { color: rgba(255, 255, 255, .82); font-size: 22px; }
+    .perks { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-top: 16px; }
+    .perk { background: white; border: 1px solid var(--line); border-radius: 18px; padding: 16px 18px; }
+    .perk strong { display: block; margin-top: 6px; font-size: 22px; letter-spacing: -.03em; }
+    .perk span { display: block; margin-top: 4px; color: var(--ink-soft); font-size: 15px; line-height: 1.3; }
+    .fine { margin: 14px 0 0; color: rgba(20, 20, 20, .45); font-size: 13px; line-height: 1.4; max-width: 980px; }
+    .close-title { max-width: 1200px; font-size: 78px; line-height: .96; letter-spacing: -.05em; }
+    .slide-footer {
+      position: absolute; z-index: 8; left: 96px; right: 96px; bottom: 32px; height: 48px;
+      display: flex; align-items: center; pointer-events: none;
+    }
+    .slide-footer img { width: 155px; height: 48px; object-fit: contain; object-position: left center; }
+    .navigation {
+      position: absolute; z-index: 20; right: 52px; bottom: 25px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .nav-btn {
+      width: 48px; height: 48px; display: grid; place-items: center;
+      border: 1px solid rgba(20, 20, 20, .12); border-radius: 50%;
+      background: rgba(255, 255, 255, .92); color: var(--ink); cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .12);
+    }
+    .nav-btn:hover { transform: translateY(-2px); background: white; }
+    .nav-btn:disabled { opacity: .3; cursor: default; transform: none; }
+    .nav-btn svg { width: 22px; height: 22px; }
+    .slide-counter {
+      position: absolute; z-index: 22; right: 176px; bottom: 39px;
+      font: 500 12px/1 "IBM Plex Mono", monospace; color: rgba(20, 20, 20, .52); letter-spacing: .04em;
+    }
+    .progress-track { position: absolute; z-index: 21; left: 0; right: 0; bottom: 0; height: 7px; background: rgba(20, 20, 20, .1); }
+    .progress-fill { width: 0; height: 100%; background: linear-gradient(90deg, var(--v4-red), var(--v4-orange)); box-shadow: 0 0 20px rgba(229, 9, 20, .35); transition: width .3s ease; }
+    .hint { position: absolute; left: 96px; bottom: 40px; z-index: 6; color: rgba(255,255,255,.55); font: 500 12px/1 "IBM Plex Mono", monospace; letter-spacing: .04em; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
     }
   </style>
 </head>
 <body>
-  <div class="progress" aria-hidden="true"><span id="bar"></span></div>
-  <header class="top">
-    <div class="brand-row">
-      <span class="chip" title="V4 Company Colli &amp; Co">
-        <img src="assets/logo-colli.png" alt="Colli &amp; Co" />
-        <span><small>V4 Company</small><b>Colli &amp; Co</b></span>
-      </span>
-      <span class="x" aria-hidden="true">×</span>
-      <span class="chip" title="Maben Parafusos">
-        <img src="assets/logo-maben.png" alt="Maben" />
-        <span><small>Cliente</small><b>Maben Parafusos</b></span>
-      </span>
-    </div>
-    <nav class="sections" aria-label="Seções">
-      <a href="#capa">Capa</a>
-      <a href="#travas">Travas</a>
-      <a href="#funil">Funil</a>
-      <a href="#antes">Antes e depois</a>
-      <a href="#rotina">Rotina</a>
-      <a href="#investimento">Investimento</a>
-    </nav>
-  </header>
-
-  <main>
-    <section class="hero" id="capa">
-      <div class="hero-grid">
-        <div>
-          <p class="kicker">Proposta comercial · Setembro de 2026</p>
-          <h1>O balcão da Maben já resolve. O digital ainda não repete isso.</h1>
-          <p class="lede">Desde 1992 a casa vende fixação, ferramenta e ferragem em Barueri e, agora, também em Cajamar. A assessoria entra para transformar estoque e atendimento em um funil B2B que a loja e o e-commerce conseguem operar juntos.</p>
-          <div class="badges">
-            <span class="badge">Assessoria de Growth</span>
-            <span class="badge">Foco: loja + e-commerce B2B</span>
-            <span class="badge">Time: gestão, mídia, CRM e design</span>
-            <span class="badge">Barueri · Cajamar · Alphaville</span>
-            <span class="badge">Contrato de 12 meses</span>
+  <div id="viewport">
+    <main id="deck">
+      <section class="slide red active" data-title="Proposta · Maben Parafusos">
+        <div class="sphere" style="width:430px;height:430px;right:-90px;top:-110px;opacity:.42"></div>
+        <div class="sphere" style="width:210px;height:210px;right:250px;bottom:120px;opacity:.3"></div>
+        <div class="arrow-orbit"></div>
+        <div class="cover-content">
+          <div class="brand-lockup">
+            <img class="colli" src="assets/colli-white.png" alt="V4 Company Colli&amp;Co">
+            <span class="divider"></span>
+            <div class="client-panel" style="padding:12px 18px">
+              <img src="assets/logo-maben.png" alt="Maben Parafusos" style="height:52px;width:auto;max-width:240px">
+            </div>
+          </div>
+          <div>
+            <span class="eyebrow">Proposta · Assessoria de Growth</span>
+            <h1 class="cover-title" style="margin-top:22px">O balcão já resolve.<br>O digital ainda<br><span class="accent">não repete isso.</span></h1>
+            <p class="cover-sub">Desde 1992 a Maben vende fixação, ferramenta e ferragem em Barueri e Cajamar. A Colli&amp;Co entra para as duas lojas e o e-commerce operarem o mesmo funil.</p>
+          </div>
+          <div class="pills">
+            <span class="eyebrow">Barueri · Cajamar</span>
+            <span class="eyebrow">Time dedicado</span>
+            <span class="eyebrow">Contrato de 12 meses</span>
           </div>
         </div>
-        <aside class="meta">
-          <h2>Como a conta opera</h2>
-          <dl>
-            <div><dt>Modelo</dt><dd>Assessoria dentro da operação. Onboarding em 15 dias, sprint semanal e fechamento mensal com a direção.</dd></div>
-            <div><dt>Time Colli &amp; Co</dt><dd>Aline Pereira Silva na gestão do projeto. Julia Ferrari no design. Mídia e CRM entram na mesma mesa, com dono em cada frente.</dd></div>
-            <div><dt>O que a Maben já tem</dt><dd>Duas lojas, catálogo amplo de parafusos, fixadores, ferramentas e ferragens, e uma loja online. O balcão é o ativo. O caminho digital ainda não tem a mesma régua.</dd></div>
-            <div><dt>Praça</dt><dd>Barueri, Cajamar, Alphaville e Santana de Parnaíba. Empresa que repõe toda semana e cliente de balcão não seguem o mesmo roteiro.</dd></div>
-          </dl>
-        </aside>
-      </div>
-    </section>
+        </section>
 
-    <section id="travas">
-      <p class="kicker">Diagnóstico</p>
-      <h2 style="font-size:clamp(32px,4vw,48px); max-width:16ch;">Onde o crescimento trava</h2>
-      <p class="sub">Leitura da operação pública e do enquadramento do projeto: loja e e-commerce, venda B2B de equipamentos e fixação. Sem número interno de caixa nesta tela.</p>
-      <div class="grid-2">
-        <article class="card">
-          <div class="num">Trava 01</div>
-          <h3>Duas portas digitais, uma marca só</h3>
-          <p>O site institucional e a loja online não contam a mesma Maben. Em uma das páginas, os números que deveriam provar história, equipe e catálogo aparecem zerados.</p>
-          <p class="impact"><b>Impacto.</b> Quem pesquisa “parafuso em Barueri” não encontra a prova de estoque e de atendimento que o balcão já entrega.</p>
-        </article>
-        <article class="card">
-          <div class="num">Trava 02</div>
-          <h3>O contato ainda nasce no telefone</h3>
-          <p>O caminho público de pedido é ligação e e-mail. Não há, na superfície digital, uma etapa com origem, unidade e próxima ação.</p>
-          <p class="impact"><b>Impacto.</b> Anúncio e indicação chegam no mesmo balcão, e ninguém consegue dizer qual conversa virou pedido.</p>
-        </article>
-        <article class="card">
-          <div class="num">Trava 03</div>
-          <h3>O conhecimento do balcão não virou roteiro</h3>
-          <p>Quem avalia a loja elogia variedade e atenção. Também aparece atendimento sem domínio do produto. Os dois convivem porque o padrão mora na pessoa, não no processo.</p>
-          <p class="impact"><b>Impacto.</b> A segunda unidade e o e-commerce herdam o risco. Cajamar não pode depender de quem está no caixa de Barueri.</p>
-        </article>
-        <article class="card">
-          <div class="num">Trava 04</div>
-          <h3>B2B e balcão ouvem a mesma frase</h3>
-          <p>A comunicação pública fala de cidade, variedade e FAQ genérico. O comprador que repõe obra, manutenção e indústria precisa de aplicação, medida e prazo da unidade certa.</p>
-          <p class="impact"><b>Impacto.</b> A Maben compete por quem passa na porta, e perde quem já está procurando o parafuso certo para comprar de novo.</p>
-        </article>
-      </div>
-    </section>
+      <section class="slide" data-title="O negócio">
+        <div class="topline"></div>
+        <span class="eyebrow">Maben Parafusos · contexto</span>
+        <h2 style="margin-top:20px">Duas lojas. Dois sites. Um balcão.</h2>
+        <p class="lede">A Maben vende parafuso, fixador, ferramenta e ferragem desde 1992. O atendimento no balcão já resolve. O digital ainda não repete isso para quem chega de fora da loja.</p>
+        <div class="grid-4" style="margin-top:28px">
+          <article class="card fact">
+            <span class="k">Loja</span>
+            <h3>Barueri e Cajamar</h3>
+            <p>Av. Capitão Francisco César, 568, em Barueri, e Av. Ten. Marques, 4929, em Cajamar. Alphaville e Santana de Parnaíba no raio.</p>
+          </article>
+          <article class="card fact">
+            <span class="k">Catálogo</span>
+            <h3>Fixação e ferramenta</h3>
+            <p>Parafuso, porca, arruela, ferramenta e ferragem. Quem já sabe o que precisa encontra no balcão. Quem não sabe, ainda não encontra no digital.</p>
+          </article>
+          <article class="card fact">
+            <span class="k">Quem compra</span>
+            <h3>B2B e balcão</h3>
+            <p>Oficina, obra, manutenção e o cliente que entra na loja. Os dois públicos hoje recebem a mesma porta e a mesma frase.</p>
+          </article>
+          <article class="card fact">
+            <span class="k">Digital</span>
+            <h3>Duas portas</h3>
+            <p>maben.com.br e a loja mabenparafusos.com.br. O contato ainda começa no telefone e no e-mail, antes de um funil.</p>
+          </article>
+        </div>
+      </section>
 
-    <section id="funil">
-      <p class="kicker">Objetivo</p>
-      <h2 style="font-size:clamp(32px,4vw,48px); max-width:18ch;">Um funil para as duas lojas</h2>
-      <p class="sub">Atração, qualificação, CRM e follow-up. A Assessoria de Growth segura as quatro etapas para Barueri e Cajamar deixarem de vender cada uma do seu jeito.</p>
-      <div class="funnel">
-        <input type="radio" name="funil" id="f1" checked />
-        <label for="f1"><div class="num">01</div><h3 style="font-size:18px;margin:8px 0 0;">Atração</h3><p class="sub">Ser achado na hora da obra.</p></label>
-        <input type="radio" name="funil" id="f2" />
-        <label for="f2"><div class="num">02</div><h3 style="font-size:18px;margin:8px 0 0;">Qualificação</h3><p class="sub">Saber o que a pessoa precisa.</p></label>
-        <input type="radio" name="funil" id="f3" />
-        <label for="f3"><div class="num">03</div><h3 style="font-size:18px;margin:8px 0 0;">CRM</h3><p class="sub">Dar dono e unidade.</p></label>
-        <input type="radio" name="funil" id="f4" />
-        <label for="f4"><div class="num">04</div><h3 style="font-size:18px;margin:8px 0 0;">Follow-up</h3><p class="sub">Voltar na reposição.</p></label>
-        <div class="funnel-panel p1">Google pega quem já busca parafuso, fixador e ferramenta na região. Meta mostra aplicação: obra, manutenção, serralheria, indústria. As duas lojas aparecem com endereço e estoque do que a página promete. A loja online recebe o mesmo criativo, não uma marca paralela.</div>
-        <div class="funnel-panel p2">Antes de empurrar o pedido, quatro respostas: é empresa ou balcão, qual unidade atende, qual a aplicação e se a necessidade é imediata ou recorrente. Medida e norma ficam na conversa de quem entende do produto, com um roteiro único.</div>
-        <div class="funnel-panel p3">Cada contato ganha origem, unidade (Barueri ou Cajamar), responsável e próxima ação. O pedido do site, o do telefone e o do balcão passam a ter a mesma ficha. Sem isso, a segunda loja cresce no escuro.</div>
-        <div class="funnel-panel p4">Conta B2B não acaba no primeiro parafuso. A reposição tem data. Quem não comprou fica com motivo: medida errada, prazo, unidade longe, sem retorno. Quem comprou entra numa cadência curta, sem desconto que brigue com o balcão.</div>
-      </div>
-      <p class="solution">A Assessoria de Growth é o que liga anúncio, loja e reposição. Sem essa camada, Cajamar e o e-commerce viram mais uma porta, e não mais venda recorrente.</p>
-    </section>
+      <section class="slide red" data-title="A frase">
+        <div class="sphere" style="width:380px;height:380px;right:-80px;bottom:-80px;opacity:.28"></div>
+        <div class="cover-content">
+          <span class="eyebrow">O diagnóstico, em uma linha</span>
+          <h1 style="max-width:1280px;font-size:76px">A Maben não tem um problema de estoque. Tem um problema de <span class="accent">funil.</span></h1>
+          <p class="lede" style="max-width:980px">O balcão já sabe o que vender. O site, o anúncio e o WhatsApp ainda não repetem essa conversa. Sem origem, unidade e próximo passo, cada contato recomeça do zero.</p>
+        </div>
+      </section>
 
-    <section id="antes">
-      <p class="kicker">Antes e depois</p>
-      <h2 style="font-size:clamp(32px,4vw,48px);">A operação com a Colli &amp; Co dentro</h2>
-      <div class="split">
-        <article class="column">
-          <div class="num">Hoje</div>
-          <h3>Balcão forte, funil solto</h3>
-          <ul>
-            <li>Venda concentrada em quem chega na loja ou liga.</li>
-            <li>Site institucional e loja online com discursos diferentes.</li>
-            <li>Barueri e Cajamar sem uma régua só de atendimento.</li>
-            <li>Conhecimento técnico dependente de quem está no caixa.</li>
-            <li>Reposição B2B sem data e sem dono visível.</li>
-            <li>Anúncio, se existir, sem leitura até o pedido.</li>
-          </ul>
-        </article>
-        <article class="column next">
-          <div class="num">Com a V4 Colli &amp; Co</div>
-          <h3>As duas lojas no mesmo fluxo</h3>
-          <ul>
-            <li>Google e Meta levam para a unidade e para o item certo.</li>
-            <li>Uma página, um catálogo, uma promessa de prazo.</li>
-            <li>Roteiro de balcão replicado no digital e em Cajamar.</li>
-            <li>CRM com origem, unidade e próxima ação.</li>
-            <li>Conta B2B acompanhada para a próxima reposição.</li>
-            <li>Sprint semanal decide o que fica no ar.</li>
-          </ul>
-        </article>
-      </div>
-    </section>
+      <section class="slide" data-title="Oportunidades">
+        <div class="topline"></div>
+        <span class="eyebrow">O que já joga a favor</span>
+        <h2 style="margin-top:18px">Três portas abertas antes do anúncio.</h2>
+        <p class="lede">O crescimento da Maben não depende de inventar demanda. Depende de fazer o digital repetir o que o balcão já faz em Barueri e Cajamar.</p>
+        <div class="grid-3" style="margin-top:26px">
+          <article class="card fact" style="min-height:280px">
+            <span class="k">01 · Balcão</span>
+            <h3>O atendimento já prova a venda</h3>
+            <p>Quem entra na loja sai com o parafuso certo. Essa conversa existe. Ela só não está escrita para quem chega pelo site, pelo anúncio ou pelo WhatsApp.</p>
+          </article>
+          <article class="card fact" style="min-height:280px">
+            <span class="k">02 · Território</span>
+            <h3>Duas unidades, um raio claro</h3>
+            <p>Barueri, Cajamar, Alphaville e Santana de Parnaíba. Quem busca fixação e ferramenta nessa região já tem um motivo para escolher a Maben. Falta o caminho até a unidade certa.</p>
+          </article>
+          <article class="card fact" style="min-height:280px">
+            <span class="k">03 · Busca</span>
+            <h3>A demanda já tem nome</h3>
+            <p>Parafuso, ferramenta e ferragem são buscas concretas. A Maben não precisa criar o assunto. Precisa aparecer com a resposta certa, na unidade certa.</p>
+          </article>
+        </div>
+      </section>
 
-    <section id="rotina">
-      <p class="kicker">Rotina</p>
-      <h2 style="font-size:clamp(32px,4vw,48px); max-width:16ch;">Quinze dias. Toda semana. Todo mês.</h2>
-      <p class="sub">O ritmo da assessoria. O que aparecer na sprint vira tarefa com dono, não pauta para o mês seguinte.</p>
-      <div class="timeline">
-        <article class="tl">
-          <div class="when">Onboarding<br />15 dias</div>
-          <div>
-            <h3>Entrar nas duas casas</h3>
-            <p class="sub">Acessos da loja online, do site, do anúncio e do WhatsApp ou telefone comercial. Mapa do que Barueri entrega e do que Cajamar entrega. Esqueleto do CRM e correção do que a página promete sem conseguir cumprir.</p>
+      <section class="slide dark" data-title="Travas">
+        <div class="sphere" style="width:340px;height:340px;right:-70px;top:-80px;opacity:.28"></div>
+        <span class="eyebrow">O que impede a Maben de crescer no digital</span>
+        <h2 style="margin-top:16px;color:#fff">Três travas. Clique para ver o que muda.</h2>
+        <div class="grid-3" style="margin-top:20px">
+          <button class="glass trava" type="button" data-trava="0">
+            <span class="trava-index">Trava 01</span>
+            <div class="icon-box"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></div>
+            <h3>Duas portas digitais</h3>
+            <p>maben.com.br e mabenparafusos.com.br contam histórias diferentes. Quem chega não sabe qual é a loja.</p>
+            <div class="swap"><b>Impacto</b><span>Anúncio sem um destino só. A pessoa cai num site e o pedido nasce em outro. A origem se perde.</span></div>
+          </button>
+          <button class="glass trava" type="button" data-trava="1">
+            <span class="trava-index">Trava 02</span>
+            <div class="icon-box"><svg class="icon" viewBox="0 0 24 24"><path d="M4 19V5M4 19h16"/><path d="M8 15v-3M12 15V8M16 15v-5"/></svg></div>
+            <h3>Conhecimento no caixa</h3>
+            <p>O balcão sabe medida, aplicação e unidade. O digital ainda começa no telefone e no e-mail, sem roteiro.</p>
+            <div class="swap"><b>Impacto</b><span>Cada contato recomeça do zero. O follow-up mora na memória de quem atendeu, não num processo.</span></div>
+          </button>
+          <button class="glass trava" type="button" data-trava="2">
+            <span class="trava-index">Trava 03</span>
+            <div class="icon-box"><svg class="icon" viewBox="0 0 24 24"><path d="M4 8h16v11H4z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></div>
+            <h3>B2B e balcão na mesma frase</h3>
+            <p>Oficina, obra e o cliente do balcão veem a mesma mensagem. Nenhum dos dois se reconhece.</p>
+            <div class="swap"><b>Impacto</b><span>Quem compra volume não vê reposição. Quem compra peça não vê a loja perto. Os dois saem.</span></div>
+          </button>
+        </div>
+        <div class="dark-note">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V7z"/></svg>
+          <span>Regra que não se negocia: cada contato ganha origem, unidade (Barueri ou Cajamar) e próximo passo. Sem isso, o anúncio não tem onde ficar.</span>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Funil">
+        <div class="topline"></div>
+        <span class="eyebrow">A solução · como a venda acontece</span>
+        <h2 style="margin-top:16px">O funil do balcão, no digital.</h2>
+        <p class="lede" style="font-size:20px">Clique em cada etapa. A venda da Maben não termina no primeiro contato: a reposição, a outra unidade e o próximo pedido é que pagam o canal.</p>
+        <div class="funnel-row" id="funnel"></div>
+        <div class="detail" id="funnelDetail"></div>
+      </section>
+
+      <section class="slide" data-title="Canais">
+        <div class="topline"></div>
+        <span class="eyebrow">Como os canais se falam</span>
+        <h2 style="margin-top:16px">Um sistema. Não uma peça solta.</h2>
+        <div class="flow" id="flow"></div>
+        <div class="flow-read" id="flowRead"></div>
+      </section>
+
+      <section class="slide" data-title="Time">
+        <div class="topline"></div>
+        <span class="eyebrow">Escopo do time dedicado</span>
+        <h2 style="margin-top:16px">Quatro donos. Nenhuma frente órfã.</h2>
+        <p class="lede" style="margin-bottom:22px">Cada trava do diagnóstico tem um responsável dentro da Colli&amp;Co. Aline Pereira Silva conduz a conta. Julia Ferrari assina o design.</p>
+        <div class="grid-4">
+          <article class="card who-card">
+            <div class="icon-box"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M5 19c1.5-3 3.8-4.5 7-4.5S17.5 16 19 19"/></svg></div>
+            <span class="who-role">Account · Aline Pereira Silva</span>
+            <h3>Gestão e alinhamento</h3>
+            <p>Dona da conta com a direção da Maben. Plano, prioridade, ritmo e a cobrança dos dois lados.</p>
+          </article>
+          <article class="card who-card">
+            <div class="icon-box"><svg class="icon" viewBox="0 0 24 24"><path d="M4 19V5M4 19h16"/><path d="M7 14l4-4 3 3 5-6"/></svg></div>
+            <span class="who-role">Gestor de tráfego</span>
+            <h3>Aquisição e performance</h3>
+            <p>Google e Meta ligados às duas unidades e à loja. Leitura semanal do que vira conversa e do que vira pedido.</p>
+          </article>
+          <article class="card who-card">
+            <div class="icon-box"><svg class="icon" viewBox="0 0 24 24"><path d="M5 19V6h10l4 4v9z"/><path d="M9 12h6M9 16h4"/></svg></div>
+            <span class="who-role">Copywriter</span>
+            <h3>Comunicação e conversão</h3>
+            <p>Uma voz para o B2B e outra para o balcão. Anúncio, página e WhatsApp param de falar a mesma frase para os dois.</p>
+          </article>
+          <article class="card who-card">
+            <div class="icon-box"><svg class="icon" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 15l4-4 3 3 3-4 6 6"/></svg></div>
+            <span class="who-role">Design · Julia Ferrari</span>
+            <h3>Ativos de conversão</h3>
+            <p>Peça, aplicação e unidade com a mesma cara. O criativo mostra o que o balcão já sabe explicar.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Entregáveis">
+        <div class="topline"></div>
+        <span class="eyebrow">A promessa</span>
+        <h2 style="margin-top:16px">Duas entregas. O resto serve a elas.</h2>
+        <div class="grid-2" style="margin-top:22px">
+          <article class="card promise">
+            <span class="who-role">Promessa 01</span>
+            <h3>Eliminar as travas de operação e de venda</h3>
+            <ul>
+              <li><i>→</i>Um destino só: site, anúncio e WhatsApp apontam para a mesma loja.</li>
+              <li><i>→</i>Cada contato com origem, unidade (Barueri ou Cajamar) e próximo passo.</li>
+              <li><i>→</i>Roteiro de balcão e roteiro de B2B. Os dois públicos deixam de receber a mesma frase.</li>
+              <li><i>→</i>WhatsApp com triagem. Ninguém repete a história do zero quando passa para o humano.</li>
+            </ul>
+          </article>
+          <article class="card promise">
+            <span class="who-role">Promessa 02</span>
+            <h3>Aumentar a autoridade da marca no mercado</h3>
+            <ul>
+              <li><i>→</i>A Maben como a casa de fixação e ferramenta em Barueri e Cajamar.</li>
+              <li><i>→</i>Conteúdo que mostra aplicação, medida e unidade, do jeito que o balcão já explica.</li>
+              <li><i>→</i>Presença contínua: orgânico e mídia contando a mesma história.</li>
+              <li><i>→</i>Quem busca parafuso e ferramenta na região encontra a Maben antes do concorrente.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="slide dark" data-title="Ondas">
+        <div class="sphere" style="width:360px;height:360px;right:-90px;top:-70px;opacity:.26"></div>
+        <span class="eyebrow">Ordem de execução</span>
+        <h2 style="margin-top:16px;color:#fff">Três ondas. Sem pular o funil.</h2>
+        <p class="lede" style="margin-bottom:22px">Escalar anúncio antes de ter um destino, um roteiro e um dono multiplica o problema. A verba só entra quando a casa está de pé.</p>
+        <div class="grid-3">
+          <article class="glass wave">
+            <span class="trava-index">Onda 01 · dias 0 a 15</span>
+            <h3>Onboarding</h3>
+            <p>Uma porta digital. Página, pixel e o que cada unidade pode prometer. CRM mínimo com origem, Barueri ou Cajamar, e próximo passo.</p>
+            <div class="when">Meta · a Maben tem onde receber a pessoa</div>
+          </article>
+          <article class="glass wave">
+            <span class="trava-index">Onda 02 · dias 15 a 60</span>
+            <h3>Adquirir</h3>
+            <p>Google e Meta ligados às lojas e ao WhatsApp. Sprint semanal do que vira conversa e do que vira pedido. B2B e balcão com criativos separados.</p>
+            <div class="when">Meta · anúncio com destino e com resposta</div>
+          </article>
+          <article class="glass wave">
+            <span class="trava-index">Onda 03 · dias 60 a 90</span>
+            <h3>Ficar</h3>
+            <p>Régua de reposição para quem já comprou. A segunda compra deixa de depender da memória de quem atendeu no balcão.</p>
+            <div class="when">Meta · o pedido seguinte já tem dono</div>
+          </article>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Rotina">
+        <div class="topline"></div>
+        <span class="eyebrow">Processo e rotina</span>
+        <h2 style="margin-top:16px">Ritmo curto. Decisão na semana.</h2>
+        <p class="lede" style="margin-bottom:22px">A Colli&amp;Co não aparece só na reunião mensal. Problema visto na segunda vira ajuste antes da sexta.</p>
+        <div class="grid-4">
+          <article class="card who-card" style="min-height:280px">
+            <span class="who-role">Todo dia</span>
+            <h3>WhatsApp da conta</h3>
+            <p>A direção da Maben e o time no mesmo grupo. Dúvida, criativo e desbloqueio sem esperar pauta.</p>
+          </article>
+          <article class="card who-card" style="min-height:280px">
+            <span class="who-role">Toda semana</span>
+            <h3>Growth Sprint</h3>
+            <p>Tráfego e Julia Ferrari leem anúncio, página e resposta do WhatsApp. O que não converte sai na mesma semana.</p>
+          </article>
+          <article class="card who-card" style="min-height:280px">
+            <span class="who-role">A cada 15 dias</span>
+            <h3>Performance</h3>
+            <p>Reunião com Aline Pereira Silva: o que entrou, o que travou, o que muda na quinzena. Uma pauta, um dono.</p>
+          </article>
+          <article class="card who-card" style="min-height:280px">
+            <span class="who-role">Todo mês</span>
+            <h3>Fechamento</h3>
+            <p>A direção da Maben na mesa. Report do mês, verba de mídia e a decisão de avançar ou segurar.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Transformação">
+        <div class="topline"></div>
+        <span class="eyebrow">Como fica a Maben Parafusos</span>
+        <h2 style="margin-top:16px">De balcão que lembra para operação que enxerga.</h2>
+        <div class="split">
+          <div class="col">
+            <h3>Hoje</h3>
+            <ol>
+              <li><b>01</b>O balcão resolve. O digital ainda não repete a conversa.</li>
+              <li><b>02</b>Dois sites. O contato começa no telefone e no e-mail.</li>
+              <li><b>03</b>B2B e balcão recebem a mesma frase.</li>
+              <li><b>04</b>Follow-up na memória de quem atendeu.</li>
+              <li><b>05</b>Barueri e Cajamar existem no endereço, não no anúncio.</li>
+            </ol>
           </div>
-        </article>
-        <article class="tl">
-          <div class="when">Growth sprint<br />Semanal</div>
-          <div>
-            <h3>Uma pauta, quatro frentes</h3>
-            <p class="sub">Criativo, verba, perguntas que chegaram no balcão e contatos parados. Aline conduz a conta. Julia fecha a peça. Sai um plano de sete dias para as duas unidades.</p>
+          <div class="col next">
+            <h3>Com a assessoria</h3>
+            <ol>
+              <li><b>01</b>Uma porta: site, anúncio e WhatsApp com o mesmo argumento.</li>
+              <li><b>02</b>Cada contato com origem, unidade e próximo passo.</li>
+              <li><b>03</b>B2B vê reposição. Balcão vê a loja perto.</li>
+              <li><b>04</b>O histórico não mora em uma pessoa.</li>
+              <li><b>05</b>Quem busca fixação na região encontra a unidade certa.</li>
+            </ol>
           </div>
-        </article>
-        <article class="tl">
-          <div class="when">Fechamento<br />Mensal</div>
-          <div>
-            <h3>Mesa com a direção</h3>
-            <p class="sub">O que a mídia trouxe, o que cada loja converteu e qual conta B2B voltou a comprar. É aqui que a verba muda de praça ou de canal.</p>
-          </div>
-        </article>
-      </div>
-    </section>
+        </div>
+      </section>
 
-    <section id="investimento">
-      <p class="kicker">Fechamento</p>
-      <h2 style="font-size:clamp(36px,5vw,58px); max-width:14ch;">Prontos para colocar as duas lojas no mesmo funil.</h2>
-      <p class="lede" style="margin-top:14px;">A Maben não precisa de mais uma página de cidade. Precisa que Barueri, Cajamar e a loja online vendam com a mesma origem, o mesmo roteiro e a mesma reposição.</p>
-      <article class="offer">
-        <div class="num">Investimento</div>
-        <h3 style="font-size:28px; margin-top:8px;">Assessoria de Growth · 12 meses</h3>
-        <p class="strike">Valor nominal sem desconto: R$ 10.693,23/mês</p>
-        <p class="benefit">Cashback EE de R$ 12.926,00 + desconto especial de fechamento</p>
-        <p class="price">12x de R$ 6.152,32<small> /mês no cartão de crédito</small></p>
-        <p class="total">Total do contrato de 12 meses: R$ 73.827,84</p>
-        <p class="fine">Verba de mídia é à parte deste fee. O onboarding de 15 dias começa quando os acessos das duas lojas e da loja online estiverem na mesa.</p>
-      </article>
-    </section>
-  </main>
-  <footer>
-    <span>V4 Company · Colli &amp; Co × Maben Parafusos</span>
-    <span>Barueri e Cajamar · Setembro de 2026</span>
-  </footer>
+      <section class="slide" data-title="Investimento">
+        <div class="topline"></div>
+        <span class="eyebrow">Investimento e condições</span>
+        <h2 style="margin-top:16px">A tabela e a condição desta mesa.</h2>
+        <div class="price-layout">
+          <div class="anchor">
+            <span class="tag">Valor regular</span>
+            <div class="old">R$ 10.693,23</div>
+            <p>por mês, Assessoria de Growth em tabela.</p>
+          </div>
+          <div class="deal">
+            <div class="sphere" style="width:260px;height:260px;right:-40px;top:-70px;opacity:.35"></div>
+            <span class="tag">Com cashback EE e desconto de fechamento</span>
+            <div class="times">12× no cartão de crédito</div>
+            <div class="now">R$ 6.152,32</div>
+            <p>condição promocional desta proposta.</p>
+          </div>
+        </div>
+        <div class="perks">
+          <div class="perk">
+            <b>Benefício</b>
+            <strong>R$ 12.926,00</strong>
+            <span>Cashback EE, o valor já investido na estruturação, devolvido nesta condição.</span>
+          </div>
+          <div class="perk">
+            <b>Fechamento</b>
+            <strong>Desconto especial</strong>
+            <span>Aplicado sobre a tabela para chegar nas 12 parcelas do cartão.</span>
+          </div>
+          <div class="perk">
+            <b>Escopo</b>
+            <strong>Time dedicado</strong>
+            <span>Account, tráfego, copy e design. Verba de mídia é definida à parte, com vocês.</span>
+          </div>
+        </div>
+        <p class="fine">Contrato de 12 meses. Valor total do contrato anual: R$ 73.827,84.</p>
+      </section>
+
+      <section class="slide red" data-title="Próximo passo">
+        <div class="sphere" style="width:420px;height:420px;right:-100px;bottom:-120px;opacity:.3"></div>
+        <div class="arrow-orbit" style="top:auto;bottom:40px;right:80px;opacity:.7"></div>
+        <div class="cover-content">
+          <div class="brand-lockup">
+            <img class="colli" src="assets/colli-white.png" alt="V4 Company Colli&amp;Co">
+            <span class="divider"></span>
+            <div class="client-panel" style="padding:12px 18px">
+              <img src="assets/logo-maben.png" alt="Maben Parafusos" style="height:52px;width:auto;max-width:240px">
+            </div>
+          </div>
+          <div>
+            <span class="eyebrow">Próximo passo</span>
+            <h1 class="close-title" style="margin-top:18px">A Maben não precisa de mais um post. Precisa de um funil que <span class="accent">repita o balcão.</span></h1>
+          </div>
+          <div class="pills">
+            <span class="eyebrow">Aline · gestão</span>
+            <span class="eyebrow">Julia · design</span>
+            <span class="eyebrow">12 meses</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="slide-footer"><img id="footerLogo" src="assets/colli-red.png" alt="Colli&amp;Co"></div>
+    <div class="slide-counter" id="slideCounter">01 / 13</div>
+    <nav class="navigation" aria-label="Navegação da apresentação">
+      <button class="nav-btn" id="prevBtn" type="button" aria-label="Slide anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 5l-7 7 7 7"/></svg>
+      </button>
+      <button class="nav-btn" id="nextBtn" type="button" aria-label="Próximo slide">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </nav>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+
   <script>
-    const bar = document.getElementById("bar");
-    const links = [...document.querySelectorAll("nav.sections a")];
-    function onScroll() {
-      const h = document.documentElement;
-      const max = h.scrollHeight - h.clientHeight;
-      bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + "%";
-      let current = links[0];
-      links.forEach((a) => {
-        const el = document.querySelector(a.getAttribute("href"));
-        if (el && el.getBoundingClientRect().top < 140) current = a;
-      });
-      links.forEach((a) => a.classList.toggle("active", a === current));
+    const slides = [...document.querySelectorAll("#deck > section.slide")];
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const progressFill = document.getElementById("progressFill");
+    const slideCounter = document.getElementById("slideCounter");
+    const footerLogo = document.getElementById("footerLogo");
+    const whiteLogo = "assets/colli-white.png";
+    const redLogo = "assets/colli-red.png";
+    let current = 0;
+
+    function pad(n) { return String(n).padStart(2, "0"); }
+
+    function goTo(n) {
+      current = Math.max(0, Math.min(slides.length - 1, n));
+      slides.forEach((s, i) => s.classList.toggle("active", i === current));
+      const dark = slides[current].classList.contains("red") || slides[current].classList.contains("dark");
+      footerLogo.src = dark ? whiteLogo : redLogo;
+      footerLogo.style.opacity = (current === 0 || current === slides.length - 1) ? "0" : "1";
+      slideCounter.style.color = dark ? "rgba(255,255,255,.58)" : "rgba(20,20,20,.52)";
+      slideCounter.textContent = pad(current + 1) + "  /  " + pad(slides.length);
+      progressFill.style.width = ((current + 1) / slides.length * 100) + "%";
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === slides.length - 1;
+      const title = slides[current].dataset.title || "Maben Parafusos";
+      document.title = pad(current + 1) + " | " + title;
     }
-    document.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
+
+    prevBtn.addEventListener("click", () => goTo(current - 1));
+    nextBtn.addEventListener("click", () => goTo(current + 1));
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight" || e.key === "PageDown") goTo(current + 1);
+      if (e.key === "ArrowLeft" || e.key === "PageUp") goTo(current - 1);
+    });
+
+    function fit() {
+      const s = Math.min(window.innerWidth / 1600, window.innerHeight / 900);
+      document.getElementById("deck").style.setProperty("--deck-scale", String(s));
+    }
+    window.addEventListener("resize", fit);
+    fit();
+    goTo(0);
+
+    const travas = [
+      ["Impacto", "Anúncio sem um destino só. A pessoa cai num site e o pedido nasce em outro. A origem se perde."],
+      ["Impacto", "Cada contato recomeça do zero. O follow-up mora na memória de quem atendeu, não num processo."],
+      ["Impacto", "Quem compra volume não vê reposição. Quem compra peça não vê a loja perto. Os dois saem."]
+    ];
+    const travasFix = [
+      ["O que a assessoria faz", "Uma porta só: site, anúncio e WhatsApp apontam para o mesmo destino, com a unidade certa."],
+      ["O que a assessoria faz", "Cada contato ganha origem, Barueri ou Cajamar, e um próximo passo. O roteiro sai da memória do caixa."],
+      ["O que a assessoria faz", "B2B vê reposição. Balcão vê a loja perto. Copy e design separam as duas conversas."]
+    ];
+    document.querySelectorAll("[data-trava]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const i = Number(btn.dataset.trava);
+        const on = btn.classList.contains("is-on");
+        document.querySelectorAll("[data-trava]").forEach((el) => {
+          el.classList.remove("is-on");
+          const n = Number(el.dataset.trava);
+          const box = el.querySelector(".swap");
+          box.innerHTML = "<b>" + travas[n][0] + "</b><span>" + travas[n][1] + "</span>";
+        });
+        if (!on) {
+          btn.classList.add("is-on");
+          btn.querySelector(".swap").innerHTML = "<b>" + travasFix[i][0] + "</b><span>" + travasFix[i][1] + "</span>";
+        }
+      });
+    });
+
+    const funnel = [
+      { n: "01", name: "Atrair", short: "A busca já existe. A Maben precisa aparecer.", text: "Google e Meta falam com quem procura parafuso, ferramenta e ferragem em Barueri, Cajamar e Alphaville. B2B e balcão veem criativos diferentes.", own: "Tráfego + Julia Ferrari", role: "Um destino só. O anúncio leva para a unidade certa, não para dois sites." },
+      { n: "02", name: "Qualificar", short: "Peça, aplicação e unidade antes do pedido.", text: "A página e o WhatsApp separam quem compra volume de quem precisa de uma peça. Medida, aplicação e loja entram na primeira resposta.", own: "Copy + account", role: "Aline Pereira Silva garante que o roteiro não dependa de quem está no caixa." },
+      { n: "03", name: "Registrar", short: "Origem, unidade e próximo passo.", text: "Cada contato entra com de onde veio, se é Barueri ou Cajamar, e o que acontece em seguida. O histórico deixa de morar na memória.", own: "Account", role: "CRM mínimo no onboarding. Sem registro, o anúncio não tem onde ficar." },
+      { n: "04", name: "Atender", short: "O digital repete o balcão.", text: "Quem chega do anúncio não recomeça a história. O time usa o mesmo roteiro que o balcão já domina: o que é, para que serve, qual unidade entrega.", own: "Account + loja", role: "WhatsApp com triagem. O humano entra quando o contexto já está escrito." },
+      { n: "05", name: "Repor", short: "O próximo pedido já tem dono.", text: "Quem comprou para obra, oficina ou manutenção volta por régua, não por memória. A segunda compra é parte do funil, não um acaso.", own: "Account + tráfego", role: "Público de quem já comprou e lembrete de reposição por unidade." }
+    ];
+    const funnelEl = document.getElementById("funnel");
+    const funnelDetail = document.getElementById("funnelDetail");
+    function renderFunnel(active) {
+      funnelEl.innerHTML = funnel.map((f, i) =>
+        '<button type="button" class="funnel-step' + (i === active ? " is-on" : "") + '" data-i="' + i + '"><span class="n">' + f.n + '</span><h3>' + f.name + '</h3><p>' + f.short + '</p></button>'
+      ).join("");
+      const f = funnel[active];
+      funnelDetail.innerHTML = '<div><h3>' + f.name + '</h3><p>' + f.text + '</p></div><div class="own"><span>' + f.own + '</span><p>' + f.role + '</p></div>';
+      funnelEl.querySelectorAll("button").forEach((b) => b.addEventListener("click", () => renderFunnel(Number(b.dataset.i))));
+    }
+    renderFunnel(0);
+
+    const channels = [
+      { name: "Google", sub: "Quem já procura", text: "Captura parafuso, ferramenta e ferragem em Barueri, Cajamar e Alphaville. A página responde com a unidade certa, não com dois sites." },
+      { name: "Meta", sub: "B2B e balcão", text: "Dois criativos. Obra e oficina veem reposição. O balcão vê a loja perto. Ninguém recebe a mesma frase." },
+      { name: "Lojas", sub: "Barueri e Cajamar", text: "As duas unidades entram no anúncio com endereço e o que cada uma entrega. O digital deixa de tratar as lojas como um ponto só." },
+      { name: "E-commerce e WhatsApp", sub: "Conversão", text: "Um destino. A loja fecha o pedido. O WhatsApp conduz quem precisa de medida, aplicação ou prazo antes de comprar." },
+      { name: "CRM", sub: "Reposição", text: "Registra origem, unidade e desfecho. O próximo pedido deixa de depender da memória de quem atendeu." }
+    ];
+    const flowEl = document.getElementById("flow");
+    const flowRead = document.getElementById("flowRead");
+    function renderFlow(active) {
+      const node = (i) => {
+        const c = channels[i];
+        return '<button type="button" class="node' + (i === active ? " is-on" : "") + '" data-i="' + i + '"><b>' + c.name + '</b><span>' + c.sub + '</span></button>';
+      };
+      flowEl.innerHTML =
+        '<div class="flow-col">' + node(0) + node(1) + node(2) + '</div>' +
+        '<div class="flow-arrow">→</div>' +
+        '<div class="flow-col" style="align-content:center">' + node(3) + '</div>' +
+        '<div class="flow-arrow">→</div>' +
+        '<div class="flow-col">' +
+          '<div class="hub-node"><strong>Maben</strong><span>Todo canal chega na unidade certa. Balcão e B2B não dividem a mesma frase.</span></div>' +
+          node(4) +
+        '</div>';
+      const c = channels[active];
+      flowRead.innerHTML = '<div class="tag">' + c.name + '</div><div><p>' + c.text + '</p></div>';
+      flowEl.querySelectorAll(".node").forEach((b) => b.addEventListener("click", () => renderFlow(Number(b.dataset.i))));
+    }
+    renderFlow(0);
   </script>
 </body>
 </html>
