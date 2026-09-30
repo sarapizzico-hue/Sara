@@ -1,0 +1,756 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>01 | Proposta · Assessoria de Growth · MB Comércio</title>
+  <meta name="description" content="Proposta comercial de Assessoria de Growth para a MB Comércio e a marca Drinks 27. Colli&amp;Co.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --v4-red: #e50914;
+      --v4-orange: #ff481f;
+      --v4-dark: #280001;
+      --v4-cream: #ffebc8;
+      --ink: #141414;
+      --ink-soft: #5a5a5a;
+      --line: rgba(20, 20, 20, .12);
+      --radius: 22px;
+      --radius-pill: 999px;
+      --hero: radial-gradient(120% 130% at 50% -10%, #ff5a2c 0%, #e50914 30%, #b00610 62%, #280001 100%);
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      width: 100%; height: 100%; margin: 0; overflow: hidden;
+      background: #171313; color: var(--ink);
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    button { font-family: inherit; }
+    #viewport {
+      position: fixed; inset: 0; overflow: hidden;
+      background: radial-gradient(circle at 50% 10%, rgba(229, 9, 20, .18), transparent 38%), #171313;
+    }
+    #deck {
+      --deck-scale: 1;
+      position: absolute; left: 50%; top: 50%;
+      width: 1600px; height: 900px; overflow: hidden;
+      transform: translate(-50%, -50%) scale(var(--deck-scale));
+      transform-origin: center;
+      background: #f5f4f2;
+      box-shadow: 0 40px 120px rgba(0, 0, 0, .45);
+    }
+    .slide {
+      position: absolute; inset: 0; width: 1600px; height: 900px;
+      padding: 72px 96px 108px; overflow: hidden;
+      opacity: 0; pointer-events: none; transform: translateX(24px);
+      transition: opacity .28s ease, transform .28s ease;
+      background: radial-gradient(circle at 92% 8%, rgba(229, 9, 20, .055), transparent 24%), #f5f4f2;
+    }
+    .slide.active { opacity: 1; pointer-events: auto; transform: translateX(0); }
+    .slide.red { color: white; background: var(--hero); }
+    .slide.dark {
+      color: white;
+      background: radial-gradient(circle at 78% 15%, rgba(229, 9, 20, .5), transparent 32%), linear-gradient(145deg, #280001 0%, #130001 100%);
+    }
+    .topline {
+      position: absolute; top: 0; left: 0; width: 100%; height: 5px;
+      background: linear-gradient(90deg, var(--v4-red), var(--v4-orange), transparent 76%);
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { margin-bottom: 0; font-size: 88px; line-height: .98; letter-spacing: -.055em; font-weight: 600; }
+    h2 { margin-bottom: 14px; font-size: 52px; line-height: 1.02; letter-spacing: -.045em; font-weight: 600; }
+    h3 { margin-bottom: 8px; font-size: 24px; line-height: 1.12; letter-spacing: -.025em; font-weight: 600; }
+    .lede { max-width: 1100px; color: var(--ink-soft); font-size: 24px; line-height: 1.38; font-weight: 300; }
+    .red .lede, .dark .lede { color: rgba(255, 255, 255, .74); }
+    .accent { color: var(--v4-red); }
+    .red .accent, .dark .accent { color: var(--v4-cream); }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px; min-height: 34px;
+      padding: 7px 15px; border-radius: var(--radius-pill);
+      border: 1px solid rgba(229, 9, 20, .18); background: rgba(229, 9, 20, .07);
+      color: var(--v4-red); font-size: 12px; line-height: 1; font-weight: 700;
+      letter-spacing: .09em; text-transform: uppercase;
+    }
+    .red .eyebrow, .dark .eyebrow {
+      color: rgba(255, 255, 255, .92); background: rgba(255, 255, 255, .06);
+      border-color: rgba(255, 255, 255, .35);
+      box-shadow: inset 0 0 80px rgba(255, 255, 255, .12), inset 0 1px 8px rgba(255, 255, 255, .35), -5px 5px 20px rgba(0, 0, 0, .10);
+      backdrop-filter: blur(14px) saturate(140%);
+    }
+    .card {
+      position: relative; background: white; border: 1px solid var(--line);
+      border-radius: var(--radius); padding: 26px; overflow: hidden;
+    }
+    .glass {
+      position: relative; overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .35); border-radius: var(--radius);
+      background: rgba(255, 255, 255, .06);
+      box-shadow: inset 0 0 150px rgba(255, 255, 255, .13), inset 0 1px 10px rgba(255, 255, 255, .38), inset 0 -2px 10px rgba(255, 255, 255, .22), -5px 5px 20px rgba(0, 0, 0, .10);
+      backdrop-filter: blur(14px) saturate(140%);
+    }
+    .sphere {
+      position: absolute; border-radius: 50%; pointer-events: none;
+      background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, .38), rgba(255, 255, 255, .045) 48%, transparent 66%);
+      border: 1px solid rgba(255, 255, 255, .24);
+      box-shadow: inset 0 0 120px rgba(255, 255, 255, .13), inset 25px 18px 70px rgba(255, 160, 70, .28);
+    }
+    .icon { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+    .icon-box {
+      width: 52px; height: 52px; display: grid; place-items: center; flex: 0 0 auto;
+      border: 1px solid rgba(229, 9, 20, .18); border-radius: 16px;
+      color: var(--v4-red); background: rgba(229, 9, 20, .07);
+    }
+    .red .icon-box, .dark .icon-box { color: white; border-color: rgba(255, 255, 255, .28); background: rgba(255, 255, 255, .08); }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+    .cover-content { position: relative; z-index: 3; height: 100%; display: flex; flex-direction: column; justify-content: space-between; }
+    .brand-lockup { display: flex; align-items: center; gap: 26px; }
+    .brand-lockup .colli { width: 330px; height: auto; display: block; object-fit: contain; }
+    .brand-lockup .divider { width: 1px; height: 62px; background: rgba(255, 255, 255, .35); }
+    .client-panel {
+      display: grid; place-items: center; gap: 2px;
+      min-width: 188px; padding: 16px 22px 14px; border-radius: 18px; background: #fff;
+      box-shadow: 0 16px 40px rgba(40, 0, 1, .14); color: #141414; text-align: center; line-height: 1;
+    }
+    .client-panel strong { font-size: 20px; letter-spacing: .14em; font-weight: 700; }
+    .client-panel b { color: var(--v4-red); font-size: 34px; letter-spacing: -.04em; font-weight: 700; }
+    .client-panel small {
+      margin-top: 6px; font: 700 10px/1 "IBM Plex Mono", monospace;
+      letter-spacing: .16em; color: #5a5a5a;
+    }
+    .cover-title { max-width: 1100px; margin: 0; font-size: 92px; line-height: .93; letter-spacing: -.06em; }
+    .cover-sub { max-width: 760px; margin: 22px 0 0; font-size: 26px; line-height: 1.35; color: rgba(255, 255, 255, .74); font-weight: 300; }
+    .arrow-orbit {
+      position: absolute; width: 400px; height: 400px;
+      border: 1.5px solid rgba(255, 255, 255, .28); border-radius: 50%;
+      right: 90px; top: 175px; pointer-events: none;
+    }
+    .arrow-orbit::before, .arrow-orbit::after {
+      content: ""; position: absolute; border-radius: 50%; border: 1px solid rgba(255, 255, 255, .18);
+    }
+    .arrow-orbit::before { inset: 54px; }
+    .arrow-orbit::after { inset: 112px; }
+    .pills { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .who-card { padding: 24px; display: flex; flex-direction: column; gap: 10px; min-height: 250px; text-align: left; }
+    .who-role { font: 700 11px/1 "IBM Plex Mono", monospace; letter-spacing: .11em; text-transform: uppercase; color: var(--v4-red); }
+    .who-card p, .fact p, .wave p { margin: 0; color: var(--ink-soft); font-size: 16px; line-height: 1.35; }
+    .dark .who-card p, .dark .wave p, .glass p { color: rgba(255, 255, 255, .74); }
+    .fact { min-height: 196px; }
+    .fact .k { font: 700 11px/1 "IBM Plex Mono", monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--v4-red); }
+    .trava { min-height: 348px; display: flex; flex-direction: column; gap: 12px; padding: 24px 22px; text-align: left; color: white; cursor: pointer; width: 100%; }
+    .trava-index { font: 700 12px/1 "IBM Plex Mono", monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--v4-cream); }
+    .trava h3 { color: white; font-size: 28px; margin: 0; }
+    .trava .swap { margin-top: auto; padding-top: 14px; border-top: 1px solid rgba(255, 255, 255, .2); min-height: 92px; }
+    .trava .swap b { display: block; color: var(--v4-cream); font-size: 13px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 6px; }
+    .trava.is-on { border-color: var(--v4-cream); box-shadow: 0 0 0 2px rgba(255, 235, 200, .35); }
+    .dark-note {
+      display: flex; align-items: center; gap: 16px; margin-top: 18px;
+      padding: 16px 22px; border-radius: var(--radius);
+      background: rgba(255, 255, 255, .06); border: 1px solid rgba(255, 255, 255, .18);
+      color: rgba(255, 255, 255, .86); font-size: 18px; line-height: 1.35;
+    }
+    .funnel-row { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; margin-top: 22px; }
+    .funnel-step {
+      position: relative; min-height: 168px; min-width: 0; padding: 18px 16px 16px; text-align: left;
+      border-radius: 20px; border: 1px solid var(--line); background: white; cursor: pointer; color: var(--ink);
+    }
+    .funnel-step::after {
+      content: ""; position: absolute; right: -9px; top: 50%; width: 10px; height: 10px;
+      border-right: 2px solid var(--v4-red); border-top: 2px solid var(--v4-red);
+      transform: translateY(-50%) rotate(45deg); z-index: 2;
+    }
+    .funnel-step:last-child::after { display: none; }
+    .funnel-step .n { font: 700 12px/1 "IBM Plex Mono", monospace; letter-spacing: .1em; color: var(--v4-red); }
+    .funnel-step h3 { margin: 12px 0 8px; font-size: 22px; }
+    .funnel-step p { margin: 0; color: var(--ink-soft); font-size: 14px; line-height: 1.3; }
+    .funnel-step.is-on {
+      background: var(--hero); color: white; border-color: transparent;
+    }
+    .funnel-step.is-on p { color: rgba(255, 255, 255, .78); }
+    .funnel-step.is-on .n { color: var(--v4-cream); }
+    .detail {
+      margin-top: 16px; display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, .65fr); gap: 18px;
+      padding: 22px 26px; border-radius: 20px; background: white; border: 1px solid var(--line); min-height: 148px;
+    }
+    .detail h3 { font-size: 28px; margin-bottom: 8px; }
+    .detail p { margin: 0; color: var(--ink-soft); font-size: 18px; line-height: 1.4; }
+    .detail .own { border-left: 1px solid var(--line); padding-left: 22px; }
+    .detail .own span { display: block; font: 700 11px/1 "IBM Plex Mono", monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--v4-red); margin-bottom: 8px; }
+    .flow {
+      margin-top: 22px; display: grid; grid-template-columns: minmax(0, 1.15fr) 40px minmax(0, 1fr) 40px minmax(0, 1fr); align-items: stretch; gap: 8px; min-height: 340px;
+    }
+    .flow-col { display: grid; gap: 10px; }
+    .node {
+      text-align: left; cursor: pointer; border-radius: 18px; border: 1px solid var(--line);
+      background: white; padding: 16px 16px 14px; color: var(--ink);
+    }
+    .node b { display: block; font-size: 18px; letter-spacing: -.02em; }
+    .node span { display: block; margin-top: 4px; color: var(--ink-soft); font-size: 14px; line-height: 1.3; }
+    .node.is-on { background: var(--hero); color: white; border-color: transparent; }
+    .node.is-on span { color: rgba(255, 255, 255, .78); }
+    .flow-arrow { display: grid; place-items: center; color: var(--v4-red); font-size: 28px; font-weight: 600; }
+    .hub-node {
+      display: grid; place-items: center; text-align: center; border-radius: 22px; color: white;
+      background: var(--hero); min-height: 100%; padding: 18px;
+    }
+    .hub-node strong { font-size: 28px; letter-spacing: -.03em; display: block; }
+    .hub-node span { display: block; margin-top: 8px; color: rgba(255, 255, 255, .78); font-size: 15px; line-height: 1.35; }
+    .flow-read {
+      margin-top: 16px; padding: 18px 22px; border-radius: 18px; background: white; border: 1px solid var(--line);
+      display: grid; grid-template-columns: 180px 1fr; gap: 18px; align-items: center; min-height: 108px;
+    }
+    .flow-read .tag { font: 700 12px/1 "IBM Plex Mono", monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--v4-red); }
+    .flow-read p { margin: 6px 0 0; color: var(--ink-soft); font-size: 18px; line-height: 1.35; }
+    .promise { min-height: 470px; padding: 32px; display: flex; flex-direction: column; }
+    .promise h3 { font-size: 32px; max-width: 16ch; }
+    .promise ul { margin: 8px 0 0; padding: 0; list-style: none; display: grid; gap: 12px; }
+    .promise li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; font-size: 18px; line-height: 1.35; color: var(--ink-soft); }
+    .promise li i { color: var(--v4-red); font-style: normal; font-weight: 700; }
+    .wave { min-height: 360px; padding: 28px 26px; display: flex; flex-direction: column; gap: 12px; color: white; }
+    .wave h3 { color: white; font-size: 30px; margin: 0; }
+    .wave .when { margin-top: auto; padding-top: 14px; border-top: 1px solid rgba(255, 255, 255, .2); color: var(--v4-cream); font: 700 13px/1.3 "IBM Plex Mono", monospace; letter-spacing: .04em; }
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 8px; }
+    .col { padding: 26px 28px; border-radius: 24px; border: 1px solid var(--line); background: white; }
+    .col.next { background: linear-gradient(180deg, rgba(229, 9, 20, .08), white 42%); border-color: rgba(229, 9, 20, .22); }
+    .col h3 { font-size: 28px; margin-bottom: 16px; }
+    .col ol { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; }
+    .col li { display: grid; grid-template-columns: 28px 1fr; gap: 10px; font-size: 18px; line-height: 1.3; color: var(--ink-soft); }
+    .col li b { color: var(--v4-red); font: 700 14px/1.2 "IBM Plex Mono", monospace; }
+    .price-layout { display: grid; grid-template-columns: .82fr 1.18fr; gap: 22px; margin-top: 18px; align-items: stretch; }
+    .anchor, .deal { border-radius: 28px; padding: 36px 40px; min-height: 340px; display: flex; flex-direction: column; justify-content: center; }
+    .anchor { background: white; border: 1px solid var(--line); }
+    .anchor .tag, .perk b { font: 700 12px/1 "IBM Plex Mono", monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--v4-red); }
+    .old { margin: 14px 0 8px; font-size: 54px; font-weight: 600; letter-spacing: -.04em; line-height: 1; color: #9a9393; text-decoration: line-through; text-decoration-thickness: 3px; }
+    .anchor p, .deal p { margin: 0; color: var(--ink-soft); font-size: 20px; }
+    .deal {
+      color: white; background: var(--hero); position: relative; overflow: hidden;
+      box-shadow: 0 30px 80px rgba(229, 9, 20, .28);
+    }
+    .deal .tag { color: var(--v4-cream); font: 700 12px/1 "IBM Plex Mono", monospace; letter-spacing: .12em; text-transform: uppercase; }
+    .deal .times { margin-top: 18px; font-size: 22px; font-weight: 600; letter-spacing: .08em; color: rgba(255, 255, 255, .8); }
+    .deal .now { font-size: 84px; font-weight: 650; letter-spacing: -.05em; line-height: .95; margin: 4px 0 10px; }
+    .deal p { color: rgba(255, 255, 255, .82); font-size: 22px; }
+    .perks { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-top: 16px; }
+    .perk { background: white; border: 1px solid var(--line); border-radius: 18px; padding: 16px 18px; }
+    .perk strong { display: block; margin-top: 6px; font-size: 22px; letter-spacing: -.03em; }
+    .perk span { display: block; margin-top: 4px; color: var(--ink-soft); font-size: 15px; line-height: 1.3; }
+    .fine { margin: 14px 0 0; color: rgba(20, 20, 20, .45); font-size: 13px; line-height: 1.4; max-width: 980px; }
+    .close-title { max-width: 1200px; font-size: 78px; line-height: .96; letter-spacing: -.05em; }
+    .slide-footer {
+      position: absolute; z-index: 8; left: 96px; right: 96px; bottom: 32px; height: 48px;
+      display: flex; align-items: center; pointer-events: none;
+    }
+    .slide-footer img { width: 155px; height: 48px; object-fit: contain; object-position: left center; }
+    .navigation {
+      position: absolute; z-index: 20; right: 52px; bottom: 25px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .nav-btn {
+      width: 48px; height: 48px; display: grid; place-items: center;
+      border: 1px solid rgba(20, 20, 20, .12); border-radius: 50%;
+      background: rgba(255, 255, 255, .92); color: var(--ink); cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .12);
+    }
+    .nav-btn:hover { transform: translateY(-2px); background: white; }
+    .nav-btn:disabled { opacity: .3; cursor: default; transform: none; }
+    .nav-btn svg { width: 22px; height: 22px; }
+    .slide-counter {
+      position: absolute; z-index: 22; right: 176px; bottom: 39px;
+      font: 500 12px/1 "IBM Plex Mono", monospace; color: rgba(20, 20, 20, .52); letter-spacing: .04em;
+    }
+    .progress-track { position: absolute; z-index: 21; left: 0; right: 0; bottom: 0; height: 7px; background: rgba(20, 20, 20, .1); }
+    .progress-fill { width: 0; height: 100%; background: linear-gradient(90deg, var(--v4-red), var(--v4-orange)); box-shadow: 0 0 20px rgba(229, 9, 20, .35); transition: width .3s ease; }
+    .hint { position: absolute; left: 96px; bottom: 40px; z-index: 6; color: rgba(255,255,255,.55); font: 500 12px/1 "IBM Plex Mono", monospace; letter-spacing: .04em; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div id="viewport">
+    <main id="deck">
+      <section class="slide red active" data-title="Proposta · MB Comércio">
+        <div class="sphere" style="width:430px;height:430px;right:-90px;top:-110px;opacity:.42"></div>
+        <div class="sphere" style="width:210px;height:210px;right:250px;bottom:120px;opacity:.3"></div>
+        <div class="arrow-orbit"></div>
+        <div class="cover-content">
+          <div class="brand-lockup">
+            <img class="colli" src="assets/colli-white.png" alt="V4 Company Colli&amp;Co">
+            <span class="divider"></span>
+            <div class="client-panel">
+              <strong>DRINKS</strong>
+              <b>27</b>
+              <small>MB COMÉRCIO</small>
+            </div>
+          </div>
+          <div>
+            <span class="eyebrow">Proposta · Assessoria de Growth</span>
+            <h1 class="cover-title" style="margin-top:22px">Vocês já vendem<br>no olho no olho.<br><span class="accent">Agora vão existir.</span></h1>
+            <p class="cover-sub">Sete anos de prateleira no Espírito Santo. A Drinks 27 ainda não tem canal, funil nem voz. A Colli&amp;Co entra com um time dedicado para lançar a marca e operar o crescimento.</p>
+          </div>
+          <div class="pills">
+            <span class="eyebrow">Vitória · Espírito Santo</span>
+            <span class="eyebrow">Time dedicado</span>
+            <span class="eyebrow">Contrato de 12 meses</span>
+          </div>
+        </div>
+        </section>
+
+      <section class="slide" data-title="O negócio">
+        <div class="topline"></div>
+        <span class="eyebrow">MB Comércio · contexto</span>
+        <h2 style="margin-top:20px">Duas pontas. Uma ainda não nasceu.</h2>
+        <p class="lede">A MB distribui cachaça premium para supermercado. A Drinks 27 é o movimento novo: kit fechado, direto para quem vai receber, presentear ou celebrar. O digital dessa marca começa do zero.</p>
+        <div class="grid-4" style="margin-top:28px">
+          <article class="card fact">
+            <span class="k">B2B</span>
+            <h3>Olho no olho</h3>
+            <p>Cerca de sete anos atendendo supermercado no Espírito Santo. Pedido controlado em planilha. Sem CRM.</p>
+          </article>
+          <article class="card fact">
+            <span class="k">B2C · Drinks 27</span>
+            <h3>Kit, nunca avulso</h3>
+            <p>Curadoria fechada de cachaça e licor. Não compete em preço com a gôndola que a própria MB abastece.</p>
+          </article>
+          <article class="card fact">
+            <span class="k">Onde vende</span>
+            <h3>Só no estado</h3>
+            <p>Consumidor da Grande Vitória, compra por ocasião. A loja fica restrita ao Espírito Santo de propósito.</p>
+          </article>
+          <article class="card fact">
+            <span class="k">Quem decide</span>
+            <h3>Três nomes</h3>
+            <p>Fábio Gonçalves decide. Fernando Mantovani executa o dia a dia. Cristina valida o contrato.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="slide red" data-title="A frase">
+        <div class="sphere" style="width:380px;height:380px;right:-80px;bottom:-80px;opacity:.28"></div>
+        <div class="cover-content">
+          <span class="eyebrow">O diagnóstico, em uma linha</span>
+          <h1 style="max-width:1280px;font-size:76px">A MB não tem um problema de produto. Tem um problema de <span class="accent">existência digital.</span></h1>
+          <p class="lede" style="max-width:980px">Não há campanha para otimizar, pixel para ler nem funil para cobrar. A marca precisa se apresentar e vender ao mesmo tempo. Mídia paga, sozinha, não carrega o primeiro ano.</p>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Oportunidades">
+        <div class="topline"></div>
+        <span class="eyebrow">O que já joga a favor</span>
+        <h2 style="margin-top:18px">Três portas abertas antes do anúncio.</h2>
+        <p class="lede">O crescimento da Drinks 27 não depende de inventar demanda. Depende de ocupar um espaço que ainda está vazio, com a regra que a própria MB já escolheu.</p>
+        <div class="grid-3" style="margin-top:26px">
+          <article class="card fact" style="min-height:280px">
+            <span class="k">01 · Ocasião</span>
+            <h3>A compra não começa numa busca</h3>
+            <p>Quem recebe visita, presenteia ou celebra não está pesquisando “melhor cachaça”. Quer acertar sem entender de destilado. O kit fechado é a resposta pronta.</p>
+          </article>
+          <article class="card fact" style="min-height:280px">
+            <span class="k">02 · Espaço</span>
+            <h3>A referência premium ainda não tem dono</h3>
+            <p>Presença digital anterior: zero. Sem perfil operando como canal, sem prova social, sem histórico de anúncio. Quem chegar com voz consistente vira a referência no estado.</p>
+          </article>
+          <article class="card fact" style="min-height:280px">
+            <span class="k">03 · Tese</span>
+            <h3>Processo, não herói</h3>
+            <p>Fábio não quer o crescimento pendurado em uma pessoa. Fernando já sustenta o digital no dia a dia. A assessoria cabe nessa tese: rotina, dono e método.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="slide dark" data-title="Travas">
+        <div class="sphere" style="width:340px;height:340px;right:-70px;top:-80px;opacity:.28"></div>
+        <span class="eyebrow">O que impede a Drinks 27 de crescer</span>
+        <h2 style="margin-top:16px;color:#fff">Três travas. Clique para ver o que muda.</h2>
+        <div class="grid-3" style="margin-top:20px">
+          <button class="glass trava" type="button" data-trava="0">
+            <span class="trava-index">Trava 01</span>
+            <div class="icon-box"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></div>
+            <h3>Inexistência</h3>
+            <p>Marca nova, sem audiência, sem pixel e sem prova. Qualquer campanha nasce fria.</p>
+            <div class="swap"><b>Impacto</b><span>Anúncio sem casa para onde mandar a pessoa. O dinheiro entra e não tem onde ficar.</span></div>
+          </button>
+          <button class="glass trava" type="button" data-trava="1">
+            <span class="trava-index">Trava 02</span>
+            <div class="icon-box"><svg class="icon" viewBox="0 0 24 24"><path d="M4 19V5M4 19h16"/><path d="M8 15v-3M12 15V8M16 15v-5"/></svg></div>
+            <h3>Comercial de balcão</h3>
+            <p>O time negocia volume com comprador de supermercado. Lead frio não tem etapa, dono nem motivo de perda.</p>
+            <div class="swap"><b>Impacto</b><span>Quem trata kit como pedido de gôndola perde o lead. O follow-up mora na memória de uma pessoa.</span></div>
+          </button>
+          <button class="glass trava" type="button" data-trava="2">
+            <span class="trava-index">Trava 03</span>
+            <div class="icon-box"><svg class="icon" viewBox="0 0 24 24"><path d="M4 8h16v11H4z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></div>
+            <h3>Vitrine incompleta</h3>
+            <p>Nomes de kit ainda em fechamento, embalagem em teste e loja sem data de estreia.</p>
+            <div class="swap"><b>Impacto</b><span>Não se anuncia o que o consumidor ainda não consegue ver. A página e o criativo esperam o mesmo desbloqueio.</span></div>
+          </button>
+        </div>
+        <div class="dark-note">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V7z"/></svg>
+          <span>Regra que não se negocia: kit fechado, nunca garrafa avulsa. A Drinks 27 não entra em guerra de preço com o supermercado que a MB já atende.</span>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Funil">
+        <div class="topline"></div>
+        <span class="eyebrow">A solução · como a venda acontece</span>
+        <h2 style="margin-top:16px">O funil da ocasião, não o da gôndola.</h2>
+        <p class="lede" style="font-size:20px">Clique em cada etapa. A venda da Drinks 27 não termina no checkout: a próxima visita, o próximo presente e a próxima celebração é que pagam o canal.</p>
+        <div class="funnel-row" id="funnel"></div>
+        <div class="detail" id="funnelDetail"></div>
+      </section>
+
+      <section class="slide" data-title="Canais">
+        <div class="topline"></div>
+        <span class="eyebrow">Como os canais se falam</span>
+        <h2 style="margin-top:16px">Um sistema. Não uma peça solta.</h2>
+        <div class="flow" id="flow"></div>
+        <div class="flow-read" id="flowRead"></div>
+      </section>
+
+      <section class="slide" data-title="Time">
+        <div class="topline"></div>
+        <span class="eyebrow">Escopo do time dedicado</span>
+        <h2 style="margin-top:16px">Quatro donos. Nenhuma frente órfã.</h2>
+        <p class="lede" style="margin-bottom:22px">Cada trava do diagnóstico tem um responsável dentro da Colli&amp;Co. O mesmo time que leu a MB antes desta proposta opera a conta.</p>
+        <div class="grid-4">
+          <article class="card who-card">
+            <div class="icon-box"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M5 19c1.5-3 3.8-4.5 7-4.5S17.5 16 19 19"/></svg></div>
+            <span class="who-role">Account Manager</span>
+            <h3>Gestão e alinhamento</h3>
+            <p>Dono da conta com Fábio, Fernando e Cristina. Plano, prioridade, ritmo e a cobrança dos dois lados.</p>
+          </article>
+          <article class="card who-card">
+            <div class="icon-box"><svg class="icon" viewBox="0 0 24 24"><path d="M4 19V5M4 19h16"/><path d="M7 14l4-4 3 3 5-6"/></svg></div>
+            <span class="who-role">Gestor de tráfego</span>
+            <h3>Aquisição e performance</h3>
+            <p>Meta e Google nascem junto com a loja. Público, criativo e leitura semanal do que vira pedido.</p>
+          </article>
+          <article class="card who-card">
+            <div class="icon-box"><svg class="icon" viewBox="0 0 24 24"><path d="M5 19V6h10l4 4v9z"/><path d="M9 12h6M9 16h4"/></svg></div>
+            <span class="who-role">Copywriter</span>
+            <h3>Comunicação e conversão</h3>
+            <p>Uma voz só: anúncio, página, Instagram e WhatsApp. Ensina cachaça premium sem pedir desculpa pelo produto.</p>
+          </article>
+          <article class="card who-card">
+            <div class="icon-box"><svg class="icon" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 15l4-4 3 3 3-4 6 6"/></svg></div>
+            <span class="who-role">Designer</span>
+            <h3>Ativos de conversão</h3>
+            <p>Kit, feed, anúncio e página com a mesma cara. A embalagem vira prova, não só caixa.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Entregáveis">
+        <div class="topline"></div>
+        <span class="eyebrow">A promessa</span>
+        <h2 style="margin-top:16px">Duas entregas. O resto serve a elas.</h2>
+        <div class="grid-2" style="margin-top:22px">
+          <article class="card promise">
+            <span class="who-role">Promessa 01</span>
+            <h3>Eliminar as travas de operação e de venda</h3>
+            <ul>
+              <li><i>→</i>Funil B2C com etapa, dono e motivo de perda. O pedido sai da planilha.</li>
+              <li><i>→</i>Roteiro de lead frio, diferente da negociação com comprador de supermercado.</li>
+              <li><i>→</i>Loja, pixel e criativos destravados para uma data de lançamento.</li>
+              <li><i>→</i>WhatsApp com triagem. Ninguém repete a história do zero quando passa para o humano.</li>
+            </ul>
+          </article>
+          <article class="card promise">
+            <span class="who-role">Promessa 02</span>
+            <h3>Aumentar a autoridade da marca no mercado</h3>
+            <ul>
+              <li><i>→</i>Posicionamento premium público, sem guerra de preço com o ponto de venda.</li>
+              <li><i>→</i>Conteúdo que trata cachaça de alambique como escolha, não como atalho.</li>
+              <li><i>→</i>Presença contínua: orgânico e mídia contando a mesma história.</li>
+              <li><i>→</i>A Drinks 27 reconhecida na Grande Vitória como curadoria de ocasião.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="slide dark" data-title="Ondas">
+        <div class="sphere" style="width:360px;height:360px;right:-90px;top:-70px;opacity:.26"></div>
+        <span class="eyebrow">Ordem de execução</span>
+        <h2 style="margin-top:16px;color:#fff">Três ondas. Sem pular a vitrine.</h2>
+        <p class="lede" style="margin-bottom:22px">Escalar anúncio antes de ter página, kit e funil multiplica o problema. A verba só entra quando a casa está de pé.</p>
+        <div class="grid-3">
+          <article class="glass wave">
+            <span class="trava-index">Onda 01 · dias 0 a 30</span>
+            <h3>Existir</h3>
+            <p>Fechar o que a comunicação pode prometer. Página, pixel, criativos e um CRM mínimo com dono. Data de lançamento na mesa.</p>
+            <div class="when">Meta · a marca tem onde receber a pessoa</div>
+          </article>
+          <article class="glass wave">
+            <span class="trava-index">Onda 02 · dias 30 a 60</span>
+            <h3>Adquirir</h3>
+            <p>Meta e Google ligados à loja e ao WhatsApp. Leitura semanal do que vira conversa e do que vira pedido. Fernando no mesmo número que o time.</p>
+            <div class="when">Meta · anúncio com destino e com resposta</div>
+          </article>
+          <article class="glass wave">
+            <span class="trava-index">Onda 03 · dias 60 a 90</span>
+            <h3>Ficar</h3>
+            <p>Calendário de autoridade, prova de quem recebeu o kit e régua da próxima ocasião. A segunda compra deixa de depender de memória.</p>
+            <div class="when">Meta · a marca continua depois do primeiro kit</div>
+          </article>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Rotina">
+        <div class="topline"></div>
+        <span class="eyebrow">Processo e rotina</span>
+        <h2 style="margin-top:16px">Ritmo curto. Decisão na semana.</h2>
+        <p class="lede" style="margin-bottom:22px">A Colli&amp;Co não aparece só na reunião mensal. Problema visto na segunda vira ajuste antes da sexta.</p>
+        <div class="grid-4">
+          <article class="card who-card" style="min-height:280px">
+            <span class="who-role">Todo dia</span>
+            <h3>WhatsApp da conta</h3>
+            <p>Fernando e o time no mesmo grupo. Dúvida, criativo e desbloqueio sem esperar pauta.</p>
+          </article>
+          <article class="card who-card" style="min-height:280px">
+            <span class="who-role">Toda semana</span>
+            <h3>Otimização contínua</h3>
+            <p>Gestor de tráfego e designer leem anúncio, página e resposta do WhatsApp. O que não converte sai.</p>
+          </article>
+          <article class="card who-card" style="min-height:280px">
+            <span class="who-role">A cada 15 dias</span>
+            <h3>Performance</h3>
+            <p>Reunião com Fernando: o que entrou, o que travou, o que muda na quinzena. Uma pauta, um dono.</p>
+          </article>
+          <article class="card who-card" style="min-height:280px">
+            <span class="who-role">Todo mês</span>
+            <h3>Comitê</h3>
+            <p>Fábio e Cristina na mesa. Report do mês, verba de mídia e a decisão de avançar ou segurar.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Transformação">
+        <div class="topline"></div>
+        <span class="eyebrow">Como fica a MB Comércio</span>
+        <h2 style="margin-top:16px">De operação que lembra para operação que enxerga.</h2>
+        <div class="split">
+          <div class="col">
+            <h3>Hoje</h3>
+            <ol>
+              <li><b>01</b>B2B no olho no olho. B2C ainda sem canal.</li>
+              <li><b>02</b>Pedido e follow-up na planilha e na agenda.</li>
+              <li><b>03</b>Lead frio receberia o mesmo trato do comprador de gôndola.</li>
+              <li><b>04</b>Lançamento parado entre embalagem, foto e loja.</li>
+              <li><b>05</b>A marca premium existe na cabeça da diretoria, não no feed.</li>
+            </ol>
+          </div>
+          <div class="col next">
+            <h3>Com a assessoria</h3>
+            <ol>
+              <li><b>01</b>Drinks 27 no ar: loja, perfil e anúncio com o mesmo argumento.</li>
+              <li><b>02</b>Funil com dono. O histórico não mora em uma pessoa.</li>
+              <li><b>03</b>Quem não entende de cachaça é conduzido pela ocasião, não pelo jargão.</li>
+              <li><b>04</b>Vitrine fechada e data de campanha. O kit aparece inteiro.</li>
+              <li><b>05</b>Autoridade na Grande Vitória, sem canibalizar o supermercado.</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Investimento">
+        <div class="topline"></div>
+        <span class="eyebrow">Investimento e condições</span>
+        <h2 style="margin-top:16px">A tabela e a condição desta mesa.</h2>
+        <div class="price-layout">
+          <div class="anchor">
+            <span class="tag">Valor regular</span>
+            <div class="old">R$ 10.693,23</div>
+            <p>por mês, Assessoria de Growth em tabela.</p>
+          </div>
+          <div class="deal">
+            <div class="sphere" style="width:260px;height:260px;right:-40px;top:-70px;opacity:.35"></div>
+            <span class="tag">Com cashback EE e desconto de fechamento</span>
+            <div class="times">12× no cartão de crédito</div>
+            <div class="now">R$ 6.152,32</div>
+            <p>condição promocional desta proposta.</p>
+          </div>
+        </div>
+        <div class="perks">
+          <div class="perk">
+            <b>Benefício</b>
+            <strong>R$ 17.422,00</strong>
+            <span>Cashback EE, o valor já investido na estruturação, devolvido nesta condição.</span>
+          </div>
+          <div class="perk">
+            <b>Fechamento</b>
+            <strong>Desconto especial</strong>
+            <span>Aplicado sobre a tabela para chegar nas 12 parcelas do cartão.</span>
+          </div>
+          <div class="perk">
+            <b>Escopo</b>
+            <strong>Time dedicado</strong>
+            <span>Account, tráfego, copy e design. Verba de mídia é definida à parte, com vocês.</span>
+          </div>
+        </div>
+        <p class="fine">Contrato de 12 meses. Valor total do contrato anual: R$ 73.827,84.</p>
+      </section>
+
+      <section class="slide red" data-title="Próximo passo">
+        <div class="sphere" style="width:420px;height:420px;right:-100px;bottom:-120px;opacity:.3"></div>
+        <div class="arrow-orbit" style="top:auto;bottom:40px;right:80px;opacity:.7"></div>
+        <div class="cover-content">
+          <div class="brand-lockup">
+            <img class="colli" src="assets/colli-white.png" alt="V4 Company Colli&amp;Co">
+            <span class="divider"></span>
+            <div class="client-panel">
+              <strong>DRINKS</strong>
+              <b>27</b>
+              <small>MB COMÉRCIO</small>
+            </div>
+          </div>
+          <div>
+            <span class="eyebrow">Próximo passo</span>
+            <h1 class="close-title" style="margin-top:18px">A Drinks 27 não precisa de mais um post. Precisa de um time que <span class="accent">lance e fique.</span></h1>
+          </div>
+          <div class="pills">
+            <span class="eyebrow">Fábio · decisão</span>
+            <span class="eyebrow">Fernando · operação</span>
+            <span class="eyebrow">Cristina · contrato</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="slide-footer"><img id="footerLogo" src="assets/colli-red.png" alt="Colli&amp;Co"></div>
+    <div class="slide-counter" id="slideCounter">01 / 13</div>
+    <nav class="navigation" aria-label="Navegação da apresentação">
+      <button class="nav-btn" id="prevBtn" type="button" aria-label="Slide anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 5l-7 7 7 7"/></svg>
+      </button>
+      <button class="nav-btn" id="nextBtn" type="button" aria-label="Próximo slide">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </nav>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+
+  <script>
+    const slides = [...document.querySelectorAll("#deck > section.slide")];
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const progressFill = document.getElementById("progressFill");
+    const slideCounter = document.getElementById("slideCounter");
+    const footerLogo = document.getElementById("footerLogo");
+    const whiteLogo = "assets/colli-white.png";
+    const redLogo = "assets/colli-red.png";
+    let current = 0;
+
+    function pad(n) { return String(n).padStart(2, "0"); }
+
+    function goTo(n) {
+      current = Math.max(0, Math.min(slides.length - 1, n));
+      slides.forEach((s, i) => s.classList.toggle("active", i === current));
+      const dark = slides[current].classList.contains("red") || slides[current].classList.contains("dark");
+      footerLogo.src = dark ? whiteLogo : redLogo;
+      footerLogo.style.opacity = (current === 0 || current === slides.length - 1) ? "0" : "1";
+      slideCounter.style.color = dark ? "rgba(255,255,255,.58)" : "rgba(20,20,20,.52)";
+      slideCounter.textContent = pad(current + 1) + "  /  " + pad(slides.length);
+      progressFill.style.width = ((current + 1) / slides.length * 100) + "%";
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === slides.length - 1;
+      const title = slides[current].dataset.title || "MB Comércio";
+      document.title = pad(current + 1) + " | " + title;
+    }
+
+    prevBtn.addEventListener("click", () => goTo(current - 1));
+    nextBtn.addEventListener("click", () => goTo(current + 1));
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight" || e.key === "PageDown") goTo(current + 1);
+      if (e.key === "ArrowLeft" || e.key === "PageUp") goTo(current - 1);
+    });
+
+    function fit() {
+      const s = Math.min(window.innerWidth / 1600, window.innerHeight / 900);
+      document.getElementById("deck").style.setProperty("--deck-scale", String(s));
+    }
+    window.addEventListener("resize", fit);
+    fit();
+    goTo(0);
+
+    const travas = [
+      ["Impacto", "Anúncio sem casa para onde mandar a pessoa. O dinheiro entra e não tem onde ficar."],
+      ["Impacto", "Quem trata kit como pedido de gôndola perde o lead. O follow-up mora na memória de uma pessoa."],
+      ["Impacto", "Não se anuncia o que o consumidor ainda não consegue ver. A página e o criativo esperam o mesmo desbloqueio."]
+    ];
+    const travasFix = [
+      ["O que a assessoria faz", "Onda 1 publica a casa: página, pixel, perfil e os primeiros criativos com destino."],
+      ["O que a assessoria faz", "Funil com etapa e dono, mais um roteiro de WhatsApp feito para quem nunca comprou cachaça premium."],
+      ["O que a assessoria faz", "Copy e design fecham o que pode ser prometido e transformam o kit em peça, não em pendência."]
+    ];
+    document.querySelectorAll("[data-trava]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const i = Number(btn.dataset.trava);
+        const on = btn.classList.contains("is-on");
+        document.querySelectorAll("[data-trava]").forEach((el) => {
+          el.classList.remove("is-on");
+          const n = Number(el.dataset.trava);
+          const box = el.querySelector(".swap");
+          box.innerHTML = "<b>" + travas[n][0] + "</b><span>" + travas[n][1] + "</span>";
+        });
+        if (!on) {
+          btn.classList.add("is-on");
+          btn.querySelector(".swap").innerHTML = "<b>" + travasFix[i][0] + "</b><span>" + travasFix[i][1] + "</span>";
+        }
+      });
+    });
+
+    const funnel = [
+      { n: "01", name: "Descobrir", short: "A ocasião aparece antes da marca.", text: "Meta, TikTok e influência local falam com quem vai receber gente, presentear ou celebrar. A pessoa ainda não procura cachaça. Procura acertar a noite.", own: "Gestor de tráfego + designer", role: "Público de ocasião na Grande Vitória. Criativo com o kit, não com garrafa genérica." },
+      { n: "02", name: "Desejar", short: "A marca se explica sem se diminuir.", text: "Instagram, Google e o conteúdo ensinam cachaça de alambique e mostram por que o kit existe. Premium, sem pedir desculpa e sem brigar de preço com o supermercado.", own: "Copywriter", role: "Uma promessa só, repetida no perfil, no anúncio e na página." },
+      { n: "03", name: "Comprar", short: "Lead frio não é comprador de gôndola.", text: "A loja e o WhatsApp recebem quem nunca negociou volume. Etapa, triagem e um roteiro curto. Quem chega do anúncio não recomeça a história do zero.", own: "Account + copy", role: "Fernando opera o atendimento em cima de um processo, não de memória." },
+      { n: "04", name: "Receber", short: "A caixa é o argumento que sobra.", text: "Unboxing e entrega no Espírito Santo tiram dois medos: produto genérico e garrafa que quebra no caminho. A experiência confirma o que o anúncio prometeu.", own: "Designer", role: "Embalagem, foto e página mostram o kit fechado, do jeito que ele chega." },
+      { n: "05", name: "Voltar", short: "A próxima ocasião já tem dono.", text: "O CRM lembra quem comprou para uma visita, um presente ou uma celebração. A segunda compra não espera a pessoa lembrar sozinha da marca.", own: "Account + tráfego", role: "Régua da recompra e público de quem já conhece a Drinks 27." }
+    ];
+    const funnelEl = document.getElementById("funnel");
+    const funnelDetail = document.getElementById("funnelDetail");
+    function renderFunnel(active) {
+      funnelEl.innerHTML = funnel.map((f, i) =>
+        '<button type="button" class="funnel-step' + (i === active ? " is-on" : "") + '" data-i="' + i + '"><span class="n">' + f.n + '</span><h3>' + f.name + '</h3><p>' + f.short + '</p></button>'
+      ).join("");
+      const f = funnel[active];
+      funnelDetail.innerHTML = '<div><h3>' + f.name + '</h3><p>' + f.text + '</p></div><div class="own"><span>' + f.own + '</span><p>' + f.role + '</p></div>';
+      funnelEl.querySelectorAll("button").forEach((b) => b.addEventListener("click", () => renderFunnel(Number(b.dataset.i))));
+    }
+    renderFunnel(0);
+
+    const channels = [
+      { name: "Meta e TikTok", sub: "Demanda de ocasião", text: "Abrem a conversa com quem não está buscando cachaça. Criativo de receber, presentear e celebrar, sempre com kit fechado." },
+      { name: "Google", sub: "Quem já procura", text: "Captura a intenção de quem pesquisa presente, kit ou cachaça premium. A página responde com curadoria, não com tabela de garrafa." },
+      { name: "Instagram", sub: "Autoridade", text: "O perfil deixa de ser vitrine muda e vira o lugar onde a marca ensina, mostra o kit e sustenta o preço." },
+      { name: "Loja e WhatsApp", sub: "Conversão", text: "Dois destinos, um roteiro. A loja fecha sozinha. O WhatsApp conduz quem precisa de segurança antes de comprar." },
+      { name: "CRM", sub: "Recompra", text: "Registra origem, ocasião e desfecho. A próxima data útil de venda deixa de depender da memória do Fernando." }
+    ];
+    const flowEl = document.getElementById("flow");
+    const flowRead = document.getElementById("flowRead");
+    function renderFlow(active) {
+      const node = (i) => {
+        const c = channels[i];
+        return '<button type="button" class="node' + (i === active ? " is-on" : "") + '" data-i="' + i + '"><b>' + c.name + '</b><span>' + c.sub + '</span></button>';
+      };
+      flowEl.innerHTML =
+        '<div class="flow-col">' + node(0) + node(1) + node(2) + '</div>' +
+        '<div class="flow-arrow">→</div>' +
+        '<div class="flow-col" style="align-content:center">' + node(3) + '</div>' +
+        '<div class="flow-arrow">→</div>' +
+        '<div class="flow-col">' +
+          '<div class="hub-node"><strong>Drinks 27</strong><span>Todo canal chega no kit fechado. Nenhum compete com a gôndola.</span></div>' +
+          node(4) +
+        '</div>';
+      const c = channels[active];
+      flowRead.innerHTML = '<div class="tag">' + c.name + '</div><div><p>' + c.text + '</p></div>';
+      flowEl.querySelectorAll(".node").forEach((b) => b.addEventListener("click", () => renderFlow(Number(b.dataset.i))));
+    }
+    renderFlow(0);
+  </script>
+</body>
+</html>
