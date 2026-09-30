@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Maben Parafusos × V4 Colli &amp; Co — Proposta de Growth</title>
+  <meta name="description" content="Proposta comercial de Assessoria de Growth para a Maben Parafusos. V4 Company Colli &amp; Co." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0c0d10;
+      --card: #171a21;
+      --card-2: #1e222b;
+      --line: rgba(255,255,255,.1);
+      --line-strong: rgba(255,255,255,.18);
+      --text: #f4f0ea;
+      --muted: #aaa49c;
+      --soft: #d9d3cb;
+      --red: #e10613;
+      --red-2: #ff4d57;
+      --ok: #b7f0cf;
+      --warn: #ffd7a8;
+      --max: 1120px;
+      --ease: cubic-bezier(.22,1,.36,1);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(900px 480px at 90% -10%, rgba(225,6,19,.22), transparent 55%),
+        radial-gradient(700px 420px at -10% 18%, rgba(18,92,64,.18), transparent 50%),
+        var(--bg);
+      color: var(--text);
+      font: 16px/1.6 "Plus Jakarta Sans", system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    h1, h2, h3 { font-family: "Space Grotesk", sans-serif; letter-spacing: -.03em; line-height: 1.12; margin: 0; }
+    p { margin: 0; }
+    button, summary { font: inherit; }
+    .progress { position: fixed; inset: 0 0 auto 0; height: 3px; z-index: 80; background: rgba(255,255,255,.06); }
+    .progress span { display: block; height: 100%; width: 0; background: var(--red); }
+    header.top {
+      position: sticky; top: 0; z-index: 40;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px 18px; flex-wrap: wrap;
+      padding: 10px 22px 8px;
+      background: rgba(12,13,16,.88);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(16px);
+    }
+    .brand-row { display: flex; align-items: center; gap: 10px; }
+    .chip {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid var(--line-strong); background: rgba(255,255,255,.04);
+      border-radius: 999px; padding: 4px 10px 4px 4px; min-height: 40px;
+    }
+    .chip img { height: 34px; width: auto; border-radius: 8px; object-fit: cover; }
+    .chip b { font-family: "Space Grotesk", sans-serif; font-size: 13px; font-weight: 600; }
+    .chip small { display: block; color: var(--muted); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; font-weight: 700; }
+    .x { color: var(--muted); font-weight: 600; }
+    nav.sections { display: flex; gap: 4px; flex: 1 0 100%; overflow: auto; scrollbar-width: none; }
+    nav.sections::-webkit-scrollbar { display: none; }
+    nav.sections a {
+      text-decoration: none; color: var(--muted); font-size: 12px; font-weight: 650;
+      padding: 8px 10px; border-radius: 999px; white-space: nowrap;
+    }
+    nav.sections a.active, nav.sections a:hover { color: var(--text); background: rgba(255,255,255,.06); }
+    main { max-width: var(--max); margin: 0 auto; padding: 0 22px 80px; }
+    section { padding: 78px 0 8px; scroll-margin-top: 92px; }
+    .kicker { color: var(--red-2); font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 12px; }
+    .lede { color: var(--soft); font-size: 18px; max-width: 680px; }
+    .sub { color: var(--muted); margin-top: 10px; max-width: 720px; }
+    .hero { min-height: calc(100vh - 92px); display: grid; align-items: end; padding-top: 28px; }
+    .hero-grid { display: grid; grid-template-columns: 1.35fr .8fr; gap: 28px; align-items: end; }
+    .hero h1 { font-size: clamp(40px, 5.4vw, 64px); max-width: 14ch; }
+    .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+    .badge { border: 1px solid var(--line-strong); border-radius: 999px; padding: 7px 12px; font-size: 13px; color: var(--soft); background: rgba(255,255,255,.03); }
+    .meta {
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border: 1px solid var(--line); border-radius: 22px; padding: 18px;
+    }
+    .meta h2 { font-size: 18px; margin-bottom: 12px; }
+    .meta dl { margin: 0; display: grid; gap: 12px; }
+    .meta dt { color: var(--muted); font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .meta dd { margin: 3px 0 0; font-size: 14px; color: var(--soft); }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 22px; }
+    .card, .column, .offer {
+      background: var(--card); border: 1px solid var(--line); border-radius: 18px;
+      transition: border-color .25s var(--ease), transform .25s var(--ease), background .25s var(--ease);
+    }
+    .card { padding: 18px; }
+    .card:hover { border-color: rgba(225,6,19,.55); transform: translateY(-3px); background: var(--card-2); }
+    .card h3 { font-size: 20px; margin: 8px 0; }
+    .num { font-family: "Space Grotesk", sans-serif; color: var(--red-2); font-weight: 700; font-size: 13px; letter-spacing: .08em; }
+    .impact { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); color: var(--warn); font-size: 14px; }
+    .impact b { color: #ffe7c8; }
+    .funnel { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 18px; }
+    .funnel label { cursor: pointer; padding: 16px 14px; border-radius: 16px; border: 1px solid var(--line); background: #12141a; min-height: 118px; }
+    .funnel label:hover { border-color: rgba(225,6,19,.45); }
+    .funnel input { position: absolute; opacity: 0; pointer-events: none; }
+    .funnel input:checked + label { background: linear-gradient(180deg, rgba(225,6,19,.22), rgba(225,6,19,.05)); border-color: var(--red); }
+    .funnel-panel { display: none; grid-column: 1 / -1; padding: 18px 20px; border-radius: 16px; border: 1px solid var(--line); background: var(--card); }
+    #f1:checked ~ .p1, #f2:checked ~ .p2, #f3:checked ~ .p3, #f4:checked ~ .p4 { display: block; }
+    .solution { margin-top: 14px; padding: 14px 16px; border-left: 3px solid var(--red); background: rgba(225,6,19,.08); border-radius: 0 14px 14px 0; color: var(--soft); }
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 22px; }
+    .column { padding: 18px; }
+    .column.next { background: linear-gradient(180deg, rgba(225,6,19,.14), #171a21 42%); border-color: rgba(225,6,19,.35); }
+    .column h3 { font-size: 26px; margin: 6px 0 8px; }
+    .column ul { margin: 12px 0 0; padding-left: 18px; color: var(--soft); }
+    .column li { margin: 7px 0; }
+    .timeline { margin-top: 18px; }
+    .tl { display: grid; grid-template-columns: 170px 1fr; gap: 18px; padding: 18px 0; border-top: 1px solid var(--line); }
+    .when { font-family: "Space Grotesk", sans-serif; color: var(--red-2); font-weight: 700; }
+    .offer {
+      margin-top: 22px; padding: 28px 26px; border-color: rgba(225,6,19,.55);
+      background: radial-gradient(600px 200px at 100% 0%, rgba(225,6,19,.28), transparent 55%), var(--card);
+      box-shadow: 0 30px 80px rgba(225,6,19,.12);
+    }
+    .strike { color: var(--muted); text-decoration: line-through; font-size: 16px; margin-top: 10px; }
+    .benefit { margin-top: 12px; display: inline-block; background: rgba(183,240,207,.12); color: var(--ok); border-radius: 12px; padding: 8px 12px; font-weight: 700; font-size: 14px; }
+    .price { font-family: "Space Grotesk", sans-serif; font-size: clamp(36px, 5vw, 56px); letter-spacing: -.04em; margin-top: 14px; }
+    .price small { font-family: "Plus Jakarta Sans", sans-serif; font-size: 16px; color: var(--muted); font-weight: 500; letter-spacing: 0; }
+    .total { margin-top: 8px; color: var(--muted); font-size: 14px; }
+    .fine { margin-top: 16px; color: var(--muted); font-size: 13px; }
+    footer { max-width: var(--max); margin: 0 auto; padding: 10px 22px 40px; color: var(--muted); font-size: 13px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    @media (max-width: 900px) {
+      .hero-grid, .grid-2, .split, .funnel, .tl { grid-template-columns: 1fr; }
+      .hero h1 { max-width: none; }
+      header.top { align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" aria-hidden="true"><span id="bar"></span></div>
+  <header class="top">
+    <div class="brand-row">
+      <span class="chip" title="V4 Company Colli &amp; Co">
+        <img src="assets/logo-colli.png" alt="Colli &amp; Co" />
+        <span><small>V4 Company</small><b>Colli &amp; Co</b></span>
+      </span>
+      <span class="x" aria-hidden="true">×</span>
+      <span class="chip" title="Maben Parafusos">
+        <img src="assets/logo-maben.png" alt="Maben" />
+        <span><small>Cliente</small><b>Maben Parafusos</b></span>
+      </span>
+    </div>
+    <nav class="sections" aria-label="Seções">
+      <a href="#capa">Capa</a>
+      <a href="#travas">Travas</a>
+      <a href="#funil">Funil</a>
+      <a href="#antes">Antes e depois</a>
+      <a href="#rotina">Rotina</a>
+      <a href="#investimento">Investimento</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="capa">
+      <div class="hero-grid">
+        <div>
+          <p class="kicker">Proposta comercial · Setembro de 2026</p>
+          <h1>O balcão da Maben já resolve. O digital ainda não repete isso.</h1>
+          <p class="lede">Desde 1992 a casa vende fixação, ferramenta e ferragem em Barueri e, agora, também em Cajamar. A assessoria entra para transformar estoque e atendimento em um funil B2B que a loja e o e-commerce conseguem operar juntos.</p>
+          <div class="badges">
+            <span class="badge">Assessoria de Growth</span>
+            <span class="badge">Foco: loja + e-commerce B2B</span>
+            <span class="badge">Time: gestão, mídia, CRM e design</span>
+            <span class="badge">Barueri · Cajamar · Alphaville</span>
+            <span class="badge">Contrato de 12 meses</span>
+          </div>
+        </div>
+        <aside class="meta">
+          <h2>Como a conta opera</h2>
+          <dl>
+            <div><dt>Modelo</dt><dd>Assessoria dentro da operação. Onboarding em 15 dias, sprint semanal e fechamento mensal com a direção.</dd></div>
+            <div><dt>Time Colli &amp; Co</dt><dd>Aline Pereira Silva na gestão do projeto. Julia Ferrari no design. Mídia e CRM entram na mesma mesa, com dono em cada frente.</dd></div>
+            <div><dt>O que a Maben já tem</dt><dd>Duas lojas, catálogo amplo de parafusos, fixadores, ferramentas e ferragens, e uma loja online. O balcão é o ativo. O caminho digital ainda não tem a mesma régua.</dd></div>
+            <div><dt>Praça</dt><dd>Barueri, Cajamar, Alphaville e Santana de Parnaíba. Empresa que repõe toda semana e cliente de balcão não seguem o mesmo roteiro.</dd></div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <section id="travas">
+      <p class="kicker">Diagnóstico</p>
+      <h2 style="font-size:clamp(32px,4vw,48px); max-width:16ch;">Onde o crescimento trava</h2>
+      <p class="sub">Leitura da operação pública e do enquadramento do projeto: loja e e-commerce, venda B2B de equipamentos e fixação. Sem número interno de caixa nesta tela.</p>
+      <div class="grid-2">
+        <article class="card">
+          <div class="num">Trava 01</div>
+          <h3>Duas portas digitais, uma marca só</h3>
+          <p>O site institucional e a loja online não contam a mesma Maben. Em uma das páginas, os números que deveriam provar história, equipe e catálogo aparecem zerados.</p>
+          <p class="impact"><b>Impacto.</b> Quem pesquisa “parafuso em Barueri” não encontra a prova de estoque e de atendimento que o balcão já entrega.</p>
+        </article>
+        <article class="card">
+          <div class="num">Trava 02</div>
+          <h3>O contato ainda nasce no telefone</h3>
+          <p>O caminho público de pedido é ligação e e-mail. Não há, na superfície digital, uma etapa com origem, unidade e próxima ação.</p>
+          <p class="impact"><b>Impacto.</b> Anúncio e indicação chegam no mesmo balcão, e ninguém consegue dizer qual conversa virou pedido.</p>
+        </article>
+        <article class="card">
+          <div class="num">Trava 03</div>
+          <h3>O conhecimento do balcão não virou roteiro</h3>
+          <p>Quem avalia a loja elogia variedade e atenção. Também aparece atendimento sem domínio do produto. Os dois convivem porque o padrão mora na pessoa, não no processo.</p>
+          <p class="impact"><b>Impacto.</b> A segunda unidade e o e-commerce herdam o risco. Cajamar não pode depender de quem está no caixa de Barueri.</p>
+        </article>
+        <article class="card">
+          <div class="num">Trava 04</div>
+          <h3>B2B e balcão ouvem a mesma frase</h3>
+          <p>A comunicação pública fala de cidade, variedade e FAQ genérico. O comprador que repõe obra, manutenção e indústria precisa de aplicação, medida e prazo da unidade certa.</p>
+          <p class="impact"><b>Impacto.</b> A Maben compete por quem passa na porta, e perde quem já está procurando o parafuso certo para comprar de novo.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="funil">
+      <p class="kicker">Objetivo</p>
+      <h2 style="font-size:clamp(32px,4vw,48px); max-width:18ch;">Um funil para as duas lojas</h2>
+      <p class="sub">Atração, qualificação, CRM e follow-up. A Assessoria de Growth segura as quatro etapas para Barueri e Cajamar deixarem de vender cada uma do seu jeito.</p>
+      <div class="funnel">
+        <input type="radio" name="funil" id="f1" checked />
+        <label for="f1"><div class="num">01</div><h3 style="font-size:18px;margin:8px 0 0;">Atração</h3><p class="sub">Ser achado na hora da obra.</p></label>
+        <input type="radio" name="funil" id="f2" />
+        <label for="f2"><div class="num">02</div><h3 style="font-size:18px;margin:8px 0 0;">Qualificação</h3><p class="sub">Saber o que a pessoa precisa.</p></label>
+        <input type="radio" name="funil" id="f3" />
+        <label for="f3"><div class="num">03</div><h3 style="font-size:18px;margin:8px 0 0;">CRM</h3><p class="sub">Dar dono e unidade.</p></label>
+        <input type="radio" name="funil" id="f4" />
+        <label for="f4"><div class="num">04</div><h3 style="font-size:18px;margin:8px 0 0;">Follow-up</h3><p class="sub">Voltar na reposição.</p></label>
+        <div class="funnel-panel p1">Google pega quem já busca parafuso, fixador e ferramenta na região. Meta mostra aplicação: obra, manutenção, serralheria, indústria. As duas lojas aparecem com endereço e estoque do que a página promete. A loja online recebe o mesmo criativo, não uma marca paralela.</div>
+        <div class="funnel-panel p2">Antes de empurrar o pedido, quatro respostas: é empresa ou balcão, qual unidade atende, qual a aplicação e se a necessidade é imediata ou recorrente. Medida e norma ficam na conversa de quem entende do produto, com um roteiro único.</div>
+        <div class="funnel-panel p3">Cada contato ganha origem, unidade (Barueri ou Cajamar), responsável e próxima ação. O pedido do site, o do telefone e o do balcão passam a ter a mesma ficha. Sem isso, a segunda loja cresce no escuro.</div>
+        <div class="funnel-panel p4">Conta B2B não acaba no primeiro parafuso. A reposição tem data. Quem não comprou fica com motivo: medida errada, prazo, unidade longe, sem retorno. Quem comprou entra numa cadência curta, sem desconto que brigue com o balcão.</div>
+      </div>
+      <p class="solution">A Assessoria de Growth é o que liga anúncio, loja e reposição. Sem essa camada, Cajamar e o e-commerce viram mais uma porta, e não mais venda recorrente.</p>
+    </section>
+
+    <section id="antes">
+      <p class="kicker">Antes e depois</p>
+      <h2 style="font-size:clamp(32px,4vw,48px);">A operação com a Colli &amp; Co dentro</h2>
+      <div class="split">
+        <article class="column">
+          <div class="num">Hoje</div>
+          <h3>Balcão forte, funil solto</h3>
+          <ul>
+            <li>Venda concentrada em quem chega na loja ou liga.</li>
+            <li>Site institucional e loja online com discursos diferentes.</li>
+            <li>Barueri e Cajamar sem uma régua só de atendimento.</li>
+            <li>Conhecimento técnico dependente de quem está no caixa.</li>
+            <li>Reposição B2B sem data e sem dono visível.</li>
+            <li>Anúncio, se existir, sem leitura até o pedido.</li>
+          </ul>
+        </article>
+        <article class="column next">
+          <div class="num">Com a V4 Colli &amp; Co</div>
+          <h3>As duas lojas no mesmo fluxo</h3>
+          <ul>
+            <li>Google e Meta levam para a unidade e para o item certo.</li>
+            <li>Uma página, um catálogo, uma promessa de prazo.</li>
+            <li>Roteiro de balcão replicado no digital e em Cajamar.</li>
+            <li>CRM com origem, unidade e próxima ação.</li>
+            <li>Conta B2B acompanhada para a próxima reposição.</li>
+            <li>Sprint semanal decide o que fica no ar.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="rotina">
+      <p class="kicker">Rotina</p>
+      <h2 style="font-size:clamp(32px,4vw,48px); max-width:16ch;">Quinze dias. Toda semana. Todo mês.</h2>
+      <p class="sub">O ritmo da assessoria. O que aparecer na sprint vira tarefa com dono, não pauta para o mês seguinte.</p>
+      <div class="timeline">
+        <article class="tl">
+          <div class="when">Onboarding<br />15 dias</div>
+          <div>
+            <h3>Entrar nas duas casas</h3>
+            <p class="sub">Acessos da loja online, do site, do anúncio e do WhatsApp ou telefone comercial. Mapa do que Barueri entrega e do que Cajamar entrega. Esqueleto do CRM e correção do que a página promete sem conseguir cumprir.</p>
+          </div>
+        </article>
+        <article class="tl">
+          <div class="when">Growth sprint<br />Semanal</div>
+          <div>
+            <h3>Uma pauta, quatro frentes</h3>
+            <p class="sub">Criativo, verba, perguntas que chegaram no balcão e contatos parados. Aline conduz a conta. Julia fecha a peça. Sai um plano de sete dias para as duas unidades.</p>
+          </div>
+        </article>
+        <article class="tl">
+          <div class="when">Fechamento<br />Mensal</div>
+          <div>
+            <h3>Mesa com a direção</h3>
+            <p class="sub">O que a mídia trouxe, o que cada loja converteu e qual conta B2B voltou a comprar. É aqui que a verba muda de praça ou de canal.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="investimento">
+      <p class="kicker">Fechamento</p>
+      <h2 style="font-size:clamp(36px,5vw,58px); max-width:14ch;">Prontos para colocar as duas lojas no mesmo funil.</h2>
+      <p class="lede" style="margin-top:14px;">A Maben não precisa de mais uma página de cidade. Precisa que Barueri, Cajamar e a loja online vendam com a mesma origem, o mesmo roteiro e a mesma reposição.</p>
+      <article class="offer">
+        <div class="num">Investimento</div>
+        <h3 style="font-size:28px; margin-top:8px;">Assessoria de Growth · 12 meses</h3>
+        <p class="strike">Valor nominal sem desconto: R$ 10.693,23/mês</p>
+        <p class="benefit">Cashback EE de R$ 12.926,00 + desconto especial de fechamento</p>
+        <p class="price">12x de R$ 6.152,32<small> /mês no cartão de crédito</small></p>
+        <p class="total">Total do contrato de 12 meses: R$ 73.827,84</p>
+        <p class="fine">Verba de mídia é à parte deste fee. O onboarding de 15 dias começa quando os acessos das duas lojas e da loja online estiverem na mesa.</p>
+      </article>
+    </section>
+  </main>
+  <footer>
+    <span>V4 Company · Colli &amp; Co × Maben Parafusos</span>
+    <span>Barueri e Cajamar · Setembro de 2026</span>
+  </footer>
+  <script>
+    const bar = document.getElementById("bar");
+    const links = [...document.querySelectorAll("nav.sections a")];
+    function onScroll() {
+      const h = document.documentElement;
+      const max = h.scrollHeight - h.clientHeight;
+      bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + "%";
+      let current = links[0];
+      links.forEach((a) => {
+        const el = document.querySelector(a.getAttribute("href"));
+        if (el && el.getBoundingClientRect().top < 140) current = a;
+      });
+      links.forEach((a) => a.classList.toggle("active", a === current));
+    }
+    document.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  </script>
+</body>
+</html>
