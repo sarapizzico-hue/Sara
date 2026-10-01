@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fechamento setembro 2026 · Projeção outubro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --brand:#e50915; --bg:#050505; --surf:rgba(20,20,20,.92); --surf2:#141414;
+      --bd:rgba(255,255,255,.1); --txt:#fafafa; --mut:#a3a3a3;
+      --ok:#86efac; --warn:#fde68a; --hot:#fca5a5; --info:#93c5fd; --saber:#c4b5fd;
+      --input:#0a0a0a;
+    }
+    html[data-theme="light"] {
+      --bg:#f6f6f4; --surf:#fff; --surf2:#f3f3f0; --bd:#e4e4e0; --txt:#161616; --mut:#5c5c5c;
+      --ok:#157a45; --warn:#8a5a00; --hot:#b42318; --info:#1d4ed8; --saber:#6d28d9;
+      --input:#fff;
+    }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      margin:0; background:var(--bg); color:var(--txt);
+      font:14px/1.5 Inter,system-ui,sans-serif;
+      background-image:radial-gradient(ellipse 80% 40% at 50% -12%, rgba(229,9,21,.16), transparent);
+    }
+    html[data-theme="light"] body { background-image:none; }
+    .top {
+      position:sticky; top:0; z-index:20; backdrop-filter:blur(14px);
+      background:color-mix(in srgb, var(--bg) 88%, transparent);
+      border-bottom:1px solid var(--bd); padding:12px 22px;
+      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; align-items:center;
+    }
+    .logo { font-weight:900; letter-spacing:-.02em; }
+    .logo span { color:var(--brand); }
+    .pill { font-size:11px; font-weight:700; color:var(--mut); border:1px solid var(--bd); padding:5px 10px; border-radius:999px; }
+    button.pill { background:transparent; color:var(--txt); cursor:pointer; font:inherit; font-size:11px; font-weight:800; }
+    .wrap { max-width:1120px; margin:0 auto; padding:28px 20px 72px; }
+    h1 { margin:0 0 8px; font-size:clamp(26px,4vw,36px); font-weight:900; letter-spacing:-.03em; }
+    h3 { margin:18px 0 8px; font-size:16px; }
+    .lead { color:var(--mut); max-width:78ch; margin:0 0 18px; }
+    .nav {
+      position:sticky; top:52px; z-index:15; margin:0 0 16px; padding:8px;
+      background:color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter:blur(14px);
+      border:1px solid var(--bd); border-radius:16px; display:flex; flex-wrap:wrap; gap:8px;
+    }
+    .nav a { font-size:11px; font-weight:800; text-decoration:none; color:var(--mut); border:1px solid var(--bd); padding:6px 10px; border-radius:999px; }
+    .nav a:hover { color:var(--txt); }
+    .section { background:var(--surf); border:1px solid var(--bd); border-radius:16px; padding:18px 20px; margin-bottom:12px; }
+    .section h2 { margin:0 0 4px; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--mut); font-weight:800; }
+    .kpis { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:12px 0; }
+    .kpi { background:var(--surf2); border:1px solid var(--bd); border-radius:12px; padding:12px 14px; }
+    .kpi .l { font-size:10px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--mut); }
+    .kpi .v { font-size:22px; font-weight:900; margin-top:4px; font-variant-numeric:tabular-nums; letter-spacing:-.03em; }
+    .kpi .s { font-size:12px; color:var(--mut); margin-top:2px; }
+    .kpi.ok .v { color:var(--ok); }
+    .kpi.warn .v { color:var(--warn); }
+    .kpi.bad .v { color:var(--hot); }
+    .callout { padding:12px 14px; border-radius:12px; border:1px solid rgba(96,165,250,.35); background:rgba(96,165,250,.08); color:var(--info); font-size:13px; margin:10px 0; }
+    .callout.warn { border-color:rgba(250,204,21,.35); background:rgba(250,204,21,.08); color:var(--warn); }
+    .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+    .card { background:var(--surf2); border:1px solid var(--bd); border-radius:12px; padding:14px; }
+    .card .t { font-weight:800; margin-bottom:6px; }
+    .tools { display:flex; gap:8px; flex-wrap:wrap; margin:0 0 10px; }
+    input, select {
+      background:var(--input); color:var(--txt); border:1px solid var(--bd); border-radius:10px;
+      padding:8px 10px; font:inherit; font-size:13px;
+    }
+    input[type="search"] { min-width:220px; flex:1; }
+    input.prob { width:64px; text-align:right; padding:4px 6px; }
+    .scroll { overflow-x:auto; }
+    table { width:100%; border-collapse:collapse; font-size:13px; }
+    th, td { padding:8px; border-bottom:1px solid var(--bd); text-align:left; vertical-align:top; }
+    th { font-size:10px; text-transform:uppercase; letter-spacing:.05em; color:var(--mut); font-weight:800; }
+    td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
+    .tag { display:inline-block; padding:2px 8px; border-radius:999px; font-size:10px; font-weight:800; border:1px solid var(--bd); }
+    .tag.tiny { color:#f9a8d4; border-color:rgba(244,114,182,.4); }
+    .tag.small { color:var(--warn); border-color:rgba(250,204,21,.4); }
+    .tag.medium { color:var(--info); border-color:rgba(96,165,250,.4); }
+    .tag.large { color:var(--hot); border-color:rgba(239,68,68,.45); }
+    .tag.ok { color:var(--ok); border-color:rgba(34,197,94,.4); }
+    .tag.warn { color:var(--warn); border-color:rgba(250,204,21,.4); }
+    .tag.bad { color:var(--hot); border-color:rgba(239,68,68,.45); }
+    .tag.alta { color:var(--hot); border-color:rgba(239,68,68,.45); }
+    .tag.media { color:var(--warn); border-color:rgba(250,204,21,.4); }
+    .tag.baixa { color:var(--ok); border-color:rgba(34,197,94,.4); }
+    .muted { color:var(--mut); font-size:12px; }
+    .name { font-weight:700; }
+    .fca { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }
+    .fca ul { margin:0; padding-left:18px; }
+    .fca .card p { color:var(--txt); margin:0; }
+    .fca li { margin:0 0 6px; }
+    .chart-box { height:240px; position:relative; }
+    .months { display:flex; gap:8px; flex-wrap:wrap; }
+    .mo { flex:1; min-width:78px; background:var(--surf2); border:1px solid var(--bd); border-radius:12px; padding:10px 8px; text-align:center; }
+    .mo .m { font-size:10px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--mut); }
+    .mo .tm { font-size:15px; font-weight:900; margin-top:4px; }
+    footer { text-align:center; color:var(--mut); font-size:11px; margin-top:22px; }
+    a { color:var(--ok); }
+    @media (max-width:900px) {
+      .kpis, .grid3, .fca { grid-template-columns:1fr 1fr; }
+      .grid2 { grid-template-columns:1fr; }
+    }
+    @media (max-width:640px) {
+      .kpis, .grid3, .fca { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+<header class="top">
+  <div class="logo">V4 <span>FARMER</span> · Sara</div>
+  <div style="display:flex;gap:8px;align-items:center">
+    <span class="pill">Corte 01/10/2026</span>
+    <button class="pill" id="themeBtn" type="button">Tema claro</button>
+  </div>
+</header>
+
+<div class="wrap">
+  <h1>Setembro fechou R$ 286 mil de TCV.<br>O caixa que entrou foi R$ 179 mil.</h1>
+  <p class="lead">
+    Seis contratos. Fertisul segue com R$ 79.179 pendentes.
+    Onze drops: seis tratativas de operação em que o projeto caiu e cinco depois do pitch.
+  </p>
+
+  <nav class="nav">
+    <a href="#kpis">Setembro</a>
+    <a href="#funil">Funil</a>
+    <a href="#fechados">Fechados</a>
+    <a href="#caixa">Caixa</a>
+    <a href="#semana">Semanas</a>
+    <a href="#fca">FCA</a>
+    <a href="#outubro">Outubro</a>
+    <a href="#cenarios">Cenários</a>
+    <a href="#bi">BI</a>
+  </nav>
+
+  <div class="section" id="kpis">
+    <h2>Dashboard · setembro/2026</h2>
+    <h3 style="margin:0 0 8px">Volume, conversão e dinheiro</h3>
+    <div class="kpis">
+      <div class="kpi">
+        <div class="l">Entradas Saber</div>
+        <div class="v">42</div>
+        <div class="s">data de início em setembro</div>
+      </div>
+      <div class="kpi warn">
+        <div class="l">Pitch executado</div>
+        <div class="v">19 / 44</div>
+        <div class="s">43% das datas viraram reunião</div>
+      </div>
+      <div class="kpi">
+        <div class="l">Contratos fechados</div>
+        <div class="v">6</div>
+        <div class="s">31,6% dos pitches executados</div>
+      </div>
+      <div class="kpi bad">
+        <div class="l">Drops totais</div>
+        <div class="v">11</div>
+        <div class="s">6 ops · 5 após o pitch</div>
+      </div>
+      <div class="kpi">
+        <div class="l">TCV</div>
+        <div class="v">R$ 286.333,07</div>
+        <div class="s">ticket médio R$ 47.722</div>
+      </div>
+      <div class="kpi ok">
+        <div class="l">MRR</div>
+        <div class="v">R$ 27.742,62</div>
+        <div class="s">Work Bank · CID · Rotta · Fertisul</div>
+      </div>
+      <div class="kpi">
+        <div class="l">Saber para Ter</div>
+        <div class="v">R$ 31.675,67</div>
+        <div class="s">DUEE · Altervia</div>
+      </div>
+      <div class="kpi ok">
+        <div class="l">Caixa que entrou</div>
+        <div class="v">R$ 179.265,04</div>
+        <div class="s">62,6% do TCV</div>
+      </div>
+      <div class="kpi">
+        <div class="l">Work Bank · cartão</div>
+        <div class="v">R$ 79.224,12</div>
+        <div class="s">crédito</div>
+      </div>
+      <div class="kpi">
+        <div class="l">CID · cartão</div>
+        <div class="v">R$ 29.600,04</div>
+        <div class="s">crédito</div>
+      </div>
+      <div class="kpi">
+        <div class="l">DUEE · PIX</div>
+        <div class="v">R$ 19.786,88</div>
+        <div class="s">à vista</div>
+      </div>
+      <div class="kpi">
+        <div class="l">Rotta · cartão</div>
+        <div class="v">R$ 48.654,00</div>
+        <div class="s">crédito</div>
+      </div>
+      <div class="kpi">
+        <div class="l">Altervia · entrada PIX</div>
+        <div class="v">R$ 2.000,00</div>
+        <div class="s">entrada, não o TCV</div>
+      </div>
+      <div class="kpi warn">
+        <div class="l">Pagamento pendente</div>
+        <div class="v">R$ 79.179,24</div>
+        <div class="s">Fertisul</div>
+      </div>
+    </div>
+    <div class="callout">
+      Seis contratos no TCV. O caixa de R$ 179.265,04 soma Work Bank, CID, DUEE, Rotta e a entrada da Altervia.
+      Fertisul fechou e ainda tem R$ 79.179,24 em aberto.
+      Drops: 6 tratativas de operação (o projeto caiu) e 5 depois do pitch (2 por Budget, 2 por Timing).
+    </div>
+  </div>
+
+  <div class="section" id="funil">
+    <h2>Funil Saber</h2>
+    <h3 style="margin:0 0 8px">O que entrou, o que foi pitch e o que pagou</h3>
+    <div class="grid2">
+      <div class="chart-box"><canvas id="cFunil"></canvas></div>
+      <div>
+        <table>
+          <thead><tr><th>Etapa</th><th class="num">N</th><th>Leitura</th></tr></thead>
+          <tbody>
+            <tr><td>Entradas no mês</td><td class="num">42</td><td>Início em setembro. DUEE e Altervia fecharam no mesmo mês.</td></tr>
+            <tr><td>Datas de pitch</td><td class="num">44</td><td>Qualquer safra com data em setembro. Não é subconjunto das 42.</td></tr>
+            <tr><td>Pitches executados</td><td class="num">19</td><td>Monetizado, follow ou drop comercial.</td></tr>
+            <tr><td>Não executados</td><td class="num">19</td><td>Observação “marcar pitch”. 10 deles na semana 5.</td></tr>
+            <tr><td>Tratativa de operação</td><td class="num">6</td><td>Projeto caiu. Henri, Davi Gás, Wang, Biju Mania, Luckshoes, Neglape.</td></tr>
+            <tr><td>Drops após o pitch</td><td class="num">5</td><td>2 por Budget · 2 por Timing.</td></tr>
+            <tr><td>Fechados</td><td class="num">6</td><td>Work Bank, CID, Fertisul, Rotta, DUEE, Altervia.</td></tr>
+            <tr><td>Com caixa</td><td class="num">5</td><td>Fertisul permanece pendente: R$ 79.179,24.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="fechados">
+    <h2>Tabela 1</h2>
+    <h3 style="margin:0 0 8px">Fechados em setembro</h3>
+    <div class="tools">
+      <input id="qFech" type="search" placeholder="Buscar cliente, produto, tier…" />
+      <select id="fTier"><option value="">Tier</option><option>TINY</option><option>SMALL</option><option>MEDIUM</option><option>LARGE</option></select>
+      <select id="fStep"><option value="">STEP</option><option>Executar</option><option>Ter</option></select>
+    </div>
+    <div class="scroll"><table id="tblFech">
+      <thead>
+        <tr><th>Cliente</th><th>Tier</th><th>Produto</th><th>Pitch</th><th>Fechamento</th><th class="num">TCV</th><th class="num">MRR</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table></div>
+  </div>
+
+  <div class="section" id="caixa">
+    <h2>Tabela 2</h2>
+    <h3 style="margin:0 0 8px">Ativados · o que virou caixa</h3>
+    <div class="grid2">
+      <div class="chart-box"><canvas id="cPay"></canvas></div>
+      <div class="kpis" style="grid-template-columns:1fr 1fr">
+        <div class="kpi"><div class="l">Cartão de crédito</div><div class="v">R$ 157.478,16</div><div class="s">Work Bank · CID · Rotta</div></div>
+        <div class="kpi"><div class="l">PIX</div><div class="v">R$ 21.786,88</div><div class="s">DUEE R$ 19.786,88 · Altervia R$ 2.000,00</div></div>
+        <div class="kpi ok"><div class="l">Caixa que entrou</div><div class="v">R$ 179.265,04</div><div class="s">62,6% de R$ 286.333,07</div></div>
+        <div class="kpi warn"><div class="l">Pendente · Fertisul</div><div class="v">R$ 79.179,24</div><div class="s">fora do caixa</div></div>
+      </div>
+    </div>
+    <div class="scroll" style="margin-top:12px"><table id="tblAtiv">
+      <thead>
+        <tr><th>Empresa</th><th class="num">MRR</th><th class="num">TCV</th><th>Pagamento</th><th class="num">Caixa</th><th class="num">% em caixa</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table></div>
+  </div>
+
+  <div class="section" id="semana">
+    <h2>Comparativo</h2>
+    <h3 style="margin:0 0 8px">Pitches por semana de setembro</h3>
+    <p class="muted">Semana 1 = 01–06 · 2 = 07–13 · 3 = 14–20 · 4 = 21–27 · 5 = 28–30.</p>
+    <div class="chart-box"><canvas id="cSem"></canvas></div>
+    <p class="muted">A semana 5 concentrou os fechamentos e 10 pitches que não aconteceram. Seis projetos caíram em tratativa de operação entre as semanas 2 e 4.</p>
+  </div>
+
+  <div class="section" id="fca">
+    <h2>FCA · retrospectiva setembro</h2>
+    <h3 style="margin:0 0 10px">Fato → causa → ação</h3>
+    <div class="fca">
+      <div class="card">
+        <div class="t">Fato</div>
+        <p>Atrasos significativos em diversos pitches.</p>
+      </div>
+      <div class="card">
+        <div class="t">Causa</div>
+        <p>Incompatibilidade de agenda dos clientes, além de atendimentos que ficaram sem acompanhamento.</p>
+      </div>
+      <div class="card">
+        <div class="t">Ação</div>
+        <ul>
+          <li><strong>Priorização por tier e margem.</strong> Mapear e projetar novos clientes com base em tier e margem de contribuição.</li>
+          <li><strong>Acompanhamento semanal.</strong> Rotina de contatos semanais para construir relacionamento e compromisso contínuo com o cliente.</li>
+          <li><strong>Reativação de pipeline.</strong> Entrar em contato com clientes antigos para reativar oportunidades.</li>
+          <li><strong>Pitch presencial em São Paulo.</strong> Pitches presenciais com clientes da região para gerar autoridade e engajamento.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="outubro">
+    <h2>Panorama · 01/10/2026</h2>
+    <h3 style="margin:0 0 8px">Quem entrou até 01/10/2026</h3>
+    <div class="callout warn">
+      Os 34 ainda não foram pitchados. A taxa histórica de fechamento por tier vale quando a conta chega na reunião. Aplicar 52% em cima dos 17 MEDIUM agora infla outubro. O número que cabe no mês é a mesa já precificada mais a leva de 08/10.
+    </div>
+
+    <h3>Capacidade por faturamento · entrada até 01/10</h3>
+    <p class="muted">Need scope = quanto a empresa fatura. STEP = o que esse porte aguenta pagar. A planilha não tem margem de custo. A “margem” aqui é o ticket do STEP, não um percentual de lucro.</p>
+    <div class="scroll"><table>
+      <thead>
+        <tr><th>Tier</th><th class="num">Contas</th><th>STEP que cabe</th><th>Ticket de referência</th><th>Fecha se chegar no pitch</th><th class="num">Wins se todos pitcharem</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="tag tiny">TINY</span></td><td class="num">2</td><td>Saber ou Ter</td><td>R$ 25 mil ou R$ 10 mil</td><td>14%</td><td class="num">0,3</td></tr>
+        <tr><td><span class="tag small">SMALL</span></td><td class="num">12</td><td>Saber ou Ter</td><td>R$ 25 mil ou R$ 10 mil</td><td>29%</td><td class="num">3,5</td></tr>
+        <tr><td><span class="tag medium">MEDIUM</span></td><td class="num">16</td><td>Executar se a entrega estiver pronta. Senão Saber.</td><td>MRR R$ 6.500 ou TCV R$ 25 mil</td><td>52%</td><td class="num">8,3</td></tr>
+        <tr><td><span class="tag large">LARGE</span></td><td class="num">2</td><td>Executar</td><td>MRR R$ 6.500</td><td>75%</td><td class="num">1,5</td></tr>
+        <tr><td><span class="tag warn">sem scope</span></td><td class="num">1</td><td>Tutto Blu. Mapear antes do pitch.</td><td>—</td><td>—</td><td class="num">0</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="tools" style="margin-top:14px">
+      <input id="qEnt" type="search" placeholder="Buscar entrante…" />
+      <select id="fEntTier"><option value="">Tier</option><option>TINY</option><option>SMALL</option><option>MEDIUM</option><option>LARGE</option><option>sem</option></select>
+    </div>
+    <div class="scroll"><table id="tblEnt">
+      <thead><tr><th>Empresa</th><th>Tier</th><th>Início</th><th>Onde está</th><th>STEP deste porte</th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+  </div>
+
+  <div class="section" id="cenarios">
+    <h2>Projeção outubro</h2>
+    <h3 style="margin:0 0 8px">Mesa conhecida</h3>
+    <p class="muted">Benchmark EE, jan–ago/2026, 57 vendas, fevereiro zerado. Média ponderada R$ 56,5 mil por venda. Setembro realizou R$ 47,7 mil nos 6 contratos.</p>
+    <div class="months">
+      <div class="mo"><div class="m">Jan</div><div class="tm">R$ 63 mil</div><div class="muted">6</div></div>
+      <div class="mo"><div class="m">Mar</div><div class="tm">R$ 51 mil</div><div class="muted">11</div></div>
+      <div class="mo"><div class="m">Abr</div><div class="tm">R$ 67 mil</div><div class="muted">7</div></div>
+      <div class="mo"><div class="m">Mai</div><div class="tm">R$ 63 mil</div><div class="muted">11</div></div>
+      <div class="mo"><div class="m">Jun</div><div class="tm">R$ 36 mil</div><div class="muted">8</div></div>
+      <div class="mo"><div class="m">Jul</div><div class="tm">R$ 32 mil</div><div class="muted">6</div></div>
+      <div class="mo"><div class="m">Ago</div><div class="tm">R$ 81 mil</div><div class="muted">8</div></div>
+      <div class="mo"><div class="m">Set</div><div class="tm">R$ 48 mil</div><div class="muted">6</div></div>
+    </div>
+
+    <div class="grid3" id="scenCards" style="margin-top:14px"></div>
+    <div class="chart-box" style="margin-top:12px"><canvas id="cCen"></canvas></div>
+
+    <h3>Follow em aberto do mês de Setembro para fechar</h3>
+    <p class="muted">A probabilidade é peso de etapa, não taxa histórica da conta. Altere o número. TCV, MRR e caixa recalculam. Caixa da mesa = TCV ÷ parcelas do cartão, porque as oito formas já são crédito.</p>
+    <div class="scroll"><table id="tblMesa">
+      <thead>
+        <tr>
+          <th>Conta</th><th>Tier</th><th>Produto</th><th class="num">TCV</th><th class="num">MRR</th>
+          <th class="num">P %</th><th class="num">R %</th><th class="num">O %</th><th>Devolutiva</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table></div>
+
+  </div>
+
+  <div class="section" id="bi">
+    <h2>Filtros para BI</h2>
+    <h3 style="margin:0 0 8px">Campos da aba E.E. que sustentam este corte</h3>
+    <div class="grid2">
+      <div class="card">
+        <div class="t">Filtros</div>
+        <ul>
+          <li>Farmer = Sara</li>
+          <li>Data de início, data do pitch, data do fechamento (mês)</li>
+          <li>Status: Monetizado, Follow, Semana 0–05, Drop, em branco</li>
+          <li>Need scope: TINY, SMALL, MEDIUM, LARGE, vazio</li>
+          <li>Motivo de DROP: Tratativa Ops, Budget, Timing, Ghost</li>
+          <li>Ativado: Ativado, Aguardando o pagamento, vazio</li>
+          <li>Forma de pagamento e produto da proposta</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="t">Medidas</div>
+        <ul>
+          <li>TCV, MRR (coluna Executar quando há booking), One time (Ter / Saber)</li>
+          <li>Caixa de setembro = valores liquidados informados (cartão integral em Work Bank, CID e Rotta; PIX da DUEE; entrada de R$ 2.000 da Altervia). Fertisul fica pendente.</li>
+          <li>% caixa = caixa ÷ TCV</li>
+          <li>Pitch executado = status em Monetizado, Follow ou Drop comercial</li>
+          <li>Entrante de outubro = status em branco ou Semana 02, não monetizado</li>
+        </ul>
+      </div>
+    </div>
+    <p class="muted">Esta página já filtra cliente, tier e STEP. No Power BI ou Looker, a mesma lógica evita contar a linha duplicada de DUEE e de Altervia.</p>
+  </div>
+
+  <footer>
+    Fonte: Cockpit Monetização · aba E.E. · Farmer Sara · corte 01/10/2026.
+    Referência de tier e ticket:
+    <a href="cenarios-setembro-2026.html">cenários setembro</a> ·
+    <a href="saber-agosto-2026.html">FCA agosto</a> ·
+    <a href="https://docs.google.com/spreadsheets/d/1dSukhon9dIUABcbQIKGKUa-ku-_oLOn1Q5YWeWGfI6U/edit?gid=759150030#gid=759150030">planilha</a>
+  </footer>
+</div>
+
+<script>
+/* Corte lido da aba E.E. em 01/10/2026. Valores em reais, não em centavos. */
+const brl = (n) => n.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+const brl0 = (n) => n.toLocaleString("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 });
+const pct = (n) => n.toLocaleString("pt-BR", { maximumFractionDigits: 1 }) + "%";
+
+const FECHADOS = [
+  { nome: "Work Bank (BT)", tier: "TINY", produto: "Executar Basic", step: "Executar", pitch: "29/09/2026", fechShow: "29/09/2026", tcv: 79224.12, mrr: 6602.01, pay: "Cartão de crédito", caixa: 79224.12 },
+  { nome: "CID — Clínica de Serviços Médicos", tier: "MEDIUM", produto: "Execução Assistida", step: "Executar", pitch: "22/09/2026", fechShow: "25/09/2026", tcv: 29600.04, mrr: 4933.34, pay: "Cartão de crédito", caixa: 29600.04 },
+  { nome: "Fertisul Fertilizantes", tier: "MEDIUM", produto: "Executar Basic", step: "Executar", pitch: "29/09/2026", fechShow: "25/09/2026", tcv: 97179.24, mrr: 8098.27, pay: "Pendente", caixa: 0 },
+  { nome: "Frigorífico Rotta", tier: "MEDIUM", produto: "Execução Assistida", step: "Executar", pitch: "30/09/2026", fechShow: "30/09/2026", tcv: 48654, mrr: 8109, pay: "Cartão de crédito", caixa: 48654 },
+  { nome: "DUEE Reserve Estates", tier: "MEDIUM", produto: "Implementação de Site", step: "Ter", pitch: "28/09/2026", fechShow: "29/09/2026", tcv: 19786.88, mrr: 0, pay: "PIX", caixa: 19786.88 },
+  { nome: "Altervia Securitizadora", tier: "MEDIUM", produto: "Naming", step: "Ter", pitch: "29/09/2026", fechShow: "29/09/2026", tcv: 11888.79, mrr: 0, pay: "Entrada PIX", caixa: 2000 }
+];
+
+/* Probabilidades iniciais = peso da etapa na nota do Cockpit. Editáveis na tabela. */
+const MESA = [
+  { nome: "Comercial Ultimix", tier: "MEDIUM", produto: "Growth + social", tcv: 134235.46, mrr: 9953.57, parcelas: 12, p: 40, r: 55, o: 70, quando: "01/10", atencao: "alta", passo: "Cobrar devolutiva. Proposta já na mesa." },
+  { nome: "Bodega do Sertão", tier: "MEDIUM", produto: "Zap First", tcv: 66127.9, mrr: 0, parcelas: 12, p: 70, r: 85, o: 95, quando: "Semana 1", atencao: "alta", passo: "Aceitou. Destravar o contrato. Não reenviar proposta." },
+  { nome: "Nosso Boteco", tier: "MEDIUM", produto: "Execução Assistida", tcv: 15000, mrr: 0, parcelas: 6, p: 45, r: 60, o: 75, quando: "02/10", atencao: "alta", passo: "Devolutiva." },
+  { nome: "ABC71", tier: "MEDIUM", produto: "Executar Basic", tcv: 102000, mrr: 8500, parcelas: 12, p: 25, r: 40, o: 55, quando: "Outubro, sem dia", atencao: "media", passo: "Problema interno. Reabrir sem marcar data fictícia." },
+  { nome: "AMBI Topografia", tier: "TINY", produto: "SEO/GEO", tcv: 21600, mrr: 3600, parcelas: 6, p: 35, r: 50, o: 65, quando: "05/10", atencao: "media", passo: "Devolutiva." },
+  { nome: "Mixconect Telecom", tier: "MEDIUM", produto: "Execução Assistida", tcv: 15000, mrr: 0, parcelas: 6, p: 35, r: 50, o: 65, quando: "05/10", atencao: "media", passo: "Devolutiva." },
+  { nome: "CCPVC", tier: "MEDIUM", produto: "SEO/GEO", tcv: 48818.97, mrr: 3600, parcelas: 12, p: 30, r: 45, o: 60, quando: "06/10", atencao: "media", passo: "Devolutiva." },
+  { nome: "V-tech Blindados", tier: "MEDIUM", produto: "Executar Basic", tcv: 115372.32, mrr: 8364.36, parcelas: 12, p: 20, r: 35, o: 50, quando: "Sem data", atencao: "media", passo: "Proposta pronta. Pedir o dia da devolutiva." }
+];
+
+const ENTRANTES = [
+  ["JM Industrial","SMALL","09/09/2026","Sem status","08/10"],
+  ["Atlantic BC Gastrobar","SMALL","18/09/2026","Iniciando","sem data"],
+  ["WP Lab","LARGE","24/09/2026","Iniciando","sem data"],
+  ["Aquicultura Venites","SMALL","24/09/2026","Iniciando","sem data"],
+  ["Mister Chef","SMALL","24/09/2026","Iniciando","sem data"],
+  ["Noix Premium","MEDIUM","25/09/2026","Iniciando","sem data"],
+  ["Ortopedia Boa Viagem","MEDIUM","22/09/2026","Iniciando","sem data"],
+  ["Innove Odontologia","TINY","17/09/2026","Iniciando","sem data"],
+  ["Agropesca Pet Shop","TINY","23/09/2026","Iniciando","sem data"],
+  ["Atos Protetores","MEDIUM","21/09/2026","Iniciando","08/10"],
+  ["Nurema Soluções Nutricionais","LARGE","21/09/2026","Iniciando","08/10"],
+  ["Coimbra Tecnologia","MEDIUM","18/09/2026","Iniciando","08/10"],
+  ["Stark Engenharia","MEDIUM","22/09/2026","Iniciando","08/10"],
+  ["2 Fun Eventos","MEDIUM","29/09/2026","Iniciando","08/10"],
+  ["Triberio Matheus Odontologia","SMALL","29/09/2026","Iniciando","08/10"],
+  ["Pousada Tera Nova","SMALL","30/09/2026","Iniciando","08/10"],
+  ["Garagem do Nelsinho","SMALL","30/09/2026","Iniciando","08/10"],
+  ["Zilus Distribuidora","MEDIUM","30/09/2026","Iniciando","08/10"],
+  ["Realce Cosméticos","MEDIUM","30/09/2026","Iniciando","08/10"],
+  ["Interpharma","MEDIUM","21/09/2026","Iniciando","08/10"],
+  ["Princess Presentes","MEDIUM","16/09/2026","Iniciando","08/10"],
+  ["Amparado Supermercado","SMALL","11/09/2026","Iniciando","08/10"],
+  ["Berkan Assessoria","MEDIUM","17/09/2026","Iniciando","08/10"],
+  ["AG Produtos Naturais","SMALL","16/09/2026","Iniciando","08/10"],
+  ["Tukkas Restaurante","SMALL","17/09/2026","Iniciando","08/10"],
+  ["Samurai Materiais","MEDIUM","24/09/2026","Em desenvolvimento","sem data"],
+  ["Gomarine Corp","MEDIUM","11/09/2026","Sem status","sem data"],
+  ["Tutto Blu","sem","10/09/2026","Sem status","sem data"],
+  ["Xis Picanha","MEDIUM","04/09/2026","Semana 02","sem data"],
+  ["Tecno2 Serviços","SMALL","01/09/2026","Semana 02","sem data"],
+  ["Clínica Autista Osasco","MEDIUM","17/09/2026","Semana 02","sem data"],
+  ["Casa de Carnes M.P.","MEDIUM","01/09/2026","Semana 02","sem data"],
+  ["I9 Hoje","SMALL","09/09/2026","Semana 02","sem data"]
+].map(([nome, tier, inicio, onde]) => ({ nome, tier, inicio, onde }))
+  .filter((d) => {
+    const [dia, mes, ano] = d.inicio.split("/").map(Number);
+    return new Date(ano, mes - 1, dia) <= new Date(2026, 9, 1);
+  });
+
+function stepDe(tier) {
+  if (tier === "TINY" || tier === "SMALL") return "Saber ou Ter";
+  if (tier === "MEDIUM") return "Executar, se a entrega estiver pronta";
+  if (tier === "LARGE") return "Executar";
+  return "Mapear need scope";
+}
+function tagTier(t) {
+  const c = { TINY: "tiny", SMALL: "small", MEDIUM: "medium", LARGE: "large" }[t] || "warn";
+  return `<span class="tag ${c}">${t === "sem" ? "sem scope" : t}</span>`;
+}
+
+function renderFechados() {
+  const q = document.getElementById("qFech").value.trim().toLowerCase();
+  const tier = document.getElementById("fTier").value;
+  const step = document.getElementById("fStep").value;
+  const rows = FECHADOS.filter((d) => {
+    const blob = (d.nome + d.produto + d.tier).toLowerCase();
+    return (!q || blob.includes(q)) && (!tier || d.tier === tier) && (!step || d.step === step);
+  });
+  document.querySelector("#tblFech tbody").innerHTML = rows.map((d) => `<tr>
+    <td class="name">${d.nome}</td><td>${tagTier(d.tier)}</td><td>${d.produto}</td>
+    <td>${d.pitch}</td><td>${d.fechShow}</td>
+    <td class="num">${brl(d.tcv)}</td><td class="num">${d.mrr ? brl(d.mrr) : "—"}</td>
+  </tr>`).join("") || `<tr><td colspan="7" class="muted">Nenhum fechado nesse filtro.</td></tr>`;
+}
+
+function renderAtiv() {
+  document.querySelector("#tblAtiv tbody").innerHTML = FECHADOS.map((d) => `<tr>
+    <td class="name">${d.nome}</td>
+    <td class="num">${d.mrr ? brl(d.mrr) : "—"}</td>
+    <td class="num">${brl(d.tcv)}</td>
+    <td>${d.pay}${d.caixa === 0 ? " · R$ 79.179,24 em aberto" : ""}</td>
+    <td class="num">${brl(d.caixa)}</td>
+    <td class="num">${pct(100 * d.caixa / d.tcv)}</td>
+  </tr>`).join("");
+}
+
+function renderEnt() {
+  const q = document.getElementById("qEnt").value.trim().toLowerCase();
+  const tier = document.getElementById("fEntTier").value;
+  const rows = ENTRANTES.filter((d) => (!q || d.nome.toLowerCase().includes(q)) && (!tier || d.tier === tier));
+  document.querySelector("#tblEnt tbody").innerHTML = rows.map((d) => `<tr>
+    <td class="name">${d.nome}</td><td>${tagTier(d.tier)}</td><td>${d.inicio}</td>
+    <td>${d.onde}</td><td>${stepDe(d.tier)}</td>
+  </tr>`).join("") || `<tr><td colspan="5" class="muted">Nenhum entrante nesse filtro.</td></tr>`;
+}
+
+function ev(key) {
+  return MESA.reduce((acc, d) => {
+    const w = d[key] / 100;
+    acc.tcv += d.tcv * w;
+    acc.mrr += d.mrr * w;
+    acc.caixa += (d.tcv / d.parcelas) * w;
+    return acc;
+  }, { tcv: 0, mrr: 0, caixa: 0 });
+}
+
+let chartCen;
+function renderCenarios() {
+  const cards = [
+    ["Pessimista", "warn", ev("p")],
+    ["Realista", "", ev("r")],
+    ["Otimista", "ok", ev("o")]
+  ];
+  document.getElementById("scenCards").innerHTML = cards.map(([nome, cls, mesa]) => `
+    <div class="card">
+      <span class="tag ${cls}">${nome}</span>
+      <div class="muted" style="margin-top:8px">MRR da mesa</div>
+      <div style="font-size:26px;font-weight:900;color:var(--ok)">${brl0(mesa.mrr)}</div>
+      <div class="muted">TCV ${brl0(mesa.tcv)}</div>
+      <div class="muted">Caixa ${brl0(mesa.caixa)}</div>
+    </div>`).join("");
+
+  const labels = ["Pessimista", "Realista", "Otimista"];
+  const mesaMrr = [ev("p").mrr, ev("r").mrr, ev("o").mrr];
+  if (chartCen) chartCen.destroy();
+  chartCen = new Chart(document.getElementById("cCen"), {
+    type: "bar",
+    data: {
+      labels,
+      datasets: [
+        { label: "MRR da mesa", data: mesaMrr, backgroundColor: "#e50915", borderRadius: 4 }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { grid: { display: false } },
+        y: { beginAtZero: true, ticks: { callback: (v) => "R$ " + Math.round(v / 1000) + " mil" } }
+      }
+    }
+  });
+}
+
+function renderMesa() {
+  document.querySelector("#tblMesa tbody").innerHTML = MESA.map((d, i) => `<tr>
+    <td class="name">${d.nome}</td><td>${tagTier(d.tier)}</td><td>${d.produto}</td>
+    <td class="num">${brl0(d.tcv)}</td><td class="num">${d.mrr ? brl0(d.mrr) : "—"}</td>
+    <td class="num"><input class="prob" data-i="${i}" data-k="p" type="number" min="0" max="100" value="${d.p}"></td>
+    <td class="num"><input class="prob" data-i="${i}" data-k="r" type="number" min="0" max="100" value="${d.r}"></td>
+    <td class="num"><input class="prob" data-i="${i}" data-k="o" type="number" min="0" max="100" value="${d.o}"></td>
+    <td>${d.quando}</td>
+  </tr>`).join("");
+}
+
+document.getElementById("tblMesa").addEventListener("input", (e) => {
+  const el = e.target;
+  if (!el.classList.contains("prob")) return;
+  const n = Math.max(0, Math.min(100, Number(el.value) || 0));
+  MESA[Number(el.dataset.i)][el.dataset.k] = n;
+  renderCenarios();
+});
+
+["qFech", "fTier", "fStep"].forEach((id) => document.getElementById(id).addEventListener("input", renderFechados));
+["qEnt", "fEntTier"].forEach((id) => document.getElementById(id).addEventListener("input", renderEnt));
+
+document.getElementById("themeBtn").addEventListener("click", () => {
+  const html = document.documentElement;
+  const next = html.dataset.theme === "dark" ? "light" : "dark";
+  html.dataset.theme = next;
+  document.getElementById("themeBtn").textContent = next === "dark" ? "Tema claro" : "Tema escuro";
+  Chart.defaults.color = next === "dark" ? "#a3a3a3" : "#5c5c5c";
+  Chart.defaults.borderColor = next === "dark" ? "rgba(255,255,255,.08)" : "#e4e4e0";
+  renderCenarios();
+});
+
+Chart.defaults.color = "#a3a3a3";
+Chart.defaults.borderColor = "rgba(255,255,255,.08)";
+Chart.defaults.font.family = "Inter, system-ui, sans-serif";
+
+new Chart(document.getElementById("cFunil"), {
+  type: "bar",
+  data: {
+    labels: ["Entradas", "Datas", "Executados", "Fechados", "Ativados"],
+    datasets: [{ data: [42, 44, 19, 6, 5], backgroundColor: ["#3f3f46", "#a3a3a3", "#93c5fd", "#e50915", "#86efac"], borderRadius: 4 }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+    scales: { y: { beginAtZero: true, ticks: { precision: 0 } }, x: { grid: { display: false } } }
+  }
+});
+
+new Chart(document.getElementById("cPay"), {
+  type: "bar",
+  data: {
+    labels: ["Work Bank", "CID", "Rotta", "DUEE", "Altervia"],
+    datasets: [{ data: [79224.12, 29600.04, 48654, 19786.88, 2000], backgroundColor: ["#e50915", "#e50915", "#e50915", "#fafafa", "#86efac"], borderRadius: 4 }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+    scales: {
+      y: { beginAtZero: true, ticks: { callback: (v) => "R$ " + Math.round(v / 1000) + " mil" } },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+new Chart(document.getElementById("cSem"), {
+  type: "bar",
+  data: {
+    labels: ["Sem 1", "Sem 2", "Sem 3", "Sem 4", "Sem 5"],
+    datasets: [
+      { label: "Executado", data: [1, 1, 4, 6, 7], backgroundColor: "#86efac", borderRadius: 4 },
+      { label: "Operação segurou", data: [0, 3, 1, 2, 0], backgroundColor: "#fde68a", borderRadius: 4 },
+      { label: "Não executado", data: [0, 0, 5, 4, 10], backgroundColor: "#fca5a5", borderRadius: 4 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: "bottom" } },
+    scales: {
+      x: { stacked: true, grid: { display: false } },
+      y: { stacked: true, beginAtZero: true, ticks: { precision: 0 } }
+    }
+  }
+});
+
+renderFechados();
+renderAtiv();
+renderEnt();
+renderMesa();
+renderCenarios();
+</script>
+</body>
+</html>
