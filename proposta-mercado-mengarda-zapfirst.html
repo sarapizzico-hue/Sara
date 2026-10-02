@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Mercado Mengarda × V4 Company — ZapFirst · 3 meses</title>
+<meta name="description" content="Proposta ZapFirst para o Mercado Mengarda. Três meses para o comercial sair do caderno e virar processo."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --wine:#e3040a;
+  --wine-deep:#0d0d0d;
+  --wine-mid:#1a1a1a;
+  --cream:#f6f4f2;
+  --sand:#f6f4f2;
+  --paper:#fff;
+  --gold:#e3040a;
+  --gold-soft:#ffb4b4;
+  --ink:#111;
+  --muted:#6b6b6b;
+  --line:#e8e4e1;
+  --white:#fff;
+  --green:#111;
+  --green-bg:#fff;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font:16px/1.65 Inter,system-ui,sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4{font-family:Sora,Inter,sans-serif;letter-spacing:-.03em;line-height:1.12;font-weight:800}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+
+#prog{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--wine));z-index:1000;width:0}
+
+.topnav{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  background:rgba(255,255,255,.94);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.75rem 2rem;gap:1rem;
+}
+.logo{font-family:Sora,Inter,sans-serif;font-weight:800;font-size:13px;letter-spacing:.02em;white-space:nowrap}
+.logo span{color:var(--wine)}
+.topnav nav{display:flex;gap:1.35rem;overflow-x:auto;scrollbar-width:none}
+.topnav nav a{
+  font-size:12px;font-weight:600;color:var(--muted);white-space:nowrap;
+  padding:.25rem 0;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;
+}
+.topnav nav a:hover,.topnav nav a.active{color:var(--wine);border-color:var(--wine)}
+.cta-mini{
+  background:var(--wine);color:#fff;font-size:12px;font-weight:700;
+  padding:.5rem 1rem;border-radius:999px;white-space:nowrap;transition:transform .2s var(--ease),background .2s;
+}
+.cta-mini:hover{background:var(--wine-mid);transform:translateY(-1px)}
+@media(max-width:860px){.topnav nav{display:none}.topnav{padding:.7rem 1.1rem}}
+
+section{width:100%;padding:5.25rem 1.4rem}
+.inner{max-width:1040px;margin:0 auto}
+.slabel{
+  font-family:Inter,sans-serif;font-size:11px;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--wine);margin-bottom:.65rem;
+}
+.stitle{font-size:clamp(30px,4.4vw,46px);color:var(--ink);margin-bottom:.8rem;font-weight:680}
+.sdesc{font-size:17px;color:var(--muted);max-width:640px;line-height:1.7}
+
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  background:
+    radial-gradient(ellipse 50% 60% at 85% 15%,rgba(227,4,10,.28),transparent 58%),
+    linear-gradient(165deg,#0d0d0d 0%,#1a1a1a 58%,#0d0d0d 100%);
+  color:#fff;position:relative;overflow:hidden;padding:7.5rem 1.4rem 4.5rem;
+}
+.hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.35;
+  background-image:radial-gradient(rgba(255,255,255,.08) 0.6px,transparent 0.6px);
+  background-size:3px 3px;
+}
+.hero-grid{
+  max-width:1040px;margin:0 auto;position:relative;z-index:1;
+  display:grid;grid-template-columns:1.15fr .85fr;gap:3.2rem;align-items:center;
+}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:2rem}}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:.55rem;
+  border:1px solid rgba(227,4,10,.45);background:rgba(227,4,10,.14);
+  color:var(--gold-soft);border-radius:999px;padding:.38rem .9rem;
+  font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:1.4rem;
+}
+.eyebrow i{width:6px;height:6px;border-radius:50%;background:var(--gold);display:block;animation:pulse 1.8s infinite}
+@keyframes pulse{50%{opacity:.35;transform:scale(1.35)}}
+.hero h1{font-size:clamp(36px,5.2vw,62px);font-weight:680;color:#fff;margin-bottom:1.15rem;max-width:14ch}
+.hero h1 em{font-style:normal;font-weight:800;color:#ff3b3b}
+.hero-sub{font-size:17.5px;color:rgba(255,255,255,.74);max-width:540px;margin-bottom:1.8rem}
+.hero-actions{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:var(--wine);color:#fff;font-weight:700;font-size:15px;
+  padding:.9rem 1.5rem;border-radius:999px;
+  box-shadow:0 10px 30px rgba(0,0,0,.25);
+  transition:transform .2s var(--ease),box-shadow .2s;
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(0,0,0,.32)}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:.4rem;
+  color:rgba(255,255,255,.82);font-weight:600;font-size:14px;
+  padding:.85rem .4rem;border-bottom:1px solid rgba(255,255,255,.28);
+}
+.btn-ghost:hover{color:#fff;border-color:#fff}
+.promise{
+  margin-top:1.7rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.12);
+  font-family:Sora,Inter,sans-serif;font-size:18px;font-weight:700;font-style:normal;
+  color:#f6ead4;max-width:460px;line-height:1.45;
+}
+
+.hero-card{
+  background:rgba(255,252,248,.06);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:28px;padding:1.5rem;backdrop-filter:blur(10px);
+}
+.hero-card header{
+  display:flex;flex-direction:column;align-items:flex-start;gap:.2rem;margin-bottom:1.15rem;
+}
+.hero-card header strong{font-family:Sora,Inter,sans-serif;font-size:26px;font-weight:800}
+.hero-card header span{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-soft);font-weight:700}
+.fact{display:grid;grid-template-columns:92px 1fr;gap:.85rem;align-items:start;padding:.85rem 0;border-top:1px solid rgba(255,255,255,.1)}
+.fact b{font-family:Sora,Inter,sans-serif;font-size:18px;color:#fff;font-weight:800;white-space:nowrap}
+.fact p{font-size:13.5px;color:rgba(255,255,255,.72);line-height:1.45}
+.fact p strong{color:#fff;font-weight:650}
+
+.feel{background:var(--cream)}
+.feel-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem}
+@media(max-width:760px){.feel-grid{grid-template-columns:1fr}}
+.scene{
+  background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:1.45rem 1.5rem 1.35rem;
+  min-height:100%;transition:transform .25s var(--ease),box-shadow .25s;
+}
+.scene:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(44,16,22,.06)}
+.scene .when{
+  font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.55rem;
+}
+.scene h3{font-size:22px;margin-bottom:.45rem}
+.scene p{font-size:14.5px;color:var(--muted);line-height:1.6}
+.scene.wide{grid-column:1 / -1;background:var(--wine-deep);border-color:transparent;color:#fff}
+.scene.wide h3,.scene.wide p{color:#fff}
+.scene.wide p{color:rgba(255,255,255,.74)}
+.scene.wide .when{color:var(--gold-soft)}
+
+.shift{display:grid;grid-template-columns:1fr auto 1fr;gap:1rem;align-items:stretch;margin-top:1rem}
+@media(max-width:760px){.shift{grid-template-columns:1fr}.shift-arrow{transform:rotate(90deg);justify-self:center}}
+.shift-card{border-radius:22px;padding:1.4rem 1.45rem}
+.shift-card h3{font-size:20px;margin:.35rem 0 .7rem}
+.shift-card li{font-size:14.5px;line-height:1.45;padding:.38rem 0 .38rem 1.1rem;position:relative}
+.shift-card li::before{content:"";position:absolute;left:0;top:.72rem;width:6px;height:6px;border-radius:50%}
+.now{background:#fff;border:1px solid var(--line)}
+.now li{color:var(--muted)}
+.now li::before{background:#c4b5a8}
+.then{background:#fff;border:1px solid var(--line)}
+.then li{color:var(--ink)}
+.then li::before{background:var(--wine)}
+.shift-arrow{
+  width:46px;height:46px;border-radius:50%;align-self:center;
+  display:grid;place-items:center;background:var(--wine);color:#fff;font-size:18px;
+}
+.kicker{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.now .kicker{color:var(--muted)}
+.then .kicker{color:var(--wine)}
+
+.machine{background:var(--paper)}
+.rail{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:1.15rem;margin-top:2rem;
+}
+@media(max-width:900px){.rail{grid-template-columns:1fr}}
+.rail-step{
+  background:var(--cream);border:1px solid var(--line);border-radius:18px;padding:1rem 1rem 1.05rem;
+  position:relative;min-height:148px;
+}
+.rail-step .n{
+  font-family:Inter,sans-serif;font-size:12px;color:var(--wine);font-weight:700;letter-spacing:.08em;
+  font-variant-numeric:tabular-nums;
+}
+.rail-step h3{font-size:18px;margin:.35rem 0 .35rem}
+.rail-step p{font-size:12.5px;color:var(--muted);line-height:1.45}
+.rail-step::after{
+  content:"→";position:absolute;right:-.95rem;top:1.15rem;
+  color:var(--gold);font-weight:700;font-size:13px;line-height:1;
+}
+.rail-step:last-child::after{content:none}
+@media(max-width:900px){
+  .rail-step::after{content:none}
+  .rail-step{min-height:0}
+}
+
+.steps{display:flex;flex-direction:column;gap:0;margin-top:2.2rem;position:relative}
+.steps::before{
+  content:"";position:absolute;left:23px;top:8px;bottom:8px;width:1px;
+  background:linear-gradient(var(--gold),var(--line));
+}
+.step{display:grid;grid-template-columns:48px 1fr;gap:1.15rem;padding:0 0 1.35rem}
+.dot{
+  width:48px;height:48px;border-radius:50%;background:var(--wine);color:#fff;
+  display:grid;place-items:center;font-family:Sora,Inter,sans-serif;font-weight:800;font-size:15px;color:#fff;
+  position:relative;z-index:1;box-shadow:0 0 0 6px var(--paper);
+}
+.step-body{
+  background:var(--white);border:1px solid var(--line);border-radius:20px;padding:1.25rem 1.35rem 1.2rem;
+}
+.step-body .who{
+  font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.3rem;
+}
+.step-body h3{font-size:24px;margin-bottom:.4rem}
+.step-body p{color:var(--muted);font-size:15px}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.85rem}
+.chip{
+  font-size:12px;font-weight:600;color:var(--wine-mid);
+  background:var(--cream);border:1px solid var(--line);border-radius:999px;padding:.28rem .65rem;
+}
+
+.months{background:var(--cream)}
+.month-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-top:1.8rem}
+@media(max-width:800px){.month-grid{grid-template-columns:1fr}}
+.month{
+  background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:1.35rem 1.3rem 1.25rem;
+  display:flex;flex-direction:column;gap:.35rem;min-height:100%;
+}
+.month:last-child{background:var(--wine-deep);border-color:transparent;color:#fff}
+.month .m{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--wine)}
+.month:last-child .m{color:var(--gold-soft)}
+.month h3{font-size:26px;margin:.2rem 0 .35rem}
+.month:last-child h3{color:#fff}
+.month li{font-size:14px;color:var(--muted);padding:.28rem 0;border-top:1px solid var(--line);list-style:none}
+.month:last-child li{color:rgba(255,255,255,.78);border-color:rgba(255,255,255,.12)}
+.principles{display:grid;grid-template-columns:repeat(4,1fr);gap:.7rem;margin-top:1rem}
+@media(max-width:800px){.principles{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.principles{grid-template-columns:1fr}}
+.pr{
+  border-radius:18px;padding:1.1rem 1rem;background:var(--paper);border:1px solid var(--line);
+}
+.pr b{display:block;font-family:Sora,Inter,sans-serif;font-size:18px;font-weight:800;margin-bottom:.25rem}
+.pr span{font-size:13px;color:var(--muted);line-height:1.45;display:block}
+.pr em{font-style:normal;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+
+.del-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.7rem;margin-top:1.7rem}
+@media(max-width:980px){.del-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.del-grid{grid-template-columns:1fr}}
+.del{
+  background:var(--cream);border:1px solid var(--line);border-radius:18px;padding:1.1rem 1rem 1rem;
+  transition:transform .22s var(--ease),box-shadow .22s,background .22s;
+}
+.del:hover{transform:translateY(-3px);background:#fff;box-shadow:0 14px 36px rgba(44,16,22,.07)}
+.del .ico{font-size:20px;margin-bottom:.45rem}
+.del h3{font-family:Sora,Inter,sans-serif;font-size:14.5px;font-weight:700;letter-spacing:0;margin-bottom:.3rem}
+.del p{font-size:12.5px;color:var(--muted);line-height:1.45}
+
+.invest{background:
+  radial-gradient(ellipse 50% 40% at 100% 0%,rgba(227,4,10,.08),transparent 50%),
+  var(--cream);
+}
+.price{
+  margin-top:1.8rem;border-radius:28px;overflow:hidden;
+  display:grid;grid-template-columns:1.15fr .85fr;
+  background:var(--wine-deep);color:#fff;
+}
+@media(max-width:760px){.price{grid-template-columns:1fr}}
+.price-main{padding:2rem 2rem 1.8rem}
+.price-main .ph-label{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-soft)}
+.price-main .ph-val{
+  font-family:Sora,Inter,sans-serif;font-size:clamp(34px,5vw,52px);font-weight:800;
+  letter-spacing:-.03em;margin:.45rem 0 .2rem;line-height:1;
+}
+.price-main .ph-sub{color:rgba(255,255,255,.62);font-size:14.5px}
+.price-side{
+  background:rgba(255,255,255,.05);border-left:1px solid rgba(255,255,255,.08);
+  padding:2rem 1.7rem;display:flex;flex-direction:column;justify-content:center;
+}
+@media(max-width:760px){.price-side{border-left:none;border-top:1px solid rgba(255,255,255,.08)}}
+.price-side .ph-label{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-soft)}
+.price-side .ph-val{font-family:Sora,Inter,sans-serif;font-size:clamp(28px,3.4vw,36px);font-weight:800;margin:.35rem 0 .25rem}
+.price-side p{font-size:14px;color:rgba(255,255,255,.68)}
+
+.includes{display:grid;grid-template-columns:1fr 1fr;gap:.15rem 1.5rem;margin-top:1.3rem}
+@media(max-width:640px){.includes{grid-template-columns:1fr}}
+.inc{
+  display:flex;gap:.7rem;align-items:flex-start;
+  padding:.72rem 0;border-bottom:1px solid var(--line);font-size:15px;
+}
+.inc i{
+  flex:0 0 22px;height:22px;border-radius:50%;background:#f8e7ea;color:var(--wine);
+  display:grid;place-items:center;font-style:normal;font-size:12px;font-weight:700;margin-top:1px;
+}
+.note{
+  margin-top:1.2rem;background:#fff;border:1px solid var(--line);border-radius:16px;
+  padding:1rem 1.15rem;font-size:14px;color:var(--muted);
+}
+.note strong{color:var(--ink)}
+
+.steps-close{display:flex;flex-direction:column;margin-top:1.6rem}
+.close-item{display:grid;grid-template-columns:64px 1fr;gap:1rem;padding:1.15rem 0;border-top:1px solid var(--line)}
+.close-item:last-child{border-bottom:1px solid var(--line)}
+.close-num{font-family:Sora,Inter,sans-serif;font-size:28px;color:var(--wine);font-weight:800;line-height:1}
+.close-item strong{display:block;font-size:17px;margin-bottom:.2rem}
+.close-item span{font-size:14.5px;color:var(--muted)}
+
+.footer-cta{
+  background:
+    radial-gradient(ellipse 40% 60% at 85% 120%,rgba(227,4,10,.35),transparent 55%),
+    linear-gradient(165deg,#0d0d0d,#1a1a1a 62%,#0d0d0d);
+  text-align:center;padding:5.5rem 1.4rem 4.2rem;color:#fff;
+}
+.footer-cta h2{font-size:clamp(32px,5vw,52px);color:#fff;max-width:16ch;margin:0 auto .8rem}
+.footer-cta p{max-width:520px;margin:0 auto 1.7rem;color:rgba(255,255,255,.7);font-size:16.5px}
+.footer-cta .btn-primary{background:var(--wine);color:#fff}
+.fine{margin-top:1.3rem;font-size:12px;color:rgba(255,255,255,.42)}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal.visible{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  html{scroll-behavior:auto}
+  .eyebrow i{animation:none}
+}
+
+@media print{
+  .topnav,#prog,.hero-actions,.cta-mini{display:none!important}
+  .hero{min-height:0;padding:2rem 0}
+  section{padding:1.6rem 0;break-inside:avoid}
+  .reveal{opacity:1;transform:none}
+  body{background:#fff}
+}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+
+<header class="topnav">
+  <div class="logo">V4 <span>Company</span> · Mengarda</div>
+  <nav>
+    <a href="#casa">Operação</a>
+    <a href="#jornada">A máquina</a>
+    <a href="#meses">3 meses</a>
+    <a href="#entregas">Entregas</a>
+    <a href="#investimento">Investimento</a>
+  </nav>
+  <a class="cta-mini" href="#investimento">Ver condição</a>
+</header>
+
+<section class="hero" id="topo">
+  <div class="hero-grid">
+    <div>
+      <div class="eyebrow"><i></i> Proposta ZapFirst · 3 meses · Confidencial</div>
+      <h1>O comercial da Mengarda pode ser tão firme quanto o produto.</h1>
+      <p class="hero-sub">Três meses para sair do caderno, da mensagem sem dono e da rota sobrecarregada. O WhatsApp passa a ter processo: resposta na hora, pedido organizado e um time que sabe o próximo passo. Previsível. Profissional. Pronto para crescer.</p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#jornada">Ver a máquina rodando</a>
+        <a class="btn-ghost" href="#investimento">Investimento</a>
+      </div>
+    </div>
+    <aside class="hero-card">
+      <header>
+        <span>Embutidos · B2B</span>
+        <strong>Mercado Mengarda</strong>
+      </header>
+      <div class="fact">
+        <b>3 meses</b>
+        <p><strong>Projeto fechado.</strong> Setup, processo, time, CRM e inteligência artificial no mesmo ciclo.</p>
+      </div>
+      <div class="fact">
+        <b>10</b>
+        <p><strong>Entregas concretas.</strong> Do Google e do Instagram até a régua de recompra.</p>
+      </div>
+      <div class="fact">
+        <b>B2B</b>
+        <p><strong>Fechamento no WhatsApp.</strong> Mercado, açougue, restaurante e quem já compra.</p>
+      </div>
+      <div class="fact">
+        <b>Rota</b>
+        <p><strong>Presença onde ela vale.</strong> Quem pisa na estrada deixa de ser o caderno ambulante.</p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="feel" id="casa">
+  <div class="inner">
+    <div class="reveal">
+      <div class="slabel">O que muda na prática</div>
+      <h2 class="stitle">Sair do controle manual e operar com previsibilidade.</h2>
+      <p class="sdesc">O produto continua o da Mengarda. O que muda é o bastidor comercial: menos memória, menos caderno, menos WhatsApp respondido no estacionamento.</p>
+    </div>
+
+    <div class="feel-grid">
+      <article class="scene reveal">
+        <div class="when">O alívio</div>
+        <h3>A cabeça sai do “será que respondi?”.</h3>
+        <p>Cada conversa passa a ter dono, etapa e próximo passo. Ninguém precisa revirar o histórico do celular para lembrar o que ficou combinado com o mercado da semana passada.</p>
+      </article>
+      <article class="scene reveal">
+        <div class="when">O tempo de volta</div>
+        <h3>A rota volta a ser rota.</h3>
+        <p>Quem pisa na estrada chega no ponto para relacionamento e decisão. O pedido, a dúvida de mix e o “me chama depois” já foram organizados antes da visita.</p>
+      </article>
+      <article class="scene wide reveal">
+        <div class="when">Escala com método</div>
+        <h3>Crescer o comercial sem perder o padrão da Mengarda.</h3>
+        <p>O cliente continua falando com a Mengarda, no canal que já usa. A diferença é que a empresa responde na hora, mostra o catálogo com clareza e não depende de uma pessoa só para o pedido não escapar.</p>
+      </article>
+    </div>
+
+    <div class="shift reveal">
+      <div class="shift-card now">
+        <div class="kicker">Como o comercial vive hoje</div>
+        <h3>Na mão e na memória.</h3>
+        <ul>
+          <li>Pedido e combinado anotados no caderno, ou só na cabeça.</li>
+          <li>WhatsApp pessoal misturado com o comercial da empresa.</li>
+          <li>Quem está na rota responde tarde, ou responde no meio do caminho.</li>
+          <li>Quem sumiu só volta se alguém lembrar de chamar.</li>
+        </ul>
+      </div>
+      <div class="shift-arrow" aria-hidden="true">→</div>
+      <div class="shift-card then">
+        <div class="kicker">Como a operação passa a funcionar</div>
+        <h3>Previsível e profissional.</h3>
+        <ul>
+          <li>Cada lead entra num fluxo com etapa visível.</li>
+          <li>O WhatsApp Business da Mengarda é o balcão oficial.</li>
+          <li>A visita acontece com contexto, não com reconstrução.</li>
+          <li>Recompra e reativação rodam sem depender de memória.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="machine" id="jornada">
+  <div class="inner">
+    <div class="reveal">
+      <div class="slabel">A máquina rodando</div>
+      <h2 class="stitle">Jornada do lead, do primeiro oi ao pedido fechado.</h2>
+      <p class="sdesc">Um caminho só. O cliente chega, a inteligência artificial acolhe, o Kommo organiza e o time fecha o B2B com catálogo, script e PIX. Depois, a recompra não fica no esquecimento.</p>
+    </div>
+
+    <div class="rail reveal" aria-label="Visão geral da jornada">
+      <div class="rail-step">
+        <div class="n">01</div>
+        <h3>Chega</h3>
+        <p>Google, Instagram, site ou indicação. O destino é um WhatsApp só.</p>
+      </div>
+      <div class="rail-step">
+        <div class="n">02</div>
+        <h3>SDR de IA</h3>
+        <p>Responde na hora, qualifica o ponto e separa o que é lead de verdade.</p>
+      </div>
+      <div class="rail-step">
+        <div class="n">03</div>
+        <h3>Kommo</h3>
+        <p>A conversa vira card. Etapa, dono e próximo passo ficam visíveis.</p>
+      </div>
+      <div class="rail-step">
+        <div class="n">04</div>
+        <h3>Fecha B2B</h3>
+        <p>Catálogo, script e PIX. O time entra para decidir, não para caçar contexto.</p>
+      </div>
+      <div class="rail-step">
+        <div class="n">05</div>
+        <h3>Recompra</h3>
+        <p>Régua chama quem precisa repor e reacende quem esfriou.</p>
+      </div>
+    </div>
+
+    <div class="steps">
+      <article class="step reveal">
+        <div class="dot">1</div>
+        <div class="step-body">
+          <div class="who">Entrada</div>
+          <h3>O cliente encontra a Mengarda — e cai no canal certo.</h3>
+          <p>Mercado, açougue, restaurante, hotel, empório ou quem já compra chega pelo Google Meu Negócio, pelo Instagram, pelo site ou por indicação. Não cai no WhatsApp pessoal de alguém do time. Cai no WhatsApp Business da empresa, com perfil profissional e um caminho claro até o atendimento.</p>
+          <div class="chips">
+            <span class="chip">Google Meu Negócio</span>
+            <span class="chip">Instagram</span>
+            <span class="chip">LP / site</span>
+            <span class="chip">Indicação</span>
+          </div>
+        </div>
+      </article>
+      <article class="step reveal">
+        <div class="dot">2</div>
+        <div class="step-body">
+          <div class="who">SDR de Inteligência Artificial</div>
+          <h3>Alguém responde, mesmo com o time na produção ou na rota.</h3>
+          <p>O SDR de IA faz o primeiro atendimento no tom da Mengarda. Entende que tipo de ponto é, de qual cidade fala, qual linha de embutidos interessa e se é primeiro contato ou reposição. Tira a dúvida inicial, não deixa mensagem no vácuo e só passa adiante o que já faz sentido para uma pessoa do time continuar.</p>
+          <div class="chips">
+            <span class="chip">Resposta imediata</span>
+            <span class="chip">Qualificação</span>
+            <span class="chip">Tom da Mengarda</span>
+            <span class="chip">Handoff humano</span>
+          </div>
+        </div>
+      </article>
+      <article class="step reveal">
+        <div class="dot">3</div>
+        <div class="step-body">
+          <div class="who">CRM Kommo</div>
+          <h3>O caderno vira um funil que o time inteiro enxerga.</h3>
+          <p>Cada conversa abre um card no Kommo, ligado ao WhatsApp. O comercial deixa de viver em abas soltas. Dá para ver o que é novo, o que está qualificado, o que já recebeu proposta, o que está em negociação e o que virou pedido. Cada card tem responsável. Quando alguém pergunta “e aquele ponto?”, a resposta está no funil — não na memória de quem estava dirigindo.</p>
+          <div class="chips">
+            <span class="chip">Novo</span>
+            <span class="chip">Qualificado</span>
+            <span class="chip">Proposta</span>
+            <span class="chip">Negociação</span>
+            <span class="chip">Pedido</span>
+            <span class="chip">Recompra</span>
+          </div>
+        </div>
+      </article>
+      <article class="step reveal">
+        <div class="dot">4</div>
+        <div class="step-body">
+          <div class="who">Fechamento B2B</div>
+          <h3>O time entra com contexto, catálogo e condição clara.</h3>
+          <p>Com o lead qualificado, o time conduz a conversa que pede presença: mix, condição e confiança. O catálogo está no WhatsApp. O script cobre da apresentação à objeção e ao fechamento. O PIX fecha o pagamento sem o cliente sair do chat. Quem pisa na rota usa a visita para o que só olho no olho resolve. O pedido não precisa ser reescrito no papel quando a pessoa volta.</p>
+          <div class="chips">
+            <span class="chip">Catálogo</span>
+            <span class="chip">Script por etapa</span>
+            <span class="chip">PIX no chat</span>
+            <span class="chip">Visita com contexto</span>
+          </div>
+        </div>
+      </article>
+      <article class="step reveal">
+        <div class="dot">5</div>
+        <div class="step-body">
+          <div class="who">Depois do pedido</div>
+          <h3>A recompra deixa de depender de alguém lembrar.</h3>
+          <p>Embutido é relação contínua. A régua avisa quem está na hora de repor e reacende quem esfriou, com mensagem no tom da Mengarda — não com disparo genérico. O comercial fica previsível: o time sabe o que está aberto, o que fechou e quem merece um oi. O padrão de atendimento permanece. O improviso é que sai.</p>
+          <div class="chips">
+            <span class="chip">Régua de recompra</span>
+            <span class="chip">Reativação</span>
+            <span class="chip">Rotina, não exceção</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="months" id="meses">
+  <div class="inner">
+    <div class="reveal">
+      <div class="slabel">Como os 3 meses acontecem</div>
+      <h2 class="stitle">Primeiro o padrão. Depois o processo. A IA entra por último.</h2>
+      <p class="sdesc">Inteligência artificial em cima de WhatsApp bagunçado só acelera o caos. O ZapFirst organiza produto, processo e pessoas — e só então liga o SDR.</p>
+    </div>
+    <div class="principles reveal">
+      <div class="pr"><em>01</em><b>Produto</b><span>A linha da Mengarda descrita com clareza, pronta para o catálogo e para o chat.</span></div>
+      <div class="pr"><em>02</em><b>Processo</b><span>Do primeiro oi ao pedido, com etapa, script e responsável.</span></div>
+      <div class="pr"><em>03</em><b>Pessoas</b><span>O time treinado para operar a máquina, não para improvisar.</span></div>
+      <div class="pr"><em>04</em><b>IA</b><span>SDR e réguas só quando o atendimento humano já tem padrão.</span></div>
+    </div>
+    <div class="month-grid">
+      <article class="month reveal">
+        <div class="m">Mês 1</div>
+        <h3>A Mengarda aparece.</h3>
+        <ul>
+          <li>Google Meu Negócio no lugar</li>
+          <li>Instagram com caminho para o WhatsApp</li>
+          <li>LP / site de conversão</li>
+          <li>WhatsApp Business estruturado</li>
+        </ul>
+      </article>
+      <article class="month reveal">
+        <div class="m">Mês 2</div>
+        <h3>O pedido tem processo.</h3>
+        <ul>
+          <li>Catálogo + PIX</li>
+          <li>Scripts de todas as etapas</li>
+          <li>Fluxo comercial documentado</li>
+          <li>Treinamento do time</li>
+        </ul>
+      </article>
+      <article class="month reveal">
+        <div class="m">Mês 3</div>
+        <h3>A máquina liga.</h3>
+        <ul>
+          <li>CRM Kommo configurado</li>
+          <li>Réguas de recompra e reativação</li>
+          <li>SDR de Inteligência Artificial</li>
+          <li>Relatório final + diagnóstico</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="entregas">
+  <div class="inner">
+    <div class="reveal">
+      <div class="slabel">O que entra no projeto</div>
+      <h2 class="stitle">Dez entregas. Uma operação só.</h2>
+      <p class="sdesc">Nada solto. Cada peça existe para o lead que vocês já trazem virar conversa organizada e pedido fechado no WhatsApp.</p>
+    </div>
+    <div class="del-grid">
+      <article class="del reveal">
+        <div class="ico">📍</div>
+        <h3>Setup completo</h3>
+        <p>Google Meu Negócio, Instagram e LP/site apontando para o WhatsApp da Mengarda.</p>
+      </article>
+      <article class="del reveal">
+        <div class="ico">💬</div>
+        <h3>WhatsApp Business</h3>
+        <p>Perfil profissional, etiquetas e respostas rápidas. O balcão deixa de ser o celular pessoal.</p>
+      </article>
+      <article class="del reveal">
+        <div class="ico">🧺</div>
+        <h3>Catálogo + PIX</h3>
+        <p>A linha de embutidos visível no chat, com cobrança integrada. O cliente vê, escolhe e paga.</p>
+      </article>
+      <article class="del reveal">
+        <div class="ico">✎</div>
+        <h3>Scripts de atendimento</h3>
+        <p>Recepção, qualificação, proposta, objeção, fechamento e pós-pedido. Todas as etapas.</p>
+      </article>
+      <article class="del reveal">
+        <div class="ico">↻</div>
+        <h3>Fluxo comercial</h3>
+        <p>O caminho do lead documentado, com responsável em cada etapa. O processo para de morar na cabeça.</p>
+      </article>
+      <article class="del reveal">
+        <div class="ico">🎓</div>
+        <h3>Treinamento do time</h3>
+        <p>Quem atende e quem pisa na rota opera o mesmo playbook. A operação não fica refém de uma pessoa.</p>
+      </article>
+      <article class="del reveal">
+        <div class="ico">▣</div>
+        <h3>CRM Kommo</h3>
+        <p>Funil ligado ao WhatsApp. Cada negociação com nome, etapa e dono.</p>
+      </article>
+      <article class="del reveal">
+        <div class="ico">🔔</div>
+        <h3>Réguas de recompra</h3>
+        <p>Reposição de quem compra sempre e reativação de quem esfriou, no tom da Mengarda.</p>
+      </article>
+      <article class="del reveal">
+        <div class="ico">✦</div>
+        <h3>SDR de IA</h3>
+        <p>Primeiro atendimento contínuo. Qualifica e entrega o lead pronto para o time.</p>
+      </article>
+      <article class="del reveal">
+        <div class="ico">▤</div>
+        <h3>Relatório final</h3>
+        <p>Diagnóstico de maturidade comercial: o que já roda sozinho e qual é o próximo passo.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="invest" id="investimento">
+  <div class="inner">
+    <div class="reveal">
+      <div class="slabel">Investimento</div>
+      <h2 class="stitle">ZapFirst completo. Três meses. Uma condição.</h2>
+      <p class="sdesc">A opção que ficou neste projeto: implementação, CRM, catálogo, treinamento e SDR de IA no mesmo acordo.</p>
+    </div>
+
+    <div class="price reveal">
+      <div class="price-main">
+        <div class="ph-label">Investimento do projeto · 3 meses</div>
+        <div class="ph-val">R$ 38.952,23</div>
+        <p class="ph-sub">Valor do ZapFirst completo para o Mercado Mengarda.</p>
+      </div>
+      <div class="price-side">
+        <div class="ph-label">A opção que ficou</div>
+        <div class="ph-val">ZapFirst</div>
+        <p>Projeto de 3 meses. Setup, processo, CRM, treinamento e SDR de IA.</p>
+      </div>
+    </div>
+
+    <div class="includes reveal">
+      <div class="inc"><i>✓</i><span>Setup completo — Google Meu Negócio, Instagram e LP/site</span></div>
+      <div class="inc"><i>✓</i><span>WhatsApp Business estruturado</span></div>
+      <div class="inc"><i>✓</i><span>Catálogo de produtos + PIX integrado</span></div>
+      <div class="inc"><i>✓</i><span>Scripts de atendimento em todas as etapas</span></div>
+      <div class="inc"><i>✓</i><span>Fluxo comercial documentado</span></div>
+      <div class="inc"><i>✓</i><span>Treinamento do time</span></div>
+      <div class="inc"><i>✓</i><span>CRM Kommo configurado</span></div>
+      <div class="inc"><i>✓</i><span>Réguas de recompra e reativação</span></div>
+      <div class="inc"><i>✓</i><span>SDR de Inteligência Artificial</span></div>
+      <div class="inc"><i>✓</i><span>Relatório final + diagnóstico de maturidade</span></div>
+    </div>
+
+    <p class="note reveal"><strong>Fora deste plano:</strong> gestão contínua de conteúdo e mídia paga. O setup do Instagram entra — perfil e caminho até o WhatsApp. Anúncio no Google ou no Meta, se fizer sentido depois, é investimento à parte, pago direto nas plataformas. O ZapFirst existe para o canal que já conversa com o cliente passar a converter com processo.</p>
+  </div>
+</section>
+
+<section id="proximos">
+  <div class="inner">
+    <div class="reveal">
+      <div class="slabel">Próximos passos</div>
+      <h2 class="stitle">O produto já existe. Falta a máquina comercial.</h2>
+      <p class="sdesc">Três meses para o comercial da Mengarda deixar de depender de caderno, memória e da pessoa que está na estrada.</p>
+    </div>
+    <div class="steps-close">
+      <div class="close-item reveal">
+        <div class="close-num">01</div>
+        <div>
+          <strong>Condição escolhida e acordo assinado</strong>
+          <span>R$ 38.952,23 na opção ZapFirst, projeto de 3 meses, com as dez entregas deste documento.</span>
+        </div>
+      </div>
+      <div class="close-item reveal">
+        <div class="close-num">02</div>
+        <div>
+          <strong>Kick-off com o time</strong>
+          <span>Acessos, linha de produtos, tom de voz da Mengarda e quem opera o WhatsApp quando a rota está na estrada. Cronograma e responsáveis na mesma mesa.</span>
+        </div>
+      </div>
+      <div class="close-item reveal">
+        <div class="close-num">03</div>
+        <div>
+          <strong>Mês 1 — a Mengarda fica encontrável</strong>
+          <span>Google, Instagram, site e WhatsApp Business no ar. O lead passa a ter um lugar só para chegar.</span>
+        </div>
+      </div>
+      <div class="close-item reveal">
+        <div class="close-num">04</div>
+        <div>
+          <strong>Mês 2 — o pedido ganha método</strong>
+          <span>Catálogo, PIX, scripts, fluxo documentado e treinamento. O time atende com processo, não com improviso.</span>
+        </div>
+      </div>
+      <div class="close-item reveal">
+        <div class="close-num">05</div>
+        <div>
+          <strong>Mês 3 — CRM, régua e SDR</strong>
+          <span>Kommo ligado ao WhatsApp, recompra e reativação rodando, SDR de IA no primeiro atendimento. No fim, relatório e diagnóstico de maturidade.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="footer-cta">
+  <h2>O caderno sai. O processo fica.</h2>
+  <p>Quem pisa na rota volta a usar o dia para a relação. O WhatsApp da Mengarda passa a receber, qualificar e organizar o lead que vocês já conquistam.</p>
+  <a class="btn-primary" href="#investimento">Fechar o ZapFirst</a>
+  <div class="fine">Proposta válida por 7 dias · V4 Company × Mercado Mengarda · Confidencial</div>
+</section>
+
+<script>
+const prog = document.getElementById('prog');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  prog.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+}, { passive: true });
+
+const navLinks = document.querySelectorAll('.topnav nav a');
+const sections = [...document.querySelectorAll('section[id]')];
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
+  });
+}, { rootMargin: '-40% 0px -55% 0px' });
+sections.forEach(s => obs.observe(s));
+
+const reveals = document.querySelectorAll('.reveal');
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('visible');
+    ro.unobserve(e.target);
+  });
+}, { rootMargin: '0px 0px -40px 0px', threshold: 0.08 });
+reveals.forEach(r => ro.observe(r));
+</script>
+</body>
+</html>
