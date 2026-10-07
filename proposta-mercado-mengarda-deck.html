@@ -7,6 +7,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet"/>
+<script>
+if (location.search.indexOf("export=1") !== -1) document.documentElement.classList.add("export");
+if (location.search.indexOf("shot=") !== -1) document.documentElement.classList.add("shot");
+</script>
 <style>
 :root{
   --red:#e3040a;
@@ -216,18 +220,36 @@ h2.st{font-size:clamp(32px,3.6vw,52px);font-weight:800}
 }
 .chrome button:hover{background:var(--red);border-color:var(--red)}
 
+html.export,html.export body{height:auto;background:#fff}
+html.export .stage{display:block;height:auto}
+html.export .chrome{display:none!important}
+html.export .slide{
+  display:flex!important;flex-direction:column;
+  width:13.333in;height:7.5in;overflow:hidden;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact;
+}
+html.export .slide.cover{justify-content:space-between}
+html.export .slide.close{justify-content:center}
+html.export .slide.thanks{justify-content:space-between}
+html.shot,html.shot body{height:100%;overflow:hidden;background:#0c0c0c}
+html.shot .chrome{display:none!important}
+html.shot .stage{width:100vw;height:100vh}
+html.shot .slide.on{display:flex!important;width:100vw;height:100vh}
 @media print{
   @page{size:13.333in 7.5in;margin:0}
-  html,body{background:#fff}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  html,body{height:auto;background:#fff}
   .stage{display:block;height:auto}
-  .chrome{display:none}
-  .slide,.slide.cover,.slide.close,.slide.thanks{
-    display:block!important;width:13.333in;height:7.5in;
-    page-break-after:always;break-after:page;
+  .chrome{display:none!important}
+  .slide{
+    display:flex!important;flex-direction:column;
+    width:13.333in;height:7.5in;
+    page-break-after:always;break-after:page;break-inside:avoid;
   }
-  .slide.cover,.slide.on.cover{display:flex!important}
-  .slide.close,.slide.on.close{display:flex!important}
-  .slide.thanks,.slide.on.thanks{display:flex!important}
+  .slide.cover{justify-content:space-between}
+  .slide.close{justify-content:center}
+  .slide.thanks{justify-content:space-between}
+  .slide:last-child{page-break-after:auto;break-after:auto}
 }
 </style>
 </head>
@@ -456,7 +478,6 @@ h2.st{font-size:clamp(32px,3.6vw,52px);font-weight:800}
       <li>Relatório final + diagnóstico de maturidade</li>
     </ul>
   </div>
-  <p class="note"><strong>Fora deste plano:</strong> gestão contínua de conteúdo e mídia paga. O setup do Instagram entra com o enxoval; depois dos 60 dias da linha editorial, a produção contínua é outra conversa. Anúncio no Google ou no Meta, se fizer sentido depois, é investimento à parte, pago direto nas plataformas. O ZapFirst existe para o canal que já conversa com o cliente passar a vender com processo.</p>
 </section>
 
 <section class="slide" data-i="16">
@@ -520,6 +541,8 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Home') show(0);
   if (e.key === 'End') show(slides.length - 1);
 });
+const shot = new URLSearchParams(location.search).get('shot');
+if (shot !== null) show(Number(shot));
 </script>
 </body>
 </html>
