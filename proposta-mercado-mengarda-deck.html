@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Proposta Comercial · Mercado Mengarda — ZapFirst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --red:#e3040a;
+  --red2:#ff3b3b;
+  --ink:#141414;
+  --muted:#5e5a57;
+  --line:#ece7e2;
+  --cream:#f7f4f1;
+  --card:#fff;
+  --pink:#fff5f5;
+  --dark:#14080a;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#0c0c0c;color:var(--ink);font:15px/1.45 Inter,system-ui,sans-serif}
+button{font-family:inherit;cursor:pointer}
+h1,h2,h3{font-family:Sora,Inter,sans-serif;letter-spacing:-.03em;line-height:1.05}
+
+.stage{height:100vh;display:grid;place-items:center}
+.slide{
+  display:none;
+  width:min(100vw,calc(100vh * 16 / 9));
+  height:min(100vh,calc(100vw * 9 / 16));
+  position:relative;overflow:hidden;
+  background:var(--cream);color:var(--ink);
+  padding:3.2% 4.2% 3.6%;
+}
+.slide.on{display:block}
+.slide.on:not(.cover):not(.close):not(.thanks){display:flex;flex-direction:column}
+
+.dark{
+  background:
+    radial-gradient(ellipse 55% 80% at 88% 18%,rgba(227,4,10,.55),transparent 58%),
+    linear-gradient(115deg,#120608 0%,#2a0a10 48%,#5a1018 100%);
+  color:#fff;
+}
+.logo{display:flex;align-items:center;gap:.55rem;font-family:Sora,sans-serif;font-weight:800}
+.mark{
+  width:42px;height:42px;border-radius:10px;background:var(--red);color:#fff;
+  display:grid;place-items:center;font-size:16px;letter-spacing:-.04em;
+}
+.logo .word{color:var(--red);font-size:22px;letter-spacing:.04em}
+.dark .logo .word{color:var(--red)}
+
+.cover{display:none}
+.slide.on.cover{display:flex;flex-direction:column;justify-content:space-between}
+.cover h1{font-size:clamp(42px,5.4vw,78px);font-weight:750;max-width:12ch}
+.cover .who{margin-top:1rem;font-size:clamp(16px,1.5vw,22px);color:rgba(255,255,255,.82);font-weight:500}
+
+.kicker{font-size:clamp(13px,1.15vw,16px);color:var(--muted);font-weight:600;margin-top:.45rem}
+h2.st{font-size:clamp(32px,3.6vw,52px);font-weight:800}
+
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:1.4%;flex:1;min-height:0;margin-top:1.2%}
+.pitch{
+  background:linear-gradient(165deg,#1a0a0c,#3a1016);
+  color:#fff;border-radius:22px;padding:4.5% 5%;
+  display:flex;flex-direction:column;justify-content:space-between;
+  box-shadow:0 18px 40px rgba(20,8,10,.18);
+}
+.pitch .tag{font-size:12px;letter-spacing:.04em;color:rgba(255,255,255,.62);font-weight:600}
+.pitch p{font-size:clamp(15px,1.45vw,20px);line-height:1.45;max-width:34ch}
+.pitch .foot{font-size:12px;color:rgba(255,255,255,.55)}
+.quad{display:grid;grid-template-columns:1fr 1fr;gap:1.4%}
+.mini{
+  background:#fff;border-radius:18px;padding:8% 9%;
+  box-shadow:0 10px 28px rgba(20,8,10,.05);
+  display:flex;flex-direction:column;justify-content:center;gap:.35rem;
+}
+.ico{
+  width:34px;height:34px;border-radius:10px;background:#fff1f1;color:var(--red);
+  display:grid;place-items:center;margin-bottom:.35rem;
+}
+.ico svg{width:16px;height:16px}
+.mini strong{font-family:Sora,sans-serif;font-size:clamp(18px,1.7vw,26px);color:var(--red);font-weight:800}
+.mini span{font-size:clamp(12px,1vw,14px);color:var(--muted);line-height:1.4}
+
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5%;margin-top:2%}
+.panel{
+  background:#fff;border-radius:18px;padding:4.5% 5% 5%;
+  border-top:3px solid var(--red);box-shadow:0 10px 24px rgba(20,8,10,.04);
+  min-height:0;
+}
+.panel.soft{background:var(--pink)}
+.panel h3{font-size:clamp(16px,1.4vw,22px);margin:.7rem 0 .4rem}
+.panel p,.copy{font-size:clamp(12.5px,1.05vw,15px);color:#3f3c3a;line-height:1.45}
+.lead{font-size:clamp(13px,1.1vw,16px);color:#3a3735;margin-top:.8rem;max-width:92ch}
+
+.split{display:grid;grid-template-columns:1fr 1fr;gap:2%;margin-top:1.4%;flex:1;min-height:0}
+.col{border-radius:20px;padding:4% 4.5%}
+.col.now{background:#efeae6}
+.col.then{background:#fff;border-top:3px solid var(--red);box-shadow:0 12px 30px rgba(20,8,10,.05)}
+.col h3{font-size:clamp(20px,1.8vw,28px);margin-bottom:1rem}
+.row{display:flex;gap:.75rem;align-items:flex-start;margin:.7rem 0}
+.row p{font-size:clamp(13px,1.1vw,15.5px);color:#333}
+
+.section-title{position:absolute;left:6%;bottom:14%}
+.section-title h1{font-size:clamp(52px,6.4vw,92px);font-weight:750}
+.section-title p{margin-top:.7rem;font-size:clamp(16px,1.5vw,22px);color:rgba(255,255,255,.78)}
+.film{
+  position:absolute;right:0;top:0;bottom:0;width:7%;
+  background:repeating-linear-gradient(#3a1014 0 28px,#6b1520 28px 36px);
+  opacity:.85;
+}
+.bar{position:absolute;left:5.5%;top:16%;bottom:16%;width:4px;background:var(--red);border-radius:4px}
+
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2%;margin-top:3.2%;position:relative}
+.steps::before{
+  content:"";position:absolute;left:8%;right:8%;top:18px;height:2px;background:#f0d0d2;
+}
+.num{
+  width:36px;height:36px;border-radius:50%;border:2px solid var(--red);background:#fff;color:var(--red);
+  display:grid;place-items:center;font-family:Sora,sans-serif;font-weight:700;font-size:12px;
+  position:relative;z-index:1;margin:0 auto 1.1rem;
+}
+.step h3{font-size:clamp(15px,1.3vw,20px);margin:.45rem 0 .35rem}
+.step p{font-size:clamp(12.5px,1.05vw,15px);color:var(--muted)}
+
+.block{
+  background:#fff;border-radius:16px;padding:1.3% 1.6%;margin-top:1.1%;
+  display:grid;grid-template-columns:42px 1fr;gap:.8rem;align-items:start;
+  box-shadow:0 8px 20px rgba(20,8,10,.04);
+}
+.block.hot{background:#fff7f7;box-shadow:inset 3px 0 0 var(--red)}
+.block h3{font-size:clamp(14px,1.2vw,18px);margin-bottom:.25rem}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;margin:.7rem 0 .2rem 50px}
+.chip{
+  font-size:12px;font-weight:600;color:#444;background:#fff;border:1px solid #efe8e4;
+  border-radius:999px;padding:.28rem .65rem;
+}
+
+.two{display:grid;grid-template-columns:1.15fr .72fr;gap:2%;margin-top:1.2%;align-items:start}
+.stack{background:#2a1014;border-radius:20px;padding:4% 5%;color:#fff}
+.stack .item{
+  display:flex;align-items:center;gap:.7rem;
+  border:1px solid rgba(255,255,255,.12);border-radius:12px;
+  padding:.7rem .8rem;margin:.45rem 0;background:rgba(255,255,255,.03);
+  font-weight:650;
+}
+.rail{position:relative}
+.rail::before{content:"";position:absolute;left:27px;top:22px;bottom:22px;width:2px;background:rgba(227,4,10,.7)}
+
+.method{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.6%;margin-top:2.2%}
+.months{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2%;margin-top:2.4%;position:relative}
+.months::before{content:"";position:absolute;left:10%;right:10%;top:18px;height:2px;background:#f0d0d2}
+.mh{display:flex;align-items:center;gap:.55rem;margin:1.3rem 0 .4rem;font-weight:700}
+.check{list-style:none}
+.check li{font-size:clamp(12.5px,1.05vw,15px);color:#333;padding:.22rem 0 .22rem 1.15rem;position:relative}
+.check li::before{content:"✓";position:absolute;left:0;color:var(--red);font-weight:700;font-size:12px}
+
+.nine{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.1%;margin-top:1.4%}
+.dcard{
+  background:#fff;border-radius:14px;padding:3.2% 4%;
+  border-top:3px solid var(--red);box-shadow:0 8px 18px rgba(20,8,10,.04);
+}
+.dcard h3{font-family:Inter,sans-serif;font-size:clamp(13px,1.1vw,16px);letter-spacing:0;margin:.35rem 0 .25rem}
+.dcard p{font-size:clamp(11.5px,.95vw,13.5px);color:var(--muted);line-height:1.4}
+
+.price{display:grid;grid-template-columns:.9fr .72fr 1.15fr;gap:1.4%;margin-top:1.6%;align-items:stretch}
+.pbox{
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  border-radius:16px;padding:4% 5%;color:#fff;
+}
+.pbox .lbl{font-size:12px;color:rgba(255,255,255,.6);font-weight:600}
+.pbox .from{font-size:13px;color:rgba(255,255,255,.4);text-decoration:line-through;margin:.45rem 0 .15rem}
+.pbox .val{font-family:Sora,sans-serif;font-weight:800;font-size:clamp(26px,2.6vw,40px);line-height:1.05}
+.pbox .sub{font-size:12.5px;color:rgba(255,255,255,.62);margin-top:.45rem}
+.includes{color:#fff;font-size:clamp(12px,1vw,14px)}
+.includes li{list-style:none;padding:.22rem 0 .22rem 1.2rem;position:relative}
+.includes li::before{content:"✓";position:absolute;left:0;color:#fff;font-size:12px}
+.note{
+  margin-top:1.3%;font-size:clamp(11px,.95vw,13px);color:rgba(255,255,255,.72);line-height:1.4;max-width:110ch;
+}
+.note strong{color:#fff}
+
+.next{display:grid;grid-template-columns:.72fr 1.35fr;gap:3%;margin-top:.6%;align-items:center;flex:1;min-height:0}
+.aside-copy{font-family:Sora,sans-serif;font-size:clamp(20px,2vw,30px);font-weight:700;line-height:1.2;letter-spacing:-.03em}
+.nitem{
+  display:grid;grid-template-columns:36px 1fr;gap:.7rem;
+  background:#fff;border-radius:14px;padding:.7rem .9rem;margin:.4rem 0;
+  box-shadow:inset 3px 0 0 var(--red);
+}
+.nitem strong{display:block;font-size:clamp(13px,1.1vw,15.5px)}
+.nitem span{font-size:clamp(11.5px,.95vw,13.5px);color:var(--muted)}
+
+.close{display:none}
+.slide.on.close{display:flex;flex-direction:column;justify-content:center}
+.close h1{font-size:clamp(36px,4.4vw,64px);max-width:16ch;margin:.6rem 0 .8rem}
+.close p{max-width:42ch;font-size:clamp(15px,1.3vw,19px);color:rgba(255,255,255,.82)}
+.cta{
+  margin-top:1.4rem;display:inline-flex;align-items:center;gap:.4rem;
+  background:var(--red);color:#fff;border:0;border-radius:999px;
+  font-weight:700;font-size:15px;padding:.75rem 1.2rem;
+}
+.fine{position:absolute;left:6%;bottom:6%;font-size:12px;color:rgba(255,255,255,.45)}
+.thanks{display:none}
+.slide.on.thanks{display:flex;flex-direction:column;justify-content:space-between}
+.thanks h1{font-size:clamp(42px,5vw,72px)}
+.curve{position:absolute;right:0;bottom:8%;width:48%;height:70%;pointer-events:none}
+
+.chrome{
+  position:fixed;left:0;right:0;bottom:10px;display:flex;justify-content:center;align-items:center;gap:.6rem;
+  z-index:5;color:#fff;font-size:12px;font-weight:600;
+}
+.chrome button{
+  width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.25);
+  background:rgba(0,0,0,.45);color:#fff;
+}
+.chrome button:hover{background:var(--red);border-color:var(--red)}
+
+@media print{
+  @page{size:13.333in 7.5in;margin:0}
+  html,body{background:#fff}
+  .stage{display:block;height:auto}
+  .chrome{display:none}
+  .slide,.slide.cover,.slide.close,.slide.thanks{
+    display:block!important;width:13.333in;height:7.5in;
+    page-break-after:always;break-after:page;
+  }
+  .slide.cover,.slide.on.cover{display:flex!important}
+  .slide.close,.slide.on.close{display:flex!important}
+  .slide.thanks,.slide.on.thanks{display:flex!important}
+}
+</style>
+</head>
+<body>
+<div class="stage" id="deck">
+
+<section class="slide dark cover on" data-i="0">
+  <div class="logo"><span class="mark">V4</span><span class="word">COMPANY</span></div>
+  <div>
+    <h1>Proposta Comercial</h1>
+    <p class="who">Mercado Mengarda</p>
+  </div>
+</section>
+
+<section class="slide" data-i="1">
+  <h2 class="st">Proposta</h2>
+  <p class="kicker">O atendimento do Mercado Mengarda pode ser tão bom quanto a prateleira.</p>
+  <div class="hero-grid">
+    <div class="pitch">
+      <div class="tag">Proposta ZapFirst · 3 meses · Confidencial</div>
+      <p>Três meses para sair do pedido anotado no papel, da mensagem sem dono e do WhatsApp respondido entre um cliente e outro no caixa. O WhatsApp passa a ter processo: resposta rápida, pedido organizado e um time que sabe o próximo passo. Previsível. Profissional. Pronto para crescer.</p>
+      <div class="foot">Mercado · Delivery · Mercado Mengarda</div>
+    </div>
+    <div class="quad">
+      <article class="mini"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/></svg></div><strong>3 meses</strong><span>Projeto fechado. Setup, processo, time e CRM no mesmo ciclo.</span></article>
+      <article class="mini"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l8 4v5c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V7l8-4z"/></svg></div><strong>9 entregas</strong><span>Entregas concretas. Do Google e do Instagram até a régua de recompra.</span></article>
+      <article class="mini"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M5 17H3V7h11v10M14 17h1l3-6h3"/></svg></div><strong>Delivery</strong><span>Pedido fechado no WhatsApp. Quem pede bebida, reposição ou a compra da semana.</span></article>
+      <article class="mini"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10h16v9H4zM8 10V7a4 4 0 018 0v3"/></svg></div><strong>Balcão</strong><span>Quem está no caixa deixa de ser, ao mesmo tempo, o atendente do celular.</span></article>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-i="2">
+  <h2 class="st">Mudança prática</h2>
+  <p class="kicker">Sair do pedido na memória e operar com processo.</p>
+  <p class="lead">O mix continua o do Mercado Mengarda. O que muda é o bastidor: cada conversa tem dono, etapa e registro. Quem está no caixa deixa de ser, ao mesmo tempo, a memória do delivery.</p>
+  <div class="three">
+    <article class="panel"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="3"/><path d="M5 19c1.5-3 3.8-4.5 7-4.5S17.5 16 19 19"/></svg></div><h3>O alívio</h3><p>A cabeça sai do “onde anotei?”. Cada conversa passa a ter dono, etapa e próximo passo. O que o cliente pediu ontem à noite está no funil, não só no celular de quem atendeu.</p></article>
+    <article class="panel"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10h16v9H4zM8 10V7a4 4 0 018 0v3"/></svg></div><h3>O tempo de volta</h3><p>O balcão volta a ser balcão. Quem atende na loja atende na loja. O pedido do delivery, a dúvida de produto e o “me avisa quando chegar” ficam no WhatsApp da loja, com etapa visível para o time.</p></article>
+    <article class="panel soft"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 16l5-5 4 4 7-8"/><path d="M14 7h6v6"/></svg></div><h3>Escala com método</h3><p>Crescer o delivery sem perder o padrão do Mercado Mengarda. O cliente continua falando com uma pessoa do Mercado Mengarda. A diferença é o método: catálogo à vista, script em cada etapa e o pedido no funil, mesmo quando o caixa está ocupado.</p></article>
+  </div>
+</section>
+
+<section class="slide" data-i="3">
+  <h2 class="st">Hoje e depois</h2>
+  <p class="kicker">Como o atendimento vive hoje: na mão e na memória.</p>
+  <div class="split">
+    <div class="col now">
+      <h3>Hoje</h3>
+      <div class="row"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 3h8l4 4v14H7z"/><path d="M15 3v4h4"/></svg></div><p>Pedido e combinado anotados no papel, ou só na cabeça.</p></div>
+      <div class="row"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 6h14v12H5z"/><path d="M8 10h8M8 14h5"/></svg></div><p>WhatsApp pessoal misturado com o WhatsApp da loja.</p></div>
+      <div class="row"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg></div><p>Quem está no caixa responde tarde, ou responde no meio do atendimento.</p></div>
+      <div class="row"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4"/></svg></div><p>Quem sumiu só volta se alguém lembrar de chamar.</p></div>
+    </div>
+    <div class="col then">
+      <h3>Como a operação passa a funcionar: previsível e profissional.</h3>
+      <div class="row"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 3h8l4 4v14H7z"/></svg></div><p>Cada conversa entra num fluxo com etapa visível.</p></div>
+      <div class="row"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 6h14v12H5z"/><path d="M8 10h8M8 14h5"/></svg></div><p>O WhatsApp Business do Mercado Mengarda é o balcão oficial do delivery.</p></div>
+      <div class="row"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="7" y="3" width="10" height="18" rx="2"/></svg></div><p>O pedido sai com endereço, itens e pagamento já resolvidos no chat.</p></div>
+      <div class="row"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4"/></svg></div><p>Recompra e reativação rodam sem depender de memória.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide dark" data-i="4">
+  <div class="section-title">
+    <h1>A máquina</h1>
+    <p>A jornada do cliente, do primeiro oi ao pedido entregue</p>
+  </div>
+</section>
+
+<section class="slide" data-i="5">
+  <h2 class="st">Jornada</h2>
+  <p class="kicker">Um caminho só. O cliente chega, o time responde com padrão, o Kommo organiza e o pedido fecha com catálogo, script e PIX. Depois, a recompra não fica no esquecimento.</p>
+  <div class="steps">
+    <article class="step"><div class="num">01</div><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="6"/><path d="M16 16l4 4"/></svg></div><h3>01 · Chega</h3><p>Google, Instagram ou indicação. O destino é o WhatsApp Business do Mercado Mengarda.</p></article>
+    <article class="step"><div class="num">02</div><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></svg></div><h3>02 · Kommo</h3><p>A conversa vira card. Etapa, dono e próximo passo ficam visíveis.</p></article>
+    <article class="step"><div class="num">03</div><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7V5a3 3 0 016 0v2"/></svg></div><h3>03 · Fecha o pedido</h3><p>Catálogo, script e PIX. Quem atende entra para resolver, não para caçar contexto.</p></article>
+    <article class="step"><div class="num">04</div><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/></svg></div><h3>04 · Recompra</h3><p>A régua chama quem costuma repor e reacende quem esfriou.</p></article>
+  </div>
+</section>
+
+<section class="slide" data-i="6">
+  <h2 class="st">Entrada e funil</h2>
+  <p class="kicker">1 · Entrada: o cliente encontra o Mercado Mengarda e cai no canal certo.</p>
+  <div class="block">
+    <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="6"/><path d="M16 16l4 4"/></svg></div>
+    <div><h3>Entrada</h3><p class="copy">Quem quer bebida gelada, reposição da semana ou um pedido para entrega chega pelo Google Meu Negócio, pelo Instagram ou por indicação. Não cai no WhatsApp pessoal de alguém da loja. Cai no WhatsApp Business do Mercado Mengarda, com perfil profissional, respostas rápidas e um caminho claro até o atendimento.</p></div>
+  </div>
+  <div class="chips"><span class="chip">Google Meu Negócio</span><span class="chip">Instagram</span><span class="chip">Indicação</span></div>
+  <div class="block hot">
+    <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/></svg></div>
+    <div><h3>2 · CRM Kommo: o papel vira um funil que o time inteiro enxerga.</h3><p class="copy">Cada conversa abre um card no Kommo, ligado ao WhatsApp. Dá para ver o que é novo, o que está em atendimento, o que virou pedido, o que já foi pago e o que saiu para entrega. Cada card tem responsável. Quando alguém pergunta “e aquele pedido?”, a resposta está no funil, não na memória de quem estava no caixa.</p></div>
+  </div>
+  <div class="chips"><span class="chip">Novo</span><span class="chip">Em atendimento</span><span class="chip">Pedido</span><span class="chip">Pago</span><span class="chip">Entregue</span><span class="chip">Recompra</span></div>
+</section>
+
+<section class="slide" data-i="7">
+  <h2 class="st">Pedido e recompra</h2>
+  <p class="kicker">3 · Fechamento: quem atende entra com contexto, catálogo e condição clara.</p>
+  <div class="two">
+    <div>
+      <p class="copy">O catálogo está no WhatsApp. O script cobre da recepção à dúvida de produto, à objeção e ao fechamento. O PIX fecha o pagamento sem o cliente sair do chat. O pedido segue para a separação e a entrega sem ser reescrito no papel.</p>
+      <div class="chips" style="margin-left:0"><span class="chip">Catálogo</span><span class="chip">Script por etapa</span><span class="chip">PIX no chat</span><span class="chip">Pedido pronto para entrega</span></div>
+      <h3 style="margin-top:1.1rem;font-size:clamp(16px,1.4vw,22px)">4 · Depois do pedido: a recompra deixa de depender de alguém lembrar.</h3>
+      <p class="copy" style="margin-top:.4rem">Mercado é hábito. A régua avisa quem costuma repor e reacende quem esfriou, com mensagem no tom do Mercado Mengarda, não com disparo genérico. O atendimento fica previsível: o time sabe o que está aberto, o que fechou e quem merece um oi. O padrão fica. O improviso sai.</p>
+      <div class="chips" style="margin-left:0"><span class="chip">Régua de recompra</span><span class="chip">Reativação</span><span class="chip">Rotina, não exceção</span></div>
+    </div>
+    <div class="stack rail">
+      <div class="item"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 7h12l-1 13H7L6 7z"/></svg></div>Catálogo</div>
+      <div class="item"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="6" width="16" height="12" rx="2"/><path d="M8 12h8"/></svg></div>PIX no chat</div>
+      <div class="item"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M3 17h2M14 17h1l3-6h3"/></svg></div>Pedido pronto para entrega</div>
+      <div class="item"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4"/></svg></div>Régua de recompra</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide dark" data-i="8">
+  <div class="film"></div>
+  <div class="section-title">
+    <h1>Cronograma</h1>
+    <p>Como os 3 meses acontecem</p>
+  </div>
+</section>
+
+<section class="slide" data-i="9">
+  <h2 class="st">Método</h2>
+  <p class="kicker">Primeiro o padrão. Depois o processo. Por fim, a máquina liga.</p>
+  <p class="lead">Automação em cima de WhatsApp bagunçado só acelera a bagunça. O ZapFirst organiza produto, processo e pessoas, e só então liga o CRM e as réguas.</p>
+  <div class="method">
+    <article class="panel"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 7h12l-1 13H7L6 7z"/></svg></div><h3>01 · Produto</h3><p>O mix do Mercado Mengarda descrito com clareza, pronto para o catálogo e para o chat.</p></article>
+    <article class="panel"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h6l2-5 2 10 2-5h4"/></svg></div><h3>02 · Processo</h3><p>Do primeiro oi ao pedido entregue, com etapa, script e responsável.</p></article>
+    <article class="panel soft"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3"/><circle cx="16" cy="9" r="2"/><path d="M4 19c1-3 3-4.5 5-4.5s4 1.5 5 4.5M14 19c.4-1.6 1.4-2.6 3-3"/></svg></div><h3>03 · Pessoas</h3><p>O time treinado para operar a máquina, não para improvisar.</p></article>
+  </div>
+</section>
+
+<section class="slide" data-i="10">
+  <h2 class="st">Plano de 3 meses</h2>
+  <p class="kicker">O Mercado Mengarda aparece. O pedido tem processo. A máquina liga.</p>
+  <div class="months">
+    <article><div class="num">01</div><div class="mh"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="6"/><path d="M16 16l4 4"/></svg></div>Mês 1</div><h3 style="font-size:clamp(18px,1.5vw,24px);margin-bottom:.4rem">O Mercado Mengarda aparece.</h3><ul class="check"><li>Google Meu Negócio no lugar</li><li>Instagram com enxoval: 3 destaques, 6 publicações e linha editorial de 60 dias</li><li>WhatsApp Business estruturado</li></ul></article>
+    <article><div class="num">02</div><div class="mh"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/></svg></div>Mês 2</div><h3 style="font-size:clamp(18px,1.5vw,24px);margin-bottom:.4rem">O pedido tem processo.</h3><ul class="check"><li>Catálogo + PIX</li><li>Scripts de todas as etapas</li><li>Fluxo de atendimento documentado</li><li>Treinamento do time</li></ul></article>
+    <article><div class="num">03</div><div class="mh"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 7h12l-1 13H7L6 7z"/></svg></div>Mês 3</div><h3 style="font-size:clamp(18px,1.5vw,24px);margin-bottom:.4rem">A máquina liga.</h3><ul class="check"><li>CRM Kommo configurado</li><li>Réguas de recompra e reativação</li><li>Relatório final + diagnóstico</li></ul></article>
+  </div>
+</section>
+
+<section class="slide dark" data-i="11">
+  <div class="section-title">
+    <h1>Entregas</h1>
+    <p>O que entra no projeto</p>
+  </div>
+</section>
+
+<section class="slide" data-i="12">
+  <h2 class="st">Setup e enxoval</h2>
+  <p class="kicker">Setup completo: Google e Instagram com enxoval apontando para o WhatsApp Business do Mercado Mengarda.</p>
+  <div class="split">
+    <article class="panel" style="display:flex;flex-direction:column;justify-content:center">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-6 7-11a7 7 0 10-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2"/></svg></div>
+      <h3>Google Meu Negócio</h3>
+      <p>Perfil no lugar, com horário, fotos e o botão que leva direto ao WhatsApp.</p>
+    </article>
+    <article class="panel soft">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg></div>
+      <h3>Instagram com enxoval</h3>
+      <p>O perfil não estreia vazio. O setup entrega o enxoval completo:</p>
+      <div class="row" style="margin-top:1rem"><strong style="color:var(--red);min-width:9.5rem">3 destaques</strong><p>organizados para quem chega pela primeira vez;</p></div>
+      <div class="row"><strong style="color:var(--red);min-width:9.5rem">6 publicações</strong><p>prontas no feed;</p></div>
+      <div class="row"><strong style="color:var(--red);min-width:9.5rem">linha editorial de 60 dias</strong><p>para o perfil seguir com assunto e ritmo depois da entrega.</p></div>
+    </article>
+  </div>
+</section>
+
+<section class="slide" data-i="13">
+  <h2 class="st">Nove entregas</h2>
+  <p class="kicker">Nove entregas. Uma operação só.</p>
+  <p class="lead" style="margin-top:.35rem">Nada solto. Cada peça existe para o cliente que vocês já atraem virar conversa organizada e pedido fechado no WhatsApp.</p>
+  <div class="nine">
+    <article class="dcard"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-6 7-11a7 7 0 10-14 0c0 5 7 11 7 11z"/></svg></div><h3>Setup completo</h3><p>Google Meu Negócio e Instagram com enxoval (3 destaques, 6 publicações, linha editorial de 60 dias), apontando para o WhatsApp Business do Mercado Mengarda.</p></article>
+    <article class="dcard"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 6h14v12H5z"/><path d="M8 10h8"/></svg></div><h3>WhatsApp Business</h3><p>Perfil profissional, etiquetas e respostas rápidas. O balcão do delivery deixa de ser o celular pessoal.</p></article>
+    <article class="dcard"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 7h12l-1 13H7L6 7z"/></svg></div><h3>Catálogo + PIX</h3><p>O mix do Mercado Mengarda visível no chat, com cobrança integrada. O cliente vê, escolhe e paga.</p></article>
+    <article class="dcard"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 3h8l4 4v14H7z"/></svg></div><h3>Scripts de atendimento</h3><p>Recepção, dúvida de produto, pedido, objeção, fechamento e pós-entrega. Todas as etapas.</p></article>
+    <article class="dcard"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h6l2-5 2 10 2-5h4"/></svg></div><h3>Fluxo de atendimento</h3><p>O caminho do cliente documentado, com responsável em cada etapa. O processo para de morar na cabeça.</p></article>
+    <article class="dcard"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3"/><path d="M4 19c1-3 3-4.5 5-4.5s4 1.5 5 4.5"/></svg></div><h3>Treinamento do time</h3><p>Quem atende no WhatsApp e quem atende no balcão opera o mesmo padrão. A operação não fica refém de uma pessoa.</p></article>
+    <article class="dcard"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/></svg></div><h3>CRM Kommo</h3><p>Funil ligado ao WhatsApp. Cada pedido com nome, etapa e dono.</p></article>
+    <article class="dcard"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4"/></svg></div><h3>Réguas de recompra</h3><p>Reposição de quem compra sempre e reativação de quem esfriou, no tom do Mercado Mengarda.</p></article>
+    <article class="dcard"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 19V9M10 19V5M15 19v-7M20 19V8"/></svg></div><h3>Relatório final</h3><p>Diagnóstico de maturidade do atendimento: o que já roda sozinho e qual é o próximo passo.</p></article>
+  </div>
+</section>
+
+<section class="slide dark" data-i="14">
+  <div class="bar"></div>
+  <div class="section-title">
+    <h1>Investimento</h1>
+    <p>ZapFirst completo. Três meses.</p>
+  </div>
+</section>
+
+<section class="slide dark" data-i="15" style="background:linear-gradient(110deg,#1a080c 0%,#12080c 55%,#3a0c12 100%)">
+  <h2 class="st" style="color:#fff">Condição</h2>
+  <p class="kicker" style="color:rgba(255,255,255,.7)">De R$ 38.952,23 por 12× de R$ 1.666,67 no cartão de crédito, ou R$ 18.000 à vista.</p>
+  <div class="price">
+    <div class="pbox">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg></div>
+      <div class="lbl" style="margin-top:.6rem">No cartão de crédito · projeto de 3 meses</div>
+      <div class="from">de R$ 38.952,23</div>
+      <div class="val">12× R$ 1.666,67</div>
+      <p class="sub">Implementação, enxoval do Instagram, CRM, catálogo e treinamento no mesmo acordo.</p>
+    </div>
+    <div class="pbox">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="4" y="6" width="16" height="12" rx="2"/><path d="M8 12h8"/></svg></div>
+      <div class="lbl" style="margin-top:.6rem">Ou à vista</div>
+      <div class="from">de R$ 38.952,23</div>
+      <div class="val">R$ 18.000</div>
+      <p class="sub">Pagamento único. De R$ 38.952,23.</p>
+    </div>
+    <ul class="includes">
+      <li>Setup completo: Google Meu Negócio e Instagram com enxoval (3 destaques, 6 publicações, linha editorial de 60 dias), com acesso ao WhatsApp Business</li>
+      <li>WhatsApp Business estruturado</li>
+      <li>Catálogo de produtos + PIX integrado</li>
+      <li>Scripts de atendimento em todas as etapas</li>
+      <li>Fluxo de atendimento documentado</li>
+      <li>Treinamento do time</li>
+      <li>CRM Kommo configurado</li>
+      <li>Réguas de recompra e reativação</li>
+      <li>Relatório final + diagnóstico de maturidade</li>
+    </ul>
+  </div>
+  <p class="note"><strong>Fora deste plano:</strong> gestão contínua de conteúdo e mídia paga. O setup do Instagram entra com o enxoval; depois dos 60 dias da linha editorial, a produção contínua é outra conversa. Anúncio no Google ou no Meta, se fizer sentido depois, é investimento à parte, pago direto nas plataformas. O ZapFirst existe para o canal que já conversa com o cliente passar a vender com processo.</p>
+</section>
+
+<section class="slide" data-i="16">
+  <h2 class="st">Próximos passos</h2>
+  <p class="kicker">O mix já existe. Falta a máquina de atendimento.</p>
+  <div class="next">
+    <div>
+      <div class="ico" style="margin-bottom:1rem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h6l2-5 2 10 2-5h4"/></svg></div>
+      <p class="aside-copy">Três meses para o delivery do Mercado Mengarda deixar de depender de papel, memória e de quem está no caixa.</p>
+    </div>
+    <div>
+      <div class="nitem"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 3h8l4 4v14H7z"/></svg></div><div><strong>01 · Condição escolhida e acordo assinado</strong><span>12× de R$ 1.666,67 no cartão de crédito ou R$ 18.000 à vista. De R$ 38.952,23. Projeto de 3 meses, com as nove entregas deste documento.</span></div></div>
+      <div class="nitem"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3"/><path d="M4 19c1-3 3-4.5 5-4.5s4 1.5 5 4.5"/></svg></div><div><strong>02 · Kick-off com o time</strong><span>Acessos, mix de produtos, tom de voz do Mercado Mengarda e quem opera o WhatsApp no horário de pico da loja. Cronograma e responsáveis na mesma mesa.</span></div></div>
+      <div class="nitem"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="6"/><path d="M16 16l4 4"/></svg></div><div><strong>03 · Mês 1: o Mercado Mengarda fica encontrável</strong><span>Google, Instagram com enxoval e WhatsApp Business no ar. O cliente passa a ter um lugar só para pedir.</span></div></div>
+      <div class="nitem"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 7h12l-1 13H7L6 7z"/></svg></div><div><strong>04 · Mês 2: o pedido ganha método</strong><span>Catálogo, PIX, scripts, fluxo documentado e treinamento. O time atende com processo, não com improviso.</span></div></div>
+      <div class="nitem"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/></svg></div><div><strong>05 · Mês 3: CRM, régua e relatório</strong><span>Kommo ligado ao WhatsApp, recompra e reativação rodando. No fim, relatório e diagnóstico de maturidade.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide dark close" data-i="17">
+  <div>
+    <div style="font-size:14px;color:rgba(255,255,255,.55);font-weight:600;margin-bottom:.4rem">Fechamento</div>
+    <h1>O papel sai. O processo fica.</h1>
+    <p>Quem está no balcão volta a cuidar do cliente da loja. O WhatsApp do Mercado Mengarda passa a receber, organizar e fechar o pedido que vocês já conquistam.</p>
+    <button class="cta" type="button" id="goPrice">Fechar o ZapFirst →</button>
+  </div>
+  <div class="fine">Proposta válida por 7 dias · V4 Company × Mercado Mengarda · Confidencial</div>
+</section>
+
+<section class="slide dark thanks" data-i="18">
+  <div class="logo"><span class="mark">V4</span><span class="word">COMPANY</span></div>
+  <h1>Obrigado.</h1>
+  <svg class="curve" viewBox="0 0 480 320" fill="none" aria-hidden="true">
+    <path d="M20 260C140 250 200 180 280 150C360 120 410 70 460 40" stroke="#e3040a" stroke-width="3"/>
+    <circle cx="460" cy="40" r="7" fill="#e3040a"/>
+  </svg>
+</section>
+
+</div>
+<div class="chrome">
+  <button type="button" id="prev" aria-label="Slide anterior">‹</button>
+  <span id="count">1 / 19</span>
+  <button type="button" id="next" aria-label="Próximo slide">›</button>
+</div>
+<script>
+const slides = [...document.querySelectorAll('.slide')];
+let i = 0;
+const count = document.getElementById('count');
+function show(n){
+  i = (n + slides.length) % slides.length;
+  slides.forEach((s, idx) => s.classList.toggle('on', idx === i));
+  count.textContent = (i + 1) + ' / ' + slides.length;
+}
+document.getElementById('prev').onclick = () => show(i - 1);
+document.getElementById('next').onclick = () => show(i + 1);
+document.getElementById('goPrice').onclick = () => show(15);
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); show(i + 1); }
+  if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); show(i - 1); }
+  if (e.key === 'Home') show(0);
+  if (e.key === 'End') show(slides.length - 1);
+});
+</script>
+</body>
+</html>
