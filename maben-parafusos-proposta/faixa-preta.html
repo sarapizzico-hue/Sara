@@ -1,0 +1,821 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>01 | Fechamento ao vivo · Maben Parafusos</title>
+  <meta name="description" content="Deck de condução ao vivo da reunião de fechamento. Assessoria de Growth para a Maben Parafusos. Colli&amp;Co.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --v4-red: #e50914;
+      --v4-orange: #ff481f;
+      --v4-dark: #280001;
+      --v4-cream: #ffebc8;
+      --ink: #141414;
+      --ink-soft: #5a5a5a;
+      --line: rgba(20, 20, 20, .12);
+      --radius: 22px;
+      --radius-pill: 999px;
+      --hero: radial-gradient(120% 130% at 50% -10%, #ff5a2c 0%, #e50914 30%, #b00610 62%, #280001 100%);
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      width: 100%; height: 100%; margin: 0; overflow: hidden;
+      background: #171313; color: var(--ink);
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    button { font-family: inherit; }
+    #viewport {
+      position: fixed; inset: 0; overflow: hidden;
+      background: radial-gradient(circle at 50% 10%, rgba(229, 9, 20, .18), transparent 38%), #171313;
+    }
+    #deck {
+      --deck-scale: 1;
+      position: absolute; left: 50%; top: 50%;
+      width: 1600px; height: 900px; overflow: hidden;
+      transform: translate(-50%, -50%) scale(var(--deck-scale));
+      transform-origin: center;
+      background: #f5f4f2;
+      box-shadow: 0 40px 120px rgba(0, 0, 0, .45);
+    }
+    .slide {
+      position: absolute; inset: 0; width: 1600px; height: 900px;
+      padding: 72px 96px 108px; overflow: hidden;
+      opacity: 0; pointer-events: none; transform: translateX(24px);
+      transition: opacity .28s ease, transform .28s ease;
+      background: radial-gradient(circle at 92% 8%, rgba(229, 9, 20, .055), transparent 24%), #f5f4f2;
+    }
+    .slide.active { opacity: 1; pointer-events: auto; transform: translateX(0); }
+    .slide.red { color: white; background: var(--hero); }
+    .slide.dark {
+      color: white;
+      background: radial-gradient(circle at 78% 15%, rgba(229, 9, 20, .5), transparent 32%), linear-gradient(145deg, #280001 0%, #130001 100%);
+    }
+    .topline {
+      position: absolute; top: 0; left: 0; width: 100%; height: 5px;
+      background: linear-gradient(90deg, var(--v4-red), var(--v4-orange), transparent 76%);
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { margin-bottom: 0; font-size: 88px; line-height: .98; letter-spacing: -.055em; font-weight: 600; }
+    h2 { margin-bottom: 14px; font-size: 52px; line-height: 1.02; letter-spacing: -.045em; font-weight: 600; }
+    h3 { margin-bottom: 8px; font-size: 24px; line-height: 1.12; letter-spacing: -.025em; font-weight: 600; }
+    .lede { max-width: 1100px; color: var(--ink-soft); font-size: 24px; line-height: 1.38; font-weight: 300; }
+    .red .lede, .dark .lede { color: rgba(255, 255, 255, .74); }
+    .accent { color: var(--v4-red); }
+    .red .accent, .dark .accent { color: var(--v4-cream); }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px; min-height: 34px;
+      padding: 7px 15px; border-radius: var(--radius-pill);
+      border: 1px solid rgba(229, 9, 20, .18); background: rgba(229, 9, 20, .07);
+      color: var(--v4-red); font-size: 12px; line-height: 1; font-weight: 700;
+      letter-spacing: .09em; text-transform: uppercase;
+    }
+    .red .eyebrow, .dark .eyebrow {
+      color: rgba(255, 255, 255, .92); background: rgba(255, 255, 255, .06);
+      border-color: rgba(255, 255, 255, .35);
+      box-shadow: inset 0 0 80px rgba(255, 255, 255, .12), inset 0 1px 8px rgba(255, 255, 255, .35), -5px 5px 20px rgba(0, 0, 0, .10);
+      backdrop-filter: blur(14px) saturate(140%);
+    }
+    .card {
+      position: relative; background: white; border: 1px solid var(--line);
+      border-radius: var(--radius); padding: 26px; overflow: hidden;
+    }
+    .glass {
+      position: relative; overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .35); border-radius: var(--radius);
+      background: rgba(255, 255, 255, .06);
+      box-shadow: inset 0 0 150px rgba(255, 255, 255, .13), inset 0 1px 10px rgba(255, 255, 255, .38), inset 0 -2px 10px rgba(255, 255, 255, .22), -5px 5px 20px rgba(0, 0, 0, .10);
+      backdrop-filter: blur(14px) saturate(140%);
+    }
+    .sphere {
+      position: absolute; border-radius: 50%; pointer-events: none;
+      background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, .38), rgba(255, 255, 255, .045) 48%, transparent 66%);
+      border: 1px solid rgba(255, 255, 255, .24);
+      box-shadow: inset 0 0 120px rgba(255, 255, 255, .13), inset 25px 18px 70px rgba(255, 160, 70, .28);
+    }
+    .icon { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+    .icon-box {
+      width: 52px; height: 52px; display: grid; place-items: center; flex: 0 0 auto;
+      border: 1px solid rgba(229, 9, 20, .18); border-radius: 16px;
+      color: var(--v4-red); background: rgba(229, 9, 20, .07);
+    }
+    .red .icon-box, .dark .icon-box { color: white; border-color: rgba(255, 255, 255, .28); background: rgba(255, 255, 255, .08); }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+    .cover-content { position: relative; z-index: 3; height: 100%; display: flex; flex-direction: column; justify-content: space-between; }
+    .brand-lockup { display: flex; align-items: center; gap: 26px; }
+    .brand-lockup .colli { width: 330px; height: auto; display: block; object-fit: contain; }
+    .brand-lockup .divider { width: 1px; height: 62px; background: rgba(255, 255, 255, .35); }
+    .client-panel {
+      display: grid; place-items: center; gap: 2px;
+      min-width: 188px; padding: 16px 22px 14px; border-radius: 18px; background: #fff;
+      box-shadow: 0 16px 40px rgba(40, 0, 1, .14); color: #141414; text-align: center; line-height: 1;
+    }
+    .client-panel strong { font-size: 20px; letter-spacing: .14em; font-weight: 700; }
+    .client-panel b { color: var(--v4-red); font-size: 34px; letter-spacing: -.04em; font-weight: 700; }
+    .client-panel small {
+      margin-top: 6px; font: 700 10px/1 "IBM Plex Mono", monospace;
+      letter-spacing: .16em; color: #5a5a5a;
+    }
+    .cover-title { max-width: 1100px; margin: 0; font-size: 92px; line-height: .93; letter-spacing: -.06em; }
+    .cover-sub { max-width: 760px; margin: 22px 0 0; font-size: 26px; line-height: 1.35; color: rgba(255, 255, 255, .74); font-weight: 300; }
+    .arrow-orbit {
+      position: absolute; width: 400px; height: 400px;
+      border: 1.5px solid rgba(255, 255, 255, .28); border-radius: 50%;
+      right: 90px; top: 175px; pointer-events: none;
+    }
+    .arrow-orbit::before, .arrow-orbit::after {
+      content: ""; position: absolute; border-radius: 50%; border: 1px solid rgba(255, 255, 255, .18);
+    }
+    .arrow-orbit::before { inset: 54px; }
+    .arrow-orbit::after { inset: 112px; }
+    .pills { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .who-card { padding: 24px; display: flex; flex-direction: column; gap: 10px; min-height: 250px; text-align: left; }
+    .who-role { font: 700 11px/1 "IBM Plex Mono", monospace; letter-spacing: .11em; text-transform: uppercase; color: var(--v4-red); }
+    .who-card p, .fact p, .wave p { margin: 0; color: var(--ink-soft); font-size: 20px; line-height: 1.3; }
+    .dark .who-card p, .dark .wave p, .glass p { color: rgba(255, 255, 255, .74); }
+    .fact { min-height: 196px; }
+    .fact .k { font: 700 11px/1 "IBM Plex Mono", monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--v4-red); }
+    .trava { min-height: 348px; display: flex; flex-direction: column; gap: 12px; padding: 24px 22px; text-align: left; color: white; cursor: pointer; width: 100%; }
+    .trava-index { font: 700 12px/1 "IBM Plex Mono", monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--v4-cream); }
+    .trava h3 { color: white; font-size: 28px; margin: 0; }
+    .trava .swap { margin-top: auto; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, .2); min-height: 72px; }
+    .trava .swap b { display: block; color: var(--v4-cream); font-size: 13px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 6px; }
+    .trava.is-on { border-color: var(--v4-cream); box-shadow: 0 0 0 2px rgba(255, 235, 200, .35); }
+    .dark-note {
+      display: flex; align-items: center; gap: 16px; margin-top: 18px;
+      padding: 16px 22px; border-radius: var(--radius);
+      background: rgba(255, 255, 255, .06); border: 1px solid rgba(255, 255, 255, .18);
+      color: rgba(255, 255, 255, .86); font-size: 18px; line-height: 1.35;
+    }
+    .funnel-row { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; margin-top: 22px; }
+    .funnel-step {
+      position: relative; min-height: 168px; min-width: 0; padding: 18px 16px 16px; text-align: left;
+      border-radius: 20px; border: 1px solid var(--line); background: white; cursor: pointer; color: var(--ink);
+    }
+    .funnel-step::after {
+      content: ""; position: absolute; right: -9px; top: 50%; width: 10px; height: 10px;
+      border-right: 2px solid var(--v4-red); border-top: 2px solid var(--v4-red);
+      transform: translateY(-50%) rotate(45deg); z-index: 2;
+    }
+    .funnel-step:last-child::after { display: none; }
+    .funnel-step .n { font: 700 12px/1 "IBM Plex Mono", monospace; letter-spacing: .1em; color: var(--v4-red); }
+    .funnel-step h3 { margin: 12px 0 8px; font-size: 22px; }
+    .funnel-step p { margin: 0; color: var(--ink-soft); font-size: 14px; line-height: 1.3; }
+    .funnel-step.is-on {
+      background: var(--hero); color: white; border-color: transparent;
+    }
+    .funnel-step.is-on p { color: rgba(255, 255, 255, .78); }
+    .funnel-step.is-on .n { color: var(--v4-cream); }
+    .detail {
+      margin-top: 16px; display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, .65fr); gap: 18px;
+      padding: 22px 26px; border-radius: 20px; background: white; border: 1px solid var(--line); min-height: 148px;
+    }
+    .detail h3 { font-size: 28px; margin-bottom: 8px; }
+    .detail p { margin: 0; color: var(--ink-soft); font-size: 18px; line-height: 1.4; }
+    .detail .own { border-left: 1px solid var(--line); padding-left: 22px; }
+    .detail .own span { display: block; font: 700 11px/1 "IBM Plex Mono", monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--v4-red); margin-bottom: 8px; }
+    .flow {
+      margin-top: 22px; display: grid; grid-template-columns: minmax(0, 1.15fr) 40px minmax(0, 1fr) 40px minmax(0, 1fr); align-items: stretch; gap: 8px; min-height: 340px;
+    }
+    .flow-col { display: grid; gap: 10px; }
+    .node {
+      text-align: left; cursor: pointer; border-radius: 18px; border: 1px solid var(--line);
+      background: white; padding: 16px 16px 14px; color: var(--ink);
+    }
+    .node b { display: block; font-size: 18px; letter-spacing: -.02em; }
+    .node span { display: block; margin-top: 4px; color: var(--ink-soft); font-size: 14px; line-height: 1.3; }
+    .node.is-on { background: var(--hero); color: white; border-color: transparent; }
+    .node.is-on span { color: rgba(255, 255, 255, .78); }
+    .flow-arrow { display: grid; place-items: center; color: var(--v4-red); font-size: 28px; font-weight: 600; }
+    .hub-node {
+      display: grid; place-items: center; text-align: center; border-radius: 22px; color: white;
+      background: var(--hero); min-height: 100%; padding: 18px;
+    }
+    .hub-node strong { font-size: 28px; letter-spacing: -.03em; display: block; }
+    .hub-node span { display: block; margin-top: 8px; color: rgba(255, 255, 255, .78); font-size: 15px; line-height: 1.35; }
+    .flow-read {
+      margin-top: 16px; padding: 18px 22px; border-radius: 18px; background: white; border: 1px solid var(--line);
+      display: grid; grid-template-columns: 180px 1fr; gap: 18px; align-items: center; min-height: 108px;
+    }
+    .flow-read .tag { font: 700 12px/1 "IBM Plex Mono", monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--v4-red); }
+    .flow-read p { margin: 6px 0 0; color: var(--ink-soft); font-size: 18px; line-height: 1.35; }
+    .promise { min-height: 470px; padding: 32px; display: flex; flex-direction: column; }
+    .promise h3 { font-size: 32px; max-width: 16ch; }
+    .promise ul { margin: 8px 0 0; padding: 0; list-style: none; display: grid; gap: 12px; }
+    .promise li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; font-size: 18px; line-height: 1.35; color: var(--ink-soft); }
+    .promise li i { color: var(--v4-red); font-style: normal; font-weight: 700; }
+    .wave { min-height: 360px; padding: 28px 26px; display: flex; flex-direction: column; gap: 12px; color: white; }
+    .wave h3 { color: white; font-size: 30px; margin: 0; }
+    .wave .when { margin-top: auto; padding-top: 14px; border-top: 1px solid rgba(255, 255, 255, .2); color: var(--v4-cream); font: 700 13px/1.3 "IBM Plex Mono", monospace; letter-spacing: .04em; }
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 8px; }
+    .col { padding: 26px 28px; border-radius: 24px; border: 1px solid var(--line); background: white; }
+    .col.next { background: linear-gradient(180deg, rgba(229, 9, 20, .08), white 42%); border-color: rgba(229, 9, 20, .22); }
+    .col h3 { font-size: 28px; margin-bottom: 16px; }
+    .col ol { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; }
+    .col li { display: grid; grid-template-columns: 28px 1fr; gap: 10px; font-size: 18px; line-height: 1.3; color: var(--ink-soft); }
+    .col li b { color: var(--v4-red); font: 700 14px/1.2 "IBM Plex Mono", monospace; }
+    .price-layout { display: grid; grid-template-columns: .82fr 1.18fr; gap: 22px; margin-top: 18px; align-items: stretch; }
+    .anchor, .deal { border-radius: 28px; padding: 36px 40px; min-height: 340px; display: flex; flex-direction: column; justify-content: center; }
+    .anchor { background: white; border: 1px solid var(--line); }
+    .anchor .tag, .perk b { font: 700 12px/1 "IBM Plex Mono", monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--v4-red); }
+    .old { margin: 14px 0 8px; font-size: 54px; font-weight: 600; letter-spacing: -.04em; line-height: 1; color: #9a9393; text-decoration: line-through; text-decoration-thickness: 3px; }
+    .anchor p, .deal p { margin: 0; color: var(--ink-soft); font-size: 20px; }
+    .deal {
+      color: white; background: var(--hero); position: relative; overflow: hidden;
+      box-shadow: 0 30px 80px rgba(229, 9, 20, .28);
+    }
+    .deal .tag { color: var(--v4-cream); font: 700 12px/1 "IBM Plex Mono", monospace; letter-spacing: .12em; text-transform: uppercase; }
+    .deal .times { margin-top: 18px; font-size: 22px; font-weight: 600; letter-spacing: .08em; color: rgba(255, 255, 255, .8); }
+    .deal .now { font-size: 84px; font-weight: 650; letter-spacing: -.05em; line-height: .95; margin: 4px 0 10px; }
+    .deal p { color: rgba(255, 255, 255, .82); font-size: 22px; }
+    .perks { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-top: 16px; }
+    .perk { background: white; border: 1px solid var(--line); border-radius: 18px; padding: 16px 18px; }
+    .perk strong { display: block; margin-top: 6px; font-size: 22px; letter-spacing: -.03em; }
+    .perk span { display: block; margin-top: 4px; color: var(--ink-soft); font-size: 15px; line-height: 1.3; }
+    .fine { margin: 14px 0 0; color: rgba(20, 20, 20, .45); font-size: 13px; line-height: 1.4; max-width: 980px; }
+    .close-title { max-width: 1200px; font-size: 78px; line-height: .96; letter-spacing: -.05em; }
+    .slide-footer {
+      position: absolute; z-index: 8; left: 96px; right: 96px; bottom: 32px; height: 48px;
+      display: flex; align-items: center; pointer-events: none;
+    }
+    .slide-footer img { width: 155px; height: 48px; object-fit: contain; object-position: left center; }
+    .navigation {
+      position: absolute; z-index: 20; right: 52px; bottom: 25px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .nav-btn {
+      width: 48px; height: 48px; display: grid; place-items: center;
+      border: 1px solid rgba(20, 20, 20, .12); border-radius: 50%;
+      background: rgba(255, 255, 255, .92); color: var(--ink); cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .12);
+    }
+    .nav-btn:hover { transform: translateY(-2px); background: white; }
+    .nav-btn:disabled { opacity: .3; cursor: default; transform: none; }
+    .nav-btn svg { width: 22px; height: 22px; }
+    .slide-counter {
+      position: absolute; z-index: 22; right: 176px; bottom: 39px;
+      font: 500 12px/1 "IBM Plex Mono", monospace; color: rgba(20, 20, 20, .52); letter-spacing: .04em;
+    }
+    .progress-track { position: absolute; z-index: 21; left: 0; right: 0; bottom: 0; height: 7px; background: rgba(20, 20, 20, .1); }
+    .progress-fill { width: 0; height: 100%; background: linear-gradient(90deg, var(--v4-red), var(--v4-orange)); box-shadow: 0 0 20px rgba(229, 9, 20, .35); transition: width .3s ease; }
+    .hint { position: absolute; left: 96px; bottom: 40px; z-index: 6; color: rgba(255,255,255,.55); font: 500 12px/1 "IBM Plex Mono", monospace; letter-spacing: .04em; }
+    /* Faixa Preta: placeholders (preencher antes da reunião), notas e slides novos */
+    .ph { display: inline-block; padding: 0 .28em; border: 2px dashed rgba(229, 9, 20, .55); border-radius: 10px; color: var(--v4-red); background: rgba(229, 9, 20, .05); font-weight: 600; white-space: nowrap; }
+    .red .ph, .dark .ph { border-color: rgba(255, 235, 200, .7); color: var(--v4-cream); background: rgba(255, 255, 255, .06); }
+    .notes { display: none; }
+    .cover-content > .eyebrow { align-self: flex-start; }
+    .slide.oculto { z-index: 5; }
+    .trava { min-height: 0; gap: 8px; padding: 16px 18px; }
+    .grid-2 .trava h3 { font-size: 24px; }
+    .trava p.quote { margin: 0; color: rgba(255, 255, 255, .86); font-size: 18px; font-style: italic; }
+    .trava p.trava-num { margin: 0; color: rgba(255, 255, 255, .74); font-size: 18px; }
+    .cost-big { margin-top: 18px; color: var(--v4-red); font-size: 140px; font-weight: 700; letter-spacing: -.06em; line-height: 1; }
+    .cost-big small { font-size: 44px; font-weight: 400; color: var(--ink-soft); margin-left: 10px; letter-spacing: -.02em; }
+    .fact p .ph { font-size: 15px; }
+    .laudo-field { min-height: 180px; padding: 26px; display: flex; flex-direction: column; justify-content: space-between; font-size: 22px; }
+    .laudo-field b, .proof-card b, .pay-card b { position: relative; z-index: 2; font: 700 13px/1 "IBM Plex Mono", monospace; letter-spacing: .12em; text-transform: uppercase; color: rgba(255, 255, 255, .72); }
+    .laudo-field .ph, .proof-card .ph, .proof-card p, .pay-card strong, .pay-card p { position: relative; z-index: 2; }
+    .laudo-line { margin-top: 24px; padding: 28px 34px; font-size: 30px; line-height: 1.35; font-weight: 500; }
+    .funnel-step .tr { display: block; margin-top: 10px; font: 700 11px/1 "IBM Plex Mono", monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--v4-red); }
+    .funnel-step.is-on .tr { color: var(--v4-cream); }
+    .matrix { display: grid; grid-template-columns: 1fr 1.35fr .85fr 1.2fr; margin-top: 26px; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: white; }
+    .mx-head { padding: 16px 24px; background: #280001; color: white; font: 700 12px/1 "IBM Plex Mono", monospace; letter-spacing: .1em; text-transform: uppercase; }
+    .mx-cell { padding: 14px 22px; min-height: 78px; border-top: 1px solid var(--line); font-size: 20px; line-height: 1.25; color: var(--ink-soft); }
+    .mx-trava { color: var(--ink); font-weight: 600; }
+    .mx-trava span { display: block; color: var(--v4-red); font: 700 13px/1 "IBM Plex Mono", monospace; margin-bottom: 6px; }
+    .mx-own { color: var(--ink); }
+    .mx-gain { color: var(--ink); font-weight: 600; background: rgba(229, 9, 20, .035); }
+    .mx-base { display: flex; align-items: center; gap: 18px; margin-top: 16px; padding: 18px 24px; border-radius: var(--radius); background: white; border: 1px solid var(--line); font-size: 20px; color: var(--ink-soft); }
+    .mx-base b { color: var(--v4-red); white-space: nowrap; }
+    .proof-card { min-height: 380px; padding: 32px; display: flex; flex-direction: column; justify-content: space-between; font-size: 24px; color: white; }
+    .proof-card p { margin: 0; font-size: 20px; }
+    .proof-number { position: relative; z-index: 2; font-size: 88px; font-weight: 700; letter-spacing: -.05em; line-height: 1; }
+    .split .col li { font-size: 22px; }
+    .ask { margin-top: 26px; padding: 24px 32px; border-left: 6px solid var(--v4-red); border-radius: 0 var(--radius) var(--radius) 0; background: white; font-size: 30px; line-height: 1.3; font-weight: 500; }
+    .stack { margin-top: 24px; border: 1px solid var(--line); border-radius: var(--radius); background: white; overflow: hidden; }
+    .stack-row { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 14px 30px; border-top: 1px solid var(--line); font-size: 23px; }
+    .stack-row:first-child { border-top: 0; }
+    .stack-total { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; padding: 22px 30px; border-radius: var(--radius); background: #280001; color: white; font-size: 30px; font-weight: 600; }
+    .stack-total .ph { font-size: 44px; border-color: rgba(255, 235, 200, .7); color: var(--v4-cream); background: rgba(255, 255, 255, .06); }
+    .half { margin-top: 26px; font-size: 220px; font-weight: 700; letter-spacing: -.07em; line-height: .9; color: var(--v4-cream); }
+    .price-big { margin-top: 10px; font-size: 150px; font-weight: 650; letter-spacing: -.06em; line-height: 1; }
+    .price-big small { font-size: 52px; font-weight: 500; letter-spacing: -.02em; margin-right: 14px; vertical-align: 64px; }
+    .price-big span { font-size: 44px; font-weight: 300; letter-spacing: -.02em; margin-left: 10px; opacity: .8; }
+    .tcv-label { display: block; margin-top: 22px; font: 700 13px/1 "IBM Plex Mono", monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--v4-cream); }
+    .pay-card { padding: 26px 30px; display: grid; gap: 12px; color: white; }
+    .pay-card strong { font-size: 34px; letter-spacing: -.03em; }
+    .pay-card strong.now-big { font-size: 64px; letter-spacing: -.05em; line-height: 1; }
+    .pay-card p { margin: 0; font-size: 18px; color: rgba(255, 255, 255, .78); }
+    .step-card { min-height: 300px; padding: 30px; display: flex; flex-direction: column; justify-content: space-between; color: white; }
+    .step-card h3 { position: relative; z-index: 2; font-size: 30px; margin: 0; color: white; }
+    .step-card p { position: relative; z-index: 2; margin: 0; font-size: 20px; line-height: 1.35; }
+    .step-num { position: relative; z-index: 2; font: 500 56px/1 "IBM Plex Mono", monospace; color: var(--v4-cream); }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div id="viewport">
+    <main id="deck">
+      <!-- 01 Capa [texto enxuto] -->
+      <section class="slide red active" data-title="Proposta · Maben Parafusos">
+        <div class="sphere" style="width:430px;height:430px;right:-90px;top:-110px;opacity:.42"></div>
+        <div class="sphere" style="width:210px;height:210px;right:250px;bottom:120px;opacity:.3"></div>
+        <div class="arrow-orbit"></div>
+        <div class="cover-content">
+          <div class="brand-lockup">
+            <img class="colli" src="assets/colli-white.png" alt="V4 Company Colli&amp;Co">
+            <span class="divider"></span>
+            <div class="client-panel" style="padding:12px 18px">
+              <img src="assets/logo-maben.png" alt="Maben Parafusos" style="height:52px;width:auto;max-width:240px">
+            </div>
+          </div>
+          <div>
+            <span class="eyebrow">Proposta · Assessoria de Growth</span>
+            <h1 class="cover-title" style="margin-top:22px">O balcão vende.<br>O digital opera<br><span class="accent">no escuro.</span></h1>
+            <p class="cover-sub">Reunião de fechamento. Assessoria de Growth.</p>
+          </div>
+          <div class="pills">
+            <span class="eyebrow">Barueri · Cajamar</span>
+            <span class="eyebrow">Desde 1992</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 02 Contexto [encurtado] -->
+      <section class="slide" data-title="O negócio">
+        <div class="topline"></div>
+        <span class="eyebrow">Maben Parafusos · contexto</span>
+        <h2 style="margin-top:20px">Duas lojas. Um balcão. Um e-commerce.</h2>
+        <p class="lede">A venda existe. O rastro dela, não.</p>
+        <div class="grid-4" style="margin-top:28px">
+          <article class="card fact"><span class="k">Loja</span><h3>Barueri e Cajamar</h3><p>Alphaville e Santana de Parnaíba no raio.</p></article>
+          <article class="card fact"><span class="k">Quem compra</span><h3>B2B e balcão</h3><p>Oficina, obra, manutenção e quem entra na loja.</p></article>
+          <article class="card fact"><span class="k">Onde chega</span><h3>WhatsApp e loja</h3><p>O mesmo time atende o balcão e a mensagem.</p></article>
+          <article class="card fact"><span class="k">Onde registra</span><h3>Cabeça e ERP</h3><p>maben.com.br e mabenparafusos.com.br.</p></article>
+        </div>
+      </section>
+
+      <!-- 03 Tese -->
+      <section class="slide red" data-title="A frase">
+        <div class="sphere" style="width:380px;height:380px;right:-80px;bottom:-80px;opacity:.28"></div>
+        <div class="cover-content">
+          <span class="eyebrow">O diagnóstico, em uma linha</span>
+          <h1 style="max-width:1320px;font-size:68px">A Maben não tem um problema de produto. Opera no <span class="accent">escuro digital.</span></h1>
+          <p class="lede" style="max-width:980px">Sem canal de aquisição, sem previsibilidade de venda e sem dado para medir mídia.</p>
+        </div>
+      </section>
+
+      <!-- 04 Travas [modificado: fala do lead + número em cada trava] -->
+      <section class="slide dark" data-title="Travas">
+        <div class="sphere" style="width:340px;height:340px;right:-70px;top:-80px;opacity:.28"></div>
+        <span class="eyebrow">O que impede a Maben de enxergar a venda</span>
+        <h2 style="margin-top:12px;color:#fff;font-size:44px">Quatro travas. Clique e pergunte o que muda.</h2>
+        <div class="grid-2" style="margin-top:16px">
+          <button class="glass trava" type="button" data-trava="0">
+            <span class="trava-index">Trava 01 · Atendimento</span>
+            <h3>O WhatsApp compete com o balcão</h3>
+            <p class="quote">“<span class="ph">[fala da Maben]</span>”</p>
+            <p class="trava-num"><span class="ph">[N]</span> leads/mês sem resposta no prazo</p>
+            <div class="swap"><b>Impacto</b><span>Atraso, mensagem fragmentada e lead desassistido.</span></div>
+          </button>
+          <button class="glass trava" type="button" data-trava="1">
+            <span class="trava-index">Trava 02 · Discurso</span>
+            <h3>A frase ainda é “qualidade”</h3>
+            <p class="quote">“<span class="ph">[fala da Maben]</span>”</p>
+            <p class="trava-num"><span class="ph">[N]</span> orçamentos sem qualificação</p>
+            <div class="swap"><b>Impacto</b><span>Urgência, estoque e medida técnica ficam de fora.</span></div>
+          </button>
+          <button class="glass trava" type="button" data-trava="2">
+            <span class="trava-index">Trava 03 · Sem CRM</span>
+            <h3>A venda mora na cabeça e no ERP</h3>
+            <p class="quote">“<span class="ph">[fala da Maben]</span>”</p>
+            <p class="trava-num"><span class="ph">[N]</span> cotações sem etapa nem dono</p>
+            <div class="swap"><b>Impacto</b><span>Origem, perda e recompra não têm rastro.</span></div>
+          </button>
+          <button class="glass trava" type="button" data-trava="3">
+            <span class="trava-index">Trava 04 · Sem rotina</span>
+            <h3>Orçamento, inativo e carrinho param</h3>
+            <p class="quote">“<span class="ph">[fala da Maben]</span>”</p>
+            <p class="trava-num"><span class="ph">[N]</span> carrinhos sem recuperação</p>
+            <div class="swap"><b>Impacto</b><span>Não há follow-up nem pós-venda. O catálogo ainda está incompleto.</span></div>
+          </button>
+        </div>
+        <aside class="notes">Perguntar a fala de cada trava e escrever na caixa. Número que eles não tiverem: calcular junto. Clique troca o impacto pelo que a assessoria faz. Não monologar as quatro.</aside>
+      </section>
+
+      <!-- 05 Quanto custa [novo · etapa 5] -->
+      <section class="slide" data-title="Quanto custa">
+        <div class="topline"></div>
+        <span class="eyebrow">Quanto custa ficar assim</span>
+        <h2 style="margin-top:16px">O que as quatro travas tiram da Maben por ano</h2>
+        <div class="cost-big" style="font-size:108px"><span class="ph">[R$ X]</span><small>/ano</small></div>
+        <div class="grid-4" style="margin-top:18px">
+          <article class="card fact"><span class="k">01</span><h3>Lead sem resposta</h3><p><span class="ph">[N]</span> × <span class="ph">[conversão]</span> × <span class="ph">[ticket]</span></p></article>
+          <article class="card fact"><span class="k">02</span><h3>Orçamento genérico</h3><p><span class="ph">[N]</span> × <span class="ph">[% que esfria]</span> × <span class="ph">[ticket]</span></p></article>
+          <article class="card fact"><span class="k">03</span><h3>Cotação sem dono</h3><p><span class="ph">[N]</span> × <span class="ph">[% perdida]</span> × <span class="ph">[ticket]</span></p></article>
+          <article class="card fact"><span class="k">04</span><h3>Carrinho e inativo</h3><p><span class="ph">[N]</span> × <span class="ph">[% recuperável]</span> × <span class="ph">[ticket]</span></p></article>
+        </div>
+        <aside class="notes">Não há indicador consolidado. Fazer a conta na tela com eles. Se não souberem o ticket, usar um pedido típico de balcão e um de B2B. Aceitar “não tenho esse número” e seguir é faixa branca.</aside>
+      </section>
+
+      <!-- 06 Laudo [novo · etapa 5, gate] -->
+      <section class="slide red" data-title="Laudo">
+        <div class="sphere" style="width:360px;height:360px;right:-90px;top:-110px;opacity:.4"></div>
+        <span class="eyebrow">Antes de avançar</span>
+        <h2 style="margin-top:18px">O que precisa ser verdade<br>para seguirmos juntos</h2>
+        <div class="grid-4" style="margin-top:34px">
+          <div class="glass laudo-field"><b>Prioridade</b><span class="ph">[resposta da Maben]</span></div>
+          <div class="glass laudo-field"><b>Urgência</b><span class="ph">[resposta da Maben]</span></div>
+          <div class="glass laudo-field"><b>De 0 a 10</b><span class="ph">[nota]</span></div>
+          <div class="glass laudo-field"><b>Por que agora</b><span class="ph">[motivo]</span></div>
+        </div>
+        <div class="glass laudo-line">Vamos avançar com a Maben por causa do escuro digital — <span class="ph">[travas + R$ X]</span> — e porque vocês <span class="ph">[motivo declarado]</span>.</div>
+        <aside class="notes">Perguntar prioridade, urgência, de 0 a 10 e por que agora. Explicar o porquê antes: para não chegar no fim e ouvir “ver com o sócio”, “vou pensar” ou “não tenho verba”. Motivo fraco aqui = sem PIX no fim. Só então dizer a frase do laudo.</aside>
+      </section>
+
+      <!-- 07 Funil [cada etapa rotulada com a trava que resolve] -->
+      <section class="slide" data-title="Funil">
+        <div class="topline"></div>
+        <span class="eyebrow">A solução · como a venda acontece</span>
+        <h2 style="margin-top:16px">De acordo com o que vocês vivem hoje.</h2>
+        <p class="lede" style="font-size:22px">Cada etapa resolve uma trava. Clique e pergunte o que ficou claro.</p>
+        <div class="funnel-row" id="funnel"></div>
+        <div class="detail" id="funnelDetail"></div>
+        <aside class="notes">A cada etapa: "o que você entendeu daqui? Tá claro o quanto isso muda a trava [X] que vocês vivem hoje?"</aside>
+      </section>
+
+      <!-- 08 Trava → entrega → dono → benefício [novo, junta Time + Entregáveis] -->
+      <section class="slide" data-title="Da trava ao resultado">
+        <div class="topline"></div>
+        <span class="eyebrow">Da trava ao resultado</span>
+        <h2 style="margin-top:16px">Cada trava com sua entrega, seu dono e o que muda.</h2>
+        <div class="matrix">
+          <div class="mx-head">Trava</div><div class="mx-head">Entrega</div><div class="mx-head">Dono</div><div class="mx-head">O que muda</div>
+          <div class="mx-cell mx-trava"><span>01</span>WhatsApp × balcão</div>
+          <div class="mx-cell">Triagem e um dono por canal</div>
+          <div class="mx-cell mx-own">Aline Pereira Silva</div>
+          <div class="mx-cell mx-gain">Resposta em <span class="ph">[X h]</span></div>
+          <div class="mx-cell mx-trava"><span>02</span>Discurso genérico</div>
+          <div class="mx-cell">Roteiro: urgência, estoque, medida</div>
+          <div class="mx-cell mx-own">Copy</div>
+          <div class="mx-cell mx-gain">Orçamento qualificado: <span class="ph">[X%]</span></div>
+          <div class="mx-cell mx-trava"><span>03</span>Sem CRM</div>
+          <div class="mx-cell">Origem, etapa, perda e recompra</div>
+          <div class="mx-cell mx-own">Aline + operação</div>
+          <div class="mx-cell mx-gain">Jornada com dono, fora da cabeça</div>
+          <div class="mx-cell mx-trava"><span>04</span>Sem follow-up</div>
+          <div class="mx-cell">Régua de orçamento, inativo e carrinho</div>
+          <div class="mx-cell mx-own">Account + tráfego</div>
+          <div class="mx-cell mx-gain"><span class="ph">[N]</span> pedidos recuperados / mês</div>
+        </div>
+        <div class="mx-base"><b>Antes da mídia</b><span>O catálogo fecha o que pode ser prometido. Anúncio só entra com dado para medir retorno.</span></div>
+      </section>
+
+      <!-- 09 Ondas -->
+      <section class="slide dark" data-title="Ondas">
+        <div class="sphere" style="width:360px;height:360px;right:-90px;top:-70px;opacity:.26"></div>
+        <span class="eyebrow">Ordem de execução</span>
+        <h2 style="margin-top:16px;color:#fff">Três ondas. Sem pular o funil.</h2>
+        <p class="lede" style="margin-bottom:22px">A verba só entra quando a casa está de pé.</p>
+        <div class="grid-3">
+          <article class="glass wave"><span class="trava-index">Onda 01 · dias 0 a 15</span><h3>Enxergar</h3><p>Dono por canal, roteiro de qualificação e CRM com origem, etapa e perda.</p><div class="when">Travas 01, 02 e 03</div></article>
+          <article class="glass wave"><span class="trava-index">Onda 02 · dias 15 a 60</span><h3>Recuperar</h3><p>Follow-up de orçamento e inativo. Carrinho e catálogo do e-commerce no que já dá para vender.</p><div class="when">Trava 04</div></article>
+          <article class="glass wave"><span class="trava-index">Onda 03 · dias 60 a 90</span><h3>Medir</h3><p>Canal de aquisição ligado ao CRM. A mídia entra com número de retorno.</p><div class="when">Sai do escuro</div></article>
+        </div>
+      </section>
+
+      <!-- 10 Prova [novo · etapa 6] -->
+      <section class="slide dark" data-title="Prova">
+        <span class="eyebrow">Quem já destravou</span>
+        <h2 style="margin-top:16px;color:#fff">Quem já saiu do atendimento de cabeça.</h2>
+        <div class="grid-3" style="margin-top:40px">
+          <div class="glass proof-card"><b>Case</b><span class="ph">[cliente Colli&amp;Co]</span><p>Mesma trava: <span class="ph">[01 a 04]</span></p></div>
+          <div class="glass proof-card"><b>Resultado</b><div class="proof-number"><span class="ph">[+X%]</span></div><p><span class="ph">[pedidos, recompra ou receita]</span></p></div>
+          <div class="glass proof-card"><b>Prazo</b><div class="proof-number"><span class="ph">[N]</span></div><p>meses até o resultado</p></div>
+        </div>
+        <aside class="notes">Falou algo, prove. Escolher o case mais parecido com a trava que a Maben apontou como prioridade no laudo.</aside>
+      </section>
+
+      <!-- 11 Recap [modificado: + pergunta para o lead recitar] -->
+      <section class="slide" data-title="Transformação">
+        <div class="topline"></div>
+        <span class="eyebrow">Como fica a Maben Parafusos</span>
+        <h2 style="margin-top:16px">De operação no escuro para venda com rastro.</h2>
+        <div class="split">
+          <div class="col">
+            <h3>Hoje</h3>
+            <ol>
+              <li><b>01</b>WhatsApp disputa o balcão. O lead espera.</li>
+              <li><b>02</b>Orçamento no discurso de “qualidade”.</li>
+              <li><b>03</b>Jornada na cabeça e no ERP.</li>
+              <li><b>04</b>Sem follow-up, carrinho e pós-venda.</li>
+            </ol>
+          </div>
+          <div class="col next">
+            <h3>Com a assessoria</h3>
+            <ol>
+              <li><b>01</b>Canal com dono e prazo de resposta.</li>
+              <li><b>02</b>Roteiro de urgência, estoque e medida.</li>
+              <li><b>03</b>Origem, etapa, perda e recompra no CRM.</li>
+              <li><b>04</b>Orçamento, inativo e carrinho voltam.</li>
+            </ol>
+          </div>
+        </div>
+        <div class="ask">Dessas quatro, qual pesa mais para a Maben hoje?</div>
+        <aside class="notes">Deixar o lead recitar. A resposta é o “é isso que eu busco”. Não perguntar “faz sentido?”. Transição: “agora a parte mais tranquila, viabilizar o trabalho”.</aside>
+      </section>
+
+      <!-- 12 Ancoragem [novo · etapa 7, gate] -->
+      <section class="slide" data-title="Ancoragem">
+        <div class="topline"></div>
+        <span class="eyebrow">Quanto vale</span>
+        <h2 style="margin-top:16px">O que entra na assessoria, a preço de mercado</h2>
+        <div class="stack">
+          <div class="stack-row"><span>Account · Aline Pereira Silva, dono por canal</span><span class="ph">[R$/mês]</span></div>
+          <div class="stack-row"><span>Copy · roteiro de urgência, estoque e medida</span><span class="ph">[R$/mês]</span></div>
+          <div class="stack-row"><span>CRM da jornada · origem, etapa, perda, recompra</span><span class="ph">[R$]</span></div>
+          <div class="stack-row"><span>Régua · orçamento, inativo, carrinho e pós-venda</span><span class="ph">[R$]</span></div>
+          <div class="stack-row"><span>Tráfego · só depois do dado existir</span><span class="ph">[R$/mês]</span></div>
+          <div class="stack-row"><span>Design · Julia Ferrari, catálogo que dá para anunciar</span><span class="ph">[R$/mês]</span></div>
+        </div>
+        <div class="stack-total"><span>Valor somado</span><span class="ph">[R$ VALOR]/mês</span></div>
+        <aside class="notes">Calmo, frio, confiante. Para cada linha: explicar o entregável, o benefício no cenário da Maben e por que vale esse preço no mercado ou comprado separado. Comparar o total com o R$ X/ano do slide 5.</aside>
+      </section>
+
+      <!-- 13 Teste dos 50% [novo · etapa 7] -->
+      <section class="slide dark" data-title="Teste dos 50%">
+        <div class="sphere" style="width:420px;height:420px;right:-110px;top:-140px;opacity:.35"></div>
+        <span class="eyebrow">Teste de valor</span>
+        <div class="half">50%</div>
+        <h2 style="max-width:1250px;color:#fff">Se isso custasse metade, vale ou não vale para a Maben?</h2>
+        <p class="lede">Não é o preço. É para saber se o tamanho do problema está claro.</p>
+        <aside class="notes">Só avançar se a resposta for "vale". Se não valer, voltar ao custo das travas e à ancoragem. Objeção que surgir aqui: coletar, fazer conta, trabalhar. Só tem objeção quem tem interesse.</aside>
+      </section>
+
+      <!-- 14 Preço de tabela [modificado: só tabela, retomando as travas] -->
+      <section class="slide red" data-title="Investimento">
+        <div class="sphere" style="width:380px;height:380px;right:-90px;top:-120px;opacity:.45"></div>
+        <span class="eyebrow">Investimento</span>
+        <p class="lede" style="margin:24px 0 0;font-size:28px">Para tirar atendimento, discurso, CRM e follow-up do escuro:</p>
+        <span class="tcv-label">Valor regular · 12 meses</span>
+        <div class="price-big"><small>R$</small>10.693,23<span>/mês</span></div>
+        <p class="lede" style="margin:6px 0 0;font-size:20px">Assessoria de Growth · time dedicado · account, tráfego, copy e design</p>
+        <div class="grid-2" style="margin-top:34px;max-width:1100px">
+          <div class="glass pay-card"><b>Cartão de crédito</b><strong>12× de R$ 10.693,23</strong></div>
+          <div class="glass pay-card"><b>Contrato</b><strong>12 meses</strong><p>Verba de mídia definida à parte, com vocês.</p></div>
+        </div>
+        <aside class="notes">Negociador frio, com os fatos da reunião. Não aceitar objeção já trabalhada. Punch: "PIX ou cartão?" Se a trava for preço, medo ou emocional: pedir acordo de sim ou não e abrir a condição única (tecla U). Se for confiança, sócio ou concorrente: segurar a condição.</aside>
+      </section>
+
+      <!-- 15 Próximos passos [modificado · etapas 8 e 9] -->
+      <section class="slide red" data-title="Próximo passo">
+        <div class="sphere" style="width:420px;height:420px;right:-100px;bottom:-120px;opacity:.3"></div>
+        <span class="eyebrow">Próximos passos</span>
+        <h2 style="margin-top:18px">O trabalho começa agora.</h2>
+        <div class="grid-4" style="margin-top:40px">
+          <div class="glass step-card"><span class="step-num">01</span><h3>Pagamento</h3><p>Hoje, na call</p></div>
+          <div class="glass step-card"><span class="step-num">02</span><h3>Dados e acessos</h3><p>Google, Meta, os dois sites e WhatsApp</p></div>
+          <div class="glass step-card"><span class="step-num">03</span><h3>Kickoff</h3><p>Onda 01 com Aline em <span class="ph">[data]</span></p></div>
+          <div class="glass step-card"><span class="step-num">04</span><h3>CRM no ar</h3><p>Dono, roteiro e jornada em até 15 dias</p></div>
+        </div>
+        <aside class="notes">Fechou: parabenizar pela decisão e colocar no pedestal por ter passado a linha do medo. Não há o que comemorar ainda: o trabalho começa agora.</aside>
+      </section>
+
+      <!-- OCULTO · Condição única (tecla U) [modificado: separada do preço, sim ou não] -->
+      <section class="slide dark oculto" data-title="Condição única">
+        <span class="eyebrow">Condição única desta reunião</span>
+        <h2 style="margin-top:18px;color:#fff;max-width:1200px">Para começar a enxergar a venda a partir de hoje.</h2>
+        <div class="grid-2" style="margin-top:34px;max-width:1200px">
+          <div class="glass pay-card"><b>12× no cartão</b><strong class="now-big">R$ 6.152,32</strong><p>Com cashback EE e desconto de fechamento</p></div>
+          <div class="glass pay-card"><b>Cashback EE</b><strong class="now-big">R$ 12.926,00</strong><p>O valor já investido na estruturação, devolvido nesta condição</p></div>
+        </div>
+        <div class="dark-note" style="max-width:1200px"><span>Contrato de 12 meses. Valor total: R$ 73.827,84. Só vale nesta reunião. Tudo que for diferente de “sim, bora” é não, e ela morre.</span></div>
+        <aside class="notes">Só abrir depois do acordo: "se eu te apresentar o muro mais baixo que você pode encontrar para começarmos, isso faz dessa reunião o início e não o fim? Só tem um ponto: é sim ou não." Punch: "bora resolver isso que vem travando o digital há tanto tempo?"</aside>
+      </section>
+
+      <!-- APÊNDICE -->
+      <section class="slide dark" data-title="Apêndice">
+        <div class="cover-content">
+          <span class="eyebrow">Apêndice</span>
+          <h1 style="font-size:76px;color:#fff">Material de apoio</h1>
+          <p class="lede">Oportunidades · canais · time · rotina · objeções</p>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Oportunidades">
+        <div class="topline"></div>
+        <span class="eyebrow">Apêndice · o que já joga a favor</span>
+        <h2 style="margin-top:18px">Três portas abertas antes do anúncio.</h2>
+        <div class="grid-3" style="margin-top:26px">
+          <article class="card fact" style="min-height:240px"><span class="k">01 · Balcão</span><h3>O atendimento já prova a venda</h3><p>A conversa existe. Só não está escrita para o digital.</p></article>
+          <article class="card fact" style="min-height:240px"><span class="k">02 · Território</span><h3>Duas unidades, um raio claro</h3><p>Barueri, Cajamar, Alphaville e Santana de Parnaíba.</p></article>
+          <article class="card fact" style="min-height:240px"><span class="k">03 · Busca</span><h3>A demanda já tem nome</h3><p>Parafuso, ferramenta e ferragem são buscas concretas.</p></article>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Canais">
+        <div class="topline"></div>
+        <span class="eyebrow">Apêndice · como os canais se falam</span>
+        <h2 style="margin-top:16px">Um sistema. Não uma peça solta.</h2>
+        <div class="flow" id="flow"></div>
+        <div class="flow-read" id="flowRead"></div>
+      </section>
+
+      <section class="slide" data-title="Time">
+        <div class="topline"></div>
+        <span class="eyebrow">Apêndice · time dedicado</span>
+        <h2 style="margin-top:16px">Quatro donos. Nenhuma frente órfã.</h2>
+        <div class="grid-4" style="margin-top:26px">
+          <article class="card who-card"><span class="who-role">Account · Aline Pereira Silva</span><h3>Gestão e alinhamento</h3><p>Dona da conta com a direção da Maben.</p></article>
+          <article class="card who-card"><span class="who-role">Gestor de tráfego</span><h3>Aquisição e performance</h3><p>Google e Meta ligados às duas unidades.</p></article>
+          <article class="card who-card"><span class="who-role">Copywriter</span><h3>Comunicação e conversão</h3><p>Roteiro de urgência, disponibilidade e adequação técnica.</p></article>
+          <article class="card who-card"><span class="who-role">Design · Julia Ferrari</span><h3>Ativos de conversão</h3><p>Peça, aplicação e unidade com a mesma cara.</p></article>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Rotina">
+        <div class="topline"></div>
+        <span class="eyebrow">Apêndice · processo e rotina</span>
+        <h2 style="margin-top:16px">Ritmo curto. Decisão na semana.</h2>
+        <div class="grid-4" style="margin-top:26px">
+          <article class="card who-card"><span class="who-role">Todo dia</span><h3>WhatsApp da conta</h3><p>Dúvida e desbloqueio sem esperar pauta.</p></article>
+          <article class="card who-card"><span class="who-role">Toda semana</span><h3>Growth Sprint</h3><p>O que não converte sai na mesma semana.</p></article>
+          <article class="card who-card"><span class="who-role">A cada 15 dias</span><h3>Performance</h3><p>O que entrou, o que travou, o que muda.</p></article>
+          <article class="card who-card"><span class="who-role">Todo mês</span><h3>Fechamento</h3><p>Report, verba de mídia e decisão.</p></article>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Objeções">
+        <div class="topline"></div>
+        <span class="eyebrow">Apêndice · objeções previsíveis</span>
+        <h2 style="margin-top:16px">Perguntas que costumam aparecer</h2>
+        <div class="grid-2" style="margin-top:26px">
+          <article class="card fact"><span class="k">Verba de mídia</span><h3>“Quanto vai de anúncio?”</h3><p>A verba entra na Onda 03, com dado. Referência: <span class="ph">[R$/mês]</span>.</p></article>
+          <article class="card fact"><span class="k">Retorno</span><h3>“Em quanto tempo se paga?”</h3><p><span class="ph">[N]</span> orçamentos ou carrinhos recuperados por mês pagam a assessoria.</p></article>
+          <article class="card fact"><span class="k">ERP</span><h3>“Já temos sistema.”</h3><p>O ERP fica. O CRM registra a jornada que ele não mostra: origem, etapa, perda, recompra.</p></article>
+          <article class="card fact"><span class="k">Momento</span><h3>“Melhor esperar o catálogo.”</h3><p>A Onda 01 não anuncia. Cada mês no escuro custa <span class="ph">[R$ X ÷ 12]</span>.</p></article>
+        </div>
+      </section>
+    </main>
+
+    <div class="slide-footer"><img id="footerLogo" src="assets/colli-red.png" alt="Colli&amp;Co"></div>
+    <div class="slide-counter" id="slideCounter">01 / 13</div>
+    <nav class="navigation" aria-label="Navegação da apresentação">
+      <button class="nav-btn" id="prevBtn" type="button" aria-label="Slide anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 5l-7 7 7 7"/></svg>
+      </button>
+      <button class="nav-btn" id="nextBtn" type="button" aria-label="Próximo slide">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </nav>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+
+  <script>
+    const slides = [...document.querySelectorAll("#deck > section.slide:not(.oculto)")];
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const progressFill = document.getElementById("progressFill");
+    const slideCounter = document.getElementById("slideCounter");
+    const footerLogo = document.getElementById("footerLogo");
+    const whiteLogo = "assets/colli-white.png";
+    const redLogo = "assets/colli-red.png";
+    let current = 0;
+
+    function pad(n) { return String(n).padStart(2, "0"); }
+
+    function goTo(n) {
+      current = Math.max(0, Math.min(slides.length - 1, n));
+      slides.forEach((s, i) => s.classList.toggle("active", i === current));
+      const dark = slides[current].classList.contains("red") || slides[current].classList.contains("dark");
+      footerLogo.src = dark ? whiteLogo : redLogo;
+      footerLogo.style.opacity = (current === 0 || current === slides.length - 1) ? "0" : "1";
+      slideCounter.style.color = dark ? "rgba(255,255,255,.58)" : "rgba(20,20,20,.52)";
+      slideCounter.textContent = pad(current + 1) + "  /  " + pad(slides.length);
+      progressFill.style.width = ((current + 1) / slides.length * 100) + "%";
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === slides.length - 1;
+      const title = slides[current].dataset.title || "Maben Parafusos";
+      document.title = pad(current + 1) + " | " + title;
+    }
+
+    prevBtn.addEventListener("click", () => goTo(current - 1));
+    nextBtn.addEventListener("click", () => goTo(current + 1));
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight" || e.key === "PageDown") goTo(current + 1);
+      if (e.key === "ArrowLeft" || e.key === "PageUp") goTo(current - 1);
+    });
+
+    function fit() {
+      const s = Math.min(window.innerWidth / 1600, window.innerHeight / 900);
+      document.getElementById("deck").style.setProperty("--deck-scale", String(s));
+    }
+    window.addEventListener("resize", fit);
+    fit();
+    goTo(0);
+
+    const travas = [
+      ["Impacto", "Atraso, mensagem fragmentada e lead desassistido."],
+      ["Impacto", "Urgência, estoque e medida técnica ficam de fora."],
+      ["Impacto", "Origem, perda e recompra não têm rastro."],
+      ["Impacto", "Não há follow-up nem pós-venda. O catálogo ainda está incompleto."]
+    ];
+    const travasFix = [
+      ["O que a assessoria faz", "WhatsApp com triagem e um dono de canal. O balcão deixa de disputar a mensagem."],
+      ["O que a assessoria faz", "Roteiro de qualificação: urgência, disponibilidade e adequação técnica."],
+      ["O que a assessoria faz", "CRM da jornada. O ERP continua. Origem, etapa, perda e recompra ganham dono."],
+      ["O que a assessoria faz", "Régua de orçamento, inativo e carrinho. Catálogo fecha o que já dá para vender."]
+    ];
+    document.querySelectorAll("[data-trava]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const i = Number(btn.dataset.trava);
+        const on = btn.classList.contains("is-on");
+        document.querySelectorAll("[data-trava]").forEach((el) => {
+          el.classList.remove("is-on");
+          const n = Number(el.dataset.trava);
+          const box = el.querySelector(".swap");
+          box.innerHTML = "<b>" + travas[n][0] + "</b><span>" + travas[n][1] + "</span>";
+        });
+        if (!on) {
+          btn.classList.add("is-on");
+          btn.querySelector(".swap").innerHTML = "<b>" + travasFix[i][0] + "</b><span>" + travasFix[i][1] + "</span>";
+        }
+      });
+    });
+
+    const funnel = [
+      { n: "01", tr: "Trava 01", name: "Atender", short: "O WhatsApp deixa de disputar o balcão.", text: "A mensagem chega com triagem e um dono de canal. O balcão atende quem está na loja. O lead digital não espera a folga da rotina.", own: "Aline Pereira Silva", role: "Perguntar: o que você entendeu daqui sobre o atraso de hoje?" },
+      { n: "02", tr: "Trava 02", name: "Qualificar", short: "Urgência, estoque e medida.", text: "O roteiro substitui “qualidade”. A primeira resposta diz se tem, para quando, e se a peça serve.", own: "Copy", role: "Perguntar: ficou claro o que muda no orçamento genérico?" },
+      { n: "03", tr: "Trava 03", name: "Registrar", short: "Origem, etapa, perda, recompra.", text: "Cada cotação entra no CRM com de onde veio, em que etapa está, quem é o dono e por que morreu ou voltou. O ERP continua sendo o ERP.", own: "Aline + operação", role: "Perguntar: o que passa a existir que hoje só está na cabeça?" },
+      { n: "04", tr: "Trava 04", name: "Recuperar", short: "Orçamento, inativo e carrinho.", text: "Quem pediu preço, quem sumiu e quem abandonou o carrinho recebe follow-up. O catálogo fecha primeiro o que já dá para vender.", own: "Account + tráfego", role: "Perguntar: qual desses três a Maben perde com mais frequência?" },
+      { n: "05", tr: "Sai do escuro", name: "Medir", short: "Mídia só com rastro.", text: "Google e Meta entram quando origem e etapa já existem. O retorno do anúncio deixa de ser opinião.", own: "Tráfego + Julia Ferrari", role: "Perguntar: o que você entendeu sobre anunciar antes de ter dado?" }
+    ];
+    const funnelEl = document.getElementById("funnel");
+    const funnelDetail = document.getElementById("funnelDetail");
+    function renderFunnel(active) {
+      funnelEl.innerHTML = funnel.map((f, i) =>
+        '<button type="button" class="funnel-step' + (i === active ? " is-on" : "") + '" data-i="' + i + '"><span class="n">' + f.n + '</span><h3>' + f.name + '</h3><p>' + f.short + '</p><span class="tr">' + f.tr + '</span></button>'
+      ).join("");
+      const f = funnel[active];
+      funnelDetail.innerHTML = '<div><h3>' + f.name + '</h3><p>' + f.text + '</p></div><div class="own"><span>' + f.own + '</span><p>' + f.role + '</p></div>';
+      funnelEl.querySelectorAll("button").forEach((b) => b.addEventListener("click", () => renderFunnel(Number(b.dataset.i))));
+    }
+    renderFunnel(0);
+
+    const channels = [
+      { name: "WhatsApp", sub: "Trava 01", text: "Entra com triagem e dono. O balcão atende a loja. A mensagem não espera a folga da rotina." },
+      { name: "Roteiro", sub: "Trava 02", text: "A primeira resposta cobre urgência, disponibilidade e adequação técnica. “Qualidade” sai do discurso." },
+      { name: "Lojas e e-commerce", sub: "Trava 04", text: "Barueri, Cajamar e a loja online. Carrinho e orçamento entram na mesma régua. O catálogo fecha o que já dá para vender." },
+      { name: "CRM", sub: "Trava 03", text: "Origem, etapa da cotação, perda e recompra. O ERP permanece. A jornada deixa de morar na cabeça." },
+      { name: "Mídia", sub: "Onda 03", text: "Google e Meta só depois do rastro existir. Sem dado, não há retorno para medir." }
+    ];
+    const flowEl = document.getElementById("flow");
+    const flowRead = document.getElementById("flowRead");
+    function renderFlow(active) {
+      const node = (i) => {
+        const c = channels[i];
+        return '<button type="button" class="node' + (i === active ? " is-on" : "") + '" data-i="' + i + '"><b>' + c.name + '</b><span>' + c.sub + '</span></button>';
+      };
+      flowEl.innerHTML =
+        '<div class="flow-col">' + node(0) + node(1) + node(2) + '</div>' +
+        '<div class="flow-arrow">→</div>' +
+        '<div class="flow-col" style="align-content:center">' + node(3) + '</div>' +
+        '<div class="flow-arrow">→</div>' +
+        '<div class="flow-col">' +
+          '<div class="hub-node"><strong>Maben</strong><span>Todo canal chega com dono, etapa e próximo passo.</span></div>' +
+          node(4) +
+        '</div>';
+      const c = channels[active];
+      flowRead.innerHTML = '<div class="tag">' + c.name + '</div><div><p>' + c.text + '</p></div>';
+      flowEl.querySelectorAll(".node").forEach((b) => b.addEventListener("click", () => renderFlow(Number(b.dataset.i))));
+    }
+    renderFlow(0);
+    // Condição única: fora da navegação, abre/fecha com a tecla U (só depois do acordo de sim ou não)
+    const oculto = document.querySelector("#deck > section.slide.oculto");
+    let ocultoOn = false;
+    function fecharOculto() { if (ocultoOn) { ocultoOn = false; oculto.classList.remove("active"); goTo(current); } }
+    document.addEventListener("keydown", (e) => {
+      if (!oculto) return;
+      if (e.key.toLowerCase() === "u") {
+        if (ocultoOn) return fecharOculto();
+        ocultoOn = true;
+        slides.forEach((s) => s.classList.remove("active"));
+        oculto.classList.add("active");
+        slideCounter.textContent = "condição única";
+      } else if (["ArrowRight", "ArrowLeft", "PageDown", "PageUp"].includes(e.key)) {
+        fecharOculto();
+      }
+    });
+    prevBtn.addEventListener("click", fecharOculto);
+    nextBtn.addEventListener("click", fecharOculto);
+  </script>
+</body>
+</html>
