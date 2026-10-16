@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Henri Soluções × V4 Colli&amp;Co · Assessoria 6 meses</title>
+  <link rel="stylesheet" href="assets/fonts/ibm-plex.css">
+  <style>
+    :root {
+      --red: #e50914;
+      --orange: #ff481f;
+      --dark: #280001;
+      --cream: #ffebc8;
+      --ink: #141414;
+      --mut: #5a5a5a;
+      --line: rgba(20,20,20,.12);
+      --hero: radial-gradient(120% 130% at 50% -10%, #ff5a2c 0%, #e50914 30%, #b00610 62%, #280001 100%);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: #171313; }
+    body {
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
+    }
+    @page { size: 16in 9in; margin: 0; }
+    .page {
+      position: relative;
+      width: 16in;
+      height: 9in;
+      padding: .62in .78in .72in;
+      overflow: hidden;
+      page-break-after: always;
+      break-after: page;
+      background: #fff;
+    }
+    .page:last-child { page-break-after: auto; break-after: auto; }
+    .page.red {
+      color: #fff;
+      background: var(--hero);
+    }
+    h1, h2, h3, p { margin: 0; }
+    h1 { font-size: 72px; line-height: .98; letter-spacing: -.05em; font-weight: 600; }
+    h2 { font-size: 40px; line-height: 1.05; letter-spacing: -.035em; font-weight: 600; }
+    h3 { font-size: 28px; line-height: 1.15; letter-spacing: -.02em; font-weight: 600; }
+    .lede { margin-top: 16px; max-width: 1080px; font-size: 22px; line-height: 1.4; font-weight: 300; color: var(--mut); }
+    .red .lede { color: rgba(255,255,255,.82); }
+    .eyebrow {
+      display: inline-flex; align-items: center; min-height: 32px;
+      padding: 6px 14px; border-radius: 999px;
+      border: 1px solid rgba(229,9,20,.18);
+      background: rgba(229,9,20,.07);
+      color: var(--red);
+      font: 700 12px/1 "IBM Plex Mono", monospace;
+      letter-spacing: .1em; text-transform: uppercase;
+    }
+    .red .eyebrow {
+      color: #fff; background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.32);
+    }
+    .topline {
+      position: absolute; top: 0; left: 0; width: 100%; height: 5px;
+      background: linear-gradient(90deg, var(--red), var(--orange), transparent 76%);
+    }
+    .sphere {
+      position: absolute; border-radius: 50%; pointer-events: none;
+      border: 1px solid rgba(255,255,255,.24);
+      background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.38), rgba(255,255,255,.04) 48%, transparent 66%);
+    }
+    .logo-white { width: 330px; display: block; }
+    .logo-red { width: 155px; height: 48px; object-fit: contain; object-position: left center; }
+    .foot {
+      position: absolute; left: .78in; right: .78in; bottom: .28in;
+      display: flex; justify-content: space-between; align-items: center;
+      font: 700 10px/1 "IBM Plex Mono", monospace;
+      letter-spacing: .08em; text-transform: uppercase;
+      color: rgba(20,20,20,.42);
+    }
+    .red .foot { color: rgba(255,255,255,.45); }
+    .cover-meta { margin-top: 28px; color: rgba(255,255,255,.85); font-size: 18px; }
+    .offer {
+      margin-top: 18px; padding: 28px 36px; border-radius: 24px;
+      border: 1px solid var(--line); background: #fff;
+      min-height: 5.4in;
+    }
+    .offer.featured {
+      border: 1px solid var(--red);
+      box-shadow: 0 12px 40px rgba(229,9,20,.12);
+    }
+    .offer .tag { font: 700 12px/1 "IBM Plex Mono", monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--red); }
+    .offer h3 { margin: 12px 0 6px; }
+    .offer .sub { margin: 0 0 16px; color: var(--mut); font-size: 18px; }
+    .row {
+      display: flex; justify-content: space-between; gap: 12px;
+      padding: 10px 0; border-bottom: 1px solid var(--line);
+      font-size: 18px; color: var(--mut);
+    }
+    .row strong { color: var(--ink); }
+    .row.ok strong { color: #1a7a3a; }
+    .was { display: block; margin-top: 14px; font-size: 15px; font-weight: 600; text-decoration: line-through; color: var(--mut); }
+    .now { font-size: 46px; font-weight: 700; letter-spacing: -.04em; line-height: 1; margin: 4px 0 4px; }
+    .now small { font-size: 20px; font-weight: 600; color: var(--mut); }
+    .split { font-size: 26px; font-weight: 700; letter-spacing: -.03em; line-height: 1.15; margin: 0 0 2px; }
+    .pay { font-size: 16px; font-weight: 600; color: var(--mut); margin: 0 0 12px; }
+    .offer ul { margin: 0; padding-left: 20px; color: var(--mut); font-size: 17px; line-height: 1.45; }
+    .offer li { margin: 4px 0; }
+    .cols { display: grid; grid-template-columns: 1.15fr .85fr; gap: 22px; align-items: stretch; }
+    .note {
+      padding: 22px 24px; border-radius: 20px; background: #f5f4f2; border: 1px solid var(--line);
+    }
+    .note .k { font: 700 11px/1 "IBM Plex Mono", monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--red); margin-bottom: 10px; }
+    .note p { color: var(--mut); font-size: 16px; line-height: 1.4; margin: 0 0 10px; }
+    .note p:last-child { margin: 0; }
+    @media screen {
+      body { padding: 24px 0 48px; }
+      .page { margin: 0 auto 28px; box-shadow: 0 32px 80px rgba(0,0,0,.45); }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="page red">
+    <div class="sphere" style="width:430px;height:430px;right:-90px;top:-120px;opacity:.5"></div>
+    <div class="sphere" style="width:220px;height:220px;right:280px;top:90px;opacity:.28"></div>
+    <img class="logo-white" src="assets/v4-logo-white.png" alt="V4 Colli&amp;Co">
+    <span class="eyebrow" style="margin-top:28px">Henri Soluções × V4 Colli&amp;Co · Assessoria de Growth</span>
+    <h1 style="margin-top:22px">Da indicação à<br>origem previsível.</h1>
+    <p class="lede">Continuidade operacional para cozinhas profissionais. O próximo ciclo é uma segunda origem — filtrada, com dono, no ritmo do campo.</p>
+    <div class="cover-meta">Dois jeitos · 6 meses de trabalho · pagamento no cartão · mídia à parte</div>
+    <div class="foot"><span>V4 Colli&amp;Co</span><span>Henri Soluções · Confidencial</span><span>01 / 03</span></div>
+  </section>
+
+  <section class="page">
+    <div class="topline"></div>
+    <span class="eyebrow">Investimento · 6 meses de trabalho · cartão de crédito</span>
+    <h2 style="margin-top:14px">A V4 executa. Seis meses de trabalho.</h2>
+    <p class="lede" style="font-size:20px;margin-top:8px">Mesma estratégia da apresentação. A V4 aperta o botão. Pagamento no cartão. Verba de mídia à parte.</p>
+    <div class="cols">
+      <article class="offer featured">
+        <div class="tag">V4 executa · 6 meses de trabalho</div>
+        <h3>Assessoria de Growth</h3>
+        <p class="sub">Account + GT + Copy + Design</p>
+        <div class="row"><span>Tabela Executar</span><strong>R$ 8.500,00 /mês</strong></div>
+        <div class="row"><span>Valor total</span><strong>R$ 28.737,12</strong></div>
+        <div class="row ok"><span>Cartão de crédito</span><strong>6× R$ 4.789,52</strong></div>
+        <span class="was">De R$ 8.500,00 /mês</span>
+        <div class="now">R$ 28.737<small>,12</small></div>
+        <div class="split">6× R$ 4.789,52</div>
+        <p class="pay">no cartão de crédito</p>
+        <ul>
+          <li>V4 veicula, redige e arte-final · rotina Colli</li>
+          <li>Grupo no dia, check-in, trimestre e growths</li>
+          <li>Google com teto + LinkedIn no comitê</li>
+          <li>Verba de mídia à parte</li>
+        </ul>
+      </article>
+      <aside class="note">
+        <div class="k">Quem faz o quê</div>
+        <p>A V4 veicula, redige e arte-final. Account, tráfego, copy e design na conta.</p>
+        <p>Maria opera a lista. Romildo fecha a conta grande. Gabriel libera o campo.</p>
+        <p>Sem combo. O outro jeito — a Henri aperta o botão — está no próximo slide.</p>
+      </aside>
+    </div>
+    <div class="foot"><img class="logo-red" src="assets/v4-logo-red.png" alt=""><span>Assessoria · total R$ 28.737,12 · 6× no cartão</span><span>02 / 03</span></div>
+  </section>
+
+  <section class="page">
+    <div class="topline"></div>
+    <span class="eyebrow">Investimento · 6 meses de trabalho · cartão de crédito</span>
+    <h2 style="margin-top:14px">A V4 aponta. A Henri aperta o botão.</h2>
+    <p class="lede" style="font-size:20px;margin-top:8px">Seis meses de trabalho. Pagamento em 12× no cartão de crédito. Sem veicular, sem redigir, sem arte-final.</p>
+    <div class="cols">
+      <article class="offer">
+        <div class="tag">Henri executa · 6 meses de trabalho</div>
+        <h3>Execução Assistida</h3>
+        <p class="sub">A V4 dirige. O time interno aperta o botão</p>
+        <div class="row"><span>Tabela</span><strong>R$ 45.000,00</strong></div>
+        <div class="row"><span>Valor total</span><strong>R$ 27.600,00</strong></div>
+        <div class="row ok"><span>Cartão de crédito</span><strong>12× R$ 2.300,00</strong></div>
+        <span class="was">De R$ 45.000,00</span>
+        <div class="now">R$ 27.600<small>,00</small></div>
+        <div class="split">12× R$ 2.300,00</div>
+        <p class="pay">no cartão de crédito</p>
+        <ul>
+          <li>Semanal · 60 min de direção (prioridade e fila)</li>
+          <li>Quinzenal · revisão do que a Henri produziu</li>
+          <li>Mensal · resultado, teto de verba e mensagem</li>
+          <li>Playbook e rumo. A V4 não veicula</li>
+          <li>Verba de mídia à parte</li>
+        </ul>
+      </article>
+      <aside class="note">
+        <div class="k">Quem faz o quê</div>
+        <p>V4: rumo, teto de Google, cadência no LinkedIn, revisão do que vocês já fizeram.</p>
+        <p>Henri: Maria na lista, time interno veicula e fecha arte, Romildo no fechamento, Gabriel no campo.</p>
+        <p>Fecha sozinho. Sem combo com o slide anterior.</p>
+      </aside>
+    </div>
+    <div class="foot"><img class="logo-red" src="assets/v4-logo-red.png" alt=""><span>Assistida · 6 meses · 12× R$ 2.300,00 no cartão</span><span>03 / 03</span></div>
+  </section>
+
+</body>
+</html>
