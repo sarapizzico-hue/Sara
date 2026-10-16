@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Proposta V4 — Dakar Automotive Center | EC + Growth</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #070707;
+      --bg-elev: #111111;
+      --red: #e50915;
+      --red-deep: #9a0610;
+      --red-soft: rgba(229, 9, 21, 0.14);
+      --line: rgba(255,255,255,0.08);
+      --text: #f5f5f5;
+      --muted: #9a9a9a;
+      --ok: #34d399;
+      --ok-soft: rgba(52, 211, 153, 0.12);
+      --max: 1080px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Manrope, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      background-image:
+        radial-gradient(ellipse 80% 50% at 10% -10%, rgba(229,9,21,.28), transparent 55%),
+        radial-gradient(ellipse 60% 40% at 100% 20%, rgba(229,9,21,.12), transparent 50%),
+        linear-gradient(180deg, #070707 0%, #0b0b0b 100%);
+    }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 28px; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase;
+      color: #fca5a5;
+    }
+    .eyebrow::before { content: ""; width: 28px; height: 2px; background: var(--red); }
+    h1, h2, .display {
+      font-family: "Bebas Neue", sans-serif;
+      letter-spacing: .02em;
+      line-height: .95;
+      font-weight: 400;
+    }
+    .muted { color: var(--muted); }
+    .red { color: var(--red); }
+    .ok { color: var(--ok); }
+
+    /* HERO */
+    .hero {
+      min-height: 92vh;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 48px 0 64px;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: "";
+      position: absolute; right: -8%; top: 10%;
+      width: 420px; height: 420px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(229,9,21,.25), transparent 70%);
+      pointer-events: none;
+    }
+    .brand-lock {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: clamp(18px, 2.4vw, 26px);
+      letter-spacing: .18em;
+      margin-bottom: 28px;
+    }
+    .brand-lock span { color: var(--red); }
+    .hero h1 {
+      font-size: clamp(52px, 9vw, 96px);
+      max-width: 920px;
+      margin: 14px 0 22px;
+    }
+    .hero-lead {
+      max-width: 640px;
+      font-size: 18px;
+      color: var(--muted);
+      margin-bottom: 36px;
+    }
+    .hero-meta {
+      display: flex; flex-wrap: wrap; gap: 10px 18px;
+      font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      color: #d4d4d4;
+    }
+    .hero-meta b { color: #fff; font-weight: 800; }
+
+    /* SECTIONS */
+    section { padding: 72px 0; border-bottom: 1px solid var(--line); }
+    section h2 {
+      font-size: clamp(36px, 5vw, 56px);
+      margin: 10px 0 18px;
+    }
+    .lead { max-width: 680px; color: var(--muted); font-size: 16px; margin-bottom: 36px; }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 40px;
+      align-items: start;
+    }
+    @media (max-width: 860px) {
+      .split { grid-template-columns: 1fr; }
+    }
+
+    .quote-block {
+      border-left: 3px solid var(--red);
+      padding: 8px 0 8px 22px;
+      margin: 28px 0;
+    }
+    .quote-block p {
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+    .quote-block span {
+      display: block;
+      margin-top: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 28px;
+    }
+    @media (max-width: 700px) { .stat-row { grid-template-columns: 1fr; } }
+    .stat {
+      padding: 22px 20px;
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+      border: 1px solid var(--line);
+      border-radius: 18px;
+    }
+    .stat .n {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 42px;
+      color: #fff;
+      line-height: 1;
+    }
+    .stat .l {
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 0;
+      margin-top: 12px;
+    }
+    .step {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 18px;
+      padding: 22px 0;
+      border-top: 1px solid var(--line);
+    }
+    .step:last-child { border-bottom: 1px solid var(--line); }
+    .step .num {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 34px;
+      color: var(--red);
+    }
+    .step h3 { font-size: 18px; margin-bottom: 6px; }
+    .step p { color: var(--muted); font-size: 14px; }
+
+    .team {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    @media (max-width: 700px) { .team { grid-template-columns: 1fr; } }
+    .role {
+      padding: 24px;
+      border-radius: 18px;
+      background: var(--bg-elev);
+      border: 1px solid var(--line);
+      position: relative;
+      overflow: hidden;
+    }
+    .role::before {
+      content: "";
+      position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+      background: var(--red);
+    }
+    .role .tag {
+      font-size: 10px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+      color: #fca5a5; margin-bottom: 10px;
+    }
+    .role h3 { font-size: 20px; margin-bottom: 8px; }
+    .role p { font-size: 14px; color: var(--muted); }
+
+    .bonus {
+      margin-top: 22px;
+      padding: 22px 24px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(52,211,153,.12), rgba(52,211,153,.04));
+      border: 1px solid rgba(52,211,153,.28);
+    }
+    .bonus strong {
+      display: block;
+      font-size: 13px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--ok);
+      margin-bottom: 8px;
+    }
+    .bonus p { font-size: 15px; color: #d1fae5; }
+
+    .deliver-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    @media (max-width: 800px) { .deliver-grid { grid-template-columns: 1fr; } }
+    .deliver {
+      padding: 28px;
+      border-radius: 20px;
+      background: rgba(255,255,255,.02);
+      border: 1px solid var(--line);
+    }
+    .deliver .kicker {
+      font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--red); margin-bottom: 10px;
+    }
+    .deliver h3 {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 34px;
+      margin-bottom: 14px;
+    }
+    .deliver ul { list-style: none; }
+    .deliver li {
+      position: relative;
+      padding: 8px 0 8px 18px;
+      font-size: 14px;
+      color: #d4d4d4;
+      border-bottom: 1px solid rgba(255,255,255,.05);
+    }
+    .deliver li:last-child { border-bottom: 0; }
+    .deliver li::before {
+      content: "";
+      position: absolute; left: 0; top: 15px;
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--red);
+    }
+
+    /* PRICING */
+    .price-stage {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 20px;
+    }
+    @media (max-width: 900px) { .price-stage { grid-template-columns: 1fr; } }
+    .price-panel {
+      background: #0f0f0f;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 30px 80px rgba(0,0,0,.35);
+    }
+    .price-panel.featured {
+      background: linear-gradient(165deg, #171017 0%, #0f0f0f 45%, #101010 100%);
+      border-color: rgba(229,9,21,.35);
+    }
+    .price-panel h3 {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 30px;
+      margin-bottom: 6px;
+    }
+    .price-panel .subhead {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+    .line {
+      display: flex; justify-content: space-between; gap: 16px; align-items: baseline;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      font-size: 14px;
+    }
+    .line .lbl { color: #cfcfcf; }
+    .line .val { font-weight: 800; white-space: nowrap; }
+    .line.soft .val { color: var(--muted); font-weight: 600; }
+    .line.disc .val { color: var(--ok); }
+    .badge {
+      display: inline-block;
+      margin-left: 8px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(52,211,153,.16);
+      color: #6ee7b7;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .04em;
+    }
+    .pay-now {
+      margin-top: 22px;
+      padding: 18px 20px;
+      border-radius: 16px;
+      background: #fff;
+      color: #111;
+    }
+    .pay-now .tiny {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #666;
+      margin-bottom: 6px;
+    }
+    .pay-now .big {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 44px;
+      line-height: 1;
+      color: #111;
+    }
+    .pay-now .hint {
+      margin-top: 6px;
+      font-size: 13px;
+      color: #555;
+      font-weight: 600;
+    }
+    .note {
+      margin-top: 14px;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .total-bar {
+      margin-top: 28px;
+      padding: 26px 28px;
+      border-radius: 22px;
+      background: linear-gradient(90deg, rgba(229,9,21,.18), rgba(229,9,21,.05));
+      border: 1px solid rgba(229,9,21,.35);
+      display: flex; flex-wrap: wrap; gap: 18px 40px; justify-content: space-between; align-items: end;
+    }
+    .total-bar .k {
+      font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #fca5a5;
+      margin-bottom: 6px;
+    }
+    .total-bar .v {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 40px;
+      line-height: 1;
+    }
+
+    .cta {
+      padding: 80px 0 100px;
+      text-align: left;
+    }
+    .cta h2 { max-width: 760px; }
+    .cta p { max-width: 620px; color: var(--muted); margin: 16px 0 28px; font-size: 16px; }
+    .cta-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 14px 22px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-decoration: none;
+      border: 1px solid transparent;
+    }
+    .btn-primary { background: var(--red); color: #fff; }
+    .btn-ghost { background: transparent; color: #fff; border-color: rgba(255,255,255,.18); }
+
+    footer {
+      padding: 28px 0 48px;
+      color: var(--muted);
+      font-size: 12px;
+      border-top: 1px solid var(--line);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="brand-lock">V4 <span>COMPANY</span></div>
+      <p class="eyebrow">Proposta comercial · Pós Estruturação Estratégica</p>
+      <h1>A EE organizou a máquina.<br><span class="red">Agora é hora de executar.</span></h1>
+      <p class="hero-lead">
+        A Dakar já sabe o que fazer. O próximo passo é operar com disciplina —
+        comercial blindado, CRM vivo e um time de alta performance da V4 rodando atração e conversão lado a lado com vocês.
+      </p>
+    </div>
+  </header>
+
+  <section>
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow">Por que agora</p>
+        <h2>Vocês saíram do “o que fazer”.<br>Falta o “como operar todo dia”.</h2>
+        <p class="lead">
+          A Estruturação Estratégica entregou o mapa: comercial, posicionamento, ICPs, Google/LPs e o fim do ralo de orçamentos.
+          Sem execução assistida, o risco é o clássico — processo no papel e operação voltando ao reativo.
+        </p>
+        <div class="quote-block">
+          <p>“Não adianta encher a oficina sem organização.”</p>
+          <span>Premissa da Dakar — e o norte desta proposta</span>
+        </div>
+        <p class="muted" style="font-size:15px">
+          Por isso esta proposta não é “mais consultoria”. É o time V4 entrando para executar com vocês:
+          estruturar o comercial (Saber) e operar growth com alta performance (Executar).
+        </p>
+      </div>
+      <div>
+        <div class="stat-row" style="grid-template-columns:1fr">
+          <div class="stat">
+            <div class="n">EE → Executar</div>
+            <div class="l">Diagnóstico virou playbook. Agora vira rotina, KPI e receita previsível.</div>
+          </div>
+          <div class="stat">
+            <div class="n">R$ 100k/mês</div>
+            <div class="l">Gap estimado entre capacidade (até R$ 300k) e faturamento atual (R$ 150–200k).</div>
+          </div>
+          <div class="stat">
+            <div class="n">0% desperdício</div>
+            <div class="l">Tráfego sem processo comercial é dinheiro no lixo — a EC existe para fechar essa conta.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <p class="eyebrow">A jornada</p>
+      <h2>Do diagnóstico à execução</h2>
+      <p class="lead">Uma sequência simples, respeitando o momento de caixa e a aversão a risco da Dakar.</p>
+      <div class="timeline">
+        <div class="step">
+          <div class="num">01</div>
+          <div>
+            <h3>Estruturação Estratégica (já realizada)</h3>
+            <p>Mapa pronto: funil, ICPs, scripts, Google/LPs, posicionamento e fim do vazamento de orçamentos.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="num">02</div>
+          <div>
+            <h3>Estruturação Comercial 360º (Saber)</h3>
+            <p>Ativar CRM, SLA, playbooks, rituais e treinamento — para a equipe vender com método, não no improviso.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="num">03</div>
+          <div>
+            <h3>Assessoria de Growth (Executar · 12 meses)</h3>
+            <p>Time V4 em operação contínua: mídia de performance + design, otimizando CAC e preenchendo a capacidade ociosa com previsibilidade.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <p class="eyebrow">O que entra nesta proposta</p>
+      <h2>Núcleo modular · pronto para operar</h2>
+      <p class="lead">Dois motores sincronizados: processo comercial + atração. Trabalhamos de forma modular.</p>
+
+      <div class="deliver-grid">
+        <article class="deliver">
+          <div class="kicker">Saber · pontual</div>
+          <h3>Diagnóstico e Performance Comercial 360º</h3>
+          <ul>
+            <li>Mapeamento de funil, KPIs e SLAs</li>
+            <li>Playbooks, scripts e definição de papéis (SDR/Vendas)</li>
+            <li>Processos (BPMN) e rituais de gestão</li>
+            <li>Definição de ICP e política de comissionamento</li>
+            <li>Treinamento da equipe na nova rotina</li>
+            <li>Implantação/otimização comercial com governança</li>
+            <li>Implementação de CRM: pipes, fases, canais de captura e bot de boas-vindas</li>
+          </ul>
+        </article>
+        <article class="deliver">
+          <div class="kicker">Executar · 12 meses</div>
+          <h3>Assessoria de Growth</h3>
+          <ul>
+            <li>Profissional de Gestão de Mídia Paga (Google &amp; Meta)</li>
+            <li>Profissional de Design Gráfico (criativos de performance)</li>
+            <li>Monitoramento diário de campanhas</li>
+            <li>Check-in quinzenal de performance</li>
+            <li>QBR trimestral com liderança</li>
+            <li>Leitura de funil: clique → orçamento → receita</li>
+          </ul>
+        </article>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <p class="eyebrow">Time V4</p>
+      <h2>Alta performance ao lado da Dakar</h2>
+      <p class="lead">Não é um PDF e sumimos. É gente operando com vocês — com cadência, dado e accountability.</p>
+      <div class="team">
+        <div class="role">
+          <div class="tag">Executar</div>
+          <h3>Gestão de Mídia Paga</h3>
+          <p>Campanhas Google e Meta com foco em orçamento e CAC. Testes contínuos, não “ligar anúncio e rezar”.</p>
+        </div>
+        <div class="role">
+          <div class="tag">Executar</div>
+          <h3>Design Gráfico</h3>
+          <p>Criativos de performance alinhados aos ICPs da Dakar: agro, frota e família SUV — vender confiabilidade, não preço.</p>
+        </div>
+        <div class="role">
+          <div class="tag">Saber</div>
+          <h3>Estruturação Comercial</h3>
+          <p>Processo, CRM, scripts e treinamento para o time parar de ser reativo e passar a conduzir o orçamento até o fechamento.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="investimento">
+    <div class="wrap">
+      <p class="eyebrow">Investimento</p>
+      <h2>Valor real · cashback EE · condição de cliente</h2>
+      <div class="price-stage">
+        <!-- PONTUAL -->
+        <div class="price-panel featured">
+          <h3>Produto pontual</h3>
+          <p class="subhead">Diagnóstico e Performance Comercial 360º · Saber</p>
+
+          <div class="line soft">
+            <span class="lbl">Valor real (tabela)</span>
+            <span class="val">R$ 20.283,13</span>
+          </div>
+          <div class="line soft">
+            <span class="lbl">Subtotal</span>
+            <span class="val">R$ 20.283,13</span>
+          </div>
+          <div class="line disc">
+            <span class="lbl">Desconto cliente V4DESC25 <span class="badge">-25%</span></span>
+            <span class="val">− R$ 5.070,78</span>
+          </div>
+          <div class="line disc">
+            <span class="lbl">Pagar tudo <span class="badge">-30%</span></span>
+            <span class="val">− R$ 6.084,94</span>
+          </div>
+          <div class="line">
+            <span class="lbl"><strong>Total com desconto</strong></span>
+            <span class="val">R$ 9.127,41</span>
+          </div>
+
+          <div class="pay-now">
+            <div class="tiny">Você pagará agora</div>
+            <div class="big">12x R$ 760,62</div>
+            <div class="hint">ou condição à vista conforme política comercial · CRM bonificado incluso</div>
+          </div>
+          <p class="note">
+            Implementação de CRM (pipes, fases, canais de captura e bot de boas-vindas) está <strong style="color:#fff">bonificada</strong> —
+            não aparece como linha de cobrança adicional.
+          </p>
+        </div>
+
+        <!-- RECORRENTE -->
+        <div class="price-panel">
+          <h3>Produtos recorrentes</h3>
+          <p class="subhead">Assessoria de Growth · Executar · 12 meses</p>
+
+          <div class="line soft">
+            <span class="lbl">Assessoria de Growth</span>
+            <span class="val">R$ 11.223,40 / mês</span>
+          </div>
+          <div class="line soft">
+            <span class="lbl">Subtotal anual (12 meses)</span>
+            <span class="val">R$ 134.680,80</span>
+          </div>
+          <div class="line disc">
+            <span class="lbl">Comprometimento 12 meses <span class="badge">-15%</span></span>
+            <span class="val">− R$ 20.202,12</span>
+          </div>
+          <div class="line disc">
+            <span class="lbl">Cartão parcelado 12x <span class="badge">-20%</span></span>
+            <span class="val">− R$ 26.936,16</span>
+          </div>
+          <div class="line disc">
+            <span class="lbl">Abatimento EE (cashback) <span class="badge">≈ R$ 13.488</span></span>
+            <span class="val">− R$ 13.468,08</span>
+          </div>
+          <div class="line">
+            <span class="lbl"><strong>Investimento anual líquido</strong></span>
+            <span class="val">R$ 74.074,44</span>
+          </div>
+
+          <div class="pay-now">
+            <div class="tiny">Você pagará</div>
+            <div class="big">R$ 6.172,87<span style="font-size:22px">/mês</span></div>
+            <div class="hint">12 meses · já com cashback da EE e descontos de cliente</div>
+          </div>
+          <p class="note">
+            O abatimento de ~<strong style="color:#fff">R$ 13.488</strong> corresponde ao investimento já realizado na Estruturação Estratégica,
+            aplicado como crédito nesta condição de Executar.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="wrap">
+      <p class="eyebrow">Próximo passo</p>
+      <h2>Validar escopo.<br>Formalizar. Ligar a operação.</h2>
+      <p>
+        Alinhamos responsáveis internos (Fernando, Heiner e Renan), acessos de CRM/mídia e o kick-off da Estruturação Comercial —
+        com o time de Growth pronto para entrar na sequência, sem sobrecarregar a oficina.
+      </p>
+      <div class="cta-actions">
+        <a class="btn btn-primary" href="#investimento">Revisar investimento</a>
+        <a class="btn btn-ghost" href="#">Falar com a V4 Colli&amp;Co</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      V4 Company · Colli&amp;Co · Proposta Dakar Automotive Center · 2026<br />
+      Documento comercial confidencial · valores sujeitos à política vigente de fechamento
+    </div>
+  </footer>
+
+</body>
+</html>
