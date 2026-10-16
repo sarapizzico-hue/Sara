@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<title>Davi Gás × V4 Company — Proposta ZapFirst + Social Mídia</title>
+<style>
+  @page { size: A4; margin: 16mm 14mm 18mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font: 11.2px/1.55 Inter, "Segoe UI", Helvetica, Arial, sans-serif;
+    color: #1a1a1a;
+    background: #fff;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  h1, h2, h3, h4 { font-family: Sora, Inter, Arial, sans-serif; letter-spacing: -0.02em; line-height: 1.2; }
+  .cover {
+    background: linear-gradient(150deg, #0d0d0d 0%, #1c0404 55%, #2b0606 100%);
+    color: #fff;
+    border-radius: 18px;
+    padding: 28px 26px 24px;
+    margin-bottom: 18px;
+  }
+  .eyebrow {
+    font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
+    color: rgba(255,255,255,.65); margin-bottom: 10px;
+  }
+  .cover h1 { font-size: 26px; font-weight: 800; color: #fff; margin-bottom: 10px; }
+  .cover h1 span { color: #ff5a5f; }
+  .cover p { color: rgba(255,255,255,.86); font-size: 13px; max-width: 640px; }
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 16px; }
+  .kpi { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12); border-radius: 12px; padding: 10px 12px; }
+  .kpi b { display: block; font-size: 16px; font-family: Sora, Arial, sans-serif; }
+  .kpi span { font-size: 10px; color: rgba(255,255,255,.6); }
+  h2 { font-size: 16.5px; color: #111; margin: 18px 0 8px; }
+  h2 .n { color: #e3040a; margin-right: 6px; }
+  h3 { font-size: 12.5px; margin: 10px 0 4px; }
+  p, li { font-size: 11.2px; color: #2d2d2d; }
+  .muted { color: #5c5c5c; }
+  .box {
+    border: 1px solid #e8e4e1; background: #f7f5f4; border-radius: 12px;
+    padding: 12px 14px; margin: 8px 0 10px;
+  }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .card { border: 1px solid #e8e4e1; border-radius: 12px; padding: 11px 12px; background: #fff; page-break-inside: avoid; }
+  .card.red { background: #fff6f6; border-color: #f3c7c8; }
+  .tag { display: inline-block; font-size: 9px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #e3040a; background: #fdeaea; padding: 2px 7px; border-radius: 6px; margin-bottom: 6px; }
+  ul { padding-left: 16px; margin: 4px 0 6px; }
+  li { margin: 3px 0; }
+  .quote { border-left: 3px solid #e3040a; padding: 4px 0 4px 12px; font-weight: 600; margin: 10px 0; }
+  table { width: 100%; border-collapse: collapse; margin: 8px 0 12px; font-size: 11px; }
+  th { text-align: left; background: #111; color: #fff; padding: 8px 10px; font-size: 10px; letter-spacing: .04em; }
+  td { border-bottom: 1px solid #ece8e6; padding: 8px 10px; vertical-align: top; }
+  .ok { color: #16834a; font-weight: 700; }
+  .no { color: #a10f14; }
+  .step { display: grid; grid-template-columns: 42px 1fr; gap: 10px; margin: 8px 0; page-break-inside: avoid; }
+  .num {
+    width: 36px; height: 36px; border-radius: 50%; background: #e3040a; color: #fff;
+    font-family: Sora, Arial, sans-serif; font-weight: 800; font-size: 12px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .price {
+    background: linear-gradient(135deg, #1a1a1a, #2b0606); color: #fff;
+    border-radius: 16px; padding: 18px 18px 16px; margin-top: 8px; page-break-inside: avoid;
+  }
+  .price .label { font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.6); }
+  .price .vals { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0; }
+  .pv { background: rgba(255,255,255,.08); border-radius: 12px; padding: 12px; }
+  .pv small { display: block; color: rgba(255,255,255,.6); font-size: 10px; }
+  .pv b { display: block; font-size: 20px; font-family: Sora, Arial, sans-serif; margin: 4px 0 2px; }
+  .total { font-size: 13px; color: rgba(255,255,255,.9); }
+  .total strong { font-size: 22px; font-family: Sora, Arial, sans-serif; }
+  .note { font-size: 10.5px; color: #7d4b10; background: #fff8f0; border: 1px solid #f5d5b0; border-radius: 10px; padding: 10px 12px; margin-top: 10px; }
+  .foot { margin-top: 14px; font-size: 10px; color: #888; }
+  .avoid { page-break-inside: avoid; }
+  .mb { margin-bottom: 8px; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="eyebrow">Documento complementar · após a reunião de 15/09/2026 · Confidencial</div>
+  <h1>Davi Gás × V4 Company<br><span>Como a máquina de vendas no WhatsApp vai funcionar</span></h1>
+  <p>Luciano, este material registra o que alinhamos na reunião: o diagnóstico, o jeito de executar em 6 meses, o que entra em cada produto e — no final — a condição especial que conseguimos aprovar para a Davi Gás.</p>
+  <div class="kpis">
+    <div class="kpi"><b>R$ 2 mi</b><span>faturamento / mês</span></div>
+    <div class="kpi"><b>17–18 mil</b><span>botijões P13 / mês</span></div>
+    <div class="kpi"><b>16 cidades</b><span>atendimento a unificar</span></div>
+    <div class="kpi"><b>6 meses</b><span>projeto ZapFirst + Social</span></div>
+  </div>
+</div>
+
+<h2><span class="n">01</span> Por que este documento existe</h2>
+<p>Na reunião ficou claro um ponto seu: você quer ver as coisas <strong>funcionando</strong>, não só planejadas. O site, o Google, o WhatsApp. Por isso este PDF não é um “folder de agência”. É o recado educativo do que vamos construir, na ordem certa, para a operação da ADN Distribuidora (Davi Gás / Nacional Gás).</p>
+<div class="box">
+  <strong>O que já andou antes desta proposta:</strong> Google Meu Negócio em ajuste, landing page da Davi Gás montada (logo e botijão) e alinhamento de cidades. Para o site ir ao ar de fato, precisa de hospedagem. Se seguir com a V4, a página pode ficar no V4 Pages, sem mensalidade extra. Fora da V4, a hospedagem avulsa fica em torno de R$ 9,92/mês.
+</div>
+<p class="muted">Prioridade que você definiu: concentrar primeiro na marca principal <strong>Nacional Gás / Davi Gás</strong>. Alfa Gás / Liquigás fica para uma etapa seguinte.</p>
+
+<h2><span class="n">02</span> O problema não é volume. É organização.</h2>
+<p>A Davi Gás já vende. WhatsApp já é o canal principal (~70% do volume). O que trava o próximo salto — inclusive unificar 16 cidades numa central — é falta de padrão, de rastreador e de presença digital. Quatro gargalos:</p>
+<div class="grid2">
+  <div class="card red"><div class="tag">Gargalo 1</div><h3>Crescimento ainda depende de indicação</h3><p>O offline funciona. Mas quem não te conhece e pesquisa “gás perto de mim” hoje não cai automaticamente na Davi Gás.</p></div>
+  <div class="card red"><div class="tag">Gargalo 2</div><h3>Busca no Google ainda favorece o concorrente</h3><p>Sem Google Meu Negócio bem resolvido em cada praça, a demanda de conveniência vai para quem aparece primeiro.</p></div>
+  <div class="card red"><div class="tag">Gargalo 3</div><h3>WhatsApp converte, mas cada unidade atende de um jeito</h3><p>Sem catálogo, script, PIX no fluxo e CRM, o pedido depende de quem pegou o celular. Venda escapa e informação some.</p></div>
+  <div class="card red"><div class="tag">Gargalo 4</div><h3>Tudo ainda passa por pouca gente</h3><p>Sem processo, crescer cidade é repetir o improviso. Unificar a central só funciona se o atendimento tiver roteiro, sistema e IA bem treinada.</p></div>
+</div>
+<p class="quote">A tese da reunião: o canal já existe. Falta processo, padrão e presença — para depois sim colocar mais demanda em cima.</p>
+
+<h2><span class="n">03</span> Por que não começamos “jogando dinheiro em anúncio”</h2>
+<p>O mercado costuma vender assim: “investe X em mídia que eu te trago retorno”. Sem casa arrumada, isso é teste no seu dinheiro. A V4 inverte a ordem:</p>
+<ul>
+  <li><strong>Primeiro estrutura</strong> o produto, o atendimento e as pessoas.</li>
+  <li><strong>Depois</strong> a inteligência artificial amplia o que já funciona.</li>
+  <li><strong>Só então</strong> faz sentido colocar combustível (impulsionamento / Google Ads), se você quiser.</li>
+</ul>
+<p>Por isso o projeto é de <strong>6 meses</strong>: tempo de montar, treinar, ligar a IA com supervisão e deixar o Social rodando com calendário — não um “pacote de posts” solto.</p>
+
+<h2><span class="n">04</span> Metodologia 3P-IA (o jeito de executar)</h2>
+<p>Não ligamos robô no dia 1. A sequência é a mesma que apresentamos:</p>
+<div class="step"><div class="num">P1</div><div><h3>Produto</h3><p>Catálogo no WhatsApp (P5, P8, P13, P20, P45) com foto, descrição e preço. Sem isso, cada vendedor improvisa e o cliente não consegue pedir sozinho.</p></div></div>
+<div class="step"><div class="num">P2</div><div><h3>Processo</h3><p>Fluxo da mensagem ao pedido pago: recepção, cidade, produto, entrega, PIX, objeção e o que vai para humano. SLA combinado. Padrão Davi Gás, não padrão de cada aparelho.</p></div></div>
+<div class="step"><div class="num">P3</div><div><h3>Pessoas</h3><p>Treinamento de quem atende. De nada adianta documento se o time não souber quando usar o script, quando dar desconto e quando passar para você.</p></div></div>
+<div class="step"><div class="num">IA</div><div><h3>SDR de IA — só depois da base sólida</h3><p>No <strong>mês 3</strong> entra a IA para a conversa inicial: separar quem quer preço, quem quer orçamento B2B e quem quer comprar agora. Encaminha para a unidade/central certa.</p></div></div>
+
+<div class="box avoid">
+  <h3>Sua preocupação na reunião: “já vi robô ruim”</h3>
+  <p>Combinado: a premissa é <strong>não parecer robô engessado</strong>. A IA é treinada com o contexto da Davi Gás (cidades, produtos, horários, tom). Lê áudio e imagem. Meta de resposta em segundos. Tem gente da V4 supervisionando antes de soltar 100%. Negociação de desconto fora da regra vai para operador humano — a IA pode ter um teto, se você autorizar, mas o fechamento fino continua com pessoa.</p>
+</div>
+
+<h2><span class="n">05</span> O que o ZapFirst entrega (máquina, não relatório)</h2>
+<table>
+  <tr><th>Entrega</th><th>Para que serve na Davi Gás</th></tr>
+  <tr><td><strong>Google Meu Negócio</strong></td><td>Quem pesquisa gás na cidade te encontra. Botão de WhatsApp como ação principal. Continuamos otimizando, não é “configurar e esquecer”.</td></tr>
+  <tr><td><strong>Instagram com CTA</strong></td><td>Um perfil só para todas as cidades (como rede grande faz). Bio, link e destaques por localidade — sem criar 16 contas.</td></tr>
+  <tr><td><strong>Landing page / site</strong></td><td>Página de conversão com WhatsApp acima da dobra. Foco primeiro em Nacional Gás / Davi Gás. Ajustes de cidades, nomes e artes 3D conforme você pediu.</td></tr>
+  <tr><td><strong>Catálogo no WhatsApp</strong></td><td>Cliente vê o botijão, o preço e pede no próprio chat. Menos copy-paste, menos erro de valor.</td></tr>
+  <tr><td><strong>Scripts de atendimento</strong></td><td>Recepção, qualificação, proposta, objeção, fechamento e pós-venda. Padrão para a central e para as unidades.</td></tr>
+  <tr><td><strong>Fluxo comercial + CRM (Kommo)</strong></td><td>Tudo num lugar: conversa, cidade, status do pedido, motivo de não fechamento. Dá para unificar 16 cidades numa central e distribuir o pedido.</td></tr>
+  <tr><td><strong>PIX no fluxo</strong></td><td>Cobrança e QR no chat. Menos fricção na hora de pagar.</td></tr>
+  <tr><td><strong>Treinamento</strong></td><td>Time opera o processo. Playbook fica com vocês.</td></tr>
+  <tr><td><strong>SDR de IA 24/7</strong></td><td>Primeiro atendimento fora de horário e no pico. Humano entra no que é venda e exceção.</td></tr>
+  <tr><td><strong>Régua de recompra</strong></td><td>Família gira botijão em ~40 a 50 dias. O sistema avisa o cliente e alerta o time no CRM para não perder a recompra.</td></tr>
+</table>
+<p>O <strong>ERP de vocês continua</strong>. A V4 não substitui o controle de estoque e venda. Integramos a estratégia ao que já existe, para o pedido não ficar solto no WhatsApp.</p>
+
+<h2><span class="n">06</span> Transparência de custos que não são da mensalidade V4</h2>
+<div class="grid2">
+  <div class="card">
+    <h3>Disparo automático no WhatsApp</h3>
+    <p>Quando o robô envia mensagem pela plataforma (régua, lembrete), a Meta cobra por conversa. Na reunião falamos de uma faixa típica de <strong>R$ 0,06 a R$ 0,44</strong> por mensagem, conforme tipo/tamanho. Isso não está “escondido” na mensalidade: é custo de plataforma, variável com o volume.</p>
+  </div>
+  <div class="card">
+    <h3>Impulsionamento / Google Ads</h3>
+    <p>Não é obrigatório no dia 1. Se quiser geolocalizar oferta (raio por cidade, público 25+), o investimento na Meta/Google é pago direto por vocês. A V4 pode operar a campanha quando vocês pedirem orçamento e alinhamento com o Social.</p>
+  </div>
+</div>
+
+<h2><span class="n">07</span> Social Mídia — presença que alimenta o WhatsApp</h2>
+<p>WhatsApp fecha quem já decidiu comprar. Instagram e conteúdo fazem a pessoa <strong>escolher a Davi Gás antes de pedir</strong>. O combinado na reunião:</p>
+<ul>
+  <li><strong>Um perfil</strong> cobrindo todas as cidades, com destaques por unidade/endereço.</li>
+  <li><strong>~12 posts por mês</strong> (2 a 3 por semana), mix de imagem e vídeo.</li>
+  <li>Pilares: segurança com GLP, produto, promoção, entrega rápida e prova social.</li>
+  <li>Copy e design pela V4. Vocês <strong>aprovam</strong> calendário e arte antes de publicar (Luciano no ok).</li>
+  <li>Bio, destaques e padrão visual alinhados à marca Nacional Gás / Davi Gás.</li>
+</ul>
+<p>Quem roda isso não é “uma pessoa postando no celular”: é Social Media + criação, no mesmo plano dos 6 meses.</p>
+
+<h2><span class="n">08</span> Linha do tempo dos 6 meses</h2>
+<table>
+  <tr><th>Quando</th><th>O que acontece na prática</th></tr>
+  <tr><td><strong>Mês 1</strong></td><td>Setup: GMB, Instagram (bio/destaques), LP no ar com hospedagem, WhatsApp Business, calendário editorial começando.</td></tr>
+  <tr><td><strong>Mês 2</strong></td><td>Catálogo completo, scripts, fluxo documentado, PIX no chat. Time já atende com processo, não no improviso.</td></tr>
+  <tr><td><strong>Mês 3</strong></td><td>Treinamento, CRM live, SDR de IA com supervisão. Diagnóstico de maturidade: a máquina está de pé.</td></tr>
+  <tr><td><strong>Meses 4–5</strong></td><td>Ajuste fino, régua de recompra, Social em ritmo, preparação para replicar o padrão (inclusive 15ª praça / central).</td></tr>
+  <tr><td><strong>Mês 6</strong></td><td>Consolidação, relatório, casa organizada para vocês operarem o que foi montado.</td></tr>
+</table>
+
+<h2><span class="n">09</span> O que a mensalidade paga (equipe, não “ferramenta solta”)</h2>
+<p>O valor recorrente sustenta gente trabalhando na conta: tecnologia/sistema, CRM, Social Media, criação e gestão da operação. Por isso não é um software que você assina e se vira — é implementação + rotina de 6 meses.</p>
+<div class="box">
+  <strong>Escopo do combo:</strong> ZapFirst Completo (WhatsApp, IA, CRM, treino, GMB, LP, PIX, scripts) + Social Mídia (planejamento, publicação, monitoramento, relatório). Marca priorizada: Nacional Gás / Davi Gás.
+</div>
+
+<h2><span class="n">10</span> Valores de tabela (referência)</h2>
+<p>Na apresentação, o combo de tabela ficou em <strong>R$ 8.829,13 / mês</strong> (ZapFirst R$ 4.950,00 + Social R$ 5.632,01, com condição de combo). Esse é o valor-base da rede. Desconto fora da tabela precisa de autorização da diretoria — e foi isso que pedimos para você.</p>
+<table>
+  <tr><th>Produto</th><th>Tabela / mês</th><th>6 meses</th></tr>
+  <tr><td>ZapFirst Completo</td><td>R$ 4.950,00</td><td>R$ 29.700,00</td></tr>
+  <tr><td>Social Mídia</td><td>R$ 5.632,01</td><td>R$ 33.792,06</td></tr>
+  <tr><td><strong>Soma individual</strong></td><td><strong>R$ 10.582,01</strong></td><td><strong>R$ 63.492,06</strong></td></tr>
+  <tr><td>Combo apresentado (antes do especial)</td><td>R$ 8.829,13</td><td>R$ 52.974,78</td></tr>
+</table>
+
+<div class="price avoid">
+  <div class="label">Condição especial · aprovada para a Davi Gás · 6× no cartão</div>
+  <p style="margin:8px 0 4px;color:rgba(255,255,255,.85);font-size:12.5px;">Mesmo escopo da reunião. Sem tirar entrega. Projeto de 6 meses, pagamento em 6 parcelas no cartão.</p>
+  <div class="vals">
+    <div class="pv">
+      <small>ZapFirst Completo</small>
+      <b>6× de R$ 3.076,60</b>
+      <small>de R$ 4.950,00 / mês na tabela</small>
+    </div>
+    <div class="pv">
+      <small>Social Mídia</small>
+      <b>6× de R$ 3.602,96</b>
+      <small>de R$ 5.632,01 / mês na tabela</small>
+    </div>
+  </div>
+  <p class="total">Combo especial: <strong>R$ 6.679,56 / mês</strong> · 6× no cartão<br>
+  <span style="font-size:12px;color:rgba(255,255,255,.7);">Total do projeto: R$ 40.077,36 · economia de R$ 12.897,42 frente ao combo de R$ 8.829,13/mês</span></p>
+</div>
+<p class="note"><strong>O que continua fora da mensalidade (transparência):</strong> disparos cobrados pela Meta no WhatsApp (centavos por conversa/mensagem) e verba de anúncio no Google/Instagram, se vocês decidirem impulsionar. Hospedagem do site: inclusa no V4 Pages se seguir com a V4.</p>
+
+<h2><span class="n">11</span> Como começar (próximos passos)</h2>
+<ol style="padding-left:18px;">
+  <li style="margin:5px 0;"><strong>Confirmar o combo especial</strong> — ZapFirst 6× R$ 3.076,60 + Social 6× R$ 3.602,96, no cartão, 6 meses.</li>
+  <li style="margin:5px 0;"><strong>Contrato</strong> — Aline finaliza o documento com o combinado e manda no grupo.</li>
+  <li style="margin:5px 0;"><strong>Kick-off</strong> — acessos, números, cidades, responsáveis da central.</li>
+  <li style="margin:5px 0;"><strong>Site no ar</strong> — hospedagem (V4 Pages) + ajustes de artes 3D, nomes Nacional Gás e ordem das cidades (Brejo entre Buriti e Santa Quitéria; Barro Duro entre Água Doce e Tutóia).</li>
+  <li style="margin:5px 0;"><strong>WhatsApp + CRM + IA</strong> na sequência 3P, Social com calendário para aprovação sua.</li>
+</ol>
+<p class="quote">A operação já fatura. Este plano organiza o WhatsApp, a central e o digital para a Davi Gás crescer com padrão — não com mais improviso.</p>
+<p class="foot">V4 Company × ADN Distribuidora (Davi Gás) · Proposta de 6 meses · ZapFirst Completo + Social Mídia · Condição especial de desconto · Documento para alinhamento pós-reunião de 15/09/2026 · Confidencial</p>
+
+</body>
+</html>
