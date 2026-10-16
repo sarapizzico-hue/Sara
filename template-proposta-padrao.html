@@ -1,0 +1,1413 @@
+<!doctype html>
+<!--
+  Padrão de proposta (visual da Estruturação Comercial G6).
+  Como adaptar: abra guia-proposta-padrao.html, preencha a ficha,
+  depois edite o objeto PROPOSTA neste arquivo (narrativa, dados, produto, decisão).
+  Atalhos: setas / espaço · G mostra o ato do slide · ?mapa=1 inclui o mapa interno.
+-->
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <title>Padrão de proposta · Narrativa · Dados · Produto</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+
+
+
+
+
+
+
+
+    :root {
+      --v4-red: #e50914;
+      --v4-red-hover: #c40712;
+      --v4-orange: #ff481f;
+      --v4-flame: #f0141e;
+      --v4-dark: #280001;
+      --v4-darker: #280000;
+      --v4-grey: #e1dcdc;
+      --v4-white: #ffffff;
+      --v4-cream: #ffebc8;
+      --v4-salmon: #ffb4a0;
+      --ink: #141414;
+      --ink-soft: #5a5a5a;
+      --line: rgba(20, 20, 20, .12);
+      --radius: 22px;
+      --radius-pill: 999px;
+      --hero: radial-gradient(120% 130% at 50% -10%, #ff5a2c 0%, #e50914 30%, #b00610 62%, #280001 100%);
+    }
+
+    * { box-sizing: border-box; }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: #171313;
+      color: var(--ink);
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: geometricPrecision;
+    }
+
+    button { font-family: inherit; }
+
+    #viewport {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 10%, rgba(229, 9, 20, .18), transparent 38%),
+        #171313;
+    }
+
+    #deck {
+      --deck-scale: 1;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 1600px;
+      height: 900px;
+      overflow: hidden;
+      transform: translate(-50%, -50%) scale(var(--deck-scale));
+      transform-origin: center;
+      background: #f5f4f2;
+      box-shadow: 0 40px 120px rgba(0, 0, 0, .45);
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      width: 1600px;
+      height: 900px;
+      padding: 76px 96px 108px;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(24px);
+      transition: opacity .28s ease, transform .28s ease;
+      background:
+        radial-gradient(circle at 92% 8%, rgba(229, 9, 20, .055), transparent 24%),
+        #f5f4f2;
+    }
+
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(0);
+    }
+
+    .slide.red {
+      color: white;
+      background: var(--hero);
+    }
+
+    .slide.dark {
+      color: white;
+      background:
+        radial-gradient(circle at 78% 15%, rgba(229, 9, 20, .5), transparent 32%),
+        linear-gradient(145deg, #280001 0%, #130001 100%);
+    }
+
+    .slide.white { background: white; }
+
+    .topline {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--v4-red), var(--v4-orange), transparent 76%);
+    }
+
+    h1,
+    h2,
+    h3,
+    p { margin-top: 0; }
+
+    h1 {
+      margin-bottom: 24px;
+      font-size: 88px;
+      line-height: .98;
+      letter-spacing: -.055em;
+      font-weight: 600;
+    }
+
+    h2 {
+      margin-bottom: 18px;
+      font-size: 60px;
+      line-height: 1.02;
+      letter-spacing: -.045em;
+      font-weight: 600;
+    }
+
+    h3 {
+      margin-bottom: 10px;
+      font-size: 26px;
+      line-height: 1.1;
+      letter-spacing: -.025em;
+      font-weight: 600;
+    }
+
+    .lede {
+      max-width: 1000px;
+      color: var(--ink-soft);
+      font-size: 27px;
+      line-height: 1.42;
+      font-weight: 300;
+    }
+
+    .red .lede,
+    .dark .lede { color: rgba(255, 255, 255, .72); }
+
+    .accent { color: var(--v4-red); }
+    .red .accent,
+    .dark .accent { color: var(--v4-cream); }
+
+    .mono { font-family: "IBM Plex Mono", monospace; }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 7px 15px;
+      border: 1px solid rgba(229, 9, 20, .18);
+      border-radius: var(--radius-pill);
+      color: var(--v4-red);
+      background: rgba(229, 9, 20, .07);
+      font-size: 12px;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+
+    .red .eyebrow,
+    .dark .eyebrow {
+      color: rgba(255, 255, 255, .92);
+      background: rgba(255, 255, 255, .06);
+      border-color: rgba(255, 255, 255, .35);
+      box-shadow:
+        inset 0 0 80px rgba(255, 255, 255, .12),
+        inset 0 1px 8px rgba(255, 255, 255, .35),
+        -5px 5px 20px rgba(0, 0, 0, .10);
+      backdrop-filter: blur(14px) saturate(140%);
+    }
+
+    .card {
+      position: relative;
+      padding: 28px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: white;
+    }
+
+    .glass {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .35);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, .06);
+      box-shadow:
+        inset 0 0 150px rgba(255, 255, 255, .13),
+        inset 0 1px 10px rgba(255, 255, 255, .38),
+        inset 0 -2px 10px rgba(255, 255, 255, .22),
+        inset 0 0 100px rgba(255, 255, 255, .08),
+        -5px 5px 20px rgba(0, 0, 0, .10);
+      backdrop-filter: blur(14px) saturate(140%);
+    }
+
+    .glass::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      background:
+        radial-gradient(120% 90% at 50% 115%, rgba(255, 170, 80, .34), transparent 55%),
+        linear-gradient(180deg, rgba(255, 255, 255, .22), transparent 40%);
+      mix-blend-mode: screen;
+    }
+
+    .sphere {
+      position: absolute;
+      border: 1px solid rgba(255, 255, 255, .24);
+      border-radius: 50%;
+      pointer-events: none;
+      background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, .38), rgba(255, 255, 255, .045) 48%, transparent 66%);
+      box-shadow:
+        inset 0 0 120px rgba(255, 255, 255, .13),
+        inset 25px 18px 70px rgba(255, 160, 70, .28);
+      backdrop-filter: blur(3px);
+    }
+
+    .icon {
+      width: 30px;
+      height: 30px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .icon-box {
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      border: 1px solid rgba(229, 9, 20, .18);
+      border-radius: 17px;
+      color: var(--v4-red);
+      background: rgba(229, 9, 20, .07);
+    }
+
+    .red .icon-box,
+    .dark .icon-box {
+      color: white;
+      border-color: rgba(255, 255, 255, .28);
+      background: rgba(255, 255, 255, .08);
+    }
+
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+
+    .big-number {
+      color: var(--v4-red);
+      font-size: 72px;
+      line-height: 1;
+      letter-spacing: -.06em;
+      font-weight: 700;
+    }
+
+    .metric-label {
+      margin-top: 8px;
+      color: var(--ink-soft);
+      font-size: 16px;
+      line-height: 1.2;
+    }
+
+    .bullet-list {
+      display: grid;
+      gap: 16px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .bullet-list li {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      min-height: 76px;
+      padding: 14px 18px;
+      border: 1px solid rgba(20, 20, 20, .08);
+      border-radius: 17px;
+      background: rgba(255, 255, 255, .74);
+      font-size: 21px;
+      line-height: 1.2;
+    }
+
+    .hub-layout {
+      position: relative;
+      height: 540px;
+      isolation: isolate;
+    }
+
+    .hub-line {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 420px;
+      height: 420px;
+      border: 1px dashed rgba(229, 9, 20, .26);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .hub {
+      position: absolute;
+      z-index: 3;
+      left: 50%;
+      top: 50%;
+      width: 240px;
+      height: 240px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: white;
+      background: var(--hero);
+      box-shadow: 0 30px 80px rgba(229, 9, 20, .3);
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .hub-node {
+      position: absolute;
+      z-index: 2;
+      width: 240px;
+      min-height: 110px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 18px;
+      animation: node-float 5.2s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    .node-nw { left: 65px; top: 38px; animation-delay: -.6s; }
+    .node-ne { right: 65px; top: 38px; animation-delay: -1.8s; }
+    .node-sw { left: 65px; bottom: 38px; animation-delay: -2.8s; }
+    .node-se { right: 65px; bottom: 38px; animation-delay: -3.8s; }
+
+    .cover-content {
+      position: relative;
+      z-index: 3;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+    }
+
+    .brand-lockup img {
+      width: 330px;
+      display: block;
+      object-fit: contain;
+    }
+
+    .cover-title {
+      max-width: 1100px;
+      margin: 28px 0 0;
+      font-size: 92px;
+    }
+
+    .slide-footer {
+      position: absolute;
+      z-index: 8;
+      left: 96px;
+      right: 96px;
+      bottom: 32px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      pointer-events: none;
+    }
+
+    .slide-footer img {
+      width: 155px;
+      height: 48px;
+      object-fit: contain;
+      object-position: left center;
+    }
+
+    .navigation {
+      position: absolute;
+      z-index: 20;
+      right: 52px;
+      bottom: 25px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-btn {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(20, 20, 20, .12);
+      border-radius: 50%;
+      color: var(--ink);
+      background: rgba(255, 255, 255, .92);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .12);
+      cursor: pointer;
+      transition: transform .15s ease, background .15s ease, opacity .15s ease;
+    }
+
+    .nav-btn:hover { transform: translateY(-2px); background: white; }
+    .nav-btn:disabled { opacity: .3; cursor: default; transform: none; }
+
+    .progress-track {
+      position: absolute;
+      z-index: 21;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 7px;
+      background: rgba(20, 20, 20, .1);
+    }
+
+    .progress-fill {
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--v4-red), var(--v4-orange));
+      box-shadow: 0 0 20px rgba(229, 9, 20, .35);
+      transition: width .3s ease;
+    }
+
+    .slide-counter {
+      position: absolute;
+      z-index: 22;
+      right: 176px;
+      bottom: 39px;
+      color: rgba(20, 20, 20, .52);
+      font: 500 12px/1 "IBM Plex Mono", monospace;
+      letter-spacing: .04em;
+    }
+
+
+    /* Deck-renderer applied layouts */
+    .profile-grid{display:grid;grid-template-columns:1fr 430px;gap:84px;align-items:center;margin-top:44px}.profile-photo{height:560px;border-radius:28px;overflow:hidden;border:1px solid rgba(20,20,20,.12);background:#280001}.profile-photo img{width:100%;height:100%;object-fit:cover;object-position:center top}.badge-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}.badge{display:inline-flex;align-items:center;min-height:34px;padding:8px 14px;border-radius:999px;color:var(--v4-red);background:rgba(229,9,20,.07);border:1px solid rgba(229,9,20,.18);font:700 12px/1 "IBM Plex Mono",monospace;letter-spacing:.08em;text-transform:uppercase}.metric-wall{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:50px}.metric-wall.four{grid-template-columns:repeat(4,1fr)}.metric-card{min-height:270px;padding:32px;border-radius:24px}.metric-card p{margin:0;color:var(--ink-soft);font-size:20px;line-height:1.32}.dark .metric-card p,.red .metric-card p{color:rgba(255,255,255,.72)}.source{position:absolute;left:96px;bottom:86px;max-width:1020px;color:rgba(20,20,20,.44);font:500 11px/1.25 "IBM Plex Mono",monospace}.dark .source,.red .source{color:rgba(255,255,255,.42)}.diagnosis-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:28px;margin-top:44px}.stack{display:grid;gap:16px}.line-card{display:grid;grid-template-columns:58px 1fr;gap:18px;align-items:center;min-height:104px;padding:18px 22px;border-radius:20px;background:rgba(255,255,255,.78);border:1px solid var(--line)}.dark .line-card{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.16)}.line-card h3{margin:0 0 5px;font-size:25px}.line-card p{margin:0;color:var(--ink-soft);font-size:18px;line-height:1.32}.dark .line-card p{color:rgba(255,255,255,.72)}.quote{margin-top:42px;padding-left:26px;border-left:6px solid var(--v4-red);max-width:1040px;font-size:31px;line-height:1.2;font-weight:600}.dark .quote,.red .quote{border-color:var(--v4-cream)}.table-layout{display:grid;grid-template-columns:1fr 315px;gap:40px;margin-top:42px}.table{width:100%;border-collapse:collapse}.table th{padding:16px 14px;border-bottom:1px solid var(--line);color:var(--v4-red);text-align:left;font:700 12px/1.15 "IBM Plex Mono",monospace;letter-spacing:.08em;text-transform:uppercase}.table td{padding:18px 14px;border-bottom:1px solid var(--line);color:var(--ink-soft);font-size:20px;line-height:1.26}.table tr:nth-child(even) td{background:rgba(229,9,20,.055)}.side-metric{padding-bottom:22px;border-bottom:1px solid var(--line)}.side-metric .big-number{font-size:66px}.side-metric p{margin:8px 0 0;color:var(--ink-soft);font-size:18px;line-height:1.3}.bowtie-card{margin-top:30px;width:1180px;height:390px;padding:18px;border-radius:22px;border:1px solid var(--line);background:white}.process{display:flex;align-items:stretch;gap:10px;margin-top:46px}.stage{flex:1;min-height:136px;padding:22px 18px;border-radius:19px;background:white;border:1px solid var(--line)}.dark .stage{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.18)}.stage h3{font-size:21px;margin-bottom:9px}.stage p{margin:0;color:var(--ink-soft);font-size:16px;line-height:1.25}.dark .stage p{color:rgba(255,255,255,.72)}.arrow{display:grid;place-items:center;color:var(--v4-red);font-size:30px;font-weight:700}.funnel-area{display:grid;grid-template-columns:860px 1fr;gap:52px;align-items:center;margin-top:28px}.funnel{display:flex;flex-direction:column;align-items:center;gap:9px}.funnel-step{height:58px;display:flex;align-items:center;justify-content:center;color:white;background:linear-gradient(90deg,var(--v4-red),var(--v4-dark));border-radius:8px;font-weight:600}.funnel-step strong{font-size:25px;margin-right:10px}.funnel-step span{font-size:20px;color:rgba(255,255,255,.82)}.funnel-note{font-size:26px;line-height:1.35;color:var(--ink-soft)}.check-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px 34px;margin-top:44px}.check-card{display:grid;grid-template-columns:58px 1fr;gap:18px;align-items:center;min-height:88px;padding:18px;border-radius:20px;background:white;border:1px solid var(--line)}.check-card h3{font-size:23px;margin:0}
+    .bowtie-image-stage{position:absolute;left:96px;right:96px;top:204px;bottom:76px;display:flex;align-items:center;justify-content:center;overflow:hidden}.bowtie-image-stage img{width:auto;height:100%;max-width:100%;max-height:100%;object-fit:contain;display:block;border-radius:18px;border:1px solid var(--line);background:white;box-shadow:0 22px 70px rgba(20,20,20,.12)}.diagram-slide .eyebrow{position:relative;z-index:3}.diagram-slide h2{position:relative;z-index:3;font-size:48px;max-width:920px;margin-top:24px}.diagram-slide .source{left:320px;right:320px;bottom:38px;max-width:none;text-align:center}
+    @keyframes node-float {
+      0%, 100% { transform: var(--node-base, translate(0, 0)) translateY(0) rotate(0deg); }
+      25% { transform: var(--node-base, translate(0, 0)) translateY(-9px) rotate(-1.5deg); }
+      50% { transform: var(--node-base, translate(0, 0)) translateY(3px) rotate(1deg); }
+      75% { transform: var(--node-base, translate(0, 0)) translateY(-5px) rotate(.5deg); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  
+
+    /* G6 customizations */
+    .brand-lockup { display:flex; align-items:center; gap:18px; }
+    .brand-lockup img { height:42px; width:auto; object-fit:contain; }
+    .brand-lockup .x { opacity:.55; font-weight:600; font-size:22px; }
+    .partner-pill {
+      display:inline-flex; align-items:center; gap:10px;
+      padding:10px 16px; border-radius:999px;
+      background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.22);
+      font:600 14px/1 "IBM Plex Mono", monospace; letter-spacing:.06em; text-transform:uppercase;
+    }
+    .partner-pill img { height:22px; width:auto; background:#fff; border-radius:6px; padding:2px 6px; }
+    .split-2 { display:grid; grid-template-columns:1fr 1fr; gap:28px; margin-top:40px; }
+    .split-card { padding:28px 30px; border-radius:24px; border:1px solid var(--line); background:white; min-height:360px; }
+    .dark .split-card { background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.16); }
+    .split-card h3 { margin:0 0 18px; font-size:28px; }
+    .split-card ul { margin:0; padding-left:20px; color:var(--ink-soft); font-size:20px; line-height:1.45; }
+    .dark .split-card ul { color:rgba(255,255,255,.75); }
+    .split-card li { margin:10px 0; }
+    .split-card.ok { border-color:rgba(229,9,20,.25); }
+    .split-card.gap { background:linear-gradient(180deg, rgba(229,9,20,.06), white); }
+    .dark .split-card.gap { background:rgba(229,9,20,.16); }
+    .phase-rail {
+      display:grid; grid-template-columns:repeat(6,1fr); gap:12px; margin-top:40px;
+    }
+    .phase {
+      min-height:280px; padding:20px 16px; border-radius:20px;
+      background:white; border:1px solid var(--line);
+    }
+    .dark .phase { background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.16); }
+    .phase .n {
+      font:700 12px/1 "IBM Plex Mono", monospace; letter-spacing:.1em;
+      text-transform:uppercase; color:var(--v4-red); margin-bottom:12px;
+    }
+    .dark .phase .n { color:var(--v4-cream); }
+    .phase h3 { margin:0 0 10px; font-size:20px; line-height:1.2; }
+    .phase p { margin:0; color:var(--ink-soft); font-size:15px; line-height:1.35; }
+    .dark .phase p { color:rgba(255,255,255,.72); }
+    .price-hero {
+      display:grid; grid-template-columns:1.1fr .9fr; gap:36px; margin-top:36px; align-items:stretch;
+    }
+    .price-box {
+      padding:36px 40px; border-radius:28px; background:white; border:1px solid var(--line);
+      min-height:340px; display:flex; flex-direction:column; justify-content:center;
+    }
+    .price-box .tag {
+      font:700 12px/1 "IBM Plex Mono", monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--v4-red);
+    }
+    .price-box .amount { font-size:96px; font-weight:700; letter-spacing:-.04em; margin:12px 0 8px; line-height:1; }
+    .price-box .amount span { font-size:36px; vertical-align:super; margin-right:4px; }
+    .price-box p { margin:0; color:var(--ink-soft); font-size:22px; line-height:1.35; max-width:420px; }
+    .clock-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:44px; }
+    .clock-card {
+      min-height:300px; padding:30px; border-radius:24px;
+      background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.16);
+    }
+    .clock-card .big-number { font-size:54px; margin:18px 0 12px; }
+    .clock-card h3 { margin:0 0 10px; font-size:26px; }
+    .clock-card p { margin:0; color:rgba(255,255,255,.72); font-size:19px; line-height:1.35; }
+    .success-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px 24px; margin-top:36px; }
+    .success-item {
+      display:grid; grid-template-columns:48px 1fr; gap:14px; align-items:center;
+      padding:16px 18px; border-radius:18px; background:white; border:1px solid var(--line);
+    }
+    .success-item h3 { margin:0; font-size:20px; }
+    .cta-steps { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:48px; }
+    .cta-step {
+      padding:28px; border-radius:22px; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.18);
+    }
+    .cta-step .n { font:700 12px/1 "IBM Plex Mono", monospace; letter-spacing:.1em; color:var(--v4-cream); }
+    .cta-step h3 { margin:14px 0 8px; font-size:26px; }
+    .cta-step p { margin:0; color:rgba(255,255,255,.75); font-size:18px; line-height:1.35; }
+    .lede-tight { max-width:1080px; }
+    .mini-note {
+      margin-top:28px; font:500 14px/1.4 "IBM Plex Mono", monospace; color:rgba(20,20,20,.45);
+    }
+    .dark .mini-note, .red .mini-note { color:rgba(255,255,255,.45); }
+    .compare-side .side-metric:last-child { border-bottom:0; }
+    .cover-client {
+      display:flex; align-items:center; gap:14px; margin-top:28px;
+      color:rgba(255,255,255,.85); font-size:18px;
+    }
+    .cover-client img {
+      height:44px; width:auto; background:#fff; border-radius:10px; padding:6px 10px;
+    }
+
+  
+    .hours-table { width:100%; border-collapse:collapse; margin-top:22px; font-size:15px; }
+    .hours-table th {
+      padding:10px 10px; border-bottom:1px solid var(--line); color:var(--v4-red);
+      text-align:left; font:700 11px/1.15 "IBM Plex Mono",monospace; letter-spacing:.08em; text-transform:uppercase;
+    }
+    .hours-table td {
+      padding:8px 10px; border-bottom:1px solid var(--line); color:var(--ink-soft); font-size:15px; line-height:1.25;
+    }
+    .hours-table tr:nth-child(even) td { background:rgba(229,9,20,.04); }
+    .hours-table td.num, .hours-table th.num { text-align:right; white-space:nowrap; font-variant-numeric:tabular-nums; }
+    .hours-table tr.subtotal td { color:var(--ink); font-weight:600; background:rgba(229,9,20,.08); }
+    .hours-table tr.total td { color:var(--ink); font-weight:700; background:rgba(229,9,20,.12); }
+    .map-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px 22px; margin-top:32px; }
+    .map-item {
+      display:grid; grid-template-columns:10px 1fr; gap:14px; padding:16px 18px;
+      border-radius:18px; background:white; border:1px solid var(--line);
+    }
+    .map-item .dot { width:10px; height:10px; border-radius:50%; background:var(--v4-red); margin-top:8px; }
+    .map-item h3 { margin:0 0 4px; font-size:18px; }
+    .map-item p { margin:0; color:var(--ink-soft); font-size:15px; line-height:1.35; }
+    .map-item .g6 { color:var(--v4-red); font:700 11px/1 "IBM Plex Mono",monospace; letter-spacing:.06em; text-transform:uppercase; margin-bottom:6px; }
+    .format-row { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:40px; }
+    .format-card {
+      min-height:200px; padding:26px; border-radius:22px; background:white; border:1px solid var(--line);
+    }
+    .dark .format-card { background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.16); }
+    .format-card .k { font:700 12px/1 "IBM Plex Mono",monospace; letter-spacing:.08em; text-transform:uppercase; color:var(--v4-red); }
+    .dark .format-card .k { color:var(--v4-cream); }
+    .format-card h3 { margin:14px 0 8px; font-size:28px; }
+    .format-card p { margin:0; color:var(--ink-soft); font-size:18px; line-height:1.35; }
+    .dark .format-card p { color:rgba(255,255,255,.72); }
+    .phase-detail { display:grid; grid-template-columns:280px 1fr; gap:36px; margin-top:28px; align-items:start; }
+    .phase-side {
+      padding:28px; border-radius:24px; background:rgba(229,9,20,.06); border:1px solid rgba(229,9,20,.15);
+      min-height:420px;
+    }
+    .dark .phase-side { background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.16); }
+    .phase-side .n { font:700 12px/1 "IBM Plex Mono",monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--v4-red); }
+    .dark .phase-side .n { color:var(--v4-cream); }
+    .phase-side h3 { margin:14px 0 12px; font-size:34px; line-height:1.15; }
+    .phase-side .hours { font-size:48px; font-weight:700; letter-spacing:-.03em; margin:18px 0 6px; }
+    .phase-side p { margin:0; color:var(--ink-soft); font-size:17px; line-height:1.35; }
+    .dark .phase-side p { color:rgba(255,255,255,.72); }
+    .phase-body h4 { margin:0 0 12px; font-size:18px; color:var(--v4-red); font:700 12px/1 "IBM Plex Mono",monospace; letter-spacing:.08em; text-transform:uppercase; }
+    .dark .phase-body h4 { color:var(--v4-cream); }
+    .phase-body ul { margin:0 0 22px; padding-left:18px; color:var(--ink-soft); font-size:18px; line-height:1.4; }
+    .dark .phase-body ul { color:rgba(255,255,255,.75); }
+    .phase-body li { margin:7px 0; }
+    .phase-body .fit {
+      padding:16px 18px; border-radius:16px; border-left:5px solid var(--v4-red);
+      background:rgba(229,9,20,.05); font-size:18px; line-height:1.35; color:var(--ink);
+    }
+    .dark .phase-body .fit { background:rgba(255,255,255,.06); color:rgba(255,255,255,.88); border-color:var(--v4-cream); }
+    .two-col-hours { display:grid; grid-template-columns:1fr 1fr; gap:28px; margin-top:18px; align-items:start; }
+    .compact-lede { font-size:22px; line-height:1.35; max-width:1100px; color:var(--ink-soft); }
+    .dark .compact-lede, .red .compact-lede { color:rgba(255,255,255,.78); }
+
+  
+  
+  
+  
+    .leak-grid { display:grid; grid-template-columns:1fr 1fr; gap:22px; margin-top:28px; }
+    .leak-card {
+      padding:28px 30px; border-radius:24px; background:white; border:1px solid var(--line); min-height:360px;
+    }
+    .dark .leak-card { background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.16); }
+    .leak-card .k {
+      font:700 12px/1 "IBM Plex Mono",monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--v4-red);
+    }
+    .leak-card .num { font-size:84px; font-weight:700; letter-spacing:-.04em; color:var(--v4-red); margin:10px 0 6px; line-height:1; }
+    .leak-card .cap { margin:0 0 16px; color:var(--ink-soft); font-size:17px; line-height:1.35; }
+    .leak-card ul { margin:0; padding-left:18px; color:var(--ink-soft); font-size:17px; line-height:1.4; }
+    .leak-card li { margin:8px 0; }
+    .bars { display:flex; align-items:flex-end; gap:10px; height:150px; margin-top:18px; }
+    .bar-col { flex:1; display:flex; flex-direction:column; align-items:center; gap:6px; height:100%; justify-content:flex-end; }
+    .bar {
+      width:100%; border-radius:8px 8px 4px 4px;
+      background:linear-gradient(180deg, #ff5a2c 0%, #e50914 70%, #280001 100%);
+      min-height:8px;
+    }
+    .bar-col span { font:600 12px/1 "IBM Plex Mono",monospace; color:var(--ink-soft); }
+    .bar-col strong { font:700 13px/1 "IBM Plex Sans",sans-serif; color:var(--ink); }
+    .leak-banner {
+      margin-top:22px; padding:22px 26px; border-radius:20px;
+      background:linear-gradient(135deg, #e50914, #280001); color:white;
+      display:grid; grid-template-columns:58px 1fr; gap:18px; align-items:start;
+    }
+    .leak-banner h3 { margin:0 0 8px; font-size:22px; }
+    .leak-banner p { margin:0; color:rgba(255,255,255,.82); font-size:16px; line-height:1.4; }
+    .price-layout {
+      display:grid; grid-template-columns:1.15fr .85fr; gap:28px; margin-top:32px; align-items:stretch;
+    }
+    .price-main {
+      padding:40px 42px; border-radius:28px;
+      background:linear-gradient(145deg, #280001 0%, #e50914 100%); color:white;
+      min-height:420px; display:flex; flex-direction:column; justify-content:center;
+    }
+    .price-main .was {
+      font:700 14px/1 "IBM Plex Mono",monospace; letter-spacing:.08em; text-transform:uppercase;
+      color:rgba(255,255,255,.7); margin-bottom:10px;
+    }
+    .price-main .ref {
+      font-size:34px; font-weight:600; text-decoration:line-through; opacity:.55; margin-bottom:8px;
+    }
+    .price-main .now-label {
+      font:700 12px/1 "IBM Plex Mono",monospace; letter-spacing:.1em; text-transform:uppercase;
+      color:var(--v4-cream); margin:18px 0 8px;
+    }
+    .price-main .now {
+      font-size:78px; font-weight:700; letter-spacing:-.04em; line-height:1; margin:0 0 16px;
+    }
+    .price-main .now small { font-size:34px; }
+    .price-main p { margin:0; color:rgba(255,255,255,.8); font-size:20px; line-height:1.35; max-width:460px; }
+    .price-side { display:grid; gap:16px; }
+    .price-side .box {
+      padding:24px 26px; border-radius:22px; background:white; border:1px solid var(--line);
+    }
+    .price-side .box h3 { margin:0 0 8px; font-size:22px; }
+    .price-side .box p { margin:0; color:var(--ink-soft); font-size:17px; line-height:1.4; }
+    .price-side .box .tag {
+      font:700 11px/1 "IBM Plex Mono",monospace; letter-spacing:.08em; text-transform:uppercase;
+      color:var(--v4-red); margin-bottom:10px;
+    }
+
+  
+    .leak-grid { display:grid; grid-template-columns:1fr 1fr; gap:22px; margin-top:24px; }
+    .leak-card { padding:28px 30px; border-radius:24px; background:white; border:1px solid var(--line); min-height:340px; }
+    .leak-card .k { font:700 12px/1 "IBM Plex Mono",monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--v4-red); }
+    .leak-card .num { font-size:84px; font-weight:700; letter-spacing:-.04em; color:var(--v4-red); margin:10px 0 6px; line-height:1; }
+    .leak-card .cap { margin:0 0 16px; color:var(--ink-soft); font-size:17px; line-height:1.35; }
+    .leak-card ul { margin:0; padding-left:18px; color:var(--ink-soft); font-size:17px; line-height:1.4; }
+    .leak-card li { margin:8px 0; }
+    .bars { display:flex; align-items:flex-end; gap:10px; height:150px; margin-top:18px; }
+    .bar-col { flex:1; display:flex; flex-direction:column; align-items:center; gap:6px; height:100%; justify-content:flex-end; }
+    .bar { width:100%; border-radius:8px 8px 4px 4px; background:linear-gradient(180deg, #ff5a2c 0%, #e50914 70%, #280001 100%); min-height:8px; }
+    .bar-col span { font:600 12px/1 "IBM Plex Mono",monospace; color:var(--ink-soft); }
+    .bar-col strong { font:700 13px/1 "IBM Plex Sans",sans-serif; color:var(--ink); }
+    .leak-banner { margin-top:22px; padding:22px 26px; border-radius:20px; background:linear-gradient(135deg, #e50914, #280001); color:white; display:grid; grid-template-columns:58px 1fr; gap:18px; align-items:start; }
+    .leak-banner h3 { margin:0 0 8px; font-size:22px; }
+    .leak-banner p { margin:0; color:rgba(255,255,255,.82); font-size:16px; line-height:1.4; }
+    .price-layout { display:grid; grid-template-columns:1.15fr .85fr; gap:28px; margin-top:32px; align-items:stretch; }
+    .price-main { padding:40px 42px; border-radius:28px; background:linear-gradient(145deg, #280001 0%, #e50914 100%); color:white; min-height:420px; display:flex; flex-direction:column; justify-content:center; }
+    .price-main .was { font:700 14px/1 "IBM Plex Mono",monospace; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.7); margin-bottom:10px; }
+    .price-main .ref { font-size:34px; font-weight:600; text-decoration:line-through; opacity:.55; margin-bottom:8px; }
+    .price-main .now-label { font:700 12px/1 "IBM Plex Mono",monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--v4-cream); margin:18px 0 8px; }
+    .price-main .now { font-size:78px; font-weight:700; letter-spacing:-.04em; line-height:1; margin:0 0 16px; }
+    .price-main .now small { font-size:34px; }
+    .price-main p { margin:0; color:rgba(255,255,255,.8); font-size:20px; line-height:1.35; max-width:460px; }
+    .price-side { display:grid; gap:16px; }
+    .price-side .box { padding:24px 26px; border-radius:22px; background:white; border:1px solid var(--line); }
+    .price-side .box h3 { margin:0 0 8px; font-size:22px; }
+    .price-side .box p { margin:0; color:var(--ink-soft); font-size:17px; line-height:1.4; }
+    .price-side .box .tag { font:700 11px/1 "IBM Plex Mono",monospace; letter-spacing:.08em; text-transform:uppercase; color:var(--v4-red); margin-bottom:10px; }
+
+  
+
+    /* Padrão · lockup em texto (sem PNG embutido) */
+    .v4-mark {
+      font-weight: 700;
+      font-size: 30px;
+      letter-spacing: -.045em;
+      line-height: 1;
+    }
+    .v4-mark span { font-weight: 300; letter-spacing: .08em; font-size: 18px; margin-left: 8px; }
+    .red .v4-mark, .dark .v4-mark { color: #fff; }
+    .footer-wordmark {
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: -.03em;
+      color: var(--v4-red);
+    }
+    .red ~ * .footer-wordmark,
+    .dark-footer .footer-wordmark { color: #fff; }
+    .act-chip {
+      display: none;
+      position: absolute;
+      top: 22px;
+      right: 96px;
+      z-index: 9;
+      padding: 7px 12px;
+      border-radius: 999px;
+      font: 700 11px/1 "IBM Plex Mono", monospace;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      border: 1px solid rgba(229,9,20,.25);
+      color: var(--v4-red);
+      background: rgba(255,255,255,.88);
+    }
+    body.show-acts .act-chip { display: inline-flex; }
+    .red .act-chip, .dark .act-chip {
+      color: var(--v4-cream);
+      border-color: rgba(255,255,255,.28);
+      background: rgba(255,255,255,.1);
+    }
+    .mapa-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 40px; }
+    .mapa-card { min-height: 280px; padding: 28px; border-radius: 24px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16); }
+    .mapa-card .n { font: 700 12px/1 "IBM Plex Mono", monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--v4-cream); }
+    .mapa-card h3 { margin: 16px 0 10px; font-size: 28px; }
+    .mapa-card p { margin: 0; color: rgba(255,255,255,.72); font-size: 18px; line-height: 1.35; }
+    .success-item h3 { margin: 0; font-size: 20px; }
+    .cover-client .v4-mark { font-size: 18px; }
+    .cover-client .v4-mark span { font-size: 12px; }
+    .brand-lockup { gap: 0; }
+    .brand-lockup img { display: none; }
+    .ph { background: rgba(229,9,20,.12); border-radius: 6px; padding: 0 4px; }
+    .leak-banner .icon-box {
+      color: #fff;
+      border-color: rgba(255,255,255,.28);
+      background: rgba(255,255,255,.12);
+    }
+    .cover-client { font-weight: 500; }
+
+  </style>
+</head>
+<body>
+  <svg aria-hidden="true" width="0" height="0" style="position:absolute">
+    <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+    <symbol id="i-brand" viewBox="0 0 24 24"><path d="M4 18V6l8-3 8 3v12l-8 3-8-3Z"/><path d="M9 9h6M9 13h6M9 17h3"/></symbol>
+    <symbol id="i-store" viewBox="0 0 24 24"><path d="M3 10h18"/><path d="M5 10v10h14V10"/><path d="m4 4-1 6h18l-1-6H4Z"/><path d="M9 20v-6h6v6"/></symbol>
+    <symbol id="i-expand" viewBox="0 0 24 24"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/><path d="m3 8 6-6m12 6-6-6M3 16l6 6m12-6-6 6"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 19V9M10 19V5M16 19v-7M22 19V3"/><path d="M2 19h21"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+    <symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="19" r="3"/><circle cx="18" cy="5" r="3"/><path d="M9 19h2a4 4 0 0 0 4-4v-6"/></symbol>
+    <symbol id="i-megaphone" viewBox="0 0 24 24"><path d="m3 11 14-6v14L3 13v-2Z"/><path d="M11 16v4H7l-1-6"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3-9 5 9 5 9-5-9-5Z"/><path d="m3 12 9 5 9-5"/><path d="m3 16 9 5 9-5"/></symbol>
+    <symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></symbol>
+    <symbol id="i-brush" viewBox="0 0 24 24"><path d="m14 4 6 6-8 8H6v-6l8-8Z"/><path d="M4 20h8"/></symbol>
+    <symbol id="i-page" viewBox="0 0 24 24"><path d="M6 2h9l3 3v17H6V2Z"/><path d="M14 2v5h5M9 12h6M9 16h6"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><circle cx="18" cy="9" r="3"/><path d="M2 21c0-5 3-8 7-8s7 3 7 8M16 14c4 0 6 2 6 7"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></symbol>
+    <symbol id="i-sale" viewBox="0 0 24 24"><path d="M4 6h16l-2 12H6L4 6Z"/><path d="M8 6a4 4 0 0 1 8 0"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></symbol>
+    <symbol id="i-message" viewBox="0 0 24 24"><path d="M4 4h16v13H8l-4 4V4Z"/><path d="M8 9h8M8 13h5"/></symbol>
+    <symbol id="i-dashboard" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 10h18M10 10v11"/><path d="m14 16 2-2 2 2"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="m13 2-8 12h7l-1 8 8-12h-7l1-8Z"/></symbol>
+    <symbol id="i-lightbulb" viewBox="0 0 24 24"><path d="M9 18h6M10 22h4"/><path d="M8 14c-2-1-3-3-3-6a7 7 0 0 1 14 0c0 3-1 5-3 6l-1 2H9l-1-2Z"/></symbol>
+    <symbol id="i-money" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M7 9H5v2M17 15h2v-2"/></symbol>
+    <symbol id="i-trend" viewBox="0 0 24 24"><path d="m3 17 6-6 4 4 8-9"/><path d="M16 6h5v5"/></symbol>
+  </svg>
+  <div id="viewport">
+    <main id="deck" aria-live="polite"></main>
+    <div class="slide-footer" id="slideFooter"><div class="footer-wordmark">V4 COMPANY</div></div>
+    <div class="slide-counter" id="slideCounter">01 / 18</div>
+    <div class="navigation">
+      <button class="nav-btn" id="prevBtn" aria-label="Anterior"><svg class="icon"><use href="#i-arrow-left"></use></svg></button>
+      <button class="nav-btn" id="nextBtn" aria-label="Próximo"><svg class="icon"><use href="#i-arrow-right"></use></svg></button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+  <script>
+/**
+ * PADRÃO DE PROPOSTA — edite só este objeto.
+ * Guia: guia-proposta-padrao.html
+ * Ato 1 narrativa · Ato 2 dados · Ato 3 produto · fecho decisão
+ *
+ * O arquivo já vem preenchido com o caso G6 (Estruturação Comercial)
+ * para você ver o padrão completo. Duplique e troque os campos.
+ */
+const PROPOSTA = {
+  meta: {
+    cliente: "G6 Internet",
+    produto: "Estruturação Comercial",
+    linhaProduto: "Produto Sales V4",
+    condicaoCapa: "Proposta personalizada"
+  },
+
+  narrativa: {
+    capa: {
+      teseHtml: "Do comercial artesanal<br>à máquina de receita",
+      lede: "Processo, CRM em uso, gestão e rotina — instalados em 12 semanas para a G6 vender, ativar e reter com previsibilidade."
+    },
+    contexto: {
+      headlineHtml: "Vocês não têm problema de lead.<br>Têm um comercial reativo sem sistema.",
+      cards: [
+        { icon: "i-users", title: "Entra ~1.000 / sai ~800", text: "Volume alto, retenção frágil. O crescimento líquido vaza todo mês." },
+        { icon: "i-dashboard", title: "CRM existe, mas não governa", text: "Sem motivo de perda, sem próximo passo, sem previsibilidade de pipeline." },
+        { icon: "i-target", title: "Meta vira comodidade", text: "Quando aperta, a meta desce. O time acomoda. Falta cobrança de comportamento." },
+        { icon: "i-route", title: "Loja e PAP sem padrão", text: "5 internos + 2 porta a porta — cada canal vende de um jeito, sem playbook." }
+      ],
+      leituraTituloHtml: "Comercial<br>reativo",
+      leituraTexto: "Demanda entra. Processo não segura. Receita escapa entre ativação, follow-up e retenção."
+    },
+    visao: {
+      headline: "A ordem certa: fundação antes de pressão de meta.",
+      passos: [
+        { k: "01 · Sistema", title: "Máquina comercial", text: "Processo, CRM e rituais transformam esforço individual em operação previsível." },
+        { k: "02 · Gestão", title: "Gestor executa", text: "Com a casa estruturada, a liderança cobra comportamento e conversão — não improvisa processo." },
+        { k: "03 · Receita", title: "Menos vazamento", text: "Ativação, follow-up e retenção entram no método — o CAC deixa de queimar no escuro." }
+      ],
+      quote: "Sem sistema, meta vira pressão. Com sistema, meta vira consequência."
+    },
+    promessa: {
+      headline: "Em um projeto fechado, a V4 constrói e instala a fundação comercial da G6.",
+      lede: "Processo, CRM em uso, scripts, cadências, indicadores e rituais de gestão — operando de verdade pelo time de loja e PAP.",
+      quote: "Não é entregar PDF. É deixar a operação rodando."
+    }
+  },
+
+  dados: {
+    vazamento: {
+      eyebrow: "A conta que explica a estagnação",
+      headline: "Quanto dinheiro sua operação está vazando?",
+      lede: "A G6 tem capacidade de vender. O que a operação não tem é capacidade de segurar — e de medir por que perde.",
+      esquerda: {
+        k: "Entradas",
+        num: "~1.000",
+        cap: "ativações por mês, número citado pela operação",
+        bullets: [
+          "Meta Forms entregou 1.269 leads no ano com CPL de R$ 7,51",
+          "O WhatsApp responde em cerca de 1 minuto",
+          "Existe demanda e existe time para atender"
+        ]
+      },
+      direita: {
+        k: "Saídas",
+        num: "3.755",
+        cap: "cancelamentos somados de janeiro a junho de 2026",
+        barras: [
+          { label: "jan", value: "415" },
+          { label: "fev", value: "560" },
+          { label: "mar", value: "614" },
+          { label: "abr", value: "746" },
+          { label: "mai", value: "715" },
+          { label: "jun", value: "705" }
+        ]
+      },
+      perguntaTitulo: "E a pergunta que ninguém consegue responder hoje: qual é a taxa real de churn da G6?",
+      perguntaTexto: "Para calcular, é preciso a carteira ativa no início de cada mês e o cancelamento por coorte, motivo, cidade e tempo de casa. Esse dado ainda não existe de forma conciliada — e sem ele, toda decisão de investimento é chute."
+    },
+    encaixe: {
+      headline: "Onde a G6 perde previsibilidade — e o que a Estruturação Comercial fecha.",
+      itens: [
+        { title: "Processo comercial inconsistente", text: "Loja e PAP vendem sem padrão; não há jornada nem critério de etapa." },
+        { title: "Cada vendedor vende de um jeito", text: "Sem script compartilhado; performance depende de pessoa, não de método." },
+        { title: "CRM não representa a realidade", text: "Pipeline não reflete ativação, perda nem follow-up." },
+        { title: "Gestor não conduz reunião comercial", text: "Falta ritual; Mateus precisa herdar rituais prontos, não inventar do zero." },
+        { title: "Sem cadência e passagem de bastão", text: "Vendeu e acabou: ativação, save e retenção ficam soltos." },
+        { title: "Treino não vira rotina", text: "Artefato sem instalação assistida regride no comportamento antigo." }
+      ]
+    }
+  },
+
+  produto: {
+    formato: {
+      headline: "Projeto consultivo com implementação assistida",
+      cards: [
+        { k: "Duração", title: "12 semanas", text: "Tempo para diagnosticar, construir, instalar e fazer handover com adesão." },
+        { k: "Carga V4", title: "106,5h", text: "Carga média/alta: análise, desenho, CRM, QA e instalação — não só calls." },
+        { k: "Execução", title: "V4 + G6", text: "V4 constrói e conduz a instalação; o time G6 opera no dia a dia." },
+        { k: "Ritmo", title: "Semanal", text: "Encontros com sponsor/gestor e checkpoints com o time comercial." },
+        { k: "Presencial", title: "F1 + F5", text: "Diagnóstico e instalação/treino presenciais — onde a adesão se decide." },
+        { k: "Saída", title: "Handover", text: "Rotina de gestão instalada + plano de continuidade 60 dias." }
+      ]
+    },
+    escopo: {
+      headline: "O que a Estruturação Comercial instala na G6",
+      colunaA: {
+        title: "Fundação operacional",
+        items: [
+          "Arquitetura loja × PAP com critérios de etapa",
+          "Scripts, cadência e papéis claros por canal",
+          "Rituais de gestão (diária / semanal / pipeline review)",
+          "Onboarding operacional de vendedores"
+        ]
+      },
+      colunaB: {
+        title: "Controle e adesão",
+        items: [
+          "CRM como painel de receita — não cadastro",
+          "Motivo de perda, próxima ação e higiene de pipeline",
+          "Instalação assistida + roleplay",
+          "Rotinas de ativação, follow-up e save no processo"
+        ]
+      },
+      quote: "O produto não vende documento. Vende capacidade instalada no time."
+    },
+    fasesHeadline: "Seis fases. Uma fundação comercial instalada.",
+    fasesNota: "+ 6h de gestão de projeto, QA e alinhamentos internos · Total 106,5h",
+    fases: [
+      {
+        n: "Fase 01 · 18h",
+        title: "Diagnóstico operacional",
+        resumo: "Operação real, não documento bonito para o problema errado.",
+        hours: "18h",
+        detalhe: "Entender a operação real da G6 antes de desenhar qualquer playbook.",
+        entregas: [
+          "Diagnóstico comercial detalhado",
+          "Entrevistas com sponsor, gestor, top e bottom performer",
+          "Auditoria do CRM / RD atual",
+          "Mapa de gargalos por etapa",
+          "Priorização das dores que impedem venda previsível"
+        ],
+        fit: "Encaixe G6: presencial no onboarding — time fechado, loja + PAP.",
+        theme: "white"
+      },
+      {
+        n: "Fase 02 · 15h",
+        title: "Arquitetura comercial",
+        resumo: "Sistema operacional que o time consegue executar.",
+        hours: "15h",
+        detalhe: "Desenhar o sistema que a G6 realmente consegue executar.",
+        entregas: [
+          "ICP / segmentos e jornada comercial alvo",
+          "Pipeline e critérios de etapa · papéis",
+          "SLA marketing ↔ comercial ↔ gestor",
+          "Metas de atividade e indicadores",
+          "Scripts · cadências · BPMN · matriz CHA"
+        ],
+        fit: "Encaixe G6: dual-track loja × PAP.",
+        theme: ""
+      },
+      {
+        n: "Fase 03 · 15,5h",
+        title: "CRM e controle",
+        resumo: "Em paralelo à F2 — método vira workflow.",
+        hours: "15,5h",
+        detalhe: "Arquitetura vira workflow e gestão — painel de receita em uso.",
+        nSide: "Fase 03 · paralelo à F2",
+        entregas: [
+          "Reorganização do pipeline no CRM",
+          "Campos obrigatórios · motivos de perda",
+          "Atividades obrigatórias e próximas ações",
+          "Dashboard de gestão e conversão",
+          "Regras de higiene · rotina de registro"
+        ],
+        fit: "Encaixe G6: origem, tempo de resposta, status, dor, capacidade, produto, próxima ação e motivo de perda.",
+        theme: "white"
+      },
+      {
+        n: "Fase 04 · 20h",
+        title: "Camada estratégica",
+        resumo: "Playbook, comissão e breakeven da operação.",
+        hours: "20h",
+        detalhe: "Processo, gestão, metas, incentivo e viabilidade financeira.",
+        entregas: [
+          "Playbook comercial orientado ao uso",
+          "Política de comissionamento",
+          "Breakeven da operação comercial"
+        ],
+        fit: "Encaixe G6: comissão loja ≠ PAP. Meta como piso. Breakeven amarra CAC, payback e retenção.",
+        theme: ""
+      },
+      {
+        n: "Fase 05 · 22h",
+        title: "Instalação da rotina",
+        resumo: "Adesão: imersão, roleplay e rituais assistidos.",
+        hours: "22h",
+        detalhe: "Garantir que os artefatos sejam usados.",
+        nSide: "Fase 05 · presencial",
+        entregas: [
+          "Onboarding operacional de vendedores",
+          "Imersão do time + treinamento do gestor",
+          "Roleplay loja e PAP",
+          "Pipeline review e reunião semanal assistidas",
+          "Checklist semanal · correção de desvios"
+        ],
+        fit: "Encaixe G6: imersão presencial + roleplay. Mateus herda a rotina.",
+        theme: "dark"
+      },
+      {
+        n: "Fase 06 · 10h",
+        title: "Handover 60 dias",
+        resumo: "Continuidade + retenção + riscos de regressão.",
+        hours: "10h",
+        detalhe: "Manter a rotina nos próximos 60 dias.",
+        entregas: [
+          "Reunião final de transferência",
+          "Score de maturidade antes/depois",
+          "Plano de 60 dias",
+          "Rotinas de retenção e expansão",
+          "Riscos de regressão · evolução"
+        ],
+        fit: "Encaixe G6: motivos de perda, save/upsell e ritual de gestão.",
+        theme: "white"
+      }
+    ],
+    sucesso: {
+      headline: "Receita Previsível",
+      itens: [
+        { icon: "i-dashboard", title: "Pipeline configurado e usado" },
+        { icon: "i-calendar", title: "Reunião semanal acontecendo" },
+        { icon: "i-message", title: "Follow-up sendo executado" },
+        { icon: "i-chart", title: "Gestor usando indicadores" },
+        { icon: "i-page", title: "Time nos scripts e critérios" },
+        { icon: "i-users", title: "Onboarding documentado" },
+        { icon: "i-trend", title: "Rotinas de retenção em operação" },
+        { icon: "i-target", title: "Sponsor com previsibilidade" }
+      ]
+    }
+  },
+
+  decisao: {
+    recap: {
+      headline: "O que está em jogo na G6",
+      dores: [
+        "Comercial reativo: entra ~1.000 / base quase não cresce",
+        "3.755 cancelamentos em 6 meses — sem churn real conciliado",
+        "CRM sem governança — não é painel de receita",
+        "Loja e PAP sem padrão, script nem cadência",
+        "Ativação, save e retenção fora do processo"
+      ],
+      dados: [
+        "~1.000 ativações/mês · Meta Forms 1.269 leads · CPL R$ 7,51",
+        "Saídas: jan 415 · fev 560 · mar 614 · abr 746 · mai 715 · jun 705",
+        "WhatsApp responde em ~1 minuto",
+        "5 vendedores loja + 2 PAP · Mateus em ~30 dias",
+        "Projeto: 12 semanas · 106,5h · dual-track loja × PAP"
+      ],
+      quote: "A Estruturação Comercial instala a máquina que fecha essas dores — com método, adesão e gestão."
+    },
+    investimento: {
+      headline: "Investimento estratégico na fundação comercial da G6",
+      ancoraLabel: "Valor de referência do produto",
+      ancora: "R$ 89.635,85",
+      condicaoLabel: "Condição comercial G6",
+      precoHtml: "R$ 71.582<small>,32</small>",
+      inclusoTitulo: "Capacidade instalada",
+      inclusoTexto: "Diagnóstico → arquitetura → CRM como painel de receita → estratégica → instalação → handover 60 dias.",
+      agoraTitulo: "Parar o vazamento",
+      agoraTexto: "Com 3.755 saídas em 6 meses e churn real ainda não conciliado, estruturar o comercial é a decisão que dá previsibilidade.",
+      resultadoTitulo: "Máquina comercial",
+      resultadoTexto: "Processo, rituais e gestão rodando — para vender, ativar e reter com método.",
+      rodape: "12 semanas · 106,5h · implementação assistida · dual-track loja × PAP · presenciais nas fases críticas."
+    }
+  }
+};
+
+(function () {
+  const P = PROPOSTA;
+  const params = new URLSearchParams(location.search);
+  const SHOW_MAPA = params.has("mapa");
+  const deck = document.getElementById("deck");
+
+  function esc(s) {
+    return String(s == null ? "" : s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+  function raw(s) { return s == null ? "" : String(s); }
+  function icon(id) {
+    return '<div class="icon-box"><svg class="icon"><use href="#' + id + '"></use></svg></div>';
+  }
+  function chip(act) {
+    return '<div class="act-chip">' + esc(act) + "</div>";
+  }
+  function topline() { return '<div class="topline"></div>'; }
+  function spheres() {
+    return '<div class="sphere" style="width:430px;height:430px;right:-80px;top:-115px;opacity:.55"></div>' +
+      '<div class="sphere" style="width:245px;height:245px;right:285px;top:115px;opacity:.32"></div>';
+  }
+  function v4mark() {
+    return '<div class="v4-mark">V4 <span>COMPANY</span></div>';
+  }
+  function bullets(list) {
+    return "<ul>" + list.map(function (item) { return "<li>" + esc(item) + "</li>"; }).join("") + "</ul>";
+  }
+
+  function slide(cls, title, act, inner) {
+    return '<section class="slide ' + cls + '" data-title="' + esc(title) + '" data-act="' + esc(act) + '">' +
+      chip(act) + inner + "</section>";
+  }
+
+  const html = [];
+
+  html.push(slide("red active", "Capa", "Narrativa",
+    spheres() +
+    '<div class="cover-content">' +
+      '<div class="brand-lockup">' + v4mark() + "</div>" +
+      "<div>" +
+        '<span class="eyebrow">' + esc(P.meta.cliente) + " × V4 Company · " + esc(P.meta.produto) + "</span>" +
+        '<h1 class="cover-title">' + raw(P.narrativa.capa.teseHtml) + "</h1>" +
+        '<p class="lede">' + esc(P.narrativa.capa.lede) + "</p>" +
+        '<div class="cover-client">' + esc(P.meta.cliente) + " · " + esc(P.meta.condicaoCapa) + " · " + esc(P.meta.linhaProduto) + "</div>" +
+      "</div>" +
+    "</div>"
+  ));
+
+  if (SHOW_MAPA) {
+    html.push(slide("dark", "Mapa do padrão", "Padrão",
+      '<span class="eyebrow">Padrão de proposta · não vai para o cliente</span>' +
+      '<h2 style="margin-top:28px;max-width:1180px">Narrativa, dados e produto — nesta ordem.</h2>' +
+      '<div class="mapa-grid">' +
+        '<div class="mapa-card"><div class="n">Ato 1</div><h3>Narrativa</h3><p>O cliente se reconhece. Reframe da causa raiz, ordem certa e a promessa do que fica instalado.</p></div>' +
+        '<div class="mapa-card"><div class="n">Ato 2</div><h3>Dados</h3><p>A conta que dói: o que entra, o que vaza, a pergunta que o CRM não responde, as dores que o produto fecha.</p></div>' +
+        '<div class="mapa-card"><div class="n">Ato 3</div><h3>Produto</h3><p>Formato, escopo, fases com encaixe nesta conta, critério de pronto. Depois recap e um preço.</p></div>' +
+      "</div>"
+    ));
+  }
+
+  const ctx = P.narrativa.contexto;
+  html.push(slide("dark", "Contexto", "Narrativa",
+    '<span class="eyebrow">Contexto ' + esc(P.meta.cliente) + "</span>" +
+    '<h2 style="margin-top:28px;max-width:1200px">' + raw(ctx.headlineHtml) + "</h2>" +
+    '<div class="diagnosis-grid">' +
+      '<div class="stack">' +
+        ctx.cards.map(function (c) {
+          return '<div class="line-card">' + icon(c.icon) + "<div><h3>" + esc(c.title) + "</h3><p>" + esc(c.text) + "</p></div></div>";
+        }).join("") +
+      "</div>" +
+      '<div class="metric-card glass" style="min-height:464px">' +
+        icon("i-bolt") +
+        '<div class="big-number" style="font-size:58px;margin-top:36px;line-height:1.05">' + raw(ctx.leituraTituloHtml) + "</div>" +
+        '<h3 style="margin-top:22px">Leitura</h3>' +
+        "<p>" + esc(ctx.leituraTexto) + "</p>" +
+      "</div>" +
+    "</div>"
+  ));
+
+  const vz = P.dados.vazamento;
+  const bars = vz.direita.barras || [];
+  const maxBar = bars.reduce(function (m, b) { return Math.max(m, Number(b.value) || 0); }, 1);
+  html.push(slide("white", "Quanto dinheiro vazando", "Dados",
+    topline() +
+    '<div style="display:inline-flex;align-items:center;padding:8px 14px;border-radius:999px;background:rgba(229,9,20,.08);border:1px solid rgba(229,9,20,.18);font:700 12px/1 \'IBM Plex Mono\',monospace;letter-spacing:.08em;text-transform:uppercase;color:#e50914;margin-bottom:18px">' + esc(vz.eyebrow) + "</div>" +
+    '<h2 style="margin:0;max-width:1180px;font-size:42px;line-height:1.12">' + esc(vz.headline) + "</h2>" +
+    '<p style="margin:12px 0 0;max-width:980px;color:#5a5a5a;font-size:20px;line-height:1.35">' + esc(vz.lede) + "</p>" +
+    '<div class="leak-grid">' +
+      '<div class="leak-card">' +
+        '<div class="k">' + esc(vz.esquerda.k) + "</div>" +
+        '<div class="num">' + esc(vz.esquerda.num) + "</div>" +
+        '<p class="cap">' + esc(vz.esquerda.cap) + "</p>" +
+        bullets(vz.esquerda.bullets) +
+      "</div>" +
+      '<div class="leak-card">' +
+        '<div class="k">' + esc(vz.direita.k) + "</div>" +
+        '<div class="num">' + esc(vz.direita.num) + "</div>" +
+        '<p class="cap">' + esc(vz.direita.cap) + "</p>" +
+        (bars.length
+          ? '<div class="bars">' + bars.map(function (b) {
+              var h = Math.max(8, Math.round((Number(b.value) / maxBar) * 130));
+              return '<div class="bar-col"><strong>' + esc(b.value) + '</strong><div class="bar" style="height:' + h + 'px"></div><span>' + esc(b.label) + "</span></div>";
+            }).join("") + "</div>"
+          : "") +
+      "</div>" +
+    "</div>" +
+    '<div class="leak-banner">' +
+      icon("i-search") +
+      "<div><h3>" + esc(vz.perguntaTitulo) + "</h3><p>" + esc(vz.perguntaTexto) + "</p></div>" +
+    "</div>"
+  ));
+
+  const enc = P.dados.encaixe;
+  html.push(slide("dark", "Dores × produto", "Dados",
+    '<span class="eyebrow">Encaixe ' + esc(P.meta.cliente) + "</span>" +
+    '<h2 style="margin-top:24px;max-width:1200px;font-size:40px">' + esc(enc.headline) + "</h2>" +
+    '<div class="map-grid">' +
+      enc.itens.map(function (it) {
+        return '<div class="map-item"><div class="dot"></div><div><div class="g6">' + esc(P.meta.cliente) + "</div><h3>" + esc(it.title) + "</h3><p>" + esc(it.text) + "</p></div></div>";
+      }).join("") +
+    "</div>"
+  ));
+
+  const vis = P.narrativa.visao;
+  html.push(slide("white", "Visão estratégica", "Narrativa",
+    topline() +
+    '<span class="eyebrow">Visão estratégica</span>' +
+    '<h2 style="margin-top:28px;max-width:1180px">' + esc(vis.headline) + "</h2>" +
+    '<div class="format-row" style="margin-top:44px">' +
+      vis.passos.map(function (p) {
+        return '<div class="format-card"><div class="k">' + esc(p.k) + "</div><h3>" + esc(p.title) + "</h3><p>" + esc(p.text) + "</p></div>";
+      }).join("") +
+    "</div>" +
+    '<div class="quote" style="margin-top:36px;font-size:24px">' + esc(vis.quote) + "</div>"
+  ));
+
+  const pr = P.narrativa.promessa;
+  html.push(slide("red", "Promessa", "Narrativa",
+    '<div class="sphere" style="width:380px;height:380px;right:-60px;top:-90px;opacity:.4"></div>' +
+    '<span class="eyebrow">Promessa</span>' +
+    '<h2 style="margin-top:36px;max-width:1280px;font-size:52px">' + esc(pr.headline) + "</h2>" +
+    '<p class="lede" style="margin-top:28px;max-width:1100px">' + esc(pr.lede) + "</p>" +
+    '<div class="quote" style="margin-top:48px;border-color:var(--v4-cream);font-size:28px">' + esc(pr.quote) + "</div>"
+  ));
+
+  const fmt = P.produto.formato;
+  html.push(slide("", "Formato", "Produto",
+    topline() +
+    '<span class="eyebrow">Formato</span>' +
+    '<h2 style="margin-top:28px;max-width:1100px">' + esc(fmt.headline) + "</h2>" +
+    '<div class="format-row">' +
+      fmt.cards.map(function (c) {
+        return '<div class="format-card"><div class="k">' + esc(c.k) + "</div><h3>" + esc(c.title) + "</h3><p>" + esc(c.text) + "</p></div>";
+      }).join("") +
+    "</div>"
+  ));
+
+  const sc = P.produto.escopo;
+  html.push(slide("white", "O que o produto entrega", "Produto",
+    topline() +
+    '<span class="eyebrow">Escopo do produto</span>' +
+    '<h2 style="margin-top:28px;max-width:1180px">' + esc(sc.headline) + "</h2>" +
+    '<div class="split-2">' +
+      '<div class="split-card ok"><h3>' + esc(sc.colunaA.title) + "</h3>" + bullets(sc.colunaA.items) + "</div>" +
+      '<div class="split-card gap"><h3>' + esc(sc.colunaB.title) + "</h3>" + bullets(sc.colunaB.items) + "</div>" +
+    "</div>" +
+    '<div class="quote" style="margin-top:30px;font-size:24px">' + esc(sc.quote) + "</div>"
+  ));
+
+  const fases = P.produto.fases;
+  html.push(slide("dark", "Fases do produto", "Produto",
+    '<span class="eyebrow">Fases do produto</span>' +
+    '<h2 style="margin-top:24px;max-width:1180px;font-size:42px">' + esc(P.produto.fasesHeadline) + "</h2>" +
+    '<div class="phase-rail" style="grid-template-columns:repeat(' + Math.min(fases.length, 6) + ',1fr)">' +
+      fases.map(function (f) {
+        return '<div class="phase"><div class="n">' + esc(f.n) + "</div><h3>" + esc(f.title) + "</h3><p>" + esc(f.resumo) + "</p></div>";
+      }).join("") +
+    "</div>" +
+    (P.produto.fasesNota ? '<p class="mini-note">' + esc(P.produto.fasesNota) + "</p>" : "")
+  ));
+
+  fases.forEach(function (f, i) {
+    html.push(slide(f.theme || "", "Fase " + (i + 1) + " · " + f.title, "Produto",
+      (f.theme === "dark" ? "" : topline()) +
+      '<span class="eyebrow">Fases · detalhe</span>' +
+      '<div class="phase-detail">' +
+        '<div class="phase-side"><div class="n">' + esc(f.nSide || f.n) + "</div><h3>" + esc(f.title) + '</h3><div class="hours">' + esc(f.hours) + "</div><p>" + esc(f.detalhe) + "</p></div>" +
+        '<div class="phase-body"><h4>Entregas</h4>' + bullets(f.entregas) +
+          '<div class="fit"><strong>' + esc(f.fit) + "</strong></div>" +
+        "</div>" +
+      "</div>"
+    ));
+  });
+
+  const suc = P.produto.sucesso;
+  html.push(slide("", "Receita Previsível", "Produto",
+    topline() +
+    '<span class="eyebrow">' + esc(suc.headline) + "</span>" +
+    '<h2 style="margin-top:28px;max-width:1180px">' + esc(suc.headline) + "</h2>" +
+    '<div class="success-grid" style="margin-top:28px">' +
+      suc.itens.map(function (it) {
+        return '<div class="success-item">' + icon(it.icon) + "<h3>" + esc(it.title) + "</h3></div>";
+      }).join("") +
+    "</div>"
+  ));
+
+  const rec = P.decisao.recap;
+  html.push(slide("dark", "Recap · dores e dados", "Decisão",
+    '<span class="eyebrow">Recap antes da decisão</span>' +
+    '<h2 style="margin-top:22px;max-width:1180px">' + esc(rec.headline) + "</h2>" +
+    '<div class="split-2" style="margin-top:28px">' +
+      '<div class="split-card gap" style="min-height:auto"><h3>Dores</h3>' + bullets(rec.dores) + "</div>" +
+      '<div class="split-card ok" style="min-height:auto"><h3>Dados</h3>' + bullets(rec.dados) + "</div>" +
+    "</div>" +
+    '<div class="quote" style="margin-top:28px;font-size:24px">' + esc(rec.quote) + "</div>"
+  ));
+
+  const inv = P.decisao.investimento;
+  html.push(slide("white", "Investimento", "Decisão",
+    topline() +
+    '<span class="eyebrow">Investimento</span>' +
+    '<h2 style="margin-top:18px;max-width:1100px">' + esc(inv.headline) + "</h2>" +
+    '<div class="price-layout">' +
+      '<div class="price-main">' +
+        '<div class="was">' + esc(inv.ancoraLabel) + "</div>" +
+        '<div class="ref">' + esc(inv.ancora) + "</div>" +
+        '<div class="now-label">' + esc(inv.condicaoLabel) + "</div>" +
+        '<div class="now">' + raw(inv.precoHtml) + "</div>" +
+        "<p>" + esc(inv.rodape) + "</p>" +
+      "</div>" +
+      '<div class="price-side">' +
+        '<div class="box"><div class="tag">O que está incluso</div><h3>' + esc(inv.inclusoTitulo) + "</h3><p>" + esc(inv.inclusoTexto) + "</p></div>" +
+        '<div class="box"><div class="tag">Por que agora</div><h3>' + esc(inv.agoraTitulo) + "</h3><p>" + esc(inv.agoraTexto) + "</p></div>" +
+        '<div class="box"><div class="tag">Resultado esperado</div><h3>' + esc(inv.resultadoTitulo) + "</h3><p>" + esc(inv.resultadoTexto) + "</p></div>" +
+      "</div>" +
+    "</div>"
+  ));
+
+  deck.insertAdjacentHTML("afterbegin", html.join("\n"));
+
+  const slidesEls = Array.from(document.querySelectorAll(".slide"));
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+  const slideCounter = document.getElementById("slideCounter");
+  const progressFill = document.getElementById("progressFill");
+  const footerEl = document.getElementById("slideFooter");
+  let current = 0;
+
+  function fitDeck() {
+    const w = window.visualViewport?.width || window.innerWidth;
+    const h = window.visualViewport?.height || window.innerHeight;
+    deck.style.setProperty("--deck-scale", Math.max(.1, Math.min((w - 16) / 1600, (h - 16) / 900, 1)));
+  }
+
+  function goTo(index) {
+    current = Math.max(0, Math.min(slidesEls.length - 1, index));
+    slidesEls.forEach(function (s, i) { s.classList.toggle("active", i === current); });
+    const number = String(current + 1).padStart(2, "0");
+    const total = String(slidesEls.length).padStart(2, "0");
+    const active = slidesEls[current];
+    const isDark = active.classList.contains("red") || active.classList.contains("dark");
+    slideCounter.textContent = number + " / " + total;
+    slideCounter.style.color = isDark ? "rgba(255,255,255,.58)" : "rgba(20,20,20,.52)";
+    progressFill.style.width = ((current + 1) / slidesEls.length) * 100 + "%";
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === slidesEls.length - 1;
+    footerEl.classList.toggle("dark-footer", isDark);
+    footerEl.style.opacity = (current === 0 || current === slidesEls.length - 1) ? "0" : "1";
+    document.title = number + " | " + (active.dataset.title || P.meta.cliente);
+  }
+
+  prevBtn.onclick = function () { goTo(current - 1); };
+  nextBtn.onclick = function () { goTo(current + 1); };
+  window.addEventListener("resize", fitDeck);
+  window.visualViewport?.addEventListener("resize", fitDeck);
+  window.addEventListener("keydown", function (e) {
+    if (["ArrowRight", "PageDown", " "].includes(e.key)) { e.preventDefault(); goTo(current + 1); }
+    if (["ArrowLeft", "PageUp"].includes(e.key)) { e.preventDefault(); goTo(current - 1); }
+    if (e.key === "Home") goTo(0);
+    if (e.key === "End") goTo(slidesEls.length - 1);
+    if (e.key === "g" || e.key === "G") document.body.classList.toggle("show-acts");
+  });
+  let tx = null;
+  deck.addEventListener("touchstart", function (e) { tx = e.changedTouches[0].clientX; }, { passive: true });
+  deck.addEventListener("touchend", function (e) {
+    if (tx == null) return;
+    const d = e.changedTouches[0].clientX - tx;
+    if (Math.abs(d) > 70) goTo(current + (d < 0 ? 1 : -1));
+    tx = null;
+  }, { passive: true });
+  fitDeck();
+  goTo(0);
+})();
+
+  </script>
+</body>
+</html>
