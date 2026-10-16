@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Análise IA · Pitch · Controle comercial</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:#140608; --surf:rgba(255,255,255,.06); --bd:rgba(255,255,255,.14);
+      --txt:#fff; --mut:rgba(255,255,255,.78); --red:#e11d24;
+      --ok:#86efac; --warn:#fde68a; --bad:#fda4af;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;font:15px/1.55 "Plus Jakarta Sans",system-ui,sans-serif;color:var(--txt);
+      background:radial-gradient(ellipse 70% 40% at 10% 0%,rgba(225,29,36,.32),transparent 55%),
+        linear-gradient(180deg,#1a090b 0%,#0d0405 100%);padding-bottom:72px
+    }
+    h1,h2,h3{font-family:Outfit,sans-serif;letter-spacing:-.02em;line-height:1.15}
+    .top{position:sticky;top:0;z-index:40;backdrop-filter:blur(14px);background:rgba(13,4,5,.92);
+      border-bottom:1px solid var(--bd);padding:12px 18px;display:flex;gap:10px;flex-wrap:wrap;
+      align-items:center;justify-content:space-between}
+    .brand{font-weight:800;font-size:14px}.brand span{color:#fda4af}
+    .pill{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+      border:1px solid var(--bd);border-radius:999px;padding:6px 11px;color:var(--mut)}
+    .wrap{max-width:960px;margin:0 auto;padding:26px 18px 0}
+    .hero{border:1px solid var(--bd);border-radius:20px;padding:26px 22px;
+      background:linear-gradient(135deg,rgba(225,29,36,.2),rgba(255,255,255,.04));margin-bottom:16px}
+    .hero h1{margin:0 0 10px;font-size:clamp(24px,4vw,34px)}
+    .hero p{margin:0;color:var(--mut);max-width:820px}
+    .nav{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin:14px 0 18px}
+    .nav a{text-decoration:none;color:var(--mut);font-size:12px;font-weight:700;border:1px solid var(--bd);
+      background:var(--surf);border-radius:12px;padding:10px 12px}
+    .nav a:hover{color:#fff;background:rgba(225,29,36,.18)}
+    .nav a small{display:block;color:#fda4af;font-size:10px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px}
+    .section{border:1px solid var(--bd);border-radius:18px;background:rgba(255,255,255,.04);
+      padding:20px 18px;margin:12px 0}
+    .section h2{margin:0 0 8px;font-size:clamp(18px,3vw,24px)}
+    .section .k{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#fda4af;margin-bottom:6px}
+    .lead{color:var(--mut);margin:0 0 12px;font-size:14px}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    @media(max-width:760px){.grid2{grid-template-columns:1fr}}
+    .card{border:1px solid var(--bd);border-radius:14px;background:var(--surf);padding:12px 14px}
+    .card h3{margin:0 0 6px;font-size:14px}
+    .card p,.card li{margin:0;font-size:13px;color:var(--mut)}
+    .card ul{margin:6px 0 0;padding-left:16px}
+    .card li{margin:4px 0}
+    .tag{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+      padding:3px 8px;border-radius:999px;margin-bottom:6px}
+    .tag.ok{background:rgba(134,239,172,.15);color:var(--ok)}
+    .tag.warn{background:rgba(253,230,138,.12);color:var(--warn)}
+    .tag.bad{background:rgba(253,164,175,.15);color:var(--bad)}
+    .callout{margin:12px 0;padding:12px 14px;border-radius:12px;font-size:14px}
+    .callout.warn{border:1px solid rgba(253,230,138,.3);background:rgba(253,230,138,.08);color:var(--warn)}
+    .callout.ok{border:1px solid rgba(134,239,172,.3);background:rgba(134,239,172,.08);color:var(--ok)}
+    .callout.bad{border:1px solid rgba(253,164,175,.3);background:rgba(253,164,175,.08);color:var(--bad)}
+    .callout strong{color:inherit;filter:brightness(1.15)}
+    table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
+    th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--bd);vertical-align:top}
+    th{color:#fda4af;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+    td{color:var(--mut)} td strong{color:#fff}
+    ol.steps{margin:8px 0 0;padding-left:18px;color:var(--mut);font-size:13px}
+    ol.steps li{margin:8px 0} ol.steps strong{color:#fff}
+    .quote{border-left:3px solid var(--red);padding:10px 14px;margin:10px 0;background:rgba(225,29,36,.08);
+      color:var(--mut);font-size:13px;border-radius:0 10px 10px 0}
+    .quote strong{color:#fff}
+    .score{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0}
+    @media(max-width:600px){.score{grid-template-columns:1fr}}
+    .score-item{border:1px solid var(--bd);border-radius:12px;padding:12px;background:var(--surf);text-align:center}
+    .score-item .l{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+    .score-item .v{font-size:22px;font-weight:800;margin-top:4px}
+    .score-item .v.bad{color:var(--bad)}.score-item .v.warn{color:var(--warn)}
+    footer{margin:24px 0 0;text-align:center;font-size:12px;color:var(--mut)}
+  </style>
+</head>
+<body>
+  <div class="top">
+    <div class="brand">Análise IA · <span>Controle comercial</span></div>
+    <div class="pill">6 win × 6 drop · recorte Unik + Terra</div>
+  </div>
+
+  <div class="wrap">
+    <header class="hero">
+      <h1>Gap não é simpatia. É controle comercial.</h1>
+      <p>
+        Leitura da IA sobre pitches que monetizaram vs. drops.
+        Neste arquivo: síntese geral + Unik Benefícios + Terra Prometida —
+        e os padrões isolados que saem daí. Sem juntar com outros kits.
+      </p>
+    </header>
+
+    <div class="callout warn">
+      <strong>Veredito da IA:</strong> boa abertura, disponibilidade e preservação de próximos passos.
+      O gap é entrar como negociadora de preço antes de confirmar valor, prioridade, escopo, retorno, autoridade e prontidão para decidir.
+    </div>
+
+    <nav class="nav">
+      <a href="#leitura"><small>01</small>Leitura geral</a>
+      <a href="#padrao"><small>02</small>Padrão-mãe</a>
+      <a href="#checklist"><small>03</small>Checklist pré-preço</a>
+      <a href="#unik"><small>04</small>Unik</a>
+      <a href="#terra"><small>05</small>Terra Prometida</a>
+      <a href="#regras"><small>06</small>Regras novas</a>
+      <a href="#fila"><small>07</small>Fila (restante)</a>
+    </nav>
+
+    <!-- 01 -->
+    <section class="section" id="leitura">
+      <div class="k">01 · Leitura geral</div>
+      <h2>Scores de prontidão × execução</h2>
+      <p class="lead">A IA separou duas coisas: se a jornada estava pronta e se o pitch foi bem executado. Nos dois drops abaixo, nenhum dos eixos autorizava fechamento.</p>
+      <table>
+        <thead>
+          <tr><th>Call</th><th>Prontidão da jornada</th><th>Execução do pitch</th><th>Melhor momento?</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Unik Benefícios</strong></td>
+            <td><strong style="color:var(--bad)">25,0</strong></td>
+            <td><strong style="color:var(--warn)">42,8</strong></td>
+            <td>Não. Havia interesse, faltava alinhamento decisório e econômico.</td>
+          </tr>
+          <tr>
+            <td><strong>Terra Prometida</strong></td>
+            <td><strong style="color:var(--bad)">20,0</strong></td>
+            <td><strong style="color:var(--warn)">40,8</strong></td>
+            <td>Não para fechamento. Cliente ainda entendendo produto, retorno e custo total.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="callout bad">
+        <strong>Padrão emergente:</strong> execução ~40 e prontidão ≤25 → a sala “anda”, mas não está pronta para preço.
+        Negociar nesse ponto não recupera conversão; dilui valor.
+      </div>
+    </section>
+
+    <!-- 02 -->
+    <section class="section" id="padrao">
+      <div class="k">02 · Padrão-mãe</div>
+      <h2>Controle comercial = decidir se a sala pode falar de dinheiro</h2>
+      <div class="grid2">
+        <div class="card">
+          <span class="tag ok">O que já funciona</span>
+          <h3>Abertura e continuidade</h3>
+          <ul>
+            <li>Deixa o cliente falar</li>
+            <li>Preserva próximo passo (não some o follow)</li>
+            <li>Abre espaço de transparência</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="tag bad">O que quebra</span>
+          <h3>Timing da negociação</h3>
+          <ul>
+            <li>Entra quando o preço já foi apresentado ou a objeção já apareceu</li>
+            <li>Primeira função vira negociar, não diagnosticar prontidão</li>
+            <li>“Faz sentido?” / “alguma dúvida?” substituem diagnóstico</li>
+          </ul>
+        </div>
+      </div>
+      <div class="quote">
+        <strong>Frase-padrão:</strong> “Antes de falarmos de condição, quero resolver essas dúvidas.”
+        Interromper o pitch com segurança &gt; negociar proposta que o cliente ainda não compreendeu.
+      </div>
+    </section>
+
+    <!-- 03 -->
+    <section class="section" id="checklist">
+      <div class="k">03 · Checklist pré-preço</div>
+      <h2>Seis confirmações — uma pergunta por vez</h2>
+      <p class="lead">Antes de condição, desconto ou contraproposta. Se alguma falhar, a sala não está em fechamento.</p>
+      <ol class="steps">
+        <li><strong>Valor:</strong> O que o cliente mais valorizou na estratégia?</li>
+        <li><strong>Prioridade:</strong> Qual problema ele considera prioritário?</li>
+        <li><strong>Escopo:</strong> O escopo apresentado resolve essa prioridade?</li>
+        <li><strong>Retorno:</strong> Qual retorno ele espera e em quanto tempo?</li>
+        <li><strong>Custo total:</strong> Fee + mídia + ferramentas + responsabilidades internas estão claros?</li>
+        <li><strong>Autoridade:</strong> Quem decide e o que ainda precisa ser analisado?</li>
+      </ol>
+      <div class="callout ok">
+        <strong>Padrão operacional:</strong> 6/6 verdes → pode falar investimento.
+        Qualquer vermelho → diagnosticar ou interromper; não abrir desconto.
+      </div>
+    </section>
+
+    <!-- 04 UNIK -->
+    <section class="section" id="unik">
+      <div class="k">04 · Call drop</div>
+      <h2>Unik Benefícios</h2>
+      <div class="score">
+        <div class="score-item"><div class="l">Prontidão</div><div class="v bad">25</div></div>
+        <div class="score-item"><div class="l">Execução</div><div class="v warn">42,8</div></div>
+        <div class="score-item"><div class="l">Fechamento</div><div class="v bad">Não</div></div>
+      </div>
+
+      <div class="card" style="margin-bottom:10px">
+        <span class="tag bad">O que aconteceu</span>
+        <ul>
+          <li>Entrega &gt; 1h30 antes do pitch</li>
+          <li>Daniel perdeu parte relevante e voltou depois</li>
+          <li>01:42:58 — apresentação “nos bastidores” (ansiedade de presença)</li>
+          <li>Validação = “fez sentido?” / “alguma dúvida?”</li>
+          <li>01:52:30 — preço</li>
+          <li>Cliente precisou perguntar se ainda havia mídia e se o contrato era de 1 ano</li>
+          <li>01:55:14 — pediram tempo entre sócios</li>
+          <li>Abriu negociação sem isolar: caixa × custo total × prioridade × autoridade × retorno</li>
+        </ul>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <span class="tag ok">Ponto positivo</span>
+          <h3>Próximo passo concreto</h3>
+          <p>Compromisso de resposta depois do almoço — melhor que follow genérico.</p>
+        </div>
+        <div class="card">
+          <span class="tag bad">Correção central</span>
+          <h3>Preço sem valor verbalizado</h3>
+          <p>Cliente chegou ao investimento sem verbalizar valor da entrega e sem clareza do custo total.</p>
+        </div>
+      </div>
+
+      <h3 style="margin:16px 0 8px;font-size:16px">Condução padrão (extraída)</h3>
+      <ol class="steps">
+        <li><strong>Antes do investimento:</strong> “Quero ouvir cada um. Qual ponto da estratégia vocês consideram mais prioritário para executar?”</li>
+        <li><strong>Escopo / custo total:</strong> “Considerando fee, mídia e responsabilidades internas, essa configuração está adequada ou existe ponto de escopo a ajustar?”</li>
+        <li><strong>Fecho de decisão:</strong> “Para vocês decidirem hoje, o que precisa estar validado entre os sócios?”</li>
+      </ol>
+      <div class="callout bad">
+        <strong>Ban:</strong> “não quero que a Unik suma” — transmite ansiedade e introduz risco de ghosting sem diagnosticar a decisão.
+      </div>
+
+      <div class="card" style="margin-top:10px">
+        <span class="tag warn">Padrão Unik</span>
+        <h3>Interesse ≠ prontidão decisória</h3>
+        <p>Havia interesse. Faltava: hierarquia de valor verbalizada, custo total explícito, mapa de sócios, trava isolada antes de negociar.</p>
+      </div>
+    </section>
+
+    <!-- 05 TERRA -->
+    <section class="section" id="terra">
+      <div class="k">05 · Call drop</div>
+      <h2>Terra Prometida</h2>
+      <div class="score">
+        <div class="score-item"><div class="l">Prontidão</div><div class="v bad">20</div></div>
+        <div class="score-item"><div class="l">Execução</div><div class="v warn">40,8</div></div>
+        <div class="score-item"><div class="l">Fechamento</div><div class="v bad">Não</div></div>
+      </div>
+
+      <div class="card" style="margin-bottom:10px">
+        <span class="tag bad">O que aconteceu</span>
+        <ul>
+          <li>00:37:48 — boa pergunta sobre prioridade de produtos</li>
+          <li>Cliente disse prioridades diferentes — hierarquia <em>não concluída</em> antes do preço</li>
+          <li>00:43:44 — preço</li>
+          <li>00:46:15 — “bastante dúvidas” sobre os produtos (depois do preço)</li>
+          <li>00:58:31–01:00:38 — confusão mensalidade / recorrência / pontuais (“calma aí, ficou confuso”)</li>
+          <li>01:02:43 — pediu projeção de retorno curto e longo prazo</li>
+          <li>Declarou impossível fechar: ainda conhecendo a V4</li>
+          <li>Mesmo assim → contraproposta, desconto, condição de fechamento do mês</li>
+        </ul>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <span class="tag ok">Ponto positivo</span>
+          <h3>Próximo passo bilateral</h3>
+          <p>Forecast + contraproposta + nova reunião (segunda 16h).</p>
+        </div>
+        <div class="card">
+          <span class="tag bad">Correção central</span>
+          <h3>Objeção ≠ preço</h3>
+          <p>Falta de compreensão de produto, sequência, custo total e retorno. Negociar antes enfraqueceu valor.</p>
+        </div>
+      </div>
+
+      <h3 style="margin:16px 0 8px;font-size:16px">Condução padrão (extraída)</h3>
+      <ol class="steps">
+        <li><strong>Quando há dúvidas:</strong> “Então ainda não estamos na etapa de negociar. Quero primeiro garantir que você consiga explicar por que cada produto entra, em qual ordem e qual resultado esperamos.”</li>
+        <li><strong>Quando pedem retorno:</strong> “Vamos construir três cenários: mídia isolada, mídia com CRM e solução completa. Em cada um: investimento total, premissas, prazo e resultado para o projeto se pagar.”</li>
+        <li><strong>Contraproposta:</strong> só depois dessa apresentação.</li>
+      </ol>
+
+      <div class="card" style="margin-top:10px">
+        <span class="tag warn">Padrão Terra</span>
+        <h3>Prioridade aberta + preço = confusão</h3>
+        <p>Pergunta boa sem fechar hierarquia. Preço em cima de dúvida. Cliente verbaliza falta de retorno — e a sala ainda abre desconto.</p>
+      </div>
+    </section>
+
+    <!-- 06 REGRAS -->
+    <section class="section" id="regras">
+      <div class="k">06 · Padrões isolados (ainda não juntar)</div>
+      <h2>Regras que saem só desta análise</h2>
+      <div class="grid2">
+        <div class="card">
+          <span class="tag ok">Fazer</span>
+          <ul>
+            <li>Diagnosticar prontidão antes de negociar</li>
+            <li>Uma pergunta aberta por vez (as 6 do checklist)</li>
+            <li>Isolar a trava: caixa / custo total / prioridade / autoridade / retorno</li>
+            <li>Interromper pitch se produto ou retorno não estão claros</li>
+            <li>Cenários de retorno (quando o cliente pede) antes de condição</li>
+            <li>Fechar hierarquia de produtos antes do preço</li>
+            <li>Deixar custo total (fee + mídia + ferramentas) explícito — cliente não deve precisar perguntar</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="tag bad">Evitar</span>
+          <ul>
+            <li>Negociar com dúvida de produto ainda aberta</li>
+            <li>“Faz sentido?” / “alguma dúvida?” como validação principal</li>
+            <li>Falas de ansiedade (“não quero que sumam”)</li>
+            <li>Contraproposta / desconto / “fecha o mês” com prontidão &lt; ~40</li>
+            <li>Empilhar entrega longa + preço sem balizamento decisório</li>
+            <li>Tratar “preciso falar com sócios” como objeção de preço sem mapear o que falta validar</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout warn" style="margin-top:14px">
+        <strong>Nome do padrão:</strong> Controle Comercial Pré-Preço.
+        Função da Farmer na zona de preço = <em>porteira</em>, não <em>desconto</em>.
+        Só libera condição quando valor, prioridade, escopo, retorno, custo total e autoridade estão verbalizados.
+      </div>
+    </section>
+
+    <!-- 07 FILA -->
+    <section class="section" id="fila">
+      <div class="k">07 · Fila desta rodada</div>
+      <h2>O que já entrou × o que falta</h2>
+      <p class="lead">Recorte anunciado: 6 pitches que monetizaram + 6 que droparam. Neste arquivo só Unik e Terra (drops) foram detalhados.</p>
+      <table>
+        <thead>
+          <tr><th>Conta</th><th>Tipo</th><th>Status na análise</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Unik Benefícios</strong></td><td>Drop</td><td><span class="tag ok">Analisado</span></td></tr>
+          <tr><td><strong>Terra Prometida</strong></td><td>Drop</td><td><span class="tag ok">Analisado</span></td></tr>
+          <tr><td>Drop 3–6</td><td>Drop</td><td><span class="tag warn">Aguardando</span></td></tr>
+          <tr><td>Win 1–6</td><td>Monetizado</td><td><span class="tag warn">Aguardando</span></td></tr>
+        </tbody>
+      </table>
+      <div class="callout ok">
+        <strong>Próximo:</strong> enviar as outras calls (ou o feedback da IA delas).
+        Continuamos analisando e extraindo padrões — sem juntar ainda.
+      </div>
+    </section>
+
+    <footer>
+      Análise IA · Controle comercial · Unik + Terra Prometida · padrões isolados
+    </footer>
+  </div>
+</body>
+</html>
