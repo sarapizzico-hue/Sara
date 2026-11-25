@@ -79,8 +79,12 @@
     .pain h3{font-size:26px;line-height:1.12;margin:40px 0 14px;max-width:440px}
     .pain p{color:var(--gray);margin:0;max-width:470px}
     .diagnosis-quote{margin-top:50px;background:var(--wine);color:#fff;padding:44px 48px;display:grid;grid-template-columns:1fr 1.4fr;gap:50px;align-items:center}
-    .diagnosis-quote strong{font-family:Display;font-size:clamp(50px,7vw,94px);line-height:.86;text-transform:uppercase;color:#e9c0be}
+    .diagnosis-quote strong{font-family:Display;font-size:clamp(34px,3.6vw,58px);line-height:.92;text-transform:uppercase;color:#e9c0be}
     .diagnosis-quote p{font-size:21px;color:#ead7d6;margin:0}
+    .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:0 0 28px}
+    .stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 24px}
+    .stat b{display:block;font-family:Display,Impact,sans-serif;font-size:clamp(36px,4vw,52px);line-height:.9;color:var(--red);letter-spacing:-.03em}
+    .stat span{display:block;margin-top:10px;color:var(--gray);font-size:14px;line-height:1.35}
 
     .plan{background:#fff}
     .plan-rail{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--ink)}
@@ -150,12 +154,12 @@
     @media(max-width:1040px){
       .nav{display:none}.menu-button{display:block}.hero-grid{grid-template-columns:1fr 1fr;gap:20px}.hero-art{min-height:570px}.pet-orbit{width:390px;height:390px}.hero-pet{width:350px}.hero-proof{display:none}
       .section-head{grid-template-columns:130px 1fr}.plan-rail{grid-template-columns:repeat(3,1fr)}.plan-item:nth-child(3){border-right:0}.plan-item:nth-child(n+4){border-top:1px solid var(--line)}
-      .reactivation-map{grid-template-columns:repeat(3,1fr);row-gap:34px}.reactivation-map:before{display:none}.outcomes{grid-template-columns:repeat(2,1fr)}.outcome:nth-child(2){border-right:0}.outcome:nth-child(-n+2){border-bottom:1px solid rgba(255,255,255,.2)}
+      .stat-row{grid-template-columns:repeat(2,1fr)}.reactivation-map{grid-template-columns:repeat(3,1fr);row-gap:34px}.reactivation-map:before{display:none}.outcomes{grid-template-columns:repeat(2,1fr)}.outcome:nth-child(2){border-right:0}.outcome:nth-child(-n+2){border-bottom:1px solid rgba(255,255,255,.2)}
       .kanban-rules{grid-template-columns:repeat(2,1fr)}.rule{border-bottom:1px solid var(--line)}.benefit{grid-template-columns:60px 1fr}.benefit p{grid-column:2}.step-grid{grid-template-columns:repeat(2,1fr)}.step:nth-child(2){border-right:0}.anchor-frame,.price-grid{grid-template-columns:1fr}.anchor-value{white-space:normal}
     }
     @media(max-width:720px){
       .shell{width:calc(100% - 40px);max-width:350px;margin-left:20px;margin-right:auto}.header-inner{height:63px}.brand img{width:42px}.brand-context{font-size:11px}.hero{min-height:auto}.hero-grid{min-height:auto;display:block;padding:54px 0 0}.hero h1{font-size:clamp(76px,23vw,104px);max-width:100%;line-height:.88;letter-spacing:-.015em}.hero-sub{font-size:22px;line-height:1.22;letter-spacing:-.02em;margin-top:34px;max-width:100%}.hero-text{font-size:18px;line-height:1.5;max-width:100%}.hero-art{min-height:430px;margin-top:30px}.pet-orbit{width:330px;height:330px;right:-80px;top:38px}.hero-pet{width:310px;right:-62px;top:32px}.crm-preview{left:0;bottom:30px;width:82%;transform:rotate(-1deg)}.preview-row{grid-template-columns:32px 1fr 18px;padding:11px 0}.preview-icon{width:32px;height:32px}.preview-row b{font-size:13px}.preview-top{padding:13px 16px}.preview-list{padding:5px 16px 10px}
-      .section{padding:78px 0}.section-head{display:block;margin-bottom:42px}.chapter{margin-bottom:18px}.section h2{font-size:44px}.lead{font-size:18px}.diagnosis-grid{grid-template-columns:1fr}.pain{padding:30px;min-height:0}.pain h3{margin-top:28px;font-size:23px}.diagnosis-quote{grid-template-columns:1fr;padding:34px 28px;gap:22px}.diagnosis-quote strong{font-size:62px}
+      .section{padding:78px 0}.section-head{display:block;margin-bottom:42px}.chapter{margin-bottom:18px}.section h2{font-size:44px}.lead{font-size:18px}.diagnosis-grid{grid-template-columns:1fr}.pain{padding:30px;min-height:0}.pain h3{margin-top:28px;font-size:23px}.stat-row{grid-template-columns:1fr}.diagnosis-quote{grid-template-columns:1fr;padding:34px 28px;gap:22px}.diagnosis-quote strong{font-size:40px}
       .plan-rail{display:block}.plan-item,.plan-item:first-child{padding:26px 0;border-right:0;border-bottom:1px solid var(--line)}.plan-item h3{margin-top:22px}.reactivation-map{grid-template-columns:1fr}.map-node{display:grid;grid-template-columns:82px 1fr;gap:18px;align-items:center}.map-dot{margin:0}.map-node h3,.map-node p{text-align:left;margin-left:0}.outcomes{grid-template-columns:1fr}.outcome{border-right:0;border-bottom:1px solid rgba(255,255,255,.2)!important}.outcome:last-child{border-bottom:0!important}
       .kanban-board{margin-right:-20px}.kanban-rules{grid-template-columns:1fr}.rule{border-right:0}.benefit{grid-template-columns:46px 1fr;gap:18px}.benefit .num{font-size:30px}.benefit h3{font-size:20px}.step-grid{grid-template-columns:1fr}.step{border-right:0;border-bottom:1px solid rgba(255,255,255,.25);margin:0;padding-right:0}.anchor-frame{gap:34px;padding:34px 0 38px}.anchor-copy{font-size:18px}.anchor-value{font-size:72px}.price{font-size:48px}.condition{font-size:20px}.included{padding:26px}.closing{padding:88px 0}.footer-inner{display:block}.footer img{margin-bottom:18px}
     }
@@ -185,7 +189,7 @@
           <p class="hero-label">Proposta para Village Pet</p>
           <h1>CRM QUE <span>FAZ VOLTAR</span></h1>
           <p class="hero-sub"><span>Memória vira processo.</span><span>Histórico vira recompra.</span></p>
-          <p class="hero-text">Organizar a base, antecipar necessidades e criar uma rotina de relacionamento que não dependa da memória de uma única pessoa.</p>
+          <p class="hero-text">As 5 lojas já geram interesse. O CRM organiza o caminho entre o clique no anúncio, a conversa no WhatsApp e a volta do cliente no mês seguinte.</p>
           <a class="button" href="#contexto">Conhecer a proposta
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
@@ -201,21 +205,27 @@
               <div class="preview-row"><span class="preview-icon">03</span><span><small>Recorrência</small><b>A próxima compra começa.</b></span><span class="check">✓</span></div>
             </div>
           </div>
-          <div class="hero-proof"><strong>1</strong><span>visão para organizar as duas operações</span></div>
+          <div class="hero-proof"><strong>5</strong><span>lojas na mesma rotina de CRM</span></div>
         </div>
       </div>
     </section>
 
     <section class="section diagnosis" id="contexto">
       <div class="shell">
-        <div class="section-head reveal"><span class="chapter">01 · Diagnóstico</span><div><h2>O problema não é atender. É lembrar no tempo certo.</h2><p class="lead">As lojas já possuem reputação, proximidade e uma base que compra. O gargalo está em transformar esse relacionamento em processo comercial contínuo.</p></div></div>
-        <div class="diagnosis-grid reveal">
-          <article class="pain"><span class="pain-num">01</span><h3>O histórico está espalhado.</h3><p>Conversas no WhatsApp, fotos de comandas, cadastros parciais e informações mantidas na memória dificultam uma visão única do cliente.</p></article>
-          <article class="pain"><span class="pain-num">02</span><h3>A recompra chega tarde.</h3><p>Quando a equipe não antecipa a necessidade, o tutor pesquisa preço, compra por conveniência e pode migrar para aplicativos ou concorrentes.</p></article>
-          <article class="pain"><span class="pain-num">03</span><h3>Conhecimento sai junto com pessoas.</h3><p>A saída de profissionais experientes mostrou o risco de depender de quem lembra a rotina, o pet e o histórico de cada cliente.</p></article>
-          <article class="pain"><span class="pain-num">04</span><h3>A gestão enxerga pouco.</h3><p>Sem registro estruturado, frequência, retenção, ticket e desempenho por categoria permanecem no campo da percepção.</p></article>
+        <div class="section-head reveal"><span class="chapter">01 · Diagnóstico</span><div><h2>O problema não é gerar demanda. É converter e fazer voltar.</h2><p class="lead">As 5 lojas já têm marca reconhecida desde 2005, conveniência de rota e campanhas gerando volume real de interessados. O gargalo hoje está entre o clique no anúncio, a conversa no WhatsApp e a volta do cliente no mês seguinte.</p></div></div>
+        <div class="stat-row reveal">
+          <article class="stat"><b>171</b><span>Leads captados desde 15/10</span></article>
+          <article class="stat"><b>94</b><span>Ficaram sem retorno (55%)</span></article>
+          <article class="stat"><b>30</b><span>Desqualificados por distância</span></article>
+          <article class="stat"><b>09/11</b><span>Última atualização da planilha</span></article>
         </div>
-        <div class="diagnosis-quote reveal"><strong>Tem dinheiro na base.</strong><p>A recorrência foi definida como prioridade. A equipe já iniciou melhorias de cadastro, abordagem e follow-up. O CRM entra para dar continuidade, escala e visibilidade ao que já começou a ser feito.</p></div>
+        <div class="diagnosis-grid reveal">
+          <article class="pain"><span class="pain-num">01</span><h3>A planilha trava a operação.</h3><p>Atualizar card por card manualmente consome o tempo da gerência e gera atraso nos registros. Sem o valor de venda preenchido, a campanha roda no escuro e o ROI real se perde no faturamento global.</p></article>
+          <article class="pain"><span class="pain-num">02</span><h3>Mais da metade dos leads esfria sem retorno.</h3><p>Nos registros desde 15 de outubro, dos ~171 leads captados, 94 ficaram sem retorno e 30 foram desqualificados por distância, como Zona Norte, Liberdade, Barueri e Sapopemba. Sem triagem e cadência de follow-up, dinheiro pago em mídia fica na mesa.</p></article>
+          <article class="pain"><span class="pain-num">03</span><h3>O WhatsApp sobrecarrega uma única loja.</h3><p>Concentrar o atendimento digital no telefone de um gerente impede escalar nas 5 unidades, dificulta cobrir fins de semana e tira da diretoria a visibilidade de quem respondeu cada cliente.</p></article>
+          <article class="pain"><span class="pain-num">04</span><h3>A recompra de 30 a 40 dias escapa para a concorrência.</h3><p>Sem registro sistemático no Pet Master ou régua ativa de WhatsApp, o cliente que comprou ração, areia ou tapete higiênico não é lembrado na hora certa e acaba migrando para grandes redes ou compras recorrentes online.</p></article>
+        </div>
+        <div class="diagnosis-quote reveal"><strong>Tem receita pronta para ser destravada.</strong><p>Felipe e Rafael já validaram o apelo de ofertas agressivas, iniciaram o controle de qualificação e estão ativando o Grupo VIP. O Kommo CRM entra para tirar esse peso do processo manual, dar escala às 5 unidades e entregar os indicadores reais até janeiro de 2027.</p></div>
       </div>
     </section>
 
@@ -223,9 +233,9 @@
       <div class="shell">
         <div class="section-head reveal"><span class="chapter">02 · Solução</span><div><h2>Uma estrutura simples para organizar, antecipar, relacionar e medir.</h2><p class="lead">A implantação conecta dados, rotina e gestão. A tecnologia apoia o atendimento consultivo sem substituir o cuidado que diferencia as lojas.</p></div></div>
         <div class="plan-rail reveal">
-          <article class="plan-item"><span class="n">01</span><h3>Arquitetura do CRM</h3><p>Etapas, campos, responsáveis, motivos e critérios de movimentação para as duas operações.</p></article>
+          <article class="plan-item"><span class="n">01</span><h3>Arquitetura do CRM</h3><p>Etapas, campos, responsáveis, motivos e critérios de movimentação no Kommo, para as 5 lojas.</p></article>
           <article class="plan-item"><span class="n">02</span><h3>Base organizada</h3><p>Modelo de cadastro, preparação dos dados disponíveis e tratamento do lote aprovado.</p></article>
-          <article class="plan-item"><span class="n">03</span><h3>Réguas de relacionamento</h3><p>Recompra, pós-venda, reativação e novo agendamento com gatilhos e responsáveis.</p></article>
+          <article class="plan-item"><span class="n">03</span><h3>Réguas de relacionamento</h3><p>Recompra de 30 a 40 dias, pós-venda, reativação e Grupo VIP, com gatilhos e responsáveis.</p></article>
           <article class="plan-item"><span class="n">04</span><h3>Visão gerencial</h3><p>Indicadores iniciais para acompanhar clientes ativos, inativos, recorrência e tarefas.</p></article>
           <article class="plan-item"><span class="n">05</span><h3>Implantação assistida</h3><p>Configuração, treinamento, manual enxuto e validação do primeiro ciclo de uso.</p></article>
         </div>
@@ -292,9 +302,9 @@
       <div class="shell">
         <div class="section-head reveal"><span class="chapter">Base da proposta</span><div><h2 id="evidence-title">O desenho nasce do que a equipe relatou e já começou a executar.</h2><p class="lead">Nenhum case externo ou resultado de terceiros foi usado como promessa. A recomendação parte das evidências da própria operação.</p></div></div>
         <div class="benefit-list reveal">
-          <article class="benefit"><span class="num">A</span><h3>Recorrência definida como prioridade.</h3><p>A liderança reconheceu receita potencial não capturada na base atual e colocou a retenção como o próximo passo.</p></article>
-          <article class="benefit"><span class="num">B</span><h3>Histórico ainda disperso.</h3><p>A equipe relatou o uso de conversas, fotos de comandas, cadastros parciais e memória para acompanhar clientes.</p></article>
-          <article class="benefit"><span class="num">C</span><h3>Execução já iniciada.</h3><p>Cadastro, follow-up e abordagem comercial começaram a mudar; o CRM entra para sustentar essa evolução.</p></article>
+          <article class="benefit"><span class="num">A</span><h3>Oferta e qualificação já validadas.</h3><p>Felipe e Rafael validaram o apelo de ofertas agressivas e iniciaram o controle de qualificação dos leads.</p></article>
+          <article class="benefit"><span class="num">B</span><h3>A planilha chegou no limite.</h3><p>A última atualização é de 09/11. Card por card atrasa o registro, esconde o valor da venda e mistura o ROI no faturamento global.</p></article>
+          <article class="benefit"><span class="num">C</span><h3>Grupo VIP em ativação.</h3><p>O Kommo entra para tirar o peso do processo manual, dar escala às 5 unidades e entregar indicadores reais até janeiro de 2027.</p></article>
         </div>
       </div>
     </section>
@@ -303,7 +313,7 @@
       <div class="shell">
         <div class="section-head reveal"><span class="chapter">06 · Implantação</span><div><h2>Primeiro tornar utilizável. Depois ampliar.</h2><p class="lead">A entrada em operação começa com um fluxo representativo de recompra e avança depois da validação essencial.</p></div></div>
         <div class="step-grid reveal">
-          <article class="step"><span>01</span><h3>Diagnóstico técnico</h3><p>Mapear sistemas, usuários, fontes de dados, volume e processos das duas lojas.</p></article>
+          <article class="step"><span>01</span><h3>Diagnóstico técnico</h3><p>Mapear Kommo, Pet Master, WhatsApp, usuários e o processo das 5 lojas.</p></article>
           <article class="step"><span>02</span><h3>Configuração e base</h3><p>Criar campos, etapas, tarefas, segmentações e preparar o lote aprovado.</p></article>
           <article class="step"><span>03</span><h3>Treinamento e operação</h3><p>Treinar responsáveis, iniciar o primeiro fluxo e corrigir falhas objetivas.</p></article>
           <article class="step"><span>04</span><h3>Acompanhamento inicial</h3><p>Revisar adesão, qualidade dos registros e indicadores do primeiro ciclo.</p></article>
@@ -331,7 +341,7 @@
             <div class="condition">12x no cartão de crédito</div>
             <p class="price-fine">O total contratado permanece em R$ 8.564,23. A operadora do cartão distribui eventual ajuste de centavos entre as parcelas sem alterar o valor total. Validade da condição e momento da cobrança devem constar no aceite comercial.</p>
           </div>
-          <aside class="included"><h3>O que este investimento coloca de pé</h3><ul><li>CRM desenhado para as duas lojas</li><li>Base preparada dentro do limite aprovado</li><li>Mapa de reativação operacional</li><li>Kanban e regras de governança</li><li>Réguas comerciais prioritárias</li><li>Treinamento e primeiro ciclo validado</li></ul></aside>
+          <aside class="included"><h3>O que este investimento coloca de pé</h3><ul><li>Kommo desenhado para as 5 lojas</li><li>Base preparada dentro do limite aprovado</li><li>Mapa de reativação operacional</li><li>Kanban e regras de governança</li><li>Réguas comerciais prioritárias</li><li>Treinamento e primeiro ciclo validado</li></ul></aside>
         </div>
       </div>
     </section>
