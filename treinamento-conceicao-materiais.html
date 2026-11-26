@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Treinamento comercial · Conceição Materiais de Construção × V4 Company</title>
+  <meta name="description" content="Treinamento comercial estratégico da V4 Company para o time da Conceição Materiais de Construção. Menos atendimento reativo. Mais estratégia comercial." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #09090b;
+      --bg-2: #111114;
+      --card: rgba(255,255,255,0.045);
+      --card-2: rgba(255,255,255,0.07);
+      --line: rgba(255,255,255,0.12);
+      --text: #f5f5f6;
+      --muted: #c6c6cf;
+      --soft: #9b9ba6;
+      --red: #e10600;
+      --red-2: #ff4d45;
+      --red-ink: #ffc3bf;
+      --cream: #f6f1ea;
+      --gold: #f0c36a;
+      --blue: #9ec4ff;
+      --green: #8eecc4;
+      --violet: #d2c2ff;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --top: 58px;
+      --bot: 68px;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { height: 100%; }
+    html { background: var(--bg); }
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: "Plus Jakarta Sans", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(900px 480px at 8% -10%, rgba(225,6,0,0.28), transparent 55%),
+        radial-gradient(700px 420px at 110% 110%, rgba(225,6,0,0.14), transparent 50%),
+        var(--bg);
+      line-height: 1.45;
+      -webkit-font-smoothing: antialiased;
+    }
+    button, input { font: inherit; color: inherit; }
+    button { cursor: pointer; }
+    :focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+    .grain {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      z-index: 8;
+      opacity: 0.18;
+      background-image: radial-gradient(rgba(255,255,255,0.22) 0.55px, transparent 0.55px);
+      background-size: 3px 3px;
+      mix-blend-mode: overlay;
+    }
+    .progress {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      z-index: 40;
+      background: rgba(255,255,255,0.08);
+    }
+    .progress > span {
+      display: block;
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(90deg, var(--red), #ffb4ae);
+      transform: scaleX(0.03);
+      transform-origin: left center;
+      transition: transform 0.45s var(--ease);
+    }
+    .topbar, .bottombar {
+      position: fixed;
+      left: 0; right: 0;
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 0 22px;
+      background: rgba(9,9,11,0.78);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-color: var(--line);
+      border-style: solid;
+    }
+    .topbar { top: 3px; height: var(--top); border-bottom-width: 1px; }
+    .bottombar { bottom: 0; height: var(--bot); border-top-width: 1px; justify-content: space-between; }
+    .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .brand svg { height: 16px; width: auto; display: block; }
+    .brand .who {
+      font-size: 13px;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .brand .who strong { color: var(--text); font-weight: 650; }
+    .modname {
+      margin-left: auto;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--red-ink);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .stage { height: 100%; height: 100dvh; position: relative; z-index: 1; }
+    .slide {
+      position: absolute;
+      inset: 0;
+      overflow: auto;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(14px);
+      transition: opacity 0.45s var(--ease), transform 0.45s var(--ease), visibility 0.45s;
+      padding: calc(var(--top) + 18px) 28px calc(var(--bot) + 8px);
+    }
+    .slide.is-on { opacity: 1; visibility: visible; transform: none; z-index: 2; }
+    .wrap { max-width: 1120px; margin: 0 auto; min-height: calc(100dvh - var(--top) - var(--bot) - 26px); display: flex; flex-direction: column; justify-content: center; }
+    .kicker {
+      display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+      margin: 0 0 12px;
+      font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--red-ink);
+    }
+    h1, h2, h3 { font-family: Outfit, "Segoe UI", sans-serif; letter-spacing: -0.03em; line-height: 1.05; margin: 0; font-weight: 700; }
+    h1 { font-size: clamp(2.4rem, 6vw, 5.1rem); }
+    h2 { font-size: clamp(1.7rem, 3.4vw, 2.85rem); max-width: 18ch; }
+    h2.wide { max-width: 22ch; }
+    .lead { margin: 14px 0 0; max-width: 62ch; color: var(--muted); font-size: clamp(1rem, 1.5vw, 1.18rem); }
+    .sub { color: var(--soft); font-size: 0.92rem; margin: 8px 0 0; }
+    .seal {
+      display: inline-flex; align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 3px 9px;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--muted);
+    }
+    .seal-fact { color: var(--blue); border-color: rgba(158,196,255,0.45); }
+    .seal-read { color: var(--gold); border-color: rgba(240,195,106,0.45); }
+    .seal-rec { color: var(--red-ink); border-color: rgba(255,77,69,0.5); }
+    .seal-sim { color: var(--violet); border-color: rgba(210,194,255,0.5); }
+    .seal-blank { color: var(--cream); border-style: dashed; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .stack { display: grid; gap: 10px; margin-top: 16px; }
+    .card, .tile, .seg, .step, .check, .phrase {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+    }
+    .card { padding: 14px 14px 13px; }
+    .card h3 { font-size: 1.05rem; margin-bottom: 6px; }
+    .card p, .card li { color: var(--muted); font-size: 0.94rem; }
+    .card ol, .card ul { margin: 8px 0 0; padding-left: 1.1rem; }
+    .card li + li { margin-top: 4px; }
+    .num {
+      font-family: Outfit, sans-serif;
+      font-weight: 800;
+      color: var(--red-2);
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+    }
+    .stat b {
+      display: block;
+      font-family: Outfit, sans-serif;
+      font-size: clamp(1.6rem, 3vw, 2.3rem);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin: 8px 0 6px;
+    }
+    .stat span { color: var(--muted); font-size: 0.9rem; }
+    .quote {
+      margin-top: 22px;
+      font-family: Outfit, sans-serif;
+      font-size: clamp(1.55rem, 3vw, 2.45rem);
+      line-height: 1.18;
+      letter-spacing: -0.03em;
+      max-width: 20ch;
+      color: var(--cream);
+    }
+    .quote em { font-style: normal; color: #fff; background: linear-gradient(transparent 62%, rgba(225,6,0,0.85) 62%, rgba(225,6,0,0.85) 92%, transparent 92%); }
+    .fine { margin-top: 12px; color: var(--soft); font-size: 0.8rem; max-width: 78ch; }
+    .bars { display: grid; gap: 12px; margin-top: 20px; }
+    .bar-row { display: grid; grid-template-columns: 180px 1fr auto; gap: 12px; align-items: center; }
+    .bar-row span { color: var(--muted); font-size: 0.92rem; }
+    .track { height: 14px; border-radius: 99px; background: rgba(255,255,255,0.08); overflow: hidden; }
+    .fill { height: 100%; border-radius: inherit; background: linear-gradient(90deg, #8d120f, var(--red-2)); }
+    .fill.dim { background: rgba(255,255,255,0.55); }
+    .bar-row strong { font-family: Outfit, sans-serif; font-size: 1rem; }
+    table.cmp { width: 100%; border-collapse: collapse; margin-top: 18px; }
+    table.cmp th, table.cmp td {
+      text-align: left; vertical-align: top;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+      font-size: 0.98rem;
+    }
+    table.cmp th {
+      font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--soft); font-weight: 700;
+    }
+    table.cmp td:first-child { color: var(--soft); width: 46%; }
+    table.cmp td:last-child { color: var(--cream); font-weight: 600; }
+    .cmp tr:hover td { background: rgba(255,255,255,0.03); }
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px; }
+    .bad { background: rgba(255,255,255,0.03); }
+    .good { background: linear-gradient(180deg, rgba(225,6,0,0.18), rgba(255,255,255,0.04)); border-color: rgba(255,77,69,0.45); }
+    .scene {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 14px;
+    }
+    .say {
+      margin: 8px 0 0;
+      color: var(--cream);
+      font-weight: 650;
+      font-size: 1.02rem;
+    }
+    .segs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 16px; }
+    .seg, .step {
+      text-align: left;
+      padding: 12px;
+      transition: border-color 0.2s var(--ease), background 0.2s var(--ease), transform 0.2s var(--ease);
+    }
+    .seg strong, .step strong { display: block; font-size: 0.92rem; margin-top: 4px; }
+    .seg small, .step small { color: var(--red-ink); font-weight: 800; letter-spacing: 0.08em; }
+    .seg.is-on, .step.is-on, .tile.is-on, .check[aria-pressed="true"] {
+      border-color: rgba(255,77,69,0.8);
+      background: rgba(225,6,0,0.14);
+    }
+    .seg:hover, .step:hover, .tile:hover, .check:hover { transform: translateY(-2px); }
+    .detail {
+      margin-top: 12px;
+      padding: 16px 18px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      min-height: 132px;
+    }
+    .detail h3 { font-size: 1.15rem; margin-bottom: 6px; }
+    .detail p { margin: 0; color: var(--muted); }
+    .detail[hidden] { display: none; }
+    .flow { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-top: 16px; }
+    .step { text-align: center; padding: 12px 8px; }
+    .step strong { font-size: 0.78rem; line-height: 1.2; }
+    .qgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+    .qgrid h3 { font-size: 0.95rem; margin-bottom: 8px; }
+    .qgrid li { color: var(--cream); margin: 6px 0; }
+    .qgrid ul { margin: 0; padding-left: 1rem; }
+    .coach {
+      margin-top: 12px;
+      padding: 10px 12px;
+      border-left: 3px solid var(--red);
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+    .answer { display: none; margin-top: 12px; }
+    .answer.is-open { display: block; }
+    .ghost, .solid {
+      border-radius: 999px;
+      padding: 10px 16px;
+      border: 1px solid var(--line);
+      background: transparent;
+    }
+    .solid { background: var(--red); border-color: var(--red); color: white; font-weight: 700; }
+    .ghost { color: var(--text); background: rgba(255,255,255,0.04); }
+    .ghost:disabled, .solid:disabled { opacity: 0.35; cursor: default; }
+    .nav-cluster, .tools { display: flex; align-items: center; gap: 8px; }
+    .count { min-width: 92px; text-align: center; font-variant-numeric: tabular-nums; color: var(--muted); font-size: 0.92rem; }
+    .help { color: var(--soft); font-size: 12px; }
+    .tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 16px; }
+    .tile { text-align: left; padding: 12px; }
+    .tile b { display: block; font-size: 0.95rem; margin-bottom: 4px; }
+    .tile em { font-style: normal; font-family: Outfit, sans-serif; font-size: 1.4rem; color: var(--soft); }
+    .tile p { margin: 6px 0 0; color: var(--muted); font-size: 0.8rem; }
+    .blank {
+      margin-top: 8px;
+      border: 1px dashed rgba(255,255,255,0.28);
+      border-radius: 10px;
+      min-height: 36px;
+      display: flex; align-items: center; padding: 6px 10px;
+      color: var(--soft); font-size: 0.85rem;
+    }
+    .week { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 16px; }
+    .week article { padding: 12px; border-radius: 14px; background: var(--card); border: 1px solid var(--line); }
+    .week strong { display: block; font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--red-ink); margin-bottom: 6px; }
+    .week p { margin: 0; color: var(--muted); font-size: 0.86rem; }
+    .checks { display: grid; gap: 8px; margin-top: 16px; }
+    .check {
+      width: 100%;
+      display: flex; gap: 12px; align-items: flex-start;
+      text-align: left; padding: 12px 14px;
+    }
+    .box {
+      width: 18px; height: 18px; flex: none; margin-top: 2px;
+      border-radius: 5px; border: 1.5px solid rgba(255,255,255,0.45);
+    }
+    .check[aria-pressed="true"] .box { background: var(--red); border-color: var(--red); box-shadow: inset 0 0 0 2px #09090b; }
+    .hero-num {
+      font-family: Outfit, sans-serif;
+      font-weight: 800;
+      font-size: clamp(4.5rem, 12vw, 8rem);
+      line-height: 0.85;
+      letter-spacing: -0.06em;
+      color: transparent;
+      -webkit-text-stroke: 1.5px rgba(255,77,69,0.85);
+      margin-bottom: 8px;
+    }
+    .cover-mark { display: flex; align-items: center; gap: 14px; color: var(--muted); letter-spacing: 0.16em; text-transform: uppercase; font-size: 12px; font-weight: 700; }
+    .cover-mark svg { height: 18px; width: auto; }
+    .rule { width: 72px; height: 4px; border-radius: 4px; background: var(--red); margin: 18px 0; }
+    .pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .pills span { border: 1px solid var(--line); border-radius: 999px; padding: 6px 10px; color: var(--muted); font-size: 0.86rem; }
+    .overlay {
+      position: fixed; inset: 0; z-index: 50;
+      background: rgba(0,0,0,0.62);
+      display: none;
+      place-items: center;
+      padding: 24px;
+    }
+    .overlay.is-open { display: grid; }
+    .panel {
+      width: min(860px, 100%);
+      max-height: min(78dvh, 720px);
+      overflow: auto;
+      background: #121215;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 18px;
+    }
+    .panel header { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 8px; }
+    .panel header p { margin: 0; font-family: Outfit, sans-serif; font-size: 1.3rem; }
+    .mod-block { margin-top: 14px; }
+    .mod-block h3 { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red-ink); margin-bottom: 6px; }
+    .jump {
+      width: 100%; text-align: left;
+      background: transparent; border: 0; border-radius: 10px;
+      padding: 7px 8px; color: var(--muted);
+    }
+    .jump:hover, .jump.is-here { background: rgba(255,255,255,0.06); color: white; }
+    .sr {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0); border: 0;
+    }
+    .end-line { margin-top: 20px; font-size: clamp(1.05rem, 2vw, 1.35rem); color: var(--cream); font-weight: 650; max-width: 36ch; }
+    @media (max-width: 980px) {
+      .grid-4, .tiles, .flow { grid-template-columns: 1fr 1fr; }
+      .segs, .week { grid-template-columns: 1fr 1fr; }
+      .grid-3 { grid-template-columns: 1fr; }
+      .scene, .split, .qgrid, .grid-2 { grid-template-columns: 1fr; }
+      .bar-row { grid-template-columns: 1fr; gap: 6px; }
+      h2 { max-width: none; }
+      .help { display: none; }
+      .modname { display: none; }
+    }
+    @media (max-width: 640px) {
+      .slide { padding-left: 16px; padding-right: 16px; }
+      .tiles, .flow, .segs, .week, .grid-4 { grid-template-columns: 1fr; }
+      .who { display: none; }
+      .count { min-width: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="progress" aria-hidden="true"><span id="bar"></span></div>
+  <header class="topbar">
+    <div class="brand">
+      <svg fill="#fff" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 77 20" aria-label="V4 Company"><path d="M33.023 3.575c-2.001.003-3.093 1.21-3.09 3.32l.008 6.858c.003 2.11 1.098 3.315 3.1 3.312 2-.003 3.092-1.21 3.09-3.32l-.009-6.858c-.003-2.11-1.097-3.315-3.099-3.312zm.015 11.606c-.649.001-1.057-.356-1.058-1.298l-.009-7.122c-.001-.942.406-1.3 1.055-1.302.648 0 1.057.357 1.058 1.299l.009 7.122c.001.942-.407 1.3-1.055 1.301zm-6.1-3.176l.002 1.884c.001.942-.406 1.282-1.055 1.283-.648 0-1.056-.338-1.058-1.28l-.009-7.122c-.001-.942.406-1.3 1.055-1.302.648 0 1.057.357 1.058 1.299l.002 1.413 1.927-.002-.002-1.281c-.002-2.11-1.041-3.315-3.043-3.313-2 .003-3.037 1.21-3.034 3.32l.008 6.859c.003 2.11 1.042 3.314 3.043 3.312 2.002-.003 3.038-1.21 3.035-3.32l-.002-1.752-1.927.002zM13.055 6.352L8.68 10.813c-.06.062-.017.166.067.166l4.382-.006a.096.096 0 00.096-.097l-.006-4.456c0-.087-.103-.13-.163-.068zm5.862 7.88l-2.687.004a.035.035 0 00-.035.035l.004 2.879c0 .02-.015.035-.035.035l-3.01.004a.035.035 0 01-.034-.035l-.004-2.879a.035.035 0 00-.034-.035l-8.796.012a.141.141 0 01-.14-.142l-.003-2.624v-.004a.795.795 0 01.223-.588l8.758-8.928a.035.035 0 01.025-.01l2.846-.004c.005 0 .009.001.014.003a.367.367 0 01.216.348l.01 8.677c0 .019.017.035.036.035l2.641-.004a.035.035 0 00.035-.035l-.011-8.5c-.002-1.364-1.1-2.478-2.442-2.476L4.18.016a.035.035 0 00-.034.036l.008 6.856c0 .031.037.047.06.025l4.994-5.064a.034.034 0 01.024-.01l2.603-.003c.03 0 .046.037.025.06l-8.118 8.41a.034.034 0 01-.049 0l-1.529-1.55a.036.036 0 01-.01-.026L2.143.074A.035.035 0 002.104.04C.976.185.086 1.131 0 2.294v5.972l.011 8.9a2.48 2.48 0 001.937 2.424h14.974c1.15-.199 2.034-1.224 2.032-2.448l-.003-2.873a.035.035 0 00-.035-.036zM66.47 3.682l.01 7.895-2.104-7.892-2.557.003.017 13.19 1.834-.003-.012-9.553 2.55 9.55 2.094-.004-.016-13.188-1.816.002zm-23.33.031l-1.378 9.366-1.513-9.362-2.835.003.017 13.19 1.779-.003-.012-9.327 1.532 9.325 1.927-.003 1.396-9.46.012 9.458 1.928-.002-.017-13.19-2.835.005h-.001zm33.133-.043l-1.946.002-1.549 6.013-1.564-6.009-2.131.003 2.587 8.814.005 4.371 2.039-.003-.006-4.37 2.565-8.821zm-20.44.026l-2.058 13.192 1.871-.003.35-2.393 2.501-.003.355 2.392 2.057-.003-2.092-13.186-2.983.004zm.42 9.005l.974-6.67.99 6.668-1.964.002zm-5.793-8.998l-3.002.004.017 13.189 2.038-.003-.006-4.955.964-.002c2.038-.002 3.037-1.153 3.035-3.263l-.003-1.715c-.002-2.11-1.005-3.258-3.043-3.255zm.008 6.35h-.964L49.5 5.589l.964-.001c.648-.001 1.001.3 1.002 1.242l.003 1.978c.001.942-.35 1.245-1 1.245z"/></svg>
+      <div class="who">Conceição <strong>Materiais de Construção</strong></div>
+    </div>
+    <div class="modname" id="modLabel">Abertura</div>
+  </header>
+
+  <main class="stage" id="stage">
+
+    <article class="slide is-on" data-mod="0" data-label="Capa">
+      <div class="wrap">
+        <div class="cover-mark">
+          <svg fill="#fff" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 77 20" aria-hidden="true"><path d="M33.023 3.575c-2.001.003-3.093 1.21-3.09 3.32l.008 6.858c.003 2.11 1.098 3.315 3.1 3.312 2-.003 3.092-1.21 3.09-3.32l-.009-6.858c-.003-2.11-1.097-3.315-3.099-3.312zm.015 11.606c-.649.001-1.057-.356-1.058-1.298l-.009-7.122c-.001-.942.406-1.3 1.055-1.302.648 0 1.057.357 1.058 1.299l.009 7.122c.001.942-.407 1.3-1.055 1.301zm-6.1-3.176l.002 1.884c.001.942-.406 1.282-1.055 1.283-.648 0-1.056-.338-1.058-1.28l-.009-7.122c-.001-.942.406-1.3 1.055-1.302.648 0 1.057.357 1.058 1.299l.002 1.413 1.927-.002-.002-1.281c-.002-2.11-1.041-3.315-3.043-3.313-2 .003-3.037 1.21-3.034 3.32l.008 6.859c.003 2.11 1.042 3.314 3.043 3.312 2.002-.003 3.038-1.21 3.035-3.32l-.002-1.752-1.927.002zM13.055 6.352L8.68 10.813c-.06.062-.017.166.067.166l4.382-.006a.096.096 0 00.096-.097l-.006-4.456c0-.087-.103-.13-.163-.068zm5.862 7.88l-2.687.004a.035.035 0 00-.035.035l.004 2.879c0 .02-.015.035-.035.035l-3.01.004a.035.035 0 01-.034-.035l-.004-2.879a.035.035 0 00-.034-.035l-8.796.012a.141.141 0 01-.14-.142l-.003-2.624v-.004a.795.795 0 01.223-.588l8.758-8.928a.035.035 0 01.025-.01l2.846-.004c.005 0 .009.001.014.003a.367.367 0 01.216.348l.01 8.677c0 .019.017.035.036.035l2.641-.004a.035.035 0 00.035-.035l-.011-8.5c-.002-1.364-1.1-2.478-2.442-2.476L4.18.016a.035.035 0 00-.034.036l.008 6.856c0 .031.037.047.06.025l4.994-5.064a.034.034 0 01.024-.01l2.603-.003c.03 0 .046.037.025.06l-8.118 8.41a.034.034 0 01-.049 0l-1.529-1.55a.036.036 0 01-.01-.026L2.143.074A.035.035 0 002.104.04C.976.185.086 1.131 0 2.294v5.972l.011 8.9a2.48 2.48 0 001.937 2.424h14.974c1.15-.199 2.034-1.224 2.032-2.448l-.003-2.873a.035.035 0 00-.035-.036zM66.47 3.682l.01 7.895-2.104-7.892-2.557.003.017 13.19 1.834-.003-.012-9.553 2.55 9.55 2.094-.004-.016-13.188-1.816.002zm-23.33.031l-1.378 9.366-1.513-9.362-2.835.003.017 13.19 1.779-.003-.012-9.327 1.532 9.325 1.927-.003 1.396-9.46.012 9.458 1.928-.002-.017-13.19-2.835.005h-.001zm33.133-.043l-1.946.002-1.549 6.013-1.564-6.009-2.131.003 2.587 8.814.005 4.371 2.039-.003-.006-4.37 2.565-8.821zm-20.44.026l-2.058 13.192 1.871-.003.35-2.393 2.501-.003.355 2.392 2.057-.003-2.092-13.186-2.983.004zm.42 9.005l.974-6.67.99 6.668-1.964.002zm-5.793-8.998l-3.002.004.017 13.189 2.038-.003-.006-4.955.964-.002c2.038-.002 3.037-1.153 3.035-3.263l-.003-1.715c-.002-2.11-1.005-3.258-3.043-3.255zm.008 6.35h-.964L49.5 5.589l.964-.001c.648-.001 1.001.3 1.002 1.242l.003 1.978c.001.942-.35 1.245-1 1.245z"/></svg>
+          Treinamento comercial estratégico
+        </div>
+        <div class="rule"></div>
+        <p class="kicker" style="letter-spacing:0.18em">Conceição Materiais de Construção</p>
+        <h1>Quem espera o pedido,<br>entrega o crescimento<br>para outra loja.</h1>
+        <p class="lead">Uma sala para o time sair do atendimento que reage e entrar na venda que conduz. Menos teoria. Mais prática. Mais resultado — dentro do que a operação aguenta.</p>
+        <div class="pills">
+          <span>1 unidade</span>
+          <span>3 caminhões</span>
+          <span>6 módulos</span>
+          <span>Começa no próximo cliente</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="slide" data-mod="0" data-label="A mensagem">
+      <div class="wrap">
+        <p class="kicker">A frase que conduz a sala</p>
+        <h2 class="wide">Não precisamos apenas de mais clientes.</h2>
+        <p class="quote">Precisamos <em>aproveitar melhor</em> cada oportunidade, desenvolver a carteira e transformar atendimento em resultado.</p>
+        <p class="end-line">Menos atendimento reativo. Mais estratégia comercial.</p>
+      </div>
+    </article>
+
+    <article class="slide" data-mod="0" data-label="Como ler a sala">
+      <div class="wrap">
+        <p class="kicker">Contrato da sala</p>
+        <h2>O que está na tela tem dono.</h2>
+        <p class="lead">O kickoff trouxe um diagnóstico inicial. Não é relatório auditado e não vira meta nesta sala. Cada selo diz o que aquilo é.</p>
+        <div class="stack grid-3">
+          <article class="card">
+            <span class="seal seal-fact">Fato relatado</span>
+            <h3>O que a gestão contou</h3>
+            <p>Unidade, caminhões, faturamento aproximado, jeito de atender, carteira e giro. Ainda sem nova amostra de atendimentos.</p>
+          </article>
+          <article class="card">
+            <span class="seal seal-read">Leitura</span>
+            <h3>O que isso sugere</h3>
+            <p>Uma interpretação da V4 para discutir com o time. Não é número medido e não é compromisso de resultado.</p>
+          </article>
+          <article class="card">
+            <span class="seal seal-rec">Recomendação</span>
+            <h3>O que passa a valer</h3>
+            <p>Comportamento, pergunta, ritual e registro. Dá para começar sem esperar um relatório novo.</p>
+          </article>
+        </div>
+        <div class="stack grid-2">
+          <article class="card">
+            <span class="seal seal-sim">Simulação</span>
+            <h3>Cena de loja, não caso real</h3>
+            <p>Nomes, obras e cestas são exemplos para treinar a conversa. Não são clientes da Conceição e não trazem preço.</p>
+          </article>
+          <article class="card">
+            <span class="seal seal-blank">A preencher</span>
+            <h3>O número ainda não existe aqui</h3>
+            <p>Conversão, ticket, meta e mix fino ficam em branco até a gestão preencher com dado de verdade.</p>
+          </article>
+        </div>
+      </div>
+    </article>
+
+    <article class="slide" data-mod="0" data-label="O que foi relatado">
+      <div class="wrap">
+        <p class="kicker"><span class="seal seal-fact">Fato relatado no kickoff</span></p>
+        <h2>O tamanho do jogo, do jeito que foi contado.</h2>
+        <div class="stack grid-4">
+          <article class="card stat"><span class="num">01</span><b>1</b><span>unidade física</span></article>
+          <article class="card stat"><span class="num">02</span><b>3</b><span>caminhões para operação e entrega</span></article>
+          <article class="card stat"><span class="num">03</span><b>~200 mil</b><span>faturamento mensal relatado, em reais</span></article>
+          <article class="card stat"><span class="num">04</span><b>~300 mil</b><span>patamar mensal que o histórico já alcançou</span></article>
+        </div>
+        <div class="bars" role="img" aria-label="Comparação visual entre o faturamento mensal relatado, cerca de 200 mil reais, e o patamar histórico relatado, cerca de 300 mil reais.">
+          <div class="bar-row">
+            <span>Patamar relatado agora</span>
+            <div class="track"><div class="fill" style="width:67%"></div></div>
+            <strong>~ R$ 200 mil</strong>
+          </div>
+          <div class="bar-row">
+            <span>Patamar já alcançado</span>
+            <div class="track"><div class="fill dim" style="width:100%"></div></div>
+            <strong>~ R$ 300 mil</strong>
+          </div>
+        </div>
+        <p class="fine">Números aproximados, relatados no kickoff. Não foram revalidados por relatório comercial nesta apresentação. A distância entre os dois patamares não é meta, não é projeção e não é promessa de recuperação.</p>
+      </div>
+    </article>
+
+    <article class="slide" data-mod="0" data-label="Diagnóstico">
+      <div class="wrap">
+        <p class="kicker"><span class="seal seal-fact">Fato relatado</span> <span class="seal seal-read">Leitura</span></p>
+        <h2>Quatro furos que o kickoff deixou à vista.</h2>
+        <div class="stack grid-2">
+          <article class="card">
+            <span class="num">Processo</span>
+            <h3>A loja espera o cliente pedir.</h3>
+            <p>Atendimento sobretudo reativo, pouca pergunta, pouca leitura da obra e nenhum processo que outra pessoa consiga repetir.</p>
+            <p class="say">Leitura: quem só separa o item entrega o resto da obra para quem perguntar.</p>
+          </article>
+          <article class="card">
+            <span class="num">Gestão</span>
+            <h3>O que não foi anotado some.</h3>
+            <p>Baixa rastreabilidade, metas pouco definidas, sem ritual de resultado e dificuldade de saber por que a venda não fechou.</p>
+            <p class="say">Leitura: sem registro, a loja conhece o faturamento e desconhece a oportunidade perdida.</p>
+          </article>
+          <article class="card">
+            <span class="num">Carteira e mix</span>
+            <h3>Muita relação na mão de uma pessoa.</h3>
+            <p>Concentração relevante em clientes empresariais, linhas com participação alta e baixa contribuição, carteira herdada por uma vendedora.</p>
+            <p class="say">Leitura: a loja ainda não enxerga a própria carteira. As linhas fracas não foram nomeadas no kickoff — e não serão inventadas aqui.</p>
+          </article>
+          <article class="card">
+            <span class="num">Caixa</span>
+            <h3>Vender mais a prazo esbarra no giro.</h3>
+            <p>O capital de giro foi apontado como um dos principais limites para ampliar o volume de vendas faturadas.</p>
+            <p class="say">Leitura: crescer o discurso sem crescer a capacidade de estoque, prazo e entrega aperta o negócio.</p>
+          </article>
+        </div>
+      </div>
+    </article>
+
+    <article class="slide" data-mod="0" data-label="Direção">
+      <div class="wrap">
+        <p class="kicker">O que fazer com esse cenário</p>
+        <h2 class="wide">Três colunas. Nenhuma delas é meta de faturamento.</h2>
+        <div class="stack grid-3">
+          <article class="card">
+            <span class="seal seal-read">Oportunidade</span>
+            <h3>O movimento já existe.</h3>
+            <p>O faturamento já esteve mais alto. A carteira existe. O cliente entra na loja. Há o que organizar antes de sair caçando volume novo.</p>
+          </article>
+          <article class="card">
+            <span class="seal seal-fact">Limite</span>
+            <h3>O teto é real.</h3>
+            <p>Uma loja, três caminhões e giro curto. Prometer carga, prazo ou fiado fora disso não é venda. É problema transferido.</p>
+          </article>
+          <article class="card good">
+            <span class="seal seal-rec">Direção</span>
+            <h3>Aproveitar melhor cada conversa.</h3>
+            <p>Qualificar o atendimento, desenvolver quem já compra, escolher melhor o mix e só então ampliar o que o caixa sustenta.</p>
+          </article>
+        </div>
+      </div>
+    </article>
+
+    <article class="slide" data-mod="0" data-label="Cinco competências">
+      <div class="wrap">
+        <p class="kicker">O que este treinamento treina</p>
+        <h2>Cinco músculos. Um time.</h2>
+        <div class="stack">
+          <button class="check" data-goto-mod="1" type="button"><span class="num">01</span><span><strong>Mentalidade comercial.</strong> Vender é achar oportunidade, não só separar pedido.</span></button>
+          <button class="check" data-goto-mod="2" type="button"><span class="num">02</span><span><strong>Carteira.</strong> Saber quem é o cliente, quem volta e quem sumiu.</span></button>
+          <button class="check" data-goto-mod="3" type="button"><span class="num">03</span><span><strong>Venda consultiva.</strong> Um fluxo simples, da abordagem ao pós-venda.</span></button>
+          <button class="check" data-goto-mod="4" type="button"><span class="num">04</span><span><strong>Ticket e mix.</strong> O complemento certo da obra, sem empurrar produto.</span></button>
+          <button class="check" data-goto-mod="5" type="button"><span class="num">05</span><span><strong>Performance.</strong> Meta, indicador e ritual — com número de verdade ou em branco.</span></button>
+        </div>
+        <p class="fine">Clique num músculo para ir ao módulo. O plano de ação fecha a sala, no módulo 6.</p>
+      </div>
+    </article>
+
+    <article class="slide" data-mod="1" data-label="Módulo 1">
+      <div class="wrap">
+        <p class="hero-num">01</p>
+        <p class="kicker">Módulo 1 · O novo papel do vendedor</p>
+        <h2>Atender é receber. Vender é conduzir.</h2>
+        <p class="lead">Nos próximos minutos o time separa o que faz hoje do que a Conceição precisa que passe a fazer. A cena é a loja. A mudança é a próxima frase.</p>
+      </div>
+    </article>
+
+    <article class="slide" data-mod="1" data-label="Dois papéis">
+      <div class="wrap">
+        <p class="kicker"><span class="seal seal-rec">Recomendação</span></p>
+        <h2>O balcão tem dois profissionais. Só um faz a loja crescer.</h2>
+        <div class="split">
+          <article class="card bad">
+            <span class="num">Atendente</span>
+            <h3>Espera o pedido pronto.</h3>
+            <ul>
+              <li>Responde o que foi perguntado.</li>
+              <li>Separa o item e encerra.</li>
+              <li>Trata todo mundo como visita única.</li>
+              <li>Não anota o que ficou de fora.</li>
+              <li>Chama de relacionamento um “qualquer coisa, volta”.</li>
+            </ul>
+          </article>
+          <article class="card good">
+            <span class="num">Vendedor consultivo</span>
+            <h3>Entende a obra antes do item.</h3>
+            <ul>
+              <li>Pergunta a etapa e quem executa.</li>
+              <li>Monta a carga que a fase pede.</li>
+              <li>Enxerga pedreiro, empreiteiro e empresa como relação.</li>
+              <li>Registra o sim, o não e o motivo.</li>
+              <li>Marca o próximo contato com um motivo real.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </article>
+
+    <article class="slide" data-mod="1" data-label="Frases do balcão">
+      <div class="wrap">
+        <p class="kicker"><span class="seal seal-sim">Simulação de fala</span></p>
+        <h2>A frase de hoje e a frase que vende.</h2>
+        <p class="lead">Se você se reconhece na coluna da esquerda, o treinamento já começou.</p>
+        <table class="cmp">
+          <thead><tr><th>O que a gente fala sem perceber</th><th>O que passa a conduzir a venda</th></tr></thead>
+          <tbody>
+            <tr><td>Posso ajudar?</td><td>Para qual etapa da obra é o material?</td></tr>
+            <tr><td>Temos sim.</td><td>Me conta o que já está no canteiro que eu monto o resto com você.</td></tr>
+            <tr><td>Só isso?</td><td>O que mais essa etapa pede para a obra não parar?</td></tr>
+            <tr><td>Vou ver o preço.</td><td>Você está comparando o item ou a carga completa, com entrega?</td></tr>
+            <tr><td>Qualquer coisa, volta.</td><td>Quando eu te procuro para a próxima etapa?</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </article>
+
+    <article class="slide" data-mod="1" data-label="Cena do cimento">
+      <div class="wrap">
+        <p class="kicker"><span class="seal seal-sim">Simulação</span> Cena de balcão · sem preço e sem cliente real</p>
+        <h2>Dez sacos de cimento não são dez sacos de cimento.</h2>
+        <div class="scene">
+          <article class="card bad">
+            <span class="num">Como chega</span>
+            <p class="say">“Me vê dez sacos de cimento.”</p>
+            <p>O atendente confere estoque, fala o preço e pergunta se leva. A conversa acaba no saco.</p>
+          </article>
+          <article class="card good">
+            <span class="num">Como a venda conduz</span>
+            <p class="say">“É fundação, contrapiso ou reboco?”</p>
+            <p>A resposta muda a carga. Reboco puxa uma conversa de areia. Contrapiso puxa outra. Fundação puxa outra. Quem executa pode ser um pedreiro que volta toda semana. A entrega precisa caber no caminhão de hoje.</p>
+            <p class="fine">Isto não é dosagem de obra e não substitui quem executa. É o gatilho para perguntar antes de separar.</p>
+          </article>
+        </div>
+      </div>
+    </article>
+
+    <article class="slide" data-mod="1" data-label="Exercício do balcão">
+      <div class="wrap">
+        <p class="kicker"><span class="seal seal-sim">Exercício</span></p>
+        <h2>O pedreiro pede vinte sacos. O que você pergunta antes de separar?</h2>
+        <p class="lead">Um minuto em silêncio. Depois, uma pessoa fala a primeira pergunta que faria. Só então a sala abre um caminho.</p>
+        <p class="coach">Condutor: não aceite “o preço” como primeira resposta. A pergunta tem de revelar a obra.</p>
+        <button class="solid" type="button" data-reveal aria-expanded="false">Mostrar um caminho</button>
+        <div class="answer">
+          <div class="grid-2">
+            <article class="card">
+              <h3>Perguntas que abrem a venda</h3>
+              <ol>
+                <li>Qual etapa está rodando agora?</li>
+                <li>Areia, brita ou tela já estão no canteiro?</li>
+                <li>A entrega é hoje — e cabe com o que ainda vai pedir?</li>
+                <li>Qual a próxima etapa, para eu saber quando te procurar?</li>
+              </ol>
+            </article>
+            <article class="card">
+              <h3>O que não fazer nesta cena</h3>
+              <ul>
+                <li>Desconto antes de entender a objeção.</li>
+                <li>Lista de produto sem ligação com a etapa.</li>
+                <li>Prometer horário de caminhão que o dia não tem.</li>
+                <li>Deixar o pedreiro ir embora sem nome e sem próximo contato.</li>
+              </ul>
+            </article>
+          </div>
+          <p class="fine">Um caminho possível para treinar. Não é script obrigatório nem especificação técnica.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="slide" data-mod="2" data-label="Módulo 2">
+      <div class="wrap">
+        <p class="hero-num">02</p>
+        <p class="kicker">Módulo 2 · Conhecendo e desenvolvendo o cliente</p>
+        <h2>A próxima venda, muitas vezes, já tem nome.</h2>
+        <p class="lead">Carteira é o conjunto de quem já comprou ou pode comprar de novo. Na Conceição ela existe, está concentrada e ainda mora demais na memória de uma pessoa.</p>
+      </div>
+    </article>
+
+    <article class="slide" data-mod="2" data-label="Segmentos">
+      <div class="wrap">
+        <p class="kicker"><span class="seal seal-rec">Recomendação</span> Mapa qualitativo · sem percentual</p>
+        <h2>Cinco jeitos de comprar. Cinco conversas.</h2>
+        <p class="sub">O kickoff apontou peso relevante de cliente empresarial. Não há percentual validado — por isso nenhum gráfico de fatia.</p>
+        <div class="segs" role="tablist" aria-label="Segmentos de cliente">
+          <button class="seg is-on" type="button" data-seg="final" role="tab" aria-selected="true"><small>01</small><strong>Consumidor final</strong></button>
+          <button class="seg" type="button" data-seg="pedreiro" role="tab" aria-selected="false"><small>02</small><strong>Pedreiro</strong></button>
+          <button class="seg" type="button" data-seg="empreiteiro" role="tab" aria-selected="false"><small>03</small><strong>Empreiteiro</strong></button>
+          <button class="seg" type="button" data-seg="construtora" role="tab" aria-selected="false"><small>04</small><strong>Construtora</strong></button>
+          <button class="seg" type="button" data-seg="empresa" role="tab" aria-selected="false"><small>05</small><strong>Empresa</strong></button>
+        </div>
+        <div class="detail" data-seg-panel="final">
+          <h3>Consumidor final</h3>
+          <p>Reforma da casa, decisão com pressa e medo de errar o material. Pergunte a etapa e o que o pedreiro pediu. Ofereça o que completa essa fase. Peça o contato de quem executa — muitas vezes a relação boa está nele, não na nota de hoje.</p>
+        </div>
+        <div class="detail" data-seg-panel="pedreiro" hidden>
+          <h3>Pedreiro</h3>
+          <p>Ele influencia a compra de várias obras. Trate como relação, não como pedido avulso. Pergunte quantas frentes ele tem e quando a próxima começa. Cadastre. Um pedreiro bem atendido traz o consumidor que ainda não conhece a loja.</p>
+        </div>
+        <div class="detail" data-seg-panel="empreiteiro" hidden>
+          <h3>Empreiteiro</h3>
+          <p>Várias obras, recorrência e conversa de prazo. Combine um retorno por etapa. Condição de pagamento só dentro do que o giro permite. Se o caixa não aguenta o prazo, diga isso com clareza e feche o que dá para faturar agora.</p>
+        </div>
+        <div class="detail" data-seg-panel="construtora" hidden>
+          <h3>Construtora</h3>
+          <p>Volume, especificação e alguém que aprova longe do balcão. Entenda a obra, o prazo e quem decide. Não prometa entrega que os três caminhões não cumprem. Registre o que ficou em aberto para a gestão enxergar.</p>
+        </div>
+        <div class="detail" data-seg-panel="empresa" hidden>
+          <h3>Empresa</h3>
+          <p>Manutenção, condomínio, indústria, reposição. O valor está na previsibilidade. Descubra o que consome todo mês e proponha a próxima data — sem inventar contrato e sem assumir volume que o estoque não tem.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="slide" data-mod="2" data-label="Potencial">
+      <div class="wrap">
+        <p class="kicker"><span class="seal seal-rec">Recomendação</span> Sem pontuação inventada</p>
+        <h2>Potencial não é feeling. É sinal.</h2>
+        <p class="lead">Quanto mais sinais aparecerem na conversa, mais a loja deve registrar e voltar. Não existe nota mágica. Existe atenção.</p>
+        <div class="stack grid-3">
+          <article class="card"><span class="num">Obra viva</span><h3>Tem etapa agora.</h3><p>Compra isolada de balcão é uma coisa. Obra em andamento é uma sequência de compras.</p></article>
+          <article class="card"><span class="num">Quem decide</span><h3>A pessoa certa está na conversa?</h3><p>Se quem aprova não está, o próximo passo é chegar nele — não empurrar o fechamento.</p></article>
+          <article class="card"><span class="num">Kit da etapa</span><h3>Pediu um item de um conjunto.</h3><p>Cimento sem conversa de areia, tinta sem conversa de preparo, tubo sem conexão: há o que investigar.</p></article>
+          <article class="card"><span class="num">Histórico</span><h3>Já comprou ou foi indicado.</h3><p>Cliente que volta, ou que chega pelo pedreiro, vale cadastro e próximo contato.</p></article>
+          <article class="card"><span class="num">Próxima fase</span><h3>Ele já fala do que vem depois.</h3><p>Anote a etapa seguinte e a data em que faz sentido procurar. Sem data, o retorno não acontece.</p></article>
+          <article class="card"><span class="num">Limite</span><h3>Sinal alto não autoriza qualquer venda.</h3><p>Potencial grande com prazo que o giro não cobre continua sendo não, ou uma venda menor à vista.</p></article>
+        </div>
+      </div>
+    </article>
+
+    <article class="slide" data-mod="2" data-label="Três movimentos">
+      <div class="wrap">
+        <p class="kicker"><span class="seal seal-fact">Fato</span> <span class="seal seal-rec">Recomendação</span></p>
+        <h2>Desenvolver, reativar e tirar a carteira da cabeça.</h2>
+        <div class="stack grid-3">
+          <article class="card">
+            <span class="num">Quem já compra</span>
+            <h3>Aprofundar, não só repetir.</h3>
+            <p>Pergunte a obra atual, o que sempre falta e quando é a próxima. O objetivo é sair do item de sempre para a etapa inteira — se a etapa pedir.</p>
+          </article>
+          <article class="card">
+            <span class="num">Quem sumiu</span>
+            <h3>Reativar com motivo.</h3>
+            <p class="say">“Aqui é a Conceição. Na última vez o material foi para a obra da [rua]. Tem alguma frente agora em que a gente evite faltar material?”</p>
+            <p class="fine">Simulação de fala. Sem desconto inventado. Se a obra acabou, pergunte a próxima. Se foi para o concorrente, pergunte o que decidiu.</p>
+          </article>
+          <article class="card">
+            <span class="num">Carteira concentrada</span>
+            <h3>A loja precisa lembrar junto.</h3>
+            <p>A carteira foi herdada por uma vendedora. Isso é fato. O risco é a relação existir só na memória dela. O caminho não é tirar a carteira: é cadastrar, anotar a última compra e o próximo contato, e a gestão acompanhar as contas mais relevantes com ela.</p>
+          </article>
+        </div>
+      </div>
+    </article>
+
+    <article class="slide" data-mod="2" data-label="Exercício da carteira">
+      <div class="wrap">
+        <p class="kicker"><span class="seal seal-sim">Exercício</span> Três fichas hipotéticas</p>
+        <h2>Quem você aprofunda, quem você liga, quem você reativa?</h2>
+        <div class="stack grid-3">
+          <article class="card"><span class="num">A</span><h3>Dona Marina</h3><p>Reformando o banheiro. Veio uma vez. Ainda não sabemos o pedreiro.</p></article>
+          <article class="card"><span class="num">B</span><h3>João</h3><p>Pedreiro. Compra todo mês, quase sempre o mesmo básico. Nunca foi chamado para a próxima obra.</p></article>
+          <article class="card"><span class="num">C</span><h3>Construtora Alfa</h3><p>Comprou várias vezes no ano passado. Há cerca de quatro meses não aparece. Motivo desconhecido.</p></article>
+        </div>
+        <button class="solid" type="button" data-reveal aria-expanded="false" style="margin-top:14px">Mostrar um caminho</button>
+        <div class="answer">
+          <article class="card">
+            <h3>Um caminho possível — não uma regra e sem ranking de valor</h3>
+            <ul>
+              <li><strong>João, ainda esta semana.</strong> Já compra. Dá para descobrir as obras abertas e o que falta além do básico.</li>
+              <li><strong>Alfa, reativar.</strong> Sumiu com histórico. A ligação descobre se a obra acabou, se o prazo travou ou se o concorrente levou.</li>
+              <li><strong>Marina, no balcão.</strong> Uma reforma pode ser compra curta. Atenda a etapa inteira e peça o contato de quem executa.</li>
+            </ul>
+            <p class="fine">Nenhum dos três tem faturamento estimado. A prioridade aqui é de relação, não de meta.</p>
+          </article>
+        </div>
+        <p class="coach">Condutor: 4 minutos em dupla. Cada dupla escolhe por quem começa na segunda e diz o motivo em uma frase.</p>
+      </div>
+    </article>
+
+    <article class="slide" data-mod="3" data-label="Módulo 3">
+      <div class="wrap">
+        <p class="hero-num">03</p>
+        <p class="kicker">Módulo 3 · A metodologia da venda consultiva</p>
+        <h2>Sete passos. Qualquer pessoa do balcão consegue repetir.</h2>
+        <p class="lead">Sem método, cada um vende de um jeito e a loja não aprende. Com método, a conversa fica simples o bastante para treinar amanhã de manhã.</p>
+      </div>
+    </article>
+
+    <article class="slide" data-mod="3" data-label="Fluxo da venda">
+      <div class="wrap">
+        <p class="kicker"><span class="seal seal-rec">Recomendação</span> Clique no passo</p>
+        <h2>O fluxo inteiro cabe numa conversa.</h2>
+        <div class="flow" role="tablist" aria-label="Passos da venda consultiva">
+          <button class="step is-on" type="button" data-step="abordar"><small>01</small><strong>Abordar</strong></button>
+          <button class="step" type="button" data-step="investigar"><small>02</small><strong>Investigar</strong></button>
+          <button class="step" type="button" data-step="oportunidade"><small>03</small><strong>Oportunidade</strong></button>
+          <button class="step" type="button" data-step="solucao"><small>04</small><strong>Solução</strong></button>
+          <button class="step" type="button" data-step="objecao"><small>05</small><strong>Objeção</strong></button>
+          <button class="step" type="button" data-step="fechar"><small>06</small><strong>Fechar</strong></button>
+          <button class="step" type="button" data-step="pos"><small>07</small><strong>Pós-venda</strong></button>
+        </div>
+        <div class="detail" data-step-panel="abordar">
+          <h3>Abordar a obra, não o estoque.</h3>
+          <p class="say">“Você está tirando material para qual etapa?”</p>
+          <p>Evite abrir só com “pois não?”. A primeira frase já conduz.</p>
+        </div>
+        <div class="detail" data-step-panel="investigar" hidden>
+          <h3>Investigar antes de oferecer.</h3>
+          <p class="say">“O que já está no canteiro e o que ainda falta nesta fase?”</p>
+          <p>Etapa, quem executa, prazo e se é compra ou orçamento. Quatro respostas mudam a venda.</p>
+        </div>
+        <div class="detail" data-step-panel="oportunidade" hidden>
+          <h3>Identificar o que a conversa revelou.</h3>
+          <p class="say">“Pelo que você contou, estes itens são da mesma etapa. Faz sentido olhar juntos?”</p>
+          <p>Oportunidade pode ser complemento, próxima fase ou um pedreiro que volta. Não é lista cega de catálogo.</p>
+        </div>
+        <div class="detail" data-step-panel="solucao" hidden>
+          <h3>Apresentar uma carga, não um discurso.</h3>
+          <p class="say">“Eu separo o que você pediu e o complemento desta etapa, para ir numa entrega só.”</p>
+          <p>Uma frase: item, complemento, entrega. Se a entrega não cabe no caminhão, diga e proponha o corte.</p>
+        </div>
+        <div class="detail" data-step-panel="objecao" hidden>
+          <h3>Trabalhar a trava antes do desconto.</h3>
+          <p class="say">“O que está travando — preço, prazo, estoque ou pagamento?”</p>
+          <p>Desconto automático ensina o cliente a pedir desconto. Primeiro entenda a trava.</p>
+        </div>
+        <div class="detail" data-step-panel="fechar" hidden>
+          <h3>Fechar com tudo confirmado.</h3>
+          <p class="say">“Fechamos assim: estes itens, esta entrega, esta condição. Posso seguir?”</p>
+          <p>Quantidade, pagamento, endereço e quem recebe. Sim ou não claro. Os dois se registram.</p>
+        </div>
+        <div class="detail" data-step-panel="pos" hidden>
+          <h3>Pós-venda com data.</h3>
+          <p class="say">“Quando a obra virar de etapa, eu te chamo. Qual o melhor dia?”</p>
+          <p>“Qualquer coisa estamos aí” não é pós-venda. Pós-venda é conferir a entrega e marcar o próximo motivo.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="slide" data-mod="3" data-label="Perguntas">
+      <div class="wrap">
+        <p class="kicker"><span class="seal seal-rec">Recomendação</span> Banco de perguntas</p>
+        <h2>A ferramenta do vendedor é a pergunta.</h2>
+        <div class="qgrid">
+          <article class="card">
+            <h3>Para abrir</h3>
+            <ul>
+              <li>Para qual etapa é o material?</li>
+              <li>É obra, reforma ou reposição?</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Para entender</h3>
+            <ul>
+              <li>Quem está executando?</li>
+              <li>O que já tem no canteiro?</li>
+              <li>É para hoje ou é orçamento?</li>
+              <li>Qual o prazo desta etapa?</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Para achar oportunidade</h3>
+            <ul>
+              <li>O que ainda falta para a obra não parar?</li>
+              <li>A próxima etapa já tem data?</li>
+              <li>Você compra para mais de uma frente?</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Para avançar</h3>
+            <ul>
+              <li>Leva o complemento nesta mesma entrega?</li>
+              <li>Posso anotar o contato para a fase seguinte?</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </article>
+
+    <article class="slide" data-mod="3" data-label="Objeções">
+      <div class="wrap">
+        <p class="kicker"><span class="seal seal-sim">Situações de balcão</span> <span class="seal seal-rec">Fala sugerida</span></p>
+        <h2>A objeção não é o fim. É a parte honesta da conversa.</h2>
+        <div class="stack grid-2">
+          <article class="card">
+            <span class="num">“Está caro.”</span>
+            <p class="say">“Entendo. Você está comparando o preço deste item ou a carga completa, com a entrega?”</p>
+            <p>Só fale de condição depois de saber o que está dentro da conta. Desconto não é o primeiro movimento.</p>
+          </article>
+          <article class="card">
+            <span class="num">“Vou ver na outra loja.”</span>
+            <p class="say">“Justo comparar. O que decide hoje: preço, prazo de entrega ou não faltar material no meio da obra?”</p>
+            <p>Ajude o critério. Não desqualifique o concorrente e não invente um benefício que a loja não entrega.</p>
+          </article>
+          <article class="card">
+            <span class="num">“Só quero este item.”</span>
+            <p class="say">“Fechado, segue só isso. Posso anotar o que ficou para a próxima etapa e te chamar na hora certa?”</p>
+            <p>Respeite o não. Registre o que ficou de fora. Empurrar depois do não queima a próxima compra.</p>
+          </article>
+          <article class="card">
+            <span class="num">“Agora não tenho como pagar.”</span>
+            <p class="say">“A condição fica dentro do que a loja consegue. O que não dá para prometer, a gente não promete. Dá para separar o que fecha agora.”</p>
+            <p>Prazo e fiado passam pelo giro. O balcão não cria crédito que a gestão não autorizou.</p>
+          </article>
+        </div>
+      </div>
+    </article>
+
+    <article class="slide" data-mod="3" data-label="Fechar e voltar">
+      <div class="wrap">
+        <p class="kicker"><span class="seal seal-rec">Recomendação</span></p>
+        <h2>Fechar é confirmar. Voltar é ter um motivo.</h2>
+        <div class="split">
+          <article class="card">
+            <span class="num">06 · Fechar</span>
+            <h3>O sim tem cinco checagens.</h3>
+            <ol>
+              <li>Itens e quantidades.</li>
+              <li>Condição de pagamento autorizada.</li>
+              <li>Entrega: dia, endereço, quem recebe.</li>
+              <li>O que o caminhão realmente leva hoje.</li>
+              <li>A frase: “Posso seguir assim?”</li>
+            </ol>
+          </article>
+          <article class="card">
+            <span class="num">07 · Pós-venda</span>
+            <h3>Três retornos que cabem no dia.</h3>
+            <ol>
+              <li>Chegou tudo certo?</li>
+              <li>A obra já virou de etapa?</li>
+              <li>Qual dia eu te procuro de novo?</li>
+            </ol>
+            <p>Sem a terceira, o pós-venda vira gentileza. Com a terceira, vira carteira.</p>
+          </article>
+        </div>
+      </div>
+    </article>
+
+    <article class="slide" data-mod="3" data-label="Roleplay">
+      <div class="wrap">
+        <p class="kicker"><span class="seal seal-sim">Exercício</span></p>
+        <h2>Dupla. Três minutos. Uma frase do cliente.</h2>
+        <article class="card" style="margin-top:16px">
+          <p class="say">“Só quero o tubo de 100.”</p>
+          <p>Um faz o cliente. O outro conduz os sete passos sem pressa e sem catálogo. Se o cliente repetir “só isso”, a venda boa respeita e ainda marca o próximo contato.</p>
+        </article>
+        <div class="stack grid-4">
+          <article class="card"><h3>Perguntou a etapa?</h3><p>Água, esgoto ou chuva. A obra muda a conexão.</p></article>
+          <article class="card"><h3>Ofereceu com critério?</h3><p>Conexão, cola ou registro só se a fase pedir.</p></article>
+          <article class="card"><h3>Respeitou o não?</h3><p>Não insistiu depois de um não claro.</p></article>
+          <article class="card"><h3>Marcou a volta?</h3><p>Nome, telefone e o motivo do próximo contato.</p></article>
+        </div>
+        <p class="coach">Condutor: uma dupla mostra. O resto só observa os quatro pontos. Sem plateia corrigindo no meio da cena.</p>
+      </div>
+    </article>
+
+    <article class="slide" data-mod="4" data-label="Módulo 4">
+      <div class="wrap">
+        <p class="hero-num">04</p>
+        <p class="kicker">Módulo 4 · Vender mais sem depender só de cliente novo</p>
+        <h2>Mais resultado não começa com mais porta entrando.</h2>
+        <p class="lead">Começa na conversa que já está acontecendo: o complemento da etapa, o ticket que a obra justifica e a próxima compra marcada.</p>
+      </div>
+    </article>
+
+    <article class="slide" data-mod="4" data-label="Cestas">
+      <div class="wrap">
+        <p class="kicker"><span class="seal seal-sim">Simulação didática</span> Não é lista obrigatória</p>
+        <h2>Complemento é da obra. Não é do estoque parado.</h2>
+        <p class="sub">O que muita gente chama de cross-sell, aqui, é uma pergunta: “o que esta mesma etapa ainda pede?”. Confirme com quem executa. Não invente especificação.</p>
+        <table class="cmp">
+          <thead><tr><th>Se o cliente levou</th><th>A conversa pode incluir</th></tr></thead>
+          <tbody>
+            <tr><td>Cimento</td><td>Etapa primeiro. Aí sim areia, brita, tela ou aditivo — o que a fase pedir.</td></tr>
+            <tr><td>Tinta</td><td>A parede já está pronta? Massa, lixa, rolo e fita só se o preparo existir.</td></tr>
+            <tr><td>Tubo</td><td>Água, esgoto ou chuva. Conexão, cola ou registro conforme a linha.</td></tr>
+            <tr><td>Piso</td><td>Metragem e ambiente. Argamassa, rejunte e espaçador se a colocação for agora.</td></tr>
+            <tr><td>Fio</td><td>Só o que o eletricista especificou: eletroduto, fita, disjuntor. Sem trocar o projeto.</td></tr>
+          </tbody>
+        </table>
+        <p class="fine">Exemplos para treinar o raciocínio. Sem preço, sem margem e sem obrigação de oferecer os cinco.</p>
+      </div>
+    </article>
+
+    <article class="slide" data-mod="4" data-label="Ticket, mix e recorrência">
+      <div class="wrap">
+        <p class="kicker"><span class="seal seal-blank">A preencher</span> <span class="seal seal-fact">Fato sem lista</span></p>
+        <h2>Três alavancas. Nenhum número inventado.</h2>
+        <div class="stack grid-3">
+          <article class="card">
+            <span class="num">Ticket médio</span>
+            <h3>Quanto cada venda leva.</h3>
+            <p>Faturamento do período dividido pelo número de vendas. Sobe quando a etapa vai mais completa — não quando se empurra item solto.</p>
+            <div class="blank">Ticket atual: a preencher com a gestão</div>
+          </article>
+          <article class="card">
+            <span class="num">Mix</span>
+            <h3>O que a loja escolhe vender.</h3>
+            <p>Mix é a combinação do que sai. O kickoff viu linhas com muita participação e baixa contribuição. Os nomes não vieram. Não vamos batizá-los aqui.</p>
+            <div class="blank">5 linhas para puxar · 5 para revisar — com a gestão</div>
+          </article>
+          <article class="card">
+            <span class="num">Recorrência</span>
+            <h3>Compra única vira relação com motivo.</h3>
+            <p>Próxima etapa da obra, reposição da empresa ou próxima frente do pedreiro. Sem motivo, o retorno parece cobrança.</p>
+            <div class="blank">Próximo contato: data + motivo</div>
+          </article>
+        </div>
+        <p class="fine">Nada desta tela é meta. Ticket e mix só entram na rotina depois que a gestão colocar o número verdadeiro ao lado.</p>
+      </div>
+    </article>
+
+    <article class="slide" data-mod="4" data-label="O teto do caixa">
+      <div class="wrap">
+        <p class="kicker"><span class="seal seal-fact">Limite relatado</span></p>
+        <h2>Inteligência comercial também é saber o que não vender.</h2>
+        <div class="split">
+          <article class="card">
+            <span class="num">Caixa</span>
+            <h3>Giro limita venda faturada.</h3>
+            <p>Estoque, prazo e inadimplência consomem o mesmo capital. Ampliar volume a prazo sem giro não apareceu no kickoff como caminho livre. Apareceu como restrição.</p>
+          </article>
+          <article class="card">
+            <span class="num">Operação</span>
+            <h3>Três caminhões e uma loja.</h3>
+            <p>A entrega prometida no balcão precisa caber no dia. Carga demais para o caminhão vira atraso, e atraso vira cliente que não volta.</p>
+          </article>
+        </div>
+        <article class="card good" style="margin-top:12px">
+          <h3>A ordem que protege o crescimento</h3>
+          <p>Primeiro, aproveitar melhor o atendimento. Depois, organizar a carteira. Em paralelo, a gestão diz o quanto pode ir a prazo nesta semana. O time não cria meta de faturamento por conta própria.</p>
+        </article>
+      </div>
+    </article>
+
+    <article class="slide" data-mod="5" data-label="Módulo 5">
+      <div class="wrap">
+        <p class="hero-num">05</p>
+        <p class="kicker">Módulo 5 · Rotina comercial e indicadores</p>
+        <h2>O que não é anotado vira opinião.</h2>
+        <p class="lead">Meta sem número é desejo. Indicador sem registro é chute. A rotina começa curta o bastante para acontecer mesmo num dia de balcão cheio.</p>
+      </div>
+    </article>
+
+    <article class="slide" data-mod="5" data-label="Rituais">
+      <div class="wrap">
+        <p class="kicker"><span class="seal seal-rec">Recomendação</span></p>
+        <h2>Quinze minutos por dia. Uma conversa por semana.</h2>
+        <div class="split">
+          <article class="card">
+            <span class="num">Todo dia · 15 min · em pé</span>
+            <h3>O ritual que não depende de planilha bonita.</h3>
+            <ol>
+              <li>O que fechou ontem.</li>
+              <li>O que não fechou, e o motivo em uma palavra.</li>
+              <li>Quem será procurado hoje, e por quê.</li>
+              <li>Trava do dia: estoque, caminhão, preço ou giro.</li>
+            </ol>
+          </article>
+          <article class="card">
+            <span class="num">Na semana · com a gestão</span>
+            <h3>Olhar o que o balcão sozinho não vê.</h3>
+            <ol>
+              <li>Atendimentos registrados de verdade.</li>
+              <li>Vendas fechadas e motivos de perda.</li>
+              <li>Clientes reativados e retornos feitos.</li>
+              <li>O que o caixa autoriza vender a prazo.</li>
+              <li>Um caso para o time aprender.</li>
+            </ol>
+          </article>
+        </div>
+        <p class="fine">Meta individual e meta da loja se definem nessa conversa semanal, com o número na mesa. Esta apresentação não entrega o valor da meta.</p>
+      </div>
+    </article>
+
+    <article class="slide" data-mod="5" data-label="Painel">
+      <div class="wrap">
+        <p class="kicker"><span class="seal seal-blank">Painel a preencher</span> Clique para destacar</p>
+        <h2>Oito indicadores. Todos em branco de propósito.</h2>
+        <div class="tiles">
+          <button class="tile" type="button" aria-pressed="false"><b>Atendimentos</b><em>—</em><p>Conversas de venda registradas no período.</p></button>
+          <button class="tile" type="button" aria-pressed="false"><b>Vendas fechadas</b><em>—</em><p>Pedidos que saíram do atendimento.</p></button>
+          <button class="tile" type="button" aria-pressed="false"><b>Conversão</b><em>—</em><p>Fechadas dividido por atendimentos. Sem registro, não existe.</p></button>
+          <button class="tile" type="button" aria-pressed="false"><b>Ticket médio</b><em>—</em><p>Faturamento dividido pelo número de vendas.</p></button>
+          <button class="tile" type="button" aria-pressed="false"><b>Faturamento</b><em>—</em><p>O realizado do período. O relato do kickoff não entra como meta.</p></button>
+          <button class="tile" type="button" aria-pressed="false"><b>Clientes ativos</b><em>—</em><p>Quem comprou na janela que a gestão definir.</p></button>
+          <button class="tile" type="button" aria-pressed="false"><b>Reativados</b><em>—</em><p>Quem estava parado e voltou a comprar.</p></button>
+          <button class="tile" type="button" aria-pressed="false"><b>Motivo da perda</b><em>—</em><p>Preço, prazo, estoque, crédito, orçamento, concorrente ou outro.</p></button>
+        </div>
+        <p class="fine">Nenhum alvo numérico. A gestão preenche o realizado e, só então, combina a meta olhando giro, estoque e caminhão.</p>
+      </div>
+    </article>
+
+    <article class="slide" data-mod="5" data-label="Registro">
+      <div class="wrap">
+        <p class="kicker"><span class="seal seal-rec">Recomendação</span> Ficha mínima de cada atendimento</p>
+        <h2>Se não couber num papel, não vai para a rotina.</h2>
+        <div class="stack grid-4">
+          <article class="card"><h3>Quem</h3><p>Nome, telefone e segmento: final, pedreiro, empreiteiro, construtora ou empresa.</p></article>
+          <article class="card"><h3>Obra</h3><p>O que pediu, a etapa e o que mais a fase precisava.</p></article>
+          <article class="card"><h3>Desfecho</h3><p>Fechou ou não. Se não fechou, um motivo só. Sem texto longo.</p></article>
+          <article class="card"><h3>Volta</h3><p>Data do próximo contato e o motivo: etapa, reposição ou reativação.</p></article>
+        </div>
+        <article class="card" style="margin-top:12px">
+          <h3>O que essa ficha resolve</h3>
+          <p>A loja passa a ver oportunidade perdida, deixa de depender da memória de uma vendedora e chega no ritual com fato, não com impressão. O formato — caderno, planilha ou sistema — a gestão escolhe. O conteúdo mínimo é este.</p>
+        </article>
+      </div>
+    </article>
+
+    <article class="slide" data-mod="6" data-label="Módulo 6">
+      <div class="wrap">
+        <p class="hero-num">06</p>
+        <p class="kicker">Módulo 6 · Plano de ação comercial</p>
+        <h2>O treinamento acaba aqui. O comercial começa no próximo atendimento.</h2>
+        <p class="lead">Sem lista infinita. Três movimentos: começar, parar e melhorar. O resto é disciplina de olhar se isso aconteceu.</p>
+      </div>
+    </article>
+
+    <article class="slide" data-mod="6" data-label="Começar, parar, melhorar">
+      <div class="wrap">
+        <p class="kicker"><span class="seal seal-rec">Direção prática</span></p>
+        <h2>O que muda na segunda-feira.</h2>
+        <div class="stack grid-3">
+          <article class="card good">
+            <span class="num">Começar</span>
+            <ul>
+              <li>Perguntar a etapa antes de separar.</li>
+              <li>Registrar todo atendimento, inclusive o que não fechou.</li>
+              <li>Marcar o próximo contato com um motivo.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="num">Parar</span>
+            <ul>
+              <li>Deixar o cliente conduzir a venda inteiro.</li>
+              <li>Guardar a carteira só na cabeça de uma pessoa.</li>
+              <li>Prometer volume, prazo ou fiado que o caixa e o caminhão não sustentam.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="num">Melhorar</span>
+            <ul>
+              <li>O complemento, com critério da etapa.</li>
+              <li>O retorno de quem já comprou.</li>
+              <li>A leitura semanal do que não fechou.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </article>
+
+    <article class="slide" data-mod="6" data-label="A semana">
+      <div class="wrap">
+        <p class="kicker"><span class="seal seal-rec">Comportamento de rotina</span></p>
+        <h2>Uma semana tipo. Sem meta de receita escondida.</h2>
+        <div class="week">
+          <article><strong>Segunda</strong><p>Lista de quem será procurado e o motivo de cada um.</p></article>
+          <article><strong>No balcão</strong><p>Registro na hora. Memória de fim do dia perde venda.</p></article>
+          <article><strong>Todo dia</strong><p>Quinze minutos: fechou, não fechou, trava, retorno.</p></article>
+          <article><strong>Depois da entrega</strong><p>Chegou? A obra virou de etapa? Qual o próximo dia?</p></article>
+          <article><strong>Fechamento</strong><p>Gestão e time olham o painel em branco até ele deixar de estar em branco.</p></article>
+        </div>
+        <div class="stack grid-3">
+          <article class="card"><span class="num">Semana 1</span><h3>Registrar</h3><p>O hábito é a ficha, não o volume.</p></article>
+          <article class="card"><span class="num">Semana 2</span><h3>Ritual sem plateia</h3><p>Acontece mesmo se a V4 não estiver na sala.</p></article>
+          <article class="card"><span class="num">Semana 3 e 4</span><h3>Carteira e ajuste</h3><p>Nomes, segmentos e próximo contato. O número que aparecer serve para decidir, não para enfeitar.</p></article>
+        </div>
+        <p class="fine">Sequência de comportamento. Não é cronograma de faturamento e não considera os cerca de R$ 300 mil como alvo.</p>
+      </div>
+    </article>
+
+    <article class="slide" data-mod="6" data-label="Compromisso">
+      <div class="wrap">
+        <p class="kicker"><span class="seal seal-rec">Compromisso do time</span> Fica salvo neste navegador</p>
+        <h2>O que a sala assume agora.</h2>
+        <p class="lead">Cada pessoa escolhe, em voz alta, um comportamento. A sala marca juntos o que passa a ser inegociável.</p>
+        <div class="checks" id="commitments">
+          <button class="check" type="button" aria-pressed="false" data-commit="etapa"><span class="box" aria-hidden="true"></span><span>Perguntar a etapa da obra antes de separar o material.</span></button>
+          <button class="check" type="button" aria-pressed="false" data-commit="criterio"><span class="box" aria-hidden="true"></span><span>Oferecer complemento só quando a etapa pedir, e respeitar o não.</span></button>
+          <button class="check" type="button" aria-pressed="false" data-commit="registro"><span class="box" aria-hidden="true"></span><span>Registrar o atendimento, inclusive quando a venda não fecha.</span></button>
+          <button class="check" type="button" aria-pressed="false" data-commit="volta"><span class="box" aria-hidden="true"></span><span>Sair de cada conversa com o próximo contato e o motivo.</span></button>
+          <button class="check" type="button" aria-pressed="false" data-commit="ritual"><span class="box" aria-hidden="true"></span><span>Levar um caso real para o ritual da semana.</span></button>
+        </div>
+        <p class="coach">Condutor: não encerre com aplauso genérico. Encerre com um nome e uma frase: “na próxima, eu pergunto a etapa”.</p>
+      </div>
+    </article>
+
+    <article class="slide" data-mod="6" data-label="Fecho">
+      <div class="wrap">
+        <p class="kicker">V4 Company · Conceição Materiais de Construção</p>
+        <h2 class="wide">A loja não precisa esperar mais gente entrar para vender melhor.</h2>
+        <p class="quote">Precisa conduzir a obra, cuidar de quem já compra e <em>anotar o que aconteceu</em>.</p>
+        <p class="end-line">Menos teoria. Mais prática. Menos atendimento reativo. Mais estratégia comercial. Mais resultado — no tamanho que o caixa e os três caminhões sustentam.</p>
+        <p class="fine">Material de treinamento desenvolvido pela V4 Company a partir do kickoff. Diagnóstico inicial, não auditoria de indicadores. Simulações marcadas não são clientes, preços ou metas.</p>
+      </div>
+    </article>
+
+  </main>
+
+  <footer class="bottombar">
+    <div class="nav-cluster">
+      <button class="ghost" type="button" id="prev">Anterior</button>
+      <div class="count" id="count">01 / 01</div>
+      <button class="solid" type="button" id="next">Próximo</button>
+    </div>
+    <div class="help">Espaço ou setas · 1–6 pulam o módulo · M abre o mapa</div>
+    <div class="tools">
+      <button class="ghost" type="button" id="openMap">Módulos</button>
+    </div>
+  </footer>
+
+  <div class="overlay" id="overlay" aria-hidden="true">
+    <div class="panel" role="dialog" aria-modal="true" aria-labelledby="mapTitle">
+      <header>
+        <p id="mapTitle">Mapa do treinamento</p>
+        <button class="ghost" type="button" id="closeMap">Fechar</button>
+      </header>
+      <div id="modList"></div>
+    </div>
+  </div>
+  <p class="sr" id="live" aria-live="polite"></p>
+
+  <script>
+    (function () {
+      var slides = Array.prototype.slice.call(document.querySelectorAll(".slide"));
+      var modules = [
+        "Abertura",
+        "Módulo 1 · O novo papel",
+        "Módulo 2 · O cliente",
+        "Módulo 3 · Venda consultiva",
+        "Módulo 4 · Ticket e mix",
+        "Módulo 5 · Rotina",
+        "Módulo 6 · Plano de ação"
+      ];
+      var i = 0;
+      var bar = document.getElementById("bar");
+      var label = document.getElementById("modLabel");
+      var count = document.getElementById("count");
+      var live = document.getElementById("live");
+      var prev = document.getElementById("prev");
+      var next = document.getElementById("next");
+      var overlay = document.getElementById("overlay");
+      var list = document.getElementById("modList");
+      var stage = document.getElementById("stage");
+
+      function pad(n) { return (n < 10 ? "0" : "") + n; }
+
+      function show(n) {
+        n = Math.max(0, Math.min(slides.length - 1, n));
+        slides[i].classList.remove("is-on");
+        i = n;
+        var s = slides[i];
+        s.classList.add("is-on");
+        s.scrollTop = 0;
+        var mod = Number(s.getAttribute("data-mod")) || 0;
+        label.textContent = modules[mod];
+        count.textContent = pad(i + 1) + "  /  " + pad(slides.length);
+        bar.style.transform = "scaleX(" + ((i + 1) / slides.length) + ")";
+        prev.disabled = i === 0;
+        next.disabled = i === slides.length - 1;
+        next.textContent = i === slides.length - 1 ? "Fim" : "Próximo";
+        live.textContent = "Slide " + (i + 1) + " de " + slides.length + ". " + (s.getAttribute("data-label") || "");
+        var jumps = list.querySelectorAll(".jump");
+        for (var k = 0; k < jumps.length; k++) {
+          jumps[k].classList.toggle("is-here", Number(jumps[k].getAttribute("data-go")) === i);
+        }
+        if (history.replaceState) history.replaceState(null, "", "#s" + (i + 1));
+      }
+
+      function go(delta) { show(i + delta); }
+
+      function goMod(mod) {
+        for (var k = 0; k < slides.length; k++) {
+          if (Number(slides[k].getAttribute("data-mod")) === mod) { show(k); return; }
+        }
+      }
+
+      var current = "";
+      var html = "";
+      slides.forEach(function (s, idx) {
+        var mod = s.getAttribute("data-mod");
+        if (mod !== current) {
+          if (current !== "") html += "</div>";
+          current = mod;
+          html += '<div class="mod-block"><h3>' + modules[Number(mod)] + '</h3>';
+        }
+        html += '<button class="jump" type="button" data-go="' + idx + '">' + pad(idx + 1) + "  " + (s.getAttribute("data-label") || "") + "</button>";
+      });
+      html += "</div>";
+      list.innerHTML = html;
+
+      list.addEventListener("click", function (e) {
+        var b = e.target.closest("[data-go]");
+        if (!b) return;
+        show(Number(b.getAttribute("data-go")));
+        setMap(false);
+      });
+
+      prev.addEventListener("click", function () { go(-1); });
+      next.addEventListener("click", function () { go(1); });
+      function setMap(open) {
+        if (open) overlay.classList.add("is-open");
+        else overlay.classList.remove("is-open");
+        overlay.setAttribute("aria-hidden", open ? "false" : "true");
+      }
+      document.getElementById("openMap").addEventListener("click", function () { setMap(true); });
+      document.getElementById("closeMap").addEventListener("click", function () { setMap(false); });
+      overlay.addEventListener("click", function (e) { if (e.target === overlay) setMap(false); });
+
+      document.addEventListener("keydown", function (e) {
+        var tag = (e.target && e.target.tagName) || "";
+        if (tag === "INPUT" || tag === "TEXTAREA") return;
+        if (e.key === "Escape") { setMap(false); return; }
+        if (e.key === "m" || e.key === "M") { setMap(!overlay.classList.contains("is-open")); return; }
+        if (e.key === "ArrowRight" || e.key === "ArrowDown" || e.key === "PageDown") { e.preventDefault(); go(1); }
+        else if (e.key === "ArrowLeft" || e.key === "ArrowUp" || e.key === "PageUp") { e.preventDefault(); go(-1); }
+        else if (e.key === " " && tag !== "BUTTON" && tag !== "A" && !overlay.classList.contains("is-open")) { e.preventDefault(); go(1); }
+        else if (e.key === "Home") { e.preventDefault(); show(0); }
+        else if (e.key === "End") { e.preventDefault(); show(slides.length - 1); }
+        else if (e.key >= "1" && e.key <= "6") { goMod(Number(e.key)); }
+      });
+
+      var x0 = null;
+      stage.addEventListener("touchstart", function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+      stage.addEventListener("touchend", function (e) {
+        if (x0 == null) return;
+        var dx = e.changedTouches[0].clientX - x0;
+        if (Math.abs(dx) > 56) go(dx < 0 ? 1 : -1);
+        x0 = null;
+      }, { passive: true });
+
+      document.addEventListener("click", function (e) {
+        var tab = e.target.closest("[data-seg]");
+        if (tab) {
+          var name = tab.getAttribute("data-seg");
+          document.querySelectorAll("[data-seg]").forEach(function (el) {
+            var on = el === tab;
+            el.classList.toggle("is-on", on);
+            el.setAttribute("aria-selected", on ? "true" : "false");
+          });
+          document.querySelectorAll("[data-seg-panel]").forEach(function (panel) {
+            panel.hidden = panel.getAttribute("data-seg-panel") !== name;
+          });
+          return;
+        }
+        var step = e.target.closest("[data-step]");
+        if (step) {
+          var id = step.getAttribute("data-step");
+          document.querySelectorAll("[data-step]").forEach(function (el) { el.classList.toggle("is-on", el === step); });
+          document.querySelectorAll("[data-step-panel]").forEach(function (panel) {
+            panel.hidden = panel.getAttribute("data-step-panel") !== id;
+          });
+          return;
+        }
+        var reveal = e.target.closest("[data-reveal]");
+        if (reveal) {
+          var box = reveal.parentElement.querySelector(".answer");
+          if (!box) return;
+          var open = !box.classList.contains("is-open");
+          box.classList.toggle("is-open", open);
+          reveal.setAttribute("aria-expanded", open ? "true" : "false");
+          reveal.textContent = open ? "Ocultar o caminho" : "Mostrar um caminho";
+          return;
+        }
+        var jumpMod = e.target.closest("[data-goto-mod]");
+        if (jumpMod) { goMod(Number(jumpMod.getAttribute("data-goto-mod"))); return; }
+        var tile = e.target.closest(".tile");
+        if (tile) {
+          var pressed = tile.getAttribute("aria-pressed") === "true";
+          tile.setAttribute("aria-pressed", pressed ? "false" : "true");
+          tile.classList.toggle("is-on", !pressed);
+          return;
+        }
+        var commit = e.target.closest("[data-commit]");
+        if (commit) {
+          var on = commit.getAttribute("aria-pressed") !== "true";
+          commit.setAttribute("aria-pressed", on ? "true" : "false");
+          saveCommitments();
+        }
+      });
+
+      var storageKey = "conceicao-treino-compromissos";
+      function saveCommitments() {
+        var data = {};
+        document.querySelectorAll("[data-commit]").forEach(function (el) {
+          data[el.getAttribute("data-commit")] = el.getAttribute("aria-pressed") === "true";
+        });
+        try { localStorage.setItem(storageKey, JSON.stringify(data)); } catch (err) {}
+      }
+      try {
+        var saved = JSON.parse(localStorage.getItem(storageKey) || "{}");
+        document.querySelectorAll("[data-commit]").forEach(function (el) {
+          var on = !!saved[el.getAttribute("data-commit")];
+          el.setAttribute("aria-pressed", on ? "true" : "false");
+        });
+      } catch (err) {}
+
+      var hash = (location.hash || "").match(/^#s(\d+)$/);
+      show(hash ? Number(hash[1]) - 1 : 0);
+    })();
+  </script>
+</body>
+</html>
