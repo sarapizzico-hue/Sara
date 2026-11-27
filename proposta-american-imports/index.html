@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>American Imports — Estrutura de receita · V4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #e50914;
+    --alarm: #ff2d2d;
+    --alarm-soft: #ff6a5c;
+    --ok: #9cf0b6;
+    --gold: #ffcf5a;
+    --text: #fff;
+    --muted: rgba(255,255,255,.68);
+    --faint: rgba(255,255,255,.42);
+    --hair: rgba(255,255,255,.14);
+    --hair-strong: rgba(255,255,255,.28);
+    --glass: linear-gradient(160deg, rgba(255,255,255,.09), rgba(255,255,255,.02));
+    --glass-red: linear-gradient(160deg, rgba(229,9,20,.32), rgba(229,9,20,.08));
+    --radius: 20px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: #0c0101; color: var(--text); }
+  body { font-family: "IBM Plex Sans", "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+  button { font-family: inherit; }
+  #viewport { position: fixed; inset: 0; overflow: hidden; background: #0c0101; }
+  #deck {
+    --deck-scale: 1;
+    position: absolute; left: 50%; top: 50%; width: 1600px; height: 900px; overflow: hidden;
+    transform: translate(-50%, -50%) scale(var(--deck-scale)); transform-origin: center;
+    background: #140102; box-shadow: 0 30px 100px #000a;
+  }
+  .slide {
+    position: absolute; inset: 0; padding: 76px 80px 64px;
+    display: flex; flex-direction: column; opacity: 0; visibility: hidden; pointer-events: none;
+  }
+  .slide.active { opacity: 1; visibility: visible; pointer-events: auto; }
+  .slide > * { position: relative; z-index: 2; }
+  .bg {
+    position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse at 92% -10%, rgba(229,9,20,.38), transparent 50%),
+      linear-gradient(105deg, #1c0306, #120102 58%);
+  }
+  .chapter {
+    position: absolute; top: 26px; left: 80px; right: 80px;
+    display: flex; justify-content: space-between;
+    font: 14px/1.2 "IBM Plex Mono", ui-monospace, monospace;
+    letter-spacing: .08em; text-transform: uppercase; color: var(--faint);
+  }
+  .chapter span:first-child { color: var(--alarm-soft); }
+  .chapter span:first-child::before {
+    content: ""; display: inline-block; width: 22px; height: 2px;
+    background: currentColor; vertical-align: middle; margin-right: 12px;
+  }
+  h1 { margin: 0 0 10px; font-size: 54px; line-height: .98; letter-spacing: -.035em; font-weight: 600; }
+  .lede { margin: 0; font-size: 22px; line-height: 1.35; font-weight: 300; color: var(--muted); max-width: 52ch; }
+  .head { margin-bottom: 18px; }
+  .kicker { font: 13px/1.2 "IBM Plex Mono", monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--alarm-soft); }
+  .glass {
+    background: var(--glass); border: 1px solid var(--hair); border-radius: var(--radius);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.12);
+  }
+  .glass.hot { background: var(--glass-red); border-color: rgba(255,90,76,.5); }
+  .num { font-variant-numeric: tabular-nums; letter-spacing: -.04em; }
+  .source { margin-top: auto; padding-top: 10px; font: 13px/1.35 "IBM Plex Mono", monospace; color: var(--faint); }
+  .notes { display: none; }
+  .ok { color: var(--ok); }
+
+  .cover { flex: 1; display: grid; grid-template-columns: 1.2fr .8fr; gap: 40px; align-items: center; }
+  .cover h1 { font-size: 78px; max-width: 12ch; }
+  .cover .call { margin-top: 22px; font-size: 28px; line-height: 1.25; font-weight: 500; max-width: 18ch; }
+  .cover .call em { font-style: normal; color: var(--alarm); }
+  .cover-card { padding: 28px 30px; }
+  .cover-card p { margin: 0; font-size: 22px; line-height: 1.4; }
+  .cover-card p + p { margin-top: 14px; color: var(--muted); font-weight: 300; }
+
+  .grid4 { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-content: center; }
+  .pain { padding: 22px 24px; display: flex; flex-direction: column; gap: 8px; min-height: 0; }
+  .pain .n { font: 13px "IBM Plex Mono", monospace; color: var(--alarm-soft); }
+  .pain h3 { margin: 0; font-size: 26px; letter-spacing: -.02em; font-weight: 600; }
+  .pain p { margin: 0; font-size: 18px; line-height: 1.35; color: var(--muted); }
+
+  .grid6 { flex: 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; align-content: center; }
+  .hit { padding: 18px 20px; }
+  .hit .from { font: 12px "IBM Plex Mono", monospace; letter-spacing: .06em; text-transform: uppercase; color: var(--alarm-soft); }
+  .hit h3 { margin: 8px 0 6px; font-size: 24px; font-weight: 600; }
+  .hit p { margin: 0; font-size: 16px; line-height: 1.35; color: var(--muted); }
+
+  .fr-planta { flex: 1; display: grid; grid-template-columns: 100px 1fr 100px; gap: 14px; align-items: stretch; min-height: 0; }
+  .fr-io { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 8px; }
+  .fr-io b { font-size: 18px; }
+  .fr-io span { font-size: 13px; color: var(--muted); line-height: 1.25; }
+  .chip {
+    width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center;
+    background: rgba(255,255,255,.08); border: 1px solid var(--hair); font-weight: 600;
+  }
+  .fr-io.out .chip { background: var(--red); border-color: var(--red); box-shadow: 0 0 32px rgba(229,9,20,.6); }
+  .fr-sets { display: grid; grid-template-columns: 1fr 2fr 2fr 2fr; gap: 10px; }
+  .fr-set { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+  .fr-set > header {
+    padding: 8px 12px; border-radius: 12px;
+    border: 1px solid rgba(255,140,110,.45); background: rgba(229,9,20,.16);
+    font: 600 12px "IBM Plex Mono", monospace; letter-spacing: .08em; text-transform: uppercase; color: #ffc9b8;
+  }
+  .fr-ms { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 8px; flex: 1; }
+  .fr-m {
+    padding: 12px; border-radius: 16px; min-height: 132px;
+    background: linear-gradient(170deg, rgba(255,255,255,.1), rgba(255,255,255,.03));
+    border: 1px solid var(--hair-strong); display: flex; flex-direction: column; gap: 4px;
+  }
+  .fr-m .k { font: 12px "IBM Plex Mono", monospace; color: var(--alarm-soft); }
+  .fr-m b { font-size: 20px; line-height: 1.1; }
+  .fr-m p { margin: 4px 0 0; font-size: 14px; color: var(--muted); line-height: 1.3; }
+  .fr-m.hot { background: linear-gradient(170deg, rgba(229,9,20,.4), rgba(229,9,20,.1)); border-color: #ff5a4c; }
+  .fr-belt {
+    height: 36px; border-radius: 10px; overflow: hidden; border: 1px solid var(--hair);
+    background: repeating-linear-gradient(90deg, rgba(0,0,0,.55) 0 14px, rgba(255,255,255,.08) 14px 18px);
+    display: flex; align-items: center; justify-content: space-around;
+  }
+  .slide.active .fr-belt { animation: belt 1.4s linear infinite; }
+  @keyframes belt { to { background-position: 18px 0; } }
+  .mat { width: 16px; height: 16px; border-radius: 4px; display: inline-block; }
+  .mat.ore { background: radial-gradient(circle at 40% 40%, #ffb15a, #e5480f); border-radius: 40% 60%; }
+  .mat.cube { background: linear-gradient(135deg, #ffd9a8, #ff7a3a); }
+  .mat.coin { border-radius: 50%; background: radial-gradient(circle at 35% 35%, #fff3b0, var(--gold) 50%, #c98a12); }
+  .fr-back {
+    margin-top: 10px; align-self: center; padding: 8px 16px; border-radius: 999px;
+    background: #2a0a04; border: 1px solid rgba(255,207,90,.45); color: #ffe3a3; font-size: 16px;
+  }
+
+  .map { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 10px; }
+  .row {
+    display: grid; grid-template-columns: 1.15fr .9fr 1.15fr .95fr; gap: 10px; align-items: stretch;
+  }
+  .row span, .row b, .row p { margin: 0; }
+  .cell { padding: 14px 16px; border-radius: 14px; border: 1px solid var(--hair); background: rgba(255,255,255,.04); }
+  .cell.pain { background: var(--glass-red); border-color: rgba(255,90,76,.45); }
+  .cell b { display: block; font-size: 18px; margin-bottom: 4px; }
+  .cell p, .cell span { font-size: 15px; line-height: 1.3; color: var(--muted); }
+  .hd { font: 12px "IBM Plex Mono", monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); padding: 0 4px 4px; }
+
+  .why { flex: 1; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; align-content: center; }
+  .why article { padding: 22px 22px 20px; display: flex; flex-direction: column; gap: 10px; }
+  .why h3 { margin: 0; font-size: 26px; }
+  .why .bad { color: #ffb4a8; font-size: 17px; line-height: 1.35; }
+  .why .good { margin-top: auto; color: var(--ok); font-size: 17px; line-height: 1.35; }
+
+  .flow { flex: 1; display: flex; align-items: stretch; gap: 8px; }
+  .node { flex: 1; padding: 16px 14px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  .node .k { font: 12px "IBM Plex Mono", monospace; color: var(--alarm-soft); letter-spacing: .06em; text-transform: uppercase; }
+  .node b { font-size: 20px; }
+  .node p { margin: 0; font-size: 15px; line-height: 1.3; color: var(--muted); }
+  .node .who { margin-top: auto; font-size: 14px; color: var(--ok); }
+  .slide[data-name="Como ficará"] .flow { flex: 1 1 auto; }
+  .slide[data-name="Como ficará"] .source { margin-top: 12px; }
+  .squad { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 12px; }
+  .sq { padding: 12px 12px 14px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  .sq .k { font: 11px "IBM Plex Mono", monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--alarm-soft); }
+  .sq b { font-size: 16px; line-height: 1.15; }
+  .sq p { margin: 0; font-size: 13px; line-height: 1.3; color: var(--muted); }
+  .arrow { align-self: center; color: var(--alarm-soft); font-size: 22px; }
+  .hip {
+    display: inline-block; font: 600 12px "IBM Plex Mono", monospace; letter-spacing: .12em;
+    text-transform: uppercase; background: var(--red); color: #fff; border-radius: 999px; padding: 4px 10px;
+  }
+
+  .refs { display: flex; flex-direction: column; }
+  .ref {
+    display: grid; grid-template-columns: 300px 1fr auto; gap: 14px; align-items: center;
+    padding: 10px 0; border-top: 1px solid var(--hair);
+  }
+  .ref b { font-size: 18px; font-weight: 550; }
+  .bar { height: 8px; border-radius: 99px; background: rgba(255,255,255,.08); overflow: hidden; }
+  .bar i { display: block; height: 100%; background: var(--alarm); }
+  .ref-val { font-size: 20px; font-weight: 650; }
+  .sumline { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; padding-top: 16px; }
+  .sumline .big { font-size: 56px; font-weight: 600; line-height: .9; }
+
+  .offers { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-content: center; }
+  .offer { padding: 22px 24px 20px; display: flex; flex-direction: column; gap: 6px; }
+  .offer .price { font-size: 40px; font-weight: 600; line-height: 1; }
+  .offer .sub { font-size: 16px; color: var(--muted); }
+  .offer ul { margin: 8px 0 0; padding: 0; list-style: none; }
+  .offer li { font-size: 16px; line-height: 1.45; color: var(--muted); }
+  .offer li::before { content: "· "; color: var(--alarm-soft); }
+  .total {
+    display: grid; grid-template-columns: 1.2fr .8fr; gap: 14px; margin-top: 14px;
+  }
+  .total article { padding: 16px 20px; }
+  .total .price { font-size: 44px; font-weight: 600; line-height: 1; margin-top: 4px; }
+  .total p { margin: 6px 0 0; color: var(--muted); font-size: 15px; }
+
+  .chrome {
+    position: absolute; left: 80px; right: 80px; bottom: 18px; z-index: 6;
+    display: flex; justify-content: space-between; align-items: center;
+    font: 14px "IBM Plex Mono", monospace; color: var(--faint);
+  }
+  .chrome b { color: #fff; }
+  .chrome button {
+    height: 34px; margin-left: 8px; border-radius: 999px; padding: 0 12px;
+    border: 1px solid var(--hair); background: rgba(0,0,0,.35); color: #fff; cursor: pointer;
+  }
+  .drawer {
+    display: none; position: fixed; z-index: 8; left: 20px; right: 20px; bottom: 16px;
+    max-width: 880px; background: #fff; color: #1a070c; border-radius: 14px; padding: 12px 16px;
+  }
+  body.show-notes .drawer { display: block; }
+  .drawer h3 { margin: 0 0 4px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #8a4038; }
+  .drawer p { margin: 0; font-size: 15px; line-height: 1.4; }
+  @media (prefers-reduced-motion: reduce) {
+    .slide.active .fr-belt { animation: none; }
+  }
+</style>
+</head>
+<body>
+<div id="viewport"><div id="deck">
+
+<section class="slide active" data-name="Capa">
+  <div class="bg"></div>
+  <div class="chapter"><span>V4</span><span>Proposta comercial</span></div>
+  <div class="cover">
+    <div>
+      <p class="kicker">American Imports</p>
+      <h1>Ver qual oferta vende.</h1>
+      <p class="call">Uma esteira para <em>gerar demanda, organizar a oportunidade e acompanhar</em> o que a conversa não guarda.</p>
+    </div>
+    <article class="glass cover-card">
+      <p>A American Imports já escolhe o produto e já atende. Campanha, argumento e etapa ainda não andam na mesma linha.</p>
+      <p>O projeto não é um pacote de anúncio. É a estrutura que faz cada oportunidade aparecer, da oferta até a decisão.</p>
+    </article>
+  </div>
+  <aside class="notes"><p>Abrir pelo que a operação já faz: escolhe produto importado e atende. O catálogo não é o problema. O problema é a linha entre a oferta e o que acontece com quem respondeu. Não prometer faturamento. Quem mais decide nesta sala?</p></aside>
+</section>
+
+<section class="slide" data-name="Travas">
+  <div class="bg"></div>
+  <div class="chapter"><span>V4 · American Imports</span><span>Onde a linha trava</span></div>
+  <header class="head">
+    <h1>Quatro travas. Uma causa.</h1>
+    <p class="lede">A operação não sofre de falta de produto. Sofre de não saber qual oferta gerou cada oportunidade.</p>
+  </header>
+  <div class="grid4">
+    <article class="glass hot pain"><span class="n">01 · Origem</span><h3>O contato chega sem campanha.</h3><p>A peça roda, alguém responde, e ninguém registra qual anúncio ou qual categoria abriu aquela conversa.</p></article>
+    <article class="glass hot pain"><span class="n">02 · Verba</span><h3>A mídia não separa o catálogo.</h3><p>O dinheiro sai. A reunião seguinte não mostra se a bolsa, o perfume, o eletrônico ou o alimento devolveu oportunidade.</p></article>
+    <article class="glass hot pain"><span class="n">03 · Jornada</span><h3>O follow-up mora na conversa.</h3><p>Orçamento, próximo passo e o que esfriou ficam com quem atendeu. A etapa não existe fora dali.</p></article>
+    <article class="glass hot pain"><span class="n">04 · Argumento</span><h3>A variedade não escolhe a frase.</h3><p>Desejos diferentes disputam a mesma mensagem. O interesse não vira uma oportunidade com dono.</p></article>
+  </div>
+  <aside class="notes"><p>Qual destas pesa mais? Uma de cada vez. Leitura do modelo da loja e do escopo pedido, não citação literal. Não completar com cifra. Se a dor principal for falta de demanda, e não a conversa, a trava 03 deixa de ser a lenta.</p></aside>
+</section>
+
+<section class="slide" data-name="O custo">
+  <div class="bg"></div>
+  <div class="chapter"><span>V4 · American Imports</span><span>Se nada mudar</span></div>
+  <header class="head">
+    <h1>O custo de vender no escuro.</h1>
+    <p class="lede">Cada trava cobra um efeito. Nenhuma delas tem cifra nesta sala, porque a linha ainda não foi medida.</p>
+  </header>
+  <div class="grid6">
+    <article class="glass hit"><span class="from">Vem da origem</span><h3>Oferta que não se repete.</h3><p>Sem a campanha marcada, não dá para repetir o que trouxe o contato nem cortar o que só gerou conversa.</p></article>
+    <article class="glass hit"><span class="from">Vem da verba</span><h3>Investimento sem leitura.</h3><p>A mídia continua. O que funcionou numa categoria não aparece. O desperdício, se houver, também não.</p></article>
+    <article class="glass hit"><span class="from">Vem da jornada</span><h3>Comercial sem previsão.</h3><p>Sem etapa e sem taxa, o mês não se antecipa. A gestão descobre o resultado quando ele já passou.</p></article>
+    <article class="glass hit"><span class="from">Vem do follow-up</span><h3>Esforço que não escala.</h3><p>O que depende de memória não vira rotina. Mais interesse, nesse estado, aumenta o que uma pessoa não guarda.</p></article>
+    <article class="glass hit"><span class="from">Vem do argumento</span><h3>Desejo que não entra na conta.</h3><p>Quem viu a peça e não deixou uma oportunidade acompanhável não existe para o comercial.</p></article>
+    <article class="glass hit"><span class="from">As quatro juntas</span><h3>Receita potencial invisível.</h3><p>A perda é real e não tem tamanho. Quem decide não enxerga o que a linha ainda não mostrou.</p></article>
+  </div>
+  <aside class="notes"><p>Perguntar o que eles acham que já perderam entre conversa e pedido. Se a resposta for vaga, é o ponto: a perda não pesa porque não tem número. Não colocar R$ na mesa. Laudo falado, sem tela, só se o motivo pessoal aparecer: avançar porque a loja já vende e a oportunidade não tem linha. Motivo pessoal ainda não está na ficha. Motivo fraco: não abrir a solução.</p></aside>
+</section>
+
+<section class="slide" data-name="Fábrica">
+  <div class="bg"></div>
+  <div class="chapter"><span>V4 · Fábrica de receita</span><span>American Imports</span></div>
+  <header class="head">
+    <h1>A esteira desta proposta.</h1>
+    <p class="lede">Só o que entra no escopo. A decisão de compra continua com o comercial da American Imports.</p>
+  </header>
+  <div class="fr-planta">
+    <div class="fr-io"><span class="chip">◎</span><b>Mercado</b><span>quem procura o que não acha fácil</span></div>
+    <div class="fr-sets">
+      <div class="fr-set">
+        <header>Demanda · Growth</header>
+        <div class="fr-ms">
+          <div class="fr-m"><span class="k">01</span><b>Exposição</b><p>Mídia, peça e mensagem para a oferta certa aparecer.</p></div>
+        </div>
+        <div class="fr-belt"><span class="mat ore"></span><span class="mat ore"></span><span class="mat ore"></span></div>
+      </div>
+      <div class="fr-set">
+        <header>Oferta · Growth</header>
+        <div class="fr-ms">
+          <div class="fr-m"><span class="k">02</span><b>Argumento</b><p>A copy escolhe o desejo e pede o contato.</p></div>
+          <div class="fr-m"><span class="k">03</span><b>Peça</b><p>O design mostra a oferta no canal que já existe.</p></div>
+        </div>
+        <div class="fr-belt"><span class="mat cube"></span><span class="mat cube"></span></div>
+      </div>
+      <div class="fr-set">
+        <header>Inteligência · CRM</header>
+        <div class="fr-ms">
+          <div class="fr-m hot"><span class="k">04</span><b>Origem</b><p>Cada oportunidade diz de qual campanha veio.</p></div>
+          <div class="fr-m hot"><span class="k">05</span><b>Jornada</b><p>Etapa, dono e próximo passo.</p></div>
+        </div>
+        <div class="fr-belt"><span class="mat cube"></span><span class="mat coin"></span></div>
+      </div>
+      <div class="fr-set">
+        <header>Decisão · American Imports</header>
+        <div class="fr-ms">
+          <div class="fr-m"><span class="k">06</span><b>Venda</b><p>O comercial conduz o fechamento.</p></div>
+          <div class="fr-m"><span class="k">07</span><b>Leitura</b><p>O account devolve o que funcionou para a próxima oferta.</p></div>
+        </div>
+        <div class="fr-belt"><span class="mat coin"></span><span class="mat coin"></span></div>
+      </div>
+    </div>
+    <div class="fr-io out"><span class="chip">R$</span><b>Receita</b><span>com a linha visível</span></div>
+  </div>
+  <div class="fr-back">A leitura volta para a próxima oferta. Hoje a conversa não devolve essa leitura.</div>
+  <aside class="notes"><p>Faltou etapa do caminho deles? A venda não está no nosso escopo: quem fecha é a American Imports. A gente deixa a etapa visível. Verba de mídia fica de fora. Site também: sem desenvolvimento, reformulação ou implementação. A peça pede o contato no canal que eles já operam.</p></aside>
+</section>
+
+<section class="slide" data-name="Solução">
+  <div class="bg"></div>
+  <div class="chapter"><span>V4 · Como resolvemos</span><span>Trava, entrega, prática, busca</span></div>
+  <header class="head">
+    <h1>Cada trava tem um posto.</h1>
+  </header>
+  <div class="map">
+    <div class="row">
+      <span class="hd">O problema</span><span class="hd">O que entra</span><span class="hd">Na prática</span><span class="hd">O que buscamos</span>
+    </div>
+    <div class="row">
+      <div class="cell pain"><b>Oferta e verba no escuro.</b><p>Não se sabe o que a mídia devolve.</p></div>
+      <div class="cell"><b>Time de Growth.</b><p>Account e GT. Cada um olha uma parte da demanda.</p></div>
+      <div class="cell"><b>Uma leitura só.</b><p>Campanha e canal nascem do que a semana mostrou.</p></div>
+      <div class="cell"><b class="ok">Demanda com dono.</b><p>Saber qual oferta traz a oportunidade.</p></div>
+    </div>
+    <div class="row">
+      <div class="cell pain"><b>Mensagem que não escolhe.</b><p>Categorias diferentes, a mesma frase.</p></div>
+      <div class="cell"><b>Copy e design.</b><p>Quem olha o argumento e a peça da oferta.</p></div>
+      <div class="cell"><b>Pedido claro.</b><p>A comunicação pede o contato do desejo certo.</p></div>
+      <div class="cell"><b class="ok">Interesse qualificado.</b><p>A pessoa chega sabendo o que busca.</p></div>
+    </div>
+    <div class="row">
+      <div class="cell pain"><b>Oportunidade na conversa.</b><p>O follow-up depende de memória.</p></div>
+      <div class="cell"><b>Implementação de CRM.</b><p>Quem olha origem, etapa e follow-up.</p></div>
+      <div class="cell"><b>Rastro.</b><p>Funil, dono e próximo passo no mesmo lugar.</p></div>
+      <div class="cell"><b class="ok">Jornada visível.</b><p>Ver onde a oportunidade para.</p></div>
+    </div>
+  </div>
+  <p class="source">Fora do escopo: verba de mídia, o time comercial da American Imports, o site e qualquer promessa de volume ou de faturamento.</p>
+  <aside class="notes"><p>Uma linha por trava. As duas primeiras linhas são a mesma frente: Growth gera a demanda. A terceira é o CRM, que guarda a oportunidade. O que você entendeu que muda? Buscamos leitura, não um faturamento prometido. Site não entra em nenhuma linha.</p></aside>
+</section>
+
+<section class="slide" data-name="Por quê">
+  <div class="bg"></div>
+  <div class="chapter"><span>V4 · A lógica</span><span>Por que as duas juntas</span></div>
+  <header class="head">
+    <h1>Sozinha, cada frente falha.</h1>
+    <p class="lede">Campanha, argumento e funil só viram receita quando andam na mesma esteira.</p>
+  </header>
+  <div class="why">
+    <article class="glass">
+      <span class="kicker">Growth sem CRM</span>
+      <h3>Mais anúncio, mais conversa solta.</h3>
+      <p class="bad">A demanda entra e a origem se perde com quem atendeu. A verba seguinte repete no escuro.</p>
+      <p class="good">Com o CRM, a campanha aprende qual oferta gerou a oportunidade que avançou.</p>
+    </article>
+    <article class="glass">
+      <span class="kicker">CRM sem demanda</span>
+      <h3>Funil organizado, sem oferta nova.</h3>
+      <p class="bad">Etapa e taxa não criam quem procura o produto. Só mostram o que já chegou.</p>
+      <p class="good">Com a assessoria, a linha tem o que medir: peça, mídia e argumento.</p>
+    </article>
+    <article class="glass">
+      <span class="kicker">Atendimento sem os dois</span>
+      <h3>A conversa fecha e não ensina.</h3>
+      <p class="bad">Quem atende não sabe qual peça trouxe o contato nem o que a próxima campanha deve repetir.</p>
+      <p class="good">Com as duas frentes, o comercial recebe a oportunidade com origem e devolve a leitura.</p>
+    </article>
+  </div>
+  <aside class="notes"><p>Não é uma lista de serviços. É a razão de contratar as duas. Se ele quiser só anúncio, mostrar a conversa que não devolve leitura. Se quiser só CRM, mostrar o funil sem oferta nova. O comercial da American Imports continua fechando.</p></aside>
+</section>
+
+<section class="slide" data-name="Como ficará">
+  <div class="bg"></div>
+  <div class="chapter"><span>V4 · American Imports</span><span><span class="hip">Hipótese</span></span></div>
+  <header class="head">
+    <h1>A operação com a linha acesa.</h1>
+    <p class="lede">Entram as duas frentes. Cada um olha a sua. O volume de saída não está garantido.</p>
+  </header>
+  <div class="flow">
+    <article class="glass node"><span class="k">Entra</span><b>Demanda</b><p>Peça, texto e mídia com a mesma oferta.</p><p class="who">Growth</p></article>
+    <span class="arrow">→</span>
+    <article class="glass node"><span class="k">Pede</span><b>Argumento</b><p>A mensagem escolhe a categoria e pede o contato.</p><p class="who">Copy e design</p></article>
+    <span class="arrow">→</span>
+    <article class="glass hot node"><span class="k">Organiza</span><b>CRM</b><p>Origem, etapa e próximo passo ficam registrados.</p><p class="who">Implementação</p></article>
+    <span class="arrow">→</span>
+    <article class="glass node"><span class="k">Decide</span><b>Venda</b><p>O comercial da American Imports conduz o fechamento.</p><p class="who">American Imports</p></article>
+    <span class="arrow">→</span>
+    <article class="glass node"><span class="k">Aprende</span><b>Leitura</b><p>O que avançou volta para a próxima oferta.</p><p class="who">Account</p></article>
+  </div>
+  <div class="squad">
+    <article class="glass sq"><span class="k">Frente · Growth</span><b>Account Manager</b><p>Olha a semana: o que avançou e o que a próxima campanha repete.</p></article>
+    <article class="glass sq"><span class="k">Frente · Growth</span><b>GT</b><p>Olha canal e verba: de qual oferta veio a oportunidade.</p></article>
+    <article class="glass sq"><span class="k">Frente · Growth</span><b>Copy</b><p>Olha o argumento de cada categoria e o pedido de contato.</p></article>
+    <article class="glass sq"><span class="k">Frente · Growth</span><b>Design</b><p>Olha a peça que a pessoa vê.</p></article>
+    <article class="glass sq"><span class="k">Frente · CRM</span><b>Implementação de CRM</b><p>Olha origem, etapa, dono e próximo passo.</p></article>
+  </div>
+  <p class="source">Hipótese de desenho, não de resultado. O site permanece como está. Previsível não tem data: a série passa a existir quando origem e jornada estiverem acesas.</p>
+  <aside class="notes"><p>Apontar o time: Account, GT, copy, design e implementação de CRM. Cada um olha uma frente. A venda continua com a American Imports. O desenho é hipótese. A saída não está garantida. Com as palavras dele: o que muda? Depois, viabilizar o trabalho. Sem perguntar se faz sentido.</p></aside>
+</section>
+
+<section class="slide" data-name="Mercado">
+  <div class="bg"></div>
+  <div class="chapter"><span>V4 · Referência de mercado</span><span>Ainda não é o preço</span></div>
+  <header class="head">
+    <h1>Cinco funções, cada uma no seu mercado.</h1>
+  </header>
+  <div class="refs">
+    <div class="ref"><b>Account Manager</b><span class="bar"><i style="width:64.5%"></i></span><span class="ref-val num">R$ 10.000,00</span></div>
+    <div class="ref"><b>Gestor de Tráfego</b><span class="bar"><i style="width:77.4%"></i></span><span class="ref-val num">R$ 12.000,00</span></div>
+    <div class="ref"><b>Designer</b><span class="bar"><i style="width:60.6%"></i></span><span class="ref-val num">R$ 9.400,00</span></div>
+    <div class="ref"><b>Copywriter</b><span class="bar"><i style="width:48.4%"></i></span><span class="ref-val num">R$ 7.500,00</span></div>
+    <div class="ref"><b>Especialista em Dados e CRM</b><span class="bar"><i style="width:100%"></i></span><span class="ref-val num">R$ 15.500,00</span></div>
+  </div>
+  <div class="sumline">
+    <div><span class="kicker">Soma mensal da referência</span><div class="big num">R$ 54.400,00</div></div>
+    <p class="source" style="margin:0;max-width:46ch">Doze meses dessa referência: R$ 652.800,00. Conta sobre a faixa mensal, não dado anual da fonte. Salário de um profissional em tempo cheio, não o preço desta proposta.</p>
+  </div>
+  <p class="source">Faixas do Glassdoor, as mesmas da composição já usada, sem a função que saiu do escopo. Não são cotação oficial nem valor garantido pela plataforma. Validar função e faixa antes de publicar.</p>
+  <aside class="notes"><p>Bloco a bloco. Não falar o nosso preço ainda. Teste dos 50%, falado: metade desta referência não é o preço. Só segue se ele disser que a estrutura vale. Se ele disser que um salário já passa a parcela, a referência é folha cheia e a parcela é acesso à estrutura. Não prometer hora de cinco pessoas nem economia sobre os R$ 652.800.</p></aside>
+</section>
+
+<section class="slide" data-name="Investimento">
+  <div class="bg"></div>
+  <div class="chapter"><span>V4 · Investimento</span><span>Depois da esteira</span></div>
+  <header class="head" style="margin-bottom:10px">
+    <h1>A estrutura, em dois quadros.</h1>
+    <p class="lede" style="font-size:18px">Entra o time de Growth e a implementação de CRM. Account, GT, copy, design e quem estrutura o funil.</p>
+  </header>
+  <div class="offers">
+    <article class="glass offer">
+      <span class="kicker">01 · Growth · 12 meses</span>
+      <div class="price num">R$ 6.923,25</div>
+      <div class="sub">por mês · total R$ 83.079,00</div>
+      <ul>
+        <li>Account olha a semana. GT olha canal e verba.</li>
+        <li>Copy olha o argumento. Design olha a peça.</li>
+        <li>12 × 6.923,25 fecha em 83.079,00</li>
+      </ul>
+    </article>
+    <article class="glass offer">
+      <span class="kicker">02 · CRM · projeto</span>
+      <div class="price num">R$ 5.500,00</div>
+      <div class="sub">total · 12× de R$ 458,33</div>
+      <ul>
+        <li>A implementação olha origem, etapa e taxa.</li>
+        <li>12 × 458,33 = 5.499,96</li>
+        <li>Vale R$ 5.500,00 · diferença de R$ 0,04</li>
+      </ul>
+    </article>
+  </div>
+  <div class="total">
+    <article class="glass hot">
+      <span class="kicker">Soma dos dois totais</span>
+      <div class="price num">R$ 88.579,00</div>
+    </article>
+    <article class="glass">
+      <span class="kicker">Parcelas no mesmo mês</span>
+      <div class="price num" style="font-size:36px">R$ 7.381,58</div>
+      <p>Não é uma mensalidade única. Cada quadro tem o seu prazo.</p>
+    </article>
+  </div>
+  <p class="source">12 × 7.381,58 = 88.578,96, R$ 0,04 abaixo da soma dos totais. Valores de Growth e de CRM preservados. Fora: verba de mídia, time comercial da American Imports, site e promessa de faturamento.</p>
+  <aside class="notes"><p>Retomar as quatro travas e então o número. Soma R$ 88.579,00. As parcelas juntas dão R$ 7.381,58 e não são uma mensalidade única. Os dois, ou por qual a linha começa? Pix ou cartão? Silêncio. Não há condição única nesta versão.</p></aside>
+</section>
+
+<div class="chrome">
+  <div><b id="pos">01</b> <span id="sname">Capa</span></div>
+  <div>
+    <button type="button" id="full">Tela cheia</button>
+    <button type="button" id="prev" aria-label="Anterior">←</button>
+    <button type="button" id="next" aria-label="Próxima">→</button>
+  </div>
+</div>
+</div></div>
+<div class="drawer"><h3>Nota</h3><p id="note"></p></div>
+<script>
+(function () {
+  const deck = document.getElementById("deck");
+  const slides = [...document.querySelectorAll(".slide")];
+  const pos = document.getElementById("pos");
+  const sname = document.getElementById("sname");
+  const note = document.getElementById("note");
+  let i = 0;
+  function fit() {
+    const w = window.visualViewport?.width || innerWidth;
+    const h = window.visualViewport?.height || innerHeight;
+    deck.style.setProperty("--deck-scale", Math.max(.1, Math.min((w - 8) / 1600, (h - 8) / 900)));
+  }
+  function render() {
+    slides.forEach((s, n) => s.classList.toggle("active", n === i));
+    pos.textContent = String(i + 1).padStart(2, "0");
+    sname.textContent = slides[i].dataset.name + " · " + String(slides.length).padStart(2, "0");
+    note.textContent = slides[i].querySelector(".notes p").textContent;
+    document.getElementById("prev").disabled = i === 0;
+    document.getElementById("next").disabled = i === slides.length - 1;
+    if (location.hash !== "#" + (i + 1)) history.replaceState(null, "", "#" + (i + 1));
+  }
+  function go(n) {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    render();
+  }
+  document.getElementById("prev").onclick = () => go(i - 1);
+  document.getElementById("next").onclick = () => go(i + 1);
+  document.getElementById("full").onclick = () => {
+    if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+    else document.exitFullscreen();
+  };
+  addEventListener("keydown", (e) => {
+    const k = e.key;
+    if (k === "ArrowRight" || k === "PageDown" || (k === " " && e.target === document.body)) { e.preventDefault(); go(i + 1); }
+    else if (k === "ArrowLeft" || k === "PageUp") { e.preventDefault(); go(i - 1); }
+    else if (k === "n" || k === "N") document.body.classList.toggle("show-notes");
+    else if (k === "f" || k === "F") document.getElementById("full").click();
+    else if (k === "Escape") document.body.classList.remove("show-notes");
+  });
+  addEventListener("resize", fit);
+  window.visualViewport?.addEventListener("resize", fit);
+  addEventListener("hashchange", () => {
+    const h = parseInt(location.hash.slice(1), 10);
+    if (h >= 1 && h <= slides.length) { i = h - 1; render(); }
+  });
+  const start = parseInt(location.hash.slice(1), 10);
+  if (start >= 1 && start <= slides.length) i = start - 1;
+  fit();
+  render();
+})();
+</script>
+</body>
+</html>
