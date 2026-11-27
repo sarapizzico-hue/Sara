@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Luz de Clara · Redesign estratégico de embalagens</title>
+<meta name="description" content="Proposta comercial para o redesign estratégico das embalagens Luz de Clara." />
+<meta name="theme-color" content="#08080a" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #08080a;
+    --red: #ff2d2d;
+    --red-2: #ff5a4a;
+    --line: rgba(255, 70, 60, .5);
+    --line-soft: rgba(255, 255, 255, .1);
+    --text: #f6f2ee;
+    --muted: #d2c8c0;
+    --dim: #a89c94;
+    --gold: #f0d7a4;
+    --header: 72px;
+    --footer: 68px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); }
+  body {
+    font-family: "Manrope", "Segoe UI", sans-serif;
+    font-size: 18px;
+    line-height: 1.35;
+    min-height: 100%;
+    -webkit-font-smoothing: antialiased;
+  }
+  body::before, body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+  body::before {
+    background:
+      radial-gradient(880px 520px at 88% -10%, rgba(176, 18, 28, .42), transparent 58%),
+      radial-gradient(720px 480px at -10% 110%, rgba(90, 8, 16, .55), transparent 60%),
+      var(--bg);
+  }
+  body::after {
+    background-image:
+      linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+    background-size: 88px 88px;
+    mask-image: radial-gradient(circle at 70% 30%, #000 0%, transparent 72%);
+  }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; padding: 0; }
+  img { max-width: 100%; display: block; }
+  s { text-decoration-thickness: 2px; }
+
+  .top, .bar { position: fixed; z-index: 5; }
+  .top {
+    top: 0; left: 0; right: 0;
+    height: var(--header);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 28px;
+    background: linear-gradient(#08080a, rgba(8,8,10,.2));
+  }
+  .brand-lock, .top-name, h1, h2, .stroke, .brand, .card h3, .price, .anchor-total strong {
+    font-family: Syne, sans-serif;
+    font-weight: 800;
+    letter-spacing: -.04em;
+    margin: 0;
+  }
+  .brand-lock { font-size: 18px; }
+  .top-name {
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .folio { font-variant-numeric: tabular-nums; min-width: 72px; text-align: right; }
+  .folio b { font-family: Manrope, sans-serif; font-size: 20px; }
+  .folio span { color: var(--dim); font-size: 14px; }
+
+  .bar {
+    left: 0; right: 0; bottom: 0;
+    height: var(--footer);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 0 28px;
+    background: linear-gradient(rgba(8,8,10,0), #08080a 40%);
+  }
+  .nav-arrows, .tools, .dots { display: flex; gap: 8px; align-items: center; }
+  .icon-btn, .tool-btn {
+    border: 1px solid var(--line-soft);
+    border-radius: 999px;
+    height: 36px;
+    min-width: 36px;
+    padding: 0 12px;
+    color: var(--muted);
+    background: rgba(0,0,0,.25);
+  }
+  .icon-btn:hover, .tool-btn:hover { color: white; border-color: var(--line); }
+  .dots button { width: 7px; height: 7px; border-radius: 99px; background: rgba(255,255,255,.28); }
+  .dots button[aria-current="true"] { width: 22px; background: var(--red); }
+  .hint { color: var(--dim); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+
+  .stage { position: relative; z-index: 1; }
+  .slide {
+    position: relative;
+    min-height: 100vh;
+    padding: 112px clamp(20px, 5vw, 80px) 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: safe center;
+    align-items: center;
+  }
+  .slide > * { width: min(1120px, 100%); }
+  .kicker {
+    margin: 0 0 10px;
+    color: var(--red-2);
+    font-family: Syne, sans-serif;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    font-size: 13px;
+  }
+  .brand { font-size: clamp(40px, 5vw, 68px); line-height: .92; }
+  h1, .stroke { font-size: clamp(48px, 6vw, 84px); line-height: .92; color: var(--text); }
+  h2 { font-size: clamp(34px, 4vw, 52px); line-height: .95; max-width: 16ch; }
+  .lead, .sub { margin: 14px 0 0; max-width: 38ch; color: var(--muted); font-size: clamp(18px, 1.5vw, 22px); }
+
+  .hero { display: flex; flex-direction: column; gap: 22px; }
+  .cover {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(240px, .72fr);
+    gap: clamp(20px, 3vw, 40px);
+    align-items: center;
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 22px 0 0; padding: 0; list-style: none; }
+  .chips li, .tag {
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 7px 12px;
+    font-size: 13px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    background: rgba(255, 45, 45, .06);
+  }
+  .shot {
+    position: relative;
+    border-radius: 28px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    aspect-ratio: 1 / 1;
+    max-height: 420px;
+    box-shadow: 0 30px 80px rgba(0,0,0,.45);
+    background: #14090c;
+  }
+  .shot img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+  .shot figcaption {
+    position: absolute;
+    left: 14px; right: 14px; bottom: 14px;
+    background: rgba(8,8,10,.72);
+    border: 1px solid var(--line-soft);
+    border-radius: 16px;
+    padding: 12px 14px;
+  }
+  .shot figcaption strong { display: block; font-size: 14px; }
+  .shot figcaption span {
+    display: block;
+    margin-top: 4px;
+    color: var(--gold);
+    font-family: Syne, sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .cards, .trio, .offer-grid { display: grid; gap: 14px; margin-top: 26px; }
+  .cards, .trio { grid-template-columns: repeat(4, 1fr); }
+  .trio { grid-template-columns: repeat(3, 1fr); }
+  .card {
+    background: linear-gradient(180deg, rgba(255,45,45,.08), rgba(0,0,0,.18));
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    padding: 18px 18px 16px;
+    box-shadow: 0 18px 50px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.05);
+  }
+  .idx {
+    font-family: Syne, sans-serif;
+    font-weight: 700;
+    color: var(--red-2);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    font-size: 12px;
+  }
+  .card h3 { font-size: clamp(22px, 2vw, 28px); line-height: 1.05; margin: 8px 0; }
+  .card p, .card li { margin: 0; color: var(--muted); font-size: 16px; }
+  .card ul { list-style: none; margin: 8px 0 0; padding: 0; }
+  .card li {
+    padding: 8px 0 8px 14px;
+    border-top: 1px solid var(--line-soft);
+    position: relative;
+    color: var(--text);
+  }
+  .card li::before {
+    content: "";
+    width: 6px; height: 6px;
+    border-radius: 99px;
+    background: var(--red);
+    position: absolute;
+    left: 0; top: 15px;
+  }
+
+  .was { margin: 0 0 4px; color: var(--dim); text-transform: uppercase; font-size: 13px; letter-spacing: .12em; }
+  .was s { color: var(--muted); font-family: Syne, sans-serif; font-size: 22px; margin-left: 8px; font-weight: 700; }
+  .retake { margin: 0 0 8px; }
+  .offer-grid { grid-template-columns: 1.05fr .95fr; }
+  .offer-card {
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    padding: 22px 22px 18px;
+    background: linear-gradient(180deg, rgba(255,45,45,.08), rgba(0,0,0,.2));
+  }
+  .offer-card.pix {
+    background:
+      radial-gradient(400px 180px at 90% 0%, rgba(240, 215, 164, .16), transparent 50%),
+      linear-gradient(180deg, rgba(255,45,45,.16), rgba(0,0,0,.25));
+    border-color: rgba(240, 215, 164, .7);
+  }
+  .tag { display: inline-block; margin-bottom: 14px; }
+  .price { font-size: clamp(34px, 4.2vw, 64px); line-height: .9; white-space: nowrap; }
+  .price span { font-size: .42em; margin-right: 6px; }
+  .cond { margin: 10px 0 0; text-transform: uppercase; font-size: 13px; letter-spacing: .14em; }
+  .delta { margin: 14px 0 0; color: var(--gold); }
+  .fine { margin: 14px 0 0; color: var(--dim); font-size: 14px; }
+
+  @media (max-width: 1000px) {
+    .cover, .cards, .offer-grid { grid-template-columns: 1fr 1fr; }
+    .trio { grid-template-columns: 1fr; }
+    .shot { max-height: 360px; }
+  }
+  @media (max-width: 720px) {
+    .top-name, .hint, .dots { display: none; }
+    .slide { min-height: auto; padding: 88px 16px 108px; justify-content: flex-start; }
+    .cover, .cards, .trio, .offer-grid { grid-template-columns: 1fr; }
+    .price { white-space: normal; }
+    h1, .stroke, .brand { font-size: clamp(34px, 10vw, 48px); }
+    h2 { max-width: none; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+  }
+  @media print {
+    @page { size: 13.333in 7.5in; margin: 0; }
+    .top, .bar { display: none !important; }
+    .slide {
+      min-height: 7.5in;
+      height: 7.5in;
+      page-break-after: always;
+      break-after: page;
+      padding: .55in .7in;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .slide::after {
+      content: "Luz de Clara · Redesign de embalagens";
+      position: absolute;
+      right: .6in;
+      bottom: .28in;
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: #c8beb6;
+    }
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <p class="brand-lock">Luz de Clara</p>
+  <div class="top-name" id="sectionName">Capa</div>
+  <div class="folio"><b id="folio">01</b><span> / 04</span></div>
+</header>
+
+<main class="stage" id="stage">
+  <section class="slide active" id="capa" data-name="Capa">
+    <div class="hero">
+      <div>
+        <p class="kicker">Proposta comercial</p>
+        <p class="brand">Luz de Clara</p>
+        <h1>Embalagens</h1>
+      </div>
+      <div class="cover">
+        <div>
+          <p class="lead">Redesign estratégico para a marca valer mais na gôndola, com uma família só e arquivo pronto para a gráfica.</p>
+          <ul class="chips">
+            <li>2 caminhos</li>
+            <li>3 faces</li>
+            <li>Faca atual</li>
+            <li>Arquivo de produção</li>
+          </ul>
+        </div>
+        <figure class="shot">
+          <img src="assets/embalagem.jpg" alt="Lata atual da Luz de Clara, vermelha, com o monograma LC e sobremesas ilustradas." />
+          <figcaption>
+            <strong>Embalagem atual · ponto de partida</strong>
+            <span>O que um dia foi promessa, hoje é doce realidade.</span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="fazer" data-name="O que fazer">
+    <div>
+      <p class="kicker">O que precisamos fazer</p>
+      <h2>A embalagem trabalhando pela marca.</h2>
+      <p class="sub">Quatro movimentos, do olhar na gôndola até o arquivo da gráfica.</p>
+    </div>
+    <div class="cards">
+      <article class="card">
+        <div class="idx">01</div>
+        <h3>Valorizar</h3>
+        <p>A qualidade do produto aparece antes da primeira colher.</p>
+      </article>
+      <article class="card">
+        <div class="idx">02</div>
+        <h3>Ordenar</h3>
+        <p>Marca, produto e variação com uma leitura só.</p>
+      </article>
+      <article class="card">
+        <div class="idx">03</div>
+        <h3>Unir</h3>
+        <p>As variações com cara da mesma casa.</p>
+      </article>
+      <article class="card">
+        <div class="idx">04</div>
+        <h3>Produzir</h3>
+        <p>O visual fechado para a gráfica imprimir.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="slide" id="incluso" data-name="Incluso">
+    <div>
+      <p class="kicker">O que está incluso</p>
+      <h2>O sistema da embalagem.</h2>
+    </div>
+    <div class="trio">
+      <article class="card">
+        <div class="idx">Criação</div>
+        <ul>
+          <li>2 propostas iniciais de design</li>
+          <li>Frontal, traseira e lateral</li>
+          <li>Hierarquia da informação</li>
+          <li>Adequação à faca existente</li>
+        </ul>
+      </article>
+      <article class="card">
+        <div class="idx">Família</div>
+        <ul>
+          <li>Variações conforme contratado</li>
+          <li>Padronização dos elementos</li>
+          <li>Mini manual da embalagem</li>
+        </ul>
+      </article>
+      <article class="card">
+        <div class="idx">Entrega</div>
+        <ul>
+          <li>Mockups 3D realistas</li>
+          <li>Comparativo antes e depois</li>
+          <li>Até 2 rodadas de ajustes</li>
+          <li>Arquivos AI, PDF, PNG e JPG</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="slide" id="valores" data-name="Valores">
+    <div>
+      <p class="kicker">Condição Black Friday</p>
+      <p class="retake">Percepção na gôndola. Família de variações. Arquivo para a gráfica.</p>
+      <p class="was">Investimento original <s>R$ 21.457,90</s></p>
+    </div>
+    <div class="offer-grid">
+      <article class="offer-card">
+        <span class="tag">Black Friday · cartão</span>
+        <p class="price"><span>R$</span>14.782,61</p>
+        <p class="cond">até 12x no cartão</p>
+        <p class="delta">R$ 6.675,29 abaixo do original</p>
+      </article>
+      <article class="offer-card pix">
+        <span class="tag">Mais vantajosa · PIX</span>
+        <p class="price"><span>R$</span>12.782,61</p>
+        <p class="cond">à vista via PIX</p>
+        <p class="delta">R$ 2.000,00 abaixo do cartão</p>
+      </article>
+    </div>
+    <p class="fine">Sem taxa extra e sem outra condição além destas duas.</p>
+  </section>
+</main>
+
+<footer class="bar">
+  <div class="nav-arrows">
+    <button class="icon-btn" type="button" id="prev" aria-label="Seção anterior">←</button>
+    <button class="icon-btn" type="button" id="next" aria-label="Próxima seção">→</button>
+  </div>
+  <div class="dots" id="dots" aria-label="Ir para seção"></div>
+  <div class="tools">
+    <span class="hint">Setas · F · P</span>
+    <button class="tool-btn" type="button" id="full">Tela cheia</button>
+    <button class="tool-btn" type="button" id="print" title="No Chrome, ative gráficos de fundo para o PDF sair como a tela.">PDF</button>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var slides = Array.prototype.slice.call(document.querySelectorAll(".slide"));
+  var dots = document.getElementById("dots");
+  var folio = document.getElementById("folio");
+  var nameEl = document.getElementById("sectionName");
+  var i = 0;
+
+  slides.forEach(function (slide, idx) {
+    var d = document.createElement("button");
+    d.type = "button";
+    d.setAttribute("aria-label", slide.getAttribute("data-name"));
+    d.addEventListener("click", function () { go(idx); });
+    dots.appendChild(d);
+  });
+
+  function paint() {
+    slides.forEach(function (slide, idx) { slide.classList.toggle("active", idx === i); });
+    Array.prototype.forEach.call(dots.children, function (btn, idx) {
+      if (idx === i) btn.setAttribute("aria-current", "true");
+      else btn.removeAttribute("aria-current");
+    });
+    folio.textContent = String(i + 1).padStart(2, "0");
+    nameEl.textContent = slides[i].getAttribute("data-name");
+    var id = slides[i].id;
+    if (location.hash !== "#" + id) history.replaceState(null, "", "#" + id);
+  }
+
+  function go(n) {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    paint();
+    slides[i].scrollIntoView({ behavior: "auto", block: "start" });
+  }
+
+  document.getElementById("prev").addEventListener("click", function () { go(i - 1); });
+  document.getElementById("next").addEventListener("click", function () { go(i + 1); });
+  document.getElementById("full").addEventListener("click", function () {
+    if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+    else document.exitFullscreen();
+  });
+  document.getElementById("print").addEventListener("click", function () { window.print(); });
+
+  addEventListener("keydown", function (e) {
+    var k = e.key;
+    if (k === "ArrowRight" || k === "ArrowDown" || k === "PageDown" || k === " ") {
+      e.preventDefault(); go(i + 1);
+    } else if (k === "ArrowLeft" || k === "ArrowUp" || k === "PageUp") {
+      e.preventDefault(); go(i - 1);
+    } else if (k === "Home") go(0);
+    else if (k === "End") go(slides.length - 1);
+    else if (k === "f" || k === "F") {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    } else if (k === "p" || k === "P") window.print();
+  });
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        i = slides.indexOf(entry.target);
+        paint();
+      }
+    });
+  }, { rootMargin: "-40% 0px -50% 0px", threshold: 0.1 });
+  slides.forEach(function (slide) { io.observe(slide); });
+
+  var start = slides.findIndex(function (slide) { return slide.id === location.hash.slice(1); });
+  go(start >= 0 ? start : 0);
+})();
+</script>
+</body>
+</html>
